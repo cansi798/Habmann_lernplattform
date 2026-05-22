@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lernplatt · Dashboard</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<script src="assets/auth.js"></script>
+<script>requireAuth();</script>
+
+<div class="brand-bar">
+  <a href="dashboard.html">Lernplatt · by Can Siebert</a>
+  <a href="#" class="logout">Logout</a>
+</div>
+
+<main>
+  <h1>Kurs wählen</h1>
+  <div class="course-grid">
+    <a href="kurs-22/index.html" class="course-card kurs-22">
+      <div class="course-id">Kurs 22_Bo_143</div>
+      <h2>Digitale Vertriebsstrategien &amp; Plattform-Geschäftsmodelle</h2>
+      <div style="color:var(--color-muted)">16 Tage · 28.05.–19.06.2026 · 8 Module</div>
+    </a>
+    <a href="kurs-71/index.html" class="course-card kurs-71">
+      <div class="course-id">Kurs 71_Dig_42</div>
+      <h2>Digital Business Modelling &amp; Transformation</h2>
+      <div style="color:var(--color-muted)">16 Tage · 28.05.–19.06.2026 · 8 Module</div>
+    </a>
+  </div>
+</main>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
