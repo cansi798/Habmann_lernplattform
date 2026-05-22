@@ -159,10 +159,80 @@ def write_material_pickers():
             (out_dir / "index.html").write_text(build_material_picker_html(kurs, tag), encoding="utf-8")
 
 
+def build_quiz_page_html(kurs: dict, tag: dict) -> str:
+    kurs_short = kurs["id"].split("_")[0]
+    tag_nn = f"{tag['nr']:02d}"
+    json_path = f"../../../data/quiz/kurs-{kurs_short}-tag-{tag_nn}.json"
+    crumb_items = [
+        {"label": "Kurse", "href": "../../dashboard.html"},
+        {"label": f"Kurs {kurs['id']}", "href": "../index.html"},
+        {"label": f"Tag {tag['nr']}", "href": "index.html"},
+        {"label": "Quiz", "href": None},
+    ]
+    body = f"""
+{brand_bar(asset_prefix="../../")}
+{crumbs(crumb_items)}
+<main>
+  <div id="quiz-container">Quiz wird geladen …</div>
+</main>
+<script src="../../assets/dom.js"></script>
+<script src="../../assets/progress.js"></script>
+<script src="../../assets/quiz.js"></script>
+<script>
+  (async () => {{
+    const data = await loadQuiz("{json_path}");
+    new QuizSession(data, document.getElementById("quiz-container")).render();
+  }})();
+</script>
+"""
+    return page(title=f"Quiz · Tag {tag['nr']}", body=body, asset_prefix="../../", scripts=[])
+
+
+def build_lernpfad_page_html(kurs: dict, tag: dict) -> str:
+    kurs_short = kurs["id"].split("_")[0]
+    tag_nn = f"{tag['nr']:02d}"
+    json_path = f"../../../data/pfad/kurs-{kurs_short}-tag-{tag_nn}.json"
+    crumb_items = [
+        {"label": "Kurse", "href": "../../dashboard.html"},
+        {"label": f"Kurs {kurs['id']}", "href": "../index.html"},
+        {"label": f"Tag {tag['nr']}", "href": "index.html"},
+        {"label": "Lernpfad", "href": None},
+    ]
+    body = f"""
+{brand_bar(asset_prefix="../../")}
+{crumbs(crumb_items)}
+<main>
+  <div id="pfad-container">Lernpfad wird geladen …</div>
+</main>
+<script src="../../assets/dom.js"></script>
+<script src="../../assets/progress.js"></script>
+<script src="../../assets/pfad.js"></script>
+<script>
+  (async () => {{
+    const data = await loadPfad("{json_path}");
+    new PfadSession(data, document.getElementById("pfad-container")).render();
+  }})();
+</script>
+"""
+    return page(title=f"Lernpfad · Tag {tag['nr']}", body=body, asset_prefix="../../", scripts=[])
+
+
+def write_material_pages():
+    plan = load_course_plan()
+    for kurs in plan["kurse"]:
+        kurs_short = kurs["id"].split("_")[0]
+        for tag in kurs["tage"]:
+            tag_nn = f"{tag['nr']:02d}"
+            out_dir = DOCS / f"kurs-{kurs_short}" / f"tag-{tag_nn}"
+            (out_dir / "quiz.html").write_text(build_quiz_page_html(kurs, tag), encoding="utf-8")
+            (out_dir / "lernpfad.html").write_text(build_lernpfad_page_html(kurs, tag), encoding="utf-8")
+
+
 def main():
     write_day_lists()
     write_material_pickers()
-    print("Built day lists + material pickers.")
+    write_material_pages()
+    print("Built all generated pages.")
 
 
 if __name__ == "__main__":
