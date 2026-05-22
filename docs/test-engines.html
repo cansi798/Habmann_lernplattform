@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Engine Smoke Test</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="brand-bar"><span>Lernplatt · Engine-Test</span></div>
+<main>
+  <h1>Smoke-Test der Engines</h1>
+  <button id="t1">1. Auth: hash &amp; login</button>
+  <button id="t2">2. Progress: record &amp; read</button>
+  <button id="t3">3. Quiz: load + render dummy</button>
+  <pre id="out" style="background:#fff;padding:12px;border:1px solid #ccc;margin-top:16px"></pre>
+  <h2>Quiz</h2>
+  <div id="quiz-container"></div>
+</main>
+<script src="assets/dom.js"></script>
+<script src="assets/auth.js"></script>
+<script src="assets/progress.js"></script>
+<script src="assets/quiz.js"></script>
+<script>
+  const out = document.getElementById("out");
+  const log = (msg) => { out.append(msg + "\n"); };
+
+  document.getElementById("t1").addEventListener("click", async () => {
+    log(`attemptLogin("Habmann") = ${await attemptLogin("Habmann")} (expected true)`);
+    log(`attemptLogin("falsch")  = ${await attemptLogin("falsch")} (expected false)`);
+  });
+
+  document.getElementById("t2").addEventListener("click", () => {
+    markViewed("22_Bo_143", 1, "handout");
+    markViewed("22_Bo_143", 1, "video");
+    recordQuizResult("22_Bo_143", 1, 47);
+    recordPfadStep("22_Bo_143", 1, 1);
+    recordPfadStep("22_Bo_143", 1, 2);
+    log("status: " + JSON.stringify(getDayStatus("22_Bo_143", 1)));
+    log("expected: skript:true, video:true, quiz:true, aufgaben:false, lernpfad:true");
+  });
+
+  document.getElementById("t3").addEventListener("click", async () => {
+    const data = await loadQuiz("../data/quiz/kurs-22-tag-01.json");
+    const session = new QuizSession(data, document.getElementById("quiz-container"));
+    session.render();
+    log(`Quiz loaded with ${data.fragen.length} questions, rendered.`);
+  });
+</script>
+</body>
+</html>
