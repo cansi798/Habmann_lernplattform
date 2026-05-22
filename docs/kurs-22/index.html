@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lernplatt · Kurs 22_Bo_143</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<script src="../assets/auth.js"></script>
+<script>requireAuth();</script>
+
+<div class="brand-bar"><a href="../dashboard.html">Lernplatt · by Can Siebert</a><a href="#" class="logout">Logout</a></div>
+<div class="crumbs"><a href="../dashboard.html">Kurse</a> › <span>Kurs 22_Bo_143</span></div>
+<main>
+  <h1>Digitale Vertriebsstrategien & Plattform-Geschäftsmodelle</h1>
+  <p style="color:var(--color-muted)">2 Tage</p>
+  <div class="day-list">
+    <a class="day-row" href="tag-01/index.html">
+  <div>
+    <div class="day-date">2026-05-28 (Do)</div>
+    <div class="day-meta">M1 · Tag 1/2</div>
+  </div>
+  <div class="day-title">Plattformmodelle erfolgreich nutzen</div>
+  <div class="pips" data-kurs="22_Bo_143" data-tag="1"><span class="pip" data-key="skript"></span><span class="pip" data-key="video"></span><span class="pip" data-key="quiz"></span><span class="pip" data-key="aufgaben"></span><span class="pip" data-key="lernpfad"></span></div>
+  <span></span>
+</a>
+<a class="day-row" href="tag-02/index.html">
+  <div>
+    <div class="day-date">2026-05-29 (Fr)</div>
+    <div class="day-meta">M1 · Tag 2/2</div>
+  </div>
+  <div class="day-title">Plattformstrategien umsetzen</div>
+  <div class="pips" data-kurs="22_Bo_143" data-tag="2"><span class="pip" data-key="skript"></span><span class="pip" data-key="video"></span><span class="pip" data-key="quiz"></span><span class="pip" data-key="aufgaben"></span><span class="pip" data-key="lernpfad"></span></div>
+  <span></span>
+</a>
+  </div>
+</main>
+<script src="../assets/progress.js"></script>
+<script>
+  document.querySelectorAll(".pips").forEach(el => {
+    const kursId = el.dataset.kurs, tag = parseInt(el.dataset.tag);
+    const status = getDayStatus(kursId, tag);
+    el.querySelectorAll(".pip").forEach(p => {
+      if (status[p.dataset.key]) p.classList.add("done");
+    });
+  });
+</script>
+
+<script src="../assets/app.js"></script>
+
+</body>
+</html>
