@@ -228,10 +228,96 @@ def write_material_pages():
             (out_dir / "lernpfad.html").write_text(build_lernpfad_page_html(kurs, tag), encoding="utf-8")
 
 
+def _media_crumbs(kurs: dict, tag: dict, label: str):
+    return [
+        {"label": "Kurse", "href": "../../dashboard.html"},
+        {"label": f"Kurs {kurs['id']}", "href": "../index.html"},
+        {"label": f"Tag {tag['nr']}", "href": "index.html"},
+        {"label": label, "href": None},
+    ]
+
+
+def build_video_page_html(kurs: dict, tag: dict) -> str:
+    body = f"""
+{brand_bar(asset_prefix="../../")}
+{crumbs(_media_crumbs(kurs, tag, "Video"))}
+<main>
+  <h1>Tagesvideo · Tag {tag['nr']}</h1>
+  <div class="pfad-video-placeholder">📺 Video-Platzhalter<br>
+    <small>YouTube-Embed hier einfügen</small>
+  </div>
+  <p style="margin-top:24px;color:var(--color-muted)">
+    Hinweis: Sobald produziert, durch <code>iframe src="https://www.youtube.com/embed/VIDEO_ID"</code> ersetzen.
+  </p>
+</main>
+<script src="../../assets/progress.js"></script>
+<script>markViewed("{kurs['id']}", {tag['nr']}, "video");</script>
+"""
+    return page(title=f"Video · Tag {tag['nr']}", body=body, asset_prefix="../../", scripts=[])
+
+
+def build_podcast_page_html(kurs: dict, tag: dict) -> str:
+    body = f"""
+{brand_bar(asset_prefix="../../")}
+{crumbs(_media_crumbs(kurs, tag, "Podcast"))}
+<main>
+  <h1>Tagespodcast · Tag {tag['nr']}</h1>
+  <div class="pfad-video-placeholder">🎧 Podcast-Platzhalter<br>
+    <small>Audio-URL hier eintragen</small>
+  </div>
+</main>
+<script src="../../assets/progress.js"></script>
+<script>markViewed("{kurs['id']}", {tag['nr']}, "podcast");</script>
+"""
+    return page(title=f"Podcast · Tag {tag['nr']}", body=body, asset_prefix="../../", scripts=[])
+
+
+def build_praesentation_page_html(kurs: dict, tag: dict) -> str:
+    body = f"""
+{brand_bar(asset_prefix="../../")}
+{crumbs(_media_crumbs(kurs, tag, "Präsentation"))}
+<main>
+  <h1>Präsentation · Tag {tag['nr']}</h1>
+  <p style="color:var(--color-muted)">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
+    <div class="slide">
+      <h2 class="handwritten" style="font-size:36px">{tag['thema']}</h2>
+      <p>Modul {tag['modul']['nr']} · Tag {tag['nr']}</p>
+      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird in Plan 2 automatisch generiert.</em></p>
+    </div>
+    <div class="slide" style="display:none">
+      <h2>Slide 2 — Platzhalter</h2>
+      <p>Inhalt folgt.</p>
+    </div>
+  </div>
+</main>
+<script src="../../assets/progress.js"></script>
+<script src="../../assets/slides.js"></script>
+<script>
+  new SlideShow(document.getElementById("slides"));
+  markViewed("{kurs['id']}", {tag['nr']}, "praesentation");
+</script>
+"""
+    return page(title=f"Präsentation · Tag {tag['nr']}", body=body, asset_prefix="../../", scripts=[])
+
+
+def write_media_pages():
+    plan = load_course_plan()
+    for kurs in plan["kurse"]:
+        kurs_short = kurs["id"].split("_")[0]
+        for tag in kurs["tage"]:
+            tag_nn = f"{tag['nr']:02d}"
+            out_dir = DOCS / f"kurs-{kurs_short}" / f"tag-{tag_nn}"
+            (out_dir / "video.html").write_text(build_video_page_html(kurs, tag), encoding="utf-8")
+            (out_dir / "podcast.html").write_text(build_podcast_page_html(kurs, tag), encoding="utf-8")
+            (out_dir / "praesentation.html").write_text(build_praesentation_page_html(kurs, tag), encoding="utf-8")
+
+
 def main():
     write_day_lists()
     write_material_pickers()
     write_material_pages()
+    write_media_pages()
     print("Built all generated pages.")
 
 
