@@ -82,9 +82,87 @@ def write_day_lists():
         (out_dir / "index.html").write_text(build_day_list_html(kurs), encoding="utf-8")
 
 
+PHASES = [
+    {"nr": "1", "title": "PRÄSENTATION · HANDOUT", "sub": "Theorie aufnehmen", "items": [
+        {"name": "Präsentation", "meta": "HTML · Slides", "icon": "🎞", "href": "praesentation.html"},
+        {"name": "Handout",      "meta": "PDF · ~30 S.", "icon": "📄", "href": "../../pdf/{kurs_short}-handout-tag-{tag_nn}.pdf"},
+    ]},
+    {"nr": "2", "title": "VIDEO · PODCAST", "sub": "Vertiefen über Medien", "items": [
+        {"name": "Tagesvideo",   "meta": "≈ 20 min", "icon": "📺", "href": "video.html"},
+        {"name": "Tagespodcast", "meta": "≈ 25 min", "icon": "🎧", "href": "podcast.html"},
+    ]},
+    {"nr": "3", "title": "VERTIEFUNG 1 · QUIZ", "sub": "Wissen prüfen", "items": [
+        {"name": "Quiz",         "meta": "60 Fragen", "icon": "❓", "href": "quiz.html"},
+    ]},
+    {"nr": "4", "title": "VERTIEFUNG 2 & ÜBEN · AUFGABEN", "sub": "Anwenden mit Lösungen", "items": [
+        {"name": "Aufgabenheft", "meta": "PDF · Übung", "icon": "📝", "href": "../../pdf/{kurs_short}-aufgaben-tag-{tag_nn}.pdf"},
+        {"name": "Musterlösung", "meta": "PDF",        "icon": "💡", "href": "../../pdf/{kurs_short}-loesungen-tag-{tag_nn}.pdf"},
+    ]},
+    {"nr": "5", "title": "VERTIEFUNG 3 & ÜBEN · LERNPFAD", "sub": "Geführter Pfad", "items": [
+        {"name": "Lernpfad", "meta": "interaktiv", "icon": "🧭", "href": "lernpfad.html"},
+    ]},
+]
+
+
+def build_material_picker_html(kurs: dict, tag: dict) -> str:
+    kurs_short = kurs["id"].split("_")[0]
+    tag_nn = f"{tag['nr']:02d}"
+    phase_blocks = []
+    for phase in PHASES:
+        cards = []
+        for item in phase["items"]:
+            href = item["href"].format(kurs_short=kurs_short, tag_nn=tag_nn)
+            cards.append(
+                f'<a class="material-card" href="{href}">'
+                f'<div class="material-icon">{item["icon"]}</div>'
+                f'<div>'
+                f'<div class="material-name">{item["name"]}</div>'
+                f'<div class="material-meta">{item["meta"]}</div>'
+                f'</div></a>'
+            )
+        phase_blocks.append(
+            f'<div class="phase-block">'
+            f'<div class="phase-header">'
+            f'<span class="phase-number">{phase["nr"]}</span>'
+            f'<span class="phase-title">{phase["title"]}</span>'
+            f'<span class="phase-sub">{phase["sub"]}</span>'
+            f'</div>'
+            f'<div class="material-row">{"".join(cards)}</div>'
+            f'</div>'
+        )
+
+    crumb_items = [
+        {"label": "Kurse", "href": "../../dashboard.html"},
+        {"label": f"Kurs {kurs['id']}", "href": "../index.html"},
+        {"label": f"Tag {tag['nr']} ({tag['datum']})", "href": None},
+    ]
+    body = f"""
+{brand_bar(asset_prefix="../../")}
+{crumbs(crumb_items)}
+<main>
+  <h1>Tag {tag['nr']} · {tag['thema']}</h1>
+  <p style="color:var(--color-muted)">Modul {tag['modul']['nr']} · {tag['datum']} ({tag['wochentag']}) · {tag['schwerpunkt']}</p>
+  {"".join(phase_blocks)}
+</main>
+"""
+    return page(title=f"Tag {tag['nr']}", body=body, asset_prefix="../../", scripts=[])
+
+
+def write_material_pickers():
+    plan = load_course_plan()
+    for kurs in plan["kurse"]:
+        kurs_short = kurs["id"].split("_")[0]
+        for tag in kurs["tage"]:
+            tag_nn = f"{tag['nr']:02d}"
+            out_dir = DOCS / f"kurs-{kurs_short}" / f"tag-{tag_nn}"
+            out_dir.mkdir(parents=True, exist_ok=True)
+            (out_dir / "index.html").write_text(build_material_picker_html(kurs, tag), encoding="utf-8")
+
+
 def main():
     write_day_lists()
-    print("Built day lists.")
+    write_material_pickers()
+    print("Built day lists + material pickers.")
 
 
 if __name__ == "__main__":

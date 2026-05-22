@@ -17,3 +17,17 @@ def test_build_day_list_html_contains_all_days():
     for tag in kurs["tage"]:
         assert tag["datum"] in html
         assert tag["thema"] in html
+
+
+def test_build_material_picker_includes_5_phases():
+    from pipeline.build_site import build_material_picker_html, load_course_plan
+    plan = load_course_plan()
+    kurs = plan["kurse"][0]
+    tag = kurs["tage"][0]
+    html = build_material_picker_html(kurs, tag)
+    assert "PRÄSENTATION" in html
+    assert "QUIZ" in html
+    assert "LERNPFAD" in html
+    assert "quiz.html" in html
+    assert "lernpfad.html" in html
+    assert "praesentation.html" in html
