@@ -31,3 +31,20 @@ def test_build_material_picker_includes_5_phases():
     assert "quiz.html" in html
     assert "lernpfad.html" in html
     assert "praesentation.html" in html
+
+
+def test_build_site_full_run_creates_expected_files():
+    from pipeline.build_site import main
+    main()
+    docs_root = Path("docs")
+    for f in [
+        "kurs-22/index.html",
+        "kurs-22/tag-01/index.html",
+        "kurs-22/tag-01/quiz.html",
+        "kurs-22/tag-01/lernpfad.html",
+        "kurs-22/tag-01/praesentation.html",
+        "kurs-22/tag-01/video.html",
+        "kurs-22/tag-01/podcast.html",
+        "kurs-71/tag-01/index.html",
+    ]:
+        assert (docs_root / f).exists(), f"missing: {f}"
