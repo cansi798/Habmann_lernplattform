@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lernplatt · Login</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<main>
+  <div class="login-card">
+    <h1 class="handwritten" style="font-size:42px;margin:0">Lernplatt</h1>
+    <p style="color:var(--color-muted);margin-top:0">by Can Siebert</p>
+    <p>Bitte Zugangscode eingeben:</p>
+    <input type="password" id="code-input" placeholder="Zugangscode" autofocus>
+    <br>
+    <button id="login-btn">Eintreten →</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</main>
+
+<script src="assets/auth.js"></script>
+<script>
+  const input = document.getElementById("code-input");
+  const btn = document.getElementById("login-btn");
+  const err = document.getElementById("login-error");
+  async function tryLogin() {
+    err.textContent = "";
+    const ok = await attemptLogin(input.value);
+    if (ok) {
+      setAuthenticated();
+      window.location.href = "dashboard.html";
+    } else {
+      err.textContent = "Code stimmt nicht.";
+      input.value = "";
+      input.focus();
+    }
+  }
+  btn.addEventListener("click", tryLogin);
+  input.addEventListener("keydown", e => { if (e.key === "Enter") tryLogin(); });
+</script>
+</body>
+</html>
