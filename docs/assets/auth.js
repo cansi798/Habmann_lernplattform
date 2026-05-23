@@ -21,7 +21,8 @@ function isAuthenticated() { return !!sessionStorage.getItem(SESSION_KEY); }
 
 function requireAuth() {
   if (!isAuthenticated()) {
-    const depth = window.location.pathname.split("/").filter(p => p && p !== "Habmann_lernplattform").length - 1;
+    const skip = new Set(["Habmann_lernplattform", "docs"]);
+    const depth = window.location.pathname.split("/").filter(p => p && !skip.has(p)).length - 1;
     const prefix = depth > 0 ? "../".repeat(depth) : "./";
     window.location.replace(prefix + "index.html");
   }
