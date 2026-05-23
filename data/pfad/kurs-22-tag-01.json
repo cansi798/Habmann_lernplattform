@@ -1,10 +1,147 @@
 {
   "kurs_id": "22_Bo_143",
   "tag_nr": 1,
-  "titel": "Plattformmodelle in der Praxis erkennen",
+  "titel": "Plattformmodelle in der Praxis erkennen und strategisch einordnen",
+  "erstellt_am": "2026-05-23",
   "schritte": [
-    {"nr":1,"typ":"video","titel":"Was sind Plattform-Geschäftsmodelle?","youtube_id":"TODO_VIDEO_ID","youtube_query":"Plattformökonomie Grundlagen erklärt","dauer_min":6,"aufgabe":{"frage":"Welche zwei Akteursgruppen werden bei Plattformen typischerweise verbunden?","typ":"multi","optionen":["Anbieter","Nachfrager","Investoren","Regulator"],"korrekt":[0,1],"erklaerung":"Plattformen vermitteln zwischen Anbietern (Verkäufern, Fahrern) und Nachfragern (Käufern, Fahrgästen)."}},
-    {"nr":2,"typ":"text","titel":"Konzept: Netzwerkeffekte","inhalt":"Netzwerkeffekte beschreiben den Effekt, dass der Wert einer Plattform mit der Anzahl ihrer Nutzer steigt. Man unterscheidet direkte (innerhalb einer Gruppe) und indirekte Netzwerkeffekte (zwischen zwei Gruppen).","aufgabe":{"frage":"Welcher Effekt wirkt, wenn mehr Uber-Fahrer mehr Passagiere anziehen?","typ":"single","optionen":["Direkter Netzwerkeffekt","Indirekter Netzwerkeffekt","Lerneffekt","Skaleneffekt"],"korrekt":1,"erklaerung":"Indirekter Netzwerkeffekt — die eine Marktseite macht die Plattform für die andere attraktiver."}},
-    {"nr":3,"typ":"text","titel":"Strategische Konsequenzen","inhalt":"Plattformen mit starken Netzwerkeffekten tendieren zu Winner-takes-all-Dynamiken. Frühe Marktführer haben einen strategischen Vorteil. Für Späteinsteiger bleibt häufig nur die Differenzierung über Nischen, Qualität oder spezifische Zielgruppen.","aufgabe":{"frage":"Was ist die häufigste Strategie für späte Marktteilnehmer?","typ":"single","optionen":["Preisdumping","Nischen-Differenzierung","Aggressive Werbung","Konzentration auf B2B"],"korrekt":1,"erklaerung":"Späteinsteiger gewinnen typischerweise durch klare Differenzierung statt Imitation."}}
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "Warum heute? Klassisch, digital, plattformbasiert",
+      "youtube_id": "TODO_VIDEO_ID",
+      "youtube_query": "klassischer vs digitaler vertrieb erklärt unterschied",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welcher Faktor unterscheidet plattformbasierten Vertrieb am stärksten vom klassischen und einfach digitalen Vertrieb?",
+        "typ": "single",
+        "optionen": [
+          "Die Nutzung eines Online-Auftritts überhaupt",
+          "Die Vermittlung zwischen mehreren Marktseiten über Netzwerkeffekte",
+          "Der Einsatz eines CRM-Systems",
+          "Die Existenz eines Außendienstes"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Plattformen leben davon, dass sie zwei oder mehr Marktseiten zusammenbringen und über Netzwerkeffekte an Wert gewinnen. Ein eigener Online-Shop ist digital, aber noch keine Plattform. CRM und Außendienst sind Werkzeuge bzw. Kanäle, kein Modellunterschied."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "Sechs Plattformtypen im Überblick",
+      "inhalt": "Plattformmodelle lassen sich grob in sechs Typen sortieren. Marktplätze wie Amazon bündeln Anbieter und Käufer auf einer Transaktionsfläche. Vermittlungsplattformen wie Uber oder Airbnb stellen einen Match zwischen Nachfrage und Angebot her, ohne selbst Eigentümer der Leistung zu sein. Content-Plattformen wie YouTube finanzieren sich über Reichweite und Werbung rund um Inhalte. SaaS-Plattformen wie Salesforce verkaufen wiederkehrend Software-Funktionalität. Community-Plattformen wie LinkedIn entstehen rund um Beziehungen und Identität. Ökosystem-Plattformen wie Apple oder SAP verbinden mehrere Module, Partner und Drittentwickler zu einem strategisch geschlossenen Raum.",
+      "dauer_min": 5,
+      "aufgabe": {
+        "frage": "Welche der folgenden Beispiele sind klassische Vermittlungsplattformen?",
+        "typ": "multi",
+        "optionen": [
+          "Uber",
+          "Salesforce",
+          "Airbnb",
+          "YouTube",
+          "Apple App Store"
+        ],
+        "korrekt": [0, 2],
+        "erklaerung": "Uber und Airbnb sind Vermittlungsplattformen: Sie führen Angebot und Nachfrage zusammen, ohne die Leistung selbst zu erbringen. Salesforce ist SaaS, YouTube ist Content, der App Store ist eine Ökosystem-Plattform mit Marktplatzfunktion."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "Netzwerkeffekte: direkt versus indirekt",
+      "youtube_id": "TODO_VIDEO_ID",
+      "youtube_query": "netzwerkeffekte direkt indirekt plattform beispiele",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Mehr Fahrer auf Uber führen zu kürzeren Wartezeiten für Fahrgäste, was wiederum mehr Fahrgäste anzieht. Welcher Effekt ist hier zentral?",
+        "typ": "single",
+        "optionen": [
+          "Direkter Netzwerkeffekt innerhalb der Fahrgastgruppe",
+          "Indirekter Netzwerkeffekt zwischen Fahrern und Fahrgästen",
+          "Reiner Skaleneffekt durch Fixkostendegression",
+          "Lerneffekt der Plattform-Algorithmen"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Es handelt sich um einen indirekten Netzwerkeffekt: Die eine Marktseite (Fahrer) macht die Plattform für die andere Marktseite (Fahrgäste) attraktiver. Direkte Netzwerkeffekte wirken innerhalb derselben Gruppe (z. B. mehr WhatsApp-Nutzer machen WhatsApp für andere Nutzer wertvoller)."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "Kritische Masse und das Henne-Ei-Problem",
+      "inhalt": "Plattformen sind solange leer wie wertlos: Ohne Anbieter kommen keine Nachfrager, ohne Nachfrager kommen keine Anbieter. Das ist das Henne-Ei-Problem. Erst ab einer kritischen Masse beginnen Netzwerkeffekte sichtbar zu wirken und der Plattformwert wächst von selbst. Typische Startstrategien sind die scharfe Fokussierung auf eine geografische Nische oder Branche, die einseitige Subvention einer Marktseite zu Beginn (Uber zahlte Fahrer fürs Onlinegehen) oder das Mitbringen einer eigenen ersten Marktseite (Amazon startete als Buchhändler, bevor Drittanbieter dazukamen). Späteinsteiger gewinnen nicht über Imitation, sondern über Spezialisierung in Segmenten, in denen die etablierte Plattform schwach ist.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Was beschreibt das Henne-Ei-Problem beim Plattformstart am präzisesten?",
+        "typ": "single",
+        "optionen": [
+          "Plattformen brauchen einen langen Atem, weil Marketing teuer ist",
+          "Anbieter kommen nur, wenn Nachfrager da sind und umgekehrt — beide Marktseiten müssen gleichzeitig wachsen",
+          "Plattformen scheitern, weil sie kein klares Produkt haben",
+          "Die Plattform muss erst regulatorisch zugelassen werden, bevor Nutzer einsteigen"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Henne-Ei beschreibt die wechselseitige Abhängigkeit der Marktseiten in der Frühphase. Ohne Anbieter keine Nachfrager — und ohne Nachfrager keine Anbieter. Lösung sind gezielte Eingriffe wie Nischenfokus, Subvention einer Seite oder eine eigene Startseite."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "Eigener Kanal versus Plattform — strategische Trade-offs",
+      "youtube_id": "TODO_VIDEO_ID",
+      "youtube_query": "eigener online shop vs marktplatz vor und nachteile b2b",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche der folgenden sind typische Vorteile eines eigenen digitalen Vertriebskanals gegenüber der Listung auf einer großen Plattform?",
+        "typ": "multi",
+        "optionen": [
+          "Volle Kontrolle über Kundendaten und Wiederkaufprozesse",
+          "Schnellster Marktzugang ohne eigenen Aufbau",
+          "Stärkere Markenwahrnehmung statt Vergleichbarkeit im Listing",
+          "Höhere Kontrolle über Preisgestaltung und Margen",
+          "Sofortige Reichweite ohne Marketingbudget"
+        ],
+        "korrekt": [0, 2, 3],
+        "erklaerung": "Eigene Kanäle punkten bei Datenhoheit, Markenführung und Preis-/Margenkontrolle. Geschwindigkeit und Reichweite sind dagegen typische Plattformvorteile — beides muss man im eigenen Kanal erst aufbauen."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "Plattform-Auswahl-Matrix in der Praxis",
+      "inhalt": "Eine belastbare Plattformentscheidung beruht selten auf einem Kriterium, sondern auf einer Matrix. Sechs Kriterien haben sich bewährt: Zielgruppenpassung (sind unsere Kunden dort?), Kostenmodell (Setup, Provision, laufende Gebühren), Datenzugang (sehen wir das Kundenverhalten oder nur die Bestellung?), Kontrollgrad (bestimmen wir Preis, Sortiment, Kommunikation?), Markenwirkung (stärkt oder verwässert die Plattform unsere Positionierung?) und Skalierbarkeit (trägt der Kanal in 2 Jahren noch?). Jede Option wird pro Kriterium etwa auf einer 1-bis-5-Skala bewertet, kritische Kriterien werden gewichtet. So entstehen aus dem Bauchgefühl nachvollziehbare Priorisierungen statt isolierter Kanalentscheidungen.",
+      "dauer_min": 5,
+      "aufgabe": {
+        "frage": "Ein spezialisierter B2B-Anbieter mit erklärungsbedürftigen Produkten und hochwertiger Marke prüft seine Plattformoptionen. Welches Kriterium ist hier typischerweise am wichtigsten?",
+        "typ": "single",
+        "optionen": [
+          "Maximale Reichweite über die größte verfügbare Plattform",
+          "Niedrigste Provision pro Transaktion",
+          "Markenwirkung und Kontrollgrad über die Kundenschnittstelle",
+          "Schnellste technische Anbindung an die Plattform"
+        ],
+        "korrekt": 2,
+        "erklaerung": "Bei spezialisierten B2B-Produkten ist die Marke ein zentraler Differenzierungshebel. Reichweite ohne Kontrolle führt zu Vergleichbarkeit und Preisdruck — und beschädigt die Qualitätspositionierung. Provision und Anbindung sind operative, keine strategischen Kriterien."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "Management: Wann wird die Plattform zur Falle?",
+      "youtube_id": "TODO_VIDEO_ID",
+      "youtube_query": "plattform abhängigkeit lock in risiko vertrieb strategie",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Warnsignale deuten aus Managementsicht auf eine strategisch riskante Plattformabhängigkeit hin?",
+        "typ": "multi",
+        "optionen": [
+          "Mehr als zwei Drittel des Neugeschäfts laufen über einen einzigen Plattformbetreiber",
+          "Die Plattform diktiert wesentliche Bedingungen wie Preis, Ranking oder Sortiment",
+          "Kundendaten und Kontaktrechte liegen vollständig bei der Plattform, nicht bei uns",
+          "Die Plattform hat im letzten Jahr ihr Design überarbeitet"
+        ],
+        "korrekt": [0, 1, 2],
+        "erklaerung": "Konzentration auf einen Kanal, fehlende Datenhoheit und einseitige Steuerungsmacht des Plattformbetreibers sind die klassischen Lock-in-Indikatoren. Ein Designwechsel ist operativ, aber kein strategisches Risiko."
+      }
+    }
   ]
 }
