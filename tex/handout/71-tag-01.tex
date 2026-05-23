@@ -1,0 +1,753 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 1 - Lehrskript
+% BPMN 2.0 & EPC: Einordnung, Basiselemente, Modell-Qualitaet, Zweckorientierung
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+% Charter als Body. Fallback: TeX Gyre Schola (sehr aehnlich, in MiKTeX dabei).
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+% Sans = Source Sans 3 / Source Sans Pro. Fallback: TeX Gyre Heros.
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+% Caveat fuer Akzente. Wenn nicht da -> faellt auf italic Hauptschrift zurueck.
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+% Monospace
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+% Kurs 71 Akzent: Orange (#9d4a1a)
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+% Eselsbruecke - amber, dashed
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Merkkasten - orange fuer Kurs 71
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 1}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}BPMN 2.0 \& EPC}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 1 \textperiodcentered{} TAG 1 VON 3 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 28.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}BPMN 2.0\\\&\\EPC\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Prozesse modellieren, Verantwortung sichtbar machen --\\von der Notation zur Steuerungsentscheidung.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 1 von 3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Am Ende dieses Tages haben Sie ein gemeinsames Vokabular für Prozessmodellierung, können BPMN 2.0 und EPC einordnen, ein erstes belastbares Modell erstellen und beginnen, Modellierungsentscheidungen aus der Management-Perspektive zu treffen. Die Lernziele sind in drei Stufen gegliedert -- Wissen, Anwendung und Management -- und bauen aufeinander auf.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Begriffe Prozess, Modell, Notation, Modellzweck verstehen und voneinander abgrenzen.
+  \item BPMN-2.0-Basiselemente kennen: Start-/End-Ereignisse, Aktivitäten/Tasks, Gateways (insb. XOR), Sequenz- und Nachrichtenfluss, Pools und Lanes.
+  \item EPC-Basiselemente kennen: Ereignis, Funktion, Konnektoren (AND, OR, XOR), Organisationseinheit, Informationsobjekt.
+  \item Grundsätze ordnungsmäßiger Modellierung (GoM) als Qualitätsrahmen einordnen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Aus einer Prozessbeschreibung ein BPMN- oder EPC-Modell ableiten.
+  \item Benennungsregeln (Verb + Objekt für Funktionen, Zustand für Ereignisse) konsistent anwenden.
+  \item Modellqualität anhand von Kriterien bewerten und gezielt verbessern.
+  \item Eine Notation begründet auswählen: \emph{BPMN oder EPC für diesen Zweck?}
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Modellzweck und Granularität als Managemententscheidung treffen.
+  \item Zielkonflikte (Dokumentation vs.\ Automatisierung, Management vs.\ IT) bewusst entscheiden.
+  \item Verantwortung über Lanes und Rollen sichtbar machen.
+  \item Annahmen unter Unsicherheit transparent dokumentieren statt zu raten.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Ein Prozessmodell ist kein Selbstzweck. Es ist ein \emph{Steuerungsinstrument} -- für Dokumentation, Analyse, Automatisierung oder Compliance. Wer den Zweck nicht kennt, modelliert entweder zu fein oder zu grob -- und in beiden Fällen am Bedarf vorbei.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG / MOTIVATION --------------------------------------------
+\section{Einstieg: Warum Prozesse modellieren}
+
+Jede Organisation \emph{hat} Prozesse -- ob sie sie aufgeschrieben hat oder nicht. Bestellungen werden bearbeitet, Anträge geprüft, Geräte produziert, Tickets beantwortet. Die Frage ist nicht, \emph{ob} es Prozesse gibt, sondern: \emph{Sind sie verstanden, vergleichbar, steuerbar?}
+
+In der Praxis stoßen wir typischerweise auf drei Symptome, die anzeigen, dass die Prozesslandschaft modellierungsbedürftig ist:
+
+\begin{enumerate}
+  \item \fachbegriff{Niemand weiß, wer entscheidet.} Verantwortung liegt im Bauch einiger erfahrener Mitarbeiter -- und verschwindet, sobald jemand das Unternehmen verlässt.
+  \item \fachbegriff{Jeder Bereich modelliert anders -- oder gar nicht.} Vergleichbarkeit fehlt, Audits werden zur Such-Aktion, IT-Schnittstellen erfindet jedes Projekt neu.
+  \item \fachbegriff{Das Modell ist da -- aber unbenutzbar.} Es ist zu fein, zu vage, falsch beschriftet oder seit drei Reorganisationen nicht angefasst worden.
+\end{enumerate}
+
+\subsection{Was ein Prozess ist -- und was nicht}
+
+Ein \fachbegriff{Prozess} ist eine logische Abfolge von Aktivitäten, die einen \emph{Input} in einen \emph{Output} transformiert und dabei einen Wert für den Kunden -- intern oder extern -- erzeugt. Drei Bestandteile gehören dazu:
+
+\begin{itemize}
+  \item \textbf{Input} -- Trigger oder Ausgangszustand (eine Bestellung trifft ein, eine Anforderung wird formuliert).
+  \item \textbf{Transformation} -- die eigentliche Folge von Tätigkeiten, oft mit Entscheidungen und parallelen Pfaden.
+  \item \textbf{Output} -- Ergebniszustand (eine versendete Lieferung, ein freigegebenes Produkt, ein abgelehnter Antrag).
+\end{itemize}
+
+Ein \fachbegriff{Modell} ist nicht der Prozess. Es ist eine \emph{Abbildung} der Realität, die bewusst Dinge weglässt, um andere Dinge sichtbar zu machen. Ein gutes Modell verschweigt Details, ohne die Logik zu verzerren.
+
+\subsection{Was Modellierung leistet -- und was nicht}
+
+Modellierung ist nicht magisch. Sie ändert nicht die Realität, sie macht sie nur \emph{besprechbar}. Was sie kann:
+
+\begin{itemize}
+  \item Gemeinsames Verständnis schaffen (Fach + IT + Management sprechen über dasselbe Diagramm).
+  \item Schwachstellen sichtbar machen (Doppelarbeit, fehlende Entscheidungen, Schleifen ohne Abbruchkriterium).
+  \item Verantwortung dokumentieren (wer macht was, wer entscheidet).
+  \item Eine Brücke zur Automatisierung bauen (BPMN 2.0 als executable Notation).
+\end{itemize}
+
+Was sie \emph{nicht} kann: schlechte Prozesse durch Visualisierung gut machen. Ein modelliertes Chaos bleibt Chaos -- nur dass es jetzt auf Papier steht und alle es lesen können.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{I-T-O}]
+\textbf{I-T-O} -- die drei Bestandteile jedes Prozesses, von links nach rechts:\\[2pt]
+\textbf{I}nput -- was kommt rein? (Bestellung, Antrag, Anforderung)\\
+\textbf{T}ransformation -- was passiert? (prüfen, entscheiden, fertigen)\\
+\textbf{O}utput -- was kommt raus? (Lieferung, Bescheid, Produkt)\\[2pt]
+\emph{Wenn Input, Transformation oder Output unklar sind, kann man kein Modell bauen, nur eine Hoffnung skizzieren.}
+\end{eselsbox}
+
+\subsection{Vier Modellierungszwecke}
+
+Bevor wir das erste Symbol zeichnen, muss \emph{eine} Frage beantwortet sein: \emph{Wofür modellieren wir?} In der Praxis gibt es vier Hauptzwecke, und sie verlangen unterschiedliche Tiefen, Notationen und Granularitäten:
+
+\begin{itemize}
+  \item \fachbegriff{Dokumentation.} Das Modell hält fest, wie ein Prozess heute läuft. Adressat: neue Mitarbeiter, Audit, Wissenssicherung. Tiefe: mittel; Klarheit wichtiger als Vollständigkeit.
+  \item \fachbegriff{Analyse.} Das Modell soll Schwachstellen finden -- Engpässe, Schleifen, doppelte Arbeit. Adressat: Prozess-Owner, Change-Team. Tiefe: hoch, mit Mess- und Entscheidungspunkten.
+  \item \fachbegriff{Automatisierung.} Das Modell soll als Vorlage für eine ausführbare Lösung dienen (Workflow-Engine, Process-Mining-Tool). Adressat: IT. Tiefe: sehr hoch, jede Bedingung exakt.
+  \item \fachbegriff{Compliance.} Das Modell weist nach, dass regulatorische Anforderungen eingehalten werden. Adressat: Auditor, Aufsicht. Tiefe: variabel; Nachvollziehbarkeit und Versionierung sind entscheidend.
+\end{itemize}
+
+% --- 2. BPMN BASISELEMENTE -----------------------------------------------
+\section{BPMN 2.0 -- Basiselemente}
+
+\fachbegriff{BPMN} steht für \emph{Business Process Model and Notation}. Die Version 2.0 ist seit 2011 ein Standard der Object Management Group (OMG). Ihr Anspruch: eine Notation, die sowohl für die Fachseite verständlich als auch für die IT ausführbar ist. In der Praxis nutzen wir nur einen Bruchteil der Spezifikation -- das, was im Geschäftsalltag wirklich vorkommt.
+
+\subsection{Aktivitäten (Activities) und Tasks}
+
+Eine \fachbegriff{Aktivität} ist eine Tätigkeit, die innerhalb des Prozesses ausgeführt wird. Sie wird als abgerundetes Rechteck dargestellt. Die einfachste Aktivität ist der \fachbegriff{Task} -- eine atomare, nicht weiter zerlegte Tätigkeit. Komplexe Aktivitäten können als \fachbegriff{Sub-Process} verfeinert werden (ein gekapselter Teilprozess mit eigenem Start und Ende).
+
+Benennungsregel für Tasks: \emph{Verb + Objekt}. Also nicht ``Rechnung'', sondern ``Rechnung erstellen''. Nicht ``Lagerprüfung'', sondern ``Lagerbestand prüfen''. Wer diese Regel konsequent durchhält, eliminiert die Hälfte aller Missverständnisse in Reviews.
+
+\subsection{Ereignisse (Events)}
+
+Ein \fachbegriff{Ereignis} ist etwas, das im Prozess \emph{passiert} -- typischerweise ein Zustandswechsel oder ein Trigger. BPMN unterscheidet drei Hauptkategorien, dargestellt als Kreise:
+
+\begin{itemize}
+  \item \fachbegriff{Start-Ereignis} (dünner Kreis) -- der Prozess beginnt. Jeder vollständige Prozess hat genau ein Start-Ereignis pro Pool (im einfachen Fall).
+  \item \fachbegriff{Zwischen-Ereignis} (doppelter Kreis) -- etwas passiert während des Prozesses, oft ein Wartezustand (``Nachricht erhalten'', ``Timer abgelaufen'').
+  \item \fachbegriff{End-Ereignis} (dicker Kreis) -- der Prozess endet. Achtung: jeder Pfad muss zu einem End-Ereignis führen. Ein Prozess ohne klares Ende ist ein Indikator für ein unfertiges Modell.
+\end{itemize}
+
+\subsection{Gateways}
+
+Ein \fachbegriff{Gateway} ist eine Verzweigung oder Zusammenführung im Prozessfluss, dargestellt als Raute. Die drei wichtigsten Typen:
+
+\begin{itemize}
+  \item \fachbegriff{XOR-Gateway} (Raute mit ``X'') -- exklusive Entscheidung: genau ein Pfad wird gewählt. Beispiel: ``Bestellung vollständig?'' \textrightarrow{} ja oder nein.
+  \item \fachbegriff{AND-Gateway} (Raute mit ``+'') -- parallele Ausführung: alle Pfade laufen \emph{gleichzeitig}. Wird oft zur Synchronisation am Ende wieder zusammengeführt.
+  \item \fachbegriff{OR-Gateway} (Raute mit ``O'') -- inklusiv: ein oder mehrere Pfade. Mächtig, aber kann das Modell schnell unleserlich machen -- sparsam einsetzen.
+\end{itemize}
+
+\begin{merkbox}[Gateway-Disziplin]
+Ein Gateway ist nicht dazu da, alle möglichen Pfade ``aufzufächern''. Es markiert eine \emph{echte Entscheidung}, die im Prozess so gefällt wird. Wenn vor dem Gateway nicht klar ist, wer auf welcher Basis entscheidet, ist das Gateway eine Lüge -- es täuscht Kontrolle vor, wo Improvisation herrscht.
+\end{merkbox}
+
+\subsection{Sequenz- und Nachrichtenflüsse}
+
+Aktivitäten, Ereignisse und Gateways werden über \fachbegriff{Sequenzflüsse} verbunden (durchgezogener Pfeil). Sie zeigen die zeitliche Reihenfolge \emph{innerhalb} eines Pools. Zwischen verschiedenen Pools (also zwischen unterschiedlichen Beteiligten) wird der \fachbegriff{Nachrichtenfluss} verwendet (gestrichelter Pfeil mit offener Spitze). Er signalisiert: hier wird kommuniziert, hier verlässt etwas die Organisationsgrenze.
+
+\subsection{Pools und Lanes}
+
+Ein \fachbegriff{Pool} steht für einen Beteiligten -- meist eine ganze Organisation oder einen organisatorisch eigenständigen Bereich. Innerhalb eines Pools gliedern \fachbegriff{Lanes} weiter nach Rollen, Abteilungen oder Systemen. Beispiel: Pool ``NovaParts GmbH'', Lanes ``Vertrieb'', ``Produktion'', ``Versand'', ``Buchhaltung''.
+
+Lanes sind das wichtigste \emph{Verantwortungs-Werkzeug} der BPMN. Eine Aktivität in einer Lane heißt: \emph{Diese Rolle führt diese Tätigkeit durch.} Damit ist Verantwortung nicht mehr Bauchwissen, sondern Diagramm-Eigenschaft.
+
+\subsection{Artifacts}
+
+\fachbegriff{Artifacts} sind ergänzende Elemente, die den Prozess kontextualisieren, ohne ihn zu verändern: \emph{Data Objects} (z.\,B.\ ``Bestellung als PDF''), \emph{Annotations} (Kommentare am Diagramm), \emph{Groups} (visuelle Gruppierung). Sie helfen der Lesbarkeit, sind aber kein Pflichtprogramm.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{A-E-G-F-P}]
+Die fünf BPMN-Hauptelemente, die in 90\,\% der Modelle vorkommen:\\[2pt]
+\textbf{A}ktivitäten -- was wird getan?\\
+\textbf{E}reignisse -- was passiert? (Start, Zwischen, Ende)\\
+\textbf{G}ateways -- wo wird entschieden?\\
+\textbf{F}lüsse -- wie hängt es zusammen? (Sequenz, Nachricht)\\
+\textbf{P}ools/Lanes -- wer ist verantwortlich?\\[2pt]
+\emph{Mit ``A-E-G-F-P'' kann man fast jedes Prozessdiagramm bauen -- alles andere ist Feinschliff.}
+\end{eselsbox}
+
+% --- 3. EPC IM VERGLEICH -------------------------------------------------
+\section{EPC -- Ereignisgesteuerte Prozesskette}
+
+\fachbegriff{EPC} steht für \emph{Ereignisgesteuerte Prozesskette}. Sie wurde Anfang der 1990er Jahre am Institut für Wirtschaftsinformatik in Saarbrücken entwickelt und ist in deutschsprachigen Organisationen weit verbreitet -- besonders in SAP-nahen Umgebungen und in Verwaltungen. Wer im DACH-Raum mit gewachsenen Prozesslandschaften zu tun hat, trifft EPC garantiert.
+
+\subsection{Die drei Pflichtelemente}
+
+EPC ist im Kern denkbar einfach. Drei Symbole tragen die Notation:
+
+\begin{itemize}
+  \item \fachbegriff{Ereignis} (Sechseck) -- ein Zustand. Beispiel: ``Bestellung eingegangen'', ``Lager geprüft'', ``Rechnung erstellt''. Benennung passiv: Zustand, der eingetreten ist.
+  \item \fachbegriff{Funktion} (abgerundetes Rechteck) -- eine Tätigkeit. Beispiel: ``Lagerbestand prüfen'', ``Rechnung erstellen''. Benennung aktiv: Verb + Objekt.
+  \item \fachbegriff{Konnektor} (Kreis mit Symbol) -- logische Verknüpfung: AND ($\wedge$), OR ($\vee$), XOR.
+\end{itemize}
+
+Die zentrale Spielregel der EPC: \emph{Ereignis und Funktion wechseln sich strikt ab.} Auf ein Ereignis folgt eine Funktion, auf eine Funktion ein Ereignis. Diese Disziplin macht EPC besonders gut lesbar -- und besonders streng.
+
+\subsection{Ergänzende Elemente}
+
+In erweiterten EPC (eEPC) kommen zwei weitere Elemente häufig vor:
+
+\begin{itemize}
+  \item \fachbegriff{Organisationseinheit} (Ellipse) -- wer führt die Funktion aus? (Abteilung, Rolle, Stelle).
+  \item \fachbegriff{Informationsobjekt} (Rechteck) -- welche Information wird benötigt oder erzeugt? (Bestellung, Kundenstammsatz, Lagerbestand).
+\end{itemize}
+
+\subsection{BPMN vs.\ EPC -- wann was}
+
+Beide Notationen können denselben Prozess abbilden -- aber mit unterschiedlichen Schwerpunkten:
+
+\begin{tabularx}{\linewidth}{@{}l X X@{}}
+\toprule
+& \textbf{BPMN 2.0} & \textbf{EPC} \\
+\midrule
+\textbf{Schwerpunkt} & Ablauflogik, Rollen, Automatisierung & Ereignisgetriebene Wertschöpfungskette, Business-Sicht \\
+\textbf{Verbreitung} & internationaler Standard (OMG) & DACH, oft SAP-/ARIS-Umfeld \\
+\textbf{Nähe zur IT} & hoch -- executable BPMN möglich & gering -- Beschreibungsmodell \\
+\textbf{Lesbarkeit für Fachseite} & gut bei einfachen Modellen & sehr gut, klare Sprache \\
+\textbf{Rollendarstellung} & über Pools/Lanes nativ & über Organisationseinheiten (optional) \\
+\textbf{Skalierbarkeit} & komplexe Modelle möglich, aber unübersichtlich & gut für Übersicht, weniger für Tiefe \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent\textbf{Faustregel.} \emph{Geht es Richtung Automatisierung oder Schnittstelle zur IT?} \textrightarrow{} BPMN. \emph{Geht es um eine Management- oder Fachübersicht, in der Ereignisse den Takt geben?} \textrightarrow{} EPC. In hybriden Landschaften: EPC für die Übersicht, BPMN für die Detailebene, die nahe an der IT liegt.
+
+\begin{merkbox}[Notation als Werkzeug, nicht als Religion]
+Die Frage ``BPMN \emph{oder} EPC'' ist meist falsch gestellt. Die richtige Frage lautet: \emph{Für welchen Zweck, für welche Zielgruppe, mit welcher Tiefe modellieren wir?} Wer den Zweck kennt, wählt die Notation als Werkzeug -- und nicht aus Tool-Gewohnheit.
+\end{merkbox}
+
+% --- 4. MODELL-QUALITAET / GoM -------------------------------------------
+\section{Modell-Qualität: die sieben Grundsätze}
+
+Ein Modell ist nicht ``richtig'' oder ``falsch'' -- es ist mehr oder weniger \emph{brauchbar} für seinen Zweck. Die \fachbegriff{Grundsätze ordnungsmäßiger Modellierung} (GoM) -- ursprünglich von Becker, Rosemann und Schütte formuliert -- geben sieben Kriterien an die Hand, die in jeder Modellierungs-Disziplin gelten.
+
+\subsection{Die sieben Grundsätze im Detail}
+
+\begin{enumerate}
+  \item \fachbegriff{Grundsatz der Richtigkeit.} Das Modell bildet die Realität (oder das gewünschte Soll) \emph{korrekt} ab. Es enthält keine Widersprüche, die Logik trägt. Test: lässt sich der Prozess so wie modelliert ausführen?
+  \item \fachbegriff{Grundsatz der Relevanz.} Das Modell enthält nur das, was für seinen Zweck relevant ist. Alles andere lenkt ab. Test: kann ich ein Element streichen, ohne dass die Zweckaussage leidet?
+  \item \fachbegriff{Grundsatz der Wirtschaftlichkeit.} Aufwand für Modellierung und Pflege steht in einem vernünftigen Verhältnis zum Nutzen. Test: lohnt sich das Detail noch, oder sind wir im Modellierungs-Selbstzweck?
+  \item \fachbegriff{Grundsatz der Klarheit.} Das Modell ist für die Zielgruppe \emph{lesbar} -- nicht für den Modellierer selbst. Test: versteht eine Person aus der Zielgruppe es ohne mündliche Erklärung?
+  \item \fachbegriff{Grundsatz der Vergleichbarkeit.} Das Modell folgt denselben Konventionen wie andere Modelle derselben Organisation: Benennung, Granularität, Symbolik. Test: kann ich es neben ein Nachbarmodell legen und beide vergleichen?
+  \item \fachbegriff{Grundsatz des systematischen Aufbaus.} Das Modell ist konsistent strukturiert -- Hierarchie, Schichten, Schnittstellen sind nachvollziehbar. Test: gibt es ein erkennbares Muster, oder ist es Wildwuchs?
+  \item \fachbegriff{Grundsatz der Zweckorientierung.} Das Modell dient einem klar benannten Zweck. Alle anderen Grundsätze sind ihm untergeordnet. Test: kann ich in einem Satz sagen, wofür dieses Modell gebraucht wird?
+\end{enumerate}
+
+\subsection{Die sieben Grundsätze als Checkliste}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Richtigkeit & Logik schlüssig, keine Widersprüche, ausführbare Pfade. \\
+Relevanz & Nur das Notwendige -- kein Selbstzweck-Detail. \\
+Wirtschaftlichkeit & Aufwand \textless{} Nutzen, auch in der Pflege. \\
+Klarheit & Lesbarkeit für die Zielgruppe, nicht für den Modellierer. \\
+Vergleichbarkeit & Konventionen einhalten, neben Nachbarmodellen lesbar. \\
+Systematischer Aufbau & Konsistente Hierarchie und Schnittstellen. \\
+Zweckorientierung & Ein klar benannter Zweck -- alles andere folgt. \\
+\bottomrule
+\end{tabularx}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{R-R-W-K-V-S-Z}]
+``\textbf{R}ichtig, \textbf{r}elevant, \textbf{w}irtschaftlich, \textbf{k}lar, \textbf{v}ergleichbar, \textbf{s}ystematisch, \textbf{z}weckorientiert.''\\[2pt]
+\emph{Sieben Buchstaben, sieben Tests vor jeder Modell-Freigabe. Wer fünf von sieben erfüllt, hat ein gutes Modell. Wer Zweckorientierung verfehlt, hat \textemdash{} egal wie schön gezeichnet \textemdash{} kein brauchbares.}
+\end{eselsbox}
+
+% --- 5. ZWECKORIENTIERUNG ------------------------------------------------
+\section{Zweckorientierung: was VOR dem Modellieren zu klären ist}
+
+Der wichtigste der sieben Grundsätze -- Zweckorientierung -- bekommt einen eigenen Abschnitt, weil er in der Praxis am häufigsten übersprungen wird. Modellierer sind oft so erpicht, ein Tool zu öffnen und mit Symbolen anzufangen, dass sie die drei wichtigen Fragen nicht stellen.
+
+\subsection{Drei Fragen vor jedem Modell}
+
+\begin{enumerate}
+  \item \textbf{Wofür?} (Modellzweck) -- Dokumentation, Analyse, Automatisierung, Compliance? Häufig ist es eine \emph{Hauptzweck-plus-Nebennutzen}-Konstellation. Sie muss benannt sein.
+  \item \textbf{Für wen?} (Zielgruppe) -- Fachseite, Management, IT, Auditor, neue Mitarbeiter? Die Zielgruppe bestimmt Sprache, Tiefe und Symbolik.
+  \item \textbf{Wie tief?} (Granularität) -- Übersicht über das gesamte Geschäftsfeld, oder Detail bis auf Klick-Ebene? Tiefe ist eine Entscheidung, kein Zufall.
+\end{enumerate}
+
+\subsection{Granularität als Managemententscheidung}
+
+Granularität ist der häufigste Stolperstein. ``Zu fein'' bedeutet: niemand findet die wichtige Information, Pflegeaufwand explodiert, Modelle altern schnell. ``Zu grob'' bedeutet: das Modell sagt nichts Verwertbares, Entscheidungen müssen woanders getroffen werden. Beide Fehler kosten -- in unterschiedlicher Form.
+
+Eine praktikable Heuristik: \emph{Die kleinste sinnvolle Einheit ist eine Aktivität, die immer von derselben Rolle, im gleichen System, ohne Unterbrechung durchgeführt wird.} Wechselt die Rolle, das System oder der Zeitpunkt -- ist es eine neue Aktivität.
+
+\subsection{Stakeholder identifizieren}
+
+Wer wird das Modell \emph{tatsächlich nutzen}? Diese Frage trennt Modelle, die in Schubladen sterben, von solchen, die im Alltag genutzt werden:
+
+\begin{itemize}
+  \item \textbf{Prozess-Owner} -- verantwortet das End-to-End-Ergebnis und die Optimierung.
+  \item \textbf{Beteiligte Rollen} -- führen einzelne Aktivitäten aus, geben Realitäts-Feedback.
+  \item \textbf{IT/Entwicklung} -- bei Automatisierungs- oder Schnittstellen-Bezug.
+  \item \textbf{Management} -- nutzt Modelle für Priorisierung, Investitionsentscheidungen, Reporting.
+  \item \textbf{Compliance/Audit} -- benötigt Nachvollziehbarkeit und Versionierung.
+\end{itemize}
+
+\begin{merkbox}[Modellzweck-Statement -- ein Satz, der trägt]
+Vor jedem Modell sollte \emph{ein} Satz stehen, der drei Lücken füllt:\\[4pt]
+\emph{``Dieses Modell beschreibt den Prozess \underline{\hspace{2.5cm}}, für die Zielgruppe \underline{\hspace{2.5cm}}, mit dem Zweck \underline{\hspace{2.5cm}}.''}\\[4pt]
+Wer diesen Satz nicht aufschreiben kann, sollte nicht modellieren -- sondern fragen.
+\end{merkbox}
+
+% --- 6. POOLS, LANES, VERANTWORTUNG --------------------------------------
+\section{Pools, Lanes und Verantwortlichkeiten}
+
+Ein BPMN-Diagramm ohne Pools und Lanes ist eine Folge bunter Symbole -- aber kein Verantwortungsmodell. Erst die Aufteilung in Pools (Beteiligte) und Lanes (Rollen) macht ein Diagramm steuerungstauglich.
+
+\subsection{Pools: organisatorische Grenzen}
+
+Ein \fachbegriff{Pool} markiert eine organisatorisch eigenständige Einheit -- die eigene Firma, einen externen Dienstleister, einen Kunden. Was über die Pool-Grenze geht, ist eine \emph{Schnittstelle}: ein Vertrag, eine Datenübertragung, ein Telefonat. Diese Schnittstellen sind oft die teuersten Stellen im Prozess -- weil hier Wartezeit, Missverständnisse und Verantwortungslücken entstehen.
+
+In BPMN werden Pools nebeneinander dargestellt, durch \fachbegriff{Nachrichtenflüsse} (gestrichelt) verbunden. Innerhalb eines Pools fließt die Logik über \fachbegriff{Sequenzflüsse} (durchgezogen).
+
+\subsection{Lanes: Rollen statt Personen}
+
+Innerhalb eines Pools strukturieren \fachbegriff{Lanes} die Verantwortung. Wichtig: Lanes stehen für \emph{Rollen}, nicht für konkrete Personen. ``Vertrieb'' ist eine Lane, nicht ``Frau Meier''. Wenn Frau Meier morgen geht, bleibt die Lane bestehen, nur der Bewohner wechselt.
+
+Typische Lanes in einem Vertriebs-/Produktionsprozess: \emph{Vertrieb}, \emph{Einkauf}, \emph{Produktion}, \emph{Qualität}, \emph{Versand}, \emph{Buchhaltung}. Typische Lanes in einem Innovationsprozess: \emph{Produktmanagement}, \emph{F\&E}, \emph{Qualität}, \emph{Operations}, optional \emph{Legal} und \emph{Einkauf}.
+
+\subsection{Verantwortung sichtbar machen -- RACI an der Lane}
+
+Lanes lassen sich gut mit einer \fachbegriff{RACI}-Matrix kombinieren: für jede Aktivität wird festgelegt, wer \emph{Responsible} (führt aus), \emph{Accountable} (verantwortet), \emph{Consulted} (wird gefragt) und \emph{Informed} (wird informiert) ist. Die Lane zeigt typischerweise die \emph{R}; die anderen Rollen werden in einer ergänzenden Tabelle gepflegt.
+
+\begin{merkbox}[Verantwortungs-Test]
+Wenn man ein BPMN-Modell drucken kann, ohne die Lanes -- und niemand bemerkt einen Verlust -- ist das Modell als Verantwortungsdokument nutzlos. Lanes sind die Stelle, an der aus einem \emph{Ablaufbild} ein \emph{Steuerungsmodell} wird.
+\end{merkbox}
+
+\subsection{Häufige Fehler bei Pools und Lanes}
+
+\begin{itemize}
+  \item \textbf{Zu viele Lanes.} Wenn jedes Modell zehn Lanes hat, wird das Diagramm unleserlich. Zusammenfassen, wo möglich -- Detail in Sub-Prozesse verlagern.
+  \item \textbf{Externe Beteiligte als Lane.} Kunden, Lieferanten, Behörden gehören in einen \emph{eigenen Pool}, nicht in eine Lane des eigenen Pools. Sonst wird die organisatorische Grenze unsichtbar.
+  \item \textbf{Eine Aktivität in zwei Lanes.} Eine Aktivität gehört zu \emph{einer} Rolle. Wenn zwei zusammen handeln, ist es entweder eine Übergabe (zwei Aktivitäten) oder eine ungenaue Beschreibung.
+\end{itemize}
+
+% --- 7. HAEUFIGE FEHLER --------------------------------------------------
+\section{Häufige Fehler in Praxis-Modellen}
+
+Wer Prozessmodelle reviewt, sieht in 80\,\% der Fälle dieselben sechs Fehlerbilder. Wer sie kennt, kann sie vermeiden -- und ein eigenes Modell selbst prüfen, bevor andere es zerlegen.
+
+\subsection{Sechs typische Anti-Muster}
+
+\begin{enumerate}
+  \item \fachbegriff{Spaghetti-Modell.} 40 Pfeile kreuzen sich, das Diagramm passt nicht mehr auf eine Seite, niemand versteht es. Ursache: keine Hierarchie. Heilmittel: Sub-Prozesse, Layering, weniger Detail.
+  \item \fachbegriff{Fehlende End-Ereignisse.} Mehrere Pfade verlieren sich im Nichts. Ein Modell ohne klare Enden ist unvollständig -- und kein \emph{vollständiges} Modell. Heilmittel: jedem Pfad ein End-Ereignis zuordnen, auch dem ``abgelehnt''-Pfad.
+  \item \fachbegriff{Falsche Gateway-Logik.} Auf ein XOR-Gateway folgen drei Pfade, die sich überlappen -- oder ein AND-Gateway, das nie wieder synchronisiert wird. Heilmittel: Gateways immer paarig denken (öffnen + schließen), Bedingungen disjunkt formulieren.
+  \item \fachbegriff{Inkonsistente Benennung.} ``Bestellung prüfen'' neben ``Prüfung Bestellung'' neben ``Bestelldatenkontrolle''. Drei Begriffe, vermutlich dieselbe Tätigkeit. Heilmittel: Glossar, einheitliche Regel Verb + Objekt.
+  \item \fachbegriff{Endlosschleifen ohne Abbruchkriterium.} ``Nacharbeiten'' \textrightarrow{} ``erneut prüfen'' \textrightarrow{} ``Nacharbeiten'' -- und niemand weiß, nach wie vielen Iterationen es eskaliert. Heilmittel: Schleifen mit klarem Abbruchkriterium oder Eskalationspfad.
+  \item \fachbegriff{Modell ohne Annahmen-Hinweis.} Im Diagramm steht eine Aktivität ``automatisch übermitteln'' -- aber niemand weiß, ob die Schnittstelle existiert. Heilmittel: Annahmen explizit dokumentieren, z.\,B.\ als Annotation.
+\end{enumerate}
+
+\subsection{Review-Checkliste in fünf Punkten}
+
+\begin{enumerate}
+  \item Hat jeder Pfad ein klares Ende?
+  \item Sind alle Gateways Entscheidungen, die jemand tatsächlich trifft?
+  \item Folgen alle Benennungen einer Regel (Verb + Objekt)?
+  \item Ist Verantwortung über Lanes sichtbar?
+  \item Sind Annahmen unter Unsicherheit explizit gemacht?
+\end{enumerate}
+
+\begin{merkbox}[Spaghetti-Test]
+Wenn man den Modellausdruck einer Kollegin auf den Tisch legt und sie nach 60 Sekunden \emph{nicht} sagen kann, worum es geht, ist das Modell nicht zu klein gedruckt -- es ist nicht gut genug. Das ist kein Druck-Problem, sondern ein \emph{Klarheits}-Problem.
+\end{merkbox}
+
+% --- 8. EXECUTABLE BPMN: BRUECKE ZUR IT ----------------------------------
+\section{Vom Diagramm zur Ausführung: BPMN als Brücke}
+
+Eine Besonderheit der BPMN 2.0 ist, dass sie nicht nur dokumentieren, sondern auch \emph{ausführen} kann. Mit einer \fachbegriff{Workflow-Engine} (Camunda, Flowable, jBPM und andere) lassen sich BPMN-Diagramme direkt als Software-Prozess betreiben -- mit Tasks, die User zugewiesen oder von Services automatisch ausgeführt werden. Das ist der Brückenkopf zwischen Fach und IT.
+
+\subsection{Was ``executable BPMN'' bedeutet}
+
+Ein ausführbares BPMN-Modell unterscheidet sich vom rein dokumentarischen Modell in mehreren Punkten:
+
+\begin{itemize}
+  \item \textbf{Vollständigkeit.} Jeder Pfad muss durchführbar sein -- es darf keine ``schwebenden'' Aktivitäten geben.
+  \item \textbf{Eindeutigkeit der Gateways.} Bedingungen müssen formal beschrieben sein (oft in \fachbegriff{FEEL}, der Decision-Engine-Sprache, oder in einer Skriptsprache).
+  \item \textbf{Task-Typisierung.} BPMN unterscheidet \emph{User Task} (ein Mensch arbeitet), \emph{Service Task} (ein System arbeitet), \emph{Send/Receive Task} (Nachrichtenaustausch), \emph{Script Task} (kleine Logik), \emph{Business Rule Task} (Entscheidungslogik).
+  \item \textbf{Datenobjekte und Variablen.} Was geht in den Prozess hinein, was kommt heraus, was wird zwischen Tasks weitergegeben?
+\end{itemize}
+
+\subsection{Strategische Bedeutung: BPMN als Übersetzer}
+
+Der eigentliche Wert von BPMN 2.0 liegt darin, dass \emph{ein und dieselbe Notation} von Fach und IT genutzt werden kann. Die Fachseite zeichnet einen Prozess -- die IT-Seite hängt Service-Tasks an die richtigen Stellen. Wer das gut hinbekommt, vermeidet die klassische Brüche zwischen ``so wollten wir's'' und ``so haben wir's gebaut''.
+
+In der Praxis ist diese Brücke nicht voraussetzungsfrei: sie erfordert Disziplin in der Modellierung, ein gemeinsames Glossar und ein klares Bekenntnis, dass das BPMN-Modell die \emph{single source of truth} ist -- nicht das Word-Dokument daneben.
+
+\subsection{Tool-Landschaft -- ein Überblick}
+
+Ohne Empfehlung im Detail (Tooling ist projekt- und budgetabhängig) -- diese Kategorien sind 2026 relevant:
+
+\begin{itemize}
+  \item \textbf{Reine Modellierungs-Tools} (z.\,B.\ Camunda Modeler als Desktop, draw.io, bpmn.io). Geringe Hürde, gut für Dokumentation und Analyse.
+  \item \textbf{ARIS-/Signavio-Klasse.} Enterprise-Modellierungs-Plattformen mit Governance, Versionierung, Repository.
+  \item \textbf{Workflow-Engines} (Camunda Platform, Flowable, jBPM). Führen BPMN aus, integrieren mit Microservices und User-Interfaces.
+  \item \textbf{Low-Code/No-Code-Plattformen}, die BPMN-ähnliche Notationen für schnelle Workflow-Automatisierung anbieten -- mit Tendenz zur Vereinfachung der Notation.
+\end{itemize}
+
+\subsection{Wann nicht automatisieren}
+
+Nicht jeder dokumentierte Prozess ist ein Kandidat für Automatisierung. Drei Indikatoren, die zur Zurückhaltung mahnen:
+
+\begin{itemize}
+  \item \textbf{Hohe Varianz pro Fall.} Wenn fast jeder Vorgang anders ist, wird der Workflow zur Sammlung von Sonderlocken.
+  \item \textbf{Kurze Lebensdauer des Prozesses.} Wenn die Organisation den Prozess in zwölf Monaten neu erfindet, lohnt sich die Investition nicht.
+  \item \textbf{Niedrige Frequenz.} Ein Prozess, der dreimal im Jahr läuft, ist ein Kandidat für eine Checkliste, nicht für eine Engine.
+\end{itemize}
+
+% --- 9. COACHING: MODELL VS. REALITAET -----------------------------------
+\section{Coaching: Modell vs.\ Realität}
+
+In den ersten Sektionen ging es um Notation und Qualität -- die handwerkliche Seite. In diesem Abschnitt geht es um eine andere Frage, die in jedem Modellierungsprojekt früher oder später aufkommt: \emph{Wie genau bilden wir die Realität ab -- und wessen Realität ist das eigentlich?} Das sind die Coaching-Themen, die im Tag aus UE 4 stammen.
+
+\subsection{Wofür modellieren wir wirklich?}
+
+Auf der Oberfläche ist die Antwort einfach (siehe Sektion 5): Dokumentation, Analyse, Automatisierung, Compliance. In der Tiefe ist sie politischer. Modelle haben Nebenwirkungen:
+
+\begin{itemize}
+  \item Wer im Modell als ``Entscheider'' eingezeichnet ist, bekommt diese Rolle de facto verliehen -- ob er sie wollte oder nicht.
+  \item Wer im Modell \emph{nicht} vorkommt, wird in spätere Optimierungen oft auch nicht einbezogen.
+  \item Wer das Modell pflegt, prägt, wie der Prozess wahrgenommen wird -- unabhängig davon, wie er tatsächlich läuft.
+\end{itemize}
+
+Senior-Modellierung bedeutet, diese Nebenwirkungen mitzudenken. Ein Modell ist ein \emph{Machtinstrument}, nicht nur ein Diagramm.
+
+\subsection{Granularität bewusst entscheiden}
+
+Wie genau wir modellieren, ist eine Entscheidung -- und sie hat Kosten in beide Richtungen. Drei Leitfragen:
+
+\begin{enumerate}
+  \item Welche Modellierungs-Entscheidung von heute hat den größten Einfluss auf spätere Kosten und Risiko?
+  \item Welche Information fehlt -- und wie würde ich sie mit minimalem Aufwand beschaffen?
+  \item Wo würde ich bewusst \emph{nicht} weiter detaillieren -- und warum?
+\end{enumerate}
+
+\subsection{Umgang mit Unklarheit -- Annahmen sichtbar machen}
+
+In der Praxis sind viele Informationen unvollständig: Schnittstellen unbekannt, Zuständigkeiten umstritten, Fallzahlen geschätzt. Der häufigste Fehler ist es, diese Lücken durch \emph{Raten} zu schließen, ohne es kenntlich zu machen. Das Modell sieht dann sauber aus -- ist aber innen voller Annahmen, die niemand kennt.
+
+Die Senior-Disziplin: \emph{Annahmen explizit machen.} Eine Annotation am Diagramm (``Annahme: Schnittstelle XY existiert, zu validieren bis KW~28''), ein Annahmen-Logbuch neben dem Modell, eine Liste offener Klärungen. Transparenz ist hier kein Schwäche-Eingeständnis -- sie ist die Form, in der Verantwortung sichtbar wird.
+
+\subsection{Entscheidungslogik: Wo muss ein Gateway hin?}
+
+Nicht jede ``Wenn-dann''-Konstruktion gehört in ein Modell als Gateway. Manche Verzweigungen sind nur \emph{Beschreibungsdetails}, andere sind echte Steuerungspunkte. Faustregel:
+
+\begin{itemize}
+  \item \textbf{Echtes Gateway:} an dieser Stelle entscheidet eine Person oder Regel mit nachvollziehbaren Kriterien -- und die Wahl hat erkennbare Konsequenzen für den weiteren Pfad.
+  \item \textbf{Beschreibungsdetail:} an dieser Stelle gibt es zwar Varianten, aber sie werden situativ entschieden und sind nicht entscheidungsrelevant für die Steuerung des Gesamtprozesses.
+\end{itemize}
+
+\subsection{Senior-Shift: Verantwortungsfähigkeit statt Mod-Tooling}
+
+Der Wechsel vom Modellierer zur \emph{Verantwortungsfähigkeit} ist der eigentliche Sprung im Tag. Drei Kennzeichen, an denen man diesen Wechsel erkennt:
+
+\begin{itemize}
+  \item Man modelliert \emph{vor} dem Werkzeug -- also: man kennt Zweck und Zielgruppe, bevor man das Tool öffnet.
+  \item Man ist bereit, Modelle bewusst \emph{unvollständig} zu lassen, mit dokumentierten Lücken, statt sie scheingenau zu machen.
+  \item Man führt eine Diskussion über das Modell mit dem Vorstand in 90 Sekunden -- nicht über Notation, sondern über die Steuerungslogik.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Z-G-A-V}]
+Vier Senior-Hebel, die in jeder Modellierungs-Diskussion zuerst geklärt werden müssen:\\[2pt]
+\textbf{Z}weck -- wofür modellieren wir?\\
+\textbf{G}ranularität -- wie tief?\\
+\textbf{A}nnahmen -- was wissen wir nicht (und wie machen wir's sichtbar)?\\
+\textbf{V}erantwortung -- wer entscheidet, wer liefert zu?\\[2pt]
+\emph{``Z-G-A-V'' \textemdash{} vier Fragen, die vor jedem Diagramm-Symbol beantwortet sein sollten.}
+\end{eselsbox}
+
+% --- 10. MANAGEMENT-PERSPEKTIVE ------------------------------------------
+\section{Management-Perspektive: Modellierung als Architektur}
+
+Auf Wissens-Ebene ist Modellierung eine Notation. Auf Anwendungs-Ebene ist sie ein Handwerk. Auf Management-Ebene ist sie eine \emph{Architekturentscheidung}: Welche Prozesse modellieren wir überhaupt? Wie tief? Mit welcher Governance? Wer prüft, wer entscheidet, wer hält den Standard?
+
+\subsection{Zwei zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Schnell dokumentieren vs.\ später automatisieren können.} Ein hastig gezeichnetes Übersichtsmodell schafft Klarheit -- ist aber selten direkt automatisierbar. Wer auf Automatisierung zielt, muss von Anfang an formaler arbeiten. Das kostet Zeit, die man am Anfang nicht hat.
+  \item \textbf{Für Management verständlich vs.\ für IT ausführbar.} Management will eine A4-Übersicht. IT will jede Bedingung formal. Beide Anforderungen in \emph{einem} Modell zu erfüllen, ist eine Lebenslüge. Praktikabel ist eine \emph{Schichtarchitektur}: oben EPC-/BPMN-Übersicht, darunter detaillierte BPMN-Sub-Prozesse.
+\end{enumerate}
+
+\subsection{Governance: Modellierung im Mehr-Bereichs-Kontext}
+
+Sobald mehrere Bereiche modellieren, entstehen typische Probleme:
+
+\begin{itemize}
+  \item Jeder Bereich benennt anders -- Vergleichbarkeit verschwindet.
+  \item Niemand prüft Modelle -- Qualität verfällt.
+  \item Modelle altern -- der Stand spiegelt nicht mehr die Realität.
+  \item Tools wuchern -- jeder zeichnet, wo er Lust hat.
+\end{itemize}
+
+Eine \fachbegriff{Modellierungs-Policy} (1 Seite, nicht 20) regelt das Minimum: Wann BPMN, wann EPC? Welche Benennungsregeln? Welche Mindest-Qualität (Start/Ende, Gateways, Lanes)? Wer reviewt? Wann wird aktualisiert?
+
+\subsection{Rollen in einem Governance-Modell}
+
+Eine pragmatische Rollenverteilung in einer wachsenden Organisation:
+
+\begin{itemize}
+  \item \fachbegriff{Process Owner} -- verantwortet einen End-to-End-Prozess fachlich, vertritt ihn nach außen.
+  \item \fachbegriff{Modeler} -- modelliert konkrete Prozesse, kennt das Handwerk.
+  \item \fachbegriff{Reviewer} -- prüft Modelle gegen die Policy und gegen GoM.
+  \item \fachbegriff{Approver} -- gibt finale Modellversion frei (oft Process Owner oder Bereichsleiter).
+\end{itemize}
+
+Diese vier Rollen lassen sich als RACI darstellen und im Modell selbst über Lanes verankern.
+
+\subsection{Risiken bei Modellierungs-Initiativen}
+
+\begin{enumerate}
+  \item \textbf{Übermodellierung.} Alles wird in jedem Detail gezeichnet -- Aufwand verschlingt Nutzen.
+  \item \textbf{Schattenprozesse.} Das Modell stimmt nicht mehr mit der Wirklichkeit überein; die Wirklichkeit läuft daneben.
+  \item \textbf{Akzeptanzproblem.} Die operativen Teams empfinden Modellierung als ``Aufgabe von oben'' -- ohne erkennbaren Nutzen für sie selbst.
+  \item \textbf{Tool-Falle.} Diskussionen drehen sich um das Tool statt um den Prozess.
+  \item \textbf{Audit-Fokus.} Modellierung wird nur für Compliance gemacht -- nicht für Steuerung. Das Ergebnis erfüllt den Audit, schafft aber keinen operativen Wert.
+\end{enumerate}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 1]
+Prozessmodellierung ist eine \textbf{Architekturentscheidung}, kein Zeichen-Hobby. Sie wirkt jahrelang, sie verändert Sprache, Verantwortlichkeiten und Schnittstellen, und sie kann durch saubere Methoden \emph{strukturiert}, aber nicht algorithmisch \emph{ersetzt} werden. \emph{Wer modelliert, entscheidet \textemdash{} wer entscheidet, verantwortet.}
+\end{merkbox}
+
+% --- 11. TAKE-AWAYS ------------------------------------------------------
+\section{Take-aways aus Tag 1}
+
+\begin{enumerate}
+  \item \textbf{Prozess = Input \textrightarrow{} Transformation \textrightarrow{} Output.} Wenn ein Bestandteil unklar ist, kann man kein Modell bauen, nur eine Vermutung skizzieren.
+  \item \textbf{Modell-Zweck zuerst, Symbol danach.} Dokumentation, Analyse, Automatisierung oder Compliance -- jeder Zweck verlangt andere Tiefe und Notation.
+  \item \textbf{BPMN nahe IT, EPC nahe Business} -- aber im Zweifel entscheidet der Zweck, nicht die Tool-Gewohnheit.
+  \item \textbf{Sieben GoM-Grundsätze als Checkliste:} Richtigkeit, Relevanz, Wirtschaftlichkeit, Klarheit, Vergleichbarkeit, systematischer Aufbau, Zweckorientierung.
+  \item \textbf{Lanes sind das Verantwortungs-Werkzeug.} Ohne Lanes ist BPMN kein Steuerungsmodell.
+  \item \textbf{Gateways nur, wo es echte Entscheidungen gibt.} Jede zusätzliche Raute kostet Klarheit -- sie muss sich rechtfertigen.
+  \item \textbf{Annahmen sichtbar machen.} Transparenz unter Unsicherheit ist die senior-tauglichste Form von Verantwortung.
+  \item \textbf{Modellierung ist Architektur.} Im Mehr-Bereichs-Kontext entscheidet Governance darüber, ob Modelle lebendig bleiben oder im Repository sterben.
+\end{enumerate}
+
+% --- 12. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Activity / Task] Tätigkeit im BPMN-Prozess. Atomar als Task, zerlegt als Sub-Process. Benennung: Verb + Objekt.
+  \item[BPMN 2.0] \emph{Business Process Model and Notation}, Version 2.0. OMG-Standard für Prozessmodellierung. Geeignet für Fach \emph{und} IT (executable BPMN).
+  \item[EPC] \emph{Ereignisgesteuerte Prozesskette}. Im DACH-Raum verbreitete Notation mit strikt alternierenden Ereignissen und Funktionen.
+  \item[Ereignis (Event)] Zustand oder Trigger im Prozess. In BPMN als Kreis (Start, Zwischen, Ende); in EPC als Sechseck.
+  \item[Funktion (EPC)] Tätigkeit in der EPC. Folgt immer auf ein Ereignis. Benennung: Verb + Objekt.
+  \item[Gateway] Verzweigung / Zusammenführung im BPMN-Prozess. XOR (exklusiv), AND (parallel), OR (inklusiv).
+  \item[Granularität] Tiefe eines Modells. Bewusst zu wählen, je nach Zweck und Zielgruppe.
+  \item[GoM] \emph{Grundsätze ordnungsmäßiger Modellierung.} Sieben Qualitätskriterien: Richtigkeit, Relevanz, Wirtschaftlichkeit, Klarheit, Vergleichbarkeit, systematischer Aufbau, Zweckorientierung.
+  \item[Konnektor (EPC)] Logische Verknüpfung in der EPC: AND, OR, XOR.
+  \item[Lane] Innerhalb eines Pools eingerichteter Bereich für eine Rolle. Ordnet Aktivitäten einer Verantwortung zu.
+  \item[Modellzweck] Wofür ein Modell gebaut wird -- Dokumentation, Analyse, Automatisierung, Compliance. Bestimmt Tiefe und Notation.
+  \item[Nachrichtenfluss] Gestrichelter Pfeil zwischen Pools in BPMN. Markiert Kommunikation über organisatorische Grenzen.
+  \item[Organisationseinheit (EPC)] Optionale Zuordnung in der eEPC -- welche Rolle/Stelle führt die Funktion aus.
+  \item[Pool] Beteiligter in BPMN -- typischerweise eine Organisation. Pools werden über Nachrichtenflüsse verbunden.
+  \item[Prozess] Logische Abfolge von Aktivitäten, die Input in Output transformiert und Wert erzeugt.
+  \item[RACI] Verantwortungsmatrix: \emph{Responsible}, \emph{Accountable}, \emph{Consulted}, \emph{Informed}. Ergänzt Lanes um Detail-Verantwortung.
+  \item[Sequenzfluss] Durchgezogener Pfeil zwischen Aktivitäten innerhalb eines Pools. Bestimmt die zeitliche Reihenfolge.
+  \item[Workflow-Engine] Software, die BPMN-Modelle ausführt (z.\,B.\ Camunda, Flowable). Brücke vom Diagramm zum laufenden Prozess.
+  \item[Zweckorientierung] Wichtigster der sieben GoM-Grundsätze. Ein Modell folgt immer einem klar benannten Zweck -- alle anderen Eigenschaften ordnen sich diesem unter.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 1 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
