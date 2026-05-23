@@ -25,3 +25,9 @@ Site-Vorschau:
 cd docs && python -m http.server 8000
 ```
 Dann http://localhost:8000 öffnen. Zugangscode: `Habmann`.
+
+## Stand der Implementierung
+
+- [x] Plan 1 · Plattform-Skelett (HTML, CSS, JS-Engines, Site-Builder, Dummy-Daten)
+- [ ] Plan 2 · Content-Pipeline (Excel-Parser, Quellen, LLM-Generatoren)
+- [ ] Plan 3 · LaTeX-Build & Deployment
