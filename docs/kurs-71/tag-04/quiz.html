@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lernplatt · Quiz · Tag 4</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+<script src="../../assets/auth.js"></script>
+<script>requireAuth();</script>
+
+<div class="brand-bar"><a href="../../dashboard.html">Lernplatt · by Can Siebert</a><a href="#" class="logout">Logout</a></div>
+<div class="crumbs"><a href="../../dashboard.html">Kurse</a> › <a href="../index.html">Kurs 71_Dig_42</a> › <a href="index.html">Tag 4</a> › <span>Quiz</span></div>
+<main>
+  <div id="quiz-container">Quiz wird geladen …</div>
+</main>
+<script src="../../assets/dom.js"></script>
+<script src="../../assets/progress.js"></script>
+<script src="../../assets/quiz.js"></script>
+<script>
+  (async () => {
+    const data = await loadQuiz("../../../data/quiz/kurs-71-tag-04.json");
+    new QuizSession(data, document.getElementById("quiz-container")).render();
+  })();
+</script>
+
+<script src="../../assets/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lernplatt · Lernpfad · Tag 13</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+<script src="../../assets/auth.js"></script>
+<script>requireAuth();</script>
+
+<div class="brand-bar"><a href="../../dashboard.html">Lernplatt · by Can Siebert</a><a href="#" class="logout">Logout</a></div>
+<div class="crumbs"><a href="../../dashboard.html">Kurse</a> › <a href="../index.html">Kurs 71_Dig_42</a> › <a href="index.html">Tag 13</a> › <span>Lernpfad</span></div>
+<main>
+  <div id="pfad-container">Lernpfad wird geladen …</div>
+</main>
+<script src="../../assets/dom.js"></script>
+<script src="../../assets/progress.js"></script>
+<script src="../../assets/pfad.js"></script>
+<script>
+  (async () => {
+    const data = await loadPfad("../../../data/pfad/kurs-71-tag-13.json");
+    new PfadSession(data, document.getElementById("pfad-container")).render();
+  })();
+</script>
+
+<script src="../../assets/app.js"></script>
+
+</body>
+</html>
