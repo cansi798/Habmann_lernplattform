@@ -273,17 +273,25 @@ def build_podcast_page_html(kurs: dict, tag: dict) -> str:
 
 
 def build_praesentation_page_html(kurs: dict, tag: dict) -> str:
+    kurs_short = kurs["id"].split("_")[0]
+    tag_nn = f"{tag['nr']:02d}"
     body = f"""
 {brand_bar(asset_prefix="../../")}
 {crumbs(_media_crumbs(kurs, tag, "Präsentation"))}
 <main>
-  <h1>Präsentation · Tag {tag['nr']}</h1>
-  <p style="color:var(--color-muted)">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px">
+    <h1 style="margin:0">Präsentation · Tag {tag['nr']}</h1>
+    <a href="praesentation.html" download="kurs-{kurs_short}-tag-{tag_nn}-praesentation.html"
+       class="quiz-button" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+      ⬇ HTML-Download
+    </a>
+  </div>
+  <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
   <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
     <div class="slide">
       <h2 class="handwritten" style="font-size:36px">{tag['thema']}</h2>
       <p>Modul {tag['modul']['nr']} · Tag {tag['nr']}</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird in Plan 2 automatisch generiert.</em></p>
+      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
     </div>
     <div class="slide" style="display:none">
       <h2>Slide 2 — Platzhalter</h2>
@@ -301,6 +309,11 @@ def build_praesentation_page_html(kurs: dict, tag: dict) -> str:
     return page(title=f"Präsentation · Tag {tag['nr']}", body=body, asset_prefix="../../", scripts=[])
 
 
+# Generated präsentation.html files larger than this threshold are treated as
+# real content and not overwritten by the stub-builder. Stub-output is ~1.5 kB.
+PRAESENTATION_PROTECT_BYTES = 3000
+
+
 def write_media_pages():
     plan = load_course_plan()
     for kurs in plan["kurse"]:
@@ -310,7 +323,10 @@ def write_media_pages():
             out_dir = DOCS / f"kurs-{kurs_short}" / f"tag-{tag_nn}"
             (out_dir / "video.html").write_text(build_video_page_html(kurs, tag), encoding="utf-8")
             (out_dir / "podcast.html").write_text(build_podcast_page_html(kurs, tag), encoding="utf-8")
-            (out_dir / "praesentation.html").write_text(build_praesentation_page_html(kurs, tag), encoding="utf-8")
+            praesentation_path = out_dir / "praesentation.html"
+            if praesentation_path.exists() and praesentation_path.stat().st_size > PRAESENTATION_PROTECT_BYTES:
+                continue
+            praesentation_path.write_text(build_praesentation_page_html(kurs, tag), encoding="utf-8")
 
 
 def main():

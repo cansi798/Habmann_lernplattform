@@ -59,9 +59,27 @@ class PfadSession {
   }
 
   renderTask(task) {
+    this.taskFeedback = el('div', { class: 'quiz-feedback', style: 'display:none' });
+
+    if (task.typ === 'text') {
+      this.taskTextarea = el('textarea', {
+        id: 'pfad-text-answer',
+        placeholder: 'Hier eigene Antwort eintippen — Musterlösung nach Klick auf "Musterlösung anzeigen"',
+        rows: 6,
+        style: 'width:100%;padding:12px;font-size:15px;font-family:inherit;border:1.5px solid var(--color-line-dark);border-radius:var(--radius);resize:vertical;margin-top:8px',
+      });
+      this.taskBtn = el('button', { class: 'quiz-button', id: 'pfad-eval',
+        on: { click: () => this.evaluate() } }, 'Musterlösung anzeigen');
+      return el('div', { class: 'quiz-card', style: 'margin-top:24px' },
+        el('div', { class: 'quiz-question' }, task.frage),
+        this.taskTextarea,
+        this.taskBtn,
+        this.taskFeedback,
+      );
+    }
+
     this.taskBtn = el('button', { class: 'quiz-button', id: 'pfad-eval', disabled: true,
       on: { click: () => this.evaluate() } }, 'Antwort prüfen');
-    this.taskFeedback = el('div', { class: 'quiz-feedback', style: 'display:none' });
     return el('div', { class: 'quiz-card', style: 'margin-top:24px' },
       el('div', { class: 'quiz-question' }, task.frage),
       el('div', { class: 'quiz-options' },
@@ -73,6 +91,11 @@ class PfadSession {
   }
 
   bindTask(task) {
+    if (task.typ === 'text') {
+      this.evaluated = false;
+      // Button bleibt aktiv — Lerner darf jederzeit auf "Musterlösung anzeigen" klicken.
+      return;
+    }
     const multi = task.typ === 'multi';
     this.selected = multi ? [] : null;
     this.evaluated = false;
@@ -98,6 +121,27 @@ class PfadSession {
     this.evaluated = true;
     const step = this.steps[this.current];
     const task = step.aufgabe;
+
+    if (task.typ === 'text') {
+      const own = this.taskTextarea ? this.taskTextarea.value.trim() : '';
+      clear(this.taskFeedback);
+      this.taskFeedback.append(
+        el('div', { style: 'background:#fffce0;border-left:4px solid #d4a000;padding:10px 12px;border-radius:4px;margin-bottom:10px' },
+          el('strong', {}, '📝 Musterlösung'),
+          el('div', { style: 'margin-top:6px' }, document.createTextNode(task.musterloesung || task.erklaerung || '—')),
+        ),
+        own ? el('div', { style: 'background:#f3f3f3;padding:10px 12px;border-radius:4px;font-size:14px;color:var(--color-muted)' },
+          el('strong', {}, 'Deine Antwort '),
+          document.createTextNode('(bleibt lokal in deinem Browser):'),
+          el('div', { style: 'margin-top:6px;white-space:pre-wrap;color:var(--color-ink)' }, own),
+        ) : null,
+      );
+      this.taskFeedback.style.display = 'block';
+      this.taskBtn.textContent = this.current + 1 < this.steps.length ? 'Weiter →' : 'Lernpfad abschließen';
+      this.taskBtn.onclick = () => this.next();
+      return;
+    }
+
     const multi = task.typ === 'multi';
     let correct;
     if (multi) {
