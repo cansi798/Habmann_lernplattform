@@ -1,0 +1,790 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 1 - Lehrskript
+% Digitale Vertriebsstrategien & Plattformmodelle
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+% Charter als Body. Fallback: TeX Gyre Schola (sehr ähnlich, in MiKTeX dabei).
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+% Sans = Source Sans 3 / Source Sans Pro. Fallback: TeX Gyre Heros.
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+% Caveat fuer Akzente. Wenn nicht da -> faellt auf italic Hauptschrift zurueck.
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+% Monospace
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+% Eselsbruecke - amber, dashed
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Merkkasten - blau-weiss
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 1}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Digitale Vertriebsstrategien}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 1 \textperiodcentered{} TAG 1 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 28.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Digitale\\Vertriebsstrategien\\\&\\Plattformmodelle\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom klassischen zum digitalen Vertrieb -- Märkte\\verstehen, Plattformen bewerten, Entscheidungen\\verantworten.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 1 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Am Ende dieses Tages haben Sie ein gemeinsames Vokabular für digitale Vertriebsstrategien, können Plattformoptionen strukturiert bewerten und beginnen, Entscheidungen aus der Management-Perspektive zu treffen. Die Lernziele sind in drei Stufen gegliedert -- Wissen, Anwendung und Management -- und bauen aufeinander auf.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundlagen digitaler Vertriebsstrategien verstehen.
+  \item Marktanalyse, Zielgruppenanalyse und Wettbewerbsanalyse einordnen.
+  \item Plattformmodelle, Plattformtypen und Erfolgsfaktoren unterscheiden.
+  \item Kriterien für Plattformauswahl und Marktpositionierung kennen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Digitale Vertriebskanäle und Plattformmodelle auf konkrete Geschäftssituationen anwenden.
+  \item Zielgruppen, Marktchancen und Wettbewerbsdruck strukturiert analysieren.
+  \item Plattformoptionen anhand nachvollziehbarer Kriterien bewerten.
+  \item Erste Priorisierungsentscheidungen treffen.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Plattformauswahl als strategische Managemententscheidung vorbereiten.
+  \item Zielkonflikte zwischen Reichweite, Kosten, Kontrolle, Datenzugang und Markenpositionierung bewerten.
+  \item Entscheidungen unter Unsicherheit begründen.
+  \item Verantwortung für eine digitale Vertriebsarchitektur übernehmen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Wissen ohne Anwendung bleibt Theorie. Anwendung ohne Managementperspektive bleibt Operativität. Erst die drei Stufen \emph{zusammen} ergeben ein belastbares Entscheidungsmodell.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG / MOTIVATION --------------------------------------------
+\section{Einstieg: Warum digitaler Vertrieb \emph{jetzt}}
+
+Vertrieb war jahrzehntelang ein Spiel der \emph{Beziehungen}: Außendienst, Telefon, Messe, Empfehlung. Wer ein gutes Produkt und gute Verkäufer hatte, kam ins Geschäft. In den letzten zehn bis fünfzehn Jahren hat sich die Kaufentscheidung jedoch verschoben -- nicht nur im Konsumbereich (B2C), sondern auch im Geschäftskundengeschäft (B2B). Drei Verschiebungen prägen das Bild:
+
+\begin{enumerate}
+  \item \fachbegriff{Vorab-Recherche.} B2B-Käufer informieren sich heute zu großen Teilen \emph{vor} dem ersten persönlichen Kontakt. Die Vertriebsorganisation wird oft erst in einer späten Phase überhaupt eingebunden -- mit einer Shortlist, die sie nicht selbst kuratiert hat.
+  \item \fachbegriff{Plattform-Intermediation.} Marktplätze, Bewertungsportale, Vergleichsseiten und SaaS-Ökosysteme drängen sich zwischen Anbieter und Kunde. Sie übernehmen Reichweite, Vertrauensbildung und Transaktionsabwicklung -- und beanspruchen dafür einen Anteil an Daten und Marge.
+  \item \fachbegriff{Daten als Steuerungsgrundlage.} Wer im digitalen Vertrieb erfolgreich ist, steuert über Daten -- über Reichweite, Klick-Raten, Conversion, Customer Lifetime Value. Wer keine Daten hat, fliegt blind und verliert gegen datengetriebene Wettbewerber.
+\end{enumerate}
+
+\subsection{Klassisch -- digital -- plattformbasiert}
+
+Drei Vertriebslogiken stehen heute nebeneinander, nicht nacheinander:
+
+\begin{itemize}
+  \item \fachbegriff{Klassischer Vertrieb} setzt auf direkte, oft persönliche Interaktion: Außendienst, Innendienst, Telefon, Messen, Direktmailings.
+  \item \fachbegriff{Digitaler Vertrieb} bedeutet, dass Anbahnung, Information, Konfiguration oder Kaufabschluss über digitale Kanäle laufen -- eigene Website, Webshop, E-Mail-Kampagnen, Social Selling.
+  \item \fachbegriff{Plattformbasierter Vertrieb} nutzt einen \emph{Dritten}, eine Plattform, als Marktzugang: Amazon, B2B-Marktplätze, App-Stores, LinkedIn als Lead-Generator.
+\end{itemize}
+
+Diese drei Logiken sind keine Alternativen, sondern Bausteine. Die strategische Frage lautet daher nicht ``digital ja oder nein'', sondern: \emph{Welche Kombination passt zu unserem Produkt, unserer Zielgruppe und unserem Anspruch an Kontrolle und Marge?}
+
+\subsection{B2B vs.\ B2C -- es konvergiert}
+
+Bisher galt: B2C ist digital, B2B ist persönlich. Das stimmt 2026 immer weniger. Im B2B-Vertrieb gilt mittlerweile als Faustregel, dass Kaufentscheider eine \emph{B2C-Erwartung} an digitale Erlebnisse mitbringen: schnelle Suche, verständliche Preise, sichtbare Bewertungen, einfache Nachbestellung. Wer im B2B noch ausschließlich klassisch verkauft, riskiert es, in Suchergebnissen und Shortlists schlicht nicht aufzutauchen.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{R-A-D}]
+\textbf{R-A-D} -- die drei Gründe, warum digitaler Vertrieb 2026 nicht optional ist:\\[2pt]
+\textbf{R}eichweite -- ohne digitale Sichtbarkeit kein neuer Kontakt.\\
+\textbf{A}utomatisierung -- ohne digitale Prozesse keine Skalierung.\\
+\textbf{D}aten -- ohne Daten keine Steuerung.\\[2pt]
+\emph{Wer kein RAD hat, kommt nicht voran.}
+\end{eselsbox}
+
+\subsection{Was heute \emph{nicht} mehr funktioniert}
+
+\begin{itemize}
+  \item ``Wir haben ja unsere Stammkunden'' -- Stammkunden altern, neue Kunden suchen anders.
+  \item ``Wir machen Messe und Empfehlung'' -- gut, aber ohne digitale Sichtbarkeit gibt es kaum noch erste Kontakte zu Personen, die einen \emph{nicht} kennen.
+  \item ``Digital ist nur Werbung'' -- digital ist heute der \emph{Vertriebskanal}, nicht nur der Kommunikationskanal. Hier finden Anbahnung, Beratung, Abschluss und Nachbestellung statt.
+\end{itemize}
+
+% --- 2. BEGRIFFE & DEFINITIONEN ------------------------------------------
+\section{Begriffe \& Definitionen}
+
+In den nächsten Stunden brauchen wir ein gemeinsames Vokabular. Die folgenden Begriffe ziehen sich durch den Tag und durch die Fallstudien. Sie sind im Glossar am Ende des Skripts noch einmal kurz definiert.
+
+\subsection{Vertriebskanal vs.\ Plattform}
+
+Ein \fachbegriff{Vertriebskanal} ist der \emph{Weg}, über den ein Anbieter sein Produkt zum Kunden bringt. Beispiele: eigener Außendienst, eigener Webshop, Telefon-Hotline, Partner-Reseller. Ein Kanal ist meist \emph{linear}: ein Anbieter, ein Kunde, eine Transaktion.
+
+Eine \fachbegriff{Plattform} ist demgegenüber ein \emph{Marktraum} mit Mehrseitigkeit. Sie bringt zwei oder mehr Nutzergruppen zusammen -- typischerweise Anbieter und Nachfrager -- und nutzt die Größe einer Gruppe, um die andere zu gewinnen (Netzwerkeffekte). Die Plattform selbst verkauft das eigentliche Produkt häufig gar nicht; sie organisiert das Zusammenkommen.
+
+\begin{merkbox}[Kernunterschied]
+Der \emph{Vertriebskanal} ist ein \textbf{Rohr}: Sie schicken Ihr Produkt durch, der Kunde erhält es. Die \emph{Plattform} ist ein \textbf{Marktplatz}: viele Anbieter, viele Nachfrager, die Plattform betreibt den Raum und definiert die Regeln. Wer eine Plattform mit einem Kanal verwechselt, unterschätzt sowohl Reichweite als auch Abhängigkeit.
+\end{merkbox}
+
+\subsection{Marktanalyse-Vokabular}
+
+\begin{itemize}
+  \item \fachbegriff{Zielgruppe.} Die konkret beschreibbare Gruppe von Personen oder Organisationen, die unser Produkt kaufen soll. \emph{Wer? Wofür? In welcher Situation?}
+  \item \fachbegriff{Bedarf.} Das konkrete Problem oder Bedürfnis, das die Zielgruppe gelöst haben möchte. Wichtig: der Bedarf ist nicht das Produkt. Niemand will einen Bürostuhl -- man will Rückenschmerzen vermeiden und länger konzentriert arbeiten.
+  \item \fachbegriff{Marktgröße.} Wie viele potenzielle Kunden gibt es, mit welchem Volumen? Marktgröße trennt eine Nische von einem Massenmarkt.
+  \item \fachbegriff{Wettbewerb.} Wer löst denselben Bedarf -- direkt (gleiches Produkt) oder indirekt (Substitute, Eigenleistung)?
+  \item \fachbegriff{Trends.} In welche Richtung verschiebt sich der Markt? Regulatorisch, technologisch, demografisch?
+\end{itemize}
+
+\subsection{Customer Journey \& Touchpoints}
+
+Die \fachbegriff{Customer Journey} ist die Abfolge der Schritte, die ein Interessent vom ersten Kontakt bis zur Kaufentscheidung -- und darüber hinaus zur Nachbestellung -- durchläuft. Vereinfacht lässt sie sich in fünf Phasen einteilen:
+
+\begin{enumerate}
+  \item \fachbegriff{Awareness} -- Der Kunde wird auf ein Problem oder einen Anbieter aufmerksam.
+  \item \fachbegriff{Consideration} -- Der Kunde vergleicht Optionen, sammelt Informationen.
+  \item \fachbegriff{Decision} -- Der Kunde entscheidet sich und kauft.
+  \item \fachbegriff{Retention} -- Der Kunde nutzt das Produkt; er nachbestellt, abonniert weiter, kündigt nicht.
+  \item \fachbegriff{Advocacy} -- Der Kunde empfiehlt aktiv weiter.
+\end{enumerate}
+
+Ein \fachbegriff{Touchpoint} ist jeder konkrete Berührungspunkt zwischen Kunde und Anbieter entlang dieser Reise: ein Google-Suchergebnis, eine LinkedIn-Anzeige, eine Webshop-Produktseite, eine Bewertungs-Sternebewertung, ein E-Mail-Newsletter, das Gespräch mit dem Außendienst. Ein \fachbegriff{Conversion-Punkt} ist ein Touchpoint, an dem der Kunde eine \emph{messbare} Handlung vollzieht: Klick, Kontaktanfrage, Demo-Buchung, Kauf.
+
+\begin{merkbox}[Glossar-Auszug -- die fünf Begriffe, die heute jeder im Schlaf können muss]
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Zielgruppe & Wer kauft warum? \\
+Plattform & Marktraum mit Mehrseitigkeit, nicht linearer Kanal. \\
+Netzwerkeffekt & Mehr Nutzer machen die Plattform für jeden Nutzer wertvoller. \\
+Touchpoint & Konkreter Berührungspunkt entlang der Customer Journey. \\
+Conversion & Messbare Handlung, die uns dem Abschluss näher bringt. \\
+\bottomrule
+\end{tabularx}
+\end{merkbox}
+
+\subsection{Chancen und Risiken digitaler Vertriebsstrategien}
+
+Digitaler Vertrieb ist nicht automatisch ``besser''. Er bringt neue Chancen, aber auch neue Risiken:
+
+\begin{itemize}
+  \item \textbf{Chancen:} Reichweite ohne geographische Grenze, Messbarkeit jedes Schrittes, Automatisierung wiederkehrender Aufgaben, niedrigere variable Kosten je Kundenkontakt, neue Geschäftsmodelle (Subscription, Self-Service).
+  \item \textbf{Risiken:} Sichtbarkeitsdruck und steigende Werbekosten, Abhängigkeit von Plattformregeln, Preisvergleich und Margenerosion, Datenschutz und regulatorische Anforderungen, Notwendigkeit neuer Kompetenzen im Team.
+\end{itemize}
+
+% --- 3. MARKTANALYSE -----------------------------------------------------
+\section{Marktanalyse als Grundlage}
+
+Bevor wir Vertriebskanäle wählen, müssen wir den \emph{Markt} verstehen. Marktanalyse ist im digitalen Vertrieb keine akademische Pflichtübung, sondern der Boden, auf dem jede Plattformentscheidung ruht. Vier Bausteine gehören dazu.
+
+\subsection{Zielgruppenanalyse}
+
+Eine brauchbare Zielgruppenanalyse beantwortet drei Fragen:
+
+\begin{enumerate}
+  \item \textbf{Wer genau?} Demografie (B2C: Alter, Region, Einkommen) bzw.\ Firmografie (B2B: Branche, Größe, Rolle der Entscheider).
+  \item \textbf{In welcher Situation?} Welcher Auslöser bringt diese Person auf die Idee, nach einer Lösung zu suchen?
+  \item \textbf{Mit welchem Verhalten?} Wo informiert sie sich? Wem vertraut sie? Wie bezahlt sie? Wie kauft sie nach?
+\end{enumerate}
+
+Im B2B-Vertrieb ist eine Schlüsselgröße das \fachbegriff{Buying Center}: nicht eine einzelne Person entscheidet, sondern eine Gruppe (Fachabteilung, Einkauf, IT, Geschäftsleitung). Wer im B2B-Webshop nur an den Einkauf denkt und die Fachabteilung vergisst, verliert die Vorentscheidung schon vor dem ersten Vergleich.
+
+\subsection{Wettbewerbsanalyse}
+
+Wettbewerbsanalyse fragt: \emph{Wer löst dasselbe Problem -- und wie gut?} Drei Sichten helfen:
+
+\begin{itemize}
+  \item \textbf{Direkter Wettbewerb} -- gleiche Produktkategorie, gleiches Versprechen. Was machen sie besser, schlechter, anders?
+  \item \textbf{Indirekter Wettbewerb / Substitute} -- andere Lösung für denselben Bedarf. Beispiel: gegen ergonomische Bürostühle konkurriert auch ``mehr Pausen machen'' oder ``Stehpult''.
+  \item \textbf{Plattform-Wettbewerb} -- Plattformen, die als \emph{Vermittler} an der Zielgruppe sitzen, sind heute oft die wichtigsten ``Wettbewerber'' um die Aufmerksamkeit -- sie verschieben Sichtbarkeit nach ihrer Logik.
+\end{itemize}
+
+\subsection{Customer Journey rekonstruieren}
+
+Marktanalyse mündet in eine Rekonstruktion der \emph{tatsächlichen} Customer Journey unserer Zielgruppe. Hilfreiche Leitfragen:
+
+\begin{itemize}
+  \item Welcher Auslöser bringt den Kunden in Phase \emph{Awareness}?
+  \item Wo sucht er in der \emph{Consideration}-Phase nach Information? Google? LinkedIn? Branchenforum? Kollegen?
+  \item Was sind seine Top-3-Kriterien in der \emph{Decision}-Phase? Preis, Service, Vertrauen, Lieferzeit?
+  \item Wie funktioniert \emph{Retention} bei ihm? Nachbestellung? Abo? Service-Hotline?
+\end{itemize}
+
+\subsection{Conversion-Punkte identifizieren}
+
+Sobald die Journey rekonstruiert ist, sind die \fachbegriff{Conversion-Punkte} identifizierbar: jene Stellen, an denen der Kunde von einer Phase in die nächste \emph{springt}. An genau diesen Punkten lohnt sich digitale Investition am stärksten, weil hier kleine Veränderungen große Wirkung haben.
+
+\begin{merkbox}[Marktanalyse-Checkliste]
+\begin{itemize}
+  \item Wer ist die Zielgruppe -- demografisch \emph{und} firmografisch?
+  \item Welchen Bedarf hat sie -- nicht welches Produkt sie will?
+  \item Wer löst denselben Bedarf sonst noch?
+  \item Wie sieht ihre Customer Journey \emph{realistisch} aus?
+  \item Wo sitzen die Conversion-Punkte -- und wie groß ist die Lücke heute?
+\end{itemize}
+\end{merkbox}
+
+% --- 4. PLATTFORMMODELLE: 6 TYPEN ---------------------------------------
+\section{Plattformmodelle: sechs Typen}
+
+Plattform ist nicht gleich Plattform. Wer ``wir gehen auf eine Plattform'' sagt, ohne zu spezifizieren \emph{welchen Typ}, hat das halbe Problem schon übersehen. Im Folgenden sechs Plattformtypen, die im Vertriebskontext relevant sind. Pro Typ: Definition, Beispiel, Mechanismus, typische Erlöslogik.
+
+\subsection{Marktplatz-Plattform}
+
+\textbf{Definition.} Eine Plattform, auf der viele Anbieter ein vergleichbares Sortiment führen und der Kunde direkt zwischen ihnen wählt.
+
+\textbf{Beispiele.} Amazon (B2C/B2B), eBay, Otto-Marketplace, Mercateo (B2B).
+
+\textbf{Mechanismus.} Suchbasierter Vergleich. Der Kunde sucht eine Produktkategorie, die Plattform sortiert Anbieter nach Preis, Bewertung, Lieferzeit. Sichtbarkeit hängt stark von Plattform-Algorithmen ab.
+
+\textbf{Erlöslogik.} Verkaufsprovision (typisch 5--15\,\%), teils Listungsgebühren, teils Werbeplätze.
+
+\subsection{Vermittlungsplattform}
+
+\textbf{Definition.} Eine Plattform, die Anbieter und Nachfrager \emph{vermittelt}, ohne selbst Ware oder Leistung zu führen.
+
+\textbf{Beispiele.} Check24, Idealo, Tripadvisor (Hotel-Vermittlung), Upwork (Freelancer-Vermittlung).
+
+\textbf{Mechanismus.} Matching auf Basis von Kriterien (Preis, Bewertung, Verfügbarkeit). Vertrag und Lieferung erfolgen oft \emph{außerhalb} der Plattform.
+
+\textbf{Erlöslogik.} Lead-Provision, Vermittlungsgebühr, Werbung.
+
+\subsection{Content-Plattform}
+
+\textbf{Definition.} Eine Plattform, deren Mehrwert primär darin liegt, Inhalte zu produzieren oder zu verteilen. Vertrieb erfolgt indirekt: über Reichweite und Vertrauen.
+
+\textbf{Beispiele.} YouTube, LinkedIn (für Social Selling), Branchenfachportale, Newsletter-Plattformen.
+
+\textbf{Mechanismus.} Aufmerksamkeit \textrightarrow{} Vertrauen \textrightarrow{} Lead. Der Verkauf passiert nicht auf der Plattform, sondern in dem Trichter, den die Plattform anstößt.
+
+\textbf{Erlöslogik (für Anbieter):} kein direkter Verkauf -- aber Leadgenerierung und Markenaufbau, der sich in anderen Kanälen monetarisiert.
+
+\subsection{SaaS-Plattform}
+
+\textbf{Definition.} Eine Software-as-a-Service-Plattform, die als Standardlösung in einer Branche verbreitet ist und Drittanbieter über eine Schnittstelle integriert.
+
+\textbf{Beispiele.} Salesforce AppExchange, HubSpot Marketplace, Microsoft Teams App Store, Shopify App Store.
+
+\textbf{Mechanismus.} Der Drittanbieter verkauft \emph{innerhalb} eines Software-Ökosystems an Kunden, die ohnehin schon Nutzer der Plattform sind.
+
+\textbf{Erlöslogik.} Plattformprovision (oft 15--30\,\%), häufig kombiniert mit Listungs- und Zertifizierungsgebühren.
+
+\subsection{Community-Plattform}
+
+\textbf{Definition.} Eine Plattform, deren primärer Wert die fachliche oder soziale Community ist. Sie wirkt vertrieblich über Empfehlung, Reputation und Co-Creation.
+
+\textbf{Beispiele.} Stack Overflow / Stack Exchange (Tech-Community), GitHub, branchenspezifische Foren, Discord-Server.
+
+\textbf{Mechanismus.} Wer in der Community fachlich glaubwürdig ist, wird gefunden und empfohlen. Vertrieb läuft über Reputation, nicht über Anzeigen.
+
+\textbf{Erlöslogik (für Anbieter):} kein direkter Verkauf -- aber sehr hochwertige Leads und Recruiting-Effekte.
+
+\subsection{Ökosystem-Plattform}
+
+\textbf{Definition.} Eine umfassende Plattform, die mehrere Dienste, Geräte und Drittanbieter zu einem geschlossenen System verknüpft. Sie wirkt nicht nur als Marktplatz, sondern als Infrastruktur.
+
+\textbf{Beispiele.} Apple iOS / App Store, Google-Ökosystem, SAP-Ökosystem, AWS Marketplace.
+
+\textbf{Mechanismus.} Wer in das Ökosystem hineinverkauft, erreicht Kunden, die dort bereits ``leben''. Wer es verlässt, verliert sie oft.
+
+\textbf{Erlöslogik.} Plattformprovision (im App-Store-Bereich klassisch 15--30\,\%), Zertifizierungs- und Compliance-Gebühren, teils auch Datenzugang gegen Bezahlung.
+
+\subsection{Im Überblick}
+
+\begin{tabularx}{\linewidth}{@{}lX l@{}}
+\toprule
+\textbf{Typ} & \textbf{Was die Plattform tut} & \textbf{Erlöslogik} \\
+\midrule
+Marktplatz & sortiert vergleichbare Anbieter & Verkaufsprovision \\
+Vermittlung & matcht, ohne selbst zu liefern & Lead-/Vermittlungsgebühr \\
+Content & verteilt Inhalte und Aufmerksamkeit & Werbung, indirekt Leads \\
+SaaS & integriert Drittanbieter in Software & App-Provision \\
+Community & organisiert Reputation und Fachaustausch & indirekt, Vertrauen \\
+Ökosystem & verknüpft Dienste, Geräte, Anbieter & Provision, Zertifizierung \\
+\bottomrule
+\end{tabularx}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{M-V-C-S-C-Ö} -- ``Mein Verkauf Coacht Sechs Clevere Ökonomen'']
+\textbf{M}arktplatz -- \textbf{V}ermittlung -- \textbf{C}ontent -- \textbf{S}aaS -- \textbf{C}ommunity -- \textbf{Ö}kosystem.\\
+Sechs Typen, sechs Logiken. Wer sie nicht trennen kann, wirft \emph{Reichweite}, \emph{Vermittlung} und \emph{Ökosystem-Lock-in} in einen Topf -- und kauft das Falsche.
+\end{eselsbox}
+
+% --- 5. PLATTFORM-MECHANISMEN --------------------------------------------
+\section{Plattform-Mechanismen}
+
+Egal welcher Typ -- Plattformen funktionieren über einen vergleichsweise kleinen Satz von Mechanismen. Wer diese Mechanismen versteht, kann jede neue Plattform schneller einschätzen.
+
+\subsection{Matching}
+
+Plattformen führen Anbieter und Nachfrager auf Basis von Kriterien zusammen: Preis, Bewertung, Region, Verfügbarkeit, Spezialisierung. Der Algorithmus bestimmt, wer wem zuerst angezeigt wird. \emph{Wer den Algorithmus nicht versteht, bewirbt die falschen Felder.}
+
+\subsection{Reichweite}
+
+Plattformen liefern Reichweite, die ein einzelner Anbieter kaum aufbauen könnte. Reichweite ist jedoch nicht kostenlos: man bezahlt mit Provision, Daten oder Sichtbarkeit (Werbeplätze). Wichtig: Reichweite \emph{ohne} Conversion ist ein teures Hobby.
+
+\subsection{Bewertungen \& Reputation}
+
+Bewertungssysteme sind das Vertrauensmoment der Plattform. Sie schaffen für den Kunden Orientierung, für die Plattform eine Skalierung von Vertrauen, ohne dass die Plattform jeden Anbieter einzeln zertifizieren muss. Für Anbieter sind Bewertungen zugleich Risiko (öffentliche Fehler) und Chance (sichtbare Qualität).
+
+\subsection{Netzwerkeffekte}
+
+Plattformen werden mit jedem zusätzlichen Nutzer wertvoller -- in unterschiedlicher Richtung:
+
+\begin{itemize}
+  \item \fachbegriff{Direkter Netzwerkeffekt} -- mehr Nutzer derselben Gruppe machen die Plattform für jeden Einzelnen wertvoller (Telefon-Netz, Messenger). Im Vertrieb seltener.
+  \item \fachbegriff{Indirekter Netzwerkeffekt} -- mehr Anbieter machen die Plattform für Nachfrager attraktiver, und umgekehrt. Das ist die typische \emph{Marktplatz-Dynamik}. Sie erklärt, warum die Nummer-2-Plattform in einer Kategorie oft viel weniger wert ist als die Nummer~1.
+\end{itemize}
+
+\subsection{Transaktionsabwicklung}
+
+Viele Plattformen wickeln auch die Transaktion mit ab -- Bezahlung, Rechnung, Reklamation, Rückgabe. Das erhöht für den Kunden die Bequemlichkeit, für den Anbieter die Abhängigkeit (Daten, Schnittstellen, Auszahlungsrhythmen).
+
+\subsection{Datenanalyse}
+
+Plattformen erzeugen Daten -- Klicks, Verweildauer, Suchanfragen, Abbruchpunkte. Wer als Anbieter Zugriff auf diese Daten hat (oder erkauft), kann gezielt optimieren. Wer keinen Zugriff hat, ist auf die kumulierten Reports der Plattform angewiesen -- und steuert weniger präzise als jene, die direkten Datenzugang haben (z.\,B.\ auf der eigenen Website).
+
+\begin{merkbox}[Mechanismen -- die sechs Hebel]
+\textbf{Matching} \textperiodcentered{} \textbf{Reichweite} \textperiodcentered{} \textbf{Bewertungen} \textperiodcentered{} \textbf{Netzwerkeffekte} \textperiodcentered{} \textbf{Transaktionsabwicklung} \textperiodcentered{} \textbf{Datenanalyse}\\[2pt]
+Jede Plattform-Entscheidung lässt sich an diesen sechs Hebeln entlangprüfen. Was nutzt uns dieser Hebel? Was kostet er uns? Wer kontrolliert ihn?
+\end{merkbox}
+
+% --- 6. ERFOLGSFAKTOREN --------------------------------------------------
+\section{Erfolgsfaktoren von Plattformen}
+
+Plattformen scheitern selten an einer einzelnen falschen Funktion -- sie scheitern fast immer daran, dass eine der folgenden Grundbedingungen nicht erfüllt ist. Diese Erfolgsfaktoren gelten sowohl für \emph{eigene} Plattformansätze als auch als Bewertungsmaßstab, ob eine externe Plattform für uns funktionieren wird.
+
+\subsection{Vertrauen}
+
+Vertrauen ist die Währung der Plattform. Es entsteht über Bewertungen, Garantien, Identitätsprüfung, klare Regeln, transparente Streitschlichtung. Ohne Vertrauen \emph{kommt} der Kunde gar nicht erst -- egal wie groß die Reichweite ist.
+
+\subsection{Sichtbarkeit}
+
+Auf einer Plattform mit Millionen Anbietern ist Sichtbarkeit selbst ein Produkt. Sie wird über Algorithmen, Bewertungen, bezahlte Platzierung und Sortimentsbreite verteilt. \emph{Sichtbar zu sein, ist ein eigener Vollzeitjob.}
+
+\subsection{Nutzerfreundlichkeit}
+
+Auch die beste Plattform-Idee scheitert, wenn das Erlebnis -- Suche, Bestellung, Bezahlung, Wiederbestellung -- für den Nutzer zu reibungsvoll ist. Im B2B gilt: die Nutzererwartung ist heute B2C-geprägt. Eine sperrige Oberfläche, die ``halt für Profis ist'', verliert gegen einen Marktplatz, der sich anfühlt wie Amazon.
+
+\subsection{Kritische Masse -- das Henne-Ei-Problem}
+
+Plattformen leben von Mehrseitigkeit. Aber: Anbieter kommen nur, wenn Nachfrager da sind. Nachfrager kommen nur, wenn Anbieter da sind. Diesen Anlaufpunkt nennt man das \fachbegriff{Henne-Ei-Problem}. Erfolgreiche Plattformen lösen es typischerweise über drei Strategien:
+
+\begin{itemize}
+  \item \textbf{Seitenpriorisierung} -- zuerst gezielt \emph{eine} Seite massiv aufbauen (oft die anbieterseitige Sortimentstiefe).
+  \item \textbf{Subventionierung} -- eine Seite finanziell oder funktional bevorteilen, bis kritische Masse erreicht ist.
+  \item \textbf{Nische zuerst} -- mit einer extrem fokussierten Untergruppe starten und ``ausreichend dicht'' werden, bevor man verbreitert.
+\end{itemize}
+
+\subsection{Qualitätssicherung}
+
+Bewertungen allein reichen nicht -- Plattformen brauchen aktive Qualitätssicherung: Identitätsprüfung der Anbieter, Stichproben, Sanktion bei Verstößen, klare Service-Level-Vorgaben. Wo Qualität verwässert, sinkt Vertrauen, dann Frequenz, dann das ganze Modell.
+
+\subsection{Anbieter- und Kundennutzen muss beidseitig stimmen}
+
+Eine Plattform funktioniert nur dann, wenn \emph{beide} Seiten dauerhaft einen Vorteil haben. Wenn die Plattform die Anbieter immer weiter ausquetscht (Provisionen, Sichtbarkeit nur gegen Werbung, schlechte Auszahlungsrhythmen), wandern Anbieter ab -- und mit ihnen früher oder später die Nachfrager.
+
+\begin{merkbox}[Erfolgsfaktoren -- der Schnellcheck]
+\textbf{V}ertrauen \textperiodcentered{} \textbf{S}ichtbarkeit \textperiodcentered{} \textbf{N}utzerfreundlichkeit \textperiodcentered{} \textbf{K}ritische Masse \textperiodcentered{} \textbf{Q}ualität \textperiodcentered{} \textbf{B}eidseitiger Nutzen.\\[2pt]
+Fehlt einer davon stabil, kippt die Plattform.
+\end{merkbox}
+
+% --- 7. EIGENER KANAL VS. EXTERNE PLATTFORM ------------------------------
+\section{Eigener Kanal vs.\ externe Plattform}
+
+Die zentrale strategische Wahl im digitalen Vertrieb lautet nicht ``digital ja/nein'', sondern: \emph{Bauen wir einen eigenen Kanal -- oder gehen wir auf eine externe Plattform -- oder beides?} Es gibt keine universell richtige Antwort. Aber es gibt klare Trade-offs.
+
+\subsection{Vier Dimensionen, in denen sich Eigenes und Externes unterscheiden}
+
+\begin{tabularx}{\linewidth}{@{}l X X@{}}
+\toprule
+& \textbf{Eigener Kanal} & \textbf{Externe Plattform} \\
+\midrule
+\textbf{Reichweite} & muss aufgebaut werden -- langsam, teuer & verfügbar -- aber gegen Gebühr und nur nach Plattformregeln \\
+\textbf{Kontrolle} & hoch -- Design, Sortiment, Preis, Zielgruppe & gering -- die Plattform definiert Regeln \\
+\textbf{Datenzugang} & vollständig (eigenes Tracking, eigenes CRM) & oft eingeschränkt -- die Plattform behält ``ihre'' Daten \\
+\textbf{Marke} & klar steuerbar & verwässert -- gleicher Look wie alle anderen Anbieter \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Wann eigener Kanal sinnvoll ist}
+
+\begin{itemize}
+  \item Erklärungsbedürftige, hochmargige Produkte, die Beratung brauchen.
+  \item Wiederkehrende Bestellungen / Abos, wo Kundenbindung der Hebel ist.
+  \item Klare Markenpositionierung, die nicht in einer Liste neben Wettbewerbern aufgehen darf.
+  \item Direkter Zugriff auf Kundendaten ist strategisch wichtig (z.\,B.\ für CRM, Cross-Sell, Forschung).
+\end{itemize}
+
+\subsection{Wann externe Plattform sinnvoll ist}
+
+\begin{itemize}
+  \item Schneller Marktzugang in einem neuen Segment ist wichtiger als Margen pro Verkauf.
+  \item Produkt ist gut vergleichbar, kaum erklärungsbedürftig -- der Vergleich auf der Plattform schadet nicht.
+  \item Eigene digitale Sichtbarkeit fehlt -- die Plattform liefert sie sofort.
+  \item Testen einer Hypothese: lohnt sich der Markt überhaupt?
+\end{itemize}
+
+\subsection{Wann beides -- und in welcher Logik}
+
+Die häufigste sinnvolle Lösung im B2B ist eine \emph{differenzierte} Kombination:
+
+\begin{itemize}
+  \item Eigener Kanal für \textbf{Bestandskunden, Nachbestellung, hochwertige Beratung}.
+  \item Externe Plattform für \textbf{Neukunden-Erstkontakt, Auslagerung von Reichweite, Probieren neuer Segmente}.
+\end{itemize}
+
+Plattformen werden dabei \emph{ergänzend} genutzt, nicht als alleinige Kundenschnittstelle -- ein Punkt, der besonders bei der Bewertung von Marktplatz-Listings entscheidend ist (vgl.\ Modul 1, UE 4).
+
+\begin{merkbox}[Entscheidungskriterien -- eigener Kanal vs.\ externe Plattform]
+\begin{itemize}
+  \item \textbf{Reichweitendruck} hoch \textrightarrow{} Plattform attraktiv.
+  \item \textbf{Erklärungsbedürftigkeit} hoch \textrightarrow{} eigener Kanal attraktiv.
+  \item \textbf{Markenwert} hoch \textrightarrow{} eigener Kanal attraktiv.
+  \item \textbf{Bestandskunden-Anteil} hoch \textrightarrow{} eigener Kanal attraktiv.
+  \item \textbf{Zeitdruck} hoch \textrightarrow{} Plattform als Hebel, eigener Kanal parallel im Aufbau.
+\end{itemize}
+\end{merkbox}
+
+% --- 8. PLATTFORMAUSWAHL: KRITERIEN & BEWERTUNG --------------------------
+\section{Plattformauswahl: Kriterien und Bewertung}
+
+Eine strukturierte Plattformauswahl hat zwei Schritte: erst Kriterien definieren, dann Optionen \emph{vergleichend} bewerten -- nicht der Reihe nach einzeln. Erst Vergleich macht aus einer Beschreibung eine Entscheidung.
+
+\subsection{Sieben Kriterien, die fast immer relevant sind}
+
+\begin{enumerate}
+  \item \textbf{Zielgruppenpassung.} Sind unsere Wunschkunden auf der Plattform überhaupt aktiv? Tausend B2C-Käufer helfen nicht, wenn wir B2B verkaufen.
+  \item \textbf{Kostenmodell.} Welche Provisionen, Listungs-, Werbe- und Onboarding-Kosten fallen an? Wie skalieren sie mit dem Umsatz?
+  \item \textbf{Wettbewerbsumfeld.} Wie hart ist die Vergleichbarkeit? Wie viele direkte Wettbewerber sind auf derselben Plattform?
+  \item \textbf{Datenzugang.} Welche Kundendaten sehen wir, welche behält die Plattform? Können wir die Daten in unser eigenes CRM exportieren?
+  \item \textbf{Kontrollgrad.} Welche Regeln gibt die Plattform vor (Preis, Lieferzeit, Werbung)? Können wir Sortiment, Beratung, Look-\&-Feel steuern?
+  \item \textbf{Markenwirkung.} Stärkt oder verwässert die Plattform unsere Marke? Wie unterscheidbar sind wir dort?
+  \item \textbf{Skalierbarkeit.} Wie weit trägt der Kanal? Können wir mit ihm in zwei Jahren das Zehnfache machen, oder ist er nach 200 Bestellungen ausgereizt?
+\end{enumerate}
+
+\subsection{Bewertungsmatrix als Methode}
+
+Die einfachste belastbare Methode für eine Plattformauswahl ist eine \fachbegriff{Bewertungsmatrix}. Sie hat in der Regel drei Bestandteile:
+
+\begin{enumerate}
+  \item Kriterien (Spalten) -- siehe oben, ggf.\ gewichtet.
+  \item Optionen (Zeilen) -- die konkreten Plattformen / Kanäle, die wir vergleichen.
+  \item Bewertung pro Zelle auf einer Skala von 1--5.
+\end{enumerate}
+
+\begin{tabularx}{\linewidth}{@{}lXXXX@{}}
+\toprule
+\textbf{Kriterium (Gewicht)} & \textbf{Eigener Webshop} & \textbf{Amazon Business} & \textbf{LinkedIn-Vertrieb} & \textbf{Spezial-Marktplatz} \\
+\midrule
+Zielgruppenpassung (3) & 4 & 3 & 4 & 5 \\
+Kostenmodell (2)       & 2 & 3 & 3 & 3 \\
+Wettbewerbsumfeld (2)  & 5 & 2 & 4 & 3 \\
+Datenzugang (3)        & 5 & 1 & 3 & 2 \\
+Kontrollgrad (3)       & 5 & 1 & 3 & 2 \\
+Markenwirkung (2)      & 5 & 2 & 4 & 3 \\
+Skalierbarkeit (1)     & 4 & 5 & 3 & 3 \\
+\midrule
+\textbf{Gewichteter Schnitt} & \textbf{4{,}3} & \textbf{2{,}1} & \textbf{3{,}5} & \textbf{3{,}1} \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent\emph{Lesehinweis.} Die Matrix oben ist als Beispiel zu verstehen, nicht als universelle Empfehlung. Die Bewertung hängt vom konkreten Produkt, der Zielgruppe und den Rahmenbedingungen ab. Aber: der \emph{Aufbau} ist universell. Genau diese Logik werden Sie im Arbeitsauftrag und in der Fallstudie nutzen.
+
+\subsection{Drei typische Fallen}
+
+\begin{itemize}
+  \item \textbf{Bewertung ohne Gewichtung.} Wenn \emph{Datenzugang} und \emph{Skalierbarkeit} dasselbe Gewicht bekommen, kommt am Ende eine Empfehlung heraus, die niemand will. Gewichten lohnt.
+  \item \textbf{Optionen ohne Vergleichbarkeit.} ``Wir vergleichen LinkedIn mit Amazon Business'' -- nur wenn Sie wissen, welchen Job die Option im Vertriebsprozess übernimmt. Beide können sinnvoll sein, aber für \emph{unterschiedliche} Aufgaben (Leadgenerierung vs.\ Transaktion).
+  \item \textbf{Bauchgefühl statt Bewertung.} Die Matrix ist nicht das Ergebnis -- sie ist das \emph{Werkzeug}, das uns zwingt, Annahmen transparent zu machen. Wenn am Ende eine Option gewinnt, die sich falsch anfühlt: das ist ein Signal, die Gewichte oder eine einzelne Zelle nachzuprüfen, nicht die Matrix zu ignorieren.
+\end{itemize}
+
+% --- 9. MARKTPOSITIONIERUNG ----------------------------------------------
+\section{Marktpositionierung}
+
+Plattformwahl ist nicht von der \emph{Positionierung} zu trennen. Wer als Qualitätsanbieter wahrgenommen werden möchte, hat auf einem reinen Preisvergleichs-Marktplatz wenig zu suchen -- selbst wenn die Reichweite verlockend ist. Sechs Positionierungs-Archetypen helfen, sich selbst zu verorten:
+
+\subsection{Die sechs Positionierungs-Archetypen}
+
+\begin{enumerate}
+  \item \textbf{Preisführer.} Versprechen: ``Bei uns am günstigsten.'' Beispiel-Logik: Skaleneffekte, schlanke Prozesse, automatisierte Abwicklung. Plattform-Affinität: hoch, da Marktplätze die Preisvergleichbarkeit unterstützen.
+  \item \textbf{Qualitätsanbieter.} Versprechen: ``Bestes Produkt / beste Verarbeitung / längste Lebensdauer.'' Plattform-Affinität: mittel -- braucht Bewertungssysteme und Markenraum.
+  \item \textbf{Spezialist.} Versprechen: ``Tiefenkompetenz in einem klar umrissenen Bereich.'' Plattform-Affinität: bevorzugt spezialisierte B2B-Marktplätze, Communities, Fachportale.
+  \item \textbf{Problemlöser.} Versprechen: ``Wir lösen Ihr konkretes Problem -- nicht nur ein Produkt.'' Beratung und Service sind Teil des Angebots. Plattform-Affinität: niedrig -- Beratung braucht Raum, den Marktplätze nicht geben.
+  \item \textbf{Nischenanbieter.} Versprechen: ``Wir bedienen eine sehr spitze Zielgruppe besser als jeder andere.'' Plattform-Affinität: hängt davon ab, ob es einen Nischenmarktplatz oder eine Nischencommunity gibt.
+  \item \textbf{Plattform-Champion.} Versprechen: ``Wir \emph{sind} die Plattform.'' Eigene Plattformökonomie als Geschäftsmodell -- nicht jedes Unternehmen kann oder soll das sein.
+\end{enumerate}
+
+\subsection{Konsistenz: Positionierung \emph{und} Kanal müssen zusammenpassen}
+
+Die wichtigste Erkenntnis aus diesem Abschnitt: \emph{Positionierung und Plattformwahl müssen konsistent sein.} Ein Qualitätsanbieter, der auf einem reinen Preisvergleich landet, sendet ein widersprüchliches Signal -- und verliert auf beiden Ebenen.
+
+\begin{merkbox}[Konsistenz-Test]
+Drei Fragen, die zueinander passen müssen:
+\begin{enumerate}
+  \item Wie wollen wir wahrgenommen werden? (Positionierung)
+  \item Wo erleben uns die Kunden? (Kanäle, Plattformen)
+  \item Was erleben sie dort? (Sortiment, Preis, Service, Sichtbarkeit)
+\end{enumerate}
+Wenn diese drei Sätze nicht in dieselbe Richtung zeigen, stimmt etwas nicht.
+\end{merkbox}
+
+% --- 10. MANAGEMENT-PERSPEKTIVE ------------------------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Auf Wissens- und Anwendungsebene sieht eine gute Plattformentscheidung wie eine sauber ausgefüllte Matrix aus. Auf Managementebene geht es um etwas anderes: um Zielkonflikte, die nicht ``richtig gelöst'' werden können, sondern \emph{entschieden} werden müssen. Das ist der inhaltliche Kern der Coaching-Themen aus UE 4.
+
+\subsection{Vier zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Kurzfristiger Umsatz vs.\ langfristige Abhängigkeit.} Eine Plattform-Listung kann morgen den Umsatz nach oben ziehen -- und in drei Jahren bedeuten, dass die Plattform die Konditionen diktiert, weil sie mittlerweile 60\,\% unseres Geschäfts trägt.
+  \item \textbf{Reichweite vs.\ Kontrolle.} Reichweite gibt es typischerweise nur gegen Kontrollverlust -- Provision, Algorithmus, Datenzugang. Wer beides will, bezahlt sehr viel.
+  \item \textbf{Wachstum vs.\ Markenpositionierung.} Wachstum über breite Marktplätze kann die Marke verwässern. Wachstum nur über exklusive Kanäle bleibt klein.
+  \item \textbf{Geschwindigkeit vs.\ Datenkontrolle.} Externe Plattformen liefern Reichweite \emph{sofort}, aber Daten unvollständig. Eigene Infrastruktur liefert vollständige Daten, aber erst nach Monaten.
+\end{enumerate}
+
+\subsection{Lock-in-Risiken}
+
+\fachbegriff{Plattform-Lock-in} bedeutet: wir können den Kanal nicht mehr ohne signifikante Kosten verlassen, selbst wenn er sich verschlechtert. Lock-in entsteht typischerweise über mehrere Hebel \emph{gleichzeitig}:
+
+\begin{itemize}
+  \item Ein wesentlicher Anteil des Umsatzes hängt am Kanal.
+  \item Operative Prozesse (Lager, Fulfillment, Bezahlung) sind eng integriert.
+  \item Kundendaten sitzen auf der Plattform, nicht bei uns.
+  \item Wir haben keinen eigenen Direktkanal aufgebaut, um Bestandskunden weiter zu betreuen.
+\end{itemize}
+
+\subsection{Entscheidungslogik unter Unsicherheit}
+
+Im Management ist die Plattformwahl \emph{keine} reine Kanalentscheidung. Sie ist eine \fachbegriff{Architekturentscheidung}: Welche Kundenschnittstelle kontrollieren wir selbst, und welche überlassen wir Plattformen? Welche Daten halten wir bei uns, welche teilen wir? Diese Architektur wirkt jahrelang -- länger, als die Marktanalyse stabil ist.
+
+Daraus folgt eine pragmatische Entscheidungslogik:
+
+\begin{itemize}
+  \item \textbf{Trenne ``schnell wirken'' von ``strategisch tragen''.} Kurzfristige Reichweite über externe Plattformen, langfristige Kundenbeziehung über den eigenen Kanal -- selbst wenn er noch klein ist.
+  \item \textbf{Reduziere Lock-in aktiv.} Halte Anteile pro Plattform unter einer Schwelle (z.\,B.\ 30\,\% des Umsatzes pro Kanal), erhalte parallel einen Direktkanal.
+  \item \textbf{Erwarte Unsicherheit, baue dafür.} Treffe Entscheidungen, die auch bei einer ungünstigen Marktveränderung noch tragfähig sind -- nicht jene, die nur bei einer optimistischen Annahme funktionieren.
+\end{itemize}
+
+\subsection{Senior-Level-Denken}
+
+Aus den Coaching-Themen (UE 4) und dem Feedback-Input (UE 7) ergibt sich ein einfacher, aber wirksamer Perspektivwechsel: Senior-Level bedeutet \emph{nicht}, ``die beste Plattform'' zu suchen. Es bedeutet, ein \emph{belastbares Entscheidungsmodell} zu entwickeln, in dem Wachstum, Risiko und Kontrolle ausbalanciert sind und das auch in zwei Jahren noch trägt, wenn sich Markt und Plattform-Landschaft verändert haben.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{K-A-D-M}]
+Die vier Zielkonflikte, in einer Reihenfolge, die sich merken lässt:\\[2pt]
+\textbf{K}urzfrist vs.\ Langfrist -- \textbf{A}bhängigkeit (Lock-in) -- \textbf{D}atenkontrolle -- \textbf{M}arkenpositionierung.\\[2pt]
+\emph{``KADM''} -- vier Trade-offs, die man als Management nicht ``löst'', sondern bewusst entscheidet.
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 1]
+Die Plattformwahl ist eine \textbf{Architekturentscheidung}, keine Werbeentscheidung. Sie wirkt jahrelang, sie verändert Daten, Prozesse und Verantwortlichkeiten, und sie kann durch saubere Methoden \emph{vorbereitet}, aber nicht algorithmisch \emph{ersetzt} werden. \emph{Wer wählt, entscheidet -- und wer entscheidet, verantwortet.}
+\end{merkbox}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Bewertungsmatrix] Strukturiertes Werkzeug zur vergleichenden Bewertung von Plattformoptionen. Kriterien (Spalten) und Optionen (Zeilen), Bewertung pro Zelle, optional gewichtet.
+  \item[Buying Center] Gruppe von Personen, die im B2B gemeinsam über einen Kauf entscheiden -- typischerweise Fachabteilung, Einkauf, IT, Geschäftsleitung.
+  \item[Conversion-Punkt] Touchpoint, an dem der Kunde eine messbare Handlung vollzieht (Klick, Anfrage, Demo, Kauf).
+  \item[Customer Journey] Abfolge der Phasen, die ein Kunde vom ersten Bewusstsein bis zum Kauf und darüber hinaus durchläuft: Awareness, Consideration, Decision, Retention, Advocacy.
+  \item[Digitaler Vertrieb] Vertriebsform, bei der Anbahnung, Information, Konfiguration oder Kaufabschluss über digitale Kanäle laufen.
+  \item[Erfolgsfaktoren (Plattform)] Vertrauen, Sichtbarkeit, Nutzerfreundlichkeit, kritische Masse, Qualitätssicherung, beidseitiger Nutzen.
+  \item[Henne-Ei-Problem] Anlaufproblem mehrseitiger Plattformen: Anbieter wollen Nachfrager, Nachfrager wollen Anbieter -- aber initial fehlt beides.
+  \item[Klassischer Vertrieb] Vertriebsform mit direkter, oft persönlicher Interaktion (Außendienst, Telefon, Messe, Direktmail).
+  \item[Lock-in (Plattform-Lock-in)] Zustand, in dem ein Anbieter einen Plattformkanal nicht mehr ohne signifikante Kosten verlassen kann.
+  \item[Marktanalyse] Strukturierte Untersuchung von Zielgruppe, Bedarf, Marktgröße, Wettbewerb und Trends als Grundlage einer Vertriebsentscheidung.
+  \item[Marktpositionierung] Die strategische Verortung eines Anbieters im Markt -- z.\,B.\ als Preisführer, Qualitätsanbieter, Spezialist, Problemlöser, Nischenanbieter, Plattform-Champion.
+  \item[Netzwerkeffekt] Wertzuwachs einer Plattform durch zusätzliche Nutzer; direkt (innerhalb einer Gruppe) oder indirekt (zwischen Anbieter- und Nachfragerseite).
+  \item[Plattform] Marktraum mit Mehrseitigkeit, der mindestens zwei Nutzergruppen zusammenführt und die Regeln des Zusammenkommens setzt.
+  \item[Plattformbasierter Vertrieb] Vertrieb über eine externe Plattform, die als Vermittler zwischen Anbieter und Kunden steht.
+  \item[Plattformtypen] Sechs Kategorien im Vertriebskontext: Marktplatz, Vermittlungsplattform, Content-, SaaS-, Community-, Ökosystem-Plattform.
+  \item[Touchpoint] Konkreter Berührungspunkt zwischen Kunde und Anbieter entlang der Customer Journey.
+  \item[Vertriebskanal] Linearer Weg vom Anbieter zum Kunden; im Gegensatz zur Plattform eindimensional.
+  \item[Zielgruppe] Konkret beschreibbare Gruppe von Personen oder Organisationen, die unser Produkt kaufen soll -- inklusive Situation, Verhalten, Entscheidungslogik.
+  \item[Zielkonflikte (digitaler Vertrieb)] Spannungsfelder, die nicht ``gelöst'', sondern bewusst entschieden werden: Reichweite vs.\ Kontrolle, Wachstum vs.\ Marke, Geschwindigkeit vs.\ Datenkontrolle, Kurzfrist vs.\ Langfrist.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 1 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
