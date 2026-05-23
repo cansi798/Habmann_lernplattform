@@ -1,0 +1,877 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 1 - Loesungsheft
+% Digitale Vertriebsstrategien & Plattformmodelle
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Musterloesungs-Box: gruen-weiss
+\newtcolorbox{loesungbox}[1][Musterlösung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 1}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Digitale Vertriebsstrategien}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 1 \textperiodcentered{} TAG 1 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 28.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 1\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Digitale\\Vertriebsstrategien \& Plattformmodelle.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis,\\nicht die einzige korrekte Lösung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 1}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- Anleitung -----------------------------------------------------------
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterlösungen sind \emph{eine} mögliche, didaktisch nachvollziehbare Lösung \textendash{} sie sind nicht die einzig richtige. Insbesondere auf L2 und L3 sind mehrere Begründungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den im Lehrskript eingeführten Begriffsapparat sauber nutzen,
+  \item Annahmen explizit machen, statt sie zu verschleiern,
+  \item Zielkonflikte benennen, statt sie wegzudefinieren,
+  \item zu einer klar formulierten Entscheidung führen \textendash{} nicht bloß zu einer Beschreibung.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterlösung. Wo weicht Ihre Argumentation ab? Ist die Abweichung eine andere Annahme \textendash{} oder ein Denkfehler? Genau dort entsteht der Lerneffekt.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Klassisch \textendash{} digital \textendash{} plattformbasiert}{\nivLi}{5\,min}
+
+\noindent Definieren Sie in jeweils \emph{einem} Satz die drei Vertriebslogiken, die wir heute parallel im Markt finden:
+
+\begin{enumerate}
+  \item Klassischer Vertrieb
+  \item Digitaler Vertrieb
+  \item Plattformbasierter Vertrieb
+\end{enumerate}
+
+\noindent Ergänzen Sie einen vierten Satz, in dem Sie das zentrale Unterscheidungsmerkmal zwischen \emph{digitalem} und \emph{plattformbasiertem} Vertrieb auf den Punkt bringen.
+
+\ytquery{klassischer digitaler plattformbasierter Vertrieb Unterschied Definition}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Klassischer Vertrieb} setzt auf direkte, oft persönliche Interaktion zwischen Anbieter und Kunde \textendash{} Außendienst, Innendienst, Telefon, Messe, Direktmail.
+  \item \textbf{Digitaler Vertrieb} bedeutet, dass Anbahnung, Information, Konfiguration oder Kaufabschluss über digitale Kanäle laufen \textendash{} eigene Website, Webshop, E-Mail-Kampagnen, Social Selling.
+  \item \textbf{Plattformbasierter Vertrieb} nutzt einen Dritten \textendash{} eine Plattform \textendash{} als Marktzugang: Amazon, B2B-Marktplätze, App-Stores, LinkedIn als Lead-Generator.
+  \item \textbf{Unterscheidung digital vs.\ plattformbasiert:} Digitaler Vertrieb läuft über \emph{eigene} digitale Kanäle und behält Kontrolle, Daten und Kundenschnittstelle beim Anbieter; plattformbasierter Vertrieb übergibt einen Teil dieser Kontrolle (Sichtbarkeit, Datenzugang, Regeln) an einen Plattformbetreiber.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Plattformtypen zuordnen}{\nivLi}{8\,min}
+
+\noindent Ordnen Sie jede der sechs Plattformen unten dem passenden \emph{Plattformtyp} zu. Sechs Typen stehen zur Auswahl:
+
+\medskip
+\noindent\textbf{Typen:} Marktplatz \textperiodcentered{} Vermittlungsplattform \textperiodcentered{} Content-Plattform \textperiodcentered{} SaaS-Plattform \textperiodcentered{} Community-Plattform \textperiodcentered{} Ökosystem-Plattform.
+
+\medskip
+\noindent\textbf{Plattformen:}
+
+\begin{enumerate}
+  \item Amazon Business
+  \item LinkedIn
+  \item Salesforce AppExchange
+  \item Etsy
+  \item Stack Overflow
+  \item Apple App Store
+\end{enumerate}
+
+\noindent Schreiben Sie hinter jeden Namen den Typ. Begründen Sie in einem Halbsatz, woran Sie den Typ erkennen.
+
+\ytquery{Plattformtypen Marktplatz SaaS Community Ökosystem Beispiele}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Amazon Business \textrightarrow{} Marktplatz.} Viele Anbieter führen ein vergleichbares Sortiment, der Kunde wählt nach Preis, Bewertung, Lieferzeit.
+  \item \textbf{LinkedIn \textrightarrow{} Content- \emph{und} Community-Plattform} (Hybrid). Primär Reichweite über Inhalte plus berufliches Netzwerk; Vertrieb erfolgt indirekt über Sichtbarkeit und Lead-Generierung.
+  \item \textbf{Salesforce AppExchange \textrightarrow{} SaaS-Plattform.} Drittanbieter integrieren sich in ein Software-Ökosystem und verkaufen an Kunden, die Salesforce bereits nutzen.
+  \item \textbf{Etsy \textrightarrow{} Marktplatz} (mit Nischenfokus auf Handgemachtes / Vintage). Viele Anbieter, ein Marktraum, suchbasierter Vergleich.
+  \item \textbf{Stack Overflow \textrightarrow{} Community-Plattform.} Fachliche Reputation, kein direkter Verkauf, sondern Recruiting- und Vertrauenseffekte.
+  \item \textbf{Apple App Store \textrightarrow{} Ökosystem-Plattform.} Verknüpfung von Geräten, Diensten und Drittanbietern in einem geschlossenen System mit eigenen Regeln (Provision, Zertifizierung).
+\end{enumerate}
+
+\noindent\emph{Hinweis:} LinkedIn lässt sich legitim auch rein als Content- oder rein als Community-Plattform einordnen \textendash{} entscheidend ist die nachvollziehbare Begründung, nicht das ``Etikett''.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Netzwerkeffekte erkennen}{\nivLi}{8\,min}
+
+\noindent Lesen Sie die drei Szenarien. Entscheiden Sie für jedes, ob es sich um einen \emph{direkten} oder einen \emph{indirekten} Netzwerkeffekt handelt \textendash{} und begründen Sie jeweils in einem Satz, in welcher Richtung der Effekt wirkt.
+
+\begin{enumerate}
+  \item Je mehr Uber-Fahrer in einer Stadt unterwegs sind, desto kürzere Wartezeiten haben die Passagiere \textendash{} und desto attraktiver wird Uber für neue Passagiere.
+  \item Je mehr Kolleginnen und Kollegen WhatsApp installiert haben, desto sinnvoller ist es für mich selbst, WhatsApp zu installieren.
+  \item Je mehr Verkäufer auf Amazon listen, desto größer wird die Auswahl für Käufer \textendash{} und desto eher kaufen sie dort, was wiederum noch mehr Verkäufer anzieht.
+\end{enumerate}
+
+\ytquery{direkter indirekter Netzwerkeffekt Plattform Beispiele erklärt}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Indirekter Netzwerkeffekt.} Mehr Anbieter (Fahrer) machen die Plattform für die andere Seite (Passagiere) attraktiver \textendash{} klassische Zwei-Seiten-Dynamik zwischen unterschiedlichen Nutzergruppen.
+  \item \textbf{Direkter Netzwerkeffekt.} Mehr Nutzer derselben Gruppe (Kontakte) machen die Plattform für jeden einzelnen Nutzer derselben Gruppe wertvoller \textendash{} klassische Eigenschaft von Kommunikationsnetzen.
+  \item \textbf{Indirekter Netzwerkeffekt mit Rückkopplung} (Marktplatz-Dynamik). Anbieterseite \textrightarrow{} Nachfragerseite \textrightarrow{} Anbieterseite. Diese Schleife erklärt, warum die Nummer-1-Plattform in einer Kategorie oft uneinholbar wird.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{OfficePro Solutions \textendash{} drei digitale Vertriebswege}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``OfficePro Solutions'' verkauft ergonomische Bürostühle und Arbeitsplatzlösungen an kleine und mittlere Unternehmen. Bisher läuft der Vertrieb über persönliche Empfehlungen, Telefonakquise und gelegentliche Messeauftritte. Die Geschäftsleitung möchte künftig stärker digital verkaufen \textendash{} weiß aber nicht, ob ein eigener Online-Shop, LinkedIn-Vertrieb, Amazon Business, ein B2B-Marktplatz oder eine Kombination sinnvoll ist.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Zielgruppe: kleine und mittlere Unternehmen mit 10\,--\,250 Mitarbeitenden
+  \item Produkte: erklärungsbedürftig, mittleres bis hohes Preisniveau
+  \item Bisherige Stärke: persönliche Beratung und Qualität
+  \item Schwäche: geringe digitale Sichtbarkeit
+  \item Budget: begrenzt
+  \item Zeitdruck: erste digitale Vertriebsergebnisse innerhalb von 6 Monaten
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie mindestens \textbf{fünf Informationen}, die für eine fundierte digitale Vertriebsstrategie heute noch fehlen.
+  \item Entwickeln Sie \textbf{drei mögliche digitale Vertriebswege} für OfficePro Solutions. Beschreiben Sie jeden Weg in 1\,--\,2 Sätzen.
+  \item Bewerten Sie jeden Vertriebsweg grob nach \emph{Aufwand}, \emph{Reichweite} und \emph{Kontrollgrad} (jeweils niedrig/mittel/hoch).
+  \item Formulieren Sie eine \textbf{erste Empfehlung in drei Sätzen} \textendash{} trotz unvollständiger Datenlage.
+\end{enumerate}
+
+\ytquery{B2B digitaler Vertrieb Mittelstand Strategie eigener Webshop LinkedIn}
+
+\begin{loesungbox}
+\textbf{1. Fehlende Informationen (mindestens fünf):}
+\begin{itemize}
+  \item Konkrete Zielgruppen-Differenzierung: Branchen, Entscheider-Rollen (Einkauf vs.\ Office Management vs.\ Geschäftsführung), Buying-Center-Logik.
+  \item Aktuelle Customer-Journey-Daten: wo informieren sich potentielle Kunden heute (Google, LinkedIn, Branchenportale, Empfehlungen)?
+  \item Wettbewerbsumfeld: welche direkten Wettbewerber sind bereits digital sichtbar \textendash{} und mit welcher Positionierung?
+  \item Margenstruktur und Mindestumsatz pro Kunde: lohnt sich überhaupt ein Lead, der nur über Online-Recherche kommt?
+  \item Digitale Kompetenz im eigenen Team: wer kann Webshop, Content, Kampagnen operativ betreiben?
+  \item Zusatzpunkte: bestehendes CRM, Lieferlogistik, regulatorische Anforderungen, Marken-Wahrnehmung in der Zielgruppe.
+\end{itemize}
+
+\textbf{2. Drei mögliche digitale Vertriebswege:}
+\begin{itemize}
+  \item \emph{Weg A \textendash{} Eigener B2B-Webshop mit Beratungstermin-Funktion.} Konfigurator und Online-Anfrage, ergänzt um vereinbarten Beratungstermin. Behält Marke, Beratung und Daten beim Anbieter.
+  \item \emph{Weg B \textendash{} LinkedIn-Social-Selling plus gezielte Lead-Kampagnen.} Inhaltsbasierte Sichtbarkeit (Posts, Whitepaper, Cases) und LinkedIn-Ads auf definierte Job-Titel; aktive Direktansprache.
+  \item \emph{Weg C \textendash{} Listung auf einem spezialisierten B2B-Marktplatz für Büroausstattung.} Schneller Marktzugang, hohe Vergleichbarkeit, Plattform-Provision, Datenkontrolle eingeschränkt.
+\end{itemize}
+
+\textbf{3. Grobbewertung (niedrig / mittel / hoch):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXXX@{}}
+\toprule
+ & \textbf{Aufwand} & \textbf{Reichweite} & \textbf{Kontrollgrad} \\
+\midrule
+A: Eigener Webshop & hoch & niedrig\,--\,mittel (zunächst) & hoch \\
+B: LinkedIn-Selling & mittel & mittel & mittel\,--\,hoch \\
+C: Spezial-Marktplatz & niedrig\,--\,mittel & mittel\,--\,hoch & niedrig\,--\,mittel \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{4. Empfehlung (3 Sätze):}
+OfficePro startet kurzfristig mit \emph{LinkedIn-Selling}, weil es zur B2B-Zielgruppe, zum erklärungsbedürftigen Produkt und zur ``Beratung als Stärke'' am besten passt und unter 6\,Monaten erste Ergebnisse liefert. Parallel beginnt der Aufbau eines \emph{eigenen B2B-Webshops mit Beratungstermin-Funktion}, der ab 9\,--\,12 Monaten die strategische Kundenschnittstelle wird. Ein spezialisierter B2B-Marktplatz wird zunächst \emph{nicht} priorisiert, weil die hohe Vergleichbarkeit gegen die qualitative Markenpositionierung wirkt \textendash{} er bleibt als Option für selektive Standardprodukte.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Plattformoptionen-Matrix für OfficePro}{\nivLii}{30\,min}
+
+\begin{infobox}[Vier Optionen]
+\textbf{Option A \textendash{} Amazon Business:} hohe Reichweite, starker Preiswettbewerb, wenig Kontrolle über Kundendaten, schneller Marktzugang.\\[2pt]
+\textbf{Option B \textendash{} Eigener Online-Shop mit Beratungstermin-Funktion:} hohe Kontrolle über Marke und Daten, höherer Aufbauaufwand, Sichtbarkeit muss erst aufgebaut werden, passt zu erklärungsbedürftigen Produkten.\\[2pt]
+\textbf{Option C \textendash{} LinkedIn-Vertrieb mit Lead-Kampagnen:} gute B2B-Zielgruppenansprache, erfordert Content und aktive Ansprache, mittlerer Aufwand, gut für Beratung und Beziehungsaufbau.\\[2pt]
+\textbf{Option D \textendash{} Spezialisierter B2B-Marktplatz für Büroausstattung:} passende Zielgruppe, Abhängigkeit vom Plattformbetreiber, hohe Vergleichbarkeit, mittlere Reichweite.\\[6pt]
+\textbf{Rahmen:} Budget 40.000\,\euro{} für 6 Monate \textperiodcentered{} Vertriebsteam 2 Personen \textperiodcentered{} Ziel: 100 qualifizierte Leads \textperiodcentered{} hochwertige Markenpositionierung erhalten.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Füllen Sie die folgende Bewertungsmatrix aus. Skala 1\,(sehr schlecht) bis 5\,(sehr gut).
+  \item Priorisieren Sie maximal \textbf{zwei} Optionen für die ersten 6 Monate.
+  \item Begründen Sie, welche Option Sie zunächst \emph{nicht} verfolgen würden.
+  \item Formulieren Sie eine \textbf{Managementempfehlung in drei Sätzen}.
+\end{enumerate}
+
+\ytquery{Bewertungsmatrix Plattformauswahl B2B Vergleich Amazon eigener Shop}
+
+\begin{loesungbox}
+\textbf{1. Mögliche Bewertungsmatrix} (Skala 1\,--\,5, hier ungewichtet):
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lcccc@{}}
+\toprule
+\textbf{Kriterium} & \textbf{A: Amazon} & \textbf{B: Webshop} & \textbf{C: LinkedIn} & \textbf{D: Marktplatz} \\
+\midrule
+Reichweite          & 5 & 2 & 4 & 3 \\
+Kostenmodell        & 3 & 2 & 3 & 3 \\
+Kontrollgrad        & 1 & 5 & 4 & 2 \\
+Datenzugang         & 1 & 5 & 3 & 2 \\
+\midrule
+\textbf{Summe}      & \textbf{10} & \textbf{14} & \textbf{14} & \textbf{10} \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Priorisierung (max.\ 2 Optionen):} Option \textbf{B (Eigener Webshop)} und Option \textbf{C (LinkedIn-Vertrieb)} \textendash{} sie ergänzen sich: LinkedIn liefert in 6\,Monaten messbare Reichweite und Leads, der Webshop baut die strategische Kundenschnittstelle für die nächsten Jahre auf.
+
+\smallskip
+\textbf{3. Welche Option \emph{nicht} verfolgen:} \textbf{Option A (Amazon Business)} ist für OfficePro die problematischste Wahl. Die zwei niedrigsten Bewertungen (Kontrollgrad und Datenzugang) treffen genau das, was bei einem erklärungsbedürftigen, beratungsstarken Produkt strategisch geschützt werden muss. Reichweite ohne Markenraum erzeugt Preisdruck \textendash{} und damit Margenerosion bei einem ohnehin begrenzten Budget.
+
+\smallskip
+\textbf{4. Managementempfehlung (3 Sätze):}
+OfficePro startet mit LinkedIn-Vertrieb, um in 6\,Monaten 100 qualifizierte Leads zu liefern und Erfahrung mit digitaler Ansprache aufzubauen. Parallel wird ein eigener B2B-Webshop mit Beratungstermin-Funktion aufgebaut, der ab Monat 9 die zentrale Kundenschnittstelle wird und Markenpositionierung sowie Datenkontrolle schützt. Amazon Business und der spezialisierte B2B-Marktplatz bleiben optional für ausgewählte Standardprodukte \textendash{} aber nicht als Hauptkanal.
+
+\smallskip
+\emph{Hinweis:} Andere Bewertungen sind möglich, solange Kontrollgrad und Datenzugang in der Begründung sichtbar gegen Reichweite abgewogen werden.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Customer Journey für einen B2B-Geschäftsführer}{\nivLii}{20\,min}
+
+\begin{infobox}[Persona]
+\textbf{Anna Berg, 47 Jahre, Geschäftsführerin eines mittelständischen Architekturbüros (28 Mitarbeitende).} Sie sucht nach einer Komplett-Lösung für ergonomische Büroausstattung, weil sie ein neues Büro bezieht. Sie hat keine Zeit für Messen, vergleicht aber gründlich, bevor sie unterschreibt. Entscheidungstreiber: Gesundheitsschutz der Mitarbeitenden, planbare Budgets, schnelle Lieferung.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Skizzieren Sie eine realistische Customer Journey für Anna Berg in \textbf{fünf Touchpoints} \textendash{} von Awareness bis Retention. Für jeden Touchpoint:
+
+\begin{itemize}
+  \item Konkreter Berührungspunkt (z.\,B.\ ``Google-Suchergebnis'', ``LinkedIn-Beitrag'', ``Showroom-Termin'').
+  \item Welche Frage hat Anna Berg in diesem Moment?
+  \item An welcher Stelle ist der nächste Conversion-Punkt (Klick / Anfrage / Termin / Kauf / Nachbestellung)?
+\end{itemize}
+
+\noindent Formulieren Sie zum Schluss \emph{eine} Hypothese: Wo wäre die größte digitale Investition für ein Möbel-/Büroausstatter-Unternehmen am wirkungsvollsten?
+
+\ytquery{Customer Journey B2B mittelstand Touchpoints awareness consideration decision}
+
+\begin{loesungbox}
+\textbf{Fünf Touchpoints:}
+
+\begin{enumerate}
+  \item \textbf{Awareness \textendash{} Google-Suche.} \emph{Berührungspunkt:} Anna googelt ``ergonomische Bürostühle Mittelstand Beratung''. \emph{Frage:} ``Wer bietet eine Komplettlösung, nicht nur einzelne Stühle?'' \emph{Conversion-Punkt:} Klick auf ein organisches Top-3-Ergebnis oder eine Google-Ad mit klarer B2B-Botschaft.
+  \item \textbf{Consideration \textendash{} Landingpage / LinkedIn-Cases.} \emph{Berührungspunkt:} Detailseite mit Referenzkunden, FAQ, Konfigurator-Vorschau; daneben LinkedIn-Post mit Anwendungs-Case. \emph{Frage:} ``Verstehen die meine Situation \textendash{} Architekturbüro, 28 Mitarbeitende, neues Office?'' \emph{Conversion-Punkt:} Termin-Anfrage / Whitepaper-Download / Kontakt-Formular.
+  \item \textbf{Decision \textendash{} Beratungstermin (Video oder Showroom).} \emph{Berührungspunkt:} 30-Min.-Video-Call mit konkretem Stuhl-/Tisch-Vorschlag und transparentem Preis. \emph{Frage:} ``Passt Service, Lieferzeit und Preis zu meinem Plan?'' \emph{Conversion-Punkt:} Angebotsannahme / Vertragsunterschrift.
+  \item \textbf{Retention \textendash{} Login-Bereich für Nachbestellung.} \emph{Berührungspunkt:} Persönliches Konto mit Bestellhistorie, Wartungsverträge, neue Mitarbeitende einfach hinzubuchen. \emph{Frage:} ``Wie schnell bekomme ich ergänzende Ausstattung für die nächsten zwei neuen Kollegen?'' \emph{Conversion-Punkt:} One-Click-Nachbestellung.
+  \item \textbf{Advocacy \textendash{} LinkedIn-Empfehlung / Referenz-Anfrage.} \emph{Berührungspunkt:} OfficePro fragt nach 6 Monaten höflich nach einer Bewertung / Referenzfreigabe. \emph{Frage:} ``Sind die Stühle wirklich der Grund, warum mein Team weniger Rückenprobleme hat?'' \emph{Conversion-Punkt:} Freigabe als Referenz \textendash{} wirkt als Lead-Magnet für die nächste Customer Journey.
+\end{enumerate}
+
+\textbf{Hypothese:} Größter digitaler Hebel für einen Möbel-/Büroausstatter ist die \emph{Schnittstelle zwischen Consideration und Decision} \textendash{} also eine Landingpage plus Beratungstermin-Buchung, die Vertrauen aufbaut, \emph{bevor} der Außendienst eingeschaltet wird. Hier verlieren klassische B2B-Anbieter heute am meisten Leads.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Branchenvergleich \textendash{} Plattform-Bewertungsmatrix}{\nivLii}{25\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Wählen Sie \textbf{drei Branchen} aus der folgenden Liste (oder andere, falls Sie eine bessere kennen):
+
+\begin{itemize}
+  \item Möbel \& Büroausstattung
+  \item Maschinenbau / Industriebedarf
+  \item Business-Software (B2B-SaaS)
+  \item Medizinischer Praxisbedarf
+  \item Handwerksdienstleistungen
+\end{itemize}
+
+\noindent Für jede der drei Branchen:
+
+\begin{enumerate}
+  \item Nennen Sie \textbf{zwei konkrete Plattformen}, die in dieser Branche tatsächlich Bedeutung haben.
+  \item Bewerten Sie jede Plattform anhand von \textbf{drei Kriterien Ihrer Wahl} (z.\,B.\ Reichweite, Datenzugang, Markenwirkung, Kostenmodell, Wettbewerbsumfeld).
+  \item Schreiben Sie einen Satz: für welche Anbieter-Situation passt diese Plattform?
+\end{enumerate}
+
+\ytquery{B2B Plattformen Branchenvergleich Maschinenbau Möbel Software Beispiele}
+
+\begin{loesungbox}
+\emph{Beispielhafte Auswahl \textendash{} andere Branchen und Plattformen sind möglich, solange die Bewertung mit den Kriterien aus dem Skript konsistent ist.}
+
+\smallskip
+\textbf{Branche 1: Möbel \& Büroausstattung}
+\begin{itemize}
+  \item \emph{Amazon Business} \textendash{} Reichweite: hoch \textperiodcentered{} Datenzugang: niedrig \textperiodcentered{} Markenwirkung: schwach. Passt für standardisierte, austauschbare Produkte ohne Beratungsbedarf.
+  \item \emph{Mercateo / Unite} \textendash{} Reichweite: mittel im B2B-Mittelstand \textperiodcentered{} Datenzugang: niedrig \textperiodcentered{} Markenwirkung: mittel. Passt, wenn das Ziel ist, in zentralen B2B-Einkaufskatalogen auffindbar zu sein.
+\end{itemize}
+
+\textbf{Branche 2: Business-Software (B2B-SaaS)}
+\begin{itemize}
+  \item \emph{Salesforce AppExchange} \textendash{} Reichweite: hoch in der Salesforce-Kundenbasis \textperiodcentered{} Kostenmodell: ca.\ 15\,\% Provision \textperiodcentered{} Markenwirkung: stark, wenn man als zertifizierter Partner gelistet wird. Passt für Anbieter, deren Zielkunden ohnehin Salesforce nutzen.
+  \item \emph{G2 / Capterra} \textendash{} Reichweite: hoch in der Vorrecherche \textperiodcentered{} Datenzugang: mittel (über Bewertungssystem) \textperiodcentered{} Markenwirkung: mittel\,--\,hoch über Bewertungs-Signal. Passt, wenn organische Sichtbarkeit in Vergleichsportalen ein Engpass ist.
+\end{itemize}
+
+\textbf{Branche 3: Maschinenbau / Industriebedarf}
+\begin{itemize}
+  \item \emph{Industriestock / Wer liefert was?} \textendash{} Reichweite: hoch im DACH-B2B \textperiodcentered{} Wettbewerbsumfeld: hoch (viele direkte Anbieter) \textperiodcentered{} Markenwirkung: schwach. Passt für Reichweite in Anfrage-orientierten Märkten, weniger für Markenaufbau.
+  \item \emph{LinkedIn / Branchen-Communities} \textendash{} Reichweite: mittel \textperiodcentered{} Datenzugang: mittel (Lead-Daten) \textperiodcentered{} Markenwirkung: hoch durch fachliche Sichtbarkeit. Passt für Anbieter mit erklärungsbedürftigen Produkten und Senior-Decisionern.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Netzwerkeffekte und kritische Masse konkret}{\nivLii}{20\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Analysieren Sie zwei Plattformen \textbf{detailliert} hinsichtlich Netzwerkeffekten und kritischer Masse:
+
+\medskip
+\noindent\textbf{Plattform 1: Airbnb} \\
+\noindent\textbf{Plattform 2: Slack}
+
+\medskip
+\noindent Für jede Plattform beantworten Sie:
+
+\begin{enumerate}
+  \item Welche Netzwerkeffekte wirken hier \textendash{} direkt, indirekt, oder beide? Wer profitiert konkret von welcher Seite?
+  \item Was bedeutet \emph{kritische Masse} hier konkret? Ab wann ``kippt'' die Plattform in den selbsttragenden Modus?
+  \item Wie hat die Plattform (vermutlich) das Henne-Ei-Problem in der Anfangsphase gelöst?
+\end{enumerate}
+
+\noindent Schließen Sie mit \emph{einem} Vergleichssatz: Welche Plattform ist gegen Wettbewerber stärker geschützt \textendash{} und warum?
+
+\ytquery{Airbnb Slack Netzwerkeffekte kritische Masse Henne-Ei-Problem Plattform}
+
+\begin{loesungbox}
+\textbf{Plattform 1: Airbnb}
+\begin{enumerate}
+  \item \emph{Indirekter Netzwerkeffekt zwischen zwei Seiten:} Mehr Gastgeber \textrightarrow{} mehr Auswahl für Gäste \textrightarrow{} mehr Buchungen \textrightarrow{} attraktiver für neue Gastgeber. Geringer direkter Effekt innerhalb einer Seite.
+  \item \emph{Kritische Masse:} ausreichende Dichte an verfügbaren Unterkünften pro Stadt, sodass ein Gast mit hoher Wahrscheinlichkeit etwas Passendes findet. Stadt-für-Stadt-Logik \textendash{} New York gekippt vor Hamburg.
+  \item \emph{Henne-Ei-Lösung:} Anbieterseite gezielt zuerst aufbauen (Gründer haben in den ersten Städten persönlich Wohnungen hinzugefügt, professionell fotografiert), parallel \emph{eine} Stadt nach der anderen.
+\end{enumerate}
+
+\textbf{Plattform 2: Slack}
+\begin{enumerate}
+  \item \emph{Direkter Netzwerkeffekt innerhalb einer Organisation:} Je mehr Kolleginnen und Kollegen Slack nutzen, desto wertvoller wird Slack für jeden Einzelnen. Zusätzlich indirekter Effekt durch das App-Ökosystem (mehr Integrationen \textrightarrow{} mehr Nutzungstiefe).
+  \item \emph{Kritische Masse:} ungefähr ``ein Team komplett drin''. Sobald in einem Team alle Slack aktiv nutzen, kippt der Kommunikationsstandard \textendash{} E-Mail/MS-Teams verlieren intern.
+  \item \emph{Henne-Ei-Lösung:} bottom-up-Adoption durch einzelne Teams (kostenlose Version), virale Einladungslogik, Investitionen in Integrationen, die andere Tools andocken \textendash{} so wird Slack im Workflow unverzichtbar, bevor IT/Einkauf überhaupt entscheidet.
+\end{enumerate}
+
+\textbf{Vergleichssatz:} Slack hat in der einzelnen Organisation den \emph{stärkeren} Schutz (direkter Netzwerkeffekt plus Lock-in über Integrationen), Airbnb hat den \emph{breiteren} Schutz (indirekter Effekt skaliert pro Stadt) \textendash{} Slack ist intern schwerer ablösbar, Airbnb global schwerer einzuholen.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Fallstudie MedEquip Direct \textendash{} 12-Monats-Strategie}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie: MedEquip Direct]
+``MedEquip Direct'' ist ein mittelständischer Anbieter von medizinischen Verbrauchsartikeln für Arztpraxen, Pflegeeinrichtungen und kleinere Kliniken. Bisheriger Vertrieb: Außendienst, Telefonbestellungen, Bestandskundenkontakte. Neue Wettbewerber gewinnen Marktanteile über digitale Plattformen, Preisvergleichsportale und automatisierte Nachbestellprozesse.
+
+\smallskip
+Die Geschäftsführung möchte innerhalb von zwölf Monaten eine digitale Vertriebsstrategie aufbauen \textendash{} neue Kunden digital gewinnen, Bestandskunden effizienter betreuen, und gleichzeitig die Qualitätspositionierung nicht durch reinen Preiswettbewerb beschädigen.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Jahresumsatz: 18\,Mio.\,\euro
+  \item Vertriebsteam: 12 Außendienst, 6 Innendienst
+  \item Digitales Marketing bisher kaum vorhanden, CRM vorhanden aber unkonsequent genutzt
+  \item Budget für digitale Vertriebsoffensive: 250.000\,\euro
+  \item Ziel: 20\,\% der Neukundenkontakte in 12 Monaten digital generieren
+  \item Risiken: Preisdruck, regulatorische Anforderungen, geringe digitale Kompetenz im Team
+\end{itemize}
+
+\smallskip
+\textbf{Strategische Optionen:}
+\begin{itemize}
+  \item \textbf{A:} Eigener B2B-Webshop mit Login-Bereich und Nachbestellfunktion
+  \item \textbf{B:} Listung auf etablierten B2B-Marktplätzen für medizinischen Praxisbedarf
+  \item \textbf{C:} LinkedIn- und Google-Kampagnen zur Leadgenerierung
+  \item \textbf{D:} Aufbau eines digitalen Kundenportals mit Beratung, Dokumenten und Servicefunktionen
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie Markt- und Vertriebssituation von MedEquip Direct in 3\,--\,5 Punkten.
+  \item Beschreiben Sie die wichtigsten Zielgruppen und ihre digitalen Kaufbedürfnisse.
+  \item Bewerten Sie die vier Optionen A--D anhand von: Zielgruppenpassung \textperiodcentered{} Umsatzpotenzial \textperiodcentered{} Investitionsaufwand \textperiodcentered{} Umsetzungsgeschwindigkeit \textperiodcentered{} Kontrollgrad über Kundendaten \textperiodcentered{} Risiko der Austauschbarkeit \textperiodcentered{} Beitrag zur Marktpositionierung.
+  \item Entwickeln Sie eine \textbf{priorisierte Empfehlung} für die ersten zwölf Monate.
+  \item Beschreiben Sie, wie sich die Rollen von Außendienst, Innendienst und Marketing verändern.
+  \item Treffen Sie \emph{mindestens eine Entscheidung unter Unsicherheit} und begründen Sie diese ausdrücklich.
+\end{enumerate}
+
+\ytquery{B2B digitale Vertriebsstrategie Medizinbedarf Webshop Plattform Mittelstand}
+
+\begin{loesungbox}
+\textbf{1. Analyse der Ausgangslage:}
+\begin{itemize}
+  \item Starke Bestandskundenbeziehungen, aber geringe digitale Neukundengewinnung \textendash{} das bisherige Modell skaliert nicht weiter.
+  \item Der Markt entwickelt sich in Richtung digitaler Beschaffung, Vergleichbarkeit und automatisierter Nachbestellung.
+  \item Größte Gefahr: Austauschbarkeit über reine Marktplatzlistungen \textendash{} Preisdruck und Margenerosion.
+  \item Größte Chance: Kombination aus digitalem Service, datenbasierter Kundenbindung und gezielter Leadgenerierung.
+\end{itemize}
+
+\textbf{2. Zielgruppen und ihre digitalen Kaufbedürfnisse:}
+\begin{itemize}
+  \item \emph{Arztpraxen:} einfache Nachbestellung, Verlässlichkeit, schnelle Lieferung.
+  \item \emph{Pflegeeinrichtungen:} wiederkehrende Bestellungen, klare Preise, Dokumentation und Compliance.
+  \item \emph{Kleinere Kliniken:} Compliance, Service, verlässliche Lieferfähigkeit, Rahmenverträge.
+  \item \emph{Neukunden (alle Segmente):} Vertrauen, Orientierung, einfache Kontaktaufnahme.
+\end{itemize}
+
+\textbf{3. Bewertung der Optionen:}
+\begin{itemize}
+  \item \emph{A \textendash{} Eigener B2B-Webshop:} strategisch sehr sinnvoll, da Kundendaten, Nachbestellung und Kundenbindung kontrolliert werden können; mittlerer bis hoher Aufwand; mittlere Umsetzungsgeschwindigkeit.
+  \item \emph{B \textendash{} B2B-Marktplätze:} kurzfristig hilfreich für Reichweite, aber Risiko von Preisdruck und Austauschbarkeit; nur selektiv für Standardartikel nutzen.
+  \item \emph{C \textendash{} LinkedIn-/Google-Kampagnen:} sinnvoll zur Leadgenerierung, besonders für Neukundenansprache und Sichtbarkeit; benötigt professionelles Kampagnenmanagement; relativ schnell wirksam.
+  \item \emph{D \textendash{} Digitales Kundenportal:} hoher strategischer Wert für Bestandskundenbindung, Servicequalität und Differenzierung; eher mittelfristig aufzubauen, höherer Initialaufwand.
+\end{itemize}
+
+\textbf{4. Priorisierte Empfehlung (12 Monate):}
+\begin{itemize}
+  \item \textbf{Priorität 1:} Eigener B2B-Webshop mit Login- und Nachbestellfunktion (Monate 1\,--\,9).
+  \item \textbf{Priorität 2:} Google- und LinkedIn-Kampagnen zur qualifizierten Leadgenerierung (ab Monat 2 parallel).
+  \item \textbf{Priorität 3:} Digitales Kundenportal als Ausbauphase (Start ab Monat 8, Vollausbau im Folgejahr).
+  \item Marktplätze nur kontrolliert für ausgewählte Standardprodukte einsetzen \textendash{} nicht als Hauptstrategie.
+\end{itemize}
+
+\textbf{5. Rollenveränderung im Vertrieb:}
+\begin{itemize}
+  \item \emph{Außendienst} wird stärker zum Berater für Schlüsselkunden und komplexe Bedarfe \textendash{} weniger Routineroutine, mehr Beratungstiefe.
+  \item \emph{Innendienst} übernimmt digitale Kundenbetreuung, Nachfassprozesse und Angebotsmanagement im Webshop-Backend.
+  \item \emph{Marketing} wird zum Leadgenerator und Datenlieferant für den Vertrieb \textendash{} Performance-orientiert, kampagnenfähig.
+  \item \emph{CRM} wird zur zentralen Steuerungsplattform für Kundendaten und Vertriebsaktivitäten \textendash{} konsequente Nutzung wird Pflicht, nicht Option.
+\end{itemize}
+
+\textbf{6. Entscheidung unter Unsicherheit:}
+Trotz unklarer Akzeptanz digitaler Nachbestellung in Arztpraxen wird der eigene B2B-Webshop priorisiert \textendash{} weil er strategisch Kundendaten, Kundenbindung und Prozessskalierung ermöglicht. Das Risiko wird durch Pilotkunden, schrittweise Einführung und Vertriebsschulung reduziert. Begründungslogik: \emph{Strategische Kontrolle ist höher zu bewerten als kurzfristige Reichweite}; \emph{digitale Vertriebskanäle müssen zur Positionierung als Qualitätsanbieter passen}; \emph{Plattformen werden ergänzend genutzt, aber nicht zur alleinigen Kundenschnittstelle gemacht}.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Lock-in-Analyse \textendash{} Plattform als strategisches Risiko}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Plattform-Lock-in bezeichnet einen Zustand, in dem ein Anbieter eine Plattform nicht mehr ohne signifikante Kosten verlassen kann \textendash{} selbst wenn sich Konditionen verschlechtern. Lock-in entsteht typischerweise durch mehrere Hebel gleichzeitig: Umsatzanteil, operative Integration, Datenbesitz, fehlender Direktkanal.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in eigenen Worten, ab \emph{wann} Plattformabhängigkeit zu einem strategischen Risiko wird (3\,--\,4 Sätze). Was sind die kritischen Schwellen?
+  \item Wählen Sie ein \textbf{konkretes Branchenbeispiel}, in dem Plattform-Lock-in heute sichtbar ein Problem ist (z.\,B.\ Markenartikler auf Amazon, App-Entwickler im Apple-Ökosystem, Hotels auf Booking.com, Spotify-Bands, Verlage in Google News). Erläutern Sie an diesem Beispiel:
+  \begin{itemize}
+    \item Welche Lock-in-Hebel wirken konkret?
+    \item Welche strategischen Optionen hat ein Anbieter, der den Lock-in reduzieren möchte?
+    \item Was würde es kosten \textendash{} kurzfristig und langfristig \textendash{} den Kanal zu verlassen?
+  \end{itemize}
+  \item Formulieren Sie eine \textbf{Faustregel} (ein bis zwei Sätze): Wann ist Plattformabhängigkeit aus Managementsicht noch akzeptabel \textendash{} und wann nicht mehr?
+\end{enumerate}
+
+\ytquery{Plattform Lock-in B2B Risiko Amazon Booking Apple Strategie Abhängigkeit}
+
+\begin{loesungbox}
+\textbf{1. Wann wird Plattformabhängigkeit zum strategischen Risiko:}
+Plattformabhängigkeit wird zum Risiko, wenn die Plattform die Konditionen einseitig diktieren kann, ohne dass der Anbieter realistisch ausweichen kann. Kritische Schwellen sind typischerweise: \emph{Umsatzanteil über 30\,\%}, \emph{Datenkontrolle vollständig bei der Plattform}, \emph{operative Prozesse (Fulfillment, Bezahlung) tief integriert}, und \emph{kein paralleler Direktkanal zu denselben Kunden}. Sobald zwei oder mehr dieser Hebel gleichzeitig greifen, ist der Ausstieg nicht mehr durch eine Entscheidung möglich, sondern nur noch durch ein mehrjähriges Programm.
+
+\smallskip
+\textbf{2. Beispiel: Hotels auf Booking.com}
+
+\smallskip
+\emph{Lock-in-Hebel konkret:}
+\begin{itemize}
+  \item Booking.com generiert in vielen Häusern 40\,--\,60\,\% der Buchungen \textendash{} Umsatzabhängigkeit hoch.
+  \item Provisionen 15\,--\,25\,\% senken Marge; gleichzeitig stellt die ``Best-Rate-Garantie'' sicher, dass Hotels nicht im eigenen Kanal günstiger sein dürfen.
+  \item Gäste-Daten bleiben bei Booking \textendash{} keine direkte Wiederansprache möglich.
+  \item Algorithmus-Sichtbarkeit hängt an Bewertungen und ``Booking-Performance'' \textendash{} Hotels sind in der Algorithmuslogik gefangen.
+\end{itemize}
+
+\emph{Strategische Optionen zur Lock-in-Reduktion:}
+\begin{itemize}
+  \item Eigener Direktkanal mit klarer Anreizlogik (etwa Direktbucher-Rabatt, exklusiver Service) \textendash{} aktive Rückeroberung der Kundenbeziehung.
+  \item CRM-Aufbau für Bestandskunden, um Wiederholungs-Buchungen direkt zu führen.
+  \item Multi-Plattform-Listung: Expedia, HRS, Google Hotel Ads als zusätzliche Kanäle, um Booking-Anteil unter eine Schwelle zu drücken.
+  \item Markenpositionierung im eigenen Kanal so stärken, dass Booking nur noch als Discovery-Kanal wirkt, nicht als Transaktions-Monopol.
+\end{itemize}
+
+\emph{Ausstiegskosten:}
+\begin{itemize}
+  \item \emph{Kurzfristig:} signifikanter Umsatzverlust (Auslastung sinkt), denn Direktkanal-Sichtbarkeit muss erst aufgebaut werden.
+  \item \emph{Langfristig:} Investition in eigene Sichtbarkeit (SEO, SEA, Markenarbeit), CRM-Technologie, Service-Kultur \textendash{} und Lerneffekte einer Organisation, die jahrelang nur ``Algorithmus bedient'' hat.
+\end{itemize}
+
+\smallskip
+\textbf{3. Faustregel:} Plattformabhängigkeit ist akzeptabel, solange (a) der Umsatzanteil eines einzelnen Kanals unter etwa 30\,\% bleibt \emph{und} (b) ein eigener Direktkanal mit eigenen Daten parallel besteht. Sobald eine dieser Bedingungen kippt, ist Lock-in-Reduktion eine strategische Pflicht, nicht eine Option.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Digitale Vertriebsarchitektur 2030}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Sales Officer (oder Leiter:in Digitale Vertriebsstrategie) eines mittelständischen B2B-Unternehmens.
+
+\smallskip
+\textbf{Ausgangslage:} Das Unternehmen verkauft hochwertige, erklärungsbedürftige B2B-Produkte. Der bisherige Vertrieb ist stark personenabhängig, digital wenig sichtbar und nutzt Kundendaten nur unzureichend. Gleichzeitig entstehen neue Plattformanbieter, die den Markt transparenter und preissensibler machen. Bis 2030 soll der Vertrieb digital skalieren \textendash{} ohne die Marke zu verwässern.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Budget begrenzt
+  \item Zeitdruck durch neue digitale Wettbewerber
+  \item Vertriebsteam teilweise skeptisch gegenüber digitalen Prozessen
+  \item Kundendaten liegen verteilt in verschiedenen Systemen
+  \item Geschäftsführung erwartet Wachstum, aber keine Verwässerung der Marke
+  \item Marktinformationen sind unvollständig
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strukturierte \emph{Entscheidungsarchitektur} \textendash{} keine reine Maßnahmenliste \textendash{} für den digitalen Vertrieb bis 2030. Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item Klare Zielsetzung für die digitale Vertriebsstrategie bis 2030 (3\,--\,5 Sätze).
+  \item Segmentierung der Zielgruppen und ihrer digitalen Kaufbedürfnisse.
+  \item Bewertung möglicher Plattform- und Kanaloptionen.
+  \item \textbf{Entscheidung}, welche Plattformen genutzt, welche vermieden und welche selbst aufgebaut werden sollen.
+  \item Positionierungslogik: Wie soll das Unternehmen digital wahrgenommen werden?
+  \item Governance-Struktur: Wer entscheidet künftig über Plattformen, Daten, Kampagnen, Vertriebsprozesse?
+  \item Roadmap mit kurz-, mittel- und langfristigen Maßnahmen (0\,--\,12\,Mon., 12\,--\,36\,Mon., 36+\,Mon.).
+  \item Risikoanalyse zu Plattformabhängigkeit, Preisdruck, Datenverlust, organisatorischer Überforderung.
+  \item Drei Managemententscheidungen, die trotz unvollständiger Informationen getroffen werden müssen.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens \emph{eine bewusste Entscheidung gegen} eine scheinbar attraktive Plattformoption \textendash{} und begründen Sie diese aus Senior-Level-Perspektive.
+
+\ytquery{digitale Vertriebsstrategie 2030 B2B Mittelstand Plattformarchitektur CSO}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind möglich, solange sie als Architektur (nicht als Liste) gedacht sind.}
+
+\smallskip
+\textbf{1. Zielsetzung 2030:} Bis 2030 generiert der Vertrieb 50\,\% des Neukundenumsatzes über eigene digitale Kanäle und nutzt Plattformen \emph{ergänzend}, ohne eine einzelne Plattform über 25\,\% des Umsatzes wachsen zu lassen. Die Marke bleibt klar als Qualitäts- und Lösungsanbieter positioniert; der Außendienst wird auf Schlüsselkunden fokussiert; CRM und Kundendaten liegen vollständig im eigenen System.
+
+\smallskip
+\textbf{2. Zielgruppen-Segmentierung:}
+\begin{itemize}
+  \item \emph{Bestandskunden mit hohem Wiederkaufvolumen} \textendash{} Bedarf: einfache Nachbestellung, Servicequalität, planbare Lieferung.
+  \item \emph{Neukunden in Kernsegmenten} \textendash{} Bedarf: Vertrauen, Orientierung, klare Differenzierung gegenüber Wettbewerb.
+  \item \emph{Adjacent-Segmente} \textendash{} Bedarf: schneller Einstieg, niedrige Hürden, Probemöglichkeit.
+\end{itemize}
+
+\textbf{3. Bewertete Plattform-/Kanaloptionen:}
+\begin{itemize}
+  \item Eigener B2B-Webshop + Kundenportal \textrightarrow{} \textbf{strategischer Kernkanal}.
+  \item LinkedIn-Selling + Google Ads \textrightarrow{} \textbf{Reichweiten- und Leadkanal}.
+  \item Spezialisierter B2B-Marktplatz \textrightarrow{} \textbf{Testkanal für Adjacent-Segmente}.
+  \item Branchenspezifische Community/Fachportal \textrightarrow{} \textbf{Reputationskanal}.
+  \item Generischer Massen-Marktplatz (z.\,B.\ Amazon Business) \textrightarrow{} \textbf{bewusst nicht}.
+\end{itemize}
+
+\textbf{4. Entscheidung:}
+\begin{itemize}
+  \item \emph{Selbst aufbauen:} Webshop, Kundenportal, CRM-Konsolidierung, eigene Datenplattform.
+  \item \emph{Nutzen, aber begrenzt:} LinkedIn, Google, ein spezialisierter B2B-Marktplatz \textendash{} jeweils mit Umsatz-Cap.
+  \item \emph{Vermeiden:} generische Massen-Marktplätze, weil sie die Marke verwässern und den Preisvergleich erzwingen.
+\end{itemize}
+
+\textbf{5. Positionierungslogik:} ``Qualitätsanbieter mit digitalem Service'' \textendash{} digitale Wahrnehmung als kompetenter Problemlöser, nicht als günstigster Anbieter. Sichtbar durch eigene Inhalte, Cases, transparente Beratung, schnelle Lieferung; nicht sichtbar im reinen Preisvergleich.
+
+\smallskip
+\textbf{6. Governance:}
+\begin{itemize}
+  \item \emph{CSO} entscheidet über Plattformportfolio, Umsatz-Caps und neue Kanalentscheidungen.
+  \item \emph{Leiter:in Digital Sales} verantwortet operative Plattformsteuerung, Performance-Marketing, KPI-Reporting.
+  \item \emph{IT/Daten} verantwortet CRM und Datenarchitektur \textendash{} ein einziges System der Wahrheit.
+  \item \emph{Vertriebsleitung Außendienst} verantwortet Schlüsselkunden, Komplexgeschäft und Vertriebskultur.
+\end{itemize}
+
+\textbf{7. Roadmap:}
+\begin{itemize}
+  \item \emph{0\,--\,12 Monate:} CRM konsolidieren, Webshop-MVP live, LinkedIn-/Google-Kampagnen pilotieren, Außendienst-Workshops.
+  \item \emph{12\,--\,36 Monate:} Webshop ausbauen, Kundenportal launchen, Datenplattform aufbauen, Marktplatz-Pilot evaluieren.
+  \item \emph{36+\,Monate:} Daten-getriebene Personalisierung, Service-Differenzierung als Plattform-Geschäftsmodell, internationale Skalierung.
+\end{itemize}
+
+\textbf{8. Risikoanalyse:}
+\begin{itemize}
+  \item \emph{Plattformabhängigkeit:} mitigiert durch Umsatz-Cap je Kanal (max.\ 25\,\%).
+  \item \emph{Preisdruck:} mitigiert durch Service-Positionierung und Bündelung.
+  \item \emph{Datenverlust:} mitigiert durch eigene CRM-/Datenarchitektur.
+  \item \emph{Organisatorische Überforderung:} mitigiert durch Phasen-Rollout, Schulung, externe Verstärkung in den ersten 12 Monaten.
+\end{itemize}
+
+\textbf{9. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item Aufbau eines eigenen Kundenportals \emph{vor} dem klaren Beweis, dass Bestandskunden es nutzen \textendash{} weil die strategische Datenkontrolle wichtiger ist als die kurzfristige Akzeptanz.
+  \item Kein Listing auf Amazon Business, obwohl es schnell Reichweite brächte \textendash{} weil die Markenverwässerung langfristig teurer wäre als der entgangene Kurzfrist-Umsatz.
+  \item Umsatz-Cap von 25\,\% je Plattform \emph{vor} dem ersten Beweis, dass Plattformen gefährlich werden \textendash{} weil der nachträgliche Ausstieg jeweils dreimal so teuer wäre wie das proaktive Limit.
+\end{enumerate}
+
+\textbf{Zusatz \textendash{} Entscheidung gegen eine attraktive Plattformoption:} Bewusst kein generischer Massen-Marktplatz (Amazon Business). Aus Senior-Level-Perspektive ist Reichweite, die nur über Preisvergleich kommt, kein nachhaltiges Wachstum; sie zerstört die Margenstruktur, die Beratung trägt, und macht das Unternehmen langfristig austauschbar. Die ``attraktive'' Option ist hier eine strategische Falle.
+\end{loesungbox}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterlösungen sind eine Diskussionsbasis. Wenn Ihre eigene Lösung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder einen anderen Maßstab angelegt?} Beides ist legitim, solange die Logik nachvollziehbar bleibt.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Bringen Sie Ihre eigenen Lösungen in die Coaching-Sitzung mit. Im Fokus stehen drei Fragen: Welche Annahmen haben Sie gemacht? Welche Zielkonflikte haben Sie sichtbar gemacht? Welche Entscheidung haben Sie getroffen \textendash{} und würden Sie auch verantworten, wenn sich der Markt anders entwickelt als angenommen?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 1 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

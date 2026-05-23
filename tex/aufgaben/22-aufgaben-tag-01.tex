@@ -1,0 +1,658 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 1 - Aufgabenheft
+% Digitale Vertriebsstrategien & Plattformmodelle
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+% Niveau-Farben
+\definecolor{lpL1}{RGB}{34,120,72}      % L1 = gruen (reproduktion)
+\definecolor{lpL2}{RGB}{22,90,140}      % L2 = blau (anwendung)
+\definecolor{lpL3}{RGB}{170,42,52}      % L3 = rot (management)
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+% Info-Box (blau-weiss) fuer Hinweise/Aufgabenstellung-Rahmen
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Antwort-Bereich: leerer Kasten mit Punktlinien
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 1}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Digitale Vertriebsstrategien}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+% Niveau-Badge: \niveau{L1}, \niveau{L2}, \niveau{L3}
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\niveau}[1]{%
+  \ifx#1L%
+    % wird nicht verwendet
+  \fi
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+% Zeit-Hinweis
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+% Aufgaben-Kopf: Nr + Titel + Badges + Zeit
+\newcommand{\aufgabenkopf}[4]{%
+  % #1 = Nr, #2 = Titel, #3 = Badge-Cmd, #4 = Zeit
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+% YouTube-Suchquery (kompakt rendern)
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% Linierter Antwort-Bereich mit gepunkteten Linien
+% \antwortlinien{n} - n Zeilen
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+% Fallback: ohne pgffor
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 1 \textperiodcentered{} TAG 1 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 28.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 1\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Digitale Vertriebsstrategien \&\\Plattformmodelle -- elf Aufgaben\\auf drei Niveaus.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- ANLEITUNG -----------------------------------------------------------
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enthält elf Aufgaben zu Tag 1 \textendash{} Digitale Vertriebsstrategien \& Plattformmodelle. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Kurze Reproduktion und Einordnung. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Transfer auf konkrete Situationen. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Entscheidungsarchitektur und Verantwortung. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enthält:
+
+\begin{itemize}
+  \item eine Niveau-Markierung und einen Zeit-Richtwert,
+  \item den Aufgabentext (oft mit Kontext oder Fallbeschreibung),
+  \item einen Antwort-Freiraum für Ihre Lösung,
+  \item eine \emph{YouTube-Suchquery} für den begleitenden Lernpfad \textendash{} eine präzise Suchanfrage, die Sie eins zu eins auf YouTube eingeben können, um vertiefendes Material zur Aufgabe zu finden.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterlösungen finden Sie im separaten \emph{Lösungsheft Tag 1}. Versuchen Sie jede Aufgabe zuerst eigenständig \textendash{} der Mehrwert entsteht in der eigenen Argumentation, nicht im Abschreiben.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Klassisch \textendash{} digital \textendash{} plattformbasiert}{\nivLi}{5\,min}
+
+\noindent Definieren Sie in jeweils \emph{einem} Satz die drei Vertriebslogiken, die wir heute parallel im Markt finden:
+
+\begin{enumerate}
+  \item Klassischer Vertrieb
+  \item Digitaler Vertrieb
+  \item Plattformbasierter Vertrieb
+\end{enumerate}
+
+\noindent Ergänzen Sie einen vierten Satz, in dem Sie das zentrale Unterscheidungsmerkmal zwischen \emph{digitalem} und \emph{plattformbasiertem} Vertrieb auf den Punkt bringen.
+
+\ytquery{klassischer digitaler plattformbasierter Vertrieb Unterschied Definition}
+
+\antwortlinien{8}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Plattformtypen zuordnen}{\nivLi}{8\,min}
+
+\noindent Ordnen Sie jede der sechs Plattformen unten dem passenden \emph{Plattformtyp} zu. Sechs Typen stehen zur Auswahl:
+
+\medskip
+\noindent\textbf{Typen:} Marktplatz \textperiodcentered{} Vermittlungsplattform \textperiodcentered{} Content-Plattform \textperiodcentered{} SaaS-Plattform \textperiodcentered{} Community-Plattform \textperiodcentered{} Ökosystem-Plattform.
+
+\medskip
+\noindent\textbf{Plattformen:}
+
+\begin{enumerate}
+  \item Amazon Business
+  \item LinkedIn
+  \item Salesforce AppExchange
+  \item Etsy
+  \item Stack Overflow
+  \item Apple App Store
+\end{enumerate}
+
+\noindent Schreiben Sie hinter jeden Namen den Typ. Begründen Sie in einem Halbsatz, woran Sie den Typ erkennen.
+
+\ytquery{Plattformtypen Marktplatz SaaS Community Ökosystem Beispiele}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Netzwerkeffekte erkennen}{\nivLi}{8\,min}
+
+\noindent Lesen Sie die drei Szenarien. Entscheiden Sie für jedes, ob es sich um einen \emph{direkten} oder einen \emph{indirekten} Netzwerkeffekt handelt \textendash{} und begründen Sie jeweils in einem Satz, in welcher Richtung der Effekt wirkt.
+
+\begin{enumerate}
+  \item Je mehr Uber-Fahrer in einer Stadt unterwegs sind, desto kürzere Wartezeiten haben die Passagiere \textendash{} und desto attraktiver wird Uber für neue Passagiere.
+  \item Je mehr Kolleginnen und Kollegen WhatsApp installiert haben, desto sinnvoller ist es für mich selbst, WhatsApp zu installieren.
+  \item Je mehr Verkäufer auf Amazon listen, desto größer wird die Auswahl für Käufer \textendash{} und desto eher kaufen sie dort, was wiederum noch mehr Verkäufer anzieht.
+\end{enumerate}
+
+\ytquery{direkter indirekter Netzwerkeffekt Plattform Beispiele erklärt}
+
+\antwortlinien{9}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{OfficePro Solutions \textendash{} drei digitale Vertriebswege}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``OfficePro Solutions'' verkauft ergonomische Bürostühle und Arbeitsplatzlösungen an kleine und mittlere Unternehmen. Bisher läuft der Vertrieb über persönliche Empfehlungen, Telefonakquise und gelegentliche Messeauftritte. Die Geschäftsleitung möchte künftig stärker digital verkaufen \textendash{} weiß aber nicht, ob ein eigener Online-Shop, LinkedIn-Vertrieb, Amazon Business, ein B2B-Marktplatz oder eine Kombination sinnvoll ist.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Zielgruppe: kleine und mittlere Unternehmen mit 10\,--\,250 Mitarbeitenden
+  \item Produkte: erklärungsbedürftig, mittleres bis hohes Preisniveau
+  \item Bisherige Stärke: persönliche Beratung und Qualität
+  \item Schwäche: geringe digitale Sichtbarkeit
+  \item Budget: begrenzt
+  \item Zeitdruck: erste digitale Vertriebsergebnisse innerhalb von 6 Monaten
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie mindestens \textbf{fünf Informationen}, die für eine fundierte digitale Vertriebsstrategie heute noch fehlen.
+  \item Entwickeln Sie \textbf{drei mögliche digitale Vertriebswege} für OfficePro Solutions. Beschreiben Sie jeden Weg in 1\,--\,2 Sätzen.
+  \item Bewerten Sie jeden Vertriebsweg grob nach \emph{Aufwand}, \emph{Reichweite} und \emph{Kontrollgrad} (jeweils niedrig/mittel/hoch).
+  \item Formulieren Sie eine \textbf{erste Empfehlung in drei Sätzen} \textendash{} trotz unvollständiger Datenlage.
+\end{enumerate}
+
+\ytquery{B2B digitaler Vertrieb Mittelstand Strategie eigener Webshop LinkedIn}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Plattformoptionen-Matrix für OfficePro}{\nivLii}{30\,min}
+
+\begin{infobox}[Vier Optionen]
+\textbf{Option A \textendash{} Amazon Business:} hohe Reichweite, starker Preiswettbewerb, wenig Kontrolle über Kundendaten, schneller Marktzugang.\\[2pt]
+\textbf{Option B \textendash{} Eigener Online-Shop mit Beratungstermin-Funktion:} hohe Kontrolle über Marke und Daten, höherer Aufbauaufwand, Sichtbarkeit muss erst aufgebaut werden, passt zu erklärungsbedürftigen Produkten.\\[2pt]
+\textbf{Option C \textendash{} LinkedIn-Vertrieb mit Lead-Kampagnen:} gute B2B-Zielgruppenansprache, erfordert Content und aktive Ansprache, mittlerer Aufwand, gut für Beratung und Beziehungsaufbau.\\[2pt]
+\textbf{Option D \textendash{} Spezialisierter B2B-Marktplatz für Büroausstattung:} passende Zielgruppe, Abhängigkeit vom Plattformbetreiber, hohe Vergleichbarkeit, mittlere Reichweite.\\[6pt]
+\textbf{Rahmen:} Budget 40.000\,\euro{} für 6 Monate \textperiodcentered{} Vertriebsteam 2 Personen \textperiodcentered{} Ziel: 100 qualifizierte Leads \textperiodcentered{} hochwertige Markenpositionierung erhalten.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Füllen Sie die folgende Bewertungsmatrix aus. Skala 1\,(sehr schlecht) bis 5\,(sehr gut).
+  \item Priorisieren Sie maximal \textbf{zwei} Optionen für die ersten 6 Monate.
+  \item Begründen Sie, welche Option Sie zunächst \emph{nicht} verfolgen würden.
+  \item Formulieren Sie eine \textbf{Managementempfehlung in drei Sätzen}.
+\end{enumerate}
+
+\medskip
+\noindent\begin{tabularx}{\linewidth}{@{}l|c|c|c|c@{}}
+\toprule
+\textbf{Kriterium} & \textbf{A: Amazon} & \textbf{B: Webshop} & \textbf{C: LinkedIn} & \textbf{D: Marktplatz} \\
+\midrule
+Reichweite          & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\midrule
+Kostenmodell        & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\midrule
+Kontrollgrad        & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\midrule
+Datenzugang         & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\midrule
+\textbf{Summe}      & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\bottomrule
+\end{tabularx}
+
+\ytquery{Bewertungsmatrix Plattformauswahl B2B Vergleich Amazon eigener Shop}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Customer Journey für einen B2B-Geschäftsführer}{\nivLii}{20\,min}
+
+\begin{infobox}[Persona]
+\textbf{Anna Berg, 47 Jahre, Geschäftsführerin eines mittelständischen Architekturbüros (28 Mitarbeitende).} Sie sucht nach einer Komplett-Lösung für ergonomische Büroausstattung, weil sie ein neues Büro bezieht. Sie hat keine Zeit für Messen, vergleicht aber gründlich, bevor sie unterschreibt. Entscheidungstreiber: Gesundheitsschutz der Mitarbeitenden, planbare Budgets, schnelle Lieferung.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Skizzieren Sie eine realistische Customer Journey für Anna Berg in \textbf{fünf Touchpoints} \textendash{} von Awareness bis Retention. Für jeden Touchpoint:
+
+\begin{itemize}
+  \item Konkreter Berührungspunkt (z.\,B.\ ``Google-Suchergebnis'', ``LinkedIn-Beitrag'', ``Showroom-Termin'').
+  \item Welche Frage hat Anna Berg in diesem Moment?
+  \item An welcher Stelle ist der nächste Conversion-Punkt (Klick / Anfrage / Termin / Kauf / Nachbestellung)?
+\end{itemize}
+
+\noindent Formulieren Sie zum Schluss \emph{eine} Hypothese: Wo wäre die größte digitale Investition für ein Möbel-/Büroausstatter-Unternehmen am wirkungsvollsten?
+
+\ytquery{Customer Journey B2B mittelstand Touchpoints awareness consideration decision}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Branchenvergleich \textendash{} Plattform-Bewertungsmatrix}{\nivLii}{25\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Wählen Sie \textbf{drei Branchen} aus der folgenden Liste (oder andere, falls Sie eine bessere kennen):
+
+\begin{itemize}
+  \item Möbel \& Büroausstattung
+  \item Maschinenbau / Industriebedarf
+  \item Business-Software (B2B-SaaS)
+  \item Medizinischer Praxisbedarf
+  \item Handwerksdienstleistungen
+\end{itemize}
+
+\noindent Für jede der drei Branchen:
+
+\begin{enumerate}
+  \item Nennen Sie \textbf{zwei konkrete Plattformen}, die in dieser Branche tatsächlich Bedeutung haben.
+  \item Bewerten Sie jede Plattform anhand von \textbf{drei Kriterien Ihrer Wahl} (z.\,B.\ Reichweite, Datenzugang, Markenwirkung, Kostenmodell, Wettbewerbsumfeld).
+  \item Schreiben Sie einen Satz: für welche Anbieter-Situation passt diese Plattform?
+\end{enumerate}
+
+\ytquery{B2B Plattformen Branchenvergleich Maschinenbau Möbel Software Beispiele}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Netzwerkeffekte und kritische Masse konkret}{\nivLii}{20\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Analysieren Sie zwei Plattformen \textbf{detailliert} hinsichtlich Netzwerkeffekten und kritischer Masse:
+
+\medskip
+\noindent\textbf{Plattform 1: Airbnb} \\
+\noindent\textbf{Plattform 2: Slack}
+
+\medskip
+\noindent Für jede Plattform beantworten Sie:
+
+\begin{enumerate}
+  \item Welche Netzwerkeffekte wirken hier \textendash{} direkt, indirekt, oder beide? Wer profitiert konkret von welcher Seite?
+  \item Was bedeutet \emph{kritische Masse} hier konkret? Ab wann ``kippt'' die Plattform in den selbsttragenden Modus?
+  \item Wie hat die Plattform (vermutlich) das Henne-Ei-Problem in der Anfangsphase gelöst?
+\end{enumerate}
+
+\noindent Schließen Sie mit \emph{einem} Vergleichssatz: Welche Plattform ist gegen Wettbewerber stärker geschützt \textendash{} und warum?
+
+\ytquery{Airbnb Slack Netzwerkeffekte kritische Masse Henne-Ei-Problem Plattform}
+
+\antwortlinien{16}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Fallstudie MedEquip Direct \textendash{} 12-Monats-Strategie}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie: MedEquip Direct]
+``MedEquip Direct'' ist ein mittelständischer Anbieter von medizinischen Verbrauchsartikeln für Arztpraxen, Pflegeeinrichtungen und kleinere Kliniken. Bisheriger Vertrieb: Außendienst, Telefonbestellungen, Bestandskundenkontakte. Neue Wettbewerber gewinnen Marktanteile über digitale Plattformen, Preisvergleichsportale und automatisierte Nachbestellprozesse.
+
+\smallskip
+Die Geschäftsführung möchte innerhalb von zwölf Monaten eine digitale Vertriebsstrategie aufbauen \textendash{} neue Kunden digital gewinnen, Bestandskunden effizienter betreuen, und gleichzeitig die Qualitätspositionierung nicht durch reinen Preiswettbewerb beschädigen.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Jahresumsatz: 18\,Mio.\,\euro
+  \item Vertriebsteam: 12 Außendienst, 6 Innendienst
+  \item Digitales Marketing bisher kaum vorhanden, CRM vorhanden aber unkonsequent genutzt
+  \item Budget für digitale Vertriebsoffensive: 250.000\,\euro
+  \item Ziel: 20\,\% der Neukundenkontakte in 12 Monaten digital generieren
+  \item Risiken: Preisdruck, regulatorische Anforderungen, geringe digitale Kompetenz im Team
+\end{itemize}
+
+\smallskip
+\textbf{Strategische Optionen:}
+\begin{itemize}
+  \item \textbf{A:} Eigener B2B-Webshop mit Login-Bereich und Nachbestellfunktion
+  \item \textbf{B:} Listung auf etablierten B2B-Marktplätzen für medizinischen Praxisbedarf
+  \item \textbf{C:} LinkedIn- und Google-Kampagnen zur Leadgenerierung
+  \item \textbf{D:} Aufbau eines digitalen Kundenportals mit Beratung, Dokumenten und Servicefunktionen
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie Markt- und Vertriebssituation von MedEquip Direct in 3\,--\,5 Punkten.
+  \item Beschreiben Sie die wichtigsten Zielgruppen und ihre digitalen Kaufbedürfnisse.
+  \item Bewerten Sie die vier Optionen A--D anhand von: Zielgruppenpassung \textperiodcentered{} Umsatzpotenzial \textperiodcentered{} Investitionsaufwand \textperiodcentered{} Umsetzungsgeschwindigkeit \textperiodcentered{} Kontrollgrad über Kundendaten \textperiodcentered{} Risiko der Austauschbarkeit \textperiodcentered{} Beitrag zur Marktpositionierung.
+  \item Entwickeln Sie eine \textbf{priorisierte Empfehlung} für die ersten zwölf Monate.
+  \item Beschreiben Sie, wie sich die Rollen von Außendienst, Innendienst und Marketing verändern.
+  \item Treffen Sie \emph{mindestens eine Entscheidung unter Unsicherheit} und begründen Sie diese ausdrücklich.
+\end{enumerate}
+
+\ytquery{B2B digitale Vertriebsstrategie Medizinbedarf Webshop Plattform Mittelstand}
+
+\antwortlinien{30}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Lock-in-Analyse \textendash{} Plattform als strategisches Risiko}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Plattform-Lock-in bezeichnet einen Zustand, in dem ein Anbieter eine Plattform nicht mehr ohne signifikante Kosten verlassen kann \textendash{} selbst wenn sich Konditionen verschlechtern. Lock-in entsteht typischerweise durch mehrere Hebel gleichzeitig: Umsatzanteil, operative Integration, Datenbesitz, fehlender Direktkanal.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in eigenen Worten, ab \emph{wann} Plattformabhängigkeit zu einem strategischen Risiko wird (3\,--\,4 Sätze). Was sind die kritischen Schwellen?
+  \item Wählen Sie ein \textbf{konkretes Branchenbeispiel}, in dem Plattform-Lock-in heute sichtbar ein Problem ist (z.\,B.\ Markenartikler auf Amazon, App-Entwickler im Apple-Ökosystem, Hotels auf Booking.com, Spotify-Bands, Verlage in Google News). Erläutern Sie an diesem Beispiel:
+  \begin{itemize}
+    \item Welche Lock-in-Hebel wirken konkret?
+    \item Welche strategischen Optionen hat ein Anbieter, der den Lock-in reduzieren möchte?
+    \item Was würde es kosten \textendash{} kurzfristig und langfristig \textendash{} den Kanal zu verlassen?
+  \end{itemize}
+  \item Formulieren Sie eine \textbf{Faustregel} (ein bis zwei Sätze): Wann ist Plattformabhängigkeit aus Managementsicht noch akzeptabel \textendash{} und wann nicht mehr?
+\end{enumerate}
+
+\ytquery{Plattform Lock-in B2B Risiko Amazon Booking Apple Strategie Abhängigkeit}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Digitale Vertriebsarchitektur 2030}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Sales Officer (oder Leiter:in Digitale Vertriebsstrategie) eines mittelständischen B2B-Unternehmens.
+
+\smallskip
+\textbf{Ausgangslage:} Das Unternehmen verkauft hochwertige, erklärungsbedürftige B2B-Produkte. Der bisherige Vertrieb ist stark personenabhängig, digital wenig sichtbar und nutzt Kundendaten nur unzureichend. Gleichzeitig entstehen neue Plattformanbieter, die den Markt transparenter und preissensibler machen. Bis 2030 soll der Vertrieb digital skalieren \textendash{} ohne die Marke zu verwässern.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Budget begrenzt
+  \item Zeitdruck durch neue digitale Wettbewerber
+  \item Vertriebsteam teilweise skeptisch gegenüber digitalen Prozessen
+  \item Kundendaten liegen verteilt in verschiedenen Systemen
+  \item Geschäftsführung erwartet Wachstum, aber keine Verwässerung der Marke
+  \item Marktinformationen sind unvollständig
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strukturierte \emph{Entscheidungsarchitektur} \textendash{} keine reine Maßnahmenliste \textendash{} für den digitalen Vertrieb bis 2030. Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item Klare Zielsetzung für die digitale Vertriebsstrategie bis 2030 (3\,--\,5 Sätze).
+  \item Segmentierung der Zielgruppen und ihrer digitalen Kaufbedürfnisse.
+  \item Bewertung möglicher Plattform- und Kanaloptionen.
+  \item \textbf{Entscheidung}, welche Plattformen genutzt, welche vermieden und welche selbst aufgebaut werden sollen.
+  \item Positionierungslogik: Wie soll das Unternehmen digital wahrgenommen werden?
+  \item Governance-Struktur: Wer entscheidet künftig über Plattformen, Daten, Kampagnen, Vertriebsprozesse?
+  \item Roadmap mit kurz-, mittel- und langfristigen Maßnahmen (0\,--\,12\,Mon., 12\,--\,36\,Mon., 36+\,Mon.).
+  \item Risikoanalyse zu Plattformabhängigkeit, Preisdruck, Datenverlust, organisatorischer Überforderung.
+  \item Drei Managemententscheidungen, die trotz unvollständiger Informationen getroffen werden müssen.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens \emph{eine bewusste Entscheidung gegen} eine scheinbar attraktive Plattformoption \textendash{} und begründen Sie diese aus Senior-Level-Perspektive.
+
+\ytquery{digitale Vertriebsstrategie 2030 B2B Mittelstand Plattformarchitektur CSO}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 1}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Klassischen, digitalen und plattformbasierten Vertrieb sauber abgrenzen.
+  \item Sechs Plattformtypen voneinander unterscheiden und Beispiele zuordnen.
+  \item Direkte und indirekte Netzwerkeffekte in konkreten Szenarien benennen.
+  \item Eine Bewertungsmatrix für Plattformoptionen aufstellen und nachvollziehbar bewerten.
+  \item Eine Customer Journey rekonstruieren und Conversion-Punkte identifizieren.
+  \item Lock-in-Risiken erkennen und gegen Reichweite abwägen.
+  \item Eine Entscheidungsarchitektur formulieren, die Wachstum, Kontrolle und Marke ausbalanciert.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 1 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
