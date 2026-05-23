@@ -1,12 +1,907 @@
 {
   "kurs_id": "22_Bo_143",
   "tag_nr": 1,
-  "erstellt_am": "2026-05-22",
+  "erstellt_am": "2026-05-23",
   "fragen": [
-    {"id":"q01","frage":"Welcher Faktor beschreibt einen direkten Netzwerkeffekt?","optionen":["Mehr Anbieter führen zu höherer Auswahl","Mehr Nutzer derselben Seite erhöhen den Nutzen für jeden","Mehr Daten führen zu besseren Algorithmen","Mehr Kapital führt zu schnellerer Skalierung"],"korrekt":1,"erklaerung":"Direkte Netzwerkeffekte treten innerhalb derselben Nutzergruppe auf: je mehr Telefon-Besitzer, desto wertvoller ist das Telefon für jeden.","quelle":"Parker, van Alstyne & Choudary (2016): Platform Revolution, S. 23–27","schwierigkeit":"leicht","thema_tag":"Netzwerkeffekt"},
-    {"id":"q02","frage":"Was ist das zentrale Merkmal eines zweiseitigen Marktes?","optionen":["Es gibt zwei konkurrierende Anbieter","Plattform vermittelt zwischen zwei Nutzergruppen","Produkte werden in zwei Märkten verkauft","Zwei Hersteller produzieren dasselbe Produkt"],"korrekt":1,"erklaerung":"Plattformen wie eBay oder AirBnB verbinden Anbieter und Nachfrager — beide Gruppen profitieren voneinander.","quelle":"Eisenmann, Parker & Van Alstyne (2006): Strategies for Two-Sided Markets","schwierigkeit":"leicht","thema_tag":"Plattformmodell"},
-    {"id":"q03","frage":"Welche Aussage zur kritischen Masse einer Plattform trifft zu?","optionen":["Wenn überschritten, wachsen Netzwerkeffekte sich selbst tragend","Sie ist bei allen Plattformen gleich hoch","Sie spielt nur in den ersten 6 Monaten eine Rolle","Sie kann durch Werbung umgangen werden"],"korrekt":0,"erklaerung":"Sobald die kritische Masse erreicht ist, wird die Plattform für neue Nutzer attraktiver — sie zieht sich quasi selbst weiter hoch.","quelle":"Tiwana (2014): Platform Ecosystems, Kap. 4","schwierigkeit":"mittel","thema_tag":"Skalierung"},
-    {"id":"q04","frage":"Was ist ein Indikator für eine Plattformabhängigkeit aus Anbietersicht?","optionen":["Die Plattform hat viele kleine Anbieter","Der Plattformanteil am eigenen Umsatz übersteigt 50%","Die Plattform bietet kostenfreie Listing-Optionen","Die Plattform hat regionale Konkurrenz"],"korrekt":1,"erklaerung":"Wenn mehr als die Hälfte des Umsatzes über eine einzige Plattform läuft, ist der Anbieter strategisch verwundbar.","quelle":"Choudary (2015): Platform Scale, Kap. 7","schwierigkeit":"mittel","thema_tag":"Plattformrisiko"},
-    {"id":"q05","frage":"Welche Aussage zu Multi-Homing ist korrekt?","optionen":["Nutzer verwenden ausschließlich eine Plattform","Anbieter sind auf mehreren Plattformen gleichzeitig aktiv","Plattformen vereinen sich zu Konzernen","Nutzer wechseln einmal pro Jahr die Plattform"],"korrekt":1,"erklaerung":"Multi-Homing schwächt einseitige Lock-in-Effekte und streut Risiko und Reichweite.","quelle":"Hagiu & Wright (2015): Multi-Sided Platforms, RAND Journal","schwierigkeit":"schwer","thema_tag":"Plattformstrategie"}
+    {
+      "id": "q01",
+      "frage": "Was unterscheidet plattformbasierten Vertrieb grundsätzlich vom klassischen Vertrieb?",
+      "optionen": [
+        "Plattformbasierter Vertrieb verzichtet vollständig auf Beratung",
+        "Plattformbasierter Vertrieb nutzt eine vermittelnde Infrastruktur, die Anbieter und Nachfrager zusammenführt",
+        "Plattformbasierter Vertrieb erfolgt ausschließlich über Telefonakquise",
+        "Plattformbasierter Vertrieb ist nur für Privatkunden geeignet"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der zentrale Unterschied liegt im Modell der Wertschöpfung. Während der klassische Vertrieb auf direkten Kontakt zwischen Anbieter und Kunde setzt, basiert der plattformbasierte Vertrieb auf einer dritten, vermittelnden Infrastruktur. Diese stellt Reichweite, Matching, Bewertungen und Transaktionsabwicklung bereit und ermöglicht Skalierung, die im klassischen Vertrieb nur schwer erreichbar ist.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Grundlagen digitaler Vertriebsstrategien",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Vertriebsformen"
+    },
+    {
+      "id": "q02",
+      "frage": "Welche der folgenden Plattformtypen ist KEINE im Kurs behandelte Hauptkategorie?",
+      "optionen": [
+        "Marktplatzplattform",
+        "Content-Plattform",
+        "Steuerungsplattform",
+        "Community-Plattform"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Im Kurs werden sechs Plattformtypen unterschieden: Marktplatz, Vermittlungsplattform, Content-Plattform, SaaS-Plattform, Community-Plattform und Ökosystem-Plattform. „Steuerungsplattform“ ist kein etablierter Begriff in dieser Typologie. Die korrekte Einordnung von Plattformen nach Typ ist Voraussetzung für eine fundierte Plattformauswahl.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformmodelle verstehen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Plattformtypen"
+    },
+    {
+      "id": "q03",
+      "frage": "Was beschreibt der Begriff „Matching“ im Plattformkontext?",
+      "optionen": [
+        "Das technische Pairing von Servern in einem Rechenzentrum",
+        "Das algorithmische oder strukturelle Zusammenführen passender Anbieter und Nachfrager",
+        "Das Vergleichen von Preisen über mehrere Anbieter hinweg",
+        "Das Einrichten von Zahlungsschnittstellen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Matching ist einer der zentralen Plattformmechanismen. Es beschreibt die Fähigkeit einer Plattform, passende Anbieter und Nachfrager auf Basis von Daten, Kriterien oder Algorithmen zusammenzuführen. Je präziser das Matching, desto höher der Nutzen für beide Marktseiten und damit die Attraktivität der Plattform.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformmechanismen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Plattformmechanismen"
+    },
+    {
+      "id": "q04",
+      "frage": "Welche Aussage zur Customer Journey im digitalen Vertrieb trifft zu?",
+      "optionen": [
+        "Sie beschreibt nur den Bezahlvorgang",
+        "Sie umfasst alle Touchpoints vom ersten Kontakt bis zur Kaufentscheidung und darüber hinaus",
+        "Sie ist im B2B-Vertrieb nicht relevant",
+        "Sie wird ausschließlich durch den Vertrieb gesteuert"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Customer Journey beschreibt den gesamten Pfad eines potenziellen Kunden – von der ersten Wahrnehmung über Informationssuche, Vergleich und Kaufentscheidung bis zur Nachkaufphase. Im digitalen Vertrieb ist sie Grundlage dafür, Touchpoints, Conversion-Punkte und Kanalentscheidungen systematisch zu gestalten.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Customer Journey",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Customer Journey"
+    },
+    {
+      "id": "q05",
+      "frage": "Was bedeutet „kritische Masse“ bei Plattformen?",
+      "optionen": [
+        "Die maximale Serverlast einer Plattform",
+        "Die Mindestanzahl an Nutzenden, ab der eine Plattform sich selbst tragend weiterentwickelt",
+        "Der Punkt, an dem die Plattform regulatorisch überwacht wird",
+        "Die Anzahl der Mitarbeitenden eines Plattformbetreibers"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die kritische Masse beschreibt den Schwellenwert, ab dem eine Plattform genügend Anbieter und Nachfrager hat, um über Netzwerkeffekte eigenständig zu wachsen. Vor Erreichen dieser Schwelle benötigt die Plattform meist starke Anschubinvestitionen; danach sinken die Akquisekosten und die Plattform wird selbsttragend.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Erfolgsfaktoren",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Skalierung"
+    },
+    {
+      "id": "q06",
+      "frage": "Welcher der folgenden Faktoren zählt NICHT zu den klassischen Erfolgsfaktoren einer Plattform?",
+      "optionen": [
+        "Vertrauen",
+        "Sichtbarkeit",
+        "Kritische Masse",
+        "Geringe Nutzerzahl"
+      ],
+      "korrekt": 3,
+      "erklaerung": "Erfolgsfaktoren von Plattformen umfassen Vertrauen, Sichtbarkeit, Nutzerfreundlichkeit, kritische Masse, Qualitätssicherung sowie konkreten Anbieter- und Kundennutzen. Eine geringe Nutzerzahl ist im Gegenteil ein Hindernis, weil Netzwerkeffekte erst durch wachsende Nutzergruppen entstehen.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Erfolgsfaktoren",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Erfolgsfaktoren"
+    },
+    {
+      "id": "q07",
+      "frage": "Wie lässt sich eine SaaS-Plattform am besten beschreiben?",
+      "optionen": [
+        "Ein digitaler Marktplatz für physische Güter",
+        "Eine Plattform, die Software als Dienstleistung über das Internet bereitstellt",
+        "Eine Community für Software-Entwickler",
+        "Ein Vergleichsportal für Software-Lizenzen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Software-as-a-Service-Plattformen stellen Anwendungen über das Internet bereit, statt sie lokal zu installieren. Nutzer zahlen meist nutzungsabhängig oder im Abonnement. Beispiele sind Salesforce, Microsoft 365 oder HubSpot. Für Anbieter erlauben SaaS-Plattformen wiederkehrende Umsätze und enge Kundenbindung.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformtypen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Plattformtypen"
+    },
+    {
+      "id": "q08",
+      "frage": "Was ist ein zentrales Merkmal einer Ökosystem-Plattform?",
+      "optionen": [
+        "Sie ist auf ein einzelnes Produkt beschränkt",
+        "Sie integriert mehrere komplementäre Dienste und Akteure rund um einen Kern",
+        "Sie verzichtet bewusst auf Datenanalyse",
+        "Sie funktioniert nur lokal"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ökosystem-Plattformen wie Apple, Google oder Amazon bündeln mehrere komplementäre Dienste und Drittanbieter rund um einen Plattformkern. Sie erzeugen so wechselseitige Bindungseffekte und höheren Kundennutzen. Der Wert ergibt sich nicht aus einem einzelnen Produkt, sondern aus dem Zusammenspiel vieler Bausteine.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformtypen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Plattformtypen"
+    },
+    {
+      "id": "q09",
+      "frage": "Welche Aussage zur Marktanalyse im digitalen Vertrieb trifft zu?",
+      "optionen": [
+        "Sie umfasst nur die eigene Zielgruppe",
+        "Sie umfasst Zielgruppe, Bedarf, Marktgröße, Wettbewerb und Trends",
+        "Sie ersetzt die Vertriebsplanung",
+        "Sie ist nur für Konzerne relevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine systematische Marktanalyse betrachtet mehrere Dimensionen: Zielgruppe, konkreter Bedarf, Marktgröße, Wettbewerbslage und relevante Trends. Diese Mehrdimensionalität verhindert, dass Vertriebsentscheidungen nur auf einem Aspekt basieren und sichert die Grundlage für fundierte Kanal- und Plattformwahl.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Marktanalyse",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Marktanalyse"
+    },
+    {
+      "id": "q10",
+      "frage": "Was bezeichnet der Begriff „Touchpoint“?",
+      "optionen": [
+        "Den physischen Verkaufsort eines Produkts",
+        "Jeden Kontaktpunkt zwischen Kunde und Unternehmen entlang der Customer Journey",
+        "Den ersten Klick auf einer Website",
+        "Den finalen Vertragsabschluss"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Touchpoint ist jeder Kontaktpunkt zwischen einem (potenziellen) Kunden und einem Unternehmen. Das kann eine Anzeige, ein Beratungsgespräch, eine Bewertung, eine E-Mail oder ein Servicekontakt sein. Im digitalen Vertrieb müssen Touchpoints bewusst gestaltet werden, weil sie kumuliert die Kaufentscheidung prägen.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Customer Journey",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Customer Journey"
+    },
+    {
+      "id": "q11",
+      "frage": "Welche der folgenden Marktpositionierungen zielt primär auf kleine, spezifische Marktsegmente?",
+      "optionen": [
+        "Preisführer",
+        "Qualitätsanbieter",
+        "Nischenanbieter",
+        "Plattform-Champion"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Nischenanbieter konzentrieren sich bewusst auf klar abgegrenzte, oft kleinere Zielgruppen mit spezifischen Bedürfnissen. Sie verzichten auf Massenmarkt-Reichweite zugunsten von Spezialisierung und Differenzierung. Diese Positionierung ist im digitalen Vertrieb besonders relevant, weil Plattformen Nischen wirtschaftlich erschließbar machen.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Marktpositionierung",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Positionierung"
+    },
+    {
+      "id": "q12",
+      "frage": "Was bezeichnet „Conversion“ im digitalen Vertrieb?",
+      "optionen": [
+        "Den Wechsel von einer Plattform zur anderen",
+        "Den Übergang eines Interessenten in einen konkreten Handlungsschritt, etwa Anfrage oder Kauf",
+        "Die Umstellung des Vertriebsteams auf digitale Tools",
+        "Die Währungsumrechnung bei internationalen Plattformen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Conversion bezeichnet den Übergang von einer passiven in eine aktive Handlung – etwa wenn aus einem Websitebesucher ein Anfragender, aus einem Anfragenden ein Käufer wird. Conversion-Punkte entlang der Customer Journey sind zentrale Stellschrauben für die Vertriebseffizienz und werden durch Design, Inhalt und Trust-Elemente beeinflusst.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Customer Journey",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Conversion"
+    },
+    {
+      "id": "q13",
+      "frage": "Welches Element gehört typischerweise NICHT zur Wettbewerbsanalyse?",
+      "optionen": [
+        "Identifikation direkter Wettbewerber",
+        "Analyse der eigenen Buchhaltung",
+        "Bewertung der Wettbewerbsstrategien",
+        "Einschätzung der Wettbewerbsstärke"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Wettbewerbsanalyse beschäftigt sich mit dem Markt, nicht mit internen Finanzdaten. Sie identifiziert relevante Wettbewerber, analysiert deren Strategien und Positionierung und schätzt ihre Stärke ein. Die eigene Buchhaltung ist eine interne Sicht und gehört zur Finanz- bzw. Controlling-Perspektive, nicht zur Marktbeobachtung.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Marktanalyse",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Wettbewerb"
+    },
+    {
+      "id": "q14",
+      "frage": "Wie unterscheiden sich Marktplatzplattformen und Content-Plattformen primär?",
+      "optionen": [
+        "Marktplätze sind kostenfrei, Content-Plattformen kostenpflichtig",
+        "Marktplätze vermitteln Transaktionen zwischen Anbietern und Nachfragern, Content-Plattformen stellen Inhalte bereit",
+        "Content-Plattformen sind immer größer als Marktplätze",
+        "Marktplätze arbeiten ohne Datenanalyse"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Marktplatzplattformen wie Amazon oder eBay haben den primären Zweck, Transaktionen zwischen Anbietern und Nachfragern zu ermöglichen. Content-Plattformen wie YouTube oder Spotify stellen Inhalte zur Verfügung, oft ergänzt um Werbung oder Abonnements. Beide nutzen Datenanalyse, unterscheiden sich aber im Kern-Wertversprechen.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformtypen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Plattformtypen"
+    },
+    {
+      "id": "q15",
+      "frage": "Was bezeichnet „Skalierbarkeit“ im Vertriebskontext?",
+      "optionen": [
+        "Die Fähigkeit, das Vertriebsvolumen zu steigern, ohne die Kosten proportional zu erhöhen",
+        "Die Fähigkeit, Preise nach Region anzupassen",
+        "Die Fähigkeit, Vertriebsmitarbeitende schnell einzustellen",
+        "Die Fähigkeit, mehrere Sprachen anzubieten"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Skalierbarkeit beschreibt das Verhältnis zwischen Wachstum und Aufwand. Skalierbare Vertriebsmodelle ermöglichen es, mit überproportional geringem Mehraufwand mehr Umsatz zu erzielen. Plattformbasierte und digitale Vertriebskanäle sind typischerweise besser skalierbar als klassischer Außendienstvertrieb, was sie für Wachstumsstrategien attraktiv macht.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Grundlagen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Skalierung"
+    },
+    {
+      "id": "q16",
+      "frage": "Welches Kriterium ist KEIN klassisches Auswahlkriterium bei der Plattformwahl?",
+      "optionen": [
+        "Zielgruppenpassung",
+        "Kostenmodell",
+        "Datenzugang",
+        "Anzahl interner Meetings"
+      ],
+      "korrekt": 3,
+      "erklaerung": "Zentrale Kriterien zur Plattformauswahl sind Zielgruppe, Kostenmodell, Wettbewerb, Datenzugang, Kontrollgrad, Markenwirkung und Skalierbarkeit. Die Anzahl interner Meetings ist eine prozessuale, organisatorische Größe und hat keinen direkten Bezug zur strategischen Eignung einer Plattform.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformauswahl",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Plattformauswahl"
+    },
+    {
+      "id": "q17",
+      "frage": "Was ist eine Vermittlungsplattform?",
+      "optionen": [
+        "Eine Plattform, die nur Werbung schaltet",
+        "Eine Plattform, die Anbieter und Kunden gezielt zusammenführt, ohne selbst zu produzieren",
+        "Eine Plattform, die Verträge automatisch abschließt",
+        "Eine Plattform, die Logistikdienstleistungen anbietet"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vermittlungsplattformen wie Uber, Airbnb oder Check24 produzieren weder Produkte noch erbringen sie selbst die Kerndienstleistung. Sie führen Anbieter und Nachfrager zusammen und verdienen typischerweise an Vermittlungsgebühren. Ihr Wert liegt in Reichweite, Vertrauen und einem effizienten Matching.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformtypen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Plattformtypen"
+    },
+    {
+      "id": "q18",
+      "frage": "Was bedeutet „Kontrollgrad“ im Kontext der Plattformwahl?",
+      "optionen": [
+        "Die Geschwindigkeit, mit der eine Plattform reagiert",
+        "Das Ausmaß, in dem ein Unternehmen Kundendaten, Marke und Prozesse selbst steuern kann",
+        "Die Anzahl der Beschwerden auf einer Plattform",
+        "Die rechtliche Aufsicht über Plattformen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Kontrollgrad beschreibt, wie viel Steuerungshoheit ein Unternehmen über seine Kundenschnittstelle behält. Auf einem fremden Marktplatz ist die Kontrolle gering, weil Daten, Preisanzeige, Layout und Kundenkommunikation vom Plattformbetreiber bestimmt werden. Auf einem eigenen Shop ist die Kontrolle hoch, der Aufbauaufwand aber größer.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformauswahl",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Kontrolle"
+    },
+    {
+      "id": "q19",
+      "frage": "Was beschreibt der Begriff „Markenwirkung“ im Plattformkontext?",
+      "optionen": [
+        "Den finanziellen Wert einer Marke laut Bilanz",
+        "Die Auswirkung der gewählten Plattform auf die Wahrnehmung und Positionierung der eigenen Marke",
+        "Den Werbeaufwand pro Plattform",
+        "Die Anzahl der Markenrechtsverletzungen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Markenwirkung beschreibt, wie eine Plattform die Wahrnehmung und Positionierung der Marke beeinflusst. Eine Premium-Marke verliert auf einem Discounter-Marktplatz potenziell an Statur, während ein spezialisierter Marktplatz das Premium-Image stärken kann. Plattformwahl ist daher immer auch eine Markenentscheidung.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformauswahl",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Markenführung"
+    },
+    {
+      "id": "q20",
+      "frage": "Was meint „Plattform-Champion“ als Positionierungsoption?",
+      "optionen": [
+        "Ein Unternehmen, das selbst zur dominierenden Plattform wird",
+        "Ein besonders erfolgreicher Händler auf Amazon",
+        "Ein Influencer mit hoher Reichweite",
+        "Ein Plattformbetreiber im Ruhestand"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Plattform-Champion ist eine strategische Positionierung, bei der ein Unternehmen nicht nur Plattformen nutzt, sondern selbst zur primären Plattform in seinem Marktsegment wird. Diese Position bietet maximale Kontrolle und Wertabschöpfung, erfordert aber hohe Investitionen, technologische Kompetenz und eine klare Ökosystem-Strategie.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Marktpositionierung",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Positionierung"
+    },
+    {
+      "id": "q21",
+      "frage": "Ein mittelständischer Anbieter hochwertiger Designermöbel überlegt, auf einem Discount-Marktplatz wie Amazon zu listen. Welcher Effekt ist strategisch am kritischsten zu prüfen?",
+      "optionen": [
+        "Die Lieferzeit verkürzt sich",
+        "Die Marke könnte durch Preisvergleich und Massenumfeld verwässern",
+        "Die Logistikkosten steigen automatisch",
+        "Die Steuerlast verändert sich"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Bei der Plattformwahl ist immer die Markenwirkung mit zu bewerten. Eine Premium-Positionierung kann auf einem preisorientierten Marktplatz Schaden nehmen, weil das Umfeld vergleichbar und austauschbar wirkt. Das ist insbesondere bei erklärungsbedürftigen, hochpreisigen Produkten ein gravierender strategischer Trade-off zwischen Reichweite und Positionierung.",
+      "quelle": "Tag 1 · UE 4 Coaching · Reichweite vs. strategische Passung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Markenführung"
+    },
+    {
+      "id": "q22",
+      "frage": "Ein B2B-Anbieter erklärungsbedürftiger Produkte will erste digitale Leads generieren. Welche Plattform-Kombination ist typischerweise am wirksamsten?",
+      "optionen": [
+        "Reiner Amazon-Auftritt mit Standardlisting",
+        "LinkedIn-Kampagnen kombiniert mit eigener Landingpage und Beratungstermin",
+        "Kleinanzeigen-Portale wie eBay Kleinanzeigen",
+        "Auss schließlich Suchmaschinen-Anzeigen ohne weiteren Kanal"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Erklärungsbedürftige B2B-Produkte profitieren von professioneller Zielgruppenansprache und der Möglichkeit zur Beratung. LinkedIn liefert die Zielgruppenpräzision, eigene Landingpages erlauben Markensteuerung und ein Beratungstermin bringt die Conversion. Amazon und Kleinanzeigen sind für beratungsintensive B2B-Güter typischerweise ungeeignet, weil dort Preis und Standardisierung dominieren.",
+      "quelle": "Tag 1 · UE 2 Arbeitsauftrag 1 · OfficePro Solutions",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Plattformauswahl"
+    },
+    {
+      "id": "q23",
+      "frage": "Welche Information wäre bei der Bewertung einer Plattform am wichtigsten, wenn Datensouveränität für das Unternehmen oberste Priorität hat?",
+      "optionen": [
+        "Designqualität der Plattformoberfläche",
+        "Welche Kundendaten der Anbieter selbst erhält und weiterverwenden darf",
+        "Die geografische Lage der Plattformzentrale",
+        "Die Anzahl angemeldeter Nutzer"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wenn Datensouveränität Priorität hat, entscheidet zuerst, welche Kundendaten der Anbieter selbst erhält und ob er diese weiterverwenden darf. Viele Marktplätze halten Kundendaten exklusiv und erlauben nur indirekte Kommunikation. Für eine langfristige Kundenbindung und eigene CRM-Strategie ist genau dieser Datenzugang oft entscheidend.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformauswahl",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Datenzugang"
+    },
+    {
+      "id": "q24",
+      "frage": "Ein Unternehmen überlegt, 80 % seines Vertriebsumsatzes über eine einzige Plattform zu generieren. Welcher Effekt entsteht primär?",
+      "optionen": [
+        "Die Marktreichweite sinkt automatisch",
+        "Eine strategische Abhängigkeit vom Plattformbetreiber",
+        "Die Margen steigen verlässlich",
+        "Die Innovationskraft des Unternehmens wächst"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wenn ein großer Teil des Umsatzes über einen einzigen Kanal läuft, entsteht strategische Abhängigkeit – ein Lock-in. Änderungen der Plattform-Konditionen, Algorithmen oder Gebühren können unmittelbar das Geschäftsmodell treffen. Solche Konzentrationsrisiken müssen Management aktiv steuern, etwa durch Multi-Channel-Strategien oder Aufbau eigener Kundenschnittstellen.",
+      "quelle": "Tag 1 · UE 4 Coaching · Wann Plattformen Abhängigkeiten erzeugen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Plattformrisiko"
+    },
+    {
+      "id": "q25",
+      "frage": "Welche Plattformoption passt am besten zu einer langfristigen Bestandskundenbindung im B2B?",
+      "optionen": [
+        "Listung auf wechselnden Vergleichsportalen",
+        "Aufbau eines digitalen Kundenportals mit Beratungs- und Servicefunktionen",
+        "Temporäre Rabattaktionen auf Marktplätzen",
+        "Print-Mailings zur Bestandskundenpflege"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Bestandskundenbindung im B2B lebt von wiederkehrenden Interaktionen, Servicequalität und Differenzierung. Ein digitales Kundenportal liefert genau diese Bausteine: einfache Nachbestellung, Dokumentenzugriff, Serviceanfragen, Beratungstermine. Es schafft Wechselhürden, die nicht auf Preis basieren, und erhöht die Kundenbindung systematisch.",
+      "quelle": "Tag 1 · UE 5 Fallstudie · MedEquip Direct",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Kundenbindung"
+    },
+    {
+      "id": "q26",
+      "frage": "Welche Aussage zur Rolle des Außendienstes in einer digitalisierten Vertriebsstrategie trifft am ehesten zu?",
+      "optionen": [
+        "Außendienst wird vollständig abgeschafft",
+        "Außendienst wird zur reinen Auftragsabwicklung",
+        "Außendienst wandelt sich zur Beratung für Schlüsselkunden und komplexe Bedarfe",
+        "Außendienst übernimmt die Pflege der Plattformlistings"
+      ],
+      "korrekt": 2,
+      "erklaerung": "In modernen, hybriden Vertriebsmodellen werden Routinetransaktionen digital abgewickelt, während der Außendienst seine Stärke in der Beratung komplexer Bedarfe und der Pflege von Schlüsselkundenbeziehungen ausspielt. Die Aufgabenverteilung verschiebt sich, der Außendienst verschwindet jedoch nicht, sondern wird strategisch fokussierter eingesetzt.",
+      "quelle": "Tag 1 · UE 5 Fallstudie · Rollenveränderung im Vertrieb",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vertriebsorganisation"
+    },
+    {
+      "id": "q27",
+      "frage": "Ein Unternehmen mit begrenztem Budget und Zeitdruck soll erste digitale Vertriebsergebnisse innerhalb von sechs Monaten erzielen. Was ist strategisch am sinnvollsten?",
+      "optionen": [
+        "Parallel auf allen Plattformen präsent sein",
+        "Maximal zwei klar priorisierte Kanäle konsequent aufbauen",
+        "Erst nach einem Jahr planen",
+        "Zunächst nur Print investieren"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Bei begrenztem Budget und kurzem Zeitfenster ist Fokussierung entscheidend. Eine Konzentration auf ein bis zwei sorgfältig gewählte Kanäle ermöglicht echte Lernkurven, sichtbare Ergebnisse und belastbare Daten. Eine Gießkannenverteilung über viele Kanäle führt erfahrungsgemäß zu hohem Aufwand bei geringer Wirkung.",
+      "quelle": "Tag 1 · UE 3 Arbeitsauftrag 2 · Priorisierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Priorisierung"
+    },
+    {
+      "id": "q28",
+      "frage": "Welcher Indikator deutet darauf hin, dass eine Plattform für die eigene Zielgruppe gut passt?",
+      "optionen": [
+        "Die Plattform hat ein modernes Design",
+        "Die Plattform wird nachweislich von der Zielgruppe genutzt und genießt dort Vertrauen",
+        "Die Plattform hat viele Werbepartner",
+        "Die Plattform existiert seit über zehn Jahren"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der zentrale Test für Zielgruppenpassung ist, ob die Zielgruppe die Plattform aktiv nutzt und ihr vertraut. Designqualität, Alter der Plattform oder Werbepartner sind sekundär. Ohne Präsenz der Zielgruppe und Vertrauen entsteht keine Conversion – unabhängig davon, wie attraktiv die Plattform technisch wirkt.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Erfolgsfaktoren",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Zielgruppe"
+    },
+    {
+      "id": "q29",
+      "frage": "Wie sollte ein Unternehmen mit fehlenden Marktdaten umgehen, wenn schnelle Entscheidungen anstehen?",
+      "optionen": [
+        "Entscheidung verschieben, bis vollständige Daten vorliegen",
+        "Entscheidung auf Basis vorhandener Informationen treffen und Risiken explizit benennen",
+        "Entscheidung dem Plattformbetreiber überlassen",
+        "Auf Basis eines einzigen Kundengesprächs entscheiden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vollständige Daten gibt es im Vertrieb selten. Entscheidungen unter Unsicherheit erfordern Mut, klare Annahmen und explizit benannte Risiken. Verschieben führt zu strategischer Trägheit, eine Einzelmeinung zu Verzerrung. Professionell ist die strukturierte Entscheidung auf Basis der besten verfügbaren Informationen mit transparenter Risikoabschätzung.",
+      "quelle": "Tag 1 · UE 4 Coaching · Entscheidungen unter Unsicherheit",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Entscheidungsfindung"
+    },
+    {
+      "id": "q30",
+      "frage": "Welche Funktion erfüllt eine Entscheidungsmatrix bei der Plattformbewertung?",
+      "optionen": [
+        "Sie ersetzt strategisches Denken durch Punktwerte",
+        "Sie strukturiert die Bewertung mehrerer Optionen anhand definierter Kriterien",
+        "Sie liefert die endgültige Entscheidung automatisch",
+        "Sie reduziert den Aufwand der Marktanalyse"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Entscheidungsmatrix macht Vergleichbarkeit transparent: mehrere Plattformoptionen werden auf identischen Kriterien bewertet – etwa Reichweite, Kosten, Kontrolle, Datenzugang, Markenwirkung. Sie ersetzt strategisches Urteil nicht, sondern strukturiert es. Die Bewertung muss anschließend interpretiert werden, da nicht alle Kriterien gleich gewichtet sind.",
+      "quelle": "Tag 1 · UE 3 Arbeitsauftrag 2 · Entscheidungsmatrix",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Bewertungsmethoden"
+    },
+    {
+      "id": "q31",
+      "frage": "Welcher Vorteil entsteht primär durch den Aufbau eines eigenen Online-Shops gegenüber der reinen Marktplatznutzung?",
+      "optionen": [
+        "Sofortige Reichweite ohne Marketingaufwand",
+        "Volle Kontrolle über Marke, Kundendaten und Kundenbeziehung",
+        "Automatische SEO-Spitzenpositionen",
+        "Wegfall jeglicher technischer Verantwortung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein eigener Shop verschiebt Kontrolle und Datenhoheit zum Anbieter zurück. Markenauftritt, Preisstrategie, Kundenkommunikation und CRM liegen in der eigenen Hand. Der Preis dafür ist höherer Aufbauaufwand und die Notwendigkeit, Sichtbarkeit selbst zu generieren – ein zentraler Trade-off zwischen Kontrolle und Reichweite.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Eigener Kanal vs. Plattform",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Eigener Kanal"
+    },
+    {
+      "id": "q32",
+      "frage": "Welche Konsequenz hat es, wenn ein Anbieter dauerhaft nur über Marktplätze verkauft und keine eigene Kundendatenbank aufbaut?",
+      "optionen": [
+        "Er kann jederzeit unabhängig kommunizieren",
+        "Er verliert mittelfristig die Fähigkeit zu eigenständiger Kundenansprache",
+        "Er gewinnt automatisch Marktanteile",
+        "Er senkt seine Marketingkosten dauerhaft"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ohne eigene Kundendaten bleibt der Anbieter dauerhaft auf die Vermittlungsleistung der Plattform angewiesen. Direkter Dialog, Cross-Selling, Loyalitätsprogramme oder ein Wechsel des Kanals werden schwierig, weil die Beziehung zum Kunden faktisch über den Plattformbetreiber läuft. Das ist ein zentrales langfristiges Risiko bei reiner Plattformstrategie.",
+      "quelle": "Tag 1 · UE 4 Coaching · Datenzugang und Kundenschnittstelle",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Datenzugang"
+    },
+    {
+      "id": "q33",
+      "frage": "Wie lässt sich Vertrauen auf einer Plattform am wirksamsten aufbauen?",
+      "optionen": [
+        "Durch aggressive Preissenkungen",
+        "Durch konsistente Qualität, transparente Informationen und positive Bewertungen",
+        "Durch häufige Sortimentswechsel",
+        "Durch besonders auffällige Werbebanner"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vertrauen entsteht systematisch durch erlebbare Qualität, transparente Produkt- und Lieferinformationen sowie Bewertungen anderer Käufer. Plattformen institutionalisieren Vertrauen über Bewertungssysteme – deshalb sind konsistente Leistung und proaktives Bewertungsmanagement erfolgskritisch für Anbieter auf Plattformen.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Erfolgsfaktoren",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vertrauen"
+    },
+    {
+      "id": "q34",
+      "frage": "Welcher Zielkonflikt entsteht typischerweise zwischen kurzfristigem Umsatz und langfristiger strategischer Position?",
+      "optionen": [
+        "Kurzfristige Marktplätze liefern Umsatz, können aber Abhängigkeit und Margenerosion erzeugen",
+        "Eigene Shops liefern sofort höheren Umsatz als Marktplätze",
+        "Eigene Kanäle sind kurzfristig immer profitabler",
+        "Marktplätze verändern die Marktposition nicht"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Marktplätze liefern schnelle Reichweite und kurzfristigen Umsatz, gehen aber oft mit Preisdruck, geringerem Datenzugang und Abhängigkeit einher. Eigene Kanäle brauchen Zeit zum Aufbau, stärken aber Marke, Datenhoheit und Kundenbindung. Diese Trade-offs zwischen kurzfristigem Umsatz und langfristiger Position sind ein klassisches Spannungsfeld in der Plattformstrategie.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Zielkonflikte",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Zielkonflikte"
+    },
+    {
+      "id": "q35",
+      "frage": "Welches Vorgehen ist beim Markteintritt mit begrenztem Vertriebsteam empfehlenswert?",
+      "optionen": [
+        "Sofort in alle Marktsegmente gleichzeitig",
+        "Fokus auf ein klar definiertes Zielgruppensegment mit klarer Wertbotschaft",
+        "Vorhandenes Sortiment breit ausweiten",
+        "Vor allem auf Preis senken"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein kleines Team kann seine Wirkung nur über Fokus entfalten. Klar abgegrenzte Zielgruppen, eine präzise Wertbotschaft und konsequente Bearbeitung erhöhen Conversion und Vertrauen. Breite Streuung verbraucht Ressourcen ohne erkennbares Profil. Preissenkung ist zudem selten eine nachhaltige Differenzierung gegenüber größeren Wettbewerbern.",
+      "quelle": "Tag 1 · UE 3 Arbeitsauftrag 2 · Priorisierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Markteintritt"
+    },
+    {
+      "id": "q36",
+      "frage": "Welcher Aspekt der Customer Journey wird häufig unterschätzt?",
+      "optionen": [
+        "Der erste Werbekontakt",
+        "Die Phase nach dem Kauf – Onboarding, Service, Wiederkauf",
+        "Der Bezahlvorgang",
+        "Die Produktauswahl"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Viele Vertriebsorganisationen optimieren stark auf den Erstkauf, vernachlässigen aber Onboarding, Servicequalität und Wiederkauf. Genau diese Nachkaufphase entscheidet jedoch über Loyalität, Empfehlungen und Customer Lifetime Value. Im digitalen Vertrieb sind hier datenbasierte Trigger, Servicekontakte und gezielte Folgekommunikation hochwirksam.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Customer Journey",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Customer Journey"
+    },
+    {
+      "id": "q37",
+      "frage": "Welche Rolle spielen Bewertungen für neue Anbieter auf einer etablierten Plattform?",
+      "optionen": [
+        "Sie sind zweitrangig, weil die Plattform allein für Vertrauen sorgt",
+        "Sie sind oft entscheidend, weil sie Vertrauensaufbau und Sichtbarkeit unterstützen",
+        "Sie sind nur für Endkunden, nicht für B2B relevant",
+        "Sie wirken sich nicht auf das Ranking aus"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Für neue Anbieter sind Bewertungen ein wesentlicher Hebel: Sie ersetzen den fehlenden Bekanntheitsvorsprung etablierter Marken, beeinflussen Plattform-Rankings und reduzieren die Kaufunsicherheit. Aktives Bewertungsmanagement – von erstklassiger Lieferung bis zu strukturierter Nachfrage – ist deshalb integraler Teil einer Plattformstrategie.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformmechanismen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Bewertungen"
+    },
+    {
+      "id": "q38",
+      "frage": "Welche Aussage zu Netzwerkeffekten ist korrekt?",
+      "optionen": [
+        "Sie sinken mit wachsender Nutzerzahl",
+        "Der Nutzen einer Plattform steigt typischerweise, wenn mehr Anbieter oder Nachfrager hinzukommen",
+        "Sie wirken nur in Sozialen Netzwerken",
+        "Sie sind technologisch erzwungen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Netzwerkeffekte beschreiben das Phänomen, dass der Nutzen einer Plattform mit der Anzahl ihrer Nutzer steigt. Mehr Anbieter erhöhen die Auswahl für Nachfrager, mehr Nachfrager machen die Plattform für Anbieter attraktiver. Dieses Wechselspiel ist der zentrale Wachstumsmechanismus erfolgreicher Plattformen und der Grund für ihre Tendenz zur Konzentration.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformmechanismen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Netzwerkeffekt"
+    },
+    {
+      "id": "q39",
+      "frage": "Welche Funktion hat ein CRM-System in einer digitalen Vertriebsarchitektur?",
+      "optionen": [
+        "Es ersetzt den Vertrieb durch Automatisierung",
+        "Es bündelt Kundendaten und steuert Vertriebsaktivitäten zentral",
+        "Es ist nur für das Marketing relevant",
+        "Es dient ausschließlich der Buchhaltung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein CRM-System bündelt Kundendaten, Interaktionen, Pipelines und Vertriebsaktivitäten an einem Ort. In einer digitalisierten Vertriebsarchitektur ist es zentrale Steuerungsplattform: es macht Kundenkenntnis nutzbar, verbindet Marketing und Vertrieb und ermöglicht datenbasierte Entscheidungen. Ohne konsequente CRM-Nutzung bleibt der Wert eigener Kundendaten begrenzt.",
+      "quelle": "Tag 1 · UE 5 Fallstudie · MedEquip Direct",
+      "schwierigkeit": "mittel",
+      "thema_tag": "CRM"
+    },
+    {
+      "id": "q40",
+      "frage": "Welche Plattformwahl ist am ehesten geeignet, wenn ein Anbieter primär Vertrauen über Fachexpertise aufbauen will?",
+      "optionen": [
+        "Discount-Marktplatz",
+        "Content-Plattformen wie Fachblogs, Podcasts oder LinkedIn-Artikel",
+        "Anonyme Kleinanzeigen-Portale",
+        "Reine Vergleichsportale"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vertrauen über Fachexpertise entsteht durch Sichtbarkeit relevanter Inhalte. Content-Plattformen erlauben es, Kompetenz über Artikel, Podcasts, Webinare oder Beiträge zu demonstrieren und so qualifizierte Aufmerksamkeit zu gewinnen. Discount- und Vergleichsumfelder fokussieren dagegen auf Preis und Schnellkauf und sind für expertisegetriebene Positionierungen ungeeignet.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformtypen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Content-Marketing"
+    },
+    {
+      "id": "q41",
+      "frage": "Welche Bedeutung hat „Geschwindigkeit der Umsetzung“ bei der Plattformbewertung?",
+      "optionen": [
+        "Sie ist nur für Start-ups relevant",
+        "Sie beschreibt, wie schnell ein Kanal aufgebaut und marktwirksam werden kann",
+        "Sie meint die Geschwindigkeit der Plattform-Server",
+        "Sie ist mit der Markenwirkung identisch"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Geschwindigkeit der Umsetzung ist ein eigenständiges Bewertungskriterium: Wie schnell lässt sich ein Kanal aufbauen und in tatsächliche Vertriebswirkung überführen? Marktplätze sind oft schnell aktiv, eigene Shops brauchen länger. Bei Zeitdruck kann dieses Kriterium ausschlaggebend sein, ohne die langfristigen Trade-offs zu eliminieren.",
+      "quelle": "Tag 1 · UE 5 Fallstudie · Bewertungskriterien",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Bewertungskriterien"
+    },
+    {
+      "id": "q42",
+      "frage": "Welche Aussage zu Pilotprojekten im digitalen Vertrieb trifft zu?",
+      "optionen": [
+        "Sie sind reine Zeitverschwendung",
+        "Sie reduzieren Risiken, weil Annahmen vor der vollständigen Investition geprüft werden",
+        "Sie ersetzen die Strategie",
+        "Sie funktionieren nur im B2C"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Pilotprojekte erlauben es, Annahmen zu testen, Kundenfeedback zu erhalten und Risiken in einer kleineren Bandbreite zu durchlaufen. Sie sind besonders nützlich, wenn Datenlage oder Marktreaktion unsicher sind. Pilot ersetzt nicht die strategische Entscheidung, sondern fundiert sie durch reale Beobachtungen statt reiner Annahmen.",
+      "quelle": "Tag 1 · UE 5 Fallstudie · Entscheidung unter Unsicherheit",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Pilotierung"
+    },
+    {
+      "id": "q43",
+      "frage": "Was sollte vor der finalen Plattformwahl in jedem Fall geprüft werden?",
+      "optionen": [
+        "Die letzten Pressemitteilungen des Plattformbetreibers",
+        "Ob die eigene Zielgruppe dort wirklich aktiv ist und welche Konditionen gelten",
+        "Die Büroflächen des Plattformbetreibers",
+        "Die Sprache der Plattform-Mitarbeitenden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vor der Plattformwahl müssen zwei Dinge gesichert sein: die Aktivität der eigenen Zielgruppe auf der Plattform und die wirtschaftlichen Konditionen – Gebühren, Datenzugang, Vertragslaufzeit, exklusive Verpflichtungen. Ohne diese Prüfung wird die Plattform schnell zu einer Wette statt zu einer fundierten Entscheidung.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformauswahl",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Plattformauswahl"
+    },
+    {
+      "id": "q44",
+      "frage": "Welche Aufgabe übernimmt der Innendienst typischerweise in einer modernen digitalen Vertriebsorganisation?",
+      "optionen": [
+        "Reine Datenpflege ohne Kundenkontakt",
+        "Digitale Kundenbetreuung, Nachfassprozesse und Angebotsmanagement",
+        "Klassische Außendienstbesuche",
+        "Programmierung der Plattform"
+      ],
+      "korrekt": 1,
+      "erklaerung": "In digitalisierten Vertriebsorganisationen wird der Innendienst zu einer aktiven Vertriebsfunktion: digitale Kundenbetreuung, Nachfassprozesse zu Leads, Angebotsmanagement, Pflege von CRM-Daten. Diese Rolle macht den Außendienst nicht überflüssig, sondern entlastet ihn von Routineaufgaben und steigert die Schlagkraft der Gesamtorganisation.",
+      "quelle": "Tag 1 · UE 5 Fallstudie · Rollenveränderung im Vertrieb",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vertriebsorganisation"
+    },
+    {
+      "id": "q45",
+      "frage": "Welche Aussage zum Verhältnis von Reichweite und Markenkontrolle ist zutreffend?",
+      "optionen": [
+        "Höhere Reichweite garantiert höhere Markenkontrolle",
+        "Hohe Reichweite über Drittplattformen geht oft mit geringerer Markenkontrolle einher",
+        "Beides ist unabhängig voneinander",
+        "Markenkontrolle ist im digitalen Vertrieb irrelevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Reichweite und Markenkontrolle stehen oft in einem inversen Verhältnis. Eine fremde Plattform liefert schnell viele Kontakte, bestimmt aber Layout, Wettbewerbsumfeld und Kommunikationsregeln. Eigene Kanäle bieten volle Kontrolle, aber kleinere Anfangsreichweite. Die strategische Aufgabe besteht darin, dieses Spannungsverhältnis bewusst auszubalancieren.",
+      "quelle": "Tag 1 · UE 4 Coaching · Reichweite vs. strategische Passung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Zielkonflikte"
+    },
+    {
+      "id": "q46",
+      "frage": "Wie lässt sich die Eignung einer Plattform für erklärungsbedürftige Produkte am besten einschätzen?",
+      "optionen": [
+        "An der reinen Besucherzahl",
+        "An der Möglichkeit, Inhalte, Beratung und Vertrauen aufzubauen, statt nur Preise zu vergleichen",
+        "Am Alter der Plattform",
+        "Am Bekanntheitsgrad des Plattformlogos"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Erklärungsbedürftige Produkte erfordern Kontext, Vertrauen und Beratungsmöglichkeiten. Plattformen, die rein auf Preisvergleich oder Schnellkauf optimiert sind, eignen sich dafür schlecht. Geeignet sind Plattformen, die Content, Beratungsangebote und differenzierte Produktdarstellung ermöglichen – etwa fachspezifische Marktplätze, LinkedIn oder eigene Portale.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Plattformauswahl",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Plattformauswahl"
+    },
+    {
+      "id": "q47",
+      "frage": "Welche Aussage zu „Qualitätssicherung“ als Plattform-Erfolgsfaktor ist korrekt?",
+      "optionen": [
+        "Sie ist allein Sache des Plattformbetreibers",
+        "Sie ist Voraussetzung für nachhaltiges Vertrauen und Wiederkauf",
+        "Sie spielt nur im B2B eine Rolle",
+        "Sie ist im digitalen Vertrieb irrelevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Qualitätssicherung umfasst Produktqualität, Liefer- und Servicezuverlässigkeit sowie konsistente Kommunikation. Sie ist Voraussetzung für Bewertungen, Empfehlungen und Wiederkauf. Anbieter und Plattformbetreiber teilen sich die Verantwortung: Plattformen setzen Mindeststandards, Anbieter müssen sie operativ einhalten und idealerweise übertreffen.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Erfolgsfaktoren",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Qualitätssicherung"
+    },
+    {
+      "id": "q48",
+      "frage": "Welche Empfehlung passt zu einem B2B-Anbieter, der seine Marktpositionierung als Qualitätsanbieter schützen will?",
+      "optionen": [
+        "Aggressive Listung auf Preisvergleichsportalen",
+        "Selektive Plattformwahl mit Fokus auf Inhalte, Beratung und Kontrolle der Kundenschnittstelle",
+        "Vollständiger Rückzug aus digitalem Vertrieb",
+        "Verzicht auf jedes CRM"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Qualitätspositionierung verlangt Plattformen, die Differenzierung erlauben – nicht solche, die ausschließlich auf Preisvergleich basieren. Selektive Plattformwahl, eigene Kundenschnittstelle und Beratungsangebote schützen die Position. Ein vollständiger digitaler Rückzug wäre hingegen riskant, weil moderne Kunden auch im Premium-Segment digitale Touchpoints erwarten.",
+      "quelle": "Tag 1 · UE 4 Coaching · Positionierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Positionierung"
+    },
+    {
+      "id": "q49",
+      "frage": "Welche Bedeutung haben Conversion-Punkte für die Optimierung digitaler Vertriebskanäle?",
+      "optionen": [
+        "Sie haben keine messbare Bedeutung",
+        "Sie sind zentrale Stellen, an denen Potenzialverluste gezielt reduziert werden können",
+        "Sie betreffen nur das Design der Website",
+        "Sie ersetzen die Marktanalyse"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Conversion-Punkte sind die Stellen entlang der Customer Journey, an denen Interessenten in den nächsten Handlungsschritt übergehen. Wenn dort viele Nutzer abspringen, geht Vertriebspotenzial verloren. Systematische Optimierung dieser Punkte – über Design, Inhalte, Vertrauenselemente und Datenanalyse – ist einer der wirkungsvollsten Hebel im digitalen Vertrieb.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Customer Journey",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Conversion"
+    },
+    {
+      "id": "q50",
+      "frage": "Was kennzeichnet eine „Kombinationsstrategie“ aus eigenem Kanal und Plattformnutzung?",
+      "optionen": [
+        "Die zufällige Mischung mehrerer Kanäle",
+        "Eine bewusste Aufgabenteilung, bei der jeder Kanal eine klare Rolle in der Vertriebsarchitektur übernimmt",
+        "Der parallele Aufbau identischer Auftritte auf allen Plattformen",
+        "Der vollständige Verzicht auf strategische Steuerung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Kombinationsstrategie weist jedem Kanal eine spezifische Rolle zu: zum Beispiel Marktplätze für Reichweite und Neukundengewinnung, eigener Shop für Premium-Sortiment und Bestandskunden, LinkedIn für Lead-Aufbau, Kundenportal für Bestandsbindung. Klare Rollen verhindern Kannibalisierung und sichern, dass jedes Investment einem messbaren Zweck dient.",
+      "quelle": "Tag 1 · UE 5 Fallstudie · Priorisierte Empfehlung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vertriebsarchitektur"
+    },
+    {
+      "id": "q51",
+      "frage": "Aus Senior-Management-Perspektive: Welche Entscheidung gilt als langfristig riskant, obwohl sie kurzfristig attraktiv erscheint?",
+      "optionen": [
+        "Aufbau einer eigenen Kundendatenbank",
+        "Die alleinige Konzentration des Vertriebs auf eine einzige fremde Plattform mit hohem Umsatzanteil",
+        "Investitionen in Mitarbeiterqualifikation",
+        "Aufbau eines digitalen Kundenportals"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die alleinige Konzentration auf eine fremde Plattform liefert kurzfristig Umsatz, baut aber strategische Abhängigkeit auf. Plattformbetreiber können Konditionen, Algorithmen oder Sortimentsregeln ändern und damit das Geschäftsmodell unmittelbar beeinflussen. Aus Senior-Perspektive ist das eine klassische Konzentrationsfalle, die durch Multi-Channel-Architektur und eigene Kundenschnittstelle bewusst vermieden werden sollte.",
+      "quelle": "Tag 1 · UE 7 Feedback · Management-Brille",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Plattformrisiko"
+    },
+    {
+      "id": "q52",
+      "frage": "Welche Spannung muss in der Vertriebsarchitektur bewusst gemanagt werden?",
+      "optionen": [
+        "Zwischen Lieferanten und Logistik",
+        "Zwischen Wachstum, Kontrolle, Kosten, Geschwindigkeit und Markenpositionierung",
+        "Zwischen Marketing und Buchhaltung",
+        "Zwischen Innen- und Außendienst-Mittagspausen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vertriebsarchitektur lebt vom Ausbalancieren mehrerer, teils gegenläufiger Ziele: schnelles Wachstum vs. Kontrolle, Kosteneffizienz vs. Markenprämisse, Reichweite vs. Differenzierung. Es gibt keine Optimallösung, sondern bewusst getroffene Priorisierungen mit transparenten Trade-offs. Genau das ist die Aufgabe von Senior-Vertriebsentscheidungen.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Zielkonflikte",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Zielkonflikte"
+    },
+    {
+      "id": "q53",
+      "frage": "Welche Aussage beschreibt eine „Entscheidungsarchitektur“ am präzisesten?",
+      "optionen": [
+        "Eine vollständige To-do-Liste für den Vertrieb",
+        "Ein strukturiertes Rahmenwerk, das festlegt, wer wann auf welcher Basis welche Vertriebs- und Plattformentscheidungen trifft",
+        "Ein Organigramm der Marketingabteilung",
+        "Eine Liste aller genutzten Tools"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Entscheidungsarchitektur regelt die Logik strategischer Entscheidungen: Wer entscheidet über Plattformen, Kampagnen, Daten und Prozesse? Welche Kriterien werden angelegt? Welche Eskalationswege gelten? Sie ist Voraussetzung dafür, dass Vertriebsentscheidungen konsistent und reproduzierbar werden, statt vom Einzelfall abhängig zu bleiben.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Entscheidungsarchitektur",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q54",
+      "frage": "Welcher Reflex einer Vertriebsorganisation kann strategisch besonders gefährlich sein?",
+      "optionen": [
+        "Investitionen in Kundenbindung",
+        "Aus Zeitdruck eine scheinbar attraktive Plattform zu wählen, ohne Markenwirkung und Datenzugang ausreichend zu prüfen",
+        "Aufbau eines digitalen Kundenportals",
+        "Schulung des Vertriebsteams"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Zeitdruck verleitet dazu, Plattformen wegen schneller Reichweite zu wählen, ohne die strukturellen Folgen – Markenwirkung, Datenzugang, Abhängigkeit – in Ruhe zu prüfen. Solche Schnellschussentscheidungen sind besonders gefährlich, weil sie schwer umkehrbar sind und das Geschäftsmodell mittelfristig prägen. Senior-Management sollte diese Dynamik bewusst entschleunigen.",
+      "quelle": "Tag 1 · UE 4 Coaching · Entscheidungen unter Unsicherheit",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Entscheidungsfindung"
+    },
+    {
+      "id": "q55",
+      "frage": "Welche Governance-Frage ist im Plattform-Kontext besonders wichtig?",
+      "optionen": [
+        "Welcher Mitarbeiter den Newsletter formatiert",
+        "Wer im Unternehmen verbindlich über Plattformnutzung, Datenflusssouveränität und Markenauftritt entscheidet",
+        "Welche Schriftart auf der Website verwendet wird",
+        "Wer die Plattform-Server administriert"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Plattformentscheidungen berühren Marke, Daten, Kundenbeziehung und Wettbewerbsposition gleichermaßen. Es muss verbindlich geklärt sein, wer im Unternehmen verantwortlich entscheidet – Vertriebsleitung, Marketingleitung, IT, Datenschutz, Geschäftsführung. Ohne klare Governance entstehen widersprüchliche Plattformauftritte und ungesteuerte strategische Risiken.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Governance",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q56",
+      "frage": "Welche Bewertungsperspektive unterscheidet einen Chief Sales Officer von einer reinen Kanalbewertung?",
+      "optionen": [
+        "Er prüft nur Werbekosten",
+        "Er bewertet jede Plattform auch hinsichtlich strategischer Folgen für Geschäftsmodell, Marke und Organisation",
+        "Er entscheidet ausschließlich nach Umsatz pro Klick",
+        "Er beruft sich nur auf externe Beratungen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Chief Sales Officer betrachtet Plattformentscheidungen aus der Architektursicht: Welche Folgen ergeben sich für Geschäftsmodell, Marke, Rollen, Daten und langfristige Wettbewerbsposition? Die Kanaleffizienz ist nur einer von mehreren Bewertungsmaßstäben. Diese Perspektive verhindert, dass kurzfristige Performance-Logik langfristige strategische Hebel überlagert.",
+      "quelle": "Tag 1 · UE 7 Feedback · Senior-Level-Denken",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Management"
+    },
+    {
+      "id": "q57",
+      "frage": "Wie sollte mit der bewussten Entscheidung GEGEN eine attraktive Plattform umgegangen werden?",
+      "optionen": [
+        "Sie sollte intern verschwiegen werden",
+        "Sie sollte transparent begründet werden, idealerweise mit strategischem Bezug zu Marke, Daten oder Abhängigkeit",
+        "Sie ist unwichtig",
+        "Sie sollte nur kommuniziert werden, wenn die Entscheidung scheitert"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Bewusste Nicht-Entscheidungen sind im Senior-Vertrieb genauso wichtig wie aktive Investitionen. Sie sollten dokumentiert und transparent begründet werden – etwa weil Markenwirkung, Datenzugang oder Abhängigkeitsrisiko die kurzfristigen Reichweiteneffekte überwiegen. Diese Transparenz stärkt die Entscheidungsarchitektur und macht zukünftige Prüfungen anschlussfähig.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Zusatzanforderung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Management"
+    },
+    {
+      "id": "q58",
+      "frage": "Welche organisatorische Folge ergibt sich typischerweise aus dem Wechsel zu plattformbasierten Vertriebsmodellen?",
+      "optionen": [
+        "Keine, da nur die Tools wechseln",
+        "Rollen, Prozesse, Datenflüsse und Verantwortlichkeiten verändern sich tiefgreifend",
+        "Nur die IT-Abteilung wird berührt",
+        "Der Vertrieb wird vollständig ausgelagert"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Plattformbasierter Vertrieb ist keine reine Toolfrage. Rollen verschieben sich (Außendienst, Innendienst, Marketing), Datenflüsse müssen neu geordnet werden, Steuerungslogik und Erfolgskennzahlen verändern sich, und Verantwortlichkeiten für Plattformen und Kundenschnittstellen müssen neu definiert werden. Wer diese organisatorischen Folgen übersieht, scheitert in der Umsetzung.",
+      "quelle": "Tag 1 · UE 7 Feedback · Managemententscheidungen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Vertriebsorganisation"
+    },
+    {
+      "id": "q59",
+      "frage": "Welche Aussage zur Plattformwahl als Architekturentscheidung trifft am ehesten zu?",
+      "optionen": [
+        "Sie ist eine reine Marketing-Entscheidung",
+        "Sie definiert, welche Kundenschnittstellen das Unternehmen selbst kontrolliert und welche es Plattformen überlässt",
+        "Sie kann beliebig oft kostenlos revidiert werden",
+        "Sie ist ausschließlich Sache der IT"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Plattformwahl ist mehr als Kanalentscheidung: Sie regelt, welche Kundenschnittstellen das Unternehmen selbst behält und welche es an Plattformen abgibt. Damit prägt sie Datenhoheit, Kundenbindung und Wettbewerbsposition langfristig. Solche Entscheidungen sind teuer revidierbar, weil sie Kundenbeziehungen, Daten und organisatorische Strukturen mit aufbauen.",
+      "quelle": "Tag 1 · UE 7 Feedback · Architekturentscheidung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Vertriebsarchitektur"
+    },
+    {
+      "id": "q60",
+      "frage": "Welche Haltung prägt Senior-Level-Denken in der digitalen Vertriebsstrategie am stärksten?",
+      "optionen": [
+        "Die Suche nach der einen perfekten Plattform",
+        "Die Entwicklung eines belastbaren Entscheidungsmodells für Wachstum, Risiko und Kontrolle bei unvollständiger Informationslage",
+        "Die strikte Vermeidung jeglicher Plattformnutzung",
+        "Die ausschließliche Orientierung an Wettbewerbern"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Level-Denken konzentriert sich nicht auf die Suche nach einer perfekten Lösung, sondern auf den Aufbau eines belastbaren Entscheidungsmodells. Dieses muss Wachstumschancen, Risiken und Kontrollansprüche systematisch ausbalancieren – und das auch dann, wenn nicht alle Informationen vorliegen. Statt Lähmung durch Datenlücken entsteht so handlungsfähige Strategie unter Unsicherheit.",
+      "quelle": "Tag 1 · UE 7 Feedback · Senior-Level-Denken",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Management"
+    }
   ]
 }
