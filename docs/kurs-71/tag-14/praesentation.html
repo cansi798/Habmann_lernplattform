@@ -3,8 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lernplatt · Präsentation · Tag 14</title>
+  <title>Lernplatt · Präsentation · Tag 14 · Kurs 71</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-71); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+
+    .merk-box { background: var(--kurs-71-bg); border: 1.5px solid var(--kurs-71); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-71); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-71-bg); color: var(--kurs-71); }
+
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row .check { flex: 0 0 28px; height: 28px; color: #2a8a2a; font-size: 26px; font-weight: 700; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+
+    .diagram-box { background: #fff; border: 1.5px solid var(--color-line); border-radius: var(--radius); padding: 14px; text-align: center; }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,16 +51,375 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Green IT als Managementsystem: CO₂-/Footprint-Messung + Sustainable Software + E-Waste + Lieferantenbewertung – integriert in den Service-Lifecycle und auditfähig nach ISO-14001-Logik</h2>
-      <p>Modul 6 · Tag 14</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 6 · Tag 14 von 16 · Kurs 71 (Dig 42) · 17. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:46px;line-height:1.05;color:var(--kurs-71);margin:0">Green IT als Managementsystem</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">CO₂-Messung · Sustainable Software · E-Waste · Vendor Sustainability – integriert in den Service-Lifecycle nach ISO-14001-Logik.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Tag 14 von 16 · Messbarkeit vor Moral</span>
+      </div>
+    </section>
+
+    <!-- Slide 2: Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Carbon Footprint Measurement</li>
+            <li>Sustainable Software Development</li>
+            <li>E-Waste Lifecycle</li>
+            <li>Vendor Sustainability Assessment</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Messplan für einen Service entwerfen</li>
+            <li>Vendor-Scorecard anwenden</li>
+            <li>SSD-Guardrails definieren</li>
+            <li>E-Waste-Standardprozess</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>ISO-14001-orientiertes Operating Model</li>
+            <li>Data Quality Framework gegen Greenwashing</li>
+            <li>Procurement &amp; Vendor Controls</li>
+            <li>Trade-off Performance/Cost/CO₂</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:18px">
+        Green IT ist Managementsystem – PDCA, nicht Kampagne.
+      </div>
+    </section>
+
+    <!-- Slide 3: Carbon Footprint Logik (SVG) -->
+    <section class="slide" style="display:none">
+      <h2>Carbon Footprint · die Messkette</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar14a" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <rect x="20" y="60" width="160" height="80" rx="8" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="100" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">Aktivitäten</text>
+          <text x="100" y="110" text-anchor="middle" font-size="11" fill="#444">Compute-Stunden</text>
+          <text x="100" y="125" text-anchor="middle" font-size="11" fill="#444">Storage · Transfer</text>
+
+          <rect x="220" y="60" width="160" height="80" rx="8" fill="#ffd9b0" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="300" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">Energie / Ressourcen</text>
+          <text x="300" y="110" text-anchor="middle" font-size="11" fill="#444">kWh · Wasser</text>
+          <text x="300" y="125" text-anchor="middle" font-size="11" fill="#444">Hardware-Lifecycle</text>
+
+          <rect x="420" y="60" width="160" height="80" rx="8" fill="#f5b878" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="500" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">Emissionsfaktoren</text>
+          <text x="500" y="110" text-anchor="middle" font-size="11" fill="#444">Strommix · Region</text>
+          <text x="500" y="125" text-anchor="middle" font-size="11" fill="#444">Standards (GHG)</text>
+
+          <rect x="620" y="60" width="220" height="80" rx="8" fill="#d18a40" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="730" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">CO₂e</text>
+          <text x="730" y="110" text-anchor="middle" font-size="11" fill="#fff">+ Datenqualität (A/B/C)</text>
+          <text x="730" y="125" text-anchor="middle" font-size="11" fill="#fff">+ Systemgrenze dokumentiert</text>
+
+          <line x1="180" y1="100" x2="220" y2="100" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar14a)"/>
+          <line x1="380" y1="100" x2="420" y2="100" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar14a)"/>
+          <line x1="580" y1="100" x2="620" y2="100" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar14a)"/>
+
+          <text x="430" y="180" text-anchor="middle" font-size="13" font-weight="700" fill="#9d4a1a">Scope 1 (direkt) · Scope 2 (Energie) · Scope 3 (Lieferkette)</text>
+          <text x="430" y="200" text-anchor="middle" font-size="11" fill="#444">Systemgrenzen festlegen, sonst sind Zahlen unvergleichbar.</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Ohne Systemgrenze + Datenqualität-Label sind CO₂-Zahlen Marketing, keine Steuerung.
+      </div>
+    </section>
+
+    <!-- Slide 4: Sustainable Software Development -->
+    <section class="slide" style="display:none">
+      <h2>Sustainable Software · vier Hebel</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Effizienz</h3>
+          <p>Weniger CPU-Zyklen · weniger Speicher · weniger Datenbewegung. Profiling vor Release.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Architektur</h3>
+          <p>Caching · Async · Batch statt Real-Time wo möglich · ressourcenbewusste Defaults.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Betrieb</h3>
+          <p>Auto-Scaling nach Last · Off-Hours-Shutdown · Performance Budgets je Service.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Messung</h3>
+          <p>Performance + Energie + Datenvolumen pro Service. „Green by guesswork“ ist nicht messbar.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Efficiency als Qualitätsmerkmal – wie Security: mit Budgets, Reviews und Gates.
+      </div>
+    </section>
+
+    <!-- Slide 5: E-Waste Lifecycle (SVG) -->
+    <section class="slide" style="display:none">
+      <h2>E-Waste · sechs Schritte mit Nachweis</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar14b" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <rect x="10" y="60" width="120" height="60" rx="6" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="70" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">1 · Beschaffung</text>
+          <text x="70" y="104" text-anchor="middle" font-size="11" fill="#444">Effizienzkriterien</text>
+
+          <rect x="150" y="60" width="120" height="60" rx="6" fill="#ffd9b0" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="210" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">2 · Nutzung</text>
+          <text x="210" y="104" text-anchor="middle" font-size="11" fill="#444">Asset Register</text>
+
+          <rect x="290" y="60" width="120" height="60" rx="6" fill="#f5b878" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="350" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">3 · Wartung</text>
+          <text x="350" y="104" text-anchor="middle" font-size="11" fill="#444">Reparatur</text>
+
+          <rect x="430" y="60" width="120" height="60" rx="6" fill="#f5b878" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="490" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">4 · Refurbish</text>
+          <text x="490" y="104" text-anchor="middle" font-size="11" fill="#444">Datenlöschung</text>
+
+          <rect x="570" y="60" width="120" height="60" rx="6" fill="#d18a40" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="630" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">5 · Reuse</text>
+          <text x="630" y="104" text-anchor="middle" font-size="11" fill="#fff">Sekundärmarkt</text>
+
+          <rect x="710" y="60" width="140" height="60" rx="6" fill="#9d4a1a" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="780" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">6 · Recycling</text>
+          <text x="780" y="104" text-anchor="middle" font-size="11" fill="#fff">zertifizierter Partner</text>
+
+          <line x1="130" y1="90" x2="150" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar14b)"/>
+          <line x1="270" y1="90" x2="290" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar14b)"/>
+          <line x1="410" y1="90" x2="430" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar14b)"/>
+          <line x1="550" y1="90" x2="570" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar14b)"/>
+          <line x1="690" y1="90" x2="710" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar14b)"/>
+
+          <text x="430" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#9d4a1a">Nachweisartefakte: Datenlöschprotokoll · Rücknahmebeleg · Recycling-Zertifikat</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Steuerungsprinzip: Nutzungsdauer verlängern · sichere Datenlöschung · Partnerqualität nachweisen.
+      </div>
+    </section>
+
+    <!-- Slide 6: Vendor Scorecard -->
+    <section class="slide" style="display:none">
+      <h2>Vendor Sustainability · die Scorecard</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead>
+          <tr><th>Kriterium (1–5)</th><th>Vendor A · billig</th><th>Vendor B · vollständig</th><th>Vendor C · effizient</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Umweltpolitik</th><td>2</td><td>5</td><td>4</td></tr>
+          <tr><th>CO₂-Reporting</th><td>1</td><td>5</td><td>3</td></tr>
+          <tr><th>Energieeffizienz</th><td>3</td><td>4</td><td>5</td></tr>
+          <tr><th>Kreislaufwirtschaft</th><td>1</td><td>5</td><td>3</td></tr>
+          <tr><th>Subunternehmer-Transparenz</th><td>2</td><td>4</td><td>2</td></tr>
+          <tr><th>Nachweise / Zertifikate</th><td>1</td><td>4</td><td>3</td></tr>
+          <tr><th><strong>Summe</strong></th><td><strong>10</strong></td><td><strong>27 · empfohlen</strong></td><td><strong>20</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Vertragsklauseln machen Scorecard durchsetzbar: jährliches Reporting · Rücknahme · Auditrecht.
+      </div>
+    </section>
+
+    <!-- Slide 7: ISO-14001-Logik · PDCA -->
+    <section class="slide" style="display:none">
+      <h2>ISO-14001-Logik · PDCA als Managementsystem</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Plan</h3>
+          <p>Aspekte identifizieren (Energie, Lieferkette, E-Waste) · Ziele &amp; Programme.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Do</h3>
+          <p>Maßnahmen umsetzen · Messstandard etablieren · Trainings ausrollen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Check</h3>
+          <p>Messen · Reviews · interne Audits · Vendor-Audits.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Act</h3>
+          <p>Korrekturen · KPIs anpassen · Verbesserungsplan dokumentieren.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        „Messbarkeit vor Moral“ – ohne Metriken werden Diskussionen politisch und wirkungslos.
+      </div>
+    </section>
+
+    <!-- Slide 8: Fallstudie TeleData -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · TeleData Services</h2>
+      <p style="color:var(--color-muted)">4 Monate · 180k Budget · Datenlücken Cloud · Widerstand „Zusatzarbeit“.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>5 Environmental Aspects</h3>
+          <ul>
+            <li>Energieverbrauch im Betrieb</li>
+            <li>Hardware-Lifecycle</li>
+            <li>Datenvolumen / Transfer</li>
+            <li>Cloud-Overprovisioning</li>
+            <li>Lieferkette / Vendor</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Quick Wins (4 Wochen)</h3>
+          <ul>
+            <li>Messplan MVP für 3 Services</li>
+            <li>Non-Prod Off-Hours-Compliance</li>
+            <li>E-Waste-Standardprozess Pilot</li>
+            <li>Vendor-Klausel-Update für Recontracting</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        KPI-Beispiele: kWh/Compute-Hours · Off-Hours-Compliance · Rücknahmequote · Verifizierte Vendor-Daten.
+      </div>
+    </section>
+
+    <!-- Slide 9: Coaching · Greenwashing-Falle -->
+    <section class="slide" style="display:none">
+      <h2>Coaching · Greenwashing erkennen</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Systemgrenzen unklar</h3>
+          <p>„−30 % CO₂“ – wovon? Welche Scope? Welcher Zeitraum? Ohne Grenze: keine Aussage.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Datenqualität versteckt</h3>
+          <p>Schätzwerte werden als Messwerte präsentiert. A/B/C-Label macht es ehrlich.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Vendor-Claims nicht prüfbar</h3>
+          <p>Marketing-Folien statt Reports. Auditrecht und Subunternehmer-Transparenz als Pflicht.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Anti-Greenwashing-Pflicht: Datenqualität sichtbar · Schätzungen markiert · Verbesserungsplan im Bericht.
+      </div>
+    </section>
+
+    <!-- Slide 10: SSD Guardrails -->
+    <section class="slide" style="display:none">
+      <h2>SSD-Guardrails · Gates im Release</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead>
+          <tr><th>Service-Klasse</th><th>Performance Budget</th><th>Data Budget</th><th>Pflicht-Check</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Kritisch (Kundenpfad)</th><td>P99 &lt; 300 ms</td><td>Payload &lt; 50 KB</td><td>Profiling vor jedem Release</td></tr>
+          <tr><th>Normal</th><td>P99 &lt; 800 ms</td><td>Payload &lt; 200 KB</td><td>Profiling bei größeren Releases</td></tr>
+          <tr><th>Batch / Background</th><td>—</td><td>—</td><td>Energie pro Run &lt; Schwelle</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Ausnahmen erlaubt – aber dokumentiert, mit Owner und Verfallsdatum.
+      </div>
+    </section>
+
+    <!-- Slide 11: Procurement Integration -->
+    <section class="slide" style="display:none">
+      <h2>Procurement · Green-IT in den Einkauf einbauen</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Vertragsklauseln (Pflicht)</h3>
+          <ul>
+            <li>Jährliches CO₂-Reporting nach GHG</li>
+            <li>Rücknahme- und Recyclingprogramm</li>
+            <li>Subunternehmer-Transparenz</li>
+            <li>Auditrecht (Prinzip)</li>
+            <li>Exit-Strategie / Datenmigration</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Rollenwechsel</h3>
+          <ul>
+            <li>Service Owner verantwortet Kriterien</li>
+            <li>Einkauf prüft Belege, nicht nur Preis</li>
+            <li>Sustainability Lead reviewt jährlich</li>
+            <li>Vendor Scorecard → Vertragsverlängerung</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Procurement ist Teil des Umweltmanagements – nicht „Einkauf allein“.
+      </div>
+    </section>
+
+    <!-- Slide 12: Management · Trade-offs -->
+    <section class="slide" style="display:none">
+      <h2>Management · drei harte Trade-offs</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Performance ↔ CO₂</h3>
+          <p>Niedrigere Latenz braucht mehr Replikation. Wo wirklich nötig? SLO-Klassen entscheiden.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Cost ↔ CO₂</h3>
+          <p>Billigster Strom ≠ saubersten Strom. Region und Mix als Kriterium führen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Speed ↔ Audit</h3>
+          <p>Reporting will Geschwindigkeit, Audit will Nachweis. Beides braucht Daten-Pipeline.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Senior-Shift: Green IT als verantwortete Entscheidungsarchitektur, nicht als Kampagne.
+      </div>
+    </section>
+
+    <!-- Slide 13: Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Carbon Footprint braucht Systemgrenze + Datenqualität-Label – sonst Marketing.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">SSD = Effizienz als Qualitätsmerkmal · Budgets · Reviews · Gates.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">E-Waste-Nachweis (Löschung · Rücknahme · Recycling) ist Pflicht – nicht Best Effort.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Vendor Scorecard + Vertragsklauseln macht Anspruch durchsetzbar.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">PDCA: Plan · Do · Check · Act – Green IT ist Managementsystem, nicht Kampagne.</span></div>
+      </div>
+    </section>
+
+    <!-- Slide 14: Outro -->
+    <section class="slide" style="display:none">
+      <h2>Quellen · Weiterarbeiten</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout · Lehrskript</h3>
+          <p style="font-size:14px">Carbon Footprint, SSD, E-Waste, Vendor Sustainability, ISO-14001-Logik.</p>
+          <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-14.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Vertiefung &amp; Übung</h3>
+          <p style="font-size:14px">Video · Podcast · Quiz · Aufgaben · Lernpfad.</p>
+          <p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-71);font-weight:600">→ Zurück zur Materialauswahl</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 15.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
 <script src="../../assets/progress.js"></script>
@@ -39,8 +428,6 @@
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 14, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

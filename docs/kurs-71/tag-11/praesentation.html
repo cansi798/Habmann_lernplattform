@@ -3,8 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lernplatt · Präsentation · Tag 11</title>
+  <title>Lernplatt · Präsentation · Tag 11 · Kurs 71</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-71); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+
+    .merk-box { background: var(--kurs-71-bg); border: 1.5px solid var(--kurs-71); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-71); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-71-bg); color: var(--kurs-71); }
+
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row .check { flex: 0 0 28px; height: 28px; color: #2a8a2a; font-size: 26px; font-weight: 700; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+
+    .diagram-box { background: #fff; border: 1.5px solid var(--color-line); border-radius: var(--radius); padding: 14px; text-align: center; }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,16 +51,451 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">RPA als Steuerungs- und Risikohebel: Plattformüberblick + richtige Automationsform (attended/unattended) – mit verantworteter Entscheidung unter Unsicherheit</h2>
-      <p>Modul 5 · Tag 11</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 5 · Tag 11 von 16 · Kurs 71 (Dig 42) · 12. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0">RPA als Steuerungs- und Risikohebel</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Plattformüberblick · Attended vs. Unattended · Use-Case-Eignung · Entscheidung unter Unsicherheit.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Tag 11 von 16 · Produktivität ohne Klick-Magie</span>
+      </div>
+    </section>
+
+    <!-- Slide 2: Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <p style="color:var(--color-muted)">Drei Stufen – vom Bot-Verständnis zur Portfolio-Steuerung.</p>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>RPA-Einsatzgrenzen erkennen</li>
+            <li>Plattformbausteine: Designer · Orchestrator · Bot</li>
+            <li>Attended vs. Unattended unterscheiden</li>
+            <li>Nutzen vs. Risiken einordnen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Eignungs-Scoring für Use Cases</li>
+            <li>Stufenplan Attended → Unattended</li>
+            <li>Bot-Flow mit Exception Queue entwerfen</li>
+            <li>3 KPIs definieren (Produktivität/Qualität/Risiko)</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Automation Funnel &amp; Portfolio</li>
+            <li>Risk Appetite + Guardrails</li>
+            <li>Operating Model + RACI</li>
+            <li>Skalierungs-Stop-Kriterien</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:18px">
+        RPA ist nicht „Klicken automatisieren“ – RPA ist verantwortete Produktivität.
+      </div>
+    </section>
+
+    <!-- Slide 3: Was ist RPA · Eignung -->
+    <section class="slide" style="display:none">
+      <h2>RPA · wofür geeignet, wofür nicht</h2>
+      <p style="color:var(--color-muted)">Robotic Process Automation: regelbasiert, stabil, hohes Volumen, klarer Output.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Geeignet</h3>
+          <ul>
+            <li>Regelbasiert, klare Logik</li>
+            <li>Stabile UI / stabile API</li>
+            <li>Hohes Volumen, repetitiv</li>
+            <li>Wenige Ausnahmen (&lt; 10–15 %)</li>
+            <li>Klarer Input/Output, eindeutige Quellen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Weniger geeignet</h3>
+          <ul>
+            <li>UI ändert sich häufig</li>
+            <li>Viele Sonderfälle, hoher Interpretationsanteil</li>
+            <li>Regeln unklar / ständig im Wandel</li>
+            <li>Niedriges Volumen / Einzelfälle</li>
+            <li>Ergänzung durch BPM/AI nötig</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Faustregel: <strong>Stabilität × Volumen × Regeldichte</strong> bestimmt den ROI.
+      </div>
+    </section>
+
+    <!-- Slide 4: Plattform-Architektur (SVG) -->
+    <section class="slide" style="display:none">
+      <h2>RPA-Plattform · drei Bausteine</h2>
+      <p style="color:var(--color-muted)">Toolneutral – Begriffe variieren je Plattform (UiPath, Automation Anywhere, Blue Prism, Power Automate).</p>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 820 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar11a" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <rect x="40" y="40" width="200" height="160" rx="10" fill="#fff3d9" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="140" y="70" text-anchor="middle" font-size="16" font-weight="700" fill="#5a3a08">1 · Studio / Designer</text>
+          <text x="140" y="98" text-anchor="middle" font-size="12" fill="#444">Bot-Logik bauen</text>
+          <text x="140" y="118" text-anchor="middle" font-size="12" fill="#444">Workflows, Activities</text>
+          <text x="140" y="138" text-anchor="middle" font-size="12" fill="#444">Test im Entwurf</text>
+          <text x="140" y="158" text-anchor="middle" font-size="12" fill="#444">Versionierung</text>
+          <text x="140" y="178" text-anchor="middle" font-size="11" font-style="italic" fill="#666">Owner: Developer</text>
+
+          <rect x="300" y="40" width="200" height="160" rx="10" fill="#fff3d9" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="400" y="70" text-anchor="middle" font-size="16" font-weight="700" fill="#5a3a08">2 · Orchestrator</text>
+          <text x="400" y="98" text-anchor="middle" font-size="12" fill="#444">Planung / Trigger</text>
+          <text x="400" y="118" text-anchor="middle" font-size="12" fill="#444">Queues &amp; Priorisierung</text>
+          <text x="400" y="138" text-anchor="middle" font-size="12" fill="#444">Credentials / Vault</text>
+          <text x="400" y="158" text-anchor="middle" font-size="12" fill="#444">Monitoring / Logs</text>
+          <text x="400" y="178" text-anchor="middle" font-size="11" font-style="italic" fill="#666">Owner: Operations</text>
+
+          <rect x="560" y="40" width="200" height="160" rx="10" fill="#fff3d9" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="660" y="70" text-anchor="middle" font-size="16" font-weight="700" fill="#5a3a08">3 · Bot Runtime</text>
+          <text x="660" y="98" text-anchor="middle" font-size="12" fill="#444">Workstation (attended)</text>
+          <text x="660" y="118" text-anchor="middle" font-size="12" fill="#444">oder Server (unattended)</text>
+          <text x="660" y="138" text-anchor="middle" font-size="12" fill="#444">UI- oder API-Zugriff</text>
+          <text x="660" y="158" text-anchor="middle" font-size="12" fill="#444">Exception-Handling</text>
+          <text x="660" y="178" text-anchor="middle" font-size="11" font-style="italic" fill="#666">Owner: Bot Owner</text>
+
+          <line x1="240" y1="120" x2="300" y2="120" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11a)"/>
+          <line x1="500" y1="120" x2="560" y2="120" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11a)"/>
+
+          <text x="400" y="230" text-anchor="middle" font-size="13" fill="#9d4a1a" font-weight="600">Skalierung braucht Standards: Naming · Versions · Test · Deploy</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Low-Code lockt schnell – aber ohne Standards wird daraus Schatten-IT.
+      </div>
+    </section>
+
+    <!-- Slide 5: Attended vs Unattended -->
+    <section class="slide" style="display:none">
+      <h2>Attended vs. Unattended · zwei Modi, zwei Risikoprofile</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead>
+          <tr><th style="width:18%">Aspekt</th><th>Attended</th><th>Unattended</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Ausführung</th><td>am Arbeitsplatz, User triggert/überwacht</td><td>serverseitig, Zeitplan oder Queue</td></tr>
+          <tr><th>Skalierung</th><td>begrenzt (1 Bot pro Mensch)</td><td>hoch · 24/7-Betrieb möglich</td></tr>
+          <tr><th>Anwendung</th><td>Assistenz, Teilschritte, Co-Pilot</td><td>vollautomatische Massenverarbeitung</td></tr>
+          <tr><th>Betriebsrisiko</th><td>gering · Mensch sieht zu</td><td>höher · Bot kann skaliert falschbuchen</td></tr>
+          <tr><th>Governance-Bedarf</th><td>moderat</td><td>hoch · SoD, Audit, Logging, Eskalation</td></tr>
+          <tr><th>Einstieg</th><td>für PoC und unsichere Prozesse ideal</td><td>für stabile Prozesse mit hohem Volumen</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Stufenstrategie: Attended starten → KPIs stabil → schrittweise Unattended-Migration.
+      </div>
+    </section>
+
+    <!-- Slide 6: Automation Candidate Funnel (SVG) -->
+    <section class="slide" style="display:none">
+      <h2>Automation Candidate Funnel</h2>
+      <p style="color:var(--color-muted)">Ideen werden gefiltert – nicht alles, was geht, soll gebaut werden.</p>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 820 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar11b" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <polygon points="40,40 200,40 180,90 60,90" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="120" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">1 · Ideen</text>
+
+          <polygon points="220,40 360,40 340,90 240,90" fill="#ffd9b0" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="290" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">2 · Eignung</text>
+
+          <polygon points="380,40 500,40 480,90 400,90" fill="#f5b878" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="440" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">3 · PoC</text>
+
+          <polygon points="520,40 620,40 600,90 540,90" fill="#d18a40" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="570" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">4 · Pilot</text>
+
+          <polygon points="640,40 720,40 700,90 660,90" fill="#9d4a1a" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="680" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">5 · Betrieb</text>
+
+          <line x1="200" y1="65" x2="220" y2="65" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11b)"/>
+          <line x1="360" y1="65" x2="380" y2="65" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11b)"/>
+          <line x1="500" y1="65" x2="520" y2="65" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11b)"/>
+          <line x1="620" y1="65" x2="640" y2="65" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11b)"/>
+
+          <text x="120" y="120" text-anchor="middle" font-size="11" fill="#666">offen sammeln</text>
+          <text x="290" y="120" text-anchor="middle" font-size="11" fill="#666">Score (V/R/E)</text>
+          <text x="440" y="120" text-anchor="middle" font-size="11" fill="#666">Machbarkeit</text>
+          <text x="570" y="120" text-anchor="middle" font-size="11" fill="#666">echte Last</text>
+          <text x="680" y="120" text-anchor="middle" font-size="11" fill="#666">Run · KPI · Improve</text>
+
+          <text x="380" y="170" text-anchor="middle" font-size="14" font-weight="700" fill="#9d4a1a">Kill-Criteria an jeder Stufe</text>
+          <text x="380" y="190" text-anchor="middle" font-size="12" fill="#444">Stopp, wenn Eignung &lt; X · Risiko &gt; Y · Volumen &lt; Z</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Nicht „kann automatisiert werden“, sondern „lohnt sich und ist verantwortbar“.
+      </div>
+    </section>
+
+    <!-- Slide 7: Bot-Flow mit Exceptions (SVG) -->
+    <section class="slide" style="display:none">
+      <h2>Bot-Flow · Rechnung erfassen mit Exception Queue</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 880 280" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar11c" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <circle cx="50" cy="80" r="20" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="50" y="115" text-anchor="middle" font-size="11" fill="#444">Mail in</text>
+
+          <rect x="100" y="60" width="110" height="40" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="155" y="84" text-anchor="middle" font-size="12" fill="#222">Daten extrahieren</text>
+
+          <rect x="240" y="60" width="110" height="40" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="295" y="84" text-anchor="middle" font-size="12" fill="#222">Validierung</text>
+
+          <polygon points="380,80 410,55 440,80 410,105" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="410" y="84" text-anchor="middle" font-size="14" fill="#9d4a1a">×</text>
+          <text x="410" y="45" text-anchor="middle" font-size="11" fill="#444">ok?</text>
+
+          <rect x="470" y="60" width="110" height="40" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="525" y="84" text-anchor="middle" font-size="12" fill="#222">ERP buchen</text>
+
+          <rect x="610" y="60" width="110" height="40" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="665" y="84" text-anchor="middle" font-size="12" fill="#222">Audit-Log</text>
+
+          <circle cx="780" cy="80" r="20" fill="#fff" stroke="#9d4a1a" stroke-width="4"/>
+          <text x="780" y="115" text-anchor="middle" font-size="11" fill="#444">fertig</text>
+
+          <line x1="70" y1="80" x2="100" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11c)"/>
+          <line x1="210" y1="80" x2="240" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11c)"/>
+          <line x1="350" y1="80" x2="380" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11c)"/>
+          <line x1="440" y1="80" x2="470" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11c)"/>
+          <text x="455" y="74" font-size="10" fill="#666">ja</text>
+          <line x1="580" y1="80" x2="610" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11c)"/>
+          <line x1="720" y1="80" x2="760" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar11c)"/>
+
+          <polyline points="410,105 410,180 470,180" fill="none" stroke="#b53" stroke-width="2" marker-end="url(#ar11c)"/>
+          <text x="418" y="135" font-size="11" fill="#b53">nein</text>
+
+          <rect x="470" y="160" width="160" height="40" rx="6" fill="#fde2dc" stroke="#b04030" stroke-width="2"/>
+          <text x="550" y="184" text-anchor="middle" font-size="12" fill="#222">Exception Queue</text>
+
+          <rect x="660" y="160" width="160" height="40" rx="6" fill="#fde2dc" stroke="#b04030" stroke-width="2"/>
+          <text x="740" y="184" text-anchor="middle" font-size="12" fill="#222">Buchhaltung · Mensch</text>
+          <line x1="630" y1="180" x2="660" y2="180" stroke="#b04030" stroke-width="2" marker-end="url(#ar11c)"/>
+
+          <text x="440" y="245" text-anchor="middle" font-size="13" font-weight="600" fill="#9d4a1a">5 Exception-Kategorien typisch:</text>
+          <text x="440" y="263" text-anchor="middle" font-size="12" fill="#444">fehlende Kostenstelle · Lieferant unbekannt · Dublette · Portal down · Betrag über Schwelle</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Fail safe: Bot bricht kontrolliert ab, erzeugt Arbeitspaket – nicht Chaos.
+      </div>
+    </section>
+
+    <!-- Slide 8: Eignungs-Score -->
+    <section class="slide" style="display:none">
+      <h2>Use-Case-Eignung · drei Beispiele scoren</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead>
+          <tr><th>Kriterium (1–5)</th><th>A · Rechnungen erfassen</th><th>B · Reklamation/Kulanz</th><th>C · HR-Onboarding</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Regelbasiertheit</th><td>5</td><td>2</td><td>4</td></tr>
+          <tr><th>UI-Stabilität</th><td>4</td><td>3</td><td>4</td></tr>
+          <tr><th>Volumen</th><td>5</td><td>3</td><td>3</td></tr>
+          <tr><th>Ausnahmen niedrig</th><td>4</td><td>1</td><td>4</td></tr>
+          <tr><th>Audit-Relevanz</th><td>5</td><td>5</td><td>4</td></tr>
+          <tr><th><strong>Score (Summe)</strong></th><td><strong>23 · gut</strong></td><td><strong>14 · nicht jetzt</strong></td><td><strong>19 · gut</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        B braucht erst Regelklarheit + AI-Ergänzung. RPA allein scheitert an „viele Sonderfälle“.
+      </div>
+    </section>
+
+    <!-- Slide 9: Nutzen vs. Risiken -->
+    <section class="slide" style="display:none">
+      <h2>Nutzen vs. Risiken · die Senior-Brille</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Nutzen</h3>
+          <ul>
+            <li>Zeitgewinn 30–70 % bei stabilen Prozessen</li>
+            <li>Fehlerreduktion durch deterministische Logik</li>
+            <li>SLA-Stabilität, 24/7-Fähigkeit (unattended)</li>
+            <li>Audit Trail – wenn richtig gebaut</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Risiken</h3>
+          <ul>
+            <li>Schatten-IT (jeder baut „seinen“ Bot)</li>
+            <li>Credential-Risiko, geteilte Accounts</li>
+            <li>Fragile UI-Automation, hohe Wartung</li>
+            <li>Fehlbuchungen im großen Maßstab</li>
+            <li>Compliance-Lücke ohne SoD-Disziplin</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        RPA verstärkt vorhandene Probleme – schlechte Prozesse werden schneller schlecht.
+      </div>
+    </section>
+
+    <!-- Slide 10: Stufenplan attended → unattended -->
+    <section class="slide" style="display:none">
+      <h2>Stufenplan · in 12 Wochen verantwortet skalieren</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Release 1 · Woche 1–6 (attended)</h3>
+          <ul>
+            <li>Bot läuft auf Workstation, Mensch sieht zu</li>
+            <li>10–20 % des Volumens, klare Stop-Regel</li>
+            <li>Logging schon Audit-konform: Wer/Was/Wann</li>
+            <li>Tägliches Review der Exceptions</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Release 2 · Woche 7–12 (unattended)</h3>
+          <ul>
+            <li>Server-Bot mit Queue + Scheduler</li>
+            <li>Skalierung nur, wenn Readiness-KPIs grün</li>
+            <li>Eskalationspfad bei Spikes der Exception-Rate</li>
+            <li>Governance-Pack: SoD, Vault, Audit-Log</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Readiness-KPIs: <strong>Exception-Rate &lt; 10 %</strong> · UI-Änderungen &lt; 1 / Monat · Rollback-Pfad getestet.
+      </div>
+    </section>
+
+    <!-- Slide 11: Fallstudie NordTrade -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · NordTrade (Eingangsrechnungen)</h2>
+      <p style="color:var(--color-muted)">250 Rechnungen/Tag · 30 % Zeitersparnis in 8 Wochen · CFO drückt, Audit fordert Nachweis.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Entscheidung</h3>
+          <ul>
+            <li>Start <strong>attended</strong> – Portal-UI volatil</li>
+            <li>Übergang unattended ab Woche 6 bei stabilen KPIs</li>
+            <li>Exception Queue mit Owner Buchhaltung</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>KPIs · Woche 8</h3>
+          <ul>
+            <li>Durchsatz/Tag: +30 %</li>
+            <li>Fehlerquote: −50 %</li>
+            <li>Exception-Rate: ≤ 10 % (Stabilisierung)</li>
+            <li>Rollback/Korrektur-Quote: &lt; 2 %</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Audit-Felder: Bot-ID/Version · Timestamp · Quelle · Felder vor/nachher · Status · Exception-Code.
+      </div>
+    </section>
+
+    <!-- Slide 12: Coaching Senior-Shift -->
+    <section class="slide" style="display:none">
+      <h2>Coaching · vom Klicken zur Verantwortung</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Wo der größte Schaden droht</h3>
+          <p>Fehlbuchung × Skalierung = Audit-Eskalation. „Klein, oft, lernend“ schlägt „groß, einmal, riskant“.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Irreversibel teuer</h3>
+          <p>Zugriffskonzept, Orchestrierungsmodell, Betriebsmodell. Da früh entscheiden – mit Sicherheit als Designprinzip.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Pflicht-Guardrails</h3>
+          <p>Vault statt Klartext-Credentials · Least Privilege · SoD-Regeln · Audit-Log unveränderbar · Stop-Schwelle.</p>
+        </div>
+        <div class="merk-box">
+          <h3>KPI gegen Gaming</h3>
+          <p>Produktivität nur gültig, wenn Fehlerquote unter Schwelle. KPIs koppeln statt isolieren.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Bot = privilegierter Mitarbeiter. Würde so behandeln, wie eine neue Identität mit Systemzugriff.
+      </div>
+    </section>
+
+    <!-- Slide 13: Management-Perspektive -->
+    <section class="slide" style="display:none">
+      <h2>Management · Portfolio statt Bot-Sammlung</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Funnel führen</h3>
+          <p>Ideen → Eignung → PoC → Pilot → Betrieb. Kill-Criteria an jeder Stufe – sonst Friedhof.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Risk Appetite</h3>
+          <p>Welche Bot-Klasse darf Fast Track? Ab welcher Exception-Rate wird gestoppt? Schriftlich.</p>
+        </div>
+        <div class="merk-box">
+          <h3>CoE vs. föderiert</h3>
+          <p>Center of Excellence sichert Standards · Fachbereiche besitzen Bots. Hybrid funktioniert am besten.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Enablement statt Verbot</h3>
+          <p>Self-Service mit Guardrails schlägt Schatten-Automatisierung. Bürokratie produziert Umgehung.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Senior-Shift: Von „Bots bauen“ zu „Betriebs- und Entscheidungsarchitektur verantworten“.
+      </div>
+    </section>
+
+    <!-- Slide 14: Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">RPA passt: regelbasiert, stabil, hohes Volumen, wenig Ausnahmen.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Attended zuerst senkt Change-Risiko · Unattended braucht Governance.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Fail safe: kontrollierter Abbruch in eine Exception Queue – nicht Chaos.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Audit Trail ist Pflicht: Wer/Was/Wann/Womit/Ergebnis.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Portfolio führen statt Bots zählen – Funnel + Kill-Criteria.</span></div>
+      </div>
+    </section>
+
+    <!-- Slide 15: Outro -->
+    <section class="slide" style="display:none">
+      <h2>Quellen · Weiterarbeiten</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout · Lehrskript</h3>
+          <p style="font-size:14px">Plattformbausteine, Stufenmodell, Eignungs-Scoring, Bot-Flow, KPIs.</p>
+          <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-11.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Vertiefung &amp; Übung</h3>
+          <p style="font-size:14px">Video · Podcast · Quiz · Aufgaben · Lernpfad.</p>
+          <p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-71);font-weight:600">→ Zurück zur Materialauswahl</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 12.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
 <script src="../../assets/progress.js"></script>
@@ -39,8 +504,6 @@
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 11, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

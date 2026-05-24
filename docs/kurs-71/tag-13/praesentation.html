@@ -3,8 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lernplatt · Präsentation · Tag 13</title>
+  <title>Lernplatt · Präsentation · Tag 13 · Kurs 71</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-71); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+
+    .merk-box { background: var(--kurs-71-bg); border: 1.5px solid var(--kurs-71); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-71); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-71-bg); color: var(--kurs-71); }
+
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row .check { flex: 0 0 28px; height: 28px; color: #2a8a2a; font-size: 26px; font-weight: 700; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+
+    .diagram-box { background: #fff; border: 1.5px solid var(--color-line); border-radius: var(--radius); padding: 14px; text-align: center; }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,16 +51,346 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Nachhaltige IT-Services steuerbar machen: Service-Portfolio (Wert, Risiko, Nachhaltigkeit) + Kapazitätssteuerung (Rightsizing, Energieeffizienz) – auditfähig und entscheidungsorientiert</h2>
-      <p>Modul 6 · Tag 13</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 6 · Tag 13 von 16 · Kurs 71 (Dig 42) · 16. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0">Nachhaltige IT-Services steuerbar machen</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Service-Portfolio · Kapazität · Rightsizing · Energieeffizienz – auditfähig und entscheidungsorientiert.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Tag 13 von 16 · „Sicherheit durch Messung“</span>
+      </div>
+    </section>
+
+    <!-- Slide 2: Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>ITIL-4-orientiertes Service Portfolio</li>
+            <li>Capacity Planning · Rightsizing</li>
+            <li>Energy-Efficient-Data-Center-Hebel</li>
+            <li>ISO-20000-nahe Nachweislogik</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Portfolio-Canvas für 8 Services</li>
+            <li>2-Stufen-Rightsizing-Plan + Guardrails</li>
+            <li>3 KPIs (SLO · Kosten · Nachhaltigkeit)</li>
+            <li>4-Wochen-Quick-Wins identifizieren</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Portfolio Governance · Board-Mechanik</li>
+            <li>SLO-Klassen &amp; Capacity-Reserven</li>
+            <li>Anti-Greenwashing-KPI-Kopplungen</li>
+            <li>Stakeholder-Konflikte führen</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:18px">
+        Nachhaltigkeit ist Steuerungssystem – kein Nebenprojekt, keine Folie.
+      </div>
+    </section>
+
+    <!-- Slide 3: Service Portfolio (ITIL 4) -->
+    <section class="slide" style="display:none">
+      <h2>Service Portfolio · drei Lebensphasen</h2>
+      <p style="color:var(--color-muted)">„Wert“ ist nicht nur monetär – Kundennutzen, Regulatorik, Resilienz, Nachhaltigkeit gehören rein.</p>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Pipeline</h3>
+          <p>Geplante Services, Idee bis Design. Steuerung: Invest-Entscheidung mit Owner.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Live</h3>
+          <p>Aktive Services in Betrieb. Steuerung: SLOs, Kosten, Verbrauch, Reviews.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Retired</h3>
+          <p>Abgeschaltete Services. Steuerung: Datenmigration, Audit-Nachweis, Restrisiken.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Portfolio-Eintrag = Service + Owner + Kosten + Risiko + Nutzen + Nachhaltigkeitswirkung.
+      </div>
+    </section>
+
+    <!-- Slide 4: Rightsizing-Logik (SVG) -->
+    <section class="slide" style="display:none">
+      <h2>Rightsizing · Ressourcen treffen den Bedarf</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+          <line x1="60" y1="240" x2="820" y2="240" stroke="#444" stroke-width="2"/>
+          <line x1="60" y1="40" x2="60" y2="240" stroke="#444" stroke-width="2"/>
+          <text x="40" y="50" font-size="11" fill="#444">CPU %</text>
+          <text x="440" y="270" text-anchor="middle" font-size="12" fill="#444">Zeit →</text>
+
+          <rect x="60" y="80" width="760" height="40" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="1"/>
+          <text x="440" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#5a3a08">aktuelle Bereitstellung (10 VMs) – Overprovisioning</text>
+
+          <path d="M 60 220 Q 200 215 280 218 T 460 215 Q 520 150 580 145 Q 620 145 660 215 T 820 220" stroke="#9d4a1a" stroke-width="2" fill="none"/>
+          <text x="200" y="232" font-size="11" fill="#9d4a1a">Last (Mittel 15–20%)</text>
+          <text x="585" y="138" font-size="11" font-weight="700" fill="#9d4a1a">Peak Monatsende (60%)</text>
+
+          <rect x="60" y="180" width="760" height="40" fill="#dff0d4" stroke="#3a7a2a" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="440" y="205" text-anchor="middle" font-size="12" font-weight="700" fill="#2a6a1a">Rightsizing-Ziel (5 VMs + Autoscale auf 8 bei Peak)</text>
+
+          <text x="440" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#9d4a1a">Guardrails: CPU &gt; 85 % über 10 Min → Rollback · Fehlerquote &gt; 1 % → Stop</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Rightsizing ohne SLO + Monitoring ist Glücksspiel. Erst Messbarkeit, dann Reduktion.
+      </div>
+    </section>
+
+    <!-- Slide 5: Energieeffizienz-Hebel -->
+    <section class="slide" style="display:none">
+      <h2>Energieeffizienz · sechs Hebel im Rechenzentrum</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>1 · Konsolidierung</h3>
+          <p>Zombie-Services abschalten · Auslastung pro Host erhöhen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Virtualisierung / Container</h3>
+          <p>Dichteres Packing · weniger physische Hardware.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Idle abschalten</h3>
+          <p>Non-Prod nachts und am Wochenende aus – „Low regret“-Move.</p>
+        </div>
+        <div class="merk-box">
+          <h3>4 · Kühlung</h3>
+          <p>Warmgang/Kaltgang, höhere Set-Points, freie Kühlung wo möglich.</p>
+        </div>
+        <div class="merk-box">
+          <h3>5 · Hardware-Klasse</h3>
+          <p>Effizienzklassen bei Neuanschaffung, Lebenszyklus dokumentieren.</p>
+        </div>
+        <div class="merk-box">
+          <h3>6 · Workload-Shift</h3>
+          <p>Batches in Zeitfenster mit günstigerem Strommix verschieben.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Prozessdisziplin (Change · Release) ist der unsichtbare 7. Hebel – ohne sie verpufft alles andere.
+      </div>
+    </section>
+
+    <!-- Slide 6: Capacity Planning -->
+    <section class="slide" style="display:none">
+      <h2>Capacity Planning · vier Dimensionen</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Compute</h3>
+          <p>CPU/Memory · Reservierungen vs. Burst · Autoscale-Regeln.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Storage</h3>
+          <p>Tiering (Hot/Warm/Cold) · Retention-Policy · Backup-Strategie.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Netzwerk</h3>
+          <p>Bandbreite · Latenzpfade · Egress-Kosten in der Cloud.</p>
+        </div>
+        <div class="merk-box">
+          <h3>People &amp; Skills</h3>
+          <p>Auch Kapazität ist Mensch: On-Call, Skill-Pool, Übergaben.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Kapazität ist die Fähigkeit, Last und SLOs zu erfüllen – nicht ein VM-Inventar.
+      </div>
+    </section>
+
+    <!-- Slide 7: Fallstudie EuroHealth -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · EuroHealth (kritische Services)</h2>
+      <p style="color:var(--color-muted)">Ziel: 15 % Energie- und Betriebskosten weniger in 4 Monaten – ohne SLO-Bruch.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Portfolio-Auszug</h3>
+          <ul>
+            <li>Patientenportal · kritisch · SLO 99,9 %</li>
+            <li>Reporting/DWH · mittel · Batch-Fenster verlegen</li>
+            <li>Dev/Test-Umgebung · niedrig · Off-Hours-Shutdown</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Maßnahmen-Mix</h3>
+          <ul>
+            <li>Abschaltpolitik Non-Prod + Notfall-On &lt; 30 Min</li>
+            <li>Rightsizing-Pilot für 2 Services · CPU-Guardrail</li>
+            <li>2-wöchentliches Capacity Review Board</li>
+            <li>Retire der „Zombie-Services“ nach Portfolio-Check</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        4-Wochen Quick Wins: Non-Prod Shutdown · Rightsizing-Pilot · Standard-SLOs einführen.
+      </div>
+    </section>
+
+    <!-- Slide 8: Portfolio-Scoring -->
+    <section class="slide" style="display:none">
+      <h2>Portfolio-Scoring · fünf Kriterien, eine Entscheidung</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead>
+          <tr><th>Kriterium</th><th>1 · gering</th><th>3 · mittel</th><th>5 · hoch</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Wert (Kunde/Regulatorik)</th><td>kein Kundenkontakt</td><td>indirekt</td><td>direkt &amp; regulatorisch</td></tr>
+          <tr><th>Risiko (Sicherheit/Betrieb)</th><td>isoliert</td><td>Schnittstellen</td><td>kritischer Pfad</td></tr>
+          <tr><th>Kosten / Verbrauch</th><td>&lt; 1 % Budget</td><td>1–5 %</td><td>&gt; 5 %</td></tr>
+          <tr><th>Nachhaltigkeitshebel</th><td>kaum</td><td>spürbar</td><td>hoch (Konsolidierung)</td></tr>
+          <tr><th>Umsetzungsaufwand</th><td>klein</td><td>mittel</td><td>groß</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Priorität = hoher Hebel × vertretbares Risiko × machbarer Aufwand. „Low regret moves“ zuerst.
+      </div>
+    </section>
+
+    <!-- Slide 9: KPI-Set mit Anti-Gaming -->
+    <section class="slide" style="display:none">
+      <h2>KPIs · Drei-Säulen-Set mit Kopplung</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>SLO-Verfügbarkeit</h3>
+          <p>Kritische Services 99,9 % · mittel 99,5 % · niedrig 99 %.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Kosten pro Service / Monat</h3>
+          <p>Vergleichbar machen · Trend statt Momentaufnahme · Owner.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Off-Hours-Shutdown-Compliance</h3>
+          <p>oder kWh / Workload-Klasse · Energieverbrauch nachweisbar.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Anti-Gaming: Kostenreduktion <em>nur</em> gültig, wenn SLO gehalten wurde.
+      </div>
+    </section>
+
+    <!-- Slide 10: Coaching · Trade-offs -->
+    <section class="slide" style="display:none">
+      <h2>Coaching · drei Zielkonflikte ehrlich führen</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Verfügbarkeit ↔ Kosten</h3>
+          <p>99,99 % kostet mehr als doppelt so viel wie 99,9 %. Wer braucht es wirklich?</p>
+        </div>
+        <div class="merk-box">
+          <h3>Kosten ↔ Nachhaltigkeit</h3>
+          <p>Günstigster Strommix ≠ saubersten. Trade-off bewusst entscheiden, dokumentieren.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Standardisierung ↔ Lokal-Optimum</h3>
+          <p>Konzernweite Defaults schaffen Vergleichbarkeit – verhindern lokale Maximierung.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Greenwashing-KPI-Falle: schönes Reporting, keine Wirkung. Datenqualität sichtbar machen (A/B/C).
+      </div>
+    </section>
+
+    <!-- Slide 11: Capacity Governance -->
+    <section class="slide" style="display:none">
+      <h2>Capacity Governance · Board-Mechanik</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Rollen</h3>
+          <ul>
+            <li>Portfolio Owner (entscheidet Invest/Retire)</li>
+            <li>Service Owner (KPIs, SLOs, Kosten)</li>
+            <li>FinOps / Controlling (Kostenmodell)</li>
+            <li>Operations / SRE (Monitoring, Rightsizing)</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Rituale</h3>
+          <ul>
+            <li>Capacity Review 2-wöchentlich</li>
+            <li>Portfolio Board monatlich</li>
+            <li>Entscheidungsprotokoll auditfähig</li>
+            <li>Quarterly Review: Retire / Re-Invest</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Auditfähig bedeutet: Kriterien · Owner · Datenbasis · Beschluss · Review-Zyklus dokumentiert.
+      </div>
+    </section>
+
+    <!-- Slide 12: Management · Senior-Shift -->
+    <section class="slide" style="display:none">
+      <h2>Management · vom Verwalten zum Steuern</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>SLO-Reserven</h3>
+          <p>Wieviel Sicherheit ist genug, obwohl Peak unsicher? Reserve mit Frühwarnsignal.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Retire-Mut</h3>
+          <p>Welche Services werden konsequent abgeschaltet – trotz Widerstand? Stakeholder-Plan.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Investitionspfad</h3>
+          <p>Wo Plattform-Standard, wo Service-Eigenentwicklung? Klare Architekturentscheidung.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Reporting-Ehrlichkeit</h3>
+          <p>Datenqualität sichtbar (A/B/C), Schätzungen markieren, Verbesserungsplan zeigen.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Senior-Shift: weg von „Ressourcen verwalten“, hin zu steuerbaren, verantworteten Service-Architekturen.
+      </div>
+    </section>
+
+    <!-- Slide 13: Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Portfolio führen heißt: Owner · Kosten · Risiko · Nutzen · Nachhaltigkeit sichtbar.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Rightsizing nur mit SLO &amp; Monitoring – Guardrails sind Pflicht.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Idle abschalten ist „Low regret“ – fast immer sinnvoll, fast nie umstritten.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">KPIs koppeln: Kostenreduktion <em>nur</em> gültig, wenn SLO gehalten.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Auditfähige Entscheidung = Kriterien · Owner · Datenbasis · Beschluss · Review.</span></div>
+      </div>
+    </section>
+
+    <!-- Slide 14: Outro -->
+    <section class="slide" style="display:none">
+      <h2>Quellen · Weiterarbeiten</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout · Lehrskript</h3>
+          <p style="font-size:14px">ITIL-Portfolio, Rightsizing, Energieeffizienz, KPI-Set, Board-Mechanik.</p>
+          <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-13.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Vertiefung &amp; Übung</h3>
+          <p style="font-size:14px">Video · Podcast · Quiz · Aufgaben · Lernpfad.</p>
+          <p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-71);font-weight:600">→ Zurück zur Materialauswahl</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 14.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
 <script src="../../assets/progress.js"></script>
@@ -39,8 +399,6 @@
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 13, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>
