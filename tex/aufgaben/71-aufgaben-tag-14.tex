@@ -1,0 +1,613 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 14 - Aufgabenheft
+% Green IT als Managementsystem: CO2-Messung, Sustainable Software, E-Waste, Vendor Sustainability (ISO 14001)
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 14}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Green IT \& ISO 14001}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 6 \textperiodcentered{} TAG 14 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 17.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 14\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Green IT als Managementsystem \textendash{}\\CO\textsubscript{2}-Messung, Sustainable Software,\\E-Waste und Vendor Sustainability.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 14 \textendash{} \emph{Green IT als Managementsystem}: Carbon Footprint Measurement (GHG-Protocol-Logik), Sustainable Software Development, E-Waste Management, Vendor Sustainability Assessment und ISO-14001-orientierte PDCA-Verankerung im Service-Lifecycle.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Messlogik, Hebel, Lifecycle, Scorecard-Begriffe. 5\,--\,10 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Messplan, Vendor-Scorecard, SSD-Guardrails, E-Waste-Prozess. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} ISO-14001-orientiertes Operating Model, Anti-Greenwashing, Decision Architecture. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt eine Niveau-Markierung, einen Zeit-Richtwert, den Aufgabentext, einen Antwort-Freiraum und eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 14}. \emph{``Messbarkeit vor Moral''} \textendash{} ohne Systemgrenzen und Datenqualit\"at bleibt jede Green-IT-Diskussion politisch und folgenlos.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Carbon Footprint Messlogik}{\nivLi}{8\,min}
+
+\noindent Die Messlogik f\"ur einen Carbon Footprint folgt einer Kette: \emph{Aktivit\"aten} \textrightarrow{} \emph{Energie-\,/\,Ressourcenverbrauch} \textrightarrow{} \emph{Emissionsfaktoren} (als Prinzip) \textrightarrow{} \emph{CO\textsubscript{2}e}. Typische Quellen in der IT: Rechenzentrum / Cloud, Endger\"ate, Daten\"ubertragung, Software-Nutzung (Last), Lieferkette (Vendor). Zwei harte Anforderungen entscheiden \"uber die Belastbarkeit: \emph{Systemgrenzen} (was ist drin / drau{\ss}en?) und \emph{Datenqualit\"at} (gemessen vs.\ gesch\"atzt).
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Skizzieren Sie die \textbf{Messkette} in vier Schritten und erkl\"aren Sie pro Schritt, welche \emph{Annahme} darin steckt (z.\,B.\ ``Emissionsfaktor pro kWh ist konstant'' \textendash{} stimmt nur, wenn Strommix stabil ist).
+  \item Definieren Sie f\"ur einen IT-Service \emph{Kundenportal} \emph{drei plausible Systemgrenzen} (Variante eng: nur Compute; Variante mittel: + Storage + Netz; Variante weit: + Endger\"ate + Lieferkette). Welche Variante ist \emph{auditf\"ahig}, welche \emph{realistisch} ohne neue Datenpipeline?
+  \item Erkl\"aren Sie in einem Satz, warum die \emph{Datenqualit\"at} (\emph{A} gemessen, \emph{B} berechnet, \emph{C} gesch\"atzt) ein Pflichtattribut jedes CO\textsubscript{2}-Werts ist.
+\end{enumerate}
+
+\ytquery{carbon footprint IT measurement system boundary GHG protocol data quality}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Sustainable Software Development \textendash{} Hebel}{\nivLi}{8\,min}
+
+\noindent \emph{Sustainable Software Development (SSD)} setzt drei Hebelklassen ein: \emph{Effizienz} (weniger Rechenzeit, weniger Speicher, weniger Datenbewegung), \emph{Architektur} (Caching, asynchrone Verarbeitung, Batch vs.\ Real-Time, ressourcenbewusste Defaults) und \emph{Betrieb} (Skalierung nach Bedarf, Off-Hours, Monitoring, \emph{Performance Budgets}). Das Hauptrisiko: ``Green by guesswork'' \textendash{} Aussagen ohne Metriken und Guardrails.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Erstellen Sie eine \textbf{Tabelle} mit den drei Hebelklassen und je drei konkreten Beispielen (z.\,B.\ Effizienz: SQL-Index statt Full-Scan; Architektur: HTTP-Caching; Betrieb: Off-Hours-Shutdown Non-Prod).
+  \item Definieren Sie \emph{Performance Budget} und \emph{Data Budget} jeweils in einem Satz \textendash{} und nennen Sie einen konkreten Wert f\"ur einen kritischen API-Endpunkt (z.\,B.\ \emph{p95 $<$\,300\,ms}; \emph{Payload $<$\,50\,kB}).
+  \item Nennen Sie \textbf{zwei typische ``Green by guesswork''-Anti-Muster}, die Sie aus Projekten kennen (z.\,B.\ ``Wir haben ein Caching gebaut'' ohne Cache-Hit-Rate zu messen).
+\end{enumerate}
+
+\ytquery{sustainable software development efficiency performance budget green coding}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{E-Waste Lifecycle \& Vendor Scorecard}{\nivLi}{10\,min}
+
+\noindent \emph{Electronic Waste} folgt einem Lifecycle: \emph{Beschaffung} \textrightarrow{} \emph{Nutzung} \textrightarrow{} \emph{Wartung / Reparatur} \textrightarrow{} \emph{Wiederverwendung} \textrightarrow{} \emph{Recycling / Entsorgung}. Steuerungsprinzip: \emph{Verl\"angerung der Nutzungsdauer} + \emph{sichere Datenl\"oschung} + \emph{Nachweisf\"uhrung} + \emph{Partnerqualit\"at}. Eine \emph{Vendor Scorecard} bewertet Lieferanten auf sieben Dimensionen: \emph{Umweltpolitik}, \emph{CO\textsubscript{2}-Reporting}, \emph{Energieeffizienz}, \emph{Kreislaufwirtschaft}, \emph{Subunternehmer-Transparenz}, \emph{Nachweise / Zertifikate}, \emph{Transparenz im allgemeinen}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie jede der f\"unf Lifecycle-Phasen in einem Satz; markieren Sie pro Phase die \emph{prim\"are Verantwortung} (z.\,B.\ Beschaffung: Procurement + Service Owner; Recycling: IT Asset Manager + Security f\"ur L\"oschprotokolle).
+  \item Erstellen Sie eine \textbf{Scorecard-Vorlage} (1\,--\,5 Punkte) mit den sieben Dimensionen und je einem konkreten \emph{Pr\"ufkriterium} pro Dimension (z.\,B.\ ``CO\textsubscript{2}-Reporting: liefert der Vendor j\"ahrlich verifizierte Scope-1/2-Daten?'').
+  \item Nennen Sie \textbf{drei Nachweisartefakte}, die ein Auditor zu E-Waste sehen will (z.\,B.\ Datenl\"oschprotokoll, Recycling-Zertifikat, Asset-Register).
+\end{enumerate}
+
+\ytquery{electronic waste lifecycle WEEE vendor sustainability scorecard data erasure}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Messplan ``Kundenportal'' in 6 Wochen}{\nivLii}{25\,min}
+
+\begin{infobox}[Ausgangslage: Green-IT-Messplan]
+\textbf{Service:} \emph{Kundenportal} eines Versicherers \textendash{} ca.\ 80.000 aktive Nutzer / Monat.
+
+\smallskip
+\textbf{Auftrag der Gesch\"aftsleitung:} Innerhalb von 6 Wochen ein \emph{belastbarer} Green-IT-Messplan + erste Quick Wins.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Bestehendes Monitoring liefert CPU, RAM, Storage; Energieverbrauch \emph{nicht} direkt messbar.
+  \item Cloud-Anteil ca.\ 40\,\% (mit eingeschr\"anktem Vendor-Reporting).
+  \item Endger\"ate-Verbrauch beim Nutzer unbekannt.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} F\"ullen Sie das \emph{Messplan-Template} aus:
+
+\begin{enumerate}
+  \item \textbf{Messobjekte} (mind.\ 5): pro Objekt: \emph{Metrik}, \emph{Datenquelle}, \emph{Messintervall}, \emph{Owner}, \emph{Datenqualit\"at} (A/B/C).
+  \item \textbf{Systemgrenze} (1 Satz): Was ist im Footprint drin, was bewusst drau{\ss}en? Begr\"undung in 1 Satz pro Ausgrenzung.
+  \item \textbf{Drei Annahmen} mit Sichtbarkeit: z.\,B.\ ``Emissionsfaktor 350\,g\,CO\textsubscript{2}e/kWh f\"ur Rechenzentrum X'', ``Cloud-Anteil wird als gesch\"atzt gelabelt'', ``Endger\"ate au{\ss}erhalb des Scopes''.
+  \item \textbf{Drei Quick Wins} f\"ur die n\"achsten 4 Wochen (ohne Messstandard-Komplettausbau): z.\,B.\ Non-Prod Off-Hours, Caching f\"ur statische Inhalte, Bild-Komprimierung.
+  \item \textbf{Eine Trade-off-Entscheidung:} Welcher Messpunkt bleibt \emph{bewusst} unscharf (Datenqualit\"at C), und welche \emph{Transparenzma{\ss}nahme} kompensiert das (z.\,B.\ Annahmenregister, Datenqualit\"atslabel auf Reports)?
+\end{enumerate}
+
+\ytquery{green IT measurement plan carbon footprint scope cloud data quality}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Vendor Scorecard f\"ur Laptop-Refresh}{\nivLii}{25\,min}
+
+\begin{infobox}[Szenario: 1.200 Laptops in 12 Monaten]
+Drei Vendor-Angebote (fiktiv):
+
+\smallskip
+\begin{itemize}
+  \item \textbf{Vendor A:} g\"unstig, wenig Nachweise; Garantieaustausch nach 3 Jahren; Recycling \"uber Partner unklar.
+  \item \textbf{Vendor B:} teurer; Vendor-eigenes \emph{R\"ucknahmeprogramm}; Reparatur / Refurbish-Angebot; CO\textsubscript{2}-Reporting verf\"ugbar.
+  \item \textbf{Vendor C:} mittelpreisig; gute Energieeffizienzklassen; \emph{Subunternehmerkette intransparent}.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Erstellen Sie eine \textbf{vollst\"andige Scorecard-Vorlage} (1\,--\,5 Punkte) mit folgenden Dimensionen: \emph{Umwelttransparenz}, \emph{CO\textsubscript{2}-Reporting}, \emph{Energieeffizienz}, \emph{Kreislaufwirtschaft / Refurbish}, \emph{Subunternehmer-Transparenz}, \emph{Datenl\"oschnachweise}, \emph{Gesamtkosten \"uber 5 Jahre} (TCO inkl.\ Refurbish-Gutschriften).
+  \item \textbf{Bewerten} Sie die drei Vendoren mit Punkten und kurzer Begr\"undung pro Zelle.
+  \item Formulieren Sie eine \textbf{Empfehlung} (3\,--\,4 S\"atze): welcher Vendor, mit welchen \emph{Vertragsklauseln} (z.\,B.\ Reporting-Pflicht, Auditrecht, R\"ucknahme dokumentiert), und welche \emph{Bedingungen} bei welchen Punktst\"anden zum Ausschluss f\"uhren.
+  \item Definieren Sie \textbf{drei Fr\"uhwarnsignale}, dass die Vendor-Wahl im Nachhinein revidiert werden muss (z.\,B.\ CO\textsubscript{2}-Reporting wird versp\"atet geliefert; Subunternehmer-Liste \"andert sich ohne Information; Datenl\"oschprotokoll nicht auditierbar).
+\end{enumerate}
+
+\ytquery{vendor sustainability assessment scorecard laptop procurement CO2 refurbish}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{F\"unf Environmental Aspects + Messstandard}{\nivLii}{25\,min}
+
+\begin{infobox}[Kontext: TeleData Services]
+\textbf{Unternehmen:} ``TeleData Services'' \textendash{} viele digitale Services, hoher Ger\"atebestand (12.000 Endger\"ate), Cloud-Last w\"achst stark.
+
+\smallskip
+\textbf{Problem:} Green-IT-Initiativen sind isoliert, kein einheitlicher Messstandard, Vendor-Claims widerspr\"uchlich, E-Waste-Prozess uneinheitlich.
+
+\smallskip
+\textbf{Ziel:} In 4 Monaten auditf\"ahiges Green-IT-Programm, das im Service-Lifecycle verankert ist.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie \textbf{f\"unf Environmental Aspects} f\"ur IT-Services (z.\,B.\ \emph{Energieverbrauch Betrieb}, \emph{Hardware-Lifecycle}, \emph{Datenvolumen / Transfer}, \emph{Lieferkette}, \emph{Entsorgung / E-Waste}). Pro Aspekt: \emph{Owner}, \emph{prim\"arer Steuerungshebel}, \emph{typische Reportingfrequenz}.
+  \item Erstellen Sie einen \textbf{Mess- \& Reporting-Standard} (Tabelle): pro Aspekt \emph{Metrik}, \emph{Einheit}, \emph{Datenquelle}, \emph{Datenqualit\"at}, \emph{Owner}, \emph{Review-Zyklus}.
+  \item \textbf{Anti-Greenwashing-Mechanik:} Wie erzwingen Sie, dass Sch\"atzwerte (Label C) als Sch\"atzwerte ausgewiesen werden? (Vorschlag: jeder Report enth\"alt eine Spalte \emph{Datenqualit\"at}; Aggregate werden \emph{automatisch} auf das schlechteste Label heruntergezogen.)
+  \item Nennen Sie zwei \textbf{nicht verhandelbare Regeln} (z.\,B.\ ``kein CO\textsubscript{2}-Wert ohne Systemgrenze und Datenqualit\"at''; ``kein Bericht ohne Annahmenregister'').
+\end{enumerate}
+
+\ytquery{ISO 14001 environmental aspects IT services measurement reporting standard}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{SSD-Guardrails \& E-Waste-Standardprozess}{\nivLii}{25\,min}
+
+\begin{infobox}[Aufgabenstellung: zwei Bausteine, eine Logik]
+F\"ur zwei Serviceklassen \textendash{} \emph{kritisch} (Patientenportal, Banking-Backend) und \emph{normal} (Reporting, interne Tools) \textendash{} sollen \emph{Sustainable-Software-Guardrails} verbindlich werden. Parallel l\"auft der E-Waste-Prozess heterogen und liefert dem Audit keine belastbaren Nachweise.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag, zweigeteilt:}
+
+\smallskip
+\textbf{Teil A \textendash{} SSD-Guardrails:}
+
+\begin{enumerate}
+  \item Definieren Sie f\"ur \emph{kritisch} und \emph{normal} jeweils ein \emph{Performance Budget} (z.\,B.\ p95-Latenz, max.\ Payload) und ein \emph{Data Budget} (z.\,B.\ max.\ MB pro Session).
+  \item Definieren Sie ein \emph{Release Gate}: vor welcher Phase wird das Budget gepr\"uft, was passiert bei Verletzung (\emph{Block}, \emph{Warning}, \emph{Ausnahmegenehmigung})?
+  \item Definieren Sie einen \emph{Ausnahmeprozess}: wer darf bei Verletzung freigeben, mit welcher Sunset-Klausel (z.\,B.\ max.\ 60 Tage, dann Re-Review)?
+\end{enumerate}
+
+\smallskip
+\textbf{Teil B \textendash{} E-Waste-Standardprozess:}
+
+\begin{enumerate}
+  \item Skizzieren Sie den End-to-End-Prozess: \emph{Asset Register} \textrightarrow{} \emph{Datenl\"oschung} \textrightarrow{} \emph{Refurbish / Reuse} \textrightarrow{} \emph{R\"ucknahme} \textrightarrow{} \emph{Recycling} \textrightarrow{} \emph{Nachweisarchiv}. Owner pro Schritt.
+  \item Nennen Sie \emph{vier Nachweisartefakte}, die pro entsorgtem Ger\"at vorliegen m\"ussen (Datenl\"oschprotokoll, Asset-Out-Buchung, Recycling-Zertifikat, ggf.\ Refurbish-Beleg).
+  \item Formulieren Sie eine \emph{nicht verhandelbare Regel}: Welche \emph{Daten\-l\"oschanforderung} gilt f\"ur Ger\"ate mit PII / Gesundheitsdaten (z.\,B.\ mehrfaches \"Uberschreiben oder physische Zerst\"orung)?
+\end{enumerate}
+
+\ytquery{sustainable software performance budget data budget e-waste process secure erasure}
+
+\antwortlinien{24}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Fallstudie ``TeleData Services'' \textendash{} Green-IT-Strategie integriert}{\nivLii}{40\,min}
+
+\begin{infobox}[Fallstudie: TeleData Services]
+\textbf{Unternehmen:} ``TeleData Services'' \textendash{} viele digitale Services, hoher Ger\"atebestand, Cloud-Last w\"achst.
+
+\smallskip
+\textbf{Problem:} Green-IT-Initiativen sind isoliert; kein einheitlicher Messstandard; Vendor-Claims widerspr\"uchlich; E-Waste-Prozess uneinheitlich.
+
+\smallskip
+\textbf{Ziel:} In 4 Monaten ein \emph{auditf\"ahiges} Green-IT-Programm, das im Service-Lifecycle (Service-Design / Transition / Operation / Improvement) verankert ist.
+
+\smallskip
+\textbf{Restriktionen:}
+\begin{itemize}
+  \item Budget: 180.000\,\euro{}.
+  \item Datenl\"ucken (insbesondere Cloud-Verbrauch).
+  \item Widerstand (``Zusatzarbeit'').
+  \item Vendor-Transparenz unterschiedlich.
+  \item Zielkonflikt Performance vs.\ Kosten vs.\ CO\textsubscript{2}.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{F\"unf Environmental Aspects} (siehe Aufgabe 6) mit Owner und Hebel.
+  \item \textbf{Mess- \& Reporting-Standard}: Metriken, Frequenz, Owner, Datenqualit\"atslabel.
+  \item \textbf{SSD-Guardrails} f\"ur zwei Serviceklassen (siehe Aufgabe 7) + Ausnahmeprozess.
+  \item \textbf{E-Waste Standardprozess} (siehe Aufgabe 7) mit Nachweisartefakten und Verantwortlichkeiten.
+  \item \textbf{Vendor Scorecard + Vertragsklauseln} (j\"ahrliches Reporting, Nachweisprogramme, Subunternehmertransparenz, R\"ucknahme, Auditrecht als Prinzip).
+  \item \textbf{Entscheidung unter Unsicherheit:} Welche \emph{zwei} Ma{\ss}nahmen starten Sie sofort (4 Wochen), welche \emph{zwei} sp\"ater? Mit Begr\"undung und Fr\"uhwarnsignal.
+\end{enumerate}
+
+\ytquery{green IT operating model carbon footprint vendor sustainability ISO 14001 audit}
+
+\antwortlinien{32}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{ISO-14001-orientiertes Managementsystem (PDCA)}{\nivLiii}{35\,min}
+
+\begin{infobox}[Rolle: Sustainability Lead + CIO]
+\textbf{Ihre Rolle:} \emph{Sustainability Lead} mit Schnittstelle zum \emph{CIO} eines internationalen Konzerns.
+
+\smallskip
+\textbf{Auftrag:} Sie sollen Green-IT als \emph{Managementsystem} \textendash{} nicht als Initiative \textendash{} aufsetzen, das ISO-14001-Logik folgt: \emph{Aspekte} \textrightarrow{} \emph{Ziele} \textrightarrow{} \emph{Programme} \textrightarrow{} \emph{Messung} \textrightarrow{} \emph{Korrektur} \textrightarrow{} \emph{Verbesserung} (PDCA).
+
+\smallskip
+\textbf{Restriktionen:} Heterogene Reife je Region; Datenl\"ucken bei Vendor-Lieferketten; politische Widerst\"ande gegen ``noch ein Steuerungssystem''.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Aspekte-Ziele-Matrix:} F\"unf Environmental Aspects mit je einem messbaren Jahresziel (z.\,B.\ \emph{Energie Betrieb} $-$\,15\,\% bei Datenqualit\"at $\geq$\,B; \emph{Hardware-Lifecycle}: $+$\,30\,\% Wiederverwendung).
+  \item \textbf{Programme:} Zwei konkrete Programme pro Aspekt (z.\,B.\ Non-Prod Off-Hours, Storage-Tiering; Refurbish-Quote, Vendor-Recontracting). Owner und Sponsor pro Programm.
+  \item \textbf{Messung:} F\"unf KPIs mit Anti-Gaming-Kopplung (siehe Tag 13). Pflichtspalte \emph{Datenqualit\"at}.
+  \item \textbf{Korrektur (Non-Conformity Process):} Was passiert, wenn ein Ziel verfehlt wird? Drei Stufen: \emph{Reminder} (Owner reagiert in 30 Tagen) \textrightarrow{} \emph{Eskalation} (Vorstand, Trade-off-Entscheidung) \textrightarrow{} \emph{Aussetzung des Ziels} (mit Begr\"undung im Annahmenregister).
+  \item \textbf{Verbesserung:} Lessons-Learned-Mechanik (z.\,B.\ quartalsweise Review aller Korrekturen \textrightarrow{} drei systemische \"Anderungen pro Quartal).
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:} (a) Welche Aspekte werden \emph{trotz} Datenl\"ucken berichtet (Risiko-Begr\"undung + Fr\"uhwarnsignal). (b) Welcher Vendor wird trotz Mehrkosten bevorzugt (Business Case mit Risiko / CO\textsubscript{2} / Compliance).
+\end{enumerate}
+
+\ytquery{ISO 14001 environmental management system PDCA aspects objectives programs}
+
+\antwortlinien{28}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Anti-Greenwashing \textendash{} Transparenzregeln und Datenqualit\"atslabel}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent ``Wir reduzieren unsere IT-Emissionen um 30\,\%'' \textendash{} dieser Satz ist nur belastbar, wenn Systemgrenze, Datenqualit\"at und Annahmen offen liegen. Greenwashing entsteht selten aus B\"osartigkeit, sondern aus \emph{unklaren Systemgrenzen}, \emph{verdr\"angten Sch\"atzungen} und \emph{KPIs ohne Kopplung}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Drei Greenwashing-Anti-Muster} aus der Praxis (z.\,B.\ ``Cloud-Verlagerung als CO\textsubscript{2}-Reduktion'' ohne Vendor-Daten; ``LED in B\"uros'' als IT-KPI; ``Refurbish-Quote'' ohne Datenl\"oschnachweis).
+  \item Definieren Sie ein \textbf{Datenqualit\"atslabel-System} (A/B/C/D):
+    \begin{itemize}
+      \item \emph{A:} gemessen mit zertifiziertem Z\"ahler.
+      \item \emph{B:} berechnet aus belastbaren Eingangsdaten.
+      \item \emph{C:} gesch\"atzt mit dokumentierter Methodik.
+      \item \emph{D:} ``best effort'' ohne dokumentierte Methodik \textendash{} darf nicht ver\"offentlicht werden.
+    \end{itemize}
+  \item \textbf{Zwei Vorstands-Transparenz-Regeln} (Pflicht): (a) Jede Aussage tr\"agt das schlechteste Label im Aggregat. (b) Annahmenregister wird mit jedem Reporting versendet \textendash{} nicht separat verlinkt.
+  \item \textbf{Drei Hebel}, die Greenwashing \emph{strukturell} verhindern: z.\,B.\ Pflichtspalte ``Datenqualit\"at'' in allen Dashboards; quartalsweises Annahmenregister-Review im Audit; KPI-Kopplung (Reduktion z\"ahlt nur bei Datenqualit\"at $\geq$\,B).
+  \item \textbf{Faustregel} (1 Satz): Wann darf ein CO\textsubscript{2}-Wert in den Vorstandsbericht \textendash{} und wann nicht?
+\end{enumerate}
+
+\ytquery{greenwashing IT carbon footprint data quality label system boundaries assumptions}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Green-IT Operating Model \& Decision Architecture}{\nivLiii}{50\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} \emph{CIO/CTO} + \emph{Sustainability Lead} + \emph{Head of Procurement} (Senior-Rollenmix; gemeinsame Steuerung).
+
+\smallskip
+\textbf{Auftrag:} Ein \emph{Green-IT-Operating-Model} etablieren, das CO\textsubscript{2}-Messung, SSD-Standards, E-Waste und Vendor Sustainability in den IT-Service-Lifecycle integriert \textendash{} auditf\"ahig und wirkungsorientiert.
+
+\smallskip
+\textbf{Restriktionen:}
+\begin{itemize}
+  \item Datenl\"ucken (Vendor-/Cloud-Daten).
+  \item Budget: 300.000\,\euro{}.
+  \item Vendor-Claims unklar.
+  \item Kultureller Widerstand.
+  \item Zielkonflikte Performance / Cost / CO\textsubscript{2}.
+  \item Zeitdruck durch Reportingpflichten.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strukturierte \emph{Entscheidungsarchitektur} in 8 Schritten:
+
+\begin{enumerate}
+  \item \textbf{Top-10 Entscheidungen}: Systemgrenzen, Messstandard, KPI-Ziele, SSD-Gates, Ausnahmeprozess, Vendor-Kriterien, E-Waste-Policy, Reporting/Rollen, Investitionspriorit\"aten, Review-Zyklen.
+  \item \textbf{Governance \& Rollen:} Owner je Daten- / Service- / Procurement-Thema, RACI, Board-Mechanik, Entscheidungsprotokoll (auditf\"ahig).
+  \item \textbf{Mess- \& Data-Quality-Framework:} gemessen vs.\ gesch\"atzt, Qualit\"atschecks, Verbesserungsplan, Transparenzregeln (Anti-Greenwashing).
+  \item \textbf{Procurement \& Vendor Controls:} Scorecard, Vertragsklauseln, Auditrecht (Prinzip), Subunternehmer\-transparenz, Exit-Strategie.
+  \item \textbf{SSD- \& Betriebs-Guardrails:} Performance- / Data-Budgets, Release Gates, Observability, FinOps-/GreenOps-light.
+  \item \textbf{Roadmap:} MVP 8 Wochen \textrightarrow{} Scale 12 Wochen \textrightarrow{} Sustain (laufend), inkl.\ Change / Enablement.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:}
+    \begin{itemize}
+      \item Welche Metriken kommen ``Executive'' trotz Datenl\"ucken (mit Sch\"atzlogik + Datum f\"ur Messung)?
+      \item Welcher Vendor wird trotz Mehrkosten bevorzugt (Business Case + Risiko-/CO\textsubscript{2}-/Compliance-Argument)?
+    \end{itemize}
+  \item \textbf{Anschluss an Strategie}: Drei Argumente (Reputation, Regulator.\ Anschluss, Effizienz) f\"ur Vorstand und Aufsichtsrat.
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien (Senior-Level):} Pragmatismus unter Restriktionen \textperiodcentered{} Anti-Greenwashing-Reife \textperiodcentered{} Auditf\"ahigkeit \textperiodcentered{} Wirkung: \emph{Green IT als verantwortete Entscheidungsarchitektur, nicht als Kampagne}.
+
+\ytquery{green IT operating model ISO 14001 decision architecture CIO sustainability}
+
+\antwortlinien{38}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben zu Tag 14 bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 14}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Carbon Footprint Messlogik (Aktivit\"at \textrightarrow{} Energie \textrightarrow{} Faktor \textrightarrow{} CO\textsubscript{2}e) operationalisieren \textendash{} inkl.\ Systemgrenzen und Datenqualit\"at.
+  \item Sustainable Software Development mit Performance- und Data-Budgets steuern.
+  \item E-Waste als Lifecycle (Beschaffung bis Recycling) mit Nachweispflichten f\"uhren.
+  \item Vendor Sustainability \"uber Scorecard und Vertragsklauseln verankern \textendash{} nicht delegieren.
+  \item Messpl\"ane mit Quick Wins und Trade-off-Entscheidungen unter Datenunsicherheit liefern.
+  \item Anti-Greenwashing strukturell verhindern (Label-System, Annahmenregister, KPI-Kopplung).
+  \item Ein ISO-14001-orientiertes Managementsystem (PDCA) f\"ur Green IT aufsetzen.
+  \item Eine Green-IT-Entscheidungsarchitektur formulieren \textendash{} Restrisiken dokumentiert, Eskalationspfade klar.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 14 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

@@ -1,0 +1,601 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 12 - Aufgabenheft
+% RPA skalieren ohne Kontrollverlust: Governance, Audit Trail, Exceptions, Security by Design, Change Management
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 12}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}RPA \textendash{} Governance \& Skalierung}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 5 \textperiodcentered{} TAG 12 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 15.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 12\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}RPA skalieren ohne Kontroll\-verlust \textendash{}\\Governance, Audit Trail, Security\\und Change in elf Aufgaben.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 12 \textendash{} \emph{RPA skalieren ohne Kontrollverlust}: Bot-Governance, Audit Trail, Exception Handling, Security by Design und Change Management. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Lifecycle, Rollen, Standards, Exception-Typen. 5\,--\,10 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} RACI, Audit-Log, Playbooks, Security-Guardrails, Change-Paket. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Operating Model, Risk Appetite, Anti-Gaming-KPIs. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt eine Niveau-Markierung, einen Zeit-Richtwert, den Aufgabentext, einen Antwort-Freiraum und eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 12}. \emph{Governance ist kein Selbstzweck} \textendash{} sie ist die Bedingung, dass Skalierung verantwortbar bleibt. Versuchen Sie jede Aufgabe zuerst eigenst\"andig.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Bot-Lifecycle \& Governance-Rollen}{\nivLi}{8\,min}
+
+\noindent Der Bot-Lifecycle umfasst neun Phasen: \emph{Idea \textrightarrow{} Assessment \textrightarrow{} Design \textrightarrow{} Build \textrightarrow{} Test \textrightarrow{} Deploy \textrightarrow{} Run \textrightarrow{} Improve \textrightarrow{} Retire}. Mindestens sieben Rollen sind beteiligt: \emph{Process Owner}, \emph{Bot Owner}, \emph{Developer}, \emph{Reviewer/QA}, \emph{Security Owner}, \emph{Operations/Run}, \emph{Change Owner (Fachbereich)}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Ordnen Sie jeder der \textbf{neun Lifecycle-Phasen} jeweils die \emph{prim\"ar verantwortliche} Rolle zu (eine Rolle kann mehrere Phasen abdecken).
+  \item Erkl\"aren Sie in je einem Satz, was in den Phasen \emph{Assessment}, \emph{Test} und \emph{Retire} konkret entschieden / produziert wird.
+  \item Nennen Sie \textbf{zwei Risiken}, die entstehen, wenn die Phase \emph{Improve} ausgelassen wird (Live-Bots ohne kontinuierliche Verbesserung).
+\end{enumerate}
+
+\ytquery{RPA bot governance lifecycle phases process owner roles}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Vier nicht verhandelbare Governance-Standards}{\nivLi}{8\,min}
+
+\noindent Ein \emph{Governance-Minimum} besteht laut Lehrskript aus f\"unf Bausteinen: \emph{Rollen + Freigaben + Standards + Monitoring + Incident-Prozess}. Bei den Standards lassen sich vier Bereiche kaum verhandeln: \emph{Naming \& Versionierung}, \emph{Logging-Minimum}, \emph{Exception Codes}, \emph{Freigabe vor Produktion}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie jeden der vier Standards in 2\,--\,3 S\"atzen so, dass eine neue Entwicklerin ihn unmittelbar anwenden kann (z.\,B.\ Naming-Konvention: \texttt{<Domain>\_<Prozess>\_<Action>\_v<Major>.<Minor>}).
+  \item Markieren Sie f\"ur jeden Standard die \emph{Konsequenz bei Verletzung} (z.\,B.\ ``Bot ohne Logging-Minimum geht nicht in Prod \textendash{} hartes Stop-Kriterium'').
+  \item Erg\"anzen Sie einen \textbf{f\"unften} Standard, den Sie aus Ihrer Erfahrung als ebenso nicht verhandelbar einstufen, und begr\"unden Sie warum.
+\end{enumerate}
+
+\ytquery{RPA governance standards naming versioning logging exception codes}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Exception-Typen \& Audit-Trail-Felder}{\nivLi}{10\,min}
+
+\noindent Ausnahmen lassen sich in drei Typen sortieren: \emph{Business Exceptions} (fachlich \textendash{} z.\,B.\ \emph{ApprovalRequired}, \emph{DuplicateInvoice}), \emph{System Exceptions} (technisch \textendash{} \emph{ERPDown}, \emph{Timeout}) und \emph{Data Exceptions} (Qualit\"at \textendash{} \emph{MissingCostCenter}, \emph{UnknownVendor}). Ein vollst\"andiger Audit Trail beantwortet f\"unf Fragen: \emph{Wer / Was / Wann / Womit / Ergebnis} \textendash{} plus optional \emph{Begr\"undung}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Erstellen Sie eine \textbf{Tabelle} mit den drei Exception-Typen und je drei konkreten Beispielen aus den Dom\"anen \emph{Rechnungsverarbeitung}, \emph{HR-Onboarding}, \emph{Bestellabwicklung}.
+  \item Skizzieren Sie ein \textbf{Audit-Log-Template} mit mindestens neun Feldern (z.\,B.\ \texttt{BotID}, \texttt{Version}, \texttt{InputRef}, \texttt{Action}, \texttt{TargetSystem}, \texttt{ResultStatus}, \texttt{ExceptionCode}, \texttt{ProcessedBy}, \texttt{Timestamp}).
+  \item Markieren Sie, welche drei Felder \emph{unbedingt unver\"anderbar} (append-only) gespeichert werden m\"ussen \textendash{} und warum.
+\end{enumerate}
+
+\noindent\textbf{Hinweis:} Das Prinzip ``fail safe'' bedeutet \emph{kontrollierter Abbruch} mit \"Ubergabe an einen Menschen (Queue/Task) und vollst\"andiger Nachweisf\"uhrung \textendash{} nicht stilles Steckenbleiben.
+
+\ytquery{RPA audit trail exception handling business system data exception}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Governance-Minimum in 45 Minuten}{\nivLii}{30\,min}
+
+\begin{infobox}[Ausgangslage: ``KMU mit RPA-Wildwuchs'']
+\textbf{Unternehmen:} ``Nordhandel AG'' \textendash{} mittelst\"andischer Distributor mit 14 Live-Bots in 4 Fachbereichen.
+
+\smallskip
+\textbf{Problem:} RPA w\"achst schnell, jeder baut Bots ``wie er will''. Vor zwei Wochen gab es einen Vorfall: ein Bot hat \emph{falsche Daten} ins ERP gebucht, niemand wei{\ss}, welche Version lief. Keine zentrale Logging-Pflicht, keine Freigabe vor Prod, keine RACI.
+
+\smallskip
+\textbf{Auftrag der Gesch\"aftsleitung:} Innerhalb von 45 Minuten ein \emph{1-Seiten-Governance-Minimum} liefern \textendash{} so knapp, dass es alle lesen, aber so verbindlich, dass es Wirkung entfaltet.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{RACI f\"ur 6 Rollen} (Process Owner, Bot Owner, Developer, Reviewer/QA, Security, Operations) \"uber f\"unf typische T\"atigkeiten: \emph{Bot-Idee bewerten}, \emph{Code reviewen}, \emph{Freigabe vor Prod erteilen}, \emph{Run \& Monitoring}, \emph{Incident bearbeiten}.
+  \item \textbf{Vier nicht verhandelbare Standards} (z.\,B.\ Versionierung, Logging-Minimum, Exception Codes, Freigabe vor Prod) \textendash{} je 1\,--\,2 S\"atze konkret.
+  \item \textbf{Release Flow} \emph{Build \textrightarrow{} Test \textrightarrow{} UAT \textrightarrow{} Deploy \textrightarrow{} Monitoring} mit \emph{zwei} Gates (vor UAT, vor Deploy): wer entscheidet was?
+  \item \textbf{Fast-Track-Regel f\"ur kleine Bots}: Welche Klasse von Bots darf einen verk\"urzten Weg nehmen? Welche \emph{Guardrail} (z.\,B.\ kein PII, max.\ 100 Transaktionen/Tag, kein Schreibzugriff auf Finance-Systeme) bleibt verpflichtend?
+\end{enumerate}
+
+\ytquery{RPA minimum viable governance RACI release flow fast track}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Audit Trail Standard \& f\"unf Exception-Playbooks}{\nivLii}{25\,min}
+
+\begin{infobox}[Szenario: Rechnungsbot mit Ausnahmen]
+\textbf{Bot:} \emph{InvoiceBot v2.3} verarbeitet eingehende Rechnungen aus dem Lieferantenportal in das ERP.
+
+\smallskip
+\textbf{Beobachtete Ausnahmen (Top 5):}
+\begin{enumerate}
+  \item \emph{MissingCostCenter}: Rechnung ohne Kostenstelle.
+  \item \emph{DuplicateInvoice}: Rechnungsnummer existiert bereits im ERP.
+  \item \emph{ERPNotReachable}: ERP-System l\"asst sich nicht ansprechen.
+  \item \emph{ApprovalThreshold}: Betrag \"ubersteigt 10.000\,\euro{} \textendash{} Vier-Augen-Freigabe n\"otig.
+  \item \emph{PortalUIChanged}: Selektor auf Lieferantenportal greift nicht mehr.
+\end{enumerate}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie das \textbf{Audit-Log-Template} (Felder, Datentypen, Pflicht/Optional). Mindestens 10 Felder; mind.\ drei davon \emph{append-only}. Erg\"anzen Sie eine \textbf{Aufbewahrungs-Regel} (z.\,B.\ 5 Jahre f\"ur Finance-Logs, role-based Access).
+  \item Schreiben Sie f\"ur \emph{jede} der f\"unf Exceptions ein \textbf{Playbook} (max.\ 4 Zeilen): \emph{Owner}, \emph{Reaktion} (Retry / Queue / Ticket / Eskalation), \emph{SLA}, \emph{Eskalationsweg}.
+  \item Formulieren Sie \textbf{zwei KPIs}, mit denen Sie die Wirksamkeit des Exception Handling steuern (z.\,B.\ \emph{Exception Rate} $\leq$\,12\,\%, \emph{MTTR} $<$\,4\,h). Definieren Sie f\"ur jede KPI einen \emph{Anti-Gaming-Mechanismus}.
+\end{enumerate}
+
+\ytquery{RPA audit log retention exception playbook MTTR exception rate}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Security-by-Design Guardrails entwerfen}{\nivLii}{25\,min}
+
+\begin{infobox}[Ausgangslage: ``Bot als privilegierter Mitarbeiter'']
+Ein Bot ist technisch ein \emph{privilegierter Account}: er kann auf SAP, CRM, SharePoint und Mail zugreifen \textendash{} oft mit weitreichenden Rechten. Vor zwei Monaten hat ein Bot in der Buchhaltung sowohl Rechnungen \emph{angelegt} als auch \emph{freigegeben} \textendash{} ein klassischer SoD-Bruch (Segregation of Duties), den ein Mensch nie h\"atte machen d\"urfen. Der Auditor hat einen Finding eingetragen.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie ein \emph{Security-by-Design-Set} f\"ur RPA-Bots, das diesen Vorfall in Zukunft verhindert.
+
+\begin{enumerate}
+  \item \textbf{Account-Konzept:} Wie sind \emph{Bot-Accounts} von \emph{Personal-Accounts} getrennt? Welches Naming setzen Sie (\texttt{srv\_rpa\_*})? Wie werden Passw\"orter/Secrets verwaltet (Credential-Vault-Prinzip \textendash{} \emph{Secrets nie im Code}).
+  \item \textbf{Least Privilege:} Skizzieren Sie f\"ur drei Beispiel-Bots (\emph{InvoiceBot}, \emph{HR-OnboardingBot}, \emph{ReportingBot}) die jeweils \emph{minimal n\"otigen} Berechtigungen.
+  \item \textbf{Segregation of Duties:} Welche \emph{drei} SoD-Regeln muss ein Finance-Bot strikt einhalten? (Beispiel: \emph{Anlegen} und \emph{Freigeben} eines Buchungsbelegs nie durch denselben Account.)
+  \item \textbf{PII-/Datenschutz-Logik:} Welche Logging-Felder d\"urfen \emph{nicht} im Klartext geloggt werden (z.\,B.\ Personalnummer, Gehalt, Gesundheitsdaten)? Wie l\"osen Sie das (Maskierung / Hashing / kein Log)?
+  \item \textbf{Drei nicht verhandelbare Guardrails} f\"ur jeden Bot vor Go-Live (1 Satz je Regel).
+\end{enumerate}
+
+\ytquery{RPA security by design least privilege SoD credential vault bot account}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Change-Paket f\"ur Mitarbeitende ``hinter dem Bot''}{\nivLii}{20\,min}
+
+\begin{infobox}[Fall: ``Was passiert mit meinem Job?'']
+\textbf{Team Rechnungseingang} (12 Mitarbeitende) erf\"ahrt vom geplanten \emph{InvoiceBot}. Reaktionen reichen von ``endlich keine Tippt\"atigkeit mehr'' \"uber ``mache ich \"uberhaupt noch was?'' bis hin zu offener Ablehnung (``ich werde diesen Bot nicht trainieren''). Die Bereichsleitung sagt \"offentlich: ``Es wird keine Entlassungen geben'' \textendash{} intern wird aber \"uber 2 Stellen weniger im n\"achsten Budgetzyklus gesprochen.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Rollenwandel} (3 S\"atze): Wie ver\"andert sich die T\"atigkeit von ``Erfassen'' zu ``\"Uberwachen / Entscheiden / Exceptions bearbeiten''? Welche \emph{neuen} Skills braucht das Team?
+  \item \textbf{Kommunikations-Botschaft:} Formulieren Sie eine zwei-S\"atze-Kernbotschaft, die \emph{glaubw\"urdig} ist (keine Schein-Garantie ``alles bleibt wie es ist''), aber den Nutzen klar macht (``Bot nimmt Aufgaben, nicht W\"urde'').
+  \item \textbf{Trainingspfad:} Skizzieren Sie ein Curriculum in drei Stufen (\emph{Operator} \textendash{} \emph{Owner} \textendash{} \emph{Champion}) mit je zwei Lerninhalten und einem Wirksamkeitsnachweis (z.\,B.\ ``Operator l\"ost 3 Standard-Exceptions selbstst\"andig'').
+  \item \textbf{Umgang mit aktivem Widerstand:} Wie reagieren Sie konkret auf die Aussage ``Ich werde diesen Bot nicht trainieren''? Drei Schritte: \emph{Zuh\"oren} \textendash{} \emph{Reframe} \textendash{} \emph{klare Konsequenz}.
+  \item \textbf{Drei Fr\"uhwarnsignale}, dass das Change-Programm scheitert (z.\,B.\ Krankenstand steigt, Bot-Vorschl\"age sinken, Exceptions werden bewusst eskaliert).
+\end{enumerate}
+
+\ytquery{RPA change management role shift training resistance bot operator owner}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Fallstudie ``PharmaDistrib'' \textendash{} Rollout im regulierten Umfeld}{\nivLii}{40\,min}
+
+\begin{infobox}[Fallstudie: PharmaDistrib]
+\textbf{Unternehmen:} ``PharmaDistrib AG'' \textendash{} pharmazeutischer Distributor (reguliert, audit\-kritisch \textendash{} GxP-relevante Prozesse).
+
+\smallskip
+\textbf{Auftrag:} RPA-Rollout in \emph{Finance} und \emph{Supply Chain} \textendash{} 10 Bots in 3 Monaten.
+
+\smallskip
+\textbf{Spannungsfeld:}
+\begin{itemize}
+  \item Auditoren fordern \emph{Traceability} (jede Aktion nachweisbar).
+  \item Security fordert \emph{strenge Controls} (kein Self-Service, SoD strikt).
+  \item Fachbereiche dr\"angen auf \emph{Speed} (``wir m\"ussen liefern'').
+  \item Erste Pilotbots laufen, aber Portal-UIs \"andern sich, Exceptions steigen, Mitarbeitende sind verunsichert.
+\end{itemize}
+
+\smallskip
+\textbf{Restriktionen:}
+\begin{itemize}
+  \item 10 Wochen bis zum n\"achsten Audit-Sampling.
+  \item Budget: 160.000\,\euro{}.
+  \item Begrenzte Security-Kapazit\"at (1,5 FTE).
+  \item Datenklassifikation \emph{noch unklar}.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Minimum Viable Governance:} Definieren Sie Lifecycle, Rollen (RACI \"uber 6 Rollen), Release Gates (risikobasiert: Low-/Medium-/High-Risk Bot).
+  \item \textbf{Audit Trail Standard:} Welche Felder werden f\"ur GxP-Auditierbarkeit gefordert? Wer darf Logs \emph{sehen} (Role-based Access)? Aufbewahrung (z.\,B.\ 5 Jahre)? Exportf\"ahigkeit f\"ur Auditor?
+  \item \textbf{Exception Governance:} \emph{Drei} Exception-Kategorien (Data / Business / System / Security) mit insgesamt \emph{f\"unf} konkreten Playbooks (je Owner, Reaktion, SLA, Eskalation). \emph{Zwei} KPIs (Exception Rate, MTTR) inkl.\ Schwellen.
+  \item \textbf{Security-by-Design Guardrails:} Account-Konzept, Secrets, SoD-Regeln, Logging-Integrit\"at (append-only), PII-Behandlung.
+  \item \textbf{Change-Paket:} Kernbotschaft, Rollenwandel, Trainingsplan, Umgang mit Widerstand, Champions-Netzwerk.
+  \item \textbf{Priorit\"atenempfehlung:} Welche \emph{drei} Bausteine starten Sie in den ersten 4 Wochen, welche 2 verschieben Sie bewusst \textendash{} mit Begr\"undung?
+\end{enumerate}
+
+\ytquery{RPA pharma GxP governance audit trail exception security regulated rollout}
+
+\antwortlinien{30}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Risk Appetite \& Bot-Klassifikation}{\nivLiii}{35\,min}
+
+\begin{infobox}[Rolle: Chief Risk Officer]
+\textbf{Ihre Rolle:} CRO eines mittelgro{\ss}en Konzerns (5.000 MA, mehrere Bereiche, eigene Auto\-mation CoE).
+
+\smallskip
+\textbf{Ausgangslage:} 60 Live-Bots, ca.\ 30 in der Pipeline. Bisher gibt es \emph{keinen} formalen \emph{Risk Appetite} f\"ur RPA. Der Vorstand fragt: ``Wann sagen wir eigentlich \emph{Nein}? Wo erlauben wir bewusst Risiko?''
+
+\smallskip
+\textbf{Auftrag:} Entwerfen Sie ein \emph{Risk Appetite Framework} f\"ur RPA \textendash{} schriftlich, freigabef\"ahig.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Bot-Klassifikation in drei Stufen} (\emph{Low / Medium / High Risk}). Definieren Sie \emph{vier} Kriterien (z.\,B.\ Transaktionswert, Datensensitivit\"at, regulatorische Relevanz, Reversibilit\"at) mit jeweils Schwellenwerten.
+  \item \textbf{Freigabestufen je Klasse:} Wer freigibt, welche Reviews verpflichtend sind, welche \emph{Human-in-the-Loop}-Pflicht greift.
+  \item \textbf{SoD-Regeln:} Welche \emph{drei} Trennungen sind klassen\"ubergreifend zwingend? Bei welchen erlauben Sie Ausnahmen \textendash{} unter welchen Bedingungen?
+  \item \textbf{Logging \& Retention Standard:} Differenziert nach Klasse (z.\,B.\ Low\,=\,1 Jahr, Medium\,=\,3 Jahre, High\,=\,7 Jahre) \textendash{} mit Begr\"undung.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:} F\"ur welche Bot-Klasse \emph{erlauben} Sie \emph{Fast Track}, obwohl Restrisiko bleibt? Welche \emph{Fr\"uhwarnsignale} l\"osen einen Stopp aus (z.\,B.\ Exception Rate $>$\,15\,\%, Audit-Finding zu Logging-Integrit\"at)?
+  \item \textbf{Vorstandsvorlage} (1 Absatz): Schreiben Sie den Kernsatz, mit dem Sie den Vorstand zur Freigabe bewegen \textendash{} Risiko, Nutzen, Guardrails in drei S\"atzen.
+\end{enumerate}
+
+\ytquery{RPA risk appetite bot classification governance high risk human in the loop}
+
+\antwortlinien{26}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{CoE vs.\ Federation \textendash{} Operating Model entscheiden}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Ein zentralistisches \emph{Center of Excellence} (CoE) garantiert Standards, wird aber zum Engpass. Eine \emph{f\"oderierte} Aufstellung (jeder Bereich macht selbst) ist schnell, erzeugt aber \emph{Schatten-Bots} und Wildwuchs. Hybride Modelle existieren \textendash{} aber sie sind \emph{nicht einfach}: sie verschieben das Problem, ohne es zu l\"osen.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Drei Modelle vergleichen:} \emph{CoE-zentral}, \emph{f\"oderiert (mit Standards)}, \emph{Hub-and-Spoke (Hybrid)}. Tabellarisch mit f\"unf Kriterien: \emph{Skalierungs\-geschwindigkeit}, \emph{Qualit\"atskonsistenz}, \emph{Akzeptanz im Fachbereich}, \emph{Engpass-Risiko}, \emph{Audit-Tauglichkeit}.
+  \item \textbf{Empfehlung} (2\,--\,3 S\"atze) f\"ur ein Unternehmen mit 60 Bots, 8 Bereichen, mittlerer Reife \textendash{} mit Begr\"undung.
+  \item \textbf{Engpass-Diagnose:} Wo ist im empfohlenen Modell der wahrscheinliche \emph{Engpass} (Security-Review, QA, Fachfreigabe)? Wie entlasten Sie ihn \emph{ohne} Standards zu verw\"assern? (Mindestens drei Hebel: z.\,B.\ Self-Service mit Templates, automatisierte Code-Checks, Reviewer-Pool, Risk-Based Routing.)
+  \item \textbf{Fr\"uhwarnsignale ``Modell stimmt nicht mehr''}: drei messbare Signale (z.\,B.\ Anteil ``Shadow Bots'' $>$\,X\,\%, Time-to-Production $>$\,8 Wochen, Audit-Findings $>$\,3 pro Quartal).
+  \item \textbf{Konsequenz}: Wann \emph{kippen} Sie ein Modell? (Faustregel in 1\,--\,2 S\"atzen.)
+\end{enumerate}
+
+\ytquery{RPA operating model CoE federation hub spoke automation center excellence}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Enterprise RPA Operating Model}{\nivLiii}{50\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} \emph{Head of Automation CoE} / COO einer wachsenden Organisation.
+
+\smallskip
+\textbf{Auftrag:} Ein unternehmensweites \emph{RPA Operating Model} etablieren, das Skalierung erm\"oglicht, aber Audit, Compliance und Security \emph{nachweisbar} beherrscht \textendash{} inklusive Change- und Kommunikationsstrategie.
+
+\smallskip
+\textbf{Ausgangslage:}
+\begin{itemize}
+  \item Viele Fachbereiche, heterogene Prozesse.
+  \item UI-Volatilit\"at (Portale \"andern sich oft).
+  \item Budget: 300.000\,\euro{}.
+  \item Security-Kapazit\"at knapp (2 FTE f\"ur 60 Bots).
+  \item Kultureller Widerstand m\"oglich (``Bots ersetzen uns'').
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strukturierte \emph{Entscheidungsarchitektur} \textendash{} keine reine Ma{\ss}nahmenliste \textendash{} in 8\,--\,10 Schritten:
+
+\begin{enumerate}
+  \item \textbf{Risk Appetite \& Guardrails:} Bot-Klassifikation, Freigabestufen, SoD-Regeln, Logging/Retention Standard, Human-in-the-Loop-Pflichten.
+  \item \textbf{Operating Model:} CoE / federated / hybrid \textendash{} Rollen, RACI, Eskalation, Incident- und Problem-Management f\"ur Bots.
+  \item \textbf{Quality \& Release Management:} Teststrategie, UAT, Change-Prozess, Versionierung, Rollback, Monitoring-Katalog.
+  \item \textbf{Exception Governance:} Codes, Playbooks, KPI-Steuerung (Exception Rate, MTTR, Rework), Root Cause Reviews.
+  \item \textbf{Security-by-Design Blueprint:} Identity \& Access, Secrets, Logging Integrity, Zugriff auf PII, Third-Party-/Portal-Risiken.
+  \item \textbf{Change \& Enablement:} Stakeholder-Plan, Trainingsrollen, Kommunikationsnarrativ, Erfolgsmessung (Akzeptanz, Skill Shift).
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit} mit Annahme, verworfener Alternative, Fr\"uhwarnsignal:
+    \begin{itemize}
+      \item \emph{CoE vs.\ F\"oderation:} Welche Variante w\"ahlen Sie \textendash{} und welche Shadow-Bot-Rate / Incident-Rate triggert eine Korrektur?
+      \item \emph{Fast Track Grenze:} Welche Bot-Klasse darf schnell in Prod \textendash{} und ab welchen KPI-Schwellen wird gestoppt?
+    \end{itemize}
+  \item \textbf{Anschluss an Strategie:} Warum lohnt sich das aus Sicht der Gesch\"aftsleitung? Mindestens drei Argumente (Compliance-Risiko, Skalierbarkeit, Time-to-Value).
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien (Senior-Level):} Pragmatismus unter Restriktionen \textperiodcentered{} Klarheit der Verantwortlichkeiten \textperiodcentered{} Anschlussf\"ahigkeit an Risk \& Audit \textperiodcentered{} Reife des Entscheidens unter Unsicherheit \textperiodcentered{} Wirkung von ``Bots kontrollieren'' zu ``verantwortbares Automationssystem f\"uhren''.
+
+\ytquery{enterprise RPA operating model risk appetite governance scaling automation CoE}
+
+\antwortlinien{38}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben zu Tag 12 bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 12}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Bot-Lifecycle, Governance-Rollen und nicht verhandelbare Standards benennen und einsetzen.
+  \item Audit-Trail-Anforderungen (Wer/Was/Wann/Womit/Ergebnis) sauber operationalisieren \textendash{} inkl.\ Aufbewahrung und Access-Regeln.
+  \item Exception Handling als ROI-Hebel begreifen (Codes, Playbooks, SLAs, MTTR-Steuerung).
+  \item Security-by-Design f\"ur Bots als ``privilegierte Mitarbeiter'' entwerfen (Least Privilege, SoD, Vault, PII).
+  \item Change Management nicht ``nachreichen'', sondern als Teil des Designs verankern (Rollenwandel, Trainingspfad, Champions).
+  \item Bot-Klassifikation und Risk Appetite als Entscheidungsbasis nutzen \textendash{} statt jeden Fall einzeln zu verhandeln.
+  \item CoE vs.\ F\"oderation \emph{begr\"undet} w\"ahlen, Engp\"asse antizipieren, Fr\"uhwarnsignale messen.
+  \item Ein Enterprise-Operating-Model als Entscheidungsarchitektur formulieren \textendash{} nicht als Werkzeugkasten.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 12 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

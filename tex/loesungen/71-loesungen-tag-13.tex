@@ -1,0 +1,756 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 13 - Loesungsheft
+% Nachhaltige IT-Services steuerbar machen: Service Portfolio, Capacity, Rightsizing
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 13}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Sustainable IT Services \& Capacity}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 6 \textperiodcentered{} TAG 13 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 16.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 13\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Service Portfolio,\\Capacity und Sustainable IT.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 13}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterl\"osungen sind \emph{eine} m\"ogliche, didaktisch nachvollziehbare L\"osung. Insbesondere auf L2 und L3 sind mehrere Begr\"undungswege legitim, solange sie:
+
+\begin{itemize}
+  \item ITIL-4-Begriffe (Portfolio, Capacity, SLO/SLI/SLA) sauber nutzen,
+  \item Annahmen explizit machen,
+  \item Zielkonflikte (Verf\"ugbarkeit vs.\ Kosten vs.\ Nachhaltigkeit) benennen,
+  \item zu einer klar formulierten Entscheidung mit Fr\"uhwarnsignal f\"uhren.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihre Argumentation ab? Ist die Abweichung eine andere Annahme \textendash{} oder ein Denkfehler? Genau dort entsteht der Lerneffekt.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Service-Portfolio: Pipeline / Live / Retired}{\nivLi}{8\,min}
+
+\ytquery{ITIL 4 service portfolio management pipeline live retired catalog}
+
+\begin{loesungbox}
+\textbf{1. Abgrenzung:}
+\begin{itemize}
+  \item \emph{Service Portfolio} \textendash{} die \emph{Gesamtmenge} aller Services (geplant, im Betrieb, abgek\"undigt). Steuerungssicht der IT-Leitung; enth\"alt auch interne Kosten, Risiken, Nachhaltigkeits\-treiber.
+  \item \emph{Service Catalog} \textendash{} nur die aktuell \emph{verf\"ugbaren} (Live) Services. Kunden- und Bestellsicht; was kann ich heute beziehen?
+  \item \emph{Service Pipeline} \textendash{} \emph{Vorhaben} und in Entwicklung befindliche Services; Planungssicht.
+\end{itemize}
+
+\smallskip
+\textbf{2. Acht Mindestattribute:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}X@{}}
+\toprule
+\textbf{Attribut} & \textbf{Bedeutung} \\
+\midrule
+Service-Name              & sprechende Bezeichnung mit Bereichs-Pr\"afix \\
+Owner                     & verantwortliche Rolle (nicht Person) \\
+Lebenszyklus-Status       & Pipeline / Live / Retired \\
+Kritikalit\"at / SLO-Klasse & Gold / Silver / Bronze; mit gekoppelten SLO-Zielen \\
+Kosten pro Monat          & Run + Change (FinOps-tauglich) \\
+Energieverbrauch          & Wert + Qualit\"atslabel (gemessen / gesch\"atzt) \\
+Risiko                    & Betriebs-/Compliance-/Reputations-Risiko \\
+Nachhaltigkeitshebel      & konkret (z.\,B.\ Off-Hours, Rightsizing, Retire) \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Begr\"undung Nachhaltigkeit als eigenes Attribut:} Wenn der Nachhaltigkeitseffekt nur in ``Kosten'' verbleibt, dominieren kurzfristige Sparma{\ss}nahmen \textendash{} ein Service kann \emph{billig im Run} und gleichzeitig \emph{teuer in CO\textsubscript{2}} sein. Eigenes Attribut macht die Trade-offs sichtbar und entscheidbar.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Capacity \& Rightsizing \textendash{} Begriffe sortieren}{\nivLi}{8\,min}
+
+\ytquery{IT capacity planning rightsizing SLO SLI SLA overprovisioning guardrail}
+
+\begin{loesungbox}
+\textbf{1. Begriffstabelle:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{2.8cm}X@{}}
+\toprule
+\textbf{Begriff} & \textbf{Definition + Beispiel} \\
+\midrule
+Capacity       & F\"ahigkeit, Last und SLOs zu erf\"ullen (Compute, Storage, Netz, People). Bsp.: 16 VMs, 200 GB RAM, 2 SREs. \\
+Rightsizing    & Ressourcen an den \emph{realen} Bedarf anpassen ohne SLO zu verletzen. Bsp.: 10 VMs $\rightarrow$ 6 VMs nach 90-Tage-Auslastungsanalyse. \\
+SLO            & Internes Zielwert pro SLI (z.\,B.\ Verf\"ugbarkeit $\geq$\,99,9\,\%). \\
+SLI            & gemessener Indikator (z.\,B.\ tats\"achliche Verf\"ugbarkeit pro Monat). \\
+SLA            & vertragliche Zusage gegen\"uber Kunde / Fachbereich (oft schw\"acher als SLO). \\
+Overprovisioning & Ressourcen deutlich \"uber Bedarf; CPU $<$\,20\,\% Durchschnitt typisch. \\
+Guardrail      & automatischer Stopp/Rollback bei Schwellverletzung; Bsp.: ``CPU $>$\,85\,\% \"uber 15 Min $\rightarrow$ Rollback''. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Risiko ohne SLO / ohne Monitoring:}
+\begin{itemize}
+  \item \emph{Ohne SLO} ist Rightsizing Gl\"ucksspiel \textendash{} man wei{\ss} nicht, was ``gut genug'' bedeutet, und reduziert blind.
+  \item \emph{Ohne Monitoring} entstehen typischerweise stille SLO-Verletzungen: der Service ist schon kaputt, bevor jemand das Fehlen von Alarmen bemerkt.
+\end{itemize}
+
+\smallskip
+\textbf{3. Drei Anzeichen f\"ur Overprovisioning:}
+\begin{itemize}
+  \item Durchschnittliche CPU-Auslastung $<$\,20\,\% \"uber 90 Tage.
+  \item Durchschnittliche RAM-Auslastung $<$\,40\,\% bei stabilem Lastprofil.
+  \item Kein einziger Kapazit\"atsalarm in 90 Tagen \textendash{} obwohl Schwellen sauber konfiguriert sind.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Acht Hebel f\"ur Energy-Efficient Data Centers}{\nivLi}{10\,min}
+
+\ytquery{energy efficient data center virtualization rightsizing workload shift cooling}
+
+\begin{loesungbox}
+\textbf{1. Hebel mit Aufwand:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}p{1.4cm}X@{}}
+\toprule
+\textbf{Hebel} & \textbf{Aufwand} & \textbf{Was bedeutet das?} \\
+\midrule
+Konsolidierung         & Mid    & mehrere Workloads auf einer Plattform b\"undeln; weniger physische Maschinen. \\
+Virtualisierung / Container & Mid & VMs / Container statt dedizierter Hardware; bessere Auslastung. \\
+Abschalten Idle        & Low    & Non-Prod nachts und am Wochenende aus; trivial, aber selten konsequent. \\
+K\"uhlung optimieren   & High   & Luftf\"uhrung, Hot/Cold-Aisle, Temperatur-Setpoint; baut tief in den RZ-Betrieb ein. \\
+Hardware-Effizienzklassen& Mid  & beim n\"achsten Refresh effizientere Komponenten; einmalig wirksam. \\
+Workload-Shift / Zeitfenster& Mid & Batch- und Backup-Last in Zeiten g\"unstigen Strommix legen. \\
+Standort / Strommix    & High   & RZ-Standort bzw.\ Energievertrag mit Gr\"unanteil; mittelfristige Entscheidung. \\
+Prozessdisziplin       & Low    & Change / Release / Decommissioning sauber f\"uhren \textendash{} keine ``Zombie-Server''. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Drei Low Regret Moves:} \emph{Abschalten Idle} (Non-Prod off), \emph{Prozessdisziplin / Zombies dekommissionieren}, \emph{Workload-Shift / Batch-Fenster verschieben}. Hoher Effekt, niedriges Risiko, niedrige Investition.
+
+\smallskip
+\textbf{3. Zwei trugschl\"ussige ``Schnell-Hebel'':}
+\begin{itemize}
+  \item ``Alles in die Cloud schieben'' ohne Workload-Profil \textendash{} verschiebt das Problem oft nur, erh\"oht Kosten und kann CO\textsubscript{2}-Wirkung sogar verschlechtern, wenn der Cloud-Anbieter nicht in einem gr\"unen Strommix steht und Auto-Scaling fehlt.
+  \item ``K\"uhlung runterfahren'' ohne Temperaturmonitoring \textendash{} kann Hardware-Ausf\"alle ausl\"osen; die SLO-Bru\-ch-Kosten \"ubersteigen das eingesparte kWh leicht um Gr\"o{\ss}enordnungen.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Service-Portfolio Canvas f\"ur 20 Services}{\nivLii}{25\,min}
+
+\ytquery{IT service portfolio canvas critical SLO sustainability scoring}
+
+\begin{loesungbox}
+\textbf{Portfolio-Canvas (Auszug, acht Services):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{2.8cm}p{1.9cm}p{1.0cm}p{0.6cm}p{0.9cm}p{1.0cm}p{1.4cm}X@{}}
+\toprule
+\textbf{Service} & \textbf{Owner} & \textbf{Status} & \textbf{Krit.} & \textbf{SLO} & \textbf{Kosten} & \textbf{Energie} & \textbf{Entscheid.} \\
+\midrule
+Kundenportal      & Dig.\,Channel  & Live    & 5 & Gold   & 18\,k\,\euro & Compute       & Optimieren \\
+Reporting/DWH     & FinOps         & Live    & 3 & Silver & 12\,k       & Batch-Last    & Optimieren \\
+CRM               & Vertrieb       & Live    & 4 & Silver & 14\,k       & Compute       & Halten \\
+Schaden-Mgmt      & Operations     & Live    & 5 & Gold   & 20\,k       & Compute+Storage & Halten \\
+Dev/Test-Umg.     & Engineering    & Live    & 2 & Bronze & 8\,k        & Off-Hours-Hebel & Optimieren \\
+Mobile App v2     & Dig.\,Channel  & Pipeline& 4 & Silver & 0           & Architekturwahl & Invest \\
+Alt-BI            & FinOps         & Live    & 2 & Bronze & 5\,k        & Wenig Nutzung & Retire \\
+Active Directory  & Security       & Live    & 5 & Gold   & 4\,k        & gering        & Halten \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Drei Entscheidungsempfehlungen mit Begr\"undung:}
+\begin{itemize}
+  \item \emph{Dev/Test-Umgebung optimieren:} Konsequenter Off-Hours-Shutdown + Image-Standardisierung; gesch\"atzt 35\,\% Energieersparnis ohne Auswirkung auf Engineering-Geschwindigkeit (Wiederanlauf $<$\,10 Min).
+  \item \emph{Alt-BI retire:} Nutzung $<$\,5 User/Quartal, vollst\"andig durch Reporting/DWH abgedeckt; Stilllegung in 8 Wochen mit Migrationspfad und Archiv f\"ur Audit.
+  \item \emph{Reporting/DWH optimieren:} Batch-Last in nachfragearme Zeitfenster verschieben + Storage-Tiering (\emph{Hot/Warm/Cold}); 20\,\% Kosten- und CO\textsubscript{2}-Hebel ohne SLO-Bruch.
+\end{itemize}
+
+\smallskip
+\textbf{Zwei Zielkonflikte (durch Canvas sichtbar):}
+\begin{itemize}
+  \item \emph{Kritikalit\"at vs.\ Kosten:} Schaden-Mgmt (Krit.\,5) ist teuer, aber nicht verhandelbar.
+  \item \emph{Verf\"ugbarkeit vs.\ Energie:} Gold-SLO erzwingt Redundanz \textendash{} R\"uckkopplung auf Energieverbrauch; sinnvolle Aufweichung nur bei Bronze-Services denkbar.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Rightsizing-Plan ``Service auf 10 VMs''}{\nivLii}{25\,min}
+
+\ytquery{rightsizing pilot rollout guardrails VM cpu memory peak SLO}
+
+\begin{loesungbox}
+\textbf{1. Drei Annahmen:}
+\begin{itemize}
+  \item Peak-Profil bleibt in den n\"achsten 90 Tagen vergleichbar (keine Marketing-Kampagne, kein Reporting-Stichtag\-wechsel).
+  \item Autoscaling im Hypervisor m\"oglich (kann tempor\"ar VMs hochfahren bei Lastpeak).
+  \item Lastprofil ist nicht von externen Triggern abh\"angig (kein synchroner Aufruf durch Drittsystem).
+\end{itemize}
+
+\smallskip
+\textbf{2. Zweistufiger Rightsizing-Plan:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{2.2cm}p{4.0cm}p{2.6cm}X@{}}
+\toprule
+\textbf{Stufe} & \textbf{Aktion} & \textbf{Owner} & \textbf{Erfolg / Stopp} \\
+\midrule
+Pilot (Wo 1\,--\,3)   & 10 VMs $\rightarrow$ 7 VMs (3 stillgelegt); kleinere VM-Typen f\"ur 2 VMs; nachts nur 4 VMs aktiv & Service Owner + Plattformbetrieb & Erfolg: SLO eingehalten + Kosten\,$-$\,18\,\%; Stopp: SLO-Bruch oder Fehlerquote\,$>$\,0,5\,\% \\
+Rollout (Wo 4\,--\,8) & wenn Pilot ok: Ausweitung auf 2 weitere \"ahnliche Services & Service Owner & Erfolg: gemittelte Energieersparnis\,$\geq$\,20\,\%; Stopp: Service-Owner-Veto bei einer Incident-Eskalation \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Zwei Guardrails:}
+\begin{itemize}
+  \item \emph{Antwortzeit-Guardrail:} 95.\ Perzentil der Antwortzeit $>$\,2\,s f\"ur l\"anger als 10 Minuten $\rightarrow$ automatischer Rollback (VMs wieder hochfahren), Ticket an Service Owner.
+  \item \emph{CPU-Guardrail:} CPU \"uber alle aktiven VMs $>$\,85\,\% f\"ur mehr als 15 Minuten $\rightarrow$ Autoscale-Notfall + Alarm an Plattformbetrieb.
+\end{itemize}
+
+\smallskip
+\textbf{4. Entscheidung unter Unsicherheit:}\\
+\emph{Gr\"o{\ss}tes Risiko:} Peak-Profil unterz\"ahlt (z.\,B.\ Monatsende-Reporting taucht in den 90-Tage-Daten nicht ausreichend repr\"asentiert auf). \emph{Minimal-invasive Kompensation:}
+\begin{itemize}
+  \item Pilot \emph{startet erst nach} einem vollst\"andigen Monatsende-Zyklus, damit das Peak-Verhalten bestens dokumentiert ist.
+  \item Notfall-Kapazit\"at (3 zus\"atzliche VMs) im Hypervisor \emph{vorgehalten} und in $<$\,10 Min aktivierbar; Plattformbetrieb hat dokumentierten Wiederanlauf.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Sechs Ma{\ss}nahmen Capacity \& Rightsizing}{\nivLii}{25\,min}
+
+\ytquery{ITIL capacity management sustainable IT rightsizing measures non-prod shutdown}
+
+\begin{loesungbox}
+\textbf{Sechs Ma{\ss}nahmen mit Owner / Guardrail / Monitoring / Rollback:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.0cm}p{2.4cm}p{3.0cm}p{2.6cm}X@{}}
+\toprule
+\textbf{Ma{\ss}nahme} & \textbf{Owner} & \textbf{Guardrail} & \textbf{Monitoring} & \textbf{Rollback} \\
+\midrule
+Non-Prod Off-Hours-Shutdown   & Plattformbetrieb   & Wiederanlauf $<$\,30\,Min m\"oglich & Off-Hours-Compliance-Quote & Wiederanlauf-Skript, on-demand \\
+Rightsizing Pilot 2 Services  & Service Owner      & CPU $>$\,85\,\%, Fehlerquote $>$\,0,5\,\% & Synthetic Tests, p95-Latenz & 1-Klick-Restore VM-Snapshot \\
+Storage-Tiering DWH           & FinOps + Storage   & Read-Latenz Hot $<$\,50\,ms      & Tier-Hit-Rate              & R\"uckverschiebung in Hot \\
+Batch-Window verschieben      & Operations         & Berichts-Liefer-SLA halten       & Lieferzeitpunkt Reports     & alte Cron-Zeit reaktivieren \\
+Retire Alt-BI                 & Portfolio Manager  & Alt-Reports archiviert, Audit\-Pfad& Anzahl aktive Nutzer        & Lesezugriff 90 Tage erhalten \\
+Capacity-Review-Board (2-w\"ochentlich) & ITSM Lead & Entscheidungsprotokoll Pflichtfeld & Board-Stundenz\"ahler      & --- (governance) \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Priorisierung (Hebel vs.\ Aufwand):}
+\begin{itemize}
+  \item \emph{Wochen 1\,--\,4 (Quick Wins):} Non-Prod Shutdown, Capacity-Review-Board.
+  \item \emph{Wochen 5\,--\,12 (Skalierung):} Rightsizing Pilot 2 Services, Batch-Window-Shift.
+  \item \emph{Sp\"ater (Wo 13+):} Storage-Tiering DWH, Retire Alt-BI.
+\end{itemize}
+\emph{Begr\"undung:} Quick Wins liefern in 4 Wochen messbaren Effekt; Tiering und Retire haben Abh\"angigkeiten (Stakeholder-Kommunikation), daher sp\"ater.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{KPI-Set: 1 SLO, 1 Kosten, 1 Nachhaltigkeit}{\nivLii}{20\,min}
+
+\ytquery{sustainable IT KPI green IT anti gaming coupling SLO cost energy}
+
+\begin{loesungbox}
+\textbf{1. Drei KPIs (kompakt):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}XX@{}}
+\toprule
+\textbf{KPI} & \textbf{Definition} & \textbf{Ziel / Owner / Review} \\
+\midrule
+SLO-Verf\"ugbarkeit (kritische Services) & Anteil der Stunden im Monat, in denen SLO eingehalten wurde & $\geq$\,99,9\,\% Gold-Services; Owner: SRE Lead; monatlich \\
+Kosten pro Service / Monat        & FinOps-Run-Kosten / aktive Service-Instanz & Trend $-$\,15\,\% YoY; Owner: FinOps; monatlich \\
+Non-Prod Off-Hours-Compliance     & \% der Stunden au{\ss}erhalb Kernzeit, in denen Non-Prod tats\"achlich aus war & $\geq$\,80\,\%; Owner: Plattformbetrieb; w\"ochentlich \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Kopplungsregel (Anti-Gaming):} \emph{Kostenreduktion z\"ahlt nur, wenn SLO-Verf\"ugbarkeit im selben Quartal $\geq$\,99,9\,\%.} Bonus / Reporting nur an gekoppeltes Tripel (Kosten $-$ SLO $-$ Off-Hours). Wer Kosten dr\"uckt und SLO bricht, hat per Definition \emph{nicht geliefert}.
+
+\smallskip
+\textbf{3. Greenwashing-Anti-Muster + Gegenma{\ss}nahme:}
+\begin{itemize}
+  \item \emph{Anti-Muster:} ``Non-Prod ist nachts aus'' \textendash{} aber das Team f\"ahrt es \emph{vor} dem n\"achsten Werktag fr\"uh wieder hoch, sodass Off-Hours-Wert k\"unstlich gut wird. Wirkung null.
+  \item \emph{Gegenma{\ss}nahme:} Off-Hours-Z\"ahlung erfolgt aus Energie-/CPU-Daten, \emph{nicht} aus Tag/Nacht-Markern. Zus\"atzlich: \emph{tats\"achlich verbrauchte} kWh in Off-Hours als Z\"ahler.
+\end{itemize}
+
+\smallskip
+\textbf{4. Vierte, optionale KPI:} \emph{Capacity-Decision Audit Coverage} \textendash{} \% der Capacity-/Rightsizing-Entscheidungen mit vollst\"andigem Entscheidungsprotokoll (Datenquelle, Verantwortlicher, Review-Datum). Ziel $\geq$\,90\,\%; sch\"utzt vor ``stillen'' Entscheidungen, die sp\"ater keine Begr\"undung haben.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Fallstudie ``EuroHealth Services''}{\nivLii}{40\,min}
+
+\ytquery{sustainable IT service portfolio capacity governance healthcare SLO energy}
+
+\begin{loesungbox}
+\textbf{1. Service-Portfolio (8 Services, kompakt):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{2.6cm}p{1.6cm}p{0.6cm}p{0.8cm}p{2.0cm}p{1.4cm}X@{}}
+\toprule
+\textbf{Service} & \textbf{Status} & \textbf{Krit.} & \textbf{SLO} & \textbf{Energie-Treiber} & \textbf{Risiko} & \textbf{Hebel} \\
+\midrule
+Patientenportal     & Live    & 5 & Gold   & Compute, Peak & Reputations   & Rightsizing + Caching \\
+Klinikinformationssys.& Live  & 5 & Gold   & Compute       & Patientensafety & Konsolidierung \\
+Reporting / DWH     & Live    & 3 & Silver & Batch-Last    & Audit-Verz\"og.& Batch-Shift, Tiering \\
+DICOM-Archiv        & Live    & 4 & Silver & Storage       & Datenverlust  & Cold-Storage f\"ur Alt-Daten \\
+Dev/Test            & Live    & 2 & Bronze & Compute       & gering        & Off-Hours-Shutdown \\
+Mobile-App v2       & Pipeline& 4 & Silver & Architektur   & Time-to-Market& effiziente Defaults \\
+Alt-HR-Tool         & Live    & 2 & Bronze & Compute       & Audit         & Retire 6 Monate \\
+Active Directory    & Live    & 5 & Gold   & gering        & Sicherheits   & Halten \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Scoring (1\,--\,5; je h\"oher, desto besser/wichtiger). Top-3 zur Optimierung:} Reporting/DWH (Hebel 5, Risiko 2), Dev/Test (Hebel 5, Risiko 1), DICOM-Archiv (Hebel 4, Risiko 2). \textbf{Retire-Kandidat:} Alt-HR-Tool (Wert 1, Hebel 3, Risiko 2 \textendash{} kontrolliertes Auslaufen).
+
+\smallskip
+\textbf{3. Ma{\ss}nahmenpaket} (sechs Ma{\ss}nahmen \textendash{} siehe Aufgabe 6):
+\begin{itemize}
+  \item Non-Prod Off-Hours Shutdown (Dev/Test) \textendash{} Quick Win.
+  \item Rightsizing Pilot Patientenportal (Off-Peak).
+  \item Storage-Tiering DICOM-Archiv (Hot/Warm/Cold).
+  \item Batch-Shift Reporting/DWH.
+  \item Retire Alt-HR-Tool (Migrationspfad + Archiv).
+  \item Capacity-Review-Board 2-w\"ochentlich (auditf\"ahig).
+\end{itemize}
+
+\smallskip
+\textbf{4. Drei KPIs:}
+\begin{itemize}
+  \item \emph{SLO-Verf\"ugbarkeit Gold-Services} $\geq$\,99,95\,\% (Owner: SRE).
+  \item \emph{Kosten pro Service} \textendash{} Trend $-$\,15\,\% in 4 Monaten (Owner: FinOps); gekoppelt: z\"ahlt nur bei SLO-Einhaltung.
+  \item \emph{Off-Hours-Compliance Non-Prod} $\geq$\,80\,\% (Owner: Plattformbetrieb); gemessen aus kWh, nicht aus Schaltern.
+\end{itemize}
+
+\smallskip
+\textbf{5. Entscheidung unter Unsicherheit:}
+\begin{itemize}
+  \item \emph{Sofort (4 Wochen):} Non-Prod Off-Hours-Shutdown + Capacity-Review-Board. Risiko niedrig, Hebel hoch, ohne Tooling-Abh\"angigkeit.
+  \item \emph{Verschoben:} Retire Alt-HR-Tool (Stakeholder-Widerstand erwartet, ben\"otigt Migrationspfad) und Storage-Tiering DICOM (Datenintegrit\"at hat Vorrang \textendash{} ben\"otigt Validierungsphase).
+\end{itemize}
+\emph{Begr\"undung:} 15\,\%-Ziel ist in 4 Monaten realistisch erreichbar, wenn Quick Wins fr\"uh laufen und politisch heikle Aktionen sauber vorbereitet werden.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Portfolio Board \& Capacity Governance Design}{\nivLiii}{35\,min}
+
+\ytquery{ITSM portfolio board capacity governance RACI decision protocol audit}
+
+\begin{loesungbox}
+\textbf{1. Portfolio Board Setup:}
+\begin{itemize}
+  \item \emph{Mitglieder:} Portfolio Owner (Vorsitz), Service-Owner-Vertretung (rotierend, 3 Bereiche), FinOps/Controlling, Operations/SRE Lead, Sustainable-IT Lead, Security Lead.
+  \item \emph{Taktung:} monatlich 90 Min; bei Vorf\"allen ad hoc.
+  \item \emph{Im Board entschieden:} Service-Aufnahme in Pipeline; SLO-Klassen-\"Anderung; Rightsizing-Ausnahmen; Retire-Empfehlungen.
+  \item \emph{Eskaliert an Vorstand:} Budgetspr\"unge $>$\,250\,k\,\euro{}; SLO-Aufweichung Gold; Schliessung mit Kunden-/Compliance-Wirkung.
+\end{itemize}
+
+\smallskip
+\textbf{2. RACI \"uber f\"unf Entscheidungstypen:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}ccccc@{}}
+\toprule
+ & \textbf{PortfOwn.} & \textbf{SvcOwn.} & \textbf{FinOps} & \textbf{Ops/SRE} & \textbf{Sec} \\
+\midrule
+Service einf\"uhren        & A    & R   & C   & C   & C \\
+Service \"andern           & C    & R/A & C   & C   & C \\
+Service stilllegen         & A    & R   & C   & I   & C \\
+SLO-Klasse \"andern        & A    & R   & C   & C   & I \\
+Rightsizing-Ausnahme       & I    & R/A & C   & C   & I \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Entscheidungsprotokoll (Pflichtfelder):}
+\begin{itemize}
+  \item \emph{Datum} und Teilnehmer (Name + Rolle).
+  \item \emph{Entscheidung} im Klartext (was wurde beschlossen).
+  \item \emph{Begr\"undung} + \emph{Datenquelle} (welcher Report, welche Metrik).
+  \item \emph{Reviewdatum} (wann pr\"ufen wir, ob die Entscheidung wirkt).
+  \item \emph{Verantwortlicher} f\"ur Umsetzung.
+\end{itemize}
+
+\smallskip
+\textbf{4. Capacity Governance Bausteine:}
+\begin{itemize}
+  \item \emph{Demand Forecasting Minimal:} 12-Monats-Trend pro Service + Quartals-Adjust durch Service Owner. Kein KI-Modell n\"otig \textendash{} aber konsequente Datenpflege.
+  \item \emph{Guardrail-Set:} CPU $>$\,85\,\% / Fehlerquote $>$\,0,5\,\% / p95-Latenz $>$\,2\,s; automatisch wirksam, dokumentiert im Service-Steckbrief.
+  \item \emph{Ausnahmeprozess:} Service Owner kann Ausnahme f\"ur 30 Tage selbst genehmigen (mit Begr\"undung); l\"anger als 30 Tage nur durch Portfolio Board.
+\end{itemize}
+
+\smallskip
+\textbf{5. Zwei Entscheidungen unter Unsicherheit:}
+\begin{itemize}
+  \item \emph{SLO-Reserve:} Gold-Services 30\,\% Headroom, Silver 15\,\%, Bronze 0\,\%. \emph{Annahme:} Peak-Streuung max.\ $+$25\,\% beobachtet; \emph{Fr\"uhwarnsignal:} mehr als zwei Headroom-Verletzungen pro Quartal $\rightarrow$ Headroom auf 35\,\% erh\"ohen, alternative Architektur (Edge-Caching) pr\"ufen. \emph{Eskalation:} CIO bei dritter Verletzung.
+  \item \emph{Konsequente Optimierung trotz Widerstand:} Alt-HR-Tool und Alt-BI retire. \emph{Trade-off-Logik:} Nutzungswert $<$\,kritische Schwelle; alternative Wege existieren. \emph{Stakeholder-Plan:} 90-Tage-Lese-Zugriff, Migrationsworkshop, Champion aus dem betroffenen Bereich. \emph{Fr\"uhwarnsignal:} Widerstand eskaliert auf Bereichsleiter-Ebene $\rightarrow$ Sponsor-Gespr\"ach in $<$\,2 Wochen.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{ISO-20000-nahe Nachweislogik}{\nivLiii}{30\,min}
+
+\ytquery{ISO 20000 ITSM audit evidence service management documentation compliance}
+
+\begin{loesungbox}
+\textbf{1. F\"unf Nachweisartefakte aus dem ITSM-Alltag:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}XX@{}}
+\toprule
+\textbf{Artefakt} & \textbf{Was gepr\"uft wird} & \textbf{Owner / Speicherort} \\
+\midrule
+Capacity-Board-Protokoll & Pflichtfelder vorhanden, Entscheidungen begr\"undet, Reviewdatum gesetzt & ITSM Lead / Confluence + Audit-Archiv \\
+Change-Ticket mit Approver & Risikoklassifikation, Sign-off, Rollback-Plan, Post-Implementation-Review & Change Manager / ITSM-Tool \\
+SLO-Report                 & SLI-Werte gemessen, Abweichungen erkl\"art, Massnahmen dokumentiert & SRE Lead / Monitoring-System \\
+Rightsizing-Begr\"undung   & Datenbasis (90-Tage-Profil), Annahmen, Guardrails, Rollback & Service Owner / ITSM-Tool \\
+Incident-Post-Mortem       & Zeitlinie, Root Cause, Massnahmen, Verantwortlicher, Follow-up-Tickets & Operations / Wiki \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Drei ``Papier-Anti-Muster'':}
+\begin{itemize}
+  \item \emph{Monatlicher Capacity-Report, den niemand liest:} 20 Seiten PDF an 30 Empf\"anger, ohne Frage / Entscheidung. \emph{Symptom:} keine R\"uckmeldung, keine Anschluss-Entscheidung.
+  \item \emph{Doppelte Dokumentation in Wiki und Ticket:} dieselbe Information an zwei Stellen, einer veraltet \textendash{} und Auditor zieht beide.
+  \item \emph{Manuell gepflegte Service-Liste:} Excel, drei verantwortliche Personen, niemand wei{\ss}, welche Version aktuell ist.
+\end{itemize}
+
+\smallskip
+\textbf{3. Drei Automatik-Hebel:}
+\begin{itemize}
+  \item Ticket-System exportiert Change-Log direkt als Audit-Report (kein manuelles ``Zusammenstellen'').
+  \item SLO-Dashboard wird auf Knopfdruck zum Audit-Report \textendash{} mit Signatur und Zeitstempel.
+  \item Entscheidungs-Templates im ITSM-Tool zwingen Pflichtfelder vor Speicherung \textendash{} Capacity-Board-Protokoll entsteht ``nebenbei''.
+\end{itemize}
+
+\smallskip
+\textbf{4. Faustregel:} Ein Nachweis ist \emph{Compliance}, wenn er aus einer \emph{Entscheidung} entstanden ist und einen Auditor in unter 2 Minuten zum Zweck f\"uhrt; er ist \emph{B\"urokratie}, sobald er die Entscheidung selbst nicht mehr beeinflusst und nur noch ``erzeugt'' wird, um ihn vorzeigen zu k\"onnen.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Sustainable IT Decision Architecture}{\nivLiii}{50\,min}
+
+\ytquery{sustainable IT decision architecture CIO portfolio capacity governance roadmap}
+
+\begin{loesungbox}
+\emph{Musterl\"osung als Entscheidungsarchitektur; andere Konfigurationen sind m\"oglich.}
+
+\smallskip
+\textbf{1. Top-10 Entscheidungen:}
+\begin{enumerate}
+  \item Service-Priorit\"aten (Kritikalit\"at gekoppelt an Strategie, nicht Lautst\"arke).
+  \item SLO-Klassen Gold/Silver/Bronze + Headroom-Regeln.
+  \item Kapazit\"atsreserven pro Klasse (30\,\% / 15\,\% / 0\,\%).
+  \item Rightsizing-Policy (Pflicht-Pilot vor Rollout, Guardrails verbindlich).
+  \item Non-Prod-Regel (Off-Hours = Default; Ausnahmen mit Sunset).
+  \item Invest vs.\ Retire (objektive Schwellen: Nutzer, Kosten, Risiko).
+  \item Ausnahmeprozess (30 Tage Service Owner; l\"anger nur Board).
+  \item Monitoring-Standards (SLI je Service Pflicht; sonst keine Prod-Freigabe).
+  \item Risikoakzeptanz (Restrisiko sichtbar machen, nicht wegdefinieren).
+  \item Review-Zyklen (monatlich Board, w\"ochentlich Ops, quartalsweise Vorstand).
+\end{enumerate}
+
+\smallskip
+\textbf{2. Portfolio Governance:} Rollen wie Aufgabe 9; Board monatlich; Entscheidungs\-protokoll auditf\"ahig.
+
+\smallskip
+\textbf{3. Capacity \& Rightsizing Governance:} Demand Forecast Minimal; Guardrails verbindlich; Rollback-Plan vor Pilot; Eskalation an SRE + Service Owner.
+
+\smallskip
+\textbf{4. KPI \& Anti-Gaming:} SLO + Kosten + Nachhaltigkeit gekoppelt; Kostenreduktion nur g\"ultig bei SLO-Einhaltung; Off-Hours gemessen aus kWh, nicht aus Schaltern; Audit Coverage als Schutz-KPI.
+
+\smallskip
+\textbf{5. Roadmap:}
+\begin{itemize}
+  \item \emph{Wo 1\,--\,4 Quick Wins:} Non-Prod Off-Hours, Capacity Board konstituiert, KPI-Set freigegeben.
+  \item \emph{Wo 5\,--\,12 Skalierung:} Rightsizing Pilot, Storage-Tiering, Retire-Welle 1.
+  \item \emph{Sustain (laufend):} Monatliches Board, quartalsweiser Vorstandstrend, j\"ahrlicher Audit-Trockenlauf.
+\end{itemize}
+
+\smallskip
+\textbf{6. Zwei Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{SLO-Reserven (Headroom 30\,/\,15\,/\,0\,\%).} Annahme: Peak-Streuung max.\ $+$25\,\%. Verworfene Alternative: einheitliche 25\,\% (kostet zu viel). Fr\"uhwarnsignal: mehr als zwei Headroom-Verletzungen pro Quartal $\rightarrow$ Headroom anheben oder Architektur \"andern.
+  \item \emph{Retire-Welle trotz Widerstand.} Annahme: $<$\,5 aktive Nutzer + alternative Wege vorhanden = legitim. Verworfene Alternative: ``alle behalten, weil sich jemand beschwert'' \textendash{} schiebt Kosten in Zukunft. Fr\"uhwarnsignal: Eskalation auf Bereichsleiter $\rightarrow$ Sponsor-Gespr\"ach + Stakeholder-Plan.
+\end{enumerate}
+
+\smallskip
+\textbf{7. Anschluss an Strategie:}
+\begin{itemize}
+  \item Compliance: ISO-20000-nahe Nachweislogik schafft Audit-Sicherheit ohne B\"urokratie.
+  \item Kosten: Hebel $-$15\,\% in 4 Monaten ist realistisch und vorzeigbar.
+  \item Nachhaltigkeit: ESG-Reporting bekommt belastbare IT-Datenpunkte (CO\textsubscript{2}-Treiber pro Service), keine Greenwashing-Risiken.
+\end{itemize}
+
+\smallskip
+\textbf{8. Vorstandssatz:}\\
+``Wir f\"uhren ein gekoppeltes Steuerungssystem aus Service-Portfolio, Capacity Governance und SLO-/Kosten-/Nachhaltigkeits-KPIs ein, das in 12 Wochen 15\,\% Kosten \emph{ohne SLO-Bruch} freisetzt, Audit-Sicherheit schafft und Nachhaltigkeit messbar verankert \textendash{} Verantwortung ist je Service eindeutig, Restrisiken sind dokumentiert, und wir berichten quartalsweise an den Vorstand.''
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Wenn Ihre eigene L\"osung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder eine andere Risikoabw\"agung?} Beides ist legitim, solange die Logik nachvollziehbar bleibt und Fr\"uhwarnsignale benannt sind.
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie Ihre L\"osungen in die Coaching-Sitzung. Leitfragen: Welche Annahmen liegen Ihren Klassifikationen zugrunde? Wo haben Sie bewusst Restrisiko akzeptiert? Welche Anti-Gaming-Logik sch\"utzt Ihr KPI-Set vor Schein-Erfolg?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 13 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

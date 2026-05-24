@@ -1,0 +1,765 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 16 - Loesungsheft (Capstone)
+% CSRD / EU-Taxonomie als Prozess-, Daten- und Kontrollarchitektur
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 16}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}CSRD / EU-Taxonomie \textendash{} Capstone}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 8 (CAPSTONE) \textperiodcentered{} TAG 16 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 19.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 16\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} CSRD,\\EU-Taxonomie und Capstone.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 16}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen (Capstone)}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen zu Tag 16 sind eine m\"ogliche, didaktisch nachvollziehbare L\"osung \textendash{} sie sind nicht die einzig richtige. Da der Capstone die Lerninhalte der Tage 1\,--\,15 integriert, sind mehrere Begr\"undungswege legitim, solange sie:
+
+\begin{itemize}
+  \item Systemgrenzen, Datenqualit\"atslabels und Annahmen explizit machen,
+  \item Anti-Greenwashing-Logik beachten,
+  \item Trade-offs (Transparenz vs.\ Aufwand, Speed vs.\ Assurance) benennen,
+  \item zu einer klar formulierten Entscheidung mit Fr\"uhwarnsignal f\"uhren,
+  \item Anbindung an laufende Transformationsprogramme zeigen (BPMN/EPC, RPA, ITSM, Green IT, Change).
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihre Argumentation ab? Ist es eine andere Systemgrenze, ein anderer Risk Appetite \textendash{} oder ein Denkfehler? Genau dort entsteht der Lerneffekt des Capstones.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{CSRD \& EU-Taxonomie aus Prozesssicht}{\nivLi}{8\,min}
+
+\ytquery{CSRD EU taxonomy process perspective sustainability reporting data governance}
+
+\begin{loesungbox}
+\textbf{1. Erkl\"arung aus Prozesssicht:}
+\begin{itemize}
+  \item \emph{CSRD} (Corporate Sustainability Reporting Directive): verlangt ein systematisches Reporting \"uber Nachhaltigkeits-Themen entlang der \emph{doppelten Wesentlichkeit} (Wirkung auf Umwelt/Gesellschaft \emph{und} Wirkung auf das Unternehmen). Prozess: Datenbedarfe je Thema $\rightarrow$ Datenfl\"usse mit Verantwortlichen $\rightarrow$ Controls $\rightarrow$ Reporting + Assurance.
+  \item \emph{EU-Taxonomie}: klassifiziert wirtschaftliche T\"atigkeiten nach \"okologischen Kriterien (z.\,B.\ \emph{Klimaschutz}, \emph{Anpassung}, \emph{Kreislaufwirtschaft}); verlangt Anteils-Kennzahlen (Umsatz, CapEx, OpEx). Prozess: Aktivit\"aten-Mapping $\rightarrow$ \emph{Eligibility}/\emph{Alignment}-Pr\"ufung $\rightarrow$ Kennzahlen-Berechnung mit Nachweis.
+\end{itemize}
+
+\smallskip
+\textbf{2. Drei Risiken mit Beispiel:}
+\begin{itemize}
+  \item \emph{Uneinheitliche Definitionen:} Werk A z\"ahlt ``Energie'' inklusive Heizung, Werk B nur Strom \textrightarrow{} Aggregat ist nicht vergleichbar.
+  \item \emph{Dateninseln:} Energiedaten in Facility-Excel, Vendor-CO\textsubscript{2} in Procurement-Mail, IT-Verbrauch im Monitoring \textrightarrow{} keine konsolidierte Sicht.
+  \item \emph{Sch\"atzungen ohne Transparenz:} Scope-3-Daten ``halt gesch\"atzt'' \textrightarrow{} Auditor markiert Finding, Reputationsrisiko.
+\end{itemize}
+
+\smallskip
+\textbf{3. CSRD als Prozess- statt Dokument-Thema:} Ein CSRD-Bericht ohne stabilen Prozess ist eine Momentaufnahme, die im n\"achsten Jahr neu zusammengeb\"undelt werden muss \textendash{} CSRD verlangt ein \emph{laufendes System}, das den Bericht erzeugt, mit Rollen, Controls und Audit-Trail; der ``Bericht'' ist nur die Ausgabeform dieses Systems.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Governance- \& Kontrollsysteme}{\nivLi}{10\,min}
+
+\ytquery{ESG governance controls audit readiness evidence pack CSRD reporting}
+
+\begin{loesungbox}
+\textbf{1. Rollenmodell (f\"unf Rollen):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}p{4.8cm}X@{}}
+\toprule
+\textbf{Rolle} & \textbf{Hauptverantwortung} & \textbf{Entscheidungsrechte / Eskalation} \\
+\midrule
+ESG Steering           & strategische Ausrichtung; Risk Appetite; Trade-offs                & Eskalationspfad: an Vorstand und Aufsichtsrat. \\
+Data Owner             & Datenqualit\"at und Datenbedarfe je Thema (z.\,B.\ Energie, Lieferkette) & Genehmigt KPI-Berechnung; Eskalation an ESG Steering. \\
+Control Owner          & Definition und Durchf\"uhrung der Controls                       & Bewertet Pass/Fail; Eskalation bei wiederholtem Fehler. \\
+Reporting Factory Lead & End-to-End Reportingprozess; Tooling; Konsolidierung; Cadence    & Freigibt Reports vor Ver\"offentlichung; Eskalation an CFO. \\
+Internal Audit         & Pr\"uft Sampling, Evidence Pack, Pflichtfelder                  & Unabh\"angige Eskalation an Vorstand / Audit Committee. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. F\"unf Control-Typen:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.0cm}Xp{2.0cm}@{}}
+\toprule
+\textbf{Typ} & \textbf{Wozu / wer pr\"uft} & \textbf{Frequenz} \\
+\midrule
+Completeness-Check       & alle Pflichtfelder vorhanden; Data Owner    & automatisch je Datenlieferung \\
+Plausibilit\"atsgrenzen  & Schwellen f\"ur ``ungew\"ohnliche'' Werte; Control Owner & bei jedem Eintrag \\
+Vier-Augen-Freigabe      & Top-KPI freigeben; Data Owner + Reporting Lead & vor Konsolidierung \\
+Change-Log / Versionierung & nachvollziehbare \"Anderungen; Tool         & st\"andig \\
+Zugriffskontrolle        & RBAC f\"ur Daten und Reports; Security         & quartalsw.\ Review \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Audit-Readiness} (1 Satz): die F\"ahigkeit, jederzeit die Herkunft, Berechnung, Freigabe und Versionsgeschichte jeder ESG-Zahl nachweisen zu k\"onnen \textendash{} ohne Sonderaufwand. \emph{Drei Evidence-Pack-Elemente:} Datenquelle (Export mit Zeitstempel), Transformationslogik (ETL-Script mit Version), Freigabeprotokoll mit Annahmenregister.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{KPI-Dictionary \& Datenqualit\"atslabel}{\nivLi}{10\,min}
+
+\ytquery{KPI dictionary ESG data quality label anti gaming reporting CSRD}
+
+\begin{loesungbox}
+\textbf{1. KPI-Steckbrief-Template:} Name; Definition; Berechnung; Systemgrenze; Einheit; Datenquelle; Datenqualit\"atslabel (A/B/C/D); Anti-Gaming-Regel; Owner; Reviewzyklus; Verbesserungsplan (wenn DQ $<$\,B).
+
+\smallskip
+\textbf{2. Drei KPI-Steckbriefe (kompakt):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}XXX@{}}
+\toprule
+\textbf{Feld} & \textbf{Energieverbrauch IT} & \textbf{Emissionsintensit\"at IT-Services} & \textbf{Anteil verifizierte Vendor-Daten} \\
+\midrule
+Definition       & kWh j\"ahrlich \"uber alle IT-Komponenten innerhalb Systemgrenze & g CO\textsubscript{2}e pro Service-Stunde & Anteil Vendoren mit Scorecard $\geq$\,B am Einkaufsvolumen \\
+Berechnung       & Summe kWh aus RZ-Z\"ahlern + Cloud-Bills + gesch\"atzten Endger\"aten & Energie $\times$ Emissionsfaktor / aktive Service-Stunden & gewichtetes Einkaufsvolumen / Gesamtvolumen \\
+Systemgrenze     & RZ on-prem + Cloud-Compute + Endger\"ate-Sch\"atzung & dieselbe Grenze wie Energie & Top-100-Vendoren nach Volumen \\
+Einheit          & MWh / Jahr                & g CO\textsubscript{2}e / h        & \% \\
+Datenquelle      & RZ-Z\"ahler (A) + Vendor-Bill (C) + Analytics (C) & abgeleitet                  & Procurement-System \\
+DQ-Label         & B (gemischt, schlechtestes z\"ahlt) & B                & B \\
+Anti-Gaming      & Aggregat folgt schlechtestem Label & nur g\"ultig bei DQ $\geq$\,B des Energie-Inputs & z\"ahlt erst nach unabh\"angiger Vendor-Verifikation \\
+Owner            & CIO + Plattformbetrieb     & CSO + CIO         & CPO + Procurement \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Begr\"undung der Pflicht:} Ein KPI ohne Datenqualit\"atslabel kann von Lesern (Vorstand, Investor, Auditor) nicht eingeordnet werden \textendash{} ohne diese Information ist die Zahl entweder \emph{zu glaubw\"urdig} oder \emph{zu unsicher}. \emph{Pipeline-Konsequenz:} das KPI-Tool weist Eintr\"age ohne DQ-Label automatisch ab; D-Werte d\"urfen nur intern, nicht in Reports erscheinen.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{ESG-Reportingprozess End-to-End in 8\,--\,10 Schritten}{\nivLii}{30\,min}
+
+\ytquery{CSRD reporting process end to end controls evidence data quality}
+
+\begin{loesungbox}
+\textbf{1. End-to-End-Reportingprozess (9 Schritte):}
+\begin{enumerate}
+  \item \emph{KPI-Dictionary aktualisieren} (CSO + Data Owner).
+  \item \emph{Datenanforderung an Owner verteilen} (Reporting Factory).
+  \item \emph{Datenerfassung} aus Quellsystemen (Data Owner; teils RPA-gest\"utzt).
+  \item \emph{Validierung}: Completeness-Check + Plausibilit\"atspr\"ufung (Control Owner).
+  \item \emph{Konsolidierung} (Reporting Factory; Versionierung im Tool).
+  \item \emph{Freigabe}: Vier-Augen Data Owner + Reporting Lead.
+  \item \emph{Ver\"offentlichung / Reporting} (CSO).
+  \item \emph{Audit Trail / Evidence Pack} bereitstellen (Reporting Factory + Internal Audit).
+  \item \emph{Lessons Learned / Korrekturma{\ss}nahmen} (ESG Steering).
+\end{enumerate}
+
+\smallskip
+\textbf{2. Drei Kontrollpunkte:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}p{3.2cm}p{2.6cm}X@{}}
+\toprule
+\textbf{Kontrolle} & \textbf{Owner} & \textbf{Eingang} & \textbf{Ausgang / Folge} \\
+\midrule
+Completeness-Check       & Data Owner       & vor Konsolidierung & fehlt was \textrightarrow{} R\"uckweisung an Quelle, Ticket \\
+Plausibilit\"at + Schwellen & Control Owner & vor Freigabe        & au{\ss}erhalb Schwelle \textrightarrow{} Ausnahmegenehmigung + Annahme \\
+Vier-Augen-Freigabe      & Owner + Reporting Lead & vor Ver\"offentlichung & ohne beide Sign-offs kein Release \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. F\"unf Evidence-Artefakte:} Datenquelle (System + Export-Zeitstempel); Berechnungs-Script in versionierter Form; Freigabeprotokoll (Sign-offs, Datum, Bearbeiter); Ausnahmebehandlung (warum, wer, Sunset); Versions-/Change-Log f\"ur jeden Datenpunkt.
+
+\smallskip
+\textbf{4. Zwei Transparenzma{\ss}nahmen:}
+\begin{itemize}
+  \item Datenqualit\"atslabel (A/B/C; D nicht ver\"offentlichbar) als Pflichtfeld.
+  \item Annahmenregister wird \emph{im selben Versand} mit dem Reporting verteilt \textendash{} nicht als separater Link.
+\end{itemize}
+
+\smallskip
+\textbf{5. Trade-off:} Lieferkettendaten d\"urfen mit DQ-C ver\"offentlicht werden, wenn (a) Methodik dokumentiert; (b) Verbesserungsplan auf B in 12 Monaten beigef\"ugt; (c) ESG Steering hat Sign-off geleistet; (d) Fr\"uhwarnsignal definiert (Audit-Finding zu Scope-3 \textrightarrow{} sofortiger Pause + Re-Design).
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Acht Controls + Evidence Pack Checkliste}{\nivLii}{25\,min}
+
+\ytquery{CSRD controls evidence pack minimum viable controls reconciliation sampling}
+
+\begin{loesungbox}
+\textbf{1. Acht Controls:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}Xp{1.4cm}@{}}
+\toprule
+\textbf{Control} & \textbf{Beschreibung + Owner + Eskalation} & \textbf{MVC?} \\
+\midrule
+Pflichtfelder / Completeness & alle definierten Felder ausgef\"ullt; Data Owner; Eskalation an Reporting Lead. & MVC \\
+Plausibilit\"atsgrenzen      & Schwellen je KPI; au{\ss}erhalb \textrightarrow{} Ausnahmegenehmigung; Control Owner. & MVC \\
+2-Augen-Freigabe             & Data Owner + Reporting Lead; ohne beide kein Release. & MVC (Top-3 KPI) \\
+\"Anderungslog / Versionierung & wer / was / warum; Tool-erzwungen. & MVC \\
+Zugriffskontrolle (RBAC)     & Rollenbasiert; quartalsw.\ Review; Security. & MVC \\
+Ausnahmegenehmigung          & Vier-Augen + Sunset-Klausel; Control Owner. & MVC \\
+Reconciliation zu Finance    & Abgleich von Energie/CapEx-Daten mit Finance-System; Control + FinOps. & Scale \\
+Sampling-Review              & Stichprobe 5\,\%/Quartal; Internal Audit. & Scale \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Evidence-Pack-Checkliste pro KPI:}
+\begin{itemize}
+  \item Datenquelle (System / Export-Zeitstempel / Bearbeitende Person).
+  \item Transformationslogik (ETL / Script mit Version).
+  \item Berechnungsblatt mit Annahmen und Systemgrenze.
+  \item Freigabeprotokoll (Sign-offs, Datum, RACI-Rolle).
+  \item Ausnahmenregister.
+  \item Datenqualit\"atslabel (mit Begr\"undung).
+  \item Change-Requests / Versionierung.
+\end{itemize}
+
+\smallskip
+\textbf{3. Begr\"undungen MVC vs.\ Scale:}
+\begin{itemize}
+  \item MVC: ohne sie ist Reporting strukturell unbelastbar (\emph{Completeness}, \emph{Plausibilit\"at}, \emph{Vier-Augen}, \emph{Change-Log}, \emph{RBAC}, \emph{Ausnahme}) \textendash{} sie kosten wenig, schaffen viel Sicherheit.
+  \item Scale: \emph{Reconciliation zu Finance} verlangt Tooling-Reife; \emph{Sampling-Review} braucht Internal-Audit-Kapazit\"at \textendash{} im Dry Run durch Sponsor-Sign-off und Spot-Checks ersetzbar.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{KPI-Set 6\,--\,8 + Anti-Gaming-Kopplung}{\nivLii}{25\,min}
+
+\ytquery{ESG KPI set anti gaming coupling data quality CSRD greenwashing}
+
+\begin{loesungbox}
+\textbf{1. KPI-Set (8 KPIs):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}p{1.6cm}Xp{1.4cm}@{}}
+\toprule
+\textbf{KPI} & \textbf{Dimension} & \textbf{Owner / Ziel / DQ} & \textbf{Anti-Gaming} \\
+\midrule
+Energieverbrauch IT       & E (Umwelt)     & CIO; $-$\,15\,\% YoY; DQ B            & Aggregat folgt schlechtestem Label \\
+Emissionsintensit\"at     & E              & CSO+CIO; $-$\,12\,\% YoY; DQ B        & nur g\"ultig bei DQ $\geq$\,B Energie-Input \\
+Anteil verifizierte Vendor-Daten & E       & CPO; $\geq$\,80\,\%; DQ B             & nur Vendoren mit unabh\"angiger Verifikation \\
+Datenqualit\"atsindex     & G (Steuerung)  & Data Owners; $\geq$\,B im Mittel      & Z\"ahlung aus Tool, nicht aus Selbstbericht \\
+Control Pass Rate         & G              & Control Owners; $\geq$\,90\,\%        & Failures werden gez\"ahlt, nicht ``wiederholt'' \\
+Timeliness (Report p\"unktl.)& G            & Reporting Lead; $\geq$\,95\,\%        & Verz\"ogerung wird mit Begr\"undung dokumentiert \\
+Exception Rate            & G              & Control Owner; $\leq$\,8\,\%          & Ausnahme braucht Sign-off, sonst Failure \\
+Mitarbeiter-Diversit\"at  & S (Sozial)     & CHRO; $\geq$\,X\,\% in F\"uhrung      & quartalsweiser Audit-Stichprobenpass \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Drei KPI-Paar-Kopplungen:}
+\begin{itemize}
+  \item \emph{Emissionsintensit\"at} z\"ahlt nur, wenn \emph{Energieverbrauch}-Input DQ $\geq$\,B (sonst basiert sie auf wackeligen Daten und t\"auscht Pr\"azision vor).
+  \item \emph{Anteil verifizierte Vendor-Daten} z\"ahlt nur, wenn \emph{Control Pass Rate} $\geq$\,80\,\% (sonst werden Verifizierungen ``hochgez\"ahlt'').
+  \item \emph{Energieverbrauch IT} darf eine Reduktion nur ausweisen, wenn im selben Zeitraum \emph{Verf\"ugbarkeit/SLO} (aus Tag 13) eingehalten wurde \textendash{} sonst werden Services unter Bedarf gehalten (Anti-Gaming gegen ``billige'' Reduktion).
+\end{itemize}
+
+\smallskip
+\textbf{3. Schutz-KPI:} \emph{Anteil Reports mit DQ-Label und Annahmenregister} $\geq$\,95\,\%. Owner: Reporting Factory Lead. Konsequenz bei Unter\-schreiten: alle Reports ohne Label / Annahmenregister werden bis zur Korrektur zur\"uckgezogen; Eskalation an ESG Steering binnen 5 Arbeitstagen.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Integration in Transformation}{\nivLii}{25\,min}
+
+\ytquery{ESG transformation integration RPA ITSM green IT change management CSRD}
+
+\begin{loesungbox}
+\textbf{1. Wie jedes Programm direkt auf CSRD einzahlt:}
+\begin{itemize}
+  \item \emph{BPMN / EPC} (Tag 1\,--\,4): liefert die \emph{Prozess-Modelle}, in die Controls platziert werden \textendash{} ohne sauberes Prozessmodell sind Controls willk\"urlich. \emph{Beispiel:} Plausibilit\"atspr\"ufung wird in BPMN-Lane des Data Owners angesetzt.
+  \item \emph{RPA-Governance} (Tag 10\,--\,12): liefert \emph{nachweisf\"ahige Audit-Trails} f\"ur Datenherkunft; Bot-IDs + Versionen identifizieren jeden Datenpunkt, Exception-Logs zeigen Ausnahmen. \emph{Beispiel:} RPA sammelt Energiedaten aus Werksystemen, Audit Trail belegt Datenherkunft auditf\"ahig.
+  \item \emph{Sustainable IT} (Tag 13): liefert das \emph{Service-Portfolio} und die Kapazit\"ats-Telemetrie, die CO\textsubscript{2}-Berechnungen f\"uttert. \emph{Beispiel:} SLO-Reports werden zu Inputs der KPI-Kopplung ``Reduktion gilt nur bei SLO-Einhaltung''.
+  \item \emph{Green IT} (Tag 14): liefert den \emph{Mess-Standard} (Aspekte, DQ-Labels, Annahmenregister) und das \emph{Anti-Greenwashing-Regelwerk} \textendash{} CSRD \"ubernimmt diese Logik 1:1.
+  \item \emph{Change Leadership} (Tag 15): sichert die \emph{Verankerung} \textendash{} ESG-Reporting wird in Routinen, KPIs und Trainings eingebaut, statt als Projekt zu enden. \emph{Beispiel:} Data Owner werden \"uber Champions-Netzwerk multipliziert; Pulse Survey misst Adoption.
+\end{itemize}
+
+\smallskip
+\textbf{2. Drei konkrete Initiativen in 14 Wochen:}
+\begin{itemize}
+  \item \emph{DWH/ETL f\"ur ESG-Events:} Konsolidierungs-Layer zwischen Quell-Systemen und Reporting-Tool; mit Versionierung und Audit-Trail.
+  \item \emph{Workflow-Freigaben f\"ur KPI-\"Anderungen:} jede \"Anderung am KPI-Dictionary l\"auft \"uber Workflow-Tool (4-Augen + Annahmenregister-Update).
+  \item \emph{BI-Dashboards mit Audit Trail:} Visualisierung mit Drill-down auf Quelle, DQ-Label und Freigabeprotokoll \textendash{} keine ``stillen'' Reports.
+\end{itemize}
+
+\smallskip
+\textbf{3. Drei Anti-Muster (die Integration zerst\"oren):}
+\begin{itemize}
+  \item Reporting wird parallel in Excel gebaut (kein Audit-Trail, keine Versionierung).
+  \item ESG-Team hat keine Anbindung an IT-Architektur (Datenpipelines bleiben halbmanuell).
+  \item KPI-\"Anderungen ohne Change-Log und ohne Annahmenregister-Update (Reports werden \"uber Zeit inkonsistent).
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Capstone-Fallstudie ``IndustriCo Europe''}{\nivLii}{45\,min}
+
+\ytquery{CSRD case study reporting process controls KPI transformation industrial}
+
+\begin{loesungbox}
+\textbf{1. Reportingprozess} (Plan-Collect-Validate-Consolidate-Approve-Report-Assure):
+\begin{itemize}
+  \item \emph{Plan:} KPI-Dictionary, Data Owners, Cadence (Quartal + Jahresabschluss).
+  \item \emph{Collect:} aus IT (Energie), Einkauf (Vendor), Werke (Produktion), Finance (CapEx/OpEx) \textendash{} per RPA + ETL.
+  \item \emph{Validate:} Completeness + Plausibilit\"at (Control Owner).
+  \item \emph{Consolidate:} im DWH; Versionierung Pflicht.
+  \item \emph{Approve:} Vier-Augen Data Owner + Reporting Lead; ESG Steering Sign-off f\"ur Top-KPI.
+  \item \emph{Report:} im BI-Tool + offizieller Bericht.
+  \item \emph{Assure:} Internal Audit Sampling; Evidence Pack abrufbar.
+\end{itemize}
+
+\smallskip
+\textbf{2. Acht Controls:} siehe Aufgabe 5.
+
+\smallskip
+\textbf{3. Evidence Pack:} siehe Aufgabe 5; pro KPI verbindlich.
+
+\smallskip
+\textbf{4. KPI-Set:} siehe Aufgabe 6.
+
+\smallskip
+\textbf{5. Integration in Transformation:}
+\begin{itemize}
+  \item DWH/ETL mit ESG-Schema und Audit-Trail (RPA liefert Daten mit Bot-ID + Version).
+  \item Workflow-Freigaben f\"ur KPI-\"Anderungen (ESG Steering + Annahmenregister-Update Pflicht).
+  \item BI-Dashboard mit Drill-down auf Quelle, DQ-Label und Freigabeprotokoll.
+\end{itemize}
+
+\smallskip
+\textbf{6. Zwei Datenl\"ucken im Dry Run:}
+\begin{enumerate}
+  \item \emph{Scope-3 Lieferkette (DQ-C):} Sch\"atzung mit Branchen-Durchschnittsfaktoren. \emph{Annahme:} Top-100-Vendoren liefern bis Q4 verifizierte Daten. \emph{Verworfen:} 100\,\%-Verifikation in 14 Wochen (unrealistisch). \emph{Guardrail:} Methodik dokumentiert, ESG-Steering-Sign-off, Verbesserungsplan auf B in 12 Monaten. \emph{Fr\"uhwarn:} Auditor-Findings zu Scope-3 $\rightarrow$ sofortiger Pause + Re-Design.
+  \item \emph{Werks-Energiedaten (Werke C+D, DQ-C):} Sch\"atzung aus Produktionsmenge. \emph{Annahme:} Faktoren aus \"ahnlichen Werken \"ubertragbar. \emph{Verworfen:} Z\"ahler-Installation in 14 Wochen (Procurement-Zyklus zu lang). \emph{Guardrail:} Sch\"atz-Methodik dokumentiert; Z\"ahler-Installation als Verbesserungsprojekt budgetiert. \emph{Fr\"uhwarn:} Abweichung gemessen vs.\ gesch\"atzt $>$\,30\,\% bei zwei \"ahnlichen Werken $\rightarrow$ Z\"ahler-Installation priorisieren.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Risk Appetite \& Vorstands-Transparenzregeln}{\nivLiii}{35\,min}
+
+\ytquery{ESG risk appetite governance board transparency rules CSRD audit committee}
+
+\begin{loesungbox}
+\textbf{1. F\"unf Bereiche mit bewusstem Restrisiko:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.0cm}XX@{}}
+\toprule
+\textbf{Bereich} & \textbf{Annahme + Risiko} & \textbf{Guardrail + Fr\"uhwarnsignal} \\
+\midrule
+Scope-3 Lieferkette DQ-C    & Branchen-Mittel reicht in Dry Run; Risiko: Audit-Finding & Methodik + Sign-off + Verbesserungsplan; Fr\"uhwarn: Audit-Sample-Failure \\
+Energie kleiner Werke gesch\"atzt & Lokale Z\"ahler fehlen; Risiko: Abweichung $>$\,30\,\% & Z\"ahler-Installation budgetiert; Fr\"uhwarn: Sch\"atz-Vergleich bei \"ahnlichen Werken \\
+Vendor-CO\textsubscript{2} self-reported & nicht extern verifiziert; Risiko: \"Uberzeichnung & Pflicht-Audit-Klausel; Fr\"uhwarn: 2 versp\"atete Reports nacheinander \\
+Sampling statt 100-\%-Pr\"ufung & 5\,\%-Stichprobe; Risiko: blinde Flecken & Risikobasierter Sampling-Plan; Fr\"uhwarn: Findings-Quote im Sample $>$\,5\,\% \\
+CSRD-Reporting trotz Tool-L\"ucken & manuelle Konsolidierung in Wo 1\,--\,4; Risiko: Fehler & Vier-Augen-Pflicht; Fr\"uhwarn: $>$\,2 Korrekturen pro Bericht \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Drei Vorstands-Transparenzregeln:}
+\begin{itemize}
+  \item Jede ver\"offentlichte Zahl tr\"agt das schlechteste DQ-Label im Aggregat.
+  \item Annahmenregister geht im selben Versand mit (kein separater Link).
+  \item D-Werte sind nicht ver\"offentlichbar; im Tool gekennzeichnet, kein Bypass.
+\end{itemize}
+
+\smallskip
+\textbf{3. Drei nicht delegierbare Vorstands-Entscheidungen:}
+\begin{itemize}
+  \item \emph{Systemgrenzen:} jede Reduktion / Erweiterung \"andert Vergleichbarkeit aller historischen Daten \textendash{} kann nur der Vorstand verantworten.
+  \item \emph{Risk Appetite f\"ur Sch\"atzungen:} entscheidet, ob die Organisation mit DQ-C in den Bericht geht \textendash{} ein reputationskritischer Akt.
+  \item \emph{Transparenzregeln gegen Greenwashing:} bindet Marketing, IR und Berichterstattung; ohne Vorstandsbeschluss aush\"ohlbar.
+\end{itemize}
+
+\smallskip
+\textbf{4. Vorstandsvorlage (1 Absatz):}\\
+``Wir schlagen einen dreistufigen ESG-Risk-Appetite-Rahmen vor (Scope-3 DQ-C zul\"assig mit dokumentierter Methodik und Verbesserungsplan; Sampling statt 100\,\%-Pr\"ufung in Dry Run; manuelle Konsolidierung Wo\,1\,--\,4 mit Vier-Augen). Drei Entscheidungen erbitten wir vom Vorstand: Systemgrenzen, Risk Appetite f\"ur Sch\"atzungen und Transparenzregeln gegen Greenwashing. Drei Empfehlungen, die wir tragen: KPI-Set mit Anti-Gaming-Kopplung, Minimum Viable Controls f\"ur Dry Run, Integration in laufende Transformationsprogramme \textendash{} Eskalation an Sie nur bei Audit-Finding-Niveau A oder \"Uberschreiten des dokumentierten Risikoappetits.''
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Minimum Viable Controls (MVC) f\"ur Dry Run}{\nivLiii}{30\,min}
+
+\ytquery{minimum viable controls dry run sampling audit readiness CSRD scale phase}
+
+\begin{loesungbox}
+\textbf{1. F\"unf MVC:}
+\begin{itemize}
+  \item \emph{Completeness-Check} (automatisch).
+  \item \emph{Vier-Augen-Freigabe} f\"ur Top-3-KPI (h\"andisch).
+  \item \emph{DQ-Labeling-Pflicht} (Tool-erzwungen).
+  \item \emph{Annahmenregister-Pflicht} (mit jedem Reporting im selben Versand).
+  \item \emph{Change-Log Pflicht} f\"ur KPI-Definition (Tool-erzwungen).
+\end{itemize}
+
+\smallskip
+\textbf{2. Drei Scale-Controls (Wo 7\,--\,12):}
+\begin{itemize}
+  \item Reconciliation zu Finance-Daten f\"ur alle KPIs (ben\"otigt DWH-Anbindung an Finance-System).
+  \item Sampling-Review f\"ur Vendor-Daten (ben\"otigt Internal-Audit-Kapazit\"at).
+  \item Auto-Validierung gegen historische Werte (ben\"otigt 12-Monats-Historie pro KPI).
+\end{itemize}
+
+\smallskip
+\textbf{3. F\"unf Kompensations-Ma{\ss}nahmen im Dry Run:}
+\begin{itemize}
+  \item Sampling per Hand statt automatisiert (5 KPIs $\times$ 3 Stichproben = 15 Pr\"ufungen).
+  \item Sponsor-Sign-off (CSO + CFO) f\"ur Top-KPI ersetzt Reconciliation.
+  \item Audit-Trockenlauf in Wo 10 (Internal Audit pr\"uft Evidence Pack Stichprobe).
+  \item Spot-Checks Plausibilit\"at gegen Vorjahr (manuell).
+  \item Erh\"ohte Frequenz des ESG Steering Board (w\"ochentlich statt monatlich).
+\end{itemize}
+
+\smallskip
+\textbf{4. Drei Stoppkriterien:}
+\begin{itemize}
+  \item $>$\,3 KPIs ohne DQ-Label.
+  \item Control Pass Rate $<$\,80\,\%.
+  \item Mehr als ein materieller Audit-Finding im Audit-Trockenlauf.
+\end{itemize}
+
+\smallskip
+\textbf{5. Faustregel:} Eine Control ist \emph{MVC}, wenn ohne sie das Reporting strukturell nicht belastbar oder nicht audittauglich w\"are; sie ist \emph{Overkill}, wenn sie nur zus\"atzliche Sicherheit bringt, die im Dry Run nicht entscheidungsrelevant ist (z.\,B.\ vollst\"andige Auto-Reconciliation f\"ur einen Wert mit DQ-C).
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Capstone-Transferprojekt}{\nivLiii}{60\,min}
+
+\ytquery{CSRD EU taxonomy decision architecture CSO CFO CIO governance integration}
+
+\begin{loesungbox}
+\emph{Musterl\"osung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind m\"oglich.}
+
+\smallskip
+\textbf{1. Top-12 Entscheidungen:}
+\begin{enumerate}
+  \item Systemgrenzen je Topic (CSO + Vorstand).
+  \item KPI-Dictionary Ownership (Data Owners pro Topic).
+  \item Datenqualit\"atslabels A/B/C/D als Pflichtattribut.
+  \item Control-Set (5 MVC, 3 Scale).
+  \item Ausnahmeprozess (Sign-off + Sunset).
+  \item Tooling-Architektur (DWH/ETL/BI/Workflow).
+  \item Reporting-Cadence (quartalsweise intern, j\"ahrlich extern).
+  \item Audit-Readiness (Evidence Pack + Sampling-Plan).
+  \item Vendor-Datenstrategie (Scorecard + Vertragsklauseln; Tag 14).
+  \item Kommunikations- und Transparenzregeln (Annahmenregister Pflicht).
+  \item Priorisierung (Materialit\"at vor Detail).
+  \item Budget / Ressourcen (250\,k\,\euro{} mit klarer Verteilung).
+\end{enumerate}
+
+\smallskip
+\textbf{2. Governance \& Operating Model:}
+\begin{itemize}
+  \item \emph{ESG Steering} (CSO Vorsitz; CFO, CIO, CPO, CHRO, Internal Audit).
+  \item \emph{Data Owners} pro Topic; \emph{Control Owners} f\"ur Control-Set.
+  \item \emph{Reporting Factory} (Lead + 2 FTE) als zentrale Konsolidierungsstelle.
+  \item RACI je Topic; Eskalation: Steering \textrightarrow{} Vorstand \textrightarrow{} Aufsichtsrat (Audit Committee).
+  \item Entscheidungsprotokolle auditf\"ahig (Pflichtfelder wie Tag 13).
+\end{itemize}
+
+\smallskip
+\textbf{3. Controls \& Evidence Framework:} 5 MVC f\"ur Dry Run, 3 Scale-Controls f\"ur Wo 7\,--\,12 (siehe Aufgabe 10); Evidence Pack pro KPI; Change-/Versioning Pflicht; RBAC quartalsw.\ Review; Sampling 5\,\%/Quartal in Scale-Phase.
+
+\smallskip
+\textbf{4. Integration in Transformation:}
+\begin{itemize}
+  \item Prozessdigitalisierung (BPMN/EPC-Modelle als Trag\-grund f\"ur Controls).
+  \item Process Intelligence (Monitoring f\"ur KPI-Inputs).
+  \item Green IT (Mess-Standard liefert Energie-/CO\textsubscript{2}-Daten).
+  \item Vendor Management (Scorecards aus Tag 14).
+  \item KPI-Kopplungen gegen Greenwashing (Tag 14 + 16 verbunden).
+\end{itemize}
+
+\smallskip
+\textbf{5. Roadmap (16 Wochen):}
+\begin{itemize}
+  \item \emph{Wo 1\,--\,6 Dry Run:} MVC etabliert; Top-3-KPIs ver\"offentlichbar; Annahmenregister Pflicht.
+  \item \emph{Wo 6\,--\,10 Stabilisierung:} Scale-Controls hochziehen; DWH/ETL-Anbindung; Workflow-Freigaben live.
+  \item \emph{Wo 10\,--\,16 Assurance Readiness:} Audit-Trockenlauf; Lessons Learned; Korrekturen; Training (Change-Lead-Programm aus Tag 15).
+  \item \emph{Sustain (laufend):} Quartalsw.\ Steering; j\"ahrlicher externer Auditschluss; PDCA mit Verbesserungsplan.
+\end{itemize}
+
+\smallskip
+\textbf{6. Top-5-Risiken + Gegenma{\ss}nahmen:}
+\begin{itemize}
+  \item Greenwashing $\rightarrow$ KPI-Kopplung + DQ-Label + Annahmenregister.
+  \item Datenqualit\"at $\rightarrow$ DQ-System + Verbesserungsplan + Z\"ahler-Investition.
+  \item Fehlende Verantwortlichkeit $\rightarrow$ klare Data Owner; Eskalationspfad.
+  \item Audit-Findings $\rightarrow$ Audit-Trockenlauf in Wo 10; Internal Audit fr\"uh einbinden.
+  \item KPI-Gaming $\rightarrow$ Anti-Gaming-Kopplung; Stichprobe; Audit-Pr\"ufung.
+\end{itemize}
+
+\smallskip
+\textbf{7. Zwei Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Ver\"offentlichung trotz DQ-C:} Scope-3 wird mit DQ-C ver\"offentlicht; Annahme: Transparenz ist besser als Schweigen; verworfene Alternative: ``Scope-3 weglassen'' (Audit-Risiko); Guardrails: Methodik + Verbesserungsplan + Sign-off; Fr\"uhwarn: Audit-Finding A oder Reputationsangriff; Review: in 12 Monaten.
+  \item \emph{Reduktion Controls im Dry Run:} Reconciliation und Auto-Validierung ausgesetzt; kompensiert durch Sponsor-Sign-off + Audit-Trockenlauf; Annahme: 90\,\% der Materialit\"at \"uber MVC abgedeckt; verworfen: ``alle Controls von Tag 1'' (sprengt 14 Wochen); Fr\"uhwarn: Control Pass Rate $<$\,80\,\% oder mehr als ein materieller Finding.
+\end{enumerate}
+
+\smallskip
+\textbf{8. Anschluss an Strategie (f\"unf Argumente):}
+\begin{enumerate}
+  \item \emph{Compliance:} CSRD ist gesetzlich verbindlich; ein nicht auditf\"ahiges Reporting ist ein Bilanzthema.
+  \item \emph{Reputation:} Anti-Greenwashing-Logik schafft Glaubw\"urdigkeit bei Kunden, NGOs, Presse.
+  \item \emph{Investorenkommunikation:} EU-Taxonomie-Anteile sind Kapitalmarktrelevant; Investoren erwarten Daten + Methodik.
+  \item \emph{Effizienz:} Integration mit RPA / Green IT vermeidet Parallelpipelines; ein System statt drei.
+  \item \emph{Anschluss an Transformation:} Verankerung mit BPMN/EPC, RPA und Change schafft \emph{ein} Operating Model, statt isolierter Initiativen.
+\end{enumerate}
+
+\smallskip
+\textbf{9. Pr\"asentationssatz Vorstand / Aufsichtsrat:}\\
+``Wir bauen in 16 Wochen eine ESG-Governance, die CSRD und EU-Taxonomie in unsere bestehenden Transformationsprogramme integriert \textendash{} mit Minimum Viable Controls im Dry Run, Datenqualit\"atslabels und Annahmenregister gegen Greenwashing, und drei nicht delegierbaren Vorstandsentscheidungen (Systemgrenzen, Risk Appetite, Transparenzregeln); das Ergebnis ist nicht nur ein erf\"ullbarer Bericht, sondern ein verantwortetes Governance- und Entscheidungs-Betriebssystem.''
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss (Capstone-Tag und Kurs)}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen zu Tag 16 sind eine Diskussionsbasis und integrieren bewusst Inhalte der Tage 1\,--\,15. Pr\"ufen Sie: Wo haben Sie Ihre Architektur \emph{integriert} \textendash{} und wo haben Sie ESG-Compliance noch als separate S\"aule gef\"uhrt?
+
+\medskip
+\begin{infobox}[N\"achster Schritt nach Kursabschluss]
+Tragen Sie die Capstone-L\"osung in die abschlie{\ss}ende Coaching-Sitzung. Drei Leitfragen: Welche Entscheidungen sind in Ihrer Organisation \emph{wirklich} nicht delegierbar? Wie verhindern Sie strukturell, dass ein Audit-Trockenlauf in B\"urokratie kippt? Welche zwei Restrisiken w\"urden Sie heute akzeptieren \textendash{} und welche Fr\"uhwarnsignale w\"urden Sie zur Korrektur zwingen?
+\end{infobox}
+
+\medskip
+\noindent\textbf{Bogen des Kurses 71 (Dig 42):}\\
+\emph{Notation} (BPMN, EPC) \textrightarrow{} \emph{Automatisierung} (RPA, Governance) \textrightarrow{} \emph{Steuerung} (ITSM, Green IT) \textrightarrow{} \emph{F\"uhrung} (Change Leadership) \textrightarrow{} \emph{Verantwortung} (CSRD). Diese f\"unf Ebenen sind \emph{eine} Architektur, kein Werkzeugkasten \textendash{} und der Capstone macht das sichtbar.
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 16 \textperiodcentered{} L\"osungsheft (Capstone) \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

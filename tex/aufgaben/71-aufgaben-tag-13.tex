@@ -1,0 +1,601 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 13 - Aufgabenheft
+% Nachhaltige IT-Services steuerbar machen: Service Portfolio, Capacity, Rightsizing, Energy Efficiency
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 13}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Sustainable IT Services \& Capacity}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 6 \textperiodcentered{} TAG 13 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 16.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 13\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Nachhaltige IT-Services steuerbar\\machen \textendash{} Portfolio, Capacity\\und Rightsizing in elf Aufgaben.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 13 \textendash{} \emph{Nachhaltige IT-Services steuerbar machen}: ITIL-4-orientiertes Service Portfolio Management, Kapazit\"atsplanung, Rightsizing, Energy-Efficient Data Centers und ISO-20000-nahe Nachweislogik. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Portfolio-Logik, Kapazit\"ats-Begriffe, Energiehebel. 5\,--\,10 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Portfolio-Canvas, Rightsizing-Plan, KPIs, Capacity-Board, Audit-Logik. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Entscheidungsarchitektur, Anti-Greenwashing-KPIs, Trade-off-Protokolle. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt eine Niveau-Markierung, einen Zeit-Richtwert, den Aufgabentext, einen Antwort-Freiraum und eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 13}. \emph{``Sicherheit durch Messung''} \textendash{} Rightsizing ohne SLOs und Monitoring ist Gl\"ucksspiel. Versuchen Sie jede Aufgabe zuerst eigenst\"andig.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Service-Portfolio: Pipeline / Live / Retired}{\nivLi}{8\,min}
+
+\noindent Ein \emph{Service Portfolio} (ITIL 4) umfasst alle Services einer IT-Organisation \textendash{} \emph{Pipeline} (geplant), \emph{Live} (in Produktion), \emph{Retired} (abgek\"undigt). Es ist \emph{nicht} der Service-Katalog (der nur den ``Live''-Teil zeigt). ``Wert'' ist nicht nur monet\"ar: Kundennutzen, regulatorische Relevanz, Resilienz und \emph{Nachhaltigkeitswirkung} z\"ahlen genauso.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Erkl\"aren Sie in je 2\,--\,3 S\"atzen den Unterschied zwischen \emph{Service Portfolio}, \emph{Service Catalog} und \emph{Service Pipeline}.
+  \item Erstellen Sie eine \textbf{Tabelle mit acht Attributen}, die jeder Eintrag im Portfolio mindestens haben muss (z.\,B.\ \emph{Service-Name}, \emph{Owner}, \emph{Kritikalit\"at/SLO-Klasse}, \emph{Kosten pro Monat}, \emph{Energieverbrauch (gemessen/gesch\"atzt)}, \emph{Risiko}, \emph{Nachhaltigkeitshebel}, \emph{Lebenszyklus-Status}).
+  \item Begr\"unden Sie in einem Satz, warum die Nachhaltigkeitswirkung ein \emph{eigenes Attribut} sein muss \textendash{} statt sie in ``Kosten'' zu verstecken.
+\end{enumerate}
+
+\ytquery{ITIL 4 service portfolio management pipeline live retired catalog}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Capacity \& Rightsizing \textendash{} Begriffe sortieren}{\nivLi}{8\,min}
+
+\noindent \emph{Kapazit\"at} ist die F\"ahigkeit, Last und SLOs zu erf\"ullen \textendash{} \"uber vier Dimensionen: \emph{Compute}, \emph{Storage}, \emph{Netzwerk}, \emph{People/Skills}. \emph{Rightsizing} ist die Anpassung der Ressourcen an den \emph{realen} Bedarf: Overprovisioning reduzieren, ohne SLO zu verletzen. Begleitbegriffe: \emph{SLO} (Service Level Objective), \emph{SLI} (Service Level Indicator), \emph{SLA} (vertragliche Zusage), \emph{Guardrail} (automatischer Stopp/Rollback bei Schwellverletzung).
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Erstellen Sie eine \textbf{Begriffstabelle} mit den sieben Begriffen \emph{Capacity, Rightsizing, SLO, SLI, SLA, Overprovisioning, Guardrail}. Pro Begriff: Definition (1 Satz) + ein konkretes Beispiel.
+  \item Erkl\"aren Sie in einem Satz, warum \emph{Rightsizing ohne SLO} riskant ist \textendash{} und in einem zweiten Satz, was \emph{Rightsizing ohne Monitoring} typischerweise zur Folge hat.
+  \item Nennen Sie \textbf{drei Anzeichen}, dass ein Service \emph{overprovisioniert} ist (z.\,B.\ CPU $<$\,20\,\% im Durchschnitt, RAM $<$\,40\,\%, kein einziger Spitzen-Alarm in 90 Tagen).
+\end{enumerate}
+
+\ytquery{IT capacity planning rightsizing SLO SLI SLA overprovisioning guardrail}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Sieben Hebel f\"ur Energy-Efficient Data Centers}{\nivLi}{10\,min}
+
+\noindent Energieeffizienz im Rechenzentrum entsteht durch eine Kombination von Hebeln: \emph{Konsolidierung}, \emph{Virtualisierung / Container}, \emph{Abschalten Idle}, \emph{K\"uhlungs-Optimierung}, \emph{Hardware-Effizienzklassen}, \emph{Workload-Shift in g\"unstige Zeitfenster}, \emph{Strommix / Standort} (als Konzept), \emph{Prozessdisziplin (Change / Release)}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Erkl\"aren Sie jeden der \textbf{acht Hebel} in einem Satz \textendash{} so, dass eine Fachbereichsleitung versteht, was gemeint ist und welcher \emph{Aufwand} dahintersteckt (Low / Mid / High).
+  \item Sortieren Sie die Hebel nach \emph{Wirkung / Aufwand}. Welche drei sind die typischen \emph{Low Regret Moves} (hoher Effekt bei niedrigem Risiko)?
+  \item Nennen Sie \textbf{zwei Hebel}, die in der Praxis oft als ``schnell umsetzbar'' verkauft werden, aber teure Folgen haben (z.\,B.\ ``alles in die Cloud schieben'' ohne Workload-Profil; ``K\"uhlung herunterfahren'' ohne Temperaturmonitoring).
+\end{enumerate}
+
+\ytquery{energy efficient data center virtualization rightsizing workload shift cooling}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Service-Portfolio Canvas f\"ur 20 Services}{\nivLii}{25\,min}
+
+\begin{infobox}[Ausgangslage: ``20 Services, neue Kostenziele'']
+\textbf{Unternehmen:} Mittelgro{\ss}er Versicherer mit 20 IT-Services (Kundenportal, DWH/Reporting, CRM, Schadenmanagement, Vertragsverwaltung, Dev/Test-Umgebungen, BI, Mail, Active Directory, \ldots).
+
+\smallskip
+\textbf{Problem:} Budget gedeckelt, Energieziel \emph{Konzernvorgabe} ($-$15\,\% in 12 Monaten). Bisher gibt es keinen einheitlichen Portfolio-Blick \textendash{} jeder Service wird einzeln verhandelt.
+
+\smallskip
+\textbf{Auftrag:} In 30 Minuten ein Portfolio-Steuerungsbild liefern, das eine Entscheidungsgrundlage f\"ur das Steuerkreis-Meeting in einer Woche ist.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Skizzieren Sie einen \textbf{Service-Portfolio Canvas} mit den Spalten: \emph{Service}, \emph{Owner}, \emph{Status (Pipeline/Live/Retired)}, \emph{Kritikalit\"at} (1\,--\,5), \emph{SLO-Klasse} (Gold/Silver/Bronze), \emph{Kosten/Monat}, \emph{Energie-Treiber}, \emph{Nachhaltigkeitshebel}, \emph{Entscheidung} (Invest / Halten / Optimieren / Retire).
+  \item F\"ullen Sie die Tabelle f\"ur \emph{acht} Beispiel-Services aus (drei davon Live, einer Pipeline, einer Retired \textendash{} der Rest Live mit unterschiedlicher Kritikalit\"at).
+  \item Treffen Sie f\"ur \textbf{drei} Services eine konkrete Entscheidungsempfehlung mit Begr\"undung (z.\,B.\ \emph{Dev/Test: Retire nicht n\"otige Instanzen, Off-Hours-Shutdown}).
+  \item Nennen Sie \textbf{zwei Zielkonflikte}, die der Canvas sichtbar macht (z.\,B.\ \emph{Kritikalit\"at vs.\ Kosten}, \emph{Verf\"ugbarkeit vs.\ Energie}).
+\end{enumerate}
+
+\ytquery{IT service portfolio canvas critical SLO sustainability scoring}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Rightsizing-Plan ``Service auf 10 VMs''}{\nivLii}{25\,min}
+
+\begin{infobox}[Mini-Szenario: Reporting-Service]
+\textbf{Service:} \emph{ReportingService} l\"auft auf 10 virtuellen Maschinen (VM).
+
+\smallskip
+\textbf{Monitoring-Daten (90-Tage-Fenster):}
+\begin{itemize}
+  \item CPU-Auslastung im Durchschnitt 15\,--\,20\,\%.
+  \item RAM-Auslastung 35\,--\,40\,\%.
+  \item Peak (Monatsende, 5 Tage / Monat): CPU 60\,\% f\"ur 6 Stunden, RAM 70\,\%.
+  \item Keine Ausf\"alle, SLO ``Antwortzeit ok'' eingehalten.
+\end{itemize}
+
+\smallskip
+\textbf{Ziel:} 20\,\% Energiekostenreduktion \emph{ohne} SLO-Bruch.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Formulieren Sie \textbf{drei Annahmen} (z.\,B.\ Peak-Profil bleibt \"ahnlich, Autoscaling ist im Hypervisor m\"oglich, das Lastprofil ist bekannt und nicht von externen Triggern abh\"angig).
+  \item Legen Sie einen \textbf{zweistufigen Rightsizing-Plan} fest: \emph{Pilot} (z.\,B.\ 2 VMs reduzieren / kleinere VM-Typen / Nacht-Shutdown) \textrightarrow{} \emph{Rollout} (wenn Pilot ok). Pro Stufe: konkrete Aktion, Owner, Erfolgs-/Stopp-Kriterien.
+  \item Definieren Sie \textbf{zwei Guardrails} (Stopp-/Rollback-Regeln). Beispiele: Fehlerquote $>$\,0,5\,\%, Antwortzeit $>$\,2\,s im 95. Perzentil, CPU $>$\,85\,\% \"uber 15 Minuten.
+  \item \textbf{Entscheidung unter Unsicherheit:} Welches ist das gr\"o{\ss}te Risiko (z.\,B.\ Peak wurde untersch\"atzt, Monitoringdaten sind l\"uckenhaft, Service hat unsichtbare Abh\"angigkeiten)? Wie kompensieren Sie \emph{minimalinvasiv} (z.\,B.\ Peak-Profil 1 Monat zus\"atzlich messen, Notfall-Kapazit\"at on demand sichern)?
+\end{enumerate}
+
+\ytquery{rightsizing pilot rollout guardrails VM cpu memory peak SLO}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Sechs Ma{\ss}nahmen Capacity \& Rightsizing}{\nivLii}{25\,min}
+
+\begin{infobox}[Kontext: EuroHealth Services]
+\textbf{Unternehmen:} ``EuroHealth Services'' \textendash{} kritische Gesundheits-Services, hohe Verf\"ugbarkeit gefordert.
+
+\smallskip
+\textbf{Problem:} Energiekosten steigen, gleichzeitig w\"achst die Last. Kein sauberes Service-Portfolio, Kapazit\"atsentscheidungen reaktiv. \emph{Audit} fordert nachvollziehbare ITSM-Prozesse.
+
+\smallskip
+\textbf{Ziel:} 15\,\% Energie- und Betriebskostenreduktion in 4 Monaten ohne SLO-Verletzung. Budget 200\,k\,\euro{}.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie ein \emph{Capacity- \& Rightsizing-Ma{\ss}nahmen\-paket} (mindestens sechs Ma{\ss}nahmen). F\"ur \emph{jede} Ma{\ss}nahme:
+
+\begin{itemize}
+  \item \textbf{Beschreibung} (1 Satz),
+  \item \textbf{Owner} (Rolle, nicht Person),
+  \item \textbf{Guardrail / Stopp-Regel},
+  \item \textbf{Monitoring} (welche Metrik wird gepr\"uft),
+  \item \textbf{Rollback-Plan} (was passiert, wenn die Guardrail greift).
+\end{itemize}
+
+\noindent Beispielsweise:
+\begin{itemize}
+  \item Abschalt-Policy f\"ur Non-Prod (Owner: Plattformbetrieb; Guardrail: Notfall-On in $<$\,30 Min; Monitoring: Off-Hours-Quote; Rollback: Wiederanlauf-Skript).
+  \item Rightsizing-Pilot 2 Services (Owner: Service Owner; Guardrail: CPU $>$\,85\,\% / Fehlerquote $>$\,0,5\,\%; Monitoring: Synthetic Tests; Rollback: 1-Klick-Restore).
+  \item Capacity-Review-Board 2-w\"ochentlich (Owner: ITSM Lead; auditf\"ahiges Entscheidungsprotokoll).
+  \item \ldots
+\end{itemize}
+
+\noindent Erg\"anzen Sie unter dem Ma{\ss}nahmenpaket eine \emph{Priorisierungs-Tabelle} (Hebel vs.\ Aufwand): welche zwei Ma{\ss}nahmen starten in den ersten 4 Wochen, welche zwei in den Wochen 5\,--\,12, welche zwei sp\"ater?
+
+\ytquery{ITIL capacity management sustainable IT rightsizing measures non-prod shutdown}
+
+\antwortlinien{24}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{KPI-Set: 1 SLO, 1 Kosten, 1 Nachhaltigkeit}{\nivLii}{20\,min}
+
+\begin{infobox}[Aufgabenstellung]
+Sie m\"ussen Ihrem Steuerkreis ein KPI-Set f\"ur ``Sustainable IT'' vorlegen. Es muss mindestens \emph{drei} KPIs enthalten: einen \emph{SLO-KPI} (Verf\"ugbarkeit), einen \emph{Kosten-KPI}, einen \emph{Nachhaltigkeits-KPI}. Wichtig: Die KPIs m\"ussen \emph{gekoppelt} sein (Anti-Gaming) \textendash{} Kostenreduktion ohne SLO-Einhaltung darf nicht ``z\"ahlen''.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie f\"ur jeden der drei KPI: \emph{Name}, \emph{Berechnung / Formel}, \emph{Owner}, \emph{Ziel (Zahl)}, \emph{Datenquelle}, \emph{Review-Zyklus}.
+  \item Formulieren Sie eine \textbf{Kopplungsregel} (Anti-Gaming): z.\,B.\ ``Kostenreduktion z\"ahlt nur, wenn SLO-Verf\"ugbarkeit $\geq$\,99,9\,\% im selben Zeitraum'' oder ``Off-Hours-Compliance z\"ahlt nur, wenn keine Notfall-Eskalation w\"ahrend Off-Hours''.
+  \item Beschreiben Sie \textbf{ein Greenwashing-Anti-Muster}: Wie w\"urde jemand diese KPIs ``gamen'', wenn die Kopplung fehlt? Wie verhindern Sie es konkret?
+  \item Erg\"anzen Sie \textbf{eine vierte, optionale KPI} (z.\,B.\ \emph{Auditf\"ahigkeit der Entscheidungen} \textendash{} \% der Capacity-Entscheidungen mit dokumentiertem Protokoll), die das System \emph{vor sich selbst} sch\"utzt.
+\end{enumerate}
+
+\ytquery{sustainable IT KPI green IT anti gaming coupling SLO cost energy}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Fallstudie ``EuroHealth Services'' \textendash{} Portfolio + Capacity}{\nivLii}{40\,min}
+
+\begin{infobox}[Fallstudie: EuroHealth]
+\textbf{Unternehmen:} ``EuroHealth Services'' \textendash{} kritische Health-Services, hohe Verf\"ugbarkeitsanforderungen, mehrere Standorte.
+
+\smallskip
+\textbf{Problem:}
+\begin{itemize}
+  \item Energiekosten steigen, Last w\"achst.
+  \item Kein sauberes Service-Portfolio.
+  \item Kapazit\"atsentscheidungen passieren reaktiv.
+  \item Audit fordert nachvollziehbare Service-Management-Prozesse.
+\end{itemize}
+
+\smallskip
+\textbf{Ziel:} 15\,\% Energie- und Betriebskostenreduktion in 4 Monaten ohne SLO-Verletzung.
+
+\smallskip
+\textbf{Restriktionen:} Budget 200\,k\,\euro{}; Lastprognosen unsicher; Fachbereiche wehren sich gegen ``Abschaltungen''; einige Monitoringdaten fehlen.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Service-Portfolio f\"ur 8 Services} (Pipeline / Live / Retired) mit \emph{Owner}, \emph{Kritikalit\"at}, \emph{SLO}, \emph{Kosten-/Energie-Treiber}, \emph{Risiko}, \emph{Nachhaltigkeitshebel}.
+  \item \textbf{Scoring-Rahmen} (1\,--\,5) f\"ur Portfolio-Entscheidungen: \emph{Wert}, \emph{Risiko}, \emph{Kosten}, \emph{Nachhaltigkeitswirkung}, \emph{Ver\"anderungsaufwand}. Bewerten Sie die 8 Services und kennzeichnen Sie die Top-3 zur Optimierung und 1 \emph{Retire}-Kandidat.
+  \item \textbf{Ma{\ss}nahmenpaket} (mindestens 6 Ma{\ss}nahmen \textendash{} siehe Aufgabe 6) inkl.\ Guardrails, Monitoring, Rollback.
+  \item \textbf{Drei KPIs}: mindestens 1 SLO, 1 Kosten, 1 Nachhaltigkeit (siehe Aufgabe 7) mit Anti-Gaming-Kopplung und Owner.
+  \item \textbf{Entscheidung unter Unsicherheit:} Welche \emph{2 Ma{\ss}nahmen} starten Sie sofort (4 Wochen), welche \emph{2} verschieben Sie bewusst (Risiko / Abh\"angigkeit) \textendash{} mit Begr\"undung.
+\end{enumerate}
+
+\ytquery{sustainable IT service portfolio capacity governance healthcare SLO energy}
+
+\antwortlinien{32}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Portfolio Board \& Capacity Governance Design}{\nivLiii}{35\,min}
+
+\begin{infobox}[Rolle: Head of IT Service Management]
+\textbf{Ihre Rolle:} \emph{Head of ITSM} eines Konzerns mit ca.\ 80 Services, mehrere Bereiche, eigene FinOps-Funktion im Aufbau.
+
+\smallskip
+\textbf{Auftrag:} Etablieren Sie ein \emph{Portfolio Board} + eine \emph{Capacity Governance}, die in 90 Tagen wirksam sein muss \textendash{} \emph{auditf\"ahig} und \emph{anschlussf\"ahig} an die Konzernstrategie.
+
+\smallskip
+\textbf{Restriktionen:} Politische Widerst\"ande gegen ``Stilllegungen''; Datenlage zu Verbrauch heterogen; Budget gedeckelt.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Portfolio Board Setup:} Wer sitzt drin (Portfolio Owner, Service Owner, FinOps / Controlling, Operations / SRE)? Taktung (z.\,B.\ monatlich, 90 Min)? Entscheidungsschwellen (welche Entscheidungen werden \emph{im Board} getroffen, welche \emph{eskaliert} an den Vorstand)?
+  \item \textbf{RACI \"uber f\"unf typische Entscheidungstypen}: \emph{Service einf\"uhren}, \emph{Service \"andern}, \emph{Service stilllegen}, \emph{SLO-Klasse \"andern}, \emph{Rightsizing-Ausnahme genehmigen}.
+  \item \textbf{Entscheidungsprotokoll (auditf\"ahig):} Welche f\"unf Pflichtfelder muss jedes Protokoll enthalten? (Datum, Teilnehmer, Entscheidung, Begr\"undung, Datenquelle, Reviewdatum, Verantwortlicher.)
+  \item \textbf{Capacity Governance \textendash{} drei Bausteine:} \emph{Demand Forecasting Minimal} (z.\,B.\ 12-Monats-Trend + Quartals-Adjust), \emph{Guardrail-Set} (Stopp-/Rollback-Regeln), \emph{Ausnahmeprozess} (wer darf Ausnahmen genehmigen, in welchem Rahmen).
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:} (a) Welche \emph{SLO-Reserven} sind ``genug'', obwohl der Peak unsicher ist? Begr\"undung + Fr\"uhwarnsignal + Eskalationspfad. (b) Welche Services werden \emph{konsequent} optimiert / retired, obwohl Widerstand erwartet wird? Trade-off-Logik + Stakeholder-Plan.
+\end{enumerate}
+
+\ytquery{ITSM portfolio board capacity governance RACI decision protocol audit}
+
+\antwortlinien{28}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{ISO-20000-nahe Nachweislogik \textendash{} ohne ``Papier um des Papiers willen''}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Nachweise im IT-Service-Management entstehen nicht durch Dokumente, sondern durch \emph{gelebte} Prozesse mit klaren Rollen, Messgr\"o{\ss}en, Reviews und dokumentierten Entscheidungen. Auditoren erwarten \emph{Evidenz}: Wer hat was wann auf welcher Datenbasis entschieden? Gleichzeitig erzeugt ``alles dokumentieren'' Aufwand ohne Wirkung \textendash{} Compliance kippt in B\"urokratie.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{F\"unf Nachweisartefakte} aus dem ITSM-Alltag, die ein Auditor \emph{im echten Leben} pr\"uft (z.\,B.\ Capacity-Board-Protokoll, Change-Tickets mit Approver, SLO-Report, Rightsizing-Begr\"undung, Incident-Post-Mortem). Pro Artefakt: was wird gepr\"uft, wer ist Owner, wo gespeichert?
+  \item \textbf{Drei ``Papier-Anti-Muster''}, die typisch sind und Aufwand ohne Wirkung erzeugen (z.\,B.\ jeden Monat ein Capacity-Report drucken, den niemand liest; doppelte Dokumentation in Wiki + Ticket; manuell gepflegte Service-Listen, die nie aktuell sind).
+  \item \textbf{Drei Hebel}, die Nachweis \emph{automatisch} entstehen lassen \textendash{} ohne Zusatzaufwand (z.\,B.\ Ticket-System exportiert Change-Log; SLO-Dashboard wird zum Audit-Report; Entscheidungs-Templates strukturieren Protokoll automatisch).
+  \item \textbf{Faustregel} (1 Satz): Wann ist ein Nachweis \emph{Compliance} \textendash{} und wann \emph{B\"urokratie}?
+\end{enumerate}
+
+\ytquery{ISO 20000 ITSM audit evidence service management documentation compliance}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Sustainable IT Service Portfolio Decision Architecture}{\nivLiii}{50\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} \emph{CIO} oder \emph{Head of IT Service Management} mit Senior-Sustainability-Mandat.
+
+\smallskip
+\textbf{Auftrag:} In 12 Wochen ein belastbares \emph{Steuerungsmodell} etablieren, das Service-Portfolio, Kapazit\"at, Kosten und Nachhaltigkeitsziele integriert \textendash{} auditf\"ahig, skalierbar, konfliktfest.
+
+\smallskip
+\textbf{Restriktionen:}
+\begin{itemize}
+  \item Lastentwicklung unklar (Wachstumsszenarien $+$10\,\% bis $+$30\,\%).
+  \item Budget gedeckelt.
+  \item Politische Widerst\"ande aus Fachbereichen.
+  \item Tool-/Monitoring-Reife heterogen.
+  \item Zeitdruck durch Kostenziele.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strukturierte \emph{Entscheidungsarchitektur} \textendash{} keine Ma{\ss}nahmenliste \textendash{} in 8 Schritten:
+
+\begin{enumerate}
+  \item \textbf{Top-10 Entscheidungen} (Architektur, nicht Ma{\ss}nahmen): Service-Priorit\"aten, SLO-Klassen, Kapazit\"atsreserven, Rightsizing-Policy, Non-Prod-Regeln, Invest vs.\ Retire, Ausnahmeprozesse, Monitoring-Standards, Risikoakzeptanz, Review-Zyklen.
+  \item \textbf{Portfolio Governance:} Rollen (Portfolio Owner, Service Owner, FinOps, Operations), RACI, Board-Mechanik, Entscheidungsprotokoll.
+  \item \textbf{Capacity \& Rightsizing Governance:} Demand Forecasting Minimal, Guardrails, Rollback-Mechanik, Eskalation, Change-Policy.
+  \item \textbf{KPI \& Anti-Gaming Design:} KPIs koppeln (Kostenreduktion nur g\"ultig bei SLO-Einhaltung), Review- und Korrekturmechanik.
+  \item \textbf{Roadmap:} 4 Wochen Quick Wins \textrightarrow{} 8 Wochen Skalierung \textrightarrow{} Sustain (laufend), inkl.\ Kommunikations- \& Enablement-Plan.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:}
+    \begin{itemize}
+      \item Welche \emph{SLO-Reserven} sind ``genug'', obwohl Peak unsicher ist? Annahme, verworfene Alternative, Fr\"uhwarnsignal.
+      \item Welche Services werden \emph{konsequent} optimiert / retired trotz Widerstand? Trade-off-Logik, Stakeholder-Plan, Fr\"uhwarnsignal.
+    \end{itemize}
+  \item \textbf{Anschluss an Strategie:} Drei Argumente, warum diese Entscheidungsarchitektur das CIO-Mandat tr\"agt (Compliance, Kosten, Nachhaltigkeit).
+  \item \textbf{Pr\"asentationssatz f\"ur den Vorstand} (1\,--\,2 S\"atze): Welche Kernbotschaft erlaubt es dem Vorstand, dieses Modell ohne Detailpr\"ufung freizugeben?
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien (Senior-Level):} Pragmatismus unter Restriktionen \textperiodcentered{} Auditf\"ahigkeit \textperiodcentered{} Anti-Gaming-Reife \textperiodcentered{} Stakeholder-Bewusstsein \textperiodcentered{} Wirkung von ``Ressourcen verwalten'' zu ``verantwortete Service- und Entscheidungsarchitektur''.
+
+\ytquery{sustainable IT decision architecture CIO portfolio capacity governance roadmap}
+
+\antwortlinien{38}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben zu Tag 13 bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 13}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Service-Portfolio (Pipeline / Live / Retired) sauber von Service-Katalog und Pipeline unterscheiden.
+  \item Kapazit\"at und Rightsizing entlang SLO, SLI, SLA und Guardrails operationalisieren.
+  \item Energieeffizienzhebel nach Wirkung und Aufwand sortieren \textendash{} \emph{Low Regret Moves} priorisieren.
+  \item Einen Portfolio-Canvas und einen zweistufigen Rightsizing-Plan mit Guardrails und Rollback entwerfen.
+  \item KPIs koppeln (Kosten + SLO + Nachhaltigkeit) \textendash{} mit Anti-Gaming-Logik.
+  \item Ein Portfolio Board und eine Capacity Governance freigabef\"ahig dimensionieren.
+  \item ISO-20000-nahe Nachweislogik gelebt umsetzen \textendash{} statt ``Papier um des Papiers willen''.
+  \item Ein Sustainable-IT-Steuerungsmodell als Entscheidungsarchitektur formulieren \textendash{} mit dokumentierten Restrisiken.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 13 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

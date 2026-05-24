@@ -1,144 +1,139 @@
 {
   "kurs_id": "22_Bo_143",
   "tag_nr": 8,
-  "titel": "Dynamische Preisstrategien und Performance-Monitoring im Plattformverkauf",
+  "titel": "Dynamische Preisstrategien und integrierte Plattform-Performance steuern",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Dynamische Preisstrategien — mehr als Rabattaktionen",
-      "youtube_id": "",
-      "youtube_query": "dynamic pricing strategie e-commerce deutsch erklärt",
-      "dauer_min": 8,
+      "titel": "Die typischen Preisstrategien — Überblick und Einordnung",
+      "youtube_id": "JOdSVqUa5p0",
+      "youtube_query": "typische preisstrategien einfach erklärt deutsch",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Was unterscheidet eine ‚dynamische Preisstrategie‘ von reinen Rabattaktionen?",
         "typ": "single",
+        "frage": "Was beschreibt eine dynamische Preisstrategie am präzisesten?",
         "optionen": [
-          "Dynamische Preise sind immer niedriger als der Listenpreis",
-          "Dynamische Preisstrategie passt Preise systematisch und regelbasiert an Wettbewerb, Nachfrage, Marge, Lagerbestand und Conversion an — Rabattaktionen sind dagegen meist pauschale, zeitlich begrenzte Preisnachlässe",
-          "Dynamische Preise gelten nur an Wochenenden",
-          "Dynamische Preise sind dasselbe wie A/B-Tests"
+          "Automatische tägliche Rabattaktionen, um Wettbewerber zu unterbieten",
+          "Datenbasierte Anpassung des Preises an Nachfrage, Wettbewerb, Lagerbestand, Saisonalität und Marge — innerhalb definierter Grenzen",
+          "Verzicht auf jede Preisänderung, um Vertrauen zu signalisieren",
+          "Manuelle Preisänderung nur einmal pro Jahr"
         ],
         "korrekt": 1,
-        "erklaerung": "Dynamische Preisgestaltung ist eine systematische Steuerung mehrerer Variablen über klare Regeln und Grenzen — sie kann Preise auch erhöhen, je nach Marktbedingungen. Rabattaktionen sind dagegen meist pauschale, zeitlich begrenzte Nachlässe ohne Steuerungslogik."
+        "erklaerung": "Dynamische Preisgestaltung ist nicht automatischer Rabatt, sondern regelbasierte Anpassung im Rahmen klarer Mindestmarge und Markenleitplanken. Amazon ändert täglich Millionen Preise — aber nicht zufällig, sondern entlang definierter Steuerungsregeln. HomeTech Pro müsste solche Regeln (Mindestmarge ≥ 25 %, Markenwirkung) explizit setzen."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Preisstrategien differenzieren — nach Produktrolle, nicht pauschal",
-      "inhalt": "Eine reife Plattform-Preisstrategie behandelt nicht alle Produkte gleich. Vier Produktrollen erfordern unterschiedliche Logiken. Erstens: Premium-Produkte mit hoher Marge und Markenwirkung sollten preisstabil gehalten werden — Stärkung über Service, Garantie, Qualität und Anwendungsvorteile statt über Rabatt. Zweitens: Standardprodukte mit hohem Wettbewerbsdruck und hoher Preiselastizität vertragen zeitlich begrenzte Aktionen, solange eine Mindestmarge gesichert bleibt. Drittens: Ersatzteile mit hoher Wiederkaufrate und geringerer Vergleichbarkeit werden über Verfügbarkeit, schnelle Lieferung und Kompatibilität positioniert — kein Rabatt nötig. Viertens: Bundle-Angebote schützen vor direktem Preisvergleich und erhöhen den Warenkorbwert — sie sind ein eigenständiger strategischer Hebel. Der zentrale Punkt: ‚Pauschale Rabattaktionen über das gesamte Sortiment‘ ist meist die schlechteste aller Optionen, weil sie genau dort Marge zerstört, wo es nicht nötig wäre.",
+      "titel": "Acht Einflussfaktoren dynamischer Preisbildung",
+      "inhalt": "Dynamische Preise reagieren auf acht Faktoren: Wettbewerbspreise, aktuelle Nachfrage, Lagerbestand, Saisonalität, Lieferfähigkeit, eigene Marge, Plattformgebühren, Bewertungen und Conversion Rate. Nicht jeder Faktor ist gleich wichtig — je nach Produktkategorie verschieben sich die Gewichte. Bei Premium-Küchenmaschinen von KitchenPro Direct dominieren Marge, Marken- und Bewertungswirkung. Bei Standardzubehör dominieren Wettbewerbspreise und Nachfrage. Bei Ersatzteilen dominieren Verfügbarkeit und Wiederkaufrate, kaum Wettbewerb. Reife Preisstrategien differenzieren nach Produktrolle — nicht eine Preislogik für das ganze Sortiment, sondern produktgruppenspezifische Regelwerke.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Preisstrategie passt für welche Produktrolle?",
-        "typ": "multi",
-        "optionen": [
-          "Premium-Produkte sollten preisstabil gehalten und über Wertargumente kommuniziert werden",
-          "Ersatzteile mit hoher Wiederkaufrate sollten aggressiv rabattiert werden",
-          "Standardprodukte unter Wettbewerbsdruck vertragen kontrollierte Aktionsfenster",
-          "Bundle-Angebote sind ein Hebel zur Reduktion von direkter Preisvergleichbarkeit"
+        "typ": "zuordnung",
+        "frage": "Ordnen Sie die vier Produktgruppen von KitchenPro Direct ihrer passenden Preisstrategie zu.",
+        "paare": [
+          {"links": "Premium-Küchenmaschinen (hohe Marge, starke Marke)", "rechts": "Preisstabil mit wertorientierter Kommunikation, keine aggressiven Rabatte"},
+          {"links": "Standardzubehör (hoher Wettbewerbsdruck)", "rechts": "Dynamisch mit kontrollierten Aktionsfenstern oberhalb Mindestmarge"},
+          {"links": "Ersatzteile (hohe Wiederkaufrate)", "rechts": "Stabil — Verfügbarkeit und schnelle Lieferung statt Preis"},
+          {"links": "Bundle-Angebote (Gerät + Zubehör + Service)", "rechts": "Aktiv ausbauen — Differenzierung reduziert direkten Preisvergleich"}
         ],
-        "korrekt": [0, 2, 3],
-        "erklaerung": "Premium stabil, Standard dynamisch, Bundle differenzierend — das ist die etablierte Logik. Ersatzteile zu rabattieren ist meist falsch: Wenn der Kunde sie braucht, kauft er sie ohnehin — der Rabatt zerstört Marge ohne Volumeneffekt."
+        "erklaerung": "Die Produktgruppe bestimmt die Preisstrategie — nicht der Wettbewerber. Wer Premium-Geräte rabattiert, weil Wettbewerber es tut, verliert doppelt: Marge sinkt und Markenpositionierung wird verwässert. Wer Ersatzteile rabattiert, verschenkt Marge, die Kunden gar nicht erwartet haben."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Preis, Content oder Sichtbarkeit — wo liegt das Problem wirklich?",
-      "youtube_id": "",
-      "youtube_query": "conversion problem analyse e-commerce preis sichtbarkeit content deutsch",
-      "dauer_min": 7,
+      "titel": "Premiumstrategie im B2B — Wertargumentation statt Rabatte",
+      "youtube_id": "DpgQaQaX4OI",
+      "youtube_query": "premium preisstrategie b2b marketing erfolgsfaktor deutsch",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Die Conversion Rate einer Plattformseite sinkt von 2,4% auf 1,8%. Was ist die wichtigste erste Analysefrage?",
-        "typ": "single",
-        "optionen": [
-          "Wir senken sofort die Preise um 20%",
-          "Ist das Problem primär ein Preis-, ein Content- oder ein Sichtbarkeitsproblem — bevor eine Maßnahme gewählt wird?",
-          "Wir verdoppeln das Werbebudget",
-          "Wir warten ein Quartal ab"
+        "typ": "lueckentext",
+        "frage": "Vervollständigen Sie die Premium-Preislogik:",
+        "text": "Eine Premiumpreisstrategie funktioniert nur, wenn der wahrgenommene {0} höher ist als beim Wettbewerb. Das setzt sichtbare Differenzierung über {1}, Service, Marke oder Anwendungsexpertise voraus. Wer den Preis ohne diese Differenzierung verteidigt, verliert Marktanteile. Wer den Preis senkt ohne Not, beschädigt die {2} dauerhaft — und ein wiederhergestellter Premium-Preis nach Rabattaktion ist kaum durchsetzbar.",
+        "luecken": [
+          {"antwort": "Kundennutzen", "alternativen": ["Wert", "Nutzen", "Mehrwert", "Kundennutzen"]},
+          {"antwort": "Qualität", "alternativen": ["Produktqualität", "Verarbeitung", "Leistung"]},
+          {"antwort": "Preispositionierung", "alternativen": ["Marke", "Positionierung", "Markenwahrnehmung", "Premium-Positionierung"]}
         ],
-        "korrekt": 1,
-        "erklaerung": "Die erste Aufgabe ist Diagnose — nicht Reaktion. Wenn das Problem Content ist (unklare Beschreibung, schwache Bilder), helfen Preissenkungen nicht. Wenn es Sichtbarkeit ist, wirkt Content-Optimierung allein nicht. Wer sofort am Preis dreht, ohne die Ursache zu kennen, zerstört oft Marge ohne Effekt."
+        "erklaerung": "Premium-Preise sind keine Eigenschaft — sie sind das Ergebnis sichtbar gemachter Differenzierung. KitchenPro Direct muss die Mehrwerte (Servicegarantie, Anwendungsberatung, Qualität, Bundles) kommunizieren, nicht den Preis verteidigen. Senken ohne Not ist die teuerste Marketingmaßnahme der Welt — der Anker ist weg."
       }
     },
     {
       "nr": 4,
       "typ": "text",
-      "titel": "Performance-Monitoring — operative und Management-KPIs trennen",
-      "inhalt": "Performance-Monitoring im Plattformverkauf braucht zwei klar getrennte KPI-Ebenen. Operative KPIs sind Klickrate, Conversion Rate, Sichtbarkeitsplatzierung, Retourenquote, durchschnittlicher Warenkorb, Reaktionszeiten — sie ermöglichen tägliche bis wöchentliche Steuerung im operativen Team. Management-KPIs sind Deckungsbeitrag pro Produktgruppe, Marge nach Aktionen, Preisabstand zu Hauptwettbewerbern, Wiederkaufrate, Aktionsrentabilität und Bewertungsentwicklung — sie ermöglichen monatliche bis quartalsweise strategische Entscheidungen. Ein klassischer Fehler: Operative KPIs werden ins Management-Reporting gehoben (‚wir hatten 500.000 Klicks!‘), Management-KPIs werden in operative Diskussionen gemischt — beide Ebenen verlieren ihre Steuerungswirkung. Reife Organisationen unterscheiden bewusst und stellen sicher, dass die Management-Ebene Entscheidungen über Skalierung, Stopp, Investitionsumlenkung treffen kann, ohne sich in operativem Detail zu verlieren.",
-      "dauer_min": 6,
+      "titel": "Risiken dynamischer Preisgestaltung — und wie man sie eingrenzt",
+      "inhalt": "Dynamische Preise können fünf Schäden anrichten, wenn sie ohne Governance laufen: Margenverlust durch Race-to-the-Bottom, Preiskrieg mit Wettbewerbern (in dem beide verlieren), beschädigte Markenwahrnehmung („immer im Angebot = nicht hochwertig“), Kundenerwartung auf permanente Rabatte (Vollpreis wird zur Ausnahme) und Kannibalisierung zwischen eigenen Produktgruppen. Drei Schutzmechanismen sind etabliert: erstens Mindestmarge als harte Untergrenze (bei KitchenPro Direct: 25 %), zweitens definierter Aktionsrahmen (max. X % Rabatt, max. Y Tage im Quartal), drittens Premium-Schutzzone (Premium-Produkte sind aus der dynamischen Logik ausgeschlossen und bleiben preisstabil). Ohne diese Leitplanken wird Dynamic Pricing zur stillen Margenerosion.",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche der folgenden KPIs gehören eher auf die Management-Ebene als auf die operative Ebene?",
         "typ": "multi",
+        "frage": "Welche Governance-Regeln würden Sie für die dynamische Preissteuerung bei KitchenPro Direct festlegen?",
         "optionen": [
-          "Deckungsbeitrag pro Produktgruppe",
-          "Anzahl Klicks heute",
-          "Wiederkaufrate und CLV/CAC-Verhältnis",
-          "Aktionsrentabilität nach Marge statt nach Umsatz",
-          "Klickrate der letzten Stunde"
+          "Harte Mindestmarge von 25 %, die unter keinen Umständen unterschritten wird",
+          "Premium-Küchenmaschinen werden aus der automatischen Preislogik ausgenommen — manuelle Entscheidung pro Produkt",
+          "Maximaler Rabatt von 20 %, max. drei Aktionen pro Quartal je Produktgruppe",
+          "Vollständige Automatisierung aller Preise ohne menschliche Freigabe, damit nichts verpasst wird",
+          "Wöchentliches Monitoring von Marge, Conversion und Bewertungen — bei Auffälligkeiten manueller Override"
         ],
-        "korrekt": [0, 2, 3],
-        "erklaerung": "Deckungsbeitrag, Wiederkaufrate und Aktionsrentabilität sind strategische Steuerungsgrößen mit längerem Wirkungshorizont. Klicks-pro-Stunde sind operative Indikatoren — relevant für das Team, aber nicht für Management-Entscheidungen."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Optionen 1, 2, 3, 5 sind die kanonischen Schutzleitplanken für dynamische Preise. Option 4 (komplette Automatisierung ohne Freigabe) ist genau das Anti-Pattern — gerade bei Premium-Marken muss menschliche Governance immer eingreifen können. Algorithmen optimieren auf das, was sie messen — und das ist selten die langfristige Markenpositionierung."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "Preis-Governance — wann muss Management eingreifen",
-      "youtube_id": "",
-      "youtube_query": "preis governance e-commerce regeln management entscheidung deutsch",
-      "dauer_min": 7,
+      "titel": "Customer Lifetime Value berechnen — Profitabilität jenseits des Erstkaufs",
+      "youtube_id": "WJHr8R1s4y8",
+      "youtube_query": "customer lifetime value CLV berechnen erklärt",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Wann sollte eine dynamische Preisregel zwingend durch Management-Governance begrenzt werden?",
-        "typ": "single",
-        "optionen": [
-          "Niemals — Automatisierung soll möglichst frei laufen",
-          "Wenn der Preis Marge, Markenanker, Kundenerwartung oder strategische Positionierung erheblich beeinflussen könnte — etwa bei Premium-Produkten, Mindestmargen oder Marktpreisschwellen",
-          "Nur bei technischen Fehlern",
-          "Nur am Wochenende"
-        ],
-        "korrekt": 1,
-        "erklaerung": "Dynamic Pricing braucht Leitplanken: Mindestmargen, Maximalrabatte, Schutz von Premium-Produkten, Schutz vor Preiskriegen. Ohne diese Governance werden automatisierte Regeln zur strategischen Gefahr — eine reaktive Anpassung an einen Wettbewerber-Preiskrieg kann den eigenen Markenanker dauerhaft beschädigen."
+        "typ": "text",
+        "frage": "HomeTech Pro verkauft sein Smart Thermostat für 149 € (Wettbewerber A: 119 €, Wettbewerber B: 89 €, Wettbewerber C Premium: 169 €). Conversion sinkt, Druck zur Preissenkung wächst. Die Mindestmarge soll 25 % bleiben, die Marke hochwertig. Welche Strategie würden Sie empfehlen — und welche bewusst nicht?",
+        "musterloesung": "Empfehlung: Preis stabil bei 149 € halten — und stattdessen Content, Bundle-Angebote und Bewertungsmanagement priorisieren. Bewusst keine pauschale Preissenkung.\n\nWarum keine Preissenkung: Eine Senkung auf das Niveau von Wettbewerber A (119 €) wäre ein 20 %-Hit auf den Verkaufspreis. Bei 32 % Gewinnmarge (aus den Kennzahlen ableitbar: 32 % Marge pro Gerät) würde das die Marge auf ca. 18 % drücken — unter die definierte Mindestmarge von 25 %. Das ist nicht nur ein Margenproblem, sondern auch ein Positionierungsproblem: HomeTech Pro würde sich zwischen dem Billig-Wettbewerber B (89 €) und dem Premium-Anbieter C (169 €) als „mittelpreisig“ positionieren — die schwächste Position im Markt. Wer in der Mitte sitzt, gewinnt selten.\n\nWas stattdessen: Das Problem ist nicht primär ein Preisproblem, sondern ein Sichtbarkeits- und Wertkommunikations-Problem. Die Kennzahlen zeigen eine Klickrate von 3,2 % — solide, aber Conversion von 1,1 % deutet auf einen Gap zwischen Suche und Kaufentscheidung. Das ist klassisch ein Content- und Bewertungsproblem, kein Preisproblem.\n\nDrei konkrete Hebel: erstens Content-Verbesserung mit klarem Energieeinsparungs-Rechner („Sie sparen X € pro Jahr — der Preisunterschied amortisiert sich nach Y Monaten“). Zweitens Bundle-Angebote (Thermostat + Smart-Home-Hub + Installations-Service), die Vergleichbarkeit reduzieren und den wahrgenommenen Wert erhöhen. Drittens systematisches Bewertungsmanagement — 85 Bewertungen bei 4,5 Sternen sind ein Asset, das stärker sichtbar gemacht werden muss.\n\nKontrolliertes Preisexperiment als Backup: Falls die Maßnahmen nach 3 Monaten nicht greifen, ein kontrollierter A/B-Test mit Preisstaffel 129/139/149 € auf einem zeitlich begrenzten Sortiment. Mindestmarge von 25 % bleibt Untergrenze. So entsteht Datenbasis, ohne die Marke pauschal zu beschädigen.\n\nWas bewusst nicht: Aggressive Preissenkung auf 119 € oder darunter — das wäre kurzfristige Conversion gegen langfristige Profitabilität und Positionierung. Auch keine Reaktion auf Wettbewerber A's Wochenend-Aktionen — wer reflexartig folgt, gibt die eigene Preislogik aus der Hand.\n\nSenior-Level-Logik: Conversion-Probleme haben oft drei Ursachen — Preis, Content, Sichtbarkeit. Reflexartig den Preis zu senken behandelt nur das offensichtlichste Symptom, beschädigt aber das langfristig wichtigste Asset (Marke und Marge). Erst diagnostizieren, dann handeln.",
+        "erklaerung": "Eine starke Antwort sollte: (1) die Preissenkung explizit ablehnen mit Margenrechnung, (2) das Problem als Content/Sichtbarkeit/Vertrauen umdeuten statt als reines Preisproblem, (3) kontrolliertes Experiment als Backup vorschlagen, (4) Bundles als Differenzierungs-Hebel erkennen, (5) Senior-Level-Logik „Symptom vs. Ursache“ explizit machen."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Bewusste Entscheidung gegen reflexartige Preissenkungen",
-      "inhalt": "Senior-Level-Pricing zeigt sich darin, nicht reflexartig auf Wettbewerberpreise zu reagieren. Ein Hauptwettbewerber senkt am Wochenende seine Preise — die naheliegende Reaktion ist, mitzuziehen. Bei Premium-Marken ist dies meist falsch. Drei Gründe: Erstens beschädigt jede Preisanpassung den Markenanker und gewöhnt Kunden an Erwartungen, die langfristig schwer wieder zu korrigieren sind. Zweitens entsteht ein Preiskrieg-Risiko — beide Anbieter senken, bis die Marge bei keinem mehr trägt; gewonnen hat in dieser Situation nur der Kunde, oft kurzfristig. Drittens ist die Conversion-Wirkung einer Preissenkung bei Premium-Marken typischerweise schwächer als angenommen — Premium-Käufer entscheiden meist nicht über zwei oder drei Euro Differenz, sondern über Vertrauen, Service, Qualität und Garantie. Strategisch belastbarer ist eine Antwort über Bundle-Angebote, Servicekommunikation und Differenzierung — die nicht direkt vergleichbar sind und damit den Preiskrieg unterbrechen.",
+      "titel": "Performance-Monitoring: operative versus strategische KPIs",
+      "inhalt": "Plattformperformance-Monitoring muss zwischen zwei Ebenen unterscheiden. Operative KPIs liefern Tagesentscheidungen: Aufrufe, Klickrate, Conversion Rate, Warenkorb, aktueller Preisabstand zu Wettbewerbern. Strategische KPIs liefern Quartals- und Jahresentscheidungen: Deckungsbeitrag je Produktgruppe, CLV-Entwicklung, Margenstabilität, Bewertungsqualität, Markenkennzahlen. Reife Steuerung trennt beide: operativ wird täglich gehandelt, strategisch wird monatlich entschieden. Die häufigste Falle ist das Vermischen — kurzfristige operative Schwankungen werden zu strategischen Entscheidungen aufgeblasen, oder umgekehrt: strategische Probleme werden mit operativen Reaktionen behandelt. Bei KitchenPro Direct heißt das: sinkende wöchentliche Conversion ist operativ; sinkende Marge bei Premium-Maschinen ist strategisch.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Warum kann eine reflexartige Preissenkung als Reaktion auf Wettbewerber bei Premium-Marken strategisch gefährlich sein?",
-        "typ": "multi",
-        "optionen": [
-          "Sie beschädigt den Markenanker und prägt eine Rabatt-Erwartung beim Kunden",
-          "Sie führt häufig zu Preiskriegen, in denen beide Anbieter Marge verlieren",
-          "Sie wirkt bei Premium-Käufern oft schwächer auf die Conversion als angenommen",
-          "Sie ist immer kostenneutral, daher risikolos"
+        "typ": "zuordnung",
+        "frage": "Ordnen Sie die KPIs ihrer Ebene zu — operative Tagesentscheidung oder strategische Managementsicht.",
+        "paare": [
+          {"links": "Klickrate des Tages auf die Premium-Küchenmaschine", "rechts": "Operative KPI — Tagesentscheidung"},
+          {"links": "Aktueller Preisabstand zum Hauptwettbewerber", "rechts": "Operative KPI — Tagesentscheidung"},
+          {"links": "Deckungsbeitrag je Produktgruppe (monatlich)", "rechts": "Strategische KPI — Managementsicht"},
+          {"links": "CLV-Entwicklung der Bestandskunden (Quartal)", "rechts": "Strategische KPI — Managementsicht"},
+          {"links": "Margenstabilität nach Aktionsphasen (Quartal)", "rechts": "Strategische KPI — Managementsicht"},
+          {"links": "Aktionsrentabilität nach Marge (nicht nach Umsatz)", "rechts": "Strategische KPI — Managementsicht"}
         ],
-        "korrekt": [0, 1, 2],
-        "erklaerung": "Markenanker-Schaden, Preiskriegs-Risiko und überschätzte Conversion-Wirkung sind belegte Phänomene bei reflexartigem Pricing. Option 3 ist faktisch falsch: Preissenkung ist nie kostenneutral — sie reduziert die Marge um den vollen Betrag und kann zusätzlich langfristige Schäden verursachen."
+        "erklaerung": "Operative KPIs steuern den Tag — strategische KPIs steuern die Richtung. Die häufigste Falle ist die Aufblähung operativer Schwankungen zu strategischen Krisen — und das Übersehen strategischer Erosion in den Tageszahlen. Reifes Plattform-Management hält beide Ebenen sauber getrennt."
       }
     },
     {
       "nr": 7,
-      "typ": "text",
-      "titel": "Integrierte Plattform-Verkaufsarchitektur — Preis, Content, Sichtbarkeit, Marge",
-      "inhalt": "Plattform-Verkauf auf Senior-Level bedeutet, fünf Dimensionen integriert zu steuern statt isoliert zu optimieren: Preis, Content, Sichtbarkeit, Bewertungen und Marge. Wer nur den Preis steuert, ignoriert, dass Content die Conversion vor allem dann hochhält, wenn der Preis im oberen Bereich liegt — Vertrauenselemente, FAQ und Kompatibilitätsdaten kompensieren Preisaufschläge. Wer nur Sichtbarkeit optimiert, riskiert falsche Kundenerwartungen und schlechte Bewertungen, die wiederum die Sichtbarkeit beschädigen. Wer nur Marge optimiert, verliert Marktposition. Wer nur Bewertungen sammelt, ohne die Produktqualität und Kommunikationsklarheit darauf abzustimmen, sammelt schlechte Bewertungen. Reife Plattform-Architektur arbeitet mit einem klaren Zielbild pro Produktgruppe und steuert dann alle fünf Dimensionen koordiniert — typischerweise getragen durch ein Performance-Dashboard, das alle Größen gleichzeitig sichtbar macht.",
-      "dauer_min": 5,
+      "typ": "video",
+      "titel": "Pricing B2B — die Macht der Wertigkeit",
+      "youtube_id": "4HDUwRKmBvI",
+      "youtube_query": "preisstrategie pricing b2b macht wertigkeit deutsch",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Aussage über integrierte Plattform-Verkaufsarchitektur ist korrekt?",
-        "typ": "single",
+        "typ": "multi",
+        "frage": "Welche Aussagen treffen aus Senior-Management-Sicht auf eine integrierte Preis- und Plattformstrategie zu?",
         "optionen": [
-          "Optimale Plattform-Performance entsteht durch isolierte Optimierung jeder Einzelmaßnahme",
-          "Preis, Content, Sichtbarkeit, Bewertungen und Marge müssen integriert gesteuert werden — eine einzelne Dimension allein kann andere beschädigen",
-          "Preis ist immer die wichtigste Steuerungsgröße",
-          "Bewertungen sollten nicht ins Reporting aufgenommen werden"
+          "Eine Preisentscheidung muss immer auch ihre Wirkung auf Marke, Marge und Plattformranking mitdenken",
+          "Senior-Level-Denken bedeutet, nicht jedem Wettbewerber-Preis reflexartig zu folgen",
+          "Performance-Monitoring soll Entscheidungen vorbereiten — nicht nur rückblickend berichten",
+          "Eine einheitliche Preislogik für das ganze Sortiment ist immer effizienter als produktgruppenspezifische Regeln",
+          "Preis-Governance ist wichtiger als Preisautomatisierung — Algorithmen brauchen Leitplanken, nicht Freiheit"
         ],
-        "korrekt": 1,
-        "erklaerung": "Integrierte Steuerung ist der Kern erfolgreicher Plattform-Performance. Isolierte Optimierung einzelner Dimensionen führt regelmäßig zu Trade-offs, die das Gesamtergebnis schlechter machen — etwa Sichtbarkeit hoch, aber falsche Kunden = schlechte Bewertungen = sinkende Sichtbarkeit."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Optionen 1, 2, 3, 5 sind Senior-Level-Standard für integrierte Plattform-Preissteuerung. Option 4 (einheitliche Preislogik für das ganze Sortiment) ist die häufigste Vereinfachungsfalle — sie ignoriert, dass Produktrolle, Marge, Wettbewerb und Kundenerwartung je nach Produktgruppe vollkommen unterschiedlich sind. Differenzierte Regelwerke sind komplexer in der Einführung, aber strukturell tragfähiger."
       }
     }
   ]

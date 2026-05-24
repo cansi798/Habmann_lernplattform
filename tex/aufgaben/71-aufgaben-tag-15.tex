@@ -1,0 +1,579 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 15 - Aufgabenheft
+% Change Leadership: Rollenklaerung, Stakeholder/Kommunikation, Widerstand produktiv, Befaehigen & Verankern
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 15}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Change Leadership \& Verankerung}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 7 \textperiodcentered{} TAG 15 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 18.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 15\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Nachhaltige Prozess\-ver\"anderung\\f\"uhren \textendash{} Rollen, Widerstand, Befaehigung\\und Verankerung in elf Aufgaben.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 15 \textendash{} \emph{Nachhaltige Prozessver\"anderung f\"uhren}: Change-Rollen (Sponsor, Change Lead, Process Owner, Line Manager, Champions), Stakeholder- und Kommunikationsstrategie, Widerstand als Information lesen, Befaehigung und Sustainment-Mechanik. Bezugsmodelle: \emph{Kotter} (8-Schritte), \emph{Lewin} (Unfreeze-Change-Refreeze), \emph{ADKAR} (Awareness-Desire-Knowledge-Ability-Reinforcement).
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Rollen, Modelle, Widerstandstypen. 5\,--\,10 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Stakeholder-Mapping, Kommunikations\-paket, Sustainment-Design. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Change-Portfolio, Transparenzregeln, Stoppkriterien. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt eine Niveau-Markierung, einen Zeit-Richtwert, den Aufgabentext, einen Antwort-Freiraum und eine \emph{YouTube-Suchquery}.
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 15}. \emph{Widerstand ist Information}: Interessen, Risiken, Identit\"at, \"Uberlastung, fehlendes Vertrauen. Wer Widerstand nur ``brechen'' will, l\"ost ihn nicht \textendash{} sondern produziert Schattenprozesse.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{F\"unf Change-Rollen + Verantwortlichkeiten}{\nivLi}{8\,min}
+
+\noindent Eine gelungene Prozessver\"anderung braucht mindestens f\"unf Rollen: \emph{Sponsor}, \emph{Change Lead}, \emph{Process Owner}, \emph{Line Manager}, \emph{Champions / Multiplikatoren}. Erfolgsfaktoren: klares ``Warum'', Beteiligung, Quick Wins, psychologische Sicherheit, sichtbare F\"uhrung, messbare Wirkung.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie f\"ur jede der f\"unf Rollen \textbf{drei Verantwortlichkeiten} (z.\,B.\ Sponsor: gibt Richtung, sichert Ressourcen, entscheidet bei Konflikten).
+  \item Erkl\"aren Sie in einem Satz, was passiert, wenn die \emph{Sponsor-Rolle} unterbesetzt ist (typisch: ``Wir machen einen Change ohne echtes Mandat'').
+  \item Nennen Sie \textbf{drei Anzeichen}, dass die \emph{Champions} nicht wirken (z.\,B.\ keine Feedbacksignale aus dem Team, Champions wechseln aus, Kollegen reden nicht mit ihnen \"uber den Change).
+\end{enumerate}
+
+\ytquery{change leadership roles sponsor change lead process owner champions Kotter}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Change-Modelle: Kotter, Lewin, ADKAR}{\nivLi}{10\,min}
+
+\noindent Drei klassische Modelle leiten Change-Vorhaben:
+
+\begin{itemize}
+  \item \emph{Lewin}: \emph{Unfreeze} \textrightarrow{} \emph{Change} \textrightarrow{} \emph{Refreeze}. Konzentriert sich auf den Aggregatzustand der Organisation.
+  \item \emph{Kotter}: \emph{8 Schritte} \textendash{} Dringlichkeit, F\"uhrungskoalition, Vision, Kommunikation, Hindernisse beseitigen, Quick Wins, Konsolidieren, Verankern.
+  \item \emph{ADKAR}: \emph{Awareness, Desire, Knowledge, Ability, Reinforcement} \textendash{} Fokus auf den einzelnen Menschen im Change.
+\end{itemize}
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Erstellen Sie eine \textbf{Tabelle} mit den drei Modellen und je drei \emph{St\"arken} und je einem \emph{Schwachpunkt} (z.\,B.\ Kotter: stark in Top-down-Strukturen, schwach bei agilen / lernenden Organisationen).
+  \item Ordnen Sie die folgenden Aussagen \emph{einer} der Modell-Phasen / -Schritte zu: ``Das Team versteht, warum wir das tun'' \textperiodcentered{} ``Wir feiern den ersten erfolgreichen Pilot'' \textperiodcentered{} ``Mitarbeiter brauchen ein Training, sonst k\"onnen sie nicht'' \textperiodcentered{} ``Die alte Routine kehrt zur\"uck, sobald der Druck wegf\"allt''.
+  \item Welches Modell w\"urden Sie f\"ur eine \emph{technische} Prozess\-ver\"anderung (z.\,B.\ Einf\"uhrung Workflow-Tool) nutzen, welches f\"ur eine \emph{kulturelle} Ver\"anderung (z.\,B.\ ``wir reden offen \"uber Fehler'')? Begr\"unden Sie in je einem Satz.
+\end{enumerate}
+
+\ytquery{change management models Kotter Lewin ADKAR comparison strengths weaknesses}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{F\"unf Widerstandstypen lesen}{\nivLi}{8\,min}
+
+\noindent Widerstand ist nicht \emph{ein} Ph\"anomen, sondern \emph{mehrere}. F\"unf typische Auspr\"agungen:
+
+\begin{itemize}
+  \item \emph{Interessen-Widerstand:} ``Ich verliere Macht / Budget / Sichtbarkeit.''
+  \item \emph{Risiko-Widerstand:} ``Ich sehe Gefahren, die niemand adressiert.''
+  \item \emph{Identit\"ats-Widerstand:} ``Das war immer meine Rolle / mein Selbstverst\"andnis.''
+  \item \emph{\"Uberlastungs-Widerstand:} ``Schon wieder ein Projekt, ich habe keine Zeit.''
+  \item \emph{Vertrauens-Widerstand:} ``Ich glaube nicht, dass die F\"uhrung das ernst meint.''
+\end{itemize}
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Schreiben Sie f\"ur jeden Typ ein \emph{typisches Zitat aus dem Alltag} (anders als oben).
+  \item Notieren Sie f\"ur jeden Typ \emph{eine angemessene Erstreaktion} (z.\,B.\ Interessen: explizit ansprechen + Ausgleichsangebot; \"Uberlastung: Priorit\"aten reduzieren + Sponsor-Backing).
+  \item Nennen Sie \textbf{eine Reaktion, die in allen f\"unf F\"allen kontraproduktiv ist} (z.\,B.\ ``Das ist halt jetzt so, bitte ziehen Sie mit'').
+\end{enumerate}
+
+\ytquery{change management resistance types interests identity overload trust}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Change-Architektur f\"ur E2E-Prozessdigitalisierung}{\nivLii}{30\,min}
+
+\begin{infobox}[Ausgangslage]
+Ein E2E-Prozess (Order-to-Cash) wird digitalisiert: Workflow-Tool, KPI-Steuerung mit Dashboard, Abweichungsmanagement. Fachbereiche f\"uhlen sich \emph{\"uberwacht} (``KPI = Kontrolle''), IT ist \"uberlastet, Compliance will mehr Kontrollen, Operations will Speed.
+
+\smallskip
+\textbf{Ziel:} $-$\,25\,\% Durchlaufzeit, $-$\,30\,\% Rework in 12 Wochen.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{F\"unf Rollensteckbriefe} (Sponsor, Change Lead, Process Owner, Line Manager, Champions): f\"ur jede Rolle \emph{drei} konkrete Verantwortungen \emph{f\"ur dieses Vorhaben} (nicht generisch).
+  \item \textbf{Risikoliste} (mindestens acht Risiken): z.\,B.\ Akzeptanzverlust, \"Uberlastung, Datenl\"ucken, KPI-Gaming, Schattenprozesse, Compliance-Spannung, IT-Engpass, fehlendes Sponsor-Mandat.
+  \item \textbf{Priorisierung}: Top-3 nach \emph{Impact $\times$ Wahrscheinlichkeit} (Matrix 1\,--\,5; kurze Begr\"undung).
+  \item \textbf{Zwei Experimente} f\"ur die ersten 2 Wochen: F\"ur welche \emph{zwei Risiken} testen Sie eine Hypothese? Jeweils: \emph{Hypothese}, \emph{Test} (max.\ 2 Wochen), \emph{Erfolg / Misserfolg-Kriterium}.
+  \item \textbf{Rituale}: Welche \emph{drei Rituale} verankern den Change in den n\"achsten 12 Wochen (z.\,B.\ Weekly Process Standup 30\,min, Monthly Improvement Board 60\,min, Quarterly Audit-Review)?
+\end{enumerate}
+
+\ytquery{change architecture process digitalization roles risks experiments rituals}
+
+\antwortlinien{24}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Stakeholder-Matrix 2$\times$2 + Einbindungsstrategie}{\nivLii}{25\,min}
+
+\begin{infobox}[Acht Stakeholder]
+F\"ur das Vorhaben aus Aufgabe 4 m\"ussen folgende acht Stakeholder eingebunden werden:
+
+\smallskip
+\emph{Operations}, \emph{Fachbereich (Vertrieb)}, \emph{IT}, \emph{Compliance}, \emph{Controlling}, \emph{Customer Service}, \emph{Betriebsrat} (falls relevant), \emph{Key Customer (extern)}.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Erstellen Sie eine \textbf{2$\times$2-Matrix} \emph{Einfluss $\times$ Betroffenheit} (jeweils niedrig / hoch). Ordnen Sie alle acht Stakeholder ein.
+  \item Definieren Sie f\"ur jede der vier Felder die \emph{Einbindungsstrategie} aus dem Set: \emph{Informieren} \textperiodcentered{} \emph{Konsultieren} \textperiodcentered{} \emph{Mitentscheiden} \textperiodcentered{} \emph{Verantworten}.
+  \item Schreiben Sie f\"ur \emph{drei} ausgew\"ahlte Stakeholder einen \textbf{Steckbrief} (3\,--\,4 Zeilen): \emph{Interessen / Sorgen}, \emph{erwartete Botschaft}, \emph{Kanal}, \emph{Frequenz}.
+  \item Identifizieren Sie \textbf{eine ``politische Falle''}: welcher Stakeholder ist scheinbar wenig betroffen, hat aber hohen Einfluss \textendash{} und welche Folge h\"atte es, diesen Stakeholder zu \"ubergehen?
+\end{enumerate}
+
+\ytquery{stakeholder mapping matrix influence interest engagement strategy}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Kommunikationspaket: Kick-off + Kernbotschaften}{\nivLii}{25\,min}
+
+\begin{infobox}[Drei blockierende Stakeholder-Gruppen]
+\textbf{Team A (Operations):} ``Schon wieder ein Projekt, wir haben keine Zeit.''\\
+\textbf{Team B (Fachbereich):} ``KPI-Steuerung\,=\,Kontrolle, wir verlieren Autonomie.''\\
+\textbf{Team C (IT):} ``Ohne klare Anforderungen und Datenbasis wird das nichts.''
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Kick-off-Botschaft (max.\ 5 S\"atze):} Beginnt mit dem ``Warum'', adressiert die drei Sorgen \emph{namentlich}, kommt zum konkreten Nutzen, benennt eine bewusste Konsequenz (``KPIs sind zur Verbesserung, nicht zur Bestrafung''), und schlie{\ss}t mit einer Einladung.
+  \item \textbf{Drei Kernbotschaften} f\"ur die n\"achsten 12 Wochen (jede Botschaft = max.\ 1 Satz; jede adressiert \emph{eine} der drei Sorgen).
+  \item \textbf{Zwei Kan\"ale} mit Frequenz und Owner (z.\,B.\ w\"ochentliche Stand-up-Mail durch Change Lead; monatliches Town Hall durch Sponsor; Slack/Teams-Channel mit moderiertem Q\&A).
+  \item \textbf{Feedbackmechanismus:} Wie holen Sie regelm\"a{\ss}ig ungefilterte R\"uckmeldung (z.\,B.\ anonyme Pulse Survey 5 Fragen, monatlich; offene Sprechstunde mit dem Sponsor; Champion-Roundtable; Skip-Level-Gespr\"ach)?
+  \item \textbf{Was bewusst \emph{nicht} kommunizieren?} Welche zwei Botschaften w\"aren in dieser Phase kontraproduktiv (z.\,B.\ ``Es wird keine Stellenstreichungen geben'' \textendash{} wenn das nicht gesichert ist, zerst\"ort die Aussage Vertrauen)?
+\end{enumerate}
+
+\ytquery{change communication kick off key messages channels feedback pulse survey}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Sustainment-Design: KPI-Set + Definition of Done}{\nivLii}{25\,min}
+
+\begin{infobox}[Aufgabenstellung]
+Damit der E2E-Prozess nach dem Go-Live \emph{nicht} in die alten Routinen zur\"uckkippt, brauchen Sie ein \emph{Sustainment-Design}: KPIs, Review-Mechanik, Definition of Done, Trainings- und Coachingplan.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{KPI-Set (mindestens f\"unf KPIs) \"uber drei Ebenen:}
+    \begin{itemize}
+      \item \emph{Outcome:} z.\,B.\ Durchlaufzeit, SLA-Quote, Kundenzufriedenheit.
+      \item \emph{Prozess:} z.\,B.\ Rework-Quote, Exception-Rate.
+      \item \emph{Adoption:} z.\,B.\ \% F\"alle, die im Workflow laufen; Trainingsabschlussquote.
+    \end{itemize}
+    Pro KPI: \emph{Ziel}, \emph{Owner}, \emph{Datenquelle}, \emph{Review-Frequenz}.
+  \item \textbf{Review Board:} Wer sitzt drin, Taktung, Entscheidungsschwellen, Protokoll-Pflichtfelder.
+  \item \textbf{Definition of Done (DoD) f\"ur Prozess\"anderungen} \textendash{} f\"unf Kriterien (z.\,B.\ Modell aktualisiert; Owner benannt; KPI angepasst; Training durchgef\"uhrt; Monitoring aktiv).
+  \item \textbf{Trainings- / Coaching-Plan} in drei Stufen (Operator \textrightarrow{} Owner \textrightarrow{} Champion) mit Aufwand und Erfolgsnachweis.
+  \item \textbf{Anti-Gaming-Mechanik:} Wie verhindern Sie, dass KPIs ``ged\"uckt'' werden (z.\,B.\ Antwortzeiten manipuliert, F\"alle umetikettiert)?
+\end{enumerate}
+
+\ytquery{sustainment KPI outcome process adoption review board definition of done}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Fallstudie ``ServiceCo'' \textendash{} E2E-Prozess nachhaltig verankern}{\nivLii}{40\,min}
+
+\begin{infobox}[Fallstudie: ServiceCo]
+\textbf{Unternehmen:} ``ServiceCo'' \textendash{} mehrere Standorte; ein E2E-Prozess (Order-to-Delivery) wird workflow- und KPI-gest\"utzt eingef\"uhrt; Ziel $-$\,25\,\% Durchlaufzeit, $-$\,30\,\% Rework in 12 Wochen.
+
+\smallskip
+\textbf{Restriktionen:} Zeitdruck; parallele Projekte; unvollst\"andige Daten; Widerstand gegen KPI-Transparenz; Budget begrenzt.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Liefern Sie ein integriertes \emph{Change-Paket}, das alle vorhergehenden Bausteine zusammenf\"uhrt:
+
+\begin{enumerate}
+  \item \textbf{Change-Architektur:} Rollen (Sponsor / Owner / Lead / Line / Champions); Entscheidungswege; Taktung (Rituale).
+  \item \textbf{Stakeholderstrategie:} Acht Stakeholder; 2$\times$2 Matrix; Einbindung pro Quadrant.
+  \item \textbf{Kommunikationspaket:} Kick-off-Botschaft, drei Kernbotschaften, zwei Kan\"ale, ein Feedback\-mechanismus.
+  \item \textbf{Sustainment-Design:} KPI-Set (Outcome / Prozess / Adoption), Review Board, Trainings- / Coachingplan, Definition of Done.
+  \item \textbf{Entscheidung unter Unsicherheit (zwei Trade-off-Protokolle):}
+    \begin{itemize}
+      \item \emph{Speed vs.\ Compliance:} MVP mit Ausnahmeprozess + Audit Trail? Welche Guardrails sind nicht verhandelbar?
+      \item \emph{Transparenz vs.\ Angst:} Wie viel KPI-Transparenz auf Team- vs.\ Personenebene? Welche Guardrails sch\"utzen Kultur?
+    \end{itemize}
+    Pro Protokoll: \emph{Entscheidung}, \emph{Annahme}, \emph{verworfene Alternative}, \emph{Fr\"uhwarnsignal}, \emph{Reviewdatum}.
+\end{enumerate}
+
+\ytquery{change leadership E2E process digital transformation stakeholder sustainment KPI}
+
+\antwortlinien{32}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Change-Portfolio: WIP-Limits f\"ur Ver\"anderung}{\nivLiii}{30\,min}
+
+\begin{infobox}[Rolle: Chief Transformation Officer]
+\textbf{Ihre Rolle:} \emph{CTO (Chief Transformation Officer)} eines Konzerns mit aktuell 17 laufenden Change-Initiativen \"uber 6 Bereiche; Kapazit\"at f\"ur sauber gef\"uhrte Changes liegt realistisch bei 6\,--\,8 parallel.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Priorisierungskriterien (f\"unf):} z.\,B.\ \emph{Strategiebeitrag}, \emph{Dringlichkeit}, \emph{Aufwand}, \emph{Risiko bei Verz\"ogerung}, \emph{Reife der Vorbereitung}. Pro Kriterium ein konkretes Ma{\ss}.
+  \item \textbf{WIP-Limit definieren:} Wie viele parallele Changes erlauben Sie pro Bereich / pro Standort / pro Stakeholder-Gruppe? Begr\"undung.
+  \item \textbf{Stopp- / Schwenk-Kriterien:} Drei Signale, die ein Change-Vorhaben in den \emph{Pause}- oder \emph{Stop}-Modus heben (z.\,B.\ Adoption nach 8 Wochen $<$\,30\,\%; Sponsor wechselt; KPI-Gaming nachgewiesen).
+  \item \textbf{Eskalations-Architektur:} Wer entscheidet \"uber Stopp (Change Lead allein? Steering? Vorstand?), und welche Eskalations\-fristen gelten?
+  \item \textbf{Anti-Muster:} Drei typische Fehlmuster in Change-Portfolios (z.\,B.\ ``alles parallel''; ``Sponsor vergibt Mandat ohne Ressourcen''; ``Champions \"uberlasten ohne Anerkennung'') \textendash{} Gegenma{\ss}nahmen je Muster.
+\end{enumerate}
+
+\ytquery{change portfolio WIP limits prioritization stop criteria escalation transformation}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Transparenz vs.\ Angst \textendash{} KPI-Guardrails}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent KPI-Transparenz ist ein zweischneidiges Schwert: \emph{Sichtbar} sein erh\"oht Lerngeschwindigkeit und Verantwortung, \emph{sichtbar gemacht} werden kann aber Angst und Defensivverhalten ausl\"osen. Die Aufgabe der F\"uhrung ist es, eine Linie zu ziehen \textendash{} nicht ``alles transparent'' und nicht ``alles geheim''.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Vier Ebenen} \emph{KPI-Aufl\"osung}: \emph{Unternehmens-aggregiert} \textperiodcentered{} \emph{Bereich} \textperiodcentered{} \emph{Team} \textperiodcentered{} \emph{Person}. F\"ur jede Ebene: \emph{Wer sieht was}, \emph{Zweck}, \emph{Risiko bei Verletzung der Grenze}.
+  \item \textbf{Drei Guardrails f\"ur Transparenz}: z.\,B.\ ``Personen-KPIs nur bei begr\"undetem Incident-Fall \textendash{} und mit Vier-Augen''; ``Team-KPIs sind f\"ur Lernen, nicht f\"ur Vergleich''; ``Aggregierte KPIs werden im Townhall geteilt; Bereichs-KPIs in der Bereichsrunde''.
+  \item \textbf{Drei KPI-Gaming-Muster}: z.\,B.\ ``Ticket-Schlie{\ss}ungen vor Resolution markieren''; ``Schwierige F\"alle umetikettieren''; ``Antwortzeiten manuell stoppen''. Pro Muster: \emph{Erkennungssignal} und \emph{Gegenma{\ss}nahme}.
+  \item \textbf{Kultur-Frage:} Welche zwei Routinen verhindern, dass KPIs als \emph{Druckmittel} eingesetzt werden (z.\,B.\ Retro-Mechanik, ``Was hat geholfen, was nicht?'' statt ``Wer hat versagt?'')?
+  \item \textbf{Eine Fr\"uhwarnsignal-Logik}, dass ein KPI in eine Angstkultur umkippt (z.\,B.\ Krankenstand steigt, Tickets ``verschwinden'', offene R\"uckmeldungen werden seltener).
+\end{enumerate}
+
+\ytquery{KPI transparency culture fear gaming guardrails psychological safety change}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Change Leadership Operating Model}{\nivLiii}{50\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} \emph{Chief Transformation Officer} / \emph{Bereichsleitung} / \emph{Lead Consultant} \textendash{} verantwortlich f\"ur das organisationale Change-System (mehrere parallele Initiativen).
+
+\smallskip
+\textbf{Auftrag:} Ein nachhaltiges \emph{Change-Operating-Model} f\"ur Prozessver\"anderungen etablieren, das Geschwindigkeit liefert, Widerstand produktiv macht und Wirkung messbar verankert \textendash{} \"uber mehrere Initiativen.
+
+\smallskip
+\textbf{Restriktionen:} Mehrere parallele Changes, begrenzte Kapazit\"at, Stakeholderkonflikte, Datenlage unvollst\"andig, Zeitdruck durch Business-Ziele.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine \emph{Entscheidungsarchitektur} in 8 Schritten:
+
+\begin{enumerate}
+  \item \textbf{Top-10 Change-Entscheidungen}: Priorisierung, Ressourcen, KPI-Transparenz-Regeln, Ausnahmeprozess, Eskalationspfade, Kommunikationsregeln, Trainingsinvest, Stoppkriterien, WIP-Limits, Sustainment.
+  \item \textbf{Portfolio-Steuerung:} Priorisierungslogik, Taktung, Entlastungsmechanik (WIP-Limits f\"ur Change \textendash{} siehe Aufgabe 9).
+  \item \textbf{Stakeholder- \& Kommunikationssystem:} Zielgruppen, Cadence, Feedbackschleifen (Pulse), \emph{Truth Signals} (wie erkennt man \emph{echte} Adoption: Nutzung, Eigeninitiative, Verbesserungs\-vorschl\"age)?
+  \item \textbf{Sustainment-System:} DoD-Standards, Review Boards, KPI-Governance, Coaching- / Enablement-Programm, Champions-Netzwerk.
+  \item \textbf{Risikomodell:} Widerstandstypen, \"Uberlastungsindikatoren, KPI-Gaming-Erkennung, Gegen\-ma{\ss}nahmen.
+  \item \textbf{Roadmap (12 Wochen):} Pilot \textrightarrow{} Skalierung \textrightarrow{} Verstetigung; Messkonzept.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:}
+    \begin{itemize}
+      \item \emph{Transparenzregel:} Welche KPI-Transparenz ist hilfreich, welche schadet Kultur? Guardrails + Fr\"uhwarn\-signale.
+      \item \emph{Stopp- / Schwenk-Kriterien:} Wann wird ein Change-Vorhaben gestoppt oder neu geschnitten? (WIP, Wirkung, Risiko.)
+    \end{itemize}
+  \item \textbf{Anschluss an Strategie:} Drei Argumente, warum dieses Operating Model Strategie tr\"agt (Time-to-Effect, Mitarbeiterbindung, Compliance).
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien (Senior-Level):} Pragmatismus unter Restriktionen \textperiodcentered{} Reife der Trade-off-Logik \textperiodcentered{} kulturelle Sensibilit\"at \textperiodcentered{} Wirkung: \emph{Change wird gef\"uhrt, nicht gemanagt}.
+
+\ytquery{change operating model transformation portfolio sustainment KPI culture}
+
+\antwortlinien{38}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben zu Tag 15 bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 15}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Change-Rollen klar besetzen \textendash{} insbesondere die Sponsor-Rolle.
+  \item Lewin, Kotter und ADKAR als komplement\"are Werkzeuge einsetzen.
+  \item Widerstand als \emph{Information} lesen \textendash{} nach Typ unterschiedlich reagieren.
+  \item Stakeholder \"uber Einfluss / Betroffenheit einbinden und ``politische Fallen'' erkennen.
+  \item Kommunikationspakete mit glaubw\"urdiger Kernbotschaft entwickeln und Feedback-Mechaniken einbauen.
+  \item Sustainment-Design (KPIs, Review, DoD, Training) bauen, das Refreeze tats\"achlich tr\"agt.
+  \item Change-Portfolio mit WIP-Limits und Stoppkriterien f\"uhren.
+  \item KPI-Transparenz mit Guardrails so dimensionieren, dass Lernen statt Angst entsteht.
+  \item Ein Change-Operating-Model als Entscheidungsarchitektur formulieren.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 15 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

@@ -1,0 +1,558 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 16 - Aufgabenheft (Capstone)
+% CSRD / EU-Taxonomie als Prozess-, Daten- und Kontrollarchitektur
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 16}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}CSRD / EU-Taxonomie \textendash{} Capstone}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 8 (CAPSTONE) \textperiodcentered{} TAG 16 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 19.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 16\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}CSRD \& EU-Taxonomie \textendash{}\\Prozess-, Daten- und Kontroll-\\architektur in elf Aufgaben.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3 \textperiodcentered{} Capstone}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt die elf Capstone-Aufgaben zu Tag 16 \textendash{} \emph{Regulatorik in Steuerung \"ubersetzen}: EU-Taxonomie und CSRD als Prozess-, Daten- und Kontroll\-architektur, integriert in laufende Transformationsprogramme (Prozessdigitalisierung, RPA, Green IT, Change). Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} CSRD-/EU-Taxonomie-Logik, Controls, Evidence Pack, KPI-Dictionary. 5\,--\,10 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Reportingprozess, Controls, KPI-Steckbriefe, Anti-Gaming. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Decision Architecture, Risk Appetite, Integration in Transformation. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt eine Niveau-Markierung, einen Zeit-Richtwert, den Aufgabentext, einen Antwort-Freiraum und eine \emph{YouTube-Suchquery}.
+
+\begin{infobox}[Hinweis: Capstone-Tag]
+\textbf{Tag 16 ist der Capstone des Kurses.} Die Aufgaben verbinden Inhalte aus den vorhergehenden Tagen: BPMN/EPC (Prozesssicht), RPA-Governance (Audit Trail), Sustainable IT (Datenpipelines), Green IT (Datenqualit\"at), Change Leadership (Verankerung). Das ist beabsichtigt: \emph{ESG-Compliance ist kein Reporting-Projekt, sondern eine integrierte Entscheidungs- und Kontrollarchitektur}.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{CSRD \& EU-Taxonomie aus Prozesssicht}{\nivLi}{8\,min}
+
+\noindent \emph{CSRD} (Corporate Sustainability Reporting Directive) und \emph{EU-Taxonomie} verlangen, dass Unternehmen Nachhaltigkeits-Informationen \emph{verl\"asslich}, \emph{vergleichbar} und \emph{auditf\"ahig} berichten. Aus Prozesssicht hei{\ss}t das: Anforderungen erzeugen \emph{Datenbedarfe}, \emph{Nachweise}, \emph{Kontrollen} und \emph{Verantwortlichkeiten}. Wo entstehen Kennzahlen (Energie, Emissionen, CapEx-/OpEx-Anteile, Policies, Lieferkette), wo werden sie validiert, wo freigegeben?
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Erkl\"aren Sie in je 2 S\"atzen, was \emph{CSRD} und \emph{EU-Taxonomie} fordern \textendash{} aus Prozesssicht, nicht aus Jura-Sicht (z.\,B.\ CSRD: doppelte Wesentlichkeit; EU-Taxonomie: Klassifikation wirtschaftlicher T\"atigkeiten nach \"okologischen Kriterien).
+  \item Nennen Sie \textbf{drei typische Risiken} aus Prozesssicht: \emph{uneinheitliche Definitionen}, \emph{Dateninseln}, \emph{Sch\"atzungen ohne Transparenz}, \emph{fehlende Verantwortliche}. F\"ur jedes Risiko: ein konkretes Beispiel.
+  \item Erkl\"aren Sie in einem Satz, warum CSRD ein \emph{Prozess-} und \emph{kein Dokument-Thema} ist (Dokument-Sicht: ``Wir bauen einen Bericht''; Prozess-Sicht: ``Wir bauen ein System, das den Bericht erzeugt'').
+\end{enumerate}
+
+\ytquery{CSRD EU taxonomy process perspective sustainability reporting data governance}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Governance- \& Kontrollsysteme f\"ur ESG-Reporting}{\nivLi}{10\,min}
+
+\noindent F\"ur belastbares ESG-Reporting braucht es drei Schichten: \emph{Governance} (Rollen + Entscheidungswege + Policies + Review-Zyklen), \emph{Controls} (definierte Pr\"ufungen: Plausibilit\"at, Vollst\"andigkeit, Freigaben, Traceability) und \emph{Audit-Readiness} (Nachweisf\"uhrung, Prozessdokumentation, ``Evidence Packs'').
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Skizzieren Sie ein \textbf{Rollenmodell} mit f\"unf Rollen (\emph{ESG Steering}, \emph{Data Owner}, \emph{Control Owner}, \emph{Reporting Factory Lead}, \emph{Internal Audit}). Pro Rolle: \emph{Hauptverantwortung}, \emph{Entscheidungsrechte}, \emph{Eskalationsweg}.
+  \item Definieren Sie \textbf{f\"unf Control-Typen} (z.\,B.\ \emph{Completeness Check}, \emph{Plausibilit\"atspr\"ufung mit Schwellen}, \emph{Vier-Augen-Freigabe}, \emph{Change-Log / Versionierung}, \emph{Zugriffskontrolle}). Pro Typ: \emph{wozu da}, \emph{wer pr\"uft}, \emph{wie h\"aufig}.
+  \item Definieren Sie \textbf{Audit-Readiness} in einem Satz \textendash{} und nennen Sie \emph{drei Evidence-Pack-Elemente} (z.\,B.\ Datenquelle, Transformationslogik, Freigabeprotokoll, Annahmenregister, Versionierung).
+\end{enumerate}
+
+\ytquery{ESG governance controls audit readiness evidence pack CSRD reporting}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{KPI-Dictionary \& Datenqualit\"atslabel}{\nivLi}{10\,min}
+
+\noindent Eine \emph{Single Source of Truth} f\"ur ESG-KPIs verlangt ein \emph{KPI-Dictionary}: pro KPI eine \emph{Definition}, \emph{Systemgrenze}, \emph{Berechnung}, \emph{Datenquelle}, \emph{Datenqualit\"at} (A/B/C, siehe Tag 14), \emph{Anti-Gaming-Mechanik}, \emph{Owner}. Materialit\"at-/Risiko-Logik bestimmt, \emph{welche} Controls und KPIs intensiv gef\"uhrt werden \textendash{} ``nicht alles pr\"ufen, sondern das Richtige''.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie ein \textbf{KPI-Steckbrief-Template} mit mindestens neun Feldern (Name, Definition, Berechnung, Systemgrenze, Einheit, Datenquelle, Datenqualit\"atslabel, Anti-Gaming-Regel, Owner).
+  \item F\"ullen Sie das Template f\"ur \textbf{drei KPIs} aus: \emph{Energieverbrauch IT}, \emph{Emissionsintensit\"at IT-Services}, \emph{Anteil verifizierte Vendor-Daten}.
+  \item Erkl\"aren Sie in einem Satz, warum ein \emph{KPI ohne Datenqualit\"atslabel nicht im CSRD-Bericht erscheinen darf} \textendash{} und welche Konsequenz das auf die Reporting-Pipeline hat (Pflichtfeld; Pipeline lehnt unmarkierte Werte ab).
+\end{enumerate}
+
+\ytquery{KPI dictionary ESG data quality label anti gaming reporting CSRD}
+
+\antwortlinien{14}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{ESG-Reportingprozess End-to-End in 8\,--\,10 Schritten}{\nivLii}{30\,min}
+
+\begin{infobox}[Ausgangslage]
+Ein Unternehmen muss ESG-relevante Daten aus IT, Facility, Einkauf, HR, Finance konsolidieren. Heute existieren Excel-Silos, Definitionen sind unklar.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Skizzieren Sie einen \textbf{End-to-End-Reportingprozess in 8\,--\,10 Schritten} (textuell): \emph{KPI-Dictionary aktualisieren} \textrightarrow{} \emph{Datenanforderung an Owner} \textrightarrow{} \emph{Datenerfassung (Quellen)} \textrightarrow{} \emph{Validierung (Plausibilit\"at / Completeness)} \textrightarrow{} \emph{Konsolidierung} \textrightarrow{} \emph{Freigabe (Owner + Reporting Lead)} \textrightarrow{} \emph{Ver\"offentlichung / Reporting} \textrightarrow{} \emph{Audit-Trail / Evidence Pack} \textrightarrow{} \emph{Lessons Learned}.
+  \item \textbf{Drei Kontrollpunkte} entlang des Prozesses: z.\,B.\ Completeness-Check (vor Konsolidierung); Plausibilit\"atspr\"ufung mit Schwellen (vor Freigabe); Vier-Augen-Freigabe (vor Ver\"offentlichung). Pro Kontrolle: \emph{Owner}, \emph{Eingangskriterium}, \emph{Ausgang/Folge}.
+  \item \textbf{F\"unf Evidence-Artefakte}: Datenquelle, Berechnung (Script-Version), Freigabe, Ausnahmebehandlung, Versionierung.
+  \item \textbf{Zwei Transparenzma{\ss}nahmen} f\"ur schwache Daten: \emph{Datenqualit\"atslabel} (A/B/C; D nicht ver\"offentlichbar); \emph{Annahmenregister} mit jedem Reporting versendet.
+  \item \textbf{Eine Trade-off-Entscheidung:} Welcher Schritt erlaubt eine Sch\"atzung \emph{bewusst} (z.\,B.\ Lieferkettendaten als Label C), und welche Guardrails (Methodik dokumentiert, Verbesserungsplan, Sponsor-Sign-off) sind verpflichtend?
+\end{enumerate}
+
+\ytquery{CSRD reporting process end to end controls evidence data quality}
+
+\antwortlinien{24}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Acht Controls + Evidence Pack Checkliste}{\nivLii}{25\,min}
+
+\begin{infobox}[Fall: IndustriCo Europe (regulatorisch sensibel)]
+Mehrere Werke, komplexe Lieferkette; Reporting muss \emph{konsistent}, \emph{nachvollziehbar} und \emph{auditf\"ahig} werden.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie \textbf{acht Controls} entlang des Reportingprozesses: Pflichtfelder/Completeness; Plausibilit\"atsgrenzen (Schwellen); 2-Augen-Freigabe; \"Anderungslog (wer/was/warum); Zugriffskontrolle; Ausnahmegenehmigung; Reconciliation zu Finance-Daten; Sampling-Review f\"ur Audit-Readiness. Pro Control: \emph{Eingangskriterium}, \emph{Ausl\"oser}, \emph{Owner}, \emph{Eskalation bei Fehler}.
+  \item Erstellen Sie eine \textbf{Evidence-Pack-Checkliste} pro KPI: Datenquelle (System/Export), Transformationslogik (ETL), Berechnungsblatt/Script-Version, Freigabe\-protokoll, Ausnahmenregister, Datenqualit\"atslabel, Change-Requests.
+  \item Markieren Sie f\"ur jede Control: ist sie \emph{Minimum Viable Control} (MVC) f\"ur den \emph{Dry Run} \textendash{} oder erst \emph{Scale-Phase}? Begr\"undung in je einem Satz.
+\end{enumerate}
+
+\ytquery{CSRD controls evidence pack minimum viable controls reconciliation sampling}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{KPI-Set 6\,--\,8 + Anti-Gaming-Kopplung}{\nivLii}{25\,min}
+
+\begin{infobox}[Aufgabenstellung]
+F\"ur CSRD / EU-Taxonomie soll ein robustes \emph{KPI-Set} (6\,--\,8 KPIs) entwickelt werden. Jeder KPI muss \emph{Datenqualit\"atslabel} und \emph{Anti-Gaming-Mechanik} besitzen. Ohne Kopplung droht Greenwashing (Tag 14).
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie ein \textbf{KPI-Set mit 6\,--\,8 KPIs}, das alle drei ESG-Dimensionen abdeckt (Environment / Social / Governance). Vorschl\"age: \emph{Energieverbrauch} (A/B/C), \emph{Emissionsintensit\"at} (mit Systemgrenze), \emph{Anteil verifizierte Vendor-Daten}, \emph{Datenqualit\"atsindex}, \emph{Control Pass Rate}, \emph{Timeliness (Reporting p\"unktlich)}, \emph{Exception Rate}, \emph{Mitarbeiter-Diversit\"atskennzahl}.
+  \item Pro KPI: \emph{Definition / Berechnung / Owner / Ziel / Datenqualit\"at / Anti-Gaming}.
+  \item \textbf{Kopplungslogik} f\"ur mindestens drei KPI-Paare: z.\,B.\ ``Kosten- oder CO\textsubscript{2}-KPI z\"ahlt nur, wenn Datenqualit\"atslabel $\geq$\,B und Control Pass Rate $\geq$\,X.'' Erkl\"aren Sie, was diese Kopplung strukturell verhindert.
+  \item \textbf{Schutz-KPI:} Eine KPI, die das System \emph{vor sich selbst} sch\"utzt (z.\,B.\ \emph{Anteil Reports mit DQ-Label und Annahmenregister} \emph{$\geq$\,95\,\%}). Owner und Konsequenz bei Unter\-schreiten.
+\end{enumerate}
+
+\ytquery{ESG KPI set anti gaming coupling data quality CSRD greenwashing}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Integration in Transformation (RPA, ITSM, Green IT, Change)}{\nivLii}{25\,min}
+
+\begin{infobox}[These (Kurs-Kontext)]
+ESG-Compliance darf nicht als isoliertes ``Reporting-Projekt'' laufen. Sie muss in die bereits laufenden Transformationsprogramme dieses Kurses integriert sein: Prozessdigitalisierung (BPMN/EPC, Workflow), RPA-Governance (Audit Trail), Sustainable IT (Service-Portfolio, Capacity), Green IT (Mess-System, Anti-Greenwashing), Change Leadership (Verankerung).
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item F\"ur \textbf{jedes der f\"unf Transformationsprogramme} (BPMN/EPC, RPA, ITSM, Green IT, Change): Schreiben Sie je 2\,--\,3 S\"atze, wie dieses Programm \emph{direkt auf CSRD einzahlt} (z.\,B.\ RPA-Audit-Trail $\rightarrow$ liefert nachweisf\"ahige Datenherkunft; Green-IT-Messsystem $\rightarrow$ liefert die Inputs f\"ur Scope-2-Berechnungen).
+  \item Identifizieren Sie \textbf{drei konkrete Prozess-/Tooling-Initiativen}, die in den n\"achsten 14 Wochen direkt CSRD-relevant werden (z.\,B.\ DWH/ETL f\"ur ESG-Events; Workflow-Freigaben f\"ur KPI-\"Anderungen; Monitoring \& Dashboards mit Audit Trail).
+  \item \textbf{Drei Anti-Muster}, die diese Integration zerst\"oren (z.\,B.\ Reporting wird separat in Excel gebaut; ESG-Team hat keine Anbindung an IT-Architektur; KPI-\"Anderungen ohne Change-Log).
+\end{enumerate}
+
+\ytquery{ESG transformation integration RPA ITSM green IT change management CSRD}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Capstone-Fallstudie ``IndustriCo Europe''}{\nivLii}{45\,min}
+
+\begin{infobox}[Capstone-Fallstudie: IndustriCo Europe]
+\textbf{Unternehmen:} ``IndustriCo Europe'' \textendash{} mehrere Werke, komplexe Lieferkette.
+
+\smallskip
+\textbf{Problem:}
+\begin{itemize}
+  \item ESG-Daten sind fragmentiert.
+  \item Keine einheitlichen Definitionen.
+  \item Reporting muss konsistent, nachvollziehbar und auditf\"ahig werden.
+  \item Parallel l\"auft ein Transformationsprogramm (Prozessdigitalisierung, Green IT, RPA).
+\end{itemize}
+
+\smallskip
+\textbf{Restriktionen:} 14 Wochen bis zum internen Dry-Run; Budget 250\,k\,\euro{}; Datenl\"ucken (Energie/Lieferkette); Zielkonflikt Transparenz vs.\ Aufwand; Reputationsrisiko (Greenwashing).
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag (integriert):}
+
+\begin{enumerate}
+  \item \textbf{Reportingprozess} (Plan-Collect-Validate-Consolidate-Approve-Report-Assure) inkl.\ Rollen und Schnittstellen (IT, Einkauf, Werke, Finance).
+  \item \textbf{Acht Controls} (siehe Aufgabe 5) mit Owner und Eskalation.
+  \item \textbf{Evidence Pack Checkliste} pro KPI (siehe Aufgabe 5).
+  \item \textbf{KPI-Set (6\,--\,8 KPIs)} inkl.\ Datenqualit\"atslabel und Anti-Gaming-Kopplung (siehe Aufgabe 6).
+  \item \textbf{Integration in Transformation}: Drei Prozess-/Tooling-Initiativen, die direkt einzahlen (DWH/ETL, Workflow-Freigaben, BI-Dashboards mit Audit Trail; RPA f\"ur Datensammlung mit Governance).
+  \item \textbf{Entscheidung unter Unsicherheit:} Welche \emph{zwei Datenl\"ucken} akzeptieren Sie im Dry Run \textendash{} und welche Kontrollen / Transparenzma{\ss}nahmen kompensieren das? Pro Entscheidung: Annahme, verworfene Alternative, Guardrails, Verbesserungsplan, Fr\"uhwarnsignal.
+\end{enumerate}
+
+\ytquery{CSRD case study reporting process controls KPI transformation industrial}
+
+\antwortlinien{36}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Risk Appetite \& Vorstands-Transparenzregeln}{\nivLiii}{35\,min}
+
+\begin{infobox}[Rolle: CSO / CFO / CIO gemeinsam]
+\textbf{Ihre Rolle:} \emph{Chief Sustainability Officer} im Tandem mit \emph{CFO} und \emph{CIO}; Sie verantworten gemeinsam die ESG-Governance.
+
+\smallskip
+\textbf{Auftrag:} In 16 Wochen eine auditf\"ahige ESG-Governance etablieren, die CSRD und EU-Taxonomie in Prozesse, Daten, Controls, KPIs und Tooling \"ubersetzt \textendash{} und dauerhaft in Transformationsprogramme integriert ist.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Risk Appetite f\"ur ESG-Reporting:} F\"unf Bereiche, in denen Sie \emph{bewusst} Risiko akzeptieren (z.\,B.\ Lieferkettendaten als DQ-C, Sch\"atzungen f\"ur Scope-3, Sampling statt 100-\%-Pr\"ufung). Pro Bereich: \emph{Annahme}, \emph{Risiko-Quantifizierung} (qualitativ + grob), \emph{Guardrail}, \emph{Fr\"uhwarnsignal}, \emph{Eskalation}.
+  \item \textbf{Drei Vorstands-Transparenzregeln:} z.\,B.\ ``Jede ver\"offentlichte Zahl tr\"agt das schlechteste Datenqualit\"atslabel im Aggregat''; ``Annahmenregister geht im selben Versand mit''; ``D-Werte sind nicht ver\"offentlichbar''.
+  \item \textbf{Drei nicht delegierbare Entscheidungen} f\"ur den Vorstand: z.\,B.\ \emph{Systemgrenzen}, \emph{Risk Appetite f\"ur Sch\"atzungen}, \emph{Transparenzregeln gegen Greenwashing}. Erkl\"aren Sie pro Entscheidung, warum Delegation strukturell fehlerhaft w\"are.
+  \item \textbf{Eine Vorstandsvorlage (1 Absatz):} Wie pr\"asentieren Sie das Risk Appetite Framework im n\"achsten Vorstandstreffen \textendash{} mit klarem Anker, was Sie entscheiden lassen, und was Sie als Empfehlung tragen?
+\end{enumerate}
+
+\ytquery{ESG risk appetite governance board transparency rules CSRD audit committee}
+
+\antwortlinien{26}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Minimum Viable Controls (MVC) f\"ur Dry Run}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Im Dry Run (4\,--\,6 Wochen) kann nicht \emph{jede} Control implementiert sein \textendash{} aber das Ergebnis muss \emph{trotzdem} belastbar sein. Die Senior-Frage: \emph{Welche Controls sind ``Minimum Viable Controls'' (MVC), welche sind Overkill}?
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie \textbf{f\"unf MVC} (\emph{Minimum Viable Controls}) f\"ur den Dry Run \textendash{} ohne die das Reporting nicht aussagekr\"aftig ist (z.\,B.\ Completeness-Check, 2-Augen-Freigabe f\"ur Top-3-KPI, DQ-Labeling-Pflicht, Annahmenregister, Change-Log Pflicht).
+  \item Definieren Sie \textbf{drei Controls}, die in den \emph{Scale}-Phasen (Wo 7\,--\,12) dazukommen, im Dry Run aber bewusst ausgesetzt sind (z.\,B.\ Reconciliation zu Finance-Daten f\"ur alle KPIs; Sampling-Review f\"ur Vendor-Daten; Auto-Validierung gegen historische Werte).
+  \item \textbf{Kompensationsmechanik:} Welche \emph{f\"unf Ma{\ss}nahmen} f\"angt das Fehlen der drei Scale-Controls im Dry Run ab (z.\,B.\ \emph{Sampling per Hand statt automatisiert}; \emph{Sponsor-Sign-off statt Reconciliation}; \emph{Audit-Trockenlauf in Wo 10})?
+  \item \textbf{Stoppkriterien:} Drei Schwellen, die einen Dry Run als ``nicht ausreichend'' kennzeichnen (z.\,B.\ $>$\,3 KPIs ohne DQ-Label; Control Pass Rate $<$\,80\,\%; mehr als ein materieller Audit-Finding bei Stichprobe).
+  \item \textbf{Faustregel} (1 Satz): Wann ist eine Control \emph{MVC}, wann \emph{Overkill}?
+\end{enumerate}
+
+\ytquery{minimum viable controls dry run sampling audit readiness CSRD scale phase}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Capstone-Transferprojekt \textendash{} CSRD/EU-Taxonomie Decision Architecture}{\nivLiii}{60\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} \emph{Chief Sustainability Officer} im Tandem mit \emph{CFO} und \emph{CIO} (gemeinsame Steuerung).
+
+\smallskip
+\textbf{Auftrag:} In 16 Wochen eine auditf\"ahige ESG-Governance etablieren, die EU-Taxonomie- und CSRD-Anforderungen in Prozesse, Daten, Controls, KPIs und Tooling \"ubersetzt \textendash{} und in laufende Transformationsprogramme (BPMN/EPC, RPA, Sustainable IT, Green IT, Change) integriert ist.
+
+\smallskip
+\textbf{Restriktionen:} Datenl\"ucken; heterogene Systeme; begrenzte Kapazit\"at; hoher Zeitdruck; reputations\-kritisches Umfeld; Zielkonflikte (Transparenz vs.\ Aufwand, Speed vs.\ Assurance).
+\end{infobox}
+
+\noindent\textbf{Capstone-Arbeitsauftrag:} Entwickeln Sie eine vollst\"andige \emph{Entscheidungsarchitektur} in 9 Schritten. Pr\"asentationstauglich, kein Fl\"ie{\ss}text-Roman.
+
+\begin{enumerate}
+  \item \textbf{Top-12 Entscheidungen:} Systemgrenzen; KPI-Dictionary Ownership; Datenqualit\"atslabels; Control-Set; Ausnahmeprozess; Tooling-Architektur (DWH/ETL/BI); Reporting-Cadence; Audit-Readiness; Vendor-Datenstrategie; Kommunikations-/Transparenzregeln; Priorisierung; Budget/Ressourcen.
+  \item \textbf{Governance \& Operating Model:} ESG Steering, Data Owners, Control Owners, Reporting Factory, RACI, Eskalation, Entscheidungsprotokolle.
+  \item \textbf{Controls \& Evidence Framework:} Minimum Viable Controls $\rightarrow$ Scale; Evidence Packs; Change-/Versioning; Access Control; Sampling-/Assurance-Plan.
+  \item \textbf{Integration in Transformation:} Verankerung in Prozessdigitalisierung (Workflows), Process Intelligence (Monitoring), Green IT Ma{\ss}nahmen, Vendor Management; KPI-Kopplungen gegen Greenwashing.
+  \item \textbf{Roadmap:} Dry Run (4\,--\,6 Wochen) \textrightarrow{} Stabilisierung (6\,--\,10 Wochen) \textrightarrow{} Assurance Readiness (laufend), inkl.\ Change Management \& Training.
+  \item \textbf{Risikomodell:} Top-5 Risiken (Greenwashing, Datenqualit\"at, fehlende Verantwortlichkeit, Audit-Findings, KPI-Gaming) + Gegenma{\ss}nahmen.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:}
+    \begin{itemize}
+      \item Welche KPI / Reports werden trotz Datenqualit\"at C ver\"offentlicht (Transparenzentscheidung) \textendash{} und welche Guardrails sind Pflicht?
+      \item Welche Controls werden im Dry Run reduziert \textendash{} und wie wird das Risiko kompensiert (Sampling, Zusatzreview, Board-Freigabe)?
+    \end{itemize}
+    Pro Entscheidung: Annahme, verworfene Alternative, Fr\"uhwarnsignal, Reviewdatum.
+  \item \textbf{Anschluss an Strategie:} F\"unf Argumente, warum diese Entscheidungsarchitektur Strategie tr\"agt (Compliance, Reputation, Investorenkommunikation, Effizienz, Anschluss an Transformation).
+  \item \textbf{Pr\"asentationssatz f\"ur Vorstand und Aufsichtsrat} (2\,--\,3 S\"atze): Was ist die Kernbotschaft, die das Mandat tr\"agt, ohne in Details abzugleiten?
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien (Senior-Capstone):} Anschluss an Strategie \textperiodcentered{} Integration mit Tagen 1\,--\,15 \textperiodcentered{} Pragmatismus unter Restriktionen \textperiodcentered{} Reife des Entscheidens unter Unsicherheit \textperiodcentered{} Anti-Greenwashing-Logik \textperiodcentered{} Auditf\"ahigkeit \textperiodcentered{} Wirkung: \emph{nicht ``Reporting erf\"ullen'', sondern ein verantwortetes Governance-, Daten- und Entscheidungs-Betriebssystem aufbauen}.
+
+\ytquery{CSRD EU taxonomy decision architecture CSO CFO CIO governance integration}
+
+\antwortlinien{44}
+
+\clearpage
+
+\section*{Abschluss \& Kursabschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben des Capstone-Tags 16 bearbeitet \textendash{} und damit den Kurs \emph{Digital Business Modelling \& Transformation} (Kurs 71 / Dig 42) durchlaufen. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 16}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item CSRD und EU-Taxonomie aus Prozesssicht denken \textendash{} nicht als Dokument-Projekt.
+  \item Eine Governance-Schicht aus Rollen, Controls und Audit-Readiness aufsetzen.
+  \item Ein KPI-Dictionary mit Datenqualit\"atslabels und Anti-Gaming-Kopplung bauen.
+  \item Einen End-to-End-Reportingprozess mit Controls und Evidence Pack designen.
+  \item Minimum Viable Controls von Overkill unterscheiden \textendash{} im Dry Run wie in Scale.
+  \item ESG-Compliance in laufende Transformationsprogramme (BPMN/EPC, RPA, ITSM, Green IT, Change) integrieren, statt isoliert zu reportieren.
+  \item Vorstands-Transparenzregeln gegen Greenwashing formulieren und durchsetzen.
+  \item Eine vollst\"andige Capstone-Entscheidungsarchitektur tragen, die unter Unsicherheit handlungsf\"ahig bleibt.
+\end{itemize}
+\end{infobox}
+
+\medskip
+\noindent\textbf{Schlussgedanke (Kurs 71).} Der Bogen dieses Kurses war eine Bewegung von \emph{Notation} (BPMN, EPC) \"uber \emph{Automatisierung} (RPA, Governance) und \emph{Steuerung} (ITSM, Green IT) zu \emph{F\"uhrung} (Change Leadership) und \emph{Verantwortung} (CSRD). Diese f\"unf Ebenen sind \emph{eine} Architektur, kein Werkzeugkasten. Wer Tag 16 sauber tr\"agt, hat Tag 1 bis 15 verstanden \textendash{} und umgekehrt.
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 16 \textperiodcentered{} Aufgabenheft (Capstone) \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
