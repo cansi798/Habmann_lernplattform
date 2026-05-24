@@ -248,7 +248,7 @@ Ein Prozessmodell ist kein Selbstzweck. Es ist ein \emph{Steuerungsinstrument} -
 % --- 1. EINSTIEG / MOTIVATION --------------------------------------------
 \section{Einstieg: Warum Prozesse modellieren}
 
-Jede Organisation \emph{hat} Prozesse -- ob sie sie aufgeschrieben hat oder nicht. Bestellungen werden bearbeitet, Anträge geprüft, Geräte produziert, Tickets beantwortet. Die Frage ist nicht, \emph{ob} es Prozesse gibt, sondern: \emph{Sind sie verstanden, vergleichbar, steuerbar?}
+Jede Organisation \emph{hat} Prozesse -- ob sie sie aufgeschrieben hat oder nicht. Bestellungen werden bearbeitet, Anträge geprüft, Geräte produziert, Tickets beantwortet. Die Frage ist nicht, \emph{ob} es Prozesse gibt, sondern: \emph{Sind sie verstanden, vergleichbar, steuerbar?} \quelle{vgl.\ Dumas et al., 2018, Kap.~1}
 
 In der Praxis stoßen wir typischerweise auf drei Symptome, die anzeigen, dass die Prozesslandschaft modellierungsbedürftig ist:
 
@@ -305,7 +305,7 @@ Bevor wir das erste Symbol zeichnen, muss \emph{eine} Frage beantwortet sein: \e
 % --- 2. BPMN BASISELEMENTE -----------------------------------------------
 \section{BPMN 2.0 -- Basiselemente}
 
-\fachbegriff{BPMN} steht für \emph{Business Process Model and Notation}. Die Version 2.0 ist seit 2011 ein Standard der Object Management Group (OMG). Ihr Anspruch: eine Notation, die sowohl für die Fachseite verständlich als auch für die IT ausführbar ist. In der Praxis nutzen wir nur einen Bruchteil der Spezifikation -- das, was im Geschäftsalltag wirklich vorkommt.
+\fachbegriff{BPMN} steht für \emph{Business Process Model and Notation}. Die Version 2.0 ist seit 2011 ein Standard der Object Management Group (OMG), aktuell in Version 2.0.2 von 2014. Ihr Anspruch: eine Notation, die sowohl für die Fachseite verständlich als auch für die IT ausführbar ist. In der Praxis nutzen wir nur einen Bruchteil der Spezifikation -- das, was im Geschäftsalltag wirklich vorkommt. \quelle{OMG, 2014; Allweyer, 2020}
 
 \subsection{Aktivitäten (Activities) und Tasks}
 
@@ -364,7 +364,7 @@ Die fünf BPMN-Hauptelemente, die in 90\,\% der Modelle vorkommen:\\[2pt]
 % --- 3. EPC IM VERGLEICH -------------------------------------------------
 \section{EPC -- Ereignisgesteuerte Prozesskette}
 
-\fachbegriff{EPC} steht für \emph{Ereignisgesteuerte Prozesskette}. Sie wurde Anfang der 1990er Jahre am Institut für Wirtschaftsinformatik in Saarbrücken entwickelt und ist in deutschsprachigen Organisationen weit verbreitet -- besonders in SAP-nahen Umgebungen und in Verwaltungen. Wer im DACH-Raum mit gewachsenen Prozesslandschaften zu tun hat, trifft EPC garantiert.
+\fachbegriff{EPC} steht für \emph{Ereignisgesteuerte Prozesskette}. Sie wurde Anfang der 1990er Jahre am Institut für Wirtschaftsinformatik in Saarbrücken (Scheer) entwickelt und ist in deutschsprachigen Organisationen weit verbreitet -- besonders in SAP-nahen Umgebungen und in Verwaltungen. Wer im DACH-Raum mit gewachsenen Prozesslandschaften zu tun hat, trifft EPC garantiert. \quelle{Scheer, 2002}
 
 \subsection{Die drei Pflichtelemente}
 
@@ -415,7 +415,7 @@ Die Frage ``BPMN \emph{oder} EPC'' ist meist falsch gestellt. Die richtige Frage
 % --- 4. MODELL-QUALITAET / GoM -------------------------------------------
 \section{Modell-Qualität: die sieben Grundsätze}
 
-Ein Modell ist nicht ``richtig'' oder ``falsch'' -- es ist mehr oder weniger \emph{brauchbar} für seinen Zweck. Die \fachbegriff{Grundsätze ordnungsmäßiger Modellierung} (GoM) -- ursprünglich von Becker, Rosemann und Schütte formuliert -- geben sieben Kriterien an die Hand, die in jeder Modellierungs-Disziplin gelten.
+Ein Modell ist nicht ``richtig'' oder ``falsch'' -- es ist mehr oder weniger \emph{brauchbar} für seinen Zweck. Die \fachbegriff{Grundsätze ordnungsmäßiger Modellierung} (GoM) -- ursprünglich von Becker, Rosemann und Schütte (1995) formuliert -- geben sieben Kriterien an die Hand, die in jeder Modellierungs-Disziplin gelten. \quelle{Becker et al., 1995} Eine empirisch fundierte, kompaktere Schwester-Heuristik sind die ``Seven Process Modeling Guidelines'' (7PMG) von Mendling, Reijers und van der Aalst -- sie übersetzen die GoM in konkrete Daumenregeln für die tägliche Modellierungspraxis. \quelle{Mendling et al., 2010}
 
 \subsection{Die sieben Grundsätze im Detail}
 
@@ -488,7 +488,7 @@ Wer diesen Satz nicht aufschreiben kann, sollte nicht modellieren -- sondern fra
 % --- 6. POOLS, LANES, VERANTWORTUNG --------------------------------------
 \section{Pools, Lanes und Verantwortlichkeiten}
 
-Ein BPMN-Diagramm ohne Pools und Lanes ist eine Folge bunter Symbole -- aber kein Verantwortungsmodell. Erst die Aufteilung in Pools (Beteiligte) und Lanes (Rollen) macht ein Diagramm steuerungstauglich.
+Ein BPMN-Diagramm ohne Pools und Lanes ist eine Folge bunter Symbole -- aber kein Verantwortungsmodell. Erst die Aufteilung in Pools (Beteiligte) und Lanes (Rollen) macht ein Diagramm steuerungstauglich. \quelle{Freund \& Rücker, 2019, Kap.~3}
 
 \subsection{Pools: organisatorische Grenzen}
 
@@ -504,7 +504,7 @@ Typische Lanes in einem Vertriebs-/Produktionsprozess: \emph{Vertrieb}, \emph{Ei
 
 \subsection{Verantwortung sichtbar machen -- RACI an der Lane}
 
-Lanes lassen sich gut mit einer \fachbegriff{RACI}-Matrix kombinieren: für jede Aktivität wird festgelegt, wer \emph{Responsible} (führt aus), \emph{Accountable} (verantwortet), \emph{Consulted} (wird gefragt) und \emph{Informed} (wird informiert) ist. Die Lane zeigt typischerweise die \emph{R}; die anderen Rollen werden in einer ergänzenden Tabelle gepflegt.
+Lanes lassen sich gut mit einer \fachbegriff{RACI}-Matrix kombinieren: für jede Aktivität wird festgelegt, wer \emph{Responsible} (führt aus), \emph{Accountable} (verantwortet), \emph{Consulted} (wird gefragt) und \emph{Informed} (wird informiert) ist. Die Lane zeigt typischerweise die \emph{R}; die anderen Rollen werden in einer ergänzenden Tabelle gepflegt. \quelle{PMI, 2021}
 
 \begin{merkbox}[Verantwortungs-Test]
 Wenn man ein BPMN-Modell drucken kann, ohne die Lanes -- und niemand bemerkt einen Verlust -- ist das Modell als Verantwortungsdokument nutzlos. Lanes sind die Stelle, an der aus einem \emph{Ablaufbild} ein \emph{Steuerungsmodell} wird.
@@ -551,7 +551,7 @@ Wenn man den Modellausdruck einer Kollegin auf den Tisch legt und sie nach 60 Se
 % --- 8. EXECUTABLE BPMN: BRUECKE ZUR IT ----------------------------------
 \section{Vom Diagramm zur Ausführung: BPMN als Brücke}
 
-Eine Besonderheit der BPMN 2.0 ist, dass sie nicht nur dokumentieren, sondern auch \emph{ausführen} kann. Mit einer \fachbegriff{Workflow-Engine} (Camunda, Flowable, jBPM und andere) lassen sich BPMN-Diagramme direkt als Software-Prozess betreiben -- mit Tasks, die User zugewiesen oder von Services automatisch ausgeführt werden. Das ist der Brückenkopf zwischen Fach und IT.
+Eine Besonderheit der BPMN 2.0 ist, dass sie nicht nur dokumentieren, sondern auch \emph{ausführen} kann. Mit einer \fachbegriff{Workflow-Engine} (Camunda, Flowable, jBPM und andere) lassen sich BPMN-Diagramme direkt als Software-Prozess betreiben -- mit Tasks, die User zugewiesen oder von Services automatisch ausgeführt werden. Das ist der Brückenkopf zwischen Fach und IT. \quelle{Freund \& Rücker, 2019; Dumas et al., 2018, Kap.~9}
 
 \subsection{Was ``executable BPMN'' bedeutet}
 
@@ -718,7 +718,25 @@ Prozessmodellierung ist eine \textbf{Architekturentscheidung}, kein Zeichen-Hobb
   \item \textbf{Modellierung ist Architektur.} Im Mehr-Bereichs-Kontext entscheidet Governance darüber, ob Modelle lebendig bleiben oder im Repository sterben.
 \end{enumerate}
 
-% --- 12. GLOSSAR ---------------------------------------------------------
+% --- 12. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Allweyer, T. (2020).] \emph{BPMN 2.0 -- Business Process Model and Notation: Einführung in den Standard für die Geschäftsprozessmodellierung} (4.\ Aufl.). BoD.
+  \item[Becker, J., Rosemann, M., \& Schütte, R. (1995).] Grundsätze ordnungsmäßiger Modellierung. \emph{Wirtschaftsinformatik, 37}(5), 435--445.
+  \item[Dumas, M., La Rosa, M., Mendling, J., \& Reijers, H.\,A. (2018).] \emph{Fundamentals of business process management} (2nd ed.). Springer. \href{https://doi.org/10.1007/978-3-662-56509-4}{https://doi.org/10.1007/978-3-662-56509-4}
+  \item[Freund, J., \& Rücker, B. (2019).] \emph{Real-life BPMN: Includes an introduction to DMN} (4th ed.). CreateSpace.
+  \item[Mendling, J., Reijers, H.\,A., \& van der Aalst, W.\,M.\,P. (2010).] Seven process modeling guidelines (7PMG). \emph{Information and Software Technology, 52}(2), 127--136. \href{https://doi.org/10.1016/j.infsof.2009.08.004}{https://doi.org/10.1016/j.infsof.2009.08.004}
+  \item[Object Management Group. (2014).] \emph{Business Process Model and Notation (BPMN), Version 2.0.2} (formal/2013-12-09). \href{https://www.omg.org/spec/BPMN/2.0.2/}{https://www.omg.org/spec/BPMN/2.0.2/}
+  \item[Project Management Institute. (2021).] \emph{A guide to the Project Management Body of Knowledge (PMBOK\textregistered{} Guide)} (7th ed.). Project Management Institute.
+  \item[Scheer, A.-W. (2002).] \emph{ARIS -- Vom Geschäftsprozess zum Anwendungssystem} (4.\ Aufl.). Springer.
+  \item[van der Aalst, W.\,M.\,P. (2016).] \emph{Process mining: Data science in action} (2nd ed.). Springer. \href{https://doi.org/10.1007/978-3-662-49851-4}{https://doi.org/10.1007/978-3-662-49851-4}
+\end{description}
+
+% --- 13. GLOSSAR ---------------------------------------------------------
 \clearpage
 \section{Glossar}
 
@@ -739,6 +757,7 @@ Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfo
   \item[Nachrichtenfluss] Gestrichelter Pfeil zwischen Pools in BPMN. Markiert Kommunikation über organisatorische Grenzen.
   \item[Organisationseinheit (EPC)] Optionale Zuordnung in der eEPC -- welche Rolle/Stelle führt die Funktion aus.
   \item[Pool] Beteiligter in BPMN -- typischerweise eine Organisation. Pools werden über Nachrichtenflüsse verbunden.
+  \item[Process Mining] Datenbasierte Rekonstruktion realer Prozesse aus Logdaten von IT-Systemen. Macht das Ist sichtbar -- als Ergänzung zum modellierten Soll. \quelle{van der Aalst, 2016}
   \item[Prozess] Logische Abfolge von Aktivitäten, die Input in Output transformiert und Wert erzeugt.
   \item[RACI] Verantwortungsmatrix: \emph{Responsible}, \emph{Accountable}, \emph{Consulted}, \emph{Informed}. Ergänzt Lanes um Detail-Verantwortung.
   \item[Sequenzfluss] Durchgezogener Pfeil zwischen Aktivitäten innerhalb eines Pools. Bestimmt die zeitliche Reihenfolge.

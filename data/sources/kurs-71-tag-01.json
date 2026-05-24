@@ -1,0 +1,80 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 1,
+  "erstellt_am": "2026-05-24",
+  "stil": "APA-7",
+  "quellen": [
+    {
+      "key": "dumas2018",
+      "kurz": "Dumas et al., 2018",
+      "apa": "Dumas, M., La Rosa, M., Mendling, J., & Reijers, H. A. (2018). Fundamentals of business process management (2nd ed.). Springer. https://doi.org/10.1007/978-3-662-56509-4",
+      "typ": "Lehrbuch",
+      "thema": ["BPM-Lifecycle", "BPMN-Grundlagen", "Modellierung", "Analyse"],
+      "verwendung_im_skript": "Standard-Lehrbuch für den gesamten BPM-Zyklus. Wird im Skript an mehreren Stellen als allgemeine Grundlage zitiert (Einstieg, BPMN-Basiselemente, Modellzwecke)."
+    },
+    {
+      "key": "mendling2010",
+      "kurz": "Mendling et al., 2010",
+      "apa": "Mendling, J., Reijers, H. A., & van der Aalst, W. M. P. (2010). Seven process modeling guidelines (7PMG). Information and Software Technology, 52(2), 127–136. https://doi.org/10.1016/j.infsof.2009.08.004",
+      "typ": "Journal-Artikel",
+      "thema": ["Modellqualität", "Benennungsregeln", "7PMG"],
+      "verwendung_im_skript": "Wird in der Section ‚Modell-Qualität‘ zitiert. Empirisch fundierte Modellierungsregeln, die mit den GoM korrespondieren."
+    },
+    {
+      "key": "becker1995",
+      "kurz": "Becker et al., 1995",
+      "apa": "Becker, J., Rosemann, M., & Schütte, R. (1995). Grundsätze ordnungsmäßiger Modellierung. Wirtschaftsinformatik, 37(5), 435–445.",
+      "typ": "Journal-Artikel",
+      "thema": ["GoM", "Modellqualität", "Richtigkeit", "Relevanz", "Wirtschaftlichkeit", "Klarheit", "Vergleichbarkeit", "Systematik", "Zweckorientierung"],
+      "verwendung_im_skript": "Primärquelle der sieben Grundsätze ordnungsmäßiger Modellierung. Im Skript an zentraler Stelle in Section ‚Modell-Qualität‘ zitiert."
+    },
+    {
+      "key": "vanderaalst2016",
+      "kurz": "van der Aalst, 2016",
+      "apa": "van der Aalst, W. M. P. (2016). Process mining: Data science in action (2nd ed.). Springer. https://doi.org/10.1007/978-3-662-49851-4",
+      "typ": "Lehrbuch",
+      "thema": ["Process Mining", "Ist-Modell", "Daten-basierte Prozessrekonstruktion"],
+      "verwendung_im_skript": "Wird im Glossar/Ausblick als Standardwerk für Process Mining genannt — Brücke vom modellierten Soll zum gelebten Ist."
+    },
+    {
+      "key": "omg2014",
+      "kurz": "OMG, 2014",
+      "apa": "Object Management Group. (2014). Business Process Model and Notation (BPMN), Version 2.0.2 (formal/2013-12-09). https://www.omg.org/spec/BPMN/2.0.2/",
+      "typ": "Standard / Spezifikation",
+      "thema": ["BPMN 2.0", "Notation", "Symbole", "Ausführbarkeit"],
+      "verwendung_im_skript": "Primärquelle für BPMN-Symbole und -Semantik. Im Skript in der BPMN-Section zitiert."
+    },
+    {
+      "key": "allweyer2020",
+      "kurz": "Allweyer, 2020",
+      "apa": "Allweyer, T. (2020). BPMN 2.0 – Business Process Model and Notation: Einführung in den Standard für die Geschäftsprozessmodellierung (4. Aufl.). BoD.",
+      "typ": "Lehrbuch (deutsch)",
+      "thema": ["BPMN 2.0", "Einführung", "Beispiele"],
+      "verwendung_im_skript": "Zugängliche deutschsprachige BPMN-Einführung. Wird in der BPMN-Section als didaktische Ergänzung zur OMG-Spec zitiert."
+    },
+    {
+      "key": "freund2019",
+      "kurz": "Freund & Rücker, 2019",
+      "apa": "Freund, J., & Rücker, B. (2019). Real-life BPMN: Includes an introduction to DMN (4th ed.). CreateSpace.",
+      "typ": "Praxishandbuch",
+      "thema": ["BPMN-Praxis", "Pools/Lanes", "Workflow-Engine", "Camunda"],
+      "verwendung_im_skript": "Praxisorientierte BPMN-Quelle der Camunda-Gründer. Im Skript in Section ‚Pools, Lanes und Verantwortlichkeiten‘ sowie zum Brücken-Begriff Workflow-Engine zitiert."
+    },
+    {
+      "key": "scheer2002",
+      "kurz": "Scheer, 2002",
+      "apa": "Scheer, A.-W. (2002). ARIS – Vom Geschäftsprozess zum Anwendungssystem (4. Aufl.). Springer.",
+      "typ": "Lehrbuch",
+      "thema": ["EPC", "ARIS", "Ereignisgesteuerte Prozesskette"],
+      "verwendung_im_skript": "Standardquelle für EPC und das ARIS-Framework. Wird in Section ‚EPC – Ereignisgesteuerte Prozesskette‘ zitiert."
+    },
+    {
+      "key": "pmi2021",
+      "kurz": "PMI, 2021",
+      "apa": "Project Management Institute. (2021). A guide to the Project Management Body of Knowledge (PMBOK® Guide) (7th ed.). Project Management Institute.",
+      "typ": "Standard",
+      "thema": ["RACI", "Verantwortungsmatrix", "Rollen"],
+      "verwendung_im_skript": "Referenz für RACI als etabliertes Verantwortungs-Mapping in Section ‚Pools, Lanes und Verantwortlichkeiten‘."
+    }
+  ]
+}
