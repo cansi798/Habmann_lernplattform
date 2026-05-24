@@ -5,6 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lernplatt · Präsentation · Tag 11</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-22); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-22); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-22-bg); color: var(--kurs-22); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row canvas { flex: 0 0 36px; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .kriterium-pill { display: inline-block; background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: 20px; padding: 6px 14px; margin: 4px; font-weight: 600; color: var(--kurs-22); }
+    .tier-card { background: #fff; border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 12px; }
+    .tier-card h3 { margin: 0 0 4px; color: var(--kurs-22); font-size: 16px; }
+    .tier-card .preis { font-family: 'Caveat', cursive; font-size: 28px; color: #c47612; }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -13,34 +40,335 @@
 <div class="brand-bar"><a href="../../dashboard.html">Lernplatt · by Can Siebert</a><a href="#" class="logout">Logout</a></div>
 <div class="crumbs"><a href="../../dashboard.html">Kurse</a> › <a href="../index.html">Kurs 22_Bo_143</a> › <a href="index.html">Tag 11</a> › <span>Präsentation</span></div>
 <main>
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px">
-    <h1 style="margin:0">Präsentation · Tag 11</h1>
-    <a href="praesentation.html" download="kurs-22-tag-11-praesentation.html"
-       class="quiz-button" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">
-      ⬇ HTML-Download
-    </a>
-  </div>
-  <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Mit Plattformen Geld verdienen: Modelle, Abo-Strategien & Partnernetzwerke</h2>
-      <p>Modul 6 · Tag 11</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <h1>Präsentation · Tag 11</h1>
+  <p style="color:var(--color-muted)">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- 1 Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 6 · Tag 11 · Kurs 22 (Bo 143) · 12. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:54px;line-height:1.05;color:var(--kurs-22);margin:0">Mit Plattformen<br>Geld verdienen</h2>
+      <canvas data-rough="underline" data-color="#1a4d8f" width="420" height="22" style="margin-top:8px"></canvas>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Monetarisierung, Subscription-Modelle, Partnernetzwerke – die wirtschaftliche Logik der Plattformökonomie.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#c47612;font-size:26px">Tag 11 von 16 · Nutzen → Zahlungsbereitschaft → Skalierung</span>
+      </div>
+    </section>
+
+    <!-- 2 Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box"><h3>L1 · Wissen</h3><ul><li>Erlösmodelle der Plattformökonomie</li><li>Subscription-Tiers &amp; Pricing</li><li>CLV als Steuerungsgröße</li><li>Partner &amp; Affiliate-Logiken</li></ul></div>
+        <div class="merk-box"><h3>L2 · Anwendung</h3><ul><li>Monetarisierungsmodelle übertragen</li><li>Abo-Modelle entwickeln</li><li>CLV/CAC einbeziehen</li><li>Partneransätze bewerten</li></ul></div>
+        <div class="merk-box"><h3>L3 · Management</h3><ul><li>Monetarisierungsarchitektur führen</li><li>Pricing unter Unsicherheit</li><li>Umsatz, Kundenwert, Skalierbarkeit</li></ul></div>
+      </div>
+      <div class="accent-box" style="margin-top:18px">
+        Monetarisierung = Verbindung aus Kundennutzen, Zahlungsbereitschaft, Transaktion, Daten und Partnern.
+      </div>
+    </section>
+
+    <!-- 3 Direkt vs. indirekt -->
+    <section class="slide" style="display:none">
+      <h2>Direkte vs. indirekte Monetarisierung</h2>
+      <table class="vs-table">
+        <thead><tr><th></th><th>Direkt</th><th>Indirekt</th></tr></thead>
+        <tbody>
+          <tr><th>Logik</th><td>Nutzer zahlt für die Leistung</td><td>Dritte zahlen, Nutzer zahlt mit Daten/Aufmerksamkeit</td></tr>
+          <tr><th>Beispiele</th><td>Subscription, Provision, Listing-Gebühr</td><td>Werbung, Datenmonetarisierung, Lead-Vermittlung</td></tr>
+          <tr><th>Transparenz</th><td>hoch</td><td>oft gering – Vertrauensrisiko</td></tr>
+          <tr><th>Skalierung</th><td>linear mit Nutzern</td><td>überproportional mit Reichweite</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Wer zahlt – ist der eigentliche Kunde. Das bestimmt das Produkt.
+      </div>
+    </section>
+
+    <!-- 4 Erlösmodelle -->
+    <section class="slide" style="display:none">
+      <h2>Sechs Erlösmodelle der Plattformökonomie</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Transaktionsprovision</h3><p>Anteil je Vermittlung. Amazon, Booking, eBay.</p></div>
+        <div class="merk-box"><h3>Listing-/Onboarding-Gebühr</h3><p>Eintritt in den Markt. Messen, Marktplätze.</p></div>
+        <div class="merk-box"><h3>Subscription</h3><p>Wiederkehrend, planbar. Netflix, HubSpot, Spotify.</p></div>
+        <div class="merk-box"><h3>Premium-Features</h3><p>Bessere Sichtbarkeit, mehr Reichweite. LinkedIn Premium.</p></div>
+        <div class="merk-box"><h3>Werbung / Sponsoring</h3><p>Aufmerksamkeit wird verkauft. Google, Meta.</p></div>
+        <div class="merk-box"><h3>Daten- &amp; Insight-Verkauf</h3><p>Aggregierte Marktinformationen. Branchen-Dashboards.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Reife Plattformen kombinieren – aber nie ohne Logik.
+      </div>
+    </section>
+
+    <!-- 5 Subscription-Tiers -->
+    <section class="slide" style="display:none">
+      <h2>Subscription-Tiers · Drei-Stufen-Logik</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="tier-card">
+          <h3>Basic / Free</h3>
+          <p class="preis">0 €</p>
+          <ul style="font-size:14px"><li>Einstieg, kein Risiko</li><li>Grundfunktion</li><li>Conversion-Pfad nach oben</li></ul>
+        </div>
+        <div class="tier-card">
+          <h3>Pro</h3>
+          <p class="preis">49 € / Monat</p>
+          <ul style="font-size:14px"><li>Kernfunktionen erweitert</li><li>Bessere Sichtbarkeit</li><li>Reporting, Support</li></ul>
+        </div>
+        <div class="tier-card">
+          <h3>Enterprise</h3>
+          <p class="preis">individuell</p>
+          <ul style="font-size:14px"><li>SLA, Datenexport</li><li>Integration, Sicherheit</li><li>Account-Manager</li></ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Tiers segmentieren Zahlungsbereitschaft – nicht Funktionen.
+      </div>
+    </section>
+
+    <!-- 6 CLV -->
+    <section class="slide" style="display:none">
+      <h2>CLV · Customer Lifetime Value</h2>
+      <div style="margin-top:14px;text-align:center">
+        <p style="font-family:'Caveat',cursive;font-size:28px;color:var(--kurs-22)">
+          CLV = ø Umsatz pro Periode × Marge × Verweildauer
+        </p>
+        <canvas data-rough="underline" data-color="#1a4d8f" width="380" height="20"></canvas>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box"><h3>Warum CLV?</h3><p>Bindet Akquisekosten an Lebensdauer. CAC isoliert betrachtet ist gefährlich – CAC vs. CLV ist die Steuergröße.</p></div>
+        <div class="merk-box"><h3>Faustregel</h3><p>CLV : CAC ≥ 3 : 1 in skalierenden SaaS-/Plattformmodellen. Sonst frisst Wachstum Marge.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Hoher Umsatz, kurze Verweildauer = lecker Geschäft, kaputte Bilanz.
+      </div>
+    </section>
+
+    <!-- 7 Fallbeispiel EventPro -->
+    <section class="slide" style="display:none">
+      <h2>Fallbeispiel · EventPro Connect</h2>
+      <p style="color:var(--color-muted)">Vermittlung von Dienstleistern für Firmenevents (Catering, Technik, Locations).</p>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Plattform-Struktur</h3><ul><li>3.000 Unternehmenskunden</li><li>850 Eventdienstleister</li><li>4.500 Anfragen / Monat</li></ul></div>
+        <div class="merk-box"><h3>Signale</h3><ul><li>Anbieter wollen mehr Sichtbarkeit</li><li>Großkunden wollen Reporting + SLA</li><li>Kleinanbieter wollen niedrige Eintrittshürde</li></ul></div>
+        <div class="merk-box"><h3>Mögliche Erlöse</h3><ul><li>Provision je Vermittlung</li><li>Premium-Sichtbarkeit für Anbieter</li><li>Enterprise-Abo für Großkunden</li><li>Datenanalyse als Insight-Produkt</li></ul></div>
+        <div class="merk-box"><h3>Risiken</h3><ul><li>Provision zu hoch → Anbieter wandern ab</li><li>Pay-for-Visibility → Relevanz erodiert</li><li>Datenverkauf → Vertrauensschaden</li></ul></div>
+      </div>
+    </section>
+
+    <!-- 8 Fallstudie LegalMatch Pro -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · LegalMatch Pro</h2>
+      <p style="color:var(--color-muted)">B2B-Plattform: Mittelstand ↔ Kanzleien, Datenschutz, Compliance.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Monetarisierungs-Mix</h3>
+          <ul>
+            <li>Kostenlose Anfrage – Conversion-Anker</li>
+            <li>Provision je vermitteltem Mandat</li>
+            <li>Subscription für Kanzleien (Sichtbarkeit, Lead-Reporting)</li>
+            <li>Enterprise-Abo für Konzernkunden (SLA, Compliance-Reports)</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Bewusst <em>nicht</em></h3>
+          <ul>
+            <li>Bezahltes Top-Ranking – zerstört Vertrauen</li>
+            <li>Datenverkauf an Dritte – Compliance-Risiko</li>
+            <li>Aggressive Provisionen für Erstmandate – schreckt Kanzleien ab</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Welche Erlösquelle wird <em>bewusst</em> nicht genutzt – und warum?
+      </div>
+    </section>
+
+    <!-- 8b LegalMatch Erlös-Tabelle -->
+    <section class="slide" style="display:none">
+      <h2>LegalMatch Pro · Erlös-Architektur</h2>
+      <table class="vs-table">
+        <thead><tr><th>Stream</th><th>Logik</th><th>Anteil Ziel</th><th>Wirkt auf</th></tr></thead>
+        <tbody>
+          <tr><th>Anfrage kostenlos</th><td>Conversion-Anker · 0 €</td><td>0 %</td><td>Volumen, Vertrauen</td></tr>
+          <tr><th>Provision Mandat</th><td>12 % der ersten Rechnung</td><td>40 %</td><td>Wachstum, Anbieter-Match</td></tr>
+          <tr><th>Kanzlei-Abo</th><td>249 €/Monat · Sichtbarkeit + Reporting</td><td>30 %</td><td>Wiederkehrend, Marge</td></tr>
+          <tr><th>Enterprise-Abo</th><td>indiv. · SLA, Compliance-Reports</td><td>20 %</td><td>Großkunden, Lock-in</td></tr>
+          <tr><th>Insight-Reports</th><td>anonymisiert · Branchen-Benchmark</td><td>10 %</td><td>strategisch</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Vier Streams · klar gewichtet · kein „alles zugleich“.
+      </div>
+    </section>
+
+    <!-- 9 Partner & Affiliate -->
+    <section class="slide" style="display:none">
+      <h2>Partnernetzwerke &amp; Affiliate</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box"><h3>Affiliate</h3><p>Pay-per-Performance. Klick, Lead, Sale. Skaliert, prüft sich selbst.</p></div>
+        <div class="merk-box"><h3>Reseller / Channel</h3><p>Vertriebspartner verkaufen im eigenen Namen. Marge geteilt.</p></div>
+        <div class="merk-box"><h3>Strategische Allianz</h3><p>Gemeinsame Roadmap, geteilte Kunden, Co-Marketing.</p></div>
+      </div>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box"><h3>Chancen</h3><ul><li>Reichweite ohne eigene Akquisekosten</li><li>Vertrauensbrücke in neue Segmente</li><li>Schnelle Internationalisierung</li></ul></div>
+        <div class="merk-box"><h3>Risiken</h3><ul><li>Abhängigkeit vom Partner</li><li>Marken-Verwässerung</li><li>Konflikte über Kundenhoheit &amp; Daten</li></ul></div>
+      </div>
+    </section>
+
+    <!-- 10 Pricing-Logiken -->
+    <section class="slide" style="display:none">
+      <h2>Pricing · vier Logiken</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Cost-plus</h3><p>Kosten + Aufschlag. Einfach, aber blind für Zahlungsbereitschaft.</p></div>
+        <div class="merk-box"><h3>Markt-/Wettbewerbsorientiert</h3><p>Was zahlen andere? Anker-Pricing, Reaktion.</p></div>
+        <div class="merk-box"><h3>Value-based</h3><p>Was ist der wirtschaftliche Nutzen für den Kunden? Höchste Marge, schwierigste Messung.</p></div>
+        <div class="merk-box"><h3>Dynamisch / Nutzungsabhängig</h3><p>Pay-per-Use, Tiered, Surge-Pricing. Risiko: Vorhersehbarkeit.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Pricing ist nie nur Preis – es ist Positionierung.
+      </div>
+    </section>
+
+    <!-- 11 KPIs -->
+    <section class="slide" style="display:none">
+      <h2>KPIs · Monetarisierung steuern</h2>
+      <div style="margin-top:14px;text-align:center">
+        <span class="kriterium-pill">MRR</span>
+        <span class="kriterium-pill">ARR</span>
+        <span class="kriterium-pill">CAC</span>
+        <span class="kriterium-pill">CLV</span>
+        <span class="kriterium-pill">Payback Period</span>
+        <span class="kriterium-pill">Churn</span>
+        <span class="kriterium-pill">Net Revenue Retention</span>
+        <span class="kriterium-pill">Take Rate</span>
+        <span class="kriterium-pill">Partner-Anteil</span>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box"><h3>Wachstums-KPIs</h3><p>MRR/ARR, Net Revenue Retention, Take Rate.</p></div>
+        <div class="merk-box"><h3>Gesundheits-KPIs</h3><p>Churn, CLV:CAC, Payback Period.</p></div>
+      </div>
+    </section>
+
+    <!-- 11b Monetarisierungs-Reihenfolge -->
+    <section class="slide" style="display:none">
+      <h2>Reihenfolge · was zuerst monetarisieren?</h2>
+      <p style="color:var(--color-muted)">Nicht jede Erlösquelle gleichzeitig.</p>
+      <ol style="margin-top:14px">
+        <li><strong>Wachstumsphase</strong> · Provision niedrig, Free-Tier offen. Nutzerbasis vor Marge.</li>
+        <li><strong>Aktivierungsphase</strong> · Premium-Features für Power-User. Erste Zahlungsbereitschaft testen.</li>
+        <li><strong>Skalierungsphase</strong> · Subscription für Hauptsegmente. Wiederkehrende Erlöse.</li>
+        <li><strong>Reifephase</strong> · Enterprise-Abo, Partner, Daten-Insights. Mehrere Streams.</li>
+        <li><strong>Plattformphase</strong> · Marktplatz-Logik, Take Rate optimieren.</li>
+      </ol>
+      <div class="accent-box" style="margin-top:14px">
+        Falsche Reihenfolge = Wachstum verhindert oder Vertrauen verbrannt.
+      </div>
+    </section>
+
+    <!-- 12 Zielkonflikte -->
+    <section class="slide" style="display:none">
+      <h2>Management · vier Zielkonflikte</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Wachstum vs. Marge</h3><p>Niedrige Provision = mehr Nutzer, weniger Ertrag. Wann lohnt die Subvention?</p></div>
+        <div class="merk-box"><h3>Free-Tier vs. Zahlungsbereitschaft</h3><p>Kostenlos zieht Volumen – kannibalisiert Premium, wenn zu großzügig.</p></div>
+        <div class="merk-box"><h3>Daten-Monetarisierung vs. Vertrauen</h3><p>Erlös sofort – Reputationsschaden später.</p></div>
+        <div class="merk-box"><h3>Partner-Hebel vs. Kundenkontrolle</h3><p>Partner bringen Reichweite – nehmen aber Datenhoheit und Marge.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Monetarisierung verändert das Verhalten <em>aller</em> Plattformteilnehmer.
+      </div>
+    </section>
+
+    <!-- 12b Methoden -->
+    <section class="slide" style="display:none">
+      <h2>Methoden &amp; Werkzeuge</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Business Model Canvas</h3><p>Erlöse, Kosten, Kunden, Kanäle, Partner – auf einer Seite.</p></div>
+        <div class="merk-box"><h3>Value Proposition Canvas</h3><p>Gain · Pain · Job-to-be-done je Segment.</p></div>
+        <div class="merk-box"><h3>Pricing-Ladder</h3><p>Free → Pro → Enterprise mit klaren Hürden.</p></div>
+        <div class="merk-box"><h3>Take-Rate-Sensitivität</h3><p>Was passiert, wenn Provision um 1 % steigt/sinkt?</p></div>
+        <div class="merk-box"><h3>Cohort-Analyse</h3><p>Lebensdauer und Marge je Eintritts-Quartal.</p></div>
+        <div class="merk-box"><h3>Partner-Portfolio-Matrix</h3><p>Reichweite × Marge × Kontrolle.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Werkzeuge sind nichts wert ohne klare Entscheidungsfrage.
+      </div>
+    </section>
+
+    <!-- 13 Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Wer zahlt – ist der eigentliche Kunde. Das prägt das Produkt.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Tiers segmentieren Zahlungsbereitschaft, nicht Funktionen.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">CLV vor CAC – Marge entsteht in der Lebensdauer.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Welche Erlösquelle wird bewusst <em>nicht</em> genutzt?</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Partner = Reichweite gegen Datenhoheit. Bewusst entscheiden.</span></div>
+      </div>
+    </section>
+
+    <!-- 13b Senior-Frage -->
+    <section class="slide" style="display:none">
+      <h2>Senior-Level-Frage</h2>
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Die eine Frage hinter allem</h3>
+        <p>Wenn Sie nur drei Erlösquellen aktiv steuern dürfen – und müssen <em>begründen</em>, welche vierte Sie bewusst <em>nicht</em> nutzen: welche wären das, in dieser Reihenfolge, und warum?</p>
+      </div>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box"><h3>Was sie testet</h3><ul><li>Verständnis für Reihenfolge &amp; Reife</li><li>Bewusste Selbstbeschränkung</li><li>Wertarchitektur statt Sammlung</li></ul></div>
+        <div class="merk-box"><h3>Was sie nicht testet</h3><ul><li>Wer am meisten Streams aufzählt</li><li>Wer das größte Marktvolumen schätzt</li></ul></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Verantwortung beginnt da, wo bewusst etwas <em>nicht</em> getan wird.
+      </div>
+    </section>
+
+    <!-- 14 Outro -->
+    <section class="slide" style="display:none">
+      <h2>Quellen · Weiterarbeiten</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box"><h3>Handout</h3><p style="font-size:14px">Theorie, Eselsbrücken, Glossar.</p><p style="margin-top:10px"><a href="../../pdf/22-handout-tag-11.pdf" style="color:var(--kurs-22);font-weight:600">→ Handout PDF</a></p></div>
+        <div class="merk-box"><h3>Vertiefung</h3><p style="font-size:14px">Video · Podcast · Quiz · Aufgaben.</p><p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-22);font-weight:600">→ Materialauswahl</a></p></div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <canvas data-rough="underline" data-color="#1a4d8f" width="320" height="20"></canvas>
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-22);margin:12px 0 0">Bis morgen – Tag 12.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 22 (Bo 143) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script src="../../assets/rough.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
+      const rc = rough.canvas(canvas);
+      const w = canvas.width, h = canvas.height;
+      const color = canvas.dataset.color || '#1a4d8f';
+      const type = canvas.dataset.rough;
+      if (type === 'underline') {
+        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
+      } else if (type === 'arrow') {
+        rc.line(0, h/2, w-10, h/2, { stroke: color, strokeWidth: 2, roughness: 1.4 });
+        rc.line(w-15, h/2-7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
+        rc.line(w-15, h/2+7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
+      } else if (type === 'check') {
+        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+      }
+    });
+  });
+</script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
   new SlideShow(document.getElementById("slides"));
   markViewed("22_Bo_143", 11, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

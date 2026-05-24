@@ -5,6 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lernplatt · Präsentation · Tag 13</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-22); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-22); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-22-bg); color: var(--kurs-22); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row canvas { flex: 0 0 36px; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .kriterium-pill { display: inline-block; background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: 20px; padding: 6px 14px; margin: 4px; font-weight: 600; color: var(--kurs-22); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -13,34 +37,345 @@
 <div class="brand-bar"><a href="../../dashboard.html">Lernplatt · by Can Siebert</a><a href="#" class="logout">Logout</a></div>
 <div class="crumbs"><a href="../../dashboard.html">Kurse</a> › <a href="../index.html">Kurs 22_Bo_143</a> › <a href="index.html">Tag 13</a> › <span>Präsentation</span></div>
 <main>
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px">
-    <h1 style="margin:0">Präsentation · Tag 13</h1>
-    <a href="praesentation.html" download="kurs-22-tag-13-praesentation.html"
-       class="quiz-button" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">
-      ⬇ HTML-Download
-    </a>
-  </div>
-  <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Vertrieb digital denken: Automatisierte Prozesse, KI & Chatbots im Einsatz</h2>
-      <p>Modul 7 · Tag 13</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <h1>Präsentation · Tag 13</h1>
+  <p style="color:var(--color-muted)">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- 1 Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 7 · Tag 13 · Kurs 22 (Bo 143) · 16. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:54px;line-height:1.05;color:var(--kurs-22);margin:0">Vertriebs­transformation:<br>CRM, Automation, KI</h2>
+      <canvas data-rough="underline" data-color="#1a4d8f" width="420" height="22" style="margin-top:8px"></canvas>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Vom Tool-Denken zur verantwortlichen digitalen Vertriebsarchitektur.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#c47612;font-size:26px">Tag 13 von 16 · Daten → Prozess → Entscheidung</span>
+      </div>
+    </section>
+
+    <!-- 2 Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box"><h3>L1 · Wissen</h3><ul><li>Digitale Transformation im Vertrieb</li><li>CRM als Steuerungsplattform</li><li>Verkaufsautomatisierung</li><li>KI &amp; Predictive Analytics</li></ul></div>
+        <div class="merk-box"><h3>L2 · Anwendung</h3><ul><li>Prozesse digitalisieren</li><li>CRM-gestützte Pipeline</li><li>KI-Insights für Priorisierung</li><li>Chancen &amp; Risiken bewerten</li></ul></div>
+        <div class="merk-box"><h3>L3 · Management</h3><ul><li>Transformation als Architektur</li><li>Datenqualität, Akzeptanz, Datenschutz</li><li>Ethik &amp; Skalierbarkeit verantworten</li></ul></div>
+      </div>
+      <div class="accent-box" style="margin-top:18px">
+        Digitalisierung einzelner Schritte ≠ Transformation der Architektur.
+      </div>
+    </section>
+
+    <!-- 3 Was Transformation NICHT ist -->
+    <section class="slide" style="display:none">
+      <h2>Transformation · was sie ist – und was nicht</h2>
+      <table class="vs-table">
+        <thead><tr><th></th><th>Digitalisierung einzelner Schritte</th><th>Echte Vertriebstransformation</th></tr></thead>
+        <tbody>
+          <tr><th>Ebene</th><td>Excel ersetzt durch CRM-Maske</td><td>Prozesse, Rollen, Daten, Steuerung neu</td></tr>
+          <tr><th>Tool</th><td>Eingeführt &amp; gefeiert</td><td>Eingeführt – und in Prozesse verankert</td></tr>
+          <tr><th>Erfolg</th><td>Tool-Nutzungsrate</td><td>Pipeline-Qualität, Forecast-Genauigkeit, NRR</td></tr>
+          <tr><th>Verantwortung</th><td>IT</td><td>Vertriebsführung + IT + Datenschutz</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Ein CRM ohne Pflichtprozess ist eine teure Excel-Tabelle.
+      </div>
+    </section>
+
+    <!-- 4 CRM als Steuerungsplattform -->
+    <section class="slide" style="display:none">
+      <h2>CRM · Steuerungsplattform statt Adressbuch</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Daten</h3><p>Kontakt · Account · Buying Center · Interaktion · Pipeline-Stage.</p></div>
+        <div class="merk-box"><h3>Prozesse</h3><p>Lead → Opportunity → Angebot → Auftrag. Klare Stages, klare Definitionen.</p></div>
+        <div class="merk-box"><h3>Automatisierung</h3><p>Follow-up-Erinnerungen · Lead Scoring · Aufgaben-Routing.</p></div>
+        <div class="merk-box"><h3>Reporting</h3><p>Forecast · Win-Rate · Cycle-Time · Pipeline-Hygiene.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        CRM steuert das Geschäft – nicht den Vertriebsmitarbeiter.
+      </div>
+    </section>
+
+    <!-- 5 Fallbeispiel TechLine -->
+    <section class="slide" style="display:none">
+      <h2>Fallbeispiel · TechLine Solutions</h2>
+      <p style="color:var(--color-muted)">IT-Dienstleistungen für Mittelstand. Excel, E-Mail, CRM mit fehlenden Datenfeldern.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Sichtbare Probleme</h3>
+          <ul>
+            <li>Pipeline nicht sichtbar</li>
+            <li>Forecast aus dem Bauch</li>
+            <li>Leads gehen verloren</li>
+            <li>Wissen nur in Köpfen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Erste Maßnahmen</h3>
+          <ul>
+            <li>CRM-Pflichtprozess für alle Leads</li>
+            <li>Automatische Follow-up-Erinnerungen</li>
+            <li>Lead Scoring nach Branche, Größe, Verhalten</li>
+            <li>Wöchentliche Pipeline-Hygiene</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Erst Prozess sauber, dann automatisieren, dann KI.
+      </div>
+    </section>
+
+    <!-- 6 KI im Vertrieb -->
+    <section class="slide" style="display:none">
+      <h2>KI im Vertrieb · sechs Anwendungsfelder</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Lead Scoring</h3><p>Wahrscheinlichkeit für Abschluss aus Daten ableiten.</p></div>
+        <div class="merk-box"><h3>Next-Best-Action</h3><p>Welcher nächste Schritt erhöht Abschlusswahrscheinlichkeit?</p></div>
+        <div class="merk-box"><h3>Churn-Prognose</h3><p>Welche Bestandskunden sind in Gefahr?</p></div>
+        <div class="merk-box"><h3>Forecast</h3><p>Aus Pipeline-Daten realistischer Umsatzhorizont.</p></div>
+        <div class="merk-box"><h3>Content-Generierung</h3><p>Erstentwürfe Mail, Angebot, Zusammenfassungen.</p></div>
+        <div class="merk-box"><h3>Sentiment / Coaching</h3><p>Gesprächsaufzeichnungen analysieren, Muster spiegeln.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        KI ersetzt nicht den Vertrieb – sie macht ihn präziser.
+      </div>
+    </section>
+
+    <!-- 7 KI verantwortlich -->
+    <section class="slide" style="display:none">
+      <h2>KI verantwortlich · vier Leitplanken</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Datenqualität</h3><p>Mülliger Input = falsche Empfehlung. Qualität vor Modell.</p></div>
+        <div class="merk-box"><h3>Transparenz</h3><p>Wer sieht, warum ein Lead priorisiert wird? Nachvollziehbarkeit.</p></div>
+        <div class="merk-box"><h3>Bias</h3><p>Trainingsdaten reproduzieren Vergangenheit. Was wird strukturell ausgeschlossen?</p></div>
+        <div class="merk-box"><h3>Mensch im Loop</h3><p>Entscheidungen mit Außenwirkung – nie vollautomatisch.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        „Schwarz-Box-Vertrieb“ ist kein verantwortbares Modell.
+      </div>
+    </section>
+
+    <!-- 8 Fallstudie MedTech -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · MedTech Service GmbH</h2>
+      <p style="color:var(--color-muted)">Wartungsverträge, Ersatzteile, Service für medizinische Geräte (Kliniken, Labore).</p>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Ist</h3><ul><li>Beziehungsorientiert, aber undokumentiert</li><li>Vertragsverlängerungen nach Bauchgefühl</li><li>Kein konsistenter Forecast</li></ul></div>
+        <div class="merk-box"><h3>Roadmap (3 Phasen)</h3><ul><li>1 · CRM-Pflicht + Stages definieren</li><li>2 · Automatisierung (Erinnerung, Routing)</li><li>3 · KI-Piloten (Churn, Next-Best-Offer)</li></ul></div>
+        <div class="merk-box"><h3>KPIs</h3><ul><li>Forecast-Genauigkeit · Win-Rate</li><li>Verlängerungsquote · NRR</li><li>Datenqualität (Pflichtfelder)</li></ul></div>
+        <div class="merk-box"><h3>Bewusst <em>nicht</em></h3><ul><li>KI-Tool ohne Datengrundlage einführen</li><li>Vollautomatische Angebotsfreigabe</li><li>Personalbewertung per KI</li></ul></div>
+      </div>
+    </section>
+
+    <!-- 8b KI-Fallen -->
+    <section class="slide" style="display:none">
+      <h2>KI-Fallen · sechs typische Fehler</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Tool vor Prozess</h3><p>KI-Plattform gekauft, Pipeline-Definition fehlt.</p></div>
+        <div class="merk-box"><h3>Garbage in</h3><p>Schmutzige Daten erzeugen scheinbar-präzise Empfehlungen.</p></div>
+        <div class="merk-box"><h3>Schwarz-Box</h3><p>Niemand kann Entscheidungen erklären – auch nicht im Notfall.</p></div>
+        <div class="merk-box"><h3>Bias übersehen</h3><p>Modell reproduziert vergangene Diskriminierung.</p></div>
+        <div class="merk-box"><h3>Kein Mensch-Override</h3><p>Automatische Aktionen mit Außenwirkung.</p></div>
+        <div class="merk-box"><h3>Keine Erfolgskontrolle</h3><p>KI als Glaubensfrage statt KPI-getrieben.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        KI im Vertrieb scheitert selten technisch – meist organisatorisch.
+      </div>
+    </section>
+
+    <!-- 9 KPIs -->
+    <section class="slide" style="display:none">
+      <h2>KPIs · digitale Vertriebssteuerung</h2>
+      <div style="margin-top:14px;text-align:center">
+        <span class="kriterium-pill">Pipeline-Coverage</span>
+        <span class="kriterium-pill">Win-Rate</span>
+        <span class="kriterium-pill">Cycle-Time</span>
+        <span class="kriterium-pill">Forecast-Genauigkeit</span>
+        <span class="kriterium-pill">CRM-Hygiene</span>
+        <span class="kriterium-pill">Lead-Reaktionszeit</span>
+        <span class="kriterium-pill">NRR</span>
+        <span class="kriterium-pill">Adoption Rate (Tool)</span>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box"><h3>Steuerungsebene</h3><p>Win-Rate · Cycle-Time · Forecast – wirtschaftliche Realität.</p></div>
+        <div class="merk-box"><h3>Hygieneebene</h3><p>Pflichtfeld-Quote · Adoption · Reaktionszeit – Voraussetzungen für KI.</p></div>
+      </div>
+    </section>
+
+    <!-- 10 Change -->
+    <section class="slide" style="display:none">
+      <h2>Change · ohne Akzeptanz keine Transformation</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box"><h3>Sinn vermitteln</h3><p>Warum ist das CRM mein Vorteil – nicht Kontrolle?</p></div>
+        <div class="merk-box"><h3>Können stärken</h3><p>Schulung, Co-Pilot-Sessions, Best Practices.</p></div>
+        <div class="merk-box"><h3>Dürfen klären</h3><p>Daten, KI, Entscheidungen – Spielregeln festschreiben.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Tool eingeführt ≠ Tool genutzt. Adoption ist eine Führungsaufgabe.
+      </div>
+    </section>
+
+    <!-- 10b Reifegrade -->
+    <section class="slide" style="display:none">
+      <h2>Reifegrade · wo steht der Vertrieb?</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>1 · Ad-hoc</h3><p>Excel, E-Mail, kein zentrales System. Wissen in Köpfen.</p></div>
+        <div class="merk-box"><h3>2 · CRM eingeführt</h3><p>Daten vorhanden – Pflege uneinheitlich.</p></div>
+        <div class="merk-box"><h3>3 · Prozesse standardisiert</h3><p>Stages definiert, Pflichtfelder, Forecast-Routine.</p></div>
+        <div class="merk-box"><h3>4 · Automatisiert</h3><p>Routing, Erinnerungen, Lead Scoring laufen.</p></div>
+        <div class="merk-box"><h3>5 · Datengetrieben</h3><p>KI-Insights priorisieren, Forecast belastbar.</p></div>
+        <div class="merk-box"><h3>6 · Adaptiv</h3><p>Lernende Architektur, kontinuierliche Iteration.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Sprünge überspringen kostet mehr, als sie sparen.
+      </div>
+    </section>
+
+    <!-- 11 Zielkonflikte -->
+    <section class="slide" style="display:none">
+      <h2>Management · vier Zielkonflikte</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Effizienz vs. Kundennähe</h3><p>Automatisierte Pfade skalieren – Beziehung lebt von Reibung.</p></div>
+        <div class="merk-box"><h3>Datenqualität vs. Aufwand</h3><p>Saubere Daten kosten – aber jede KI-Empfehlung steht darauf.</p></div>
+        <div class="merk-box"><h3>Akzeptanz vs. Tempo</h3><p>Roll-out übersprungen ≠ Roll-out gespart.</p></div>
+        <div class="merk-box"><h3>Datenschutz vs. Personalisierung</h3><p>Mehr Daten = bessere Insights = höhere Risiken.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Transformation = Führungsentscheidung, keine IT-Entscheidung.
+      </div>
+    </section>
+
+    <!-- 11b Methoden -->
+    <section class="slide" style="display:none">
+      <h2>Methoden &amp; Werkzeuge</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Sales-Process-Map</h3><p>Stage-Definitionen mit Eintritts- und Austrittskriterien.</p></div>
+        <div class="merk-box"><h3>Lead Scoring</h3><p>Profil-Score + Verhaltens-Score → Schwellenwert.</p></div>
+        <div class="merk-box"><h3>Forecast-Kategorien</h3><p>Commit · Best Case · Pipeline – klare Spielregeln.</p></div>
+        <div class="merk-box"><h3>Adoption-Dashboard</h3><p>Pflichtfeld-Quote · Aktivität · Hygiene-Index.</p></div>
+        <div class="merk-box"><h3>Win/Loss-Reviews</h3><p>Strukturierte Auswertung gewonnener &amp; verlorener Deals.</p></div>
+        <div class="merk-box"><h3>KI-Governance-Board</h3><p>Use-Case-Freigabe · Modell-Audit · Risikobewertung.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Methode schlägt Tool. Disziplin schlägt Methode.
+      </div>
+    </section>
+
+    <!-- 12 Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Prozess vor Tool. Tool vor KI.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">CRM steuert das Geschäft, nicht den Menschen.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Datenqualität ist die heimliche KI-Strategie.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Mensch im Loop bei jeder Entscheidung mit Außenwirkung.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Adoption ist Führung – nicht Schulung.</span></div>
+      </div>
+    </section>
+
+    <!-- 12b Senior-Frage -->
+    <section class="slide" style="display:none">
+      <h2>Senior-Level-Frage</h2>
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Die eine Frage hinter allem</h3>
+        <p>Welche KI-Anwendung in Ihrem Vertrieb würde ein Aufsichtsrat eindeutig billigen – und welche würde er <em>nicht</em> akzeptieren, obwohl sie technisch funktioniert?</p>
+      </div>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box"><h3>Was sie testet</h3><ul><li>Transparenz statt Black-Box</li><li>Mensch im Loop</li><li>Erklärbarkeit gegenüber Stakeholdern</li></ul></div>
+        <div class="merk-box"><h3>Was sie nicht testet</h3><ul><li>Wer am meisten KI einsetzt</li><li>Wer am schnellsten skaliert</li></ul></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Verantwortbare KI ist der Maßstab – nicht: technisch mögliche KI.
+      </div>
+    </section>
+
+    <!-- 12c Transformations-Roadmap -->
+    <section class="slide" style="display:none">
+      <h2>Transformations-Roadmap · 12 Monate</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Q1 · Fundament</h3>
+          <ul>
+            <li>Stage-Definitionen + Pflichtfelder</li>
+            <li>CRM-Hygiene-Index einführen</li>
+            <li>Forecast-Routine wöchentlich</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Q2 · Automatisierung</h3>
+          <ul>
+            <li>Lead-Routing nach Region/Branche</li>
+            <li>Follow-up-Erinnerungen</li>
+            <li>Lead Scoring v1</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Q3 · Daten &amp; Insights</h3>
+          <ul>
+            <li>Win/Loss-Analyse strukturiert</li>
+            <li>Pipeline-Coverage-Reporting</li>
+            <li>Erste KI-Piloten (Churn, Next-Best-Offer)</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Q4 · Skalierung</h3>
+          <ul>
+            <li>Adaptive Forecasts</li>
+            <li>Coaching-Insights aus Aufzeichnungen</li>
+            <li>Governance-Board für KI-Anwendungen</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Roadmap = Disziplin sichtbar. Sprünge kosten mehr, als sie sparen.
+      </div>
+    </section>
+
+    <!-- 13 Outro -->
+    <section class="slide" style="display:none">
+      <h2>Quellen · Weiterarbeiten</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box"><h3>Handout</h3><p style="font-size:14px">Theorie, Eselsbrücken, Glossar.</p><p style="margin-top:10px"><a href="../../pdf/22-handout-tag-13.pdf" style="color:var(--kurs-22);font-weight:600">→ Handout PDF</a></p></div>
+        <div class="merk-box"><h3>Vertiefung</h3><p style="font-size:14px">Video · Podcast · Quiz · Aufgaben.</p><p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-22);font-weight:600">→ Materialauswahl</a></p></div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <canvas data-rough="underline" data-color="#1a4d8f" width="320" height="20"></canvas>
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-22);margin:12px 0 0">Bis morgen – Tag 14.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 22 (Bo 143) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script src="../../assets/rough.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
+      const rc = rough.canvas(canvas);
+      const w = canvas.width, h = canvas.height;
+      const color = canvas.dataset.color || '#1a4d8f';
+      const type = canvas.dataset.rough;
+      if (type === 'underline') {
+        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
+      } else if (type === 'arrow') {
+        rc.line(0, h/2, w-10, h/2, { stroke: color, strokeWidth: 2, roughness: 1.4 });
+        rc.line(w-15, h/2-7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
+        rc.line(w-15, h/2+7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
+      } else if (type === 'check') {
+        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+      }
+    });
+  });
+</script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
   new SlideShow(document.getElementById("slides"));
   markViewed("22_Bo_143", 13, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

@@ -5,6 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lernplatt · Präsentation · Tag 14</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-22); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-22); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-22-bg); color: var(--kurs-22); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row canvas { flex: 0 0 36px; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .kriterium-pill { display: inline-block; background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: 20px; padding: 6px 14px; margin: 4px; font-weight: 600; color: var(--kurs-22); }
+    .bubble { background: #f4f6fa; border: 1.5px solid var(--color-line-dark); border-radius: 12px; padding: 8px 12px; max-width: 80%; font-size: 14px; margin: 4px 0; }
+    .bubble.bot { background: var(--kurs-22-bg); border-color: var(--kurs-22); }
+    .bubble.user { background: #fff3d9; border-color: #c47612; margin-left: auto; }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -13,34 +40,327 @@
 <div class="brand-bar"><a href="../../dashboard.html">Lernplatt · by Can Siebert</a><a href="#" class="logout">Logout</a></div>
 <div class="crumbs"><a href="../../dashboard.html">Kurse</a> › <a href="../index.html">Kurs 22_Bo_143</a> › <a href="index.html">Tag 14</a> › <span>Präsentation</span></div>
 <main>
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px">
-    <h1 style="margin:0">Präsentation · Tag 14</h1>
-    <a href="praesentation.html" download="kurs-22-tag-14-praesentation.html"
-       class="quiz-button" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">
-      ⬇ HTML-Download
-    </a>
-  </div>
-  <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Vertrieb digital denken: Automatisierte Prozesse, KI & Chatbots im Einsatz</h2>
-      <p>Modul 7 · Tag 14</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <h1>Präsentation · Tag 14</h1>
+  <p style="color:var(--color-muted)">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- 1 Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 7 · Tag 14 · Kurs 22 (Bo 143) · 17. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:54px;line-height:1.05;color:var(--kurs-22);margin:0">Chatbots &amp;<br>Conversational Commerce</h2>
+      <canvas data-rough="underline" data-color="#1a4d8f" width="420" height="22" style="margin-top:8px"></canvas>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Automatisierte Kundeninteraktion – sinnvoll gestaltet, sauber implementiert, wirtschaftlich bewertet.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#c47612;font-size:26px">Tag 14 von 16 · Bot → Mensch → Entscheidung</span>
+      </div>
+    </section>
+
+    <!-- 2 Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box"><h3>L1 · Wissen</h3><ul><li>Chatbot-Typen unterscheiden</li><li>Conversational Commerce</li><li>Implementierungsphasen</li><li>ROI &amp; Nutzenbewertung</li></ul></div>
+        <div class="merk-box"><h3>L2 · Anwendung</h3><ul><li>Use-Cases identifizieren</li><li>Kundeninteraktion strukturieren</li><li>Implementierungsplan</li><li>KPIs definieren</li></ul></div>
+        <div class="merk-box"><h3>L3 · Management</h3><ul><li>Tools als Architektur denken</li><li>Kundenerlebnis verantworten</li><li>Governance, Datenschutz, Skalierung</li></ul></div>
+      </div>
+      <div class="accent-box" style="margin-top:18px">
+        Vom Tool-Denken zur verantwortlichen digitalen Vertriebsarchitektur.
+      </div>
+    </section>
+
+    <!-- 3 Chatbot-Typen -->
+    <section class="slide" style="display:none">
+      <h2>Chatbot-Typen · drei Klassen</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box"><h3>Regelbasiert</h3><p>Entscheidungsbaum, klar definierte Pfade. Robust, aber rigide.</p><p style="font-size:13px;color:var(--color-muted)">FAQ · Terminbuchung · Status-Anfragen</p></div>
+        <div class="merk-box"><h3>KI-basiert</h3><p>NLU/LLM-gestützt. Sprache verstehen, frei antworten. Flexibel, aber riskant.</p><p style="font-size:13px;color:var(--color-muted)">Beratung · Empfehlung · Produktauswahl</p></div>
+        <div class="merk-box"><h3>Hybrid (Bot + Mensch)</h3><p>Bot qualifiziert, übergibt an Vertrieb/Service. Beste Praxis.</p><p style="font-size:13px;color:var(--color-muted)">B2B-Vertrieb, komplexe Beratung</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Die Übergabe vom Bot zum Menschen ist erfolgskritisch – nicht der Bot.
+      </div>
+    </section>
+
+    <!-- 4 Conversational Commerce -->
+    <section class="slide" style="display:none">
+      <h2>Conversational Commerce</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div>
+          <p>Vertriebsorientierter Dialog über Chat, Messenger, Sprache, Voice-Assistenten.</p>
+          <div class="bubble bot">Hallo, ich bin Ben. Wonach suchen Sie heute?</div>
+          <div class="bubble user">Cloud-Arbeitsplätze für 25 Mitarbeitende.</div>
+          <div class="bubble bot">Verstanden. Brauchen Sie Office, CAD, beides?</div>
+          <div class="bubble user">Office. Datenschutz wichtig.</div>
+          <div class="bubble bot">Ich zeige Ihnen 2 passende Pakete und buche bei Bedarf einen Beratungstermin.</div>
+        </div>
+        <div>
+          <div class="merk-box"><h3>Was es leistet</h3>
+            <ul><li>Lead-Qualifizierung 24/7</li><li>Schnelle Antwortzeiten</li><li>Strukturierte Daten ins CRM</li><li>Entlastung von Routine-Anfragen</li></ul>
+          </div>
+          <div class="merk-box" style="margin-top:10px"><h3>Wo es scheitert</h3>
+            <ul><li>Erwartung „echter Berater“ wird enttäuscht</li><li>Hängt im Sackgassen-Dialog</li><li>Übergibt zu spät an Menschen</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 Use-Cases -->
+    <section class="slide" style="display:none">
+      <h2>Use-Cases im B2B-Vertrieb</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>FAQ &amp; Selfservice</h3><p>Preise, Datenschutz, Einrichtung. Hoher ROI, niedriges Risiko.</p></div>
+        <div class="merk-box"><h3>Lead-Qualifizierung</h3><p>Profil + Bedarf erfassen, Übergabe an Vertrieb.</p></div>
+        <div class="merk-box"><h3>Terminbuchung</h3><p>Kalender-Integration, automatische Reminder.</p></div>
+        <div class="merk-box"><h3>Status &amp; Tracking</h3><p>Bestellung, Auftrag, Ticket. Entlastet Service.</p></div>
+        <div class="merk-box"><h3>Produktberatung</h3><p>Filterlogik, Empfehlung, Vergleichshilfe.</p></div>
+        <div class="merk-box"><h3>Reaktivierung</h3><p>Warenkorbabbruch, Inaktivität, Vertragsablauf.</p></div>
+      </div>
+    </section>
+
+    <!-- 6 Fallbeispiel OfficeCloud -->
+    <section class="slide" style="display:none">
+      <h2>Fallbeispiel · OfficeCloud Services</h2>
+      <p style="color:var(--color-muted)">Cloud-Arbeitsplätze für KMU. Viele Website-Besucher, wenige Kontaktanfragen.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Probleme heute</h3>
+          <ul>
+            <li>Häufige Standardfragen blockieren Vertrieb</li>
+            <li>Interessenten verlassen Seite ohne Kontakt</li>
+            <li>Reaktionszeit > 24 h</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Geplante Tools</h3>
+          <ul>
+            <li>Website-Chatbot (FAQ + Leadqualifizierung)</li>
+            <li>Terminbuchungstool mit Kalender</li>
+            <li>E-Mail-Strecke nach Chatbot-Kontakt</li>
+            <li>CRM-Integration</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Auswahl-Frage: Was bringt Vertriebswirkung – nicht: was ist neu?
+      </div>
+    </section>
+
+    <!-- 7 Implementierungsphasen -->
+    <section class="slide" style="display:none">
+      <h2>Implementierung · fünf Phasen</h2>
+      <ol style="margin-top:14px">
+        <li><strong>Use-Case-Auswahl</strong> – Wert vor Technik. Welcher Engpass?</li>
+        <li><strong>Dialog-Design</strong> – Pfade, Eskalationen, Tonalität, Übergaberegeln.</li>
+        <li><strong>Integration</strong> – CRM, Kalender, Wissensbasis. Datenfluss klar.</li>
+        <li><strong>Pilot &amp; Lernen</strong> – kleines Segment, A/B-Test, Iteration.</li>
+        <li><strong>Skalierung &amp; Governance</strong> – Monitoring, Update-Routine, Verantwortlichkeit.</li>
+      </ol>
+      <div style="margin-top:14px;display:flex;align-items:center;gap:14px">
+        <canvas data-rough="arrow" data-color="#1a4d8f" width="160" height="28"></canvas>
+        <span class="handwritten" style="font-size:22px;color:var(--kurs-22)">Erst kleiner Pilot – dann großer Roll-out.</span>
+      </div>
+    </section>
+
+    <!-- 8 Fallstudie B2B Supply -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · B2B Supply Solutions</h2>
+      <p style="color:var(--color-muted)">Technische Verbrauchsmaterialien für Industrie. Hohe Anfrage-Last.</p>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Use-Case-Auswahl</h3><ul><li>Bestell-Status (höchster Volumen-Hebel)</li><li>Lead-Qualifizierung neue Kunden</li><li>Produktvergleich (Top 10)</li></ul></div>
+        <div class="merk-box"><h3>Implementierungsplan</h3><ul><li>Quartal 1 · Status &amp; FAQ</li><li>Quartal 2 · Lead-Qualifizierung</li><li>Quartal 3 · Produktberatung</li></ul></div>
+        <div class="merk-box"><h3>Übergaberegeln</h3><ul><li>Komplexe Anfrage → Vertrieb</li><li>Reklamation → Service</li><li>Großauftrag → KAM</li></ul></div>
+        <div class="merk-box"><h3>KPIs / ROI</h3><ul><li>Containment-Rate · CSAT</li><li>Lead-Reaktionszeit · Conversion</li><li>Cost per Contact · Pipeline-Beitrag</li></ul></div>
+      </div>
+    </section>
+
+    <!-- 8b Übergaberegeln -->
+    <section class="slide" style="display:none">
+      <h2>Übergaberegeln · Bot → Mensch</h2>
+      <table class="vs-table">
+        <thead><tr><th>Auslöser</th><th>Übergabe an</th><th>Ziel-Reaktionszeit</th></tr></thead>
+        <tbody>
+          <tr><td>Komplexe Beratung (≥ 3 Rückfragen)</td><td>Vertrieb</td><td>&lt; 30 min</td></tr>
+          <tr><td>Großauftrag (Volumen &gt; X €)</td><td>Key Account Manager</td><td>&lt; 2 h</td></tr>
+          <tr><td>Reklamation / Eskalation</td><td>Service-Lead</td><td>&lt; 1 h</td></tr>
+          <tr><td>Kunde fordert Mensch („Berater?“)</td><td>nächster freier Agent</td><td>&lt; 5 min</td></tr>
+          <tr><td>Bot „verstehe nicht“ · 2× nacheinander</td><td>FAQ-Team</td><td>&lt; 15 min</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Saubere Übergabe rettet das Erlebnis – auch wenn der Bot scheitert.
+      </div>
+    </section>
+
+    <!-- 9 KPIs -->
+    <section class="slide" style="display:none">
+      <h2>KPIs · Chatbot &amp; Tools</h2>
+      <div style="margin-top:14px;text-align:center">
+        <span class="kriterium-pill">Containment Rate</span>
+        <span class="kriterium-pill">Fallback Rate</span>
+        <span class="kriterium-pill">CSAT</span>
+        <span class="kriterium-pill">First Response Time</span>
+        <span class="kriterium-pill">Conversion Rate</span>
+        <span class="kriterium-pill">Cost per Contact</span>
+        <span class="kriterium-pill">Pipeline-Beitrag</span>
+        <span class="kriterium-pill">Übergabe-Erfolg</span>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box"><h3>Erlebnis-KPIs</h3><p>CSAT · Fallback · Übergabe-Erfolg. Vertrauen messbar machen.</p></div>
+        <div class="merk-box"><h3>Wirtschafts-KPIs</h3><p>Cost per Contact · Pipeline-Beitrag · Conversion. Bewertung gegenüber Status quo.</p></div>
+      </div>
+    </section>
+
+    <!-- 10 Wo Chatbot scheitert -->
+    <section class="slide" style="display:none">
+      <h2>Wo Chatbots Vertrauen zerstören</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Symptom</h3>
+          <ul>
+            <li>Sackgassen-Dialoge</li>
+            <li>„Ich verstehe Sie nicht“</li>
+            <li>Endlosschleifen</li>
+            <li>Übergabe zu spät / gar nicht</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Ursache</h3>
+          <ul>
+            <li>Use-Case zu breit</li>
+            <li>Dialog ohne Eskalation</li>
+            <li>Wissensbasis unvollständig</li>
+            <li>Kein Mensch-Override</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Lieber 3 perfekte Use-Cases als 30 mittelmäßige.
+      </div>
+    </section>
+
+    <!-- 10b ROI Chatbot -->
+    <section class="slide" style="display:none">
+      <h2>ROI-Rechnung · Beispiel</h2>
+      <p style="color:var(--color-muted)">Vor-/Nach-Vergleich – nicht nur Aktivitätskennzahlen.</p>
+      <table class="vs-table">
+        <thead><tr><th>Kennzahl</th><th>Vor Bot</th><th>Mit Bot (6 Mo)</th></tr></thead>
+        <tbody>
+          <tr><th>Anfragen / Monat</th><td>2.400</td><td>3.100 (+29 %)</td></tr>
+          <tr><th>Erstantwort</th><td>26 h</td><td>2 min</td></tr>
+          <tr><th>Containment Rate</th><td>–</td><td>54 %</td></tr>
+          <tr><th>SQL pro Monat</th><td>38</td><td>71</td></tr>
+          <tr><th>Cost per Contact</th><td>9,80 €</td><td>3,60 €</td></tr>
+          <tr><th>Pipeline-Beitrag / Mo</th><td>180 k €</td><td>340 k €</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        ROI nicht aus Bot-Klicks – aus Vertriebswirkung.
+      </div>
+    </section>
+
+    <!-- 11 Zielkonflikte -->
+    <section class="slide" style="display:none">
+      <h2>Management · vier Zielkonflikte</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Automatisierung vs. Kundenerlebnis</h3><p>Effizient für uns ≠ angenehm für Kunden.</p></div>
+        <div class="merk-box"><h3>Kosten vs. Datenqualität</h3><p>Billiger Bot ohne Wartung wird teuer durch Fehler.</p></div>
+        <div class="merk-box"><h3>Vertriebskapazität vs. Lead-Volumen</h3><p>Mehr Leads über Bot – nur wenn SQL-Definition steht.</p></div>
+        <div class="merk-box"><h3>Skalierung vs. Governance</h3><p>Schneller Rollout ohne Update-Prozess = Reputationsrisiko.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Tool-Entscheidung = Architekturentscheidung mit Außenwirkung.
+      </div>
+    </section>
+
+    <!-- 11b Methoden -->
+    <section class="slide" style="display:none">
+      <h2>Methoden &amp; Werkzeuge</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Use-Case-Matrix</h3><p>Wert × Aufwand × Risiko – Priorisierung sichtbar.</p></div>
+        <div class="merk-box"><h3>Conversation Design</h3><p>Pfade, Intents, Fallback-Skripte, Tonalität.</p></div>
+        <div class="merk-box"><h3>Wissensbasis-Pflege</h3><p>Quelle, Aktualität, Verantwortliche · Update-Routine.</p></div>
+        <div class="merk-box"><h3>A/B-Test-Plan</h3><p>Hypothese, Metrik, Zeitraum, Entscheidungsregel.</p></div>
+        <div class="merk-box"><h3>Eskalations-SLAs</h3><p>Reaktionszeit je Übergabe-Typ.</p></div>
+        <div class="merk-box"><h3>Bot-Governance-Board</h3><p>Freigabe, Audit, Stilllegung – wer entscheidet?</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Tool ohne Governance = Outage in Zeitlupe.
+      </div>
+    </section>
+
+    <!-- 12 Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Wert vor Technik – Use-Case zuerst, Bot danach.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Die Übergabe vom Bot zum Menschen ist erfolgskritisch.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Drei perfekte Pfade schlagen 30 mittelmäßige.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Pilot vor Roll-out. Monitoring vor Skalierung.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Chatbots sind keine Entlastung – wenn die Wissensbasis nicht stimmt.</span></div>
+      </div>
+    </section>
+
+    <!-- 12b Senior-Frage -->
+    <section class="slide" style="display:none">
+      <h2>Senior-Level-Frage</h2>
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Die eine Frage hinter allem</h3>
+        <p>Welche Chatbot-Funktion implementieren Sie bewusst <em>nicht</em>, obwohl sie umsetzbar wäre – und wie begründen Sie das gegenüber Marketing, Vertrieb und Vorstand?</p>
+      </div>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box"><h3>Was sie testet</h3><ul><li>Schutz des Kundenerlebnisses</li><li>Realistische Fähigkeit der Wissensbasis</li><li>Verantwortung für Übergaben</li></ul></div>
+        <div class="merk-box"><h3>Typische Fallen</h3><ul><li>„Wir können alles automatisieren“</li><li>Pilot ohne Monitoring</li><li>KI-Bot ohne Eskalation</li></ul></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Der Bot ist ein Vertreter des Unternehmens – mit allen Konsequenzen.
+      </div>
+    </section>
+
+    <!-- 13 Outro -->
+    <section class="slide" style="display:none">
+      <h2>Quellen · Weiterarbeiten</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box"><h3>Handout</h3><p style="font-size:14px">Theorie, Eselsbrücken, Glossar.</p><p style="margin-top:10px"><a href="../../pdf/22-handout-tag-14.pdf" style="color:var(--kurs-22);font-weight:600">→ Handout PDF</a></p></div>
+        <div class="merk-box"><h3>Vertiefung</h3><p style="font-size:14px">Video · Podcast · Quiz · Aufgaben.</p><p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-22);font-weight:600">→ Materialauswahl</a></p></div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <canvas data-rough="underline" data-color="#1a4d8f" width="320" height="20"></canvas>
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-22);margin:12px 0 0">Bis morgen – Tag 15.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 22 (Bo 143) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script src="../../assets/rough.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
+      const rc = rough.canvas(canvas);
+      const w = canvas.width, h = canvas.height;
+      const color = canvas.dataset.color || '#1a4d8f';
+      const type = canvas.dataset.rough;
+      if (type === 'underline') {
+        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
+      } else if (type === 'arrow') {
+        rc.line(0, h/2, w-10, h/2, { stroke: color, strokeWidth: 2, roughness: 1.4 });
+        rc.line(w-15, h/2-7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
+        rc.line(w-15, h/2+7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
+      } else if (type === 'check') {
+        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+      }
+    });
+  });
+</script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
   new SlideShow(document.getElementById("slides"));
   markViewed("22_Bo_143", 14, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

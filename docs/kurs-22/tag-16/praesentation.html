@@ -5,6 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lernplatt · Präsentation · Tag 16</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-22); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-22); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-22-bg); color: var(--kurs-22); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row canvas { flex: 0 0 36px; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .kriterium-pill { display: inline-block; background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: 20px; padding: 6px 14px; margin: 4px; font-weight: 600; color: var(--kurs-22); }
+    .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+    .timeline-step { background: #fff; border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 10px; font-size: 14px; }
+    .timeline-step h4 { margin: 0 0 4px; font-size: 14px; color: var(--kurs-22); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -13,34 +40,312 @@
 <div class="brand-bar"><a href="../../dashboard.html">Lernplatt · by Can Siebert</a><a href="#" class="logout">Logout</a></div>
 <div class="crumbs"><a href="../../dashboard.html">Kurse</a> › <a href="../index.html">Kurs 22_Bo_143</a> › <a href="index.html">Tag 16</a> › <span>Präsentation</span></div>
 <main>
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px">
-    <h1 style="margin:0">Präsentation · Tag 16</h1>
-    <a href="praesentation.html" download="kurs-22-tag-16-praesentation.html"
-       class="quiz-button" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">
-      ⬇ HTML-Download
-    </a>
-  </div>
-  <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Plattformmärkte meistern: Rechtssicherheit & Wettbewerbsstrategien</h2>
-      <p>Modul 8 · Tag 16</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <h1>Präsentation · Tag 16</h1>
+  <p style="color:var(--color-muted)">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- 1 Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 8 · Tag 16 · Kurs 22 (Bo 143) · 19. Juni 2026 · <strong>Abschluss</strong></div>
+      <h2 class="handwritten" style="font-size:54px;line-height:1.05;color:var(--kurs-22);margin:0">Kartellrecht,<br>Krise &amp; Resilienz</h2>
+      <canvas data-rough="underline" data-color="#1a4d8f" width="420" height="22" style="margin-top:8px"></canvas>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Marktmacht, Fairness und Krisenmanagement – die langfristige Steuerung von Plattformmärkten.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#c47612;font-size:26px">Tag 16 von 16 · Macht → Fairness → Zukunft</span>
+      </div>
+    </section>
+
+    <!-- 2 Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box"><h3>L1 · Wissen</h3><ul><li>Kartellrecht in Plattformmärkten</li><li>Marktmacht &amp; Abhängigkeit</li><li>Krisenarten</li><li>Zukunftssichere Strategien</li></ul></div>
+        <div class="merk-box"><h3>L2 · Anwendung</h3><ul><li>Fairnessrisiken identifizieren</li><li>Faire Plattformregeln ableiten</li><li>Krisenszenarien bewerten</li><li>Resilienz entwickeln</li></ul></div>
+        <div class="merk-box"><h3>L3 · Management</h3><ul><li>Wettbewerb &amp; Krise als Führung</li><li>Stakeholder-Vertrauen verantworten</li><li>Zukunftsfähigkeit absichern</li></ul></div>
+      </div>
+      <div class="accent-box" style="margin-top:18px">
+        Marktmacht ohne faire Regeln zerstört das, was sie erzeugt hat: Vertrauen.
+      </div>
+    </section>
+
+    <!-- 3 Marktmacht -->
+    <section class="slide" style="display:none">
+      <h2>Marktmacht in Plattformmärkten</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Netzwerkeffekte</h3><p>Mehr Nutzer → wertvoller → noch mehr Nutzer. Selbstverstärkend.</p></div>
+        <div class="merk-box"><h3>Datenvorsprung</h3><p>Wer mehr sieht, optimiert schneller. Wettbewerber schließen kaum auf.</p></div>
+        <div class="merk-box"><h3>Zugangskontrolle</h3><p>Gatekeeper entscheidet, wer überhaupt teilnimmt.</p></div>
+        <div class="merk-box"><h3>Wechselkosten</h3><p>Datenexport, Integration, Reputation. Lock-in entsteht stillschweigend.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Marktmacht wird selten erobert – sie wird zugelassen.
+      </div>
+    </section>
+
+    <!-- 4 Kartellrechtliche Hotspots -->
+    <section class="slide" style="display:none">
+      <h2>Kartellrechtliche Hotspots</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Selbstbevorzugung</h3><p>Eigene Angebote im Ranking bevorzugen (DMA-Verbot).</p></div>
+        <div class="merk-box"><h3>Most-Favoured-Nation</h3><p>„Anderswo nicht günstiger“-Klauseln (Booking-Fälle).</p></div>
+        <div class="merk-box"><h3>Diskriminierende Gebühren</h3><p>Großkunde zahlt anders, ohne sachlichen Grund.</p></div>
+        <div class="merk-box"><h3>Sperrungen ohne Begründung</h3><p>Plötzlicher Ausschluss → existenzgefährdend.</p></div>
+        <div class="merk-box"><h3>Datenmissbrauch</h3><p>Anbieterdaten für eigenes Produkt nutzen.</p></div>
+        <div class="merk-box"><h3>Interoperabilitäts-Sperren</h3><p>Datenportabilität blockieren.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Bußgelder bis 10 % Konzernumsatz – im Wiederholungsfall mehr.
+      </div>
+    </section>
+
+    <!-- 5 Faire Plattformregeln -->
+    <section class="slide" style="display:none">
+      <h2>Faire Plattformregeln · sechs Prinzipien</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Transparenz</h3><p>Ranking-Kriterien, Gebührenstruktur, Algorithmen offen dokumentiert.</p></div>
+        <div class="merk-box"><h3>Gleichbehandlung</h3><p>Gleiche Regeln für eigene und fremde Angebote.</p></div>
+        <div class="merk-box"><h3>Begründung</h3><p>Sperrungen, Sanktionen, Änderungen mit klaren Gründen.</p></div>
+        <div class="merk-box"><h3>Beschwerdeweg</h3><p>Niederschwellig, schnell, dokumentiert.</p></div>
+        <div class="merk-box"><h3>Datenportabilität</h3><p>Anbieter können ihre Daten mitnehmen.</p></div>
+        <div class="merk-box"><h3>Vorhersehbarkeit</h3><p>Regeländerungen mit Frist und Erklärung.</p></div>
+      </div>
+    </section>
+
+    <!-- 6 Fallbeispiel SupplierGate -->
+    <section class="slide" style="display:none">
+      <h2>Fallbeispiel · SupplierGate</h2>
+      <p style="color:var(--color-muted)">B2B-Plattform für technische Komponenten. Pay-for-Visibility-Modell.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Beobachtete Risiken</h3>
+          <ul>
+            <li>Bezahlte Sichtbarkeit ≈ Top-Ranking</li>
+            <li>Große Anbieter mit besseren Konditionen</li>
+            <li>Sperrungen ohne klare Begründung</li>
+            <li>Kunden fühlen sich getäuscht</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Korrekturen</h3>
+          <ul>
+            <li>Kennzeichnung „Anzeige“ vs. „organisch“</li>
+            <li>Gebührenstruktur veröffentlichen</li>
+            <li>Begründungspflicht bei Sperrung</li>
+            <li>Schiedsstelle für Streitfälle</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 Krisenarten -->
+    <section class="slide" style="display:none">
+      <h2>Krisenarten in Plattformmärkten</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Vertrauen</h3><p>Bewertungsskandal, gefälschte Profile, manipulierte Daten.</p></div>
+        <div class="merk-box"><h3>Compliance</h3><p>Bußgelder, Untersuchung, Algorithmen-Streit.</p></div>
+        <div class="merk-box"><h3>Technik</h3><p>Ausfall, Datenleck, Cyberangriff.</p></div>
+        <div class="merk-box"><h3>Markt</h3><p>Konkurrent verdrängt, Nachfrage bricht ein.</p></div>
+        <div class="merk-box"><h3>Stakeholder</h3><p>Anbieter-Boykott, Mitarbeiter-Welle, Investoren-Druck.</p></div>
+        <div class="merk-box"><h3>Reputation</h3><p>Medienwelle, virale Kritik, Aktivismus.</p></div>
+      </div>
+    </section>
+
+    <!-- 8 Krisenmanagement -->
+    <section class="slide" style="display:none">
+      <h2>Krisenmanagement · vier Phasen</h2>
+      <div class="timeline">
+        <div class="timeline-step"><h4>1 · Erkennen</h4><p>Frühwarnsystem: Beschwerden, Medien, Kennzahlen.</p></div>
+        <div class="timeline-step"><h4>2 · Eindämmen</h4><p>Sofortmaßnahmen: Statement, Stopp, Eskalation.</p></div>
+        <div class="timeline-step"><h4>3 · Aufklären</h4><p>Ursache, Verantwortung, Dialog. Transparenz schlägt Schweigen.</p></div>
+        <div class="timeline-step"><h4>4 · Lernen</h4><p>Prozesse, Regeln, Governance anpassen. Dokumentieren.</p></div>
+      </div>
+      <div style="margin-top:14px;display:flex;align-items:center;gap:14px">
+        <canvas data-rough="arrow" data-color="#1a4d8f" width="160" height="28"></canvas>
+        <span class="handwritten" style="font-size:22px;color:var(--kurs-22)">Schweigen kostet mehr als Eingeständnis.</span>
+      </div>
+    </section>
+
+    <!-- 8b SupplierGate Krisenpfad -->
+    <section class="slide" style="display:none">
+      <h2>SupplierGate · Krisenpfad in der Praxis</h2>
+      <p style="color:var(--color-muted)">Anbieter klagen öffentlich · Kunden zweifeln Ranking an.</p>
+      <table class="vs-table">
+        <thead><tr><th>Phase</th><th>Aktion</th><th>Sprecher</th></tr></thead>
+        <tbody>
+          <tr><th>Stunde 0–4</th><td>Statement, Kontakt zu Anbietern, Daten sammeln</td><td>Chief Platform Officer</td></tr>
+          <tr><th>Tag 1–3</th><td>Externe Prüfung Ranking-Logik · interim Transparenz</td><td>CPO + Compliance-Officer</td></tr>
+          <tr><th>Woche 1</th><td>Reform-Plan: Kennzeichnung, Gebührenstruktur, Beschwerdeweg</td><td>CEO + Vorstand</td></tr>
+          <tr><th>Quartal 1</th><td>Audit, Veröffentlichung, Schiedsstelle</td><td>Compliance + Kommunikation</td></tr>
+          <tr><th>Lerneffekt</th><td>Governance-Update, Frühwarnindikatoren</td><td>Risiko-Komitee</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Krise transparent geführt = Vertrauen wiederhergestellt. Schweigen verlängert.
+      </div>
+    </section>
+
+    <!-- 9 Fallstudie LogiTrade Hub -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · LogiTrade Hub</h2>
+      <p style="color:var(--color-muted)">Plattform für Logistik · Verlader · Lagerflächen · Zusatzservices.</p>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Risikoanalyse</h3><ul><li>Konzentration bei 3 Großverladern</li><li>Sperrungen ohne Begründung</li><li>Daten-Lock-in bei API-Partnern</li></ul></div>
+        <div class="merk-box"><h3>Fairnessmaßnahmen</h3><ul><li>Transparente Ranking-Logik</li><li>P2B-konforme Sperrregeln</li><li>Datenexport-Schnittstelle</li></ul></div>
+        <div class="merk-box"><h3>Krisenplan</h3><ul><li>Stakeholder-Map · Sprecher-Rollen</li><li>Eskalationsketten · 4-h-SLA</li><li>Post-Mortem-Routine</li></ul></div>
+        <div class="merk-box"><h3>Entscheidung unter Unsicherheit</h3><ul><li>Bewusst <em>keine</em> Exklusivverträge mit Großverladern</li><li>Resilienz vor Wachstum</li></ul></div>
+      </div>
+    </section>
+
+    <!-- 10 Resilienz -->
+    <section class="slide" style="display:none">
+      <h2>Resilienz · sechs Hebel</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Diversifikation</h3><p>Keine Klumpen bei Anbietern, Kunden, Datenfeeds.</p></div>
+        <div class="merk-box"><h3>Vertrauen</h3><p>Vorab investiert, in Krise verfügbar.</p></div>
+        <div class="merk-box"><h3>Governance</h3><p>Klare Rollen, dokumentierte Prozesse.</p></div>
+        <div class="merk-box"><h3>Technik</h3><p>Redundanz, Backup, Pen-Tests.</p></div>
+        <div class="merk-box"><h3>Stakeholder-Dialog</h3><p>Regelmäßiger Austausch, kein Notfall-Modus.</p></div>
+        <div class="merk-box"><h3>Lern-Kultur</h3><p>Fehler dokumentieren, nicht verstecken.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Resilienz ist Vorrat – sie wird vor der Krise angelegt.
+      </div>
+    </section>
+
+    <!-- 10b Zukunftssichere Strategien -->
+    <section class="slide" style="display:none">
+      <h2>Zukunftssichere Plattformstrategie</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Regulatorische Antizipation</h3><p>Was kommt? KI-Verordnung, Datenräume, Nachhaltigkeitspflichten.</p></div>
+        <div class="merk-box"><h3>Technologische Offenheit</h3><p>APIs, Interoperabilität, Standards – statt Lock-in.</p></div>
+        <div class="merk-box"><h3>Stakeholder-Pluralität</h3><p>Nicht ein dominanter Anbieter/Kunde. Verteilung als Schutz.</p></div>
+        <div class="merk-box"><h3>Ethische Selbstbindung</h3><p>Werte vor Marketing. Glaubhaft, wenn auch unbequem.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Zukunftssicher ≠ unverwundbar. Aber: vorbereitet.
+      </div>
+    </section>
+
+    <!-- 11 Zielkonflikte -->
+    <section class="slide" style="display:none">
+      <h2>Management · vier Zielkonflikte</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box"><h3>Marktmacht vs. Fairness</h3><p>Stärke ohne Selbstbeschränkung führt zu Regulierung.</p></div>
+        <div class="merk-box"><h3>Wachstum vs. Resilienz</h3><p>Schneller skalieren = mehr Risiko-Oberfläche.</p></div>
+        <div class="merk-box"><h3>Geschwindigkeit vs. Begründung</h3><p>Krise braucht Tempo – Vertrauen braucht Erklärung.</p></div>
+        <div class="merk-box"><h3>Schutz vs. Offenheit</h3><p>Kontrolle stützt Vertrauen – verschließt aber Innovation.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Wer Plattformen führt, führt einen Markt – nicht ein Produkt.
+      </div>
+    </section>
+
+    <!-- 11b Methoden -->
+    <section class="slide" style="display:none">
+      <h2>Methoden &amp; Werkzeuge</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Marktmacht-Check</h3><p>Netzwerkeffekt × Datenvorsprung × Wechselkosten.</p></div>
+        <div class="merk-box"><h3>Fairness-Audit</h3><p>Ranking · Gebühren · Sperrregeln · Beschwerdewege.</p></div>
+        <div class="merk-box"><h3>Krisenhandbuch</h3><p>Szenarien, Eskalationsketten, Sprecher-Rollen.</p></div>
+        <div class="merk-box"><h3>Tabletop-Übung</h3><p>Krise durchspielen, bevor sie eintritt.</p></div>
+        <div class="merk-box"><h3>Stakeholder-Map</h3><p>Einfluss × Interesse · Dialog-Frequenz festlegen.</p></div>
+        <div class="merk-box"><h3>Frühwarnsystem</h3><p>Beschwerden, Medien, KPI-Abweichung – Trigger definiert.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Vorbereitung schlägt Reaktion. Immer.
+      </div>
+    </section>
+
+    <!-- 12 Capstone Brücke -->
+    <section class="slide" style="display:none">
+      <h2>Capstone · 16 Tage in einer Frage</h2>
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Die Senior-Level-Frage</h3>
+        <p>Wie steuern Sie ein digitales Vertriebs- und Plattform-Ökosystem so, dass es <strong>wirtschaftlich erfolgreich</strong>, <strong>rechtssicher</strong>, <strong>fair</strong> und <strong>resilient</strong> bleibt – auch unter Unsicherheit, Druck und Veränderung?</p>
+      </div>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box"><h3>Markt &amp; Plattform</h3><p>Tag 1–4 · Modelle, Auswahl, Strategie.</p></div>
+        <div class="merk-box"><h3>Kanäle &amp; Performance</h3><p>Tag 5–10 · Content, SEO/SEA, E-Mail, ROI.</p></div>
+        <div class="merk-box"><h3>Monetarisierung &amp; Regelung</h3><p>Tag 11–16 · Erlöse, KI, Recht, Krise.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Wissen → Anwendung → Management. Wer wählt, entscheidet. Wer entscheidet, verantwortet.
+      </div>
+    </section>
+
+    <!-- 13 Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Marktmacht ohne Fairness erzeugt Regulierung.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Transparenz ist die billigste Versicherung.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Resilienz entsteht vor der Krise – nicht in ihr.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Schweigen kostet mehr als Eingeständnis.</span></div>
+        <div class="takeaway-row"><canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas><span class="text">Plattformen führen = Märkte führen.</span></div>
+      </div>
+    </section>
+
+    <!-- 13b Senior-Frage -->
+    <section class="slide" style="display:none">
+      <h2>Senior-Level-Frage</h2>
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Die eine Frage hinter allem</h3>
+        <p>Welche Plattform-Entscheidung würden Sie <em>heute</em> bereuen, wenn sie morgen öffentlich diskutiert würde – und wie viel Tempo sind Sie bereit, dafür zu opfern?</p>
+      </div>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box"><h3>Was sie testet</h3><ul><li>Robustheit gegen Öffentlichkeit</li><li>Werte vor Wachstum</li><li>Langfrist-Konsistenz</li></ul></div>
+        <div class="merk-box"><h3>Typische Fallen</h3><ul><li>„Niemand wird das je erfahren“</li><li>Geschwindigkeit über alles</li><li>Risiko-Verlagerung auf Partner</li></ul></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Plattformführung ist Marktführung – mit allen Pflichten.
+      </div>
+    </section>
+
+    <!-- 14 Outro Abschluss -->
+    <section class="slide" style="display:none">
+      <h2>Abschluss · 16 Tage Plattform-Vertrieb</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box"><h3>Handout</h3><p style="font-size:14px">Theorie, Eselsbrücken, Glossar.</p><p style="margin-top:10px"><a href="../../pdf/22-handout-tag-16.pdf" style="color:var(--kurs-22);font-weight:600">→ Handout PDF</a></p></div>
+        <div class="merk-box"><h3>Kursübersicht</h3><p style="font-size:14px">Alle 16 Tage · Capstone-Projekt.</p><p style="margin-top:10px"><a href="../index.html" style="color:var(--kurs-22);font-weight:600">→ Kurs 22 Übersicht</a></p></div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <canvas data-rough="underline" data-color="#1a4d8f" width="320" height="20"></canvas>
+        <p class="handwritten" style="font-size:32px;color:var(--kurs-22);margin:12px 0 0">Danke – und viel Erfolg im Einsatz.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 22 (Bo 143) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script src="../../assets/rough.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
+      const rc = rough.canvas(canvas);
+      const w = canvas.width, h = canvas.height;
+      const color = canvas.dataset.color || '#1a4d8f';
+      const type = canvas.dataset.rough;
+      if (type === 'underline') {
+        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
+      } else if (type === 'arrow') {
+        rc.line(0, h/2, w-10, h/2, { stroke: color, strokeWidth: 2, roughness: 1.4 });
+        rc.line(w-15, h/2-7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
+        rc.line(w-15, h/2+7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
+      } else if (type === 'check') {
+        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+      }
+    });
+  });
+</script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
   new SlideShow(document.getElementById("slides"));
   markViewed("22_Bo_143", 16, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>
