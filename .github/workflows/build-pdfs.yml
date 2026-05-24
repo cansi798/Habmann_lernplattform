@@ -43,8 +43,9 @@ jobs:
           xelatex --version | head -1
 
       - name: Build all PDFs
+        id: build_pdfs
+        continue-on-error: true
         run: |
-          set -e
           mkdir -p docs/pdf
           FAILED=()
 
@@ -98,13 +99,12 @@ jobs:
 
           if [ ${#FAILED[@]} -ne 0 ]; then
             echo ""
-            echo "::error::${#FAILED[@]} file(s) failed to build:"
+            echo "::warning::${#FAILED[@]} file(s) failed to build (commit-step will still push the successful PDFs):"
             printf '  - %s\n' "${FAILED[@]}"
-            exit 1
           fi
 
       - name: Commit + push PDFs
-        if: success()
+        if: always()
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
