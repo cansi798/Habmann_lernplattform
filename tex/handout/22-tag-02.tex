@@ -1,0 +1,992 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 2 - Lehrskript
+% Plattformstrategien implementieren, steuern und weiterentwickeln
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+
+% --- Euro-Zeichen --------------------------------------------------------
+\usepackage{eurosym}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 2}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Plattformstrategie implementieren \& steuern}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 1 \textperiodcentered{} TAG 2 VON 2 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 29.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Plattformstrategie\\implementieren\\\& steuern\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom Zielbild bis zum Operating Model --\\Plattformstrategien umsetzen, KPIs steuern, Zukunftstrends einordnen.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 2 von 2}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent An Tag 1 haben Sie Plattformmodelle kennengelernt, Mechanismen verstanden und ein Auswahlraster für Plattform­entscheidungen entwickelt. Heute geht es um die Umsetzungs- und Steuerungsphase: \emph{Wie wird aus einer Plattform­entscheidung ein lebendes Operating Model -- mit klaren Phasen, sauberen KPIs, einer aktiven Optimierungslogik und einer realistischen Sicht auf die nächsten Jahre?}
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundlogik der Implementierung von Plattformstrategien -- Phasen Zielbild, Pilotierung, Rollout, Betrieb, Skalierung, Optimierung.
+  \item Erfolgsfaktoren kennen: Zielsetzung, Datenqualität, Kundennutzen, technische Stabilität, Prozessklarheit, Akzeptanz im Vertrieb.
+  \item Plattform-KPIs unterscheiden: Reichweite, Traffic, Leads, Conversion Rate, Customer Acquisition Cost, Customer Lifetime Value, Churn, Wiederkaufrate, Warenkorbwert, Plattformkosten, Deckungsbeitrag.
+  \item Zukunftstrends einordnen: KI-Steuerung, Personalisierung, Ökosysteme, Datenhoheit, Regulatorik.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Implementierungsplan für eine konkrete Plattformstrategie entwickeln.
+  \item Plattformmaßnahmen anhand von KPIs bewerten und priorisierte Optimierungen ableiten.
+  \item Risiken, Ressourcenbedarf und organisatorische Auswirkungen einschätzen.
+  \item Zukunftstrends auf konkrete Vertriebssituationen übertragen.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Plattformstrategie als langfristige Steuerungs- und Investitionsentscheidung bewerten.
+  \item Entscheidungen unter Unsicherheit, Budgetdruck und Zeitdruck treffen.
+  \item Zielkonflikte zwischen Wachstum, Kontrolle, Skalierung, Kundendaten und Abhängigkeit aktiv managen.
+  \item Verantwortung für die strategische Weiterentwicklung einer Plattformarchitektur übernehmen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Tag 1 hat die Frage ``\emph{Welche Plattform?}'' beantwortet. Tag 2 beantwortet ``\emph{Was tun wir damit?}'' -- vom ersten Pilot bis zum Operating Model. Wer Plattform­strategien nicht aktiv steuert, verliert die Kontrolle über Kundenzugang, Daten und Marge -- ohne dass es jemand bemerkt, bis es zu spät ist.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG / MOTIVATION --------------------------------------------
+\section{Einstieg: Von der Strategie zur Umsetzung}
+
+Eine getroffene Plattform­entscheidung ist erst die halbe Arbeit. ``Wir gehen auf Amazon Business'' oder ``Wir bauen einen eigenen B2B-Webshop'' sind Sätze, die schnell ausgesprochen sind -- die eigentlichen Folgekosten und Folge-Entscheidungen kommen in den nächsten 12--36 Monaten. In dieser Phase scheitern die meisten Plattform­initiativen nicht an der falschen Wahl, sondern an einer von vier typischen Lücken: \quelle{Cusumano et al., 2019, Kap.~5}
+
+\begin{enumerate}
+  \item \fachbegriff{Strategie ohne Zielbild.} Es ist klar, was eingeführt wird -- nicht, was am Ende erreicht sein soll. Folge: Aktivismus statt Steuerung.
+  \item \fachbegriff{Zielbild ohne KPIs.} Es ist klar, wo wir hinwollen -- aber nicht, woran wir erkennen, ob wir näher kommen. Folge: Bauchgefühl­entscheidungen.
+  \item \fachbegriff{KPIs ohne Optimierungslogik.} Wir messen vieles, aber niemand verändert auf Basis der Daten etwas. Folge: aufwändige Reports, keine Wirkung.
+  \item \fachbegriff{Optimierung ohne strategischen Rahmen.} Wir verbessern lokal -- und übersehen, dass die Plattform­abhängigkeit jedes Quartal wächst. Folge: kurzfristige Gewinne, langfristige Falle.
+\end{enumerate}
+
+\subsection{Tag 2 als Antwort auf diese Lücken}
+
+Dieses Skript geht systematisch durch die vier Antworten: \emph{Zielbild und Phasen} (Sektion 2), \emph{Schnittstellen und Onboarding} (Sektion 3), \emph{Erfolgsfaktoren und KPIs} (Sektionen 4--5), \emph{Optimierungslogik} (Sektion 6), \emph{Zukunftstrends und strategische Risiken} (Sektionen 7--8). Die Fallstudie ``BauTech Connect'' (Sektion 9) bringt alles in einem konkreten Szenario zusammen.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Z-K-O-R}]
+Die vier Antworten auf typische Plattform-Umsetzungs-Lücken:\\[2pt]
+\textbf{Z}ielbild -- wo wollen wir sein?\\
+\textbf{K}PIs -- woran messen wir, dass wir näher kommen?\\
+\textbf{O}ptimierung -- wie verbessern wir systematisch?\\
+\textbf{R}ahmen -- wie bleibt das strategisch konsistent?\\[2pt]
+\emph{Wer ein ``Z-K-O-R'' nicht beantworten kann, hat noch keine Plattformstrategie -- sondern eine Plattform-Aktivität.}
+\end{eselsbox}
+
+% --- 2. IMPLEMENTIERUNGS-PHASEN ------------------------------------------
+\section{Phasen einer Plattform­implementierung}
+
+Eine seriöse Plattform­implementierung läuft in sechs Phasen -- nicht alle gleich lang, aber alle wichtig. Wer Phasen überspringt, zahlt später dafür.
+
+\subsection{Die sechs Phasen im Überblick}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX l@{}}
+\toprule
+Phase & Inhalt & Typische Dauer \\
+\midrule
+Zielbild & Klärung Zweck, Zielgruppe, Erfolgskriterien & 2--6 Wochen \\
+Pilotierung & Kleine Testumsetzung mit ausgewählten Produkten/Kunden & 6--12 Wochen \\
+Rollout & Volle Einführung im definierten Scope & 3--6 Monate \\
+Betrieb & Stabiles Tagesgeschäft mit klaren Rollen und Prozessen & dauerhaft \\
+Skalierung & Sortiment, Reichweite, Kanäle erweitern & 6--18 Monate \\
+Optimierung & Kontinuierliche Verbesserung über KPIs und Tests & dauerhaft \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Betrieb und Optimierung sind ``dauerhaft'' -- sie haben kein Enddatum. Wer den Übergang von Rollout zu Betrieb nicht sauber gestaltet (Rollen, Verantwortlichkeiten, Routinen), bleibt ewig im ``Projekt-Modus'' und verliert die operative Stabilität.
+
+\subsection{Zielbild als Anker}
+
+Das \fachbegriff{Zielbild} ist mehr als eine Vision auf einem Slide. Es beantwortet vier Fragen konkret und messbar: \quelle{Osterwalder \& Pigneur, 2010}
+
+\begin{itemize}
+  \item \textbf{Wer ist die Zielgruppe?} -- Branche, Größe, Rolle, geografische Region.
+  \item \textbf{Was ist der Nutzenversprechen?} -- Was bekommt die Zielgruppe, was sie ohne unsere Plattform nicht oder schwerer hätte?
+  \item \textbf{Wo wollen wir in 12, 24, 36 Monaten sein?} -- konkrete Zielwerte: Anzahl Kunden, Umsatzvolumen, Deckungsbeitrag, strategische Positionierung.
+  \item \textbf{Welche Trade-offs akzeptieren wir bewusst?} -- z.\,B.\ ``langsameres Wachstum für mehr Kontrolle'' oder ``geringere Marge für höhere Reichweite''.
+\end{itemize}
+
+Ein Zielbild ohne explizite Trade-offs ist Wunschdenken. \emph{Klare Trade-offs sind das Markenzeichen einer reifen Plattformstrategie.}
+
+\subsection{Pilotierung -- bewusst klein starten}
+
+Der häufigste Fehler beim Plattform-Start: zu groß anfangen. ``Wir machen es gleich richtig'' bedeutet 12 Monate Vorbereitung ohne Marktfeedback. Die \emph{Lean-Startup-Logik} -- Build, Measure, Learn -- ist auch für etablierte Unternehmen die robustere Alternative: \quelle{Ries, 2011, Kap.~3}
+
+\begin{itemize}
+  \item \fachbegriff{Build} -- Minimum Viable Plattform-Pilot: ausgewähltes Sortiment, klar definierte Zielkunden, technisches Setup auf das Nötigste reduziert.
+  \item \fachbegriff{Measure} -- vorab definierte Erfolgsindikatoren (siehe KPIs in Sektion 5). \emph{Vor dem Start} festlegen, sonst wird im Nachhinein interpretiert.
+  \item \fachbegriff{Learn} -- bewusste Reflexion: Was haben wir gelernt? Was war Annahme, was Fakt? Welche der drei Optionen wählen wir: \emph{persevere} (weitermachen), \emph{pivot} (Richtung ändern), \emph{stop} (abbrechen)?
+\end{itemize}
+
+\subsection{Rollout, Betrieb, Skalierung -- Übergänge bewusst managen}
+
+Drei Übergänge entscheiden über den Plattform-Erfolg:
+
+\begin{itemize}
+  \item \textbf{Pilot \textrightarrow{} Rollout.} Was im Pilot funktioniert hat, muss bewusst in den vollen Scope überführt werden -- mit Anpassungen, weil Volumen und Varianz steigen.
+  \item \textbf{Rollout \textrightarrow{} Betrieb.} ``Wer macht morgen früh weiter?'' Übergabe von Projekt-Teams an operative Verantwortliche, Routinen aufsetzen, Tickets/Eskalations-Pfade definieren.
+  \item \textbf{Betrieb \textrightarrow{} Skalierung.} Sortiment, Kanäle oder Märkte ausweiten -- bewusst priorisiert, nicht ``alles auf einmal''. Skalierung verlangt vorher stabilen Betrieb, sonst werden die Probleme nur größer.
+\end{itemize}
+
+\begin{merkbox}[Phasen-Disziplin]
+Die häufigste Plattform-Falle ist es, Phasen zu \emph{überspringen} oder zu \emph{vermischen}. ``Wir sind im Rollout, aber das Zielbild ist noch nicht ganz klar'' bedeutet: das Zielbild fehlt. Disziplin heißt: jede Phase mit klaren Output-Kriterien beenden, bevor die nächste beginnt.
+\end{merkbox}
+
+\subsection{Output-Kriterien pro Phase}
+
+Wann ist eine Phase ``abgeschlossen''? Hier hilft die explizite Definition pro Phase:
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Phase & Mindest-Output (Beispiele) \\
+\midrule
+Zielbild     & Eine Seite mit Zielgruppe, Nutzenversprechen, 12/24/36-Monats-Zielen, expliziten Trade-offs \\
+Pilotierung  & Mindestens 4 Wochen Echt-Daten mit klarer Persevere/Pivot/Stop-Entscheidung \\
+Rollout      & Stabiler Tagesbetrieb bei einer definierten Anzahl Vorgänge/Woche, dokumentierte Eskalationspfade \\
+Betrieb      & SLAs, Routinen, klare Owner-Verantwortung pro KPI \\
+Skalierung   & Reproduzierbare Pakete für weitere Sortimente/Märkte/Kanäle \\
+Optimierung  & Mindestens ein abgeschlossener Test pro Woche, dokumentierte Erkenntnisse \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Wenn diese Output-Kriterien nicht in der Phase erreicht werden, ist es Aktivismus -- nicht Phase-Abschluss.
+
+\subsection{Typische Falle pro Phase}
+
+Jede Phase hat ihren Lieblings-Fehler. Wer sie kennt, kann sie früh adressieren:
+
+\begin{itemize}
+  \item \textbf{Zielbild:} ``Wir sind digital'' -- zu vage. Heilmittel: konkrete 12/24/36-Monatsziele plus Trade-offs.
+  \item \textbf{Pilotierung:} ``Wir testen alles auf einmal'' -- Lerneffekt nicht zuordenbar. Heilmittel: klar abgegrenzter Scope, vorab definierte Erfolgshypothese.
+  \item \textbf{Rollout:} ``Big-Bang am Tag X'' -- alle Risiken konzentriert. Heilmittel: gestaffelter Rollout über Wellen.
+  \item \textbf{Betrieb:} ``Wir bleiben im Projektmodus'' -- niemand verantwortet dauerhaft. Heilmittel: Projekt-zu-Betrieb-Übergabe explizit als Meilenstein.
+  \item \textbf{Skalierung:} ``Wir skalieren, obwohl der Betrieb nicht stabil ist'' -- Probleme multiplizieren sich. Heilmittel: Skalierung erst nach stabilem Betrieb.
+  \item \textbf{Optimierung:} ``Wir testen vieles, aber lernen wenig'' -- keine Dokumentation. Heilmittel: nach jedem Test eine Lerndokumentation, auch bei Misserfolg.
+\end{itemize}
+
+% --- 3. SCHNITTSTELLEN ---------------------------------------------------
+\section{Schnittstellen und Plattform-Onboarding}
+
+Eine Plattform berührt fast alle Funktionen des Unternehmens. Wer die Schnittstellen nicht aktiv gestaltet, bekommt Konflikte zwischen Vertrieb, Marketing, IT und Kundenservice -- nicht weil die Beteiligten unfähig sind, sondern weil ihre Ziele und KPIs verschieden bleiben.
+
+\subsection{Fünf Funktionsschnittstellen}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX X@{}}
+\toprule
+Funktion & Beitrag zur Plattform & Typischer Konflikt \\
+\midrule
+Vertrieb & Bestandskunden-Pflege, Migration & ``Mein Bestandskunde wird zum Online-Kunden -- verlier ich Provision?'' \\
+Marketing & Reichweite, Content, Kampagnen & ``Wir liefern Leads, der Vertrieb beklagt sich über Qualität.'' \\
+IT & Technische Plattform, Schnittstellen, Daten & ``Es ist alles dringend, IT-Ressourcen sind begrenzt.'' \\
+Kundenservice & Anfragen, Reklamationen, Onboarding & ``Wir sind nicht in die Plattform-Prozesse eingebunden.'' \\
+Management & Steuerung, Budgetierung, Strategie & ``Reichweite wächst, aber Marge sinkt -- ist das gut?'' \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Lösungsmuster: \emph{gemeinsame KPIs} zwischen Funktionen, klare \emph{Verantwortungs-Mappings} (Wer entscheidet was, wer wird konsultiert, wer wird informiert) und \emph{regelmäßige Steuerungs-Routinen} (z.\,B.\ wöchentlicher Plattform-Jour-Fixe).
+
+\subsection{Plattform-Onboarding -- sechs Onboarding-Bereiche}
+
+Plattform-Onboarding ist mehr als ``Produkte einstellen''. Sechs Bereiche müssen abgedeckt werden:
+
+\begin{enumerate}
+  \item \textbf{Produkte} -- vollständige Produktdaten, Bilder, Beschreibungen, Varianten.
+  \item \textbf{Inhalte} -- redaktioneller Content (z.\,B.\ Beratungs-Texte, FAQs), der Vertrauen aufbaut.
+  \item \textbf{Prozesse} -- vom Bestelleingang bis zum After-Sales: wer macht was, wann?
+  \item \textbf{Nutzer} -- Kunden-Accounts, Authentifizierung, Berechtigungen.
+  \item \textbf{Partner} -- Logistik, Zahlungsanbieter, Drittanbieter mit klaren SLAs.
+  \item \textbf{Interne Rollen} -- wer ist Owner für jede der ersten fünf Kategorien?
+\end{enumerate}
+
+Ein Plattform-Onboarding, das eine dieser sechs Säulen vernachlässigt, ist anfällig: meist sind es die ``weichen'' Säulen (Inhalte, interne Rollen), die später teuer werden.
+
+\subsection{Vom Vertriebs-Skeptiker zum Plattform-Botschafter}
+
+Die häufigste Akzeptanz-Hürde in der Plattform-Einführung ist nicht die IT -- es ist der bestehende Vertrieb. Vertriebsmitarbeiter sehen die Plattform oft als Bedrohung: ``Mein Kunde wird zum Online-Kunden -- was bringt das mir?''. Drei Hebel, die in der Praxis funktionieren:
+
+\begin{itemize}
+  \item \fachbegriff{Provisions-Logik anpassen.} Online-Umsatz im selben Kunden­konto wird dem Vertriebsmitarbeiter zugerechnet -- oder zumindest teilweise. Das verhindert das ``ich verliere meinen Kunden''-Gefühl.
+  \item \fachbegriff{Vertrieb als Plattform-Wissensträger.} Der Vertrieb kennt die Kunden -- diese Kenntnis fließt in Sortiment, Inhalte und Service ein. Damit wird der Vertrieb zum aktiven Mitgestalter, nicht passiven Bedrohten.
+  \item \fachbegriff{Klare Use-Cases pro Kunden­segment.} Welcher Kunde wird vorwiegend online bedient, welcher persönlich, welcher hybrid? Statt ``alle Kunden zur Plattform'' braucht es ein bewusstes Segmentierungs-Modell.
+\end{itemize}
+
+% --- 4. ERFOLGSFAKTOREN --------------------------------------------------
+\section{Erfolgsfaktoren der Implementierung}
+
+Aus der Praxis großer Plattform-Initiativen kristallisieren sich sechs Erfolgsfaktoren heraus, die unabhängig von Branche und Plattform-Typ gelten. \quelle{Parker et al., 2016, Kap.~7; Cusumano et al., 2019}
+
+\subsection{Sechs Erfolgsfaktoren}
+
+\begin{enumerate}
+  \item \fachbegriff{Klare Zielsetzung.} Was ist die Plattform \emph{für} -- und genauso wichtig: was ist sie \emph{nicht}? Ohne diese Klärung dehnt sich der Scope unkontrolliert.
+  \item \fachbegriff{Datenqualität.} Produktdaten, Kundendaten, Transaktionsdaten -- alle drei müssen mindestens ``ordentlich'' sein. Schlechte Daten erzeugen schlechte Empfehlungen, schlechte Reports, schlechte Entscheidungen.
+  \item \fachbegriff{Kundennutzen.} Eine Plattform muss dem Kunden \emph{spürbar} besser dienen als bisherige Kanäle -- schneller, transparenter, einfacher. Sonst kommt er nicht wieder.
+  \item \fachbegriff{Technische Stabilität.} Geringe Ausfallzeiten, kurze Ladezeiten, robuste Checkout-Prozesse. Technik wird selten zum USP -- aber technische Mängel zerstören Vertrauen schneller als alles andere.
+  \item \fachbegriff{Prozessklarheit.} Wer macht was, in welcher Reihenfolge, mit welcher Service-Erwartung. Plattformen leben von Routinen, nicht von Improvisation.
+  \item \fachbegriff{Akzeptanz im Vertrieb.} Ohne Mitwirkung des Vertriebs bleibt jede Plattform ein Marketing-Projekt mit begrenzter Wirkung.
+\end{enumerate}
+
+\subsection{Die unbeliebte Wahrheit: Erfolgsfaktoren sind verkettet}
+
+Erfolgsfaktoren wirken nicht einzeln. Ein klarer Kundennutzen scheitert, wenn die Datenqualität schlecht ist (z.\,B.\ falsche Verfügbarkeits-Anzeigen). Eine stabile Technik nützt nichts ohne Akzeptanz im Vertrieb. Die Faustregel: \emph{Schwächste Säule bestimmt die tatsächliche Tragfähigkeit.}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Z-D-K-T-P-A}]
+Die sechs Säulen der Plattform-Implementierung:\\[2pt]
+\textbf{Z}iel -- klar definiert\\
+\textbf{D}aten -- Qualität\\
+\textbf{K}undennutzen -- spürbar\\
+\textbf{T}echnik -- stabil\\
+\textbf{P}rozesse -- klar\\
+\textbf{A}kzeptanz -- im Vertrieb\\[2pt]
+\emph{Eine Säule fehlt = das Konstrukt wackelt. Zwei = es fällt.}
+\end{eselsbox}
+
+% --- 5. KPIs -------------------------------------------------------------
+\section{Plattform-KPIs verstehen und nutzen}
+
+Was man nicht misst, kann man nicht steuern. Plattform-KPIs sind die Brücke zwischen operativer Aktivität und strategischer Steuerung. \quelle{Ellis \& Brown, 2017, Kap.~3}
+
+\subsection{Drei KPI-Cluster}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX X@{}}
+\toprule
+Cluster & KPI & Was es misst \\
+\midrule
+\multirow{4}{*}{Reichweite} & Besucher/Traffic & Wie viele kommen? \\
+                            & Produktaufrufe   & Was sehen sie an? \\
+                            & Quellen (organisch / paid) & Woher kommen sie? \\
+                            & Reichweiten-Kosten & Was kostet jeder Besuch? \\
+\midrule
+\multirow{4}{*}{Conversion} & Lead-Anzahl     & Wie viele zeigen Interesse? \\
+                            & Conversion Rate (CVR) & Welcher Anteil kauft? \\
+                            & Warenkorb (\O) & Wie hoch ist der Wert pro Kauf? \\
+                            & Customer Acquisition Cost (CAC) & Was kostet ein Neukunde? \\
+\midrule
+\multirow{4}{*}{Lifetime}   & Wiederkaufrate & Wie viele kommen wieder? \\
+                            & Customer Lifetime Value (CLV) & Was ist ein Kunde langfristig wert? \\
+                            & Churn Rate     & Wie viele verlieren wir? \\
+                            & CLV / CAC      & Wie viel Wert pro investiertem Euro? \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Die wichtigste Beziehung ist \emph{CLV~/~CAC}. Faustregel: \emph{Eine Plattform ist tragfähig, wenn der Customer Lifetime Value mindestens das Dreifache der Customer Acquisition Cost erreicht.} Bei CLV~/~CAC \textless~3 ist langfristig keine Profitabilität zu erwarten. \quelle{Ellis \& Brown, 2017, Kap.~8}
+
+\subsection{Vanity Metrics vs.\ wirkungsrelevante KPIs}
+
+\fachbegriff{Vanity Metrics} sind Kennzahlen, die gut aussehen, aber keine Aussage über die tatsächliche Wirkung treffen. Drei klassische Beispiele:
+
+\begin{itemize}
+  \item ``Wir hatten letzten Monat 500.000 Besucher.'' -- Wie viele davon haben gekauft?
+  \item ``Wir haben 50.000 Follower.'' -- Wie viele kommen von dort auf die Plattform?
+  \item ``Wir haben 5.000 Newsletter-Abonnenten.'' -- Wie hoch ist die Öffnungs- und Klick-Rate?
+\end{itemize}
+
+Die Gegenfrage zu jeder Vanity Metric: \emph{Welche Entscheidung würden wir anders treffen, wenn diese Zahl sich verdoppeln oder halbieren würde?} Wenn die Antwort ``keine'' ist, ist es eine Vanity Metric.
+
+\subsection{KPI-Hierarchie für Plattformsteuerung}
+
+Eine gute KPI-Architektur ist hierarchisch organisiert:
+
+\begin{itemize}
+  \item \textbf{Operative KPIs} (täglich/wöchentlich): Traffic, Conversion, Bestellungen, Reklamationen.
+  \item \textbf{Steuerungs-KPIs} (monatlich): CAC, Warenkorb, Wiederkaufrate, Plattformkosten.
+  \item \textbf{Strategische KPIs} (quartalsweise): CLV, CLV/CAC, Marktanteil, Plattformabhängigkeit (Umsatzanteil pro Kanal).
+\end{itemize}
+
+\begin{merkbox}[Die zwei wichtigsten KPI-Tests]
+\textbf{Test 1: ``Und dann?''} -- Wenn ich diese Zahl sehe, weiß ich, was zu tun ist? Wenn nicht, ist die Zahl entweder nicht entscheidungsrelevant oder es fehlt der Kontext. \\[4pt]
+\textbf{Test 2: ``Wer schaut?''} -- Welche Rolle (operativ / Steuerung / Management) braucht diese Zahl in welcher Frequenz? Eine Zahl ohne klaren Adressaten ist Reporting-Ballast.
+\end{merkbox}
+
+\subsection{CAC berechnen -- konkretes Rechenbeispiel}
+
+\fachbegriff{Customer Acquisition Cost (CAC)} berechnet sich grob als:
+
+\begin{center}
+\emph{CAC = (Marketing- + Vertriebskosten in Periode) / Anzahl Neukunden in Periode}
+\end{center}
+
+Beispiel: Ein B2B-Shop gibt in einem Quartal 90.000\,\euro{} für digitale Performance-Kampagnen aus und 60.000\,\euro{} für Inside-Sales-Personal, das die Leads qualifiziert. Im selben Quartal werden 250 Neukunden gewonnen.
+
+\[
+\text{CAC} = \frac{90{.}000 + 60{.}000}{250} = \frac{150{.}000}{250} = 600\,\text{\euro{} pro Neukunde}
+\]
+
+\noindent Das ist die nüchterne Rechnung. Was wirklich zählt, ist der Vergleich mit dem CLV.
+
+\subsection{CLV berechnen -- vereinfachte Praxisformel}
+
+\fachbegriff{Customer Lifetime Value (CLV)} hat viele Definitionen. Eine praktikable Faustformel für B2B-Plattformen:
+
+\begin{center}
+\emph{CLV = Durchschnittlicher Warenkorb $\times$ Wiederkaufrate p.\,a.\ $\times$ Erwartete Kundenlebenszeit (Jahre) $\times$ Deckungsbeitrags-Marge}
+\end{center}
+
+Beispiel (Fortsetzung des B2B-Shops): Durchschnittlicher Warenkorb 800\,\euro{}, Wiederkaufrate 5 Bestellungen pro Jahr, erwartete Kundenlebenszeit 4 Jahre, Deckungsbeitrags-Marge 25\,\%.
+
+\[
+\text{CLV} = 800 \times 5 \times 4 \times 0{,}25 = 4{.}000\,\text{\euro{}}
+\]
+
+\noindent CLV / CAC = 4.000 / 600 = \textbf{6{,}7} -- klar über dem Mindest-Schwellenwert 3. Diese Plattform-Akquise ist tragfähig.
+
+\subsection{Wann CLV/CAC kippt -- Warnsignale}
+
+\begin{itemize}
+  \item Wenn die Wiederkaufrate auf 2 Bestellungen p.\,a.\ fällt, ergibt sich CLV = 1.600\,\euro{}, also CLV/CAC = 2{,}7 -- knapp unter dem Schwellenwert. \emph{Alarmstufe gelb.}
+  \item Wenn der Durchschnittswarenkorb auf 500\,\euro{} sinkt (Margendruck durch Marktplätze), wird CLV = 2.500\,\euro{}, CLV/CAC = 4{,}2 -- noch okay, aber Trend kritisch.
+  \item Wenn die CAC durch teurere Kampagnen auf 1.200\,\euro{} steigt, kippt das Verhältnis schnell.
+\end{itemize}
+
+Reife Plattform-Steuerung bedeutet, diese Treiber regelmäßig zu überwachen -- nicht erst, wenn das Verhältnis bereits gekippt ist.
+
+% --- 6. OPTIMIERUNGSLOGIK ------------------------------------------------
+\section{Optimierungslogik: messen, analysieren, priorisieren, testen, anpassen}
+
+Plattformoptimierung ist kein einmaliges Projekt -- sie ist eine Routine. Der bewährte Fünf-Schritt-Zyklus stammt aus der Lean-Startup-Welt und ist heute Standard im Plattform-Management. \quelle{Ries, 2011, Kap.~8; Ellis \& Brown, 2017, Kap.~6}
+
+\subsection{Die fünf Schritte}
+
+\begin{enumerate}
+  \item \fachbegriff{Messen.} Die richtigen Daten erheben -- in der richtigen Frequenz, mit der richtigen Granularität.
+  \item \fachbegriff{Analysieren.} Daten interpretieren: Was ist Trend, was ist Rauschen? Wo sind Anomalien?
+  \item \fachbegriff{Priorisieren.} Was hat den größten erwarteten Wirkungs-Hebel? Aufwand vs.\ Wirkung abwägen.
+  \item \fachbegriff{Testen.} A/B-Tests oder kontrollierte Pilotierungen -- nicht ``alle Annahmen auf einmal'' ausprobieren.
+  \item \fachbegriff{Anpassen.} Was funktioniert hat, wird Standard. Was nicht funktioniert hat, wird dokumentiert (warum?) und verworfen.
+\end{enumerate}
+
+\subsection{Anwendung: typische Optimierungs-Hebel}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX X@{}}
+\toprule
+Bereich & Hebel & Erwartete Wirkung \\
+\midrule
+Reichweite & SEO, organischer Content & nachhaltig, langfristig \\
+Reichweite & Performance-Kampagnen & sofort, aber Kosten-skaliert \\
+Conversion & Checkout-Optimierung & oft 20--40\,\% mehr Abschlüsse \\
+Conversion & Vertrauens-Elemente (Reviews, Garantien) & moderater Anstieg, dauerhaft \\
+Retention & Onboarding-Verbesserung & weniger Frust nach Erstkauf \\
+Retention & Wiederkauf-Impulse (E-Mail, Push) & Wiederkaufrate steigt 10--20\,\% \\
+Margen & Up-/Cross-Selling & Warenkorb \textuparrow{} 15--30\,\% \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Test-Disziplin -- A/B-Tests richtig einsetzen}
+
+A/B-Tests sind die wirksamste Form der Optimierungs-Verifizierung -- aber nur, wenn sie diszipliniert durchgeführt werden:
+
+\begin{itemize}
+  \item Nur \emph{eine} Variable pro Test ändern -- sonst ist nicht klar, welcher Faktor wirkt.
+  \item Vorab definierte \emph{Erfolgs-Hypothese} und \emph{Mindest-Stichproben­größe}. ``Wir schauen, was passiert'' ist kein Test, sondern Beobachtung.
+  \item \emph{Signifikanz} respektieren -- Tests vorzeitig zu beenden, weil ``Variante A schon besser aussieht'', führt systematisch zu Fehlentscheidungen.
+  \item \emph{Lernen dokumentieren} -- auch verlorene Tests sind wertvolle Information.
+\end{itemize}
+
+\begin{merkbox}[Optimierungs-Routine]
+Eine wirksame Optimierungs-Routine in Plattform-Teams hat eine wöchentliche Kadenz: \emph{Montag} Daten sichten und priorisieren, \emph{Dienstag--Donnerstag} Tests umsetzen, \emph{Freitag} Lernen dokumentieren und nächste Woche planen. Ohne diese Kadenz versanden Optimierungen im Tagesgeschäft.
+\end{merkbox}
+
+\subsection{A/B-Test im Detail -- ein konkretes Setup}
+
+Beispiel: Eine Plattform vermutet, dass der Checkout zu komplex ist. Aktuell sind es vier Schritte. Hypothese: ``Wenn wir den Checkout auf zwei Schritte reduzieren, steigt die Conversion Rate um mindestens 15\,\%.''
+
+\textbf{Setup:}
+\begin{itemize}
+  \item \textbf{Variante A (Kontrolle):} aktueller 4-Schritt-Checkout.
+  \item \textbf{Variante B (Test):} reduzierter 2-Schritt-Checkout.
+  \item \textbf{Aufteilung:} 50/50 zufällig pro neuer Besucher-Session.
+  \item \textbf{Erfolgs-Metrik:} Conversion Rate (Abschluss / Besuch).
+  \item \textbf{Sekundär-Metriken:} durchschnittlicher Warenkorb, Abbruch-Punkt im Funnel.
+  \item \textbf{Mindest-Stichprobe:} mindestens 1.000 Sessions pro Variante (sonst zu hohes Rauschen).
+  \item \textbf{Test-Dauer:} mindestens 14 Tage (um Wochentags-Effekte abzubilden).
+\end{itemize}
+
+\textbf{Ergebnis-Bewertung:} Wenn Variante B \emph{statistisch signifikant} besser ist (z.\,B.\ 95\,\% Konfidenz), wird der reduzierte Checkout zum neuen Standard. Wenn der Unterschied im Rauschen liegt, wird der Test verworfen -- und die Hypothese nicht angenommen.
+
+\subsection{Fünf Test-Fehler, die zu Fehlentscheidungen führen}
+
+\begin{enumerate}
+  \item \fachbegriff{Mehrere Variablen gleichzeitig ändern.} Welcher Faktor wirkt -- die Schrittzahl oder die neue Farbe?
+  \item \fachbegriff{Test vorzeitig beenden.} ``Variante B sieht schon besser aus'' nach 3 Tagen -- statistisch nicht signifikant.
+  \item \fachbegriff{Zu kleine Stichprobe.} Bei 100 Sessions pro Variante ist fast jedes Ergebnis Rauschen.
+  \item \fachbegriff{Erfolgsmetrik nicht vorab definieren.} Im Nachhinein die Metrik wählen, die das gewünschte Ergebnis stützt.
+  \item \fachbegriff{Verlorene Tests nicht dokumentieren.} ``Was nicht funktioniert, vergessen wir.'' -- damit wiederholt man Tests immer wieder.
+\end{enumerate}
+
+% --- 7. ZUKUNFTSTRENDS --------------------------------------------------
+\section{Zukunftstrends im Plattformvertrieb}
+
+Plattformstrategie ist eine \emph{Investitions­entscheidung über mehrere Jahre}. Wer heute aufbaut, muss die nächsten 3--5 Jahre antizipieren. Vier Trends prägen 2026 das Bild -- mit unterschiedlicher Reife und unterschiedlicher Wirkungstiefe.
+
+\subsection{Trend 1: KI-gestützte Plattformsteuerung}
+
+\fachbegriff{Künstliche Intelligenz} ist nicht mehr nur Personalisierung von Produktempfehlungen. Sie steuert zunehmend Preise (Dynamic Pricing), Lagerbestände (Demand Forecasting), Marketing-Budget-Allokation und sogar Beschwerde-Bearbeitung. \quelle{Iansiti \& Lakhani, 2020, Kap.~3}
+
+Strategische Konsequenz: Plattformen mit guter Datenqualität entwickeln durch KI einen \emph{nachhaltigen Vorteil} -- mehr Daten erlauben besseres Training, das wiederum mehr Daten generiert. Plattformen mit schlechter Datenqualität geraten in einen Nachteil-Kreislauf.
+
+\subsection{Trend 2: Personalisierung als Erwartung}
+
+Was 2015 noch ``nice to have'' war, ist 2026 Kunden­erwartung. Personalisierte Produktempfehlungen, personalisierte Preise (in B2B), personalisierte Inhalte. Wer das nicht liefert, wird als veraltet wahrgenommen.
+
+Risiko: Personalisierung ohne Datentransparenz erzeugt das Gegenteil -- Misstrauen. \emph{Transparent personalisieren} (``Diese Empfehlung basiert auf Ihrer letzten Bestellung'') schlägt heimliche Personalisierung.
+
+\subsection{Trend 3: Ökosysteme und Partnernetzwerke}
+
+Einzelne Plattformen wachsen zu \fachbegriff{Ökosystemen} -- mit Drittanbietern, integrierten Diensten, gemeinsamen Datenstandards. Wer als Anbieter erfolgreich sein will, muss strategisch entscheiden: \emph{wir sind Teilnehmer im Ökosystem -- oder wir bauen unser eigenes}. Beides hat unterschiedliche Implikationen für Investition, Kontrolle und Marge. \quelle{Cusumano et al., 2019, Kap.~3}
+
+\subsection{Trend 4: Datenhoheit und Regulatorik}
+
+Während sich die Plattformmacht konzentriert, wächst das regulatorische Gegengewicht: EU-Plattform-Gesetzgebung (Digital Markets Act, Digital Services Act), Datenschutz-Verschärfungen, Wettbewerbs-Auflagen. \emph{Datenhoheit} -- wer hat Zugriff auf welche Kundendaten zu welchen Bedingungen -- wird zur strategischen Frage, nicht zur IT-Frage.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{K-P-Ö-R}]
+Die vier Zukunftstrends:\\[2pt]
+\textbf{K}I -- Steuerung und Personalisierung\\
+\textbf{P}ersonalisierung -- als Erwartung, nicht Bonus\\
+\textbf{Ö}kosysteme -- mehr als Einzel-Plattformen\\
+\textbf{R}egulatorik -- Datenhoheit als strategische Frage\\[2pt]
+\emph{Wer ``K-P-Ö-R'' nicht in seine Strategie einbaut, plant für die Vergangenheit.}
+\end{eselsbox}
+
+% --- 8. STRATEGISCHE RISIKEN ---------------------------------------------
+\section{Strategische Risiken aktiv managen}
+
+Plattform­strategie hat fünf strukturelle Risiken, die sich nicht ``wegoptimieren'' lassen -- sie müssen bewusst entschieden werden.
+
+\subsection{Die fünf strategischen Risiken}
+
+\begin{enumerate}
+  \item \fachbegriff{Plattform-Lock-in.} Je tiefer wir in eine externe Plattform integriert sind (technische Schnittstellen, Daten, Prozesse), desto teurer wird der Ausstieg. \quelle{Shapiro \& Varian, 1999, Kap.~5}
+  \item \fachbegriff{Datenverlust.} Externe Plattformen behalten Kundendaten -- wir sehen Bestellungen, aber selten das vollständige Kundenverhalten. Datenhoheit ist die Voraussetzung für strategische Steuerung.
+  \item \fachbegriff{Marktpreis-Erosion.} Vergleichsdruck auf Marktplätzen führt zu sinkenden Margen. Ohne klare Differenzierung erodiert der Preis automatisch.
+  \item \fachbegriff{Technische Komplexität.} Mit jedem Kanal, jeder Schnittstelle, jeder Personalisierung wächst die Komplexität der IT-Landschaft. Ab einem Punkt verbraucht die Pflege mehr Ressourcen als die Wertschöpfung erzeugt.
+  \item \fachbegriff{Organisatorische Überforderung.} Wenn Vertrieb, Marketing, IT und Service alle ``ihre'' Plattform-Initiative haben, entstehen Silo-Lösungen ohne Gesamtsteuerung.
+\end{enumerate}
+
+\subsection{Risiko-Management-Logik}
+
+Für jedes der fünf Risiken gibt es drei Hebel:
+
+\begin{itemize}
+  \item \fachbegriff{Vermeidung} -- bestimmte Plattformen oder Integrationen nicht eingehen.
+  \item \fachbegriff{Reduktion} -- Risiko minimieren (z.\,B.\ Multi-Plattform-Strategie, eigener Direktkanal parallel).
+  \item \fachbegriff{Transfer / Versicherung} -- vertragliche Absicherung (z.\,B.\ Datenexport-Klauseln), Multi-Vendor-Strategien.
+\end{itemize}
+
+\subsection{Die wichtigste Risiko-Frage}
+
+Vor jeder größeren Plattform-Investition lohnt eine konkrete Frage: \emph{``Was würde uns passieren, wenn diese Plattform morgen die Konditionen einseitig verschlechtert oder uns rauswirft?''} Wenn die Antwort ist ``ein größeres Problem'', ist das Risiko nicht ausreichend gemanagt. Wenn die Antwort ist ``wir haben Alternativen'', ist die Plattform­strategie reif.
+
+\begin{merkbox}[Risiko-Reife-Test]
+Eine reife Plattform-Strategie überlebt einen \emph{Plattform-Verlust}. Wenn der wichtigste externe Plattform-Kanal ausfällt, sollte das wehtun -- aber nicht existenzbedrohend sein. Maximale Konzentration auf einen Kanal ist ein Senior-Management-Failure, kein Optimierungs-Erfolg.
+\end{merkbox}
+
+\subsection{Drei konkrete Risiko-Szenarien}
+
+\textbf{Szenario 1 -- Plötzliche Provisions-Erhöhung.} Eine externe Marktplatz-Plattform erhöht die Provision von 15\,\% auf 22\,\% mit drei Monaten Vorankündigung. Wer 60\,\% seines Umsatzes über diesen Marktplatz macht, hat eine direkte Margen-Belastung von ca.\ 4 Prozentpunkten auf den Gesamtumsatz. Ausstieg in drei Monaten? Praktisch unmöglich, weil kein Direktkanal ausgebaut ist.
+
+\textbf{Szenario 2 -- Konkurrenz mit eigenem KI-Vorsprung.} Ein direkter Wettbewerber führt KI-gestützte Personalisierung ein und gewinnt dadurch 30\,\% mehr Bestellungen aus demselben Traffic. Wer keine eigenen Daten hat (weil alles über externe Plattformen läuft), kann nicht mit gleicher Tiefe nachziehen. Datenhoheit als Wettbewerbsfaktor zeigt sich erst, wenn der Wettbewerber sie nutzt.
+
+\textbf{Szenario 3 -- Regulatorische Verschärfung.} Eine neue EU-Vorschrift verlangt, dass alle Plattform-Vertriebskanäle eine bestimmte Transparenz-Anforderung erfüllen. Wer auf externen Plattformen vertreibt, ist abhängig davon, ob und wann die Plattform diese Anforderung umsetzt. Eigener Direktkanal: sofort anpassbar. Externer Kanal: Wartezeit unbekannt.
+
+In allen drei Szenarien ist die Konsequenz dieselbe: Wer in den Jahren vorher Datenhoheit, Direktkanäle und Multi-Plattform-Strategie aufgebaut hat, kommt mit überschaubarem Schmerz davon. Wer nicht, gerät in echte strategische Bedrängnis.
+
+% --- 9. FALLSTUDIE -------------------------------------------------------
+\section{Fallstudie: BauTech Connect}
+
+Wir wenden den ganzen Tag-2-Stoff auf ein konkretes Szenario an. \emph{BauTech Connect} ist ein mittelständischer Anbieter technischer Komponenten für Bauunternehmen, Handwerk und Facility Management. Vor sechs Monaten wurde eine digitale Plattform­strategie gestartet: eigener B2B-Shop, Listungen auf zwei externen Marktplätzen, erste digitale Kampagnen.
+
+\subsection{Ausgangslage und Rahmenbedingungen}
+
+\begin{itemize}
+  \item Jahresumsatz: 32\,Mio.\,\euro{} \, --\, Plattform­umsatz nach 6 Monaten: 1{,}4\,Mio.\,\euro{}
+  \item Budget für die nächste Optimierungsphase: 300{.}000\,\euro{}
+  \item Zeitfenster für sichtbare Verbesserungen: 9 Monate
+  \item Produktdatenqualität: uneinheitlich
+  \item CRM-Anbindung: teilweise vorhanden
+  \item Kundenservice erhält zunehmend Rückfragen zu digitalen Bestellungen
+\end{itemize}
+
+\subsection{Aktuelle Kennzahlen nach 6 Monaten}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXXX@{}}
+\toprule
+KPI                & B2B-Shop      & Marktplätze (Summe) & Digitale Kampagnen \\
+\midrule
+Reichweite         & 50.000 Besuche & 180.000 PDPs        & hoher Traffic \\
+Bestellungen       & 620            & 1.900               & qualifiziert: gering \\
+Warenkorb (\O)     & 760\,\euro{}   & 230\,\euro{}        & --- \\
+Conversion Rate    & 1{,}24\,\%     & ca.\ 1\,\%          & sehr niedrig \\
+Wiederkaufrate     & 18\,\%         & nicht messbar       & --- \\
+Kundendaten        & vollständig    & sehr begrenzt       & teilweise \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Bewertung der drei Kanäle}
+
+\begin{itemize}
+  \item \textbf{B2B-Shop:} strategisch wichtig (eigene Kundenschnittstelle, höchster Warenkorb, beste Datenlage), aber Reichweite zu gering und Conversion Rate ausbaufähig.
+  \item \textbf{Externe Marktplätze:} liefern Volumen, aber zerstören Marge (niedrigerer Warenkorb, hoher Preisdruck) und beschränken Datenzugang. Risiko des Lock-ins steigt mit jedem zusätzlichen Marktplatz-Umsatz-Anteil.
+  \item \textbf{Digitale Kampagnen:} generieren Traffic, aber unzureichende Qualifizierung. Hier wird Budget verbrannt.
+\end{itemize}
+
+\subsection{Engpass-Diagnose}
+
+Fünf Engpässe in der Implementierung:
+
+\begin{enumerate}
+  \item Produktdaten unvollständig \textrightarrow{} Conversion leidet, Vertrauen sinkt.
+  \item CRM-Anbindung lückenhaft \textrightarrow{} systematische Wiederkauf-Steuerung nicht möglich.
+  \item Vertrieb und Marketing arbeiten mit \emph{unterschiedlichen} KPIs \textrightarrow{} keine gemeinsame Steuerung.
+  \item Marktplatz-Sortiment ist nicht aktiv nach Marge gesteuert \textrightarrow{} Margen-Erosion.
+  \item Kundenservice ist nicht in die Plattform­prozesse eingebunden \textrightarrow{} Reibungspunkte werden nicht gelernt.
+\end{enumerate}
+
+\subsection{Optimierungs-Roadmap (9 Monate)}
+
+\textbf{Monat 1--3 -- Fundament:}
+\begin{itemize}
+  \item Produktdaten bereinigen (priorisierte Top-200-Artikel)
+  \item Checkout und Angebotsanfrage optimieren
+  \item Gemeinsame KPIs für Vertrieb, Marketing, Plattform-Management vereinbaren
+\end{itemize}
+
+\textbf{Monat 4--6 -- Steuerung:}
+\begin{itemize}
+  \item CRM-Anbindung verbessern (alle Plattform-Käufe in CRM)
+  \item Lead-Scoring für digitale Anfragen einführen
+  \item Kampagnen auf hochwertige Zielsegmente fokussieren
+  \item Marktplatz-Sortiment nach Marge sortieren -- niedermargige Artikel kontrolliert ausdünnen
+\end{itemize}
+
+\textbf{Monat 7--9 -- Skalierung:}
+\begin{itemize}
+  \item Personalisierte Produktempfehlungen testen (erste KI-Schritte)
+  \item Automatisierte Nachbestell-Impulse für wiederkehrende Artikel
+  \item Management-Dashboard mit den drei KPI-Clustern etablieren
+\end{itemize}
+
+\subsection{Budgetempfehlung}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXl@{}}
+\toprule
+Bereich                          & Maßnahmen                                & Budget \\
+\midrule
+Shop \& Produktdaten              & Datenbereinigung, Checkout, technische Verbesserungen & 120{.}000\,\euro{} \\
+CRM \& Lead-Scoring               & Anbindung, Scoring, Workflow                & 80{.}000\,\euro{} \\
+Performance-Kampagnen              & Fokussiert auf qualifizierte Zielgruppen     & 60{.}000\,\euro{} \\
+Marktplatz-Steuerung \& Reporting & Sortimentsanalyse, Dashboard                 & 40{.}000\,\euro{} \\
+\midrule
+\textbf{Summe}                    &                                          & \textbf{300{.}000\,\euro{}} \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Strategische Entscheidung unter Unsicherheit}
+
+\emph{Trotz} höherer aktueller Bestellzahlen auf den Marktplätzen wird der eigene B2B-Shop priorisiert. Begründung: Er ermöglicht langfristig bessere Daten, höhere Warenkörbe, Kundenbindung und strategische Kontrolle. Das Risiko langsamerer Skalierung wird durch fokussierte Kampagnen, bessere Datenqualität und CRM-Anbindung reduziert.
+
+\emph{Risiko-relevante Annahme:} Die Verbesserung der Produktdaten (Monat 1--3) führt tatsächlich zu einer Conversion-Steigerung im Shop. Falls die CVR nach 3 Monaten nicht von 1{,}24\,\% auf mindestens 1{,}8\,\% steigt, ist die Annahme widerlegt -- Frühwarnsignal für Strategieanpassung.
+
+\begin{merkbox}[Schluss-Logik der Fallstudie]
+Plattform­strategie ist kein IT-Projekt -- es ist eine \emph{Vertriebs-, Daten- und Organisations­entscheidung}. Kurzfristige Reichweite (Marktplätze) darf nicht automatisch über langfristige Plattform-Kontrolle (eigener Shop) gestellt werden. Optimierung wird an Marge, Datenzugang, Kundenbindung und strategischer Positionierung gemessen -- nicht an Bestellanzahl allein.
+\end{merkbox}
+
+% --- 10. COACHING -------------------------------------------------------
+\section{Coaching: Vom Operator zum Plattform-Architekten}
+
+Tag 1 hat die Auswahl-Logik geübt. Tag 2 fügt die Steuerungs-Verantwortung hinzu. Damit wechselt die Rolle: vom Operator, der eine Plattform betreibt, zum Architekten, der eine Plattform-Landschaft strategisch entwickelt.
+
+\subsection{Vier Reflexionsfragen aus dem Coaching}
+
+\begin{enumerate}
+  \item Welche Kennzahl zeigt kurzfristigen Erfolg -- kann aber langfristig täuschen? (Klassiker: Reichweite ohne Conversion-Bezug, Bestellzahl ohne Margen-Bezug.)
+  \item Welche Plattform sollte stärker kontrolliert werden? (Antwort fällt schwer, wenn die Kontrolle politisch unbequem ist -- z.\,B.\ wenn Marketing die Plattform liebt.)
+  \item Welche Prozesse müssen sich \emph{im Unternehmen} ändern, damit die Plattform funktioniert? (Plattform­änderung ohne organisatorische Anpassung scheitert systematisch.)
+  \item Welche Trends sind strategisch relevant und welche sind nur Modeerscheinungen? (Test: ``Wirkt der Trend auf unsere Kunden, unsere Marge oder unsere Daten -- oder nur auf unsere LinkedIn-Profile?'')
+\end{enumerate}
+
+\subsection{Operator vs.\ Architekt -- der Rollenwechsel}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX X@{}}
+\toprule
+Aspekt           & Operator                                  & Architekt \\
+\midrule
+Zeithorizont     & Wochen, Monate                           & Quartale, Jahre \\
+Fokus            & Tagesgeschäft, KPI-Erreichung             & Architektur, strategische Konsistenz \\
+Erfolgsmaßstab   & Operative KPIs                            & CLV/CAC, Plattform-Reife, Risiko-Bilanz \\
+Typische Frage   & ``Wie verbessern wir Conversion?''        & ``Wie sieht unsere Plattform-Landschaft in 3 Jahren aus?'' \\
+Größtes Risiko   & Daily-Business-Druck verschluckt Strategie & Strategie ohne Operativen Realitätscheck \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Beide Rollen sind unverzichtbar. Aber sie müssen klar getrennt sein: Architekt-Aufgaben in operativer Hektik zu erledigen, führt zu Schein-Strategien. Operator-Aufgaben aus dem Architektur-Modus zu steuern, führt zu detail-fernen Vorgaben.
+
+\subsection{Senior-Shift: Verantwortung für die Plattform-Landschaft}
+
+Der eigentliche Senior-Skill ist nicht ``Plattform-Wissen'', sondern \emph{Plattform-Verantwortung}: Mut, einzelne Plattform-Engagements bewusst zu reduzieren, weil sie strategisch nicht passen -- auch wenn sie kurzfristig Umsatz bringen. Mut, in eigene Kanäle zu investieren, obwohl sie länger brauchen, bis sie wirken. Mut, KPIs zu ändern, wenn sie zur Verwirrung führen.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Z-W-D-K}]
+Vier Senior-Hebel in der Plattform-Architektur:\\[2pt]
+\textbf{Z}ielbild -- klar artikuliert, mit Trade-offs\\
+\textbf{W}irkungs-KPIs -- nicht Vanity Metrics\\
+\textbf{D}atenhoheit -- bewusst entschieden\\
+\textbf{K}ontrolle -- mindestens ein Direktkanal stark\\[2pt]
+\emph{``Z-W-D-K'' -- Architekten-Disziplin in vier Buchstaben.}
+\end{eselsbox}
+
+% --- 11. MANAGEMENT-PERSPEKTIVE ------------------------------------------
+\section{Management-Perspektive: Plattformstrategie 2030}
+
+Auf Wissens- und Anwendungs-Ebene haben wir Implementierung, KPIs, Optimierung und Trends behandelt. Auf der Management-Ebene geht es um die übergreifende Frage: \emph{Wie sieht eine Plattformstrategie aus, die in 3--5 Jahren noch trägt?}
+
+\subsection{Zielbild 2030 als Steuerungs-Anker}
+
+Ein wirksames Zielbild 2030 hat fünf Eigenschaften:
+
+\begin{itemize}
+  \item \textbf{Konkret in der Zielsetzung} -- nicht ``digital sein'', sondern z.\,B.\ ``50\,\% des Umsatzes über direkte Kundenschnittstellen, 30\,\% über kontrollierte Marktplätze, 20\,\% über Partner-Ökosysteme''.
+  \item \textbf{Klar in den Trade-offs} -- ``Wir akzeptieren niedrigeres Wachstum für höhere Marge'' oder umgekehrt.
+  \item \textbf{Robust gegenüber Unsicherheit} -- funktioniert auch, wenn ein Trend langsamer kommt als erwartet.
+  \item \textbf{Beobachtbar} -- mit drei bis fünf KPIs, die Fortschritt sichtbar machen.
+  \item \textbf{Politisch tragfähig} -- auch Geschäftsleitung, Vertrieb und Aufsichtsrat können sich darauf einigen.
+\end{itemize}
+
+\subsection{Drei zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Wachstum vs.\ Kontrolle.} Wachstum kommt am leichtesten über externe Plattformen -- Kontrolle am leichtesten über eigene Kanäle. Beides voll zu haben kostet überdurchschnittlich viel.
+  \item \textbf{Daten-Maximierung vs.\ Daten-Effizienz.} Mehr Daten erlauben bessere Personalisierung -- aber jeder Datentopf erzeugt Pflegeaufwand und Risiken (Datenschutz, Sicherheit). Mehr ist nicht zwingend besser.
+  \item \textbf{Innovation vs.\ Stabilität.} Neue Funktionen, neue Trends, neue Kanäle vs.\ stabile Routinen für laufendes Geschäft. Wer alles ``neu'' macht, verliert das Bestehende.
+\end{enumerate}
+
+\subsection{Governance: KPI-Architektur für die Steuerung}
+
+Ein Plattform-Operating-Model braucht eine klare \fachbegriff{KPI-Architektur} mit drei Ebenen:
+
+\begin{itemize}
+  \item \textbf{Strategische KPIs} (quartalsweise im Aufsichtsrat / Vorstand): CLV/CAC, Umsatzanteil pro Kanal, strategische Konzentration, Marge pro Kanal, Net Promoter Score Plattform.
+  \item \textbf{Steuerungs-KPIs} (monatlich in der Geschäftsleitung): Conversion Rate, Wiederkaufrate, Warenkorb, CAC, Kampagnen-ROI.
+  \item \textbf{Operative KPIs} (täglich/wöchentlich im Plattform-Team): Traffic, Bestellungen, Reklamationen, Reaktionszeit, technische Verfügbarkeit.
+\end{itemize}
+
+\subsection{Plattform-Architektur 2030: ein robustes Mischmodell}
+
+In der überwiegenden Mehrheit reifer B2B-Unternehmen wird sich bis 2030 ein Mischmodell durchsetzen:
+
+\begin{itemize}
+  \item \textbf{Eigener Direktkanal (40--60\,\% Umsatz)} -- als strategisches Rückgrat. Hier liegen Daten, Marken-Kontrolle und Marge.
+  \item \textbf{Kontrollierte Marktplätze (20--40\,\%)} -- bewusst ausgewählt, klar definierte Sortiments-Logik, aktive Margen-Steuerung.
+  \item \textbf{Ökosysteme \& Partner (10--30\,\%)} -- für Reichweite in Nischen, für Cross-Selling-Effekte, für strategische Allianzen.
+\end{itemize}
+
+Die genauen Prozente sind branchen- und unternehmensspezifisch. Die \emph{Trennung in drei Quellen} ist universell -- sie reduziert Lock-in-Risiken und schafft Verhandlungs­macht.
+
+\subsection{Anti-Patterns auf Management-Ebene}
+
+\begin{enumerate}
+  \item \fachbegriff{``Wir gehen digital -- alles andere ergibt sich.''} Ohne Zielbild keine Steuerung. Aktivismus statt Strategie.
+  \item \fachbegriff{``Reichweite ist das Wichtigste.''} Reichweite ohne Conversion, Marge und Daten ist Lärm. Vanity Metric als Leitstern.
+  \item \fachbegriff{``Wir kaufen die teure Plattform-Software ein -- damit lösen wir das Problem.''} Tools lösen keine Strategie-Lücken. Reine Tool-Liebe ist ein klassisches Anti-Pattern.
+  \item \fachbegriff{``Datenhoheit ist eine IT-Frage.''} Falsch -- es ist die strategisch wichtigste Frage des Plattform­geschäfts. Wer Daten an externe Plattformen abgibt, verliert langfristig die Steuerung.
+  \item \fachbegriff{``Wir machen einfach alles.''} Sechs Kanäle, vier Marktplätze, drei Personalisierungs-Tools -- ohne klare Priorisierung wird das Operating Model unbeherrschbar.
+\end{enumerate}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 2]
+Plattform­strategie ist eine \textbf{Architektur­entscheidung} -- keine Marketing- oder IT-Entscheidung. Sie wirkt jahrelang, sie verändert Vertriebs­routinen, Datenlandschaften und Verhandlungs­positionen. Reife zeigt sich daran, dass eine Plattform­strategie auch dann trägt, wenn einzelne Plattformen verschwinden oder die Konditionen sich ändern. \emph{Wer wählt, entscheidet -- wer entscheidet, verantwortet.}
+\end{merkbox}
+
+% --- 12. HAEUFIGE FEHLER ------------------------------------------------
+\section{Häufige Fehler in der Plattform-Umsetzung}
+
+Sechs typische Anti-Muster, die in der Praxis immer wieder auftauchen -- mit konkreten Heilmitteln:
+
+\subsection{Sechs typische Fehler}
+
+\begin{enumerate}
+  \item \fachbegriff{Phasen überspringen.} Direkt in den Rollout, ohne Pilotierung -- weil ``wir wissen schon, was wir tun''. Heilmittel: zumindest 6 Wochen kontrollierter Pilot mit messbaren Erfolgskriterien.
+  \item \fachbegriff{KPIs ohne Adressaten.} 30 Reports werden generiert, niemand schaut sie an. Heilmittel: pro KPI klären, welche Rolle, in welcher Frequenz, mit welcher Entscheidungs-Kompetenz.
+  \item \fachbegriff{Vanity Metrics als Steuerungs­basis.} ``Wir haben mehr Traffic'' -- aber ohne Conversion, Marge, Wiederkauf-Bezug bedeutet das wenig. Heilmittel: für jede Metrik den ``Und-dann?''-Test machen.
+  \item \fachbegriff{Vertrieb-Akzeptanz unterschätzen.} Die Plattform wird gegen den Vertrieb gebaut statt mit ihm. Heilmittel: Provisions-Modell anpassen, Vertrieb als Wissensträger einbinden, klare Segmentierung Online/Persönlich.
+  \item \fachbegriff{Marktplatz-Optimierung ohne Margen-Steuerung.} Wir optimieren Sichtbarkeit auf Marktplätzen, aber niemand schaut, ob die Marge noch trägt. Heilmittel: Sortiment auf Marktplätzen aktiv nach Marge filtern.
+  \item \fachbegriff{Datenhoheit verschenken.} Wir nutzen externe Plattformen ohne Strategie für eigene Kunden­schnittstellen. Heilmittel: mindestens ein eigener Direktkanal mit \emph{vollständiger Kontrolle} über Daten und Kundenbeziehung.
+\end{enumerate}
+
+\subsection{Review-Checkliste vor einer Plattform-Investition}
+
+Sieben Fragen, die vor jeder größeren Investition beantwortet sein sollten:
+
+\begin{enumerate}
+  \item Ist das Zielbild explizit und mit Trade-offs formuliert?
+  \item Sind die KPIs definiert -- und ist klar, wer wann darauf schaut?
+  \item Ist der Pilot-Scope klein genug, dass wir innerhalb von 12 Wochen lernen?
+  \item Haben wir mindestens \emph{einen} eigenen Direktkanal mit Datenhoheit?
+  \item Ist der Vertrieb mitgenommen -- oder ist er gegen die Initiative?
+  \item Welcher Anteil unseres Umsatzes wäre verloren, wenn die wichtigste Plattform morgen wegfällt?
+  \item Gibt es klare Eskalations- und Stopp-Kriterien? (Ein Projekt, das nicht beendet werden kann, ist kein Projekt.)
+\end{enumerate}
+
+% --- 13. TAKE-AWAYS ------------------------------------------------------
+\section{Take-aways aus Tag 2}
+
+\begin{enumerate}
+  \item \textbf{Plattform-Implementierung in sechs Phasen.} Zielbild, Pilotierung, Rollout, Betrieb, Skalierung, Optimierung. Phasen-Überspringen rächt sich.
+  \item \textbf{Schnittstellen aktiv gestalten.} Vertrieb, Marketing, IT, Service, Management müssen gemeinsame KPIs und Routinen haben -- sonst entstehen Silos.
+  \item \textbf{Sechs Erfolgsfaktoren -- die schwächste Säule entscheidet.} Ziel, Daten, Kundennutzen, Technik, Prozesse, Akzeptanz.
+  \item \textbf{KPIs in drei Clustern und drei Hierarchie-Ebenen.} Reichweite/Conversion/Lifetime -- operativ/Steuerung/strategisch. CLV/CAC ist der wichtigste Beziehungs-KPI.
+  \item \textbf{Optimierung als Routine, nicht als Projekt.} Wöchentliche Kadenz: messen, analysieren, priorisieren, testen, anpassen.
+  \item \textbf{Vier Zukunftstrends antizipieren.} KI, Personalisierung, Ökosysteme, Datenhoheit/Regulatorik.
+  \item \textbf{Fünf strategische Risiken aktiv managen.} Lock-in, Datenverlust, Margen-Erosion, technische Komplexität, organisatorische Überforderung.
+  \item \textbf{Plattform-Architektur 2030: Mischmodell.} 40--60\,\% Direktkanal, 20--40\,\% kontrollierte Marktplätze, 10--30\,\% Ökosysteme.
+  \item \textbf{Vom Operator zum Architekten.} Senior-Verantwortung heißt, einzelne Plattformen bewusst zu reduzieren, eigene Kanäle zu stärken, Vanity-Metrics zu ersetzen.
+\end{enumerate}
+
+% --- 14. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Cusumano, M.\,A., Gawer, A., \& Yoffie, D.\,B. (2019).] \emph{The business of platforms: Strategy in the age of digital competition, innovation, and power}. HarperBusiness.
+  \item[Ellis, S., \& Brown, M. (2017).] \emph{Hacking growth: How today's fastest-growing companies drive breakout success}. Crown Business.
+  \item[Gassmann, O., Frankenberger, K., \& Csik, M. (2017).] \emph{Geschäftsmodelle entwickeln: 55 innovative Konzepte mit dem St.\ Galler Business Model Navigator} (2.\ Aufl.). Hanser.
+  \item[Iansiti, M., \& Lakhani, K.\,R. (2020).] \emph{Competing in the age of AI: Strategy and leadership when algorithms and networks run the world}. Harvard Business Review Press.
+  \item[Osterwalder, A., \& Pigneur, Y. (2010).] \emph{Business model generation: A handbook for visionaries, game changers, and challengers}. Wiley.
+  \item[Parker, G.\,G., Van Alstyne, M.\,W., \& Choudary, S.\,P. (2016).] \emph{Platform revolution: How networked markets are transforming the economy -- and how to make them work for you}. W.\,W.\ Norton.
+  \item[Ries, E. (2011).] \emph{The lean startup: How today's entrepreneurs use continuous innovation to create radically successful businesses}. Crown Business.
+  \item[Shapiro, C., \& Varian, H.\,R. (1999).] \emph{Information rules: A strategic guide to the network economy}. Harvard Business School Press.
+\end{description}
+
+% --- 15. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[A/B-Test] Kontrolliertes Experiment, bei dem zwei Varianten gegen­einander getestet werden. Voraussetzung für valide Optimierungs-Entscheidungen.
+  \item[CAC -- Customer Acquisition Cost] Marketing- und Vertriebskosten pro Neukunde. Wichtige Steuerungsgröße in jedem Plattformgeschäft.
+  \item[CLV -- Customer Lifetime Value] Erwarteter Deckungsbeitrag eines Kunden über die gesamte Geschäftsbeziehung. Vergleichswert für CAC.
+  \item[CLV / CAC] Verhältnis zwischen Customer Lifetime Value und Customer Acquisition Cost. Faustregel: \textgreater~3 ist tragfähig, \textless~1 nicht.
+  \item[Conversion Rate (CVR)] Anteil der Besucher, die zu Käufern werden. Schlüssel-KPI in jedem digitalen Vertrieb.
+  \item[Churn Rate] Anteil der Kunden, die in einer Periode verloren werden. In Abo-Geschäften besonders relevant.
+  \item[Datenhoheit] Strategische Kontrolle über Kundendaten -- wer hat Zugriff, zu welchen Bedingungen? Wachsende strategische Bedeutung.
+  \item[Lean Startup] Methodisches Vorgehen für unsichere Innovationsumfelder -- Build, Measure, Learn -- mit den Optionen persevere, pivot, stop. \quelle{Ries, 2011}
+  \item[Lock-in] Strategische Bindung an eine externe Plattform, die einen Ausstieg kostspielig oder unmöglich macht. \quelle{Shapiro \& Varian, 1999}
+  \item[Pilot] Klein dimensionierte Test-Umsetzung einer Plattform-Initiative, in der zentrale Annahmen geprüft werden -- vor dem Rollout.
+  \item[Plattform-Onboarding] Strukturiertes Aufbringen von Produkten, Inhalten, Prozessen, Nutzern, Partnern und internen Rollen auf die Plattform.
+  \item[Plattform-Ökosystem] Vernetzter Verbund mehrerer Plattformen, Drittanbieter und Dienste mit gemeinsamen Standards. \quelle{Cusumano et al., 2019}
+  \item[Rollout] Vollständige Einführung einer Plattform-Initiative im definierten Scope nach erfolgreichem Pilot.
+  \item[Skalierung] Erweiterung einer funktionierenden Plattform-Initiative auf weiteres Sortiment, weitere Kanäle oder Märkte.
+  \item[Vanity Metric] Kennzahl, die beeindruckend aussieht, aber keine Entscheidungs­relevanz hat (z.\,B.\ ``Follower-Zahl'' ohne Conversion-Bezug).
+  \item[Wiederkaufrate] Anteil der Kunden, die innerhalb einer Periode erneut kaufen. Indikator für Plattform-Bindung.
+  \item[Zielbild] Konkrete, mit Trade-offs versehene Beschreibung des Soll-Zustands einer Plattform­strategie in 12, 24 oder 36 Monaten.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 2 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

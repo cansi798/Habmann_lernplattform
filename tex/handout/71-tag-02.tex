@@ -1,0 +1,1155 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 2 - Lehrskript
+% UML, VSM & Process Mining: Struktur, Wertfluss, Datenrealitaet
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 2}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}UML \textperiodcentered{} VSM \textperiodcentered{} Process Mining}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 1 \textperiodcentered{} TAG 2 VON 2 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 29.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}UML, VSM\\\&\\Process Mining\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Drei Perspektiven auf denselben Prozess --\\Struktur, Wertfluss und Datenrealität als Dreiklang.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 2 von 2}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent An Tag 1 haben Sie gelernt, Prozesse mit BPMN und EPC zu \emph{modellieren}. Heute geht es darum, denselben Prozess aus \emph{drei verschiedenen Perspektiven} zu betrachten -- als Struktur (UML), als Wertfluss (VSM) und als Datenrealität (Process Mining). Jede der drei Methoden beantwortet eine andere Frage; im Zusammenspiel werden sie zum Steuerungsinstrument.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item UML praxisnah einordnen: Use Case Diagram (Wer will was?), Activity Diagram (Wie läuft es ab?).
+  \item VSM-Grundbegriffe kennen: Wertstrom, Bearbeitungszeit (BT), Wartezeit (WT), Durchlaufzeit, WIP, Engpass.
+  \item Wertschöpfung unterscheiden: Value-Adding, Non-Value-Adding, notwendig aber nicht wertschöpfend.
+  \item Process Mining einordnen: Event Log, Discovery, Conformance, Enhancement.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Aus einer Prozessbeschreibung ein UML-Use-Case- oder Activity-Diagramm ableiten.
+  \item Eine VSM-Skizze für einen End-to-End-Prozess erstellen, BT/WT schätzen, Engpass identifizieren.
+  \item Aus einem Mini-Event-Log Prozessvarianten erkennen und Hypothesen für Abweichungen formulieren.
+  \item Die richtige Methode für eine konkrete Fragestellung auswählen -- UML, VSM oder Process Mining.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Die drei Perspektiven (Struktur, Fluss, Daten) als komplementäres Steuerungssystem nutzen.
+  \item Zielkonflikte (Speed vs.\ Quality vs.\ Compliance vs.\ Kosten) bewusst entscheiden und Trade-offs transparent machen.
+  \item Datenminimum für ein belastbares Operating Model definieren -- auch bei unvollständigen Daten.
+  \item Entscheidungen unter Unsicherheit treffen und mit Frühwarnsignalen absichern.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Modelle sind \emph{Hypothesen}, Daten sind \emph{Realität}, Wertstromsicht ist \emph{Wirkung}. Wer nur modelliert, sieht nicht die Varianten. Wer nur Daten anschaut, versteht nicht die Absicht. Wer nur den Wertstrom betrachtet, übersieht die Verantwortlichkeiten. Der Senior-Skill ist, alle drei Perspektiven \emph{zusammenzuführen}.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG / MOTIVATION --------------------------------------------
+\section{Einstieg: Drei Perspektiven, eine Realität}
+
+Stellen Sie sich vor, Sie sollen einen Auftrag bewerten: ``Wir wollen unseren Onboarding-Prozess verbessern.'' Sie haben drei mögliche erste Schritte. Erstens: ein Modell zeichnen (BPMN, EPC, UML). Zweitens: den Wertstrom aufnehmen -- wie lange dauert was, wo staut es sich? Drittens: in die Daten schauen -- was passiert in den Systemen wirklich, in welchen Reihenfolgen?
+
+Jede dieser drei Perspektiven liefert eine andere Wahrheit. Das Modell zeigt, wie es \emph{gedacht} ist. Der Wertstrom zeigt, wo \emph{Zeit und Geld verloren} gehen. Die Daten zeigen, wie es \emph{tatsächlich abläuft}. Und jede dieser drei Wahrheiten kann von den anderen abweichen -- oft dramatisch. \quelle{vgl.\ Dumas et al., 2018, Kap.~1}
+
+\subsection{Warum eine Sicht nicht reicht}
+
+In der Praxis arbeiten Teams oft nur mit \emph{einer} Methode -- meist der, die sie zuerst gelernt haben. Das hat berechenbare Folgen:
+
+\begin{itemize}
+  \item Wer nur \emph{modelliert}, beschreibt einen Soll-Prozess, der mit der Realität immer weniger zu tun hat, je älter das Modell wird.
+  \item Wer nur den \emph{Wertstrom} betrachtet, sieht zwar, wo es staut -- aber nicht, wer eigentlich entscheidet und wer welche Rolle hat.
+  \item Wer nur \emph{Daten} analysiert, kennt jedes Detail des Ist-Zustands -- versteht aber nicht, ob die Abweichungen vom Soll absichtliche Verbesserungen oder unbemerkte Risiken sind.
+\end{itemize}
+
+Der Dreiklang löst dieses Problem nicht durch eine ``vierte, perfekte'' Methode. Er löst es, indem jede der drei Sichten genau das beiträgt, was sie kann -- und durch die Kombination Lücken sichtbar werden, die jede einzelne Sicht hätte.
+
+\subsection{Was Sie heute können werden}
+
+Am Ende des Tages werden Sie in der Lage sein, einen konkreten Geschäftsprozess in drei Perspektiven zu beschreiben: als UML Use Case (Wer will was?), als UML Activity (Wie läuft es ab?), als VSM (Wo geht Zeit verloren?) und als Event-Log-Analyse (Was passiert wirklich?). Wichtiger noch: Sie werden wissen, wann welche Methode lohnt -- und wann es Verschwendung wäre, alle drei zu erstellen.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{S-F-D}]
+\textbf{S-F-D} -- die drei Perspektiven, von links nach rechts:\\[2pt]
+\textbf{S}truktur -- wer macht was, mit wem? (UML)\\
+\textbf{F}luss -- wo geht Zeit/Wert verloren? (VSM)\\
+\textbf{D}aten -- was passiert tatsächlich, in welchen Varianten? (Process Mining)\\[2pt]
+\emph{Wer alle drei beherrscht, sieht mehr als die Summe der Teile.}
+\end{eselsbox}
+
+% --- 2. UML -------------------------------------------------------------
+\section{UML -- Notation für Struktur und Verantwortung}
+
+\fachbegriff{UML} (\emph{Unified Modeling Language}) ist mit 14 Diagrammtypen die am breitesten aufgestellte Modellierungssprache überhaupt. In der Geschäftsprozess-Praxis brauchen wir davon meist nur zwei: das \emph{Use Case Diagram} (für Scope und Akteure) und das \emph{Activity Diagram} (für Abläufe). Wer diese zwei beherrscht, deckt 80\,\% aller Anwendungsfälle ab. \quelle{Fowler, 2003, Kap.~1; OMG, 2017}
+
+\subsection{Use Case Diagram -- Wer will was?}
+
+Ein \fachbegriff{Use Case Diagram} beantwortet drei Fragen auf einen Blick: \emph{Wer sind die beteiligten Akteure? Welche Ziele verfolgen sie? Wo verläuft der Scope-Rand des Systems?} Die drei Hauptelemente:
+
+\begin{itemize}
+  \item \fachbegriff{Akteur} (Strichmännchen) -- eine Rolle, die mit dem System interagiert. Akteure sind \emph{außerhalb} des Systems: Kunde, Sachbearbeiter, externes IT-System, Aufsichtsbehörde.
+  \item \fachbegriff{Use Case} (Ellipse) -- ein konkretes Ziel, das ein Akteur erreichen will. Benennung: Verb + Objekt (``Bestellung aufgeben'', ``Rechnung freigeben'').
+  \item \fachbegriff{Systemgrenze} (Rechteck) -- markiert den \emph{Scope}: was gehört zum System, was nicht.
+\end{itemize}
+
+Use Case Diagrams sind das beste Werkzeug für die frühe Phase eines Projekts: ``Worüber reden wir eigentlich?'' Sie zwingen das Team, Scope und Verantwortlichkeiten explizit zu machen, bevor jemand das erste Detail-Diagramm zeichnet.
+
+\subsection{Activity Diagram -- Wie läuft es ab?}
+
+Ein \fachbegriff{Activity Diagram} ist im Kern eine Schwester der BPMN, nur mit etwas anderen Symbolen. Es zeigt den Ablauf einer Aktivität (oder eines Use Cases) als Folge von Schritten, Entscheidungen und parallelen Pfaden. Die wichtigsten Elemente:
+
+\begin{itemize}
+  \item \fachbegriff{Startknoten} (gefüllter Kreis) und \fachbegriff{Endknoten} (Kreis mit Ring).
+  \item \fachbegriff{Aktion} (abgerundetes Rechteck) -- ein einzelner Schritt.
+  \item \fachbegriff{Entscheidungsknoten} (Raute) -- analog zum XOR-Gateway in BPMN.
+  \item \fachbegriff{Parallelisierung / Synchronisation} (waagerechter Balken) -- analog zum AND-Gateway.
+  \item \fachbegriff{Swimlane} (vertikaler Streifen) -- Verantwortungsbereich, analog zur Lane in BPMN.
+\end{itemize}
+
+\begin{merkbox}[UML Activity vs.\ BPMN]
+Wer BPMN kennt, kann UML Activity in 15 Minuten lesen -- die Logik ist nahezu identisch, nur die Symbole sind anders. Die Unterschiede liegen im Detail (z. B. Datenflüsse, Pins, Interruptible Regions), die im Geschäftsalltag selten gebraucht werden. Faustregel: \emph{BPMN für reine Geschäftsprozesse, UML Activity, wenn der Prozess Teil eines größeren Software-Designs ist.}
+\end{merkbox}
+
+\subsection{Warum nur diese zwei Diagrammtypen?}
+
+UML kennt 14 Diagrammtypen, von Klassendiagramm bis Sequenzdiagramm bis State Machine. In der Geschäftsprozess-Modellierung brauchen Sie davon zwei -- und sollten der Versuchung widerstehen, jede neue Frage mit einem neuen Diagrammtyp zu beantworten. Drei Gründe: \quelle{Fowler, 2003, S.~13--16}
+
+\begin{enumerate}
+  \item \textbf{Akzeptanz.} Mehr als zwei Notationen verwirrt die Zielgruppe -- und ein verwirrtes Modell wird nicht genutzt.
+  \item \textbf{Pflegeaufwand.} Jedes Diagramm muss aktuell gehalten werden. Vier Diagramme pro Prozess = vier Stellen, die altern können.
+  \item \textbf{Klarheit der Aussage.} Use Case + Activity beantworten 80\,\% aller Geschäftsprozess-Fragen. Der Rest gehört in BPMN, VSM oder Process Mining.
+\end{enumerate}
+
+\subsection{Use Case Diagram konkret -- Beispiel CloudWorks Onboarding}
+
+Sehen wir uns ein konkretes Beispiel an -- das Use Case Diagram, das wir später in der Fallstudie (Sektion 8) ausführlich nutzen. \emph{CloudWorks B2B} ist ein SaaS-Anbieter, der seinen Onboarding-Prozess verbessern möchte.
+
+\textbf{Akteure} (außerhalb der Systemgrenze ``Onboarding-System''):
+\begin{itemize}
+  \item \emph{Neukunde} -- löst den Prozess durch Vertragsabschluss aus, liefert Daten, nimmt das Training an.
+  \item \emph{Sales} -- bereitet die Übergabe vor, schreibt das Briefing.
+  \item \emph{Onboarding-Team} -- führt die operativen Schritte durch.
+  \item \emph{IT} -- konfiguriert Zugänge, importiert Daten.
+  \item \emph{Compliance} -- prüft Security und gibt Freigaben.
+  \item \emph{Support} -- übernimmt nach Go-Live (Hypercare).
+\end{itemize}
+
+\textbf{Use Cases} (jeweils Verb + Objekt):
+\begin{enumerate}
+  \item \emph{Account anlegen} -- Sales, Onboarding-Team
+  \item \emph{Vertrags-/Scope-Check} -- Onboarding-Team
+  \item \emph{Zugänge und Rollen vergeben} -- Onboarding-Team, IT
+  \item \emph{Datenimport durchführen} -- IT, Neukunde
+  \item \emph{Security-/Compliance-Check} -- Compliance
+  \item \emph{Kunden-Training durchführen} -- Onboarding-Team, Neukunde
+  \item \emph{Go-Live-Freigabe erteilen} -- Onboarding-Team, Compliance
+  \item \emph{Hypercare starten} -- Support (erste 30 Tage nach Go-Live)
+\end{enumerate}
+
+Was uns dieses Diagramm \emph{vor jeder Detailmodellierung} zeigt: Sechs Akteure, acht Use Cases. Es wird klar, dass Compliance ein eigener Akteur ist (nicht ``irgendwo bei IT''), dass der Neukunde aktiv mitwirkt (nicht nur Empfänger ist), und dass Support erst nach Go-Live einsetzt. Diese Klarheit am Anfang verhindert die häufigsten Scope-Streitigkeiten später im Projekt.
+
+\subsection{Activity Diagram lesen -- Symbol-für-Symbol}
+
+Ein Activity Diagram für unseren Onboarding-Kernablauf (textuell beschrieben, weil wir keine Grafik einbinden):
+
+\begin{quote}
+\textbf{Start} (gefüllter Kreis im Lane ``Sales'') \\
+\textrightarrow{} \emph{Sales übergibt Onboarding-Briefing} (Aktion in Lane Sales) \\
+\textrightarrow{} \textbf{Entscheidung} (Raute): ``Kundendaten vollständig?'' \\
+\qquad \emph{Nein-Pfad}: \textrightarrow{} \emph{Daten nachfordern} (Lane Onboarding) \textrightarrow{} \emph{zurück zu Datenprüfung} (max.\ 2 Iterationen, dann Eskalation) \\
+\qquad \emph{Ja-Pfad}: \textrightarrow{} \emph{Zugänge konfigurieren} (Lane IT) \\
+\textrightarrow{} \textbf{Entscheidung}: ``Provisioning abgeschlossen?'' \\
+\qquad \emph{Nein, > 48 h}: \textrightarrow{} \emph{Eskalation an IT-Lead} \\
+\qquad \emph{Ja}: \textrightarrow{} \emph{Security-/Compliance-Check} (Lane Compliance) \\
+\textrightarrow{} \textbf{Entscheidung}: ``Check bestanden?'' \\
+\qquad \emph{Nein}: \textrightarrow{} \emph{Korrekturen} (Lane Onboarding) \textrightarrow{} \emph{erneuter Check} \\
+\qquad \emph{Ja}: \textrightarrow{} \emph{Kunden-Training} (Lane Onboarding) \textrightarrow{} \emph{Go-Live-Freigabe} \textrightarrow{} \textbf{Ende}
+\end{quote}
+
+Drei Dinge fallen auf: Jede Entscheidung ist disjunkt (Ja/Nein, kein ``vielleicht''), jeder Schleifenpfad hat eine \emph{Obergrenze} (z.\,B.\ ``max.\ 2 Iterationen''), und die Lanes machen sichtbar, wer in welchem Schritt verantwortet. Genau diese Disziplin unterscheidet ein lesbares Activity Diagram von einem dekorativen Bild.
+
+\subsection{Häufige Fehler in UML-Diagrammen}
+
+\begin{enumerate}
+  \item \fachbegriff{Akteure als konkrete Personen.} ``Frau Meier'' statt ``Sachbearbeiter''. Folgenfehler: Modell altert mit dem Personalwechsel.
+  \item \fachbegriff{Use Cases als UI-Klicks.} ``Auf Button klicken'' ist kein Ziel. Use Cases beschreiben \emph{was der Akteur erreichen will}, nicht wie er bedient.
+  \item \fachbegriff{Systemgrenze fehlt oder ist unscharf.} Wenn nicht klar ist, was innerhalb des Systems liegt und was außerhalb, taugt das Diagramm nicht zur Scope-Klärung.
+  \item \fachbegriff{Schleifen ohne Obergrenze.} ``Erneut prüfen'' \textrightarrow{} ``korrigieren'' \textrightarrow{} ``erneut prüfen'' kann theoretisch unendlich laufen. Praxis: maximal zwei Iterationen, dann Eskalation.
+  \item \fachbegriff{Mehrere Verantwortliche in einer Lane.} ``Sales und Onboarding'' -- entweder splitten oder als Übergabe modellieren. Ungeklärte Verantwortung ist ein Steuerungsfehler, kein Modellierungs-Komfort.
+\end{enumerate}
+
+\begin{merkbox}[UML-Disziplin]
+Die häufigste UML-Falle ist nicht falsche Syntax -- es ist \emph{zu viel} UML. Vier Diagramme pro Prozess sind drei zu viel. Wenn ein Use Case Diagram und ein Activity Diagram die Frage nicht beantworten, hilft kein weiterer Diagrammtyp -- dann fehlt entweder ein VSM (Zeit/Fluss) oder ein Process Mining (Daten).
+\end{merkbox}
+
+% --- 3. VSM --------------------------------------------------------------
+\section{Value Stream Mapping (VSM) -- der Wertfluss}
+
+\fachbegriff{VSM} kommt aus der Lean-Produktion und wurde von Mike Rother und John Shook 1999 in dem Klassiker ``Learning to See'' für die Toyota-Welt dokumentiert. Heute ist VSM eine etablierte Methode auch außerhalb der Produktion -- für Verwaltungsprozesse, Software-Entwicklung, Vertriebs- und Onboarding-Prozesse. \quelle{Rother \& Shook, 1999; Womack \& Jones, 2003}
+
+\subsection{Die zentrale Frage von VSM}
+
+VSM beantwortet eine Frage: \emph{Wo entlang des Wertstroms vom Trigger bis zum Output geht Zeit verloren -- und warum?} Es geht \emph{nicht} darum, eine möglichst detailgenaue Prozessbeschreibung zu erzeugen. Es geht darum, die Stellen sichtbar zu machen, an denen \emph{Wartezeiten, Wiederholungen oder unnötige Schleifen} entstehen.
+
+\subsection{Die VSM-Elemente}
+
+Eine VSM ist im Kern eine horizontale Skizze, die den Prozess von links nach rechts zeigt:
+
+\begin{itemize}
+  \item \fachbegriff{Prozessschritt-Box} -- ein Schritt im Wertstrom. Pro Box werden zwei Zeiten notiert: \fachbegriff{Bearbeitungszeit (BT)} -- wie lange dauert die eigentliche Tätigkeit? und \fachbegriff{Wartezeit (WT)} -- wie lange wartet das Werkstück (oder der Vorgang) zwischen den Schritten?
+  \item \fachbegriff{Materialfluss / Informationsfluss} -- Pfeile, die zeigen, was zwischen den Schritten weitergegeben wird.
+  \item \fachbegriff{Queue / WIP} -- ein Dreieck-Symbol für Warteschlangen (``Work in Progress'') zwischen Schritten. Hier sitzen typischerweise die größten Verluste.
+  \item \fachbegriff{Push / Pull} -- gestrichelte vs. durchgezogene Pfeile, je nachdem, ob ein Schritt ``geschoben'' (push) oder ``gezogen'' (pull) wird.
+\end{itemize}
+
+\subsection{Bearbeitungszeit, Wartezeit, Durchlaufzeit}
+
+Drei Zeiten, die in jeder VSM klar getrennt werden müssen:
+
+\begin{itemize}
+  \item \fachbegriff{Bearbeitungszeit (BT)} -- die Zeit, in der \emph{tatsächlich am Vorgang gearbeitet wird}. ``Bestellung prüfen: 4 Minuten.''
+  \item \fachbegriff{Wartezeit (WT)} -- die Zeit, in der der Vorgang \emph{in einer Warteschlange liegt}. ``Bestellung wartet auf Freigabe: 2 Tage.''
+  \item \fachbegriff{Durchlaufzeit (DLZ)} -- die Gesamtzeit vom Anfang bis zum Ende des Wertstroms. DLZ = Summe aller BT + Summe aller WT.
+\end{itemize}
+
+In den meisten Wertströmen ist die WT \emph{ein Vielfaches} der BT. Beispiel Onboarding: ``Wir brauchen 6 Wochen.'' Wenn man die reine Bearbeitungszeit aufaddiert, kommen oft nur 4--6 Stunden raus. Die anderen 5,5 Wochen sind Wartezeit. Das ist die entscheidende Einsicht: \emph{Optimierung lohnt sich fast immer mehr bei der WT als bei der BT.}
+
+\subsection{Wertschöpfung erkennen}
+
+Jeder Schritt wird in eine von drei Kategorien einsortiert: \quelle{Womack \& Jones, 2003, Kap.~2}
+
+\begin{enumerate}
+  \item \fachbegriff{Wertschöpfend (Value-Adding, VA).} Der Kunde würde dafür bezahlen, wenn er es wüsste. ``Ware kommissionieren.''
+  \item \fachbegriff{Nicht wertschöpfend, aber notwendig (Necessary Non-Value-Adding, NNVA).} Notwendig aus regulatorischen oder organisatorischen Gründen, aber kein Wertbeitrag für den Kunden. ``Rechnung archivieren.''
+  \item \fachbegriff{Verschwendung (Waste, Muda).} Weder wertschöpfend noch notwendig. ``Bestellung erneut prüfen, weil die erste Prüfung unvollständig dokumentiert war.''
+\end{enumerate}
+
+\begin{merkbox}[Die sieben Verschwendungsarten (Toyota)]
+Aus der Lean-Tradition stammen sieben Verschwendungstypen: \textbf{Ü}berproduktion, \textbf{W}artezeit, \textbf{T}ransport, \textbf{Ü}berbearbeitung, \textbf{B}estand, \textbf{B}ewegung, \textbf{F}ehler/Nacharbeit. In Wissensprozessen ergänzt sich oft eine achte: \textbf{ungenutzte Kreativität / Wissen.} Eine gute VSM zeigt, wo welche Art auftritt -- und gibt damit Hinweise auf die wirksamste Gegenmaßnahme.
+\end{merkbox}
+
+\subsection{Engpass-Diagnose mit VSM}
+
+Der \fachbegriff{Engpass} ist der Schritt im Wertstrom, der die \emph{gesamte Durchlaufzeit} am stärksten begrenzt. Eine VSM macht ihn sichtbar -- typischerweise dort, wo die Wartezeit (WT) einen Sprung nach oben macht. Faustregeln zur Engpass-Identifikation:
+
+\begin{itemize}
+  \item Wo wartet WIP am längsten? (höchste WT)
+  \item Wo werden am häufigsten Eskalationen ausgelöst?
+  \item Wo wechselt der Vorgang Rolle, System oder Ort? (Schnittstellen verlieren Zeit)
+  \item Wo werden Vorgänge zurückgewiesen / nachbearbeitet? (Wiederholungs-Schleifen)
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{BT-WT-DLZ}]
+Die drei Zeiten, die jede VSM braucht:\\[2pt]
+\textbf{BT} = Bearbeitungszeit (was geschieht aktiv)\\
+\textbf{WT} = Wartezeit (wie lange wird gewartet)\\
+\textbf{DLZ} = Durchlaufzeit (Gesamtdauer)\\[2pt]
+\emph{Faustregel: DLZ \textgreater\textgreater{} Summe BT. Der Großteil der DLZ ist Warten.}
+\end{eselsbox}
+
+\subsection{Die sieben Verschwendungsarten im Detail}
+
+Toyota hat sieben Verschwendungsarten kodifiziert, die in jedem Prozess auftauchen können. In Wissensprozessen (Büro, IT, Vertrieb) verändern sich die Beispiele, die Logik bleibt:
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX X@{}}
+\toprule
+Typ & Produktion (klassisch) & Wissensprozess (Übersetzung) \\
+\midrule
+Überproduktion & Mehr Teile fertigen als gebraucht & Reports erstellen, die niemand liest; Pflichtfelder, die niemand auswertet \\
+Wartezeit & Maschine wartet auf Material & Vorgang wartet auf Freigabe, Daten, Antwort \\
+Transport & Teile zwischen Standorten bewegen & Daten zwischen Systemen exportieren/importieren \\
+Überbearbeitung & Bauteil feiner schleifen als nötig & Mehrfache Reviews ohne Mehrwert; ``Schönschreiben'' von Standard-Tickets \\
+Bestand & Lager mit fertigen Teilen vollstellen & Posteingänge / Warteschlangen mit hunderten ungelesenen Tickets \\
+Bewegung & Mitarbeiter laufen zwischen Stationen & System-Wechsel pro Vorgang (CRM \textrightarrow{} Ticket \textrightarrow{} ERP \textrightarrow{} Mail) \\
+Fehler / Nacharbeit & Defekte Teile aussortieren, neu fertigen & Fehlerhaft erfasste Stammdaten, Rückläufer-Tickets, Eskalationen \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent In modernen Wissensprozessen wird oft eine \emph{achte} Verschwendung ergänzt: \fachbegriff{ungenutzte Kreativität / ungenutztes Wissen} -- Mitarbeitende, deren Erfahrung systematisch übergangen wird. Das ist die teuerste Verschwendungsart, weil sie die Verbesserung des Prozesses selbst verhindert. \quelle{Womack \& Jones, 2003, Kap.~2}
+
+\subsection{Current State vs.\ Future State VSM}
+
+Eine VSM kommt typischerweise in zwei Versionen vor: \fachbegriff{Current State} (wie es jetzt ist) und \fachbegriff{Future State} (wie es sein soll). Der Wert entsteht durch die Gegenüberstellung -- nicht durch eine der beiden allein. \quelle{Rother \& Shook, 1999}
+
+\begin{itemize}
+  \item Der \emph{Current State} ist die ehrliche Aufnahme des Ist-Zustands: BT/WT geschätzt oder gemessen, Engpässe identifiziert, Verschwendungen markiert. Ohne diese Ausgangsbasis fehlt jede Veränderungs-Diskussion die Faktengrundlage.
+  \item Der \emph{Future State} ist die kollektive Zielvereinbarung: Wo wollen wir in 6--12 Wochen sein? Welche Verschwendungen sind eliminiert? Welche Wartezeiten halbiert? Wichtig: der Future State ist kein utopisches Wunsch-Diagramm, sondern eine machbare Ziel-Skizze.
+\end{itemize}
+
+Die häufigste Falle: nur einen Current State zeichnen, dann ``analysieren'', aber nie einen klaren Future State formulieren. Das Ergebnis: viele Erkenntnisse, keine gemeinsame Richtung.
+
+\subsection{VSM in Wissensprozessen -- Besonderheiten}
+
+VSM stammt aus der Produktion, wird heute aber überwiegend in Wissensprozessen eingesetzt (Verwaltung, IT, Vertrieb, Onboarding). Drei Besonderheiten:
+
+\begin{enumerate}
+  \item \fachbegriff{Wertstrom ist unsichtbar.} In der Fabrik sehen Sie das WIP physisch zwischen Maschinen. Im Büro liegt der Vorgang als E-Mail, Ticket oder PDF irgendwo in einer Inbox -- visuell unsichtbar, aber genauso real.
+  \item \fachbegriff{Zeiten sind individueller.} Eine Maschine braucht für jedes Teil dieselbe Zeit. Ein Sachbearbeiter braucht für einfache Vorgänge 2 Minuten, für komplizierte 2 Stunden. Varianz ist hoch -- Schätzungen brauchen Vertrauensintervalle.
+  \item \fachbegriff{Werte sind kulturell.} ``Compliance-Prüfung'' ist in der einen Organisation NNVA, in der anderen wertschöpfend (z.\,B.\ wenn Compliance ein Marken-USP ist). Wertschöpfungs-Klassifikationen sind nicht universal.
+\end{enumerate}
+
+\begin{merkbox}[VSM-Pragmatik]
+Im Wissensprozess sind 80\,\% einer VSM Schätzung -- das ist kein Mangel, sondern unvermeidbar. Die Disziplin: \emph{Schätzungen als solche kennzeichnen, Bandbreiten angeben, prüfen wo Messung lohnt.} Eine geschätzte VSM mit ehrlicher Markierung schlägt eine ``präzise'' VSM, die im Detail falsch ist.
+\end{merkbox}
+
+% --- 4. PROCESS MINING ---------------------------------------------------
+\section{Process Mining -- vom Modell zur Datenrealität}
+
+\fachbegriff{Process Mining} ist die jüngste der drei Methoden -- sie entstand Anfang der 2000er Jahre an der TU Eindhoven (van der Aalst) und ist heute eine etablierte Disziplin mit eigenen Konferenzen, Werkzeugen und einem internationalen Handbuch. \quelle{van der Aalst, 2016; van der Aalst \& Carmona, 2022}
+
+\subsection{Das zentrale Konzept: der Event Log}
+
+Process Mining setzt voraus, dass IT-Systeme Spuren hinterlassen -- jeder Arbeitsschritt erzeugt einen Eintrag in einer Log-Datenbank. Diese Spuren werden zu einem \fachbegriff{Event Log} zusammengeführt. Ein Event Log hat im Minimum drei Felder pro Eintrag:
+
+\begin{itemize}
+  \item \fachbegriff{Case ID} -- welcher Vorgang? (eine Bestellung, ein Antrag, ein Ticket)
+  \item \fachbegriff{Aktivität} -- welcher Schritt wurde ausgeführt? (``Antrag prüfen'', ``Freigabe erteilen'')
+  \item \fachbegriff{Zeitstempel} -- wann wurde der Schritt ausgeführt?
+\end{itemize}
+
+Optional, aber wertvoll: \fachbegriff{Ressource} (welche Person oder welches System hat die Aktivität ausgeführt?), Datenfelder zum Vorgang (Betrag, Kategorie, Priorität), Kostenstellen.
+
+\subsection{Drei Disziplinen des Process Mining}
+
+Process Mining wird in drei Disziplinen unterteilt, die unterschiedliche Fragen beantworten: \quelle{van der Aalst, 2016, Kap.~1}
+
+\begin{enumerate}
+  \item \fachbegriff{Discovery} -- ``Welcher Prozess läuft hier tatsächlich ab?'' Aus den Event Logs wird ein Ist-Prozessmodell rekonstruiert -- ohne dass jemand einen Modellierungs-Workshop machen muss. Algorithmen finden die häufigsten Pfade, die Varianten und die Ausreißer.
+  \item \fachbegriff{Conformance Checking} -- ``Stimmt das Soll mit dem Ist überein?'' Ein bestehendes Soll-Modell wird gegen den Event Log gehalten. Abweichungen werden gemessen: Welche Schritte fehlen? Welche Schritte kommen zusätzlich vor? Welche Reihenfolgen werden verletzt?
+  \item \fachbegriff{Enhancement} -- ``Was lernen wir noch dazu?'' Das Modell wird angereichert um Zeitinformationen (wo dauert es wie lange?), um Frequenzen (wie häufig wird ein Pfad genommen?), um Engpässe.
+\end{enumerate}
+
+\subsection{Was Process Mining nicht ersetzt}
+
+Process Mining liefert Datenrealität -- aber es ersetzt weder Modellierung noch Wertstromanalyse:
+
+\begin{itemize}
+  \item Es zeigt nicht den \emph{Soll-Prozess.} Die Daten zeigen, was passiert ist -- nicht, was passieren sollte.
+  \item Es zeigt nicht die \emph{Absicht.} Warum eine Variante existiert (Fehler? bewusste Anpassung? Ausnahmebehandlung?), beantworten die Logs nicht.
+  \item Es zeigt nicht die \emph{Verantwortlichkeiten.} ``Wer ist befugt, diese Entscheidung zu treffen?'' steht selten im Log.
+  \item Es ist nur so gut wie die \emph{Datenqualität.} Wenn Schritte nicht protokolliert werden, fehlen sie auch im Discovery-Output.
+\end{itemize}
+
+\begin{merkbox}[Process Mining -- der Realitätscheck]
+Process Mining ist die wirksamste Methode, um die Frage zu beantworten: \emph{``Läuft unser Prozess wirklich so, wie wir glauben?''} Die Antwort ist fast immer: \emph{Nein, nicht ganz.} Und genau diese Differenz ist der Goldminen-Moment -- weil sie zeigt, wo Aufwand für Verbesserung sich lohnt und wo nicht.
+\end{merkbox}
+
+\subsection{Voraussetzungen für ein gutes Process-Mining-Projekt}
+
+Nicht jeder Prozess eignet sich für Process Mining. Drei Voraussetzungen sollten erfüllt sein: \quelle{vgl.\ van der Aalst \& Carmona, 2022, Kap.~1}
+
+\begin{enumerate}
+  \item \textbf{Digitale Spuren.} Die Schritte des Prozesses müssen in IT-Systemen protokolliert sein. Reine Papier-Prozesse liefern keine Logs.
+  \item \textbf{Eine eindeutige Case ID.} Ohne Case ID lassen sich die Events nicht zu Vorgängen zusammenfassen. In der Praxis ist die Case ID oft die größte Datenqualitäts-Baustelle: gleicher Vorgang, in drei Systemen drei verschiedene IDs.
+  \item \textbf{Genug Cases.} 50 Cases sind zu wenig. Sinnvoll wird die Analyse meist ab einigen hundert bis tausend Cases -- abhängig von der Varianz.
+\end{enumerate}
+
+\subsection{Ein Mini-Event-Log -- konkretes Beispiel}
+
+Um zu verstehen, was Discovery und Conformance tatsächlich auswerten, hier ein Mini-Event-Log mit drei Cases aus einem Bestell­prozess:
+
+\begin{tabularx}{\linewidth}{@{}lXll@{}}
+\toprule
+\textbf{Case ID} & \textbf{Aktivität} & \textbf{Zeitstempel} & \textbf{Ressource} \\
+\midrule
+A & Bestellung\_eingegangen   & 2026-05-29 09:00 & System  \\
+A & Angaben\_prüfen           & 2026-05-29 09:05 & Meier   \\
+A & Nachfragen                 & 2026-05-29 09:20 & Meier   \\
+A & Angaben\_vollständig      & 2026-05-29 10:30 & Meier   \\
+A & Zahlung\_prüfen           & 2026-05-29 10:35 & System  \\
+A & Versand                    & 2026-05-29 16:00 & Schmidt \\
+\addlinespace
+B & Bestellung\_eingegangen   & 2026-05-29 11:00 & System  \\
+B & Angaben\_prüfen           & 2026-05-29 11:05 & Meier   \\
+B & Zahlung\_prüfen           & 2026-05-29 11:06 & System  \\
+B & Kommissionieren            & 2026-05-29 14:00 & Schmidt \\
+B & Versand                    & 2026-05-29 14:45 & Schmidt \\
+\addlinespace
+C & Bestellung\_eingegangen   & 2026-05-29 08:10 & System  \\
+C & Angaben\_prüfen           & 2026-05-29 08:20 & Meier   \\
+C & Zahlung\_prüfen           & 2026-05-29 08:25 & System  \\
+C & Warten\_auf\_Nachschub    & 2026-05-29 08:26 & System  \\
+C & Kommissionieren            & 2026-05-31 09:00 & Schmidt \\
+C & Versand                    & 2026-05-31 09:30 & Schmidt \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Was Discovery aus diesen drei Cases erkennen würde:
+\begin{itemize}
+  \item Zwei \emph{Prozessvarianten}: Variante 1 (Cases A) mit ``Nachfragen''-Schleife, Variante 2 (Cases B, C) ohne Rückfrage.
+  \item Ein \emph{wahrscheinlicher Engpass}: in Case C wartet der Vorgang fast 2 Tage auf Nachschub -- dramatisch im Verhältnis zur sonstigen DLZ.
+  \item Drei \emph{Hypothesen für die Abweichungen}: (a) Datenqualität bei Eingang (löst Nachfragen aus), (b) Lagerverfügbarkeit (löst Nachschub-Wartezeit aus), (c) Ressourcen-Engpass bei Schmidt (alle Versand-Aktivitäten konzentriert).
+  \item Zwei \emph{fehlende Datenfelder}, deren Ergänzung Entscheidungen verbessern würde: \emph{Grundcode für Nachfragen} (Schemafehler? Tippfehler? unklar?) und \emph{Lagerstatus zum Bestellzeitpunkt} (war Engpass vorhersehbar?).
+\end{itemize}
+
+Drei Cases reichen natürlich nicht für eine ernsthafte Analyse -- in Wirklichkeit braucht es Hunderte bis Tausende. Aber das Prinzip ist sichtbar: Mit \emph{drei Pflichtfeldern} und einer optionalen Ressource lässt sich erstaunlich viel ableiten.
+
+\subsection{Discovery-Algorithmen im Überblick}
+
+Aus dem Event Log einen Prozess zu rekonstruieren ist nicht-trivial -- die Reihenfolge ist klar, aber Verzweigungen, Parallelitäten und Schleifen müssen aus Mustern abgeleitet werden. Drei Algorithmen-Familien dominieren in der Praxis: \quelle{van der Aalst, 2016, Kap.~6; van der Aalst \& Carmona, 2022, Kap.~4}
+
+\begin{itemize}
+  \item \fachbegriff{Alpha-Algorithmus.} Der akademische Klassiker -- erkennt Sequenz, Wahl (XOR) und Parallelität (AND) aus den Direkt-Folge-Beziehungen. Schwäche: anfällig für Rauschen (jeder Ausreißer beeinflusst das Modell).
+  \item \fachbegriff{Heuristic Miner.} Praxis-tauglicher: filtert seltene Pfade weg, ist robust gegenüber Rauschen, liefert ein Modell, das ``die typischen 80\,\%'' der Cases zeigt.
+  \item \fachbegriff{Inductive Miner.} Garantiert \emph{wohlgeformte} Modelle (jeder Pfad endet, keine Deadlocks) und ist heute die meistgenutzte Familie in kommerziellen Tools.
+\end{itemize}
+
+Was Sie als Anwender wissen sollten: \emph{Welcher Algorithmus mit welchen Parametern gerade läuft.} Das gleiche Event Log kann mit unterschiedlichen Algorithmen sehr unterschiedliche Modelle produzieren -- und keiner davon ist ``richtig'', sondern nur unterschiedlich gefiltert.
+
+\subsection{Conformance-Metriken}
+
+Wenn Sie ein Soll-Modell gegen einen Event Log halten, brauchen Sie Metriken zur Bewertung der Übereinstimmung:
+
+\begin{itemize}
+  \item \fachbegriff{Fitness} -- wie viele der tatsächlichen Cases lassen sich mit dem Soll-Modell vollständig nachvollziehen? Hohe Fitness = Soll deckt das Ist gut ab.
+  \item \fachbegriff{Precision} -- wie eng beschreibt das Modell tatsächlich beobachtetes Verhalten -- und nicht zusätzlich auch nie beobachtete Pfade? Hohe Precision = Modell ist nicht zu permissiv.
+  \item \fachbegriff{Generalization} -- wie gut beschreibt das Modell auch \emph{zukünftiges} Verhalten (nicht nur das beobachtete)?
+  \item \fachbegriff{Simplicity} -- wie kompakt ist das Modell?
+\end{itemize}
+
+Fitness und Precision stehen oft in einem Trade-off zueinander: ein Modell, das jeden Ausreißer abdeckt, hat hohe Fitness, aber niedrige Precision. Ein restriktives Modell hat hohe Precision, aber niedrige Fitness. Die Kunst liegt in der Balance.
+
+\subsection{Typische Datenquellen für Event Logs}
+
+Aus welchen Systemen kommen die Logs in der Praxis? Sechs typische Quellen:
+
+\begin{enumerate}
+  \item \fachbegriff{ERP-Systeme} (SAP, Oracle, Dynamics) -- Belege, Vorgänge, Genehmigungsschritte.
+  \item \fachbegriff{CRM-Systeme} (Salesforce, HubSpot, Dynamics) -- Leads, Opportunities, Customer-Service-Tickets.
+  \item \fachbegriff{Ticket-Systeme} (Jira, ServiceNow, Zendesk) -- IT-Service-Management, Change-Management.
+  \item \fachbegriff{Workflow-Engines} (Camunda, Flowable) -- jeder Task-Wechsel ist ein Event.
+  \item \fachbegriff{Application-Logs / Audit Trails} -- nutzbar, wenn fachliche Bedeutung mit den technischen Logs verknüpft werden kann.
+  \item \fachbegriff{Datenbank-Tabellen mit Zeitstempel-Feldern} (z.\,B.\ \texttt{erstellt\_am}, \texttt{bearbeitet\_am}, \texttt{abgeschlossen\_am}) -- liefern indirekt Events durch zeitliche Reihenfolge.
+\end{enumerate}
+
+\begin{merkbox}[Datenquellen-Realität]
+In der Praxis kommt ein einziger Event Log selten aus einer einzigen Quelle. Typisch sind 3--5 Quellsysteme, die zusammengeführt werden müssen -- mit allen Herausforderungen der Datenkonsistenz: unterschiedliche Case-IDs, abweichende Aktivitätsbezeichnungen, Zeitstempel in verschiedenen Zeitzonen. Genau hier liegt der größte Aufwand jedes Process-Mining-Projekts.
+\end{merkbox}
+
+% --- 5. DER DREIKLANG ----------------------------------------------------
+\section{Der Methodendreiklang}
+
+Bis hier haben wir die drei Methoden einzeln betrachtet. Die Stärke entsteht aber erst durch \emph{die Kombination}.
+
+\subsection{Was jede Methode beiträgt -- und was sie auslässt}
+
+\begin{tabularx}{\linewidth}{@{}l X X@{}}
+\toprule
+\textbf{Methode} & \textbf{Beantwortet} & \textbf{Lässt aus} \\
+\midrule
+UML (Use Case + Activity) & Wer? Was? Wie sollte es ablaufen? & Wie dauert es? Was passiert wirklich? \\
+VSM & Wo geht Zeit/Wert verloren? & Wer entscheidet? Welche Varianten gibt es? \\
+Process Mining & Was passiert wirklich, in welchen Varianten? & Wie sollte es sein? Wer trägt Verantwortung? \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Die Kombination ist mehr als die Summe der Teile: Wenn UML zeigt, dass eine Rolle entscheiden \emph{sollte}, VSM zeigt, dass an dieser Stelle Wartezeit ent\-steht, und Process Mining zeigt, dass die Entscheidung in 40\,\% der Fälle übersprungen wird -- dann haben Sie nicht drei Beobachtungen, sondern eine konsistente Diagnose.
+
+\subsection{Eine Story, drei Perspektiven}
+
+Beispiel ``Customer Onboarding'' (siehe Sektion 8 für die ausführliche Fallstudie):
+
+\begin{itemize}
+  \item \textbf{UML Use Case:} Akteure sind Kunde, Sales, Onboarding-Team, IT, Compliance. Ihre Ziele sind: ``Account anlegen'', ``Zugänge vergeben'', ``Security-Check bestehen''.
+  \item \textbf{UML Activity:} Kernablauf mit drei Swimlanes (Sales, Onboarding, IT). Entscheidungspunkte: ``Daten vollständig?'', ``Security-Check bestanden?''
+  \item \textbf{VSM:} 10 Schritte vom Sales-Übergabe bis zum Go-Live. BT zusammen ~6 Stunden, DLZ aktuell 6 Wochen. Engpass: IT-Provisioning (Wartezeit dominiert).
+  \item \textbf{Process Mining (qualitativ):} 40\,\% der Cases mit Rücksprüngen wegen fehlender Kundendaten, 25\,\% mit Wartezeiten \textgreater{} 5 Tagen, 15\,\% mit Eskalation vor Go-Live.
+\end{itemize}
+
+Erst die Zusammenführung zeigt: Das Problem ist nicht ``IT ist langsam''. Das Problem ist, dass die Übergabe vom Sales an Onboarding in 40\,\% der Fälle unvollständig ist -- und die Wartezeit beim IT-Provisioning dadurch entsteht, dass die fehlenden Daten erst nachgefordert werden müssen.
+
+\begin{merkbox}[Die goldene Klammer]
+Modell, Wertstrom und Daten erzählen drei Teile derselben Geschichte. Die \emph{goldene Klammer} um diese drei Teile entsteht, wenn dieselbe Person (oder dasselbe Team) die drei Sichten zusammenführt. Trennt man sie auf -- Modellierer hier, Lean-Berater dort, Data Analyst woanders -- entstehen drei parallele Berichte, die nie zusammenkommen.
+\end{merkbox}
+
+\subsection{Drei Mini-Beispiele: wann lohnt welcher Dreiklang?}
+
+Damit die Methoden-Kombination nicht abstrakt bleibt, hier drei kontrastierende Mini-Szenarien:
+
+\textbf{Szenario A -- Reklamationsbearbeitung in einem Versandhandel.} Die Vermutung: ``Bearbeitung dauert zu lange.'' Was zeigt was?
+\begin{itemize}
+  \item \emph{UML Use Case} -- klärt Akteure (Kunde, Kundenservice, Logistik, Buchhaltung) und macht sichtbar, dass Buchhaltung de facto Mit-Entscheider bei Erstattungen ist.
+  \item \emph{VSM} -- zeigt: Bearbeitungszeit pro Reklamation 15 Minuten, Durchlaufzeit aber 8 Tage. Größte Wartezeit: ``warten auf Erstattungs-Freigabe Buchhaltung''.
+  \item \emph{Process Mining} -- entdeckt, dass 30\,\% der Cases zweimal an die Buchhaltung gehen (erste Freigabe wird nach Rückfrage zurückgezogen).
+\end{itemize}
+Diagnose der Kombination: Das eigentliche Problem ist nicht ``Buchhaltung ist langsam'' -- es ist, dass die initialen Freigaben in 30\,\% der Fälle revidiert werden müssen. Ohne den Mining-Befund hätte man die Kapazität in Buchhaltung erhöht (teuer, falsche Wirkungsrichtung).
+
+\textbf{Szenario B -- Compliance-Check für Vertragsfreigaben.} Die Vermutung: ``Wir wollen einen neuen Workflow konzipieren, der ihn beschleunigt.''
+\begin{itemize}
+  \item \emph{UML Use Case} -- klärt, dass es vier Verträgsarten gibt mit unterschiedlichen Akteuren (Standardvertrag, Rahmenvertrag, Sondervertrag, Compliance-Sondercase).
+  \item \emph{UML Activity} -- macht den Soll-Workflow je Vertragsart explizit.
+  \item \emph{VSM} -- entfällt teilweise: in diesem Greenfield-Projekt gibt es noch keinen verlässlichen Ist-Wertstrom zu vermessen.
+  \item \emph{Process Mining} -- entfällt: keine Logs für einen neuen Workflow.
+\end{itemize}
+Diagnose: Hier reicht UML aus -- VSM und Mining wären verfrüht. \emph{Mehr Methoden hieße hier mehr Aufwand ohne Mehrwert.}
+
+\textbf{Szenario C -- Verlassen einer Plattform durch Lieferanten.} Die Vermutung: ``Wir verlieren Lieferanten -- warum?''
+\begin{itemize}
+  \item \emph{UML Use Case} -- entfällt, der Prozess ist bekannt.
+  \item \emph{VSM} -- könnte Wartezeiten der Lieferanten auf Zahlungen zeigen.
+  \item \emph{Process Mining} -- zeigt, dass abwandernde Lieferanten typischerweise drei spezifische Schritte erlebt haben (langwierige Onboarding-Korrektur, mehrfache Provisions-Diskussion, Verspätung von Auszahlungen) -- das ist datenbasiert.
+\end{itemize}
+Diagnose: Process Mining ist hier die führende Methode, VSM ergänzt. UML wäre Mehraufwand für eine schon klare Struktur.
+
+\subsection{Wann der Dreiklang nicht hilft}
+
+Der Dreiklang ist kein Allheilmittel. Drei Situationen, in denen seine Anwendung Schaden anrichten kann:
+
+\begin{itemize}
+  \item \fachbegriff{Es gibt schlicht keine Daten.} Process Mining ist unmöglich. Dann ist UML + VSM die richtige Wahl, mit ehrlich markierten Schätzungen.
+  \item \fachbegriff{Der Prozess ist so neu, dass es noch kein Ist gibt.} VSM und Process Mining wären verfrüht. UML reicht.
+  \item \fachbegriff{Das Problem ist eindeutig politisch / kulturell.} ``Verantwortung wird nicht übernommen'' lässt sich nicht modellieren -- hier brauchen Sie Organisationsentwicklung, nicht Methoden.
+\end{itemize}
+
+% --- 6. METHODENAUSWAHL --------------------------------------------------
+\section{Methodenauswahl: Welche Methode für welche Frage?}
+
+In der Praxis ist Zeit knapp. Niemand bekommt das Mandat, jeden Prozess in allen drei Perspektiven aufzunehmen. Die folgende Heuristik hilft beim Priorisieren:
+
+\subsection{Vier Fragen -- vier Empfehlungen}
+
+\begin{tabularx}{\linewidth}{@{}lX X@{}}
+\toprule
+\textbf{Wenn die Frage lautet \ldots} & \textbf{Erste Methode} & \textbf{Sinnvolle Ergänzung} \\
+\midrule
+``Was ist überhaupt unser Scope?'' & UML Use Case & --- \\
+``Wo verliert dieser Prozess Zeit?'' & VSM & Process Mining \\
+``Stimmt unser Modell mit der Realität überein?'' & Process Mining (Conformance) & UML / BPMN als Soll \\
+``Wie wollen wir den Prozess umbauen?'' & UML Activity oder BPMN & VSM für die Ist-Aufnahme \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Drei typische Kombinationsmuster}
+
+\begin{enumerate}
+  \item \fachbegriff{Modell + Daten} (UML/BPMN + Process Mining): Klassische Konfiguration für Conformance-Projekte. Das Soll ist modelliert, der Ist kommt aus den Logs, die Differenz wird gemessen.
+  \item \fachbegriff{Wertstrom + Daten} (VSM + Process Mining): Stark bei Optimierungsprojekten. Die VSM gibt die Hypothesen, das Process Mining liefert die Zahlen, die VSM wird datenbasiert verfeinert.
+  \item \fachbegriff{Modell + Wertstrom} (UML + VSM): Sinnvoll, wenn (noch) keine guten Daten vorliegen. Die UML klärt Scope und Verantwortung, die VSM zeigt, wo Aufwand für eine Datenerhebung sich lohnen würde.
+\end{enumerate}
+
+\begin{merkbox}[Methoden-Discipline]
+Die häufigste Falle ist es, mit \emph{allen} drei Methoden zugleich zu starten. Das Ergebnis sind drei halbgare Artefakte und ein Team, das nicht weiß, welcher Befund welche Konsequenz hat. Besser: \emph{Eine Methode, vollständig, mit klarer Aussage. Dann gezielt ergänzen.}
+\end{merkbox}
+
+% --- 7. METHODENQUALITAET ------------------------------------------------
+\section{Methodenqualität: Was eine gute Analyse ausmacht}
+
+Wie bei BPMN/EPC gelten auch für UML, VSM und Process Mining Qualitätskriterien. Sie sind methodenspezifisch, aber im Geist verwandt mit den GoM (Tag 1, Abschnitt 4).
+
+\subsection{Qualität bei UML}
+
+\begin{itemize}
+  \item \textbf{Use Case Diagram:} Klare Systemgrenze, eindeutige Akteure (Rollen, nicht Namen), Use Cases als Verb + Objekt benannt. Keine ``Mini-Use-Cases'' für UI-Klicks.
+  \item \textbf{Activity Diagram:} Jeder Pfad endet, Entscheidungen sind disjunkt, Swimlanes zeigen tatsächliche Verantwortung. Konsistenz mit dem zugehörigen Use Case Diagram.
+\end{itemize}
+
+\subsection{Qualität bei VSM}
+
+\begin{itemize}
+  \item \textbf{Realistische Zeiten.} Geschätzte BT und WT sind in Ordnung, solange klar markiert (z. B. ``geschätzt -- nicht gemessen'').
+  \item \textbf{Klassifikation jedes Schritts.} Jeder Schritt ist als VA, NNVA oder Waste markiert -- nicht ``kann sein''.
+  \item \textbf{Engpass-Hypothese.} Mindestens eine Engpass-Hypothese, mit Begründung. Keine ``nichts auffällig''-VSM -- das ist ein Hinweis auf zu grob aufgenommene Daten.
+\end{itemize}
+
+\subsection{Qualität bei Process Mining}
+
+\begin{itemize}
+  \item \textbf{Datenqualität dokumentiert.} Welche Datenquellen wurden zusammengeführt? Wie wurde die Case ID konstruiert? Welche Events wurden gefiltert oder ausgeschlossen?
+  \item \textbf{Variantenanalyse.} Wie viele Varianten gibt es? Welche decken 80\,\% der Cases ab? Welche Long-Tail-Varianten sind Ausreißer und welche sind systematisch?
+  \item \textbf{Interpretierbarkeit.} Findings werden mit fachlicher Erklärung präsentiert, nicht nur als Zahlen. ``Variante 7 betrifft 12\,\% der Cases -- vermutlich, weil X.''
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{R-D-V}]
+Drei Qualitätspflichten, die alle drei Methoden teilen:\\[2pt]
+\textbf{R}ealistisch -- keine geschönten Zahlen, keine erfundenen Akteure.\\
+\textbf{D}okumentiert -- Annahmen, Datenquellen, Filter explizit.\\
+\textbf{V}erständlich -- die Zielgruppe versteht die Aussage in 60 Sekunden.\\[2pt]
+\emph{``R-D-V'' -- drei Tests vor jeder Freigabe.}
+\end{eselsbox}
+
+% --- 8. FALLSTUDIE -------------------------------------------------------
+\section{Mini-Fallstudie: Customer Onboarding bei CloudWorks B2B}
+
+Wir wenden den Dreiklang auf ein konkretes Szenario an. \emph{CloudWorks B2B} ist ein SaaS-Anbieter. Das Onboarding neuer Kunden dauert aktuell 2--6 Wochen, ist intransparent, und Kunden brechen den Prozess ab. Restriktionen: 6 Wochen Zeit, 60\,000~\euro{} Budget, fragmentierte Daten, Zielkonflikt ``schnell aktivieren'' vs.\ ``Compliance''.
+
+\subsection{Schritt 1 -- UML Use Case (Scope und Akteure)}
+
+Wir identifizieren sechs Akteure: \emph{Kunde, Sales, Onboarding-Team, IT, Compliance, Support}. Wir definieren acht Use Cases:
+
+\begin{enumerate}
+  \item Account anlegen
+  \item Vertrags-/Scope-Check
+  \item Zugang und Rollen vergeben
+  \item Datenimport durchführen
+  \item Security-/Compliance-Check
+  \item Kunden-Training
+  \item Go-Live-Freigabe
+  \item Hypercare starten (erste 30 Tage nach Go-Live)
+\end{enumerate}
+
+\subsection{Schritt 2 -- UML Activity (Ablauflogik)}
+
+Drei Swimlanes (Sales, Onboarding, IT), Hauptpfad mit zwei XOR-Entscheidungen: \emph{``Kundendaten vollständig?''} und \emph{``Security-Check bestanden?''}. Jede Verzweigung hat einen klaren ``Nein-Pfad'' mit Rücksprung -- aber mit definierter Schleifen-Obergrenze (z. B. maximal 2 Iterationen, dann Eskalation).
+
+\subsection{Schritt 3 -- VSM (Wertstrom)}
+
+Zehn Schritte vom Sales-Übergabe-Briefing bis zum Go-Live. Bearbeitungszeit insgesamt ca.\ 6 Stunden -- Durchlaufzeit aktuell 6 Wochen. Der Engpass: \emph{IT-Provisioning} (Wartezeit ca.\ 5--8 Tage, oft länger). Sekundärer Engpass: ``Nachfordern fehlender Kundendaten'' -- entsteht früh und verzögert alle nachfolgenden Schritte.
+
+\begin{tabularx}{\linewidth}{@{}lXccl@{}}
+\toprule
+\textbf{Nr.} & \textbf{Schritt} & \textbf{BT} & \textbf{WT} & \textbf{Klassifikation} \\
+\midrule
+1  & Sales-Briefing übergeben                & 30 min & 1 Tag  & NNVA \\
+2  & Kundendaten prüfen                       & 20 min & 1--3 Tage & VA \\
+3  & Daten nachfordern (40\,\% der Cases)     & 15 min & 2--7 Tage & Waste \\
+4  & Vertrags-/Scope-Check                    & 45 min & 1 Tag  & NNVA \\
+5  & Account anlegen                          & 30 min & --     & VA \\
+6  & Zugänge \& Rollen vergeben               & 60 min & 5--8 Tage & VA \\
+7  & Datenimport                              & 90 min & 1--2 Tage & VA \\
+8  & Security-/Compliance-Check               & 60 min & 2--4 Tage & NNVA \\
+9  & Kunden-Training                          & 90 min & 1 Tag  & VA \\
+10 & Go-Live-Freigabe erteilen                & 15 min & --     & VA \\
+\midrule
+   & \textbf{Summe}                           & \textbf{ca.\ 6 h} & \textbf{14--30 Tage} & \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Die Tabelle macht zwei Dinge sofort sichtbar: erstens, die Bearbeitungszeit ist mit 6 Stunden lächerlich gering im Verhältnis zu den 6 Wochen Durchlaufzeit. Zweitens, die einzige reine Verschwendung (Schritt 3, Nachfordern fehlender Daten) tritt in 40\,\% der Cases auf -- ein systematisches Problem, kein Ausreißer. Schritt 6 (Zugänge vergeben) ist mit 5--8 Tagen Wartezeit der größte Einzelhebel.
+
+\subsection{Schritt 4 -- Process-Mining-Brille (qualitativ)}
+
+Auf Basis der vorhandenen Log-Daten lassen sich drei Befunde quantifizieren:
+
+\begin{itemize}
+  \item 40\,\% der Cases haben Rücksprünge wegen fehlender Kundendaten.
+  \item 25\,\% der Cases warten mehr als 5 Tage auf IT-Provisioning.
+  \item 15\,\% der Cases eskalieren im Support vor Go-Live.
+\end{itemize}
+
+Was die Mining-Sicht zusätzlich zeigt: \emph{Die drei Befunde sind nicht unabhängig.} Eine Conformance-Analyse macht sichtbar, dass die meisten Eskalations-Cases (Befund 3) jene sind, die schon im Provisioning lange gewartet haben (Befund 2) -- und das Provisioning hat oft so lange gedauert, weil Kundendaten nachgefordert werden mussten (Befund 1). Drei vermeintlich getrennte Probleme entpuppen sich als eine Kausalkette.
+
+Variantenanalyse aus dem Log:
+\begin{itemize}
+  \item Variante 1 (Happy Path, 35\,\% der Cases): Daten vollständig \textrightarrow{} Provisioning \textless{} 48\,h \textrightarrow{} Check OK \textrightarrow{} Go-Live in 8--10 Tagen. \emph{Das funktioniert.}
+  \item Variante 2 (Datenproblem, 40\,\%): Daten unvollständig \textrightarrow{} Nachfordern \textrightarrow{} Provisioning verzögert \textrightarrow{} Go-Live in 4--5 Wochen.
+  \item Variante 3 (IT-Engpass, 15\,\%): Daten OK, aber IT-Ressourcen knapp \textrightarrow{} Wartezeit \textgreater{} 5 Tage \textrightarrow{} Go-Live in 3--4 Wochen.
+  \item Variante 4 (Eskalation, 10\,\%): Kombination aus Datenproblem + Compliance-Findings \textrightarrow{} Eskalation \textrightarrow{} Go-Live in 6--8 Wochen oder Abbruch.
+\end{itemize}
+
+Diese vier Varianten erklären \emph{warum} die Durchlaufzeit so stark schwankt -- nicht weil ``IT manchmal langsam ist'', sondern weil zwei verschiedene Engpässe (Daten und Kapazität) auf unterschiedliche Cases unterschiedlich wirken.
+
+\subsection{Schritt 5 -- Maßnahmen unter Restriktionen}
+
+Aus dem Dreiklang ergeben sich zwei Maßnahmen, die in 6 Wochen ohne neues Tooling umsetzbar sind:
+
+\begin{enumerate}
+  \item \fachbegriff{Definition of Ready für Onboarding} -- eine Checkliste plus verpflichtende Pflichtfelder beim Sales-Übergabe-Briefing. Reduziert Rücksprünge sofort, weil unvollständige Briefings nicht mehr in den Prozess kommen.
+  \item \fachbegriff{SLA-Eskalations\-regel beim Provisioning} -- nach 48\,h ohne Fortschritt ein automatischer Eskalationstrigger plus Standardpakete für Zugänge (z. B. ``Onboarding-Basis-Paket''). Reduziert Wartezeit und Varianz.
+\end{enumerate}
+
+\begin{merkbox}[Wirkmechanismus der zwei Maßnahmen]
+Die erste Maßnahme greift \emph{ursächlich}: sie verhindert, dass Cases mit unvollständigen Daten überhaupt in den Prozess geraten. Die zweite Maßnahme greift \emph{strukturell}: sie ändert die Spielregel beim Engpass, ohne das System umzubauen. Zusammen zielen sie nicht auf den ``schnellsten Fix'', sondern auf den \emph{robustesten} Hebel unter den gegebenen Restriktionen.
+\end{merkbox}
+
+\subsection{Wirkungsschätzung der Maßnahmen}
+
+Was wäre der erwartete Effekt nach 6 Wochen, wenn beide Maßnahmen vollständig umgesetzt sind?
+
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+\textbf{Kennzahl}                  & \textbf{Heute}     & \textbf{Ziel nach 6 Wochen} \\
+\midrule
+Durchschnittliche Durchlaufzeit   & 4--5 Wochen        & 2--3 Wochen (\textminus{}30 \%) \\
+Rate der Rücksprünge wg.\ Daten   & 40 \%              & 10--15 \% \\
+Wartezeit IT-Provisioning (Median) & 5--8 Tage          & 2--3 Tage \\
+Eskalationsquote                   & 15 \%              & 5--8 \% \\
+Onboarding-NPS Kunde               & 35                 & 55 \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Diese Schätzungen sind ehrliche Annahmen, keine Versprechen. Risiko-relevante Annahme: \emph{die ``Definition of Ready'' wird tatsächlich vom Sales-Team eingehalten} -- nicht umgangen, weil ``dieser Kunde ist besonders wichtig''. Das ist die größte Wirkungs-Unsicherheit. Frühwarnsignal: Wenn nach 2 Wochen mehr als 25\,\% der Übergaben ohne vollständige ``Definition of Ready'' eingehen, ist die Annahme widerlegt -- dann braucht es zusätzlich einen Eskalations-Pfad für Sales.
+
+\subsection{Governance-Mini für die Pilotphase}
+
+Damit die Maßnahmen nicht im Alltag versanden, braucht es vier klar zugeordnete Verantwortlichkeiten:
+
+\begin{itemize}
+  \item \fachbegriff{Owner Onboarding-Checkliste} -- pflegt die Checkliste, sammelt Verbesserungsvorschläge, entscheidet über Anpassungen.
+  \item \fachbegriff{IT-SLA-Owner} -- verantwortet die 48-h-Eskalationsregel, sorgt für die Standardpakete für Zugänge.
+  \item \fachbegriff{Compliance-Gate-Owner} -- definiert die Mindest-Anforderungen für den Security-Check, gibt die Standardprozeduren frei.
+  \item \fachbegriff{Wirkungs-Reporting} -- erfasst und kommuniziert die fünf Kennzahlen aus der Wirkungsschätzung wöchentlich an die Steuerungsrunde.
+\end{itemize}
+
+% --- 9. COACHING ---------------------------------------------------------
+\section{Coaching: Modell als Entscheidungsinstrument}
+
+In den ersten Sektionen ging es um Methoden und Techniken. In diesem Abschnitt geht es um die Frage, die hinter jeder Methodenwahl steht: \emph{Wozu nutzen wir das eigentlich?}
+
+\subsection{Methodenauswahl als Coaching-Thema}
+
+Senior-Modellierer haben gelernt, sich \emph{vor} der Methodenwahl zu fragen: \emph{Welche Entscheidung soll diese Analyse stützen?} Drei typische Fehler:
+
+\begin{itemize}
+  \item \textbf{Methodengetrieben statt entscheidungsgetrieben.} ``Wir nutzen Process Mining'' -- aber wofür? Wenn die Antwort vage ist, wird die Analyse vage.
+  \item \textbf{Tool-Liebe.} ``Wir haben Celonis lizenziert, also analysieren wir damit.'' Das ist Werkzeug-Aktivismus, kein Erkenntnisgewinn.
+  \item \textbf{Vollständigkeits-Anspruch.} ``Wir machen alle drei Methoden für jeden Prozess.'' Endet meist mit drei halbfertigen Analysen und einem ungenutzten Repository.
+\end{itemize}
+
+\subsection{Umgang mit Unvollständigkeit}
+
+In der Praxis sind Daten lückenhaft, Modelle veraltet, VSMs geschätzt. Die Senior-Disziplin: \emph{Annahmen explizit machen und Risiko-relevante Annahmen separat behandeln.}
+
+\begin{itemize}
+  \item \textbf{Akzeptable Annahmen} -- solche, die das Ergebnis nicht qualitativ ändern, wenn sie sich als falsch herausstellen. ``Wir nehmen an, dass 5\,\% der Tickets Spam sind -- selbst bei 10\,\% bleibt die Schlussfolgerung gleich.''
+  \item \textbf{Risiko-relevante Annahmen} -- solche, bei denen ein Irrtum die Schlussfolgerung umdreht. ``Wir nehmen an, dass das IT-Provisioning der Engpass ist. Falls es eigentlich der Compliance-Check ist, ist unsere Empfehlung falsch.''
+\end{itemize}
+
+Risiko-relevante Annahmen brauchen ein \emph{Frühwarnsignal}: ein vorab definierter Trigger, der anzeigt, dass die Annahme nicht trägt -- und Anlass zum Nachsteuern gibt.
+
+\subsection{Zielkonflikte transparent moderieren}
+
+Vier klassische Zielkonflikte tauchen in fast jedem Prozess-Verbesserungsprojekt auf:
+
+\begin{enumerate}
+  \item \textbf{Speed vs.\ Quality.} Schnellere Durchlaufzeit auf Kosten der Sorgfalt -- oder umgekehrt.
+  \item \textbf{Speed vs.\ Compliance.} Pragmatische Abkürzungen vs.\ Audit-Sicherheit.
+  \item \textbf{Quality vs.\ Cost.} Mehr Prüfungen, höhere Personalkosten.
+  \item \textbf{Standardisierung vs.\ Kundenindividualität.} Saubere Standards vs.\ Sonderwünsche.
+\end{enumerate}
+
+Senior-Coaching bedeutet hier: \emph{nicht den Konflikt auflösen, sondern transparent machen, wer entscheidet -- und auf welcher Datengrundlage.} Eine offen ausgetragene Trade-off-Diskussion ist immer besser als eine still getroffene Annahme.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Z-A-T}]
+Drei Coaching-Fragen vor jeder Methodenwahl:\\[2pt]
+\textbf{Z}weck -- welche Entscheidung soll die Analyse stützen?\\
+\textbf{A}nnahmen -- welche sind akzeptabel, welche risiko-relevant?\\
+\textbf{T}rade-offs -- welche Zielkonflikte werden sichtbar -- und wer entscheidet?\\[2pt]
+\emph{``Z-A-T'' -- drei Fragen, drei Minuten, fundierter Start.}
+\end{eselsbox}
+
+\subsection{Senior-Reflexionsfragen}
+
+Coaching auf Senior-Niveau verzichtet auf vorgekaute Antworten und arbeitet mit Fragen, die das Team selbst beantwortet. Sieben Reflexionsfragen, die in jedem Projekt funktionieren:
+
+\begin{enumerate}
+  \item Welche Perspektive fehlt, wenn wir nur modellieren -- oder nur Daten anschauen?
+  \item Welche Entscheidung würdest du heute treffen trotz fehlender Daten -- und wie sicherst du sie ab?
+  \item Wo hast du selbst eine Annahme getroffen, ohne sie zu kennzeichnen?
+  \item Welche der drei Sichten wirkt für \emph{diesen} Prozess am stärksten? Warum?
+  \item Welche Veränderung hat den größten Hebel -- und welche ist am leichtesten umzusetzen? (Die Antwort ist selten dieselbe.)
+  \item Welche Maßnahme könnte rückwärts wirken -- d.\,h.\ kurzfristig helfen, langfristig neue Probleme erzeugen?
+  \item Welche Rolle bekommt durch deine Empfehlung mehr Macht -- und ist das beabsichtigt?
+\end{enumerate}
+
+\subsection{Vom Modell-Bauer zum Entscheidungs-Coach}
+
+Der Übergang vom Junior- zum Senior-Modellierer ist kein Skill-Sprung, sondern ein Rollen-Wechsel:
+
+\begin{itemize}
+  \item Der Junior fragt: ``Welche Notation soll ich nehmen?''
+  \item Der Senior fragt: ``Welche Entscheidung soll ich heute stützen?''
+  \item Der Junior modelliert, bis das Diagramm vollständig ist.
+  \item Der Senior modelliert nur so lange, wie es die Entscheidung verbessert -- und stoppt bewusst, wenn weitere Detail-Tiefe keine neue Erkenntnis bringt.
+  \item Der Junior verteidigt sein Modell gegen Kritik.
+  \item Der Senior nutzt Kritik als Datenpunkt: ``Wo widerspricht der Befund einer impliziten Annahme im Modell?''
+\end{itemize}
+
+Diese Haltung ist das eigentliche Lernziel des Tages -- mehr als jede einzelne Methode.
+
+% --- 10. MANAGEMENT ------------------------------------------------------
+\section{Management-Perspektive: E2E Operating Model}
+
+Auf der Wissens- und Anwendungs-Ebene haben wir die drei Methoden einzeln und im Zusammenspiel betrachtet. Auf der Management-Ebene geht es um die Frage: \emph{Wie verankern wir das im Unternehmen, sodass es lebt und nicht nach einem Pilotprojekt verschwindet?}
+
+\subsection{Methodenlandkarte als Governance-Werkzeug}
+
+Eine \fachbegriff{Methodenlandkarte} ist ein einseitiges Dokument, das festhält, wann welche Methode genutzt werden soll. Pro Methode: \emph{Zweck, Zielgruppe, Output, Qualitätsschwelle}. Diese Karte ist nicht zur Pflicht-Lektüre für jeden Mitarbeitenden -- sie ist Grundlage für Reviews, Onboarding neuer Teammitglieder und Konsistenz in größeren Initiativen. \quelle{Methodisch vgl.\ Dumas et al., 2018, Kap.~6}
+
+\subsection{Daten-Minimum für Process Mining}
+
+Die größte Hürde für Process Mining in der Praxis ist nicht die Methode -- sie ist die Datenqualität. Eine pragmatische \fachbegriff{Daten-Minimum-Vereinbarung} regelt:
+
+\begin{itemize}
+  \item Welche Felder müssen \emph{pro Vorgang} mindestens geloggt werden? (Case ID, Aktivität, Zeitstempel, Ressource)
+  \item Wer ist verantwortlich für die Datenqualität? (Data Steward pro Prozess)
+  \item Welche Datenquellen werden zusammengeführt -- mit welcher Schlüssel-Logik?
+  \item Was passiert bei Datenlücken? (akzeptierte Lücke, dokumentierte Annahme, oder Eskalation)
+\end{itemize}
+
+\subsection{Governance-Rollen für den Dreiklang}
+
+Damit der Dreiklang nicht zur Methoden-Sammlung verkommt, braucht er Rollen mit klarer Verantwortung:
+
+\begin{itemize}
+  \item \fachbegriff{Process Owner} -- fachlich verantwortlich für End-to-End-Ergebnis.
+  \item \fachbegriff{Modeler} -- erstellt UML/BPMN-Modelle, beherrscht die Notationen.
+  \item \fachbegriff{Lean / VSM Coach} -- begleitet Wertstrom-Aufnahmen, kennt Verschwendungstypen.
+  \item \fachbegriff{Data Steward} -- verantwortet Datenqualität, Event-Log-Konsistenz.
+  \item \fachbegriff{Reviewer / Approver} -- prüft Methodenanwendung gegen die Methodenlandkarte, gibt frei.
+\end{itemize}
+
+\subsection{Entscheidungsarchitektur: Top-5 Entscheidungen}
+
+Das eigentliche Ziel des Dreiklangs ist nicht Methoden-Eleganz, sondern \emph{bessere Entscheidungen}. Fünf typische Entscheidungstypen werden durch den Dreiklang fundiert:
+
+\begin{enumerate}
+  \item \textbf{Priorisierung von Prozessverbesserungen.} Welche Prozesse zuerst? (Antwort: dort, wo VSM den größten Hebel zeigt und Process Mining die größte Varianz)
+  \item \textbf{Gate-Freigaben.} Welche Schritte brauchen ein explizites Gate? (Antwort: dort, wo UML Verantwortung sichtbar macht und Process Mining Umgehungen zeigt)
+  \item \textbf{Automatisierungs-Kandidaten.} Welche Schritte lohnen Automatisierung? (Antwort: hohe Frequenz im Log, geringe Varianz, klare Regel)
+  \item \textbf{Compliance-Risiken.} Wo sind regulatorische Verstöße wahrscheinlich? (Antwort: Conformance-Checks zwischen Soll-Modell und Log)
+  \item \textbf{Kapazitätssteuerung.} Wo brauchen wir mehr Ressourcen? (Antwort: VSM-Engpass + Process-Mining-Frequenz)
+\end{enumerate}
+
+\subsection{Roadmap-Logik in 10 Wochen}
+
+Eine realistische Einführung des Dreiklangs läuft nicht ``alles auf einmal'', sondern in Schichten:
+
+\begin{itemize}
+  \item \textbf{Woche 1--2:} Pilotprozess wählen (eine Wahl reicht!), Stakeholder identifizieren, UML Use Case erstellen.
+  \item \textbf{Woche 3--4:} VSM mit dem operativen Team, Engpass-Hypothesen formulieren.
+  \item \textbf{Woche 5--6:} Event Log aufbereiten, Discovery-Lauf, Conformance gegen UML Activity.
+  \item \textbf{Woche 7--8:} Erste Maßnahmen ableiten, Wirkungs-Kennzahlen definieren.
+  \item \textbf{Woche 9--10:} Maßnahmen implementieren, Methodenlandkarte und Governance-Rollen verabschieden.
+\end{itemize}
+
+\subsection{Anti-Patterns auf Management-Ebene}
+
+Vier typische Anti-Patterns, die in Management-Initiativen rund um Prozess-Methoden immer wieder auftauchen:
+
+\begin{enumerate}
+  \item \fachbegriff{``Wir machen Process Mining für alle Prozesse.''} -- Diese Ankündigung klingt ambitioniert, erzeugt aber meist 18 Monate Aufwand für Datenintegration und 30 ``Findings'', von denen keiner umgesetzt wird. Besser: ein Pilot mit klarer Wirkungs-Hypothese und messbarer Verbesserung.
+  \item \fachbegriff{``Methodenlandkarte ist ein 30-seitiges Dokument.''} -- Wenn die Karte selbst zur Bürokratie wird, nutzt sie niemand mehr. Eine wirksame Methodenlandkarte ist eine Seite: pro Methode Zweck, Zielgruppe, Output, Qualitätsschwelle.
+  \item \fachbegriff{``Wir trennen Modellierung, VSM und Mining auf drei Abteilungen.''} -- Klassischer Silo-Fehler. Drei Berichte ohne integrierte Aussage. Besser: eine Person oder ein Team trägt die ``goldene Klammer''.
+  \item \fachbegriff{``Wir warten, bis die Datenqualität perfekt ist.''} -- Wartet man darauf, geschieht nichts. Besser: mit den vorhandenen Daten starten, Qualitätsprobleme dokumentieren, parallel verbessern.
+\end{enumerate}
+
+\subsection{Pilotprozess wählen -- Kriterien}
+
+Welcher Prozess eignet sich als Pilot für die Dreiklang-Einführung? Vier Kriterien helfen:
+
+\begin{itemize}
+  \item \textbf{Sichtbarkeit.} Ein wirklich wichtiger Prozess, dessen Verbesserung im Management Beachtung findet. Nicht ``ein Rand-Prozess, der niemandem wehtut''.
+  \item \textbf{Datenlage.} Es gibt zumindest minimale Logs (Case ID, Aktivität, Zeitstempel) -- auch wenn nicht perfekt.
+  \item \textbf{Beteiligte mit Interesse.} Process Owner ist intrinsisch motiviert, nicht ``vom Vorstand zugewiesen''.
+  \item \textbf{Realistischer Umfang.} 10--20 Hauptaktivitäten, 3--5 Akteure. Nicht ``der größte E2E-Konzernprozess''.
+\end{itemize}
+
+\subsection{Wirkungs-Messung im Operating Model}
+
+Damit der Dreiklang als Operating-Model funktioniert, müssen Wirkungs-Kennzahlen vereinbart sein. Drei Cluster typischer Metriken:
+
+\begin{tabularx}{\linewidth}{@{}lXl@{}}
+\toprule
+\textbf{Cluster}            & \textbf{Beispiel-Kennzahlen}                              & \textbf{Aktualisierung} \\
+\midrule
+Effizienz                   & Durchlaufzeit (Median, P90), Rücksprungquote, Eskalationen & wöchentlich \\
+Qualität                    & Modellqualität (Review-Findings), Datenqualität (Lücken)   & monatlich \\
+Steuerung                   & Anzahl getroffener datengestützter Entscheidungen           & quartalsweise \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Wichtig: die Kennzahlen müssen zur Wirkungs-Hypothese passen. Wer sich ``mehr Modellierungs-Aktivität'' als Erfolg misst, hat den Zweck verfehlt -- das ist Aktivismus. Wer ``messbar bessere Entscheidungen'' misst, ist näher am Ziel.
+
+\begin{merkbox}[Schluss-Merksatz für Tag 2]
+Der Methodendreiklang ist eine \textbf{Sehhilfe}: drei Linsen für denselben Prozess. Erst die Kombination zeigt, was eine einzelne Sicht übersieht. Aber: \emph{Mehr Methoden sind nicht mehr Erkenntnis.} Senior-Verantwortung heißt, die richtige Linse zur richtigen Frage zu wählen -- und Mut zu haben, nicht jede Methode auf jeden Prozess anzuwenden.
+\end{merkbox}
+
+% --- 10b. HAEUFIGE FEHLER -----------------------------------------------
+\section{Häufige Fehler beim Methodendreiklang}
+
+Wer den Dreiklang in der Praxis einsetzt, läuft immer in dieselben sechs Fallen. Wer sie kennt, kann sie früh erkennen.
+
+\subsection{Sechs typische Anti-Muster}
+
+\begin{enumerate}
+  \item \fachbegriff{Methodenwahl ohne Frage.} ``Wir starten ein Process-Mining-Projekt.'' Aber welche Entscheidung soll danach besser werden? Wenn die Antwort vage bleibt, wird die Analyse vage. Heilmittel: vor Methodenwahl die zu unterstützende Entscheidung formulieren.
+  \item \fachbegriff{Drei halbgare Artefakte.} Alle drei Methoden parallel starten, jede halbfertig, keine integrierte Schlussfolgerung. Heilmittel: eine Methode vollständig, mit klarer Aussage -- dann gezielt ergänzen.
+  \item \fachbegriff{Tool zuerst, Inhalt später.} ``Wir haben Celonis lizenziert -- wofür nutzen wir es?'' Klassischer Werkzeug-Aktivismus. Heilmittel: Methodenwahl und Erkenntnis-Frage vor Tool-Auswahl.
+  \item \fachbegriff{Datenqualitäts-Verleugnung.} Process-Mining-Projekt startet, ohne dass die Datengrundlage geprüft ist. Nach 4 Wochen: ``Die Logs sind unbrauchbar.'' Heilmittel: in den ersten 2 Wochen ausschließlich Datenqualität prüfen, erst dann Analyse.
+  \item \fachbegriff{Soll-Modell als Realität verkaufen.} Ein altes BPMN-Modell wird zitiert, als sei es die Realität. Process Mining zeigt: es wird seit Monaten anders gelebt. Heilmittel: bei jeder Modell-Aussage prüfen, wann es zuletzt gegen den Ist-Log abgeglichen wurde.
+  \item \fachbegriff{Optimierung am falschen Hebel.} VSM zeigt einen klaren Engpass -- wir optimieren stattdessen einen ``leichter zugänglichen'' anderen Schritt. Ergebnis: viel Aufwand, kein Effekt auf die Durchlaufzeit. Heilmittel: dem Engpass folgen, auch wenn er politisch unbequem ist.
+\end{enumerate}
+
+\subsection{Review-Checkliste für eine Dreiklang-Analyse}
+
+Vor jeder Freigabe einer integrierten Analyse fünf Fragen:
+
+\begin{enumerate}
+  \item Ist die zu stützende Entscheidung explizit benannt?
+  \item Wurde jede Methode mit klarer Aussage abgeschlossen, oder gibt es offene Fäden?
+  \item Sind die Befunde der drei Sichten \emph{aufeinander bezogen} (Kausalkette), nicht nur nebeneinander gestellt?
+  \item Sind risiko-relevante Annahmen markiert und mit Frühwarnsignalen versehen?
+  \item Gibt es eine empfohlene Maßnahme mit Wirkungs-Hypothese und Wirkungs-Kennzahl?
+\end{enumerate}
+
+\begin{merkbox}[Mehr Methoden $\neq$ mehr Erkenntnis]
+Wer drei halbgare Sichten produziert, sieht weniger als wer eine Sicht vollständig hat. Die senior-taugliche Heuristik: \emph{Eine Methode, vollständig, klare Aussage -- dann ergänzen, wenn die Frage es verlangt.} Ehrgeizige Vollständigkeit ist hier oft Selbstsabotage.
+\end{merkbox}
+
+% --- 11. TAKE-AWAYS ------------------------------------------------------
+\section{Take-aways aus Tag 2}
+
+\begin{enumerate}
+  \item \textbf{Drei Perspektiven, eine Realität.} UML zeigt Struktur, VSM zeigt Wertfluss, Process Mining zeigt Datenrealität. Jede Methode beantwortet eine andere Frage.
+  \item \textbf{UML: zwei Diagrammtypen reichen.} Use Case (Wer will was?) und Activity (Wie läuft es ab?) decken 80\,\% aller Geschäftsprozess-Fragen ab.
+  \item \textbf{VSM: WT \textgreater\textgreater{} BT.} In den meisten Wertströmen dominiert die Wartezeit -- Optimierung lohnt sich fast immer mehr bei WT als bei BT.
+  \item \textbf{Process Mining: Realität sticht Annahme.} Das Ist aus Logs zeigt Varianten, die im Soll-Modell nie auftauchen.
+  \item \textbf{Methodendisziplin.} Eine Methode, vollständig, mit klarer Aussage -- dann gezielt ergänzen. Nicht alle drei halbgar.
+  \item \textbf{Methodenlandkarte als Governance.} Eine einseitige Karte mit Zweck/Zielgruppe/Output schafft Konsistenz.
+  \item \textbf{Daten-Minimum vor Tool-Wahl.} Wer Process Mining will, klärt erst die Datengrundlage -- nicht die Software.
+  \item \textbf{Annahmen separieren.} Akzeptable Annahmen kennzeichnen, risiko-relevante Annahmen mit Frühwarnsignalen versehen.
+\end{enumerate}
+
+% --- 12. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Dumas, M., La Rosa, M., Mendling, J., \& Reijers, H.\,A. (2018).] \emph{Fundamentals of business process management} (2nd ed.). Springer. \href{https://doi.org/10.1007/978-3-662-56509-4}{https://doi.org/10.1007/978-3-662-56509-4}
+  \item[Fowler, M. (2003).] \emph{UML distilled: A brief guide to the standard object modeling language} (3rd ed.). Addison-Wesley.
+  \item[Object Management Group. (2017).] \emph{Unified Modeling Language (UML), Version 2.5.1} (formal/2017-12-05). \href{https://www.omg.org/spec/UML/2.5.1/}{https://www.omg.org/spec/UML/2.5.1/}
+  \item[Rother, M., \& Shook, J. (1999).] \emph{Learning to see: Value stream mapping to add value and eliminate muda}. Lean Enterprise Institute.
+  \item[van der Aalst, W.\,M.\,P. (2016).] \emph{Process mining: Data science in action} (2nd ed.). Springer. \href{https://doi.org/10.1007/978-3-662-49851-4}{https://doi.org/10.1007/978-3-662-49851-4}
+  \item[van der Aalst, W.\,M.\,P., \& Carmona, J. (Hrsg.). (2022).] \emph{Process mining handbook} (Lecture Notes in Business Information Processing, Vol.~448). Springer. \href{https://doi.org/10.1007/978-3-031-08848-3}{https://doi.org/10.1007/978-3-031-08848-3}
+  \item[Womack, J.\,P., \& Jones, D.\,T. (2003).] \emph{Lean thinking: Banish waste and create wealth in your corporation} (2nd ed.). Free Press.
+\end{description}
+
+% --- 13. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Activity Diagram (UML)] Ablaufdiagramm in UML, vergleichbar mit BPMN. Symbole: Startknoten, Aktion, Entscheidungsknoten, Parallelisierung, Endknoten, Swimlane.
+  \item[Akteur (UML)] Eine Rolle, die mit dem System interagiert. Akteure liegen außerhalb der Systemgrenze.
+  \item[Bearbeitungszeit (BT)] Die Zeit, in der an einem Vorgang aktiv gearbeitet wird. Bestandteil der Durchlaufzeit.
+  \item[Case ID] Eindeutige Kennung eines Vorgangs im Event Log. Ohne Case ID ist Process Mining nicht möglich.
+  \item[Conformance Checking] Process-Mining-Disziplin, die ein Soll-Modell gegen den Event Log prüft. Identifiziert Abweichungen.
+  \item[Discovery] Process-Mining-Disziplin, die einen Ist-Prozess aus dem Event Log rekonstruiert -- ohne vorheriges Modell.
+  \item[Durchlaufzeit (DLZ)] Gesamtdauer eines Vorgangs vom Start bis zum Ende des Wertstroms. DLZ = Summe BT + Summe WT.
+  \item[Engpass] Schritt im Wertstrom, der die gesamte Durchlaufzeit am stärksten begrenzt. Typischerweise dort, wo die Wartezeit am höchsten ist.
+  \item[Enhancement] Process-Mining-Disziplin, die ein Modell um Zeitinformationen, Frequenzen und Engpässe anreichert.
+  \item[Event Log] Datenbasis für Process Mining. Mindestens drei Felder pro Eintrag: Case ID, Aktivität, Zeitstempel. \quelle{van der Aalst, 2016}
+  \item[Muda] Japanischer Begriff für Verschwendung. Im Lean-Kontext sieben (bzw.\ acht) Verschwendungsarten: Überproduktion, Wartezeit, Transport, Überbearbeitung, Bestand, Bewegung, Fehler, ungenutztes Wissen. \quelle{Womack \& Jones, 2003}
+  \item[Process Mining] Sammelbegriff für daten\-basierte Prozessanalyse aus Event Logs. Drei Disziplinen: Discovery, Conformance, Enhancement.
+  \item[Swimlane (UML)] Vertikaler oder horizontaler Bereich in einem Activity Diagram, der einer Rolle oder Organisationseinheit zugeordnet ist.
+  \item[UML] \emph{Unified Modeling Language.} OMG-Standard mit 14 Diagrammtypen. In der Geschäftsprozess-Praxis genügen meist Use Case und Activity. \quelle{Fowler, 2003}
+  \item[Use Case Diagram (UML)] Diagramm, das Akteure, Use Cases und die Systemgrenze zeigt. Beantwortet: wer will was, mit welchem Scope.
+  \item[Value Stream Mapping (VSM)] Lean-Methode zur visuellen Darstellung eines End-to-End-Wertflusses. Pro Schritt: BT, WT, Wertschöpfungs-Klassifikation. \quelle{Rother \& Shook, 1999}
+  \item[Wartezeit (WT)] Die Zeit, in der ein Vorgang in einer Warteschlange liegt -- nicht aktiv bearbeitet wird. Bestandteil der Durchlaufzeit, oft dominant.
+  \item[WIP (Work in Progress)] Bestände, die zwischen Prozess-Schritten warten. Hohe WIP-Mengen sind oft ein Symptom für Engpässe.
+  \item[Wertschöpfung] In der Lean-Terminologie: ein Schritt, für den der Kunde bezahlen würde. Gegenstücke: notwendige Nicht-Wertschöpfung (NNVA), Verschwendung (Muda).
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 2 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

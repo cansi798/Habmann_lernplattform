@@ -1,0 +1,884 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 3 - Lehrskript
+% Plattform-Geschaeftsmodelle erfolgreich entwickeln & skalieren
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+
+% --- Euro-Zeichen --------------------------------------------------------
+\usepackage{eurosym}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 3}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Plattform-Geschäftsmodelle entwickeln \& skalieren}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 2 \textperiodcentered{} TAG 3 VON 4 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 1.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Plattform-\\Geschäftsmodelle\\entwickeln \& skalieren\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom linearen Geschäft zum mehrseitigen Markt --\\Akteure, Netzwerkeffekte, Launch-Strategien und Ökosystem-Design.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 3 von 4}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent An den ersten beiden Tagen ging es um Plattformwahl, KPIs und operative Steuerung. Heute machen wir einen Perspektivwechsel: Wir betrachten Plattformen nicht mehr als Vertriebskanal, sondern als \emph{Geschäftsmodell}. Sie lernen die Logik mehrseitiger Märkte, planen Launch-Strategien und entwerfen Ökosystem-Architekturen, die wachsen können, ohne an Qualität zu verlieren.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Lineare vs.\ Plattform-Geschäftsmodelle: Wertschöpfungsstruktur, Akteure, Erlöslogiken.
+  \item Plattformtypen kennen: Marktplatz, Vermittlungsplattform, Service-, Daten-, Content-, Ökosystemplattform.
+  \item Direkte und indirekte Netzwerkeffekte unterscheiden -- positive und negative.
+  \item Henne-Ei-Problem, kritische Masse und Launch-Logiken einordnen.
+  \item Ökosystem-Governance: Regeln, Anreize, Qualität, Datenflüsse.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Eine Plattform-Akteurslandkarte mit Nutzenversprechen pro Marktseite entwerfen.
+  \item Netzwerkeffekte für einen konkreten Anwendungsfall identifizieren und bewerten.
+  \item Eine Launch-Strategie entwickeln, die bewusst priorisiert, welche Marktseite zuerst aufgebaut wird.
+  \item Erlöslogiken und Erfolgskennzahlen für einen Plattform-Pilot vorschlagen.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Plattform-Geschäftsmodelle als strategische Wachstums- und Steuerungsentscheidung bewerten.
+  \item Zielkonflikte zwischen Wachstum, Qualität, Kontrolle und Geschwindigkeit aktiv managen.
+  \item Verantwortung für Ökosystemdesign, Governance und Skalierungsfähigkeit übernehmen.
+  \item Plattformstrategie als \emph{Entscheidungsarchitektur} entwickeln -- nicht als Produktidee.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Eine Plattform ist kein digitales Schaufenster, sondern ein \emph{gesteuertes Ökosystem}. Sie funktioniert nur, wenn beide (oder mehr) Marktseiten dauerhaft Wert ziehen, wenn Netzwerkeffekte aktiv angestoßen werden und wenn Regeln vorhanden sind, die Qualität und Vertrauen sichern. Wer eine Plattform startet, ohne diese drei Dimensionen zu beherrschen, scheitert nicht am Markt -- sondern am eigenen Modell.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Vom linearen zum Plattform-Geschäftsmodell}
+
+Das klassische lineare Geschäftsmodell ist intuitiv: Ein Unternehmen kauft Materialien ein, fertigt ein Produkt, verkauft es an Kunden. Wertschöpfung verläuft in einer Linie -- vom Lieferanten über das Unternehmen zum Kunden. Erlöse entstehen aus Marge und Stückzahlen. Wachstum bedeutet: mehr produzieren, mehr verkaufen. \quelle{vgl.\ Parker et al., 2016, Kap.~1}
+
+Plattform-Geschäftsmodelle funktionieren grundlegend anders. Ein Plattformbetreiber \emph{produziert das eigentliche Produkt häufig gar nicht.} Stattdessen schafft er eine Infrastruktur, auf der zwei oder mehr Marktseiten zueinander finden können -- Anbieter und Nachfrager, Entwickler und Nutzer, Datengeber und Datennutzer. Wertschöpfung entsteht nicht durch Herstellung, sondern durch \emph{Vermittlung} und \emph{Orchestrierung}. \quelle{Cusumano et al., 2019, Kap.~1}
+
+\subsection{Die fünf zentralen Unterschiede}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXX@{}}
+\toprule
+Dimension & Lineares Geschäftsmodell & Plattform-Geschäftsmodell \\
+\midrule
+Wertschöpfung   & Linear (Lieferant \textrightarrow{} Hersteller \textrightarrow{} Kunde) & Mehrseitig (Plattform vermittelt zwischen Marktseiten) \\
+Skalierung       & Begrenzt durch Produktionskapazität & Skaliert mit Netzwerkeffekten, oft sublinear in Kosten \\
+Erlös            & Marge auf Stückzahlen                & Provisionen, Gebühren, Abos, Daten, Werbung \\
+Schlüssel\-ressource & Produkt, Fertigung, Vertrieb         & Netzwerk, Daten, Vertrauen, Regeln \\
+Wachstumsmotor & Marketing, Vertrieb, Kapazität       & Netzwerkeffekte, Reichweite, Qualität \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Diese Unterschiede sind nicht graduell, sondern strukturell. Wer ein lineares Geschäft betreibt und ``digitalisiert'', wird kein Plattform-Geschäft -- er bekommt einen besseren Webshop. Der Sprung zum Plattform-Modell erfordert ein anderes Denken, andere KPIs und andere Governance.
+
+\subsection{Wann lohnt sich der Sprung zur Plattform?}
+
+Nicht jedes Unternehmen sollte eine Plattform werden. Vier Indikatoren sprechen für den Sprung: \quelle{Hagiu, 2014}
+
+\begin{enumerate}
+  \item \fachbegriff{Es gibt mehrere Marktseiten, die einen Vermittler brauchen.} Anbieter und Nachfrager kennen sich nicht ausreichend, die Suche ist teuer, das Matching schwierig.
+  \item \fachbegriff{Netzwerkeffekte sind realistisch erreichbar.} Mit jedem Anbieter wird die Plattform für Nachfrager attraktiver -- und umgekehrt.
+  \item \fachbegriff{Das eigene Produkt allein ist nicht differenzierend genug.} Die Plattform schafft Wert durch Koordination, nicht durch Eigenleistung.
+  \item \fachbegriff{Datenzugang und Skalierung sind strategisch wichtig.} Die Plattform aggregiert Verhaltensdaten, die als Grundlage für weitere Dienste nutzbar sind.
+\end{enumerate}
+
+Wenn weniger als zwei dieser Indikatoren zutreffen, ist eine Plattform meist Over-Engineering. Dann reichen ein guter Webshop, ein Marketplace-Auftritt oder gezielte Vertriebsdigitalisierung.
+
+\subsection{Vorsicht: das ``Plattform-Buzzword-Risiko''}
+
+Viele Unternehmen nennen heute ihren Webshop oder ihr Kundenportal ``Plattform''. Das ist meist Marketing, kein Plattform-Geschäftsmodell. Drei Tests entlarven Schein-Plattformen:
+
+\begin{itemize}
+  \item Gibt es \emph{mehrere unabhängige Marktseiten}, die voneinander profitieren?
+  \item Entstehen \emph{Netzwerkeffekte} -- wird die Plattform mit jedem zusätzlichen Teilnehmer wertvoller?
+  \item Schafft der Betreiber \emph{Regeln und Anreize}, die das Verhalten der Teilnehmer steuern?
+\end{itemize}
+
+Wenn alle drei Antworten ``nein'' sind, ist es keine Plattform -- nur eine Software mit Plattform-Etikett.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{M-N-R}]
+Drei Tests für ein echtes Plattform-Geschäftsmodell:\\[2pt]
+\textbf{M}arktseiten -- gibt es mindestens zwei unabhängige?\\
+\textbf{N}etzwerkeffekte -- werden sie systematisch erzeugt?\\
+\textbf{R}egeln -- gibt es eine aktive Governance?\\[2pt]
+\emph{Ohne ``M-N-R'' ist es keine Plattform, sondern Vertrieb mit IT.}
+\end{eselsbox}
+
+% --- 2. PLATTFORMAKTEURE ------------------------------------------------
+\section{Plattformakteure und Nutzenversprechen}
+
+Eine Plattform funktioniert nur, wenn \emph{jede beteiligte Akteursgruppe} dauerhaft einen klaren Vorteil zieht. Eine der häufigsten Plattform-Pathologien: Eine Seite (meist die mit den Daten) wird systematisch besser bedient, die andere Seite wandert ab. Wenn das passiert, kippt das gesamte Modell.
+
+\subsection{Die typischen sieben Akteursgruppen}
+
+\begin{enumerate}
+  \item \fachbegriff{Anbieter} -- die Marktseite, die Leistungen oder Produkte einstellt (Verkäufer, Dienstleister, Content-Ersteller).
+  \item \fachbegriff{Nachfrager} -- die Marktseite, die Leistungen abruft (Käufer, Nutzer, Konsumenten).
+  \item \fachbegriff{Partner} -- erweiternde Beteiligte, die Mehrwertleistungen integrieren (Versand, Versicherung, Finanzierung).
+  \item \fachbegriff{Plattformbetreiber} -- gestaltet, betreibt und entwickelt die Plattform weiter.
+  \item \fachbegriff{Zahlungsdienstleister} -- übernimmt Bezahlabwicklung, oft auch Treuhand-Funktionen.
+  \item \fachbegriff{Datenpartner} -- liefern oder konsumieren Plattform-Daten unter klar definierten Bedingungen.
+  \item \fachbegriff{Serviceanbieter} -- Customer Service, technischer Support, Streitschlichtung.
+\end{enumerate}
+
+\subsection{Nutzenversprechen pro Akteursgruppe}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Akteur & Typische Nutzenversprechen \\
+\midrule
+Anbieter            & Zugang zu Reichweite, planbare Auslastung, geringere Akquisekosten, Vertrauen durch Bewertungen \\
+Nachfrager          & Auswahl, Vergleichbarkeit, Schnelligkeit, Vertrauen, Transparenz \\
+Partner             & Zugang zu Endkunden, Datenzugang, Integration in bestehende Workflows \\
+Plattformbetreiber  & Provisionen/Gebühren, Datenkontrolle, Marktmacht, langfristige Bindung \\
+Zahlungsdienstleister & Transaktionsvolumen, neuer Use Case, Daten \\
+Datenpartner        & Datenzugang gegen Bezahlung oder Mehrwertleistung \\
+Serviceanbieter     & Stabile Auftragslage, klare SLAs \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Eine Plattform-Strategie beginnt mit dieser Tabelle -- nicht mit der Technik. Wenn die Spalte ``Nutzenversprechen'' für eine Gruppe leer bleibt, fehlt die Geschäftslogik. Wenn das Versprechen unklar ist (``mehr Sichtbarkeit''), wird die Gruppe nicht teilnehmen.
+
+\subsection{Wertschöpfungsmechanismen}
+
+Plattformen schaffen Wert auf sechs typischen Wegen: \quelle{Parker et al., 2016, Kap.~3}
+
+\begin{itemize}
+  \item \fachbegriff{Vermittlung} -- bringt Anbieter und Nachfrager zusammen.
+  \item \fachbegriff{Transaktion} -- wickelt Kauf, Zahlung und Lieferung ab.
+  \item \fachbegriff{Daten} -- aggregiert Verhaltensdaten und macht sie nutzbar.
+  \item \fachbegriff{Reichweite} -- bietet einen Marktzugang, den einzelne Anbieter nicht aufbauen könnten.
+  \item \fachbegriff{Vertrauen} -- schafft Vergleichbarkeit, Bewertungen, Streitschlichtung.
+  \item \fachbegriff{Skalierung} -- ermöglicht Wachstum, das einzelne Anbieter nicht erreichen könnten.
+\end{itemize}
+
+Eine Plattform muss mindestens \emph{zwei dieser Mechanismen} überzeugend abdecken, um wettbewerbsfähig zu sein. Wer nur einen abdeckt, wird leicht durch spezialisierte Konkurrenz verdrängt.
+
+\begin{merkbox}[Nutzenversprechen-Test]
+Frage zu jeder Akteursgruppe: \emph{``Welchen konkreten Vorteil hat sie, der ohne die Plattform nicht oder schwerer erreichbar wäre?''} Wenn die Antwort vage bleibt (``mehr Möglichkeiten''), gibt es kein klares Nutzenversprechen -- die Gruppe wird nicht dauerhaft mitspielen.
+\end{merkbox}
+
+% --- 3. PLATTFORMTYPEN UND ERLOESLOGIKEN --------------------------------
+\section{Plattformtypen und Erlöslogiken}
+
+\subsection{Sechs Plattformtypen im B2B-/B2C-Kontext}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXl@{}}
+\toprule
+Plattformtyp & Was sie tut & Beispiel \\
+\midrule
+Marktplatz             & Transaktionen zwischen Anbietern und Käufern    & Amazon, eBay, Mercateo \\
+Vermittlungsplattform  & Matching zwischen Bedarf und Angebot ohne Lager  & Upwork, MyHammer \\
+Service-Plattform      & Buchung und Steuerung von Dienstleistungen       & Uber, Airbnb \\
+Daten-Plattform        & Aggregation und Bereitstellung von Daten         & Bloomberg, Statista \\
+Content-Plattform      & Produktion und Verteilung von Inhalten           & YouTube, LinkedIn \\
+Ökosystem-Plattform    & Mehrere Dienste, Geräte, Drittanbieter integriert & Apple iOS, SAP-Ökosystem \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Diese Typen lassen sich nicht trennscharf abgrenzen -- viele Plattformen kombinieren mehrere. ``MachineHub'' aus unserer Fallstudie wäre eine Kombination aus Marktplatz (Ersatzteile) und Service-Plattform (Wartungsservices).
+
+\subsection{Sieben typische Erlöslogiken}
+
+\begin{enumerate}
+  \item \fachbegriff{Provision pro Transaktion} -- Plattform erhält einen Prozentsatz jeder Transaktion. Häufigste Logik bei Marktplätzen.
+  \item \fachbegriff{Abonnement} -- Anbieter (oder Nachfrager) zahlen wiederkehrend für Zugang.
+  \item \fachbegriff{Listing-Gebühr} -- Anbieter zahlen für die Einstellung von Produkten oder Profilen.
+  \item \fachbegriff{Freemium} -- Basisnutzung kostenlos, Premiumfunktionen kostenpflichtig.
+  \item \fachbegriff{Werbung} -- Plattform vermarktet Aufmerksamkeit an Werbetreibende.
+  \item \fachbegriff{Transaktionsgebühr} -- pauschale Gebühr pro Transaktion (statt prozentual).
+  \item \fachbegriff{Daten-Services} -- Plattform monetarisiert anonymisierte oder aggregierte Daten an Dritte.
+\end{enumerate}
+
+\subsection{Wann welche Erlöslogik passt}
+
+\begin{itemize}
+  \item Hohe Transaktionswerte, klar zuordenbar: \emph{Provision}.
+  \item Wiederkehrende Nutzung mit klarem Mehrwert: \emph{Abonnement}.
+  \item Anbieter mit hohem Werbedruck: \emph{Listing-Gebühr}.
+  \item Niedrige Eintrittsschwelle wichtig: \emph{Freemium}.
+  \item Hohe Nutzerreichweite, aber niedrige Transaktionsbereitschaft: \emph{Werbung}.
+  \item B2B-Daten von wirtschaftlichem Wert: \emph{Daten-Services} (im Rahmen der DSGVO).
+\end{itemize}
+
+Häufig werden mehrere Erlöslogiken kombiniert (z.\,B.\ Provision + Listing-Gebühr + Daten-Services). Wichtig ist, dass die Logiken nicht im Widerspruch zueinander stehen: Eine reine Werbeplattform und eine reine Premium-Plattform haben unterschiedliche Anreize -- Werbeplattformen erzeugen tendenziell mehr Inhalte mit niedrigerer Qualität.
+
+\begin{merkbox}[Wirtschaftliche Tragfähigkeit prüfen]
+Vor jedem Plattform-Start die zentrale Frage: \emph{Welcher Anteil der Transaktionen muss über die Plattform laufen, damit sie wirtschaftlich tragfähig wird?} Wenn die Antwort lautet ``80 \% des Marktes innerhalb 3 Jahre'', ist das Modell strukturell zu ambitioniert -- die meisten erfolgreichen Plattformen erreichen ihr Optimum bei deutlich kleineren Anteilen einer fokussierten Nische.
+\end{merkbox}
+
+% --- 4. NETZWERKEFFEKTE ----------------------------------------------------
+\section{Netzwerkeffekte}
+
+\subsection{Direkte und indirekte Netzwerkeffekte}
+
+\fachbegriff{Direkte Netzwerkeffekte} entstehen innerhalb derselben Nutzergruppe: Je mehr Telefonnutzer es gibt, desto wertvoller wird das Telefon für jeden einzelnen Nutzer. Im B2B-Plattformkontext sind sie seltener als indirekte Effekte. \quelle{Rochet \& Tirole, 2003}
+
+\fachbegriff{Indirekte Netzwerkeffekte} entstehen zwischen verschiedenen Marktseiten: Je mehr Anbieter, desto attraktiver für Nachfrager. Je mehr Nachfrager, desto attraktiver für Anbieter. Das ist die typische Dynamik mehrseitiger Plattformen.
+
+\subsection{Positive vs.\ negative Netzwerkeffekte}
+
+Netzwerkeffekte sind nicht automatisch positiv. \emph{Negative Netzwerkeffekte} entstehen, wenn mehr Teilnehmer das Erlebnis verschlechtern: \quelle{Hagiu, 2014}
+
+\begin{itemize}
+  \item Zu viele Anbieter mit niedriger Qualität verwässern den Wert für Nachfrager.
+  \item Zu viele unqualifizierte Anfragen frustrieren Anbieter.
+  \item Anonymität auf großen Plattformen senkt Vertrauen.
+  \item Negative Bewertungen können einen Anbieter dauerhaft schädigen, ohne dass eine faire Streitschlichtung möglich ist.
+\end{itemize}
+
+Wer Netzwerkeffekte plant, muss auch deren Schattenseiten antizipieren und mit Governance-Regeln gegensteuern.
+
+\subsection{Same-Side vs.\ Cross-Side Effekte}
+
+Eine genauere Klassifikation: \quelle{Eisenmann et al., 2006}
+
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+Typ & Definition & Beispiel \\
+\midrule
+Same-Side positiv     & Mehr Teilnehmer einer Gruppe nutzen anderen Teilnehmern derselben Gruppe & Mehr WhatsApp-Nutzer machen WhatsApp wertvoller \\
+Same-Side negativ     & Mehr Teilnehmer einer Gruppe schaden Teilnehmern derselben Gruppe       & Mehr Verkäufer auf Marktplatz erhöhen Wettbewerbsdruck \\
+Cross-Side positiv    & Mehr Teilnehmer einer Gruppe nutzen der anderen Gruppe                 & Mehr Restaurants auf Lieferdienst nutzen Kunden \\
+Cross-Side negativ    & Mehr Teilnehmer einer Gruppe schaden der anderen Gruppe                & Mehr Werbung auf TV-Plattform stört Zuschauer \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Diese vier Effekte sind nicht ``einfach Netzwerkeffekte'' -- sie wirken in unterschiedliche Richtungen, gleichzeitig. Eine reife Plattform-Strategie kennt für ihren Kontext alle vier Wirkungen und steuert sie aktiv.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{S-C × +/-}]
+Vier Netzwerk-Effekt-Typen:\\[2pt]
+\textbf{Same-Side+/-} -- gleicher Marktseite gut/schlecht\\
+\textbf{Cross-Side+/-} -- anderer Marktseite gut/schlecht\\[2pt]
+\emph{``S-C × +/-'' -- vier Effekte gleichzeitig, alle aktiv steuern.}
+\end{eselsbox}
+
+% --- 5. KRITISCHE MASSE UND HENNE-EI-PROBLEM ----------------------------
+\section{Kritische Masse und das Henne-Ei-Problem}
+
+\fachbegriff{Kritische Masse} ist der Schwellenwert, ab dem eine Plattform sich selbst trägt: Es gibt genug Anbieter, dass Nachfrager kommen -- und genug Nachfrager, dass Anbieter bleiben. Vor Erreichen der kritischen Masse ist eine Plattform fragil; nach Erreichen wächst sie oft selbstverstärkend.
+
+\subsection{Das Henne-Ei-Problem}
+
+Der klassische Engpass beim Plattform-Start: \emph{Anbieter wollen erst kommen, wenn Nachfrager da sind. Nachfrager wollen erst kommen, wenn Anbieter da sind.} Beide Seiten warten aufeinander. Ergebnis: leere Plattform. \quelle{Eisenmann et al., 2006}
+
+Das Problem ist nicht trivial. Viele Plattformen scheitern an dieser Phase -- nicht weil sie schlecht gemacht waren, sondern weil sie die kritische Masse nicht erreicht haben, bevor das Geld ausging.
+
+\subsection{Drei Lösungsstrategien}
+
+\begin{enumerate}
+  \item \fachbegriff{Seitenpriorisierung} -- bewusst zuerst eine Marktseite intensiv aufbauen (meist die mit dem geringeren Risiko des Wegfallens). Beispiel: Amazon startete als Buchhändler mit eigenem Sortiment, dann Marketplace dazu.
+  \item \fachbegriff{Subventionierung einer Seite} -- eine Seite kostenlos oder mit starkem Anreiz versorgen. Beispiel: Uber zahlte anfangs Fahrer auch ohne Aufträge, um Verfügbarkeit zu garantieren.
+  \item \fachbegriff{Nischenstart} -- mit einer extrem fokussierten Untergruppe starten und ``ausreichend dicht'' werden. Beispiel: Facebook startete nur an Harvard, dann andere Universitäten.
+\end{enumerate}
+
+\subsection{Single-Homing vs.\ Multi-Homing}
+
+\fachbegriff{Single-Homing} bedeutet, dass Nutzer nur eine Plattform pro Kategorie nutzen. \fachbegriff{Multi-Homing} bedeutet, dass sie parallel mehrere nutzen. Diese Unterscheidung ist strategisch wichtig: \quelle{Eisenmann et al., 2006}
+
+\begin{itemize}
+  \item Wenn beide Marktseiten zu Multi-Homing tendieren, ist die Differenzierung über reine Reichweite schwierig -- die Plattform muss zusätzliche Werte schaffen.
+  \item Wenn eine Seite zu Single-Homing tendiert (z.\,B.\ aus Kostengründen), gewinnt die Plattform, die diese Seite zuerst bindet -- ``Winner takes most''.
+\end{itemize}
+
+\subsection{Welche Marktseite zuerst aufbauen?}
+
+Die Antwort hängt von vier Fragen ab:
+
+\begin{enumerate}
+  \item Welche Seite hat höhere Wechselkosten? \emph{Diese Seite zuerst gewinnen} -- sie bleibt stabil.
+  \item Welche Seite ist günstiger zu gewinnen? \emph{Pragmatisch zuerst} -- wenn Budget begrenzt ist.
+  \item Welche Seite zieht die andere stärker an? \emph{Strategisch zuerst} -- wegen Hebel.
+  \item Welche Seite bietet wir bereits über andere Kanäle an? \emph{Synergiestart} -- wenn Bestandskunden integrierbar sind.
+\end{enumerate}
+
+In unserer MachineHub-Fallstudie liegt die Antwort bei den \emph{Bestandskunden} (Produktionsbetriebe) -- sie sind bereits da, ihre Wechselbereitschaft zur Plattform ist begrenzt, sie ziehen Wartungsdienstleister an (cross-side positiv).
+
+\begin{merkbox}[Henne-Ei lösen, nicht ignorieren]
+Wer den Plattform-Start ohne Antwort auf das Henne-Ei-Problem beginnt, verbrennt Budget. Drei Strategien gibt es -- meist ist eine Kombination nötig. \emph{Wahl der Strategie ist Teil der Plattform-Strategie}, kein operatives Detail.
+\end{merkbox}
+
+% --- 6. LAUNCH-STRATEGIEN ------------------------------------------------
+\section{Launch-Strategien}
+
+\subsection{Sechs typische Launch-Ansätze}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Ansatz & Was er bedeutet \\
+\midrule
+Nischenstart           & Eine sehr fokussierte Untergruppe wird aufgebaut, ausreichend ``dicht'', dann verbreitert \\
+Pilotmarkt             & Eine geografische Region oder ein Segment wird vollständig bedient, dann expandiert \\
+Angebotsseite zuerst   & Zuerst kritische Masse an Anbietern gewinnen, dann Nachfrager (oft mit Subvention) \\
+Nachfrageseite zuerst  & Zuerst Nachfrager gewinnen (oft aus Bestand), Anbieter folgen wegen Marktdruck \\
+Kuratierter Start      & Manuelle Auswahl von Anbietern und/oder Nachfragern, hohe Qualität, langsames Wachstum \\
+Partnerschaftsstart    & Zusammenarbeit mit etabliertem Partner, der bereits eine Seite mitbringt \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Erfolgsfaktoren im Launch}
+
+Aus Studien und Erfahrung kristallisieren sich sechs Erfolgsfaktoren: \quelle{Parker et al., 2016, Kap.~5; Choudary, 2015}
+
+\begin{enumerate}
+  \item \fachbegriff{Fokus} -- nicht zu breit starten, klare Nische/Region/Segment.
+  \item \fachbegriff{Vertrauen} -- von Anfang an Mechanismen, die Vertrauen schaffen (Verifizierung, Bewertungen, Garantien).
+  \item \fachbegriff{Qualität} -- bewusste Selektion in der Startphase, lieber weniger Teilnehmer mit hoher Qualität als viele schlechte.
+  \item \fachbegriff{Einfache Nutzung} -- Onboarding-Reibung minimieren, klares erstes Erfolgserlebnis.
+  \item \fachbegriff{Klare Regeln} -- Plattform-Regeln müssen früh definiert sein, nicht erst bei Konflikten.
+  \item \fachbegriff{Messbare Aktivierung} -- klare Definition, ab wann ein Nutzer als ``aktiv'' gilt, plus Frühindikatoren für Drop-Off.
+\end{enumerate}
+
+\subsection{Die Falle ``zu groß starten''}
+
+Der häufigste Plattform-Start-Fehler: Zu breit, zu national, zu allumfassend. Die Hoffnung: ``Mit großem Auftritt erreichen wir mehr Sichtbarkeit.'' Die Realität: \emph{Dünne Verteilung führt dazu, dass keine Marktseite Wert erfährt}. Anbieter haben zu wenig Anfragen, Nachfrager zu wenig Treffer -- beide gehen wieder.
+
+Die Gegenstrategie: \emph{Lieber dicht in einer Nische als dünn überall.} Eine Plattform mit 30 aktiven Anbietern und 200 Nachfragern in einer Stadt schlägt eine Plattform mit 300 Anbietern und 2.000 Nachfragern verteilt über Deutschland.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{F-V-Q-E-R-A}]
+Die sechs Launch-Erfolgsfaktoren:\\[2pt]
+\textbf{F}okus, \textbf{V}ertrauen, \textbf{Q}ualität, \textbf{E}infachheit, \textbf{R}egeln, \textbf{A}ktivierungsmessung.\\[2pt]
+\emph{Fehlt einer davon, scheitert der Launch -- meist an leerer Plattform.}
+\end{eselsbox}
+
+% --- 7. OEKOSYSTEME UND GOVERNANCE --------------------------------------
+\section{Plattform-Ökosysteme und Governance}
+
+\subsection{Was ein Ökosystem von einer Plattform unterscheidet}
+
+Eine \fachbegriff{Plattform} ist die Infrastruktur. Ein \fachbegriff{Ökosystem} ist die Gesamtheit aller Teilnehmer plus die Regeln, Anreize und Datenflüsse, die sie verbindet. Eine Plattform ohne aktives Ökosystem-Management ist nur Software. \quelle{Cusumano et al., 2019, Kap.~3; McAfee \& Brynjolfsson, 2017, Kap.~6}
+
+\subsection{Vier Governance-Bausteine}
+
+\begin{enumerate}
+  \item \fachbegriff{Zugangsregeln} -- wer darf teilnehmen, unter welchen Bedingungen, mit welchen Pflichten?
+  \item \fachbegriff{Verhaltensregeln} -- welches Verhalten ist erlaubt, was wird sanktioniert (z.\,B.\ gefälschte Bewertungen, Spam, Plattform-Umgehung)?
+  \item \fachbegriff{Daten- und Eigentumsregeln} -- wem gehören welche Daten, wer darf sie nutzen, wie wird Vertrauen gesichert?
+  \item \fachbegriff{Konfliktregelung} -- wie werden Streitfälle zwischen Teilnehmern entschieden (Mediation, Schiedsverfahren, Reputation)?
+\end{enumerate}
+
+\subsection{Anreizdesign}
+
+Plattformen verhalten sich anders, je nachdem, welche Anreize sie setzen. Drei typische Anreiz-Hebel:
+
+\begin{itemize}
+  \item \fachbegriff{Sichtbarkeitsanreize} -- bessere Ranking-Position für hohe Qualität, schnelle Antwort, gute Bewertungen.
+  \item \fachbegriff{Finanzielle Anreize} -- niedrigere Provisionen für hochwertige Anbieter, Boni für Top-Performer.
+  \item \fachbegriff{Reputations-Anreize} -- Status-Badges, Verifizierungen, Auszeichnungen.
+\end{itemize}
+
+Anreize, die nicht durchdacht sind, erzeugen unerwünschtes Verhalten. ``Wer am meisten Bewertungen hat, kommt oben'' führt dazu, dass Anbieter Bewertungen kaufen oder erpressen. ``Wer am günstigsten ist, kommt oben'' führt zu Qualitätsverlust. Anreize müssen mit Gegen-Mechanismen gekoppelt sein -- analog zum Goodhart-Schutz bei KPIs (siehe Tag 3 Kurs 71).
+
+\subsection{Vertrauen als Plattform-Kapital}
+
+\fachbegriff{Vertrauen} ist die wichtigste Währung jeder Plattform. Es entsteht über mehrere Mechanismen:
+
+\begin{itemize}
+  \item Identitätsprüfung und Verifizierung.
+  \item Bewertungen und Reviews mit Schutz vor Manipulation.
+  \item Garantien (Geld-Zurück, Pflichtversicherung).
+  \item Transparente Streitschlichtung.
+  \item Sichtbare Plattform-Regeln und konsequente Durchsetzung.
+\end{itemize}
+
+Vertrauen ist schwer aufzubauen und leicht zu zerstören. Ein einziger schlecht gehandhabter Vorfall (z.\,B.\ ein Betrugsfall ohne Schadensregulierung) kann eine Plattform in einer Nische dauerhaft beschädigen.
+
+\begin{merkbox}[Governance ist nicht Bürokratie]
+Plattform-Governance wird oft als ``Regeln und Bürokratie'' missverstanden. Tatsächlich ist sie der entscheidende Wettbewerbsfaktor: Plattformen mit kluger Governance gewinnen Vertrauen, ziehen bessere Teilnehmer an und können höhere Provisionen rechtfertigen. Plattformen ohne Governance werden zu ``Wild West''-Räumen und kollabieren oft an Qualitätsproblemen.
+\end{merkbox}
+
+% --- 8. RISIKEN -------------------------------------------------------
+\section{Risiken im Plattform-Launch und im Betrieb}
+
+\subsection{Sechs typische Risiken}
+
+\begin{enumerate}
+  \item \fachbegriff{Kritische Masse wird nicht erreicht.} Plattform bleibt leer, Vertrauen schwindet, Spirale nach unten.
+  \item \fachbegriff{Negative Netzwerkeffekte.} Schlechte Anbieter schaden guten, Nachfrager verlieren Vertrauen.
+  \item \fachbegriff{Plattformmissbrauch.} Anbieter umgehen die Plattform (z.\,B.\ Direktkontakt zu Nachfragern), Plattform verliert Transaktionsanteil.
+  \item \fachbegriff{Partner- und Daten-Abhängigkeit.} Schlüssel-Partner (z.\,B.\ Zahlungsdienstleister) können Bedingungen einseitig ändern.
+  \item \fachbegriff{Regulatorische Eingriffe.} EU-Plattformregulierung (DMA, DSA) verändert Spielregeln für große Plattformen.
+  \item \fachbegriff{Interne Akzeptanz.} Bestehender Vertrieb sieht Plattform als Bedrohung, blockiert Migration.
+\end{enumerate}
+
+\subsection{Risiko-Management-Logik}
+
+\begin{itemize}
+  \item \fachbegriff{Vermeidung} -- bestimmte Plattformaktivitäten nicht einsteigen (z.\,B.\ keine ``offene Plattform für jeden'', sondern kuratiert).
+  \item \fachbegriff{Reduktion} -- Risiko minimieren (z.\,B.\ klare Verhaltensregeln, Mehrfachpartnerschaften statt Single-Vendor).
+  \item \fachbegriff{Übertragung} -- vertraglich absichern (z.\,B.\ Versicherungen, Haftungsausschlüsse, Datenexport-Klauseln).
+  \item \fachbegriff{Beobachten} -- mit Frühwarnsignalen versehen, regelmäßig prüfen.
+\end{itemize}
+
+\subsection{Drei konkrete Risiko-Szenarien}
+
+\textbf{Szenario 1 -- Plattformmissbrauch.} Ein Wartungsdienstleister umgeht nach drei Aufträgen die Plattform und arbeitet direkt mit dem Produktionsbetrieb. \emph{Konsequenz:} Plattform verliert Provision, Daten und Steuerungs-Möglichkeit. \emph{Gegenmaßnahme:} Vertragliche Bindung mit Vertragsstrafen, plus laufender Mehrwert (z.\,B.\ Bezahlsicherheit, Marketing), der den Direktweg unattraktiv macht.
+
+\textbf{Szenario 2 -- Negative Bewertungs-Spirale.} Ein einzelner Vorfall (z.\,B.\ ein unzuverlässiger Anbieter) zieht viele negative Bewertungen nach sich. Andere Nachfrager verlieren Vertrauen, ziehen sich zurück. \emph{Gegenmaßnahme:} aktive Anbieter-Qualitätskontrolle, klares Beschwerdemanagement, transparente Streitschlichtung.
+
+\textbf{Szenario 3 -- Regulatorische Anforderung.} Eine neue EU-Verordnung verlangt mehr Transparenz über Plattform-Algorithmen. \emph{Konsequenz:} Anpassungs-Aufwand, möglicherweise Wettbewerbsnachteil gegenüber kleineren oder ausländischen Plattformen. \emph{Gegenmaßnahme:} Regulatorische Beobachtung als Pflicht-Routine, frühe Anpassung statt Last-Minute-Sprint.
+
+% --- 9. FALLSTUDIE -------------------------------------------------------
+\section{Fallstudie: MachineHub -- Plattform für Ersatzteile und Wartungsservices}
+
+\subsection{Ausgangssituation}
+
+\emph{MachineHub} ist ein mittelständisches Unternehmen, das bisher Ersatzteile für Industriemaschinen direkt verkauft. Die Geschäftsführung erkennt: Kunden erwarten digitale Beschaffung, schnelle Verfügbarkeit und Servicebündel. Gleichzeitig gibt es viele Wartungsdienstleister mit freien Kapazitäten, die schwer sichtbar sind.
+
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Jahresumsatz: 45\,Mio.\,\euro{}, Bestandskunden: 1.800 Produktionsbetriebe.
+  \item Potenzielle Wartungspartner: ca.\ 400 regionale Dienstleister.
+  \item Startbudget: 500.000\,\euro{}, Zeitfenster für Pilotstart: 9 Monate.
+  \item IT-Systeme teilweise veraltet, Vertrieb befürchtet Kontrollverlust.
+\end{itemize}
+
+\subsection{Vier strategische Optionen}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXl@{}}
+\toprule
+Option & Beschreibung & Risiko \\
+\midrule
+A & Reiner Ersatzteil-Marktplatz                                    & Hoher Preiswettbewerb, geringe Differenzierung \\
+B & Plattform für Ersatzteile plus Wartungsdienstleister            & Komplexer, aber starke Differenzierung \\
+C & Geschlossenes Kundenportal nur für Bestandskunden               & Begrenzte Skalierung, geringe Netzwerkeffekte \\
+D & Offenes Ökosystem mit Partnern, Datenservices und Servicepaketen & Für Start zu komplex, hohes Risiko \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Bewertung der Optionen}
+
+\textbf{Option A (Marktplatz):} Schnell umsetzbar, aber als reiner Ersatzteil-Verkauf leicht kopierbar. Hauptproblem: Preisvergleich erodiert Margen. \emph{Empfehlung: zu risikoreich für nachhaltige Differenzierung.}
+
+\textbf{Option B (kombinierte Plattform):} Beste Balance aus Kundennutzen und strategischer Differenzierung. Die Verbindung von Teilen und Service ist eine klare Antwort auf das eigentliche Kundenbedürfnis: \emph{Maschine läuft -- statt nur Teile bekommen}. \emph{Empfehlung: priorisierter Pilot.}
+
+\textbf{Option C (Kundenportal):} Kontrollierbar und risikoarm, aber begrenzte Skalierung. Würde MachineHub langfristig ohne Plattform-Vorteil lassen. \emph{Empfehlung: nicht als Ziel, aber als Einstiegsstufe denkbar.}
+
+\textbf{Option D (offenes Ökosystem):} Strategisch attraktiv, aber für 9 Monate Pilotstart zu komplex. Erfordert Erfahrung im Plattform-Betrieb. \emph{Empfehlung: nicht jetzt, aber als 24-Monats-Vision.}
+
+\subsection{Empfehlung: Option B als fokussierter Pilot}
+
+\textbf{Schritt 1 -- Zielsegment und Pilotregion (Monat 1--3):}
+\begin{itemize}
+  \item Pilotregion: süddeutscher Raum, ca.\ 300 Bestandskunden, 80--100 potenzielle Dienstleister.
+  \item Kritische Ersatzteilgruppen: Top-50 Schnelldreher, plus 10 typische Wartungsservices.
+  \item Qualitätskriterien Wartungspartner: Zertifizierung, Reaktionszeit unter 24\,h, Kundenbewertung über 4.0.
+  \item Ziel: 20--30 geprüfte Dienstleister aktiv.
+\end{itemize}
+
+\textbf{Schritt 2 -- Plattform-MVP (Monat 4--6):}
+\begin{itemize}
+  \item Bestellfunktion für Ersatzteile mit Lieferzeitanzeige.
+  \item Serviceanfrage-Funktion mit automatisiertem Matching.
+  \item Bewertungssystem für beide Seiten.
+  \item SLA-Monitoring (Antwortzeit, Bearbeitungszeit, Kundenzufriedenheit).
+\end{itemize}
+
+\textbf{Schritt 3 -- Test und Auswertung (Monat 7--9):}
+\begin{itemize}
+  \item Pilot mit 50--80 Bestandskunden aktiv.
+  \item Wirkungskennzahlen messen (siehe unten).
+  \item Entscheidung über Skalierung auf weitere Regionen.
+\end{itemize}
+
+\subsection{Wirkungs-Kennzahlen}
+
+\begin{tabularx}{\linewidth}{@{}lXl@{}}
+\toprule
+\textbf{Kennzahl}                & \textbf{Definition}                              & \textbf{Ziel nach 9 Monaten} \\
+\midrule
+Aktivierungsrate                & Anteil eingeladener Kunden, die die Plattform nutzen & \textgreater~50\,\% \\
+Wiederkaufrate                  & Anteil Kunden mit \textgreater~3 Bestellungen     & \textgreater~40\,\% \\
+Service-Antwortzeit (Median)    & Zeit von Anfrage bis Angebot                       & \textless~8\,h \\
+Kundenzufriedenheit (NPS)       & Net Promoter Score nach erstem Service             & \textgreater~50 \\
+Plattform-Provision pro Service & Durchschnittliche Provision \euro{}/Auftrag       & 10\,\% \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Entscheidung unter Unsicherheit}
+
+\emph{Trotz} Unsicherheit über die Akzeptanz der Wartungsdienstleister wird die kombinierte Plattform-Option (B) gewählt. Begründung: Nur die Kombination Ersatzteile + Service schafft die schwer kopierbare Differenzierung, die langfristig Marktposition sichert.
+
+\emph{Risiko-relevante Annahme:} Wartungspartner akzeptieren die 10\,\%-Provision und die Qualitätskriterien. Falls weniger als 15 Dienstleister nach Monat 3 aktiv sind, ist die Annahme widerlegt -- dann muss die Provisionsstruktur überarbeitet oder die Pilotregion gewechselt werden.
+
+\begin{merkbox}[Logik der Fallstudie]
+Nicht die größte Plattformidee ist die beste -- sondern die \emph{fokussierteste mit klarer Lernlogik}. Plattformwachstum entsteht über Qualität, Vertrauen und Daten -- nicht über Reichweite allein. Netzwerkeffekte werden nicht ``passieren'', sie werden \emph{aktiv erzeugt} durch Ökosystem-Design.
+\end{merkbox}
+
+% --- 10. COACHING --------------------------------------------------------
+\section{Coaching: Plattform als gesteuertes Ökosystem}
+
+Tag 3 verschiebt die Perspektive: weg von der Plattform als Vertriebskanal (Tag 1), weg vom Operating Model (Tag 2), hin zur Plattform als \emph{Ökosystem mit Geschäftsmodell-Charakter}.
+
+\subsection{Vier Reflexionsfragen für Plattform-Entscheidungen}
+
+\begin{enumerate}
+  \item Welche Marktseite ist für den Start strategisch wichtiger -- und warum? (Antwort hängt von Wechselkosten, Akquisitionskosten und Cross-Side-Effekten ab.)
+  \item Wo kann zu schnelles Wachstum der Plattform schaden? (Klassiker: Qualität wird beim Skalieren verwässert.)
+  \item Welche Teilnehmergruppe erzeugt den \emph{größten Wert} für das Ökosystem -- nicht nur in Bestellungen, sondern in Daten, Reichweite und Vertrauen?
+  \item Welche Regeln braucht die Plattform bereits am Anfang? (Zu lockere Regeln im Start sind später schwer zu verschärfen.)
+\end{enumerate}
+
+\subsection{Vom Plattform-Manager zum Plattform-Architekten}
+
+Drei Kennzeichen des Architekten-Denkens:
+
+\begin{itemize}
+  \item Man denkt in \emph{Akteursgruppen} und \emph{Wertversprechen}, nicht in Features.
+  \item Man entscheidet, was die Plattform \emph{nicht} machen soll, genauso bewusst wie das, was sie macht.
+  \item Man baut \emph{Selbstverstärkungs-Schleifen} (Netzwerkeffekte, Daten, Reputation) bewusst ein -- statt zu hoffen, dass sie entstehen.
+\end{itemize}
+
+\subsection{Konflikte im Plattform-Aufbau}
+
+Drei klassische Konflikte tauchen in fast jeder Plattform-Initiative auf:
+
+\begin{itemize}
+  \item \fachbegriff{Wachstum vs.\ Qualität.} Schnellere Akquisition senkt Auswahlqualität -- gefährlich für Vertrauen.
+  \item \fachbegriff{Kontrolle vs.\ Offenheit.} Geschlossene Plattformen sind kontrollierbar, aber wachsen langsamer; offene Plattformen wachsen schneller, aber sind schwerer zu steuern.
+  \item \fachbegriff{Skalierung vs.\ Personalisierung.} Mehr Teilnehmer schaffen Reichweite, aber individuelle Beziehungen leiden.
+\end{itemize}
+
+Diese Konflikte sind \emph{nicht zu lösen} -- sie sind zu \emph{entscheiden}. Senior-Plattform-Verantwortung heißt, die Trade-offs sichtbar zu machen, eine Wahl zu treffen und sie zu rechtfertigen.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{W-K-S}]
+Drei klassische Plattform-Trade-offs:\\[2pt]
+\textbf{W}achstum vs.\ Qualität\\
+\textbf{K}ontrolle vs.\ Offenheit\\
+\textbf{S}kalierung vs.\ Personalisierung\\[2pt]
+\emph{``W-K-S'' -- drei Konflikte, die jede reife Plattform-Strategie bewusst entscheidet.}
+\end{eselsbox}
+
+% --- 11. MANAGEMENT ------------------------------------------------------
+\section{Management-Perspektive: Plattform-Geschäftsmodellarchitektur}
+
+Auf Wissens- und Anwendungs-Ebene haben wir die Plattform-Logik durchgearbeitet. Auf Management-Ebene geht es um die übergreifende Frage: \emph{Wie verankern wir Plattform-Denken im Unternehmen, sodass es trägt -- auch über mehrere Jahre und mehrere Verantwortungswechsel?}
+
+\subsection{Die zehn Elemente einer Plattform-Geschäftsmodellarchitektur}
+
+\begin{enumerate}
+  \item Plattform-Geschäftsmodell klar definiert (vs.\ lineares Modell).
+  \item Akteurslandkarte mit Nutzenversprechen pro Marktseite.
+  \item Analyse positiver und negativer Netzwerkeffekte.
+  \item Entscheidung: welche Marktseite zuerst aufgebaut?
+  \item Launch-Strategie für die ersten 6--12 Monate.
+  \item Governance-Logik: Zugangsregeln, Verhaltensregeln, Datenregeln, Konfliktregelung.
+  \item Risikoarchitektur mit Frühwarnsignalen.
+  \item KPI-Architektur (Aktivierung, Wachstum, Qualität, Margen).
+  \item Internes Change-Management: Vertrieb, IT, Service mitnehmen.
+  \item Drei bis fünf Executive-Entscheidungen, die explizit getroffen sind.
+\end{enumerate}
+
+\subsection{Drei zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Schnelles Wachstum vs.\ Qualitätskontrolle.} Aggressives Wachstum senkt Auswahl-Qualität. Wer auf Qualität setzt, wächst langsamer.
+  \item \textbf{Offenes Ökosystem vs.\ Differenzierung.} Offene Plattformen ziehen viele Partner an, aber verlieren oft an Profil. Geschlossene Plattformen sind differenzierter, aber kleiner.
+  \item \textbf{Vermittlungsmodell vs.\ Eigenanteil.} Soll der Betreiber selbst Anbieter sein (= Konkurrenz zu eigenen Anbietern), oder reiner Vermittler bleiben? Beides hat Vor- und Nachteile.
+\end{enumerate}
+
+\subsection{Anti-Patterns auf Management-Ebene}
+
+\begin{enumerate}
+  \item \fachbegriff{``Wir bauen die Amazon-für-X.''} -- Vergleich mit Amazon ist meist unrealistisch und führt zu falscher Skalierungs-Annahme.
+  \item \fachbegriff{``Mehr Teilnehmer = mehr Erfolg.''} -- Falsch. Schlechte Teilnehmer schaden mehr, als sie nutzen.
+  \item \fachbegriff{``Plattform ist ein IT-Projekt.''} -- Falsch. Plattform ist Geschäftsmodell, IT ist Werkzeug.
+  \item \fachbegriff{``Wir starten erst, wenn alles perfekt ist.''} -- Falsch. Plattformen lernen im Markt, nicht in Konferenzräumen.
+  \item \fachbegriff{``Wir öffnen sofort für alle.''} -- Falsch. Kuratierter Start mit Qualitätskontrolle schafft Vertrauen, das später kaum nachholbar ist.
+\end{enumerate}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 3]
+Plattform-Geschäftsmodelle sind \textbf{Architekturentscheidungen mit Ökosystem-Charakter}. Sie schaffen Wert durch Vermittlung, nicht durch Eigenproduktion. Ihr Erfolg hängt nicht primär von Technik ab, sondern von Akteurs-Logik, Netzwerkeffekt-Steuerung und Governance. Wer eine Plattform startet, muss Zielkonflikte bewusst entscheiden -- nicht ``wegmoderieren''.
+\end{merkbox}
+
+% --- 12. HAEUFIGE FEHLER ------------------------------------------------
+\section{Häufige Fehler in Plattform-Geschäftsmodellen}
+
+\subsection{Sechs typische Anti-Muster}
+
+\begin{enumerate}
+  \item \fachbegriff{Plattform ohne Henne-Ei-Strategie.} Start ohne Antwort auf das Henne-Ei-Problem führt zu leerer Plattform.
+  \item \fachbegriff{Beide Marktseiten gleich behandeln.} Beide gleich zu adressieren ist meist ineffizient -- eine Seite ist immer strategisch wichtiger.
+  \item \fachbegriff{Zu groß starten.} Dünne Verteilung verhindert Netzwerkeffekte; Plattform stirbt an leerer Wahrnehmung.
+  \item \fachbegriff{Qualität dem Wachstum opfern.} Verwässerte Auswahl zerstört Vertrauen -- der Wachstumserfolg von gestern wird zum Vertrauensproblem von heute.
+  \item \fachbegriff{Governance nachträglich einführen.} Regeln, die erst bei Problemen kommen, werden als willkürlich empfunden -- besser von Anfang an klar definieren.
+  \item \fachbegriff{Plattformmissbrauch ignorieren.} Anbieter, die Nachfrager direkt kontaktieren und die Plattform umgehen, sind ein strukturelles Risiko -- nicht eine Randerscheinung.
+\end{enumerate}
+
+\subsection{Review-Checkliste vor einem Plattform-Start}
+
+\begin{enumerate}
+  \item Haben Sie ein klares Plattform-Geschäftsmodell (nicht nur einen Webshop)?
+  \item Sind alle Akteursgruppen mit Nutzenversprechen benannt?
+  \item Haben Sie eine Antwort auf das Henne-Ei-Problem?
+  \item Ist die Launch-Strategie fokussiert genug (Nische, Region, Segment)?
+  \item Sind Vertrauensmechanismen (Verifizierung, Bewertungen, Streitschlichtung) von Tag 1 an vorhanden?
+  \item Ist ein Plan für Plattformmissbrauch (Abwanderung, Umgehung) vorhanden?
+\end{enumerate}
+
+% --- 13. TAKE-AWAYS ------------------------------------------------------
+\section{Take-aways aus Tag 3}
+
+\begin{enumerate}
+  \item \textbf{Plattform $\ne$ Webshop.} Mehrere Marktseiten, Netzwerkeffekte und Governance müssen vorhanden sein.
+  \item \textbf{Sechs Plattformtypen}, sieben Erlöslogiken -- bewusst kombinieren, nicht beliebig mischen.
+  \item \textbf{Vier Netzwerkeffekt-Typen} (Same-/Cross-Side $\times$ positiv/negativ) -- alle vier aktiv steuern.
+  \item \textbf{Kritische Masse durch Henne-Ei-Strategie.} Seitenpriorisierung, Subventionierung oder Nischenstart -- meist Kombination.
+  \item \textbf{Sechs Launch-Erfolgsfaktoren.} Fokus, Vertrauen, Qualität, Einfachheit, Regeln, Aktivierungsmessung.
+  \item \textbf{Vier Governance-Bausteine.} Zugang, Verhalten, Daten, Konfliktregelung -- von Anfang an.
+  \item \textbf{Sechs strategische Risiken.} Kritische Masse, negative Netzwerkeffekte, Missbrauch, Partnerabhängigkeit, Regulatorik, interne Akzeptanz.
+  \item \textbf{Plattform-Architektur in zehn Elementen.} Vom Geschäftsmodell über Akteurs- und Risikoarchitektur bis zur Executive-Entscheidung.
+  \item \textbf{Drei klassische Trade-offs.} Wachstum vs.\ Qualität, Kontrolle vs.\ Offenheit, Skalierung vs.\ Personalisierung -- entscheiden, nicht ``wegmoderieren''.
+\end{enumerate}
+
+% --- 14. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Choudary, S.\,P. (2015).] \emph{Platform scale: How an emerging business model helps startups build large empires with minimum investment}. Platform Thinking Labs.
+  \item[Cusumano, M.\,A., Gawer, A., \& Yoffie, D.\,B. (2019).] \emph{The business of platforms: Strategy in the age of digital competition, innovation, and power}. HarperBusiness.
+  \item[Eisenmann, T., Parker, G., \& Van Alstyne, M.\,W. (2006).] Strategies for two-sided markets. \emph{Harvard Business Review, 84}(10), 92--101.
+  \item[Evans, D.\,S., \& Schmalensee, R. (2016).] \emph{Matchmakers: The new economics of multisided platforms}. Harvard Business Review Press.
+  \item[Hagiu, A. (2014).] Strategic decisions for multisided platforms. \emph{MIT Sloan Management Review, 55}(2), 71--80.
+  \item[McAfee, A., \& Brynjolfsson, E. (2017).] \emph{Machine, platform, crowd: Harnessing our digital future}. W.\,W.\ Norton.
+  \item[Parker, G.\,G., Van Alstyne, M.\,W., \& Choudary, S.\,P. (2016).] \emph{Platform revolution: How networked markets are transforming the economy -- and how to make them work for you}. W.\,W.\ Norton.
+  \item[Rochet, J.-C., \& Tirole, J. (2003).] Platform competition in two-sided markets. \emph{Journal of the European Economic Association, 1}(4), 990--1029. \href{https://doi.org/10.1162/154247603322493212}{https://doi.org/10.1162/154247603322493212}
+\end{description}
+
+% --- 15. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Akteursgruppe] Eine Beteiligten-Kategorie auf einer Plattform (Anbieter, Nachfrager, Partner, Betreiber, etc.). Jede Gruppe braucht ein eigenes Nutzenversprechen.
+  \item[Cross-Side-Netzwerkeffekt] Wirkung zwischen Marktseiten: mehr Teilnehmer einer Seite verändern den Wert für die andere Seite (positiv oder negativ).
+  \item[Direkter Netzwerkeffekt] Wirkung innerhalb einer Marktseite: mehr Teilnehmer einer Gruppe machen die Plattform für andere Teilnehmer derselben Gruppe wertvoller (oder weniger).
+  \item[Henne-Ei-Problem] Plattform-Start-Engpass: Anbieter wollen erst kommen, wenn Nachfrager da sind -- und umgekehrt. Eine der drei Lösungsstrategien (Seitenpriorisierung, Subventionierung, Nischenstart) ist nötig.
+  \item[Indirekter Netzwerkeffekt] Cross-Side-Effekt zwischen verschiedenen Marktseiten -- die typische Plattform-Dynamik.
+  \item[Kritische Masse] Schwellenwert, ab dem eine Plattform sich selbst trägt -- genug Anbieter ziehen Nachfrager an und umgekehrt.
+  \item[Launch-Strategie] Vorgehensweise zum Plattform-Start (Nischenstart, Pilotmarkt, Seitenpriorisierung, kuratierter Start, Partnerschaftsstart).
+  \item[Lineares Geschäftsmodell] Klassisches Modell: Lieferant \textrightarrow{} Hersteller \textrightarrow{} Kunde. Wertschöpfung in einer Linie.
+  \item[Mehrseitige Plattform] Eine Plattform, die zwei oder mehr unabhängige Marktseiten verbindet.
+  \item[Multi-Homing] Nutzer nutzen mehrere Plattformen parallel. Reduziert die Marktmacht einzelner Plattformen.
+  \item[Negativer Netzwerkeffekt] Mehr Teilnehmer verschlechtern den Wert der Plattform (z. B. zu viele unqualifizierte Anfragen, Werbedichte, Spam).
+  \item[Nutzenversprechen] Konkreter Vorteil, den eine Marktseite durch die Plattform erhält -- muss klar formulierbar sein.
+  \item[Ökosystem] Gesamtheit aller Plattform-Teilnehmer plus Regeln, Anreize und Datenflüsse -- aktiv gesteuert, nicht passiv vorhanden.
+  \item[Plattform-Geschäftsmodell] Geschäftsmodell, das Wert durch Vermittlung zwischen mehreren Marktseiten schafft -- nicht durch eigene Produktion.
+  \item[Plattformmissbrauch] Verhalten, das die Plattform-Mechanismen umgeht oder unterminiert (z. B. Direktkontakt zwischen Anbieter und Nachfrager nach erstem Match, gefälschte Bewertungen).
+  \item[Plattformtyp] Kategorie nach Wertschöpfungslogik: Marktplatz, Vermittlungs-, Service-, Daten-, Content-, Ökosystem-Plattform.
+  \item[Single-Homing] Nutzer nutzen nur eine Plattform pro Kategorie. Begünstigt ``Winner-takes-most''-Dynamik.
+  \item[Vertrauen] Wichtigste Plattform-Währung -- schwer aufzubauen, leicht zu zerstören. Mechanismen: Verifizierung, Bewertungen, Garantien, Streitschlichtung.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 3 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
