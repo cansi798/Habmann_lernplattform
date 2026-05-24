@@ -5,6 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lernplatt · Präsentation · Tag 4</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-22); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+
+    .merk-box { background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-22); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+
+    .accent-box {
+      background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius);
+      padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td {
+      border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px;
+    }
+    .vs-table th { background: var(--kurs-22-bg); color: var(--kurs-22); }
+
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row canvas { flex: 0 0 36px; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+
+    .pill {
+      display: inline-block; background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22);
+      border-radius: 20px; padding: 6px 14px; margin: 4px; font-weight: 600; color: var(--kurs-22);
+    }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,21 +59,357 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Plattform-Geschäftsmodelle erfolgreich entwickeln & skalieren</h2>
-      <p>Modul 2 · Tag 4</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 2 · Tag 4 · Kurs 22 (Bo 143) · 2. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:52px;line-height:1.05;color:var(--kurs-22);margin:0">Plattformen skalieren,<br>monetarisieren, regieren</h2>
+      <canvas data-rough="underline" data-color="#1a4d8f" width="460" height="22" style="margin-top:8px"></canvas>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Wachstum, Profitabilität und Vertrauen gleichzeitig sichern – Governance als Wettbewerbsvorteil.</p>
+      <div style="margin-top:48px" class="accent-box" style="display:inline-block;padding:8px 16px">
+        <span class="handwritten" style="color:#c47612;font-size:26px">Tag 4 von 16 · Modul 2 vertieft</span>
+      </div>
+    </section>
+
+    <!-- Slide 2: Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Skalierung von Plattformen</li>
+            <li>Monetarisierungsmodelle</li>
+            <li>Plattform-Governance</li>
+            <li>Nachhaltige Wettbewerbsvorteile</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Skalierungsoptionen bewerten</li>
+            <li>Monetarisierung wählen</li>
+            <li>Governance-Regeln entwickeln</li>
+            <li>Zielkonflikte abwägen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Skalierung als Investitionsentscheidung</li>
+            <li>Monetarisierung nach Stabilität</li>
+            <li>Governance als Wettbewerbsvorteil</li>
+            <li>Bewusste Wachstumsbegrenzung</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Wachstum vs. profitable Skalierung -->
+    <section class="slide" style="display:none">
+      <h2>Wachstum vs. Skalierung vs. profitable Skalierung</h2>
+      <table class="vs-table">
+        <thead><tr><th>Begriff</th><th>Misst</th><th>Steuerungswert</th></tr></thead>
+        <tbody>
+          <tr><th>Wachstum</th><td>Größenveränderung</td><td>sagt nichts über Wirtschaftlichkeit</td></tr>
+          <tr><th>Skalierung</th><td>mehr Volumen bei gleichen Strukturen</td><td>operativ, aber riskant</td></tr>
+          <tr><th>Profitable Skalierung</th><td>Umsatz wächst schneller als Kosten &amp; Risiken</td><td>strategisch tragfähig</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Reines Wachstum ohne Steuerung kippt schnell in Verlust und Vertrauensverlust.
+      </div>
+    </section>
+
+    <!-- Slide 4: Sechs Skalierungs-Voraussetzungen -->
+    <section class="slide" style="display:none">
+      <h2>Sechs Voraussetzungen für Skalierung</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>1 · Stabile Prozesse</h3><p>Kernprozesse dokumentiert, reproduzierbar, robust.</p></div>
+        <div class="merk-box"><h3>2 · Technische Leistung</h3><p>Lasten, Performance, Skalierbarkeit der Infrastruktur.</p></div>
+        <div class="merk-box"><h3>3 · Klare Rollen</h3><p>Wer macht was – ohne Diskussion an der Schnittstelle.</p></div>
+        <div class="merk-box"><h3>4 · Datenqualität</h3><p>Belastbares Reporting, sonst Blindflug.</p></div>
+        <div class="merk-box"><h3>5 · Vertrauen</h3><p>Auf beiden Marktseiten – nicht nur aufgebaut, sondern gesichert.</p></div>
+        <div class="merk-box"><h3>6 · Wiederholbarer Nutzen</h3><p>Im Pilot bewiesen – nicht behauptet.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Skalieren ohne Voraussetzung multipliziert <em>nicht Stärke, sondern Schwäche</em>.
+      </div>
+    </section>
+
+    <!-- Slide 5: Skalierungsrisiken -->
+    <section class="slide" style="display:none">
+      <h2>Risiken zu schneller Skalierung</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Qualitätsverlust</h3><p>Neue Anbieter werden schneller aufgenommen, als geprüft werden kann.</p></div>
+        <div class="merk-box"><h3>Support-Überlast</h3><p>Beschwerden nehmen zu, Reaktionszeiten zerfallen.</p></div>
+        <div class="merk-box"><h3>Vertrauensverlust</h3><p>Schlechte Erfahrung einzelner kippt die Stimmung aller.</p></div>
+        <div class="merk-box"><h3>Negative Netzwerkeffekte</h3><p>Schlechte Anbieter verdrängen gute. Schwer reversibel.</p></div>
+        <div class="merk-box"><h3>Kostenexplosion</h3><p>Skalierungskosten wachsen schneller als Umsatz.</p></div>
+        <div class="merk-box"><h3>Kontrollverlust</h3><p>Ökosystem entwickelt sich ungesteuert.</p></div>
+      </div>
+    </section>
+
+    <!-- Slide 6: ServiceMatch -->
+    <section class="slide" style="display:none">
+      <h2>Fall · „ServiceMatch“ – soll expandiert werden?</h2>
+      <p style="color:var(--color-muted)">Regionale IT-Dienstleister-Plattform – Pilot war erfolgreich.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Status quo</h3>
+          <ul>
+            <li>120 Dienstleister · 650 Unternehmenskunden</li>
+            <li>300 Anfragen / Monat</li>
+            <li>Kundenzufriedenheit hoch</li>
+            <li>Supportaufwand <em>steigt</em></li>
+          </ul>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Warnsignale</h3>
+          <ul>
+            <li>Anbieter-Qualität schwankt</li>
+            <li>Keine automatisierte Prüfung</li>
+            <li>180.000 € Budget für 3 Regionen</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Empfehlung: <strong>begrenzt skalieren</strong> – erst Prüfprozesse automatisieren.
+      </div>
+    </section>
+
+    <!-- Slide 7: Monetarisierungsmodelle -->
+    <section class="slide" style="display:none">
+      <h2>Monetarisierungsmodelle · zehn Optionen</h2>
+      <div style="margin-top:14px;text-align:center">
+        <span class="pill">Provision</span>
+        <span class="pill">Transaktionsgebühr</span>
+        <span class="pill">Abo</span>
+        <span class="pill">Freemium</span>
+        <span class="pill">Listing</span>
+        <span class="pill">Premium-Platzierung</span>
+        <span class="pill">Werbung</span>
+        <span class="pill">Datenservices</span>
+        <span class="pill">Servicepakete</span>
+        <span class="pill">Partner</span>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Phasenpassung</h3>
+          <ul>
+            <li><strong>Aufbau</strong>: oft subventioniert</li>
+            <li><strong>Wachstum</strong>: behutsam einführen</li>
+            <li><strong>Reife</strong>: stärker hebeln</li>
+          </ul>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Klassischer Plattform-Killer</h3>
+          <p>Beidseitige Vollmonetarisierung in der frühen Phase. Eine Seite wandert ab, kritische Masse bricht.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8: Zielkonflikt Monetarisierung -->
+    <section class="slide" style="display:none">
+      <h2>Zielkonflikt · Monetarisierung vs. Netzwerkeffekt</h2>
+      <table class="vs-table">
+        <thead><tr><th></th><th>Zu früh</th><th>Zu spät</th></tr></thead>
+        <tbody>
+          <tr><th>Wirkung</th><td>Marktseite wandert ab</td><td>Reichweite aufgebaut, Kapital verbrannt</td></tr>
+          <tr><th>Netzwerkeffekte</th><td>brechen weg, bevor sie greifen</td><td>tragen, aber unprofitabel</td></tr>
+          <tr><th>Verhalten</th><td>Kunden zahlen ohne Wahrnehmungsvorteil</td><td>Kunden gewöhnen sich an „kostenlos“</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Lösung: <strong>differenziertes Modell</strong>. Eine Seite subventioniert, eine zahlt – sobald Nutzen messbar.
+      </div>
+    </section>
+
+    <!-- Slide 9: HealthCare Connect -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · „HealthCare Connect“</h2>
+      <p style="color:var(--color-muted)">Pflegeplattform · 1.800 Fachkräfte · 420 Einrichtungen · 2.400 Anfragen/Monat</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Druck</h3>
+          <ul>
+            <li>Bundesweite Skalierung gefordert</li>
+            <li>Vermittlungsquote: 58 %</li>
+            <li>Manuelle Qualitätsprüfung</li>
+            <li>750.000 € Budget · 12 Monate</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Empfehlung · B + D</h3>
+          <ul>
+            <li>Schrittweise: 2 weitere Regionen</li>
+            <li>Partnernetzwerk: Pflegeverbände</li>
+            <li>Monetarisierung: Provision + Servicepakete</li>
+            <li>Keine Premium-Sichtbarkeit (Fairness)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Im Pflegekontext ist <strong>Vertrauen der kritische Wettbewerbsvorteil</strong>. Wachstum darf ihn nicht beschädigen.
+      </div>
+    </section>
+
+    <!-- Slide 10: Governance als Wettbewerbsvorteil -->
+    <section class="slide" style="display:none">
+      <h2>Governance · sieben Regelbereiche</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Zugang</h3><p>Wer darf teilnehmen?</p></div>
+        <div class="merk-box"><h3>Qualität</h3><p>Welche Standards gelten?</p></div>
+        <div class="merk-box"><h3>Sichtbarkeit</h3><p>Wie funktioniert das Ranking?</p></div>
+        <div class="merk-box"><h3>Daten</h3><p>Wer sieht was, wer kontrolliert was?</p></div>
+        <div class="merk-box"><h3>Verhalten</h3><p>Welche Regeln gelten – und Sanktionen?</p></div>
+        <div class="merk-box"><h3>Konfliktlösung</h3><p>Wie wird eskaliert &amp; entschieden?</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Governance ist <em>keine Bürokratie</em> – sie ist einer der nachhaltigsten Wettbewerbsvorteile überhaupt.
+      </div>
+    </section>
+
+    <!-- Slide 11: Fünf Rollen des Betreibers -->
+    <section class="slide" style="display:none">
+      <h2>Fünf Rollen des Plattformbetreibers</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box"><h3>Marktgestalter</h3><p>Welche Akteure dürfen, welche müssen gehen.</p></div>
+        <div class="merk-box"><h3>Qualitätswächter</h3><p>Standards prüfen, sichern, durchsetzen.</p></div>
+        <div class="merk-box"><h3>Datenverantwortlicher</h3><p>Schutz, Nutzung, Transparenz.</p></div>
+        <div class="merk-box"><h3>Regelsetzer</h3><p>Klare, durchsetzbare, faire Regeln.</p></div>
+        <div class="merk-box"><h3>Ökosystemmanager</h3><p>Anreize so steuern, dass Nutzen für alle steigt.</p></div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Wenn eine Rolle fehlt</h3>
+          <p>… kippen schnell die negativen Netzwerkeffekte.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 12: Nachhaltige Wettbewerbsvorteile -->
+    <section class="slide" style="display:none">
+      <h2>Nachhaltige Wettbewerbsvorteile</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Schwer kopierbar</h3>
+          <ul>
+            <li>Netzwerkeffekte mit kritischer Masse</li>
+            <li>Datenvorsprung &amp; hohe Wechselkosten</li>
+            <li>Vertrauen &amp; Markenreputation</li>
+            <li>Prozessintegration in Kundenalltag</li>
+            <li>Exklusive Partnerzugänge</li>
+          </ul>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Leicht imitierbar</h3>
+          <p>Niedrigste Provision. Ein operatives Preisargument – kein strategischer Vorteil.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Differenzierung über <strong>Governance + Daten + Vertrauen</strong>, nicht über Preis.
+      </div>
+    </section>
+
+    <!-- Slide 13: Wann Wachstum bremsen -->
+    <section class="slide" style="display:none">
+      <h2>Wann Wachstum bewusst bremsen?</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>1 · Support überlastet</h3>
+          <p>Zusätzliche Kunden würden Qualität für alle beschädigen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Prüfprozesse manuell</h3>
+          <p>Skaliert nicht – negative Netzwerkeffekte drohen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Governance unklar</h3>
+          <p>Wachstum schafft Präzedenzfälle, die später teuer korrigiert werden.</p>
+        </div>
+        <div class="merk-box">
+          <h3>4 · Reporting fehlt</h3>
+          <p>Schnelles Wachstum ohne Wirtschaftlichkeitssicht = Blindflug.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Richtig: <em>„Wir bauen die fehlende Voraussetzung jetzt sofort auf“</em> – nicht „wir wachsen langsamer“.
+      </div>
+    </section>
+
+    <!-- Slide 14: Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Wachstum ≠ Skalierung ≠ profitable Skalierung.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Sechs Voraussetzungen vor jeder Skalierung – sonst multipliziert sich Schwäche.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Monetarisierung muss zur Plattformphase passen – differenziert, nicht pauschal.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Governance ist Wettbewerbsvorteil, keine Bürokratie.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Bewusst bremsen können – ist Führung, nicht Schwäche.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 15: Outro -->
+    <section class="slide" style="display:none">
+      <h2>Übergang · Tag 5 · Modul 3</h2>
+      <p style="color:var(--color-muted)">Heute: Skalierung &amp; Governance. Morgen: Kundenfokus &amp; Kanäle.</p>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout · Lehrskript</h3>
+          <p style="font-size:14px">Skalierungsvoraussetzungen, Monetarisierungsmodelle, Governance – ausführlich.</p>
+          <p style="margin-top:10px"><a href="../../pdf/22-handout-tag-04.pdf" style="color:var(--kurs-22);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Vertiefung &amp; Übung</h3>
+          <p style="font-size:14px">Video · Podcast · Quiz · Aufgaben · Lernpfad.</p>
+          <p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-22);font-weight:600">→ Zurück zur Materialauswahl</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <canvas data-rough="underline" data-color="#1a4d8f" width="320" height="20"></canvas>
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-22);margin:12px 0 0">Bis morgen – Tag 5.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 22 (Bo 143) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script src="../../assets/rough.min.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
+      const rc = rough.canvas(canvas);
+      const w = canvas.width, h = canvas.height;
+      const color = canvas.dataset.color || '#1a4d8f';
+      const type = canvas.dataset.rough;
+      if (type === 'underline') {
+        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
+      } else if (type === 'check') {
+        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+      }
+    });
+  });
+
   new SlideShow(document.getElementById("slides"));
   markViewed("22_Bo_143", 4, "praesentation");
 </script>

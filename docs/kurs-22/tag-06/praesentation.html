@@ -5,6 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lernplatt · Präsentation · Tag 6</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-22); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+
+    .merk-box { background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-22); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+
+    .accent-box {
+      background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius);
+      padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td {
+      border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px;
+    }
+    .vs-table th { background: var(--kurs-22-bg); color: var(--kurs-22); }
+
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row canvas { flex: 0 0 36px; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+
+    .stage-card {
+      background: #fff; border: 1.5px solid var(--kurs-22); border-radius: var(--radius);
+      padding: 8px; text-align: center;
+    }
+    .stage-card h3 { margin: 0; font-size: 13px; color: var(--kurs-22); }
+    .stage-card p { font-size: 12px; margin: 4px 0 0; color: var(--color-muted); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,21 +62,381 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Digitale Vertriebsstrategie entwickeln – Kundenfokus, Kanäle & Omnichannel</h2>
-      <p>Modul 3 · Tag 6</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 3 · Tag 6 · Kurs 22 (Bo 143) · 5. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:52px;line-height:1.05;color:var(--kurs-22);margin:0">Omnichannel-Vertrieb<br>operationalisieren</h2>
+      <canvas data-rough="underline" data-color="#1a4d8f" width="460" height="22" style="margin-top:8px"></canvas>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Kanäle, Prozesse, Daten und Rollen integrieren – vom Lead bis zum digitalen Service-Auftrag.</p>
+      <div style="margin-top:48px" class="accent-box" style="display:inline-block;padding:8px 16px">
+        <span class="handwritten" style="color:#c47612;font-size:26px">Tag 6 von 16 · Modul 3 vertieft</span>
+      </div>
+    </section>
+
+    <!-- Slide 2: Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Omnichannel vs. Multichannel</li>
+            <li>Online &amp; Offline integriert</li>
+            <li>Operationalisierung</li>
+            <li>Rollen &amp; KPIs</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Omnichannel auf Fälle übertragen</li>
+            <li>Kanalübergänge gestalten</li>
+            <li>Prozesse &amp; Datenflüsse</li>
+            <li>Roadmap erstellen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Architektur-Entscheidung</li>
+            <li>Zielkonflikte managen</li>
+            <li>Entscheidungen unter Unsicherheit</li>
+            <li>Vertriebsbetriebssystem</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Vier Reifegrade -->
+    <section class="slide" style="display:none">
+      <h2>Vier Stufen der Kanal-Integration</h2>
+      <div class="grid-4" style="margin-top:14px">
+        <div class="stage-card"><h3>Single</h3><p>1 Kanal</p></div>
+        <div class="stage-card"><h3>Multi</h3><p>mehrere Kanäle, unverbunden</p></div>
+        <div class="stage-card"><h3>Cross</h3><p>Übergänge zwischen Kanälen</p></div>
+        <div class="stage-card" style="background:var(--kurs-22-bg)"><h3>Omni</h3><p>integriertes Erlebnis</p></div>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Multi vs. Omni</h3>
+          <p>Multi: viele Kanäle, eigene Daten, eigene Preise. <strong>Omni:</strong> ein Erlebnis, konsistente Informationen, eine Datenbasis.</p>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Häufiges Missverständnis</h3>
+          <p>Omnichannel = mehr Kanäle. <strong>Falsch.</strong> Omnichannel = bessere <em>Integration</em> der Kanäle.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Sechs Brüche -->
+    <section class="slide" style="display:none">
+      <h2>Sechs typische Brüche in Omnichannel</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Doppelte Daten</h3><p>CRM + Excel + E-Mail-Postfächer</p></div>
+        <div class="merk-box"><h3>Unklare Zuständigkeit</h3><p>„Lead wurde übergeben“ – aber niemand greift zu</p></div>
+        <div class="merk-box"><h3>Widersprüchliche Infos</h3><p>Website-Preis ≠ Außendienst-Preis</p></div>
+        <div class="merk-box"><h3>Medienbrüche</h3><p>Online-Formular → PDF per E-Mail an Vertrieb</p></div>
+        <div class="merk-box"><h3>Lead ohne Kontext</h3><p>Vertrieb kennt vorherige Touchpoints nicht</p></div>
+        <div class="merk-box"><h3>KPI-Konflikt</h3><p>Marketing misst Klicks, Vertrieb misst Abschlüsse</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Omnichannel scheitert <strong>nicht an Tools</strong> – sondern an Brüchen zwischen Bereichen.
+      </div>
+    </section>
+
+    <!-- Slide 5: FitOffice -->
+    <section class="slide" style="display:none">
+      <h2>Fall · „FitOffice Solutions“</h2>
+      <p style="color:var(--color-muted)">Digitale Arbeitsplatzlösungen · Vertrieb über Website, LinkedIn, Webinare, Außendienst</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Status</h3>
+          <ul>
+            <li>Website-Anfragen → E-Mail → Vertrieb</li>
+            <li>Webinar-Leads ohne Nachverfolgung</li>
+            <li>Außendienst kennt Kampagnen nicht</li>
+            <li>Kundendaten in Excel, CRM, E-Mail</li>
+          </ul>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Diagnose</h3>
+          <p>Nicht zu wenige Kanäle – sondern <em>nicht integrierte</em>. Brüche an jeder Übergabe.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Erste Maßnahme: CRM-Pflichtprozess – sonst bleibt jede weitere Maßnahme wirkungslos.
+      </div>
+    </section>
+
+    <!-- Slide 6: CRM als Steuerungszentrale -->
+    <section class="slide" style="display:none">
+      <h2>CRM · von Kontaktdatenbank zur Steuerungszentrale</h2>
+      <table class="vs-table">
+        <thead><tr><th></th><th>CRM als Adressbuch</th><th>CRM als Steuerungszentrale</th></tr></thead>
+        <tbody>
+          <tr><th>Wer pflegt?</th><td>Marketing</td><td>alle Bereiche – verbindlich</td></tr>
+          <tr><th>Was steht drin?</th><td>Name, Adresse, Telefon</td><td>Leadstatus, Aktivitäten, Pipeline, Score</td></tr>
+          <tr><th>Wofür?</th><td>Newsletter-Versand</td><td>einheitliches Reporting, Übergabe, Eskalation</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Ohne verbindliche CRM-Nutzung bleibt Omnichannel ein <em>Konzept ohne Substanz</em>.
+      </div>
+    </section>
+
+    <!-- Slide 7: Lead Scoring -->
+    <section class="slide" style="display:none">
+      <h2>Lead Scoring · Profil + Verhalten</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Profildaten</h3>
+          <ul>
+            <li>Branche, Unternehmensgröße</li>
+            <li>Rolle im Buying Center</li>
+            <li>Region, Vorerfahrung</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Verhaltensdaten</h3>
+          <ul>
+            <li>Websitebesuche, Whitepaper-Downloads</li>
+            <li>Webinar-Teilnahme</li>
+            <li>Mail-Klicks, Demo-Anfragen</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Ab Schwellenwert: <strong>MQL → SQL</strong>. Übergabe an Vertrieb erst dann – schützt Kapazität <em>und</em> Lead.
+      </div>
+    </section>
+
+    <!-- Slide 8: Gemeinsame KPI -->
+    <section class="slide" style="display:none">
+      <h2>Gemeinsame KPI · Marketing &amp; Vertrieb</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Anti-Pattern</h3>
+          <ul>
+            <li>Marketing maximiert Leads – Qualität fällt</li>
+            <li>Vertrieb beklagt Qualität – Marketing fühlt sich nicht zuständig</li>
+            <li>Beide optimieren gegeneinander</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Lösung</h3>
+          <ul>
+            <li><strong>Anzahl qualifizierter Demo-Termine</strong></li>
+            <li><strong>Pipeline-Wert aus digitalen Leads</strong></li>
+            <li><strong>Abschlussquote digitaler Leads</strong></li>
+            <li>Beide Bereiche werden daran gemessen</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9: Ideale Customer Journey -->
+    <section class="slide" style="display:none">
+      <h2>Ideale Omnichannel-Journey · acht Schritte</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>1 · Bedarf entsteht</h3>
+          <p>Wartung, Modernisierung, Erweiterung</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Online-Recherche</h3>
+          <p>Referenzen, Reaktionszeiten, Leistungen</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Anfrage</h3>
+          <p>Website oder Kundenportal</p>
+        </div>
+        <div class="merk-box">
+          <h3>4 · CRM-Erfassung</h3>
+          <p>Automatisch, vollständig, qualifiziert</p>
+        </div>
+        <div class="merk-box">
+          <h3>5 · Lead Scoring</h3>
+          <p>Vertrieb · Service · Außendienst</p>
+        </div>
+        <div class="merk-box">
+          <h3>6 · Rückmeldung</h3>
+          <p>In definierter Zeit · Vertrauensfaktor</p>
+        </div>
+        <div class="merk-box">
+          <h3>7 · Angebot &amp; Doku</h3>
+          <p>Nachvollziehbar dokumentiert</p>
+        </div>
+        <div class="merk-box">
+          <h3>8 · Nachbetreuung</h3>
+          <p>Wartung, Folgeangebot, Portal</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Wenn ein Schritt unklar zugeordnet ist – fällt der Lead dort heraus.
+      </div>
+    </section>
+
+    <!-- Slide 10: IndustrialPro -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · „IndustrialPro Services“</h2>
+      <p style="color:var(--color-muted)">Wartung/Reparatur/Modernisierung · 38 Mio. € · 18 Vertrieb · 3 Marketing · 12 Service</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Diagnose</h3>
+          <ul>
+            <li>Digitale Einzelmaßnahmen vorhanden</li>
+            <li>Keine integrierte Strategie</li>
+            <li>CRM unvollständig genutzt</li>
+            <li>Bereiche mit unterschiedlichen Zielgrößen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Priorisierung</h3>
+          <ol>
+            <li>CRM-Pflichtprozess</li>
+            <li>Lead Scoring &amp; Übergabe</li>
+            <li>Website-Anfragepfade</li>
+            <li>Dashboard für alle Bereiche</li>
+            <li>Außendienst-Schulung</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 11: Kundenportal -->
+    <section class="slide" style="display:none">
+      <h2>Kundenportal · attraktiv und riskant</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Sinnvoll, wenn …</h3>
+          <ul>
+            <li>Bestandskunden wiederkehrende Transaktionen abwickeln</li>
+            <li>Daten zentral &amp; konsistent vorliegen</li>
+            <li>Service-Prozesse stabil sind</li>
+          </ul>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Verfrüht, wenn …</h3>
+          <ul>
+            <li>Daten/Prozesse noch uneinheitlich</li>
+            <li>Portal macht Komplexität <em>sichtbar</em>, nicht weg</li>
+            <li>„Großes Portal für alle“ = häufiger Fehler</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        IndustrialPro · Empfehlung: <strong>fokussierter Pilot für Wartungsverträge</strong> – kein Großprojekt.
+      </div>
+    </section>
+
+    <!-- Slide 12: Verantwortlichkeit -->
+    <section class="slide" style="display:none">
+      <h2>Verantwortlichkeit · geteilt mit Führungsrolle</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Vertrieb</h3><p>Leadbearbeitung, Pipeline, Abschluss</p></div>
+        <div class="merk-box"><h3>Marketing</h3><p>Reichweite, Leads, Content</p></div>
+        <div class="merk-box"><h3>IT</h3><p>Integration, Datenflüsse, Performance</p></div>
+        <div class="merk-box"><h3>Kundenservice</h3><p>Eingehende Anfragen, Nachbetreuung</p></div>
+        <div class="merk-box"><h3>Management</h3><p>Ziele, Budgets, Eskalation</p></div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Chief Revenue Officer</h3>
+          <p>Entscheidet, wenn Bereiche sich uneinig sind. Ohne diese Rolle: Stillstand.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 13: KPI-Architektur -->
+    <section class="slide" style="display:none">
+      <h2>KPI-Architektur · sieben Steuerungsgrößen</h2>
+      <table class="vs-table">
+        <thead><tr><th>KPI</th><th>Misst</th><th>Wer steuert?</th></tr></thead>
+        <tbody>
+          <tr><td>Anzahl qualifizierte digitale Leads</td><td>Pipeline-Input</td><td>Marketing + Vertrieb</td></tr>
+          <tr><td>Reaktionszeit auf Anfragen</td><td>Vertrauensfaktor</td><td>Vertrieb + Service</td></tr>
+          <tr><td>Conversion Anfrage → Angebot</td><td>Qualität der Bearbeitung</td><td>Vertrieb</td></tr>
+          <tr><td>Abschlussquote digitaler Leads</td><td>Wirtschaftlichkeit</td><td>Vertrieb</td></tr>
+          <tr><td>Anteil CRM-dokumentierter Leads</td><td>Datenhygiene</td><td>alle</td></tr>
+          <tr><td>Kosten pro qualifiziertem Lead</td><td>Effizienz</td><td>Marketing</td></tr>
+          <tr><td>Kundenzufriedenheit digital</td><td>Erlebnis</td><td>Service</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Slide 14: Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Omnichannel ≠ mehr Kanäle. Omnichannel = bessere Integration.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">CRM-Pflichtprozess vor jedem neuen Kanal. Sonst Substanzlos.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Lead Scoring schützt Vertrieb <em>und</em> Lead vor zu früher Übergabe.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Gemeinsame KPI für Marketing &amp; Vertrieb – nie getrennte.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Kundenportal als Pilot – nicht als Großprojekt für alle.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 15: Outro -->
+    <section class="slide" style="display:none">
+      <h2>Übergang · Tag 7 · Modul 4</h2>
+      <p style="color:var(--color-muted)">Heute: Omnichannel <em>integrieren</em>. Morgen: Plattform-SEO, Content &amp; Bewertungen.</p>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout · Lehrskript</h3>
+          <p style="font-size:14px">Omnichannel-Brüche, CRM-Logik, Lead Scoring, Customer Journey – ausführlich.</p>
+          <p style="margin-top:10px"><a href="../../pdf/22-handout-tag-06.pdf" style="color:var(--kurs-22);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Vertiefung &amp; Übung</h3>
+          <p style="font-size:14px">Video · Podcast · Quiz · Aufgaben · Lernpfad.</p>
+          <p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-22);font-weight:600">→ Zurück zur Materialauswahl</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <canvas data-rough="underline" data-color="#1a4d8f" width="320" height="20"></canvas>
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-22);margin:12px 0 0">Bis morgen – Tag 7.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 22 (Bo 143) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script src="../../assets/rough.min.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
+      const rc = rough.canvas(canvas);
+      const w = canvas.width, h = canvas.height;
+      const color = canvas.dataset.color || '#1a4d8f';
+      const type = canvas.dataset.rough;
+      if (type === 'underline') {
+        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
+      } else if (type === 'check') {
+        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+      }
+    });
+  });
+
   new SlideShow(document.getElementById("slides"));
   markViewed("22_Bo_143", 6, "praesentation");
 </script>

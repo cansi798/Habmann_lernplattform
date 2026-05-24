@@ -5,6 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lernplatt · Präsentation · Tag 9</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-22); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+
+    .merk-box { background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-22); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+
+    .accent-box {
+      background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius);
+      padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td {
+      border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px;
+    }
+    .vs-table th { background: var(--kurs-22-bg); color: var(--kurs-22); }
+
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row canvas { flex: 0 0 36px; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+
+    .funnel-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+    .funnel-bar {
+      height: 28px; background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22);
+      border-radius: 14px; padding: 0 12px; display: flex; align-items: center; font-size: 14px;
+      color: var(--kurs-22); font-weight: 600;
+    }
+    .lp-element { background: #fff; border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 10px 12px; }
+    .lp-element h3 { margin: 0 0 4px; color: var(--kurs-22); font-size: 14px; }
+    .lp-element p { font-size: 13px; margin: 4px 0; }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,21 +65,374 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Performance-Marketing im Vertrieb: Anzeigen, Conversion & E-Mail-Kampagnen</h2>
-      <p>Modul 5 · Tag 9</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 5 · Tag 9 · Kurs 22 (Bo 143) · 10. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:52px;line-height:1.05;color:var(--kurs-22);margin:0">Performance-Marketing<br>im Vertrieb</h2>
+      <canvas data-rough="underline" data-color="#1a4d8f" width="460" height="22" style="margin-top:8px"></canvas>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Anzeigen, Funnel, Landing Pages – vom Klick zum Vertriebsergebnis denken, nicht umgekehrt.</p>
+      <div style="margin-top:48px" class="accent-box" style="display:inline-block;padding:8px 16px">
+        <span class="handwritten" style="color:#c47612;font-size:26px">Tag 9 von 16 · Modul 5 startet</span>
+      </div>
+    </section>
+
+    <!-- Slide 2: Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Grundlagen Performance-Marketing</li>
+            <li>Reichweite vs. Conversion vs. Umsatz</li>
+            <li>Buyer Personas &amp; Buying Center</li>
+            <li>Landing Pages als Conversion-Instrument</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Kampagnenziele aus Vertriebszielen ableiten</li>
+            <li>Zielgruppen &amp; Botschaften entwickeln</li>
+            <li>Kanäle bewerten</li>
+            <li>Conversion-Hürden erkennen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Performance-Marketing als Investition</li>
+            <li>Zielkonflikte managen</li>
+            <li>Entscheidungen unter Unsicherheit</li>
+            <li>Skalierbare Architektur</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Performance- vs. klassische Werbung -->
+    <section class="slide" style="display:none">
+      <h2>Performance-Marketing vs. klassische Werbung</h2>
+      <table class="vs-table">
+        <thead><tr><th></th><th>Klassische Werbung</th><th>Performance-Marketing</th></tr></thead>
+        <tbody>
+          <tr><th>Optimiert</th><td>Reichweite, Awareness</td><td>Conversion bis Abschluss</td></tr>
+          <tr><th>Messung</th><td>indirekt, GRP, Recall</td><td>durchgängig entlang Funnel</td></tr>
+          <tr><th>Steuerung</th><td>Saisonal, Kampagne</td><td>kontinuierlich, datenbasiert</td></tr>
+          <tr><th>Erfolg</th><td>Bekanntheitsgrad</td><td>Pipeline, ROI, CAC</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Kern: durchgängige <strong>Messbarkeit entlang des gesamten Funnels</strong>.
+      </div>
+    </section>
+
+    <!-- Slide 4: Funnel-Stufen -->
+    <section class="slide" style="display:none">
+      <h2>Funnel · sechs Stufen mit eigenen Conversions</h2>
+      <div style="margin-top:14px">
+        <div class="funnel-row"><div class="funnel-bar" style="width:100%">Impressionen</div></div>
+        <div class="funnel-row"><div class="funnel-bar" style="width:85%">Klicks (CTR)</div></div>
+        <div class="funnel-row"><div class="funnel-bar" style="width:65%">Landing Page Conversion</div></div>
+        <div class="funnel-row"><div class="funnel-bar" style="width:45%">Qualifizierte Leads (MQL/SQL)</div></div>
+        <div class="funnel-row"><div class="funnel-bar" style="width:28%">Demo / Beratungstermin</div></div>
+        <div class="funnel-row"><div class="funnel-bar" style="width:15%">Angebot</div></div>
+        <div class="funnel-row"><div class="funnel-bar" style="width:8%">Abschluss</div></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Der größte Verlust liegt meist <strong>nicht bei der Anzeige</strong> – sondern auf Landing Page &amp; Qualifizierung.
+      </div>
+    </section>
+
+    <!-- Slide 5: SolarOffice -->
+    <section class="slide" style="display:none">
+      <h2>Fall · „SolarOffice GmbH“</h2>
+      <p style="color:var(--color-muted)">Photovoltaik für Gewerbeimmobilien · Investition oft &gt; 50.000 € · 25.000 € Budget</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Zielgruppen</h3>
+          <ul>
+            <li>Eigentümer / GF kleiner &amp; mittelständischer Unternehmen</li>
+            <li>Immobilienverwalter</li>
+            <li>Facility-Management</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Drei Kundenprobleme</h3>
+          <ul>
+            <li>Energiekosten zu hoch</li>
+            <li>Nachhaltigkeits-Anforderungen</li>
+            <li>Förderung nutzen, bevor sie ausläuft</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Vertrieb begrenzt – nur qualifizierte Beratungstermine, keine Streuanfragen.
+      </div>
+    </section>
+
+    <!-- Slide 6: Buying Center -->
+    <section class="slide" style="display:none">
+      <h2>Buying Center · differenzierte Botschaften</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>IT-Leiter</h3>
+          <p>Technische Sicherheit, Integration, Stabilität</p>
+        </div>
+        <div class="merk-box">
+          <h3>Geschäftsführer</h3>
+          <p>Risiko, Wirtschaftlichkeit, Geschäftskontinuität, Haftung</p>
+        </div>
+        <div class="merk-box">
+          <h3>Datenschutz / Compliance</h3>
+          <p>Nachweise, Auditfähigkeit, Prozesse</p>
+        </div>
+        <div class="merk-box">
+          <h3>Fachabteilung</h3>
+          <p>Alltagstauglichkeit, Bedienbarkeit</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Eine Einheitsbotschaft trifft niemanden richtig – pro Rolle eine eigene Anzeige.
+      </div>
+    </section>
+
+    <!-- Slide 7: Anzeigenkanäle -->
+    <section class="slide" style="display:none">
+      <h2>Anzeigenkanäle · B2B-Profile</h2>
+      <table class="vs-table">
+        <thead><tr><th>Kanal</th><th>Stärke</th><th>Vorsicht</th></tr></thead>
+        <tbody>
+          <tr><td>Google Ads</td><td>konkrete Suchabsicht</td><td>teuer im Wettbewerb, LP-abhängig</td></tr>
+          <tr><td>LinkedIn Ads</td><td>Rollentargeting im Buying Center</td><td>hohe Klickkosten</td></tr>
+          <tr><td>Webinare</td><td>Vertrauen + 45 min echtes Interesse</td><td>Aufwand für Konzeption</td></tr>
+          <tr><td>Retargeting</td><td>reaktiviert Bekannte</td><td>nur sinnvoll mit Vorkontakten</td></tr>
+          <tr><td>Display (breit)</td><td>Reichweite</td><td>im hochwertigen B2B oft die <em>schwächste</em> Wahl</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Slide 8: DataSecure -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · „DataSecure Solutions“</h2>
+      <p style="color:var(--color-muted)">Cybersecurity · 100–1.000 MA-Kunden · 16 Mio. € · 150k Budget · 6 Monate</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Ziele</h3>
+          <ul>
+            <li>180 qualifizierte Leads</li>
+            <li>60 Demo-Termine</li>
+            <li>20 Angebote</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Empfohlene Kanäle</h3>
+          <ol>
+            <li>LinkedIn + Whitepaper (45.000 €)</li>
+            <li>Webinar-Kampagne (25.000 €)</li>
+            <li>Google Ads (30.000 €)</li>
+            <li>Retargeting (10.000 €)</li>
+          </ol>
+          <p style="font-size:13px;color:var(--color-muted);margin-top:4px">→ breite Display-Kampagnen <em>nicht</em> priorisiert</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9: Landing Page -->
+    <section class="slide" style="display:none">
+      <h2>Landing Page · acht Elemente</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="lp-element"><h3>1 · Überschrift</h3><p>Problembezogen, mit Nutzen</p></div>
+        <div class="lp-element"><h3>2 · Nutzenversprechen</h3><p>Knapp, zielgruppenspezifisch</p></div>
+        <div class="lp-element"><h3>3 · Vertrauenselemente</h3><p>Referenzen, Zertifikate, Stimmen</p></div>
+        <div class="lp-element"><h3>4 · Prozess</h3><p>Was passiert nach der Anfrage?</p></div>
+        <div class="lp-element"><h3>5 · CTA</h3><p>„Demo-Termin vereinbaren“ statt „Absenden“</p></div>
+        <div class="lp-element"><h3>6 · Formular</h3><p>Wenige Pflichtfelder + optionale Bedarfsfrage</p></div>
+        <div class="lp-element"><h3>7 · FAQ</h3><p>Aufwand, Ablauf, Kostenrahmen</p></div>
+        <div class="lp-element"><h3>8 · Konsistenz</h3><p>Anzeigentext = Landing-Page-Inhalt</p></div>
+      </div>
+    </section>
+
+    <!-- Slide 10: SolarOffice LP-Diagnose -->
+    <section class="slide" style="display:none">
+      <h2>SolarOffice · LP-Diagnose</h2>
+      <table class="vs-table">
+        <thead><tr><th>Element</th><th>Status</th><th>Problem</th></tr></thead>
+        <tbody>
+          <tr><td>Überschrift „Willkommen bei SolarOffice“</td><td>schwach</td><td>kein Problembezug, kein Nutzen</td></tr>
+          <tr><td>Inhalte allgemein</td><td>schwach</td><td>kein Einstieg für Gewerbekunden</td></tr>
+          <tr><td>12 Pflichtfelder</td><td>kritisch</td><td>Conversion-Killer Nr. 1</td></tr>
+          <tr><td>Keine Beispielrechnung</td><td>schwach</td><td>fehlende Wirtschaftlichkeitsbeweise</td></tr>
+          <tr><td>Keine Referenzen</td><td>schwach</td><td>kein Vertrauen</td></tr>
+          <tr><td>CTA „Absenden“</td><td>schwach</td><td>vage, keine Erwartung</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Empfehlung: <strong>erst Landing Page, dann Anzeigen</strong> – sonst Budget verbrannt.
+      </div>
+    </section>
+
+    <!-- Slide 11: Bewusst gegen Display -->
+    <section class="slide" style="display:none">
+      <h2>Bewusst gegen breite Display-Kampagnen</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>1 · Budget verbrennt</h3>
+          <p>Viel Reichweite, kaum qualifizierte Leads.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Vertrieb überlastet</h3>
+          <p>Unqualifizierte Klicks belasten Vertriebskapazität.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Verzerrt Reporting</h3>
+          <p>Hohe Impressionen täuschen Aktivität vor – keine Pipeline.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Alternative: LinkedIn (Qualität) + Google Ads (Suchabsicht) + Webinare (Qualifizierung).
+      </div>
+    </section>
+
+    <!-- Slide 12: Budget-Logik -->
+    <section class="slide" style="display:none">
+      <h2>Budget · Testen, Skalieren, Stoppen</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Testen</h3>
+          <ul>
+            <li>Kleines Budget</li>
+            <li>Klare Hypothese</li>
+            <li>Lernen statt Volumen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Skalieren</h3>
+          <ul>
+            <li>Erst bei nachgewiesener Wirkung</li>
+            <li>Leadqualität beobachten</li>
+            <li>Linear? Ab welchem Punkt flach?</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Stoppen</h3>
+          <ul>
+            <li>Konsequent</li>
+            <li>Sunk-Cost ignorieren</li>
+            <li>Schwierigste Entscheidung</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Pro Kampagne klar: in welchem Modus? Welche Kriterien wechseln den Modus?
+      </div>
+    </section>
+
+    <!-- Slide 13: KPIs entlang des Funnels -->
+    <section class="slide" style="display:none">
+      <h2>KPIs · entlang des gesamten Funnels</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Operativ</h3>
+          <ul>
+            <li>CTR (Klickrate)</li>
+            <li>CPC (Kosten pro Klick)</li>
+            <li>Landing Page Conversion</li>
+            <li>Cost per Lead (CPL)</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Management</h3>
+          <ul>
+            <li>Anteil qualifizierter Leads</li>
+            <li>Cost per qualifiziertem Lead (CPQL)</li>
+            <li>Demo- &amp; Abschlussquote</li>
+            <li>Customer Acquisition Cost (CAC)</li>
+            <li>CLV / CAC pro Kampagnenquelle</li>
+            <li>Deckungsbeitrag je Kanal</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Erfolg misst sich am <strong>Vertriebsergebnis</strong> – nicht an Kosten pro Klick.
+      </div>
+    </section>
+
+    <!-- Slide 14: Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Performance-Marketing endet beim Vertriebsergebnis, nicht beim Klick.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Größter Conversion-Verlust liegt meist auf der Landing Page.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Buying Center = differenzierte Botschaften pro Rolle.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Leadqualität schlägt Leadmenge – immer.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Testen → Skalieren → Stoppen. Klare Modi, keine Sunk-Cost-Falle.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 15: Outro -->
+    <section class="slide" style="display:none">
+      <h2>Übergang · Tag 10</h2>
+      <p style="color:var(--color-muted)">Heute: Anzeigen, Funnel, LP. Morgen: E-Mail-Kampagnen &amp; Conversion-Optimierung tiefer.</p>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout · Lehrskript</h3>
+          <p style="font-size:14px">Performance-Marketing-Architektur, Funnel, Landing Pages, KPIs – ausführlich.</p>
+          <p style="margin-top:10px"><a href="../../pdf/22-handout-tag-09.pdf" style="color:var(--kurs-22);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Vertiefung &amp; Übung</h3>
+          <p style="font-size:14px">Video · Podcast · Quiz · Aufgaben · Lernpfad.</p>
+          <p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-22);font-weight:600">→ Zurück zur Materialauswahl</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <canvas data-rough="underline" data-color="#1a4d8f" width="320" height="20"></canvas>
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-22);margin:12px 0 0">Bis morgen – Tag 10.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 22 (Bo 143) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script src="../../assets/rough.min.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
+      const rc = rough.canvas(canvas);
+      const w = canvas.width, h = canvas.height;
+      const color = canvas.dataset.color || '#1a4d8f';
+      const type = canvas.dataset.rough;
+      if (type === 'underline') {
+        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
+      } else if (type === 'check') {
+        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+      }
+    });
+  });
+
   new SlideShow(document.getElementById("slides"));
   markViewed("22_Bo_143", 9, "praesentation");
 </script>

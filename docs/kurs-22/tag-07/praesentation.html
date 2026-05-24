@@ -5,6 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lernplatt · Präsentation · Tag 7</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-22); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+
+    .merk-box { background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-22); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+
+    .accent-box {
+      background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius);
+      padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td {
+      border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px;
+    }
+    .vs-table th { background: var(--kurs-22-bg); color: var(--kurs-22); }
+
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row canvas { flex: 0 0 36px; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+
+    .title-example {
+      background: #fff; border: 1.5px solid var(--color-line-dark); border-radius: 6px;
+      padding: 10px 12px; font-family: 'Source Sans 3', sans-serif; font-size: 15px;
+    }
+    .title-example.bad { background: #fff5f0; border-color: #c47612; }
+    .title-example.good { background: var(--kurs-22-bg); border-color: var(--kurs-22); }
+    .title-example .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-muted); margin-bottom: 4px; }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,21 +62,372 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Plattform-Verkauf meistern – SEO, Retention & dynamische Preisstrategien</h2>
-      <p>Modul 4 · Tag 7</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 4 · Tag 7 · Kurs 22 (Bo 143) · 8. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:52px;line-height:1.05;color:var(--kurs-22);margin:0">Plattform-SEO, Content<br>&amp; Bewertungsmanagement</h2>
+      <canvas data-rough="underline" data-color="#1a4d8f" width="460" height="22" style="margin-top:8px"></canvas>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Sichtbar werden, Vertrauen aufbauen, Wiederkauf steuern – Plattform-Performance als System.</p>
+      <div style="margin-top:48px" class="accent-box" style="display:inline-block;padding:8px 16px">
+        <span class="handwritten" style="color:#c47612;font-size:26px">Tag 7 von 16 · Modul 4 startet</span>
+      </div>
+    </section>
+
+    <!-- Slide 2: Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Plattform-SEO Grundlagen</li>
+            <li>Sichtbarkeitsfaktoren</li>
+            <li>Keywords &amp; Content</li>
+            <li>Retention &amp; Bewertungen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Plattformangebote analysieren</li>
+            <li>Titel &amp; Beschreibungen optimieren</li>
+            <li>Retention-Maßnahmen entwickeln</li>
+            <li>Bewertungsmanagement aufsetzen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>SEO als Steuerungsinstrument</li>
+            <li>Bewusst auf Reichweite verzichten</li>
+            <li>Reputation als Wettbewerbsvorteil</li>
+            <li>Verantwortung für Architektur</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Klassisches SEO vs. Plattform-SEO -->
+    <section class="slide" style="display:none">
+      <h2>Klassisches SEO vs. Plattform-SEO</h2>
+      <table class="vs-table">
+        <thead><tr><th></th><th>Klassisches SEO</th><th>Plattform-SEO</th></tr></thead>
+        <tbody>
+          <tr><th>Wirkt durch</th><td>Backlinks, Content, On-Page</td><td>Conversion, Bewertungen, Verkäuferperformance</td></tr>
+          <tr><th>Ranking-System</th><td>Google-Algorithmus</td><td>plattformeigener Algorithmus</td></tr>
+          <tr><th>Signale</th><td>extern</td><td>plattforminternes Verhalten</td></tr>
+          <tr><th>Backlinks?</th><td>zentral</td><td>praktisch irrelevant</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Plattformen haben ihre eigene <strong>geschlossene Ranking-Logik</strong>.
+      </div>
+    </section>
+
+    <!-- Slide 4: Conversion-Kette -->
+    <section class="slide" style="display:none">
+      <h2>Conversion-Kette · vier Stufen mit Brüchen</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Sichtbarkeit</h3>
+          <p>Wer sieht uns überhaupt? Ranking-Position, Suchbegriffe.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Klick</h3>
+          <p>Schwach? → Bilder, Titel, erste Bewertungen prüfen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Conversion</h3>
+          <p>Schwach? → Beschreibung, Kompatibilität, Vertrauen prüfen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Profitabilität</h3>
+          <p>Schwach? → Provision, Versand, Retouren = Deckungsbeitrag.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Reine Sichtbarkeit ohne Folgekette ist gefährlich – falsche Erwartungen → schlechte Bewertungen → Sichtbarkeitsverlust.
+      </div>
+    </section>
+
+    <!-- Slide 5: Keyword-Strategie -->
+    <section class="slide" style="display:none">
+      <h2>Keyword-Arten · fünf Kategorien</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Hauptkeywords</h3><p>Hohes Volumen, hoher Wettbewerb</p></div>
+        <div class="merk-box"><h3>Nebenkeywords</h3><p>Erweiterung des Hauptthemas</p></div>
+        <div class="merk-box"><h3>Long-Tail</h3><p>Spezifisch, niedrig im Volumen, hoch in Kaufabsicht</p></div>
+        <div class="merk-box"><h3>Problemorientiert</h3><p>„Sauger für Dauereinsatz“</p></div>
+        <div class="merk-box"><h3>Kaufnah</h3><p>„Akkuschrauber 18V Set kaufen“</p></div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Bewusst ausgeschlossen</h3>
+          <p>„Billig …“ – passt nicht zur Premium-Marke.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: CleanPro -->
+    <section class="slide" style="display:none">
+      <h2>Fall · „CleanPro Supplies“</h2>
+      <p style="color:var(--color-muted)">Industriesauger auf B2B-Marktplatz – kaum gefunden, Wettbewerber listet oben.</p>
+      <div class="title-example bad" style="margin-top:14px">
+        <div class="label">Vorher</div>
+        Sauger Modell X200
+      </div>
+      <div class="title-example bad" style="margin-top:8px">
+        <div class="label">Beschreibung (alt)</div>
+        Leistungsstarker Sauger für verschiedene Anwendungen. Gute Qualität. Für Gewerbe geeignet.
+      </div>
+      <div class="title-example good" style="margin-top:16px">
+        <div class="label">Nachher</div>
+        Profi-Nass-Trockensauger X200 für Werkstatt &amp; Gebäudereinigung – robustes Gehäuse, lange Lebensdauer, Ersatzteile lieferbar
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Vier Elemente im Titel: Kategorie · Differenzierung · Schlüsseldaten · Anwendungsbezug.
+      </div>
+    </section>
+
+    <!-- Slide 7: Produktbeschreibung -->
+    <section class="slide" style="display:none">
+      <h2>Verkaufsstarke Produktbeschreibung</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Struktur</h3>
+          <ol>
+            <li>Kurzer Nutzen-Einstieg</li>
+            <li>Wichtigste Vorteile</li>
+            <li>Technische Daten</li>
+            <li>Kompatibilität (Zubehör, Ersatzteile)</li>
+            <li>Anwendungsfälle</li>
+            <li>Transparenter Lieferumfang</li>
+            <li>FAQ (Garantie, Akku, Ladezeit)</li>
+          </ol>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Anti-Pattern</h3>
+          <p>Werblicher Superlativ-Stil ohne Daten → erzeugt Skepsis &amp; falsche Erwartungen → schlechte Bewertungen.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Vertrauen senkt Retouren – Retouren-Quote ist der <strong>wichtigste indirekte Profit-Hebel</strong>.
+      </div>
+    </section>
+
+    <!-- Slide 8: ToolMaster Pro -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · „ToolMaster Pro“</h2>
+      <p style="color:var(--color-muted)">Akkuschrauber &amp; Zubehörsets · 2,8 Mio. € Plattformumsatz · Marge 24 % · Bewertung 4,3 ★</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Symptome</h3>
+          <ul>
+            <li>Titel technisch, nicht suchorientiert</li>
+            <li>Beschreibung ohne Nutzen</li>
+            <li>Bilder ohne Anwendung</li>
+            <li>FAQ-Bereich fehlt</li>
+            <li>Kompatibilität unklar</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Bewertungs-Kritik</h3>
+          <ul>
+            <li>Lieferverzögerungen</li>
+            <li>Unklare Produktkompatibilität</li>
+            <li>Fehlende Anwendungshinweise</li>
+          </ul>
+          <p style="font-size:13px;margin-top:4px;color:var(--color-muted)">→ <em>Frühwarnsystem für Prozessprobleme</em></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9: Bewertungsmanagement -->
+    <section class="slide" style="display:none">
+      <h2>Bewertungsmanagement · Lernsystem statt Reaktion</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Vier Wirkungen gleichzeitig</h3>
+          <ul>
+            <li>Ranking-Faktor (Plattform-Algorithmus)</li>
+            <li>Vertrauenssignal für Käufer</li>
+            <li>Frühwarnsystem für Prozesse</li>
+            <li>Input für Produktmanagement &amp; Logistik</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>System</h3>
+          <ul>
+            <li>Wöchentlich auswerten</li>
+            <li>Nach Themen clustern</li>
+            <li>Innerhalb definierter Zeit antworten</li>
+            <li>Wiederkehrende Kritik intern zurückspielen</li>
+            <li>Zufriedene Kunden zur Bewertung motivieren</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Bewertungen <strong>nicht manipulieren</strong> – regulatorisch riskant, Vertrauenssignal kaputt.
+      </div>
+    </section>
+
+    <!-- Slide 10: Retention auf Plattformen -->
+    <section class="slide" style="display:none">
+      <h2>Retention · Wiederkaufrate als stärkster Profithebel</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Zubehör &amp; Ersatzteile</h3>
+          <p>Wer Akkuschrauber kauft, braucht Akkus, Bits, Koffer.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Bundle-Angebote</h3>
+          <p>Höherer Warenkorb, weniger direkter Vergleich.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Nachkauf-Impulse</h3>
+          <p>Plattformfunktionen, Erinnerungen, Empfehlungen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Wiederkaufrate als KPI</h3>
+          <p>Was nicht gemessen wird, wird nicht gesteuert.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Wiederkehrende Kunden = <strong>kein erneuter CAC</strong> = höherer Deckungsbeitrag.
+      </div>
+    </section>
+
+    <!-- Slide 11: Anti-Pattern Neukundenrabatt -->
+    <section class="slide" style="display:none">
+      <h2>Anti-Pattern · Neukundenrabatt ohne Bestandsangebot</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Signal an Bestandskunden</h3>
+          <p>„Wer treu bleibt, zahlt mehr.“ – Beschädigt Wiederkaufrate aktiv.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Bessere Logik</h3>
+          <ul>
+            <li>Bundle-Angebote für Bestand</li>
+            <li>Treue-/Volumen-Rabatte</li>
+            <li>Premium-Service-Pakete</li>
+            <li>Frühzugang zu neuen Produkten</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 12: Bewusst keine Preissenkung -->
+    <section class="slide" style="display:none">
+      <h2>Bewusst keine pauschale Preissenkung</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>1 · Preisanker zerstören</h3>
+          <p>„Ging also doch billiger“ – Preis wirkt rückwirkend unglaubwürdig.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Marge kannibalisiert</h3>
+          <p>Conversion steigt selten in gleichem Maße.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Falsche Kunden</h3>
+          <p>Preisorientierte Käufer → schlechte Bewertungen → Sichtbarkeitsverlust.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Stärker: <strong>Content, Bundles, Bewertungsmanagement</strong> – plus eng eingegrenzte Preisexperimente.
+      </div>
+    </section>
+
+    <!-- Slide 13: Plattform-Performance-Architektur -->
+    <section class="slide" style="display:none">
+      <h2>Integrierte Performance-Architektur</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>SEO</h3><p>Sichtbarkeit, Keywords</p></div>
+        <div class="merk-box"><h3>Content</h3><p>Titel, Beschreibung, FAQ, Bilder</p></div>
+        <div class="merk-box"><h3>Vertrauen</h3><p>Bewertungen, Referenzen</p></div>
+        <div class="merk-box"><h3>Retention</h3><p>Bundles, Wiederkauf, Service</p></div>
+        <div class="merk-box"><h3>Marge</h3><p>Provision, Versand, Retouren</p></div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Verbindung</h3>
+          <p>Eine Dimension isoliert optimieren beschädigt andere.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 14: Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Plattform-SEO ist Vertriebssteuerung, nicht nur Technik.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Falsche Keywords ziehen falsche Kunden – algorithmische Strafe folgt.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Bewertungen = Ranking + Vertrauen + Frühwarnsystem in einem.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Wiederkauf ist der stärkste Profitabilitätshebel.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Pauschale Preissenkung ist meist die <em>falsche</em> Antwort auf Wettbewerb.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 15: Outro -->
+    <section class="slide" style="display:none">
+      <h2>Übergang · Tag 8</h2>
+      <p style="color:var(--color-muted)">Heute: SEO, Content, Bewertungen. Morgen: dynamische Preise &amp; Performance-Monitoring.</p>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout · Lehrskript</h3>
+          <p style="font-size:14px">Plattform-SEO, Content-Architektur, Retention, Bewertungsmanagement – ausführlich.</p>
+          <p style="margin-top:10px"><a href="../../pdf/22-handout-tag-07.pdf" style="color:var(--kurs-22);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Vertiefung &amp; Übung</h3>
+          <p style="font-size:14px">Video · Podcast · Quiz · Aufgaben · Lernpfad.</p>
+          <p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-22);font-weight:600">→ Zurück zur Materialauswahl</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <canvas data-rough="underline" data-color="#1a4d8f" width="320" height="20"></canvas>
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-22);margin:12px 0 0">Bis morgen – Tag 8.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 22 (Bo 143) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script src="../../assets/rough.min.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
+      const rc = rough.canvas(canvas);
+      const w = canvas.width, h = canvas.height;
+      const color = canvas.dataset.color || '#1a4d8f';
+      const type = canvas.dataset.rough;
+      if (type === 'underline') {
+        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
+      } else if (type === 'check') {
+        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+      }
+    });
+  });
+
   new SlideShow(document.getElementById("slides"));
   markViewed("22_Bo_143", 7, "praesentation");
 </script>

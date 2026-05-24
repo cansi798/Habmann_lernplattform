@@ -5,6 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lernplatt · Präsentation · Tag 2</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-22); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+
+    .merk-box {
+      background: var(--kurs-22-bg);
+      border: 1.5px solid var(--kurs-22);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+    }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-22); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+
+    .accent-box {
+      background: #fff3d9;
+      border: 1.5px solid #c47612;
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: #5a3a08;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td {
+      border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left;
+      font-size: 15px;
+    }
+    .vs-table th { background: var(--kurs-22-bg); color: var(--kurs-22); }
+
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row canvas { flex: 0 0 36px; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+
+    .phase-pill {
+      display: inline-block; background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22);
+      border-radius: 20px; padding: 6px 14px; margin: 4px;
+      font-weight: 600; color: var(--kurs-22);
+    }
+    .kpi-card {
+      background: #fff; border: 1.5px solid var(--color-line-dark);
+      border-radius: var(--radius); padding: 12px;
+    }
+    .kpi-card h3 { margin: 0 0 4px; font-size: 15px; color: var(--kurs-22); }
+    .kpi-card p { font-size: 13px; margin: 4px 0 0; color: var(--color-muted); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,21 +77,465 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Digitale Vertriebsstrategien verstehen & Plattformmodelle erfolgreich nutzen</h2>
-      <p>Modul 1 · Tag 2</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 1 · Tag 2 · Kurs 22 (Bo 143) · 29. Mai 2026</div>
+      <h2 class="handwritten" style="font-size:52px;line-height:1.05;color:var(--kurs-22);margin:0">Plattformstrategie umsetzen,<br>KPIs steuern, Trends einordnen</h2>
+      <canvas data-rough="underline" data-color="#1a4d8f" width="460" height="22" style="margin-top:8px"></canvas>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Von der Plattformidee zur steuerbaren Plattformarchitektur – Implementierung, Optimierung, Zukunftsfähigkeit.</p>
+      <div style="margin-top:48px" class="accent-box" style="display:inline-block;padding:8px 16px">
+        <span class="handwritten" style="color:#c47612;font-size:26px">Tag 2 von 16 · Build → Measure → Learn</span>
+      </div>
+    </section>
+
+    <!-- Slide 2: Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <p style="color:var(--color-muted)">Drei Stufen, die aufeinander aufbauen.</p>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Logik der Plattform-Implementierung</li>
+            <li>Erfolgsfaktoren für Einführung &amp; Betrieb</li>
+            <li>Plattform-KPIs unterscheiden</li>
+            <li>Zukunftstrends einordnen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Implementierungsplan entwickeln</li>
+            <li>Maßnahmen anhand KPIs bewerten</li>
+            <li>Risiken &amp; Ressourcen einschätzen</li>
+            <li>Trends auf Vertrieb übertragen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Plattform als Investitionsentscheidung</li>
+            <li>Zielkonflikte managen</li>
+            <li>Plattformarchitektur weiterentwickeln</li>
+            <li>Verantwortung unter Unsicherheit</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:20px">
+        Auswahl ≠ Implementierung ≠ Optimierung. Drei eigene Disziplinen.
+      </div>
+    </section>
+
+    <!-- Slide 3: Drei Disziplinen -->
+    <section class="slide" style="display:none">
+      <h2>Drei Disziplinen – nicht verwechseln</h2>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Auswahl</h3>
+          <p>Welche Plattform passt zu uns?</p>
+          <p style="font-size:13px;color:var(--color-muted)">→ Tag 1 · Entscheidung</p>
+        </div>
+        <div class="merk-box">
+          <h3>Implementierung</h3>
+          <p>Wie bringen wir sie zum Laufen?</p>
+          <p style="font-size:13px;color:var(--color-muted)">→ Heute · Aufbau</p>
+        </div>
+        <div class="merk-box">
+          <h3>Optimierung</h3>
+          <p>Wie machen wir sie besser?</p>
+          <p style="font-size:13px;color:var(--color-muted)">→ Dauerzustand · Steuerung</p>
+        </div>
+      </div>
+      <p style="margin-top:18px">Wer diese drei Disziplinen vermischt, plant die falsche Sache zur falschen Zeit. Implementierung ohne Auswahl ist Aktivismus. Optimierung ohne Implementierung ist Wunschdenken.</p>
+      <div class="accent-box" style="margin-top:14px">
+        Heute: <strong>Implementierung &amp; Optimierung</strong> – die Phase, in der die meisten Plattformprojekte scheitern.
+      </div>
+    </section>
+
+    <!-- Slide 4: Sechs Phasen -->
+    <section class="slide" style="display:none">
+      <h2>Sechs Phasen einer Plattform-Implementierung</h2>
+      <div style="margin-top:14px;text-align:center">
+        <span class="phase-pill">1 · Zielbild</span>
+        <span class="phase-pill">2 · Pilotierung</span>
+        <span class="phase-pill">3 · Rollout</span>
+        <span class="phase-pill">4 · Betrieb</span>
+        <span class="phase-pill">5 · Skalierung</span>
+        <span class="phase-pill">6 · Optimierung</span>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Zeitliche Logik</h3>
+          <ul>
+            <li>Zielbild: 2–6 Wochen</li>
+            <li>Pilotierung: 6–12 Wochen</li>
+            <li>Rollout: 3–6 Monate</li>
+            <li>Betrieb &amp; Optimierung: <em>dauerhaft</em></li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Die typische Falle</h3>
+          <ul>
+            <li>Phasen überspringen</li>
+            <li>Phasen vermischen</li>
+            <li>„Wir sind im Rollout, aber das Zielbild ist noch unklar.“</li>
+            <li>= Aktivismus statt Steuerung</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Pilotierung kurz halten – 12 Wochen, nicht 12 Monate. Build → Measure → Learn.
+      </div>
+    </section>
+
+    <!-- Slide 5: Build-Measure-Learn -->
+    <section class="slide" style="display:none">
+      <h2>Build · Measure · Learn</h2>
+      <p style="color:var(--color-muted)">Eric Ries, Lean Startup. Gilt für Plattformeinführungen genauso.</p>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Build</h3>
+          <p>Minimum Viable Pilot. Nicht alle Funktionen – die, die das Lernen ermöglichen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Measure</h3>
+          <p>Echte Kunden, echtes Verhalten. Keine Hypothesen-Diskussionen mehr.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Learn</h3>
+          <p>Anpassen oder „Pivot“ – nicht stur an der ursprünglichen Idee festhalten.</p>
+        </div>
+      </div>
+      <div style="margin-top:18px;display:flex;align-items:center;gap:14px">
+        <canvas data-rough="arrow" data-color="#1a4d8f" width="160" height="28"></canvas>
+        <span class="handwritten" style="font-size:24px;color:var(--kurs-22)">12 Wochen Pilot &gt; 12 Monate Planung.</span>
+      </div>
+    </section>
+
+    <!-- Slide 6: Schnittstellen -->
+    <section class="slide" style="display:none">
+      <h2>Schnittstellen · fünf Bereiche, ein Prozess</h2>
+      <div class="grid-2x3" style="margin-top:16px">
+        <div class="merk-box"><h3>Vertrieb</h3><p>Leadbearbeitung, Kundengespräche, Akzeptanz</p></div>
+        <div class="merk-box"><h3>Marketing</h3><p>Sichtbarkeit, Kampagnen, Content</p></div>
+        <div class="merk-box"><h3>IT</h3><p>Anbindung, Daten, Performance</p></div>
+        <div class="merk-box"><h3>Kundenservice</h3><p>Anfragen, Beschwerden, Retouren</p></div>
+        <div class="merk-box"><h3>Management</h3><p>Budget, Ziele, Eskalation</p></div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Häufigste Bruchstelle</h3>
+          <p>Lead wird übergeben, aber niemand greift zu. Verantwortung fehlt.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Plattformprojekt = Organisationsprojekt. Keine reine IT-Frage.
+      </div>
+    </section>
+
+    <!-- Slide 7: KPI-Cluster -->
+    <section class="slide" style="display:none">
+      <h2>KPI-Cluster · drei Ebenen</h2>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Reichweite</h3>
+          <ul>
+            <li>Besucher, Produktaufrufe</li>
+            <li>Traffic-Quellen</li>
+            <li>Reichweiten-Kosten</li>
+          </ul>
+          <p style="font-size:13px;color:var(--color-muted)">Wer überhaupt kommt.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Conversion</h3>
+          <ul>
+            <li>Leads, Conversion Rate</li>
+            <li>Durchschnittl. Warenkorb</li>
+            <li>Customer Acquisition Cost</li>
+          </ul>
+          <p style="font-size:13px;color:var(--color-muted)">Was passiert.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Lifetime</h3>
+          <ul>
+            <li>Wiederkaufrate, CLV</li>
+            <li>Churn Rate</li>
+            <li><strong>CLV / CAC</strong></li>
+          </ul>
+          <p style="font-size:13px;color:var(--color-muted)">Was hängen bleibt.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        <strong>CLV / CAC ≥ 3</strong> – Faustregel für tragfähige Plattformen. Bei &lt; 1 kostet der Kunde mehr, als er bringt.
+      </div>
+    </section>
+
+    <!-- Slide 8: Vanity Metrics -->
+    <section class="slide" style="display:none">
+      <h2>Vanity Metrics · Vorsicht!</h2>
+      <p style="color:var(--color-muted)">Sehen beeindruckend aus – ändern aber keine Entscheidung.</p>
+      <table class="vs-table">
+        <thead><tr><th style="width:40%">Kennzahl</th><th>Vanity?</th><th>Was wäre die Steuerungs-Variante?</th></tr></thead>
+        <tbody>
+          <tr><td>500.000 Besucher / Monat</td><td>ja</td><td>Conversion Rate &amp; CAC daneben</td></tr>
+          <tr><td>10.000 Newsletter-Abonnenten</td><td>ja</td><td>Öffnungs- &amp; Klickrate</td></tr>
+          <tr><td>15.000 Follower</td><td>ja</td><td>Conversion aus Social</td></tr>
+          <tr><td>CLV / CAC = 3,4</td><td>nein</td><td>direkter Steuerungswert</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Faustregel: Wenn Verdopplung oder Halbierung der Zahl <em>keine Entscheidung verändert</em> – ist sie Vanity.
+      </div>
+    </section>
+
+    <!-- Slide 9: Optimierungslogik -->
+    <section class="slide" style="display:none">
+      <h2>Optimierungslogik · fünf Schritte</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>1 · Messen</h3><p>Was sehen wir tatsächlich – jenseits des Bauchgefühls?</p></div>
+        <div class="merk-box"><h3>2 · Analysieren</h3><p>Wo bricht die Conversion-Kette? Welche Ursache?</p></div>
+        <div class="merk-box"><h3>3 · Priorisieren</h3><p>Wo ist der größte Hebel pro Aufwand?</p></div>
+        <div class="merk-box"><h3>4 · Testen</h3><p>A/B-Test mit klarer Hypothese und Stichprobe.</p></div>
+        <div class="merk-box"><h3>5 · Anpassen</h3><p>Skalieren oder verwerfen – nichts „dazwischen“ liegen lassen.</p></div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Schnellster Hebel?</h3>
+          <p>Checkout-Optimierung – oft 20–40 % mehr Abschlüsse.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 10: Strategische Risiken -->
+    <section class="slide" style="display:none">
+      <h2>Strategische Risiken · fünf Bauformen</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>1 · Plattform-Lock-in</h3><p>Je tiefer integriert, desto teurer der Ausstieg.</p></div>
+        <div class="merk-box"><h3>2 · Datenverlust</h3><p>Plattform behält Kundendaten – wir sehen nur Bestellungen.</p></div>
+        <div class="merk-box"><h3>3 · Marktpreis-Erosion</h3><p>Vergleichsdruck drückt die Marge.</p></div>
+        <div class="merk-box"><h3>4 · Technische Komplexität</h3><p>Pro Kanal wächst der Pflegeaufwand <em>exponentiell</em>.</p></div>
+        <div class="merk-box"><h3>5 · Organisatorische Überforderung</h3><p>Jeder Bereich seine eigene „Plattform-Initiative“ – Silos.</p></div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Plattform-Verlust-Test</h3>
+          <p>Was passiert, wenn die wichtigste Plattform morgen rauswirft?</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Risiken lassen sich nicht wegoptimieren – nur bewusst entscheiden.
+      </div>
+    </section>
+
+    <!-- Slide 11: Lock-in reduzieren -->
+    <section class="slide" style="display:none">
+      <h2>Plattform-Lock-in aktiv reduzieren</h2>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Drei Schutzmaßnahmen</h3>
+          <ul>
+            <li>Mindestens <strong>einen eigenen Direktkanal</strong> mit voller Datenhoheit aufbauen.</li>
+            <li>Umsatzanteil pro Plattform unter Schwelle halten (z. B. &lt; 30 %).</li>
+            <li>Vertragliche <strong>Datenexport-Klauseln</strong> &amp; Multi-Vendor-Strategie.</li>
+          </ul>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Anti-Pattern</h3>
+          <p>„Alles auf eine Plattform – wegen Synergien“ – maximiert das Lock-in-Risiko.</p>
+        </div>
+      </div>
+      <div style="margin-top:18px;display:flex;align-items:center;gap:14px">
+        <canvas data-rough="arrow" data-color="#1a4d8f" width="160" height="28"></canvas>
+        <span class="handwritten" style="font-size:24px;color:var(--kurs-22)">Reichweite gegen Datenhoheit – nie pauschal, immer differenziert.</span>
+      </div>
+    </section>
+
+    <!-- Slide 12: Fallstudie BauTech Connect -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · „BauTech Connect“</h2>
+      <p style="color:var(--color-muted)">Mittelständler · technische Komponenten · 32 Mio. € Umsatz</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Eigener B2B-Shop</h3>
+          <ul>
+            <li>50.000 Besucher · 620 Bestellungen</li>
+            <li>Warenkorb: 760 €</li>
+            <li>Conversion: 1,24 % · Wiederkauf: 18 %</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Externe Marktplätze</h3>
+          <ul>
+            <li>180.000 Aufrufe · 1.900 Bestellungen</li>
+            <li>Warenkorb: 230 €</li>
+            <li>Preisvergleich · kaum Kundendaten</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Entscheidung: 300.000 € Budget · 9 Monate · Wohin?
+      </div>
+    </section>
+
+    <!-- Slide 13: BauTech Optimierungsroadmap -->
+    <section class="slide" style="display:none">
+      <h2>Optimierungsroadmap · 9 Monate</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Monat 1–3 · Basis</h3>
+          <ul>
+            <li>Produktdaten bereinigen</li>
+            <li>Checkout-Optimierung</li>
+            <li>Gemeinsame KPIs definieren</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Monat 4–6 · Steuerung</h3>
+          <ul>
+            <li>CRM-Anbindung</li>
+            <li>Lead Scoring einführen</li>
+            <li>Marktplatz nach Marge steuern</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Monat 7–9 · Hebel</h3>
+          <ul>
+            <li>Personalisierte Empfehlungen</li>
+            <li>Wiederkauflogik</li>
+            <li>Management-Dashboard</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Budget: 120k Shop · 80k CRM · 60k Kampagnen · 40k Marktplatz-Steuerung.
+      </div>
+    </section>
+
+    <!-- Slide 14: Zukunftstrends -->
+    <section class="slide" style="display:none">
+      <h2>Zukunftstrends · was bleibt, was vergeht</h2>
+      <div class="grid-2x2" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>KI-gestützte Steuerung</h3>
+          <p>Dynamische Preise, Forecasting, Budget-Allokation. <em>Datenqualität ist entscheidender als ohne KI.</em></p>
+        </div>
+        <div class="merk-box">
+          <h3>Personalisierung</h3>
+          <p>Angebote, Preise, Kundenerlebnisse. <strong>Transparent schlägt heimlich.</strong></p>
+        </div>
+        <div class="merk-box">
+          <h3>Ökosysteme &amp; Partner</h3>
+          <p>Von der Plattformnutzung zur Plattformarchitektur.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Datenhoheit &amp; Regulatorik</h3>
+          <p>DSA, DMA, KI-VO – strategisch, nicht nur compliance-relevant.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Reife: Plattformen <em>nutzen</em> → Plattformen <em>steuern</em> → eigene Architektur.
+      </div>
+    </section>
+
+    <!-- Slide 15: Management-Zielkonflikte -->
+    <section class="slide" style="display:none">
+      <h2>Management · vier Zielkonflikte</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Wachstum vs. Kontrolle</h3>
+          <p>Marktplätze pushen heute den Umsatz – diktieren morgen die Konditionen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Skalierung vs. Qualität</h3>
+          <p>Schneller Rollout vs. stabiler Prozess. Phasen-Überspringen kostet später teuer.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Kundendaten vs. Reichweite</h3>
+          <p>Sofort sichtbar, aber blind. Oder spät, aber mit voller Sicht.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Kurzfrist vs. Langfrist</h3>
+          <p>Vanity-KPI heute jubeln – CLV/CAC in 12 Monaten kontrollieren.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Werden nicht gelöst – sondern <strong>bewusst entschieden</strong>.
+      </div>
+    </section>
+
+    <!-- Slide 16: Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Auswahl, Implementierung, Optimierung – drei Disziplinen, nicht eine.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Sechs Phasen, in Reihenfolge. Wer überspringt, zahlt später teuer.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">CLV / CAC ≥ 3 – sonst kein tragfähiges Modell.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Vanity Metrics erkennen und aus dem Reporting entfernen.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Plattform-Verlust-Test bestehen – sonst ist Lock-in nicht gemanagt.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 17: Outro -->
+    <section class="slide" style="display:none">
+      <h2>Übergang · Tag 3</h2>
+      <p style="color:var(--color-muted)">Heute: Implementierung &amp; Optimierung bestehender Plattformen. Morgen: Plattform-Geschäftsmodelle <em>selbst</em> entwickeln.</p>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout · Lehrskript</h3>
+          <p style="font-size:14px">Sechs Phasen, KPI-Cluster, Risiken, Trends – ausführlich.</p>
+          <p style="margin-top:10px"><a href="../../pdf/22-handout-tag-02.pdf" style="color:var(--kurs-22);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Vertiefung &amp; Übung</h3>
+          <p style="font-size:14px">Video · Podcast · Quiz · Aufgaben · Lernpfad.</p>
+          <p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-22);font-weight:600">→ Zurück zur Materialauswahl</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <canvas data-rough="underline" data-color="#1a4d8f" width="320" height="20"></canvas>
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-22);margin:12px 0 0">Bis morgen – Tag 3.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 22 (Bo 143) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script src="../../assets/rough.min.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
+      const rc = rough.canvas(canvas);
+      const w = canvas.width, h = canvas.height;
+      const color = canvas.dataset.color || '#1a4d8f';
+      const type = canvas.dataset.rough;
+      if (type === 'underline') {
+        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
+      } else if (type === 'arrow') {
+        rc.line(0, h/2, w-10, h/2, { stroke: color, strokeWidth: 2, roughness: 1.4 });
+        rc.line(w-15, h/2-7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
+        rc.line(w-15, h/2+7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
+      } else if (type === 'check') {
+        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+      }
+    });
+  });
+
   new SlideShow(document.getElementById("slides"));
   markViewed("22_Bo_143", 2, "praesentation");
 </script>

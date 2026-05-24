@@ -5,6 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lernplatt · Präsentation · Tag 5</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-22); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+
+    .merk-box { background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-22); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+
+    .accent-box {
+      background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius);
+      padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td {
+      border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px;
+    }
+    .vs-table th { background: var(--kurs-22-bg); color: var(--kurs-22); }
+
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row canvas { flex: 0 0 36px; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+
+    .journey-step {
+      display: inline-block; background: var(--kurs-22-bg); border: 1.5px solid var(--kurs-22);
+      border-radius: 18px; padding: 6px 12px; margin: 4px;
+      font-weight: 600; color: var(--kurs-22); font-size: 14px;
+    }
+    .arrow-text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--kurs-22); margin: 0 2px; }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,21 +61,381 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Digitale Vertriebsstrategie entwickeln – Kundenfokus, Kanäle & Omnichannel</h2>
-      <p>Modul 3 · Tag 5</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 3 · Tag 5 · Kurs 22 (Bo 143) · 3. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:52px;line-height:1.05;color:var(--kurs-22);margin:0">Kundenfokus,<br>Customer Journey, Kanäle</h2>
+      <canvas data-rough="underline" data-color="#1a4d8f" width="460" height="22" style="margin-top:8px"></canvas>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Vom produktorientierten zum kundenzentrierten Vertrieb – Kanäle aus Kundenbedürfnissen ableiten.</p>
+      <div style="margin-top:48px" class="accent-box" style="display:inline-block;padding:8px 16px">
+        <span class="handwritten" style="color:#c47612;font-size:26px">Tag 5 von 16 · Modul 3 startet</span>
+      </div>
+    </section>
+
+    <!-- Slide 2: Lernziele -->
+    <section class="slide" style="display:none">
+      <h2>Lernziele dieses Tages</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Grundlagen digitaler Vertriebsstrategien</li>
+            <li>Kundenzentrierter Ansatz</li>
+            <li>Customer Journey &amp; Touchpoints</li>
+            <li>Bewertungskriterien für Kanäle</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Kundenbedürfnisse analysieren</li>
+            <li>Passende Kanäle wählen</li>
+            <li>Kanaloptionen bewerten</li>
+            <li>Vertriebslogik entwickeln</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Kanalwahl als Architekturentscheidung</li>
+            <li>Zielkonflikte bewerten</li>
+            <li>Bewusst gegen Kanäle entscheiden</li>
+            <li>Verantwortung übernehmen</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Produktorientiert vs. kundenzentriert -->
+    <section class="slide" style="display:none">
+      <h2>Produktorientiert vs. kundenzentriert</h2>
+      <table class="vs-table">
+        <thead><tr><th></th><th>Produktorientiert</th><th>Kundenzentriert</th></tr></thead>
+        <tbody>
+          <tr><th>Startpunkt</th><td>„Wir haben dieses Produkt“</td><td>„Wer kauft was, wann, warum?“</td></tr>
+          <tr><th>Kanalwahl</th><td>nach Reichweite / Trend</td><td>nach Kundenverhalten</td></tr>
+          <tr><th>Botschaft</th><td>Funktionen</td><td>Probleme &amp; Nutzen</td></tr>
+          <tr><th>Erfolg gemessen an</th><td>Klicks, Impressionen</td><td>Leadqualität, Pipeline</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Kundenzentrierung beginnt <em>nicht</em> beim Kanal – sie beginnt bei der Frage.
+      </div>
+    </section>
+
+    <!-- Slide 4: Customer Journey -->
+    <section class="slide" style="display:none">
+      <h2>Customer Journey · sieben Phasen</h2>
+      <div style="margin-top:16px;text-align:center">
+        <span class="journey-step">Aufmerksamkeit</span>
+        <span class="arrow-text">→</span>
+        <span class="journey-step">Information</span>
+        <span class="arrow-text">→</span>
+        <span class="journey-step">Vergleich</span>
+        <span class="arrow-text">→</span>
+        <span class="journey-step">Entscheidung</span>
+        <br>
+        <span class="journey-step">Kauf</span>
+        <span class="arrow-text">→</span>
+        <span class="journey-step">Nutzung</span>
+        <span class="arrow-text">→</span>
+        <span class="journey-step">Wiederkauf / Empfehlung</span>
+      </div>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box"><h3>Früh</h3><p>Sichtbarkeit, Vertrauensaufbau · SEO, Fachcontent, LinkedIn</p></div>
+        <div class="merk-box"><h3>Mitte</h3><p>Vergleichbarkeit, Beweise · Referenzen, Konfigurator, Beratungsanfrage</p></div>
+        <div class="merk-box"><h3>Spät</h3><p>Sicherheit, Beratung · persönliches Gespräch, Angebot, Referenzen</p></div>
+      </div>
+    </section>
+
+    <!-- Slide 5: B2B-Spezifika -->
+    <section class="slide" style="display:none">
+      <h2>B2B-Spezifika · was anders ist</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Buying Center</h3>
+          <p>Mehrere Personen entscheiden: Fachabteilung + Einkauf + IT + GF + ggf. Compliance.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Lange Zyklen</h3>
+          <p>Wochen bis Monate – nicht Minuten wie im B2C. Lead muss <em>in jeder Phase</em> erreichbar sein.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Vorab-Recherche</h3>
+          <p>Käufer entscheiden zu &gt; 60 % bevor wir zum Gespräch kommen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Erklärungsbedarf</h3>
+          <p>Technische Details, Wirtschaftlichkeit, Risiko, Integration.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Eine einzelne Anzeige trägt keine mehrwöchige Kaufentscheidung.
+      </div>
+    </section>
+
+    <!-- Slide 6: Zehn Kanäle -->
+    <section class="slide" style="display:none">
+      <h2>Zehn digitale Vertriebskanäle</h2>
+      <div class="grid-2x3" style="margin-top:14px">
+        <div class="merk-box"><h3>Eigener Webshop</h3><p>Volle Kontrolle, hoher Aufbau</p></div>
+        <div class="merk-box"><h3>Website &amp; Leadgen</h3><p>Beratungsanfrage, Downloads</p></div>
+        <div class="merk-box"><h3>SEO &amp; Suchmaschinen</h3><p>Langfristig, vertrauensbildend</p></div>
+        <div class="merk-box"><h3>Social Selling</h3><p>LinkedIn für B2B-Entscheider</p></div>
+        <div class="merk-box"><h3>E-Mail &amp; Automation</h3><p>Bestandskunden, Nurturing</p></div>
+        <div class="merk-box"><h3>Marktplätze / Vergleichsportale</h3><p>Reichweite gegen Marge</p></div>
+        <div class="merk-box"><h3>Webinare / Events</h3><p>Vertrauen + Qualifikation</p></div>
+        <div class="merk-box"><h3>Partner / Affiliate</h3><p>Multiplikatoren früh in Journey</p></div>
+        <div class="merk-box"><h3>Kundenportale / Self-Service</h3><p>Wiederkäufe, Bindung</p></div>
+      </div>
+    </section>
+
+    <!-- Slide 7: Zehn Bewertungskriterien -->
+    <section class="slide" style="display:none">
+      <h2>Zehn Bewertungskriterien · Kanalmatrix</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Strategische Kriterien</h3>
+          <ul>
+            <li>Zielgruppenpassung</li>
+            <li>Beratungsfähigkeit</li>
+            <li>Markenwirkung</li>
+            <li>Datenzugang</li>
+            <li>Kontrollgrad</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Operative Kriterien</h3>
+          <ul>
+            <li>Reichweite</li>
+            <li>Kosten &amp; Ressourcen</li>
+            <li>Conversion-Potenzial</li>
+            <li>Skalierbarkeit</li>
+            <li>Drittplattform-Abhängigkeit</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Hochwertige B2B-Marken: Zielgruppenpassung &amp; Beratungsfähigkeit hoch – Reichweite eher niedrig gewichten.
+      </div>
+    </section>
+
+    <!-- Slide 8: ErgoWork -->
+    <section class="slide" style="display:none">
+      <h2>Fall · „ErgoWork GmbH“</h2>
+      <p style="color:var(--color-muted)">Ergonomische Arbeitsplatzlösungen · Zielgruppe: Unternehmen + Homeoffice + öffentliche Hand</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Zur Auswahl</h3>
+          <ul>
+            <li>Webshop mit Konfigurator</li>
+            <li>Beratungsanfrage + Ratgeber</li>
+            <li>LinkedIn-Kampagnen</li>
+            <li>Amazon / Marktplatz</li>
+            <li>Webinare</li>
+            <li>E-Mail-Kampagnen Bestand</li>
+          </ul>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Spannungsfeld</h3>
+          <p>Marke hochwertig &amp; beratungsorientiert · Budget 60.000 € · qualifizierte Leads &gt; Reichweite</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Mindestens ein reichweitenstarker Kanal wird <em>bewusst nicht</em> gewählt.
+      </div>
+    </section>
+
+    <!-- Slide 9: GreenTech -->
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · „GreenTech Systems“</h2>
+      <p style="color:var(--color-muted)">Energieeffiziente Gebäudetechnik · 24 Mio. € Umsatz · 180k Budget · 12 Monate</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Priorisierte Kanäle</h3>
+          <ul>
+            <li>1 · SEO-Website mit Fachinhalten</li>
+            <li>2 · Webinare zur Leadqualifikation</li>
+            <li>3 · LinkedIn für Entscheider</li>
+            <li>4 · Partnerkanal Energieberater / Architekten</li>
+          </ul>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Bewusst nicht</h3>
+          <ul>
+            <li>Allgemeine Gebäudetechnikportale (Preisvergleich)</li>
+            <li>Angebotskonfigurator (zu früh)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 10: GreenTech Roadmap -->
+    <section class="slide" style="display:none">
+      <h2>GreenTech · Roadmap 12 Monate</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Monat 1–3 · Fundament</h3>
+          <p>Zielgruppen schärfen · Website-Struktur · Fachinhalte Förderung / Energieeinsparung</p>
+        </div>
+        <div class="merk-box">
+          <h3>Monat 4–6 · Aktivierung</h3>
+          <p>SEO veröffentlichen · erste Webinare · LinkedIn testen · Leadqualifizierung abstimmen</p>
+        </div>
+        <div class="merk-box">
+          <h3>Monat 7–9 · Optimierung</h3>
+          <p>Kampagnen verfeinern · Partnerprogramm starten · CRM-Prozesse verbessern</p>
+        </div>
+        <div class="merk-box">
+          <h3>Monat 10–12 · Skalierung</h3>
+          <p>Performance auswerten · erfolgreiche Kanäle skalieren · Schwache beenden</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 11: Bewusst gegen Kanal -->
+    <section class="slide" style="display:none">
+      <h2>Bewusst gegen einen Kanal entscheiden</h2>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>1 · Falsche Zielgruppe</h3>
+          <p>Reichweite ja – passt aber nicht. Unqualifizierte Leads.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Marken-Beschädigung</h3>
+          <p>Premium-Marke listet auf Vergleichsportal? Fördert Vergleichbarkeit.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Kapazität fehlt</h3>
+          <p>10er-Vertrieb kann nicht 2.000 Anfragen / Monat verarbeiten.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        „Wir verzichten bewusst“ ist <strong>keine Schwäche – sondern Führung</strong>.
+      </div>
+    </section>
+
+    <!-- Slide 12: SEO bei erklärungsbedürftigen Produkten -->
+    <section class="slide" style="display:none">
+      <h2>SEO + Content bei erklärungsbedürftigen B2B-Lösungen</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Vier Wirkungen gleichzeitig</h3>
+          <ul>
+            <li>Sichtbarkeit langfristig</li>
+            <li>Kompetenzaufbau / Vertrauen</li>
+            <li>Lead-Vorqualifizierung</li>
+            <li>Effizienz-Hebel für persönlichen Vertrieb</li>
+          </ul>
+        </div>
+        <div class="merk-box" style="background:#fff3d9;border-color:#c47612">
+          <h3 style="color:#c47612">Mythos</h3>
+          <p>„SEO ist nur für B2C / Konsumgüter.“ – Falsch. Gerade bei erklärungsbedürftigen B2B-Lösungen einer der stärksten Hebel.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Fachcontent ersetzt persönlichen Vertrieb nicht – er macht ihn <em>wirksamer</em>.
+      </div>
+    </section>
+
+    <!-- Slide 13: Zielkonflikte -->
+    <section class="slide" style="display:none">
+      <h2>Vier Zielkonflikte bei Kanalwahl</h2>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Reichweite vs. Leadqualität</h3>
+          <p>Klicks vs. echte Pipeline.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Kosten vs. Datenhoheit</h3>
+          <p>Externer Kanal ist günstiger – aber wir sehen nicht alles.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Schnelligkeit vs. Markenkonsistenz</h3>
+          <p>Sofort skalieren – aber zur Marke passend?</p>
+        </div>
+        <div class="merk-box">
+          <h3>Kanalvielfalt vs. Vertriebskapazität</h3>
+          <p>Mehr Kanäle = mehr Anfragen. Halten wir das?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 14: Take-aways -->
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Kanalwahl beginnt beim Kunden – nicht beim Tool.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Customer Journey in sieben Phasen – jede mit eigenem Bedarf.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Leadqualität schlägt Leadmenge – immer.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Bewusst gegen einen Kanal entscheiden ist Führung.</span>
+        </div>
+        <div class="takeaway-row">
+          <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
+          <span class="text">Roadmap statt „alles gleichzeitig“ – Aufmerksamkeit ist endlich.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 15: Outro -->
+    <section class="slide" style="display:none">
+      <h2>Übergang · Tag 6</h2>
+      <p style="color:var(--color-muted)">Heute: Kanäle <em>wählen</em>. Morgen: Kanäle <em>integrieren</em> – Omnichannel.</p>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout · Lehrskript</h3>
+          <p style="font-size:14px">Customer Journey, Touchpoints, Bewertungskriterien – ausführlich.</p>
+          <p style="margin-top:10px"><a href="../../pdf/22-handout-tag-05.pdf" style="color:var(--kurs-22);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Vertiefung &amp; Übung</h3>
+          <p style="font-size:14px">Video · Podcast · Quiz · Aufgaben · Lernpfad.</p>
+          <p style="margin-top:10px"><a href="index.html" style="color:var(--kurs-22);font-weight:600">→ Zurück zur Materialauswahl</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <canvas data-rough="underline" data-color="#1a4d8f" width="320" height="20"></canvas>
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-22);margin:12px 0 0">Bis morgen – Tag 6.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 22 (Bo 143) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script src="../../assets/rough.min.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
+      const rc = rough.canvas(canvas);
+      const w = canvas.width, h = canvas.height;
+      const color = canvas.dataset.color || '#1a4d8f';
+      const type = canvas.dataset.rough;
+      if (type === 'underline') {
+        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
+      } else if (type === 'check') {
+        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
+      }
+    });
+  });
+
   new SlideShow(document.getElementById("slides"));
   markViewed("22_Bo_143", 5, "praesentation");
 </script>
