@@ -1,0 +1,146 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 2,
+  "titel": "UML, VSM und Process Mining als komplementäres Steuerungssystem nutzen",
+  "erstellt_am": "2026-05-24",
+  "schritte": [
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "UML Use Case Diagram — Wer will was, und wo verläuft der Scope?",
+      "youtube_id": "IWbGedKa8PU",
+      "youtube_query": "uml use case diagram tutorial deutsch akteure include extend",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Was zeigt ein Use Case Diagram primär?",
+        "typ": "single",
+        "optionen": [
+          "Den genauen Ablauf aller Aktivitäten im Detail",
+          "Akteure, ihre Ziele (Use Cases) und die Systemgrenze",
+          "Die zeitliche Dauer einzelner Schritte",
+          "Die Datenstrukturen einer Software"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Ein Use Case Diagram fokussiert auf Akteure (Rollen), ihre Ziele (Use Cases) und die Systemgrenze. Genaue Abläufe gehören in Activity Diagrams, Zeitanalysen in VSM, Datenstrukturen in Klassendiagramme."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "VSM-Grundbegriffe: Bearbeitungszeit, Wartezeit, Durchlaufzeit",
+      "inhalt": "Value Stream Mapping (VSM) kommt aus der Lean-Welt und macht den End-to-End-Wertfluss sichtbar. Drei Zeiten musst du sauber trennen: Die ‚Bearbeitungszeit‘ (BT) ist die Zeit, in der tatsächlich am Vorgang gearbeitet wird — z. B. ‚Bestellung prüfen: 4 Minuten‘. Die ‚Wartezeit‘ (WT) ist die Zeit, in der der Vorgang in einer Warteschlange liegt — z. B. ‚wartet auf Freigabe: 2 Tage‘. Die ‚Durchlaufzeit‘ (DLZ) ist die Gesamtdauer und ergibt sich als Summe von BT plus WT. In den meisten Wertströmen ist die WT ein Vielfaches der BT — beim Onboarding eines Kunden sind oft 6 Stunden tatsächliche Arbeit über 6 Wochen verteilt. Genau hier liegt die Optimierungs-Goldmine: an der Wartezeit, nicht an der Bearbeitungszeit.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Aussagen über VSM sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "Die Durchlaufzeit (DLZ) ist die Summe aus Bearbeitungszeit und Wartezeit",
+          "In den meisten Wertströmen dominiert die Wartezeit über die Bearbeitungszeit",
+          "Optimierung lohnt sich meist mehr bei der Bearbeitungszeit als bei der Wartezeit",
+          "VSM kommt ursprünglich aus dem Lean-Umfeld"
+        ],
+        "korrekt": [0, 1, 3],
+        "erklaerung": "Korrekt sind die ersten beiden Aussagen sowie der Ursprung im Lean-Umfeld (Toyota). Falsch ist Option 3: Genau weil die WT meist dominant ist, lohnt sich Optimierung dort fast immer mehr als an der BT."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "UML Activity Diagram mit Swimlanes — Verantwortung sichtbar machen",
+      "youtube_id": "-b5O4gxpKL0",
+      "youtube_query": "uml aktivitätsdiagramm swimlanes deutsch tutorial",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Wofür stehen Swimlanes in einem Activity Diagram?",
+        "typ": "single",
+        "optionen": [
+          "Für zeitliche Phasen des Prozesses",
+          "Für Verantwortungsbereiche (Rollen, Organisationseinheiten)",
+          "Für parallele Pfade nach einem AND-Knoten",
+          "Für optionale Schleifen"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Swimlanes (Schwimmbahnen) sind das UML-Äquivalent zu Pools/Lanes in BPMN: vertikale oder horizontale Bereiche, denen Aktivitäten je nach Verantwortungsbereich zugeordnet werden. Sie machen sichtbar, wer welchen Schritt ausführt."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "Wertschöpfung erkennen — die drei Kategorien",
+      "inhalt": "Jeder Schritt in einer VSM wird einer von drei Kategorien zugeordnet. ‚Wertschöpfend‘ (Value-Adding, VA) ist ein Schritt, für den der Kunde bezahlen würde, wenn er es wüsste — z. B. ‚Ware kommissionieren‘. ‚Notwendig, aber nicht wertschöpfend‘ (Necessary Non-Value-Adding, NNVA) ist ein Schritt, der aus regulatorischen oder organisatorischen Gründen unverzichtbar ist, aber keinen direkten Kundennutzen hat — z. B. ‚Rechnung archivieren‘. ‚Verschwendung‘ (Waste, Muda) ist ein Schritt, der weder wertschöpfend noch notwendig ist — z. B. ‚Bestellung erneut prüfen, weil die erste Prüfung unvollständig dokumentiert war‘. In der Lean-Tradition gibt es sieben Verschwendungstypen (Überproduktion, Wartezeit, Transport, Überbearbeitung, Bestand, Bewegung, Fehler) — in Wissensprozessen häufig ergänzt um eine achte: ungenutzte Kreativität bzw. ungenutztes Wissen.",
+      "dauer_min": 5,
+      "aufgabe": {
+        "frage": "Welche Schritte zählen NICHT zur Wertschöpfung im Sinne von VSM?",
+        "typ": "multi",
+        "optionen": [
+          "Bestellung erneut prüfen wegen Daten-Fehler",
+          "Ware tatsächlich verpacken und versenden",
+          "Vorgang wartet 3 Tage auf eine Freigabe",
+          "Spezifikation gemeinsam mit dem Kunden klären"
+        ],
+        "korrekt": [0, 2],
+        "erklaerung": "Nacharbeit wegen Fehler (1) und reine Wartezeit (3) sind Verschwendung — kein Kunde würde dafür bezahlen. Verpacken und Versenden (2) sowie die fachliche Spezifikations-Klärung (4) sind dagegen wertschöpfend oder zumindest notwendig."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "Wertstromanalyse in der Praxis — VSM Tutorial",
+      "youtube_id": "4GNJxlRuaTs",
+      "youtube_query": "wertstromanalyse vsm tutorial deutsch",
+      "dauer_min": 9,
+      "aufgabe": {
+        "frage": "Wo liegt typischerweise der Engpass in einem Wertstrom?",
+        "typ": "single",
+        "optionen": [
+          "Bei dem Schritt mit der höchsten Bearbeitungszeit",
+          "Bei dem Schritt mit der höchsten Wartezeit, wo WIP sich staut",
+          "Beim ersten Schritt des Prozesses",
+          "Beim letzten Schritt des Prozesses"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Der Engpass ist typischerweise dort, wo Vorgänge am längsten warten — wo WIP sich staut. Eine VSM macht das sichtbar, indem sie zeigt, wo die Wartezeit (WT) einen Sprung nach oben macht. Hohe Bearbeitungszeit ist nicht zwangsläufig ein Engpass, solange die nachfolgenden Schritte nicht warten müssen."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "Process Mining — Event Log und die drei Disziplinen",
+      "inhalt": "Process Mining setzt voraus, dass IT-Systeme Spuren hinterlassen. Diese Spuren werden zu einem ‚Event Log‘ zusammengeführt — eine Tabelle mit mindestens drei Feldern pro Eintrag: ‚Case ID‘ (welcher Vorgang? — z. B. Bestellung B-2026-1234), ‚Aktivität‘ (welcher Schritt? — z. B. ‚Antrag prüfen‘) und ‚Zeitstempel‘ (wann? — z. B. 2026-05-29 14:32). Optional, aber wertvoll: ‚Ressource‘ (wer hat den Schritt ausgeführt?) sowie Datenfelder zum Vorgang. Auf Basis dieser Logs gibt es drei Process-Mining-Disziplinen: ‚Discovery‘ rekonstruiert das Ist-Prozessmodell aus den Logs (ohne Modellierungs-Workshop). ‚Conformance Checking‘ prüft ein bestehendes Soll-Modell gegen den Log und misst Abweichungen. ‚Enhancement‘ reichert das Modell um Zeitinformationen, Frequenzen und Engpässe an. Wichtig: Process Mining zeigt, was passiert — nicht, was passieren sollte. Es ersetzt weder Modellierung noch Wertstromanalyse.",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche drei Felder muss ein Event Log mindestens enthalten, damit Process Mining funktionieren kann?",
+        "typ": "single",
+        "optionen": [
+          "Vor- und Nachname, Abteilung, Tätigkeit",
+          "Case ID, Aktivität, Zeitstempel",
+          "Kostenstelle, Auftragsnummer, Mitarbeiter-ID",
+          "Datum, Uhrzeit, Begründung"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Das Minimum sind drei Felder: Case ID (welcher Vorgang gehört zusammen), Aktivität (welcher Schritt wurde ausgeführt) und Zeitstempel (wann). Ressource, Kostenstelle und Datenfelder zum Vorgang sind wertvolle Ergänzungen, aber nicht das Minimum."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "Process Mining einfach erklärt — vom Log zum Insight",
+      "youtube_id": "0QOTuw45zhQ",
+      "youtube_query": "process mining einfach erklärt deutsch lernvideo",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche der folgenden Aussagen über Process Mining sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "Process Mining kann Modellierung und Wertstromanalyse vollständig ersetzen",
+          "Discovery rekonstruiert ein Prozessmodell aus den Event Logs",
+          "Conformance Checking misst Abweichungen zwischen Soll-Modell und Ist-Log",
+          "Process Mining funktioniert auch ohne digitale Spuren der Aktivitäten",
+          "Die Datenqualität bestimmt maßgeblich die Aussagekraft der Analyse"
+        ],
+        "korrekt": [1, 2, 4],
+        "erklaerung": "Korrekt sind Discovery (2), Conformance (3) und die Bedeutung der Datenqualität (5). Falsch ist (1): Process Mining ist eine Ergänzung, kein Ersatz für Modellierung und VSM — es zeigt das Ist, nicht das Soll. Falsch ist auch (4): ohne digitale Spuren keine Logs, keine Analyse — reine Papier-Prozesse sind für Process Mining ungeeignet."
+      }
+    }
+  ]
+}
