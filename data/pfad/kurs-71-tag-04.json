@@ -1,147 +1,141 @@
 {
   "kurs_id": "71_Dig_42",
   "tag_nr": 4,
-  "titel": "Vom Prozessbild zum steuerbaren System: Repository, Governance und Execution-Modelle",
+  "titel": "Vom Prozessbild zum steuerbaren System: Repository, Governance und Execution mit Camunda",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Was ist ein Prozess-Repository? Single Source of Truth statt SharePoint-Chaos",
-      "youtube_id": "",
-      "youtube_query": "process repository single source of truth governance enterprise architecture deutsch",
-      "dauer_min": 7,
+      "titel": "Was ist BPM-Software? — Repository und Engine in der Übersicht",
+      "youtube_id": "vL6VOjsCJSo",
+      "youtube_query": "was ist BPM software intellior repository engine",
+      "dauer_min": 4,
       "aufgabe": {
-        "frage": "Welche Aussage beschreibt ein Prozess-Repository am treffendsten?",
+        "frage": "Was ist die Kernidee eines Prozess-Repositories?",
         "typ": "single",
         "optionen": [
-          "Ein zentraler Ablageort für PDF-Dateien, die einmal jährlich aktualisiert werden",
-          "Eine Single Source of Truth, die Prozesse, Rollen, Dokumente, Risiken, KPIs, Controls und Versionen verbindet",
-          "Eine Liste aller Mitarbeitenden mit ihren Aufgaben",
-          "Eine grafische Modellierungssoftware ohne Verwaltungsfunktionen"
+          "Ein Ablageordner, in dem alle Prozessdokumente als PDF gesammelt werden",
+          "Eine ‚Single Source of Truth‘ für Prozessstruktur, Rollen, Risiken, KPIs und Versionen",
+          "Ein Tool, das automatisch alle Prozesse modelliert",
+          "Eine Datenbank für Mitarbeiterzeiten"
         ],
         "korrekt": 1,
-        "erklaerung": "Ein Repository ist mehr als eine Ablage: es verknüpft Prozessmodelle mit Rollen, Risiken, KPIs und Controls und hält Versionen sowie Verantwortliche nachweisbar fest. Eine reine PDF-Ablage erfüllt diese Steuerungsfunktion nicht, weil Verknüpfungen, Versionsstände und Owner fehlen. Eine Mitarbeitendenliste oder eine reine Modellierungssoftware deckt weder Governance noch Lifecycle ab."
+        "erklaerung": "Ein Prozess-Repository ist eine zentrale ‚Single Source of Truth‘ — verbindet Prozessmodelle, Rollen/Owner, Dokumente, KPIs, Risiken und Versionen. Eine reine Dateiablage (SharePoint, Ordner-Wildwuchs) ist kein Repository, weil sie weder Lifecycle noch Governance erzwingt."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Drei Ebenen, vier Metadatenfelder: die Minimal-Architektur eines Repositories",
-      "inhalt": "Ein nutzbares Repository startet mit drei klaren Ebenen: ganz oben die Prozesslandkarte mit den E2E-Prozessen (z. B. Order-to-Cash, Incident-to-Resolution), darunter die Subprozesse und Modelle, ganz unten die Arbeitsanweisungen, Templates und Nachweisdokumente. Damit ein Modell überhaupt findbar und steuerbar ist, muss jedes Modell ein Set zwingender Metadaten tragen: ‚Owner‘ (wer ist accountable), ‚Status/Version‘ (Draft/Review/Approved + Versionsnummer), ‚Gültigkeit‘ (Standort/Land/Geltungsbereich) und ‚Letzte Änderung‘ (Datum und durch wen). Der Freigabeprozess folgt typischerweise dem Muster Draft → Review → Approved und ordnet den Schritten klare Rollen zu: Modeler erstellt, Reviewer prüft, Owner gibt frei. Varianten (Länder, Standorte, Produkte) müssen entweder als Attribute am Stammmodell oder als separate Modelle abgebildet werden — ohne explizite Entscheidung wuchert Variantenchaos. Ohne diese vier Bausteine bleibt ein Repository eine Ablage, kein Steuerungsinstrument.",
-      "dauer_min": 6,
+      "titel": "Repository-Struktur: drei Ebenen, klare Verantwortung",
+      "inhalt": "Ein praxistaugliches Repository hat in der Regel drei Ebenen: (1) Prozesslandkarte (Value Chain, 10-20 E2E-Prozesse), (2) Prozessmodelle (BPMN/EPC, Detailtiefe je nach Zweck), (3) Arbeitsanweisungen und Artefakte (Checklisten, Templates, Compliance-Nachweise). Jedes Modell trägt Pflicht-Metadaten: Owner (eine Person, nicht ein Team), Status (Draft/In Review/Approved/Retired), Version, Gültigkeit (Standort/Produkt/Variante), letzte Änderung. Der Freigabefluss durchläuft mindestens drei Schritte: Modeler erstellt → Reviewer prüft Qualität → Approver gibt frei (z. B. Process Owner). Varianten (Länder, Standorte, Produktlinien) sind explizit auszuzeichnen — entweder als Attribute am Hauptmodell oder als separate Modelle. Beides ist legitim, aber die Entscheidung muss bewusst und konsistent fallen, sonst entstehen Schatten-Modelle.",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche der folgenden Metadatenfelder gehören zum Pflicht-Minimum eines jeden Modells im Repository?",
-        "typ": "multi",
-        "optionen": [
-          "Owner (Verantwortliche Person/Rolle)",
-          "Status und Version",
-          "Lieblingsfarbe der Modellersteller:in",
-          "Gültigkeitsbereich (z. B. Standort/Land)",
-          "Letzte Änderung (Datum, Person)"
+        "frage": "Vervollständigen Sie die Repository-Anforderungen:",
+        "typ": "lueckentext",
+        "text": "Ein Repository hat typischerweise {0} Ebenen: Prozesslandkarte, Prozessmodelle, Arbeitsanweisungen. Jedes Modell braucht Pflicht-Metadaten — mindestens {1}, Status, Version und Gültigkeit. Der Freigabefluss läuft typischerweise: Modeler → {2} → Approver. Varianten sollten explizit als {3} dokumentiert werden, nicht als Schatten-Modelle entstehen.",
+        "luecken": [
+          {"antwort": "drei", "alternativen": ["3"]},
+          {"antwort": "Owner", "alternativen": ["Eigentümer", "Process Owner"]},
+          {"antwort": "Reviewer", "alternativen": ["Prüfer", "Review"]},
+          {"antwort": "Attribute", "alternativen": ["Metadaten", "Varianten-Attribute"]}
         ],
-        "korrekt": [0, 1, 3, 4],
-        "erklaerung": "Owner, Status/Version, Gültigkeitsbereich und Letzte Änderung sind die vier zwingenden Metadaten: ohne Owner gibt es keine Accountability, ohne Status/Version keine Nachweisbarkeit, ohne Gültigkeit keine saubere Variantensteuerung, ohne Änderungsspur keinen Audit Trail. Die Lieblingsfarbe ist offensichtlich keine Steuerungsinformation und gehört nicht ins Repository."
+        "erklaerung": "Repository ohne Owner und Lifecycle ist eine Ablage, kein Steuerungsinstrument. Die drei Ebenen (Map → Modell → Artefakt) sind das Minimum für E2E-Transparenz; alles darüber hinaus ist Reife-Zuwachs."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Business-BPMN vs. Execution-BPMN: wann wird ein Modell ausführbar?",
-      "youtube_id": "",
-      "youtube_query": "camunda bpmn execution user task service task gateway deutsch tutorial",
+      "titel": "Camunda 8 — vom Modell zum laufenden Workflow",
+      "youtube_id": "rC_TdTOfdkE",
+      "youtube_query": "camunda 8 platform process orchestrator introduction",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Was unterscheidet ein Execution-BPMN von einem Business-BPMN?",
-        "typ": "single",
+        "frage": "Welche BPMN-Elemente werden in einer Execution-Engine wie Camunda präzise modelliert (statt nur konzeptionell)?",
+        "typ": "multi",
         "optionen": [
-          "Es benutzt andere Farben für die Symbole",
-          "Es ist präziser: User Tasks, Service Tasks, Events, Datenobjekte und technische Schnittstellen werden so exakt definiert, dass eine Engine das Modell ausführen kann",
-          "Es enthält keine Gateways mehr, weil Entscheidungen automatisch getroffen werden",
-          "Es wird ausschließlich für die Geschäftsleitung erstellt"
+          "User Tasks (mit Form-Schlüssel und Zuweisung)",
+          "Service Tasks (mit konkretem Endpoint / Konnektor)",
+          "Fließtext-Beschreibungen ohne Datenanbindung",
+          "Timer- und Message-Events mit definierten Auslösern",
+          "Prozessvariablen und Datenfluss zwischen Tasks"
         ],
-        "korrekt": 1,
-        "erklaerung": "Execution-BPMN ist maschinen-nah: jede Verzweigung, jeder Datenfluss und jeder Fehlerfall muss präzise modelliert sein, sonst läuft das Modell in der Engine (z. B. Camunda) nicht. Business-BPMN darf bewusst grob bleiben, weil es Kommunikation und nicht Ausführung adressiert. Farbe ist irrelevant, Gateways bleiben essenziell für Verzweigungen, und die Zielgruppe Geschäftsleitung passt eher zu Business-BPMN, nicht Execution."
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Execution-BPMN braucht User Tasks (1), Service Tasks (2), Events (4) und Prozessvariablen/Datenfluss (5) — alle technisch annotiert. Fließtext (3) reicht für Dokumentation, aber die Engine kann ihn nicht ausführen. Faustregel: Was die Engine ausführen soll, muss präzise und maschinenlesbar sein."
       }
     },
     {
       "nr": 4,
       "typ": "text",
-      "titel": "Automations-Slice: einen Prozessabschnitt ‚execution-ready‘ schneiden",
-      "inhalt": "Nicht jeder Prozess gehört in eine Workflow-Engine, und schon gar nicht im ersten Release. Erfahrene Process Owner schneiden gezielt einen ‚Automations-Slice‘ heraus: einen Abschnitt mit klar definiertem Start- und Endpunkt, eindeutigen Datenfeldern und überschaubaren Fehlerfällen. Beispiel Rechnungsfreigabe: der Slice kann beginnen, sobald die Grunddaten erfasst sind, und enden, sobald die Buchung im ERP angestoßen ist. Drei Felder reichen oft als Datenminimum (z. B. Betrag, Kostenstelle, Freigeber), und die Eskalation bei Fristüberschreitung wird über ein Timer-Event modelliert. Wichtig ist die ‚Ausnahmepolitik‘: welche Sonderfälle werden im ersten Release organisatorisch (manuell) aufgefangen, statt sie sofort zu automatisieren — denn jede zusätzliche Ausnahme verlängert den Build und erhöht das Risiko. Genau in dieser bewussten Verkleinerung steckt Senior-Verantwortung: schnelle, sichere Lieferung vor Perfektionsanspruch.",
-      "dauer_min": 6,
+      "titel": "Business-BPMN vs. Execution-BPMN — zwei Modelle, ein Prozess",
+      "inhalt": "In der Praxis hat ein automatisierter Prozess zwei Modell-Sichten. Das Business-BPMN ist verständlich, kommuniziert Verantwortung und kann bewusst grob bleiben — Zielgruppe sind Process Owner, Management und neue Mitarbeitende. Das Execution-BPMN ist präzise, maschinen-nah und enthält User Tasks (mit Form-Schlüssel), Service Tasks (mit Endpoint), Events (Timer, Message, Error), Datenobjekte/Variablen und technische Schnittstellen — Zielgruppe sind Entwickler und die Engine selbst. Beide Sichten dürfen sich strukturell unterscheiden: Im Execution-BPMN müssen oft technische Aufgaben (Validierung, Mapping, Logging, Retry) modelliert werden, die im Business-BPMN völlig fehlen. Wichtig ist die Verbindung: Welcher Business-Task entspricht welcher Execution-Folge? Diese Mapping-Tabelle ist eines der wichtigsten Governance-Artefakte überhaupt.",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Kriterien sind entscheidend, damit ein Prozessabschnitt als sinnvoller Automations-Slice taugt?",
-        "typ": "multi",
-        "optionen": [
-          "Klar definierter Start- und Endpunkt",
-          "Möglichst viele Ausnahmen in den Slice integrieren, um den Slice ‚vollständig‘ zu machen",
-          "Eindeutig definierte Datenfelder als Input/Output",
-          "Bewusste Festlegung, welche Ausnahmen organisatorisch (außerhalb) aufgefangen werden",
-          "Verzicht auf jegliche Eskalations- oder Timer-Logik"
+        "frage": "Ordnen Sie die Anforderungen den beiden Modell-Sichten zu:",
+        "typ": "zuordnung",
+        "paare": [
+          {"links": "Verständlich für Process Owner und Management", "rechts": "Business-BPMN"},
+          {"links": "User Task mit konkretem Form-Schlüssel und Assignee", "rechts": "Execution-BPMN"},
+          {"links": "Service Task mit Endpoint und Fehlerbehandlung", "rechts": "Execution-BPMN"},
+          {"links": "Grobe Lanes für Rollen, ohne technische Details", "rechts": "Business-BPMN"},
+          {"links": "Timer-Event mit Cron-Expression", "rechts": "Execution-BPMN"},
+          {"links": "Kommunikation der Verantwortlichkeiten", "rechts": "Business-BPMN"}
         ],
-        "korrekt": [0, 2, 3],
-        "erklaerung": "Ein guter Slice hat klare Grenzen, klare Daten und eine bewusste Ausnahmepolitik — das macht ihn lieferbar und nachweisbar. Viele Ausnahmen in den ersten Slice zu packen vergrößert das Risiko und verzögert den Mehrwert. Eskalationen und Timer (z. B. Erinnerung nach 3 Tagen) gehören sogar zu einem belastbaren Slice und dürfen keinesfalls weggelassen werden."
+        "erklaerung": "Beide Sichten haben ihre Daseinsberechtigung. Business-BPMN dient der Kommunikation und Verantwortung, Execution-BPMN ist der ausführbare Vertrag mit der Engine. Wer beides in einem Modell vereinen will, verliert entweder Verständlichkeit (zu viel Technik) oder Ausführbarkeit (zu viel Vagheit)."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "Repository-Governance: Owner, Reviewer, Lifecycle und Varianten",
-      "youtube_id": "",
-      "youtube_query": "process governance owner lifecycle versioning enterprise repository deutsch",
-      "dauer_min": 7,
+      "titel": "Camunda DACH — Wie funktioniert Workflow Automation?",
+      "youtube_id": "M4UU2BXVc1g",
+      "youtube_query": "camunda dach roadshow wie geht workflow automation",
+      "dauer_min": 9,
       "aufgabe": {
-        "frage": "Welche Rolle gibt im typischen Repository-Lifecycle ein Modell offiziell frei (Approved)?",
+        "frage": "Bei einem zu automatisierenden Rechnungsfreigabe-Prozess: Welche Stelle ist ein typischer Service Task?",
         "typ": "single",
         "optionen": [
-          "Der Modeler, der das Modell erstellt hat",
-          "Die IT-Abteilung",
-          "Der Process Owner als fachlich Verantwortlicher",
-          "Jede:r Mitarbeitende mit Zugriff auf das Repository"
+          "Teamleitung gibt Rechnung manuell über 5.000 € frei",
+          "Buchhaltung erfasst die Grunddaten aus dem PDF-Scan",
+          "ERP-System bucht die freigegebene Rechnung automatisch",
+          "Anforderungsstelle bekommt eine E-Mail mit Rückfrage"
         ],
         "korrekt": 2,
-        "erklaerung": "Die Freigabe (Approved) liegt beim Process Owner — der fachlich verantwortlichen Rolle, die für KPI, Risiken und Compliance des Prozesses haftet. Der Modeler erstellt, der Reviewer prüft, aber Accountability liegt beim Owner. IT freizugeben oder es jeder/jedem zu erlauben würde Verantwortung verwässern und ist kein tragfähiges Governance-Design."
+        "erklaerung": "Service Tasks sind Systemaktionen — automatisierte Schritte, die ohne menschliches Eingreifen ablaufen (ERP-Buchung, API-Call, Mail-Versand durch das System). Optionen 1, 2 und 4 enthalten menschliche Handlungen und gehören als User Tasks modelliert."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Varianten als Attribute oder eigene Modelle? Eine Senior-Entscheidung",
-      "inhalt": "Eine der unterschätzten Designentscheidungen im Repository ist der Umgang mit Varianten. Bilden Standorte oder Länder ihren Prozess wirklich identisch ab, oder gibt es echte Unterschiede? Wer Varianten als Attribute am Stammmodell pflegt (‚Pflichtfreigabe ab 5.000 € in DE, ab 3.000 € in FR‘), reduziert Pflegeaufwand und behält Vergleichbarkeit — verliert aber Übersicht, wenn Varianten zu zahlreich werden. Wer Varianten als eigene Modelle pflegt, gewinnt Klarheit pro Standort, riskiert aber Drift: jedes Modell altert eigenständig, Vergleichbarkeit geht verloren. Die pragmatische Faustregel: Solange Varianten an wenigen klar benennbaren Parametern hängen (Schwellenwerte, Pflichtfelder, Rollen), bleibt das Stammmodell + Attributtabelle die bessere Wahl. Sobald sich die Ablauflogik selbst unterscheidet (andere Schritte, andere Reihenfolge), sind getrennte Modelle ehrlicher. Diese Entscheidung muss bewusst, dokumentiert und mit einer Variantenpolitik im Repository hinterlegt werden — sonst landet jeder Standort beim eigenen ‚Sonderweg‘.",
+      "titel": "Den ‚Automations-Slice‘ finden — MVP statt Big Bang",
+      "inhalt": "Erfahrene Process Owner automatisieren nie einen kompletten E2E-Prozess als ersten Schritt. Sie isolieren stattdessen einen Automations-Slice: eine klar abgegrenzte Teilstrecke mit definiertem Start, definiertem Ende, klaren Daten und beherrschbaren Fehlerfällen. Beispiel Rechnungsfreigabe: Statt ‚den ganzen Prozess‘ zu automatisieren, wählt man die Strecke ‚Rechnung eingegangen → automatische Validierung → bei Pflichtfeld-Fehler zurück an Buchhaltung, sonst Freigabe-Workflow starten‘ — ein Slice mit 3-5 Tasks. Ausnahmen (Sonderfälle, fehlende Lieferanten, manuelle Eingriffe) werden im ersten Release nicht im Workflow gelöst, sondern organisatorisch abgefangen — eine Mailbox, ein Sonderfall-Owner, ein wöchentliches Review. So entsteht ein lauffähiges MVP in Wochen statt Monaten, mit klarem Lerneffekt für die nächste Iteration.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Wann ist es sinnvoller, Varianten als separate Modelle (statt als Attribute am Stammmodell) zu führen?",
-        "typ": "single",
-        "optionen": [
-          "Wenn sich nur einzelne Schwellenwerte unterscheiden",
-          "Wenn sich die Ablauflogik selbst (Schritte, Reihenfolge) zwischen Varianten substanziell unterscheidet",
-          "Immer, weil getrennte Modelle ‚sauberer‘ wirken",
-          "Nie, weil das Pflegeaufwand erhöht"
-        ],
-        "korrekt": 1,
-        "erklaerung": "Sobald sich die Ablauflogik selbst unterscheidet (andere Schritte oder Reihenfolge), erzwingt das Modell-Ehrlichkeit eigene Modelle — sonst werden Stammmodelle unleserlich. Reine Schwellenwerte oder Pflichtfeldunterschiede gehören als Attribute ans Stammmodell. ‚Immer separat‘ ignoriert Pflegeaufwand und Vergleichbarkeit, ‚nie separat‘ ignoriert echte fachliche Unterschiede."
+        "frage": "Beschreiben Sie in 4-6 Sätzen, wie Sie für einen unbekannten E2E-Prozess (z. B. Reklamationsbearbeitung) den ersten Automations-Slice identifizieren würden. Welche Kriterien wenden Sie an, und wie gehen Sie mit Ausnahmen um?",
+        "typ": "text",
+        "musterloesung": "Ich beginne mit einer groben Visualisierung des E2E-Prozesses (z. B. als VSM oder Business-BPMN) und identifiziere Teilstrecken, die drei Kriterien erfüllen: (1) klar abgegrenzter Start- und End-Trigger, (2) saubere Datenlage (alle Pflichtfelder digital verfügbar), (3) hohe Häufigkeit bei niedriger Komplexität. Bei einer Reklamation könnte das die Strecke ‚Reklamation eingegangen → automatische Klassifizierung (Standard/Sonder) → Standardfall: Service Task ERP-Anpassung + automatische Kundenbestätigung‘ sein.\n\nFür Ausnahmen definiere ich einen klaren Fallback: alle Sonderfälle landen in einer Worklist eines benannten Spezialisten — bewusst manuell, mit SLA. Diese Ausnahmen werden über 4-8 Wochen beobachtet und gemessen; wiederkehrende Muster fließen in die nächste Automatisierungs-Welle ein.\n\nEntscheidend ist die ‚Stop Doing‘-Liste: Welche Funktionen kommen explizit nicht ins MVP? Beispiel: Großkunden-Sonderverträge, Reklamationen über 10.000 €, Mehrsprachigkeit jenseits DE/EN. So bleibt der Slice klein genug, um in 8-12 Wochen produktiv zu gehen, und liefert messbaren Nutzen (z. B. 60 % der Standardfälle automatisiert).",
+        "erklaerung": "Der MVP-Slice ist die wichtigste strategische Entscheidung jeder Automatisierungs-Initiative. Wer den Slice zu groß wählt, scheitert an Komplexität und IT-Engpässen. Wer ihn zu klein wählt, liefert keinen sichtbaren Nutzen und verliert politischen Rückhalt. 60-80 % Standardfälle automatisieren, 20-40 % bewusst manuell — das ist meist die richtige Größenordnung."
       }
     },
     {
       "nr": 7,
       "typ": "video",
-      "titel": "Repository steuert Transparenz, Execution steuert Durchlaufzeit — Senior-Perspektive",
-      "youtube_id": "",
-      "youtube_query": "process repository execution governance kpi audit trail strategy",
+      "titel": "Low-Code mit Camunda 8 — Prozessautomatisierung ohne Programmierung?",
+      "youtube_id": "33oG8WtRmdk",
+      "youtube_query": "low-code camunda 8 prozessautomatisierung",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche der folgenden Aussagen zur Kerndifferenz zwischen Repository und Execution sind zutreffend?",
+        "frage": "Welche Aussagen zur Governance einer Workflow-Automation sind korrekt?",
         "typ": "multi",
         "optionen": [
-          "Das Repository steuert vor allem Transparenz, Governance und Vergleichbarkeit",
-          "Execution-Modelle steuern Durchlaufzeit, Qualität und Audit Trail im laufenden Betrieb",
-          "Repository und Execution sind Synonyme und meinen dasselbe",
-          "Ein Repository ohne Owner und Lifecycle ist faktisch nur eine Ablage",
-          "Execution braucht keine Daten- und Fehlerdefinitionen, weil die Engine alles automatisch löst"
+          "Jeder produktive Workflow braucht einen benannten Automation Owner",
+          "Eskalations- und Fehlerpfade müssen explizit modelliert sein, nicht implizit",
+          "Wenn Low-Code genutzt wird, ist Governance nicht mehr nötig",
+          "Versionierung und Rollback-Strategie sind Pflicht — auch bei einfachen Workflows",
+          "Audit Trail (wer hat wann was getan?) ist optional"
         ],
         "korrekt": [0, 1, 3],
-        "erklaerung": "Das Repository fokussiert Transparenz und Governance, die Execution-Schicht fokussiert Durchlaufzeit, Qualität und Audit Trail — sie sind komplementär, nicht identisch. Ohne Owner und Lifecycle wird ein Repository zur Ablage statt zum Steuerungsinstrument. Engines lösen keineswegs automatisch Daten- und Fehlerlogik: gerade dort entstehen die teuersten Fehlautomatisierungen, wenn das nicht sauber modelliert ist."
+        "erklaerung": "Automation Owner (1), explizite Fehlerpfade (2) und Versionierung/Rollback (4) sind nicht verhandelbar. Falsch: Low-Code befreit nicht von Governance (3) — das Gegenteil ist der Fall, weil mehr Personen Workflows ändern können. Falsch: Audit Trail ist Pflicht (5) — gerade in regulierten Branchen ist er der wichtigste Compliance-Nachweis."
       }
     }
   ]

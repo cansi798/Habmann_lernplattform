@@ -21,26 +21,26 @@
           "Eine Organisationsstruktur mit klaren Hierarchien"
         ],
         "korrekt": 1,
-        "erklaerung": "Ein Geschäftsprozess ist eine geordnete Folge von Aktivitäten, die Inputs in einen definierten Output transformieren. Wichtig sind dabei drei Elemente: klare Ein- und Ausgaben, eine Reihenfolge (Ablauflogik) und ein Nutzen. Personen, Software oder Organisationen sind Hilfsmittel im Prozess, aber nicht der Prozess selbst."
+        "erklaerung": "Ein Geschäftsprozess ist eine geordnete Folge von Aktivitäten, die Inputs in einen definierten Output transformieren. Wichtig sind drei Elemente: klare Ein- und Ausgaben, eine Ablauflogik und ein Nutzen. Personen, Software oder Organisationen sind Hilfsmittel im Prozess, aber nicht der Prozess selbst."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "BPMN und EPC im Vergleich — die wichtigsten Basiselemente",
-      "inhalt": "BPMN (Business Process Model and Notation) und EPC (Ereignisgesteuerte Prozesskette) sind die zwei dominanten Notationen für Geschäftsprozesse. BPMN kommt aus der IT-/Automatisierungsecke und kennt: Start- und Endereignisse (Kreise), Tasks (abgerundete Rechtecke), Gateways für Entscheidungen (Rauten, am häufigsten XOR), Sequenzflüsse (Pfeile) und Pools/Lanes zur Darstellung von Rollen/Verantwortlichkeiten. EPC ist business-näher und arbeitet mit drei Hauptelementen: Ereignissen (Sechsecke — passive Zustände wie ‚Bestellung eingegangen‘), Funktionen (Rechtecke — aktive Tätigkeiten wie ‚Bestellung prüfen‘) und Konnektoren (AND, OR, XOR — Kreise mit Symbol). In EPC wechseln sich Ereignis und Funktion immer ab. Eine zentrale Regel in beiden Notationen: Tasks/Funktionen werden nach dem Muster Verb + Objekt benannt (z. B. ‚Lagerbestand prüfen‘), Ereignisse als Zustandsbeschreibung im Perfekt (‚Bestellung eingegangen‘).",
-      "dauer_min": 7,
+      "titel": "BPMN-Basiselemente — Symbole und ihre Bedeutung",
+      "inhalt": "BPMN 2.0 ist eine standardisierte Notation, die mit wenigen, klar definierten Symbolen auskommt. Start- und Endereignisse werden als Kreise dargestellt (dünn umrandet für Start, dick umrandet für Ende, doppelt für Zwischenereignisse). Aktivitäten — also Tätigkeiten — erscheinen als abgerundete Rechtecke und tragen Namen nach dem Muster Verb + Objekt (z. B. ‚Bestellung prüfen‘). Gateways modellieren Entscheidungen und werden als Rauten gezeichnet — am häufigsten das XOR (genau ein Pfad) und das AND (parallele Pfade). Sequenzflüsse verbinden die Elemente als durchgezogene Pfeile innerhalb eines Pools; Nachrichtenflüsse (gestrichelt) verbinden über Pool-Grenzen hinweg. Pools repräsentieren Organisationen, Lanes innerhalb eines Pools stehen für Rollen oder Abteilungen — sie machen Verantwortung sichtbar.",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussagen über BPMN und EPC sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "In EPC wechseln sich Ereignisse und Funktionen immer ab",
-          "BPMN nutzt Pools und Lanes, um Verantwortlichkeiten sichtbar zu machen",
-          "Ein XOR-Gateway in BPMN bedeutet, dass mehrere Pfade gleichzeitig durchlaufen werden",
-          "Tasks werden in beiden Notationen nach dem Muster Verb + Objekt benannt"
+        "frage": "Ordnen Sie das BPMN-Symbol seiner Bedeutung zu:",
+        "typ": "zuordnung",
+        "paare": [
+          {"links": "Abgerundetes Rechteck", "rechts": "Aktivität / Task"},
+          {"links": "Kreis", "rechts": "Ereignis (Start, Zwischen, Ende)"},
+          {"links": "Raute", "rechts": "Gateway / Entscheidung"},
+          {"links": "Pfeil (durchgezogen)", "rechts": "Sequenzfluss"},
+          {"links": "Lane", "rechts": "Rolle / Verantwortungsbereich"}
         ],
-        "korrekt": [0, 1, 3],
-        "erklaerung": "EPC verlangt strikt den Wechsel Ereignis-Funktion-Ereignis. BPMN nutzt Pools (für Organisationen) und Lanes (für Rollen darin), um Verantwortung zu zeigen. Die Benennungsregel Verb + Objekt gilt für beide. Falsch ist Option 3: ein XOR (exklusives Oder) heißt, dass genau einer der Pfade durchlaufen wird — für gleichzeitige Pfade nimmt man ein AND/Parallel-Gateway."
+        "erklaerung": "BPMN nutzt ein bewusst kleines Symbolset: Tasks (abgerundete Rechtecke), Ereignisse (Kreise), Gateways (Rauten), Sequenzflüsse (Pfeile) und Lanes (Rollen). Wer diese fünf Bausteine beherrscht, kann ca. 90 % aller BPMN-Diagramme lesen und schreiben — der Rest sind Spezialfälle für Automatisierung."
       }
     },
     {
@@ -60,27 +60,26 @@
           "Marketing-Material für die Außenkommunikation"
         ],
         "korrekt": 2,
-        "erklaerung": "Sobald ein Prozess automatisiert ausgeführt werden soll (z. B. über eine BPMN-Engine wie Camunda oder ein RPA-Tool), muss jede Verzweigung, jede Datenquelle und jede Ausnahme exakt modelliert sein — sonst läuft das Modell nicht. Dokumentation und Management-Sicht bleiben bewusst gröber, weil sie auf Verständlichkeit, nicht Ausführbarkeit zielen. Der Modellzweck bestimmt also direkt die nötige Modellierungstiefe."
+        "erklaerung": "Sobald ein Prozess automatisiert ausgeführt werden soll (z. B. über Camunda oder ein RPA-Tool), muss jede Verzweigung, jede Datenquelle und jede Ausnahme exakt modelliert sein — sonst läuft das Modell nicht. Dokumentation und Management-Sicht bleiben bewusst gröber, weil sie auf Verständlichkeit zielen, nicht auf Ausführbarkeit. Der Modellzweck bestimmt damit direkt die nötige Modellierungstiefe."
       }
     },
     {
       "nr": 4,
       "typ": "text",
-      "titel": "Modellqualität — die fünf häufigsten Fehler erkennen",
-      "inhalt": "Schlechte Prozessmodelle scheitern fast immer an denselben fünf Problemen. Erstens: zu grob — wichtige Entscheidungen werden in einem einzigen Task versteckt (‚Antrag bearbeiten‘ statt ‚Antrag prüfen‘ + ‚Über Bewilligung entscheiden‘). Zweitens: zu fein — jeder Klick wird modelliert, das Modell wird unleserlich und altert mit jeder UI-Änderung. Drittens: mehrdeutige Benennung — Tasks heißen ‚Klärung‘ oder ‚Bearbeitung‘ statt einer klaren Verb-Objekt-Kombination. Viertens: fehlende oder unklare Entscheidungspunkte — Pfade verzweigen sich ohne sichtbares Gateway, niemand weiß, wer entscheidet. Fünftens: keine Rollen — alle Tasks hängen in einer einzigen Lane, Verantwortung ist unsichtbar. Eine gute Faustregel: Wenn jemand das Modell ohne Zusatzerklärung verstehen kann und du jede Verzweigung jemandem zuordnen kannst, ist die Qualität in Ordnung.",
+      "titel": "EPC im Vergleich zu BPMN — der ereignisgesteuerte Ansatz",
+      "inhalt": "Die Ereignisgesteuerte Prozesskette (EPC) ist die zweite große Notation neben BPMN, vor allem im deutschsprachigen Raum verbreitet (ARIS). EPC arbeitet mit drei Hauptelementen: Ereignisse (Sechsecke, passive Zustände wie ‚Bestellung eingegangen‘), Funktionen (Rechtecke, aktive Tätigkeiten wie ‚Bestellung prüfen‘) und Konnektoren (Kreise mit Symbol — AND, OR, XOR). Eine zentrale EPC-Regel: Ereignis und Funktion wechseln sich immer ab. Auf eine Funktion folgt also immer ein Ereignis (was ist passiert?), auf ein Ereignis immer eine Funktion (was tun wir jetzt?). Konnektoren stehen zwischen diesen, wenn der Pfad sich aufspaltet oder zusammenführt. EPC ist business-näher und für Management-Übersichten oft pragmatischer; BPMN ist technisch präziser und automatisierungstauglich. Wer beide kennt, kann je nach Zielgruppe und Zweck wählen.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche der folgenden sind typische Qualitätsfehler in Prozessmodellen?",
-        "typ": "multi",
-        "optionen": [
-          "Ein Task heißt ‚Bearbeitung‘ ohne weitere Spezifikation",
-          "Es gibt Pools/Lanes, die Rollen klar zuordnen",
-          "Pfade verzweigen sich ohne sichtbares Gateway",
-          "Mehrere Entscheidungen werden in einem Task zusammengefasst",
-          "Das Modell passt auf eine A4-Seite und ist ohne Zusatzdoku verständlich"
+        "frage": "Vervollständigen Sie die Aussage zu EPC:",
+        "typ": "lueckentext",
+        "text": "In EPC sind {0} passive Zustände und {1} aktive Tätigkeiten. Konnektoren wie AND, OR oder {2} steuern die Verzweigung. Eine zentrale Regel: Ereignis und Funktion wechseln sich {3} ab.",
+        "luecken": [
+          {"antwort": "Ereignisse", "alternativen": ["Events", "Zustände"]},
+          {"antwort": "Funktionen", "alternativen": ["Tätigkeiten", "Aktivitäten"]},
+          {"antwort": "XOR", "alternativen": ["exklusives Oder", "exklusiv"]},
+          {"antwort": "immer", "alternativen": ["stets", "zwingend"]}
         ],
-        "korrekt": [0, 2, 3],
-        "erklaerung": "Mehrdeutige Benennung (1), implizite Verzweigungen (3) und versteckte Entscheidungen (4) sind die typischen Fehler — alle drei lassen den Leser raten oder verstecken Verantwortung. Klar zugeordnete Rollen (2) und Verständlichkeit ohne Zusatzdoku (5) sind dagegen Qualitätsmerkmale, keine Fehler."
+        "erklaerung": "EPC kennt drei Hauptelemente: Ereignisse (Sechsecke), Funktionen (Rechtecke) und Konnektoren (AND/OR/XOR). Der strikte Wechsel zwischen Ereignis und Funktion ist die wichtigste Lesehilfe — er stellt sicher, dass jeder Schritt einen klaren Auslöser und einen klaren Output hat."
       }
     },
     {
@@ -91,41 +90,36 @@
       "youtube_query": "bpmn pools lanes erklärt verantwortung rollen modellieren",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Wofür steht eine Lane in einem BPMN-Diagramm?",
-        "typ": "single",
+        "frage": "Welche Aussagen über BPMN-Modellqualität sind korrekt?",
+        "typ": "multi",
         "optionen": [
-          "Für einen zeitlichen Abschnitt im Prozess (z. B. ‚Vormittag‘)",
-          "Für eine Rolle oder Organisationseinheit, die für die Tasks in dieser Lane verantwortlich ist",
-          "Für einen alternativen Pfad bei einer Entscheidung",
-          "Für eine optionale Schleife im Prozess"
+          "Tasks sollten nach dem Muster Verb + Objekt benannt werden",
+          "Jeder Klick einer Bildschirmmaske gehört als eigener Task ins Modell",
+          "Lanes machen sichtbar, wer für welchen Task verantwortlich ist",
+          "Ein XOR-Gateway bedeutet, dass alle Pfade gleichzeitig durchlaufen werden",
+          "Ein gutes Modell ist auch ohne Zusatzdokumentation für Fachfremde verständlich"
         ],
-        "korrekt": 1,
-        "erklaerung": "Lanes sind das BPMN-Mittel, um Verantwortung sichtbar zu machen. Ein Pool steht meist für eine Organisation (z. B. ‚Kunde‘, ‚NovaParts‘), Lanes innerhalb des Pools für Rollen oder Abteilungen (‚Vertrieb‘, ‚Produktion‘, ‚Versand‘). Jeder Task liegt in genau einer Lane — das beantwortet sofort die Frage ‚Wer macht das?‘ und macht das Modell als Steuerungsinstrument nutzbar."
+        "korrekt": [0, 2, 4],
+        "erklaerung": "Verb + Objekt (1) ist die Benennungsregel, Lanes (3) machen Verantwortung sichtbar, Verständlichkeit ohne Zusatzdoku (5) ist Qualitätsmerkmal. Falsch ist: jeder Klick als Task (2 — führt zu unleserlichen Modellen, die mit jedem UI-Wechsel veralten) und XOR = parallel (4 — XOR heißt genau einer der Pfade; für parallel nimmt man AND/Parallel-Gateway)."
       }
     },
     {
       "nr": 6,
       "typ": "text",
       "titel": "Wann gehört ein Gateway hin — und welches?",
-      "inhalt": "Ein Gateway ist immer dann nötig, wenn der Prozess sich aufgrund einer echten Entscheidung verzweigt oder mehrere Pfade zusammenführt. Die häufigsten drei Typen: XOR (exklusiv) — genau einer der Pfade wird ausgeführt, z. B. ‚Bestellung vollständig?‘ Ja/Nein. AND (parallel) — alle Pfade werden gleichzeitig ausgeführt und müssen alle abgeschlossen sein, bevor es weitergeht, z. B. ‚Ware verpacken‘ + ‚Rechnung erstellen‘ laufen parallel. OR (inklusiv) — mindestens einer, evtl. mehrere Pfade werden ausgeführt; seltener, weil die Logik schnell unklar wird. Faustregel: Wenn du nicht beschreiben kannst, was nach dem Gateway in welchem Fall passiert, gehört das Gateway entweder noch nicht hin oder du brauchst zwei separate Entscheidungen. Eine zweite Faustregel: Jedes XOR sollte sich auf eine prüfbare Bedingung beziehen, die im Modell auch sichtbar ist (Datenfeld, Statuswert, Rolle entscheidet).",
+      "inhalt": "Ein Gateway ist immer dann nötig, wenn der Prozess sich aufgrund einer echten Entscheidung verzweigt oder mehrere Pfade zusammenführt. Die häufigsten drei Typen: XOR (exklusiv) — genau einer der Pfade wird ausgeführt, z. B. ‚Bestellung vollständig?‘ Ja/Nein. AND (parallel) — alle Pfade werden gleichzeitig ausgeführt und müssen alle abgeschlossen sein, bevor es weitergeht (z. B. ‚Ware verpacken‘ + ‚Rechnung erstellen‘). OR (inklusiv) — mindestens einer, evtl. mehrere Pfade werden ausgeführt; seltener verwendet, weil die Logik schnell unklar wird. Faustregel: Wenn Sie nicht beschreiben können, was nach dem Gateway in welchem Fall passiert, gehört das Gateway entweder noch nicht hin oder Sie brauchen zwei separate Entscheidungen. Zweite Faustregel: Jedes XOR sollte sich auf eine prüfbare Bedingung beziehen — Datenfeld, Statuswert oder klar benannter Entscheider.",
       "dauer_min": 5,
       "aufgabe": {
-        "frage": "An welcher Stelle gehört ein XOR-Gateway zwingend?",
-        "typ": "single",
-        "optionen": [
-          "Vor jedem Task, der länger als eine Minute dauert",
-          "An einer Stelle, an der der Prozess sich aufgrund einer eindeutigen Bedingung in genau einen von mehreren Pfaden verzweigt",
-          "Am Anfang jedes Prozesses, um die Eingangsdaten zu prüfen",
-          "Vor jeder Übergabe zwischen zwei Rollen"
-        ],
-        "korrekt": 1,
-        "erklaerung": "Ein XOR-Gateway gehört genau dort hin, wo der Prozess auf Basis einer prüfbaren Bedingung in exakt einen von mehreren möglichen Pfaden verzweigt. Übergaben zwischen Rollen, Dauer einzelner Tasks oder Inputprüfungen sind keine Verzweigungslogik — sie können mit normalen Sequenzflüssen oder Lanes abgebildet werden."
+        "frage": "Beschreiben Sie in 4-6 Sätzen, wann Sie ein XOR-Gateway und wann ein AND-Gateway einsetzen würden. Nennen Sie für beide ein konkretes Beispiel aus einem Bestellprozess.",
+        "typ": "text",
+        "musterloesung": "Ein XOR-Gateway gehört dorthin, wo der Prozess sich aufgrund einer prüfbaren Bedingung in genau einen von mehreren Pfaden verzweigt. Beispiel im Bestellprozess: Nach dem Task ‚Bestellung prüfen‘ folgt ein XOR ‚Bestellung vollständig?‘ — bei ‚Ja‘ geht es zur Lagerprüfung, bei ‚Nein‘ wird der Kunde zur Nachlieferung der Daten aufgefordert.\n\nEin AND-Gateway hingegen wird genutzt, wenn nach einem Schritt zwei oder mehr Tätigkeiten parallel laufen sollen und alle abgeschlossen sein müssen, bevor es weitergeht. Beispiel: Nach dem Task ‚Zahlungseingang bestätigt‘ läuft parallel ‚Ware kommissionieren‘ (Lager) und ‚Rechnung erstellen‘ (Buchhaltung) — erst wenn beides fertig ist, schließt ein zweites AND beide Pfade wieder zusammen und der Task ‚Versand auslösen‘ startet.\n\nDer Schlüsselunterschied: XOR = ‚entweder oder‘, AND = ‚sowohl als auch‘. Wer dieses Bauteil sauber beherrscht, kann die meisten Bestell-, Freigabe- und Eskalationsprozesse modellieren. Wichtig: Ein Gateway öffnet immer ein Muster, das später durch ein passendes Gateway wieder geschlossen wird (XOR → XOR, AND → AND).",
+        "erklaerung": "Die saubere Trennung XOR/AND ist der häufigste Modellierungsfehler in BPMN. Erfahrene Modellierer prüfen jedes Gateway mit der Frage: ‚Welche Bedingung steht hier? Welche Pfade werden danach durchlaufen — genau einer, alle oder beliebig viele?‘"
       }
     },
     {
       "nr": 7,
       "typ": "video",
-      "titel": "Vom Modellieren zur Governance — was Senior-Verantwortung bedeutet",
+      "titel": "Vom Modellieren zur Governance — Senior-Verantwortung",
       "youtube_id": "aQAT-0-Wljo",
       "youtube_query": "process modeling governance policy enterprise architecture deutsch",
       "dauer_min": 8,
@@ -135,12 +129,12 @@
         "optionen": [
           "Eine klare Regel, wann BPMN und wann EPC verwendet wird",
           "Mindeststandards für Benennung, Gateways und Rollen",
-          "Eine Liste aller jemals erstellten Modelle mit Versionsnummer",
+          "Eine vollständige Liste aller jemals erstellten Modelle mit Versionsnummer",
           "Ein Review-Prozess mit definierten Rollen (Modeler, Reviewer, Approver)",
           "Qualitätskriterien und Eskalationspfade bei Abweichungen"
         ],
         "korrekt": [0, 1, 3, 4],
-        "erklaerung": "Eine tragfähige Modellierungs-Policy regelt Auswahl der Notation (Zweck-/Zielgruppenlogik), Mindeststandards (Benennung, Gateways, Rollen), den Review-Prozess (wer prüft, wer gibt frei) sowie Qualitätskriterien und Eskalationspfade. Ein vollständiges Inventar aller Modelle ist Aufgabe des Repositories/Tools, nicht der Policy — und in der Praxis weder realistisch noch nützlich, weil es schnell veraltet."
+        "erklaerung": "Eine tragfähige Policy regelt Notations-Auswahl (Zweck/Zielgruppe), Mindeststandards (Benennung, Gateways, Rollen), Review-Prozess (wer prüft, wer gibt frei) sowie Qualitätskriterien und Eskalationspfade. Ein vollständiges Inventar aller Modelle ist Aufgabe des Repositories — nicht der Policy — und in der Praxis weder realistisch noch nützlich, weil es schnell veraltet."
       }
     }
   ]

@@ -1,147 +1,140 @@
 {
   "kurs_id": "71_Dig_42",
   "tag_nr": 7,
-  "titel": "Process Discovery und Conformance Checking als Steuerungsinstrument",
+  "titel": "Process Mining: Discovery und Conformance als Steuerungsinstrument",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Process Discovery: vom Event Log zum Ist-Prozess",
-      "youtube_id": "",
-      "youtube_query": "process discovery event log ist prozess celonis disco deutsch",
-      "dauer_min": 8,
+      "titel": "Introduction to Process Mining — 360°-Überblick (Wil van der Aalst)",
+      "youtube_id": "aHbHQ6caJoU",
+      "youtube_query": "introduction process mining 360 overview van der aalst",
+      "dauer_min": 12,
       "aufgabe": {
-        "frage": "Was ist das primäre Ziel von Process Discovery?",
+        "frage": "Welche drei Felder muss ein Event Log mindestens enthalten?",
         "typ": "single",
         "optionen": [
-          "Den Soll-Prozess neu zu modellieren",
-          "Aus Event Logs den Ist-Prozess sowie typische und seltene Varianten herauszulesen",
-          "Mitarbeitende beim Klicken zu beobachten",
-          "Eine BPMN-Schulung zu ersetzen"
+          "Vorname, Nachname, Abteilung",
+          "Case ID, Aktivität, Zeitstempel",
+          "Kostenstelle, Auftragsnummer, Mitarbeiter-ID",
+          "Datum, Uhrzeit, Begründung"
         ],
         "korrekt": 1,
-        "erklaerung": "Discovery rekonstruiert den realen Ablauf aus digitalen Spuren — den ‚Happy Path‘, die seltenen Pfade und die Schleifen. Es ersetzt keine Modellierungs-Workshops und keine Mitarbeitenden-Beobachtung, sondern liefert die Datenbasis dafür. Der Soll-Prozess bleibt eine getrennte normative Entscheidung."
+        "erklaerung": "Das absolute Minimum für Process Mining sind drei Felder: Case ID (welcher Vorgang gehört zusammen?), Aktivität (welcher Schritt?) und Zeitstempel (wann?). Ressource (wer?) und Datenfelder zum Vorgang sind wertvolle Ergänzungen, aber kein Muss-Minimum."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Happy Path, Varianten, Schleifen: was Logs wirklich zeigen",
-      "inhalt": "Wer Event Logs liest, lernt schnell: ein Prozess hat selten genau einen Ablauf. Der ‚Happy Path‘ ist der typische Pfad, der in den meisten Cases vorkommt — also vereinfacht: Anfrage prüfen → Angebot erstellen → Kunde bestätigt → Auftrag anlegen → Versand → Rechnung → Ende. Daneben tauchen ‚Varianten‘ auf: Rückfragen (Schleife auf ‚Anfrage prüfen‘), Stornos vor Versand, vertauschte Reihenfolge von Versand und Rechnung. ‚Schleifen‘ entstehen, wenn dieselbe Aktivität mehrfach im selben Case auftaucht — z. B. ‚Versand‘ zweimal, was auf Doppellieferung oder Doppelbuchung hinweisen kann. Jede Variante hat eine Hypothese: harmloser Sonderfall, legitime Innovation, fauler Kompromiss bei Zeitdruck, Datenproblem im Log, oder Compliance-Risiko. Die Pflicht für eine seriöse Discovery: Hypothesen mit der Fachseite validieren, bevor Maßnahmen geplant werden. Logs zeigen, was passiert ist — nicht, warum.",
-      "dauer_min": 6,
+      "titel": "Discovery — vom Event Log zum Ist-Prozess",
+      "inhalt": "Process Discovery ist die erste Disziplin im Process Mining: aus einem Event Log automatisch ein Prozessmodell ableiten, ohne dass ein Mensch modelliert hat. Algorithmen (Alpha-Miner, Heuristic Miner, Inductive Miner, IM-f, Split Miner) rekonstruieren Sequenzen, Verzweigungen und Schleifen aus den Aktivitäts-Reihenfolgen. Ergebnis ist typischerweise ein Prozessgraph, oft visualisiert als Petri-Netz oder BPMN-ähnliches Diagramm, plus eine Variantentabelle: ‚Happy Path‘ (häufigste Variante, oft 60-80 % der Fälle), seltene Varianten (Rücksprünge, Sonderfälle, Eskalationen) und ‚Long Tail‘ (sehr seltene Pfade, oft Datenqualitäts-Artefakte). Stolpersteine in der Praxis: unscharfe Aktivitätsbezeichnungen (gleicher Schritt heißt in zwei Systemen anders), doppelte Events (System hat eine Aktion zweimal geloggt), falsche Case IDs (eine Bestellung erhält in einem System eine andere ID als im nächsten) und Zeitstempel-Probleme (Zeitzonen, Sekundengenauigkeit fehlt). Die Faustregel erfahrener Process Miner: 70 % der Arbeit ist Daten-Aufbereitung, 30 % ist Analyse.",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Aussagen über Varianten und Schleifen in Event Logs sind zutreffend?",
-        "typ": "multi",
-        "optionen": [
-          "Eine Schleife bedeutet, dass eine Aktivität im selben Case mehrfach auftaucht",
-          "Varianten sind immer Fehler und müssen sofort verboten werden",
-          "Eine Variante kann auch eine legitime Anpassung an einen Sonderfall sein",
-          "Vor jeder Maßnahme sollten Hypothesen zu Varianten mit der Fachseite validiert werden",
-          "Logs zeigen, was passiert ist — nicht, warum es passiert ist"
+        "frage": "Vervollständigen Sie die Process-Discovery-Grundbegriffe:",
+        "typ": "lueckentext",
+        "text": "Process Discovery rekonstruiert aus einem {0} ein Prozessmodell. Der häufigste Pfad heißt {1} und macht oft 60-80 % der Fälle aus. Probleme entstehen häufig durch unscharfe {2} oder fehlerhafte Case-{3}.",
+        "luecken": [
+          {"antwort": "Event Log", "alternativen": ["Eventlog", "Log"]},
+          {"antwort": "Happy Path", "alternativen": ["Hauptpfad", "Happy-Path"]},
+          {"antwort": "Aktivitätsbezeichnungen", "alternativen": ["Aktivitäten", "Activity Names"]},
+          {"antwort": "IDs", "alternativen": ["ID", "Identifier"]}
         ],
-        "korrekt": [0, 2, 3, 4],
-        "erklaerung": "Schleifen sind Mehrfachausführungen einer Aktivität, Varianten können legitime Anpassungen oder Innovationen sein, und ohne Validierung mit der Fachseite landen Maßnahmen schnell danebenliegend. Logs sind faktisch — Ursachen sind interpretativ. Die Aussage, Varianten seien immer Fehler, ist gefährlich falsch: sie blockiert organisationales Lernen."
+        "erklaerung": "Process Discovery liefert immer Hypothesen, keine Wahrheiten. Die Datenqualität bestimmt die Analyse-Qualität. ‚Garbage in, garbage out‘ gilt im Process Mining mehr als anderswo, weil Aktivitäten und IDs aus unterschiedlichen Systemen zusammenkommen."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Conformance Checking: Ist vs. Soll und das Lesen von Abweichungen",
-      "youtube_id": "",
-      "youtube_query": "conformance checking process mining ist soll abgleich deutsch",
-      "dauer_min": 7,
+      "titel": "Celonis Conformance Checker — Tutorial",
+      "youtube_id": "QBvjRcqsySw",
+      "youtube_query": "celonis conformance checker tutorial process mining",
+      "dauer_min": 9,
       "aufgabe": {
-        "frage": "Was prüft Conformance Checking?",
+        "frage": "Was ist die Kernidee von Conformance Checking?",
         "typ": "single",
         "optionen": [
-          "Wie viele Mitarbeitende dem Compliance-Training zugestimmt haben",
-          "Inwieweit der Ist-Ablauf (aus Logs) dem normativen Soll-Modell entspricht — und wo Abweichungen auftreten",
-          "Ob ein Prozessmodell grafisch sauber dargestellt ist",
-          "Wie schnell ein Audit abgeschlossen wird"
+          "Ein neues Soll-Modell aus dem Log entwerfen",
+          "Das vorhandene Soll-Modell mit dem Ist-Verhalten aus dem Log vergleichen und Abweichungen messen",
+          "Den schnellsten Pfad durch den Prozess suchen",
+          "Mitarbeiter nach Schnelligkeit bewerten"
         ],
         "korrekt": 1,
-        "erklaerung": "Conformance Checking misst die Übereinstimmung zwischen dem normativen Soll-Modell (z. B. SOP, BPMN-Diagramm, Policy) und dem real beobachteten Ablauf aus den Logs. Es identifiziert fehlende Schritte, zusätzliche Schritte und falsche Reihenfolgen. Trainings-Quote, grafische Qualität oder Audit-Dauer messen ganz andere Dinge."
+        "erklaerung": "Conformance Checking misst die Übereinstimmung zwischen einem normativen Soll-Modell (Policy, SOP, BPMN) und dem tatsächlichen Verhalten im Event Log. Ergebnis ist ein Fitness-Score (wie gut passt das Modell?) plus eine Liste der Abweichungen — fehlende Schritte, zusätzliche Schritte, falsche Reihenfolge."
       }
     },
     {
       "nr": 4,
       "typ": "text",
-      "titel": "Abweichungen klassifizieren: Compliance, Qualität, legitime Variante, Datenproblem",
-      "inhalt": "Eine Abweichung ist nicht automatisch ein Fehler — sie ist ein Signal, das interpretiert werden muss. Erfahrene Process Owner sortieren Abweichungen in vier Klassen. ‚Compliance-Risiko‘ liegt vor, wenn eine Abweichung gegen eine regulatorische oder vertragliche Vorschrift verstößt (z. B. Rechnung vor Wareneingang in einem 3-Way-Match-Pflichtprozess). ‚Qualitäts-/Kostenrisiko‘ besteht, wenn die Abweichung Rework, Kunden-Unzufriedenheit oder finanziellen Schaden verursacht (z. B. Doppelversand). ‚Legitime Variante‘ ist eine Abweichung, die im Einzelfall sinnvoll ist und entweder als Sonderfall offiziell zugelassen werden sollte oder als Innovation aufgenommen wird (z. B. Schnellabwicklung für Premiumkunden). ‚Datenproblem‘ schließlich ist gar keine echte Abweichung, sondern ein Logfehler — falsche Case-IDs, doppelte Events, falsche Zeitstempel. Diese Klassifikation ist Voraussetzung jeder Maßnahmenpriorisierung: ohne sie werden harmlose Datenprobleme als Compliance-Fälle eskaliert oder echte Risiken als ‚Datenrauschen‘ wegerklärt.",
-      "dauer_min": 7,
+      "titel": "Abweichungen klassifizieren — nicht alles ist ein Fehler",
+      "inhalt": "Der häufigste Fehler im Conformance Checking ist die Gleichsetzung von ‚Abweichung‘ mit ‚Fehler‘. Reife Process-Miner klassifizieren Abweichungen in vier Kategorien: (1) Compliance-Risiko — die Abweichung verletzt eine harte Regel (Gesetz, Audit-Anforderung, interne Policy mit Bindungswirkung). Beispiel: Rechnung wird vor Wareneingang erstellt, obwohl 3-Way-Match Pflicht ist. Konsequenz: Maßnahme zwingend. (2) Qualitäts-/Kostenrisiko — die Abweichung erzeugt Mehrkosten oder Reputationsrisiko, ist aber nicht regelwidrig. Beispiel: Doppelversand. (3) Legitime Variante — die Abweichung ist sachlich gerechtfertigt, im Modell aber nicht vorgesehen. Beispiel: Express-Bestellung überholt den Standard-Prüfprozess. Konsequenz: Modell anpassen, nicht Verhalten. (4) Datenproblem — die ‚Abweichung‘ existiert nur im Log, nicht in der Realität. Beispiel: ein doppelter Eintrag im Versand-Log, weil zwei Systeme dieselbe Aktion mitschreiben. Konsequenz: ETL korrigieren, nicht Prozess. Die Klassifikation ist die wichtigste Senior-Disziplin im Conformance Checking — wer alles als ‚Verstoß‘ behandelt, untergräbt Vertrauen und blockiert Innovation.",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Eine Reihenfolge-Abweichung ‚Rechnung vor Wareneingang‘ taucht in 30% der Fälle auf. Wie sollten Sie als Process Owner reagieren?",
-        "typ": "single",
-        "optionen": [
-          "Sofort und ausnahmslos blockieren — eine Abweichung darf nie auftreten",
-          "Erst klassifizieren (Compliance-Risiko vs. legitimer Sonderfall vs. Datenproblem), Ursache mit Fachseite klären, dann gezielt entscheiden (Pflichtfeld, Ausnahmeprozess, Guardrail oder Datenkorrektur)",
-          "Ignorieren — 30% sind nicht relevant",
-          "Auf den nächsten Audit warten"
+        "frage": "Ordnen Sie die Abweichung der richtigen Kategorie zu:",
+        "typ": "zuordnung",
+        "paare": [
+          {"links": "Rechnung wird vor Wareneingang erstellt (3-Way-Match-Pflicht)", "rechts": "Compliance-Risiko"},
+          {"links": "Doppelversand derselben Ware an einen Kunden", "rechts": "Qualitäts-/Kostenrisiko"},
+          {"links": "Express-Bestellung überspringt Standard-Prüfung — fachlich gewollt", "rechts": "Legitime Variante"},
+          {"links": "Doppelter Versand-Eintrag im Log, weil zwei Systeme loggen", "rechts": "Datenproblem"},
+          {"links": "Sonderfreigabe ohne dokumentierte Begründung", "rechts": "Compliance-Risiko"}
         ],
-        "korrekt": 1,
-        "erklaerung": "30% Abweichung ist genau die Größenordnung, bei der reflexhaftes Blockieren genauso falsch ist wie Ignorieren: erst die Klasse bestimmen (Compliance, Qualität, legitim, Daten), dann passgenau handeln. Pauschal blockieren oder bis zum Audit warten verschärft das Risiko — die strukturierte Antwort schützt Compliance und Betrieb gleichzeitig."
+        "erklaerung": "Die Vier-Kategorien-Logik (Compliance / Qualität / Legitim / Daten) ist die wichtigste analytische Brille. Aus jeder Kategorie folgt eine andere Maßnahme: Compliance → Zwang/Kontrolle, Qualität → Optimierung, Legitim → Modell anpassen, Daten → ETL reparieren."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "Bewusst zugelassene Varianten und Guardrails",
-      "youtube_id": "",
-      "youtube_query": "bewusste ausnahmen prozess guardrail compliance management deutsch",
-      "dauer_min": 6,
+      "titel": "Process Discovery — RWTH Lecture (van der Aalst)",
+      "youtube_id": "jPERVdZYgA8",
+      "youtube_query": "foundations process discovery van der aalst lecture",
+      "dauer_min": 10,
       "aufgabe": {
-        "frage": "Was ist eine sinnvolle ‚Guardrail‘ für eine bewusst zugelassene Prozessvariante?",
-        "typ": "single",
+        "frage": "Welche Aussagen zur Datenqualität im Process Mining sind korrekt?",
+        "typ": "multi",
         "optionen": [
-          "Die Variante darf von jedem ohne Begründung genutzt werden",
-          "Klare Schwellen/Bedingungen, Pflichtbegründung im System, dokumentierte Freigabe und regelmäßiges Reporting der Ausnahmehäufigkeit",
-          "Die Variante wird heimlich geduldet",
-          "Die Variante darf maximal einmal pro Jahr genutzt werden — auch wenn das Geschäft danach verlangt"
+          "Ein guter Algorithmus kann schlechte Daten kompensieren",
+          "Doppelte Events verzerren die Häufigkeitsanalyse",
+          "Inkonsistente Case-IDs können dazu führen, dass Vorgänge fälschlich als separat erscheinen",
+          "Process Mining liefert immer absolute Wahrheiten",
+          "Zeitstempel ohne Zeitzone können falsche Durchlaufzeiten erzeugen"
         ],
-        "korrekt": 1,
-        "erklaerung": "Eine Guardrail definiert Schwelle, Pflichtfelder, Freigabe und Sichtbarkeit (Reporting): die Variante ist erlaubt, aber kontrolliert. ‚Ohne Begründung‘ untergräbt Compliance, heimliche Duldung erzeugt Schatten-Prozesse, und willkürliche Häufigkeitsgrenzen ohne Geschäftslogik führen zu Workarounds."
+        "korrekt": [1, 2, 4],
+        "erklaerung": "Korrekt: doppelte Events verzerren (2), inkonsistente Case-IDs trennen zusammengehörige Vorgänge (3), Zeitzonen-Probleme verfälschen Zeiten (5). Falsch: kein Algorithmus rettet schlechte Daten (1). Falsch: Process Mining liefert Hypothesen aus Daten, keine Wahrheiten (4) — Validierung mit Fachseite ist Pflicht."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Datenqualität versus Prozessrealität: erst trennen, dann entscheiden",
-      "inhalt": "Eine der häufigsten Fehlentscheidungen im Conformance-Bereich ist, Datenqualitätsprobleme mit Prozessabweichungen zu vermischen. Wenn 12% der Cases ‚falsche Reihenfolge‘ zeigen, kann das eine reale Prozessabweichung sein — oder ein Mapping-Fehler beim ETL, falsche Zeitstempel, doppelte Case-IDs oder eine inkonsistent benannte Aktivität. Erst eine systematische Datenqualitätsprüfung trennt das eine vom anderen: stimmen die Case-IDs eindeutig? Sind alle Zeitstempel monoton steigend? Gibt es Dubletten? Werden alle Aktivitäten gemappt? Wer ohne diese Prüfung Maßnahmen ergreift, optimiert oft am falschen Hebel: ein neues Pflichtfeld bringt nichts, wenn das Problem im Log-Export liegt. Senior-Verantwortung heißt hier, der Verlockung zu schneller Aktion zu widerstehen und stattdessen erst die Datenbasis zu validieren — auch wenn das im Audit-Druck unbequem ist.",
-      "dauer_min": 6,
+      "titel": "Conformance-Maßnahmen — von der Erkenntnis zur Steuerung",
+      "inhalt": "Eine Abweichung zu finden ist nicht das Ziel — sie zu adressieren ist es. Vier Maßnahmen-Typen stehen pro Abweichung zur Verfügung: (1) Prozessregel ändern: Wenn die Abweichung legitim ist und häufig vorkommt, gehört sie ins Modell. Beispiel: ‚Express-Pfad‘ als eigene Variante explizit modellieren. (2) Training/Kommunikation: Wenn die Abweichung auf Unwissen beruht. Beispiel: neue Pflichtfelder werden ignoriert, weil keiner über die Regel informiert wurde. (3) Systemkontrolle: Wenn die Abweichung technisch verhindert werden soll. Beispiel: Pflichtfeld kann gar nicht leer abgeschickt werden, Validierung im Formular. (4) Monitoring + Eskalation: Wenn die Abweichung selten und teuer ist und nicht vermeidbar. Beispiel: Sonderfreigaben in einem wöchentlichen Review-Board. Strategische Senior-Disziplin: Für jede priorisierte Abweichung wird ein benannter Owner, eine Messgröße und ein Review-Rhythmus festgelegt. Sonst entsteht ein Dashboard, das niemand handlungsleitend nutzt.",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Schritte gehören zur seriösen Datenqualitätsprüfung vor einer Conformance-Maßnahme?",
-        "typ": "multi",
-        "optionen": [
-          "Prüfung auf eindeutige Case-IDs",
-          "Prüfung auf monoton steigende Zeitstempel pro Case",
-          "Sofortige Maßnahmen ohne weitere Prüfung, weil Audit-Druck herrscht",
-          "Prüfung auf Dubletten und unbekannte Aktivitäten",
-          "Validierung der Aktivitätsmappings"
-        ],
-        "korrekt": [0, 1, 3, 4],
-        "erklaerung": "Case-IDs, Zeitstempel, Dubletten und Aktivitätsmappings sind die vier zentralen Datenqualitätsprüfungen vor jeder Conformance-Maßnahme. Sofortige Aktion unter Druck — ohne Datenqualitätsbasis — produziert Audit-Schein-Compliance und Folgefehler. Senior-Disziplin heißt: kurz innehalten, dann gezielt handeln."
+        "frage": "Sie identifizieren im Procure-to-Pay-Prozess drei Top-Abweichungen: (a) 30 % Rechnungen kommen vor Wareneingang, (b) 18 % haben fehlende Kostenstelle, (c) 12 % laufen über Sonderfreigabe. Beschreiben Sie in 4-6 Sätzen, welche Maßnahme Sie pro Abweichung wählen würden und warum.",
+        "typ": "text",
+        "musterloesung": "Für (a) ‚Rechnung vor Wareneingang‘ wähle ich eine Mischung aus Modellanpassung und Systemkontrolle: einen expliziten Ausnahmeprozess für Dropship- und Service-Rechnungen, der den 3-Way-Match durch eine alternative Prüfung ersetzt (z. B. Vertragsabgleich). Eine harte Sperre im ERP würde produktive Sonderfälle blockieren — daher Pflichtkennzeichen plus Nachbuchungs-SLA, Owner ist Finance Ops.\n\nFür (b) ‚fehlende Kostenstelle‘ ist Systemkontrolle der richtige Hebel: die Kostenstelle wird in der Anforderungsmaske zum Pflichtfeld mit Validierung gegen den Kostenstellen-Katalog. Begleitend ein Training für Anforderungsstellen, weil die Datenqualität auch vom Verständnis abhängt — Owner ist der Einkauf gemeinsam mit den Anforderungsstellen.\n\nFür (c) ‚12 % Sonderfreigaben‘ wähle ich Monitoring + Eskalation statt Verbot: ein Schwellenwert (z. B. ab 5.000 €), ein wöchentliches Review-Board (Einkaufsleiter + Compliance) und ein Dashboard, das wiederkehrende Muster sichtbar macht. Owner ist Procurement Lead. Begründung: ein Verbot würde nur in den Untergrund verlagern; transparente Eskalation macht Sonderfreigaben kontrollierbar.",
+        "erklaerung": "Die drei Maßnahmen zeigen das Senior-Muster: Maßnahmen-Wahl ist kontextabhängig, Owner und Messgröße sind Pflicht, und nicht jede Abweichung wird verboten. Compliance-kritische Fälle (a) brauchen Härte, Datenqualitätsfälle (b) brauchen System-Validierung, soziale Fälle (c) brauchen Transparenz statt Verbot."
       }
     },
     {
       "nr": 7,
       "typ": "video",
-      "titel": "Conformance Operating Model: Data Owner, Process Owner, Compliance Reviewer",
-      "youtube_id": "",
-      "youtube_query": "process owner data owner compliance reviewer audit operating model deutsch",
+      "titel": "Celonis in der Produktion — Process Mining im Einsatz",
+      "youtube_id": "RERGYW5o5xY",
+      "youtube_query": "celonis produktion process mining einsatz",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Rollen gehören in ein wirksames Conformance Operating Model?",
+        "frage": "Welche Aussagen zur Conformance-Governance sind korrekt?",
         "typ": "multi",
         "optionen": [
-          "Process Owner mit fachlicher Accountability für Standards und Maßnahmen",
-          "Data Steward, der für Logqualität, Mapping und Ownership der Quellen verantwortlich ist",
-          "Compliance Reviewer, der Abweichungen risikobasiert bewertet",
-          "Ein Eskalationspfad für Zielkonflikte (Speed vs. Compliance)",
-          "Alle Rollen werden bei Bedarf von der gleichen Person ad hoc übernommen"
+          "Jede priorisierte Abweichung braucht einen benannten Owner",
+          "Eine hohe Fitness (z. B. 99 %) ist immer ein gutes Zeichen",
+          "Abweichungen können auch Innovationspotenzial signalisieren",
+          "Conformance Checking braucht eine klare Regelung: was ist Muss, Kann, Ausnahmeprozess?",
+          "Sobald ein Dashboard existiert, ist die Steuerung gelöst"
         ],
-        "korrekt": [0, 1, 2, 3],
-        "erklaerung": "Process Owner, Data Steward, Compliance Reviewer und Eskalation sind die vier Bausteine — sie verteilen Verantwortung und verhindern blinde Flecken. ‚Eine Person macht alles ad hoc‘ ist genau der Anti-Pattern, der Compliance-Programme zum Reporting-Theater werden lässt und keine echten Entscheidungen produziert."
+        "korrekt": [0, 2, 3],
+        "erklaerung": "Korrekt: Owner pro Abweichung (1), Innovationspotenzial in Varianten (3), Regelwerk-Klarheit (4). Falsch: hohe Fitness kann auch ein Zeichen für untermodelliertes Soll sein (2) — z. B. weil das Modell nur den Hauptpfad beschreibt und Sonderfälle nicht enthält. Falsch: Dashboard allein steuert nicht (5) — ohne Owner, Maßnahmen und Review wird daraus ‚Wallpaper‘."
       }
     }
   ]

@@ -7,141 +7,135 @@
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Process Enhancement: Vom Bild zum steuerbaren Modell",
-      "youtube_id": "",
-      "youtube_query": "process enhancement process mining anreicherung kpi varianten deutsch",
-      "dauer_min": 7,
+      "titel": "ETL (Extract Transform Load) für Data Warehousing einfach erklärt",
+      "youtube_id": "VVJRBhUkX5o",
+      "youtube_query": "ETL extract transform load data warehousing einfach erklärt deutsch",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Was bedeutet ‚Process Enhancement‘ in der Process-Mining-Welt?",
+        "frage": "Wofür stehen die drei Buchstaben in ‚ETL‘?",
         "typ": "single",
         "optionen": [
-          "Eine größere Schriftart in BPMN-Diagrammen verwenden",
-          "Das Prozessmodell mit Daten (Zeiten, Ressourcen, Kosten, Varianten) anreichern, sodass es steuerbar wird",
-          "Den Prozess komplett automatisieren",
-          "Ein neues Modellierungstool einkaufen"
+          "Encrypt, Transmit, Log",
+          "Extract, Transform, Load",
+          "Edit, Test, Launch",
+          "Enterprise, Technical, Logical"
         ],
         "korrekt": 1,
-        "erklaerung": "Enhancement reichert das Modell um Zeiten, Ressourcen, Kosten und Varianten an — das Modell wird vom Bild zum Steuerungsinstrument. Größere Schrift, vollständige Automatisierung oder Tool-Beschaffung sind keine Enhancement-Konzepte und verfehlen den Kern."
+        "erklaerung": "ETL = Extract (Daten aus Quellsystemen ziehen) → Transform (bereinigen, mappen, anreichern) → Load (in Ziel-Datenbank/DWH laden). Die moderne Variante ELT lädt zuerst und transformiert im Ziel — relevant bei großen Datenmengen und leistungsfähigen Cloud-Warehouses (Snowflake, BigQuery)."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "ML-Typen im Prozesskontext: Klassifikation, Regression, Clustering, Anomalie",
-      "inhalt": "ML im Prozesskontext heißt nicht ‚irgendwo Deep Learning einbauen‘, sondern den Use Case sauber dem passenden ML-Typ zuordnen. ‚Klassifikation‘ beantwortet Ja/Nein- oder Mehrklassen-Fragen — z. B. ‚Wird dieser Fall die SLA verletzen?‘ oder ‚Welcher Kategorie gehört diese Reklamation an?‘. ‚Regression‘ prognostiziert numerische Werte — Restlaufzeit, Kosten, Bearbeitungsdauer. ‚Clustering‘ findet Falltypen, ohne dass diese vorher definiert sind — z. B. unbekannte Segmente komplizierter Fälle. ‚Anomalieerkennung‘ markiert Fälle, die signifikant aus dem Muster fallen, was Fraud-Hinweise oder Datenfehler aufdecken kann. Die Senior-Disziplin: vor jedem ML-Use-Case eine harte Frage stellen — wird die Vorhersage zu einer Handlung führen? Eine Prognose ohne Owner, Playbook und Erfolgsmaßstab ist verlorene Energie. Und in vielen Fällen schlägt eine simple Heuristik (‚Ticket Age > 70% SLA‘) ein komplexes Modell in den ersten 6 Monaten.",
+      "titel": "Datenmodell für Prozessdaten — Fakten und Dimensionen",
+      "inhalt": "Ein DWH für Prozessanalysen folgt typischerweise einem Sternschema. Im Zentrum steht die ‚Faktentabelle Events‘ — jede Zeile ist ein Event (eine Aktivität in einem Vorgang) mit Fremdschlüsseln zu den Dimensionen. Die wichtigsten Dimensionen: Zeit (Datum, Stunde, Schicht, Quartal — für Trendanalysen), Aktivität (Aktivitätsname, Aktivitätstyp — z. B. User Task vs. Service Task), Case (Vorgangstyp, Kunde, Produkt, Standort), Ressource (Mitarbeiter, Team, System). Daraus ergeben sich die typischen Process-Mining-Analysen ohne komplexe Queries: ‚Welche Aktivität dauert montags am längsten?‘ (Zeit × Aktivität), ‚Welcher Vorgangstyp hat die meisten Rücksprünge?‘ (Case × Schleifen), ‚Welche Ressource ist beim Service-Task X am schnellsten?‘ (Aktivität × Ressource). Wichtig: Die Dimensions-Tabellen ändern sich langsam (Slowly Changing Dimensions), die Fakten-Tabelle wächst stetig — das DWH muss mit beidem umgehen können.",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welcher ML-Typ passt am besten zur Frage ‚Wird dieser Fall die SLA in den nächsten 4 Stunden verletzen?‘?",
-        "typ": "single",
-        "optionen": [
-          "Regression",
-          "Klassifikation",
-          "Clustering",
-          "Anomalieerkennung"
+        "frage": "Ordnen Sie das DWH-Element seiner Rolle zu:",
+        "typ": "zuordnung",
+        "paare": [
+          {"links": "Faktentabelle Events", "rechts": "Eine Zeile pro Aktivität (Case ID, Aktivität, Zeit, Ressource)"},
+          {"links": "Zeit-Dimension", "rechts": "Datum, Stunde, Schicht, Quartal — für Trendanalysen"},
+          {"links": "Aktivitäts-Dimension", "rechts": "Aktivitätsname, Aktivitätstyp (User/Service Task)"},
+          {"links": "Case-Dimension", "rechts": "Vorgangstyp, Kunde, Produkt, Standort"},
+          {"links": "Ressource-Dimension", "rechts": "Mitarbeiter, Team, System"},
+          {"links": "ETL-Pipeline", "rechts": "Datenfluss von Quellsystemen ins DWH (Extract, Transform, Load)"}
         ],
-        "korrekt": 1,
-        "erklaerung": "Die Frage ist Ja/Nein — also Klassifikation. Regression würde eine numerische Restlaufzeit prognostizieren, Clustering würde Segmente finden, Anomalieerkennung würde Ausreißer melden. Die saubere Zuordnung von Use Case zu ML-Typ ist eine grundlegende Senior-Disziplin und verhindert teure Fehlentscheidungen."
+        "erklaerung": "Das Sternschema (Star Schema) ist seit den 1990ern der Standard für analytische Datenmodelle. Eine zentrale Faktentabelle plus mehrere Dimensions-Tabellen erlaubt schnelle Aggregationen über beliebige Kombinationen. Für Process Mining ist die Faktentabelle Events der Schlüssel — sie ist die Repräsentation des Event Logs im DWH."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Predictive Process Analytics als Frühwarnsystem",
-      "youtube_id": "",
-      "youtube_query": "predictive process analytics frühwarnsystem sla risiko deutsch",
-      "dauer_min": 8,
+      "titel": "Datenbank vs. Data Lake vs. Data Warehouse — die Unterschiede",
+      "youtube_id": "BQuyIwi_RCQ",
+      "youtube_query": "datenbank data lake data warehouse einfach erklärt deutsch",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Was unterscheidet Predictive Analytics von klassischem Reporting?",
-        "typ": "single",
+        "frage": "Welche Datenqualitätsprobleme treten beim Aufbau eines Event-Log-DWH typischerweise auf?",
+        "typ": "multi",
         "optionen": [
-          "Predictive Analytics ist nur teurer",
-          "Predictive zielt auf das ‚noch nicht passierte‘ (Frühwarnung) — Reporting beschreibt überwiegend das Vergangene",
-          "Reporting ist immer falsch, Predictive immer richtig",
-          "Beide Verfahren liefern dieselben Aussagen"
+          "Inkonsistente Case-IDs zwischen Quellsystemen",
+          "Zeitstempel ohne Zeitzone oder mit unterschiedlicher Genauigkeit",
+          "Aktivitätsnamen unterscheiden sich zwischen Systemen (z. B. ‚Auftrag prüfen‘ vs. ‚Prüfung Auftrag‘)",
+          "Eine Datenbank ist immer ausreichend — DWH und Data Lake sind nicht nötig",
+          "Doppelte Events durch parallel loggende Systeme"
         ],
-        "korrekt": 1,
-        "erklaerung": "Predictive richtet den Blick nach vorne — was wird wahrscheinlich passieren, sodass man noch handeln kann. Reporting beschreibt das Vergangene. Beide haben Wert, aber sie sind keineswegs identisch, und keine der beiden Methoden ist per se richtiger oder falscher."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Inkonsistente IDs (1), Zeitstempel-Probleme (2), unterschiedliche Aktivitätsnamen (3) und doppelte Events (5) sind die vier häufigsten Probleme im Process-Mining-ETL. Falsch ist (4): eine OLTP-Datenbank ist nicht analytisch optimiert — sie kann zwar Daten halten, aber komplexe Aggregations-Queries blockieren das produktive System."
       }
     },
     {
       "nr": 4,
       "typ": "text",
-      "titel": "Baseline vor ML: einfache Heuristiken schlagen komplexe Modelle",
-      "inhalt": "Eine der unbequemen Wahrheiten in Process Analytics: in den ersten Monaten eines Use Cases schlägt eine einfache Baseline-Regel ein ML-Modell fast immer — und liefert dazu noch Erklärbarkeit, Auditfähigkeit und schnelle Implementierung. Beispiel: ‚Ticket Age > 70% SLA‘ als Frühwarn-Heuristik fängt 60–80% der späteren SLA-Verletzungen, ist sofort einsatzbereit, lässt sich jedem Auditor erklären und braucht keine Trainingsdaten. Erst wenn diese Baseline ausgereizt ist und die zusätzlichen Prozentpunkte Modellgüte einen klaren wirtschaftlichen Wert haben, lohnt ML — und dann mit einer Disziplin, die viele unterschätzen: Modelle altern (‚Drift‘), brauchen Monitoring auf Modellebene, dokumentierte Trainingsdaten und einen Rückbau-Plan. Die Senior-Pointe: ML ist ein Werkzeug, kein Selbstzweck — und nicht jedes Problem braucht ein Modell.",
-      "dauer_min": 6,
+      "titel": "Predictive Process Analytics — vom Rückblick zur Frühwarnung",
+      "inhalt": "Predictive Process Analytics nutzt historische Event Logs, um die Zukunft laufender Vorgänge vorherzusagen. Vier typische Vorhersagen: (1) SLA-Verletzung — wahrscheinlichkeit, dass ein Ticket nicht rechtzeitig gelöst wird; Features sind z. B. Priorität, Ticketalter, Reassignments, Queue-Länge, Kundentyp. (2) Rework-Risiko — wahrscheinlichkeit, dass ein Vorgang in eine Schleife zurückgeht; Features sind z. B. Daten-Vollständigkeit, beteiligte Rolle, Tageszeit. (3) Abbruchwahrscheinlichkeit — etwa beim Kunden-Onboarding: bricht der Kunde ab? (4) Engpassbildung — welche Queue droht zu überlaufen? ML-Typen: Klassifikation (ja/nein-Fragen wie ‚Wird Fall eskalieren?‘), Regression (Restlaufzeit/Kosten prognostizieren), Clustering (Falltypen erkennen), Anomalieerkennung (ungewöhnliche Pfade). Senior-Disziplin: Bevor ML eingesetzt wird, prüfen, ob eine einfache Heuristik (z. B. ‚Ticket-Age > 70 % SLA-Frist‘) bereits 60-80 % des Nutzens liefert. ML lohnt sich erst, wenn die Baseline ausgereizt ist — und ML-Modelle altern (Drift), brauchen also Monitoring und Retraining-Plan.",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Aussagen über Baseline-Heuristiken sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Eine einfache Regel ist oft sofort einsatzbereit und auditfähig",
-          "Baselines liefern in den ersten Monaten oft 60–80% des Nutzens eines ML-Modells",
-          "ML-Modelle sind grundsätzlich besser als Baselines",
-          "Baseline-Regeln benötigen keine Trainingsdaten",
-          "Erklärbarkeit ist bei Baselines meist deutlich besser als bei komplexen ML-Modellen"
+        "frage": "Vervollständigen Sie die Predictive-Analytics-Schlüsselbegriffe:",
+        "typ": "lueckentext",
+        "text": "Vor ML wird oft eine einfache {0} eingesetzt — diese liefert häufig schon 60-80 % des Nutzens. Eine typische Klassifikations-Vorhersage ist ‚wird die {1} verletzt?‘. ML-Modelle altern durch {2} und brauchen daher Monitoring plus regelmäßiges {3}.",
+        "luecken": [
+          {"antwort": "Heuristik", "alternativen": ["Baseline", "Regel"]},
+          {"antwort": "SLA", "alternativen": ["Service Level", "SLA-Frist"]},
+          {"antwort": "Drift", "alternativen": ["Konzeptdrift", "Concept Drift"]},
+          {"antwort": "Retraining", "alternativen": ["Neutraining", "Nachtraining"]}
         ],
-        "korrekt": [0, 1, 3, 4],
-        "erklaerung": "Schnelle Einsatzbereitschaft, hohe Wirksamkeit, keine Trainingsdaten und gute Erklärbarkeit machen Baselines zum sinnvollen Startpunkt. ‚ML grundsätzlich besser‘ ist eine Vermutung, die viele Projekte teuer bezahlt haben — entscheidend sind Use Case, Datenqualität und Erklärbarkeitsanforderungen."
+        "erklaerung": "Baseline-Heuristiken sind unterschätzte Performance-Werkzeuge: schnell entwickelt, sofort auditierbar, kein Drift. Erst wenn sie nachweislich an ihre Grenzen stoßen, lohnt ein ML-Modell — das dann aber Monitoring, Drift-Detection und Retraining braucht."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "ETL-Pipeline und Datenqualität für Prozessdaten",
-      "youtube_id": "",
-      "youtube_query": "etl pipeline data warehouse case id timestamp deutsch erklärt",
-      "dauer_min": 7,
+      "titel": "Data Warehouse einfach erklärt — Grundlagen",
+      "youtube_id": "EHmeK1nMBvA",
+      "youtube_query": "data warehouse einfach erklärt grundlagen",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Datenqualitätscheck-Kategorie ist für Process-Mining-Logs am kritischsten?",
+        "frage": "Was ist ein gutes BI-Dashboard im Sinne der Senior-Steuerung?",
         "typ": "single",
         "optionen": [
-          "Schriftartkontrolle der Spaltennamen",
-          "Konsistenz von Case ID, Zeitstempel und Aktivitätsmapping",
-          "Farbliche Markierung der Quellsysteme",
-          "Größe der Logdatei in Megabyte"
+          "Möglichst viele KPIs auf einer Seite, damit nichts vergessen wird",
+          "Wenige Executive-KPIs mit klarem Trend, Schwellenwerten, Drilldown und ‚Next Best Action‘",
+          "Eine ästhetisch ansprechende Animation aller Zahlen",
+          "Eine vollständige Liste aller Mitarbeiter mit ihren Stundenzahlen"
         ],
         "korrekt": 1,
-        "erklaerung": "Ohne saubere Case ID, konsistente Zeitstempel und einheitliches Aktivitätsmapping kollabiert jede Process-Mining-Analyse — egal wie gut das Modell oder Dashboard danach ist. Schriftarten, Farben oder Dateigröße sind irrelevant für die analytische Aussagekraft."
+        "erklaerung": "Ein wirksames Dashboard befolgt drei Prinzipien: wenige Executive-KPIs (5-7, nicht 50), klare Schwellen/Ziele (was ist gut, was ist Eskalation?), Drilldown auf Ursachen plus konkrete Handlungsoption (‚Next Best Action‘). Wer alles zeigt, zeigt nichts; wer keine Schwellen setzt, hilft beim Entscheiden nicht."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "BI Dashboards: Trend, Schwelle, Drilldown, Handlung",
-      "inhalt": "Ein gutes Dashboard hat vier Eigenschaften, die in dieser Reihenfolge greifen müssen. Erstens ‚Trend‘: zeigt eine Kennzahl Richtung — wird es besser oder schlechter? Eine Punktangabe ohne Trend ist kaum interpretierbar. Zweitens ‚Schwelle‘: ab welchem Wert wird gehandelt? Ohne Schwellen wird Reporting zu Pseudoaktivität. Drittens ‚Drilldown‘: wenn der Trend sich verschlechtert, muss man pro Segment, Region oder Service die Ursache finden können — ein Dashboard ohne Drilldown ist eine schöne Karteileiche. Viertens ‚Handlung‘: welche Aktion folgt? Ein Alert ohne Owner und Playbook erzeugt Alarmmüdigkeit, nicht Verbesserung. Senior-Pointe: Dashboards sind keine Designarbeit, sondern Entscheidungsarchitektur. Sie sollten so gebaut sein, dass jede Kachel die Frage beantwortet: ‚Wer macht was, wenn diese Zahl rot wird?‘.",
-      "dauer_min": 5,
+      "titel": "Anti-Gaming und Alarmmüdigkeit — die zwei großen Risiken",
+      "inhalt": "Predictive Systems und Dashboards erzeugen zwei vorhersehbare Nebenwirkungen: Gaming und Alarmmüdigkeit. Gaming entsteht, wenn KPIs ohne Gegenkopplung zu Bonuszielen werden — Mitarbeiter optimieren die Kennzahl, nicht das gemeinte Verhalten. Schutz: jede Speed-KPI mit einer Qualitäts-KPI koppeln (Lead Time × Rework-Rate); jede Quantitäts-KPI mit einer Fehler-KPI (Anzahl Freigaben × Eskalations-Rate); jede Compliance-Null-KPI mit einer Meldungs-KPI (Audit Findings × gemeldete Probleme — Vermeidung von ‚Probleme verstecken‘). Alarmmüdigkeit entsteht, wenn zu viele Alerts ausgelöst werden, die zu wenig handlungsrelevant sind — Operations ignoriert dann auch wirklich wichtige Alerts. Schutz: Schwellenwerte konservativ wählen, jeden Alert mit einem Owner und einem Playbook versehen (was tun?), Alerts mit niedriger Akzeptanz monatlich nachjustieren, ‚Alert Fatigue Score‘ als eigene Steuerungskennzahl etablieren. Wichtig: Beide Risiken werden in den ersten Monaten unterschätzt — und in den Monaten 6-12 dann sehr teuer. Sie gehören in jedes Analytics-Operating-Model.",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Eigenschaften muss ein wirksames BI-Dashboard kombinieren?",
-        "typ": "multi",
-        "optionen": [
-          "Trendrichtung pro KPI",
-          "Definierte Schwellen mit Ampelfarben",
-          "Drilldown auf Segmente und Ursachen",
-          "Jeden möglichen Datenpunkt auf einer Seite",
-          "Klare Owner und ‚Next best action‘ je Alert"
-        ],
-        "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Trend, Schwelle, Drilldown und klare Handlungsbindung sind die vier Wirksamkeitskriterien. ‚Alle Datenpunkte auf einer Seite‘ erzeugt Informationsüberlastung und untergräbt Entscheidungsfähigkeit — Dashboards entstehen aus bewusster Reduktion, nicht aus Vollständigkeit."
+        "frage": "Beschreiben Sie in 4-6 Sätzen, wie Sie für ein Real-time-Monitoring-System Anti-Gaming und Anti-Alarmmüdigkeit konkret verankern. Nennen Sie pro Risiko mindestens zwei Hebel.",
+        "typ": "text",
+        "musterloesung": "Gegen Gaming verankere ich konsequente KPI-Kopplungen: jede einzeln optimierbare Kennzahl bekommt mindestens eine Gegen-KPI, die Manipulation sichtbar macht. Beispiele: Lead Time × First-Pass-Yield (Beschleunigung gilt nur, wenn Qualität bleibt), SLA-Erfüllung × Reopen-Rate (frühzeitig schließen wird nicht belohnt, wenn das Ticket wieder aufgeht), Audit-Findings = 0 × gemeldete Auffälligkeiten (Verstecken wird nicht belohnt).\n\nZweitens trenne ich die Bewertungs-KPIs von den Steuerungs-KPIs: nicht jede Operative-Kennzahl wird Bonusziel. Bonus-Ziele werden bewusst auf Outcome-Metriken gelegt (Kundenzufriedenheit, Wiederkaufrate), nicht auf Aktivitäts-Metriken (Tickets pro Stunde). Das nimmt den Anreiz, Aktivitäts-Zahlen zu manipulieren.\n\nGegen Alarmmüdigkeit baue ich zwei Hebel ein: (a) jeder Alert hat einen benannten Owner und ein Playbook — kein Alert ohne ‚was tun‘; (b) Alerts werden monatlich nach Akzeptanz und Wirksamkeit reviewt, niedrig akzeptierte Schwellen werden nachjustiert oder abgeschaltet. Zusätzlich führe ich einen ‚Alert Fatigue Score‘ ein (Anteil ignorierter Alerts) — wenn er über 20 % steigt, ist das selbst ein Eskalations-Trigger für das Operating Model.",
+        "erklaerung": "Diese vier Hebel (KPI-Kopplung, Bonus-Trennung, Alert-Ownership, Fatigue-Score) sind in produktiven Systemen die Differenz zwischen ‚Reporting-Theater‘ und echter Steuerung. Sie kosten in der Einführung etwas mehr Disziplin, sparen aber im Jahr darauf erhebliche politische Energie."
       }
     },
     {
       "nr": 7,
       "typ": "video",
-      "titel": "Analytics als Produkt: Drift, Erklärbarkeit, Human-in-the-loop",
-      "youtube_id": "",
-      "youtube_query": "analytics als produkt model drift erklärbarkeit governance deutsch",
-      "dauer_min": 8,
+      "titel": "Business Intelligence KPI Dashboard in Power BI",
+      "youtube_id": "0BwQvLGUbZg",
+      "youtube_query": "business intelligence kpi dashboard power bi",
+      "dauer_min": 9,
       "aufgabe": {
-        "frage": "Welche Aussagen zur Governance von Analytics-Produkten sind korrekt?",
+        "frage": "Welche Aussagen zu Process Enhancement und Predictive Analytics sind korrekt?",
         "typ": "multi",
         "optionen": [
-          "Modelle altern (‚Drift‘) und brauchen kontinuierliches Monitoring der Modellgüte",
-          "Erklärbarkeit ist optional, wenn das Modell genau genug ist",
-          "Es braucht klare Owner für Datenqualität, Modellbetrieb und Geschäftsergebnis",
-          "Human-in-the-loop-Regeln definieren, wann ein Mensch entscheidet — nicht das Modell",
-          "Einmal trainierte Modelle bleiben dauerhaft so gut wie am ersten Tag"
+          "Process Enhancement reichert das Modell um Zeiten, Frequenzen und Engpässe an",
+          "Predictive Analytics ersetzt menschliche Entscheidungen vollständig",
+          "Drift bezeichnet die Veränderung der Datengrundlage über die Zeit",
+          "Jeder Alert braucht einen benannten Owner und ein Playbook",
+          "Ein Dashboard ist sinnvoll, auch ohne Schwellenwerte und Drilldown"
         ],
         "korrekt": [0, 2, 3],
-        "erklaerung": "Drift-Monitoring, klare Owner und Human-in-the-loop sind drei tragende Säulen einer reifen Analytics-Governance. Erklärbarkeit ist gerade bei risikorelevanten Entscheidungen Pflicht (Audit, Fairness), und Modelle altern garantiert — daher braucht jedes Modell ein Verfallsdatum und ein Re-Training-Konzept."
+        "erklaerung": "Korrekt: Enhancement-Definition (1), Drift (3), Alert-Ownership (4). Falsch: Predictive ersetzt nicht menschliche Entscheidungen (2) — sie unterstützt sie. ‚Human in the Loop‘ bleibt Pflicht, vor allem bei Entscheidungen mit Konsequenzen für Personen oder bei rechtlichen Anforderungen. Falsch: Dashboard ohne Schwellen ist Wallpaper (5) — Steuerung braucht klare Triggerpunkte."
       }
     }
   ]

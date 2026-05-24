@@ -28,19 +28,19 @@
       "nr": 2,
       "typ": "text",
       "titel": "VSM-Grundbegriffe: Bearbeitungszeit, Wartezeit, Durchlaufzeit",
-      "inhalt": "Value Stream Mapping (VSM) kommt aus der Lean-Welt und macht den End-to-End-Wertfluss sichtbar. Drei Zeiten musst du sauber trennen: Die ‚Bearbeitungszeit‘ (BT) ist die Zeit, in der tatsächlich am Vorgang gearbeitet wird — z. B. ‚Bestellung prüfen: 4 Minuten‘. Die ‚Wartezeit‘ (WT) ist die Zeit, in der der Vorgang in einer Warteschlange liegt — z. B. ‚wartet auf Freigabe: 2 Tage‘. Die ‚Durchlaufzeit‘ (DLZ) ist die Gesamtdauer und ergibt sich als Summe von BT plus WT. In den meisten Wertströmen ist die WT ein Vielfaches der BT — beim Onboarding eines Kunden sind oft 6 Stunden tatsächliche Arbeit über 6 Wochen verteilt. Genau hier liegt die Optimierungs-Goldmine: an der Wartezeit, nicht an der Bearbeitungszeit.",
+      "inhalt": "Value Stream Mapping (VSM) kommt aus der Lean-Welt (Toyota) und macht den End-to-End-Wertfluss sichtbar. Drei Zeiten müssen Sie sauber trennen: Die Bearbeitungszeit (BT) ist die Zeit, in der tatsächlich am Vorgang gearbeitet wird — z. B. ‚Bestellung prüfen: 4 Minuten‘. Die Wartezeit (WT) ist die Zeit, in der der Vorgang in einer Warteschlange liegt — z. B. ‚wartet auf Freigabe: 2 Tage‘. Die Durchlaufzeit (DLZ) ist die Gesamtdauer und ergibt sich als Summe von BT plus WT. In den meisten Wertströmen ist die WT ein Vielfaches der BT — beim Kunden-Onboarding sind oft 6 Stunden tatsächliche Arbeit über 6 Wochen verteilt. Genau hier liegt die Optimierungs-Goldmine: an der Wartezeit, nicht an der Bearbeitungszeit. Ein zweiter Hebel ist die Reduktion von Rücksprüngen (Rework) — sie verlängern die DLZ überproportional.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussagen über VSM sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Die Durchlaufzeit (DLZ) ist die Summe aus Bearbeitungszeit und Wartezeit",
-          "In den meisten Wertströmen dominiert die Wartezeit über die Bearbeitungszeit",
-          "Optimierung lohnt sich meist mehr bei der Bearbeitungszeit als bei der Wartezeit",
-          "VSM kommt ursprünglich aus dem Lean-Umfeld"
+        "frage": "Vervollständigen Sie die VSM-Formel und Faustregel:",
+        "typ": "lueckentext",
+        "text": "Die Durchlaufzeit (DLZ) ist die Summe aus {0} (BT) und {1} (WT). In den meisten Wertströmen ist die {2} ein Vielfaches der {3} — deshalb liegt dort der größte Optimierungs-Hebel.",
+        "luecken": [
+          {"antwort": "Bearbeitungszeit", "alternativen": ["Bearbeitung", "BT"]},
+          {"antwort": "Wartezeit", "alternativen": ["Warten", "WT"]},
+          {"antwort": "Wartezeit", "alternativen": ["WT"]},
+          {"antwort": "Bearbeitungszeit", "alternativen": ["BT"]}
         ],
-        "korrekt": [0, 1, 3],
-        "erklaerung": "Korrekt sind die ersten beiden Aussagen sowie der Ursprung im Lean-Umfeld (Toyota). Falsch ist Option 3: Genau weil die WT meist dominant ist, lohnt sich Optimierung dort fast immer mehr als an der BT."
+        "erklaerung": "DLZ = BT + WT. In typischen End-to-End-Prozessen dominiert die WT (Warten auf Freigaben, Bestand, Antworten). Optimierungs-Programme, die nur an der BT drehen (Mitarbeiter beschleunigen), schöpfen meist weniger als 20 % des Potenzials aus."
       }
     },
     {
@@ -67,19 +67,19 @@
       "nr": 4,
       "typ": "text",
       "titel": "Wertschöpfung erkennen — die drei Kategorien",
-      "inhalt": "Jeder Schritt in einer VSM wird einer von drei Kategorien zugeordnet. ‚Wertschöpfend‘ (Value-Adding, VA) ist ein Schritt, für den der Kunde bezahlen würde, wenn er es wüsste — z. B. ‚Ware kommissionieren‘. ‚Notwendig, aber nicht wertschöpfend‘ (Necessary Non-Value-Adding, NNVA) ist ein Schritt, der aus regulatorischen oder organisatorischen Gründen unverzichtbar ist, aber keinen direkten Kundennutzen hat — z. B. ‚Rechnung archivieren‘. ‚Verschwendung‘ (Waste, Muda) ist ein Schritt, der weder wertschöpfend noch notwendig ist — z. B. ‚Bestellung erneut prüfen, weil die erste Prüfung unvollständig dokumentiert war‘. In der Lean-Tradition gibt es sieben Verschwendungstypen (Überproduktion, Wartezeit, Transport, Überbearbeitung, Bestand, Bewegung, Fehler) — in Wissensprozessen häufig ergänzt um eine achte: ungenutzte Kreativität bzw. ungenutztes Wissen.",
+      "inhalt": "Jeder Schritt in einer VSM wird einer von drei Kategorien zugeordnet. ‚Wertschöpfend‘ (Value-Adding, VA) ist ein Schritt, für den der Kunde bezahlen würde, wenn er es wüsste — z. B. ‚Ware kommissionieren‘. ‚Notwendig, aber nicht wertschöpfend‘ (Necessary Non-Value-Adding, NNVA) ist ein Schritt, der aus regulatorischen oder organisatorischen Gründen unverzichtbar ist, aber keinen direkten Kundennutzen hat — z. B. ‚Rechnung archivieren‘. ‚Verschwendung‘ (Waste, Muda) ist ein Schritt, der weder wertschöpfend noch notwendig ist — z. B. ‚Bestellung erneut prüfen, weil die erste Prüfung unvollständig dokumentiert war‘. In der Lean-Tradition gibt es sieben Verschwendungstypen (Überproduktion, Wartezeit, Transport, Überbearbeitung, Bestand, Bewegung, Fehler).",
       "dauer_min": 5,
       "aufgabe": {
-        "frage": "Welche Schritte zählen NICHT zur Wertschöpfung im Sinne von VSM?",
-        "typ": "multi",
-        "optionen": [
-          "Bestellung erneut prüfen wegen Daten-Fehler",
-          "Ware tatsächlich verpacken und versenden",
-          "Vorgang wartet 3 Tage auf eine Freigabe",
-          "Spezifikation gemeinsam mit dem Kunden klären"
+        "frage": "Ordnen Sie die Prozessschritte der richtigen Wertkategorie zu:",
+        "typ": "zuordnung",
+        "paare": [
+          {"links": "Ware kommissionieren und verpacken", "rechts": "Wertschöpfend (VA)"},
+          {"links": "Steuerlich vorgeschriebene Rechnungsarchivierung", "rechts": "Notwendig, aber nicht wertschöpfend (NNVA)"},
+          {"links": "Bestellung wegen Tippfehler nacharbeiten", "rechts": "Verschwendung (Muda)"},
+          {"links": "Vorgang wartet 3 Tage auf eine Freigabe", "rechts": "Verschwendung (Muda)"},
+          {"links": "Spezifikation gemeinsam mit dem Kunden klären", "rechts": "Wertschöpfend (VA)"}
         ],
-        "korrekt": [0, 2],
-        "erklaerung": "Nacharbeit wegen Fehler (1) und reine Wartezeit (3) sind Verschwendung — kein Kunde würde dafür bezahlen. Verpacken und Versenden (2) sowie die fachliche Spezifikations-Klärung (4) sind dagegen wertschöpfend oder zumindest notwendig."
+        "erklaerung": "Wertschöpfend ist alles, wofür der Kunde wissentlich bezahlen würde (Kommissionierung, Klärung). Notwendige Nicht-Wertschöpfung schützt das Unternehmen (Archivierung, Compliance). Verschwendung ist alles andere — und macht in vielen Prozessen 30-50 % der Gesamtzeit aus."
       }
     },
     {
@@ -99,26 +99,20 @@
           "Beim letzten Schritt des Prozesses"
         ],
         "korrekt": 1,
-        "erklaerung": "Der Engpass ist typischerweise dort, wo Vorgänge am längsten warten — wo WIP sich staut. Eine VSM macht das sichtbar, indem sie zeigt, wo die Wartezeit (WT) einen Sprung nach oben macht. Hohe Bearbeitungszeit ist nicht zwangsläufig ein Engpass, solange die nachfolgenden Schritte nicht warten müssen."
+        "erklaerung": "Der Engpass ist typischerweise dort, wo Vorgänge am längsten warten — wo Work-in-Progress (WIP) sich staut. Eine VSM macht das sichtbar, indem sie zeigt, wo die Wartezeit (WT) einen Sprung nach oben macht. Hohe Bearbeitungszeit ist nicht zwangsläufig ein Engpass, solange nachfolgende Schritte nicht warten müssen."
       }
     },
     {
       "nr": 6,
       "typ": "text",
       "titel": "Process Mining — Event Log und die drei Disziplinen",
-      "inhalt": "Process Mining setzt voraus, dass IT-Systeme Spuren hinterlassen. Diese Spuren werden zu einem ‚Event Log‘ zusammengeführt — eine Tabelle mit mindestens drei Feldern pro Eintrag: ‚Case ID‘ (welcher Vorgang? — z. B. Bestellung B-2026-1234), ‚Aktivität‘ (welcher Schritt? — z. B. ‚Antrag prüfen‘) und ‚Zeitstempel‘ (wann? — z. B. 2026-05-29 14:32). Optional, aber wertvoll: ‚Ressource‘ (wer hat den Schritt ausgeführt?) sowie Datenfelder zum Vorgang. Auf Basis dieser Logs gibt es drei Process-Mining-Disziplinen: ‚Discovery‘ rekonstruiert das Ist-Prozessmodell aus den Logs (ohne Modellierungs-Workshop). ‚Conformance Checking‘ prüft ein bestehendes Soll-Modell gegen den Log und misst Abweichungen. ‚Enhancement‘ reichert das Modell um Zeitinformationen, Frequenzen und Engpässe an. Wichtig: Process Mining zeigt, was passiert — nicht, was passieren sollte. Es ersetzt weder Modellierung noch Wertstromanalyse.",
+      "inhalt": "Process Mining setzt voraus, dass IT-Systeme Spuren hinterlassen. Diese Spuren werden zu einem Event Log zusammengeführt — eine Tabelle mit mindestens drei Feldern pro Eintrag: Case ID (welcher Vorgang? z. B. Bestellung B-2026-1234), Aktivität (welcher Schritt? z. B. ‚Antrag prüfen‘) und Zeitstempel (wann? z. B. 2026-05-29 14:32). Optional, aber wertvoll: Ressource (wer hat den Schritt ausgeführt?) sowie Datenfelder zum Vorgang. Auf Basis dieser Logs gibt es drei Process-Mining-Disziplinen: Discovery rekonstruiert das Ist-Prozessmodell aus den Logs (ohne Modellierungs-Workshop). Conformance Checking prüft ein bestehendes Soll-Modell gegen den Log und misst Abweichungen. Enhancement reichert das Modell um Zeitinformationen, Frequenzen und Engpässe an. Wichtig: Process Mining zeigt, was passiert — nicht, was passieren sollte.",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche drei Felder muss ein Event Log mindestens enthalten, damit Process Mining funktionieren kann?",
-        "typ": "single",
-        "optionen": [
-          "Vor- und Nachname, Abteilung, Tätigkeit",
-          "Case ID, Aktivität, Zeitstempel",
-          "Kostenstelle, Auftragsnummer, Mitarbeiter-ID",
-          "Datum, Uhrzeit, Begründung"
-        ],
-        "korrekt": 1,
-        "erklaerung": "Das Minimum sind drei Felder: Case ID (welcher Vorgang gehört zusammen), Aktivität (welcher Schritt wurde ausgeführt) und Zeitstempel (wann). Ressource, Kostenstelle und Datenfelder zum Vorgang sind wertvolle Ergänzungen, aber nicht das Minimum."
+        "frage": "Schreiben Sie in 4-6 Sätzen, welche drei Process-Mining-Disziplinen es gibt, wie sie sich unterscheiden und welche Voraussetzung sie alle teilen. Nennen Sie für jede Disziplin ein Beispiel.",
+        "typ": "text",
+        "musterloesung": "Process Mining kennt drei komplementäre Disziplinen: Discovery, Conformance Checking und Enhancement. Discovery rekonstruiert aus einem Event Log das Ist-Prozessmodell — ohne dass jemand modelliert hat. Beispiel: Aus einem ERP-Log werden alle Varianten der Bestellabwicklung als Prozessgraph sichtbar, inklusive seltener Sonderpfade.\n\nConformance Checking vergleicht ein vorhandenes Soll-Modell mit dem Ist aus dem Log und macht Abweichungen messbar. Beispiel: Die Policy sagt ‚Rechnung erst nach Wareneingang‘ — der Log zeigt, dass in 30 % der Fälle die Rechnung vorher kommt. Conformance liefert nicht nur die Prozentzahl, sondern auch die betroffenen Fälle.\n\nEnhancement reichert das Modell an: mit Zeiten (wo dauert es lange?), Frequenzen (welche Pfade sind selten?) oder Kosten. Beispiel: ein Pfad wird als ‚Hot Path‘ rot markiert, weil dort 80 % der Fälle laufen und die Durchlaufzeit doppelt so hoch ist.\n\nAlle drei brauchen die gleiche Voraussetzung: einen sauberen Event Log mit mindestens Case ID, Aktivität und Zeitstempel. Ohne diese Daten gibt es kein Process Mining.",
+        "erklaerung": "Discovery (Was passiert?), Conformance (Stimmt es mit dem Plan überein?), Enhancement (Wo lohnt sich Veränderung?). Die drei Disziplinen sind im Process Mining Manifesto (van der Aalst, 2012) definiert und in jedem Tool (Celonis, Disco, PM4Py) wiederzufinden."
       }
     },
     {
@@ -129,17 +123,17 @@
       "youtube_query": "process mining einfach erklärt deutsch lernvideo",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche der folgenden Aussagen über Process Mining sind korrekt?",
+        "frage": "Welche Aussagen über die Methodenwahl (UML, VSM, Process Mining) sind korrekt?",
         "typ": "multi",
         "optionen": [
-          "Process Mining kann Modellierung und Wertstromanalyse vollständig ersetzen",
-          "Discovery rekonstruiert ein Prozessmodell aus den Event Logs",
-          "Conformance Checking misst Abweichungen zwischen Soll-Modell und Ist-Log",
+          "UML Activity ist gut, um Verantwortung über Swimlanes sichtbar zu machen",
+          "VSM zeigt End-to-End-Wertfluss inkl. Bearbeitungs- und Wartezeiten",
           "Process Mining funktioniert auch ohne digitale Spuren der Aktivitäten",
-          "Die Datenqualität bestimmt maßgeblich die Aussagekraft der Analyse"
+          "Die drei Methoden konkurrieren — man sollte nur eine pro Projekt wählen",
+          "Process Mining zeigt das Ist, VSM das Soll und Effekt, UML die Struktur"
         ],
-        "korrekt": [1, 2, 4],
-        "erklaerung": "Korrekt sind Discovery (2), Conformance (3) und die Bedeutung der Datenqualität (5). Falsch ist (1): Process Mining ist eine Ergänzung, kein Ersatz für Modellierung und VSM — es zeigt das Ist, nicht das Soll. Falsch ist auch (4): ohne digitale Spuren keine Logs, keine Analyse — reine Papier-Prozesse sind für Process Mining ungeeignet."
+        "korrekt": [0, 1, 4],
+        "erklaerung": "UML Activity (1), VSM (2) und die komplementäre Sicht (5) sind korrekt. Falsch ist (3): ohne digitale Spuren keine Logs — reine Papier-Prozesse sind ungeeignet. Falsch ist (4): die drei Methoden ergänzen sich (Struktur + Wertfluss + Datenrealität) — Senior-Teams nutzen alle drei je nach Frage."
       }
     }
   ]

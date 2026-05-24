@@ -12,35 +12,28 @@
       "youtube_query": "stakeholder analyse projektmanagement deutsch erklärt",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche zwei Dimensionen werden in der Mendelow-Stakeholder-Matrix typischerweise verwendet?",
-        "typ": "single",
-        "optionen": [
-          "Alter und Geschlecht",
-          "Einfluss (Power) und Interesse",
-          "Gehalt und Hierarchieebene",
-          "Geografische Lage und Branche"
-        ],
-        "korrekt": 1,
-        "erklaerung": "Die Mendelow-Matrix (1981) verwendet ursprünglich Einfluss × Dynamik, wurde später als Einfluss/Interesse-Matrix popularisiert. Sie erlaubt, Stakeholder nach ihrer relevanten Steuerungswirkung zu segmentieren — und entsprechend differenziert einzubinden."
+        "frage": "Beschreiben Sie in 4-6 Sätzen, wie Sie für ein neues Projekt (Einführung eines neuen Workflow-Tools in der Buchhaltung) eine Stakeholder-Analyse mit der Mendelow-Matrix durchführen würden. Welche zwei Dimensionen nutzen Sie, und welche typischen Stakeholder-Gruppen ordnen Sie wo ein?",
+        "typ": "text",
+        "musterloesung": "Ich nutze die zwei klassischen Mendelow-Dimensionen Einfluss (Power) und Interesse — sie sind das pragmatischste Achsenpaar für Steuerungsentscheidungen. Stakeholder werden im 2×2-Raster in vier Quadranten gruppiert: Hoch-Einfluss/Hoch-Interesse (Manage Closely — eng einbinden, mitentscheiden lassen), Hoch-Einfluss/Niedrig-Interesse (Keep Satisfied — informiert halten, Eskalations-Risiko vermeiden), Niedrig-Einfluss/Hoch-Interesse (Keep Informed — regelmäßig kommunizieren, Engagement nutzen), Niedrig-Einfluss/Niedrig-Interesse (Monitor — minimaler Aufwand).\n\nFür das Workflow-Tool in der Buchhaltung würden typische Einordnungen sein: Manage Closely → Leiter Buchhaltung, CFO, IT-Verantwortlicher (alle haben hohen Einfluss auf Erfolg und sind direkt betroffen). Keep Satisfied → externer Wirtschaftsprüfer, Compliance-Officer (Einfluss bei Audits, geringes Tagesinteresse am Tool). Keep Informed → Buchhalter:innen als Endnutzer:innen (hohes Interesse, aber individuell wenig Veto-Macht — sie tragen aber Akzeptanz). Monitor → andere Abteilungen, die nicht direkt betroffen sind.\n\nEntscheidend ist die ‚Stopper-Frage‘: Wer kann das Projekt blockieren? Diese Stopper kommen meist aus ‚Keep Satisfied‘ (Compliance, Externe) oder ‚Manage Closely‘ (CFO) und werden bewusst früh und persönlich eingebunden — sonst entstehen späte Veto-Eskalationen, die teurer sind als jede frühe Abstimmung.",
+        "erklaerung": "Die Mendelow-Matrix ist mehr als ein Bild: Sie ist ein Steuerungs-Tool, das Aufwand priorisiert. Die wichtigste Disziplin ist die Stopper-Identifikation — wer kann es kippen? Diese Frage zwingt zur ehrlichen Einschätzung, jenseits formaler Hierarchien."
       }
     },
     {
       "nr": 2,
       "typ": "text",
       "titel": "Die vier Einbindungsstufen für Stakeholder",
-      "inhalt": "Statt ‚mehr oder weniger einbinden‘ arbeiten erfahrene Projektleiter mit vier klaren Einbindungsstufen. ‚Informieren‘ heißt: der Stakeholder erfährt von Ergebnissen, hat aber keine Mitsprache. ‚Konsultieren‘ heißt: der Stakeholder darf Feedback geben, die Entscheidung bleibt aber beim Owner. ‚Mitentscheiden‘ heißt: der Stakeholder ist Teil eines Entscheidungs-Gremiums (Konsens oder Mehrheit). ‚Verantworten‘ heißt: der Stakeholder ist Owner und trägt die Entscheidung allein. Wichtig: Die Einbindungsstufe wird ‚vor‘ dem Vorhaben festgelegt, nicht im Konflikt. Die wichtigste Frage ist nicht ‚wer hilft uns?‘, sondern ‚wer kann uns stoppen?‘ — diese ‚Stopper-Stakeholder‘ müssen aktiv eingebunden werden, weil ihre Ablehnung das gesamte Vorhaben gefährden kann.",
+      "inhalt": "Statt ‚mehr oder weniger einbinden‘ arbeiten erfahrene Projektleiter mit vier klaren Einbindungsstufen. ‚Informieren‘ heißt: der Stakeholder erfährt von Ergebnissen, hat aber keine Mitsprache. ‚Konsultieren‘ heißt: der Stakeholder darf Feedback geben, die Entscheidung bleibt aber beim Owner. ‚Mitentscheiden‘ heißt: der Stakeholder ist Teil eines Entscheidungs-Gremiums (Konsens oder Mehrheit). ‚Verantworten‘ heißt: der Stakeholder ist Owner und trägt die Entscheidung allein. Wichtig: Die Einbindungsstufe wird vor dem Vorhaben festgelegt, nicht im Konflikt. Die wichtigste Frage ist nicht ‚wer hilft uns?‘, sondern ‚wer kann uns stoppen?‘ — diese ‚Stopper-Stakeholder‘ müssen aktiv eingebunden werden.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussagen über Stakeholder-Einbindung sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Stopper-Stakeholder sollten aktiv eingebunden werden, weil sie das Vorhaben stoppen können",
-          "Alle Stakeholder müssen gleich behandelt werden",
-          "Die Einbindungsstufe wird vor dem Vorhaben festgelegt, nicht im Konflikt",
-          "‚Konsultieren‘ bedeutet, dass der Stakeholder die Entscheidung trifft"
+        "frage": "Ordnen Sie die Stakeholder-Einbindungsstufe ihrer Bedeutung zu:",
+        "typ": "zuordnung",
+        "paare": [
+          {"links": "Informieren", "rechts": "Stakeholder erfährt vom Ergebnis, keine Mitsprache"},
+          {"links": "Konsultieren", "rechts": "Stakeholder gibt Feedback, Owner entscheidet"},
+          {"links": "Mitentscheiden", "rechts": "Stakeholder ist Teil des Entscheidungs-Gremiums"},
+          {"links": "Verantworten", "rechts": "Stakeholder ist Owner und trägt die Entscheidung"}
         ],
-        "korrekt": [0, 2],
-        "erklaerung": "Stopper-Stakeholder zu identifizieren und einzubinden ist die wichtigste Stakeholder-Disziplin (Option 1). Die Einbindungsstufe vorab zu definieren verhindert spätere Konflikte (Option 3). Falsch ist: alle gleich behandeln (Aufwand verschwendet) und Konsultieren ≠ Entscheiden (Owner bleibt verantwortlich)."
+        "erklaerung": "Diese Vier-Stufen-Skala (ähnlich dem IAP2 Spectrum) ist das pragmatischste Werkzeug, um Einbindung zu klären. Wichtig ist die Festlegung vorab — sonst entsteht im Konfliktfall ein Streit über die Spielregeln statt über die Sache."
       }
     },
     {
@@ -67,19 +60,19 @@
       "nr": 4,
       "typ": "text",
       "titel": "Der Goodhart-Effekt und wie man ihn vermeidet",
-      "inhalt": "‚When a measure becomes a target, it ceases to be a good measure.‘ — Dieses Prinzip, oft Charles Goodhart zugeschrieben, beschreibt eine systematische Verzerrung: Sobald eine Kennzahl zum Ziel wird, optimieren Menschen die Kennzahl, nicht das eigentlich gemeinte Verhalten. Beispiele: Wird ‚Anzahl freigegebener Konzepte‘ zum Ziel, werden mehr unreife Konzepte freigegeben. Wird ‚Lead Time‘ zum Ziel, werden Vorgänge zu früh geschlossen. Wird ‚Audit-Findings = 0‘ zum Ziel, werden Probleme nicht mehr gemeldet — nur noch verdeckt. Der Schutz: ‚Kopplungen‘. Jede einzeln optimierbare KPI wird mit einer Gegen-KPI gekoppelt, die das Manipulationsrisiko adressiert. ‚Lead Time‘ koppelt man mit ‚Rework-Rate‘ und ‚Gate-Pass-Rate beim ersten Durchlauf‘ — Beschleunigung gilt nur dann als Erfolg, wenn Qualität bleibt.",
+      "inhalt": "‚When a measure becomes a target, it ceases to be a good measure.‘ — Dieses Prinzip, oft Charles Goodhart zugeschrieben, beschreibt eine systematische Verzerrung: Sobald eine Kennzahl zum Ziel wird, optimieren Menschen die Kennzahl, nicht das eigentlich gemeinte Verhalten. Beispiele: Wird ‚Anzahl freigegebener Konzepte‘ zum Ziel, werden mehr unreife Konzepte freigegeben. Wird ‚Lead Time‘ zum Ziel, werden Vorgänge zu früh geschlossen. Wird ‚Audit-Findings = 0‘ zum Ziel, werden Probleme nicht mehr gemeldet — nur noch verdeckt. Der Schutz: Kopplungen. Jede einzeln optimierbare KPI wird mit einer Gegen-KPI gekoppelt, die das Manipulationsrisiko adressiert. ‚Lead Time‘ koppelt man mit ‚Rework-Rate‘ und ‚Gate-Pass-Rate beim ersten Durchlauf‘.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Maßnahme schützt am wirksamsten vor dem Goodhart-Effekt?",
-        "typ": "single",
-        "optionen": [
-          "Mehr Kennzahlen einführen",
-          "Eine Hauptmetrik mit einer oder mehreren Gegen-KPIs koppeln (z. B. Speed + Qualität)",
-          "Kennzahlen geheim halten",
-          "Keine KPIs nutzen"
+        "frage": "Vervollständigen Sie das Goodhart-Schutzschema:",
+        "typ": "lueckentext",
+        "text": "Goodharts Gesetz: Wenn eine Kennzahl zum {0} wird, wird sie eine schlechte Kennzahl. Schutz: Jede Geschwindigkeits-KPI wird mit einer {1}-KPI gekoppelt — z. B. Lead Time mit {2}-Rate. Wirksame Steuerung braucht immer mindestens {3} gekoppelte Kennzahlen.",
+        "luecken": [
+          {"antwort": "Ziel", "alternativen": ["Target", "Zielwert"]},
+          {"antwort": "Qualitäts", "alternativen": ["Qualität", "Quality"]},
+          {"antwort": "Rework", "alternativen": ["Nacharbeits", "Fehler"]},
+          {"antwort": "zwei", "alternativen": ["2", "mehrere"]}
         ],
-        "korrekt": 1,
-        "erklaerung": "Kopplungen sind der wirksamste Goodhart-Schutz. Wenn ‚Lead Time‘ nur dann als Erfolg gilt, wenn auch ‚Rework-Rate‘ niedrig bleibt, wird Beschleunigung um jeden Preis verhindert. Mehr Kennzahlen ohne Logik erzeugen nur mehr Rauschen, Geheimhaltung untergräbt Steuerung, und ohne KPIs gibt es keine Steuerung."
+        "erklaerung": "Die Goodhart-Falle entsteht, sobald eine Einzelkennzahl ohne Gegen-Kopplung als Bonus- oder Bewertungsziel gesetzt wird. Wirksamer Schutz: paarweise Kennzahlen (z. B. Speed × Qualität), die nur gemeinsam ein positives Ergebnis ergeben können."
       }
     },
     {
@@ -99,26 +92,27 @@
           "Komplexität und Flexibilität"
         ],
         "korrekt": 1,
-        "erklaerung": "Hohe Kohäsion (alles im Service gehört fachlich zusammen) und geringe Kopplung (Service ist unabhängig von anderen) sind die zwei zentralen SOA-Qualitätsprinzipien — seit 50 Jahren gültig (David Parnas, 1972). Kosten und Antwortzeiten sind operative Eigenschaften, keine Architektur-Kriterien."
+        "erklaerung": "Hohe Kohäsion (alles im Service gehört fachlich zusammen) und geringe Kopplung (Service ist unabhängig von anderen) sind die zwei zentralen SOA-Qualitätsprinzipien — seit über 50 Jahren gültig (David Parnas, 1972). Kosten und Antwortzeiten sind operative Eigenschaften, keine Architektur-Kriterien."
       }
     },
     {
       "nr": 6,
       "typ": "text",
       "titel": "Orchestrierung vs. Choreographie",
-      "inhalt": "Wenn Services zusammenarbeiten sollen, gibt es zwei Architekturmuster. Bei der ‚Orchestrierung‘ steuert eine zentrale Komponente — typischerweise eine Workflow-Engine — den Ablauf. Sie ruft die Services in der richtigen Reihenfolge auf, reagiert auf Antworten und verzweigt. Vorteile: klare Kontrolle, einfaches Monitoring, gute Audit-Trails. Nachteile: Single Point of Failure, kann zur Engpass werden. Bei der ‚Choreographie‘ kommunizieren Services direkt untereinander — typischerweise über Events. Es gibt keinen Dirigenten; jeder Service ‚weiß‘, was zu tun ist, wenn ein Ereignis eintritt. Vorteile: skaliert gut, keine zentrale Engpass-Komponente. Nachteile: schwer zu überblicken, Debugging komplex. Faustregel: Für klar definierte Geschäftsprozesse mit hohen Audit-Anforderungen ist Orchestrierung der pragmatische Einstieg; Choreographie wird relevant, wenn Skalierung und Entkopplung über Orchestrierung hinausgehen.",
+      "inhalt": "Wenn Services zusammenarbeiten sollen, gibt es zwei Architekturmuster. Bei der Orchestrierung steuert eine zentrale Komponente — typischerweise eine Workflow-Engine — den Ablauf. Sie ruft die Services in der richtigen Reihenfolge auf, reagiert auf Antworten und verzweigt. Vorteile: klare Kontrolle, einfaches Monitoring, gute Audit-Trails. Nachteile: Single Point of Failure, kann zum Engpass werden. Bei der Choreographie kommunizieren Services direkt untereinander — typischerweise über Events. Es gibt keinen Dirigenten; jeder Service weiß, was zu tun ist, wenn ein Ereignis eintritt. Vorteile: skaliert gut, keine zentrale Engpass-Komponente. Nachteile: schwer zu überblicken, Debugging komplex. Faustregel: Für klar definierte Geschäftsprozesse mit hohen Audit-Anforderungen ist Orchestrierung der pragmatische Einstieg; Choreographie wird relevant, wenn Skalierung und Entkopplung über Orchestrierung hinausgehen.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welches Architekturmuster passt typischerweise besser zu klar definierten Geschäftsprozessen mit hohen Audit-Anforderungen?",
-        "typ": "single",
+        "frage": "Welche Aussagen über Orchestrierung vs. Choreographie sind korrekt?",
+        "typ": "multi",
         "optionen": [
-          "Choreographie",
-          "Orchestrierung",
-          "Reine Punkt-zu-Punkt-Integration",
-          "Keine Architektur"
+          "Orchestrierung hat eine zentrale Steuerungskomponente (z. B. eine Workflow-Engine)",
+          "Choreographie ist immer die bessere Wahl, weil sie moderner ist",
+          "Choreographie skaliert horizontal besser, ist aber schwerer zu debuggen",
+          "Für regulierte B2B-Prozesse mit Audit-Pflicht ist Orchestrierung oft der pragmatische Einstieg",
+          "Orchestrierung schließt event-basierte Kommunikation komplett aus"
         ],
-        "korrekt": 1,
-        "erklaerung": "Orchestrierung hat einen zentralen Dirigenten, was Audit-Trail und Monitoring vereinfacht. Choreographie ist mächtiger für Skalierung und lose Kopplung, aber Audit-Anforderungen werden schwerer abbildbar. Für viele B2B-Unternehmen ist Orchestrierung der pragmatische Einstieg."
+        "korrekt": [0, 2, 3],
+        "erklaerung": "Zentrale Steuerung (1), bessere Skalierung aber schwierigeres Debugging (3) und Audit-Eignung der Orchestrierung (4) sind korrekt. Falsch: Choreographie ist nicht ‚per se besser‘ (2) — beide Muster haben Daseinsberechtigung. Falsch: Orchestrierung kann sehr wohl Events nutzen (5) — der Unterschied ist die zentrale Steuerung."
       }
     },
     {
@@ -129,16 +123,16 @@
       "youtube_query": "workflow management prozessautomatisierung deutsch tutorial",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Bausteine muss ein Workflow Management System (WMS) mindestens bereitstellen, um wirksam zu steuern?",
-        "typ": "multi",
-        "optionen": [
-          "Aufgaben, Regeln, Rollen, Eskalationen, SLAs und Audit Trail",
-          "Nur eine grafische Oberfläche",
-          "Nur Dokumenten-Vorlagen",
-          "Die Möglichkeit, jederzeit alles zu ändern ohne Spuren"
+        "frage": "Welche Bausteine muss ein Workflow Management System (WMS) bereitstellen?",
+        "typ": "zuordnung",
+        "paare": [
+          {"links": "Aufgaben (Tasks)", "rechts": "Was muss getan werden?"},
+          {"links": "Regeln", "rechts": "Wann verzweigt der Prozess wohin?"},
+          {"links": "Rollen", "rechts": "Wer ist verantwortlich?"},
+          {"links": "Eskalationen / SLA", "rechts": "Was passiert bei Fristüberschreitung?"},
+          {"links": "Audit Trail", "rechts": "Wer hat wann was getan? — Nachweisbarkeit"}
         ],
-        "korrekt": [0],
-        "erklaerung": "Ein wirksames WMS braucht alle sechs Bausteine (Aufgaben, Regeln, Rollen, Eskalationen, SLAs, Audit Trail) — sonst entstehen Lücken (versandende Aufgaben, unklare Verantwortung, fehlende Nachweisbarkeit). Nur Oberfläche oder Vorlagen sind keine Steuerung; ‚alles ändern ohne Spur‘ untergräbt Compliance."
+        "erklaerung": "Ein wirksames WMS braucht diese fünf Bausteine (Aufgaben, Regeln, Rollen, Eskalationen, Audit Trail) — sonst entstehen Lücken: versandende Aufgaben, unklare Verantwortung oder fehlende Nachweisbarkeit. Wer auch nur einen Baustein weglässt, baut Schatten-Prozesse vor."
       }
     }
   ]

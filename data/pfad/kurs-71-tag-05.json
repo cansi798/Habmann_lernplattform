@@ -1,148 +1,140 @@
 {
   "kurs_id": "71_Dig_42",
   "tag_nr": 5,
-  "titel": "Enterprise-Modellierung: Standards, Capability Maps und MDA als Steuerungslogik",
+  "titel": "Enterprise Architecture: TOGAF, Zachman, ArchiMate und MDA als Steuerungslogik",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Von Visio-Diagrammen zur kollaborativen Enterprise-Modellierung",
-      "youtube_id": "",
-      "youtube_query": "lucidchart visio enterprise modellierung kollaboration deutsch tutorial",
-      "dauer_min": 7,
+      "titel": "TOGAF in 12 Minuten — Enterprise Architecture in der Übersicht",
+      "youtube_id": "kp0yhrTKgg4",
+      "youtube_query": "TOGAF in 12 minutes no jargon enterprise architecture",
+      "dauer_min": 12,
       "aufgabe": {
-        "frage": "Was unterscheidet eine Enterprise-Modellierungsplattform (z. B. Lucidchart, Signavio) primär von Einzeldateien in Visio?",
+        "frage": "Welche vier Architektur-Domänen deckt das TOGAF-Framework ab?",
         "typ": "single",
         "optionen": [
-          "Sie ist immer kostenlos",
-          "Sie ermöglicht gleichzeitige Kollaboration, Versionsstände, Review-Workflows und einheitliche Templates",
-          "Sie zwingt die Nutzer:innen zu festen Symbolen",
-          "Sie ersetzt jede Form von Governance"
+          "Strategie, Marketing, Vertrieb, Operations",
+          "Business, Data, Application, Technology",
+          "Hardware, Software, Netzwerk, Cloud",
+          "Personal, Finanzen, Recht, IT"
         ],
         "korrekt": 1,
-        "erklaerung": "Der zentrale Unterschied ist die geteilte Kollaboration mit Kommentaren, Versionen und Review-Workflows sowie unternehmensweiten Templates — das macht aus Einzeldateien eine Single Source of Truth. Kostenlos sind diese Tools meist nicht, sie zwingen nicht zu Symbolen (das tun Standards), und sie ersetzen keine Governance — sie ermöglichen sie."
+        "erklaerung": "TOGAF kennt vier Architektur-Domänen: Business Architecture (Prozesse/Capabilities), Data Architecture (Datenobjekte/Datenflüsse), Application Architecture (Applikationen/Services) und Technology Architecture (Plattformen/Infrastruktur). Die Architecture Development Method (ADM) führt durch diese vier Domänen iterativ."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Modelling Charter: nicht verhandelbare Standards und bewusste Freiheitsgrade",
-      "inhalt": "Eine Modelling Charter ist das einseitige Dokument, das Klarheit in eine heterogene Modellierungslandschaft bringt. Sie definiert zuerst die ‚nicht verhandelbaren‘ Standards: einheitliche Benennungsregeln (Verb + Objekt), Mindestmetadaten (Owner, Status, Version, Gültigkeit), klare Start- und Endereignisse, sichtbare Rollen über Lanes/Swimlanes und ein verpflichtendes Änderungslog. Genauso wichtig sind die bewussten ‚Freiheitsgrade‘: Detailtiefe je nach Zielgruppe, lokale Varianten als Attribute, visuelle Gestaltung innerhalb des Templates. Ohne diese Balance entstehen entweder Modell-Wildwuchs (zu viele Freiheiten) oder Akzeptanzprobleme (zu enge Regeln). Der Freigabeprozess Draft → Review → Approved → Retired mit klaren Rollen (Modeler, Reviewer, Owner) bildet das Rückgrat. Senior-Erkenntnis: Standards sollten gerade so streng sein, dass Vergleichbarkeit gelingt — gerade so frei, dass Teams sie auch leben.",
-      "dauer_min": 6,
+      "titel": "Zachman Framework — die EA-Matrix als Strukturierungswerkzeug",
+      "inhalt": "John Zachman veröffentlichte 1987 das erste Framework für Informationssystem-Architekturen — eine 6×6-Matrix, die bis heute als ‚Periodensystem der EA‘ gilt. Die sechs Spalten sind die klassischen W-Fragen: What (Daten/Objekte), How (Funktionen/Prozesse), Where (Standorte/Netze), Who (Menschen/Rollen), When (Zeit/Ereignisse), Why (Motivation/Strategie). Die sechs Zeilen sind Sichten/Perspektiven: Executive (Scope), Business Management, Architect, Engineer, Technician, Enterprise. Jede Zelle in der Matrix ist eine eigene Modellsicht — z. B. Zeile ‚Engineer‘ × Spalte ‚What‘ = logisches Datenmodell. Zachman ist kein Vorgehen (wie TOGAF ADM), sondern ein Klassifikationsrahmen: Er sagt nicht, wie man baut, sondern was alles benötigt wird, damit eine EA vollständig ist. In der Praxis wird er oft als Checkliste genutzt: Welche Zellen haben wir besetzt, welche fehlen?",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Elemente sind typischer Bestandteil einer wirksamen Modelling Charter?",
-        "typ": "multi",
-        "optionen": [
-          "Verbindliche Benennungsregel (z. B. Verb + Objekt)",
-          "Mindestmetadaten (Owner, Status, Version)",
-          "Eine vollständige Liste aller jemals erstellten Modelle",
-          "Freigabeprozess Draft → Review → Approved → Retired mit Rollen",
-          "Bewusste Freiheitsgrade (Detailtiefe, visuelle Gestaltung)"
+        "frage": "Vervollständigen Sie die Zachman-Framework-Aussagen:",
+        "typ": "lueckentext",
+        "text": "Das Zachman Framework ist eine {0}×6-Matrix. Die sechs Spalten sind die W-Fragen: What, How, Where, Who, {1} und Why. Im Gegensatz zu TOGAF ist Zachman kein {2}, sondern ein Klassifikationsrahmen. Es zeigt, {3} alles benötigt wird, nicht wie man es baut.",
+        "luecken": [
+          {"antwort": "6", "alternativen": ["sechs"]},
+          {"antwort": "When", "alternativen": ["Wann", "Zeit"]},
+          {"antwort": "Vorgehen", "alternativen": ["Prozess", "Methode"]},
+          {"antwort": "was", "alternativen": ["welche Artefakte"]}
         ],
-        "korrekt": [0, 1, 3, 4],
-        "erklaerung": "Benennungsregeln, Mindestmetadaten, Freigabeprozess und definierte Freiheitsgrade sind das Rückgrat einer Charter. Eine Modell-Volltext-Liste gehört in das Repository/Tool selbst, nicht in die Charter — sie würde sie inhaltlich überfrachten und schnell veralten."
+        "erklaerung": "Zachman = Was alles? (Klassifikation). TOGAF = Wie vorgehen? (ADM-Methode). Beide ergänzen sich: Zachman als Vollständigkeits-Check, TOGAF als Reiseroute. Reife EA-Teams nutzen beide bewusst."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Enterprise Architecture und Capability Maps verstehen",
-      "youtube_id": "",
-      "youtube_query": "enterprise architecture capability map einfach erklärt deutsch",
-      "dauer_min": 8,
+      "titel": "ArchiMate — Notation für Enterprise Architecture",
+      "youtube_id": "XGqbdfyuoaQ",
+      "youtube_query": "enterprise architecture portfolios mit archimate deutsch",
+      "dauer_min": 9,
       "aufgabe": {
-        "frage": "Was beantwortet eine Capability Map primär?",
+        "frage": "Welche drei Hauptebenen unterscheidet ArchiMate in seiner Layer-Architektur?",
         "typ": "single",
         "optionen": [
-          "Welche Mitarbeitenden in welchem Team arbeiten",
-          "Was eine Organisation fachlich tun kann (Fähigkeiten) — unabhängig von Prozess, Software oder Organisation",
-          "Wie Server und Netzwerke verbunden sind",
-          "Wie hoch der Umsatz im letzten Quartal war"
+          "Frontend, Backend, Datenbank",
+          "Business, Application, Technology",
+          "Strategy, Operations, Reporting",
+          "Modeler, Reviewer, Approver"
         ],
         "korrekt": 1,
-        "erklaerung": "Eine Capability Map beschreibt Fähigkeiten (z. B. ‚Kunde identifizieren‘, ‚Vertrag prüfen‘) und ist bewusst toolneutral, prozessneutral und organisationsneutral — sie ist die stabile Achse, gegen die Prozesse, Applikationen und Daten verortet werden. Mitarbeitende, Netzwerke und Finanzkennzahlen sind andere Sichten der Enterprise Architecture, aber nicht Capability."
+        "erklaerung": "ArchiMate strukturiert sich in drei Kern-Layer: Business (Prozesse, Rollen, Services), Application (Komponenten, Datenobjekte, Application Services) und Technology (Infrastruktur, Plattformen, Nodes). Optional ergänzen Strategy- und Physical-Layer. Die saubere Trennung dieser Layer ist der Mehrwert gegenüber BPMN/UML."
       }
     },
     {
       "nr": 4,
       "typ": "text",
-      "titel": "MDA: CIM, PIM, PSM und die Verantwortungsgrenze zwischen Business und IT",
-      "inhalt": "Model-Driven Architecture (MDA) ist mehr als ein theoretisches Modell — es ist eine Verantwortungsgrenze. Das ‚CIM‘ (Computation Independent Model) beschreibt die Geschäftssicht: Ziele, Begriffe, Prozesse, Pflichtdaten. Hier entscheidet das Business, nicht die IT. Das ‚PIM‘ (Platform Independent Model) übersetzt diese Geschäftslogik in eine logische Service- und Datensicht, ohne sich auf eine konkrete Plattform festzulegen — hier entstehen Schnittstellen, Datenobjekte und Fehlerfälle. Das ‚PSM‘ (Platform Specific Model) ist schließlich die konkrete Umsetzung auf einer Zielplattform mit ihren Eigenheiten (z. B. SAP, Salesforce, eine eigene Microservice-Plattform). Die Senior-Pointe: wenn das CIM unvollständig ist, baut die IT zwangsläufig ‚am Business vorbei‘, weil sie Annahmen treffen muss. Wenn umgekehrt das Business ins PSM hineinregiert, wird Architektur zur Politik. Die saubere Trennung — was ist Business-Entscheidung, was Implementierungsdetail — ist eine der wichtigsten Senior-Disziplinen.",
-      "dauer_min": 7,
+      "titel": "Model-Driven Architecture (MDA) — CIM, PIM, PSM als Verantwortungsgrenze",
+      "inhalt": "MDA (OMG, 2001) trennt drei Abstraktionsstufen mit klarer Verantwortungslogik. CIM (Computation Independent Model) ist die Business-Sicht: Was wollen wir? Welche Ziele, Prozesse, Begriffe gelten? — kein einziges technisches Detail. Beispiel: ‚Kunde innerhalb von 24h aktiviert‘ + Prozess-Scope + Definition des Datenobjekts ‚Kunde‘ inklusive Pflichtfeldern. PIM (Platform Independent Model) ist die logische System-/Service-Sicht: Welche Services brauchen wir, welche Datenflüsse, welche Fehlerfälle? — ohne konkrete Plattform. Beispiel: Services ‚VerifyIdentity‘, ‚CreateAccount‘, ‚AssignRoles‘ mit Verträgen und Fehlerpfaden. PSM (Platform Specific Model) ist die konkrete Umsetzung: Welche Technologie, welche Schnittstellen, welche Deployments? Beispiel: Umsetzung über bestehendes IAM-System + Workflow-Engine + Audit-Logging. Die strategische Bedeutung: CIM ist Business-Entscheidung (Verantwortung Process Owner / Management), PSM ist Implementierungsdetail (Verantwortung IT). Wer diese Grenze verwischt, baut entweder ‚Business-Lösungen, die nicht funktionieren‘ oder ‚IT-Lösungen, die am Business vorbeigehen‘.",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Aussagen zu CIM, PIM und PSM sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Im CIM werden Geschäftsziele, Begriffe und Pflichtdaten festgelegt",
-          "Das PIM legt sich bewusst noch nicht auf eine konkrete Plattform fest",
-          "Das PSM beschreibt die konkrete plattformspezifische Umsetzung",
-          "CIM und PSM sind Synonyme und können vertauscht werden",
-          "MDA ist nur ein theoretisches Konzept ohne Verantwortungsabgrenzung"
+        "frage": "Ordnen Sie die Aussagen der richtigen MDA-Ebene zu:",
+        "typ": "zuordnung",
+        "paare": [
+          {"links": "Kunde innerhalb 24h aktiviert", "rechts": "CIM (Computation Independent Model)"},
+          {"links": "Service-Vertrag VerifyIdentity mit Input/Output und Fehlerfällen", "rechts": "PIM (Platform Independent Model)"},
+          {"links": "Umsetzung über bestehendes Keycloak-IAM + Camunda-Engine", "rechts": "PSM (Platform Specific Model)"},
+          {"links": "Definition des Datenobjekts Kunde mit Pflichtfeldern", "rechts": "CIM (Computation Independent Model)"},
+          {"links": "REST-Endpoint /accounts/{id} mit OAuth2-Authentifizierung", "rechts": "PSM (Platform Specific Model)"},
+          {"links": "Logische Service-Komposition ohne Plattform-Festlegung", "rechts": "PIM (Platform Independent Model)"}
         ],
-        "korrekt": [0, 1, 2],
-        "erklaerung": "CIM, PIM und PSM bilden eine klare Abstraktionskaskade vom Business zur Plattform, jede mit eigener Verantwortung. CIM und PSM sind das Gegenteil — Geschäftssicht versus Plattformsicht — und keinesfalls austauschbar. MDA dient in der Praxis genau dazu, Business- von Implementierungsentscheidungen sauber zu trennen."
+        "erklaerung": "Die drei MDA-Ebenen sind Verantwortungsgrenzen: CIM = Business (Was?), PIM = Architektur (Wie logisch?), PSM = Engineering (Wie konkret?). Wer Plattform-Entscheidungen ins CIM trägt, blockiert künftige Optionen. Wer Business-Ziele erst im PSM klärt, baut am Bedarf vorbei."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "Capability vs. Prozess vs. Applikation — die EA-Sichten richtig nutzen",
-      "youtube_id": "",
-      "youtube_query": "capability process application data ea sichten unterschied deutsch",
-      "dauer_min": 7,
+      "titel": "Business Capability Mapping — was sind Capabilities?",
+      "youtube_id": "_cC76sI8QrM",
+      "youtube_query": "business capability mapping was sind business capabilities deutsch",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Worin liegt der wichtigste Unterschied zwischen einer Capability und einem Prozess?",
+        "frage": "Was unterscheidet eine Business Capability von einem Geschäftsprozess?",
         "typ": "single",
         "optionen": [
-          "Eine Capability beschreibt Was wir können, ein Prozess Wie wir es tun",
-          "Beide bedeuten dasselbe, nur mit anderen Worten",
-          "Eine Capability ist immer technisch, ein Prozess immer organisatorisch",
-          "Capability gilt nur für IT, Prozess nur fürs Business"
+          "Eine Capability ist nur ein anderer Begriff für Prozess",
+          "Eine Capability beschreibt ‚was‘ ein Unternehmen kann (Fähigkeit, stabil), ein Prozess beschreibt ‚wie‘ (Ablauf, variabel)",
+          "Capabilities werden nur in der IT verwendet, Prozesse nur im Business",
+          "Eine Capability ist immer einer einzelnen Person zugeordnet"
         ],
-        "korrekt": 0,
-        "erklaerung": "Capability = Fähigkeit (Was können wir?), Prozess = Ablauf (Wie tun wir es?). Diese Trennung ist kein Wortspiel: eine Fähigkeit (‚Kunde identifizieren‘) kann durch unterschiedliche Prozesse realisiert werden — und der Prozess ändert sich öfter als die Fähigkeit. Diese Stabilität macht Capabilities zur Priorisierungsachse."
+        "korrekt": 1,
+        "erklaerung": "Capability = ‚Was können wir?‘ (z. B. ‚Kunde identifizieren‘) — stabile Fähigkeit, oft über Jahre unverändert. Prozess = ‚Wie tun wir es?‘ (z. B. ‚Onboarding 2026‘) — kann sich häufig ändern, neue Tools, neue Schritte. Eine Capability wird durch einen oder mehrere Prozesse realisiert."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Toolstrategie: Standardtool vs. föderierter Ansatz",
-      "inhalt": "Die Frage ‚ein zentrales Modellierungstool oder mehrere?‘ ist keine Tooldebatte, sondern eine Organisationsfrage. Ein ‚Standardtool für alle‘ erzwingt Vergleichbarkeit, vereinfacht Audit und reduziert Lizenzchaos — kostet aber Akzeptanz, wenn Teams sich gegängelt fühlen, und hat einen Single Point of Failure beim Hersteller. Der ‚föderierte‘ Ansatz lässt Bereichen ihre Werkzeuge, definiert aber unternehmensweit Standards (Notation, Metadaten, Austauschformate) — er erhöht Akzeptanz, erfordert aber strenge Governance und Exportwege. Beide Wege sind legitim, beide haben Frühwarnsignale: beim Standardtool steigt Shadow-Tooling (Excel-Workarounds), beim föderierten Ansatz divergieren Naming und Metadaten. Eine Senior-Entscheidung balanciert Reifegrad der Organisation, Audit-Druck und Akzeptanz-Risiko — und dokumentiert die Wahl mit einem expliziten Trigger zum Nachsteuern.",
+      "titel": "Modelling Charter — Standards, Freiheiten, Freigabe",
+      "inhalt": "Eine Modelling Charter ist die ‚Verfassung‘ für unternehmensweite Prozessmodellierung. Sie regelt drei Dinge auf maximal einer Seite: Nicht verhandelbare Standards (z. B. Naming Verb+Objekt, sichtbare Start/Ende, Owner und Status als Pflicht-Metadaten, Versionierung), Freiheitsgrade (z. B. Detailtiefe je nach Zweck, Visual Style innerhalb des Templates, lokale Varianten als Attribute zulässig), Freigabe- und Änderungsprozess (Draft → Review durch 2-Augen-Prinzip → Approval durch Owner → ggf. Retired). Sie ist explizit kein Modellierungs-Handbuch (das wäre 80 Seiten und liest niemand). Sie ist die ‚goldene Mitte‘ zwischen Wildwuchs und Überregulierung. Faustregel: 5 nicht verhandelbare Standards, 3 explizite Freiheitsgrade. Mehr Standards bedeuten Akzeptanzprobleme; weniger bedeuten Inkonsistenz. Die Charter muss ein benannter Owner haben (typischerweise der Chief Process Officer oder ein Enterprise Architect) und mindestens jährlich überprüft werden.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welches Frühwarnsignal spricht typischerweise gegen die aktuell gewählte Toolstrategie?",
-        "typ": "multi",
-        "optionen": [
-          "Bei Standardtool-Strategie: Zunahme von Shadow-Tooling (Excel/Workarounds)",
-          "Bei föderierter Strategie: Naming und Metadaten divergieren zwischen Bereichen",
-          "Bei Standardtool-Strategie: Tool wird im Marktführer-Quadranten genannt",
-          "Bei föderierter Strategie: alle Teams nutzen freiwillig dieselbe Notation",
-          "Wenn Audit-Findings zu Modellinkonsistenz steigen — unabhängig von der Strategie"
-        ],
-        "korrekt": [0, 1, 4],
-        "erklaerung": "Steigendes Shadow-Tooling (1) und divergierendes Naming (2) sind klassische Warnsignale, dass die jeweilige Strategie ihre Schwächen ausspielt. Wachsende Audit-Findings (5) sind in beiden Modellen ein objektiver Trigger zum Nachschärfen. Marktquadranten und freiwillige Konvergenz sind keine Warnsignale, sondern positive bzw. neutrale Indikatoren."
+        "frage": "Entwerfen Sie für eine wachsende Organisation (5 Standorte, 200 Mitarbeitende) den Kern einer Modelling Charter. Nennen Sie 4 nicht verhandelbare Standards, 2 bewusste Freiheitsgrade und Ihren Freigabefluss in 4-6 Sätzen.",
+        "typ": "text",
+        "musterloesung": "Nicht verhandelbare Standards: (1) Naming nach Verb+Objekt für alle Tasks (z. B. ‚Bestellung prüfen‘) und Subjekt+Zustand für Ereignisse (z. B. ‚Bestellung eingegangen‘). (2) Jedes Modell trägt Pflicht-Metadaten: einen namentlich genannten Owner, Status (Draft/Approved/Retired), Versionsnummer und Gültigkeitsbereich. (3) Start- und Endereignisse sind sichtbar; jeder Prozess hat genau einen klar benannten Auslöser und mindestens einen Ergebniszustand. (4) Lanes für Rollen sind Pflicht ab dem Moment, an dem mehr als eine Rolle beteiligt ist — Verantwortung muss visuell ablesbar sein.\n\nBewusste Freiheitsgrade: (1) Die Detailtiefe ist explizit zweckabhängig — ein Management-Übersichtsmodell darf grob bleiben, ein Automations-Modell muss präzise sein. (2) Standortspezifische Varianten dürfen als Attribute am Hauptmodell dokumentiert werden, statt eigene Modelle pro Standort anzulegen.\n\nFreigabefluss: Modeler erstellt im Status ‚Draft‘. Ein zweiter Modeler oder Architect prüft im 2-Augen-Prinzip auf Standardkonformität und Verständlichkeit (‚In Review‘). Der Process Owner gibt schließlich frei (‚Approved‘). Änderungen erfordern einen Change Request mit Begründung; substanzielle Änderungen durchlaufen denselben Review-Approval-Zyklus.",
+        "erklaerung": "Eine gute Charter passt auf eine Seite und verzichtet bewusst auf Vollständigkeit. Die wichtigste Disziplin: explizit machen, was Freiheit und was Standard ist. Wer ‚alles soll Standard sein‘ schreibt, bekommt Schatten-Modelle. Wer ‚jeder macht wie er will‘ schreibt, bekommt Vergleichsunfähigkeit beim nächsten Audit."
       }
     },
     {
       "nr": 7,
       "typ": "video",
-      "titel": "Governance als Produkt: wer ist Product Owner des Modellierungssystems?",
-      "youtube_id": "",
-      "youtube_query": "governance als produkt product owner modellierung enterprise architecture",
-      "dauer_min": 8,
+      "titel": "Zachman Framework in 9 Minuten — EA-Matrix demystifiziert",
+      "youtube_id": "zrA9Tia8k1Y",
+      "youtube_query": "zachman framework 9 minutes EA matrix demystified",
+      "dauer_min": 9,
       "aufgabe": {
-        "frage": "Welche Aussagen über ‚Governance als Produkt‘ sind zutreffend?",
+        "frage": "Welche Aussagen zu Enterprise Architecture sind korrekt?",
         "typ": "multi",
         "optionen": [
-          "Es gibt eine Person/Rolle (z. B. Head of Enterprise Architecture), die Product Owner für das Modellierungssystem ist",
-          "Standards werden in Releases weiterentwickelt — nicht einmalig ‚fertig erlassen‘",
-          "Governance braucht eigene KPIs (z. B. Modellqualität, Reviewdauer, Adoption)",
-          "Governance ist ein einmaliges Projekt mit klarem Enddatum",
-          "Akzeptanz und Enablement sind Teil der Produktverantwortung"
+          "TOGAF ist ein Vorgehensmodell mit der Architecture Development Method (ADM)",
+          "Zachman ist ein Klassifikationsrahmen, kein Vorgehensmodell",
+          "ArchiMate ist eine standardisierte Notation für EA-Modelle",
+          "Capability Maps und Prozesslandkarten sind dasselbe",
+          "Eine MDA-Trennung (CIM/PIM/PSM) hilft, Business- und IT-Verantwortung sauber zu trennen"
         ],
         "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Wirksame Governance hat einen verantwortlichen Product Owner, entwickelt sich iterativ in Releases und wird über eigene KPIs gesteuert; Akzeptanz und Enablement gehören untrennbar dazu. Falsch ist die Vorstellung von Governance als einmaliges Projekt — das führt zur erstarrten Policy, die niemand mehr lebt."
+        "erklaerung": "TOGAF = Methode (1), Zachman = Klassifikation (2), ArchiMate = Notation (3), MDA = Verantwortungsgrenze (5) — alle korrekt. Falsch ist (4): Capability Map (stabile Fähigkeiten, ‚was können wir?‘) und Prozesslandkarte (Abläufe, ‚wie tun wir es?‘) sind unterschiedliche Sichten. Eine Capability wird durch einen oder mehrere Prozesse realisiert."
       }
     }
   ]
