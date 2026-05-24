@@ -1,0 +1,610 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 13 - Lehrskript
+% Digitale Transformation im Vertrieb: CRM, Automatisierung & KI
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 13}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}CRM, Automatisierung \& KI im Vertrieb}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 7 \textperiodcentered{} TAG 13 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 16.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Digitale\\Transformation\\im Vertrieb\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}CRM als Steuerungssystem, Automatisierung mit\\Augenmaß, KI als Entscheidungsunterstützung\\-- nicht als Autorität.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 13 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Digitale Transformation des Vertriebs ist mehr als ``ein neues CRM einführen''. Es ist eine Architekturentscheidung über Prozesse, Daten, Rollen und Verantwortlichkeiten. Heute lernen Sie, CRM als Steuerungsplattform zu denken, Automatisierung mit Augenmaß einzusetzen und Künstliche Intelligenz als Entscheidungsunterstützung -- nicht als Autorität -- zu verstehen.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundlagen und Potenziale der digitalen Transformation im Vertrieb verstehen.
+  \item CRM-Systeme als zentrale Daten- und Steuerungsplattform einordnen.
+  \item Verkaufsautomatisierung und digitale Prozessgestaltung kennen.
+  \item Grundlagen von KI im Vertrieb verstehen.
+  \item Predictive Analytics und intelligente Vertriebsinsights einordnen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Vertriebsprozesse auf Digitalisierungs- und Automatisierungspotenziale analysieren.
+  \item CRM-gestützte Prozesslogiken entwickeln.
+  \item Automatisierungsmöglichkeiten für Leadmanagement, Nachverfolgung und Kundenbetreuung ableiten.
+  \item KI-gestützte Insights für Vertriebspriorisierung und Prognosen anwenden.
+  \item Chancen und Risiken datenbasierter Vertriebsentscheidungen bewerten.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Digitale Vertriebstransformation als Führungs- und Architekturentscheidung gestalten.
+  \item Zielkonflikte zwischen Effizienz, Datenqualität, Akzeptanz, Kundennähe, Datenschutz und Investitionsaufwand bewerten.
+  \item Entscheidungen unter Unsicherheit, Budgetrestriktionen und Zeitdruck treffen.
+  \item Verantwortung für eine skalierbare, datenbasierte und ethisch tragfähige Vertriebsarchitektur übernehmen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Digitale Transformation im Vertrieb ist nicht eine Frage von Technologie. Sie ist eine Frage von \emph{Architektur}: Welche Prozesse standardisieren wir, welche Daten halten wir verbindlich, welche Aufgaben automatisieren wir, welche KI-Empfehlungen folgen wir -- und welche Entscheidungen behalten wir bewusst beim Menschen?
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG -------------------------------------------------------
+\section{Einstieg: Was ``Transformation'' \emph{nicht} ist}
+
+In zwei von drei Mittelstandsbetrieben beginnt ``digitale Vertriebstransformation'' mit einem Toolkauf: ein neues CRM, ein Marketing-Automation-System, ein KI-Pilot. Zwei Jahre später sind die Tools eingeführt, das Reporting wirkt moderner -- und der Vertrieb arbeitet im Wesentlichen wie vorher. Tool ohne Architektur ist verbrannte Investition. \quelle{Westerman et al., 2014, Kap.~1; Rogers, 2016}
+
+\subsection{Vier typische Fehlannahmen}
+
+\begin{enumerate}
+  \item \fachbegriff{``Digitalisierung = Tooleinführung''.} Das CRM ist eine Voraussetzung, nicht das Ergebnis.
+  \item \fachbegriff{``KI löst es schon''.} KI kann ohne saubere Datenbasis keine zuverlässigen Empfehlungen geben. Eine falsche Prognose mit großer Sicherheit ist gefährlicher als gar keine.
+  \item \fachbegriff{``Automatisierung entlastet den Vertrieb''.} Nicht automatisch. Automatisierung ohne saubere Prozessdefinition erzeugt zusätzliche Pflege- und Dokumentationsarbeit -- die der Vertrieb dann \emph{zusätzlich} leistet.
+  \item \fachbegriff{``Datenschutz ist ein Compliance-Thema''.} Falsch verstanden. Datenschutz ist ein Vertrauens- und Architekturthema.
+\end{enumerate}
+
+\subsection{Was Transformation \emph{ist}}
+
+Echte digitale Vertriebstransformation umfasst vier Veränderungen \emph{gleichzeitig}: \quelle{Westerman et al., 2014; Rogers, 2016}
+
+\begin{itemize}
+  \item \textbf{Prozesse} werden definiert, standardisiert, dokumentiert.
+  \item \textbf{Daten} werden verbindlich, qualitativ hochwertig, integriert.
+  \item \textbf{Rollen} werden klar -- wer pflegt, wer steuert, wer entscheidet.
+  \item \textbf{Kultur} verändert sich -- Vertrieb arbeitet messbar, datenbasiert, aber nicht datenfundamentalistisch.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{P-D-R-K}]
+Vier Veränderungsfelder einer echten digitalen Vertriebstransformation:\\[2pt]
+\textbf{P}rozesse -- \textbf{D}aten -- \textbf{R}ollen -- \textbf{K}ultur.\\[2pt]
+\emph{Wer nur Tools einführt und keine P-D-R-K bewegt, hat keine Transformation, sondern eine Software-Migration.}
+\end{eselsbox}
+
+% --- 2. CRM ALS STEUERUNGSPLATTFORM ----------------------------------
+\section{CRM als Steuerungsplattform}
+
+CRM (Customer Relationship Management) ist nicht eine Kontaktverwaltung. Es ist das zentrale Steuerungsinstrument einer modernen Vertriebsorganisation -- wenn es als solches gebaut, gepflegt und genutzt wird. \quelle{Kumar \& Reinartz, 2018, Kap.~3--4}
+
+\subsection{Was ein professionell genutztes CRM leistet}
+
+\begin{itemize}
+  \item \textbf{Vollständige Kundenhistorie.} Jede Aktivität, jedes Angebot, jede Kommunikation an einem Ort.
+  \item \textbf{Lead- und Opportunity-Steuerung.} Klar definierte Stufen, Übergaberegeln, Sichtbarkeit.
+  \item \textbf{Pipeline-Sicht.} Welche Verkaufschancen, mit welchem Wert, in welcher Phase, mit welcher Wahrscheinlichkeit?
+  \item \textbf{Forecasting.} Auf Basis von Pipeline und Historie eine belastbare Umsatzprognose.
+  \item \textbf{Aktivitätenplanung.} Automatische Erinnerungen, Follow-up-Aufgaben, Eskalationen.
+  \item \textbf{Reporting.} Kennzahlen für Vertriebsleitung und Geschäftsführung.
+\end{itemize}
+
+\subsection{Typische CRM-Prozesse}
+
+\begin{enumerate}
+  \item \fachbegriff{Leadaufnahme.} Wer kommt rein? Über welchen Kanal? Mit welcher Vor-Qualifizierung?
+  \item \fachbegriff{Qualifizierung.} Welche Leads sind reif für die Übergabe an den Außendienst? Welche bleiben im Marketing-Nurturing?
+  \item \fachbegriff{Angebotsprozess.} Wie wird ein Angebot erstellt, intern freigegeben, an den Kunden gesendet?
+  \item \fachbegriff{Nachverfolgung.} Wer kontrolliert offene Angebote? Wann wird nachgefasst?
+  \item \fachbegriff{Bestandskundenpflege.} Cross-Selling, Reaktivierung, Service.
+  \item \fachbegriff{Upselling.} Erkennen von Potenzialen, Initiieren von Gesprächen.
+  \item \fachbegriff{Reporting.} Wer schaut wann auf welche Kennzahlen?
+  \item \fachbegriff{Forecasting.} Wie wird aus der Pipeline ein Forecast?
+\end{enumerate}
+
+\subsection{Erfolgsfaktoren}
+
+\begin{itemize}
+  \item \textbf{Klare Datenfelder.} Pflichtfelder, einheitliche Werte, dokumentierte Bedeutung.
+  \item \textbf{Verbindliche Nutzung.} ``Was nicht im CRM steht, hat nicht stattgefunden.''
+  \item \textbf{Einfache Prozesse.} Wenige Klicks, kein 20-Felder-Formular.
+  \item \textbf{Eindeutige Rollen.} Wer ist verantwortlich für Datenqualität, für Übergabe, für Forecast?
+  \item \textbf{Saubere Schnittstellen.} Marketing-Automation, ERP, Service-System -- alles synchronisiert.
+  \item \textbf{Messbarer Nutzen.} Der Vertrieb spürt, dass das CRM ihm hilft -- nicht dass es ihm Arbeit aufbürdet.
+\end{itemize}
+
+\begin{merkbox}[CRM-Faustregel]
+Ein gutes CRM ist eines, in dem der Vertrieb \emph{freiwillig} arbeitet. Wenn der Vertrieb sagt ``ich muss ins CRM'', stimmt etwas nicht. Wenn der Vertrieb sagt ``ich gehe schnell ins CRM, da steht's drin'', stimmt es.
+\end{merkbox}
+
+% --- 3. VERKAUFSAUTOMATISIERUNG -----------------------------------
+\section{Verkaufsautomatisierung}
+
+Automatisierung im Vertrieb übernimmt wiederholbare Aufgaben, damit Vertriebsmitarbeitende ihre Zeit auf das Nicht-Wiederholbare konzentrieren können. \quelle{Kumar \& Reinartz, 2018; McAfee \& Brynjolfsson, 2017}
+
+\subsection{Was sich gut automatisieren lässt}
+
+\begin{itemize}
+  \item Erinnerungen zu offenen Angeboten.
+  \item Erinnerungen zu auslaufenden Service-/Wartungsverträgen.
+  \item Lead Routing -- automatische Zuordnung neuer Leads zu Vertriebsmitarbeitenden.
+  \item Standardisierte Follow-up-Mails nach Erstkontakt.
+  \item Angebotsvorlagen mit dynamischen Feldern.
+  \item Terminbuchungs-Prozesse mit Kalenderintegration.
+  \item Eskalationen bei überfälligen Aktivitäten.
+  \item Reports und Pipeline-Übersichten.
+\end{itemize}
+
+\subsection{Was sich \emph{nicht} sinnvoll automatisieren lässt}
+
+\begin{itemize}
+  \item Erstgespräch bei komplexen B2B-Lösungen.
+  \item Verhandlung von Preis, Konditionen, Spezialbedingungen.
+  \item Reaktion auf eine Beschwerde oder kritische Kundenrückmeldung.
+  \item Cross-Selling-Empfehlungen, die persönliches Wissen über den Kunden erfordern.
+  \item Vertrauensaufbau -- der bleibt immer menschlich.
+\end{itemize}
+
+\subsection{Erfolgsfaktoren für Automatisierung}
+
+\begin{enumerate}
+  \item \textbf{Erst Prozess, dann Tool.} Ein chaotischer manueller Prozess wird durch Automatisierung zu einem chaotischen automatischen Prozess -- nur schneller.
+  \item \textbf{Echter Nutzen für den Vertrieb.} Automatisierung muss Arbeit abnehmen, nicht hinzufügen.
+  \item \textbf{Datenqualität als Voraussetzung.} Automatisierte Erinnerungen sind nur so gut wie die Daten, auf denen sie laufen.
+  \item \textbf{Eskalations- und Sonderwege.} Es muss immer einen ``manuellen Knopf'' geben, um die Automatik anzuhalten.
+  \item \textbf{Beobachtbarkeit.} Es muss sichtbar sein, was gerade automatisch passiert -- nicht in einer Blackbox.
+\end{enumerate}
+
+\subsection{Tonfall im Mittelstand}
+
+Im deutschen Mittelstand reagieren Kunden besonders empfindlich auf automatisierte Mails, die sich als persönlich \emph{verkleiden}. Eine Mail, die ``Lieber Herr Müller, ich habe heute speziell an Sie gedacht...'' beginnt und offenkundig automatisiert ist, beschädigt Vertrauen. Eine Mail, die offen automatisiert ist und einen nützlichen Inhalt liefert, ist akzeptiert. \quelle{Homburg, 2020; Kreutzer, 2020}
+
+% --- 4. KI IM VERTRIEB: GRUNDLAGEN -------------------------------
+\section{KI im Vertrieb: Grundlagen und realistische Use Cases}
+
+Künstliche Intelligenz im Vertrieb ist 2026 kein Zukunftsthema mehr -- sie ist in vielen mittelständischen Vertriebsorganisationen produktiv im Einsatz, aber selten dort, wo Marketing-Versprechen sie verorten. Die belastbaren Use Cases sind klarer, schmaler und nüchterner als die Werbung. \quelle{Davenport \& Ronanki, 2018; Iansiti \& Lakhani, 2020}
+
+\subsection{Was KI im Vertrieb realistisch leistet}
+
+\begin{itemize}
+  \item \fachbegriff{Mustererkennung} in Bestandsdaten -- welche Kunden haben Eigenschaften, die mit Cross-Sell-Erfolg korrelieren?
+  \item \fachbegriff{Priorisierung} -- welche Leads sollten heute zuerst kontaktiert werden?
+  \item \fachbegriff{Prognose} -- welche Opportunities haben hohe / niedrige Abschlusswahrscheinlichkeit?
+  \item \fachbegriff{Vorbereitung} -- automatische Zusammenfassungen, Bullet-Point-Briefings vor einem Kundentermin.
+  \item \fachbegriff{Empfehlung} -- ``Next Best Action'' für eine bestimmte Opportunity.
+\end{itemize}
+
+\subsection{Predictive Analytics}
+
+\fachbegriff{Predictive Analytics} ist die Anwendung statistischer und maschineller Lernverfahren auf historische Daten, um Wahrscheinlichkeiten zukünftiger Ereignisse zu schätzen: \quelle{Agrawal et al., 2018}
+
+\begin{itemize}
+  \item \textbf{Kaufwahrscheinlichkeit} -- welche Leads sind reif?
+  \item \textbf{Churn-Risiko} -- welche Bestandskunden zeigen Frühindikatoren für Kündigung?
+  \item \textbf{Abschlusswahrscheinlichkeit} -- für eine Opportunity in der Pipeline.
+  \item \textbf{Umsatzpotenzial} -- wie groß könnte ein Kunde theoretisch werden?
+  \item \textbf{Next Best Action} -- welche konkrete Aktivität bringt die Opportunity am stärksten voran?
+\end{itemize}
+
+\subsection{Intelligente Insights}
+
+Hier geht KI von Statistik zu Operativem über:
+
+\begin{itemize}
+  \item \textbf{Kundensegmentierung.} Cluster-Verfahren, die Kunden mit ähnlichem Verhalten gruppieren.
+  \item \textbf{Lead Scoring.} Profil- und Verhaltensdaten zu einer Score-Zahl.
+  \item \textbf{Pipeline-Risiken.} Welche Deals sind in Wirklichkeit stuck und werden nicht abschließen?
+  \item \textbf{Cross-Selling-Potenziale.} Welche Produktkombinationen sind statistisch häufig?
+  \item \textbf{Gesprächsvorbereitung.} KI-generierte Zusammenfassungen aus E-Mail, CRM, Newsfeed.
+  \item \textbf{Forecast-Unterstützung.} Datengetriebene Korrektur von Bauchgefühl-Forecasts.
+\end{itemize}
+
+% --- 5. GRENZEN VON KI -------------------------------------------
+\section{Grenzen von KI -- und warum sie wichtig sind}
+
+KI kann viel. Aber sie kann auch sehr selbstbewusst Unsinn produzieren. Wer das nicht versteht, baut datenbasierte Vertriebsentscheidungen auf einer brüchigen Grundlage. \quelle{Davenport \& Ronanki, 2018}
+
+\subsection{Sechs strukturelle Grenzen}
+
+\begin{enumerate}
+  \item \fachbegriff{Datenqualität.} ``Garbage in, garbage out.'' KI-Empfehlungen sind nur so gut wie die Daten, auf denen sie trainieren.
+  \item \fachbegriff{Bias.} Wenn die Trainingsdaten verzerrt sind (z.\,B.\ historisch wurden bestimmte Branchen bevorzugt), reproduziert die KI den Bias.
+  \item \fachbegriff{Erklärbarkeit.} Viele moderne Modelle sind ``Blackboxes''. Sie sagen ``hohe Wahrscheinlichkeit'', aber nicht klar, warum. Im Vertrieb ist das ein Problem, wenn jemand verantworten soll, warum ein Lead nicht kontaktiert wurde.
+  \item \fachbegriff{Datenschutz.} Personenbezogene Daten in KI-Modellen sind ein regulatorisch sensibles Thema -- besonders, wenn die Daten zur Profilbildung genutzt werden.
+  \item \fachbegriff{Falsche Sicherheit.} Eine Wahrscheinlichkeitsangabe von ``87\,\%'' wirkt präziser als sie ist. Mitarbeitende und Management neigen dazu, ihr zu folgen, ohne sie zu hinterfragen.
+  \item \fachbegriff{Verantwortung.} Eine KI kann nicht verantworten. Wer ihrer Empfehlung folgt, verantwortet -- und sollte das wissen.
+\end{enumerate}
+
+\subsection{Wann KI nicht oder noch nicht sinnvoll ist}
+
+\begin{itemize}
+  \item Solange die zugrunde liegenden Daten lückenhaft oder unzuverlässig sind.
+  \item Wenn der Use Case eine sehr kleine Trainingsbasis hat (typischerweise unter 1.000 Datenpunkten).
+  \item Wenn falsche Empfehlungen disproportional teure Folgen hätten.
+  \item Wenn das Geschäft auf Kundenvertrauen beruht und automatische Entscheidungen das Vertrauen beschädigen könnten.
+  \item Wenn Datenschutz- oder Compliance-Anforderungen nicht eindeutig erfüllt werden können.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{D-B-E-D-F-V}]
+Die sechs Grenzen von KI im Vertrieb:\\[2pt]
+\textbf{D}atenqualität -- \textbf{B}ias -- \textbf{E}rklärbarkeit -- \textbf{D}atenschutz -- \textbf{F}alsche Sicherheit -- \textbf{V}erantwortung.\\[2pt]
+\emph{KI ist ein Instrument der Entscheidungsunterstützung -- niemals ein Ersatz für Entscheidungsverantwortung.}
+\end{eselsbox}
+
+% --- 6. PROZESS- UND DATENREIFE --------------------------------
+\section{Prozess- und Datenreife als Voraussetzung}
+
+Eine wichtige Senior-Level-Erkenntnis: Die meisten ``KI scheitert''-Storys sind in Wirklichkeit \emph{Datenqualitäts-Stories}. Wer KI über schlechte Daten legt, multipliziert die Fehler statt sie zu kompensieren.
+
+\subsection{Vier Reifestufen}
+
+\begin{enumerate}
+  \item \fachbegriff{Stufe 1 -- Reaktiv.} Daten verstreut, kein verbindliches CRM, Excel und E-Mail dominieren. KI ist hier nicht sinnvoll.
+  \item \fachbegriff{Stufe 2 -- Standardisiert.} CRM eingeführt, Pflichtfelder definiert, einfache Reports. KI eingeschränkt sinnvoll, beginnend mit Lead Scoring.
+  \item \fachbegriff{Stufe 3 -- Integriert.} CRM, Marketing-Automation, Service-System integriert. Datenqualität hoch. KI breit sinnvoll -- Forecasting, Churn, Next Best Action.
+  \item \fachbegriff{Stufe 4 -- Optimiert.} Vollständige Datenkette, kontinuierliche Verbesserung, KI-Empfehlungen routinemäßig integriert.
+\end{enumerate}
+
+\subsection{Roadmap-Logik}
+
+Eine seriöse digitale Vertriebstransformation folgt dieser Reife-Stufung, nicht der ``coolsten'' Technologie. Konkret in der Praxis: \quelle{Westerman et al., 2014; Rogers, 2016}
+
+\begin{itemize}
+  \item Monat 1--3: CRM-Datenmodell, Pflichtfelder, Datenverantwortlichkeiten.
+  \item Monat 4--6: Lead Scoring, einfache Automatisierungen (Follow-up, Reminder), Dashboards.
+  \item Monat 7--9: Integration Marketing-Automation, Cross-Selling-Pilot, KI-Lead-Scoring.
+  \item Monat 10--12: Predictive Forecasting pilot, KI-Empfehlungen mit menschlicher Validierung.
+\end{itemize}
+
+\begin{merkbox}[Reife vor Technologie]
+Die richtige Frage ist nicht ``Welche KI-Lösung kaufen wir?'', sondern ``Auf welcher Reifestufe stehen wir -- und was ist der \emph{nächste} sinnvolle Schritt?'' Wer Reifestufen überspringt, baut Komplexität, die er nicht beherrscht.
+\end{merkbox}
+
+% --- 7. CHANGE MANAGEMENT ----------------------------------------
+\section{Change Management: Akzeptanz im Vertrieb}
+
+Die größte Bremse digitaler Vertriebstransformation ist nicht die Technologie. Es ist der Vertriebsmitarbeiter, der nichts dokumentiert, weil er es schon immer im Kopf hatte. Akzeptanz ist eine eigene Disziplin.
+
+\subsection{Warum Vertriebsteams skeptisch sind}
+
+\begin{itemize}
+  \item ``Mehr Bürokratie, weniger Verkauf.''
+  \item ``Das Management will mich kontrollieren.''
+  \item ``Mein Wissen ist meine Versicherung -- warum soll ich es teilen?''
+  \item ``Die Tools sind nicht für unsere Realität gebaut.''
+  \item ``Ich werde an Kennzahlen gemessen, die mein eigentliches Können nicht zeigen.''
+\end{itemize}
+
+\subsection{Was Akzeptanz fördert}
+
+\begin{enumerate}
+  \item \textbf{Echter Nutzen.} Das Tool muss messbar Arbeit abnehmen -- nicht nur Reportingpflichten erzeugen.
+  \item \textbf{Eindeutige Pflichtfelder.} Wenige, klare, immer dieselben Felder -- statt 30 ``manchmal'' wichtigen.
+  \item \textbf{Klare Spielregeln.} Was passiert, wenn ein Lead nicht im CRM steht? Was nicht?
+  \item \textbf{Sichtbarer Erfolg.} Die ersten Erfolge sichtbar machen -- ``mit dieser Automatisierung haben wir XY gewonnen''.
+  \item \textbf{Schulung statt Software-Demo.} Vertrieb braucht Schulung an seinen Use Cases, nicht eine generische Tour durch das System.
+  \item \textbf{Führungsbeispiel.} Die Vertriebsleitung nutzt das System sichtbar selbst.
+\end{enumerate}
+
+\subsection{Was Akzeptanz zerstört}
+
+\begin{itemize}
+  \item Eine Pflichtfeld-Inflation, die niemand mehr ausfüllen kann.
+  \item KI-Empfehlungen, die offensichtlich naiv sind und das Vertrauen unterminieren.
+  \item Reporting, das nur dazu dient, Mitarbeitende zu kontrollieren, nicht zu unterstützen.
+  \item Tool-Wechsel im 18-Monats-Takt.
+\end{itemize}
+
+% --- 7b. GOVERNANCE & DATENSCHUTZ ------------------------------
+\section{Governance, Datenschutz und Entscheidungsverantwortung}
+
+Eine digitale Vertriebsarchitektur ohne Governance ist ein Auto ohne Lenkung. Governance regelt, wer welche Entscheidung treffen darf, wer welche Daten sehen darf, und was passiert, wenn etwas schiefläuft.
+
+\subsection{Drei Governance-Säulen}
+
+\begin{enumerate}
+  \item \fachbegriff{Datenhoheit.} Wer ist verantwortlich für welche Datenfelder? Wer darf sie ändern, wer nur lesen?
+  \item \fachbegriff{Entscheidungsrechte.} Wer entscheidet, welcher Lead an welchen Außendienst geht? Wer entscheidet bei einer KI-Empfehlung, ob sie umgesetzt wird?
+  \item \fachbegriff{Audit-Logik.} Wer prüft regelmäßig, ob die Daten korrekt sind, ob KI-Empfehlungen sinnvoll bleiben, ob die Automatisierung noch sauber läuft?
+\end{enumerate}
+
+\subsection{Datenschutz im Vertriebskontext}
+
+Personenbezogene Daten -- und im B2B umfasst das auch Kontaktpersonen bei Geschäftskunden -- unterliegen klaren regulatorischen Vorgaben. Eine seriöse digitale Vertriebsarchitektur baut Datenschutz nicht als ``zusätzliche Hürde'', sondern als integralen Bestandteil:
+
+\begin{itemize}
+  \item Datenminimierung -- nur erfassen, was wirklich gebraucht wird.
+  \item Dokumentierte Einwilligungen, insbesondere bei Marketingkommunikation.
+  \item Klare Löschfristen und -prozesse.
+  \item Audit-Trail bei sensiblen Datenzugriffen.
+  \item Differenzierte Rollen- und Rechteverwaltung.
+\end{itemize}
+
+\subsection{KI-Verantwortung}
+
+Eine KI-Empfehlung ist keine Entscheidung. Eine \emph{Person} entscheidet, ob sie der Empfehlung folgt. Im Vertriebskontext bedeutet das konkret:
+
+\begin{itemize}
+  \item KI-Lead-Scoring schlägt vor; der Vertriebsmitarbeitende entscheidet.
+  \item KI-Forecast informiert; die Vertriebsleitung verantwortet die Prognose.
+  \item KI-Cross-Selling-Vorschläge sind Hinweise; der Account-Verantwortliche prüft Plausibilität.
+\end{itemize}
+
+Diese Trennung muss in Prozessen und Schulungen verankert sein -- sonst entsteht eine implizite ``Autorität'' der Maschine, die niemand legitimiert hat.
+
+% --- 8. MANAGEMENT-PERSPEKTIVE ---------------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Die größten Spannungen in der digitalen Vertriebstransformation entstehen nicht zwischen Vertrieb und IT, sondern zwischen mehreren legitimen Anforderungen.
+
+\subsection{Sechs zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Effizienz vs.\ Kundennähe.} Mehr Automatisierung skaliert -- weniger persönlicher Kontakt erodiert Beziehungen.
+  \item \textbf{Datenqualität vs.\ Geschwindigkeit.} Saubere Daten brauchen Zeit. Geschäftsführung will Ergebnisse schnell.
+  \item \textbf{Akzeptanz vs.\ Standardisierung.} Vertrieb mag flexibles Arbeiten -- Management braucht einheitliche Daten.
+  \item \textbf{Datenschutz vs.\ Personalisierung.} Mehr Daten erhöhen Personalisierungsmöglichkeiten und Compliance-Risiken.
+  \item \textbf{Investitionsaufwand vs.\ Erwartung.} Geschäftsführung erwartet ROI in 12 Monaten, Reifeentwicklung dauert oft 24--36.
+  \item \textbf{KI-Autorität vs.\ Verantwortung.} Wer folgt der KI-Empfehlung blind? Wer überstimmt sie? Wer trägt das Ergebnis?
+\end{enumerate}
+
+\subsection{Entscheidung unter Unsicherheit}
+
+In der Fallstudie ``MedTech Service GmbH'' (UE 5) zeigt sich exemplarisch, wie eine Entscheidung unter Unsicherheit aussieht: Trotz hoher Attraktivität wird Predictive Forecasting \emph{nicht} sofort breit eingeführt, weil die aktuelle Datenqualität zu schwach ist. Falsche Sicherheit wäre teurer als gar keine Prognose. Stattdessen werden CRM-Datenqualität, Prozessverbindlichkeit und einfache Automatisierungen priorisiert, KI wird gezielt pilotiert. \quelle{Davenport \& Ronanki, 2018}
+
+\subsection{Senior-Level-Fragen}
+
+\begin{itemize}
+  \item Welche Automatisierung schafft echten Vertriebswert?
+  \item Welche KI-Anwendung wäre aktuell zu riskant?
+  \item Wo muss das Management Prozessdisziplin einfordern -- nicht delegieren?
+  \item Welche Entscheidung müsste ein Chief Revenue Officer persönlich verantworten?
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{E-D-A-D-I-K}]
+Die sechs Zielkonflikte:\\[2pt]
+\textbf{E}ffizienz vs.\ Kundennähe -- \textbf{D}atenqualität vs.\ Geschwindigkeit -- \textbf{A}kzeptanz vs.\ Standardisierung -- \textbf{D}atenschutz vs.\ Personalisierung -- \textbf{I}nvestition vs.\ Erwartung -- \textbf{K}I-Autorität vs.\ Verantwortung.\\[2pt]
+\emph{Sechs Spannungen, in denen Senior-Level-Führung aktiv steuert.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 13]
+Digitale Transformation im Vertrieb ist eine \emph{Architekturentscheidung} -- nicht eine Toolauswahl. Sie verbindet Prozesse, Daten, Automatisierung, KI und Akzeptanz. KI ist dabei das letzte, nicht das erste Werkzeug: sie braucht Reife unter sich. Wer reif baut, kann skalieren; wer überspringt, baut Komplexität ohne Steuerung.
+\end{merkbox}
+
+% --- 9. LITERATUR ----------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Agrawal, A., Gans, J., \& Goldfarb, A. (2018).] \emph{Prediction machines: The simple economics of artificial intelligence}. Harvard Business Review Press.
+  \item[Davenport, T.\,H., \& Ronanki, R. (2018).] Artificial intelligence for the real world. \emph{Harvard Business Review, 96}(1), 108--116.
+  \item[Homburg, C. (2020).] \emph{Marketingmanagement: Strategie -- Instrumente -- Umsetzung -- Unternehmensführung} (7.\ Aufl.). Springer Gabler.
+  \item[Iansiti, M., \& Lakhani, K.\,R. (2020).] \emph{Competing in the age of AI: Strategy and leadership when algorithms and networks run the world}. Harvard Business Review Press.
+  \item[Kreutzer, R.\,T. (2020).] \emph{Customer Experience Management mit KI: Die digitale Transformation in der Kundeninteraktion}. Springer Gabler.
+  \item[Kumar, V., \& Reinartz, W. (2018).] \emph{Customer relationship management: Concept, strategy, and tools} (3.\ Aufl.). Springer.
+  \item[McAfee, A., \& Brynjolfsson, E. (2017).] \emph{Machine, platform, crowd: Harnessing our digital future}. W.\,W.\ Norton.
+  \item[Rogers, D.\,L. (2016).] \emph{The digital transformation playbook: Rethink your business for the digital age}. Columbia Business School Publishing.
+  \item[Westerman, G., Bonnet, D., \& McAfee, A. (2014).] \emph{Leading digital: Turning technology into business transformation}. Harvard Business Review Press.
+\end{description}
+
+% --- 10. GLOSSAR -----------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Abschlusswahrscheinlichkeit] Geschätzte Wahrscheinlichkeit, dass eine Opportunity zum Vertragsabschluss führt.
+  \item[Bias] Systematische Verzerrung in Trainingsdaten oder Modellergebnissen.
+  \item[CRM (Customer Relationship Management)] Zentrale Steuerungsplattform für Kundendaten, Leads, Opportunities, Aktivitäten und Vertriebsprozesse.
+  \item[Churn-Risiko] Geschätzte Wahrscheinlichkeit, dass ein Bestandskunde kündigt.
+  \item[Cross-Selling] Verkauf ergänzender Produkte oder Leistungen an einen Bestandskunden.
+  \item[Datenfeld (Pflichtfeld)] Feld im CRM, das vor Speicherung zwingend ausgefüllt werden muss.
+  \item[Digitale Transformation (Vertrieb)] Veränderung von Prozessen, Daten, Rollen und Kultur des Vertriebs durch digitale Werkzeuge.
+  \item[Erklärbarkeit] Fähigkeit, eine KI-Empfehlung nachvollziehbar zu begründen.
+  \item[Forecast / Forecasting] Umsatzprognose auf Basis von Pipeline und Historie.
+  \item[KI (Künstliche Intelligenz)] Anwendung lernender Verfahren auf Daten zur Mustererkennung, Priorisierung und Prognose.
+  \item[Lead Routing] Automatische Zuordnung eines neuen Leads zu einem Vertriebsmitarbeitenden.
+  \item[Lead Scoring] Punktbasiertes Modell zur Bewertung von Lead-Reife.
+  \item[Next Best Action] KI-gestützte Empfehlung der nächsten sinnvollen Aktivität für eine Opportunity.
+  \item[Opportunity] Konkrete Verkaufschance mit erkennbarem Bedarf, Entscheider und Volumen.
+  \item[Pipeline] Übersicht aller laufenden Opportunities mit Phase, Wert und Wahrscheinlichkeit.
+  \item[Predictive Analytics] Statistische / maschinelle Verfahren zur Schätzung zukünftiger Ereignisse.
+  \item[Prozessdisziplin] Verbindliche, konsistente Anwendung definierter Prozesse durch alle Mitarbeitenden.
+  \item[Reifestufe] Entwicklungsstadium der Vertriebsorganisation: reaktiv, standardisiert, integriert, optimiert.
+  \item[Verkaufsautomatisierung] Automatische Ausführung wiederkehrender Vertriebsaufgaben (Erinnerungen, Routing, Eskalationen).
+  \item[Zielkonflikte (digitale Transformation)] Effizienz vs.\ Kundennähe, Datenqualität vs.\ Geschwindigkeit, Akzeptanz vs.\ Standardisierung, Datenschutz vs.\ Personalisierung, Investition vs.\ Erwartung, KI-Autorität vs.\ Verantwortung.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 13 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

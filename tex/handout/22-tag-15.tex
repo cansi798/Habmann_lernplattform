@@ -1,0 +1,627 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 15 - Lehrskript
+% Rechtssicherheit, Compliance & Wettbewerbsstrategie auf Plattformmärkten
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 15}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Recht, Compliance \& Wettbewerb}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 8 \textperiodcentered{} TAG 15 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 18.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Rechtssicherheit,\\Compliance\\\& Wettbewerbs-\\strategien\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Plattformen rechtssicher steuern, Risiken bewerten\\und Marktpositionen verteidigungsfähig gestalten.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 15 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Plattformökonomie ist kein rechtsfreier Raum. Im Gegenteil: mit der Bedeutungszunahme digitaler Plattformen ist auch der regulatorische Rahmen in den letzten Jahren deutlich verschärft worden -- Datenschutz, Transparenzpflichten, Plattform-zu-Geschäftspartner-Verordnung, Digital Services Act, Digital Markets Act. Heute lernen Sie, Plattformrecht und Compliance nicht als ``Bremse'' zu verstehen, sondern als Teil der \emph{Wettbewerbs- und Vertrauensarchitektur}.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundlagen der Plattformökonomie verstehen.
+  \item Rechtliche Rahmenbedingungen für digitale Plattformen einordnen.
+  \item Relevante Risikofelder wie Datenschutz, Vertragsgestaltung, Haftung, Transparenz, Wettbewerbsrecht und Verbraucher- bzw.\ Geschäftskundenschutz kennen.
+  \item Compliance-Management als Steuerungsaufgabe verstehen.
+  \item Wettbewerbsstrategien und Marktpositionierung auf digitalen Plattformen unterscheiden.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Rechtliche und strategische Risiken in konkreten Plattformmodellen identifizieren.
+  \item Compliance-Maßnahmen für Plattformbetreiber ableiten.
+  \item Wettbewerbspositionen auf Plattformmärkten analysieren.
+  \item Marktpositionierungen anhand von Zielgruppe, Differenzierung, Preis, Vertrauen, Qualität und Datenzugang bewerten.
+  \item Zielkonflikte zwischen Wachstum, Regulierung, Kontrolle, Nutzerfreundlichkeit und Wettbewerbsvorteil analysieren.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Rechtssicherheit und Wettbewerbsstrategie als Führungs- und Architekturentscheidung gestalten.
+  \item Entscheidungen unter Unsicherheit, regulatorischem Risiko, Zeitdruck und Wettbewerbsdruck treffen.
+  \item Verantwortung für Compliance-Governance, Risikosteuerung, Marktpositionierung und Plattformvertrauen übernehmen.
+  \item Vom reinen Regelwissen zur strategischen Entscheidungsarchitektur gelangen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Rechtssicherheit ist auf Plattformmärkten kein zusätzlicher Kostenfaktor -- sie ist ein \emph{Wettbewerbsvorteil}. Eine Plattform, die Vertragsrollen, Datenverarbeitung, Ranking, Bewertungsmanagement und Beschwerdewege transparent regelt, hat einen strukturellen Vorteil gegenüber Wettbewerbern, die diese Themen erst nach einer Krise angehen müssen.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Plattform als regulierter Markt}
+
+Plattformen sind heute keine ``neuen'' Geschäftsmodelle mehr -- sie sind ein etablierter Marktstandard. Mit dieser Etablierung ist der regulatorische Rahmen deutlich gewachsen. \quelle{Cusumano et al., 2019, Kap.~9; Parker et al., 2016}
+
+\subsection{Warum Plattformen besonders sensibel sind}
+
+\begin{enumerate}
+  \item \fachbegriff{Marktmacht durch Skaleneffekte.} Plattformen tendieren zu Konzentration (Netzwerkeffekte). Damit entstehen Marktbedingungen, die kartellrechtlich besonders beobachtet werden.
+  \item \fachbegriff{Datenmacht.} Plattformen sammeln Daten in Größenordnungen, die einzelne Marktteilnehmer nicht erreichen können. Das schafft asymmetrische Informationsverhältnisse.
+  \item \fachbegriff{Zugangskontrolle.} Plattformen entscheiden, wer überhaupt am Markt teilnimmt -- Listung, Sperrung, Sichtbarkeit. Diese Steuerung ist regulierungsrelevant.
+  \item \fachbegriff{Doppelrolle.} Viele Plattformen sind sowohl \emph{Marktorganisator} als auch \emph{Marktteilnehmer} (eigene Angebote). Diese Doppelrolle ist kartellrechtlich sensibel.
+\end{enumerate}
+
+\subsection{Rechtliche Grundfragen einer jeden Plattform}
+
+Vier Fragen sollten in jeder Plattform-Architektur explizit beantwortet sein:
+
+\begin{itemize}
+  \item \textbf{Wer ist Vertragspartner?} Plattform und Kunde, Anbieter und Kunde, Plattform und Anbieter? Wer schuldet was, wem?
+  \item \textbf{Wer haftet?} Bei Mangelware, Falschangabe, Vertragsverletzung -- wer trägt die Verantwortung?
+  \item \textbf{Wer verarbeitet welche Daten?} Auftragsverarbeitung, gemeinsame Verantwortlichkeit, eigene Verantwortlichkeit?
+  \item \textbf{Wer kontrolliert?} Inhalte, Angebote, Bewertungen, Transaktionen -- wer entscheidet, wer prüft, wer dokumentiert?
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{V-H-D-K}]
+Vier Grundfragen, die in jeder Plattform-Architektur beantwortet sein müssen:\\[2pt]
+\textbf{V}ertragspartner -- \textbf{H}aftung -- \textbf{D}atenverarbeitung -- \textbf{K}ontrolle.\\[2pt]
+\emph{Wer eine dieser vier Fragen nicht klar beantworten kann, hat ein Compliance-Loch.}
+\end{eselsbox}
+
+% --- 2. PLATTFORM-ROLLEN -----------------------------------------------
+\section{Plattformrollen: Vermittler, Händler, Dienstleister, Ökosystem}
+
+Eine zentrale Vorab-Frage einer Plattform ist: \emph{In welcher Rolle agieren wir eigentlich?} Die Antwort entscheidet über Haftung, Vertragsstruktur und Steuerlogik.
+
+\subsection{Vier typische Plattformrollen}
+
+Diese Klassifikation findet sich in unterschiedlichen Spielarten in der Plattformforschung und in der Praxis von Plattform-Regulatorik. \quelle{Evans \& Schmalensee, 2016; Shapiro \& Varian, 1999}
+
+\begin{enumerate}
+  \item \fachbegriff{Reiner Vermittler.} Die Plattform bringt Anbieter und Nachfrager zusammen, ohne selbst Vertragspartner zu sein. Beispiele: Vermittlungsplattformen, einige B2B-Marktplätze.
+  \item \fachbegriff{Händler.} Die Plattform kauft und verkauft selbst. Anbieter ist sie selbst gegenüber dem Endkunden. Beispiel: klassischer E-Commerce-Shop, der nicht von Drittanbietern beliefert wird.
+  \item \fachbegriff{Dienstleister.} Die Plattform erbringt eine eigene Leistung -- z.\,B.\ Datenverarbeitung, Zertifizierung, Beratung -- zusätzlich zur Vermittlung.
+  \item \fachbegriff{Ökosystembetreiber.} Die Plattform betreibt eine umfassende Infrastruktur mit mehreren Diensten, Drittanbieter-Integration und eigenen Angeboten. Beispiele: Cloud-Marktplätze, App-Store-Anbieter.
+\end{enumerate}
+
+\subsection{Mischformen}
+
+Die meisten realen Plattformen sind \emph{Mischformen}. Eine B2B-Vermittlungsplattform kann gleichzeitig vermitteln (Anbieter--Kunde), eigene Servicepakete verkaufen (Onboarding, Premium) und Daten-Reports anbieten. Diese Mischung muss vertraglich und regulatorisch sauber abgebildet werden -- sonst kommt es zu unklarer Haftung und Beschwerden ``zwischen den Stühlen''.
+
+\begin{merkbox}[Rollen-Test]
+Wenn ein Kunde Sie fragt, ``Mit wem habe ich gerade einen Vertrag?'', muss die Antwort \emph{eindeutig} sein -- und mit der vertraglichen Realität übereinstimmen. Wenn der Endkunde glaubt, mit der Plattform zu kontrahieren, die Plattform sich aber als ``reiner Vermittler'' versteht, ist das eine Lücke, die im Streitfall sehr teuer wird.
+\end{merkbox}
+
+% --- 3. RISIKOFELDER -------------------------------------------------
+\section{Risikofelder: was kann schiefgehen}
+
+Plattformbetreiber stehen in einem Risikoumfeld mit acht typischen Feldern. Jedes davon ist eigenständig adressierbar -- und wird in der Praxis oft erst nach einem Vorfall ernst genommen.
+
+\subsection{Acht Risikofelder}
+
+Die folgende Strukturierung folgt einer typischen Risikolandkarte für mehrseitige Plattformen. \quelle{OECD, 2019; Khan, 2017}
+
+\begin{enumerate}
+  \item \fachbegriff{Datenschutz und Einwilligungen.} Personenbezogene Daten von Anbietern, Kunden, Mitarbeitenden. Auftragsverarbeitung, internationaler Datentransfer, Löschpflichten.
+  \item \fachbegriff{AGB und Vertragsbedingungen.} Allgemeine Geschäftsbedingungen für drei Parteien (Plattform, Anbieter, Kunde) müssen konsistent und transparent sein.
+  \item \fachbegriff{Haftung.} Für Falschangaben, mangelhafte Leistung, Datenverlust, Plattformausfälle.
+  \item \fachbegriff{Informationspflichten.} Impressum, Preisangaben, Liefer- und Zahlungsbedingungen, Widerrufsrecht (B2C).
+  \item \fachbegriff{Preis- und Angebotsdarstellung.} Transparente Preise inkl.\ aller Komponenten, Vergleichbarkeit, kein Dark Pattern.
+  \item \fachbegriff{Wettbewerbsrecht.} Faire Praktiken, irreführende Werbung, vergleichende Aussagen.
+  \item \fachbegriff{Bewertungsmanagement.} Echtheit von Bewertungen, Umgang mit Manipulation, Beschwerden über unfaire Bewertungen.
+  \item \fachbegriff{Umgang mit Geschäftskunden (B2B).} Spezifische Anforderungen aus der Plattform-zu-Geschäftspartner-Verordnung (P2B): Transparenz von Ranking-Kriterien, Beschwerdewege, Sperrungs- und Kündigungsregeln.
+\end{enumerate}
+
+\subsection{Besonders sensible Punkte}
+
+\begin{itemize}
+  \item \textbf{Ranking-Transparenz.} Welche Faktoren beeinflussen das Ranking? Müssen sie -- in den Grundzügen, nicht im Algorithmus-Detail -- offen gelegt werden.
+  \item \textbf{Bezahlte Sichtbarkeit.} Muss klar gekennzeichnet sein. Wer nicht zwischen organischem Ranking und bezahltem unterscheidet, riskiert Wettbewerbsrechtsverstoß und Vertrauensverlust.
+  \item \textbf{Bewertungsechtheit.} Wer Bewertungen kuratiert, manipuliert oder bevorzugt, beschädigt die Vertrauensgrundlage der Plattform.
+  \item \textbf{Sperrungen.} Wer einen Anbieter sperrt, braucht definierte Gründe, einen Beschwerdeweg und eine dokumentierte Entscheidung.
+\end{itemize}
+
+\subsection{Compliance ist nicht Bürokratie}
+
+Eine wichtige Sicht: Compliance ist nicht ``Papierwerk gegen Strafen''. Sie ist ein Steuerungssystem, das verhindert, dass die Plattform versehentlich ihre eigene Vertrauensgrundlage beschädigt. Vertrauen entsteht nicht durch Marketingaussagen, sondern durch konsistente, regelkonforme Praxis. \quelle{Cusumano et al., 2019}
+
+% --- 4. COMPLIANCE-ARCHITEKTUR -----------------------------------
+\section{Compliance-Architektur für Plattformbetreiber}
+
+Eine wirksame Compliance-Architektur besteht nicht aus einem Ordner Dokumente. Sie ist ein \emph{System} aus Regeln, Verantwortlichkeiten, Kontrollen, Dokumentation und Eskalation.
+
+\subsection{Fünf Bestandteile}
+
+\begin{enumerate}
+  \item \fachbegriff{Regeln.} Welche Anforderungen gelten -- gesetzlich, regulatorisch, intern?
+  \item \fachbegriff{Verantwortlichkeiten.} Wer ist verantwortlich -- pro Risikofeld, pro Prozess?
+  \item \fachbegriff{Kontrollen.} Wie wird laufend geprüft, dass die Regeln eingehalten werden?
+  \item \fachbegriff{Dokumentation.} Was wird festgehalten? Wer hat wann was entschieden, was vereinbart, was kontrolliert?
+  \item \fachbegriff{Eskalation.} Was passiert, wenn ein Verstoß auftritt? Wer wird informiert? Wer entscheidet?
+\end{enumerate}
+
+\subsection{Typische Bausteine}
+
+Eine reife Plattform-Compliance hat typischerweise diese Bausteine:
+
+\begin{itemize}
+  \item \textbf{Datenschutzkonzept} -- Datenarten, Zwecke, Rechtsgrundlagen, Löschfristen, Auftragsverarbeitungsverträge.
+  \item \textbf{Rollen- und Verantwortlichkeitsmodell} -- pro Risikofeld eine klare Person / Funktion.
+  \item \textbf{AGB-Prüfung} -- regelmäßige Prüfung, ob die Bedingungen rechtlich aktuell sind.
+  \item \textbf{Partnerprüfung} -- bevor ein Partner eingebunden wird: Identitäts-, Compliance-, Bonitätsprüfung.
+  \item \textbf{Anbieter-Onboarding} -- mit dokumentierten Mindeststandards (Qualität, Lieferfähigkeit, Datenpflege).
+  \item \textbf{Beschwerdeprozesse} -- für Anbieter, Kunden, Endnutzer; mit definierten Fristen und Eskalationsstufen.
+  \item \textbf{Bewertungsrichtlinien} -- klare Regeln, was zulässig ist, und Manipulationsprüfung.
+  \item \textbf{Transparenzregeln} -- für Ranking, Werbung, Eigenangebote.
+  \item \textbf{Audit-Logik} -- regelmäßige interne und externe Prüfungen.
+  \item \textbf{Schulungen} -- Mitarbeitende kennen ihre Compliance-Pflichten.
+\end{itemize}
+
+\subsection{Risiko-Register}
+
+Ein zentrales Steuerungsinstrument ist das \fachbegriff{Risiko-Register}: eine strukturierte Aufstellung aller wesentlichen Risiken mit Bewertung nach \quelle{Parker et al., 2016, Kap.~9}
+
+\begin{itemize}
+  \item Eintrittswahrscheinlichkeit (niedrig / mittel / hoch),
+  \item Schadenshöhe (finanziell, reputationell, regulatorisch),
+  \item Reputationswirkung (intern / extern),
+  \item Regulatorischer Bedeutung,
+  \item Steuerbarkeit (welche Maßnahmen reduzieren das Risiko?).
+\end{itemize}
+
+\begin{merkbox}[Risiko-Register-Faustregel]
+Ein gutes Risiko-Register hat zwischen 10 und 30 Einträge -- nicht 200. Wenn es 200 Einträge hat, niemand kann es steuern. Wenn es nur 3 Einträge hat, sind die meisten Risiken nicht erkannt.
+\end{merkbox}
+
+% --- 5. WETTBEWERBSSTRATEGIE -----------------------------------
+\section{Wettbewerbsstrategien auf Plattformmärkten}
+
+Auf Plattformmärkten ist Differenzierung schwerer als in klassischen Branchen -- weil viele Plattformen ähnliche Funktionen anbieten. Sechs Positionierungsoptionen sind besonders relevant.
+
+\subsection{Sechs Positionierungs-Archetypen}
+
+Die Logik dieser Archetypen folgt klassischen Positionierungstheorien mit Anpassung an die Mehrseitigkeit von Plattformen. \quelle{Evans \& Schmalensee, 2016; Gawer \& Cusumano, 2014}
+
+\begin{enumerate}
+  \item \fachbegriff{Preisführer.} Versprechen: ``Niedrigste Gebühren / niedrigste Endpreise.'' Vorteil: klar. Risiko: dauerhafter Preiskampf, niedrige Margen.
+  \item \fachbegriff{Qualitätsanbieter.} Versprechen: ``Geprüfte Anbieter, garantierte Qualität.'' Vorteil: Differenzierung. Risiko: Aufwand für Prüfung und Kontrolle.
+  \item \fachbegriff{Nischenführer.} Versprechen: ``Wir sind die beste Plattform \emph{für diese Branche / dieses Segment}.'' Vorteil: Tiefe. Risiko: Marktgröße begrenzt.
+  \item \fachbegriff{Serviceführer.} Versprechen: ``Beste Beratung, beste Begleitung, bestes Onboarding.'' Vorteil: Bindung. Risiko: hoher Servicekostenanteil.
+  \item \fachbegriff{Vertrauensplattform.} Versprechen: ``Bei uns gibt es keine Manipulation, keine versteckte Werbung, klare Regeln.'' Vorteil: starker emotionaler Vorteil. Risiko: hohe Standards in der Umsetzung notwendig.
+  \item \fachbegriff{Daten- und Prozessspezialist.} Versprechen: ``Wir liefern Insights, Reports, Integrationen, die andere nicht liefern.'' Vorteil: schwer kopierbar. Risiko: hoher Investitionsbedarf.
+\end{enumerate}
+
+\subsection{Wettbewerbsfaktoren}
+
+Unabhängig von der gewählten Positionierung gibt es zehn Wettbewerbsfaktoren, an denen sich Plattformen messen lassen:
+
+\begin{itemize}
+  \item Sichtbarkeit und Reichweite.
+  \item Vertrauen.
+  \item Nutzererlebnis.
+  \item Bewertungsqualität.
+  \item Sortimentsbreite und -tiefe.
+  \item Servicelevel.
+  \item Datenzugang.
+  \item Partnernetzwerk.
+  \item Preislogik / Gebührenstruktur.
+  \item Plattform-Governance.
+\end{itemize}
+
+\subsection{Risiken einer schwachen Positionierung}
+
+\begin{itemize}
+  \item \fachbegriff{Austauschbarkeit.} Wenn die Plattform keine klare Differenzierung hat, sind Kunden / Anbieter leicht zu Wettbewerbern abwerbbar.
+  \item \fachbegriff{Preiskampf.} Ohne Differenzierung bleibt nur der Preis als Hebel.
+  \item \fachbegriff{Plattformabhängigkeit.} Die eigene Plattform wird zur austauschbaren Komponente in einem fremden Ökosystem.
+  \item \fachbegriff{Reputationsverlust.} Wer keine starke Positionierung hat, hat auch keinen Vertrauensvorsprung, wenn es kritisch wird.
+  \item \fachbegriff{Nachahmung.} Wettbewerber kopieren erfolgreiche Modelle schnell.
+  \item \fachbegriff{Regulatorische Angreifbarkeit.} Plattformen ohne klare Governance werden bevorzugt geprüft.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Vertrauen schlägt Reichweite}]
+Auf Plattformmärkten ist Reichweite ein notwendiges, aber nicht hinreichendes Argument. Eine kleinere Plattform mit hohem Vertrauen kann eine größere Plattform mit beschädigtem Ruf schlagen. \emph{Vertrauen ist die einzige Größe, die kein Wettbewerber einfach nachbauen kann.}
+\end{eselsbox}
+
+% --- 6. EXPANSIONSENTSCHEIDUNGEN ---------------------------------
+\section{Expansionsentscheidungen unter regulatorischer Unsicherheit}
+
+Ein typischer Konfliktpunkt: Wachstum in neue Märkte trifft auf unterschiedliche regulatorische Rahmenbedingungen. Wer ohne Vorbereitung in einen neuen Markt geht, riskiert hohe Korrekturkosten.
+
+\subsection{Drei Expansionspfade}
+
+\begin{enumerate}
+  \item \textbf{Sofort-Vollausbau.} Plattform geht in den neuen Markt mit identischer Struktur. Risiko: lokale Regulierung wird nachträglich teuer.
+  \item \textbf{Schrittweise Expansion.} Markteintritt mit Pilotstrukturen, lokale Anpassungen vor Vollausbau. Risiko: langsamer als der Wettbewerb.
+  \item \textbf{Governance-zuerst.} Erst lokale Compliance-Struktur aufbauen, dann ausrollen. Risiko: möglicher Marktanteilsverlust.
+\end{enumerate}
+
+\subsection{Wann welche Strategie?}
+
+\begin{itemize}
+  \item Sofort-Vollausbau passt, wenn die Märkte regulatorisch ähnlich sind und der Wettbewerb stark zeitkritisch ist.
+  \item Schrittweise Expansion ist in den meisten B2B-Plattformkontexten die richtige Wahl.
+  \item Governance-zuerst passt, wenn Vertrauen das Hauptverkaufsargument ist (z.\,B.\ Gesundheitsplattformen, Finanzplattformen).
+\end{itemize}
+
+\subsection{Compliance-Checks vor Markteintritt}
+
+Vor jedem Markteintritt sollten mindestens diese Punkte geklärt sein:
+
+\begin{itemize}
+  \item Welche zusätzlichen Datenschutzanforderungen gelten lokal?
+  \item Welche Sprachversion / lokale Anpassung der AGB ist nötig?
+  \item Welche Informationspflichten gegenüber Verbrauchern / Geschäftskunden bestehen?
+  \item Welche Steuer- und Rechnungslegungspflichten gibt es?
+  \item Welche Branchen-Spezifika sind regulatorisch besonders sensibel?
+  \item Welche lokalen Beschwerdewege müssen verfügbar sein?
+\end{itemize}
+
+% --- 7. PORTFOLIO-ENTSCHEIDUNGEN ---------------------------
+\section{Portfolio-Entscheidungen: was wird wann eingeführt}
+
+Senior-Level-Management an dieser Stelle bedeutet, Compliance-Investitionen mit Wachstums-Investitionen zu \emph{verbinden}, nicht gegeneinander auszuspielen.
+
+\subsection{Beispiel: Budgetverteilung}
+
+\noindent In Anlehnung an die Fallstudie ``TradeParts Europe'' (UE 5) zeigt eine plausible Budgetverteilung von 650.000\,EUR, wie ein reifes Management priorisiert:
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXr@{}}
+\toprule
+Bereich & Inhalt & Budget \\
+\midrule
+Vertrag / AGB / Datenschutz & Vertragsstruktur, Datenschutz-Konzept, AGB-Harmonisierung & 140.000 \\
+Produktdaten & Standards, Onboarding-Prozesse & 120.000 \\
+Ranking-Transparenz & Ranking-Governance, Sichtbarkeits-Logik & 100.000 \\
+Bewertungsmanagement & Manipulations-Monitoring, Richtlinien & 90.000 \\
+Anbieterprüfung & Qualitätsstandards, Audit & 80.000 \\
+Positionierung / Kommunikation & Markenarbeit, Vertrauenselemente & 70.000 \\
+Compliance-Schulungen / Reporting & Schulungen, Audit-Logik & 50.000 \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent\emph{Lesehinweis.} Diese Verteilung priorisiert Grundlagen (Verträge, Datenschutz, Produktdaten) \emph{vor} Markenarbeit. Das ist die klassische Logik einer reifen Plattform: erst Fundament, dann Fassade.
+
+% --- 7b. EU-REGULATORIK ----------------------------------
+\section{Der EU-Plattformrahmen 2026: DSA, DMA, P2B}
+
+Seit Mitte der 2020er Jahre hat der EU-Plattformrahmen erheblich an Konturen gewonnen. Für eine seriöse Plattformstrategie sind drei Regelwerke besonders relevant -- sie greifen ineinander und schaffen das, was man heute als ``europäisches Plattformrecht'' bezeichnen kann. \quelle{Eifert et al., 2021}
+
+\subsection{Digital Services Act (DSA)}
+
+Der \fachbegriff{Digital Services Act} adressiert die Verantwortung digitaler Vermittler -- besonders Online-Plattformen -- für Inhalte, Transparenz und Risikomanagement. Schwerpunkte:
+
+\begin{itemize}
+  \item Klare Meldepflichten für illegale Inhalte.
+  \item Transparenzpflichten zu Werbung, Empfehlungssystemen und Moderationsentscheidungen.
+  \item Beschwerde- und Streitbeilegungssysteme.
+  \item Risikomanagement-Pflichten für ``sehr große Online-Plattformen'' (VLOPs).
+\end{itemize}
+
+\subsection{Digital Markets Act (DMA)}
+
+Der \fachbegriff{Digital Markets Act} adressiert ``Gatekeeper'' -- besonders marktmächtige Plattformbetreiber. Auch wenn nur wenige Unternehmen direkt als Gatekeeper eingestuft sind, prägt der DMA die regulatorische Erwartungshaltung an alle größeren Plattformen:
+
+\begin{itemize}
+  \item Verbot der Bevorzugung eigener Dienste im Ranking.
+  \item Zugang zu Plattform-Funktionen für Dritte unter fairen Bedingungen.
+  \item Datenportabilität für gewerbliche Nutzer.
+  \item Klare Regeln für Bündelung und Standardvoreinstellungen.
+\end{itemize}
+
+\subsection{Plattform-zu-Geschäftspartner-Verordnung (P2B)}
+
+Die \fachbegriff{Plattform-zu-Geschäftspartner-Verordnung} richtet sich speziell an die Beziehung zwischen Plattform und gewerblichen Nutzern -- also für B2B-Plattformen besonders relevant:
+
+\begin{itemize}
+  \item Transparente AGB, Vorankündigung von Änderungen.
+  \item Begründungs- und Beschwerdepflichten bei Sperrungen.
+  \item Offenlegung der Hauptkriterien für Rankings.
+  \item Klare Regeln bei Eigenangeboten der Plattform im Wettbewerb mit Anbietern.
+\end{itemize}
+
+\subsection{Was das praktisch bedeutet}
+
+Für eine mittelständische B2B-Plattform bedeutet dieser Rahmen konkret:
+
+\begin{itemize}
+  \item AGB müssen P2B-konform aufgesetzt sein.
+  \item Ranking-Kriterien müssen in ihren Hauptzügen beschrieben werden.
+  \item Bezahlte Sichtbarkeit muss klar gekennzeichnet sein.
+  \item Sperrungs- und Beschwerdeprozesse müssen dokumentiert sein.
+  \item Bei Einführung eigener Angebote ist besondere kartellrechtliche Sorgfalt geboten.
+\end{itemize}
+
+\begin{merkbox}[Regulatorik als Mindeststandard]
+DSA, DMA und P2B definieren keinen ``Wunsch-Standard'' -- sie definieren einen \emph{Mindeststandard}, an dem alle Plattformen im EU-Raum gemessen werden. Wer darunter bleibt, riskiert Geldbußen \emph{und} Marktanteilsverlust. Wer darüber liegt, hat einen Wettbewerbsvorteil.
+\end{merkbox}
+
+% --- 8. MANAGEMENT-PERSPEKTIVE ------------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Plattform-Compliance und Wettbewerbsstrategie erzeugen mehrere strukturelle Zielkonflikte. Sie können nicht aufgelöst werden -- sie müssen entschieden werden.
+
+\subsection{Sechs zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Wachstum vs.\ Regulierung.} Schnelles Wachstum bedeutet oft, Regulierung später anzupassen -- mit hohen Korrekturkosten.
+  \item \textbf{Kontrolle vs.\ Nutzerfreundlichkeit.} Strenge Qualitätskontrolle erhöht Vertrauen -- und reduziert die Geschwindigkeit für Anbieter und Kunden.
+  \item \textbf{Differenzierung vs.\ Skalierung.} Eine sehr spezialisierte Positionierung ist differenziert, aber schlechter skalierbar.
+  \item \textbf{Wettbewerbsvorteil vs.\ Transparenz.} Volle Transparenz über Ranking-Logik kann Wettbewerbsvorteile verringern -- ist aber regulatorisch und vertrauenstechnisch oft Pflicht.
+  \item \textbf{Eigeninteresse vs.\ Plattformfairness.} Eigene Angebote der Plattform können Anbieter benachteiligen -- ein klassischer kartellrechtlicher Konfliktpunkt.
+  \item \textbf{Compliance-Investition vs.\ Wachstumsinvestition.} Beide brauchen Budget -- die Allokation ist eine Führungsentscheidung.
+\end{enumerate}
+
+\subsection{Senior-Level-Entscheidungslogik}
+
+\begin{itemize}
+  \item Welche Compliance-Schwäche kann direkt zum Wettbewerbsnachteil werden? (Ranking-Intransparenz, Datenschutz-Lücken)
+  \item Welche Positionierung schützt am besten vor Austauschbarkeit? (Vertrauensplattform, Nischenführer)
+  \item Wann sollte Management Wachstum \emph{bremsen}, obwohl Marktchancen bestehen? (vor stabiler Compliance)
+  \item Welche Entscheidung müsste ein Chief Platform Officer persönlich verantworten? (Eintritt in regulatorisch unsichere Märkte, Einführung eigener Angebote in Konkurrenz zu Anbietern)
+\end{itemize}
+
+\subsection{Rechtssicherheit als Vertrauenskapital}
+
+Eine wichtige Senior-Level-Erkenntnis: Rechtssicherheit ist nicht nur Schutzfunktion. Sie ist \emph{Vertrauenskapital}. Eine Plattform, die transparent zeigt, wie sie Bewertungen prüft, Sperrungen begründet, Daten schützt, hat einen schwer kopierbaren Vorteil. Wettbewerber, die diese Disziplin nicht haben, werden bei der ersten öffentlichen Krise sichtbar -- und verlieren Marktanteil.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{W-K-D-W-E-C}]
+Die sechs Zielkonflikte in einer Reihe:\\[2pt]
+\textbf{W}achstum vs.\ Regulierung -- \textbf{K}ontrolle vs.\ Nutzerfreundlichkeit -- \textbf{D}ifferenzierung vs.\ Skalierung -- \textbf{W}ettbewerbsvorteil vs.\ Transparenz -- \textbf{E}igeninteresse vs.\ Fairness -- \textbf{C}ompliance vs.\ Wachstum (Budget).\\[2pt]
+\emph{Sechs Konflikte, die das Senior-Management aktiv entscheidet -- nicht der Compliance-Officer allein.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 15]
+Rechtssicherheit ist auf Plattformmärkten kein Add-on -- sie ist Teil der \emph{strategischen Marktarchitektur}. Plattformbetreiber gestalten Märkte, sie tragen Verantwortung für Regeln, Transparenz, Vertrauen und Fairness. Wer Wachstum, Risiko und Marktposition ausbalanciert, baut langfristige Wettbewerbsfähigkeit. Wer Compliance erst nach einer Krise einführt, hat schon den ersten Schaden bezahlt.
+\end{merkbox}
+
+% --- 9. LITERATUR ---------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Cusumano, M.\,A., Gawer, A., \& Yoffie, D.\,B. (2019).] \emph{The business of platforms: Strategy in the age of digital competition, innovation, and power}. HarperBusiness.
+  \item[Eifert, M., Metzger, A., Schweitzer, H., \& Wagner, G. (2021).] Taming the giants: The DMA/DSA package. \emph{Common Market Law Review, 58}(4), 987--1028.
+  \item[Evans, D.\,S., \& Schmalensee, R. (2016).] \emph{Matchmakers: The new economics of multisided platforms}. Harvard Business Review Press.
+  \item[Gawer, A., \& Cusumano, M.\,A. (2014).] Industry platforms and ecosystem innovation. \emph{Journal of Product Innovation Management, 31}(3), 417--433.
+  \item[Khan, L.\,M. (2017).] Amazon's antitrust paradox. \emph{Yale Law Journal, 126}(3), 710--805.
+  \item[OECD (2019).] \emph{An introduction to online platforms and their role in the digital transformation}. OECD Publishing. \href{https://doi.org/10.1787/53e5f593-en}{https://doi.org/10.1787/53e5f593-en}
+  \item[Parker, G.\,G., Van Alstyne, M.\,W., \& Choudary, S.\,P. (2016).] \emph{Platform revolution: How networked markets are transforming the economy -- and how to make them work for you}. W.\,W.\ Norton.
+  \item[Shapiro, C., \& Varian, H.\,R. (1999).] \emph{Information rules: A strategic guide to the network economy}. Harvard Business School Press.
+\end{description}
+
+% --- 10. GLOSSAR --------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[AGB] Allgemeine Geschäftsbedingungen; rechtlich bindendes Regelwerk zwischen Plattform und Marktteilnehmern.
+  \item[Audit-Logik] Strukturierte interne und externe Prüfung der Compliance-Praxis.
+  \item[Auftragsverarbeitung] Datenschutzrechtliche Konstellation, in der ein Dritter im Auftrag Daten verarbeitet.
+  \item[Bewertungsmanagement] Steuerung von Echtheit, Sichtbarkeit und Manipulationsprüfung von Bewertungen.
+  \item[Compliance] System aus Regeln, Verantwortlichkeiten, Kontrollen, Dokumentation und Eskalation.
+  \item[Datenschutzkonzept] Dokumentierte Beschreibung der Datenarten, Zwecke, Rechtsgrundlagen und Löschfristen.
+  \item[Dienstleister (Plattformrolle)] Plattform, die zusätzlich zur Vermittlung eigene Leistungen erbringt.
+  \item[Eintrittswahrscheinlichkeit] Geschätzte Wahrscheinlichkeit, dass ein Risiko eintritt -- niedrig, mittel, hoch.
+  \item[Eskalation] Prozess, wie ein Verstoß oder Vorfall behandelt und wer informiert wird.
+  \item[Geschäftskundenschutz] Spezifische Schutzanforderungen aus der Plattform-zu-Geschäftspartner-Verordnung (P2B).
+  \item[Haftung] Rechtliche Verantwortung für Vertragsverletzung, Schaden oder Falschangabe.
+  \item[Händler (Plattformrolle)] Plattform, die selbst Vertragspartner gegenüber dem Endkunden ist.
+  \item[Informationspflichten] Pflicht zur transparenten Angabe von Impressum, Preisen, Lieferbedingungen, Widerrufsrecht.
+  \item[Marktposition] Verortung der Plattform im Wettbewerb nach Differenzierung, Zielgruppe, Preis, Vertrauen, Qualität, Datenzugang.
+  \item[Ökosystembetreiber] Plattform, die mehrere Dienste, Drittanbieter und eigene Angebote zu einer Infrastruktur verbindet.
+  \item[Plattform-zu-Geschäftspartner-Verordnung (P2B)] EU-Verordnung mit Transparenz- und Beschwerdepflichten für Plattformbetreiber gegenüber gewerblichen Nutzern.
+  \item[Positionierungs-Archetyp] Strategische Verortung: Preisführer, Qualitätsanbieter, Nischenführer, Serviceführer, Vertrauensplattform, Daten- und Prozessspezialist.
+  \item[Ranking-Transparenz] Offenlegung der Hauptkriterien, nach denen Angebote sortiert werden.
+  \item[Risiko-Register] Strukturierte Aufstellung wesentlicher Risiken mit Bewertung nach Eintrittswahrscheinlichkeit, Schaden, Steuerbarkeit.
+  \item[Schadenshöhe] Geschätzter finanzieller, reputationeller oder regulatorischer Schaden.
+  \item[Sichtbarkeitsgovernance] Regeln für organische und bezahlte Sichtbarkeit auf der Plattform.
+  \item[Sperrung] Ausschluss eines Anbieters von der Plattform; braucht definierte Gründe, Beschwerdeweg und Dokumentation.
+  \item[Transparenz] Offene Kommunikation über Regeln, Logik, Eigenangebote und Wechselwirkungen.
+  \item[Vermittler (Plattformrolle)] Plattform, die Anbieter und Nachfrager zusammenbringt, ohne selbst Vertragspartner zu sein.
+  \item[Vertrauensplattform] Positionierungstyp mit hohem Qualitäts-, Transparenz- und Fairnessversprechen.
+  \item[Wettbewerbsrecht] Recht zur Sicherung fairer Marktbedingungen -- insbesondere gegen unfaire Praktiken und Marktmachtmissbrauch.
+  \item[Zielkonflikte (Compliance / Wettbewerb)] Wachstum vs.\ Regulierung, Kontrolle vs.\ Nutzerfreundlichkeit, Differenzierung vs.\ Skalierung, Wettbewerbsvorteil vs.\ Transparenz, Eigeninteresse vs.\ Fairness, Compliance vs.\ Wachstum.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 15 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

@@ -1,0 +1,637 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 14 - Lehrskript
+% Chatbots, Conversational Commerce & digitale Vertriebstools
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 14}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Chatbots, Conversational Commerce \& ROI}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 7 \textperiodcentered{} TAG 14 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 17.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Chatbots,\\Conversational\\Commerce\\\& ROI\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Kundeninteraktion verantwortungsvoll automatisieren\\-- und wirtschaftlich messen.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 14 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Chatbots und digitale Vertriebstools versprechen viel: 24/7-Verfügbarkeit, Entlastung des Vertriebs, skalierbare Leadqualifizierung, sinkende Kosten pro Kontakt. Sie liefern -- aber nur, wenn sie an den richtigen Stellen eingesetzt und sauber an Vertrieb, Service und CRM angebunden sind. Heute lernen Sie, Chatbots und Conversational Commerce als \emph{Architekturentscheidung} zu denken: Welche Kundeninteraktion automatisieren wir? Welche bleibt bewusst menschlich? Und wie messen wir den wirtschaftlichen Erfolg?
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundlagen von Chatbots und Conversational Commerce verstehen.
+  \item Einsatzfelder automatisierter Kundeninteraktion im Vertrieb kennen.
+  \item Chancen und Grenzen von Chatbots einordnen.
+  \item Implementierungsphasen digitaler Vertriebstools verstehen.
+  \item ROI-Messung und Nutzenbewertung digitaler Tools kennen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Geeignete Chatbot-Use-Cases für konkrete Vertriebssituationen identifizieren.
+  \item Kundeninteraktionen strukturieren und Automatisierungspotenziale bewerten.
+  \item Implementierungspläne für digitale Vertriebstools entwickeln.
+  \item KPIs zur Erfolgsmessung definieren.
+  \item Zielkonflikte zwischen Automatisierung, Kundenerlebnis, Kosten, Datenqualität und Vertriebskapazität bewerten.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Chatbots und digitale Vertriebstools als strategische Architekturentscheidung bewerten.
+  \item Entscheidungen unter Unsicherheit, Budgetdruck und Akzeptanzrisiken treffen.
+  \item Verantwortung für Kundenerlebnis, Tool-Governance, Datenschutz, Wirtschaftlichkeit und Skalierbarkeit übernehmen.
+  \item Vom Tool-Denken zur verantwortlichen digitalen Vertriebsarchitektur gelangen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Ein Chatbot ist nicht ein \emph{Tool}. Er ist ein \emph{Eingriff} in das Kundenerlebnis. Jede Antwort, jede Falsch-Antwort, jede unterlassene Eskalation hat Markenwirkung. Senior-Level-Denken beginnt mit der Frage: \emph{Wo darf der Bot sprechen, wo bewusst nicht?}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------
+\section{Einstieg: Vom Chatfenster zur Vertriebsarchitektur}
+
+In vielen mittelständischen Vertriebsorganisationen sieht der erste ``Chatbot-Versuch'' so aus: Eine externe Agentur baut innerhalb von vier Wochen einen FAQ-Bot, der dem Innendienst Last abnehmen soll. Drei Monate später ist der Innendienst gleich belastet (weil der Bot kritische Fragen nicht beantwortet und Kunden frustriert nachrufen), die Marke hat ein paar negative Online-Bewertungen mehr, und niemand kann sagen, ob sich die Investition gelohnt hat. \quelle{Davenport \& Ronanki, 2018}
+
+\subsection{Drei häufige Anfangsfehler}
+
+\begin{enumerate}
+  \item \fachbegriff{Tool-zuerst-Denken.} Es wird mit Toolauswahl begonnen, ohne dass Use Cases definiert oder Prozesse geklärt sind.
+  \item \fachbegriff{Zu breite Erstphase.} Der Bot soll ``alles'' können -- statt einer klar abgegrenzten Aufgabe gut zu erledigen.
+  \item \fachbegriff{Fehlende Eskalations-Logik.} Was passiert, wenn der Bot nicht weiterkommt? Wenn die Antwort technisch korrekt, aber für die Situation falsch ist? Wenn ein Kunde böse wird?
+\end{enumerate}
+
+\subsection{Was eine seriöse Einführung leistet}
+
+\begin{itemize}
+  \item Klare Eingrenzung der Use Cases.
+  \item Klare Übergaberegeln an den Menschen.
+  \item Integration in CRM / Service-System.
+  \item Definierte KPIs vor Start.
+  \item Iterative Verbesserung im laufenden Betrieb.
+  \item Reportingstruktur für Geschäftsführung.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{U-Ü-I-K-V-R}]
+Sechs Bausteine einer seriösen Chatbot-Einführung:\\[2pt]
+\textbf{U}se Case -- \textbf{Ü}bergabe -- \textbf{I}ntegration -- \textbf{K}PI -- \textbf{V}erbesserung -- \textbf{R}eporting.\\[2pt]
+\emph{Wer ohne ``Ü-bergabe'' (Eskalation) startet, baut keinen Bot, sondern eine Empörungsmaschine.}
+\end{eselsbox}
+
+% --- 2. CHATBOT-TYPEN ----------------------------------------------
+\section{Chatbot-Typen: regelbasiert, KI-gestützt, hybrid}
+
+Nicht jeder ``Chatbot'' ist dasselbe Tier. Drei Grundtypen unterscheiden sich in Logik, Aufwand, Risiken. \quelle{McAfee \& Brynjolfsson, 2017}
+
+\subsection{Regelbasierte Chatbots}
+
+\fachbegriff{Regelbasierte Chatbots} folgen einer vordefinierten Entscheidungs-Baumlogik. Der Nutzer wählt aus Optionen, der Bot folgt dem Pfad.
+
+\begin{itemize}
+  \item \textbf{Vorteile.} Vorhersagbar, gut testbar, klare Verantwortlichkeit, kein Halluzinationsrisiko, niedrige Initialkosten.
+  \item \textbf{Nachteile.} Wirkt schnell starr, Nutzer fühlen sich in ``Telefonmenü'' gefangen, scheitert bei nicht vorhergesehenen Fragen.
+  \item \textbf{Einsatz.} FAQ, Terminbuchung, Statusabfragen, Standardprozesse.
+\end{itemize}
+
+\subsection{KI-gestützte Chatbots}
+
+\fachbegriff{KI-gestützte Chatbots} nutzen große Sprachmodelle (LLMs) für Natural Language Understanding und freie Antwortgenerierung.
+
+\begin{itemize}
+  \item \textbf{Vorteile.} Flexibel, natürlich wirkende Kommunikation, kann auch ungewöhnliche Formulierungen verstehen.
+  \item \textbf{Nachteile.} Risiko von Halluzinationen (erfundene Antworten), schwerer testbar, Datenschutz-Komplexität, höhere Kosten, schwerer kontrollierbar.
+  \item \textbf{Einsatz.} Produktberatung, Suche, Empfehlungen, generative Erklärungen.
+\end{itemize}
+
+\subsection{Hybride Bot-Mensch-Prozesse}
+
+Die in der Praxis robusteste Lösung ist meist \emph{hybrid}: der Bot übernimmt die ersten Schritte (Identifikation, Vorqualifizierung, Standardfragen), bei Bedarf wird an einen Menschen eskaliert. Der Übergang wird so gestaltet, dass der Mensch den bisherigen Verlauf sieht und nicht von vorn beginnt.
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXX@{}}
+\toprule
+Typ & Stärke & Risiko \\
+\midrule
+Regelbasiert & Vorhersagbar, kontrollierbar & wirkt starr \\
+KI-gestützt & Natürlich, flexibel & Halluzination, Compliance \\
+Hybrid & Best of both & komplexere Integration \\
+\bottomrule
+\end{tabularx}
+
+\begin{merkbox}[Bot-Typ-Faustregel]
+Im B2B-Mittelstand ist 2026 die hybride Lösung in den meisten Fällen die richtige: \emph{regelbasiert} für transaktionale Standardvorgänge (Termin, Status, FAQ), \emph{KI-gestützt} für freie Produktfragen, \emph{Mensch} ab dem Moment, in dem es um Verbindlichkeit, Verhandlung oder Beschwerde geht.
+\end{merkbox}
+
+% --- 3. CONVERSATIONAL COMMERCE -----------------------------------
+\section{Conversational Commerce: Vertrieb in der Konversation}
+
+\fachbegriff{Conversational Commerce} bezeichnet vertriebsorientierte Kommunikation über chat-basierte Kanäle -- Webseite, Messenger, Kundenportal, Plattform-Chats. Der Unterschied zu reinem Service: hier geht es um \emph{Anbahnung} und \emph{Abschluss}, nicht nur um Auskunft. \quelle{Shankar, 2018}
+
+\subsection{Acht Einsatzfelder im Vertrieb}
+
+\begin{enumerate}
+  \item \fachbegriff{Erstinformation.} Was bieten wir? Welche Funktionen? Welche Preise?
+  \item \fachbegriff{Produktberatung.} Welches Produkt passt zu welcher Anforderung?
+  \item \fachbegriff{Leadqualifizierung.} Wer ist der Nutzer, in welcher Branche, in welcher Rolle?
+  \item \fachbegriff{Terminbuchung.} Direkter Übergang in einen Kalender.
+  \item \fachbegriff{FAQ.} Wiederkehrende Standardfragen.
+  \item \fachbegriff{Angebotsvorbereitung.} Sammlung der notwendigen Eckdaten, automatische Übergabe an den Vertrieb.
+  \item \fachbegriff{Statusabfragen.} Wo ist meine Bestellung? Wann kommt der Servicetechniker?
+  \item \fachbegriff{Reaktivierung.} Bestandskunden, die länger inaktiv waren, gezielt ansprechen.
+\end{enumerate}
+
+\subsection{Wirkung auf Kaufverhalten}
+
+Empirische Studien zeigen ein interessantes Muster: Kunden, denen die Chatbot-Natur eines Bots offen disclosed wurde, reagierten weniger positiv -- die Kaufrate sank. Wurde der Bot-Status nicht disclosed, war die Kaufrate höher. Dieser Effekt erzeugt einen klaren Zielkonflikt zwischen Transparenz und Conversion. \quelle{Luo et al., 2019}
+
+\noindent\emph{Lesehinweis.} In Europa ist Transparenz typischerweise rechtlich vorgeschrieben. Das ist gerade deshalb wichtig zu kennen: die ``Trick-Lösung'' (Bot tarnt sich als Mensch) ist nicht nur ethisch, sondern auch rechtlich problematisch -- und langfristig markenschädigend, wenn die Tarnung auffliegt.
+
+\subsection{Service vs.\ Vertrieb -- die Übergabe}
+
+Die wichtigste Architekturfrage im Conversational Commerce ist nicht ``Welcher Bot?'' sondern ``\emph{Wann übergibt der Bot an den Vertrieb?}'' Drei Eskalations-Trigger sind besonders relevant: \quelle{Huang \& Rust, 2018}
+
+\begin{itemize}
+  \item \textbf{Komplexität.} Die Frage ist nicht standardisiert beantwortbar.
+  \item \textbf{Wert.} Die Anfrage hat ein hohes potenzielles Volumen -- ein menschliches Gespräch lohnt sich.
+  \item \textbf{Emotion.} Der Kunde wirkt frustriert, verärgert oder kritisch. Die Konversation braucht Mensch.
+\end{itemize}
+
+% --- 4. KUNDENNUTZEN VS. AUTOMATISIERUNG ------------------------
+\section{Kundennutzen vs.\ Automatisierungsdrang}
+
+Ein häufiger Implementierungsfehler ist die Verwechslung von ``automatisierbar'' und ``sinnvoll zu automatisieren''. Vier Kategorien helfen zu unterscheiden:
+
+\subsection{Vier Quadranten}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXX@{}}
+\toprule
+Häufigkeit / Komplexität & einfach & komplex \\
+\midrule
+häufig & \emph{ideal für Bot} & Bot-Vorqualifizierung + Mensch \\
+selten & einfache FAQ-Page reicht & klar menschlich \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Was definitiv menschlich bleiben sollte}
+
+\begin{itemize}
+  \item Verhandlungen über Preis, Vertragslaufzeit, Spezialbedingungen.
+  \item Reklamation, besonders bei sichtbarem Frust.
+  \item Reaktion auf eine kritische Kundenrückmeldung.
+  \item Kommunikation in einer Krisensituation (Lieferverzug, Qualitätsproblem).
+  \item Erstgespräche bei beratungsintensiven, hochmargigen Produkten.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Bot bei Häufigkeit -- Mensch bei Bedeutung}]
+Eine einfache Faustregel: Wo eine Frage \emph{häufig} und \emph{einfach} ist, gewinnt der Bot. Wo eine Frage \emph{selten} oder \emph{schwergewichtig} ist, gewinnt der Mensch. Im B2B-Mittelstand sind die schwergewichtigen Fragen oft die, die das eigentliche Geschäft ausmachen.
+\end{eselsbox}
+
+% --- 5. IMPLEMENTIERUNG ---------------------------------------
+\section{Implementierungsphasen}
+
+Eine seriöse Chatbot-Einführung läuft in acht Phasen -- nicht alle gleich lang, aber alle wichtig. \quelle{Westerman et al., 2014}
+
+\subsection{Acht Phasen}
+
+\begin{enumerate}
+  \item \fachbegriff{Zieldefinition.} Was soll der Bot leisten -- in Geschäftsbegriffen?
+  \item \fachbegriff{Use-Case-Auswahl.} Welche konkreten Anwendungsfälle starten wir? Wenige, klar abgegrenzte.
+  \item \fachbegriff{Prozessdesign.} Welche Dialoge, welche Übergaben, welche Datenflüsse?
+  \item \fachbegriff{Toolauswahl.} Erst jetzt -- nicht zu Beginn.
+  \item \fachbegriff{Daten- und Systemintegration.} CRM-, Service-System-, ERP-Schnittstellen.
+  \item \fachbegriff{Pilot.} In begrenztem Umfeld testen, Erkenntnisse sammeln.
+  \item \fachbegriff{Rollout.} Auf weitere Use Cases / Zielgruppen ausweiten.
+  \item \fachbegriff{Schulung, Monitoring, Optimierung.} Kontinuierlich -- nicht ``danach''.
+\end{enumerate}
+
+\subsection{Erfolgsfaktoren}
+
+\begin{itemize}
+  \item Klarer Kundennutzen -- der Bot löst ein erkennbares Problem.
+  \item Einfache, kurze Dialogführung -- keine Endlos-Menüs.
+  \item Definierte Eskalation an Vertrieb / Service / Innendienst.
+  \item Datenqualität für die Verzweigungen.
+  \item Eindeutige Verantwortlichkeiten -- wer pflegt den Bot, wer prüft Performance?
+  \item Laufende Verbesserung -- keine ``einmal eingerichtet'' -Logik.
+\end{itemize}
+
+% --- 6. ROI-LOGIK FÜR DIGITALE VERTRIEBSTOOLS -------------------
+\section{ROI-Logik für digitale Vertriebstools}
+
+ROI-Messung für Chatbots und ähnliche Tools ist anspruchsvoller als bei klassischen Marketingmaßnahmen, weil Wert auf mehreren Achsen entsteht: \quelle{Davenport \& Ronanki, 2018; Kaplan \& Norton, 1996}
+
+\subsection{Vier Wertdimensionen}
+
+\begin{enumerate}
+  \item \fachbegriff{Effizienz.} Eingesparte Arbeitszeit, schnellere Reaktionszeit, weniger Standardanfragen im Innendienst.
+  \item \fachbegriff{Conversion.} Höhere Leadqualifizierungsrate, mehr Terminbuchungen, höhere Abschlussquote.
+  \item \fachbegriff{Erlebnis.} Verbesserte Kundenzufriedenheit, weniger Wartezeiten, 24/7-Verfügbarkeit.
+  \item \fachbegriff{Daten.} Verbesserte Datenqualität, neue Verhaltensdaten, bessere Personalisierung in Zukunft.
+\end{enumerate}
+
+\subsection{Die ROI-Kette}
+
+\begin{itemize}
+  \item \textbf{Investitionskosten} (einmalig): Toolauswahl, Prozessdesign, Integration, Schulung.
+  \item \textbf{Betriebskosten} (laufend): Lizenzen, Wartung, Inhaltsupdates, Monitoring.
+  \item \textbf{Nutzen direkt} (quantifizierbar): eingesparte Arbeitszeit $\times$ Stundensatz, zusätzliche Leads $\times$ Conversion Rate $\times$ Auftragswert.
+  \item \textbf{Nutzen indirekt} (schwer quantifizierbar): Markenwirkung, Kundenzufriedenheit, Datenqualität.
+  \item \textbf{Risiken} (gegen den Nutzen): Fehlantworten, Imageschäden, Compliance-Risiken.
+\end{itemize}
+
+\subsection{Beispielrechnung}
+
+\noindent Annahmen (illustrativ): Innendienst-Anfragen 4.000\,/\,Monat, davon 45\,\% Standardfragen. Bot übernimmt 25\,\% (also ca.\ 1.000 Anfragen). Pro Anfrage 4 Minuten eingesparte Innendienst-Zeit, Stundensatz Vollkosten 55\,EUR.
+
+\begin{tabularx}{\linewidth}{@{}lXr@{}}
+\toprule
+Position & Berechnung & Wert \\
+\midrule
+Eingesparte Zeit / Monat & 1.000 $\times$ 4\,min $=$ 4.000\,min & 67\,h \\
+Wert eingesparte Zeit / Monat & 67\,h $\times$ 55\,EUR & 3.685\,EUR \\
+Eingesparte Zeit / Jahr & & 44.000\,EUR \\
+Zusätzliche qualifizierte Leads / Jahr & 150 $\times$ 20\,\% Abschluss & 30 Abschlüsse \\
+Zusätzlicher Umsatz / Jahr & 30 $\times$ 25.000\,EUR & 750.000\,EUR \\
+Zusätzlicher Deckungsbeitrag / Jahr (30\,\%) & & 225.000\,EUR \\
+Investition & einmalig & 80.000\,EUR \\
+Laufende Kosten / Jahr & & 30.000\,EUR \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Daraus ergibt sich im ersten Jahr ein \emph{Deckungsbeitrags-ROI} von rund (44.000 + 225.000 - 80.000 - 30.000) / 110.000 $\approx$ 1{,}45 -- also netto 1,45 Euro Mehrertrag pro investiertem Euro im ersten Jahr. Ab Jahr 2 verbessert sich der ROI deutlich, weil die einmaligen Kosten wegfallen.
+
+\subsection{KPIs für die laufende Messung}
+
+\begin{itemize}
+  \item \textbf{Bot-Nutzungsrate.} Wie viele Websitebesucher / Portal-Nutzer interagieren mit dem Bot?
+  \item \textbf{Lösungsquote (First Contact Resolution).} Wie viele Anfragen löst der Bot ohne Übergabe?
+  \item \textbf{Eskalationsquote.} Wie häufig muss an einen Menschen übergeben werden -- und warum?
+  \item \textbf{Leadqualifizierungsrate.} Anteil der Bot-Kontakte, die zu MQL / SQL werden.
+  \item \textbf{Terminbuchungen.} Direkter Output für den Vertrieb.
+  \item \textbf{Conversion Rate.} Welcher Anteil der Bot-Leads wird Kunde?
+  \item \textbf{Reaktionszeit.} Zeit von Anfrage bis erstem (Bot-)Wort und bis zur Klärung.
+  \item \textbf{Kundenzufriedenheit (NPS / CSAT) nach Bot-Interaktion.}
+  \item \textbf{Kosten pro Kontakt.}
+  \item \textbf{Umsatzbeitrag pro Use Case.}
+  \item \textbf{ROI gesamt.}
+\end{itemize}
+
+\begin{merkbox}[ROI-Faustregel]
+Ein digitaler Vertriebs-Tool-Case sollte \emph{drei} Wert-Argumente kombinieren: Effizienz \emph{plus} Conversion \emph{plus} Datenqualität. Ein Case, der nur auf Effizienz setzt, wird in der Geschäftsführungsdiskussion schwer haltbar -- denn die wirklichen Vorteile entstehen erst, wenn der Bot auch \emph{Umsatz} und \emph{Wissen} schafft, nicht nur \emph{Kosten senkt}.
+\end{merkbox}
+
+% --- 6b. ROADMAP ----------------------------------------------
+\section{Roadmap einer realistischen Bot-Einführung}
+
+Eine realistische Bot-Roadmap streckt sich typischerweise über 9--12 Monate -- nicht ``in 4 Wochen produktiv''. Sie folgt dem Reifeprinzip aus Tag 13: erst einfache, dann komplexere Use Cases.
+
+\subsection{Monat 1--2: Zielbild und Use-Case-Auswahl}
+
+\begin{itemize}
+  \item Workshop mit Vertrieb, Service, Innendienst, Marketing.
+  \item Sammlung wiederkehrender Standardfragen, Volumina, Lösungswege.
+  \item Identifikation der zwei bis drei klar abgegrenzten Erst-Use-Cases.
+  \item Definition Erfolgs-KPIs.
+  \item Vorab-Klärung Datenschutz und rechtliche Rahmenbedingungen.
+\end{itemize}
+
+\subsection{Monat 3--4: Prozessdesign und Toolauswahl}
+
+\begin{itemize}
+  \item Dialogabläufe entwerfen, idealerweise auf Papier vor Tool-Entscheidung.
+  \item Eskalationsregeln definieren.
+  \item Datenfluss CRM\,/\,Service-System\,/\,Bot klären.
+  \item Toolauswahl auf Basis der konkreten Anforderungen -- nicht umgekehrt.
+\end{itemize}
+
+\subsection{Monat 5--6: Pilot}
+
+\begin{itemize}
+  \item Beschränkt auf einen Use Case (z.\,B.\ FAQ-Bot für Standardfragen).
+  \item Sichtbar als Bot kommuniziert (Disclosure).
+  \item Tägliches Monitoring der ersten Wochen.
+  \item Wöchentliche Verbesserung der Antworten.
+\end{itemize}
+
+\subsection{Monat 7--9: Rollout}
+
+\begin{itemize}
+  \item Erweiterung auf weitere Use Cases.
+  \item Integration in CRM für Lead-Übergabe.
+  \item Schulung Service und Vertrieb auf neue Übergabe-Logik.
+  \item Erste Reportings an Geschäftsführung.
+\end{itemize}
+
+\subsection{Monat 10--12: Optimierung und Skalierung}
+
+\begin{itemize}
+  \item KI-gestützte Erweiterungen (Produktberatung, Next Best Action) -- nur wenn Datenbasis es trägt.
+  \item Verfeinerung der Eskalationsschwellen.
+  \item ROI-Auswertung gegen Ziele.
+  \item Entscheidung: skalieren, stabilisieren, zurückbauen.
+\end{itemize}
+
+% --- 7. RISIKEN ----------------------------------------------
+\section{Risiken und Grenzen}
+
+Chatbots können Vertrieb beschleunigen -- und beschädigen. Sieben Risiken sollten in jeder Einführung explizit adressiert werden: \quelle{Luo et al., 2019; Huang \& Rust, 2018}
+
+\subsection{Sieben typische Risiken}
+
+\begin{enumerate}
+  \item \textbf{Falsche Antworten.} Inhaltlich richtig wirkende, aber falsche Information.
+  \item \textbf{Halluzination.} Frei generierte, vollkommen erfundene Aussagen.
+  \item \textbf{Schlechte Nutzerführung.} Endlos-Menüs, Kreisschluss-Dialoge, nicht erreichbarer Mensch.
+  \item \textbf{Fehlende Eskalation.} Der Kunde will einen Menschen sprechen -- der Bot kennt keinen Ausweg.
+  \item \textbf{Datenschutzprobleme.} Sensible Daten in unsicherem Bot-Kontext.
+  \item \textbf{Akzeptanzprobleme.} Vertrieb / Service findet, dass der Bot ``ihre Kunden vergrault''.
+  \item \textbf{Markenwirkung.} Eine Reihe schlechter Bot-Erfahrungen wird in Bewertungsportalen sichtbar.
+\end{enumerate}
+
+\subsection{Wann besser kein Bot}
+
+\begin{itemize}
+  \item Wenn die Datengrundlage zu schwach ist (zu wenige FAQ-Inhalte, kein gepflegtes Produktdaten-System).
+  \item Wenn das Kundensegment hochwertig und beratungsintensiv ist.
+  \item Wenn die Markenpositionierung auf hochwertige persönliche Beziehung setzt.
+  \item Wenn rechtliche Sicherheit (z.\,B.\ medizinisch, juristisch) nicht durch automatisierte Antworten gegeben werden kann.
+\end{itemize}
+
+% --- 8. MANAGEMENT-PERSPEKTIVE ----------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Chatbot-Einführung ist nicht ein IT-Projekt. Sie ist eine Eingriff in das Kundenerlebnis und damit in die Marke.
+
+\subsection{Fünf zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Automatisierung vs.\ Kundenerlebnis.} Mehr Automatisierung skaliert -- weniger persönliche Antwort.
+  \item \textbf{Kosten vs.\ Qualität.} Ein einfacher Bot ist günstig -- und ein guter Bot ist nicht einfach.
+  \item \textbf{Datenqualität vs.\ Tempo.} Saubere Wissensbasis braucht Zeit; Geschäftsführung will Ergebnisse.
+  \item \textbf{Vertriebskapazität vs.\ Übergabevolumen.} Wenn der Bot zu schnell eskaliert, ist der Vertrieb belastet. Wenn er zu langsam eskaliert, sind die Kunden unzufrieden.
+  \item \textbf{Skalierbarkeit vs.\ Kontrolle.} Ein KI-Bot ist flexibler -- und schwerer zu kontrollieren.
+\end{enumerate}
+
+\subsection{Senior-Level-Entscheidungslogik}
+
+\begin{itemize}
+  \item Welche Kundeninteraktion sollte trotz Automatisierung \emph{nicht} an einen Bot übergeben werden?
+  \item Welche KPI zeigt echten Vertriebsnutzen -- statt bloßer Bot-Nutzung?
+  \item Wann kann ein Chatbot der Marke schaden?
+  \item Welche Implementierungsentscheidung müsste ein Chief Revenue Officer persönlich verantworten?
+\end{itemize}
+
+\subsection{Tool-Governance}
+
+Eine reife Bot-Architektur enthält eine \fachbegriff{Tool-Governance}:
+
+\begin{itemize}
+  \item Wer entscheidet über Bot-Inhalte und deren Änderungen?
+  \item Wer überwacht Qualität und Akzeptanz?
+  \item Wer ist Eskalationsverantwortlich, wenn Probleme auftauchen?
+  \item Wer prüft Datenschutz-Compliance?
+  \item Wer entscheidet über Erweiterungen oder Stilllegungen?
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{A-K-D-V-S}]
+Die fünf Zielkonflikte zum Memorieren:\\[2pt]
+\textbf{A}utomatisierung vs.\ Kundenerlebnis -- \textbf{K}osten vs.\ Qualität -- \textbf{D}atenqualität vs.\ Tempo -- \textbf{V}ertriebskapazität vs.\ Übergabe -- \textbf{S}kalierbarkeit vs.\ Kontrolle.\\[2pt]
+\emph{Fünf Trade-offs, die der Bot nicht löst -- die das Management entscheidet.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 14]
+Ein Chatbot ist ein \emph{Architekturteil} -- nicht ein \emph{Add-on}. Er greift in Kundenerlebnis, Vertriebsprozesse und Verantwortungsstrukturen ein. Die Frage ist nicht, ob die Technologie funktioniert, sondern ob die \emph{Architektur} funktioniert, in die sie eingebettet wird. Wer den Bot ohne Architektur baut, baut Risiken statt Effizienz.
+\end{merkbox}
+
+% --- 9. LITERATUR ----------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Davenport, T.\,H., \& Ronanki, R. (2018).] Artificial intelligence for the real world. \emph{Harvard Business Review, 96}(1), 108--116.
+  \item[Huang, M.-H., \& Rust, R.\,T. (2018).] Artificial intelligence in service. \emph{Journal of Service Research, 21}(2), 155--172. \href{https://doi.org/10.1177/1094670517752459}{https://doi.org/10.1177/1094670517752459}
+  \item[Kaplan, R.\,S., \& Norton, D.\,P. (1996).] \emph{The balanced scorecard: Translating strategy into action}. Harvard Business School Press.
+  \item[Kreutzer, R.\,T. (2020).] \emph{Customer Experience Management mit KI: Die digitale Transformation in der Kundeninteraktion}. Springer Gabler.
+  \item[Luo, X., Tong, S., Fang, Z., \& Qu, Z. (2019).] Frontiers: Machines vs.\ humans -- The impact of artificial intelligence chatbot disclosure on customer purchases. \emph{Marketing Science, 38}(6), 937--947. \href{https://doi.org/10.1287/mksc.2019.1192}{https://doi.org/10.1287/mksc.2019.1192}
+  \item[McAfee, A., \& Brynjolfsson, E. (2017).] \emph{Machine, platform, crowd: Harnessing our digital future}. W.\,W.\ Norton.
+  \item[Shankar, V. (2018).] How artificial intelligence (AI) is reshaping retailing. \emph{Journal of Retailing, 94}(4), vi--xi. \href{https://doi.org/10.1016/S0022-4359(18)30076-9}{https://doi.org/10.1016/S0022-4359(18)30076-9}
+  \item[Westerman, G., Bonnet, D., \& McAfee, A. (2014).] \emph{Leading digital: Turning technology into business transformation}. Harvard Business Review Press.
+\end{description}
+
+% --- 10. GLOSSAR ----------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Bot-Nutzungsrate] Anteil der Websitebesucher / Portal-Nutzer, die mit dem Bot interagieren.
+  \item[Chatbot] Digitaler Assistent zur automatisierten Kundeninteraktion -- regelbasiert, KI-gestützt oder hybrid.
+  \item[Conversational Commerce] Vertriebsorientierte Kommunikation über chat-basierte Kanäle (Website, Messenger, Kundenportal).
+  \item[Conversion Rate] Anteil der Bot-Kontakte, der zu Kunden / Abschlüssen führt.
+  \item[CSAT] Customer Satisfaction Score -- direkter Zufriedenheitswert nach Interaktion.
+  \item[Disclosure] Offenlegung der Bot-Natur gegenüber dem Nutzer; rechtlich in Europa typischerweise vorgeschrieben.
+  \item[Eskalation] Übergabe einer Konversation vom Bot an einen menschlichen Mitarbeiter.
+  \item[First Contact Resolution] Anteil der Anfragen, die ohne Übergabe abschließend gelöst werden.
+  \item[Halluzination] Erfundene, aber plausibel wirkende Antwort eines KI-Bots.
+  \item[Hybrider Bot] Kombination aus regelbasiertem und KI-gestütztem Bot mit menschlicher Übergabe.
+  \item[Implementierungsphasen] Acht Phasen einer Bot-Einführung: Ziel, Use Case, Prozess, Tool, Integration, Pilot, Rollout, Schulung/Monitoring.
+  \item[KI-gestützter Bot] Bot mit Sprachmodell für natürliches Sprachverständnis und freie Antwortgenerierung.
+  \item[Leadqualifizierungsrate] Anteil der Bot-Kontakte, die zu MQL oder SQL werden.
+  \item[Lösungsquote] Anteil der Anfragen, die vom Bot ohne Übergabe gelöst werden.
+  \item[Markenwirkung (eines Bots)] Auswirkung der Bot-Interaktion auf Markenwahrnehmung -- positiv wie negativ.
+  \item[Regelbasierter Bot] Bot, der einer vordefinierten Entscheidungs-Baumlogik folgt.
+  \item[ROI digitaler Vertriebstools] Verhältnis aus Effizienzgewinn plus Conversion plus Datenqualitätsgewinn zu Investitions- und Betriebskosten.
+  \item[Tool-Governance] Verantwortlichkeiten, Regeln und Kontrollen für den laufenden Betrieb eines digitalen Tools.
+  \item[Übergaberegel] Definierte Bedingungen, unter denen der Bot an einen Menschen abgibt (Komplexität, Wert, Emotion).
+  \item[Use Case] Klar abgegrenzter Anwendungsfall, in dem der Bot eingesetzt wird (FAQ, Termin, Leadqualifizierung etc.).
+  \item[Zielkonflikte (Bot)] Automatisierung vs.\ Kundenerlebnis, Kosten vs.\ Qualität, Datenqualität vs.\ Tempo, Vertriebskapazität vs.\ Übergabe, Skalierbarkeit vs.\ Kontrolle.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 14 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

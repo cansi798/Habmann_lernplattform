@@ -1,0 +1,611 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 16 - Lehrskript
+% Kartellrecht, Krisenmanagement & Zukunftssichere Plattformstrategien
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 16}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Kartellrecht, Krise \& Zukunftsstrategie}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 8 \textperiodcentered{} TAG 16 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 19.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Kartellrecht,\\Krise\\\& Zukunfts-\\strategie\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Plattformmacht verantwortungsvoll steuern -- fair,\\krisenfähig und zukunftssicher.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 16 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent An Tag 15 haben Sie Plattformrecht und Compliance als Architekturthemen verstanden. Heute geht der Blick einen Schritt weiter: \emph{Kartellrecht, Krisenmanagement und Zukunftssicherheit}. Marktmacht in Plattformen ist nicht per se schlecht -- aber sie muss verantwortungsvoll gestaltet werden. Krisen sind in Plattformmärkten kein Ausnahmefall, sondern eine planbare Eventualität. Und Zukunftssicherheit entsteht nicht durch Wachstum, sondern durch \emph{Resilienz}.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundprinzipien von Kartellrecht und fairem Wettbewerb in Plattformmärkten verstehen.
+  \item Risiken von Marktmacht, Diskriminierung, unfairen Plattformregeln und Abhängigkeiten einordnen.
+  \item Krisenarten in Plattformmärkten kennen.
+  \item Grundlagen zukunftssicherer Plattformstrategien verstehen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Wettbewerbs- und Kartellrechtsrisiken in konkreten Plattformmodellen identifizieren.
+  \item Faire Plattformregeln und transparente Governance-Maßnahmen ableiten.
+  \item Krisenszenarien bewerten und Gegenmaßnahmen entwickeln.
+  \item Strategien zur Resilienz, Vertrauenssicherung und langfristigen Wettbewerbsfähigkeit entwickeln.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Wettbewerbs- und Krisenmanagement als strategische Führungsaufgabe gestalten.
+  \item Entscheidungen unter Unsicherheit, öffentlichem Druck, regulatorischem Risiko und Wettbewerbsdruck treffen.
+  \item Verantwortung für faire Marktarchitektur, Plattformresilienz, Stakeholdervertrauen und Zukunftsfähigkeit übernehmen.
+  \item Vom reinen Risikowissen zur belastbaren Entscheidungsarchitektur gelangen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Eine reife Plattform behandelt drei Themen wie verbundene Gefäße: \emph{Kartellrecht} (Macht verantworten), \emph{Krisenmanagement} (auf das Unerwartete vorbereitet sein), \emph{Zukunftsstrategie} (Resilienz aufbauen). Wer eines davon vernachlässigt, gefährdet die anderen beiden. Senior-Level bedeutet, diese drei Themen \emph{gleichzeitig} zu denken.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------
+\section{Einstieg: Plattformmacht und ihre Schatten}
+
+Plattformen haben ein strukturelles Tempo zur Konzentration. Netzwerkeffekte, Datenvorteile, Wechselkosten -- alles wirkt in dieselbe Richtung: die größere Plattform wird größer. Was zunächst wie ein wirtschaftlicher Erfolg aussieht, kippt regelmäßig in ein regulatorisches und strategisches Problem. \quelle{Khan, 2017; Cusumano et al., 2019, Kap.~9}
+
+\subsection{Warum Plattformmacht regulatorisch sensibel ist}
+
+\begin{enumerate}
+  \item \fachbegriff{Marktzugangskontrolle.} Wer auf der Plattform nicht gefunden wird, existiert wirtschaftlich kaum. Plattform-Sperren wirken wie Marktausschluss.
+  \item \fachbegriff{Datenasymmetrie.} Die Plattform sieht das gesamte Markttreiben; einzelne Anbieter sehen nur ihren Ausschnitt. Datenvorteile übersetzen sich in Wettbewerbsvorteile.
+  \item \fachbegriff{Doppelrolle.} Plattform als Marktorganisator \emph{und} Marktteilnehmer ist klassisch kartellrechtssensibel.
+  \item \fachbegriff{Preis- und Konditionsmacht.} Wenn ein erheblicher Anteil der Anbieter wirtschaftlich auf die Plattform angewiesen ist, kann die Plattform Konditionen einseitig durchsetzen.
+\end{enumerate}
+
+\subsection{Drei Risikofelder im Schnelldurchgang}
+
+\begin{itemize}
+  \item \textbf{Diskriminierung.} Ungleichbehandlung vergleichbarer Anbieter -- bewusst oder unbewusst.
+  \item \textbf{Bevorzugung eigener Angebote.} Wenn die Plattform eigene Marken auf der Plattform anbietet, sind das ``Self-Preferencing''-Konstellationen, die heute besonders genau beobachtet werden.
+  \item \textbf{Exklusivität / Preisparität.} Wenn die Plattform Anbietern verbietet, anderswo günstiger anzubieten, entsteht ein klassischer wettbewerbsrechtlicher Konflikt.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Macht braucht Regeln}]
+Plattformmacht ist nicht per se ein Problem. Sie wird zum Problem, wenn sie ohne \emph{eigene Regelbindung} ausgeübt wird. Selbst auferlegte Regeln -- transparent, verlässlich, überprüfbar -- sind oft die beste Vorbeugung gegen externe Regulierung.
+\end{eselsbox}
+
+% --- 2. FAIRER WETTBEWERB -----------------------------------
+\section{Grundprinzipien fairen Wettbewerbs}
+
+Fairer Wettbewerb ist auf Plattformmärkten kein abstraktes Ideal -- er hat konkrete Bausteine, die in eigener Verantwortung gestaltbar sind.
+
+\subsection{Fünf Bausteine fairer Plattformregeln}
+
+\begin{enumerate}
+  \item \fachbegriff{Transparente Regeln.} Anbieter wissen, woran sie sind -- Zugangskriterien, Sperrregeln, Beschwerdewege.
+  \item \fachbegriff{Diskriminierungsfreier Zugang.} Wer die Kriterien erfüllt, bekommt Zugang -- nicht ``wer uns gefällt''.
+  \item \fachbegriff{Nachvollziehbare Rankinglogik.} Hauptfaktoren des Rankings sind beschrieben; Manipulationen / Schiebungen sind ausgeschlossen.
+  \item \fachbegriff{Faire Gebührenstrukturen.} Gebühren sind transparent, vergleichbar, ohne versteckte Konditionen.
+  \item \fachbegriff{Klare Beschwerdewege.} Anbieter haben einen dokumentierten Weg, sich zu beschweren, und können auf eine Antwort vertrauen.
+\end{enumerate}
+
+\subsection{Typische Fairness-Verletzungen}
+
+\begin{itemize}
+  \item Bevorzugung eigener Angebote im Ranking ohne Kennzeichnung.
+  \item Intransparente Sperrungen ohne Begründung und ohne Beschwerdeweg.
+  \item Unangemessene Gebühren, die einzelne Anbietergruppen unverhältnismäßig belasten.
+  \item Exklusive Bindungen, die Anbieter daran hindern, an anderer Stelle aktiv zu werden.
+  \item Datenvorteile, die ausgenutzt werden, um eigene Angebote zu Lasten der Anbieter zu pushen.
+  \item Preisparitätsklauseln, die Anbietern verbieten, anderswo günstiger anzubieten.
+  \item Manipulation von Rankings oder Bewertungen.
+\end{itemize}
+
+\subsection{Selbstregulierung als Strategie}
+
+Eine reife Plattform setzt sich oft selbst strenger Regeln, als gesetzlich vorgeschrieben sind. Drei Gründe: \quelle{Cusumano et al., 2019; Parker et al., 2016; Evans \& Schmalensee, 2016}
+
+\begin{itemize}
+  \item \textbf{Vorhersagbarkeit.} Wer die Regeln selbst macht, kennt sie -- und kann das Geschäft danach ausrichten.
+  \item \textbf{Vertrauen.} Selbstauferlegte Standards wirken nach außen als Qualitätssignal.
+  \item \textbf{Regulierungsvermeidung.} Wer selbst reguliert, reduziert den Druck, von außen reguliert zu werden.
+\end{itemize}
+
+\begin{merkbox}[Selbstregulierung -- Faustregel]
+Eine Plattform, die sich selbst klare Regeln gibt -- auch wo der Gesetzgeber sie nicht explizit fordert -- baut ein Wettbewerbsasset auf. Es heißt: ``Wir sind transparenter, fairer, klarer als der Wettbewerb -- prüfen Sie nach.'' Wer das glaubwürdig kann, hat einen schwer kopierbaren Vorteil.
+\end{merkbox}
+
+% --- 3. KARTELLRECHT-SENSITIVITÄTEN ------------------------
+\section{Kartellrecht: typische Sensibilitäten}
+
+Ohne in juristische Tiefe zu gehen, sind sechs Konstellationen besonders kartellrechtssensibel und sollten in jeder Plattform-Strategie aktiv adressiert sein.
+
+\subsection{Sechs Sensibilitäten}
+
+Diese Liste fasst zusammen, was in der internationalen Plattform-Kartellpraxis besonders intensiv diskutiert wird. \quelle{Khan, 2017; Eifert et al., 2021; OECD, 2019}
+
+\begin{enumerate}
+  \item \fachbegriff{Self-Preferencing.} Bevorzugung eigener Angebote auf der eigenen Plattform.
+  \item \fachbegriff{Datenmissbrauch.} Nutzung von Anbieterdaten zur eigenen Wettbewerbsvorteil-Bildung.
+  \item \fachbegriff{MFN-Klauseln (Most Favoured Nation).} Wenn Anbieter ihren günstigsten Preis verpflichtend auf der Plattform anbieten müssen.
+  \item \fachbegriff{Exklusivbindungen.} Verbot für Anbieter, auf Wettbewerbsplattformen aktiv zu sein.
+  \item \fachbegriff{Lock-in-Verstärkungen.} Maßnahmen, die das Verlassen der Plattform künstlich verteuern (Daten-Mitnahme blockieren, Schnittstellen schließen).
+  \item \fachbegriff{Kollusion über Daten.} Wenn die Plattform Preisinformationen so verbreitet, dass eine implizite Preisabstimmung der Anbieter entsteht.
+\end{enumerate}
+
+\subsection{Compliance-Schutzschilde}
+
+\begin{itemize}
+  \item Klare Trennung zwischen Plattformbetrieb und eigenen Angeboten.
+  \item Verfahren zur Sicherstellung, dass eigene Angebote keinen unfairen Vorteil im Ranking erhalten.
+  \item Datenrichtlinien, die regeln, welche Anbieterdaten wofür genutzt werden dürfen.
+  \item Vermeidung von Klauseln, die Anbieter wirtschaftlich an die Plattform binden.
+  \item Datenportabilität: Anbieter können ihre Daten exportieren und verlassen die Plattform ohne übermäßige Kosten.
+\end{itemize}
+
+\subsection{Wann eigene Angebote eingeführt werden dürfen}
+
+Eine besonders kritische Entscheidung: Soll die Plattform eigene Angebote auf der Plattform anbieten?
+
+\begin{itemize}
+  \item \textbf{Ja, wenn:} Es gibt eine erkennbare Versorgungslücke, die externe Anbieter nicht füllen; eigene Angebote werden klar gekennzeichnet; das Ranking ist neutral; die Daten anderer Anbieter werden nicht zur Optimierung der eigenen Angebote genutzt.
+  \item \textbf{Nein, wenn:} Eigene Angebote treten direkt in Konkurrenz zu wirtschaftlich abhängigen Anbietern; oder die Plattform besitzt eine Marktposition, die kartellrechtlich sensibel ist.
+\end{itemize}
+
+% --- 4. KRISENMANAGEMENT --------------------------------
+\section{Krisenmanagement auf Plattformmärkten}
+
+Krisen in Plattformmärkten verlaufen anders als in klassischen Branchen. Sie eskalieren schneller (Soziale Medien, Vergleichsportale), sie betreffen mehrere Stakeholdergruppen gleichzeitig (Anbieter, Kunden, Partner, Behörden), und sie hinterlassen langlebige Spuren im Vertrauen.
+
+\subsection{Typische Krisenarten}
+
+Krisenmanagement-Klassiker unterscheiden ähnliche Typen, mit jeweils unterschiedlichen Kommunikations- und Eskalationsmustern. \quelle{Coombs, 2014}
+
+\begin{enumerate}
+  \item \fachbegriff{Reputationskrise.} Öffentliche Kritik an Praktiken der Plattform, oft ausgelöst durch eine sichtbare Einzelhandlung (Sperrung, Ranking-Streit).
+  \item \fachbegriff{Datenpanne.} Datenleck, unbefugter Zugriff, Datenverlust.
+  \item \fachbegriff{Bewertungsmanipulation.} Aufgedeckte Manipulation -- entweder durch Anbieter oder durch die Plattform selbst.
+  \item \fachbegriff{Anbieterprotest.} Mehrere Anbieter beschweren sich öffentlich über die Plattform -- besonders gefährlich, wenn ein Branchenverband Stellung nimmt.
+  \item \fachbegriff{Regulatorische Prüfung.} Behörde leitet ein Verfahren ein.
+  \item \fachbegriff{Plattformausfall.} Technischer Ausfall, der das Geschäft der Anbieter beeinträchtigt.
+  \item \fachbegriff{Preiskrieg.} Wettbewerber setzt aggressive Preise, Anbieter wandern ab.
+  \item \fachbegriff{Vertrauensverlust.} Sukzessive Erosion des Vertrauens, oft ohne einzelnen Auslöser.
+  \item \fachbegriff{Abwanderung wichtiger Partner.} Strategischer Partner zieht sich zurück.
+\end{enumerate}
+
+\subsection{Wie Krisen verstärken}
+
+\begin{itemize}
+  \item Schnelle Verbreitung über Soziale Medien.
+  \item Mehrere Stakeholdergruppen verstärken sich gegenseitig (Anbieter beschweren sich, Kunden zweifeln, Medien greifen auf).
+  \item Geschwächtes Vertrauen senkt Aktivität, was die Krise sichtbar macht, was Vertrauen weiter senkt.
+  \item Wettbewerber nutzen die Situation aktiv.
+\end{itemize}
+
+\subsection{Architektur einer Krisenfähigkeit}
+
+Eine seriöse Krisenarchitektur enthält fünf Elemente:
+
+\begin{enumerate}
+  \item \fachbegriff{Frühwarnindikatoren.} Welche Daten / Beschwerden signalisieren, dass eine Krise im Anflug ist?
+  \item \fachbegriff{Szenarioplanung.} Welche Krisenarten sind plausibel? Was tun wir jeweils?
+  \item \fachbegriff{Verantwortlichkeiten.} Wer im Vorstand ist im Krisenfall verantwortlich? Wer im operativen Team?
+  \item \fachbegriff{Kommunikationswege.} Mit wem reden wir wann? Anbieter, Kunden, Partner, Medien, Behörden.
+  \item \fachbegriff{Eskalationsstufen.} Welche Stufen gibt es? Wer entscheidet, wann eine Stufe ausgelöst wird?
+\end{enumerate}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{F-S-V-K-E}]
+Fünf Elemente einer Krisenarchitektur:\\[2pt]
+\textbf{F}rühwarnindikatoren -- \textbf{S}zenarioplanung -- \textbf{V}erantwortlichkeiten -- \textbf{K}ommunikation -- \textbf{E}skalationsstufen.\\[2pt]
+\emph{Wer keine F-S-V-K-E hat, hat im Ernstfall fünf Probleme gleichzeitig.}
+\end{eselsbox}
+
+% --- 5. KRISENPROZESS --------------------------------
+\section{Der Krisenprozess: 72 Stunden bis Nachbereitung}
+
+Eine wirksame Krisenreaktion läuft in drei Phasen ab, die zeitlich klar getrennt sind und unterschiedliche Anforderungen haben.
+
+\subsection{Phase 1: 0--72 Stunden}
+
+\begin{itemize}
+  \item \textbf{Lagebild.} Was ist passiert? Welcher Stakeholder ist betroffen? Welche Reichweite hat die Krise?
+  \item \textbf{Sofortkommunikation.} Erstaussage, oft nüchtern und faktisch: ``Wir prüfen, wir kommunizieren, wir nehmen ernst''.
+  \item \textbf{Operative Maßnahmen.} Wenn etwas akut zu reparieren ist (Datenleck schließen, Sperrung zurücknehmen, technischen Vorfall beheben).
+  \item \textbf{Behörden- und Medienkontakt.} Falls relevant.
+  \item \textbf{Interne Information.} Mitarbeitende wissen, was los ist -- nichts ist gefährlicher als interne Information aus der Presse.
+\end{itemize}
+
+\subsection{Phase 2: Tage 3--14}
+
+\begin{itemize}
+  \item \textbf{Vertiefte Kommunikation.} Detailliertere Stellungnahmen, Maßnahmen-Beschreibungen.
+  \item \textbf{Vertrauensaufbau.} Sichtbare Maßnahmen, die das Vertrauen wiederherstellen sollen.
+  \item \textbf{Stakeholder-Dialog.} Anbieter, Verbände, Partner, kritische Kunden.
+  \item \textbf{Maßnahmenpaket.} Konkrete Verbesserungen, die mit Frist und Verantwortlichen veröffentlicht werden.
+\end{itemize}
+
+\subsection{Phase 3: Wochen bis Monate}
+
+\begin{itemize}
+  \item \textbf{Strukturelle Verbesserungen.} Governance, Prozesse, Tools, Schulungen.
+  \item \textbf{Nachhaltige Kommunikation.} Wiederholt sichtbar machen, dass die Verbesserungen wirken.
+  \item \textbf{Lessons Learned.} Internes Review: Was hat funktioniert? Was nicht?
+  \item \textbf{Frühwarnung verbessert.} Welche Signale hätten wir früher erkennen können?
+\end{itemize}
+
+\begin{merkbox}[Krisenkommunikation -- Faustregel]
+In den ersten 72 Stunden gilt: \emph{schneller als perfekt}. Eine nüchterne, ehrliche Erstaussage ist besser als ein perfektes Statement zwei Tage später. In den folgenden Wochen gilt das Umgekehrte: \emph{nachhaltig statt schnell}. Vertrauen wiederaufzubauen dauert länger, als es zu verlieren.
+\end{merkbox}
+
+% --- 6. RESILIENZ ---------------------------------
+\section{Resilienz: was Plattformen krisenfest macht}
+
+\fachbegriff{Resilienz} ist nicht ``Krisenfreiheit''. Es ist die Fähigkeit, Krisen zu verarbeiten, ohne dass das Geschäftsmodell zerbricht.
+
+\subsection{Sieben Resilienzfaktoren}
+
+In Anlehnung an die Logik antifragiler Systeme: nicht nur überleben, sondern aus Belastung lernen und gestärkt herausgehen. \quelle{Taleb, 2012; Cusumano et al., 2019}
+
+\begin{enumerate}
+  \item \fachbegriff{Transparente Governance.} Bei der ersten Krise wird sichtbar, ob Regeln und Prozesse stabil sind oder ob sie improvisiert werden.
+  \item \fachbegriff{Diversifizierte Partnerstruktur.} Kein Partner dominiert -- der Ausfall eines Partners gefährdet nicht das System.
+  \item \fachbegriff{Stabile Datenprozesse.} Datenqualität, Backups, Monitoring, Reporting laufen verlässlich.
+  \item \fachbegriff{Monitoring und Frühwarnung.} Probleme werden erkannt, bevor sie eskalieren.
+  \item \fachbegriff{Klare Compliance-Verantwortung.} In der Krise weiß jeder, wer entscheidet, kommuniziert, verantwortet.
+  \item \fachbegriff{Vertrauenswürdige Kommunikation.} Die Plattform hat in normalen Zeiten Glaubwürdigkeit aufgebaut, auf die sie in der Krise zurückgreifen kann.
+  \item \fachbegriff{Lernfähige Organisation.} Aus jedem Vorfall werden strukturelle Konsequenzen gezogen.
+\end{enumerate}
+
+\subsection{Strategische Differenzierungen}
+
+Resiliente Plattformen unterscheiden sich von ihren weniger resilienten Wettbewerbern in vier strukturellen Dimensionen:
+
+\begin{itemize}
+  \item \textbf{Datenstrategie.} Resiliente Plattformen behandeln Daten als Vertrauensgut, nicht nur als Asset.
+  \item \textbf{Partnerstrategie.} Resiliente Plattformen halten keinen einzelnen Partner über 15--20\,\% Anteil.
+  \item \textbf{Kundenkonzentration.} Resiliente Plattformen sind nicht von wenigen Großkunden abhängig.
+  \item \textbf{Geografische Streuung.} Resiliente Plattformen sind nicht auf einen einzelnen regulatorischen Raum konzentriert.
+\end{itemize}
+
+% --- 7. ZUKUNFTSSICHERE STRATEGIE -------------------------
+\section{Zukunftssichere Plattformstrategie}
+
+Zukunftssicherheit entsteht nicht durch Wachstum, sondern durch \emph{Anpassungsfähigkeit}. Vier strategische Dimensionen sind besonders entscheidend.
+
+\subsection{Vier Dimensionen}
+
+Diese Dimensionen decken die wichtigsten Veränderungsmuster ab, an denen sich Plattformen langfristig zu beweisen haben. \quelle{Parker et al., 2016; Shapiro \& Varian, 1999}
+
+\begin{enumerate}
+  \item \fachbegriff{Regulatorische Anpassungsfähigkeit.} Die Plattform kann auf neue regulatorische Anforderungen schnell reagieren, ohne ihr Geschäftsmodell umzubauen.
+  \item \fachbegriff{Wettbewerbsdifferenzierung.} Die Plattform hat eine klare, kommunizierbare Differenzierung gegenüber Wettbewerbern -- nicht nur Preis.
+  \item \fachbegriff{Stakeholdervertrauen.} Anbieter, Kunden, Partner, Mitarbeitende, Behörden vertrauen der Plattform -- nicht weil sie müssen, sondern weil sie sich darauf verlassen können.
+  \item \fachbegriff{Technische Anpassungsfähigkeit.} Architektur, Daten, Tools sind so gebaut, dass sie sich mit den Geschäftsanforderungen weiterentwickeln können.
+\end{enumerate}
+
+\subsection{Was Zukunftssicherheit nicht ist}
+
+\begin{itemize}
+  \item Nicht das Verfolgen jedes Technologietrends.
+  \item Nicht das Maximieren von Wachstum.
+  \item Nicht das Minimieren von Compliance-Kosten.
+  \item Nicht das Erreichen von Marktdominanz \emph{per se} -- Dominanz kann selbst zur Schwachstelle werden.
+\end{itemize}
+
+\subsection{Zukunftssichere Plattformen erkennen}
+
+Drei Indikatoren, an denen sich zukunftssichere Plattformen erkennen lassen:
+
+\begin{itemize}
+  \item Sie sind beim ersten Vorfall \emph{nicht} überrascht -- sie haben das Szenario in irgendeiner Form vorgedacht.
+  \item Sie haben mehrere Wettbewerbsvorteile \emph{gleichzeitig} -- nicht nur Reichweite oder nur Preis.
+  \item Ihre Roadmap berücksichtigt explizit regulatorische und gesellschaftliche Entwicklungen.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{R-W-S-T}]
+Vier Dimensionen der Zukunftssicherheit:\\[2pt]
+\textbf{R}egulatorische Anpassungsfähigkeit -- \textbf{W}ettbewerbsdifferenzierung -- \textbf{S}takeholdervertrauen -- \textbf{T}echnische Anpassungsfähigkeit.\\[2pt]
+\emph{Vier Dimensionen, in denen Plattformen \emph{nachhaltig} gewinnen -- nicht nur kurzfristig.}
+\end{eselsbox}
+
+% --- 8. MANAGEMENT-PERSPEKTIVE ----------------------
+\section{Management-Perspektive: Zielkonflikte und Senior-Level-Denken}
+
+Wir schließen den 16-tägigen Kurs mit der Sicht, die sich durch alle Tage zieht: Senior-Level-Management von Plattformen bedeutet, mehrere Zielkonflikte \emph{gleichzeitig} zu balancieren.
+
+\subsection{Sechs zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Marktmacht vs.\ Fairness.} Marktmacht ist wirtschaftlich attraktiv -- und regulatorisch sensibel. Sie zu nutzen heißt nicht, sie auszunutzen.
+  \item \textbf{Wachstum vs.\ Resilienz.} Schnelles Wachstum erhöht Vulnerabilität. Resilienz braucht Investition, die kurzfristig wie ``Bremse'' wirkt.
+  \item \textbf{Eigeninteresse vs.\ Stakeholderfairness.} Die Plattform hat eigene Interessen -- und Verantwortung gegenüber Anbietern, Kunden, Partnern.
+  \item \textbf{Kurzfrist vs.\ Langfrist.} Kurzfristige Umsatzentscheidungen können langfristig Vertrauensschäden verursachen.
+  \item \textbf{Geschwindigkeit vs.\ Sorgfalt in Krisen.} In der Krise muss schnell entschieden werden -- ohne Sorgfaltspflichten zu verletzen.
+  \item \textbf{Investition in Resilienz vs.\ Wachstumsinvestition.} Budget für Krisenarchitektur ist Budget, das nicht in Wachstum fließt.
+\end{enumerate}
+
+\subsection{Senior-Level-Entscheidungslogik}
+
+Die wichtigsten Fragen, die ein Chief Platform Officer / Chief Risk Officer regelmäßig stellt:
+
+\begin{itemize}
+  \item Wann wird Plattformmacht zum strategischen Risiko -- nicht nur zum Asset?
+  \item Welche Fairnessregel schützt langfristig den Unternehmenswert -- über Compliance hinaus?
+  \item Welche Krise könnte die Plattform am stärksten beschädigen -- und sind wir darauf vorbereitet?
+  \item Welche Entscheidung müsste ich persönlich verantworten -- nicht delegieren?
+\end{itemize}
+
+\subsection{Bewusste Entscheidung gegen Wachstum}
+
+Eine besonders charakteristische Senior-Level-Handlung ist die bewusste Entscheidung \emph{gegen} eine kurzfristig attraktive Wachstums-, Preis-, Daten- oder Eigenangebotsstrategie, weil sie das langfristige System gefährden würde. Solche Entscheidungen sind in der Regel nicht populär; aber sie sind das, was eine Plattform von einer Vermögensvernichtungsmaschine unterscheidet.
+
+\subsection{Schluss: was Sie aus 16 Tagen mitnehmen}
+
+\begin{itemize}
+  \item Digitaler Vertrieb und Plattformökonomie sind \emph{Architekturentscheidungen}, keine Toolauswahlen.
+  \item Marktanalyse, Plattformwahl, Monetarisierung, Skalierung, Transformation und Compliance sind \emph{verbundene Gefäße}.
+  \item Entscheidungen unter Unsicherheit gehören zum Geschäft -- nicht trotz, sondern wegen der Datenmenge.
+  \item Verantwortung lässt sich nicht delegieren -- weder an Tools, an KI noch an Berater.
+  \item Senior-Level-Denken erkennt Zielkonflikte, balanciert sie und macht die getroffene Entscheidung transparent.
+\end{itemize}
+
+\subsection{Brückenschlag zu den vorangegangenen 15 Tagen}
+
+\begin{itemize}
+  \item Tag 1--2: Grundlagen digitaler Vertriebsstrategien und Plattformmodelle -- die Sprache.
+  \item Tag 3--6: Plattformwahl, Kanal-Strategie, Marktpositionierung -- das Wo und Wie.
+  \item Tag 7--9: Aufbau eigener Plattformen, Lead-Generierung -- das Selbermachen.
+  \item Tag 10--12: Performance-Marketing, Monetarisierung, Revenue-Architektur -- die Wirtschaft.
+  \item Tag 13--14: Digitale Transformation, KI, Chatbots, ROI -- die Werkzeuge.
+  \item Tag 15--16: Rechtssicherheit, Wettbewerb, Krise, Zukunft -- die Verantwortung.
+\end{itemize}
+
+\noindent\emph{Diese sechs Themenblöcke gehören zusammen.} Wer den Vertrieb nur als Kanal denkt, übersieht die Architektur. Wer die Plattform nur als Geschäftsmodell denkt, übersieht die Verantwortung. Wer die Verantwortung nur als Compliance denkt, übersieht den Wettbewerbsvorteil.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{M-W-E-K-G-I}]
+Die sechs Zielkonflikte des Tages zum Memorieren:\\[2pt]
+\textbf{M}arktmacht vs.\ Fairness -- \textbf{W}achstum vs.\ Resilienz -- \textbf{E}igeninteresse vs.\ Stakeholder -- \textbf{K}urzfrist vs.\ Langfrist -- \textbf{G}eschwindigkeit vs.\ Sorgfalt -- \textbf{I}nvestition in Resilienz vs.\ Wachstum.\\[2pt]
+\emph{Sechs Konflikte, in denen die Plattform-Führung aktiv positioniert.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 16 -- und den Kurs]
+Plattformen, die in fünf Jahren noch relevant sind, haben drei Eigenschaften gleichzeitig: sie sind \emph{fair} (auch wenn sie es nicht müssten), sie sind \emph{krisenvorbereitet} (auch wenn die Krise nicht in Sicht ist), und sie sind \emph{anpassungsfähig} (auch wenn das aktuelle Geschäft läuft). Wer das ohne Pathos umsetzt, baut nicht nur ein Geschäft -- er baut ein \emph{tragfähiges Marktasset}.
+\end{merkbox}
+
+% --- 9. LITERATUR ------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Coombs, W.\,T. (2014).] \emph{Ongoing crisis communication: Planning, managing, and responding} (4.\ Aufl.). Sage.
+  \item[Cusumano, M.\,A., Gawer, A., \& Yoffie, D.\,B. (2019).] \emph{The business of platforms: Strategy in the age of digital competition, innovation, and power}. HarperBusiness.
+  \item[Eifert, M., Metzger, A., Schweitzer, H., \& Wagner, G. (2021).] Taming the giants: The DMA/DSA package. \emph{Common Market Law Review, 58}(4), 987--1028.
+  \item[Evans, D.\,S., \& Schmalensee, R. (2016).] \emph{Matchmakers: The new economics of multisided platforms}. Harvard Business Review Press.
+  \item[Khan, L.\,M. (2017).] Amazon's antitrust paradox. \emph{Yale Law Journal, 126}(3), 710--805.
+  \item[OECD (2019).] \emph{An introduction to online platforms and their role in the digital transformation}. OECD Publishing. \href{https://doi.org/10.1787/53e5f593-en}{https://doi.org/10.1787/53e5f593-en}
+  \item[Parker, G.\,G., Van Alstyne, M.\,W., \& Choudary, S.\,P. (2016).] \emph{Platform revolution: How networked markets are transforming the economy -- and how to make them work for you}. W.\,W.\ Norton.
+  \item[Shapiro, C., \& Varian, H.\,R. (1999).] \emph{Information rules: A strategic guide to the network economy}. Harvard Business School Press.
+  \item[Taleb, N.\,N. (2012).] \emph{Antifragile: Things that gain from disorder}. Random House.
+\end{description}
+
+% --- 10. GLOSSAR -------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Abwanderung (Partner)] Strategischer Rückzug eines Schlüsselpartners von der Plattform.
+  \item[Anpassungsfähigkeit] Fähigkeit der Plattform, auf regulatorische, technologische oder Marktveränderungen schnell zu reagieren.
+  \item[Bevorzugung eigener Angebote] Self-Preferencing -- kartellrechtlich sensible Bevorzugung der eigenen Produkte im Ranking.
+  \item[Bewertungsmanipulation] Aufgedeckte oder vermutete Manipulation von Bewertungen -- ein klassischer Krisen-Trigger.
+  \item[Diskriminierungsfreier Zugang] Gleiche Behandlung vergleichbarer Anbieter durch die Plattform.
+  \item[Eskalationsstufe] Definierte Stufen in einer Krise mit jeweils anderen Entscheidungsrechten und Kommunikationswegen.
+  \item[Exklusivbindung] Verbot für Anbieter, auf Wettbewerbsplattformen aktiv zu sein -- kartellrechtlich sensibel.
+  \item[Frühwarnindikatoren] Daten / Signale, die das Aufkommen einer Krise erkennbar machen.
+  \item[Geografische Streuung] Resilienzfaktor: Konzentration auf einen regulatorischen Raum vermeiden.
+  \item[Kartellrecht] Recht zur Sicherung fairer Marktbedingungen, besonders gegen Marktmachtmissbrauch.
+  \item[Kollusion über Daten] Implizite Preisabstimmung durch von der Plattform verbreitete Daten.
+  \item[Krisenarchitektur] Vorhandene Strukturen aus Frühwarnung, Szenarien, Verantwortlichkeiten, Kommunikation und Eskalation.
+  \item[Krisenarten] Reputationskrise, Datenpanne, Bewertungsmanipulation, Anbieterprotest, regulatorische Prüfung, Plattformausfall, Preiskrieg, Vertrauensverlust, Partnerabwanderung.
+  \item[Lock-in-Verstärkung] Maßnahme, die das Verlassen der Plattform künstlich verteuert.
+  \item[Marktmacht] Strukturelle Position einer Plattform, die wesentliche Marktbedingungen beeinflussen kann.
+  \item[MFN-Klausel (Most Favoured Nation)] Klausel, die Anbieter verpflichtet, ihren günstigsten Preis auf der Plattform anzubieten.
+  \item[Monitoring] Kontinuierliche Beobachtung von Kennzahlen, Beschwerden und Stimmungslagen.
+  \item[Plattformausfall] Technischer Ausfall, der das Geschäft der Anbieter beeinträchtigt.
+  \item[Preiskrieg] Aggressive Preisaktion eines Wettbewerbers, die Anbieter abwandern lässt.
+  \item[Reputationskrise] Öffentliche Kritik an Praktiken der Plattform.
+  \item[Resilienz] Fähigkeit, Krisen zu verarbeiten, ohne dass das Geschäftsmodell zerbricht.
+  \item[Resilienzfaktoren] Governance-Transparenz, Partnerdiversifikation, Datenprozesse, Monitoring, Compliance-Verantwortung, Kommunikation, Lernfähigkeit.
+  \item[Selbstregulierung] Selbst auferlegte Standards, die über gesetzliche Mindestanforderungen hinausgehen.
+  \item[Self-Preferencing] Bevorzugung eigener Angebote auf der eigenen Plattform.
+  \item[Stakeholdervertrauen] Vertrauen aller Marktteilnehmer (Anbieter, Kunden, Partner, Behörden, Mitarbeitende) in die Plattform.
+  \item[Vertrauensverlust] Schleichende Erosion des Vertrauens, oft ohne einzelnen Auslöser.
+  \item[Zielkonflikte (Kartell / Krise / Zukunft)] Marktmacht vs.\ Fairness, Wachstum vs.\ Resilienz, Eigeninteresse vs.\ Stakeholder, Kurzfrist vs.\ Langfrist, Geschwindigkeit vs.\ Sorgfalt, Investition in Resilienz vs.\ Wachstumsinvestition.
+  \item[Zukunftssicherheit] Anpassungsfähigkeit der Plattform an regulatorische, wettbewerbliche und gesellschaftliche Entwicklungen.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 16 von 16 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

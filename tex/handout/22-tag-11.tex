@@ -1,0 +1,647 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 11 - Lehrskript
+% Plattform-Monetarisierung, Subscription-Modelle & Partnernetzwerke
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 11}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Monetarisierung, Subscription \& Partner}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 6 \textperiodcentered{} TAG 11 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 12.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Plattform-\\Monetarisierung\\\& Partner-\\netzwerke\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Erlösmodelle bauen, Abo-Strategien entwickeln,\\Partnernetzwerke als Wachstumshebel steuern.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 11 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Eine Plattform, die nicht profitabel ist, ist auf Dauer keine Plattform, sondern ein Vermögensvernichter. Heute lernen Sie, wie Plattformen Geld verdienen -- aber auch, wie sie es \emph{nicht} verdienen sollten: über zu frühe oder zu aggressive Monetarisierung, die Netzwerkeffekte beschädigt. Im Mittelpunkt stehen drei Werkzeuge: Plattform-Erlösmodelle, Subscription-Architektur und Partnernetzwerke.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundlagen der Plattform-Monetarisierung verstehen.
+  \item Verschiedene Plattform-Geschäftsmodelle unterscheiden.
+  \item Subscription-Modelle, Pricing-Logiken und Tiers einordnen.
+  \item Customer Lifetime Value (CLV) als Steuerungsgröße verstehen.
+  \item Partnernetzwerke, Affiliate-Programme und strategische Allianzen kennen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Monetarisierungsmodelle auf konkrete Plattformen übertragen.
+  \item Abo-Modelle mit Leistungsstufen, Preisen und Nutzenversprechen entwickeln.
+  \item CLV, Akquisekosten und Kundenbindung in Entscheidungen einbeziehen.
+  \item Partner- und Affiliate-Ansätze strategisch bewerten.
+  \item Zielkonflikte zwischen Wachstum, Zahlungsbereitschaft, Kundennutzen, Marge und Partnerabhängigkeit analysieren.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Monetarisierungsarchitektur als strategische Führungsentscheidung gestalten.
+  \item Pricing- und Subscription-Entscheidungen unter Unsicherheit treffen.
+  \item Verantwortung für Umsatzmodell, Kundenwert, Partnerökosystem und Skalierbarkeit übernehmen.
+  \item Vom reinen Erlösmodell zur langfristigen Plattform-Wertarchitektur denken.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Plattform-Monetarisierung ist nicht das Anbringen einer Gebühr auf eine existierende Plattform. Sie ist die Gestaltung des \emph{Wertfangens} -- wie viel des erzeugten Werts darf an die Plattform fließen, ohne dass Netzwerkeffekte, Vertrauen oder Fairness Schaden nehmen? Diese Frage trennt einen Marktplatz, der trägt, von einem, der seine eigenen Anbieter ausquetscht.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Wertschöpfung und Wertfang trennen}
+
+In der Plattform-Ökonomie ist Wertschöpfung (Value Creation) und Wertfang (Value Capture) selten dasselbe. Die Plattform \emph{ermöglicht} Wert -- zwischen Anbieter und Nachfrager -- aber wie viel davon sie \emph{erfasst}, ist eine eigenständige Entwurfsfrage. \quelle{Iyer \& Singh, 2018}
+
+\subsection{Wer schafft Wert, wer fängt ihn ein?}
+
+\begin{itemize}
+  \item \fachbegriff{Anbieter} schaffen Wert: die Leistung, die der Kunde am Ende erhält.
+  \item \fachbegriff{Nachfrager} schaffen Wert: die Zahlungsbereitschaft, die das System erst speist.
+  \item \fachbegriff{Plattform} schafft Wert: durch Reichweite, Vertrauen, Matching, Datenintelligenz, Abwicklung.
+  \item \fachbegriff{Partner} schaffen Wert: durch Reichweite, Spezialwissen, Servicequalität.
+\end{itemize}
+
+Wer im Plattformdesign Wertschöpfung und Wertfang verwechselt, kommt zu einem von zwei typischen Fehlern: \emph{zu wenig fangen} (Plattform wird nicht profitabel) oder \emph{zu viel fangen} (Anbieter wandern ab, Nachfrager verlieren Vertrauen).
+
+\subsection{Drei Marktphasen, drei Logiken}
+
+Monetarisierung ist nicht in jeder Plattform-Phase identisch sinnvoll. Drei Phasen sind besonders prägend: \quelle{Parker et al., 2016, Kap.~6--7}
+
+\begin{enumerate}
+  \item \fachbegriff{Aufbauphase.} Kritische Masse muss erreicht werden. Aggressive Monetarisierung würde Anbieter abschrecken. Häufiger Ansatz: stark subventionierte Seite, freie Kernnutzung, ggf.\ Freemium.
+  \item \fachbegriff{Wachstumsphase.} Netzwerkeffekte tragen, das System wird differenzierbar. Monetarisierung lässt sich gestuft einführen -- Premium-Funktionen, bezahlte Sichtbarkeit, Subscription-Tiers.
+  \item \fachbegriff{Reifephase.} Plattform ist relevant, Wettbewerb nimmt zu. Monetarisierung wird verfeinert -- mehrere Erlösströme, Partnernetzwerke, eventuell eigene Service- und Datenangebote.
+\end{enumerate}
+
+\subsection{Zu früh vs.\ zu spät}
+
+\begin{itemize}
+  \item \textbf{Zu frühe Monetarisierung.} Risiko: geringes Wachstum, schwächere Netzwerkeffekte, niedrigere Akzeptanz, Konkurrent gewinnt.
+  \item \textbf{Zu späte Monetarisierung.} Risiko: dauerhafte Unprofitabilität, abhängig von Finanzierungsrunden, fehlende Wertlogik, Investoren werden nervös.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Phase vor Preis}]
+Plattform-Monetarisierung folgt der \emph{Marktphase}, nicht dem Cashflow-Bedarf. Wer Preise einführt, weil die Geschäftsführung schnell Umsatz braucht, beschädigt oft genau die Mechanik, die später hohe Umsätze ermöglichen würde. \emph{Phase vor Preis -- nicht Preis vor Phase.}
+\end{eselsbox}
+
+% --- 2. PLATTFORM-ERLÖSMODELLE ------------------------------------------
+\section{Plattform-Erlösmodelle: zehn Hebel}
+
+Wer ``Plattform-Monetarisierung'' sagt, meint nicht ein einzelnes Modell, sondern eine Kombination aus mehreren Hebeln. Die zehn häufigsten:
+
+\subsection{Die zehn Hebel im Überblick}
+
+\begin{enumerate}
+  \item \fachbegriff{Provisionen / Transaktionsgebühren.} Anteil pro abgewickelter Transaktion (Marktplatz-Standard). Typisch 5--30\,\%. \quelle{Hagiu \& Wright, 2015}
+  \item \fachbegriff{Listing-Gebühren.} Pauschale für die Listung eines Angebots, unabhängig von Verkauf.
+  \item \fachbegriff{Werbung.} Sponsored Listings, Banner, gezielte Platzierungen.
+  \item \fachbegriff{Premium-Platzierung.} Bezahlte Sichtbarkeit über dem regulären Ranking.
+  \item \fachbegriff{Subscription.} Wiederkehrende Gebühr pro Anbieter oder Nachfrager (monatlich / jährlich). \quelle{Tzuo \& Weisert, 2018}
+  \item \fachbegriff{Freemium.} Kostenfreie Basisnutzung, kostenpflichtige Premium-Stufe. \quelle{Anderson, 2009; Kumar, 2014}
+  \item \fachbegriff{Datenservices.} Vermarktung anonymisierter, aggregierter Daten oder spezialisierter Insights.
+  \item \fachbegriff{Servicepakete.} Onboarding, Beratung, Schulung, individuelle Anpassungen.
+  \item \fachbegriff{Partnergebühren.} Gebühren von Partner-Plattformen, Integrationen, Affiliate-Anbindung.
+  \item \fachbegriff{Erfolgsbeteiligungen.} Anteil am erzeugten Geschäftsergebnis (selten, aber bei Vermittlungsplattformen relevant).
+\end{enumerate}
+
+\subsection{Direkt vs.\ indirekt}
+
+Ein hilfreicher Querschnitt:
+
+\begin{itemize}
+  \item \textbf{Direkte Monetarisierung.} Die Plattform verlangt Gebühren direkt von Marktteilnehmern (Provision, Subscription, Listing).
+  \item \textbf{Indirekte Monetarisierung.} Die Plattform verdient durch Dritte (Werbung, Datenservices, Affiliate).
+\end{itemize}
+
+Reine Werbemodelle gelten heute als instabil -- sie skalieren schlecht im B2B, sind regulatorisch verwundbar (Datenschutz) und produzieren oft Zielkonflikte mit den eigentlichen Nutzern.
+
+\subsection{Welcher Hebel wann?}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXX@{}}
+\toprule
+Phase & Stark passende Hebel & Schwach passende Hebel \\
+\midrule
+Aufbau & Freemium, kostenlose Basis, einzelne Provisionen & breite Subscription, hohe Listing-Gebühren \\
+Wachstum & Subscription-Tiers, Premium-Platzierung, Partnergebühren & aggressive Provisionserhöhung \\
+Reife & Datenservices, Servicepakete, Erfolgsbeteiligung, eigene Services & ``mehr Werbung'' als Hauptstrategie \\
+\bottomrule
+\end{tabularx}
+
+% --- 3. SUBSCRIPTION-MODELLE -----------------------------------------------
+\section{Subscription-Modelle: Pricing, Tiers, Logik}
+
+Subscription ist nicht ``derselbe Preis monatlich''. Es ist ein Architekturmodell mit klaren Bestandteilen: wiederkehrender Umsatz, planbare Bindung, gestaffelte Leistungen, klare Zahlungsbereitschaftslogik. \quelle{Tzuo \& Weisert, 2018}
+
+\subsection{Warum Subscription -- ökonomisch}
+
+\begin{itemize}
+  \item \fachbegriff{Recurring Revenue.} Planbare wiederkehrende Erlöse -- senken die Volatilität, verbessern Investorenbewertung.
+  \item \fachbegriff{Bindung.} Subscription erzeugt Wechselkosten -- nicht primär finanziell, sondern in Form von Workflow-Integration.
+  \item \fachbegriff{Upselling.} Erstabschluss zu Basic, Aufstieg zu Professional / Enterprise -- der CLV steigt mit dem Tier.
+  \item \fachbegriff{Datenqualität.} Bezahlende Subscriber erzeugen reichere Nutzungsdaten als anonyme Besucher.
+\end{itemize}
+
+\subsection{Pricing-Ansätze}
+
+Sechs Logiken sind im B2B-Plattformbereich besonders verbreitet: \quelle{Shapiro \& Varian, 1999, Kap.~3}
+
+\begin{enumerate}
+  \item \textbf{Nutzungsbasiert (usage-based).} Bezahlt wird nach Volumen -- API-Calls, Transaktionen, GB, aktive Nutzer. Vorteile: skaliert mit Wert; Nachteile: schwer planbar für Kunden.
+  \item \textbf{Wertbasiert (value-based).} Preis spiegelt den erzeugten Mehrwert -- nicht die Kosten. Schwer einzuführen, aber lukrativ.
+  \item \textbf{Rollenbasiert (per-seat).} Pro Nutzer / Account. Klassisch im SaaS-Bereich.
+  \item \textbf{Funktionsbasiert.} Bestimmte Funktionen sind nur in höheren Tiers verfügbar.
+  \item \textbf{Transaktionsbasiert.} Subscription plus Provision pro Transaktion (Mischmodell).
+  \item \textbf{Gestaffelt (tiered).} Klare Pakete: Basic, Professional, Enterprise -- jeweils mit klar abgegrenztem Leistungsumfang.
+\end{enumerate}
+
+\subsection{Tier-Architektur}
+
+Eine professionelle Tier-Architektur folgt drei Regeln: \quelle{Tzuo \& Weisert, 2018; Kumar, 2014}
+
+\begin{itemize}
+  \item \textbf{Klare Differenzierung.} Jedes Tier muss für seine Zielgruppe \emph{eindeutig} besser passen als die anderen. Wenn Kunden ``zwischen'' Tieren schwanken, ist die Architektur zu unscharf.
+  \item \textbf{Upgrade-Pfad.} Der Weg von Basic zu Professional muss \emph{logisch wachsen}, nicht ein Sprung in alle Richtungen.
+  \item \textbf{Enterprise als Anker.} Ein hochpreisiges Enterprise-Tier ankert die Wahrnehmung der unteren Tiers -- Professional wirkt im Vergleich ``vernünftig''.
+\end{itemize}
+
+\subsection{Beispiel: B2B-Plattform-Tiers}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Tier & Typische Leistungen \\
+\midrule
+Basic / Free & Grundprofil, begrenzte Sichtbarkeit, Basis-Reporting \\
+Professional & Erweiterte Sichtbarkeit, mehr Anfragen, Branchen-Filter, einfache Integrationen \\
+Premium & Priorisierte Sichtbarkeit, qualifizierte Lead-Übergabe, erweitertes Reporting, Multi-User \\
+Enterprise & Individuell verhandelt, SLAs, API-Zugang, Datenexport, dedizierter Account-Manager \\
+\bottomrule
+\end{tabularx}
+
+\begin{merkbox}[Tier-Test]
+Wenn Sie das eigene Tier-Modell aufzeichnen und einen Bestandskunden nicht eindeutig einem Tier zuordnen können -- nicht im Verkaufsmodus, sondern im Beobachtungsmodus -- ist die Architektur zu unscharf. Saubere Tiers \emph{passen} zu klar erkennbaren Kundensegmenten.
+\end{merkbox}
+
+% --- 4. FREEMIUM -----------------------------------------------------
+\section{Freemium und Free-Logik}
+
+Freemium ist ein eigenständiges Pricing-Konstrukt: \emph{kostenlose} Basisnutzung, kostenpflichtige Premium-Stufe. Es funktioniert nur unter spezifischen Bedingungen -- und scheitert oft, wenn es als Universalansatz eingesetzt wird. \quelle{Anderson, 2009; Kumar, 2014}
+
+\subsection{Wann Freemium trägt}
+
+\begin{itemize}
+  \item Hohe Grenznutzerkosten sind \emph{niedrig} -- ein weiterer kostenloser Nutzer kostet kaum etwas.
+  \item Es gibt einen klaren Conversion-Pfad zu zahlenden Tiers (Funktion, Limit, Volumen).
+  \item Die kostenlose Stufe erzeugt selbst Wert (Netzwerkeffekt, Empfehlung, Datenqualität).
+  \item Die Conversion Rate von Free zu Paid liegt typischerweise zwischen 2--10\,\%. Darunter trägt es nicht.
+\end{itemize}
+
+\subsection{Wann Freemium scheitert}
+
+\begin{itemize}
+  \item Wenn die kostenlose Stufe ``zu gut'' ist -- niemand zahlt.
+  \item Wenn die kostenlose Stufe ``zu schlecht'' ist -- niemand bleibt lange genug, um den Wert zu sehen.
+  \item Wenn das Produkt erklärungsbedürftig ist und Free-Nutzer ohne Beratung absteigen.
+  \item Wenn die Free-Stufe Servicekosten verursacht (Support, Hosting), die nicht durch Paid-Conversion gedeckt werden.
+\end{itemize}
+
+\subsection{Freemium vs.\ Trial}
+
+\begin{itemize}
+  \item \textbf{Freemium.} Dauerhaft kostenlos in der Basisversion.
+  \item \textbf{Trial.} Vollumfänglich, aber zeitlich befristet (typisch 14--30 Tage).
+\end{itemize}
+
+Trials passen besser zu komplexen, vollwertigen Produkten; Freemium passt besser zu modularen Plattformen mit klarer Funktions-Stufung.
+
+% --- 5. CUSTOMER LIFETIME VALUE ----------------------------------------
+\section{Customer Lifetime Value als Steuerungsgröße}
+
+CLV ist nicht eine Marketingmetrik. Es ist eine \emph{Investitionsgröße}. Es sagt, wie viel man für die Gewinnung eines Kunden ausgeben darf, ohne strukturell Geld zu verlieren. \quelle{Kumar \& Reinartz, 2018}
+
+\subsection{Einfache CLV-Logik}
+
+Im einfachsten Modell gilt:
+
+\begin{itemize}
+  \item CLV = durchschnittlicher Auftragswert $\times$ Bestellfrequenz $\times$ Kundenlebensdauer $\times$ Deckungsbeitragsquote.
+  \item Im Subscription-Modell oft: CLV $\approx$ ARPU $/$ Churn Rate, wobei ARPU = Average Revenue per User.
+\end{itemize}
+
+\noindent Beispiel: Ein Kunde zahlt 200\,EUR / Monat bei 3\,\% monatlichem Churn. Die durchschnittliche Lebensdauer ist 1\,/\,0{,}03 = ca.\ 33 Monate. CLV (umsatzseitig) = 200 $\times$ 33 = 6.600\,EUR. Bei 60\,\% Deckungsbeitrag ergibt das einen CLV-Deckungsbeitrag von rund 3.960\,EUR.
+
+\subsection{CLV vs.\ CAC}
+
+Eine zentrale Faustregel: \quelle{Ellis \& Brown, 2017}
+
+\begin{itemize}
+  \item Ein gesundes Verhältnis liegt typischerweise bei \textbf{CLV / CAC $\geq$ 3}.
+  \item Bei $<$ 1: jede Akquise verbrennt strukturell Geld.
+  \item Bei 1--3: tragfähig, aber knapp; Wachstum nur über externe Finanzierung.
+  \item Bei $\geq$ 3: Geschäft trägt sich, Wachstum lässt sich aus Cashflow finanzieren.
+\end{itemize}
+
+\subsection{Hebel für CLV-Steigerung}
+
+\begin{itemize}
+  \item \textbf{Niedrigerer Churn.} Mit jedem Prozentpunkt weniger Churn steigt die Kundenlebensdauer überproportional.
+  \item \textbf{Höherer ARPU.} Upgrades, Cross-Sell, Add-Ons.
+  \item \textbf{Längere Bindung.} Service-Level, Workflow-Integration, Communityelemente.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{C-A-C $\ll$ C-L-V}]
+\textbf{C-A-C} (Customer Acquisition Cost) \emph{muss} deutlich kleiner sein als \textbf{C-L-V} (Customer Lifetime Value). \emph{CAC $\ll$ CLV} -- das ist das Mantra jeder Subscription-Plattform. Wenn Sie das eine in Euro nicht beziffern können, fliegen Sie blind.
+\end{eselsbox}
+
+% --- 6. PARTNERNETZWERKE --------------------------------------------
+\section{Partnernetzwerke und Affiliate-Programme}
+
+Partner sind nicht ``zusätzliche Vertriebsleute''. Sie sind Akteure mit eigener Logik, eigenen Anreizen, eigener Reichweite -- und teilweise eigener Loyalität gegenüber Wettbewerbern. Partnernetzwerke richtig aufzubauen ist eine eigenständige Disziplin.
+
+\subsection{Partnertypen}
+
+\begin{itemize}
+  \item \fachbegriff{Technologiepartner.} Integrationen, APIs, ergänzende Software.
+  \item \fachbegriff{Vertriebspartner.} Wiederverkäufer, Reseller, Distributoren.
+  \item \fachbegriff{Contentpartner.} Verlage, Branchenverbände, Influencer mit fachlicher Glaubwürdigkeit.
+  \item \fachbegriff{Servicepartner.} Beratungs- und Implementierungspartner.
+  \item \fachbegriff{Integrationspartner.} Spezialisierte Implementierer pro Branche / Region.
+  \item \fachbegriff{Branchenverbände.} Verbreitete, glaubwürdige Vermittler.
+  \item \fachbegriff{Beratungsunternehmen.} Multiplikatoren bei strategischen Entscheidungen.
+\end{itemize}
+
+\subsection{Affiliate-Programme}
+
+Ein \fachbegriff{Affiliate-Programm} vergütet einen Partner pro vermitteltem Kunden / Transaktion / abgeschlossenem Vertrag. Vorteile: leicht skalierbar, leistungsabhängig. Risiken: Qualität der Leads, Markenwirkung, Anreiz zu aggressiver Werbung.
+
+\begin{itemize}
+  \item \textbf{Provisionierung.} Einmalig pro Abschluss vs.\ wiederkehrend pro Subscription -- letzteres erzeugt Bindung beim Partner.
+  \item \textbf{Cookie-Logik / Attribution.} Welcher Partner bekommt die Provision, wenn ein Kunde mehrere Berührungspunkte hatte?
+  \item \textbf{Qualitätsregeln.} Mindeststandards (keine Spam-Listen, keine Brand-Bidding-Konflikte).
+\end{itemize}
+
+\subsection{Strategische Allianzen}
+
+Eine \fachbegriff{strategische Allianz} ist mehr als ein Affiliate-Partner: längerfristige Kooperation mit komplementären Akteuren, oft mit gemeinsamer Roadmap, gemeinsamer Gestaltungsmacht und Investitionen auf beiden Seiten. Risiko: starke Allianzen erzeugen Abhängigkeiten. \quelle{Iyer \& Singh, 2018}
+
+\subsection{Erfolgsfaktoren für Partnernetzwerke}
+
+\begin{enumerate}
+  \item Klare Partnerrolle -- jeder Partner kennt seinen Beitrag.
+  \item Faire Vergütung -- attraktiv genug, aber nicht margenfressend.
+  \item Daten- und Qualitätsregeln -- wer Partner ist, hält Mindeststandards.
+  \item Gemeinsame Zielgruppen -- Partner und Plattform sprechen dieselbe Zielgruppe an.
+  \item Messbare Ergebnisse -- KPIs pro Partner, regelmäßige Reviews.
+  \item Governance -- klare Eskalations- und Kündigungsregeln.
+\end{enumerate}
+
+\begin{merkbox}[Partner-Faustregel]
+Ein gutes Partnernetzwerk hat \emph{zwei} Eigenschaften gleichzeitig: es ist groß genug, um einen substantiellen Anteil des Wachstums zu tragen, \emph{und} so strukturiert, dass kein einzelner Partner mehr als 15--20\,\% des Wachstums dominiert. \emph{Konzentration ist gefährlich -- auch bei den eigenen Helfern.}
+\end{merkbox}
+
+% --- 7. MONETARISIERUNGS-ARCHITEKTUR ---------------------------------
+\section{Vom Einzelhebel zur Monetarisierungsarchitektur}
+
+Die wichtigste Erkenntnis dieses Tages ist nicht die einzelne Erlöskategorie -- es ist deren \emph{Komposition}. Eine reife Plattform-Monetarisierung verbindet typischerweise drei bis fünf Hebel zu einer Architektur.
+
+\subsection{Komposition statt Stapelung}
+
+Stapelung wäre: ``Wir nehmen Provision \emph{plus} Listing-Gebühr \emph{plus} Premium-Platzierung \emph{plus} Subscription \emph{plus} Werbung.'' Das Ergebnis ist meist Reibung: Anbieter beschweren sich, Komplexität steigt, Steuerbarkeit sinkt.
+
+Komposition heißt: \emph{wenige} Hebel, klar zugeordnet, so kombiniert, dass sie zusammen wirken.
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXX@{}}
+\toprule
+Hebel & adressiert & wofür \\
+\midrule
+Subscription (Anbieter) & Anbieterseite & wiederkehrend, planbar, Bindung \\
+Provision pro Vermittlung & beide Seiten / Plattform-Marge & Wert pro erzeugtem Match \\
+Premium-Platzierung & zahlungsbereite Anbieter & Sichtbarkeit als Zusatzleistung \\
+Servicepakete & komplexe Kunden & Onboarding, Beratung, Daten \\
+Partner-Affiliate & Reichweite & Wachstum extern \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Was \emph{nicht} monetarisiert wird}
+
+Eine bewusst getroffene Architektur ist auch davon geprägt, was \emph{nicht} monetarisiert wird:
+
+\begin{itemize}
+  \item Basisanlage und einfache Suche bleiben kostenlos -- sonst leidet die kritische Masse.
+  \item Bewertungen bleiben unabhängig -- sonst leidet das Vertrauen.
+  \item Beschwerdewege bleiben kostenfrei -- sonst leidet die Fairness-Wahrnehmung.
+\end{itemize}
+
+\subsection{Beispiel: ``LegalMatch Pro''-Architektur}
+
+In Anlehnung an die Fallstudie (UE 5) lässt sich für eine B2B-Vermittlungsplattform für rechtliche Beratung eine ausgewogene Architektur entwickeln:
+
+\begin{itemize}
+  \item \textbf{Experte Basic:} kostenlos -- Grundprofil. Sichert kritische Masse.
+  \item \textbf{Experte Professional:} 79\,EUR / Monat -- erweiterte Sichtbarkeit, mehr Anfragen, Bewertungsmoderation.
+  \item \textbf{Experte Premium:} 199\,EUR / Monat -- priorisierte Sichtbarkeit, qualifizierte Lead-Übergabe, Reporting.
+  \item \textbf{Vermittlungsprovision:} 8--12\,\% pro abgewickeltem Erstgespräch (transparent).
+  \item \textbf{Servicepakete:} Onboarding, fachliche Profilerstellung, Branchenangaben.
+  \item \textbf{Partnerprovisionen:} Branchenverbände, Steuerberater-Netzwerke, Software-Anbieter -- 10\,\% des Erstauftrags.
+\end{itemize}
+
+Was bewusst \emph{nicht} monetarisiert wird: die Kundenanfrage selbst, der Beschwerdeweg, die unabhängige Bewertung.
+
+% --- 8. MANAGEMENT-PERSPEKTIVE ---------------------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Plattform-Monetarisierung erzeugt strukturelle Spannungen, die nicht ``aufgelöst'' werden können. Sie müssen entschieden werden.
+
+\subsection{Fünf zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Wachstum vs.\ Profitabilität.} Aggressive Monetarisierung erhöht kurzfristige Marge -- und senkt langfristiges Wachstum.
+  \item \textbf{Zahlungsbereitschaft vs.\ Kundennutzen.} Was die Plattform extrahieren kann, ist nicht das, was sie extrahieren sollte. Eine zu hohe Provision verteilt Wert um -- vom Anbieter zur Plattform -- und beschädigt die Anbieterzufriedenheit.
+  \item \textbf{Marge vs.\ Netzwerkeffekt.} Eine höhere Marge pro Transaktion senkt oft die Transaktionsfrequenz. Marge und Volumen folgen oft umgekehrten Vorzeichen.
+  \item \textbf{Partnerabhängigkeit vs.\ Reichweite.} Ein dominanter Partner erzeugt Wachstum -- und ein systemisches Risiko.
+  \item \textbf{Einfachheit vs.\ Optimalität.} Eine ``optimale'' Preisstruktur mit zehn Tiers ist nicht steuerbar. Einfachheit schlägt fast immer Optimalität.
+\end{enumerate}
+
+\subsection{Lock-in -- erwünscht und unerwünscht}
+
+\fachbegriff{Lock-in}, also Wechselkosten, entsteht in Plattformen über vier Hebel: \quelle{Shapiro \& Varian, 1999, Kap.~5}
+
+\begin{itemize}
+  \item Datenintegration -- der Anbieter hat seine Produktdaten, Bilder, Beschreibungen aufwendig auf der Plattform gepflegt.
+  \item Bewertungen -- die aufgebaute Reputation bleibt auf der Plattform.
+  \item Workflow-Integration -- der Anbieter hat Prozesse, Schnittstellen, Schulungen rund um die Plattform gebaut.
+  \item Kundenbeziehung -- der Endkunde kennt nur den Plattform-Account, nicht den Anbieter direkt.
+\end{itemize}
+
+Lock-in ist aus Plattformsicht erwünscht (Stabilität, Kalkulierbarkeit). Aus Anbietersicht ist es jedoch ein Risiko, das sie zunehmend einpreisen. Plattformen, die Lock-in \emph{transparent} machen und Exit-Pfade ermöglichen, gewinnen langfristig Vertrauen.
+
+\subsection{Senior-Level-Entscheidungslogik}
+
+Drei Fragen, die ein Chief Platform Officer / Chief Revenue Officer regelmäßig stellt:
+
+\begin{itemize}
+  \item \textbf{Welche kurzfristig attraktive Erlöschance bauen wir nicht aus?} Beispiel: Verkauf personenbezogener Daten als Service. Mögliche Einnahmen, dauerhaftes Vertrauensrisiko.
+  \item \textbf{Wo lassen wir Geld bewusst liegen?} Beispiel: kostenlose Basisanlage. Mögliche Subscription-Erlöse, aber kritische Masse braucht es.
+  \item \textbf{Welche Erlösstruktur trägt auch dann, wenn ein einzelner Hebel weg bricht?} Diversifikation als Resilienzstrategie.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{W-Z-M-P-E}]
+Die fünf Zielkonflikte in einer einfachen Reihe:\\[2pt]
+\textbf{W}achstum vs.\ Profit -- \textbf{Z}ahlungsbereitschaft vs.\ Nutzen -- \textbf{M}arge vs.\ Netzwerk -- \textbf{P}artnerabhängigkeit -- \textbf{E}infachheit vs.\ Optimum.\\[2pt]
+\emph{Fünf Konflikte, in denen die Plattform aktiv positioniert -- nicht passiv treibt.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 11]
+Plattform-Monetarisierung ist eine \emph{Wertarchitektur} -- nicht eine Preisliste. Sie entscheidet, welcher Anteil des erzeugten Werts beim Anbieter, beim Nachfrager, beim Partner und bei der Plattform selbst landet. Wer diese Verteilung schief baut, beschädigt das System langfristiger als jede einzelne Marketingmaßnahme korrigieren kann.
+\end{merkbox}
+
+% --- 9. LITERATUR ------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Anderson, C. (2009).] \emph{Free: The future of a radical price}. Hyperion.
+  \item[Gassmann, O., Frankenberger, K., \& Csik, M. (2017).] \emph{Geschäftsmodelle entwickeln: 55 innovative Konzepte mit dem St.\ Galler Business Model Navigator} (2.\ Aufl.). Hanser.
+  \item[Hagiu, A., \& Wright, J. (2015).] Multi-sided platforms. \emph{International Journal of Industrial Organization, 43}, 162--174. \href{https://doi.org/10.1016/j.ijindorg.2015.03.003}{https://doi.org/10.1016/j.ijindorg.2015.03.003}
+  \item[Iyer, B., \& Singh, H. (2018).] Designing platforms for value capture. \emph{MIT Sloan Management Review, 60}(1), 1--10.
+  \item[Kumar, V. (2014).] Making `freemium' work. \emph{Harvard Business Review, 92}(5), 27--29.
+  \item[Kumar, V., \& Reinartz, W. (2018).] \emph{Customer relationship management: Concept, strategy, and tools} (3.\ Aufl.). Springer.
+  \item[Parker, G.\,G., Van Alstyne, M.\,W., \& Choudary, S.\,P. (2016).] \emph{Platform revolution: How networked markets are transforming the economy -- and how to make them work for you}. W.\,W.\ Norton.
+  \item[Shapiro, C., \& Varian, H.\,R. (1999).] \emph{Information rules: A strategic guide to the network economy}. Harvard Business School Press.
+  \item[Tzuo, T., \& Weisert, G. (2018).] \emph{Subscribed: Why the subscription model will be your company's future -- and what to do about it}. Portfolio.
+\end{description}
+
+% --- 10. GLOSSAR -------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Affiliate-Programm] Vergütungsmodell, bei dem ein Partner pro vermitteltem Kunden, Transaktion oder Abschluss eine Provision erhält.
+  \item[Allianz (strategisch)] Langfristige Kooperation mit komplementärem Partner, oft mit gemeinsamer Roadmap.
+  \item[ARPU (Average Revenue per User)] Durchschnittlicher Umsatz pro Nutzer / Konto im Subscription-Modell.
+  \item[CAC (Customer Acquisition Cost)] Kosten zur Gewinnung eines zahlenden Kunden.
+  \item[Churn Rate] Anteil der Kunden, die in einem Zeitraum kündigen.
+  \item[CLV (Customer Lifetime Value)] Wertsumme eines Kunden über die gesamte Beziehung; zentrale Steuerungsgröße im Subscription-Geschäft.
+  \item[Direkte Monetarisierung] Gebühren direkt von Marktteilnehmern (Provision, Subscription, Listing).
+  \item[Erfolgsbeteiligung] Beteiligung am erzeugten Ergebnis -- selten, aber bei Vermittlungsplattformen relevant.
+  \item[Freemium] Pricing-Modell mit kostenloser Basis- und kostenpflichtiger Premiumstufe.
+  \item[Indirekte Monetarisierung] Erlöse über Dritte (Werbung, Datenservices, Affiliates).
+  \item[Listing-Gebühr] Pauschale für das Listen eines Angebots, unabhängig von Verkauf.
+  \item[Lock-in] Zustand, in dem ein Akteur die Plattform nicht ohne signifikante Kosten verlassen kann.
+  \item[Monetarisierungsarchitektur] Komposition mehrerer Erlöshebel zu einem konsistenten Gesamtsystem.
+  \item[MRR (Monthly Recurring Revenue)] Monatlich wiederkehrender Umsatz im Subscription-Modell.
+  \item[Partnergebühr] Vergütung an Partner-Plattformen, Integrationen, Distributoren.
+  \item[Pricing-Tier] Klar abgegrenzte Leistungsstufe innerhalb eines Subscription-Modells.
+  \item[Provision] Anteil pro Transaktion -- Marktplatz-Standard.
+  \item[Recurring Revenue] Wiederkehrende Erlöse aus Abos / Subscriptions.
+  \item[Subscription] Wiederkehrendes Erlösmodell mit Planbarkeit, Bindung und Tier-Logik.
+  \item[Take Rate] Anteil der Plattform am Transaktionsvolumen.
+  \item[Tier-Architektur] Aufbau gestaffelter Subscription-Pakete (Basic / Professional / Enterprise).
+  \item[Trial] Zeitlich befristeter Vollzugriff auf ein Produkt vor Kaufentscheidung.
+  \item[Upselling] Wechsel eines Kunden in eine höhere Subscription-Stufe.
+  \item[Value Capture] Anteil des erzeugten Werts, der bei der Plattform verbleibt.
+  \item[Value Creation] Vom System (Anbieter, Nachfrager, Plattform, Partner) gemeinsam erzeugter Wert.
+  \item[Wertarchitektur] Strukturierte Verteilung des erzeugten Werts auf alle Marktteilnehmer.
+  \item[Zielkonflikte (Monetarisierung)] Spannungsfelder: Wachstum vs.\ Profit, Zahlungsbereitschaft vs.\ Nutzen, Marge vs.\ Netzwerk, Partnerabhängigkeit, Einfachheit vs.\ Optimum.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 11 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
