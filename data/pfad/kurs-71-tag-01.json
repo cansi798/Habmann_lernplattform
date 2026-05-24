@@ -1,0 +1,147 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 1,
+  "titel": "BPMN 2.0 & EPC sicher lesen, sauber modellieren und qualitativ bewerten",
+  "erstellt_am": "2026-05-24",
+  "schritte": [
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "Was ist ein Geschäftsprozess — und warum überhaupt modellieren?",
+      "youtube_id": "E5ZgMT7ty6E",
+      "youtube_query": "geschäftsprozess einfach erklärt input transformation output",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Aussage beschreibt einen Geschäftsprozess am präzisesten?",
+        "typ": "single",
+        "optionen": [
+          "Eine Liste von Aufgaben, die ein einzelner Mitarbeiter abarbeitet",
+          "Eine geordnete Folge von Aktivitäten, die aus definierten Inputs einen wertschöpfenden Output erzeugt",
+          "Eine Software, die Arbeitsabläufe automatisch ausführt",
+          "Eine Organisationsstruktur mit klaren Hierarchien"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Ein Geschäftsprozess ist eine geordnete Folge von Aktivitäten, die Inputs in einen definierten Output transformieren. Wichtig sind dabei drei Elemente: klare Ein- und Ausgaben, eine Reihenfolge (Ablauflogik) und ein Nutzen. Personen, Software oder Organisationen sind Hilfsmittel im Prozess, aber nicht der Prozess selbst."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "BPMN und EPC im Vergleich — die wichtigsten Basiselemente",
+      "inhalt": "BPMN (Business Process Model and Notation) und EPC (Ereignisgesteuerte Prozesskette) sind die zwei dominanten Notationen für Geschäftsprozesse. BPMN kommt aus der IT-/Automatisierungsecke und kennt: Start- und Endereignisse (Kreise), Tasks (abgerundete Rechtecke), Gateways für Entscheidungen (Rauten, am häufigsten XOR), Sequenzflüsse (Pfeile) und Pools/Lanes zur Darstellung von Rollen/Verantwortlichkeiten. EPC ist business-näher und arbeitet mit drei Hauptelementen: Ereignissen (Sechsecke — passive Zustände wie ‚Bestellung eingegangen‘), Funktionen (Rechtecke — aktive Tätigkeiten wie ‚Bestellung prüfen‘) und Konnektoren (AND, OR, XOR — Kreise mit Symbol). In EPC wechseln sich Ereignis und Funktion immer ab. Eine zentrale Regel in beiden Notationen: Tasks/Funktionen werden nach dem Muster Verb + Objekt benannt (z. B. ‚Lagerbestand prüfen‘), Ereignisse als Zustandsbeschreibung im Perfekt (‚Bestellung eingegangen‘).",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Aussagen über BPMN und EPC sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "In EPC wechseln sich Ereignisse und Funktionen immer ab",
+          "BPMN nutzt Pools und Lanes, um Verantwortlichkeiten sichtbar zu machen",
+          "Ein XOR-Gateway in BPMN bedeutet, dass mehrere Pfade gleichzeitig durchlaufen werden",
+          "Tasks werden in beiden Notationen nach dem Muster Verb + Objekt benannt"
+        ],
+        "korrekt": [0, 1, 3],
+        "erklaerung": "EPC verlangt strikt den Wechsel Ereignis-Funktion-Ereignis. BPMN nutzt Pools (für Organisationen) und Lanes (für Rollen darin), um Verantwortung zu zeigen. Die Benennungsregel Verb + Objekt gilt für beide. Falsch ist Option 3: ein XOR (exklusives Oder) heißt, dass genau einer der Pfade durchlaufen wird — für gleichzeitige Pfade nimmt man ein AND/Parallel-Gateway."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "Wofür modellieren wir? Die vier Zwecke und ihre Folgen",
+      "youtube_id": "xmls25KO7V8",
+      "youtube_query": "prozessmodellierung zweck dokumentation analyse automatisierung",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Für welchen Modellierungszweck wird typischerweise der höchste Detailgrad benötigt?",
+        "typ": "single",
+        "optionen": [
+          "Dokumentation für neue Mitarbeitende",
+          "Strategische Diskussion mit dem Management",
+          "Technische Automatisierung über eine Process Engine",
+          "Marketing-Material für die Außenkommunikation"
+        ],
+        "korrekt": 2,
+        "erklaerung": "Sobald ein Prozess automatisiert ausgeführt werden soll (z. B. über eine BPMN-Engine wie Camunda oder ein RPA-Tool), muss jede Verzweigung, jede Datenquelle und jede Ausnahme exakt modelliert sein — sonst läuft das Modell nicht. Dokumentation und Management-Sicht bleiben bewusst gröber, weil sie auf Verständlichkeit, nicht Ausführbarkeit zielen. Der Modellzweck bestimmt also direkt die nötige Modellierungstiefe."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "Modellqualität — die fünf häufigsten Fehler erkennen",
+      "inhalt": "Schlechte Prozessmodelle scheitern fast immer an denselben fünf Problemen. Erstens: zu grob — wichtige Entscheidungen werden in einem einzigen Task versteckt (‚Antrag bearbeiten‘ statt ‚Antrag prüfen‘ + ‚Über Bewilligung entscheiden‘). Zweitens: zu fein — jeder Klick wird modelliert, das Modell wird unleserlich und altert mit jeder UI-Änderung. Drittens: mehrdeutige Benennung — Tasks heißen ‚Klärung‘ oder ‚Bearbeitung‘ statt einer klaren Verb-Objekt-Kombination. Viertens: fehlende oder unklare Entscheidungspunkte — Pfade verzweigen sich ohne sichtbares Gateway, niemand weiß, wer entscheidet. Fünftens: keine Rollen — alle Tasks hängen in einer einzigen Lane, Verantwortung ist unsichtbar. Eine gute Faustregel: Wenn jemand das Modell ohne Zusatzerklärung verstehen kann und du jede Verzweigung jemandem zuordnen kannst, ist die Qualität in Ordnung.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche der folgenden sind typische Qualitätsfehler in Prozessmodellen?",
+        "typ": "multi",
+        "optionen": [
+          "Ein Task heißt ‚Bearbeitung‘ ohne weitere Spezifikation",
+          "Es gibt Pools/Lanes, die Rollen klar zuordnen",
+          "Pfade verzweigen sich ohne sichtbares Gateway",
+          "Mehrere Entscheidungen werden in einem Task zusammengefasst",
+          "Das Modell passt auf eine A4-Seite und ist ohne Zusatzdoku verständlich"
+        ],
+        "korrekt": [0, 2, 3],
+        "erklaerung": "Mehrdeutige Benennung (1), implizite Verzweigungen (3) und versteckte Entscheidungen (4) sind die typischen Fehler — alle drei lassen den Leser raten oder verstecken Verantwortung. Klar zugeordnete Rollen (2) und Verständlichkeit ohne Zusatzdoku (5) sind dagegen Qualitätsmerkmale, keine Fehler."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "Pools und Lanes — wer macht was, und warum das strategisch wichtig ist",
+      "youtube_id": "AmEX0CxmzAs",
+      "youtube_query": "bpmn pools lanes erklärt verantwortung rollen modellieren",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Wofür steht eine Lane in einem BPMN-Diagramm?",
+        "typ": "single",
+        "optionen": [
+          "Für einen zeitlichen Abschnitt im Prozess (z. B. ‚Vormittag‘)",
+          "Für eine Rolle oder Organisationseinheit, die für die Tasks in dieser Lane verantwortlich ist",
+          "Für einen alternativen Pfad bei einer Entscheidung",
+          "Für eine optionale Schleife im Prozess"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Lanes sind das BPMN-Mittel, um Verantwortung sichtbar zu machen. Ein Pool steht meist für eine Organisation (z. B. ‚Kunde‘, ‚NovaParts‘), Lanes innerhalb des Pools für Rollen oder Abteilungen (‚Vertrieb‘, ‚Produktion‘, ‚Versand‘). Jeder Task liegt in genau einer Lane — das beantwortet sofort die Frage ‚Wer macht das?‘ und macht das Modell als Steuerungsinstrument nutzbar."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "Wann gehört ein Gateway hin — und welches?",
+      "inhalt": "Ein Gateway ist immer dann nötig, wenn der Prozess sich aufgrund einer echten Entscheidung verzweigt oder mehrere Pfade zusammenführt. Die häufigsten drei Typen: XOR (exklusiv) — genau einer der Pfade wird ausgeführt, z. B. ‚Bestellung vollständig?‘ Ja/Nein. AND (parallel) — alle Pfade werden gleichzeitig ausgeführt und müssen alle abgeschlossen sein, bevor es weitergeht, z. B. ‚Ware verpacken‘ + ‚Rechnung erstellen‘ laufen parallel. OR (inklusiv) — mindestens einer, evtl. mehrere Pfade werden ausgeführt; seltener, weil die Logik schnell unklar wird. Faustregel: Wenn du nicht beschreiben kannst, was nach dem Gateway in welchem Fall passiert, gehört das Gateway entweder noch nicht hin oder du brauchst zwei separate Entscheidungen. Eine zweite Faustregel: Jedes XOR sollte sich auf eine prüfbare Bedingung beziehen, die im Modell auch sichtbar ist (Datenfeld, Statuswert, Rolle entscheidet).",
+      "dauer_min": 5,
+      "aufgabe": {
+        "frage": "An welcher Stelle gehört ein XOR-Gateway zwingend?",
+        "typ": "single",
+        "optionen": [
+          "Vor jedem Task, der länger als eine Minute dauert",
+          "An einer Stelle, an der der Prozess sich aufgrund einer eindeutigen Bedingung in genau einen von mehreren Pfaden verzweigt",
+          "Am Anfang jedes Prozesses, um die Eingangsdaten zu prüfen",
+          "Vor jeder Übergabe zwischen zwei Rollen"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Ein XOR-Gateway gehört genau dort hin, wo der Prozess auf Basis einer prüfbaren Bedingung in exakt einen von mehreren möglichen Pfaden verzweigt. Übergaben zwischen Rollen, Dauer einzelner Tasks oder Inputprüfungen sind keine Verzweigungslogik — sie können mit normalen Sequenzflüssen oder Lanes abgebildet werden."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "Vom Modellieren zur Governance — was Senior-Verantwortung bedeutet",
+      "youtube_id": "aQAT-0-Wljo",
+      "youtube_query": "process modeling governance policy enterprise architecture deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche Bestandteile gehören in eine Modellierungs-Policy für eine größere Organisation?",
+        "typ": "multi",
+        "optionen": [
+          "Eine klare Regel, wann BPMN und wann EPC verwendet wird",
+          "Mindeststandards für Benennung, Gateways und Rollen",
+          "Eine Liste aller jemals erstellten Modelle mit Versionsnummer",
+          "Ein Review-Prozess mit definierten Rollen (Modeler, Reviewer, Approver)",
+          "Qualitätskriterien und Eskalationspfade bei Abweichungen"
+        ],
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Eine tragfähige Modellierungs-Policy regelt Auswahl der Notation (Zweck-/Zielgruppenlogik), Mindeststandards (Benennung, Gateways, Rollen), den Review-Prozess (wer prüft, wer gibt frei) sowie Qualitätskriterien und Eskalationspfade. Ein vollständiges Inventar aller Modelle ist Aufgabe des Repositories/Tools, nicht der Policy — und in der Praxis weder realistisch noch nützlich, weil es schnell veraltet."
+      }
+    }
+  ]
+}

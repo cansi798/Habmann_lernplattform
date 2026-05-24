@@ -1,0 +1,640 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 1 - Aufgabenheft
+% BPMN 2.0 & EPC (Einordnung, Basiselemente, Modell-Qualitaet, Zweckorientierung)
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+% Kurs-71 Akzent: orange (#9d4a1a)
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+% Niveau-Farben
+\definecolor{lpL1}{RGB}{34,120,72}      % L1 = gruen (reproduktion)
+\definecolor{lpL2}{RGB}{22,90,140}      % L2 = blau (anwendung)
+\definecolor{lpL3}{RGB}{170,42,52}      % L3 = rot (management)
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+% Info-Box (orange-weiss) fuer Hinweise/Aufgabenstellung-Rahmen
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Antwort-Bereich: leerer Kasten mit Punktlinien
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 1}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}BPMN 2.0 \& EPC}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+% Niveau-Badge: \niveau{L1}, \niveau{L2}, \niveau{L3}
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+% Zeit-Hinweis
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+% Aufgaben-Kopf: Nr + Titel + Badges + Zeit
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+% YouTube-Suchquery (kompakt rendern)
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% Linierter Antwort-Bereich mit gepunkteten Linien
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 1 \textperiodcentered{} TAG 1 VON 3 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 28.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 1\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}BPMN 2.0 \& EPC -- Notation,\\Modellqualit\"at und Zweck\-orientierung\\in elf Aufgaben.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- ANLEITUNG -----------------------------------------------------------
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 1 \textendash{} \emph{BPMN 2.0 \& EPC}: Notation, Modellierungs-Grundlagen, Modellqualit\"at (GoM) und Zweckorientierung. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Notation reproduzieren, Begriffe ordnen. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Prozesse modellieren, Modelle bewerten, Notationen anwenden. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Fallstudie, Governance, Entscheidungsarchitektur. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt:
+
+\begin{itemize}
+  \item eine Niveau-Markierung und einen Zeit-Richtwert,
+  \item den Aufgabentext (oft mit Kontext oder Fallbeschreibung),
+  \item einen Antwort-Freiraum f\"ur Ihre L\"osung,
+  \item eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad \textendash{} eine pr\"azise Suchanfrage, die Sie eins zu eins auf YouTube eingeben k\"onnen, um vertiefendes Material zur Aufgabe zu finden.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 1}. Versuchen Sie jede Aufgabe zuerst eigenst\"andig \textendash{} der Mehrwert entsteht im eigenen Modellieren und Argumentieren, nicht im Abschreiben.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Notationselemente zuordnen}{\nivLi}{8\,min}
+
+\noindent Ordnen Sie die acht BPMN-Notationselemente unten jeweils ihrer korrekten Bedeutung zu. Tragen Sie hinter jeder Skizze die Bedeutung ein und schreiben Sie in einem Halbsatz, woran man das Symbol erkennt.
+
+\medskip
+\noindent\textbf{Elemente:}
+
+\begin{enumerate}
+  \item \textbf{Start-Event} \textendash{} d\"unner Kreis
+  \item \textbf{Activity (Task)} \textendash{} abgerundetes Rechteck
+  \item \textbf{Gateway} \textendash{} Raute (oft mit X, +, O)
+  \item \textbf{End-Event} \textendash{} dicker Kreis
+  \item \textbf{Sequence Flow} \textendash{} durchgezogener Pfeil
+  \item \textbf{Message Flow} \textendash{} gestrichelter Pfeil mit offener Pfeilspitze
+  \item \textbf{Pool} \textendash{} gro{\ss}er umschlie{\ss}ender Rahmen
+  \item \textbf{Lane} \textendash{} horizontaler Streifen \emph{innerhalb} eines Pools
+\end{enumerate}
+
+\noindent Skizzieren Sie zus\"atzlich frei Hand das Symbol neben Ihre Antwort \textendash{} sauber genug, dass eine Kollegin es wiedererkennt.
+
+\ytquery{BPMN 2.0 Notation Symbole Erklaerung Start Event Task Gateway Pool Lane}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Grunds\"atze ordnungsm\"a{\ss}iger Modellierung (GoM)}{\nivLi}{8\,min}
+
+\noindent Z\"ahlen Sie die \textbf{sieben Grunds\"atze ordnungsm\"a{\ss}iger Modellierung} (GoM) auf. F\"ur \emph{drei} davon erg\"anzen Sie jeweils ein konkretes Beispiel aus dem Modellierungsalltag (positiv: ``so wird der Grundsatz eingehalten'' \emph{oder} negativ: ``so wird er verletzt'').
+
+\medskip
+\noindent\textbf{Hinweis:} Die sieben Grunds\"atze sind: \emph{Richtigkeit}, \emph{Relevanz}, \emph{Wirtschaftlichkeit}, \emph{Klarheit}, \emph{Vergleichbarkeit}, \emph{Systematischer Aufbau}, \emph{Modellzweckorientierung}. Sie d\"urfen die in Ihrem Lehrskript verwendete Reihenfolge nutzen.
+
+\ytquery{Grundsaetze ordnungsmaessiger Modellierung GoM Becker Rosemann}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{BPMN vs.\ EPC \textendash{} Vergleichstabelle}{\nivLi}{10\,min}
+
+\noindent Erstellen Sie eine \textbf{Vergleichstabelle} mit f\"unf Zeilen f\"ur BPMN 2.0 und EPC. F\"ur jede Zeile tragen Sie ein, wie das jeweilige Element/Konzept in BPMN \emph{und} in EPC abgebildet wird.
+
+\medskip
+\noindent\begin{tabularx}{\linewidth}{@{}p{4.2cm}|X|X@{}}
+\toprule
+\textbf{Element / Konzept} & \textbf{BPMN 2.0} & \textbf{EPC} \\
+\midrule
+T\"atigkeit (Activity / Function) & & \\[24pt]
+\midrule
+Ereignis & & \\[24pt]
+\midrule
+Entscheidung (Gateway / Konnektor) & & \\[24pt]
+\midrule
+Fluss / Verbindung & & \\[24pt]
+\midrule
+Typischer Anwendungs\-fokus & & \\[24pt]
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\noindent Schreiben Sie unter die Tabelle \emph{einen} Schlusssatz: F\"ur welchen Modellierungszweck w\"urden Sie eher BPMN, f\"ur welchen eher EPC w\"ahlen?
+
+\ytquery{BPMN EPC Vergleich Notation Unterschied Funktion Ereignis Konnektor}
+
+\antwortlinien{4}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Bestellprozess ``B\"ucherklick GmbH'' modellieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``B\"ucherklick GmbH'' \textendash{} ein B2C-Online-Buchshop. Kunden bestellen \"uber den Webshop, bezahlen direkt (Karte oder PayPal), das Lager wird automatisch gepr\"uft, vorhandene B\"ucher gehen sofort raus, fehlende B\"ucher werden beim Gro{\ss}h\"andler nachbestellt, der Kunde wird laufend per E-Mail informiert.
+
+\smallskip
+\textbf{Auftrag der Gesch\"aftsleitung:} Modellieren Sie den Standard-Bestellprozess in BPMN, sodass eine neue Mitarbeiterin im Kundenservice ihn ohne Vorerkl\"arung versteht.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Skizzieren Sie den Bestellprozess in BPMN. \emph{Mindestanforderungen:}
+
+\begin{itemize}
+  \item \textbf{1 Start-Event} (Bestellung eingegangen),
+  \item \textbf{mindestens 2 Gateways} (z.\,B.\ ``Zahlung erfolgreich?'', ``Lager verf\"ugbar?''),
+  \item \textbf{mindestens 5 Activities} (Verb + Objekt, z.\,B.\ ``Bestellung pr\"ufen'', ``Zahlung verarbeiten'', ``Ware kommissionieren'',\ldots),
+  \item \textbf{1 End-Event}.
+\end{itemize}
+
+\noindent Erg\"anzen Sie unter Ihrer Skizze:
+
+\begin{enumerate}
+  \item \textbf{Modellzweck} (1 Satz): F\"ur wen modellieren Sie \textendash{} und wof\"ur?
+  \item \textbf{Drei Annahmen}, die Sie getroffen haben (z.\,B.\ Zahlung wird vor Versand verarbeitet).
+  \item \textbf{Zwei Fragen}, die Sie als N\"achstes mit dem Fachbereich kl\"aren w\"urden.
+\end{enumerate}
+
+\ytquery{BPMN Bestellprozess modellieren Beispiel Webshop B2C Lane Gateway}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Modell-Qualit\"at bewerten}{\nivLii}{20\,min}
+
+\begin{infobox}[Mini-Modell zur Bewertung]
+\textbf{Textuelle Modellbeschreibung} \textendash{} ein BPMN-Diagramm im Wortlaut:
+
+\smallskip
+\emph{``Start. Dann wird der Kunde bearbeitet. Dann pr\"uft jemand etwas. Wenn ok, weiter. Wenn nicht, zur\"uck zu ``Kunde bearbeiten''. Dann macht das System irgendwas. Fertig.''}
+
+\smallskip
+\textbf{Modellzweck (laut Modellierer):} ``Schulungsmaterial f\"ur neue Mitarbeiter im Service.''\\
+\textbf{Zielgruppe:} Mitarbeiter:innen im Service ohne BPMN-Vorkenntnisse.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Bewerten Sie das Modell anhand von \emph{vier} GoM-Kriterien Ihrer Wahl (z.\,B.\ \emph{Klarheit}, \emph{Richtigkeit}, \emph{Relevanz}, \emph{Modellzweckorientierung}, \emph{Vergleichbarkeit}). F\"ur jedes Kriterium:
+
+\begin{enumerate}
+  \item Vergeben Sie eine Punktzahl auf der Skala 1\,(sehr schlecht) bis 5\,(sehr gut).
+  \item Begr\"unden Sie in einem Satz, warum.
+  \item Formulieren Sie eine konkrete \textbf{Korrekturma{\ss}nahme} (was w\"urden Sie konkret \"andern?).
+\end{enumerate}
+
+\noindent Schlie{\ss}en Sie mit \emph{einem} Satz: Ist das Modell f\"ur den angegebenen Zweck \emph{geeignet} \textendash{} ja, nein, eingeschr\"ankt?
+
+\ytquery{Modellqualitaet bewerten BPMN GoM Klarheit Richtigkeit Pruefkriterien}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Rechnungspr\"ufung in EPC umsetzen}{\nivLii}{20\,min}
+
+\begin{infobox}[Prozessbeschreibung Rechnungspr\"ufung]
+\textbf{Ausgangslage:} In der Buchhaltung der ``NovaParts GmbH'' l\"auft folgende Rechnungspr\"ufung:
+
+\smallskip
+\emph{Eine Rechnung trifft per E-Mail ein. Die Buchhaltung pr\"uft die Rechnung auf formale Vollst\"andigkeit. Wenn unvollst\"andig, fordert die Buchhaltung den Lieferanten zur Korrektur auf und der Prozess endet vorerst. Wenn vollst\"andig, l\"auft eine sachliche Pr\"ufung durch den Fachbereich. Wenn der Fachbereich die Rechnung freigibt, wird sie zur Zahlung an die Bank \"ubertragen und im System als ``bezahlt'' gekennzeichnet. Wenn der Fachbereich ablehnt, wird die Rechnung reklamiert.}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Wandeln Sie diese Beschreibung in eine \textbf{EPC-Darstellung} um. Verwenden Sie konsequent:
+
+\begin{itemize}
+  \item \textbf{Ereignisse} (Sechseck) f\"ur Zust\"ande/Trigger \textendash{} z.\,B.\ \emph{Rechnung eingegangen}, \emph{Rechnung freigegeben}, \emph{Rechnung bezahlt}.
+  \item \textbf{Funktionen} (Rechteck mit abgerundeten Ecken) f\"ur T\"atigkeiten \textendash{} z.\,B.\ \emph{Rechnung formal pr\"ufen}.
+  \item \textbf{Mindestens einen XOR-Konnektor} f\"ur die Entscheidung \emph{vollst\"andig / unvollst\"andig} und/oder \emph{freigegeben / abgelehnt}.
+  \item \textbf{Benennungsregel:} Funktionen mit Verb + Objekt; Ereignisse mit Subjekt + Zustand (Partizip).
+\end{itemize}
+
+\noindent Skizzieren Sie die EPC und schreiben Sie darunter \emph{einen} Satz: An welcher Stelle h\"atte BPMN diese Logik kompakter abgebildet? Warum?
+
+\ytquery{EPC ereignisgesteuerte Prozesskette Beispiel Rechnungspruefung XOR}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Pool-Lane-Aufteilung}{\nivLii}{20\,min}
+
+\begin{infobox}[Prozess mit vier Beteiligten]
+\textbf{Prozess:} Standard-Bestellabwicklung im Mittelstand. Beteiligt sind vier Rollen: \emph{Kunde}, \emph{Vertrieb}, \emph{Lager}, \emph{Buchhaltung}.
+
+\smallskip
+\textbf{Sechs Activities:}
+\begin{enumerate}
+  \item Bestellung absenden
+  \item Bestellung erfassen
+  \item Lagerbestand pr\"ufen
+  \item Ware kommissionieren
+  \item Rechnung erstellen
+  \item Zahlungseingang verbuchen
+\end{enumerate}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Strukturieren} Sie die BPMN-Darstellung: Wie viele \emph{Pools} und wie viele \emph{Lanes} brauchen Sie? Begr\"unden Sie in zwei S\"atzen.
+  \item \textbf{Ordnen} Sie jede der sechs Activities einer Lane (oder einem eigenen Pool) zu. Stellen Sie das tabellarisch dar.
+  \item \textbf{Skizzieren} Sie zus\"atzlich, wo \emph{Message Flows} (zwischen Pools) und wo \emph{Sequence Flows} (innerhalb eines Pools) laufen.
+  \item Formulieren Sie eine \textbf{Faustregel} (1 Satz): Wann setzt man einen eigenen Pool, wann reicht eine Lane?
+\end{enumerate}
+
+\ytquery{BPMN Pool Lane Unterschied Beispiel Kunde Lieferant Message Flow}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Anti-Muster identifizieren und korrigieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Vier schlecht modellierte Beispiele]
+\textbf{Beispiel A \textendash{} ``Das Spaghetti-Modell'':} Ein Diagramm mit 28 Activities und 14 Gateways, alle Pfeile kreuzen sich mehrfach, kein erkennbarer Hauptfluss. Keine Lanes, keine Beschriftung der Gateway-Ausg\"ange.\\[2pt]
+
+\textbf{Beispiel B \textendash{} ``Wo ist das Ende?'':} Mehrere Activities enden ``offen'' \textendash{} kein End-Event, der Pfeil verschwindet ins Leere. An einer Stelle gibt es zwei Start-Events ohne Erkl\"arung.\\[2pt]
+
+\textbf{Beispiel C \textendash{} ``Gateway als Box-Sammelstelle'':} Ein XOR-Gateway hat \emph{f\"unf} ausgehende Pfeile, aber nur drei davon sind beschriftet. Die ``Default''-Bedingung ist nicht markiert. An anderer Stelle wird ein Gateway nur ge\"offnet, aber nie wieder zusammengef\"uhrt (kein Join).\\[2pt]
+
+\textbf{Beispiel D \textendash{} ``Inkonsistente Benennung'':} Die Activities hei{\ss}en: ``Rechnung'', ``zahlen'', ``Pr\"ufung Kunde'', ``Versand machen'', ``OK?''. Mal Substantiv, mal Verb, mal Frage, mal Mischung. Eine Activity hei{\ss}t nur ``Mail''.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent F\"ur jedes der vier Beispiele (A, B, C, D):
+
+\begin{enumerate}
+  \item Benennen Sie das prim\"are \textbf{Anti-Muster} mit einem pr\"agnanten Begriff (z.\,B.\ ``fehlende End-Events'', ``Gateway ohne Join'', ``inkonsistente Benennung'', ``Spaghetti-Layout'').
+  \item Beschreiben Sie in einem Satz, \textbf{welche GoM-Regel} verletzt wird.
+  \item Schlagen Sie eine \textbf{konkrete Korrektur} in 1\,--\,2 S\"atzen vor.
+\end{enumerate}
+
+\ytquery{BPMN Antipatterns Modellierungsfehler Spaghetti Gateway fehlend Join}
+
+\antwortlinien{18}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Fallstudie ``InnoHome Devices'' \textendash{} Innovation-to-Launch}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie: InnoHome Devices]
+``InnoHome Devices'' (smarte Haushaltsger\"ate) w\"achst schnell. Produkte kommen \emph{zu sp\"at} auf den Markt, Retourenquoten sind erh\"oht, Verantwortlichkeiten zwischen F\&E, Produktmanagement, Qualit\"at und Operations sind \emph{unklar}. Die Gesch\"aftsleitung will den Innovation-to-Launch-Prozess sauber modellieren \textendash{} als Steuerungsinstrument, nicht als Tapete.
+
+\smallskip
+\textbf{Rahmenbedingungen / Restriktionen:}
+\begin{itemize}
+  \item Zeitdruck: 8 Wochen bis zur n\"achsten Produktank\"undigung.
+  \item Budget: max.\ 150.000\,\euro{} f\"ur Prozess-/Qualit\"atsma{\ss}nahmen (Tooling unklar).
+  \item Zielkonflikt: ``schnell launchen'' vs.\ ``Qualit\"at / Compliance absichern''.
+  \item Unvollst\"andige Infos: IT-Schnittstellen und Kapazit\"aten nur grob bekannt.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Erstellen Sie ein \textbf{BPMN-Modell mit Lanes} f\"ur mindestens \textbf{vier Rollen}: F\&E, Produktmanagement, Qualit\"at, Produktion/Operations (optional: Einkauf, Legal).
+  \item Bauen Sie \textbf{mindestens zwei Entscheidungspunkte (XOR-Gateways)} ein, z.\,B.\ ``Business Case tragf\"ahig?'' und ``Test bestanden?''.
+  \item Erg\"anzen Sie zus\"atzlich oder alternativ eine \textbf{EPC-Sicht (max.\ 12 Elemente)} als Management-\"Ubersicht.
+  \item Identifizieren Sie \textbf{drei Steuerungspunkte} (z.\,B.\ Freigaben, Qualit\"atsgates, Eskalationen) und beschreiben Sie je Steuerungspunkt: \emph{Ziel}, \emph{Verantwortlicher}, \emph{Input/Output}, \emph{Risiko bei Auslassen}.
+  \item Formulieren Sie eine \textbf{Priorit\"atenempfehlung}: Welche zwei \"Anderungen w\"urden Sie in den 8 Wochen realistisch umsetzen \textendash{} und warum?
+\end{enumerate}
+
+\ytquery{Innovation Launch Prozess BPMN Lanes Stage Gate Modellierung}
+
+\antwortlinien{30}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Modellierungs-Governance \textendash{} wann aktualisieren, wer verantwortet?}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Prozessmodelle, die nicht gepflegt werden, sind sp\"atestens nach 12 Monaten \emph{aktiv irref\"uhrend} \textendash{} sie zeigen Ist-Zust\"ande, die so nicht mehr existieren. Trotzdem ist permanente Aktualisierung teuer. Hier ist die Management-Spannung.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Aktualisierungslogik (3\,--\,4 S\"atze):} Wann \emph{m\"ussen} Modelle aktualisiert werden \textendash{} und wann lohnt es sich \emph{nicht}? Definieren Sie 2\,--\,3 konkrete \emph{Trigger} (z.\,B.\ Systemwechsel, Reorganisation, Audit, KPI-Abweichung).
+  \item \textbf{Verantwortungsmodell:} Wer ist verantwortlich? Skizzieren Sie eine \textbf{RACI-Aufteilung} f\"ur die Rollen \emph{Process Owner}, \emph{Modeler}, \emph{Reviewer}, \emph{Approver}, \emph{Fachbereich}.
+  \item \textbf{Trade-off Aufwand vs.\ Aktualit\"at:} Argumentieren Sie mit einem \textbf{konkreten Branchenbeispiel} (z.\,B.\ Pharma/GxP, Bank/MaRisk, Automotive/IATF, KRITIS/IT-Sicherheit). Wo lohnt sich enge Pflege, wo grobk\"ornige Aktualisierung?
+  \item \textbf{Faustregel} (1\,--\,2 S\"atze): Ab welchem Punkt ist ein veraltetes Modell \emph{schlimmer} als kein Modell?
+\end{enumerate}
+
+\ytquery{Process Modeling Governance RACI Process Owner Aktualisierung Audit}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Process Modeling Governance \& Decision Architecture}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Process Officer / Enterprise Architect einer wachsenden Organisation (mehrere Standorte, unterschiedliche Teams, heterogene Modellierungspraxis).
+
+\smallskip
+\textbf{Ausgangslage:}
+\begin{itemize}
+  \item Jeder Bereich modelliert anders \textendash{} Modelle sind nicht vergleichbar.
+  \item Audit-/Compliance-Anforderungen nehmen zu (Nachweise, Nachvollziehbarkeit, Verantwortlichkeiten).
+  \item Zeitdruck: In \textbf{12 Wochen} muss eine \emph{Minimum Governance} stehen.
+  \item Budget: \textbf{80.000\,\euro{}} (Tooling-Entscheidung noch offen).
+  \item Unsicherheit: Reorganisation m\"oglich; ein Zukauf steht im Raum.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strukturierte \emph{Entscheidungsarchitektur} \textendash{} keine reine Ma{\ss}nahmenliste \textendash{} f\"ur Process Modeling Governance. Erarbeiten Sie schriftlich in 8\,--\,10 Schritten:
+
+\begin{enumerate}
+  \item \textbf{Entscheidungsarchitektur definieren:} Welche Entscheidungen sollen Modelle k\"unftig unterst\"utzen? (Priorisierung, Freigaben, Risiko, Automatisierung.)
+  \item \textbf{Modellierungs-Policy (1 Seite):}
+    \begin{itemize}
+      \item Wann BPMN, wann EPC (Zweck-/Zielgruppenlogik)?
+      \item Mindeststandard: Start/Ende, Benennungsregeln, Gateways, Rollen, Annahmen.
+      \item Qualit\"atskriterien + Review-Prozess (wer pr\"uft was)?
+    \end{itemize}
+  \item \textbf{Governance-Design:} Rollen (Owner, Modeler, Reviewer, Approver), RACI-Tabelle, Eskalationspfad.
+  \item \textbf{Rollout-Plan (12 Wochen):} Pilotbereiche, Trainingslogik (Level\,1--3), Erfolgskennzahlen (Modellqualit\"at, Durchlaufzeiten, Fehlerkosten, Audit-Findings).
+  \item \textbf{Risiko- \& Unsicherheitsmanagement:} Top-5-Risiken (Akzeptanz, \"Ubermodellierung, Schattenprozesse, \ldots) + Gegenma{\ss}nahmen.
+  \item \textbf{Tooling-Entscheidung}: Welche \emph{Anforderungen} m\"ussen erf\"ullt sein, bevor 80\,k investiert werden? Welche Tooling-Optionen scheiden bewusst aus?
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:} Treffen Sie mindestens \emph{zwei} bewusste Entscheidungen, obwohl Informationen fehlen. Dokumentieren Sie: Annahme, verworfene Alternative, Fr\"uhwarnsignal (Trigger zum Nachsteuern).
+  \item \textbf{Anschluss an Strategie:} Warum lohnt sich das aus Sicht der Gesch\"aftsleitung? (Compliance, Time-to-Market, Skalierbarkeit \textendash{} mindestens drei Argumente.)
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien (Senior-Level):} Anschlussf\"ahigkeit an Strategie \textperiodcentered{} Klarheit der Verantwortlichkeiten \textperiodcentered{} Pragmatismus unter Restriktionen (12 Wochen, 80\,k, Reorg-Risiko) \textperiodcentered{} Entscheidungslogik \& Risikoreife.
+
+\ytquery{Process Modeling Governance Decision Architecture BPMN Enterprise Architect}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 1}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item BPMN- und EPC-Basisnotation sauber lesen und anwenden.
+  \item Die sieben Grunds\"atze ordnungsm\"a{\ss}iger Modellierung (GoM) benennen und in der Bewertung eines Modells anwenden.
+  \item Eine textuelle Prozessbeschreibung strukturiert in ein BPMN- oder EPC-Modell \"ubersetzen.
+  \item Pool/Lane-Strukturen f\"ur Multi-Rollen-Prozesse aufbauen und Message vs.\ Sequence Flow unterscheiden.
+  \item Anti-Muster (Spaghetti-Layout, fehlende End-Events, Gateway ohne Join, inkonsistente Benennung) erkennen und korrigieren.
+  \item Modelle als \emph{Steuerungsinstrument} entwerfen \textendash{} mit klaren Steuerungspunkten, Verantwortlichkeiten und Entscheidungsgates.
+  \item Eine Process-Modeling-Governance entwerfen, die Pragmatismus, Compliance und Strategie verbindet.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 1 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

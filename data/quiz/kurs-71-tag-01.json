@@ -1,0 +1,907 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 1,
+  "erstellt_am": "2026-05-24",
+  "fragen": [
+    {
+      "id": "q01",
+      "frage": "Was ist ein Geschäftsprozess?",
+      "optionen": [
+        "Eine Liste von Aufgaben, die ein einzelner Mitarbeiter abarbeitet",
+        "Eine geordnete Folge von Aktivitäten, die aus definierten Inputs einen wertschöpfenden Output erzeugt",
+        "Eine Software, die Arbeitsabläufe automatisch ausführt",
+        "Eine Organisationsstruktur mit klaren Hierarchien"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Geschäftsprozess ist eine geordnete Folge von Aktivitäten, die Inputs in einen definierten Output transformieren. Wichtig sind klare Ein- und Ausgaben, eine Reihenfolge und ein erkennbarer Nutzen. Personen, Software oder Strukturen sind Hilfsmittel im Prozess, aber nicht der Prozess selbst.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Grundlagen Geschäftsprozess",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Grundlagen Prozess"
+    },
+    {
+      "id": "q02",
+      "frage": "Wofür steht die Abkürzung BPMN?",
+      "optionen": [
+        "Business Process Method and Norms",
+        "Business Process Model and Notation",
+        "Business Procedure Management Network",
+        "Business Process Mining Notation"
+      ],
+      "korrekt": 1,
+      "erklaerung": "BPMN steht für Business Process Model and Notation. Es ist eine OMG-standardisierte grafische Sprache zur Modellierung von Geschäftsprozessen, die sowohl für die fachliche Darstellung als auch für die technische Ausführbarkeit in Process Engines konzipiert ist.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Grundlagen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Basiselemente"
+    },
+    {
+      "id": "q03",
+      "frage": "Welche zwei Hauptelemente kennt die EPC strikt im Wechsel?",
+      "optionen": [
+        "Tasks und Gateways",
+        "Ereignisse und Funktionen",
+        "Pools und Lanes",
+        "Konnektoren und Sequenzflüsse"
+      ],
+      "korrekt": 1,
+      "erklaerung": "In einer EPC (Ereignisgesteuerte Prozesskette) wechseln sich Ereignisse (passive Zustände wie ‚Bestellung eingegangen‘) und Funktionen (aktive Tätigkeiten wie ‚Bestellung prüfen‘) zwingend ab. Diese Strenge ist gleichzeitig Stärke (klare Abfolge) und Schwäche (kann sperrig wirken).",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · EPC-Grundlagen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "EPC Basiselemente"
+    },
+    {
+      "id": "q04",
+      "frage": "Welches BPMN-Symbol stellt ein Startereignis dar?",
+      "optionen": [
+        "Ein abgerundetes Rechteck",
+        "Ein Kreis mit dünner Linie",
+        "Eine Raute mit X",
+        "Ein Sechseck"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Startereignisse sind in BPMN als Kreis mit dünner einfacher Linie dargestellt. Endereignisse haben dagegen eine dicke Linie. Tasks sind abgerundete Rechtecke, Gateways Rauten, das Sechseck gehört zur EPC (Ereignis).",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Symbole",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Basiselemente"
+    },
+    {
+      "id": "q05",
+      "frage": "Welches BPMN-Symbol stellt eine Aktivität (Task) dar?",
+      "optionen": [
+        "Ein abgerundetes Rechteck",
+        "Ein Kreis",
+        "Eine Raute",
+        "Ein Sechseck"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Tasks sind in BPMN abgerundete Rechtecke. Sie werden nach der Regel Verb + Objekt benannt (‚Lagerbestand prüfen‘). Kreise stehen für Ereignisse, Rauten für Gateways, Sechsecke gehören zur EPC.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Symbole",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Basiselemente"
+    },
+    {
+      "id": "q06",
+      "frage": "Welches Symbol bedeutet in BPMN eine exklusive Entscheidung (genau ein Pfad)?",
+      "optionen": [
+        "Ein Pfeil",
+        "Ein XOR-Gateway (Raute mit X)",
+        "Ein Kreis",
+        "Eine Lane"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das XOR-Gateway ist eine Raute mit einem ‚X‘ in der Mitte und bedeutet, dass genau einer der ausgehenden Pfade ausgeführt wird. Pfeile sind Sequenzflüsse, Kreise sind Ereignisse, Lanes sind Verantwortungs-Container.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Gateways",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Gateways"
+    },
+    {
+      "id": "q07",
+      "frage": "In EPC: Was wird typischerweise als Sechseck dargestellt?",
+      "optionen": [
+        "Eine Funktion (Tätigkeit)",
+        "Ein Ereignis (Zustand)",
+        "Ein Konnektor",
+        "Eine Rolle"
+      ],
+      "korrekt": 1,
+      "erklaerung": "In der EPC werden Ereignisse als Sechseck dargestellt — sie beschreiben Zustände wie ‚Bestellung eingegangen‘. Funktionen sind Rechtecke, Konnektoren sind Kreise mit AND/OR/XOR-Symbol, Rollen werden über Organisationseinheiten ergänzt.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · EPC-Symbole",
+      "schwierigkeit": "leicht",
+      "thema_tag": "EPC Basiselemente"
+    },
+    {
+      "id": "q08",
+      "frage": "In EPC: Was wird typischerweise als Rechteck dargestellt?",
+      "optionen": [
+        "Ein Ereignis",
+        "Eine Funktion (Tätigkeit)",
+        "Ein Konnektor",
+        "Eine Datei"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Funktionen sind in der EPC abgerundete Rechtecke — sie beschreiben aktive Tätigkeiten wie ‚Bestellung prüfen‘. Sie wechseln sich strikt mit Ereignissen ab. Ein Ereignis wird als Sechseck dargestellt, Konnektoren als Kreise mit AND/OR/XOR.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · EPC-Symbole",
+      "schwierigkeit": "leicht",
+      "thema_tag": "EPC Basiselemente"
+    },
+    {
+      "id": "q09",
+      "frage": "Welche Notation ist aus der IT-/Automatisierungsecke entstanden und explizit für direkte Ausführbarkeit konzipiert?",
+      "optionen": [
+        "EPC",
+        "BPMN",
+        "UML-Klassendiagramm",
+        "ER-Modell"
+      ],
+      "korrekt": 1,
+      "erklaerung": "BPMN 2.0 ist als ausführbare Notation konzipiert. Process Engines wie Camunda oder Flowable interpretieren BPMN-XML direkt zur Laufzeit. EPC ist business-näher und nicht direkt ausführbar; UML und ER haben einen ganz anderen Modellierungszweck.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN vs EPC",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN vs EPC"
+    },
+    {
+      "id": "q10",
+      "frage": "Welche Notation arbeitet strikt mit dem Wechsel Ereignis-Funktion-Ereignis?",
+      "optionen": [
+        "BPMN",
+        "EPC",
+        "Flowchart",
+        "UML-Aktivitätsdiagramm"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die EPC verlangt strikt den Wechsel von Ereignis und Funktion. Jede Funktion wird durch ein Ereignis ausgelöst und erzeugt ein neues Ereignis. BPMN, Flowcharts und UML-Aktivitätsdiagramme arbeiten ohne diese strikte Abwechslungspflicht.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · EPC-Grundlagen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "EPC Basiselemente"
+    },
+    {
+      "id": "q11",
+      "frage": "Was beschreibt eine Lane in BPMN?",
+      "optionen": [
+        "Einen zeitlichen Abschnitt im Prozess",
+        "Eine Rolle oder Organisationseinheit, die für die enthaltenen Tasks verantwortlich ist",
+        "Einen alternativen Pfad bei einer Entscheidung",
+        "Eine optionale Schleife"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Lane ist eine horizontale (oder vertikale) Unterteilung innerhalb eines Pools und steht für eine Rolle oder Organisationseinheit. Jeder Task in einer Lane gehört in die Verantwortung dieser Rolle. So macht BPMN Verantwortung sichtbar.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Lanes",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Pools Lanes"
+    },
+    {
+      "id": "q12",
+      "frage": "Was unterscheidet einen Pool von einer Lane in BPMN?",
+      "optionen": [
+        "Es gibt keinen Unterschied",
+        "Ein Pool stellt einen Beteiligten/eine Organisation dar, eine Lane eine Rolle oder Abteilung darin",
+        "Ein Pool ist immer leer, eine Lane ist gefüllt",
+        "Ein Pool ist horizontal, eine Lane vertikal — sonst identisch"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Pool repräsentiert in BPMN einen ‚Beteiligten‘ (z. B. eine Organisation wie ‚Kunde‘ oder ‚NovaParts‘). Lanes sind Unterabschnitte innerhalb eines Pools und stehen für Rollen oder Abteilungen. Zwischen zwei Pools fließen Nachrichten, innerhalb eines Pools Sequenzflüsse.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Pools",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Pools Lanes"
+    },
+    {
+      "id": "q13",
+      "frage": "Welche Benennungsregel gilt für Tasks in einem BPMN-Modell?",
+      "optionen": [
+        "Substantiv allein (z. B. ‚Bestellung‘)",
+        "Verb + Objekt (z. B. ‚Bestellung prüfen‘)",
+        "Adjektiv + Substantiv (z. B. ‚schnelle Lieferung‘)",
+        "Beliebige Bezeichnung, solange eindeutig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Tasks werden nach dem Muster Verb + Objekt benannt — also als Tätigkeit, die jemand ausführt: ‚Lagerbestand prüfen‘, ‚Rechnung erstellen‘. Reine Substantive (‚Bestellung‘) sind keine Tätigkeiten; sie würden besser als Ereignis oder Datenobjekt modelliert.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Benennungsregeln",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Benennungsregeln"
+    },
+    {
+      "id": "q14",
+      "frage": "Welche Formulierung ist eine korrekte Zustandsbeschreibung im Sinne eines EPC-Ereignisses?",
+      "optionen": [
+        "Bestellung prüfen",
+        "Bestellung eingegangen",
+        "Bestellung anlegen",
+        "Bestellung senden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "‚Bestellung eingegangen‘ ist ein Zustand, also ein Ereignis. Die anderen Formulierungen sind aktive Tätigkeiten und gehören zu Funktionen (in EPC) bzw. Tasks (in BPMN). Ereignisse beschreiben, was passiert ist; Funktionen beschreiben, was getan wird.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · EPC-Ereignisse",
+      "schwierigkeit": "leicht",
+      "thema_tag": "EPC Basiselemente"
+    },
+    {
+      "id": "q15",
+      "frage": "Wofür stehen die drei klassischen EPC-Konnektoren?",
+      "optionen": [
+        "AND, OR, XOR",
+        "IF, THEN, ELSE",
+        "GO, NO-GO, MAYBE",
+        "Plus, Minus, Equal"
+      ],
+      "korrekt": 0,
+      "erklaerung": "In der EPC werden Verzweigungen durch die drei Konnektoren AND (parallel — alle Pfade), OR (inklusiv — einer oder mehrere) und XOR (exklusiv — genau einer) modelliert. Sie entsprechen den Gateway-Typen in BPMN.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · EPC-Konnektoren",
+      "schwierigkeit": "leicht",
+      "thema_tag": "EPC Konnektoren"
+    },
+    {
+      "id": "q16",
+      "frage": "Was ist die zentrale Aussage eines XOR-Gateways?",
+      "optionen": [
+        "Alle Pfade werden gleichzeitig durchlaufen",
+        "Genau einer der Pfade wird durchlaufen",
+        "Beliebig viele Pfade werden durchlaufen",
+        "Keiner der Pfade wird durchlaufen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "XOR steht für ‚exklusives Oder‘. Es bedeutet: genau einer der möglichen Pfade wird ausgeführt — die Entscheidung muss eindeutig sein. AND bedeutet ‚alle Pfade parallel‘, OR bedeutet ‚einer oder mehrere‘.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Gateways",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Gateways"
+    },
+    {
+      "id": "q17",
+      "frage": "Welcher Modellierungszweck verlangt typischerweise den höchsten Detailgrad?",
+      "optionen": [
+        "Dokumentation für neue Mitarbeitende",
+        "Strategische Diskussion mit dem Management",
+        "Automatisierung über eine Process Engine",
+        "Marketing-Material für die Außenkommunikation"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Wenn ein Prozess automatisiert ausgeführt werden soll, muss jede Verzweigung, jedes Datenfeld und jede Ausnahme exakt modelliert sein — sonst läuft die Engine nicht. Dokumentation und Management-Sicht bleiben bewusst gröber, weil sie auf Verständlichkeit zielen.",
+      "quelle": "Tag 1 · UE 4 Coaching · Modellierungszweck",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Modellierungszweck"
+    },
+    {
+      "id": "q18",
+      "frage": "Welche Aussage über Modellqualität ist FALSCH?",
+      "optionen": [
+        "Tasks sollten nach Verb + Objekt benannt werden",
+        "Pfade dürfen sich ohne sichtbares Gateway verzweigen",
+        "Rollen sollten über Lanes sichtbar sein",
+        "Der Modellzweck bestimmt die nötige Detailtiefe"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Verzweigungen ohne sichtbares Gateway sind ein klassischer Qualitätsfehler — der Leser kann nicht erkennen, wann welcher Pfad gewählt wird. Verb+Objekt-Benennung, Rollen in Lanes und zweckgerechte Detailtiefe sind dagegen Qualitätsmerkmale.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Modellqualität",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Modellqualität"
+    },
+    {
+      "id": "q19",
+      "frage": "Was beschreibt ein Sequenzfluss in BPMN?",
+      "optionen": [
+        "Eine Übergabe zwischen zwei Organisationen",
+        "Den geordneten Übergang von einem Element zum nächsten innerhalb desselben Pools",
+        "Einen optionalen Pfad",
+        "Eine Zeitangabe"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Sequenzfluss (durchgezogener Pfeil) verbindet Elemente innerhalb desselben Pools und zeigt die Reihenfolge der Ausführung. Übergaben zwischen verschiedenen Pools laufen dagegen über Nachrichtenflüsse (gestrichelte Pfeile).",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Flüsse",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Basiselemente"
+    },
+    {
+      "id": "q20",
+      "frage": "Was beschreibt ein Nachrichtenfluss in BPMN?",
+      "optionen": [
+        "Den Übergang zwischen zwei Elementen innerhalb desselben Pools",
+        "Den Austausch von Informationen zwischen zwei Pools (Beteiligten)",
+        "Eine Zeitangabe",
+        "Eine Schleife im Prozess"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Nachrichtenfluss (gestrichelter Pfeil) verbindet zwei verschiedene Pools und stellt den Informationsaustausch dar — etwa ‚Bestellung senden‘ vom Pool ‚Kunde‘ zum Pool ‚NovaParts‘. Innerhalb eines Pools wird stattdessen ein Sequenzfluss genutzt.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Flüsse",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Basiselemente"
+    },
+    {
+      "id": "q21",
+      "frage": "Welcher EPC-Konnektor entspricht funktional einem AND-Gateway in BPMN?",
+      "optionen": [
+        "XOR",
+        "OR",
+        "AND (parallele Ausführung mehrerer Pfade)",
+        "In EPC gibt es keine Konnektoren"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Der AND-Konnektor in EPC entspricht dem parallelen AND-Gateway in BPMN: alle ausgehenden Pfade werden gleichzeitig ausgeführt und müssen zusammengeführt werden, bevor der Prozess weiterlaufen kann. XOR steht für ‚genau einer‘, OR für ‚einer oder mehrere‘.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Konnektoren vs Gateways",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN vs EPC"
+    },
+    {
+      "id": "q22",
+      "frage": "Welche Aussage über AND-Gateways trifft zu?",
+      "optionen": [
+        "Genau einer der ausgehenden Pfade wird ausgeführt",
+        "Alle ausgehenden Pfade werden parallel ausgeführt und müssen alle abgeschlossen sein, bevor zusammengeführt wird",
+        "Es wird zufällig ein Pfad gewählt",
+        "AND-Gateways sind nur in EPC erlaubt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein AND-Gateway (Raute mit ‚+‘) öffnet alle ausgehenden Pfade parallel. Ein zusammenführendes AND-Gateway wartet auf den Abschluss aller eingehenden Pfade, bevor es weitergeht — das ist die typische Stelle, an der Modellierungsfehler die Synchronisation kaputtmachen.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Gateways",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN Gateways"
+    },
+    {
+      "id": "q23",
+      "frage": "Was ist ein typisches Anzeichen für ein „zu fein“ modelliertes Prozessmodell?",
+      "optionen": [
+        "Jeder UI-Klick wird als eigener Task abgebildet",
+        "Es gibt keine Gateways",
+        "Es gibt nur einen einzigen Task",
+        "Es gibt keine Pools"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Wenn jeder UI-Klick oder Mausbewegung modelliert wird, altert das Modell mit jeder Oberflächenänderung und wird unleserlich. Die Faustregel: Modelliere Geschäftslogik (was getan wird), nicht Bedienung (wie geklickt wird).",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Modellqualität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellqualität"
+    },
+    {
+      "id": "q24",
+      "frage": "Was ist ein typisches Anzeichen für ein „zu grob“ modelliertes Prozessmodell?",
+      "optionen": [
+        "Tasks heißen klar Verb + Objekt",
+        "Wichtige Entscheidungen sind in einem einzigen Sammeltask wie ‚Antrag bearbeiten‘ versteckt",
+        "Es gibt mehrere Lanes",
+        "Es gibt Endereignisse"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wenn unter einem Sammeltask wie ‚Antrag bearbeiten‘ in Wirklichkeit Prüfung, Entscheidung und Eskalation stecken, ist die Steuerungswirkung des Modells dahin — niemand sieht, wer entscheidet oder wo es klemmt. Solche Tasks gehören aufgesplittet.",
+      "quelle": "Tag 1 · UE 2 Arbeitsauftrag 1 · Granularität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellqualität"
+    },
+    {
+      "id": "q25",
+      "frage": "Welche Eigenschaft sollte die Verzweigungsbedingung an einem XOR-Gateway haben?",
+      "optionen": [
+        "Sie sollte möglichst unklar sein, um Spielraum zu lassen",
+        "Sie sollte auf einem prüfbaren Datenwert oder Status basieren",
+        "Sie sollte nur mündlich kommuniziert werden",
+        "Sie sollte sich täglich ändern"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine gute XOR-Bedingung ist eindeutig prüfbar: ‚Antragswert > 10.000 €?‘ oder ‚Status = bestätigt?‘. So wird die Entscheidung nachvollziehbar und das Modell ist auch automatisierbar. Unklare Bedingungen führen zu Schattenentscheidungen.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Gateway-Qualität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN Gateways"
+    },
+    {
+      "id": "q26",
+      "frage": "Welche Notation eignet sich besser, wenn das Modell direkt von einer Process Engine ausgeführt werden soll?",
+      "optionen": [
+        "EPC",
+        "BPMN 2.0",
+        "Beide gleichermaßen",
+        "Keine von beiden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "BPMN 2.0 ist als ausführbarer Standard konzipiert — Engines wie Camunda interpretieren das BPMN-XML direkt. EPC ist konzeptionell und nicht direkt ausführbar, eignet sich aber besser für business-orientierte Übersichten.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN vs EPC",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN vs EPC"
+    },
+    {
+      "id": "q27",
+      "frage": "Welche Notation eignet sich tendenziell besser für ein business-orientiertes Management-Publikum, das schnell verstehen will, was wann passiert?",
+      "optionen": [
+        "BPMN mit sehr detaillierten Datenflüssen",
+        "EPC mit ereignisgetriebener Sicht",
+        "Quellcode",
+        "UML-Klassendiagramm"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die EPC ist business-nah und macht über die Ereigniskette intuitiv klar, was passiert und in welcher Reihenfolge. BPMN ist mächtiger und ausführbarer, aber für Management oft zu technisch. Quellcode und Klassendiagramme sind hier ungeeignet.",
+      "quelle": "Tag 1 · UE 4 Coaching · Zielgruppenwahl",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN vs EPC"
+    },
+    {
+      "id": "q28",
+      "frage": "Was beschreibt eine Schleife im Prozessmodell?",
+      "optionen": [
+        "Eine Rückführung vom Ende zum Start mit definierter Abbruchbedingung",
+        "Einen zweiten parallelen Pfad",
+        "Eine Datentabelle",
+        "Einen Sequenzfluss in eine Lane"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Eine Schleife führt einen Teil des Prozesses wiederholt aus, bis eine Abbruchbedingung erfüllt ist — typischerweise ‚zurück zur Prüfung, bis bestanden‘. Wichtig: ohne klare Abbruchbedingung wird die Schleife im worst case unendlich (Modellierungsfehler).",
+      "quelle": "Tag 1 · UE 5 Fallstudie · Iteration",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN Gateways"
+    },
+    {
+      "id": "q29",
+      "frage": "Was bedeutet „Granularität“ in der Prozessmodellierung?",
+      "optionen": [
+        "Die Anzahl der beteiligten Personen",
+        "Der Detailgrad bzw. wie feinkörnig die Tasks beschrieben werden",
+        "Die Reihenfolge der Tasks",
+        "Die Farbe der Symbole"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Granularität ist die wichtigste Steuerungsentscheidung in der Modellierung: wie detailliert wird ein Task aufgeschlüsselt? Die richtige Granularität hängt vom Modellierungszweck ab — für Doku grob, für Automatisierung fein.",
+      "quelle": "Tag 1 · UE 4 Coaching · Granularität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellqualität"
+    },
+    {
+      "id": "q30",
+      "frage": "Was muss bei einem zusammenführenden AND-Gateway passieren, bevor der Prozess weiterläuft?",
+      "optionen": [
+        "Der schnellste Pfad muss abgeschlossen sein",
+        "Alle eingehenden Pfade müssen abgeschlossen sein",
+        "Nur einer der eingehenden Pfade muss abgeschlossen sein",
+        "Keiner — der Prozess läuft sofort weiter"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das zusammenführende AND-Gateway synchronisiert parallele Pfade: erst wenn alle eingehenden Pfade abgeschlossen sind, geht der Prozess weiter. Wer hier versehentlich ein XOR setzt, lässt die parallelen Pfade ‚vergessen‘ — klassischer Modellierungsfehler.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Gateways",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN Gateways"
+    },
+    {
+      "id": "q31",
+      "frage": "Welcher Qualitätsfehler liegt vor, wenn ein Task schlicht „Klärung“ heißt?",
+      "optionen": [
+        "Falsche Notation",
+        "Mehrdeutige Benennung — kein Verb, kein konkretes Objekt",
+        "Fehlendes Gateway",
+        "Fehlendes Endereignis"
+      ],
+      "korrekt": 1,
+      "erklaerung": "‚Klärung‘ ist mehrdeutig: Wer klärt? Was wird geklärt? Wann ist es erledigt? Die Verb+Objekt-Regel verlangt z. B. ‚Lieferadresse klären‘. Klar benannte Tasks sind die Voraussetzung für vergleichbare und steuerbare Modelle.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · Benennungsregeln",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Benennungsregeln"
+    },
+    {
+      "id": "q32",
+      "frage": "Was ist ein Endereignis in BPMN?",
+      "optionen": [
+        "Eine Raute mit X",
+        "Ein Kreis mit dicker Linie (Endsymbol je nach Endtyp)",
+        "Ein abgerundetes Rechteck",
+        "Endereignisse gibt es in BPMN nicht"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Endereignisse sind in BPMN Kreise mit dicker Linie. Es gibt verschiedene Endtypen (Standard-Ende, Nachricht, Fehler, Eskalation, Terminate). Jeder Prozesspfad muss zwingend in einem Endereignis enden — sonst ist das Modell technisch unvollständig.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Symbole",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN Basiselemente"
+    },
+    {
+      "id": "q33",
+      "frage": "Welche Aussage zum „Modellierungszweck als Leitplanke“ stimmt?",
+      "optionen": [
+        "Der Zweck ist im Modellierungsprozess egal",
+        "Der Zweck bestimmt Detailgrad, Notationswahl und Zielgruppen-Sprache",
+        "Der Zweck wird nachträglich definiert",
+        "Der Zweck ist immer Compliance"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Modellierungszweck steuert fast alle weiteren Entscheidungen: Soll das Modell automatisierbar sein? Soll das Management einen Überblick bekommen? Soll Compliance nachgewiesen werden? Ohne diese Klärung am Anfang entstehen Modelle, die keiner Zielgruppe wirklich dient.",
+      "quelle": "Tag 1 · UE 4 Coaching · Modellierungszweck",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellierungszweck"
+    },
+    {
+      "id": "q34",
+      "frage": "Welche Fragen sollte ein Reviewer eines Prozessmodells beantworten können?",
+      "optionen": [
+        "‚Welche Farbe haben die Symbole?‘",
+        "‚Wer trägt für welchen Schritt Verantwortung, und an welcher Stelle wird entschieden?‘",
+        "‚Wie viele Klicks brauche ich?‘",
+        "‚Welche Software wurde benutzt?‘"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein gutes Modell beantwortet zwei zentrale Fragen ohne Zusatzdokumentation: Wer ist verantwortlich? Wo wird entschieden? Wenn der Reviewer das nicht beantworten kann, hat das Modell ein Steuerungs- bzw. Verantwortungsproblem.",
+      "quelle": "Tag 1 · UE 7 Feedback · Review-Kriterien",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellqualität"
+    },
+    {
+      "id": "q35",
+      "frage": "Wie verhält sich Process Mining konzeptionell zu BPMN/EPC?",
+      "optionen": [
+        "Es ersetzt manuelle Modellierung vollständig",
+        "Es rekonstruiert reale Prozesse aus Logdaten und ergänzt damit die Modellierung — Soll-Modell vs. Ist-Modell wird vergleichbar",
+        "Es ist automatische Code-Generierung",
+        "Es ist Druck-Aufbereitung von Modellen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Process Mining nutzt Logdaten aus IT-Systemen, um den real gelebten Prozess (Ist) zu rekonstruieren. Zusammen mit dem modellierten Soll-Prozess macht das Abweichungen sichtbar — eine starke Datenquelle für Optimierung und Compliance.",
+      "quelle": "Tag 1 · UE 4 Coaching · Process Mining (Ausblick)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Grundlagen Prozess"
+    },
+    {
+      "id": "q36",
+      "frage": "Was ist ein typischer Vorteil eines EPC-Modells gegenüber einem BPMN-Modell?",
+      "optionen": [
+        "Direkte Ausführbarkeit in Process Engines",
+        "Business-Nähe und einfache Verständlichkeit für den Fachbereich",
+        "Bessere IT-Schnittstellen-Integration",
+        "Mehr Symbole für jeden Sonderfall"
+      ],
+      "korrekt": 1,
+      "erklaerung": "EPC hat weniger Symbole und eine intuitive Ereignis-Funktions-Kette — dadurch verstehen Fachbereichsmitarbeitende EPC oft schneller. Ausführbarkeit und IT-Integration sind dagegen klar BPMN-Stärken.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN vs EPC",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN vs EPC"
+    },
+    {
+      "id": "q37",
+      "frage": "Welches Risiko entsteht, wenn ein Modell ohne explizite Annahmen erstellt wird?",
+      "optionen": [
+        "Es wird zu groß",
+        "Spätere Leser interpretieren die fehlende Information unterschiedlich, Entscheidungen werden inkonsistent",
+        "Es wird zu schön",
+        "Es wird zu schnell fertig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wenn Annahmen unsichtbar bleiben, raten verschiedene Leser unterschiedlich — und treffen daraus widersprüchliche Entscheidungen. Die Faustregel: Annahmen explizit als Notizen ans Modell, sodass jeder Leser denselben Kontext hat.",
+      "quelle": "Tag 1 · UE 4 Coaching · Annahmen sichtbar machen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellqualität"
+    },
+    {
+      "id": "q38",
+      "frage": "Welche Strategie hilft beim „Entscheiden unter Unsicherheit“ während der Modellierung?",
+      "optionen": [
+        "Solange warten, bis alle Daten gesammelt sind",
+        "Annahmen explizit dokumentieren und mit Frühwarnsignalen verknüpfen",
+        "Die Modellierung verschieben",
+        "Nur AND-Gateways nutzen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Modellierer entscheiden trotz fehlender Information — aber sichtbar: ‚Annahme A‘ + Trigger X (‚falls X eintritt, Modell nachsteuern‘). So bleibt das Modell handlungsfähig, ohne falsche Sicherheit vorzutäuschen.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Entscheiden unter Unsicherheit",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q39",
+      "frage": "Wann ist ein OR-Gateway gegenüber einem XOR sinnvoll?",
+      "optionen": [
+        "Immer als Standardwahl",
+        "Nie",
+        "Nur wenn mehrere Pfade gleichzeitig oder alternativ relevant sein können — vorsichtig, weil die Logik schnell unklar wird",
+        "Nur am Anfang eines Prozesses"
+      ],
+      "korrekt": 2,
+      "erklaerung": "OR bedeutet ‚einer oder mehrere‘. Beispiel: ‚Kunde bekommt Rabatt UND/ODER kostenlosen Versand‘. OR ist mächtig, aber riskant — die Implementierung und Synchronisation ist schwierig. Im Zweifel besser zwei separate XOR-Verzweigungen modellieren.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN-Gateways",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN Gateways"
+    },
+    {
+      "id": "q40",
+      "frage": "Wie sieht ein „Sweet Spot“ in der Modellierungs-Granularität aus?",
+      "optionen": [
+        "Genau 10 Tasks pro Modell",
+        "Das Modell zeigt alle Entscheidungen und Verantwortlichkeiten klar, ohne UI-Details abzubilden",
+        "Maximaler Detailgrad in jedem Bereich",
+        "Nur eine einzige Lane"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Sweet Spot ist erreicht, wenn ein Außenstehender ohne Zusatzdoku versteht, wer was entscheidet und welche Pfade es gibt — und gleichzeitig keine UI-Bedienschritte das Modell aufblähen. Ein guter Test: Würde sich das Modell ändern, wenn die Bedienoberfläche umgebaut wird? Wenn ja, ist es zu fein.",
+      "quelle": "Tag 1 · UE 4 Coaching · Granularität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellqualität"
+    },
+    {
+      "id": "q41",
+      "frage": "Welche Modellierungsentscheidung hat erfahrungsgemäß den größten Einfluss auf spätere Kosten und Risiken?",
+      "optionen": [
+        "Die Farbwahl der Symbole",
+        "Die Festlegung von Verantwortlichkeiten und Entscheidungsgates",
+        "Die Form der Symbole",
+        "Die Schriftart im Modell"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wer verantwortet, wer entscheidet, wer kann eskalieren — diese Designentscheidungen schlagen sich später in Durchlaufzeiten, Fehlerkosten und Audit-Findings nieder. Farben, Formen und Schriftarten sind kosmetisch, aber nicht strategisch.",
+      "quelle": "Tag 1 · UE 4 Coaching · Reflexion",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q42",
+      "frage": "Was sollte ein Reviewer bei einer fehlenden Information im Modell tun?",
+      "optionen": [
+        "Sie ignorieren",
+        "Eine Annahme treffen, sie explizit als solche markieren und eine Klärungsfrage notieren",
+        "Das Modell verwerfen",
+        "Den Prozess komplett umbauen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Reviewer treffen Annahmen pragmatisch — aber sichtbar als Annahme und mit offener Frage zur Klärung. So bleibt der Reviewprozess produktiv, und die unsicheren Stellen sind dokumentiert statt verschüttet.",
+      "quelle": "Tag 1 · UE 7 Feedback · Reviewhaltung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellqualität"
+    },
+    {
+      "id": "q43",
+      "frage": "Wie nennt man die bewusste Entscheidung, an einer bestimmten Stelle NICHT weiter zu detaillieren?",
+      "optionen": [
+        "Underflow",
+        "Granularitätsentscheidung bzw. bewusster Modellierungs-Stop",
+        "Modell-Crash",
+        "Lazy Loading"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine bewusste Granularitätsentscheidung sagt: ‚An dieser Stelle reicht der Detailgrad — weiter detailliert wird nur in einem Sub-Prozess oder gar nicht.‘ Das ist ein Senior-Skill, weil es Komplexität bewusst beherrscht statt unkontrolliert wachsen zu lassen.",
+      "quelle": "Tag 1 · UE 4 Coaching · Granularität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellqualität"
+    },
+    {
+      "id": "q44",
+      "frage": "Welches Modell ist anschlussfähiger für eine spätere Automatisierung?",
+      "optionen": [
+        "Ein grobes EPC ohne Datenobjekte",
+        "Ein präzises BPMN mit definierten Gateways, Datenflüssen und Rollen",
+        "Ein Flowchart in PowerPoint",
+        "Eine Word-Liste"
+      ],
+      "korrekt": 1,
+      "erklaerung": "BPMN ist ausführbar; mit klaren Gateways, Datenobjekten und Rollen lässt sich das Modell direkt in eine Engine überführen. EPC, Flowcharts und Word-Listen müssten für die Automatisierung erst aufwendig in BPMN transformiert werden.",
+      "quelle": "Tag 1 · UE 1 Wissensvermittlung · BPMN vs EPC",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN vs EPC"
+    },
+    {
+      "id": "q45",
+      "frage": "Welche Information macht ein Modell als „Steuerungsinstrument“ für das Management nutzbar?",
+      "optionen": [
+        "Schöne Farben und großes Format",
+        "Sichtbare Entscheidungsgates, klare Verantwortlichkeiten und nachvollziehbare Datenflüsse",
+        "Möglichst viele Symbole",
+        "Eine externe Beschreibung in einem separaten Dokument"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Steuerung erfordert Sichtbarkeit: Wo wird entschieden, wer trägt Verantwortung, woran orientiert sich die Entscheidung? Wenn ein Modell diese drei Punkte zeigt, kann das Management eingreifen — sonst bleibt es eine schöne Skizze.",
+      "quelle": "Tag 1 · UE 5 Fallstudie · Steuerungspunkte",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q46",
+      "frage": "Eine Führungskraft sagt: „Modelliert mir den Innovation-to-Launch-Prozess, damit ich sehe, wo es klemmt.“ Welcher Modellierungszweck steht hier im Vordergrund?",
+      "optionen": [
+        "Compliance-Nachweis",
+        "Analyse und Steuerung — Sichtbarkeit von Engpässen und Entscheidungspunkten",
+        "Vollautomatisierung über eine Process Engine",
+        "Marketing-Material für die Außendarstellung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Führungskraft will Engpässe sehen — das ist klassisch Analyse/Steuerung. Compliance wäre ein anderer Zweck (Nachweisführung), Automatisierung wäre die Ausführungsperspektive. Wer den Zweck verwechselt, modelliert am Bedarf vorbei.",
+      "quelle": "Tag 1 · UE 5 Fallstudie · Modellierungszweck",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Modellierungszweck"
+    },
+    {
+      "id": "q47",
+      "frage": "Du modellierst einen Prozess für eine spätere RPA-Automatisierung. Welcher Aspekt ist besonders kritisch?",
+      "optionen": [
+        "Möglichst schöne Layouts",
+        "Strukturierte Daten, eindeutige Trigger und prüfbare Bedingungen an jedem Gateway",
+        "Möglichst viele Lanes",
+        "Möglichst wenige Tasks insgesamt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "RPA und Process Engines können nur ausführen, was eindeutig spezifiziert ist. Datenobjekte mit klarem Schema, getriggerte Starts und prüfbare XOR-Bedingungen sind die Voraussetzung — Layouts und Task-Anzahl sind dafür sekundär.",
+      "quelle": "Tag 1 · UE 4 Coaching · Automatisierung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Modellierungszweck"
+    },
+    {
+      "id": "q48",
+      "frage": "Welche Reihenfolge ist sinnvoll, wenn ein Modellierungs-Standard organisationsweit aufgebaut wird?",
+      "optionen": [
+        "Tool einkaufen → Mitarbeitende einarbeiten → Standards definieren",
+        "Zweck-/Zielgruppenlogik klären → Mindeststandards & Review-Prozess definieren → Tool wählen → Pilotbereich → Rollout",
+        "Tool einkaufen → sofort alle Prozesse modellieren → Standards später",
+        "Externe Beratung beauftragen → Reorganisation durchführen → dann BPMN"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Erst die inhaltliche Klärung (wozu, für wen, welche Standards), dann das Tooling. Wer mit dem Tool anfängt, baut sich an die Werkzeuglogik gewöhnen — und an Standards vorbei. Pilotbereich vor Rollout sorgt für Lernschleifen mit überschaubarem Risiko.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Governance-Aufbau",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q49",
+      "frage": "Welche Inhalte gehören zwingend in eine Modellierungs-Policy?",
+      "optionen": [
+        "Eine vollständige Liste aller Prozesse der Organisation",
+        "Benennungsregeln, Gateway-Verwendung, Lane-Konzept und Vorgabe zur Annahmen-Dokumentation",
+        "Eine Vorgabe für die Schriftgröße im Modell",
+        "Eine Maximal-Anzahl an Symbolen pro Modell"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine tragfähige Policy regelt die Substanz: Wie wird benannt, wie werden Gateways genutzt, wie werden Rollen über Lanes gezeigt, wie werden Annahmen dokumentiert? Vollständige Prozessinventare sind Sache des Tools/Repositorys, nicht der Policy.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Policy-Inhalte",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q50",
+      "frage": "Was ist die Hauptaufgabe eines „Process Owners“ in einer Governance-Struktur?",
+      "optionen": [
+        "Er erstellt jedes Modell selbst",
+        "Er trägt fachliche Verantwortung für Zielzustand, Qualität und Weiterentwicklung des Prozesses",
+        "Er kontrolliert nur Compliance",
+        "Er ist nur für die IT-Anbindung zuständig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Process Owner ist fachlich verantwortlich: Er definiert den Zielzustand, sorgt für die Modellqualität und steuert die Weiterentwicklung. Modellierung selbst macht meist ein dedizierter Modeler; Compliance und IT sind eigene Rollen mit eigenem Mandat.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Rollen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q51",
+      "frage": "Welche RACI-Rolle hat typischerweise der „Approver“ im Modellierungs-Review?",
+      "optionen": [
+        "Responsible (operativ ausführend)",
+        "Accountable (trifft die finale Freigabeentscheidung)",
+        "Consulted (wird befragt)",
+        "Informed (wird informiert)"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Approver ist Accountable — er entscheidet final über die Freigabe. Responsible ist der Modeler (operative Erstellung), Consulted der Reviewer (inhaltliche Prüfung), Informed sind nachgelagerte Stakeholder. Pro Modell gibt es genau einen Accountable.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Rollen & RACI",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q52",
+      "frage": "Welche Kennzahl misst die Wirksamkeit von Process Governance sinnvoll?",
+      "optionen": [
+        "Anzahl modellierter Prozesse pro Tag",
+        "Modellqualität (z. B. Review-Findings), Durchlaufzeit-Reduktion, Audit-Findings",
+        "Anzahl eingesetzter Tools",
+        "Anzahl Mitarbeitender im Modellierungsteam"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wirksamkeit zeigt sich in Qualität (sinkende Review-Findings), Wirkung auf den realen Prozess (kürzere Durchlaufzeiten) und Compliance (weniger Audit-Findings). Pure Mengenkennzahlen sind Aktivismus, kein Wert.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Erfolgskennzahlen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q53",
+      "frage": "Was ist ein „Schattenprozess“?",
+      "optionen": [
+        "Ein Prozess, der ausschließlich nachts läuft",
+        "Ein faktisch gelebter Prozess, der nicht modelliert oder genehmigt ist — Governance-Risiko",
+        "Ein dokumentierter Prozess mit minimalen Schritten",
+        "Ein vollständig automatisierter Prozess"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Schattenprozesse entstehen, wenn Mitarbeitende eigene, nicht offizielle Workarounds entwickeln. Sie sind nicht modelliert, nicht reviewed, nicht freigegeben — und damit ein Governance- und Compliance-Risiko, weil sie Audits und Standardisierung unterlaufen.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Risiken",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q54",
+      "frage": "Welche Maßnahme reduziert das Risiko von Schattenprozessen am wirksamsten?",
+      "optionen": [
+        "Mehr Modellierungs-Software einkaufen",
+        "Niedrigschwellige Modellierungsmöglichkeit plus klare Anreize, Prozesse offiziell aufzunehmen",
+        "Strengere Verbote von Eigeninitiative",
+        "Mehr Audit-Termine pro Quartal"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Schattenprozesse entstehen, weil der offizielle Weg zu langsam, zu schwer oder zu unbeliebt ist. Wer ihn niedrigschwellig macht und das Aufnehmen aktiv belohnt (statt sanktioniert), bekommt die Prozesse sichtbar. Verbote treiben Schattenprozesse nur weiter in den Untergrund.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Risikomanagement",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q55",
+      "frage": "Was bedeutet „Übermodellierung“ und welches Risiko bringt sie mit?",
+      "optionen": [
+        "Viele Modelle erstellen — kein nennenswertes Risiko",
+        "Zu viele Details und Modelle erzeugen — Akzeptanzverlust, Pflegekosten, Modelle altern ungenutzt",
+        "Mehrere Notationen parallel nutzen — immer ein Vorteil",
+        "Nur eine Notation nutzen — immer ein Nachteil"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Übermodellierung ist der häufigste „Erfolg, der scheitert“: alles ist modelliert, niemand pflegt es, der Wert sinkt, die Akzeptanz auch. Die Faustregel: Modelliere nur, was gepflegt wird, und für einen Zweck, der den Pflegeaufwand rechtfertigt.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Risiken",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q56",
+      "frage": "Was unterscheidet eine Modellierungs-Policy von einem Modellierungs-Standard?",
+      "optionen": [
+        "Beides ist dasselbe",
+        "Policy = Geltungsregeln und Governance (wer, wann, wofür); Standard = konkrete formale Regeln (Notation, Benennung, Symbolnutzung)",
+        "Policy ist für Software, Standard für Menschen",
+        "Es gibt keinen Standard, nur eine Policy"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Policy regelt das ‚wer, wann, wozu‘ (Geltungsbereich, Rollen, Freigabewege). Der Standard regelt das ‚wie‘ (Notation, Benennung, Symbolnutzung). Beide brauchen einander — Policy ohne Standard bleibt unverbindlich, Standard ohne Policy wird ignoriert.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Policy vs Standard",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q57",
+      "frage": "Welches Risiko gehört typischerweise zu den Top-5 bei der Einführung von Process Governance?",
+      "optionen": [
+        "Hohe Stromkosten",
+        "Akzeptanzprobleme in den Fachbereichen",
+        "Mangel an Druckerpatronen",
+        "Zu viele Pools"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Akzeptanz ist fast immer der kritische Faktor: wenn die Fachbereiche die Governance nicht mittragen, bleibt sie Papier. Stromkosten, Druck und Pool-Anzahl sind irrelevant; Übermodellierung und Schattenprozesse wären weitere typische Top-5-Risiken.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Risiken",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q58",
+      "frage": "Bei begrenztem Budget und Zeitdruck: Welche zwei Maßnahmen liefern den größten Hebel auf Process-Governance-Reife?",
+      "optionen": [
+        "Vollständige Tool-Einführung plus Lizenzkauf in allen Bereichen",
+        "Verbindliche Modellierungs-Policy plus standardisierter Review-Prozess auf einem oder zwei Pilotbereichen",
+        "Externe Beratung plus neue Organisationsstruktur",
+        "Massentraining aller Mitarbeitenden ohne Pilot"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Hoher Hebel bei minimalem Aufwand: Policy + Review-Prozess + 1-2 Piloten. So zeigt sich die Wirkung, ohne dass die ganze Organisation sofort umgekrempelt werden muss. Tool- oder Massenmaßnahmen kommen sinnvoll erst nach dieser ‚Minimum Governance‘-Phase.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Prioritäten unter Restriktionen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q59",
+      "frage": "Was ist ein „Frühwarnsignal“ im Kontext „Entscheiden unter Unsicherheit“?",
+      "optionen": [
+        "Ein zufälliges Ereignis",
+        "Ein vorab definierter Trigger, dessen Eintritt anzeigt, dass eine Annahme nicht mehr trägt — Anlass zum Nachsteuern",
+        "Eine Strafe für falsche Entscheidungen",
+        "Ein zusätzlicher Audit-Termin"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Frühwarnsignale machen Annahmen handlungsfähig: ‚Wir gehen davon aus, dass X. Falls aber Indikator Y > Schwelle steigt, ist die Annahme widerlegt und wir steuern nach.‘ Das schützt vor stillen Fehlentwicklungen und ist ein Senior-Skill.",
+      "quelle": "Tag 1 · UE 8 Transferprojekt · Entscheiden unter Unsicherheit",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q60",
+      "frage": "Du hast 90 Sekunden vor dem Vorstand, um die Einführung von Process Modeling Governance zu empfehlen. Welche Linie überzeugt am ehesten?",
+      "optionen": [
+        "„Modellieren wir alles, was nicht niet- und nagelfest ist.“",
+        "„Klare Policy, kleiner Pilot mit messbarer Wirkung, lernender Rollout — und Verantwortung über RACI sichtbar machen.“",
+        "„Erst Reorganisation, dann Modellierung.“",
+        "„Modellierung ist Sache der IT — kein Vorstandsthema.“"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vorstandsempfehlungen brauchen klare Linie, sichtbaren Hebel und überschaubares Risiko: Policy + Pilot + Rollout + RACI. ‚Alles modellieren‘ ist Aktivismus, Reorganisation als Vorbedingung ist Verzögerung, ‚IT-Sache‘ unterschätzt die Strategierelevanz.",
+      "quelle": "Tag 1 · UE 7 Feedback · 90-Sekunden-Empfehlung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    }
+  ]
+}

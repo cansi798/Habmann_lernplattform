@@ -1,0 +1,753 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 1 - Loesungsheft
+% BPMN 2.0 & EPC (Einordnung, Basiselemente, Modell-Qualitaet, Zweckorientierung)
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+% Kurs-71 Akzent: orange (#9d4a1a)
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Musterloesungs-Box: gruen-weiss
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 1}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}BPMN 2.0 \& EPC}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 1 \textperiodcentered{} TAG 1 VON 3 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 28.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 1\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} BPMN 2.0,\\EPC und Modellqualit\"at.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 1}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- Anleitung -----------------------------------------------------------
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterl\"osungen sind \emph{eine} m\"ogliche, didaktisch nachvollziehbare L\"osung \textendash{} sie sind nicht die einzig richtige. Insbesondere auf L2 und L3 sind mehrere Begr\"undungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den im Lehrskript eingef\"uhrten Begriffsapparat (BPMN-Notation, EPC-Logik, GoM) sauber nutzen,
+  \item Annahmen explizit machen, statt sie zu verschleiern,
+  \item Zielkonflikte (z.\,B.\ Klarheit vs.\ Vollst\"andigkeit, Dokumentation vs.\ Automatisierung) benennen, statt sie wegzudefinieren,
+  \item zu einer klar formulierten Entscheidung f\"uhren \textendash{} nicht blo{\ss} zu einer Beschreibung.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihre Argumentation ab? Ist die Abweichung eine andere Annahme \textendash{} oder ein Denkfehler? Genau dort entsteht der Lerneffekt.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Notationselemente zuordnen}{\nivLi}{8\,min}
+
+\noindent Ordnen Sie die acht BPMN-Notationselemente unten jeweils ihrer korrekten Bedeutung zu.
+
+\ytquery{BPMN 2.0 Notation Symbole Erklaerung Start Event Task Gateway Pool Lane}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}p{3.4cm}X@{}}
+\toprule
+\textbf{Element} & \textbf{Symbol} & \textbf{Bedeutung / Erkennungsmerkmal} \\
+\midrule
+Start-Event       & d\"unner Kreis            & L\"ost den Prozess aus \textendash{} ein Trigger (Nachricht, Zeit, Bedingung). Genau \emph{ein} Pfeil verl\"asst das Symbol. \\
+Activity (Task)   & abgerundetes Rechteck     & Eine T\"atigkeit, benannt mit Verb + Objekt (``Bestellung pr\"ufen''). \\
+Gateway           & Raute (X / + / O)         & Entscheidung oder Synchronisation. XOR\,(\textbf{X}) = entweder/oder, AND\,(\textbf{+}) = parallel, OR\,(\textbf{O}) = ein/mehrere. \\
+End-Event         & dicker Kreis              & Erreichter Endzustand. Pfeile gehen \emph{hinein}, keiner heraus. \\
+Sequence Flow     & durchgezogener Pfeil      & Reihenfolge \emph{innerhalb} eines Pools. \\
+Message Flow      & gestrichelter Pfeil (offene Spitze) & Nachricht \emph{zwischen} Pools \textendash{} verbindet Beteiligte. \\
+Pool              & gro{\ss}er Rahmen          & Ein Beteiligter / eine Organisation (``Kunde'', ``B\"ucherklick GmbH''). \\
+Lane              & Streifen \emph{im} Pool   & Rolle / Abteilung innerhalb eines Beteiligten (``Vertrieb'', ``Lager''). \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\emph{Merksatz:} Pool = wer ist beteiligt, Lane = wer aus diesem Beteiligten macht es. Sequence Flow bleibt im Pool; Message Flow \"uberquert Pool-Grenzen.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Grunds\"atze ordnungsm\"a{\ss}iger Modellierung (GoM)}{\nivLi}{8\,min}
+
+\ytquery{Grundsaetze ordnungsmaessiger Modellierung GoM Becker Rosemann}
+
+\begin{loesungbox}
+\textbf{Die sieben Grunds\"atze (nach Becker / Rosemann / Sch\"utte):}
+
+\begin{enumerate}
+  \item \textbf{Richtigkeit} \textendash{} das Modell stimmt syntaktisch (Notation korrekt) und semantisch (bildet die Realit\"at zutreffend ab).
+  \item \textbf{Relevanz} \textendash{} nur das, was f\"ur den Modellzweck \emph{wichtig} ist, wird modelliert. Kein Detail-Overload.
+  \item \textbf{Wirtschaftlichkeit} \textendash{} Aufwand der Modellierung steht in vern\"unftigem Verh\"altnis zum Nutzen.
+  \item \textbf{Klarheit} \textendash{} das Modell ist f\"ur die Zielgruppe \emph{verst\"andlich} (Lesefluss, Layout, einheitliche Symbole).
+  \item \textbf{Vergleichbarkeit} \textendash{} Modelle innerhalb derselben Organisation folgen \emph{denselben} Konventionen (Modellierungs-Standard).
+  \item \textbf{Systematischer Aufbau} \textendash{} unterschiedliche Sichten (Daten, Funktionen, Organisation) bleiben \emph{konsistent} miteinander.
+  \item \textbf{Modellzweckorientierung} \textendash{} das Modell ist auf einen klaren \emph{Zweck} (Dokumentation / Analyse / Automatisierung / Compliance) zugeschnitten.
+\end{enumerate}
+
+\smallskip
+\textbf{Drei Beispiele:}
+
+\begin{itemize}
+  \item \emph{Klarheit (positiv):} Alle Gateways werden in einem Modell konsequent mit beschrifteten Ausg\"angen versehen (``ja'' / ``nein''). Der Leser muss nie raten, welcher Pfeil welchen Fall darstellt.
+  \item \emph{Wirtschaftlichkeit (negativ):} Ein Mini-Onboarding-Prozess wird auf 60 Activities herunter\-gebrochen, obwohl 10 ausreichen w\"urden. Der Aufwand zur Pflege \"ubersteigt den Nutzen \textendash{} Modell wird nie aktualisiert, veraltet schnell.
+  \item \emph{Modellzweckorientierung (positiv):} Ein Modell f\"ur die \emph{Automatisierung} zeigt explizit IT-Systeme, Schnittstellen, technische Trigger. Ein Modell f\"ur \emph{Management-\"Ubersicht} dagegen aggregiert Schritte und l\"asst Systemdetails weg.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{BPMN vs.\ EPC \textendash{} Vergleichstabelle}{\nivLi}{10\,min}
+
+\ytquery{BPMN EPC Vergleich Notation Unterschied Funktion Ereignis Konnektor}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}|X|X@{}}
+\toprule
+\textbf{Element / Konzept} & \textbf{BPMN 2.0} & \textbf{EPC} \\
+\midrule
+T\"atigkeit (Activity / Function) & \emph{Task} \textendash{} abgerundetes Rechteck; ``Bestellung pr\"ufen''. & \emph{Funktion} \textendash{} abgerundetes Rechteck (oft gr\"un); ``Bestellung pr\"ufen''. \\
+\midrule
+Ereignis & Kreis (Start / Zwischenereignis / Ende); typischerweise an Anfang/Ende des Prozesses. & \emph{Ereignis} \textendash{} Sechseck (oft rosa); \emph{zwischen jeder Funktion} ein Ereignis (``Rechnung gepr\"uft''). \\
+\midrule
+Entscheidung (Gateway / Konnektor) & \emph{Gateway} \textendash{} Raute mit X / + / O direkt am Verzweigungspunkt. & \emph{Konnektor} \textendash{} Kreis mit \(\land\) / \(\lor\) / XOR; vor und nach jeder Verzweigung muss er aufgel\"ost werden. \\
+\midrule
+Fluss / Verbindung & \emph{Sequence Flow} (durchgezogen), \emph{Message Flow} (gestrichelt). & \emph{Kontrollfluss} \textendash{} stets zwischen Ereignis und Funktion (abwechselnd). \\
+\midrule
+Typischer Anwendungs\-fokus & Ablauflogik, Verantwortlichkeiten (Pools/Lanes), N\"ahe zur Automatisierung. & Ereignisgetriebene Sicht, ARIS-Welt, Business-Verst\"andlichkeit f\"ur Fachbereiche. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Schlusssatz:} BPMN ist die richtige Wahl, wenn \emph{Verantwortlichkeiten} (Pools/Lanes) und \emph{Automatisierung} im Fokus stehen \textendash{} EPC, wenn die \emph{ereignisgetriebene Gesch\"aftslogik} und \emph{Verst\"andlichkeit f\"ur Fachbereiche} (oft ARIS-Welt, klassische Business-Sicht) wichtiger ist.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Bestellprozess ``B\"ucherklick GmbH'' modellieren}{\nivLii}{25\,min}
+
+\ytquery{BPMN Bestellprozess modellieren Beispiel Webshop B2C Lane Gateway}
+
+\begin{loesungbox}
+\textbf{BPMN-Modell (Soll-Logik, textuelle Beschreibung):}
+
+\smallskip
+\textbf{Pool:} B\"ucherklick GmbH \textendash{} \textbf{Lanes:} Webshop-System \textperiodcentered{} Zahlung \textperiodcentered{} Lager \textperiodcentered{} Versand \textperiodcentered{} Kundenservice.
+
+\smallskip
+\textbf{Start-Event} (Webshop-System): \emph{Bestellung eingegangen}.
+\begin{itemize}
+  \item Task (Webshop-System): \emph{Bestellung validieren}.
+  \item Task (Zahlung): \emph{Zahlung verarbeiten}.
+  \item \textbf{XOR-Gateway} \emph{Zahlung erfolgreich?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} Task (Kundenservice): \emph{Kunden \"uber Zahlungsfehler informieren} \textrightarrow{} \textbf{End-Event}: \emph{Bestellung abgebrochen}.
+    \item Ja \textrightarrow{} weiter.
+  \end{itemize}
+  \item Task (Lager): \emph{Lagerbestand pr\"ufen}.
+  \item \textbf{XOR-Gateway} \emph{Ware verf\"ugbar?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} Task (Lager): \emph{Beim Gro{\ss}h\"andler nachbestellen} \textrightarrow{} Task (Kundenservice): \emph{Kunden \"uber verz\"ogerte Lieferung informieren} \textrightarrow{} zur\"uck zu \emph{Lagerbestand pr\"ufen} (oder Wartezustand).
+    \item Ja \textrightarrow{} weiter.
+  \end{itemize}
+  \item Task (Lager): \emph{Ware kommissionieren}.
+  \item Task (Versand): \emph{Ware verpacken und versenden}.
+  \item Task (Kundenservice): \emph{Versandbest\"atigung an Kunden senden}.
+\end{itemize}
+\textbf{End-Event}: \emph{Bestellung abgeschlossen}.
+
+\smallskip
+\textbf{Modellzweck (1 Satz):} ``Einarbeitungsdokument f\"ur neue Mitarbeitende im Kundenservice \textendash{} um den Standardweg einer Bestellung schnell zu verstehen.''
+
+\smallskip
+\textbf{Drei Annahmen:}
+\begin{enumerate}
+  \item Zahlung erfolgt \emph{vor} dem Versand (kein Kauf auf Rechnung im Standardfall).
+  \item Lagerbestand wird automatisch durch das Webshop-System gepr\"uft (keine manuelle Lagerabfrage).
+  \item R\"ucksendungen sind nicht Teil dieses Modells (eigener Prozess).
+\end{enumerate}
+
+\smallskip
+\textbf{Zwei Fragen an den Fachbereich:}
+\begin{enumerate}
+  \item Wie verhalten wir uns bei Teilverf\"ugbarkeit (z.\,B.\ 3 von 5 B\"uchern auf Lager)? Splitten wir den Versand oder warten?
+  \item Wer kommuniziert mit dem Kunden im Express-Fall \textendash{} Versand oder Kundenservice?
+\end{enumerate}
+
+\smallskip
+\emph{Andere L\"osungen sind legitim} \textendash{} z.\,B.\ Trennung der Pools (B\"ucherklick GmbH vs.\ Gro{\ss}h\"andler) mit Message Flow. Entscheidend ist: mind.\ 1 Start, 2 Gateways, 5 Activities, 1 End-Event, saubere Verb+Objekt-Benennung, sichtbare Verantwortlichkeit \"uber Lanes.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Modell-Qualit\"at bewerten}{\nivLii}{20\,min}
+
+\ytquery{Modellqualitaet bewerten BPMN GoM Klarheit Richtigkeit Pruefkriterien}
+
+\begin{loesungbox}
+\textbf{Bewertung anhand vier GoM-Kriterien:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}cX@{}}
+\toprule
+\textbf{Kriterium} & \textbf{Pkt.} & \textbf{Begr\"undung + Korrekturma{\ss}nahme} \\
+\midrule
+Klarheit & 1 / 5 &
+``jemand pr\"uft etwas'', ``System macht irgendwas'' \textendash{} keine konkrete Benennung. \emph{Korrektur:} Jede Activity nach Verb + Objekt benennen, Rolle in Lane explizit machen. \\
+\midrule
+Richtigkeit & 2 / 5 &
+Eine R\"ucksprung-Schleife ohne Abbruch\-bedingung kann zu Endlosschleifen f\"uhren. Es ist unklar, was ``ok'' bedeutet. \emph{Korrektur:} Schleife mit max.\ Wiederholungen oder Eskalations\-pfad versehen; Gateway-Ausg\"ange klar beschriften (``vollst\"andig'' / ``unvollst\"andig''). \\
+\midrule
+Relevanz & 2 / 5 &
+Das Modell zeigt weder die wichtigen Schnittstellen noch die Kunden-Sicht; entscheidende Schritte fehlen, Triviales (``Dann macht das System irgendwas'') ist drin. \emph{Korrektur:} Modell vom Modellzweck her neu denken: ``Was muss ein Servicemitarbeiter sehen, um zu helfen?''. \\
+\midrule
+Modellzweck\-orientierung & 1 / 5 &
+F\"ur \emph{Schulung von Service-MA ohne BPMN-Kenntnis} ist das Modell ungeeignet \textendash{} es l\"asst genau die Informationen weg, die ein neuer MA braucht (was passiert konkret, wer ist zust\"andig, wann eskaliert man?). \emph{Korrektur:} Konkrete T\"atigkeiten, Rollen \"uber Lanes, explizite Eskalations\-pfade. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Eignung f\"ur den angegebenen Zweck:} \emph{Nein \textendash{} nicht geeignet}. Das Modell ist so vage, dass es weder f\"ur Schulung noch f\"ur Analyse einen Mehrwert hat. Es muss vor dem Einsatz grundlegend \"uberarbeitet werden (klare Benennungen, Rollen \"uber Lanes, konkrete Entscheidungen).
+
+\smallskip
+\emph{Andere Punktzahlen sind legitim, solange die Begr\"undungen GoM-konsistent sind.}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Rechnungspr\"ufung in EPC umsetzen}{\nivLii}{20\,min}
+
+\ytquery{EPC ereignisgesteuerte Prozesskette Beispiel Rechnungspruefung XOR}
+
+\begin{loesungbox}
+\textbf{EPC-Darstellung (Soll-Logik, textuell mit Pfeilen):}
+
+\smallskip
+\textbf{Ereignis:} \emph{Rechnung eingegangen}\\
+\quad\textrightarrow{} \textbf{Funktion:} \emph{Rechnung formal pr\"ufen} (Rolle: Buchhaltung)\\
+\quad\textrightarrow{} \textbf{XOR-Konnektor}\\
+\quad\quad\textrightarrow{} \textbf{Ereignis:} \emph{Rechnung unvollst\"andig} \textrightarrow{} \textbf{Funktion:} \emph{Lieferant zur Korrektur auffordern} (Buchhaltung) \textrightarrow{} \textbf{Ereignis:} \emph{Korrektur angefordert} \textrightarrow{} \emph{Ende (vorerst)}\\
+\quad\quad\textrightarrow{} \textbf{Ereignis:} \emph{Rechnung vollst\"andig} \textrightarrow{} \textbf{Funktion:} \emph{Rechnung sachlich pr\"ufen} (Rolle: Fachbereich) \textrightarrow{} \textbf{XOR-Konnektor}\\
+\quad\quad\quad\textrightarrow{} \textbf{Ereignis:} \emph{Rechnung freigegeben} \textrightarrow{} \textbf{Funktion:} \emph{Rechnung zur Zahlung an Bank \"ubertragen} (Buchhaltung) \textrightarrow{} \textbf{Ereignis:} \emph{Zahlung beauftragt} \textrightarrow{} \textbf{Funktion:} \emph{Rechnung im System als ``bezahlt'' kennzeichnen} (Buchhaltung) \textrightarrow{} \textbf{Ereignis:} \emph{Rechnung bezahlt} (Endereignis).\\
+\quad\quad\quad\textrightarrow{} \textbf{Ereignis:} \emph{Rechnung abgelehnt} \textrightarrow{} \textbf{Funktion:} \emph{Rechnung reklamieren} (Fachbereich) \textrightarrow{} \textbf{Ereignis:} \emph{Reklamation versendet} (Endereignis).
+
+\smallskip
+\textbf{Benennungs-Check:}
+\begin{itemize}
+  \item \emph{Ereignisse:} Subjekt + Zustand/Partizip (``Rechnung eingegangen'', ``Rechnung freigegeben'').
+  \item \emph{Funktionen:} Verb + Objekt (``Rechnung formal pr\"ufen'', ``Rechnung reklamieren'').
+\end{itemize}
+
+\smallskip
+\textbf{Wo h\"atte BPMN das kompakter abgebildet?} An den Gateway-Stellen: in EPC braucht es \emph{vor} jeder Verzweigung einen XOR-Konnektor \emph{und} ein nachfolgendes Ereignis pro Zweig \textendash{} BPMN h\"atte mit einem einzigen XOR-Gateway plus beschrifteten Ausg\"angen (``vollst\"andig'' / ``unvollst\"andig'') ausgekommen. Au{\ss}erdem h\"atte BPMN \"uber Lanes die Verantwortlichkeiten direkt am Diagramm sichtbar gemacht; in EPC l\"auft das \"uber separate Organisationssymbole.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Pool-Lane-Aufteilung}{\nivLii}{20\,min}
+
+\ytquery{BPMN Pool Lane Unterschied Beispiel Kunde Lieferant Message Flow}
+
+\begin{loesungbox}
+\textbf{1. Struktur:} \emph{Zwei Pools, drei Lanes.}
+
+\smallskip
+\noindent \textbf{Pool 1: Kunde} (eigene Organisation, ein einzelner Beteiligter \textendash{} keine Lanes n\"otig).\\
+\textbf{Pool 2: Anbieter} (unser Unternehmen) \textendash{} mit \textbf{drei Lanes}: \emph{Vertrieb}, \emph{Lager}, \emph{Buchhaltung}.
+
+\smallskip
+\textbf{Begr\"undung (2 S\"atze):} Der Kunde ist eine \emph{externe} Partei \textendash{} damit eigener Pool, kommuniziert per Message Flow mit dem Anbieter. Die drei internen Rollen geh\"oren zur gleichen Organisation und werden als Lanes innerhalb eines Pools dargestellt, damit Verantwortung sichtbar bleibt und Sequence Flow zwischen ihnen erlaubt ist.
+
+\smallskip
+\textbf{2. Zuordnung der sechs Activities:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXl@{}}
+\toprule
+\textbf{Activity} & \textbf{Pool / Lane} & \textbf{Anmerkung} \\
+\midrule
+Bestellung absenden        & Pool 1: Kunde          & l\"ost den Prozess aus \\
+Bestellung erfassen        & Pool 2 / Lane Vertrieb & startet Anbieter-internen Ablauf \\
+Lagerbestand pr\"ufen      & Pool 2 / Lane Lager    & \\
+Ware kommissionieren       & Pool 2 / Lane Lager    & nur wenn verf\"ugbar \\
+Rechnung erstellen         & Pool 2 / Lane Buchhaltung & \\
+Zahlungseingang verbuchen  & Pool 2 / Lane Buchhaltung & End-State f\"ur Anbieter \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Flows:}
+\begin{itemize}
+  \item \emph{Message Flow} (gestrichelt): \\
+    Kunde \textrightarrow{} Vertrieb (Bestellung absenden \textrightarrow{} Bestellung erfassen)\\
+    Buchhaltung \textrightarrow{} Kunde (Rechnung versenden)\\
+    Kunde \textrightarrow{} Buchhaltung (Zahlung eingegangen)
+  \item \emph{Sequence Flow} (durchgezogen): zwischen allen Activities \emph{innerhalb} von Pool 2 (Vertrieb \textrightarrow{} Lager \textrightarrow{} Buchhaltung).
+\end{itemize}
+
+\smallskip
+\textbf{4. Faustregel (1 Satz):} Ein eigener Pool entsteht, wenn die Partei eine \emph{eigene Organisation} ist (Kunde, Lieferant, Beh\"orde); Lanes nutzen wir f\"ur \emph{Rollen innerhalb derselben Organisation}.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Anti-Muster identifizieren und korrigieren}{\nivLii}{25\,min}
+
+\ytquery{BPMN Antipatterns Modellierungsfehler Spaghetti Gateway fehlend Join}
+
+\begin{loesungbox}
+\textbf{A \textendash{} Spaghetti-Layout.}
+\begin{itemize}
+  \item \emph{Verletzte GoM-Regel:} \textbf{Klarheit} (und teilweise \emph{Wirtschaftlichkeit} \textendash{} der Aufwand zur Pflege ist zu hoch).
+  \item \emph{Korrektur:} Modell in Subprozesse herunterbrechen (max.\ ca.\ 15\,--\,20 Activities pro Diagramm), Pfeile orthogonal f\"uhren, einen \emph{Hauptfluss} (``Happy Path'') etablieren und Ausnahmen klar abzweigen, Lanes einf\"uhren, Gateway-Ausg\"ange beschriften.
+\end{itemize}
+
+\smallskip
+\textbf{B \textendash{} Fehlende End-Events / mehrere unerkl\"arte Start-Events.}
+\begin{itemize}
+  \item \emph{Verletzte GoM-Regel:} \textbf{Richtigkeit} (BPMN-Syntax verletzt) und \textbf{Klarheit}.
+  \item \emph{Korrektur:} Jeder Endzustand bekommt ein End-Event (eigenes f\"ur ``erfolgreich'' und ``abgebrochen''); jeder Start-Event muss benannt werden (z.\,B.\ ``Bestellung per E-Mail'', ``Bestellung per Telefon'') oder konsolidiert. Faustregel: \emph{ein Prozess, ein definierter Anfang \textendash{} so viele Enden wie n\"otig, aber alle benannt}.
+\end{itemize}
+
+\smallskip
+\textbf{C \textendash{} Gateway als ``Box-Sammelstelle'' / fehlender Join.}
+\begin{itemize}
+  \item \emph{Verletzte GoM-Regel:} \textbf{Richtigkeit} (BPMN-Syntax: jeder Split braucht einen Join) und \textbf{Klarheit} (unbeschriftete Ausg\"ange, kein Default).
+  \item \emph{Korrektur:} Jeder Gateway-Split bekommt einen passenden Join. Alle Ausg\"ange werden mit der Entscheidungsbedingung beschriftet (z.\,B.\ ``$\geq$\,1.000\,\euro{}'' / ``$<$\,1.000\,\euro{}'' / ``Sonderfall''). Default-Pfeil mit Diagonalstrich markieren. Bei f\"unf Ausg\"angen pr\"ufen, ob ein zweistufiger Gateway klarer w\"are.
+\end{itemize}
+
+\smallskip
+\textbf{D \textendash{} Inkonsistente Benennung.}
+\begin{itemize}
+  \item \emph{Verletzte GoM-Regel:} \textbf{Vergleichbarkeit} und \textbf{Klarheit}.
+  \item \emph{Korrektur:} Konvention durchsetzen \textendash{} Activities = \emph{Verb + Objekt} (``Rechnung pr\"ufen'', ``Zahlung verarbeiten''). Keine Substantive (``Rechnung''), keine Fragen (``OK?''), keine Fragmente (``Mail''). Modell von oben nach unten durchgehen, alle Labels normieren \textendash{} und die Regel als Modellierungs-Standard im Wiki dokumentieren.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Fallstudie ``InnoHome Devices'' \textendash{} Innovation-to-Launch}{\nivLiii}{45\,min}
+
+\ytquery{Innovation Launch Prozess BPMN Lanes Stage Gate Modellierung}
+
+\begin{loesungbox}
+\textbf{1. BPMN-Modell mit Lanes (Soll-Logik):}
+
+\smallskip
+\textbf{Pool:} InnoHome Devices \textendash{} \textbf{Lanes:} Produktmanagement \textperiodcentered{} F\&E \textperiodcentered{} Qualit\"at \textperiodcentered{} Operations \textperiodcentered{} (optional: Einkauf / Legal).
+
+\smallskip
+\textbf{Start-Event:} \emph{Idee / Anforderung eingegangen}.
+\begin{itemize}
+  \item Task (PM): \emph{Anforderung klassifizieren}.
+  \item \textbf{XOR}: \emph{Strategischer Fit?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} End: \emph{Abgelehnt + dokumentiert}.
+    \item Ja \textrightarrow{} Task (F\&E): \emph{Machbarkeit bewerten} \textrightarrow{} Task (PM): \emph{Business Case erstellen}.
+  \end{itemize}
+  \item \textbf{XOR}: \emph{Business Case tragf\"ahig?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} Task (PM): \emph{Anforderung \"uberarbeiten / Scope reduzieren} \textrightarrow{} zur\"uck zu \emph{Business Case erstellen} (max.\ 1 Schleife).
+    \item Ja \textrightarrow{} Task (Qualit\"at): \emph{Teststrategie \& Akzeptanzkriterien festlegen} \textrightarrow{} Task (F\&E): \emph{Prototyp entwickeln} \textrightarrow{} Task (Qualit\"at): \emph{Prototyp testen}.
+  \end{itemize}
+  \item \textbf{XOR}: \emph{Test bestanden?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} Task (F\&E): \emph{Nachbessern} \textrightarrow{} zur\"uck zu \emph{Prototyp testen} (max.\ 2 Schleifen, dann Eskalation).
+    \item Ja \textrightarrow{} Task (Operations): \emph{Pilotfertigung planen} \textrightarrow{} Task (Operations): \emph{Pilotfertigung durchf\"uhren} \textrightarrow{} Task (Qualit\"at): \emph{Pilotfreigabe (Gate)}.
+  \end{itemize}
+  \item \textbf{XOR}: \emph{Freigabe erteilt?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} Task: \emph{Abweichungen bearbeiten + Risiko bewerten} \textrightarrow{} zur\"uck zu \emph{Pilotfreigabe}.
+    \item Ja \textrightarrow{} Task (PM): \emph{Launch vorbereiten} \textrightarrow{} End: \emph{Produkt gelauncht}.
+  \end{itemize}
+\end{itemize}
+
+\smallskip
+\textbf{2. EPC-Sicht als Management-\"Ubersicht} (max.\ 12 Elemente):\\
+\emph{Idee eingegangen} \textrightarrow{} \emph{Anforderung klassifizieren} \textrightarrow{} \emph{Business Case bewertet} \textrightarrow{} \emph{Prototyp entwickeln} \textrightarrow{} \emph{Prototyp getestet} \textrightarrow{} \emph{Pilotfertigung durchf\"uhren} \textrightarrow{} \emph{Pilotfreigabe erteilt} \textrightarrow{} \emph{Launch vorbereiten} \textrightarrow{} \emph{Produkt gelauncht}.
+
+\smallskip
+\textbf{3. Drei Steuerungspunkte:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}XX@{}}
+\toprule
+\textbf{Steuerungspunkt} & \textbf{Ziel / Verantw.\ / I\&O} & \textbf{Risiko bei Auslassen} \\
+\midrule
+Business-Case-Gate & Verhindert ``Innovations-Strohfeuer'', priorisiert Ressourcen. \emph{Verantw.:} PM. \emph{Input:} Anforderungsklassifikation. \emph{Output:} Go/No-Go + Begr\"undung. & Ressourcen werden in nicht-tragf\"ahige Ideen investiert; Time-to-Market f\"ur wirklich wichtige Produkte sinkt. \\
+\midrule
+Test-/Akzeptanz-Gate & Sch\"utzt Reputation und Retourenkosten; macht Qualit\"at messbar. \emph{Verantw.:} Qualit\"at. \emph{Input:} Akzeptanzkriterien + Testergebnis. \emph{Output:} Best\"atigung / Nachbesserung. & Mangelhafte Produkte erreichen den Markt; Retouren explodieren, Marke besch\"adigt. \\
+\midrule
+Pilotfreigabe & Reduziert Serienrisiko, kl\"art Accountability (``wer tr\"agt die Entscheidung?''). \emph{Verantw.:} Operations + Qualit\"at gemeinsam. \emph{Input:} Pilotdaten + Risikoanalyse. \emph{Output:} Freigabe oder Eskalation. & Serienproduktion startet trotz ungekl\"arter Risiken; teure R\"uckrufe drohen. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{4. Priorit\"atenempfehlung (in 8 Wochen realistisch):}
+\begin{itemize}
+  \item \textbf{1.} Business-Case-Gate als \emph{Entscheidungsnotiz} formalisieren (Owner: PM; klare Kriterien: Marktgr\"o{\ss}e, Marge, Risiko, Fit). 4 Wochen, ohne Tool umsetzbar.
+  \item \textbf{2.} Test-/Akzeptanzkriterien als \emph{Definition of Done} standardisieren (Owner: Qualit\"at). 4 Wochen, ohne Tool umsetzbar.
+\end{itemize}
+\emph{Begr\"undung:} Maximaler Hebel auf Time-to-Market und Retourenrisiko, ohne Tooling-Abh\"angigkeit; passt in das 150-k-Budget und l\"asst Raum f\"ur eine Pilotfreigabe-Iteration in Phase 2.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Modellierungs-Governance \textendash{} wann aktualisieren, wer verantwortet?}{\nivLiii}{30\,min}
+
+\ytquery{Process Modeling Governance RACI Process Owner Aktualisierung Audit}
+
+\begin{loesungbox}
+\textbf{1. Aktualisierungslogik:}
+Modelle werden \emph{nicht} im Kalender, sondern an \emph{Triggern} aktualisiert. Konkret: (a) \textbf{Strukturelle \"Anderung} \textendash{} Reorganisation, neue Rolle, neuer Standort. (b) \textbf{Systemwechsel} \textendash{} ERP-, CRM-, ITSM-Wechsel oder neue Schnittstelle. (c) \textbf{Externer Trigger} \textendash{} Audit-Finding, regulatorische \"Anderung, kritischer Vorfall. \emph{Nicht} lohnenswert ist die routinem\"a{\ss}ige Jahresaktualisierung, wenn der Prozess sich nachweislich nicht ver\"andert hat \textendash{} sie verbraucht Aufwand ohne Lernertrag.
+
+\smallskip
+\textbf{2. RACI-Aufteilung:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lcccc@{}}
+\toprule
+ & \textbf{Process Owner} & \textbf{Modeler} & \textbf{Reviewer} & \textbf{Approver} \\
+\midrule
+\"Anderung erkennen \& ansto{\ss}en & R / A & I & I & I \\
+Modell aktualisieren           & A     & R & C & I \\
+Qualit\"atspr\"ufung (GoM, Konsistenz) & I & C & R / A & I \\
+Freigabe                       & C     & I & C & R / A \\
+Kommunikation \& Schulung       & A     & I & C & I \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\emph{Lese-Hilfe:} R\,=\,Responsible (macht), A\,=\,Accountable (verantwortet), C\,=\,Consulted, I\,=\,Informed. Der Fachbereich liefert als \emph{Consulted} fachlichen Input \textendash{} ist aber nie Approver.
+
+\smallskip
+\textbf{3. Trade-off Aufwand vs.\ Aktualit\"at \textendash{} Branchenbeispiel:}\\
+\emph{Pharma (GxP-regulierter Bereich):} Hier sind Modelle \emph{Compliance-Pflicht}. Jede prozessuale \"Anderung muss validiert dokumentiert sein, sonst drohen Audit-Findings, Lieferstopps oder Produktr\"uckrufe. Enge Pflege lohnt sich \textendash{} der entgangene Aufwand w\"are um Gr\"o{\ss}en\-ordnungen teurer als die Pflege.\\
+\emph{Im Gegensatz dazu \textendash{} interne Verwaltung in einem kleinen Mittelst\"andler:} Hier reicht grobk\"ornige Aktualisierung an Triggern (Reorg, Tool-Wechsel). Ein Modell des Pausen-Vertretungs\-prozesses muss nicht jedes Quartal nachpoliert werden.
+
+\smallskip
+\textbf{4. Faustregel:} Ein veraltetes Modell ist \emph{schlimmer} als kein Modell, sobald (a) jemand danach handelt und Fehler macht, oder (b) ein Auditor es als Nachweis akzeptiert und das Audit dadurch verloren geht \textendash{} ab diesem Punkt ist ``Modell stilllegen oder pflegen'' die einzige verantwortbare Entscheidung.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Process Modeling Governance \& Decision Architecture}{\nivLiii}{45\,min}
+
+\ytquery{Process Modeling Governance Decision Architecture BPMN Enterprise Architect}
+
+\begin{loesungbox}
+\emph{Musterl\"osung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind m\"oglich, solange sie als Architektur (nicht als Liste) gedacht sind.}
+
+\smallskip
+\textbf{1. Entscheidungsarchitektur:} Modelle sollen vier Entscheidungstypen unterst\"utzen: \emph{Priorisierung} (welche Prozesse zuerst harmonisieren?), \emph{Freigaben} (wer entscheidet \"uber Prozess\"anderungen?), \emph{Risiko-Steuerung} (wo m\"ussen Steuerungspunkte sitzen, um Audit-Findings zu vermeiden?), \emph{Automatisierungs-Tauglichkeit} (welche Prozesse sind reif f\"ur RPA / Workflow-Engine?).
+
+\smallskip
+\textbf{2. Modellierungs-Policy (1 Seite, Kurzform):}
+\begin{itemize}
+  \item \emph{BPMN} f\"ur Prozesse mit klaren Verantwortlichkeiten, Schnittstellen und Automatisierungs-Potenzial; \emph{EPC} f\"ur Management-\"Ubersichten und Fachbereichs-Kommunikation in ARIS-Welt.
+  \item \emph{Mindeststandard:} ein Start-Event, mindestens ein End-Event, alle Gateway-Ausg\"ange beschriftet, Activities Verb + Objekt, Rollen \"uber Lanes, Annahmen dokumentiert.
+  \item \emph{Qualit\"atskriterien:} GoM-Checkliste; Vier-Augen-Review vor Freigabe; Konsistenz mit \"ubergeordneter Prozesslandkarte; max.\ ca.\ 20 Activities je Diagramm, sonst Subprozess.
+\end{itemize}
+
+\smallskip
+\textbf{3. Governance-Design (RACI-Kurz):}
+\begin{itemize}
+  \item \emph{Process Owner} (Fachbereichsleiter) \textendash{} Accountable f\"ur Prozess \emph{und} Modell.
+  \item \emph{Modeler} (zentrales BPM-Team oder geschulter Key-User) \textendash{} Responsible f\"ur Modellierung.
+  \item \emph{Reviewer} (BPM-Lead / Quality) \textendash{} Responsible f\"ur Qualit\"atspr\"ufung.
+  \item \emph{Approver} (CPO / Bereichsleitung) \textendash{} Accountable f\"ur Freigabe.
+  \item \emph{Eskalationspfad:} Reviewer \textrightarrow{} BPM-Lead \textrightarrow{} CPO \textrightarrow{} Vorstand.
+\end{itemize}
+
+\smallskip
+\textbf{4. Rollout-Plan (12 Wochen):}
+\begin{itemize}
+  \item \emph{Wo 1\,--\,2:} Policy-Entwurf, Tool-Anforderungen schreiben, zwei Pilotbereiche festlegen (1 Front-Office, 1 Back-Office).
+  \item \emph{Wo 3\,--\,4:} Tool-Auswahl (Shortlist max.\ 3 Werkzeuge), Trainingscurriculum f\"ur Level\,1--3.
+  \item \emph{Wo 5\,--\,8:} Pilotbereiche modellieren ca.\ 10 Kernprozesse, Review-Pfad einspielen.
+  \item \emph{Wo 9\,--\,10:} Auswertung Pilot, Lessons Learned, Policy nachsch\"arfen.
+  \item \emph{Wo 11\,--\,12:} Rollout-Plan f\"ur restliche Bereiche, Governance-Board konstituieren.
+  \item \emph{KPIs:} Modellqualit\"at (\% Modelle mit GoM-Score $\geq$\,4), Durchlaufzeit (Idee\,\textrightarrow{}\,freigegebenes Modell, Ziel $\leq$\,2 Wochen), Audit-Findings (Ziel: keine Findings zur Prozess-Dokumentation).
+\end{itemize}
+
+\smallskip
+\textbf{5. Top-5-Risiken + Gegenma{\ss}nahmen:}
+\begin{enumerate}
+  \item \emph{Akzeptanz im Fachbereich gering} \textrightarrow{} Key-User fr\"uh einbeziehen, kurze Trainings, sichtbarer Quick-Win.
+  \item \emph{\"Ubermodellierung} \textrightarrow{} ``Modell folgt Zweck''-Pflicht in Policy, max.\ Activities pro Diagramm festschreiben.
+  \item \emph{Schattenprozesse} \textrightarrow{} systematische ``Ist-Aufnahme'' im Pilot; Belohnung f\"ur saubere Offen\-legung, nicht Sanktion.
+  \item \emph{Tool-Lock-in} \textrightarrow{} Tool-Auswahl mit Export-Anforderung (BPMN-XML offen), keine Plattform-spezifischen Erweiterungen zulassen.
+  \item \emph{Reorganisation w\"ahrend Rollout} \textrightarrow{} modulare Policy (gilt unabh\"angig von Org-Struktur); Process-Owner-Rolle an Funktion, nicht an Personen koppeln.
+\end{enumerate}
+
+\smallskip
+\textbf{6. Tooling-Entscheidung:} \emph{Anforderungen vor 80-k-Investment:} BPMN-2.0-konform, Mehr-Nutzer-Editor, Versionierung, Export als BPMN-XML, RACI-/Rollenpflege, Audit-Log, On-Premise oder EU-Cloud. \emph{Bewusst ausgeschlossen:} reine Visualisierungs-Tools ohne BPMN-Semantik (zu eng) und Enterprise-Suites $>$\,80\,k Folgekosten (sprengen Budget).
+
+\smallskip
+\textbf{7. Zwei Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Tool-Entscheidung VOR Reorg-Kl\"arung:} Annahme: BPMN-XML-Export sichert Portierbarkeit. Verworfene Alternative: Warten bis Reorg klar ist (kostet 6 Monate). Fr\"uhwarnsignal: Wenn Zukauf eigenes Tool bringt \textrightarrow{} Portierung via XML-Export starten.
+  \item \emph{Pilot in nur 2 Bereichen (statt 4):} Annahme: 2 Bereiche liefern repr\"asentative Lessons Learned. Verworfene Alternative: Breitenpilot in 4 Bereichen (sprengt 12 Wochen). Fr\"uhwarnsignal: Wenn nach 6 Wochen weniger als 5 Modelle pro Pilotbereich freigegeben sind \textrightarrow{} Ressourcen umschichten, Coach extern beschaffen.
+\end{enumerate}
+
+\smallskip
+\textbf{8. Anschluss an Strategie (drei Argumente):}
+\begin{enumerate}
+  \item \emph{Compliance:} Vergleichbare Modelle reduzieren Audit-Findings und damit Bu{\ss}geld- und Reputationsrisiko.
+  \item \emph{Time-to-Market:} Klare Prozess-Eigent\"umerschaft reduziert Eskalations\-schleifen, beschleunigt Entscheidungen.
+  \item \emph{Skalierbarkeit:} Bei Zukauf / neuen Standorten ist die Onboarding-Zeit f\"ur neue Bereiche dramatisch k\"urzer, weil ein Standard existiert.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Wenn Ihre eigene L\"osung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder einen anderen Modellzweck angelegt?} Beides ist legitim, solange die Logik nachvollziehbar bleibt.
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie Ihre eigenen L\"osungen in die Coaching-Sitzung mit. Im Fokus stehen drei Fragen: Welche Annahmen haben Sie gemacht? Welche Zielkonflikte (Klarheit vs.\ Vollst\"andigkeit, Aufwand vs.\ Aktualit\"at, Dokumentation vs.\ Automatisierung) haben Sie sichtbar gemacht? Welche Entscheidung haben Sie getroffen \textendash{} und w\"urden Sie auch verantworten, wenn sich Anforderungen \"andern?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 1 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
