@@ -1,0 +1,749 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 10 - Loesungsheft
+% Skalierbare digitale Prozessarchitektur: Microservices, Kubernetes, TDD/DevOps, Operating Model
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 10}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Microservices, Kubernetes \& DevOps}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 4 \textperiodcentered{} TAG 10 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 11.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 10\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Microservices,\\Kubernetes, TDD und Operating Model.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 10}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- Anleitung -----------------------------------------------------------
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterl\"osungen sind \emph{eine} m\"ogliche, didaktisch nachvollziehbare L\"osung \textendash{} sie sind nicht die einzig richtige. Auf L2 und L3 sind mehrere Begr\"undungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den im Lehrskript eingef\"uhrten Begriffsapparat (Microservices, Kubernetes, TDD, DevOps, Operating Model) sauber nutzen,
+  \item Annahmen explizit machen, statt sie zu verschleiern,
+  \item Zielkonflikte (Speed vs.\ Stabilit\"at, Autonomie vs.\ Standardisierung, Aufwand vs.\ Auditierbarkeit) benennen,
+  \item zu einer klar formulierten Entscheidung f\"uhren \textendash{} nicht blo{\ss} zu einer Beschreibung.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihre Argumentation ab? Ist die Abweichung eine andere Annahme \textendash{} oder ein Denkfehler? Genau dort entsteht der Lerneffekt.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 LOESUNGEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Microservices \textendash{} Eignung, Risiken und Servicegrenze}{\nivLi}{8\,min}
+
+\ytquery{Microservices Vorteile Risiken Servicegrenze Business Capability erklaert}
+
+\begin{loesungbox}
+\textbf{1. Drei Nutzenversprechen:}
+\begin{itemize}
+  \item \emph{Unabh\"angige Deployments:} Teams releasen ihren Service ohne Koordination mit allen anderen \textendash{} k\"urzere Lead Time, niedrigere Stillstandskosten.
+  \item \emph{Gezielte Skalierung:} Nur der Service, der unter Last steht, wird skaliert (z.\,B.\ \emph{Checkout} zur Peak-Saison). Kein Skalieren ``auf Verdacht''.
+  \item \emph{Klare Verantwortungsgrenzen:} Ein Service, ein Team, ein Owner. ``Verantwortung verschwindet nicht im Korridor.''
+\end{itemize}
+
+\smallskip
+\textbf{2. Drei Risiken:}
+\begin{itemize}
+  \item \emph{Komplexit\"at:} Viele bewegliche Teile, Netzwerk als unzuverl\"assige Komponente, Latenzen, Versionierung der Schnittstellen.
+  \item \emph{Verteilte Fehler:} Ein Fehler wandert \"uber Service-Grenzen; Debugging ist ohne saubere Korrelations-IDs sehr teuer.
+  \item \emph{Observability-Bedarf:} Logs, Metriken, Traces zentral und konsistent \textendash{} sonst dauert die Root-Cause-Analyse bei jedem Incident Stunden.
+\end{itemize}
+
+\smallskip
+\textbf{3. Gute Servicegrenze:} Eine Servicegrenze ist \emph{gut}, wenn sie entlang einer fachlichen Capability verl\"auft (z.\,B.\ \emph{Inventory}, \emph{Billing}) und \emph{nicht} entlang von Datenbanktabellen. Tabellen sind Implementierungsdetail; eine Capability ist die kleinste Einheit gesch\"aftlicher Verantwortung \textendash{} sie \"uberlebt Refactorings und definiert sauberen Owner-Schnitt.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Container \& Kubernetes \textendash{} Kernbegriffe}{\nivLi}{8\,min}
+
+\ytquery{Kubernetes Grundlagen Container Orchestrierung Blue Green Canary einfach erklaert}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}X@{}}
+\toprule
+\textbf{Begriff} & \textbf{Erkl\"arung} \\
+\midrule
+Container & Verpackte Anwendung inklusive aller Abh\"angigkeiten \textendash{} l\"auft auf jedem kompatiblen Host gleich. ``Build once, run anywhere.'' \\
+Orchestrierung & Plattform-Layer, der Container automatisch startet, neu plant, vernetzt, skaliert und ausf\"allige neu hochzieht (Kubernetes als typische Implementierung). \\
+Self-Healing & Wenn ein Container abst\"urzt, startet die Orchestrierung ihn automatisch neu \textendash{} ohne menschliches Eingreifen. \\
+Rollback & R\"uckkehr zu einer vorherigen, bekannten guten Version, wenn ein neues Release Fehler zeigt. \\
+Service-Discovery & Services finden sich \"uber logische Namen, nicht \"uber IP-Adressen \textendash{} \"Anderungen am Cluster brechen Aufrufer nicht. \\
+Blue/Green-Deployment & Zwei vollst\"andige Versionen laufen parallel; der Verkehr wird in einem Schritt von ``blau'' auf ``gr\"un'' umgeschaltet. \\
+Canary-Release & Eine kleine Menge des Verkehrs (z.\,B.\ 5\,\%) geht zur neuen Version; bei stabilen Kennzahlen wird der Anteil schrittweise erh\"oht. \\
+Ressourcen\-limits & Pro Container vereinbarte Mindest- (Requests) und H\"ochstwerte (Limits) f\"ur CPU/RAM \textendash{} verhindert, dass ein Service den Cluster ``frisst''. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Zwei kritischste:} \emph{Rollback} und \emph{Ressourcenlimits}. Ohne ge\"ubten Rollback wird jeder Incident zur Improvisation; ohne Limits bringt ein einzelner fehlerhafter Service die Plattform in den Ressourcen-Tod. Beide kosten in der Praxis am schnellsten am meisten Geld.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Testpyramide \& Quality Gates}{\nivLi}{10\,min}
+
+\ytquery{Testpyramide TDD Red Green Refactor Quality Gates erklaert}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}|X|X|X@{}}
+\toprule
+\textbf{Eigenschaft} & \textbf{Unit-Test} & \textbf{Integrationstest} & \textbf{E2E-Test} \\
+\midrule
+Was wird getestet? & Einzelne Funktion / Klasse isoliert. & Zusammenspiel von 2\,--\,3 Komponenten (z.\,B.\ Service + DB). & Ganzer Gesch\"aftsfluss \"uber mehrere Services. \\
+\midrule
+Geschwindigkeit & Sehr schnell (Millisekunden). & Mittel (Sekunden). & Langsam (Minuten). \\
+\midrule
+Kosten / Fragilit\"at & G\"unstig, stabil. & Mittel, m\"a{\ss}ig fragil. & Teuer, sehr fragil (UI, Netzwerk, Timing). \\
+\midrule
+Anteil in Pyramide & \textbf{Viele} ($\sim$\,70\,\%). & Mittel ($\sim$\,20\,\%). & \textbf{Wenige} ($\sim$\,10\,\%). \\
+\midrule
+Typischer Fehlerfund & Logikfehler in einer Methode. & Schnittstelle / Datenformat falsch. & Geh\"art zusammen, aber im Gesamtfluss bricht etwas. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Quality Gates} sind verbindliche Pr\"ufungen in der Pipeline, die jeder Build durchlaufen muss, bevor er weiter darf. Drei nicht verhandelbare Gates vor einem Produktiv-Release:
+
+\begin{enumerate}
+  \item \emph{Alle Unit- und Integrationstests gr\"un.}
+  \item \emph{Static Code- und Security-Scan ohne kritische Findings} (z.\,B.\ keine Secrets im Code, keine bekannten CVEs in Dependencies).
+  \item \emph{Smoke Test nach Deployment} (mindestens ein ``Happy Path''-Aufruf gegen die neue Version).
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2 LOESUNGEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Service-Schnitt aus Prozessbeschreibung \textendash{} Order-to-Cash}{\nivLii}{25\,min}
+
+\ytquery{Microservices Service Schnitt Order to Cash Domain Driven Design Capability}
+
+\begin{loesungbox}
+\textbf{1. Sechs Service-Kandidaten:}
+\begin{itemize}
+  \item \emph{Order Service} \textendash{} Bestellungen annehmen, validieren, im Lifecycle f\"uhren.
+  \item \emph{Inventory Service} \textendash{} Verf\"ugbarkeit pr\"ufen, Reservierungen, Best\"ande.
+  \item \emph{Pricing/Quote Service} \textendash{} Preise und Angebote berechnen.
+  \item \emph{Shipping Service} \textendash{} Versandauftr\"age, Tracking.
+  \item \emph{Billing Service} \textendash{} Rechnungen erzeugen, Versand, Mahnwesen.
+  \item \emph{Payments Service} \textendash{} Zahlungen abwickeln, R\"uckbuchungen.
+  \item \emph{Complaints Service} \textendash{} Reklamationen, Gutschriften, Eskalation.
+\end{itemize}
+
+\smallskip
+\textbf{2. Drei Service-Steckbriefe:}
+
+\smallskip
+\noindent\textbf{(a) Order Service.} \emph{Zweck:} Lebenszyklus einer Bestellung halten (angelegt \textrightarrow{} best\"atigt \textrightarrow{} verschickt \textrightarrow{} abgeschlossen). \emph{Input:} Kunde, Artikelpositionen, Lieferadresse, gew\"unschter Liefertermin. \emph{Output:} Bestell-ID, Status, best\"atigter Liefertermin, Gesamtsumme. \emph{Owner:} Produktteam Order. \emph{Kritischster Fehler:} Bestellung in inkonsistentem Zustand (best\"atigt, aber Inventory nicht reserviert) \textendash{} Doppelt-Versand oder Lieferversprechen ohne Deckung.
+
+\smallskip
+\noindent\textbf{(b) Payments Service.} \emph{Zweck:} Zahlungen f\"ur best\"atigte Bestellungen verarbeiten und buchen. \emph{Input:} Bestell-ID, Betrag, Zahlungsmittel, IBAN/Karteninfo (via Token). \emph{Output:} Payment-Status, Buchungs-ID, Beleg-Referenz, Fehlerursache. \emph{Owner:} Produktteam Payments + Compliance. \emph{Kritischster Fehler:} Doppelbuchung oder fehlgeschlagene Buchung ohne Storno \textendash{} direkte finanzielle und reputative Folgen.
+
+\smallskip
+\noindent\textbf{(c) Inventory Service.} \emph{Zweck:} Best\"ande, Reservierungen und Verf\"ugbarkeitspr\"ufungen. \emph{Input:} Artikel-ID, Menge, Standort, Reservierungszeitraum. \emph{Output:} Verf\"ugbarkeit (ja/nein/eingeschr\"ankt), Reservierungs-ID, voraussichtliches Wiederverf\"ugbarkeits-Datum, Sicherheitsbestand-Status. \emph{Owner:} Produktteam Inventory. \emph{Kritischster Fehler:} Verkauf von tats\"achlich nicht vorhandenem Bestand (``Overselling'').
+
+\smallskip
+\textbf{3. Riskanteste Grenze + Guardrail:} \emph{Order \textendash{} Inventory.} Hier kollidieren zwei Verantwortlichkeiten: Order \emph{verspricht}, Inventory \emph{deckt}. Datenhoheit ist h\"aufig unklar (Reservierung als Order- oder Inventory-Konzept?). \emph{Guardrail:} \textbf{Anti-Corruption-Layer + idempotente Reservierungs-API}: Order ruft Inventory mit eindeutiger Operations-ID; Inventory antwortet entweder ``reserviert'' (mit TTL) oder ``nicht verf\"ugbar''. Doppelaufrufe wirken sich \emph{nicht} mehrfach aus. Ein \emph{gemeinsames Datenmodell} ist verboten \textendash{} jede Seite h\"alt ihre eigene Sicht.
+
+\smallskip
+\emph{Andere Schnitte sind legitim} (z.\,B.\ Trennung Pricing in \emph{Quote} + \emph{Pricing}, oder \emph{Notifications} als eigener Service). Entscheidend: Capability-Logik, klarer Owner, niedrige Kopplung.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Release-Flow \& Testpyramide als Sicherheitsnetz}{\nivLii}{25\,min}
+
+\ytquery{Release Flow Quality Gates Canary Feature Toggle SLO Beispiel}
+
+\begin{loesungbox}
+\textbf{1. Minimaler Release-Flow (7 Schritte):}
+\begin{enumerate}
+  \item \emph{Commit + PR} \textendash{} Code-Review durch zweite Person.
+  \item \emph{Build + Unit/Integrationstests} \textendash{} \textbf{Quality Gate 1}: Tests gr\"un, Coverage $\geq$\,80\,\%.
+  \item \emph{Static \& Security Scan} \textendash{} Dependency-Check, Secret-Scan, License-Check.
+  \item \emph{Stage-Deployment + Smoke Test} \textendash{} Happy Path und einen Fehlerpfad pr\"ufen.
+  \item \emph{Approval} \textendash{} \textbf{Quality Gate 2}: Service-Owner gibt explizit frei (bei kritischen Services zus\"atzlich Security).
+  \item \emph{Canary auf Prod} \textendash{} 5\,\% Verkehr, 30 Minuten Beobachtung (Fehlerquote, Latenz, Logs).
+  \item \emph{Full Rollout} bei stabilen Kennzahlen, sonst automatischer Rollback.
+\end{enumerate}
+
+\smallskip
+\textbf{2. Testpyramide f\"ur drei Services:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXXX@{}}
+\toprule
+\textbf{Service} & \textbf{Unit} & \textbf{Integration} & \textbf{E2E} \\
+\midrule
+Order   & $\sim$\,120 (Geschaeftsregeln, Statuslogik) & $\sim$\,25 (DB, Inventory-Aufruf)  & 2 (Happy Path, Fraud-Pfad) \\
+Billing & $\sim$\,90 (Berechnung, Steuerlogik)        & $\sim$\,20 (PDF-Erzeugung, Versand) & 1 (Rechnung an Kunde) \\
+Payments & $\sim$\,140 (PSP-Adapter, Storno-Logik)    & $\sim$\,30 (Zahlungsprovider, Buchung) & 2 (Erfolgsfall, Rueckbuchung) \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Zwei Betriebskennzahlen (SLO-orientiert):}
+\begin{itemize}
+  \item \emph{Verf\"ugbarkeit Order-API:} 99,9\,\% pro Monat. \emph{Owner:} Service-Owner Order. \emph{Mess-fenster:} rollierende 30 Tage.
+  \item \emph{Fehlerquote Payments:} $<$\,0,5\,\% der Buchungsversuche. \emph{Owner:} Service-Owner Payments + Plattformteam (Alerts). \emph{Mess-fenster:} rollierende 7 Tage.
+\end{itemize}
+
+\smallskip
+\textbf{4. MVP-Risikoplan (Rest-Risiko + Kompensation):}
+\begin{itemize}
+  \item \emph{Bewusster Verzicht:} weniger E2E-Tests (nur 1\,--\,2 Kernpfade pro Service).
+  \item \emph{Kompensation 1:} \emph{Canary-Release} mit harten Alerting-Schwellen (Fehlerquote, p95-Latenz) \textendash{} kein full rollout, solange Kennzahlen unklar.
+  \item \emph{Kompensation 2:} \emph{Feature Toggles} f\"ur riskante \"Anderungen \textendash{} \"Anderungen lassen sich ohne Deployment ausschalten.
+  \item \emph{Kompensation 3:} \emph{Manuelle Stichprobe} f\"ur Zahlungen mit Betr\"agen $\geq$\,1.000\,\euro{} in den ersten zwei Wochen nach gr\"o{\ss}eren Releases.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Fallstudie ``InsureFast'' \textendash{} Servicegrenzen \& Betriebskonzept}{\nivLii}{30\,min}
+
+\ytquery{Microservices Versicherung Schadenmeldung Kubernetes Skalierung Beispiel}
+
+\begin{loesungbox}
+\textbf{1. Servicegrenzen (sieben Services):}
+
+\smallskip
+\begin{itemize}
+  \item \emph{Claim Intake} \textendash{} Eingang aller Schadenmeldungen (App, Telefon, Mail). Validierung, Vorqualifizierung.
+  \item \emph{Policy/Customer} \textendash{} Vertrags- und Kundendaten (Datenhoheit Kunde).
+  \item \emph{Fraud Check} \textendash{} Betrugsindikatoren, automatisierte Pr\"ufung, Flagging.
+  \item \emph{Claim Assessment} \textendash{} Sachpr\"ufung, Entscheidung, Begr\"undung (auditrelevant!).
+  \item \emph{Payout} \textendash{} Auszahlung, Verkn\"upfung mit Finance.
+  \item \emph{Notifications} \textendash{} Mail, Push, SMS an Kunden + interne Stakeholder.
+  \item \emph{Document Management} \textendash{} Beweisdokumente, Fotos, Gutachten, Archivierung.
+\end{itemize}
+
+\smallskip
+\textbf{Begr\"undung einer nicht-trivialen Grenze:} \emph{Fraud Check} als eigener Service (nicht in \emph{Claim Assessment}). Grund: Fraud Check ist regelm\"a{\ss}ig algorithmisch-dynamisch (Modelle, Schwellenwerte), wird h\"aufiger ge\"andert und braucht eigene Datenhoheit (Score-Historie). Eingebettet in Assessment w\"urde jede Modell\"anderung den gesamten Pr\"ufprozess deployen lassen.
+
+\smallskip
+\textbf{2. Kubernetes-Betriebskonzept:}
+\begin{itemize}
+  \item \emph{Rollout/Rollback:} \textbf{Canary} f\"ur Claim Intake und Assessment (Verkehrsschritte 5\,\%/25\,\%/100\,\%); Rollback automatisch ausgel\"ost, wenn Fehlerquote $>$\,1\,\% \"uber 5 Minuten. Pflicht: Rollback innerhalb von 10 Minuten ge\"ubt.
+  \item \emph{Skalierungsregel:} ``Wenn die Queue-L\"ange in \emph{Claim Intake} $>$\,200 oder die CPU-Auslastung $>$\,70\,\% f\"ur 3 Minuten, dann +2 Replicas, bis max.\ 12.''
+  \item \emph{Konfiguration / Secrets:} Konfig in ConfigMaps; Secrets im Vault (nie im Image); Zugriff role-based; Rotation alle 90 Tage.
+  \item \emph{Monitoring / Alerting:} Zentraler Log-/Metric-/Trace-Standard mit Korrelations-ID pro Schadenfall. Alerts auf Fehlerquote, Latenz (p95), Queue-L\"ange, fehlende Heartbeats; Eskalation an Service-Owner.
+  \item \emph{Ressourcenlimits:} Pro Container harte Limits (z.\,B.\ 500\,m CPU, 512\,MiB RAM) und Requests bei 70\,\% der Limits. Keine ``unbegrenzten'' Pods.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Fallstudie ``InsureFast'' \textendash{} Teststrategie \& Operating Model}{\nivLii}{30\,min}
+
+\ytquery{Microservices Operating Model RACI Plattform Team Incident Management}
+
+\begin{loesungbox}
+\textbf{1. Teststrategie (TDD):}
+\begin{itemize}
+  \item \emph{Unit-Tests} f\"ur Kernlogik: \emph{Claim Assessment} (Entscheidungsregeln, Begr\"undungslogik), \emph{Fraud Check} (Score-Berechnung), \emph{Payout} (Storno-/Korrekturlogik). TDD-Zyklus \emph{Red--Green--Refactor} verpflichtend f\"ur regulatorische Logik.
+  \item \emph{Integrationstests} f\"ur Service-APIs: Claim Intake \textrightarrow{} Assessment, Assessment \textrightarrow{} Payout, alle Services \textrightarrow{} Document Management.
+  \item \emph{E2E-Tests} nur f\"ur \textbf{zwei Kernpfade}: \emph{Happy Path} (Schaden gemeldet \textrightarrow{} gepr\"uft \textrightarrow{} ausgezahlt) und \emph{Fraud-Flag-Path} (Schaden gemeldet \textrightarrow{} Fraud Check schl\"agt an \textrightarrow{} manueller Review).
+  \item \emph{Quality Gates:} (1) Alle Tests gr\"un + Security-Scan ohne kritische Findings; (2) Smoke Test nach Deploy, Rollback-Fallback geplant.
+\end{itemize}
+
+\smallskip
+\textbf{2. Operating Model:}
+
+\smallskip
+\noindent\emph{Teamzuschnitt:} 5\,--\,6 Produktteams, jedes Team besitzt 1\,--\,2 Services (``you build it, you run it''). 1 Plattformteam (CI/CD-Templates, Observability, Kubernetes-Basis). 1 Security/Compliance-Team (Baselines, Ausnahmen).
+
+\smallskip
+\noindent\emph{RACI Schnittstellen\"anderung:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lcccc@{}}
+\toprule
+ & \textbf{Service-Owner (anrufend)} & \textbf{Service-Owner (gerufen)} & \textbf{Plattform} & \textbf{Security} \\
+\midrule
+\"Anderung initiieren     & R / A & C & I & I \\
+Vertragspr\"ufung         & C     & R & C & I \\
+Auswirkung absch\"atzen   & C     & A & R & C \\
+Freigabe                 & I     & A & C & R / C \\
+Rollback-Plan            & R     & R & A & I \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\noindent\emph{Incident-Handling:} On-call beim Service-Owner; bei Plattformproblemen Eskalation an Plattformteam; Security wird zugeschaltet bei Datenleck-Verdacht. Postmortem innerhalb von 5 Arbeitstagen, blameless.
+
+\smallskip
+\noindent\emph{Release-Freigabepfad:} Standard-Release \textrightarrow{} Service-Owner gen\"ugt. Kritische \"Anderung (Schnittstelle, Datenmodell, Security) \textrightarrow{} Service-Owner + Plattform + Security.
+
+\smallskip
+\textbf{3. Zwei Entscheidungen unter Unsicherheit:}
+\begin{itemize}
+  \item \emph{Datenstrategie:} \textbf{DB-bleibt + Anti-Corruption-Layer} (kein Big Bang). Begr\"undung: 12 Wochen reichen nicht f\"ur Migration unter Audit-Druck; Risiko: Migrations-Bug w\"are existenzkritisch. \emph{Fr\"uhwarnsignal:} Wenn die Integrationsfehler \"uber den Anti-Corruption-Layer $>$\,5\,\% steigen oder die Lead-Time pro \"Anderung sich verdoppelt \textrightarrow{} Migration einplanen.
+  \item \emph{Release-Frequenz:} \textbf{w\"ochentlich f\"ur Nicht-Kernservices, zweiw\"ochentlich f\"ur Kern} (Assessment, Payout). \emph{Fr\"uhwarnsignal:} Change Failure Rate $>$\,15\,\% im Kern \textrightarrow{} Frequenz reduzieren oder Quality Gates verst\"arken.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Anti-Muster ``Microservices-Spaghetti'' erkennen und korrigieren}{\nivLii}{25\,min}
+
+\ytquery{Microservices Antipattern verteilter Monolith Observability erklaert}
+
+\begin{loesungbox}
+\textbf{A \textendash{} Service-Wildwuchs.}
+\begin{itemize}
+  \item \emph{Verletztes Prinzip:} ``Servicegrenze entlang Capabilities'' und ``Wirtschaftlichkeit''. 47 Services f\"ur 60 Entwickler bedeuten weniger als 1,3 Entwickler pro Service \textendash{} unten \"uber Owner und Run-Disziplin.
+  \item \emph{Korrektur:} Konsolidieren entlang Capabilities. Faustregel: ein Service braucht mindestens \emph{drei Personen}, die ihn ge- und betreiben k\"onnen, sonst zu Capability verschmelzen. Kundendaten in einer Hoheit \textendash{} \emph{Customer Service} \textendash{} statt vierfach.
+\end{itemize}
+
+\smallskip
+\textbf{B \textendash{} Verteilter Monolith.}
+\begin{itemize}
+  \item \emph{Verletztes Prinzip:} ``Lose Kopplung'' und ``unabh\"angige Deployments''. Wenn jede \"Anderung mehrere Releases erzwingt, sind die Services nur formal getrennt.
+  \item \emph{Korrektur:} Synchrone Aufrufe zu Events / asynchroner Kommunikation umbauen, wo m\"oglich. API-Versionierung erzwingen (alte Version mindestens eine Iteration weiter laufen lassen). Schnittstellen explizit dokumentieren (OpenAPI/AsyncAPI) und Vertragsbruch-Tests f\"ahren.
+\end{itemize}
+
+\smallskip
+\textbf{C \textendash{} Observability als Nachgedanke.}
+\begin{itemize}
+  \item \emph{Verletztes Prinzip:} Betriebsdisziplin, ``you build it, you run it''.
+  \item \emph{Korrektur:} Zentrale Log-/Metric-/Trace-Standards als Pflicht (Plattformteam stellt sie bereit, nicht jedes Team baut sie nach). \emph{Korrelations-ID} pro Gesch\"aftsfall durch alle Services. Mindest-Dashboard pro Service: Verkehr, Fehlerquote, Latenz, Saturation (``USE/RED-Pattern''). Ziel-MTTR explizit.
+\end{itemize}
+
+\smallskip
+\textbf{D \textendash{} Rollback-Atrophie.}
+\begin{itemize}
+  \item \emph{Verletztes Prinzip:} Betriebsdisziplin und Reliability-Engineering. Ein nie ge\"ubter Rollback ist im Incident-Fall \emph{kein} Rollback.
+  \item \emph{Korrektur:} Monatliche Rollback-\"Ubung pro Team (Chaos-Light), Rollback-Pfad in jeder Pipeline implementiert und getestet, Rollback-Dauer als SLO f\"ur das Plattformteam (z.\,B.\ $\leq$\,10\,Minuten). Postmortems erw\"ahnen explizit, ob Rollback m\"oglich gewesen w\"are.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3 LOESUNGEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Reliability- \& Risk-Framework f\"ur eine wachsende Plattform}{\nivLiii}{35\,min}
+
+\ytquery{SLO Error Budget Change Failure Rate MTTR SRE Framework Senior}
+
+\begin{loesungbox}
+\textbf{1. SLO-Set (drei SLOs f\"ur kritische Services):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}lX@{}}
+\toprule
+\textbf{SLO} & \textbf{Schwelle} & \textbf{Begr\"undung} \\
+\midrule
+Verf\"ugbarkeit & 99,9\,\% / Monat & Branchen\"ublich f\"ur Kundenkernprozesse; entspricht ca.\ 43 Minuten Ausfall pro Monat. \\
+Latenz p95     & $\leq$\,300\,ms  & Schwelle, ab der Nutzerwahrnehmung sp\"urbar leidet (User Research). \\
+Fehlerquote    & $\leq$\,0,5\,\%  & Niedrige Schwelle, weil Fehler in der Kernlogik direkt in Reklamationen und Audit-Findings durchschlagen. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Error Budgets:} Wenn die Verf\"ugbarkeit 99,9\,\% / Monat als SLO definiert ist, betr\"agt das \emph{Error Budget} 0,1\,\% / Monat ($\sim$\,43 Minuten). Solange das Budget \emph{nicht} aufgebraucht ist, d\"urfen Teams releasen. \emph{Wird das Budget aufgebraucht, gilt:}
+\begin{itemize}
+  \item Release-Stop f\"ur den betroffenen Service \textendash{} ausgenommen sicherheitskritische Hotfixes.
+  \item Plattform-Review innerhalb von 5 Arbeitstagen mit dem Service-Owner: Ursache, Ma{\ss}nahme, Lernen.
+  \item Erst nach 14 Tagen ohne weitere Verletzung wird der Release-Stop aufgehoben.
+\end{itemize}
+\emph{Sinn:} Speed und Reliability werden \emph{verhandelbar} \textendash{} kein blo{\ss}er Appell.
+
+\smallskip
+\textbf{3. Risk-Framework (f\"unf Risiken):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}ccX@{}}
+\toprule
+\textbf{Risiko} & \textbf{Impact} & \textbf{Whk.} & \textbf{Pr\"avention} \\
+\midrule
+Servicegrenze falsch geschnitten & 5 & 3 & Capability-Mapping vor Schnitt, Architekturreview f\"ur irreversible Entscheidungen. \\
+Secret im Code & 5 & 3 & Secret-Scanning als Quality Gate; Vault verpflichtend. \\
+Rollback nicht ge\"ubt & 4 & 4 & Monatliche Rollback-\"Ubung, Rollback-Dauer als SLO. \\
+Observability-L\"ucken & 4 & 4 & Mindest-Dashboard verpflichtend, Korrelations-ID Standard. \\
+Tooling-Lock-in & 3 & 3 & Offene Standards (OpenAPI, BPMN-XML, Helm), Export-Anforderung in Tool-Auswahl. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{4. Anti-Gaming-Mechanik:}
+\begin{itemize}
+  \item \emph{Kopplung 1:} Change Failure Rate gilt nur dann als ``erf\"ullt'', wenn gleichzeitig der \emph{Service-Health-Index} (interner Composite-Wert aus Fehlern + Eskalationen + Retouren) sich nicht verschlechtert. So bringt das Klein-Halten von ``Changes'' keinen scheinbaren Erfolg.
+  \item \emph{Kopplung 2:} Postmortem-Pflicht f\"ur jeden \emph{Kundenwahrnehmbaren} Incident; ein nicht durchgef\"uhrter Postmortem z\"ahlt als Change Failure mit doppelter Gewichtung. So lohnt es sich nicht, Incidents zu vertuschen.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Governance leicht, aber wirksam}{\nivLiii}{30\,min}
+
+\ytquery{Architecture Governance Principles Senior Lightweight Service Standard}
+
+\begin{loesungbox}
+\textbf{1. Acht Architekturprinzipien:}
+\begin{enumerate}
+  \item Servicegrenzen folgen \emph{Business Capabilities}, nicht Datenbanktabellen oder Org-Charts.
+  \item Jeder Service hat \emph{einen} Owner; Ownership ist an die Funktion gekoppelt, nicht an Personen.
+  \item Kein Secret im Code; Credentials kommen ausschlie{\ss}lich aus dem Vault.
+  \item Jede \"offentliche Schnittstelle ist als OpenAPI/AsyncAPI dokumentiert und versioniert; Vertragsbr\"uche werden in der Pipeline erkannt.
+  \item Schreibende Operationen sind \emph{idempotent} (Operations-ID), Konsumenten d\"urfen sicher wiederholen.
+  \item Jeder Service stellt ein Mindest-Dashboard (Verkehr, Fehlerquote, Latenz, Saturation) bereit und schreibt strukturierte Logs mit Korrelations-ID.
+  \item Releases gehen \"uber Canary oder Blue/Green; Rollback ist innerhalb von 10 Minuten m\"oglich und monatlich ge\"ubt.
+  \item Datenhoheit ist eindeutig: ein Service ``besitzt'' eine Capability, Daten anderer Services werden \"uber Schnittstellen oder Events bezogen \textendash{} nicht via geteilter Datenbank.
+\end{enumerate}
+
+\smallskip
+\textbf{2. Schnittstellenstandards (zwei):}
+\begin{itemize}
+  \item \emph{OpenAPI / AsyncAPI als Single Source of Truth} f\"ur synchrone bzw.\ asynchrone Schnittstellen \textendash{} jeder Service ver\"offentlicht seine Schemas im Service-Katalog.
+  \item \emph{Event-Schema-Registry} (z.\,B.\ Avro/JSON-Schema) mit Versionierung und R\"uckw\"artskompatibilit\"ats-Pr\"ufung als Quality Gate.
+\end{itemize}
+
+\smallskip
+\textbf{3. Review-Regel:}
+\begin{itemize}
+  \item \emph{Architektur-Review verpflichtend bei:} neuer Service, neue Schnittstelle nach au{\ss}en, Datenhoheits-\"Anderung, Plattformwechsel, Sicherheits-Baseline-Ausnahmen.
+  \item \emph{Nicht erforderlich bei:} interne Refactorings, neue interne Endpoints, Test-/Toolwechsel innerhalb des Teams.
+\end{itemize}
+\emph{Faustregel:} Review nur bei \emph{teuren oder irreversiblen} Entscheidungen \textendash{} alles andere kostet mehr Zeit als es schafft.
+
+\smallskip
+\textbf{4. Eskalationspfad (vier Stufen):}
+\begin{enumerate}
+  \item Service-Owner und Plattform-Lead versuchen Einigung (max.\ 2 Arbeitstage).
+  \item Bei Patt: Architekturboard (Plattform-Lead + zwei rotierende Senior-Engineers + Security).
+  \item Bei strategischem Dissens: Head of Platform / Head of Product.
+  \item Bei strategischer Verantwortung: CTO. Entscheidungen sind dokumentiert (ADR \textendash{} Architecture Decision Record).
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Digitale Prozessarchitektur als Betriebs- und Entscheidungsarchitektur}{\nivLiii}{45\,min}
+
+\ytquery{Microservices Operating Model Decision Architecture Senior Platform CIO}
+
+\begin{loesungbox}
+\emph{Musterl\"osung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind m\"oglich, solange sie als Architektur (nicht als Liste) gedacht sind.}
+
+\smallskip
+\textbf{1. Top-10-Entscheidungsarchitektur:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.8cm}p{3.6cm}X@{}}
+\toprule
+\textbf{Entscheidung} & \textbf{Wer entscheidet?} & \textbf{Optionen / Kriterien} \\
+\midrule
+Servicegrenzen          & Architekturboard + Service-Owner & Capability-Schnitt; max.\ 20 Services in Phase 1. \\
+Datenhoheit             & Architekturboard                & Eine Capability = eine Datenhoheit; kein Shared-DB. \\
+API-/Event-Standards    & Plattform-Lead                  & OpenAPI/AsyncAPI verbindlich; Schema-Registry. \\
+SLOs                    & Service-Owner + Plattform       & Standard-Set (Verf./Lat./Err) je Klasse. \\
+Release-Policies        & Plattform-Lead + Security       & Standard-Releases via Canary; Kern-Release zweiw\"ochentlich. \\
+Security-Baselines      & CISO + Plattform                & Vault, Least Privilege, SBOM, Secret-Scan. \\
+Observability-Standard  & Plattform                        & Zentraler Log-/Metric-/Trace-Stack; Korrelations-ID Pflicht. \\
+Incident-Governance     & Head of Platform                 & On-call beim Service-Owner; Eskalation an Plattform. \\
+Ausnahmeprozess         & Architekturboard                 & Schriftliche Ausnahme, Ablaufdatum, Reviewer. \\
+Toolchain-Standard      & CTO                              & 1\,--\,2 Tools pro Kategorie; Export-Pflicht. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Operating Model \& RACI:}
+\begin{itemize}
+  \item \emph{Produktteams (Build + Run):} Service-Owner, Tag-Betrieb, Releases, On-call, Postmortems.
+  \item \emph{Plattformteam:} CI/CD-Templates, Observability, Kubernetes-Basis, Rollback-Mechanik, Schema-Registry.
+  \item \emph{Security/Compliance:} Baselines, Audit-Beweise, Ausnahmen, SBOM-Pflicht.
+  \item \emph{Architekturboard:} nur teure/irreversible Entscheidungen; max.\ 1\,h pro Sitzung, alle 2 Wochen.
+  \item \emph{Eskalation bei Speed vs.\ Risk:} Service-Owner \textrightarrow{} Plattform-Lead \textrightarrow{} Head of Platform \textrightarrow{} CTO.
+\end{itemize}
+
+\smallskip
+\textbf{3. Reliability- \& Risk-Framework:}
+\begin{itemize}
+  \item SLOs pro Service (Standard-Set), Error Budgets, Change Failure Rate ($\leq$\,10\,\%), MTTR ($\leq$\,60\,min).
+  \item Anti-Gaming-Kopplung: Kosten-/Geschwindigkeits-KPIs gelten nur, wenn \emph{Service-Health-Index} nicht degradiert (s.\ Aufgabe 9).
+\end{itemize}
+
+\smallskip
+\textbf{4. Governance leicht, aber wirksam:} max.\ 8 Architekturprinzipien (s.\ Aufgabe 10). Standard-Templates f\"ur CI/CD, Helm/Deployment, Mindest-Dashboard, Postmortem.
+
+\smallskip
+\textbf{5. Roadmap (16 Wochen):}
+\begin{itemize}
+  \item \emph{MVP (Woche 1\,--\,8):} Plattform-Templates fertigstellen; zwei Pilotteams onboarden; SLO-Standard-Set live; drei Services extrahieren; Canary-Pipeline verf\"ugbar.
+  \item \emph{Scale (Woche 9\,--\,16):} weitere f\"unf Teams; w\"ochentliches Release; Error-Budget-Mechanik aktiv; Architekturboard mit ADR-Praxis.
+  \item \emph{Messkonzept:} Outcomes (Lead Time, Change Failure Rate, MTTR, Audit-Findings) \textendash{} keine Aktivit\"atsmetriken (``wie viele Tickets bearbeitet'').
+\end{itemize}
+
+\smallskip
+\textbf{6. Zwei Entscheidungen unter Unsicherheit (Pflicht):}
+\begin{enumerate}
+  \item \emph{Welche drei Services zuerst extrahieren?} \\
+    Wahl: \emph{Claim Intake}, \emph{Fraud Check}, \emph{Notifications}. Begr\"undung: Hoher Lasthebel (Intake), klare Capability (Fraud), wenig Datenkopplung (Notifications). \emph{Verworfene Alternative:} \emph{Payout} zuerst \textendash{} zu hohes Audit-/Finance-Risiko, kein guter Lern-Service. \emph{Fr\"uhwarnsignale:} Wenn Lead-Time f\"ur \emph{Intake} sich nach 4 Wochen verdoppelt oder Fraud-Score-Genauigkeit sinkt \textrightarrow{} Schnitt \"uberpr\"ufen.
+  \item \emph{Welche Release-Policy f\"ur Kernprozesse?} \\
+    Wahl: \emph{Zweiw\"ochentlich + Canary 5\,\% / 25\,\% / 100\,\%}, Rollback automatisch bei Fehlerquote $>$\,1\,\%. Begr\"undung: Kernprozesse $=$ auditrelevant + finanzkritisch; w\"ochentlich nicht durchhaltbar bei aktuellem Reifegrad, monatlich w\"are zu langsam. \emph{Guardrails:} kein Release am Freitag; Security-Approval Pflicht; Rollback-\"Ubung monatlich. \emph{Fr\"uhwarnsignal:} Wenn Change Failure Rate im Kern $>$\,15\,\% in 2 Iterationen \textrightarrow{} Frequenz zur\"uck auf monatlich.
+\end{enumerate}
+
+\smallskip
+\textbf{Anschluss an Strategie:} Auditierbarkeit (Compliance), Time-to-Market (Peak-Saison), Skalierbarkeit (mehrere Standorte). Die Plattform ist kein IT-Projekt, sondern ein \emph{steuerbares System}, das Entscheidungen, Risiko und Verantwortung sichtbar macht.
+\end{loesungbox}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Wenn Ihre eigene L\"osung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder einen anderen Service-Schnitt angelegt?} Beides ist legitim, solange die Logik nachvollziehbar bleibt.
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie Ihre eigenen L\"osungen in die Coaching-Sitzung mit. Im Fokus stehen drei Fragen: Welche Annahmen haben Sie gemacht? Welche Zielkonflikte (Speed vs.\ Stabilit\"at, Autonomie vs.\ Standardisierung, Aufwand vs.\ Auditierbarkeit) haben Sie sichtbar gemacht? Welche Entscheidung haben Sie getroffen \textendash{} und w\"urden Sie sie auch verantworten, wenn die n\"achste Reorganisation kommt?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 10 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

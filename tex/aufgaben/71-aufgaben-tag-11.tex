@@ -1,0 +1,599 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 11 - Aufgabenheft
+% RPA als Steuerungs- und Risikohebel: Plattformueberblick + Attended/Unattended
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 11}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}RPA \textendash{} Plattform \& Automationsform}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 5 \textperiodcentered{} TAG 11 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 12.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 11\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}RPA als Steuerungs- und Risiko\-hebel \textendash{}\\Plattform\"uberblick und die richtige\\Automationsform in elf Aufgaben.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 11 \textendash{} \emph{RPA als Steuerungs- und Risikohebel}: Plattform\"uberblick (Studio/Orchestrator), Eignung von Use Cases, Attended vs.\ Unattended, Nutzen-/Risikoabw\"agung und das richtige Stufenmodell. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Eignungs-Kriterien, Plattform-Begriffe, Nutzen-/Risiko-Landkarte. 5\,--\,10 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Use-Case-Scoping, Stufenmodell, Bot-Flow, KPIs. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Operating Model, Entscheidungsarchitektur, Anti-Gaming-KPIs. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt:
+
+\begin{itemize}
+  \item eine Niveau-Markierung und einen Zeit-Richtwert,
+  \item den Aufgabentext (h\"aufig mit Fallbeschreibung),
+  \item einen Antwort-Freiraum f\"ur Ihre L\"osung,
+  \item eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 11}. RPA ist eine Steuerungsentscheidung, kein Klick-Tool: ``Bot bauen'' ist immer auch eine Entscheidung \"uber Verantwortung, Compliance und Risiko.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{RPA-Eignung \textendash{} wof\"ur geeignet, wof\"ur nicht?}{\nivLi}{8\,min}
+
+\noindent Beantworten Sie kompakt:
+
+\begin{enumerate}
+  \item Nennen Sie \textbf{f\"unf Eignungskriterien} f\"ur einen typischen RPA-Use-Case (z.\,B.\ regelbasiert, stabile UI, klarer Input/Output, hohes Volumen, geringe Ausnahmenrate).
+  \item Nennen Sie \textbf{drei typische Anti-Kandidaten}, bei denen RPA \emph{nicht} (oder nur in Kombination mit BPM/KI) die richtige Wahl ist.
+  \item Schreiben Sie in einem Satz, warum die Aussage ``RPA spart immer Geld'' irref\"uhrend ist.
+\end{enumerate}
+
+\ytquery{RPA Eignung Use Case Auswahl regelbasiert UI stabil Beispiel}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Plattform\"uberblick \textendash{} Studio, Orchestrierung, Run}{\nivLi}{8\,min}
+
+\noindent Erl\"autern Sie kurz die folgenden \emph{tool-neutralen} Bausteine einer RPA-Plattform und tragen Sie zu jedem Baustein \emph{eine} typische T\"atigkeit ein, die in ihm stattfindet:
+
+\medskip
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}X@{}}
+\toprule
+\textbf{Baustein} & \textbf{Was passiert hier?} \\
+\midrule
+Studio / Designer        & \\[14pt]
+\midrule
+Orchestrator / Server    & \\[14pt]
+\midrule
+Bot-Runtime (Agent)      & \\[14pt]
+\midrule
+Queue / Work-Items       & \\[14pt]
+\midrule
+Credential Vault         & \\[14pt]
+\midrule
+Logs / Monitoring        & \\[14pt]
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\noindent Erg\"anzen Sie unter der Tabelle in einem Satz: Warum reicht das \emph{Studio} allein nicht aus, sobald mehr als drei Bots in Produktion laufen?
+
+\ytquery{RPA Plattform Studio Orchestrator Queue Logs erklaert tool neutral}
+
+\antwortlinien{6}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Attended vs.\ Unattended \textendash{} Vergleichstabelle}{\nivLi}{10\,min}
+
+\noindent Erstellen Sie eine Vergleichstabelle zwischen \emph{Attended} und \emph{Unattended Automation}. Tragen Sie zu jeder Zeile pr\"agnante Stichpunkte ein.
+
+\medskip
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}|X|X@{}}
+\toprule
+\textbf{Dimension} & \textbf{Attended} & \textbf{Unattended} \\
+\midrule
+Ausf\"uhrungsort           & & \\[16pt]
+\midrule
+Trigger                    & & \\[16pt]
+\midrule
+Skalierbarkeit             & & \\[16pt]
+\midrule
+Governance-Aufwand         & & \\[16pt]
+\midrule
+Typischer Use-Case         & & \\[16pt]
+\midrule
+Risiko bei UI-\"Anderungen  & & \\[16pt]
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\noindent Schreiben Sie unter die Tabelle einen Schlusssatz: Wann ist ein \emph{Stufenmodell} (erst attended, dann unattended) die richtige Antwort \textendash{} und wann ist es eine Ausrede, um Verantwortung aufzuschieben?
+
+\ytquery{Attended Unattended RPA Unterschied Beispiel Stufenmodell}
+
+\antwortlinien{4}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Use-Case-Eignung bewerten \textendash{} drei Kandidaten}{\nivLii}{20\,min}
+
+\begin{infobox}[Drei Kandidaten]
+\textbf{A.} Rechnungsdaten aus E-Mail lesen \textrightarrow{} ERP erfassen \textrightarrow{} Status per Mail zur\"uckmelden.
+
+\smallskip
+\textbf{B.} Kundenreklamation pr\"ufen \textrightarrow{} Kulanz entscheiden \textrightarrow{} ggf.\ Gutschrift ausl\"osen (viele Sonderf\"alle).
+
+\smallskip
+\textbf{C.} HR-Onboarding: Neue Mitarbeitende anlegen \textrightarrow{} Accounts in drei Systemen erstellen \textrightarrow{} Begr\"u{\ss}ungsmail senden.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie alle drei Kandidaten auf einer \textbf{Eignungs-Skala 1\,--\,5} entlang von f\"unf Kriterien Ihrer Wahl (z.\,B.\ Stabilit\"at, Volumen, Regelbasis, Sonderf\"alle, Auditrelevanz). Stellen Sie die Bewertung tabellarisch dar.
+  \item Empfehlen Sie f\"ur jeden Kandidaten eine \emph{Entscheidung}: \emph{Go}, \emph{Go mit Auflagen}, \emph{No-Go} \textendash{} mit kurzer Begr\"undung.
+  \item Definieren Sie f\"ur den am wenigsten geeigneten Kandidaten: Welche \textbf{Vorarbeit} (Prozess kl\"aren, Sonderf\"alle reduzieren, Schnittstelle anders bauen) w\"urde ihn aus Ihrer Sicht eignungsf\"ahig machen?
+  \item Erg\"anzen Sie einen Schlusssatz: An welchem Punkt h\"ort RPA als Werkzeug auf und wir w\"urden den Prozess besser \emph{neu modellieren} (BPM) oder \emph{neu codieren} (Workflow-Engine)?
+\end{enumerate}
+
+\ytquery{RPA Use Case Eignung bewerten Scorecard regelbasiert Volumen}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Attended vs.\ Unattended \textendash{} Entscheidung unter Zielkonflikten}{\nivLii}{25\,min}
+
+\begin{infobox}[Szenario: Zielkonflikt]
+Der Fachbereich fordert ``sofort Vollautomatisierung''. Die IT warnt vor Zugriffs-, Compliance- und Fehlerkosten. Das Management will \emph{schnelle Ergebnisse} in 6 Wochen.
+
+\smallskip
+\textbf{Constraints:} Zeitdruck 6 Wochen, Budget begrenzt, Prozess ``mittelstabil'', 15\,\% Ausnahmen, Audit-Relevanz mittel.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Entscheidung:} Starten Sie attended, unattended oder mit einem Stufenmodell?
+  \item \textbf{Begr\"undung mit Nutzen/Risiko/Komplexit\"at:} Mindestens \emph{sechs} Argumente, ausgewogen aus beiden Sichten (mindestens zwei dagegen, mindestens zwei daf\"ur).
+  \item \textbf{Stufenmodell konkret:}
+    \begin{itemize}
+      \item \emph{Release 1 (6 Wochen):} Was wird automatisiert, was bleibt manuell, wie wird geloggt?
+      \item \emph{Release 2 (weitere 6 Wochen):} Was wird erweitert, welche Governance kommt dazu?
+    \end{itemize}
+  \item \textbf{Readiness-KPIs:} Definieren Sie zwei Kennzahlen, die zeigen, dass der Prozess ``unattended-ready'' wird (z.\,B.\ Ausnahmequote, UI-\"Anderungsrate, Fehlerquote). Mit Schwelle.
+\end{enumerate}
+
+\ytquery{RPA Attended Unattended Stufenmodell Entscheidung Zielkonflikt}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Fallstudie ``NordTrade GmbH'' \textendash{} RPA im Finanzprozess (Teil 1)}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: NordTrade GmbH]
+\textbf{Unternehmen:} ``NordTrade GmbH'' (mittelgro{\ss}, SAP/ERP + mehrere Portale).
+
+\smallskip
+\textbf{Problem:} T\"aglich 250 Eingangsrechnungen aus E-Mail/PDF. Die manuelle Erfassung produziert Fehler und R\"uckfragen. \emph{CFO will 30\,\% Zeitersparnis in 8 Wochen}; der Auditor fordert Nachvollziehbarkeit.
+
+\smallskip
+\textbf{Restriktionen / Unsicherheit:} 8 Wochen, Budget 80\,k\,\euro{}, das UI eines Portals \"andert sich gelegentlich, 12\,\% Ausnahmen (fehlende Daten), Zielkonflikt \emph{Speed vs.\ Auditf\"ahigkeit}.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag (Teil 1):}
+
+\begin{enumerate}
+  \item \textbf{Automationstyp w\"ahlen:} Attended oder Unattended (oder Stufenmodell)? Begr\"unden Sie als \emph{CFO und Compliance gemeinsam} \textendash{} also mit beiden Sichten.
+  \item \textbf{Bot-Flow entwerfen} (Text/Skizze): Input \textrightarrow{} Validierung \textrightarrow{} Verarbeitung \textrightarrow{} Buchung \textrightarrow{} Logging \textrightarrow{} Exception Queue. Pro Schritt: 1 Satz, was passiert.
+  \item \textbf{Exception-Kategorien:} Definieren Sie mindestens \emph{f\"unf} Kategorien (z.\,B.\ \emph{fehlende Kostenstelle}, \emph{Lieferant unbekannt}, \emph{Dublette}, \emph{Portal nicht erreichbar}, \emph{Validierung fail}). F\"ur jede Kategorie: Behandlung (manuell / Retry / Eskalation) und Owner.
+\end{enumerate}
+
+\ytquery{RPA Rechnungseingang Bot Flow Exception Queue ERP Audit}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Fallstudie ``NordTrade GmbH'' \textendash{} Audit Trail \& KPIs (Teil 2)}{\nivLii}{25\,min}
+
+\begin{infobox}[Fortsetzung: NordTrade GmbH]
+Diese Aufgabe baut auf Aufgabe 6 auf. Sie schlie{\ss}en die Fallstudie ab.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag (Teil 2):}
+
+\begin{enumerate}
+  \item \textbf{Audit Trail Minimum:} Welche Felder m\"ussen pro Bot-Lauf protokolliert werden, damit der Auditor zufrieden ist? Definieren Sie ein \emph{Minimum-Set} (mindestens \emph{acht} Felder, z.\,B.\ Bot-ID/Version, Timestamp, Quelle (Mail-ID), Rechnungs-ID, Felder vor/nachher, Ergebnisstatus, Exception-Code, manuelle \"Ubernahme ja/nein).
+  \item \textbf{KPI-Set (3 KPIs):} Definieren Sie einen KPI pro Dimension \textendash{} \emph{Produktivit\"at}, \emph{Qualit\"at}, \emph{Risiko}. Jeweils mit \emph{Zielwert nach 8 Wochen} und \emph{Owner}.
+  \item \textbf{Zwei Annahmen} dokumentieren, die Ihre Wahl tr\"agt (z.\,B.\ Lieferantenstamm stabil, Portal-UI 1$\times$/Monat ge\"andert).
+  \item \textbf{Zwei Fr\"uhwarnsignale}, ab denen Sie reagieren w\"urden (z.\,B.\ Exception-Rate $>$\,18\,\%, UI-Change-Quote $>$\,2$\times$/Monat).
+\end{enumerate}
+
+\ytquery{RPA Audit Trail Logging KPI Produktivitaet Qualitaet Risiko}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Bot-Design \textendash{} Single Point of Failure und Guardrails}{\nivLii}{20\,min}
+
+\begin{infobox}[Drei typische Schwachstellen]
+\textbf{A \textendash{} Credentials:} Der Bot loggt sich mit dem pers\"onlichen Account einer Sachbearbeiterin ein, weil ``das geht halt schneller''.\\[2pt]
+
+\textbf{B \textendash{} Portal-Abh\"angigkeit:} Der Bot ruft ein Lieferanten-Portal ohne SLA an. Das Portal ist 1\,--\,2$\times$ pro Woche f\"ur 20 Minuten weg.\\[2pt]
+
+\textbf{C \textendash{} Datenqualit\"at:} Der Bot \"ubernimmt eingehende Daten ohne Plausibilit\"atspr\"ufung; ein Komma-Fehler bedeutet einen Faktor 100.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent F\"ur jede der drei Schwachstellen:
+
+\begin{enumerate}
+  \item Benennen Sie den \textbf{Single Point of Failure} pr\"agnant (z.\,B.\ ``Pers\"onlicher Account als Bot-Account'').
+  \item Beschreiben Sie das \textbf{realistische Schadensszenario} in einem Satz (Was kann passieren? Wer leidet?).
+  \item Definieren Sie eine konkrete \textbf{Guardrail}, die in das Bot-Design eingebaut wird (z.\,B.\ Bot-spezifischer Funktionsaccount im Vault; Retry mit Backoff und Eskalation nach 30 Minuten; Plausibilit\"atsgrenzen $\pm$\,20\,\% gegen Vortag).
+\end{enumerate}
+
+\ytquery{RPA Risiko Credential Vault Plausibilitaet Guardrail Beispiel}
+
+\antwortlinien{16}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Automation Funnel und Portfolio-Steuerung}{\nivLiii}{35\,min}
+
+\begin{infobox}[Ausgangslage: Programm-Start]
+\textbf{Ihre Rolle:} Head of Automation in einer Organisation mit 4 Fachbereichen. Es liegen aktuell 38 Ideen f\"ur Bots auf dem Tisch. Die Fachbereiche dr\"angen, IT-Kapazit\"at ist knapp, der Audit-Druck w\"achst.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Automation Funnel:} Definieren Sie f\"unf Stufen (Idea \textrightarrow{} Eignung \textrightarrow{} PoC \textrightarrow{} Pilot \textrightarrow{} Betrieb). Pro Stufe: \emph{Zugangskriterium} und \emph{Owner}.
+  \item \textbf{Bewertungskriterien:} Definieren Sie drei Achsen \textendash{} \emph{Value}, \emph{Risk}, \emph{Effort} \textendash{} jeweils mit 3\,--\,5 Indikatoren (z.\,B.\ \emph{Value:} Volumen, Zeitersparnis, Fehlerkostenreduktion; \emph{Risk:} Audit, Datenqualit\"at, UI-Stabilit\"at; \emph{Effort:} Komplexit\"at, Schnittstellen, Test-Aufwand).
+  \item \textbf{Release-Klassen:} Definieren Sie zwei bis drei Klassen (z.\,B.\ \emph{Fast Track}, \emph{Standard}, \emph{High-Risk}) mit jeweils unterschiedlicher Anzahl an Quality Gates und Freigaben.
+  \item \textbf{Kill Criteria:} Wann verlassen Bots oder Ideen den Funnel? Definieren Sie drei Kriterien (z.\,B.\ Exception-Rate $>$\,25\,\% nach Stabilisierung, UI-Change $>$\,3$\times$/Monat, Use-Case nicht mehr fachlich relevant).
+\end{enumerate}
+
+\ytquery{RPA Automation Funnel Portfolio Value Risk Effort Kill Criteria}
+
+\antwortlinien{24}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Anti-Gaming-KPIs f\"ur ein RPA-Portfolio}{\nivLiii}{25\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent KPIs steuern Verhalten. Ein RPA-KPI, der nur \emph{Anzahl Bots in Produktion} z\"ahlt, erzeugt Bot-Zoos voller Karteileichen. Ein KPI, der nur \emph{Zeitersparnis} misst, schafft kreative Sch\"atzungen. Hier ist die Management-Spannung.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Vier KPI-Kandidaten:} Schlagen Sie vier KPIs vor (z.\,B.\ \emph{Bots in Produktion}, \emph{eingesparte Stunden / Monat}, \emph{Exception-Rate}, \emph{Audit-Findings}, \emph{Change Failure Rate}).
+  \item \textbf{Gaming-Risiko:} Beschreiben Sie pro KPI, wie er gespielt werden k\"onnte (z.\,B.\ Karteileichen-Bots, gesch\"onte Zeitsch\"atzungen, Re-Klassifikation von Fehlern als ``Daten-Issue'').
+  \item \textbf{Anti-Gaming-Kopplung:} Definieren Sie zwei Kopplungen, die das System gegen Gaming sichern (z.\,B.\ ``Eingesparte Stunden gelten nur, wenn die Fehlerquote nicht steigt'' oder ``Bots z\"ahlen erst nach 30 Tagen produktivem Lauf ohne kritische Exception'').
+  \item \textbf{Faustregel} (1\,--\,2 S\"atze): Wann ist ein KPI \emph{gef\"ahrlicher} als kein KPI?
+\end{enumerate}
+
+\ytquery{KPI Gaming Goodharts Law Anti Gaming RPA Steuerung}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} RPA Portfolio \& Operating Model}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Auftrag]
+\textbf{Ihre Rolle:} COO / Head of Automation / CRO (gemeinsam gedacht).
+
+\smallskip
+\textbf{Auftrag:} Ein RPA-Programm aufsetzen, das Produktivit\"at skaliert, aber Compliance und Betriebsrisiken beherrscht \textendash{} inklusive Entscheidung unter Unsicherheit.
+
+\smallskip
+\textbf{Restriktionen / Unsicherheit:}
+\begin{itemize}
+  \item Heterogene Prozesse, wechselnde UIs.
+  \item Budget \textbf{250\,k\,\euro{}}.
+  \item Fachbereiche dr\"angen, Audit-Druck steigt, IT-Kapazit\"at begrenzt.
+  \item Datenlage f\"ur Use-Case-Priorisierung l\"uckenhaft.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine \emph{Entscheidungsarchitektur} (keine Ma{\ss}nahmenliste):
+
+\begin{enumerate}
+  \item \textbf{Automation Funnel \& Portfolio:} Kriterien (Value/Risk/Effort), Intake, Priorisierung, Release-Klassen (attended vs.\ unattended), Kill Criteria (s.\ Aufgabe 9 \textendash{} hier finalisieren und sch\"arfen).
+  \item \textbf{Governance \& Rollen:} Bot Owner, Process Owner, Security Owner, Operations/Run, Change Advisory (light), RACI und Eskalationspfade.
+  \item \textbf{Security \& Compliance Guardrails:} Credential Vault (Prinzip), Least Privilege, Logging/Audit Trail Standard, Exception Policy, SoD (Segregation of Duties).
+  \item \textbf{Quality \& Release Management:} Teststrategie, UAT, Monitoring, Rollback, Versionierung, Dokumentation.
+  \item \textbf{KPI-Steuerung:} Produktivit\"at, Qualit\"at, Risiko \textendash{} inklusive Anti-Gaming-Kopplung (s.\ Aufgabe 10).
+  \item \textbf{Roadmap:} 6 Wochen MVP \textrightarrow{} 12 Wochen Scale \textrightarrow{} Sustain (laufend) \textendash{} mit Enablement-Plan f\"ur die Fachbereiche.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit (Pflicht):}
+    \begin{itemize}
+      \item \emph{Welche f\"unf Use Cases zuerst}, trotz l\"uckenhafter Daten? Mit Begr\"undung + verworfener Alternative + Fr\"uhwarnsignal.
+      \item \emph{Unattended-Grenze:} Ab welcher Exception-Rate / Fehlerquote wird nicht skaliert? Mit Guardrails.
+    \end{itemize}
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien (Senior-Level):} Entscheidungslogik \textperiodcentered{} Risikoreife \textperiodcentered{} Pragmatismus unter Restriktionen \textperiodcentered{} Anschlussf\"ahigkeit an Strategie.
+
+\ytquery{RPA Operating Model Decision Architecture Senior Audit Compliance}
+
+\antwortlinien{36}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 11}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Eignung eines RPA-Use-Cases sauber bewerten und ``No-Go''-Kandidaten begr\"unden.
+  \item Plattformbausteine (Studio, Orchestrator, Queue, Vault, Logs) sicher zuordnen.
+  \item Attended vs.\ Unattended begr\"undet entscheiden und ein Stufenmodell formulieren.
+  \item Einen Bot-Flow mit Exception-Kategorien und Audit-Trail-Minimum entwerfen.
+  \item KPIs definieren \textendash{} und gegen Gaming koppeln.
+  \item Ein Operating Model (Funnel, RACI, Eskalation) entwerfen, das Skalierung und Compliance vereinbart.
+  \item Entscheidungen unter Unsicherheit treffen, sichtbar machen und mit Fr\"uhwarnsignalen absichern.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 11 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

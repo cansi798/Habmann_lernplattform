@@ -1,0 +1,708 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 11 - Loesungsheft
+% RPA als Steuerungs- und Risikohebel: Plattformueberblick + Attended/Unattended
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 11}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}RPA \textendash{} Plattform \& Automationsform}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 5 \textperiodcentered{} TAG 11 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 12.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 11\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} RPA-Plattform,\\Attended/Unattended und Operating Model.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 11}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterl\"osungen sind \emph{eine} m\"ogliche, didaktisch nachvollziehbare L\"osung \textendash{} sie sind nicht die einzig richtige. Insbesondere auf L2 und L3 sind mehrere Begr\"undungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den im Lehrskript eingef\"uhrten Begriffsapparat (RPA-Eignung, Plattform, Attended/Unattended, Audit Trail, KPI-Kopplung) sauber nutzen,
+  \item Annahmen explizit machen, statt sie zu verschleiern,
+  \item Zielkonflikte (Speed vs.\ Audit, Autonomie vs.\ Kontrolle) benennen,
+  \item zu einer klar formulierten Entscheidung f\"uhren \textendash{} nicht blo{\ss} zu einer Beschreibung.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihre Argumentation ab \textendash{} und warum? Genau dort entsteht der Lerneffekt.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 LOESUNGEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{RPA-Eignung \textendash{} wof\"ur geeignet, wof\"ur nicht?}{\nivLi}{8\,min}
+
+\ytquery{RPA Eignung Use Case Auswahl regelbasiert UI stabil Beispiel}
+
+\begin{loesungbox}
+\textbf{1. F\"unf Eignungskriterien:}
+\begin{itemize}
+  \item \emph{Regelbasierter Prozess} \textendash{} klare Entscheidungslogik (wenn--dann), keine Interpretation.
+  \item \emph{Stabile UI / stabile Schnittstellen} \textendash{} keine h\"aufigen UI-\"Anderungen, sonst bricht der Bot.
+  \item \emph{Klar definierter Input und Output} \textendash{} der Bot ``wei{\ss}'', wo er anf\"angt und wo er aufh\"ort.
+  \item \emph{Hohes Volumen / hohe Frequenz} \textendash{} Skaleneffekt rechtfertigt Entwicklung und Betrieb.
+  \item \emph{Geringe Ausnahmenrate} \textendash{} typischerweise unter 15\,\%; sonst frisst die Exception-Bearbeitung den ROI auf.
+\end{itemize}
+
+\smallskip
+\textbf{2. Drei Anti-Kandidaten:}
+\begin{itemize}
+  \item Prozesse mit \emph{hohem Interpretationsanteil} (Kulanz, Reklamationen mit Einzelfallabw\"agung) \textendash{} hier braucht es KI oder menschliche Entscheidung.
+  \item Prozesse mit \emph{instabilen UIs} (Portale mit h\"aufigen Releases ohne API) \textendash{} der Bot wird zur Dauerbaustelle.
+  \item Prozesse mit \emph{vielen Sonderf\"allen} ($>$\,30\,\%) \textendash{} ein BPM-Workflow mit Mensch-im-Prozess ist meist die bessere Architektur.
+\end{itemize}
+
+\smallskip
+\textbf{3. Warum ist ``RPA spart immer Geld'' irref\"uhrend?} Weil die Betriebskosten eines Bots (Wartung bei UI-\"Anderungen, Exception-Bearbeitung, Audit-Pflichten, Governance) bei schlecht gew\"ahlten Use-Cases den eingesparten Aufwand schnell \"ubersteigen \textendash{} insbesondere wenn die Ausnahmenrate hoch oder die UI instabil ist.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Plattform\"uberblick \textendash{} Studio, Orchestrierung, Run}{\nivLi}{8\,min}
+
+\ytquery{RPA Plattform Studio Orchestrator Queue Logs erklaert tool neutral}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}X@{}}
+\toprule
+\textbf{Baustein} & \textbf{Was passiert hier?} \\
+\midrule
+Studio / Designer        & Bot-Logik wird entworfen und programmiert (Workflows, Activities, Actions). Hier entsteht der \emph{Code} des Bots. \\
+\midrule
+Orchestrator / Server    & Bots werden geplant, deployed, versioniert, \"uberwacht. Hier liegt der \emph{Betrieb}: Wer l\"auft wann, mit welchen Daten? \\
+\midrule
+Bot-Runtime (Agent)      & Die eigentliche Ausf\"uhrung des Bots \textendash{} an einem Arbeitsplatz (attended) oder auf einem Server (unattended). \\
+\midrule
+Queue / Work-Items       & Arbeitspakete (z.\,B.\ 250 Rechnungen) werden in eine Queue gelegt, der Bot zieht sie sequenziell oder parallel. \\
+\midrule
+Credential Vault         & Zentrale, verschl\"usselte Ablage f\"ur Passw\"orter und Zertifikate. Nie im Code, nie im Skript. \\
+\midrule
+Logs / Monitoring        & Jeder Bot-Lauf wird mit Zeitstempel, Eingabe, Ergebnis und Exception-Code protokolliert \textendash{} Grundlage f\"ur Audit und Debug. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Warum reicht das Studio allein nicht?} Sobald mehr als drei Bots in Produktion laufen, ist die Frage \emph{wer l\"auft wann mit welchen Credentials und was passiert bei einem Fehler?} ohne Orchestrator, Vault und zentrales Logging nicht beherrschbar. Das Studio baut den Bot \textendash{} der Rest macht ihn \emph{betreibbar} und \emph{auditierbar}.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Attended vs.\ Unattended \textendash{} Vergleichstabelle}{\nivLi}{10\,min}
+
+\ytquery{Attended Unattended RPA Unterschied Beispiel Stufenmodell}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}|X|X@{}}
+\toprule
+\textbf{Dimension} & \textbf{Attended} & \textbf{Unattended} \\
+\midrule
+Ausf\"uhrungsort           & Am Arbeitsplatz / Client der Mitarbeitenden. & Server-/Cloud-Umgebung; eigener Bot-Account. \\
+\midrule
+Trigger                    & Manuell durch Nutzer:in, oft als Klick-Assistent. & Zeitplan, Queue, externes Event; ohne menschliches Zutun. \\
+\midrule
+Skalierbarkeit             & Eingeschr\"ankt (so viele Bots wie Mitarbeitende). & Hoch (parallele Worker, Queue-basiert). \\
+\midrule
+Governance-Aufwand         & Niedriger; n\"aher am User. & H\"oher: Identity, SoD, Logging, Vault, SLA. \\
+\midrule
+Typischer Use-Case         & Klick-Assistent, Teilschritt-Automatisierung, Lookups. & Massenverarbeitung (Rechnungen, Stammdaten, Reports). \\
+\midrule
+Risiko bei UI-\"Anderungen  & User merkt es sofort; Schaden klein. & Hunderte fehlerhafte Buchungen, bevor jemand reagiert. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Schlusssatz:} Ein Stufenmodell (erst attended, dann unattended) ist die richtige Wahl, wenn der Prozess noch \emph{instabil} ist \textendash{} es senkt das Schadenspotenzial und liefert Lernen \"uber Exceptions. Es wird zur \emph{Ausrede}, wenn die unattended-Skalierung nicht ehrlich geplant wird \textendash{} dann l\"auft attended ``f\"ur immer'' und der Skaleneffekt bleibt aus.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2 LOESUNGEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Use-Case-Eignung bewerten \textendash{} drei Kandidaten}{\nivLii}{20\,min}
+
+\ytquery{RPA Use Case Eignung bewerten Scorecard regelbasiert Volumen}
+
+\begin{loesungbox}
+\textbf{1. Eignungs-Scorecard (1\,--\,5; 5\,$=$\,sehr gut):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lccccc|c@{}}
+\toprule
+\textbf{Kandidat} & \textbf{Stabilit\"at} & \textbf{Volumen} & \textbf{Regelbasis} & \textbf{wenig SF} & \textbf{Audit} & \textbf{Summe} \\
+\midrule
+A (Rechnung E-Mail $\to$ ERP) & 4 & 5 & 4 & 4 & 4 & 21 \\
+B (Reklamation/Kulanz)        & 2 & 3 & 2 & 1 & 3 & 11 \\
+C (HR-Onboarding 3 Systeme)   & 3 & 3 & 4 & 4 & 4 & 18 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Empfehlung pro Kandidat:}
+\begin{itemize}
+  \item \emph{A \textendash{} Go.} Klassischer RPA-Use-Case (stabil, regelbasiert, Volumen). Start als unattended sinnvoll, gestaffelt einf\"uhrbar.
+  \item \emph{B \textendash{} No-Go (in dieser Form).} Zu viele Einzelfallentscheidungen und Interpretation; Kulanz braucht Mensch oder KI-Modell. Bot k\"onnte allenfalls \emph{Vorbereitung} (Daten holen, Vorschlag berechnen) leisten.
+  \item \emph{C \textendash{} Go mit Auflagen.} Onboarding ist gut geeignet, aber Identity und Zugriffsrechte sind Audit-sensibel \textendash{} braucht SoD-konformes Identity-Design (Bot legt an, Mensch genehmigt).
+\end{itemize}
+
+\smallskip
+\textbf{3. Vorarbeit f\"ur Kandidat B:} Sonderf\"alle reduzieren, indem klare Kulanz-Regeln definiert werden (\emph{wenn Schaden $\leq$\,50\,\euro{} und Stammkunde\textgreater{}\,2\,Jahre $\to$ Gutschrift automatisch}). Bot \"ubernimmt nur den \emph{regelbasierten} Anteil, der Rest bleibt im Workflow. Auch m\"oglich: vorgeschaltetes KI-Modell, das Kulanzantrag klassifiziert.
+
+\smallskip
+\textbf{4. Schlusssatz:} RPA h\"ort dort auf, wo der Prozess so instabil oder so erkl\"arungsbed\"urftig wird, dass die Wartung des Bots teurer ist als ein neu modellierter BPM-Workflow oder eine API-basierte L\"osung. Faustregel: $>$\,30\,\% Sonderf\"alle oder $>$\,2 UI-\"Anderungen/Monat \textrightarrow{} RPA ist die falsche Wahl.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Attended vs.\ Unattended \textendash{} Entscheidung unter Zielkonflikten}{\nivLii}{25\,min}
+
+\ytquery{RPA Attended Unattended Stufenmodell Entscheidung Zielkonflikt}
+
+\begin{loesungbox}
+\textbf{1. Entscheidung:} \emph{Stufenmodell mit Start attended.} Begr\"undung: ``mittelstabil'' und 15\,\% Ausnahmen sind zu viel f\"ur sofort unattended; gleichzeitig liefert ein Stufenmodell schnellen Wert.
+
+\smallskip
+\textbf{2. Sechs Argumente, ausgewogen:}
+\begin{itemize}
+  \item \emph{Pro Start attended:} (1) Schnelle Sichtbarkeit, sofortige Entlastung; (2) Mitarbeitende lernen den Bot kennen \textendash{} Akzeptanz steigt; (3) Schadenspotenzial bei Fehlern bleibt klein.
+  \item \emph{Pro sp\"ater unattended:} (4) Echte Skalierung erst, wenn Skaleneffekt $>$ Governance-Kosten; (5) Audit-Spur sauber, weil Identity bereits etabliert ist; (6) UI-Stabilit\"at gepr\"uft \textendash{} weniger ``Doppelarbeit'' nach Migration.
+\end{itemize}
+
+\smallskip
+\textbf{3. Stufenmodell:}
+
+\smallskip
+\noindent\emph{Release 1 (6 Wochen):} Attended-Bot \"ubernimmt die ersten 60\,\% des Prozesses (Datenextraktion, Validierung, Vorbef\"ullung); die letzten 40\,\% (Buchung, Freigabe) bleiben manuell. Jeder Lauf erzeugt einen Logeintrag im zentralen Vault (\emph{Bot-ID, User-ID, Eingabe, Ergebnis, Dauer}).
+
+\smallskip
+\noindent\emph{Release 2 (Wochen 7\,--\,12):} \"Ubergang zu unattended f\"ur die ersten 60\,\%, sobald die Readiness-KPIs (siehe unten) eingehalten werden. Buchung weiterhin mit \emph{Vier-Augen-Prinzip}. \emph{Governance dazu:} Bot-Funktionsaccount im Vault, SoD-Regel, Exception-Queue f\"ur Buchhaltung, Monitoring-Dashboard.
+
+\smallskip
+\textbf{4. Readiness-KPIs:}
+\begin{itemize}
+  \item \emph{Ausnahmequote} (gemessen am Ende der attended-Phase): $\leq$\,12\,\% in zwei aufeinanderfolgenden Wochen.
+  \item \emph{UI-\"Anderungsrate} der Zielsysteme: $\leq$\,1\,Change/Monat \"uber drei Monate.
+\end{itemize}
+Erst wenn beide KPIs erreicht sind, wechseln wir auf unattended. Andernfalls: weitere zwei Wochen attended.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Fallstudie ``NordTrade GmbH'' \textendash{} RPA im Finanzprozess (Teil 1)}{\nivLii}{30\,min}
+
+\ytquery{RPA Rechnungseingang Bot Flow Exception Queue ERP Audit}
+
+\begin{loesungbox}
+\textbf{1. Automationstyp \textendash{} CFO- und Compliance-Sicht:}
+\begin{itemize}
+  \item \emph{CFO will Skaleneffekt} \textrightarrow{} unattended, langfristig.
+  \item \emph{Compliance will Audit-Spur und Kontrolle bei UI-Instabilit\"at} \textrightarrow{} attended-Start.
+  \item \textbf{Empfehlung:} \emph{Start attended, \"Ubergang zu unattended nach 6\,--\,10 Wochen} bei stabilen Kennzahlen. Begr\"undung: Portal-UI \"andert sich gelegentlich; 12\,\% Ausnahmen ben\"otigen einen ge\"ubten Exception-Pfad, bevor das Volumen unattended l\"auft.
+\end{itemize}
+
+\smallskip
+\textbf{2. Bot-Flow (Soll):}
+\begin{enumerate}
+  \item \emph{Rechnung empfangen} \textendash{} Mailbox-Polling, PDF-Anhang holen.
+  \item \emph{Daten extrahieren} \textendash{} Invoice No, Betrag, Lieferant, Datum, USt-ID.
+  \item \emph{Validierung} \textendash{} Pflichtfelder vollst\"andig, Betragsgrenze, Dubletten-Check.
+  \item \emph{ERP-Maske \"offnen} \textendash{} im Bot-Account, nicht im pers\"onlichen Account.
+  \item \emph{Daten eintragen} \textendash{} aus Validierungsdaten 1:1 \"ubernehmen.
+  \item \emph{Buchung vorbereiten} \textendash{} im Status ``zur Freigabe'', nicht direkt gebucht.
+  \item \emph{R\"uckmeldung erzeugen} \textendash{} an Lieferant + intern an Buchhaltung.
+  \item \emph{Log schreiben} \textendash{} in zentralem Audit-Log (siehe Aufgabe 7).
+  \item \emph{Ende} oder \emph{Exception Queue} \textendash{} bei Fehler.
+\end{enumerate}
+
+\smallskip
+\textbf{3. Exception-Kategorien (sechs):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.8cm}p{3.0cm}X@{}}
+\toprule
+\textbf{Kategorie} & \textbf{Behandlung} & \textbf{Owner} \\
+\midrule
+Fehlende Kostenstelle  & Manuelle Erg\"anzung & Buchhaltung \\
+Lieferant unbekannt    & Stammdatenpflege, dann Retry & Stammdaten/Einkauf \\
+Dublette               & Automatisches Verwerfen, Hinweis an Lieferant & Buchhaltung \\
+Portal nicht erreichbar & Retry 3$\times$ mit Backoff, dann Ticket an IT & IT \\
+Validierung fail        & Manuelle Pr\"ufung in Exception-Queue & Buchhaltung \\
+Betrag $>$ Schwelle (z.\,B.\ 10\,k\,\euro{}) & Freigabepflicht (Vier-Augen) & Bereichsleitung \\
+\bottomrule
+\end{tabularx}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Fallstudie ``NordTrade GmbH'' \textendash{} Audit Trail \& KPIs (Teil 2)}{\nivLii}{25\,min}
+
+\ytquery{RPA Audit Trail Logging KPI Produktivitaet Qualitaet Risiko}
+
+\begin{loesungbox}
+\textbf{1. Audit Trail Minimum (zehn Felder):}
+\begin{enumerate}
+  \item Bot-ID + Version (z.\,B.\ Invoice-Bot v1.4.2).
+  \item Timestamp (Start, Ende).
+  \item Quelle der Eingabe (Mail-ID + Anhangsname).
+  \item Bearbeitende:r (User-Queue in attended, Bot-Account in unattended).
+  \item Rechnungs-ID + Lieferant.
+  \item Feldwerte \emph{vor} der Verarbeitung (extrahierte Daten).
+  \item Feldwerte \emph{nach} der Verarbeitung (im ERP).
+  \item Ergebnisstatus (Erfolg / Exception / Abbruch).
+  \item Exception-Code (z.\,B.\ MISSING\_COSTCENTER, DUP, PORTAL\_DOWN).
+  \item Manuelle \"Ubernahme (ja/nein) + Begr\"undung.
+\end{enumerate}
+
+\smallskip
+\textbf{2. KPI-Set (3 KPIs):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}p{2.6cm}X@{}}
+\toprule
+\textbf{KPI} & \textbf{Zielwert nach 8 Wochen} & \textbf{Owner} \\
+\midrule
+Durchsatz / Tag (Produktivit\"at) & $+$\,30\,\% & Buchhaltungsleitung \\
+Fehlerquote (Qualit\"at)           & $-$\,50\,\%        & Bot Owner \\
+Exception-Rate (Risiko)            & $\leq$\,10\,\% nach Stabilisierung & Bot Owner + Buchhaltung \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Erg\"anzung: Rollback/Correction-Quote} als Anti-Gaming: Wer Erfolgsmeldungen z\"ahlt, muss Korrekturen gegenrechnen.
+
+\smallskip
+\textbf{3. Zwei Annahmen:}
+\begin{itemize}
+  \item Lieferantenstammdaten sind zu $\geq$\,90\,\% gepflegt und \"andern sich h\"ochstens 1\,$\times$/Monat.
+  \item Portal-UI \"andert sich nicht h\"aufiger als 1\,$\times$/Monat (Monitoring eingerichtet).
+\end{itemize}
+
+\smallskip
+\textbf{4. Zwei Fr\"uhwarnsignale:}
+\begin{itemize}
+  \item Exception-Rate $>$\,18\,\% in einer Woche \textrightarrow{} Bot pausieren, Root-Cause-Analyse.
+  \item UI-Change-Quote $>$\,2$\times$/Monat \textrightarrow{} unattended-Skalierung verschieben, Portal-API anfordern.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Bot-Design \textendash{} Single Point of Failure und Guardrails}{\nivLii}{20\,min}
+
+\ytquery{RPA Risiko Credential Vault Plausibilitaet Guardrail Beispiel}
+
+\begin{loesungbox}
+\textbf{A \textendash{} Pers\"onlicher Account als Bot-Account.}
+\begin{itemize}
+  \item \emph{Single Point of Failure:} Bot l\"auft unter pers\"onlichem User. Beim Verlassen der Sachbearbeiterin steht der Bot, das Audit kann den Bot nicht von Mensch unterscheiden.
+  \item \emph{Schadensszenario:} Bei Datenleck oder Pr\"ufung steht das Unternehmen ohne Trennung von \emph{Mensch-Handeln} und \emph{Bot-Handeln} da \textendash{} Audit-Findings, Compliance-Verletzung, im Worst Case Personalmassnahme.
+  \item \emph{Guardrail:} \textbf{Bot-spezifischer Funktionsaccount} mit Berechtigungen nach \emph{Least Privilege}, Credentials im \emph{Vault}, Rotation alle 90 Tage. Bot-Account ist gesch\"utzt und nur dem Orchestrator bekannt.
+\end{itemize}
+
+\smallskip
+\textbf{B \textendash{} Portal-Abh\"angigkeit ohne SLA.}
+\begin{itemize}
+  \item \emph{Single Point of Failure:} Externe Komponente, kein Einfluss auf Verf\"ugbarkeit.
+  \item \emph{Schadensszenario:} W\"ahrend der Portal-Ausf\"alle laufen Bot-L\"aufe gegen Wand, Queue staut sich, am Tagesende sind 80 Rechnungen offen \textendash{} jemand schickt sie ``ausnahmsweise'' manuell.
+  \item \emph{Guardrail:} \textbf{Retry mit Backoff} (z.\,B.\ 3$\times$ in 5/15/45\,min) und \textbf{Eskalation an IT} nach 30 Minuten Ausfall. Bot pausiert die Queue automatisch, statt sie zu fluten. Health-Check vor jedem Lauf.
+\end{itemize}
+
+\smallskip
+\textbf{C \textendash{} Datenqualit\"at ohne Plausibilit\"atspr\"ufung.}
+\begin{itemize}
+  \item \emph{Single Point of Failure:} Eingabedaten werden blindlings \"ubernommen.
+  \item \emph{Schadensszenario:} Komma- oder Faktorfehler werden im gro{\ss}en Stil multipliziert; eine Rechnung \"uber 1.250\,\euro{} wird zu 125.000\,\euro{}, gebucht im ERP, von dort an Bank \"ubergeben.
+  \item \emph{Guardrail:} \textbf{Plausibilit\"atsgrenzen} im Bot: Betr\"age $>$\,Vortags-Median\,$\times$\,5 oder $>$\,Lieferantenmaximum der letzten 12 Monate gehen in die Exception-Queue. Zus\"atzlich: Vier-Augen-Freigabe bei Betr\"agen $\geq$\,10\,k\,\euro{}.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3 LOESUNGEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Automation Funnel und Portfolio-Steuerung}{\nivLiii}{35\,min}
+
+\ytquery{RPA Automation Funnel Portfolio Value Risk Effort Kill Criteria}
+
+\begin{loesungbox}
+\textbf{1. Automation Funnel (5 Stufen):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{2.4cm}p{5.4cm}X@{}}
+\toprule
+\textbf{Stufe} & \textbf{Zugangskriterium} & \textbf{Owner} \\
+\midrule
+Idea       & Vorschlag dokumentiert (Wer/Was/Warum?). & Fachbereich \\
+Eignung    & Eignungs-Score $\geq$\,15 (Aufgabe 4) + Owner benannt. & Process Owner + CoE-Lead \\
+PoC        & Machbarkeitsnachweis (max.\ 2 Wochen), Audit-Trail-fhig. & Bot Developer + Bot Owner \\
+Pilot      & Live in einem Bereich, Exception-Rate $\leq$\,15\,\% \"uber 4 Wochen. & Bot Owner + Process Owner \\
+Betrieb    & SLA, Monitoring, Run-Book vorhanden. & Operations / Run \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Bewertungskriterien (Value / Risk / Effort):}
+\begin{itemize}
+  \item \emph{Value:} Volumen (F\"alle/Monat), Zeitersparnis (Stunden/Monat), Fehlerkostenreduktion, Customer-Impact.
+  \item \emph{Risk:} Audit-Relevanz, Datenqualit\"at, UI-Stabilit\"at, finanzielles Schadenspotenzial.
+  \item \emph{Effort:} Komplexit\"at, Anzahl Schnittstellen, Test-Aufwand, Wartungsbedarf.
+\end{itemize}
+
+\smallskip
+\textbf{3. Release-Klassen:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{2.4cm}p{5.6cm}X@{}}
+\toprule
+\textbf{Klasse} & \textbf{Wer freigibt?} & \textbf{Quality Gates} \\
+\midrule
+Fast Track & Bot Owner (1 Augen) & Test gr\"un, Smoke OK. \\
+Standard   & Bot Owner + Reviewer (2 Augen) & Test, Security-Scan, UAT. \\
+High-Risk  & Bot Owner + Reviewer + Security + Process Owner (4 Augen) & Plus dediziertes Audit-Sampling. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{4. Kill Criteria:}
+\begin{itemize}
+  \item Exception-Rate $>$\,25\,\% nach Stabilisierung (8 Wochen) und kein Plan, sie zu senken.
+  \item UI-Change $>$\,3$\times$/Monat \"uber zwei aufeinanderfolgende Monate \textendash{} Aufwand $>$ Nutzen.
+  \item Use-Case nicht mehr fachlich relevant (Prozess gestrichen, System abl\"osend).
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Anti-Gaming-KPIs f\"ur ein RPA-Portfolio}{\nivLiii}{25\,min}
+
+\ytquery{KPI Gaming Goodharts Law Anti Gaming RPA Steuerung}
+
+\begin{loesungbox}
+\textbf{1. Vier KPI-Kandidaten + 2. Gaming-Risiko:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{4.6cm}X@{}}
+\toprule
+\textbf{KPI} & \textbf{Gaming-Risiko} \\
+\midrule
+Bots in Produktion          & Karteileichen-Bots, die niemand stilllegt, weil sie als ``Erfolg'' z\"ahlen. \\
+Eingesparte Stunden / Monat & Sch\"ongerechnete Sch\"atzungen; Stunden werden ``angerechnet'', obwohl Mensch korrigiert. \\
+Exception-Rate              & Re-Klassifikation von Fehlern als ``Daten-Issue'' oder Manipulation der Z\"ahlweise. \\
+Audit-Findings              & Findings werden als ``offen'' geparkt statt geschlossen; Definition wird ge\"andert. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Zwei Anti-Gaming-Kopplungen:}
+\begin{itemize}
+  \item \emph{Kopplung 1:} ``Eingesparte Stunden'' gelten nur, wenn die \emph{Fehlerquote im Prozess} im selben Zeitraum nicht steigt und die \emph{Exception-Rate} unter dem definierten Zielwert bleibt. So bringt Sch\"onrechnen keinen Reportwert.
+  \item \emph{Kopplung 2:} Bots z\"ahlen als ``produktiv'' erst nach \textbf{30 Tagen} ununterbrochenem Lauf \emph{ohne kritische Exception}. Stillgelegte oder dauerausfallende Bots werden aus der Z\"ahlung herausgenommen (negative Beitrag in der Bilanz).
+\end{itemize}
+
+\smallskip
+\textbf{4. Faustregel:} Ein KPI ist \emph{gef\"ahrlicher} als kein KPI, sobald er Verhalten belohnt, das vom Ziel wegf\"uhrt (Goodhart's Law). Beispiel: ``Bots in Produktion'' ohne Qualit\"atskopplung erzeugt mehr Bots als Wertsch\"opfung \textendash{} dann verschlechtert das Reporting die Realit\"at.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} RPA Portfolio \& Operating Model}{\nivLiii}{45\,min}
+
+\ytquery{RPA Operating Model Decision Architecture Senior Audit Compliance}
+
+\begin{loesungbox}
+\emph{Musterl\"osung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind m\"oglich.}
+
+\smallskip
+\textbf{1. Automation Funnel \& Portfolio:} Wie in Aufgabe 9, plus:
+\begin{itemize}
+  \item Intake \"uber zentrales Formular (Idee, Volumen, gesch\"atzte Stunden, gef\"uhlte Risiken).
+  \item Priorisierungsmatrix \emph{Value $\times$ Risk-Inverse $/$ Effort}, monatlich neu sortiert.
+  \item Release-Klassen wie Aufgabe 9; \emph{Fast Track} ausschlie{\ss}lich f\"ur Low-Risk-Bots ohne Audit-Relevanz.
+\end{itemize}
+
+\smallskip
+\textbf{2. Governance \& Rollen (RACI):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lccccc@{}}
+\toprule
+ & \textbf{Bot Owner} & \textbf{Process Owner} & \textbf{Sec Owner} & \textbf{Ops/Run} & \textbf{CAB-light} \\
+\midrule
+Use-Case-Auswahl   & R     & A & C & I & I \\
+Bot-Entwicklung    & R     & C & C & I & I \\
+Security-Review    & C     & I & R / A & I & I \\
+Go-Live-Freigabe   & C     & A & C & C & R \\
+Run \& Monitoring  & A     & I & C & R & I \\
+Incident           & R / A & C & C & R & I \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Eskalation:} Bot Owner \textrightarrow{} Process Owner \textrightarrow{} CoE-Lead \textrightarrow{} COO / CRO.
+
+\smallskip
+\textbf{3. Security \& Compliance Guardrails:} Credential Vault (Pflicht), Least Privilege f\"ur jeden Bot-Account, Logging in zentralem Audit-Trail (siehe Aufgabe 7), Exception-Policy mit Eskalationspfaden, SoD-Regel (Bot darf nicht ``anlegen und freigeben'' gleichzeitig).
+
+\smallskip
+\textbf{4. Quality \& Release Management:} Test-Pyramide (Unit/Integration/E2E auf Prozessebene), UAT verpflichtend f\"ur Standard- und High-Risk-Bots, Monitoring-Dashboard mit Exception-Rate, MTTR, Health, Rollback-Mechanik (Bot-Version zur\"uckschalten), Versionierung im Orchestrator.
+
+\smallskip
+\textbf{5. KPI-Steuerung mit Anti-Gaming:} siehe Aufgabe 10. Erg\"anzung: Quartalsweise Review durch Internal Audit auf KPI-Integrit\"at.
+
+\smallskip
+\textbf{6. Roadmap:}
+\begin{itemize}
+  \item \emph{Woche 1\,--\,6 (MVP):} CoE-Setup, Funnel, Vault, Audit-Trail-Template, 2 Pilot-Bots in Buchhaltung.
+  \item \emph{Woche 7\,--\,18 (Scale):} weitere 8\,--\,10 Bots, Fast Track aktiv, Quartals-Review etabliert.
+  \item \emph{Sustain (laufend):} Enablement-Programm f\"ur Fachbereiche (Key User schulen), Bot-Health-Checks monatlich.
+\end{itemize}
+
+\smallskip
+\textbf{7. Zwei Entscheidungen unter Unsicherheit (Pflicht):}
+\begin{enumerate}
+  \item \emph{Welche f\"unf Use Cases zuerst?} Wahl: \emph{Rechnungseingang} (Buchhaltung), \emph{Stammdatenpflege Lieferanten} (Einkauf), \emph{HR-Onboarding} (HR), \emph{Bestellungsabgleich SAP $\leftrightarrow$ Portal} (Einkauf), \emph{Reporting-Konsolidierung} (Finance). Begr\"undung: Hohe Volumina, gut messbare Sparpotenziale, Datenlage ausreichend f\"ur PoC. \emph{Verworfen:} Reklamationen/Kulanz (zu interpretationslastig), Vertragspr\"ufung (zu juristisch). \emph{Fr\"uhwarnsignal:} Wenn Exception-Rate eines Use-Cases nach 6 Wochen $>$\,25\,\% \textrightarrow{} Use-Case re-scopen oder stoppen.
+  \item \emph{Unattended-Grenze:} Skalierung wird nicht erlaubt, sobald \textbf{Exception-Rate $>$\,15\,\%} oder \textbf{Fehlerquote $>$\,2\,\%} \"uber zwei aufeinanderfolgende Wochen liegen. \emph{Guardrails:} Bei \"Uberschreiten Stopp-Mechanik im Orchestrator, manuelle Freigabe durch CoE-Lead n\"otig, Root-Cause-Analyse innerhalb von 5 Tagen.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Wenn Ihre eigene L\"osung anders ist, fragen Sie: \emph{Habe ich andere Annahmen oder einen anderen Use-Case-Mix angelegt?} Beides ist legitim, solange die Logik nachvollziehbar bleibt.
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie Ihre L\"osung in die Coaching-Sitzung mit. Im Fokus: Welche Annahmen haben Sie getroffen? Welche Zielkonflikte (Speed vs.\ Audit, Autonomie vs.\ Kontrolle) haben Sie sichtbar gemacht? Und welche Entscheidung w\"urden Sie auch verantworten, wenn die Exception-Rate doch h\"oher ausf\"allt als erwartet?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 11 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

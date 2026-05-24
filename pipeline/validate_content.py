@@ -47,10 +47,36 @@ def validate_pfad(course: str, tag: int) -> None:
         if s.get("typ") == "text" and not s.get("inhalt"):
             errors.append(f"pfad {p.name} schritt {i}: text w/o inhalt")
         a = s.get("aufgabe", {})
-        if not isinstance(a.get("optionen"), list) or len(a["optionen"]) < 3:
-            errors.append(f"pfad {p.name} schritt {i}: aufgabe.optionen invalid")
-        if "korrekt" not in a or "erklaerung" not in a:
-            errors.append(f"pfad {p.name} schritt {i}: aufgabe missing korrekt/erklaerung")
+        atyp = a.get("typ", "single")
+        if atyp in ("single", "multi"):
+            if not isinstance(a.get("optionen"), list) or len(a["optionen"]) < 3:
+                errors.append(f"pfad {p.name} schritt {i}: aufgabe.optionen invalid")
+            if "korrekt" not in a:
+                errors.append(f"pfad {p.name} schritt {i}: aufgabe missing korrekt")
+        elif atyp == "text":
+            if not (a.get("musterloesung") or a.get("erklaerung")):
+                errors.append(f"pfad {p.name} schritt {i}: text task missing musterloesung/erklaerung")
+        elif atyp == "lueckentext":
+            if not a.get("text") or "{0}" not in a["text"]:
+                errors.append(f"pfad {p.name} schritt {i}: lueckentext missing text with {{0}} placeholder")
+            if not isinstance(a.get("luecken"), list) or not a["luecken"]:
+                errors.append(f"pfad {p.name} schritt {i}: lueckentext missing luecken list")
+            else:
+                for j, l in enumerate(a["luecken"]):
+                    if not l.get("antwort"):
+                        errors.append(f"pfad {p.name} schritt {i}: lueckentext luecke {j} missing antwort")
+        elif atyp == "zuordnung":
+            paare = a.get("paare")
+            if not isinstance(paare, list) or len(paare) < 3:
+                errors.append(f"pfad {p.name} schritt {i}: zuordnung needs ≥3 paare (got {len(paare or [])})")
+            else:
+                for j, p2 in enumerate(paare):
+                    if not p2.get("links") or not p2.get("rechts"):
+                        errors.append(f"pfad {p.name} schritt {i}: zuordnung paar {j} missing links/rechts")
+        else:
+            errors.append(f"pfad {p.name} schritt {i}: unknown aufgabe typ '{atyp}'")
+        if not a.get("erklaerung") and atyp != "text":
+            warnings.append(f"pfad {p.name} schritt {i}: aufgabe missing erklaerung")
 
 
 def validate_quiz(course: str, tag: int) -> None:

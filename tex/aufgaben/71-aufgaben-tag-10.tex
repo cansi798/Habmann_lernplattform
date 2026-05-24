@@ -1,0 +1,635 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 10 - Aufgabenheft
+% Skalierbare digitale Prozessarchitektur: Microservices, Kubernetes, TDD/DevOps, Operating Model
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+% Kurs-71 Akzent: orange (#9d4a1a)
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+% Niveau-Farben
+\definecolor{lpL1}{RGB}{34,120,72}      % L1 = gruen (reproduktion)
+\definecolor{lpL2}{RGB}{22,90,140}      % L2 = blau (anwendung)
+\definecolor{lpL3}{RGB}{170,42,52}      % L3 = rot (management)
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+% Info-Box (orange-weiss) fuer Hinweise/Aufgabenstellung-Rahmen
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Antwort-Bereich: leerer Kasten mit Punktlinien
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 10}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Microservices, Kubernetes \& DevOps}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+% Niveau-Badge
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 4 \textperiodcentered{} TAG 10 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 11.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 10\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Skalierbare digitale Prozess\-architektur \textendash{} Microservices,\\Kubernetes, TDD/DevOps und Operating\\Model in elf Aufgaben.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- ANLEITUNG -----------------------------------------------------------
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 10 \textendash{} \emph{Skalierbare digitale Prozessarchitektur}: Microservices, Container/Kubernetes, TDD und Teststrategien sowie DevOps-Strategien inklusive Operating Model. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Begriffe, Servicegrenzen, Pipeline-Logik, Testpyramide. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Servicegrenzen ziehen, Betriebskonzept entwerfen, SLOs definieren, RACI bauen. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Operating Model, Entscheidungsarchitektur, Reliability-Framework. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt:
+
+\begin{itemize}
+  \item eine Niveau-Markierung und einen Zeit-Richtwert,
+  \item den Aufgabentext (h\"aufig mit Fallbeschreibung),
+  \item einen Antwort-Freiraum f\"ur Ihre L\"osung,
+  \item eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 10}. Versuchen Sie jede Aufgabe zuerst eigenst\"andig. Der Mehrwert entsteht im Entwerfen und Argumentieren \textendash{} nicht im Abschreiben.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Microservices \textendash{} Eignung, Risiken und Servicegrenze}{\nivLi}{8\,min}
+
+\noindent Erl\"autern Sie in eigenen Worten, was \emph{Microservices} sind und worin sich ihr Vorteil gegen\"uber einem Monolithen begr\"undet. Beantworten Sie konkret:
+
+\begin{enumerate}
+  \item Nennen Sie \textbf{drei Nutzenversprechen} von Microservices (z.\,B.\ unabh\"angige Deployments, gezielte Skalierung, klare Verantwortungsgrenzen).
+  \item Nennen Sie \textbf{drei Risiken}, die mit Microservices typischerweise einhergehen (z.\,B.\ Komplexit\"at, verteilte Fehler, Observability-Bedarf).
+  \item Erl\"autern Sie in einem Satz, was eine \emph{gute Servicegrenze} ausmacht \textendash{} und warum sie \emph{nicht} entlang von Datenbanktabellen, sondern entlang von \emph{Gesch\"aftsf\"ahigkeiten (Capabilities)} verlaufen sollte.
+\end{enumerate}
+
+\ytquery{Microservices Vorteile Risiken Servicegrenze Business Capability erklaert}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Container \& Kubernetes \textendash{} Kernbegriffe}{\nivLi}{8\,min}
+
+\noindent Ordnen Sie die folgenden Kernbegriffe der Container- und Kubernetes-Welt jeweils ihrer korrekten Bedeutung zu. Schreiben Sie zu jedem Begriff einen kurzen, eigenen Erkl\"arungssatz \textendash{} so, dass eine fachfremde Kollegin den Begriff versteht.
+
+\medskip
+\noindent\textbf{Begriffe:}
+
+\begin{enumerate}
+  \item \textbf{Container}
+  \item \textbf{Orchestrierung}
+  \item \textbf{Self-Healing}
+  \item \textbf{Rollback}
+  \item \textbf{Service-Discovery}
+  \item \textbf{Blue/Green-Deployment}
+  \item \textbf{Canary-Release}
+  \item \textbf{Ressourcen\-limits (Requests/Limits)}
+\end{enumerate}
+
+\noindent Markieren Sie zus\"atzlich zwei Begriffe, deren \emph{Auslassen} im Betrieb am schnellsten zu Schaden f\"uhrt \textendash{} und begr\"unden Sie kurz, warum.
+
+\ytquery{Kubernetes Grundlagen Container Orchestrierung Blue Green Canary einfach erklaert}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Testpyramide \& Quality Gates}{\nivLi}{10\,min}
+
+\noindent Erl\"autern Sie das Prinzip der \emph{Testpyramide} und erstellen Sie eine \textbf{Vergleichstabelle} f\"ur die drei Teststufen \emph{Unit}, \emph{Integration} und \emph{End-to-End (E2E)}.
+
+\medskip
+\noindent\begin{tabularx}{\linewidth}{@{}p{3.6cm}|X|X|X@{}}
+\toprule
+\textbf{Eigenschaft} & \textbf{Unit-Test} & \textbf{Integrationstest} & \textbf{E2E-Test} \\
+\midrule
+Was wird getestet?  & & & \\[16pt]
+\midrule
+Geschwindigkeit     & & & \\[16pt]
+\midrule
+Kosten / Fragilit\"at & & & \\[16pt]
+\midrule
+Anteil in Pyramide  & & & \\[16pt]
+\midrule
+Typischer Fehlerfund & & & \\[16pt]
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\noindent Erg\"anzen Sie unter der Tabelle in zwei S\"atzen: Was sind \emph{Quality Gates}, und welche drei Pr\"ufungen w\"urden Sie als nicht verhandelbares Gate vor einem Produktiv-Release verlangen?
+
+\ytquery{Testpyramide TDD Red Green Refactor Quality Gates erklaert}
+
+\antwortlinien{8}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Service-Schnitt aus Prozessbeschreibung \textendash{} Order-to-Cash}{\nivLii}{25\,min}
+
+\begin{infobox}[Ausgangslage: Order-to-Cash]
+\textbf{Prozess:} Bestellung \textrightarrow{} Verf\"ugbarkeit pr\"ufen \textrightarrow{} Preis/Angebot \textrightarrow{} Auftrag best\"atigen \textrightarrow{} Versand \textrightarrow{} Rechnung \textrightarrow{} Zahlung \textrightarrow{} Reklamation (ggf.) \textrightarrow{} Reporting.
+
+\smallskip
+\textbf{Ausgangszustand:} Heute ein Monolith, Releases alle 6 Wochen, viele Abh\"angigkeiten zwischen Modulen.
+
+\smallskip
+\textbf{Cheat Sheet:} Service = klarer Zweck + klarer Owner + Schnittstelle (Input/Output). Gute Grenze = m\"oglichst wenig ``Hin und Her'' zwischen Services (geringe Kopplung).
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Schneiden Sie den Prozess in \textbf{5\,--\,7 Service-Kandidaten} (z.\,B.\ \emph{Order}, \emph{Inventory}, \emph{Shipping}, \emph{Billing}, \emph{Payments}, \emph{Complaints}).
+  \item F\"ur \textbf{drei} dieser Services definieren Sie einen \emph{Service-Steckbrief} mit:
+    \begin{itemize}
+      \item \emph{Zweck} (1 Satz),
+      \item \emph{Input} (vier Felder) und \emph{Output} (vier Felder),
+      \item \emph{Owner-Rolle},
+      \item \emph{kritischster Fehlerfall} (1 Satz).
+    \end{itemize}
+  \item Entscheiden Sie unter Unsicherheit: Welche \emph{eine} Service-Grenze ist am riskantesten (weil Daten- oder Ownership-Verh\"altnisse unklar sind)? Definieren Sie einen \textbf{Guardrail}, der das Risiko begrenzt (z.\,B.\ Anti-Corruption-Layer, fachliche Eskalation, gemeinsamer Datenvertrag).
+\end{enumerate}
+
+\ytquery{Microservices Service Schnitt Order to Cash Domain Driven Design Capability}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Release-Flow \& Testpyramide als Sicherheitsnetz}{\nivLii}{25\,min}
+
+\begin{infobox}[Mini-Szenario]
+\textbf{Ziel:} W\"ochentliches Release. \textbf{Sorge:} Ausf\"alle in der Produktion. \textbf{Pflicht:} Der Kernprozess \emph{Rechnung / Zahlung} muss auditierbar bleiben.
+
+\smallskip
+\textbf{Cheat Sheet:} Deployment braucht Rollout-Plan, Rollback, Monitoring/Alerts und Verantwortliche. Tests gliedern sich in Unit (schnell), Integration (Schnittstellen), E2E (Gesch\"aftsfluss).
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Entwerfen Sie einen \textbf{minimalen Release-Flow} in maximal \emph{sieben Schritten} von ``\"Anderung'' bis ``Prod'' inklusive zweier \textbf{Quality Gates}.
+  \item Skizzieren Sie eine \textbf{Testpyramide f\"ur drei Services} (z.\,B.\ Order, Billing, Payments). Geben Sie f\"ur jeden Service grob an, wie viele Tests welcher Art Sie ansetzen.
+  \item Definieren Sie \textbf{zwei Betriebskennzahlen} (SLO-orientiert), z.\,B.\ \emph{Verf\"ugbarkeit}, \emph{Fehlerquote}, \emph{Latenz}, \emph{MTTR} \textendash{} jeweils mit \emph{Owner} und \emph{Zielwert}.
+  \item Entscheidung unter Unsicherheit: Wo akzeptieren Sie im \textbf{MVP} bewusst Rest-Risiko (z.\,B.\ weniger E2E-Tests)? Wie kompensieren Sie es (Canary, Feature Toggle, manuelle Kontrolle)? Dokumentieren Sie das in einem kurzen \emph{Risikoplan}.
+\end{enumerate}
+
+\ytquery{Release Flow Quality Gates Canary Feature Toggle SLO Beispiel}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Fallstudie ``InsureFast'' \textendash{} Servicegrenzen \& Betriebskonzept}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: InsureFast]
+\textbf{Unternehmen:} ``InsureFast'' \textendash{} Versicherer mit digitalem Abschluss und Schadenmeldung.
+
+\smallskip
+\textbf{Problem:} Release-Zyklus 6\,--\,8 Wochen; h\"aufige Produktionsprobleme; der Kundenprozess \emph{Schaden melden} bricht bei Lastspitzen; Audit fordert Nachvollziehbarkeit (\emph{wer hat wann was entschieden?}).
+
+\smallskip
+\textbf{Restriktionen / Unsicherheit:} 12 Wochen bis Saison-Peak, Budget 220\,k\,\euro{}, Legacy-DB, Security-Anforderungen, unklare Lastprofile, Zielkonflikt \emph{Speed vs.\ Stabilit\"at}.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag (Teil 1 von 2):}
+
+\begin{enumerate}
+  \item \textbf{Servicegrenzen (5\,--\,8):} Definieren Sie Servicegrenzen entlang der Prozesskette \emph{Schaden melden \textrightarrow{} pr\"ufen \textrightarrow{} entscheiden \textrightarrow{} auszahlen} (z.\,B.\ \emph{Claim Intake}, \emph{Policy/Customer}, \emph{Fraud Check}, \emph{Claim Assessment}, \emph{Payout}, \emph{Notifications}, \emph{Document Management}). Begr\"unden Sie eine Grenze, die nicht trivial ist.
+  \item \textbf{Kubernetes-Betriebskonzept (konzeptionell):} Beschreiben Sie f\"unf Bausteine:
+    \begin{itemize}
+      \item Rollout-/Rollback-Strategie f\"ur kritische Services,
+      \item Skalierungsregel (Wenn-Dann),
+      \item Umgang mit Konfiguration und Secrets,
+      \item Monitoring/Alerting,
+      \item Ressourcenlimits.
+    \end{itemize}
+\end{enumerate}
+
+\ytquery{Microservices Versicherung Schadenmeldung Kubernetes Skalierung Beispiel}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Fallstudie ``InsureFast'' \textendash{} Teststrategie \& Operating Model}{\nivLii}{30\,min}
+
+\begin{infobox}[Fortsetzung: InsureFast]
+\textbf{Bezug:} Diese Aufgabe baut auf Aufgabe 6 auf. Sie setzen die Fallstudie ``InsureFast'' fort und erg\"anzen die fehlenden Bausteine.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag (Teil 2 von 2):}
+
+\begin{enumerate}
+  \item \textbf{Teststrategie (TDD-Ansatz):} Definieren Sie f\"ur InsureFast eine Teststrategie mit:
+    \begin{itemize}
+      \item Unit-Tests f\"ur Kernlogik (welche Logik prim\"ar?),
+      \item Integrationstests f\"ur Service-APIs (welche Schnittstellen?),
+      \item E2E-Tests nur f\"ur \emph{zwei} Kernpfade (welche Pfade w\"ahlen Sie?).
+    \end{itemize}
+    Erg\"anzen Sie \emph{zwei Quality Gates}, die jeder Build durchlaufen muss \textendash{} und eine \emph{minimale} E2E-Absicherung.
+  \item \textbf{Operating Model:} Skizzieren Sie:
+    \begin{itemize}
+      \item den Teamzuschnitt (Produktteams + Plattformteam + Security/Compliance),
+      \item eine RACI-Aufteilung f\"ur Schnittstellen\"anderungen,
+      \item das Incident-Handling (wer wird wann gerufen?),
+      \item den Release-Freigabepfad.
+    \end{itemize}
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:}
+    \begin{itemize}
+      \item \emph{Datenstrategie:} Big-Bang-Migration vs.\ DB-bleibt + Anti-Corruption-Layer \textendash{} was w\"ahlen Sie und warum?
+      \item \emph{Release-Frequenz:} W\"ochentlich f\"ur alle Services vs.\ gestuft (Kern w\"ochentlich/zweiw\"ochentlich) \textendash{} welche Variante?
+    \end{itemize}
+    Definieren Sie zu jeder Entscheidung ein \textbf{Fr\"uhwarnsignal}.
+\end{enumerate}
+
+\ytquery{Microservices Operating Model RACI Plattform Team Incident Management}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Anti-Muster ``Microservices-Spaghetti'' erkennen und korrigieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Vier Beispiele aus dem Alltag]
+\textbf{A \textendash{} ``Service-Wildwuchs'':} 47 Services f\"ur einen Mittelst\"andler mit 60 Entwicklern. Jeder Service hat einen eigenen Datenstand, dieselben Kundendaten existieren mehrfach.\\[2pt]
+
+\textbf{B \textendash{} ``Verteilter Monolith'':} F\"unf Services, aber jede \"Anderung erfordert \emph{koordinierte Releases} aller f\"unf \textendash{} weil sie sich gegenseitig synchron aufrufen.\\[2pt]
+
+\textbf{C \textendash{} ``Observability als Nachgedanke'':} Nach jedem Incident dauert es im Schnitt zwei Stunden, bis \"uberhaupt klar ist, welcher Service den Fehler ausgel\"ost hat. Logs liegen verstreut in f\"unf Tools.\\[2pt]
+
+\textbf{D \textendash{} ``Wir vertrauen unseren Tests'' ohne Rollback-\"Ubung:} Niemand hat in den letzten sechs Monaten einen Rollback in der Produktion gefahren. Im Incident-Fall wird improvisiert.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent F\"ur jedes der vier Beispiele (A, B, C, D):
+
+\begin{enumerate}
+  \item Benennen Sie das prim\"are \textbf{Anti-Muster} (z.\,B.\ ``Verteilter Monolith'', ``Service-Wildwuchs'', ``Observability-Schuld'', ``Rollback-Atrophie'').
+  \item Beschreiben Sie in einem Satz, \textbf{welches Prinzip} dabei verletzt wird (Servicegrenze entlang Capabilities, lose Kopplung, Betriebsdisziplin, you-build-it-you-run-it).
+  \item Schlagen Sie eine \textbf{konkrete Korrektur} in 1\,--\,2 S\"atzen vor.
+\end{enumerate}
+
+\ytquery{Microservices Antipattern verteilter Monolith Observability erklaert}
+
+\antwortlinien{18}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Reliability- \& Risk-Framework f\"ur eine wachsende Plattform}{\nivLiii}{35\,min}
+
+\begin{infobox}[Ausgangslage: Plattform-Skalierung]
+\textbf{Ihre Rolle:} Head of Platform einer Organisation mit acht Produktteams. Drei Teams releasen w\"ochentlich, f\"unf releasen alle 4\,--\,6 Wochen.
+
+\smallskip
+\textbf{Beobachtung:} Die Change Failure Rate liegt bei 18\,\% (Soll: $\leq$\,10\,\%). MTTR ist hoch (Median 2,5\,h). Es gibt keine einheitlichen SLOs.
+
+\smallskip
+\textbf{Zielkonflikt:} Geschwindigkeit der Produktteams vs.\ Stabilit\"at und Auditierbarkeit der Plattform.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{SLO-Set entwickeln:} Definieren Sie ein Minimal-SLO-Set (drei SLOs) f\"ur kritische Services \textendash{} mit Schwellenwerten und Begr\"undung (Verf\"ugbarkeit, Latenz, Fehlerquote).
+  \item \textbf{Error Budgets (konzeptionell):} Erkl\"aren Sie, wie ein Error-Budget-Mechanismus zwischen Speed und Reliability vermittelt. Definieren Sie eine Regel, was passiert, wenn das Budget aufgebraucht ist (Release-Stop? Plattform-Review?).
+  \item \textbf{Risk-Framework:} Erstellen Sie eine Liste von f\"unf typischen Risiken (z.\,B.\ \emph{Servicegrenze falsch geschnitten}, \emph{Secret im Code}, \emph{Rollback nicht ge\"ubt}, \emph{Observability-L\"ucken}, \emph{Tooling-Lock-in}). Bewerten Sie jedes Risiko nach \emph{Impact} und \emph{Wahrscheinlichkeit} (jeweils 1\,--\,5) und benennen Sie pro Risiko \emph{eine} pr\"aventive Ma{\ss}nahme.
+  \item \textbf{Anti-Gaming-Mechanik:} Wie verhindern Sie, dass Teams ihre Change Failure Rate sch\"onen (z.\,B.\ Fehler nicht als Change deklarieren, kleine Releases h\"aufen, Postmortems vermeiden)? Definieren Sie zwei Gegenkopplungen.
+\end{enumerate}
+
+\ytquery{SLO Error Budget Change Failure Rate MTTR SRE Framework Senior}
+
+\antwortlinien{28}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Governance leicht, aber wirksam}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Microservices und DevOps verlocken zu maximaler Teamautonomie. Ohne Leitplanken entstehen schnell Schatten-Architekturen, inkonsistente Schnittstellen und Audit-Findings. Schwergewichtige Architektur-Boards hingegen werden umgangen oder verz\"ogern Releases. Hier ist die Management-Spannung.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Architekturprinzipien (max.\ 8 Prinzipien):} Formulieren Sie acht Prinzipien, die in Ihrer Organisation als \emph{verbindlich} gelten sollen (z.\,B.\ \emph{Servicegrenzen folgen Capabilities}, \emph{kein Secret im Code}, \emph{jeder Service hat einen Owner}, \emph{API-Versionierung verpflichtend}). Schreiben Sie jedes Prinzip in einem Satz und ohne F\"ullw\"orter.
+  \item \textbf{Schnittstellenstandards:} Definieren Sie zwei verbindliche Standards (z.\,B.\ \emph{OpenAPI-Spezifikation f\"ur jede REST-API}, \emph{Event-Schema-Registry f\"ur asynchrone Kommunikation}, \emph{Idempotenz bei schreibenden Operationen}).
+  \item \textbf{Review-Regel:} Definieren Sie, wann ein \emph{Architektur-Review} verpflichtend ist \textendash{} und wann nicht. Faustregel: Review nur f\"ur \emph{teure} oder \emph{irreversible} Entscheidungen.
+  \item \textbf{Eskalationspfad:} Wer entscheidet, wenn Produktteam und Plattformteam sich uneinig sind? Skizzieren Sie den Pfad in vier Stufen.
+\end{enumerate}
+
+\ytquery{Architecture Governance Principles Senior Lightweight Service Standard}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Digitale Prozessarchitektur als Betriebs- und Entscheidungsarchitektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Auftrag]
+\textbf{Ihre Rolle:} Chief Architect / Head of Platform / Chief Digital Officer.
+
+\smallskip
+\textbf{Auftrag:} In \textbf{16 Wochen} eine skalierbare digitale Prozessplattform etablieren, die w\"ochentlich releasen kann \emph{und} auditierbar bleibt (Microservices + Kubernetes + DevOps + Operating Model).
+
+\smallskip
+\textbf{Restriktionen / Unsicherheit:}
+\begin{itemize}
+  \item Legacy-Landschaft, Lastprofile unbekannt,
+  \item Budget \textbf{350\,k\,\euro{}},
+  \item mehrere Teams mit unterschiedlichem Reifegrad,
+  \item Security- und Audit-Druck,
+  \item Zeitdruck durch Peak-Saison.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine \emph{Entscheidungsarchitektur} (keine Ma{\ss}nahmenliste) f\"ur die Plattform. Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item \textbf{Top-10-Entscheidungsarchitektur:} Servicegrenzen, Datenhoheit, API-/Event-Standards, SLOs, Release-Policies, Security-Baselines, Observability-Standard, Incident-Governance, Ausnahmeprozess, Toolchain-Standardisierung. F\"ur jede Entscheidung: Wer entscheidet? Welche Optionen?
+  \item \textbf{Operating Model \& RACI:} Produktteams vs.\ Plattform vs.\ Security/Compliance. \emph{Wer darf was \"andern?} Eskalationspfad bei Zielkonflikten (Speed vs.\ Risk).
+  \item \textbf{Reliability- \& Risk-Framework:} SLOs, Error Budgets, Change Failure Rate, MTTR. Definieren Sie eine \emph{Anti-Gaming}-Kopplung.
+  \item \textbf{Governance leicht, aber wirksam:} max.\ acht Architekturprinzipien, Review nur f\"ur teure/irreversible Entscheidungen, Standard-Templates (CI/CD, Helm/Deployment \textendash{} konzeptionell).
+  \item \textbf{Roadmap:} MVP (8 Wochen) \textrightarrow{} Scale (8 Wochen) inklusive \emph{Messkonzept} (Outcomes, nicht Aktivit\"at).
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit (Pflicht):}
+    \begin{itemize}
+      \item \emph{Welche drei Services zuerst extrahieren?} Begr\"undung + verworfene Alternativen + Fr\"uhwarnsignale.
+      \item \emph{Welche Release-Policy f\"ur Kernprozesse?} Trade-off Speed/Safety + Guardrails.
+    \end{itemize}
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien (Senior-Level):} Entscheidungsklarheit \textperiodcentered{} Anschlussf\"ahigkeit an Strategie \textperiodcentered{} Pragmatismus unter Restriktionen (16 Wochen, 350\,k\,\euro{}, Reifegrad-Heterogenit\"at) \textperiodcentered{} Risikoreife (sichtbare, nicht verdr\"angte Risiken).
+
+\ytquery{Microservices Operating Model Decision Architecture Senior Platform CIO}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 10}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Microservices nach Capability-Logik schneiden und Servicegrenzen begr\"unden.
+  \item Container/Kubernetes-Konzepte (Orchestrierung, Self-Healing, Rollback, Service-Discovery) zuordnen.
+  \item Eine Testpyramide entwerfen und Quality Gates als Sicherheitsnetz formulieren.
+  \item Ein Kubernetes-Betriebskonzept entwerfen (Rollout, Skalierung, Konfig/Secrets, Monitoring).
+  \item Ein Operating Model mit RACI f\"ur Produktteams, Plattform und Security entwickeln.
+  \item Ein Reliability-Framework (SLOs, Error Budgets, MTTR) inklusive Anti-Gaming-Kopplung entwerfen.
+  \item Eine Architektur-Governance entwerfen, die leicht, aber wirksam ist \textendash{} und Entscheidungen unter Unsicherheit dokumentieren.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 10 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
