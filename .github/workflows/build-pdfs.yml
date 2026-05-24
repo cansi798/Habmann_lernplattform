@@ -26,18 +26,21 @@ jobs:
 
       - name: Install TeX Live (xelatex + German + extra fonts)
         run: |
+          set -e
           sudo apt-get update -qq
+          # Required packages: install in chunks so a single bad name doesn't sink the install
           sudo apt-get install -y --no-install-recommends \
             texlive-xetex \
             texlive-lang-german \
             texlive-fonts-extra \
             texlive-fonts-recommended \
             texlive-latex-recommended \
-            texlive-latex-extra \
-            texlive-pictures \
-            texlive-science \
-            fonts-charter \
-            fonts-caveat
+            texlive-latex-extra
+          # Optional add-ons — try each individually, don't fail the build if missing
+          for pkg in texlive-pictures texlive-science fonts-charter fonts-caveat fonts-cabin; do
+            sudo apt-get install -y --no-install-recommends "$pkg" || echo "::warning::optional package $pkg not available, skipping"
+          done
+          xelatex --version | head -1
 
       - name: Build all PDFs
         run: |
