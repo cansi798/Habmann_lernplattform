@@ -1,144 +1,140 @@
 {
   "kurs_id": "22_Bo_143",
   "tag_nr": 11,
-  "titel": "Plattform-Monetarisierung, Subscription-Modelle und Partnernetzwerke aufbauen",
+  "titel": "Plattform-Monetarisierung, Subscription-Modelle und Partnernetzwerke",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Plattform-Erlösmodelle im Überblick — von Provision bis Subscription",
-      "youtube_id": "",
-      "youtube_query": "plattform geschäftsmodelle erlösquellen überblick deutsch erklärt",
-      "dauer_min": 8,
+      "titel": "Wie Plattformen Geld verdienen — die wirtschaftliche Logik",
+      "youtube_id": "Sz9AIi8RMHQ",
+      "youtube_query": "revenue streams business model canvas erklärt einnahmequellen",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Aussage über Plattform-Erlösmodelle ist korrekt?",
+        "frage": "Welche Aussage trifft die Monetarisierungslogik von Plattformen am genauesten?",
         "typ": "single",
         "optionen": [
-          "Eine Plattform sollte immer nur ein einziges Erlösmodell nutzen, um Komplexität zu minimieren",
-          "Plattform-Monetarisierung kombiniert typischerweise mehrere Erlösmodelle (Provision, Subscription, Premium-Platzierung, Werbung, Datenservices, Partnergebühren) — die richtige Kombination hängt von Marktphase, Marktseiten und Wertbeitrag ab",
-          "Provisionen sind immer das beste Modell",
-          "Subscription funktioniert nur im B2C"
+          "Plattformen verdienen ausschliesslich durch Werbung",
+          "Plattformen monetarisieren typischerweise über mehrere Erlösströme: Transaktionsgebühren, Abonnements, Werbung, Premium-Features und Datenmonetarisierung",
+          "Plattformen sind grundsätzlich kostenlose Dienste ohne Geschäftsmodell",
+          "Plattformen finanzieren sich nur über Provisionen der Anbieterseite"
         ],
         "korrekt": 1,
-        "erklaerung": "Reife Plattformen kombinieren mehrere Erlösmodelle, weil unterschiedliche Marktseiten unterschiedliche Zahlungsbereitschaften und Nutzenwahrnehmungen haben. Die Kombination — und vor allem das Timing der Einführung — hängt von Marktphase, Wertbeitrag und Plattformlogik ab. Pauschale Aussagen zu ‚das eine beste Modell‘ ignorieren diese Differenzierung."
+        "erklaerung": "Erfolgreiche Plattformen kombinieren mehrere Erlösströme zu einer Ertragsarchitektur. Marktplätze nehmen Provisionen, SaaS-Plattformen erheben Abos, Content-Plattformen kombinieren Werbung und Premium-Abos, manche monetarisieren Daten. Die Mischung reduziert Klumpenrisiken."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Subscription-Tiers strategisch aufbauen",
-      "inhalt": "Subscription-Tiers strukturieren Zahlungsbereitschaft und Nutzungsintensität nach Kundensegmenten. Eine bewährte Architektur arbeitet mit drei bis vier Tiers: Basic, Professional, Premium und optional Enterprise. Jeder Tier wird durch klare Leistungslogik abgegrenzt: Zugang (welche Funktionen sind enthalten), Sichtbarkeit (Ranking-Logik, Premium-Platzierung), Support-Level (Reaktionszeiten, persönlicher Ansprechpartner), Daten (Reporting, Analysen, API-Zugang), Automatisierung (manuell vs. automatisiert) und Integrationsmöglichkeiten. Die Preislogik folgt dem Wert, nicht den Kosten — eine Funktion, die einem Enterprise-Kunden zehntausend Euro spart, kann legitim hundert Euro pro Monat kosten, auch wenn ihre Produktion günstiger ist. Wichtig: Tiers müssen klare Upgradepfade haben — der Wechsel vom Basic zum Professional muss spürbaren Mehrwert bieten, sonst stagnieren Kunden im günstigsten Tier. Zu viele Tiers (fünf, sechs, sieben) verwirren mehr als sie segmentieren — Tiering ist Vereinfachung, nicht Komplexität.",
+      "titel": "Subscription-Ökonomie: warum wiederkehrende Erlöse die Bewertung verändern",
+      "inhalt": "Subscription-Modelle haben die Plattformökonomie strukturell verändert. Anstatt eines einmaligen Verkaufs zahlt der Kunde regelmäßig — monatlich oder jährlich — für fortlaufenden Zugang zu Produkt oder Service. Drei wirtschaftliche Vorteile machen das Modell attraktiv. Erstens entsteht planbarer, wiederkehrender Cashflow (Annual Recurring Revenue, ARR), der Investitionen, Personalplanung und Bewertung stabilisiert. Zweitens wächst der Customer Lifetime Value (CLV) bei sinkender Churn-Rate stärker als der Einmalumsatz. Drittens erlauben Tier-Modelle (Basic, Pro, Enterprise) eine differenzierte Bepreisung nach Zahlungsbereitschaft. Der Preis dafür: Subscription erfordert ständige Wertlieferung, kontinuierliche Produktverbesserung und aktive Kundenbindung — sonst kündigen Nutzer.",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Prinzipien gelten beim Design effektiver Subscription-Tiers?",
-        "typ": "multi",
-        "optionen": [
-          "Drei bis vier Tiers sind meist sinnvoller als sechs oder mehr",
-          "Pricing sollte am Wert für den Kunden orientiert sein, nicht primär an den Produktionskosten",
-          "Klare Upgradepfade mit spürbarem Mehrwert zwischen den Tiers",
-          "Möglichst viele Funktionen in jedem Tier, damit alle Kunden zufrieden sind"
+        "frage": "Vervollständigen Sie die wirtschaftliche Logik von Subscription-Modellen:",
+        "typ": "lueckentext",
+        "text": "Der wiederkehrende Jahresumsatz heisst {0}. Der Wert eines Kunden über die gesamte Beziehung wird als {1} bezeichnet. Die Abwanderungsrate pro Periode nennt sich {2}. Die Vergleichsgrösse zwischen Kundenwert und Akquisitionskosten ist das Verhältnis CLV zu {3}.",
+        "luecken": [
+          { "antwort": "ARR", "alternativen": ["Annual Recurring Revenue", "MRR"] },
+          { "antwort": "CLV", "alternativen": ["Customer Lifetime Value", "Kundenlebenswert", "Lifetime Value"] },
+          { "antwort": "Churn", "alternativen": ["Churn Rate", "Abwanderungsrate", "Kündigungsrate"] },
+          { "antwort": "CAC", "alternativen": ["Customer Acquisition Cost", "Akquisitionskosten", "Kundengewinnungskosten"] }
         ],
-        "korrekt": [0, 1, 2],
-        "erklaerung": "Wenige Tiers, wertbasierter Preis und klare Upgradepfade sind Kernprinzipien. Möglichst viele Funktionen in jedem Tier zerstört dagegen die Segmentierungslogik — wenn der Basic-Tier bereits alles enthält, gibt es keinen Anreiz zum Upgrade."
+        "erklaerung": "ARR, CLV, Churn und CAC sind die vier Kernkennzahlen jedes Subscription-Modells. Die Faustregel: Ein gesundes SaaS-Modell hat ein CLV/CAC-Verhältnis von mindestens 3:1 und eine Churn-Rate unter zwei Prozent monatlich."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Customer Lifetime Value als Steuerungsgröße",
-      "youtube_id": "",
-      "youtube_query": "customer lifetime value clv plattform subscription deutsch",
-      "dauer_min": 7,
+      "titel": "Customer Lifetime Value richtig berechnen",
+      "youtube_id": "1P_uUpSVRWc",
+      "youtube_query": "customer lifetime value clv berechnen formel deutsch",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Faktoren beeinflussen den Customer Lifetime Value (CLV) eines Plattform-Abonnenten?",
+        "frage": "Welche Elemente fliessen in die Berechnung des Customer Lifetime Value (CLV) ein?",
         "typ": "multi",
         "optionen": [
-          "Durchschnittliche Vertragslaufzeit und Churn Rate",
-          "Möglichkeit zu Upgrades, Zusatzkäufen und Cross-Selling",
-          "Nutzungsintensität und damit verbundener wahrgenommener Nutzen",
-          "Geburtsdatum des Abonnenten",
-          "Akquisekosten (CAC) im Verhältnis zum CLV"
+          "Durchschnittlicher Deckungsbeitrag pro Periode",
+          "Erwartete Kundenlebensdauer in Jahren oder Perioden",
+          "Wiederkaufrate beziehungsweise Kundenbindungsrate",
+          "Anzahl der Follower auf Social Media",
+          "Customer Acquisition Cost"
         ],
         "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Laufzeit, Upgrades, Nutzungsintensität und CAC-Verhältnis prägen den CLV unmittelbar. Geburtsdatum hat im B2B-Subscription-Kontext keinen relevanten Einfluss. Die Faustregel CLV ≥ 3 × CAC gilt auch hier — sonst wird die Akquisestrategie unwirtschaftlich."
+        "erklaerung": "CLV verbindet Deckungsbeitrag, Kundenlebensdauer und Bindungsrate. Der Netto-CLV zieht den CAC ab. Social-Media-Follower haben keinen unmittelbaren Bezug zum wirtschaftlichen Kundenwert."
       }
     },
     {
       "nr": 4,
       "typ": "text",
-      "titel": "Partnernetzwerke und Affiliate-Programme aufbauen",
-      "inhalt": "Partnernetzwerke sind einer der stärksten Hebel für Reichweite, Vertrauen und Wachstum auf Plattformen — und gleichzeitig eine der häufigsten Quellen für Abhängigkeiten und Konflikte. Sechs Partnertypen sind relevant: Technologiepartner (Integrationen), Vertriebspartner (Reichweite), Contentpartner (Inhalte und Expertise), Servicepartner (Leistungserbringung), Branchenverbände (Vertrauen und Multiplikation) sowie Beratungsunternehmen (Implementierungskompetenz). Affiliate-Programme verbinden Partner mit Erfolgsvergütung — sie sind besonders wirksam, wenn die Erfolgsmessung sauber ist und die Provision die tatsächliche Wertschöpfung des Partners reflektiert. Strategische Allianzen gehen tiefer: Sie sind langfristige Kooperationen mit gegenseitiger Abhängigkeit, klaren Daten- und Qualitätsregeln und gemeinsamen Zielgruppen. Erfolgsfaktoren in beiden Fällen sind klare Partnerrolle, faire Vergütung, transparente Daten- und Qualitätsregeln, messbare Ergebnisse und eine Governance, die Konflikte handhabbar macht. Eine Plattform mit drei sorgfältig integrierten Partnern ist meist erfolgreicher als eine mit dreißig oberflächlich angebundenen.",
+      "titel": "Plattform-Geschäftsmodelle und ihre Monetarisierung",
+      "inhalt": "Plattformmodelle haben unterschiedliche Standardlogiken zur Monetarisierung entwickelt. Marktplätze leben von Transaktionsprovisionen je nach Branchenkonvention zwischen ein und 25 Prozent. SaaS-Plattformen erheben tier-basierte Abos und ergänzen mit Usage-Based Pricing. Content-Plattformen kombinieren Werbeerlöse mit Premium-Abonnements. Ökosystem-Plattformen erheben Plattformgebühren und beteiligen Drittentwickler. Community-Plattformen monetarisieren über Premium-Funktionen, Werbung oder kombinierte Modelle. Wer Plattformen strategisch entwickelt, denkt nicht nur an einen Erlösstrom, sondern an die Architektur — und an die Frage, welche Marktseite zahlt und welche subventioniert wird.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussagen über Partnernetzwerke und Affiliate-Programme sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Klare Partnerrollen, faire Vergütung und Datenregeln sind Erfolgsfaktoren",
-          "Möglichst viele Partner ohne Auswahlkriterien führen zu schneller Skalierung",
-          "Strategische Allianzen unterscheiden sich von Affiliate-Programmen durch Tiefe und Langfristigkeit",
-          "Konflikte zwischen Partnern brauchen klar definierte Governance-Mechanismen"
+        "frage": "Ordnen Sie die Plattformtypen ihrer typischen primären Monetarisierungslogik zu:",
+        "typ": "zuordnung",
+        "paare": [
+          { "links": "Marktplatz (Amazon)", "rechts": "Transaktionsprovision je Verkauf" },
+          { "links": "SaaS-Plattform (Salesforce)", "rechts": "Wiederkehrendes Abonnement nach Tiers" },
+          { "links": "Content-Plattform (YouTube)", "rechts": "Werbung kombiniert mit Premium-Abo" },
+          { "links": "Ökosystem-Plattform (Apple App Store)", "rechts": "Plattformgebühr plus Umsatzbeteiligung Drittentwickler" },
+          { "links": "Community-Plattform (LinkedIn)", "rechts": "Premium-Features, Werbung und Recruiter-Lizenzen" }
         ],
-        "korrekt": [0, 2, 3],
-        "erklaerung": "Klare Rollen, Unterscheidung Affiliate/Allianz und Governance sind etablierte Erfolgsfaktoren. Option 2 ist falsch: Viele unausgewählte Partner erzeugen Qualitätsprobleme, Konflikte und Reputationsrisiken — sorgfältige Auswahl ist meist wirksamer als reine Quantität."
+        "erklaerung": "Jeder Plattformtyp hat eine dominante Monetarisierungslogik. In der Praxis kombinieren erfolgreiche Plattformen mehrere Erlösströme — der primäre bestimmt aber die strategische DNA des Geschäftsmodells."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "MRR, Churn und Net Revenue Retention — die wichtigsten Subscription-KPIs",
-      "youtube_id": "",
-      "youtube_query": "subscription kpis mrr churn net revenue retention deutsch",
-      "dauer_min": 7,
+      "titel": "Affiliate-Marketing und Partnerprogramme als Wachstumshebel",
+      "youtube_id": "7MvuTnI9t4E",
+      "youtube_query": "affiliate marketing partnerprogramm anfänger tutorial deutsch",
+      "dauer_min": 12,
       "aufgabe": {
-        "frage": "Welche KPI ist für eine reife Subscription-Plattform besonders aussagekräftig?",
+        "frage": "Welche Aussage trifft den strategischen Wert von Partner- und Affiliate-Netzwerken am besten?",
         "typ": "single",
         "optionen": [
-          "Anzahl Newsletter-Anmeldungen pro Monat",
-          "Net Revenue Retention (NRR) — sie misst, ob bestehende Kunden über die Zeit mehr oder weniger Umsatz generieren und integriert Upgrades, Downgrades und Churn",
-          "Anzahl Social-Media-Follower",
-          "Tägliche Klickrate auf der Startseite"
+          "Affiliate-Marketing ist riskant, weil die Provision den Gewinn schmälert",
+          "Affiliate- und Partnernetzwerke sind erfolgsbasierte Wachstumshebel mit kalkulierbarem CAC, weil nur tatsächlich generierter Umsatz vergütet wird",
+          "Partnerprogramme funktionieren nur im B2C-Bereich",
+          "Affiliate-Netzwerke ersetzen die eigene Vertriebsarbeit vollständig"
         ],
         "korrekt": 1,
-        "erklaerung": "Net Revenue Retention (typisch ≥ 100 % bei erfolgreichen SaaS-Plattformen) ist eine der aussagekräftigsten Steuerungsgrößen: Sie zeigt, ob bestehende Kunden gehalten und ausgebaut werden — unabhängig vom Neugeschäft. Die anderen Optionen sind Vanity Metrics ohne wirtschaftlichen Steuerungsbezug."
+        "erklaerung": "Der strategische Vorteil: Vergütung erfolgt erfolgsbasiert — pro Klick, pro Lead oder pro Verkauf. Damit ist der Customer Acquisition Cost direkt steuerbar. Risiken liegen in Markenwirkung, Cookie-Tracking und Partnerabhängigkeit, nicht in der Modelllogik selbst."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Monetarisierung nicht überreizen — Schutz der Netzwerkeffekte",
-      "inhalt": "Eine der schwierigsten Senior-Level-Entscheidungen in der Plattform-Monetarisierung lautet: Welche Erlösquelle wird bewusst nicht oder noch nicht eingeführt — obwohl sie kurzfristig attraktiv wäre? Drei häufige Beispiele. Erstens: Premium-Sichtbarkeit, die das organische Ranking überschreibt. Sie generiert kurzfristig Umsatz, beschädigt aber die Fairness-Wahrnehmung der Anbieter und das Vertrauen der Nachfrager (‚das, was oben steht, ist nur bezahlt‘). Zweitens: Hohe Provisionen auf eine schwache Marktseite. Sie senken die Akzeptanz dieser Seite und können die kritische Masse gefährden — eine Plattform ohne ausreichend Anbieter ist für Nachfrager wertlos. Drittens: Datenmonetarisierung ohne klare Einwilligung. Sie generiert Umsatz, gefährdet aber Compliance, Vertrauen und langfristige Datenqualität. In all diesen Fällen ist ‚wir verzichten bewusst‘ keine verlorene Chance, sondern Investition in die Tragfähigkeit des Modells. Reife Plattformführung bewertet Erlösoptionen nicht nur nach Umsatzpotenzial, sondern nach Wirkung auf Netzwerkeffekte, Fairness, Vertrauen und langfristige Plattformwert.",
-      "dauer_min": 6,
+      "titel": "Senior-Level-Frage: Monetarisierungsarchitektur statt Einzeltarif",
+      "inhalt": "Plattform-Monetarisierung ist Architektur, nicht Tarif. Vier strategische Hebel sind zentral. Erstens die Marktseiten-Logik: Wer zahlt, wer wird subventioniert, wer trägt das Risiko? Plattformen wie Uber subventionierten anfangs die Fahrer; Marktplätze subventionieren häufig die Käufer durch Gratisversand. Zweitens das Tier-Design: Free, Basic, Pro, Enterprise — jede Stufe muss klar abgegrenzten Mehrwert liefern und Anreize zum Upgrade enthalten. Drittens das Pricing-Modell: Flat, Usage-Based, Hybrid, Per-Seat, Outcome-Based. Viertens das Partnerökosystem: Welche Allianzen, Affiliates und Wiederverkäufer verlängern die eigene Reichweite, ohne die Markenkontrolle zu verlieren? Diese vier Hebel ergeben in Summe eine Monetarisierungsarchitektur, die langfristig den Plattformwert bestimmt — weit über kurzfristige Tarifänderungen hinaus.",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Erlösoptionen sollten kritisch geprüft werden, weil sie kurzfristig attraktiv, aber langfristig riskant sein können?",
-        "typ": "multi",
-        "optionen": [
-          "Premium-Sichtbarkeit, die das organische Ranking faktisch ersetzt",
-          "Hohe Provisionen auf eine noch schwache Marktseite",
-          "Datenmonetarisierung ohne klare und transparente Einwilligung",
-          "Klar kommunizierte, transparente Subscription-Tiers für Anbieter"
-        ],
-        "korrekt": [0, 1, 2],
-        "erklaerung": "Verzerrte Premium-Logik, übermäßige Provisionsbelastung schwacher Marktseiten und intransparente Datennutzung sind klassische Plattform-Schwächungen. Transparente Subscription-Tiers sind dagegen ein etabliertes, langfristig tragfähiges Monetarisierungsmodell."
+        "frage": "Sie sind Head of Strategy einer Plattform für Handwerksvermittlung mit 50.000 Anbietern und 500.000 Kunden. Bisher leben Sie ausschliesslich von Vermittlungsprovisionen (15 Prozent pro Auftrag). Die Geschäftsführung will eine breitere Monetarisierungsarchitektur. Skizzieren Sie in drei bis fünf Absätzen, welche zusätzlichen Erlösströme Sie entwickeln, welche Marktseite Sie wie ansprechen und welche Maßnahme Sie bewusst nicht ergreifen.",
+        "typ": "text",
+        "musterloesung": "Die strategische Diagnose: 100-prozentige Abhängigkeit von Vermittlungsprovisionen ist ein Klumpenrisiko. Sinkt das Transaktionsvolumen, kollabiert der Umsatz. Eine Architektur mit drei Erlösströmen ist robuster.\n\nErstens würde ich für die Anbieterseite ein Subscription-Modell mit klaren Tiers einführen: Basic kostenfrei, Pro mit Sichtbarkeitsboost, Premium mit dediziertem Account-Management und Top-Listing. Damit entsteht planbarer ARR neben der volatilen Provision.\n\nZweitens würde ich auf der Kundenseite ein optionales Premium-Modell einführen: schnellere Vermittlung, garantierte Reaktionszeit, Geld-zurück-Garantie. Das senkt nicht nur die Wechselbereitschaft, sondern erhöht den CLV der wertvollsten Kundensegmente.\n\nDrittens würde ich Partner- und Affiliate-Netzwerke aufbauen: Versicherungen, Baumärkte, Immobilienverwaltungen als Vermittlungspartner mit erfolgsbasierter Provision. Das senkt den CAC für Neukunden und öffnet neue Akquisitionskanäle.\n\nDie bewusste Nicht-Maßnahme: Ich würde nicht die Vermittlungsprovision erhöhen, auch wenn das kurzfristig den Umsatz steigert. Eine Provisionserhöhung treibt Anbieter zur Konkurrenz oder zum Direktvertrieb. Stattdessen wird der Plattformwert durch Mehrwert-Tiers gesteigert — Anbieter zahlen mehr, weil sie mehr bekommen, nicht weil sie müssen. Die Marktseiten-Logik bleibt damit langfristig stabil.",
+        "erklaerung": "Senior-Level-Monetarisierung denkt in Architektur, nicht in Einzeltarifen. Die Musterlösung zeigt eine diversifizierte Erlösstruktur mit klarer Marktseiten-Logik und einer bewussten Nicht-Maßnahme zum Schutz des Plattformökosystems."
       }
     },
     {
       "nr": 7,
-      "typ": "text",
-      "titel": "Marktphase, Zahlungsbereitschaft und Preis-Einführung steuern",
-      "inhalt": "Die Frage, wann welche Monetarisierung eingeführt wird, hängt entscheidend von der Marktphase ab. In der Aufbauphase überwiegen Netzwerkeffekte und kritische Masse — eine oder beide Marktseiten bleiben oft kostenlos oder subventioniert, der Plattformbetreiber finanziert Wachstum. In der Wachstumsphase werden erste Erlösmodelle eingeführt, meist auf der Seite mit größerer Zahlungsbereitschaft und klarem Wertbeitrag (z. B. Premium-Anbieter-Profile, Lead-Vermittlungsprovisionen). In der Reifephase wird differenziert ausgebaut: mehrere Erlösmodelle parallel, Subscription-Tiers, Partner-Erlöse, optional Datenservices. Drei Fehler sind besonders häufig: zu frühe und zu hohe Monetarisierung (Wachstum bricht ein), zu späte Monetarisierung (Kapital wird verbrannt, Erwartung an Kostenfreiheit etabliert sich), und Monetarisierung der falschen Marktseite (etwa Gebühren für Nachfrager, obwohl Anbieter den höheren Wertbeitrag haben). Reife Plattform-Strategie macht diese Phasen-Logik bewusst und entscheidet bei jeder neuen Erlösquelle: passt sie zur aktuellen Phase, oder gehört sie in eine spätere?",
-      "dauer_min": 5,
+      "typ": "video",
+      "titel": "Subscription-Economy in der Praxis",
+      "youtube_id": "cmhmiDWztzU",
+      "youtube_query": "customer lifetime value einfach erklärt deutsch",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussagen über Monetarisierung in unterschiedlichen Plattform-Phasen sind korrekt?",
+        "frage": "Welche Risiken sind mit einer hohen Abhängigkeit von einem einzigen Erlösstrom verbunden?",
         "typ": "multi",
         "optionen": [
-          "In der Aufbauphase überwiegt die Sicherung von Netzwerkeffekten und kritischer Masse — oft mit Subvention einer Marktseite",
-          "In der Wachstumsphase werden erste Erlösmodelle auf der Seite mit höherer Zahlungsbereitschaft eingeführt",
-          "Reifephase erlaubt mehrere parallele Erlösmodelle und differenzierte Subscription-Tiers",
-          "Optimale Monetarisierung führt von Anfang an alle Erlösmodelle gleichzeitig ein"
+          "Klumpenrisiko bei Marktveränderungen",
+          "Eingeschränkte Verhandlungsmacht gegenüber dominanten Marktseiten",
+          "Höhere Resilienz in Krisenzeiten",
+          "Schwer planbare Cashflows bei Nachfragerückgang",
+          "Geringerer strategischer Spielraum bei Preisentscheidungen"
         ],
-        "korrekt": [0, 1, 2],
-        "erklaerung": "Phasen-spezifische Monetarisierung ist ein etabliertes Prinzip. Option 4 widerspricht ihm direkt: Wer alle Erlösmodelle sofort einführt, gefährdet kritische Masse und Netzwerkeffekte — das ist einer der häufigsten Plattform-Scheitergründe."
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Monomodellabhängigkeit führt zu Klumpenrisiko, schwacher Verhandlungsposition, volatilem Cashflow und engem Pricing-Spielraum. Höhere Resilienz entsteht erst durch Diversifikation der Erlösströme."
       }
     }
   ]

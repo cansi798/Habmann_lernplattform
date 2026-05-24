@@ -1,146 +1,141 @@
 {
   "kurs_id": "22_Bo_143",
   "tag_nr": 15,
-  "titel": "Plattformen rechtssicher betreiben — Compliance, Risiko und Marktpositionierung",
+  "titel": "Rechtssicherheit auf Plattformmärkten: DSA, DMA und Compliance-Architektur",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Plattformökonomie und rechtliche Grundfragen",
-      "youtube_id": "",
-      "youtube_query": "plattformrecht b2b vermittler haftung deutsch erklärt",
-      "dauer_min": 8,
+      "titel": "Digital Services Act (DSA) — die neue EU-Plattformregulierung",
+      "youtube_id": "eOSdkqWko1M",
+      "youtube_query": "digital services act dsa erklärt deutsch plattform",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Frage ist für die rechtliche Einordnung einer Plattform am wichtigsten?",
+        "frage": "Welche Aussage zum Digital Services Act (DSA) ist zutreffend?",
         "typ": "single",
         "optionen": [
-          "Welches Land hostet den Server",
-          "Welche Rolle nimmt die Plattform ein: reiner Vermittler, Händler, Dienstleister oder Mischform — wer ist Vertragspartner, wer haftet, wer verarbeitet welche Daten?",
-          "Wie viele Mitarbeitende die Plattform hat",
-          "Welche Sprache die Plattform verwendet"
+          "Der DSA verpflichtet Online-Plattformen zu Transparenz, Risikobewertung und Verfahren gegen illegale Inhalte",
+          "Der DSA betrifft ausschliesslich Cookie-Banner auf Websites",
+          "Der DSA ist eine freiwillige Empfehlung der EU ohne rechtliche Bindungswirkung",
+          "Der DSA gilt nur für Unternehmen mit Sitz in den USA"
         ],
-        "korrekt": 1,
-        "erklaerung": "Die Rolle der Plattform bestimmt die rechtliche Verantwortung. Ein reiner Vermittler haftet anders als ein Händler. Wer Vertragspartner ist, wer Daten verarbeitet, wer für Qualität haftet — all das ändert sich je nach Rolle. Diese Klärung ist Voraussetzung für jede Compliance-Architektur."
+        "korrekt": 0,
+        "erklaerung": "Der DSA ist seit Februar 2024 vollständig in Kraft und verpflichtet Online-Plattformen — insbesondere Very Large Online Platforms (VLOPs) — zu Transparenz, Risikobewertung, Meldeverfahren und Massnahmen gegen illegale Inhalte. Bussgelder können bis zu 6 Prozent des weltweiten Jahresumsatzes betragen."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Relevante Risikofelder im Plattformbetrieb",
-      "inhalt": "Plattformbetreiber stehen in mindestens acht Risikofeldern. Datenschutz und Datenverarbeitung — wer sieht welche Daten von wem, gibt es ausreichende Einwilligungen, welche Aufbewahrungsfristen gelten. AGB und Vertragsbedingungen — sind sie konsistent, transparent, und für beide Marktseiten klar formuliert? Haftung — wer trägt Verantwortung, wenn ein Anbieter Mangelware liefert, ein Kunde nicht zahlt, ein Service fehlschlägt? Informationspflichten — was muss dem Kunden vor Kauf transparent gemacht werden, etwa zu Identität des Anbieters, Preis, Lieferung, Widerruf? Preis- und Angebotsdarstellung — sind Preise inklusive aller Kosten klar erkennbar? Wettbewerbsrecht — werden faire Marktbedingungen eingehalten oder beeinflusst die Plattform den Wettbewerb durch eigene Vorzugsbehandlung? Plattformtransparenz — sind Ranking-Logik, bezahlte Sichtbarkeit und Bewertungsmechanismen für Marktteilnehmer nachvollziehbar? Geschäftskundenschutz — gelten besondere Regeln für KMU als Vertragspartner gegenüber großen Plattformen? Jedes Feld kann einzeln Schaden erzeugen, kombiniert können sie das Plattformmodell strukturell gefährden.",
+      "titel": "Digital Markets Act (DMA): Fairness und Gatekeeper-Regulierung",
+      "inhalt": "Der Digital Markets Act ergänzt den DSA mit einer ökonomischen Stossrichtung: faire Wettbewerbsbedingungen in digitalen Märkten. Der DMA richtet sich gezielt an sogenannte Gatekeeper — Plattformen mit so grosser Marktmacht, dass sie zwischen Anbietern und Endnutzern eine kaum zu umgehende Brücke bilden. Aktuell als Gatekeeper benannt sind unter anderem Alphabet, Amazon, Apple, ByteDance, Meta und Microsoft. Der DMA verbietet diesen Gatekeepern bestimmte Praktiken: Selbstbevorzugung eigener Dienste in Suchergebnissen, ungerechtfertigte Datenkopplung über Dienste hinweg, Anti-Steering-Klauseln, die Drittanbieter daran hindern, Nutzer auf günstigere Angebote ausserhalb der Plattform hinzuweisen. Für mittelständische Anbieter, die auf solchen Plattformen verkaufen, ist der DMA strategisch relevant: Er erweitert ihre Verhandlungs- und Reklamationsmöglichkeiten — und damit das Spielfeld.",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Risikofelder gehören zum klassischen Compliance-Spektrum eines Plattformbetreibers?",
-        "typ": "multi",
-        "optionen": [
-          "Datenschutz und Datenverarbeitung",
-          "AGB-Konsistenz und Informationspflichten",
-          "Plattformtransparenz bei Ranking und bezahlter Sichtbarkeit",
-          "Steuerliche Vorschriften für Server-Wartung",
-          "Wettbewerbsrechtliche Fragen bei eigenen Angeboten auf der Plattform"
+        "frage": "Vervollständigen Sie die zentralen Begriffe und Sanktionsrahmen:",
+        "typ": "lueckentext",
+        "text": "Der Digital Services Act regelt Verfahren gegen illegale Inhalte und Transparenz. Der Digital {0} Act richtet sich an sogenannte {1} mit besonderer Marktmacht. Bussgelder können beim DSA bis zu {2} Prozent des weltweiten Jahresumsatzes betragen, beim DMA sogar bis zu {3} Prozent.",
+        "luecken": [
+          { "antwort": "Markets", "alternativen": ["Markets-", "Markets "] },
+          { "antwort": "Gatekeeper", "alternativen": ["Gatekeepers", "Torwächter"] },
+          { "antwort": "6", "alternativen": ["sechs", "6%", "6 Prozent"] },
+          { "antwort": "10", "alternativen": ["zehn", "10%", "10 Prozent"] }
         ],
-        "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Datenschutz, AGB, Plattformtransparenz und Wettbewerbsrecht sind die typischen Risikofelder. Steuerliche Vorschriften zur Server-Wartung sind eine sehr spezielle technische Detailfrage, nicht das Hauptspektrum der Plattform-Compliance — die wesentlichen Felder betreffen Marktverhalten, Daten und Vertrag."
+        "erklaerung": "DSA und DMA bilden zusammen das neue EU-Regelwerk für digitale Plattformen: DSA für Inhalts- und Risiko-Compliance (bis 6 Prozent Bussgeld), DMA für Wettbewerbs- und Verhaltensregulierung gegenüber Gatekeepern (bis 10 Prozent, bei Wiederholung 20 Prozent)."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Plattformtransparenz — Ranking, bezahlte Sichtbarkeit, Bewertungen",
-      "youtube_id": "",
-      "youtube_query": "plattform transparenz ranking p2b verordnung deutsch",
-      "dauer_min": 7,
+      "titel": "Was der Digital Services Act in der Praxis verlangt",
+      "youtube_id": "d4BpGYqq7jQ",
+      "youtube_query": "digital services act eu plattformen erklärt deutsch",
+      "dauer_min": 9,
       "aufgabe": {
-        "frage": "Welche Plattformelemente erfordern besonders hohe Transparenz gegenüber Anbietern und Kunden?",
+        "frage": "Welche Pflichten gehören typischerweise zur DSA-Compliance grosser Online-Plattformen?",
         "typ": "multi",
         "optionen": [
-          "Ranking- und Sichtbarkeitslogik der Suchergebnisse",
-          "Klare Kennzeichnung bezahlter Platzierungen versus organischer Ergebnisse",
-          "Bewertungsregeln und Manipulationsschutz",
-          "Interne Personalstruktur des Plattformbetreibers"
+          "Meldeverfahren für illegale Inhalte",
+          "Transparenzberichte über Moderation und algorithmische Systeme",
+          "Risikobewertung systemischer Risiken inklusive Massnahmen zur Risikominderung",
+          "Verbot jeglicher Werbung auf Plattformen",
+          "Klare und zugängliche Kontaktpunkte für Behörden und Nutzer"
         ],
-        "korrekt": [0, 1, 2],
-        "erklaerung": "Ranking, bezahlte Sichtbarkeit und Bewertungen sind die typischen Transparenz-Kernfelder — auch regulatorisch gefordert. Die interne Personalstruktur ist dagegen keine plattformrelevante Transparenz-Anforderung gegenüber Marktteilnehmern."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Meldeverfahren, Transparenzberichte, systemische Risikobewertung und Behörden-Kontaktpunkte sind Kernpflichten. Ein vollständiges Werbeverbot ist nicht Teil des DSA; reguliert werden aber Targeting-Praktiken und Werbung gegenüber Minderjährigen."
       }
     },
     {
       "nr": 4,
       "typ": "text",
-      "titel": "Risiko-Register aufbauen — Eintrittswahrscheinlichkeit, Auswirkung, Steuerbarkeit",
-      "inhalt": "Ein belastbares Risiko-Register für Plattformbetreiber bewertet jedes Risiko nach drei Dimensionen. Erstens Eintrittswahrscheinlichkeit: Wie wahrscheinlich ist das Risiko in den nächsten 12 bis 24 Monaten? Zweitens Auswirkung: Was wäre der finanzielle, rechtliche, operative und reputative Schaden im Eintrittsfall? Dabei ist Reputationsschaden oft am schwerwiegendsten, weil er sich nachhaltig auf Kunden- und Anbieterbindung auswirkt. Drittens Steuerbarkeit: Wie gut können wir das Risiko durch eigene Maßnahmen reduzieren? Aus diesen drei Dimensionen ergibt sich die Priorisierung: Hohe Wahrscheinlichkeit + hohe Auswirkung + gute Steuerbarkeit = sofort handeln. Hohe Auswirkung + niedrige Wahrscheinlichkeit + schwere Steuerbarkeit = Eskalationsplan vorbereiten, regelmäßig überwachen. Niedrige Auswirkung + hohe Wahrscheinlichkeit = pragmatisch managen, nicht überoptimieren. Wichtig: Das Register ist kein einmaliges Dokument, sondern wird quartalsweise überprüft. Neue Markt-, Regulierungs- oder Wettbewerbsentwicklungen verändern die Bewertung — etwa eine neue Plattform-Verordnung oder die Veröffentlichung einer Konkurrenten-Krise.",
+      "titel": "Compliance-Architektur: vom Regelwerk zur Steuerung",
+      "inhalt": "Compliance ist im Plattformgeschäft kein juristisches Add-On, sondern eine Steuerungsarchitektur. Fünf Bausteine sind zentral. Erstens das Risikoinventar: Welche regulatorischen Risiken — Datenschutz, Inhalte, Wettbewerb, Verbraucherschutz, Steuern, Haftung — entstehen aus dem Geschäftsmodell? Zweitens die Verantwortlichkeiten: Wer ist für welche Compliance-Domäne verantwortlich, wer berichtet an die Geschäftsführung? Drittens die Prozesse: Wie werden Verstösse erkannt, dokumentiert, behoben, eskaliert? Viertens die technische Umsetzung: Welche Tools (Consent Management, Logging, Audit Trails) sichern die Compliance? Fünftens die Governance: Welche Berichtswege, Audits und Schulungen erhalten den Standard? Diese fünf Bausteine ergeben eine Compliance-Architektur, die nicht reagiert, sondern steuert — und damit Bussgeldrisiken, Reputationsschäden und Marktverbote aktiv vermeidet.",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Dimensionen sollte ein reifes Plattform-Risiko-Register bewerten?",
-        "typ": "multi",
-        "optionen": [
-          "Eintrittswahrscheinlichkeit innerhalb eines definierten Zeithorizonts",
-          "Auswirkung inkl. finanzieller, rechtlicher, operativer und reputativer Folgen",
-          "Steuerbarkeit durch eigene Maßnahmen",
-          "Sympathiewert der beteiligten Mitarbeiter",
-          "Regelmäßige Aktualisierung bei Markt- oder Regulierungsänderungen"
+        "frage": "Ordnen Sie die Compliance-Bausteine ihrer typischen Funktion zu:",
+        "typ": "zuordnung",
+        "paare": [
+          { "links": "Risikoinventar", "rechts": "Identifikation regulatorischer Risiken aus dem Geschäftsmodell" },
+          { "links": "Verantwortlichkeiten", "rechts": "Zuordnung von Domänen zu Rollen und Berichtswegen" },
+          { "links": "Prozesse", "rechts": "Erkennung, Dokumentation, Behebung und Eskalation von Verstössen" },
+          { "links": "Technische Umsetzung", "rechts": "Consent Management, Logging, Audit Trails" },
+          { "links": "Governance", "rechts": "Berichtswege, Audits, Schulungen, Kontinuität" }
         ],
-        "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Wahrscheinlichkeit, Auswirkung, Steuerbarkeit und Aktualisierung sind die etablierten Dimensionen. Sympathiewerte sind subjektiv und für Risikobewertung irrelevant — sie würden die Analyse politisieren und verzerren."
+        "erklaerung": "Die fünf Bausteine ergeben eine integrierte Compliance-Architektur. Wer einzelne Felder vernachlässigt — typischerweise Governance oder Prozesse — bekommt rasch operative Lücken und regulatorische Risiken."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "Compliance als Wettbewerbsvorteil — nicht als Bürokratie",
-      "youtube_id": "",
-      "youtube_query": "compliance wettbewerbsvorteil plattform vertrauen deutsch",
-      "dauer_min": 7,
+      "titel": "Wettbewerbsrecht und unlauterer Wettbewerb (UWG) für Online-Anbieter",
+      "youtube_id": "yap-ugi7XAU",
+      "youtube_query": "uwg unlauterer wettbewerb erklärt deutsch online",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussage über Compliance auf Plattformmärkten ist korrekt?",
-        "typ": "single",
+        "frage": "Welche Anforderungen ergeben sich aus dem UWG für Werbung und Vermarktung im Online-Vertrieb?",
+        "typ": "multi",
         "optionen": [
-          "Compliance ist immer nur Kostenfaktor und sollte minimiert werden",
-          "Compliance ist auf Plattformmärkten Teil der Wettbewerbsstrategie — sie schafft Vertrauen, schützt vor regulatorischen Risiken und differenziert von schwächer geführten Wettbewerbern",
-          "Compliance ist nur für Großunternehmen relevant",
-          "Compliance bremst Wachstum immer"
+          "Werbung muss als solche klar erkennbar sein",
+          "Irreführende oder verschleierte kommerzielle Kommunikation ist unzulässig",
+          "Influencer-Kooperationen müssen kenntlich gemacht werden",
+          "Werbung ist nur in deutscher Sprache zulässig",
+          "Aggressive Geschäftspraktiken wie unangemessener Druck sind verboten"
         ],
-        "korrekt": 1,
-        "erklaerung": "Auf Plattformmärkten ist Vertrauen die wichtigste Währung — Compliance ist eines der wirksamsten Vertrauens-Instrumente. Plattformen mit klaren Regeln, transparenter Governance und sauberer Datenschutzpraxis gewinnen langfristig Anbieter und Kunden, während compliancefreie Wettbewerber irgendwann an Reputations- oder Regulierungskrisen scheitern."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Erkennbarkeit, Verbot von Irreführung, Kennzeichnungspflicht bei Influencer-Werbung und Verbot aggressiver Praktiken sind UWG-Kernpflichten. Eine Sprachvorschrift gehört nicht ins UWG, kann aber aus Verbraucherschutzrecht folgen."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Wettbewerbspositionierung jenseits des Preises",
-      "inhalt": "Eine Plattform, die sich allein über Preis positioniert, wird austauschbar und gerät in Preiskriege, die typischerweise gewinnen, wer das größte Kapital hat — selten der ursprüngliche Innovator. Sechs alternative Positionierungsoptionen sind etabliert. Qualitätsanbieter — strenge Anbieter-Prüfung, geprüfte Produktdaten, transparente Bewertungen. Nischenführer — Fokus auf eine spezifische Branche, Anwendung oder Region mit überlegener Tiefe. Serviceführer — herausragende Service-Level, Reaktionszeiten, Beschwerdebearbeitung. Vertrauensplattform — explizite Positionierung über Compliance, Datenschutz, faire Regeln. Daten- und Prozessspezialist — überlegene Reporting-, Analyse- und Integrationsmöglichkeiten für anspruchsvolle Kunden. Ökosystemanbieter — tiefere Integration mit Partnern, Tools und ergänzenden Diensten. Wichtig: Eine glaubwürdige Positionierung erfordert konsistente Investition über alle Plattform-Bausteine hinweg. Wer sich als Qualitätsanbieter positioniert, aber im Onboarding billig prüft, verliert glaubwürdigkeit schnell. Reife Plattformführung wählt eine oder zwei Positionierungs-Achsen bewusst und priorisiert konsequent dorthin — auch gegen kurzfristigen Wachstumsdruck.",
-      "dauer_min": 6,
+      "titel": "Senior-Level-Frage: Compliance als Wettbewerbsvorteil",
+      "inhalt": "Auf Senior-Level ist Compliance kein Kostenfaktor, sondern ein Wettbewerbsvorteil. Drei Argumente tragen diese Sicht. Erstens reduziert eine belastbare Compliance-Architektur die Wahrscheinlichkeit empfindlicher Bussgelder — der DSA erlaubt bis zu 6 Prozent des globalen Jahresumsatzes, der DMA bis zu 10 Prozent. Zweitens schafft Compliance Vertrauen bei Geschäftspartnern, Investoren und Plattformbetreibern — gerade in B2B-Beziehungen ist Auditierbarkeit ein Vorvertragsthema. Drittens öffnet Compliance neue Marktzugänge: Wer DSGVO-Konformität, ISO 27001 und branchenspezifische Standards belegen kann, gewinnt Ausschreibungen, die anderen verschlossen bleiben. Senior-Level-Denken verbindet damit Risiko und Chance — Compliance ist nicht das Gegenteil von Geschäft, sondern dessen rechtliche Architektur.",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Wettbewerbs-Positionierungen jenseits des reinen Preises sind für Plattformen langfristig tragfähig?",
-        "typ": "multi",
-        "optionen": [
-          "Qualitätsanbieter mit strenger Anbieter-Prüfung",
-          "Nischenführer mit spezifischer Branchen- oder Regional-Tiefe",
-          "Vertrauensplattform mit explizit hoher Compliance und Transparenz",
-          "Daten- und Prozessspezialist mit überlegener Integration und Reporting",
-          "Reine Preisführerschaft als alleinige Differenzierung"
-        ],
-        "korrekt": [0, 1, 2, 3],
-        "erklaerung": "Qualität, Nische, Vertrauen und Daten/Prozess sind nachhaltige Positionierungs-Achsen. Reine Preisführerschaft ist dagegen meist nicht dauerhaft verteidigungsfähig — sie wird vom kapitalstärksten Akteur übernommen und führt zur Austauschbarkeit."
+        "frage": "Sie sind General Counsel einer mittelständischen B2B-Plattform für Industriebauteile mit 800 Anbietern und Kunden in Deutschland, Österreich und Frankreich. Die Geschäftsführung plant einen DACH-weiten Markteintritt mit Schwerpunkt auf Grosskunden. Skizzieren Sie in drei bis fünf Absätzen, welche Compliance-Architektur Sie etablieren, welche regulatorischen Risiken Sie priorisieren und welche kostspielige, aber strategisch unverhältnismässige Maßnahme Sie bewusst nicht durchführen.",
+        "typ": "text",
+        "musterloesung": "Die Diagnose: Eine B2B-Plattform mit Grosskunden im DACH-Raum bewegt sich in einem Mehrebenen-Regelwerk aus DSGVO, DSA, UWG, AGB-Recht, Lieferketten-Sorgfaltspflicht, branchenspezifischen Normen und Wettbewerbsrecht. Compliance ist hier nicht Anhang, sondern Marktzugangsvoraussetzung.\n\nAls General Counsel würde ich erstens ein Risikoinventar aufbauen, das die regulatorischen Risiken nach Eintrittswahrscheinlichkeit und Schadenshöhe bewertet. Schwerpunkte: Datenschutz (DSGVO), Plattformpflichten (DSA, eventuell DMA bei Wachstum), Wettbewerbsrecht (UWG, GWB), Vertragsrecht (AGB, B2B-Klauseln), Steuerrecht (Umsatzsteuer, OSS) und Verbraucher- beziehungsweise Geschäftskundenschutz.\n\nZweitens würde ich klare Verantwortlichkeiten etablieren: ein Datenschutzbeauftragter, ein Compliance-Officer mit direkter Berichtslinie zur Geschäftsführung, ein Compliance-Komitee mit Vertretern aus Vertrieb, Technik, Service und Geschäftsführung. Schulungspflichten für Mitarbeitende, regelmäßige Audits.\n\nDrittens würde ich die technische Architektur mit Consent-Management-Plattform, Audit-Trails für Plattform-Transaktionen, automatischer Logging-Infrastruktur und einem Meldesystem für regulatorische Vorfälle ausstatten. Diese Investitionen senken sowohl Bussgeldrisiken als auch operative Compliance-Kosten langfristig.\n\nDie bewusste Nicht-Maßnahme: Ich würde nicht eigene Compliance-Strukturen für jede Landesgesellschaft aufbauen. Eine zentrale Compliance-Architektur mit lokalen Ergänzungen (deutsche AGB-Spezifika, französische Sprachpflichten, österreichische Sondervorschriften) ist effizienter und konsistenter. Eine vollständige Dezentralisierung wäre kostspielig, koordinationsintensiv und würde widersprüchliche Standards riskieren. Compliance gewinnt durch zentrale Steuerung, nicht durch redundante Strukturen.",
+        "erklaerung": "Die Musterlösung verbindet Risikoinventar, Rollen, Technik und bewusste Architekturentscheidung. Sie zeigt, wie Compliance vom Kostenfaktor zum Marktzugangs- und Wettbewerbshebel wird."
       }
     },
     {
       "nr": 7,
-      "typ": "text",
-      "titel": "Expansion erst nach Governance-Stabilisierung",
-      "inhalt": "Eine der schwersten Entscheidungen im Plattform-Management ist die bewusste Verzögerung einer Expansion. Wenn Geschäftsführung und Investoren auf Wachstum drücken, fällt es schwer zu sagen: Wir warten — wir bauen erst die Governance auf. Die Begründung ist aber strukturell: Wer mit schwacher Governance expandiert, multipliziert seine Schwächen — und Compliance-Probleme, Anbieterbeschwerden, Bewertungsmanipulation oder Vertragsfragen wachsen exponentiell mit der Plattformgröße. Eine Plattform mit zweitausend Anbietern und unklarer Rankinglogik kann das vielleicht durch persönliche Kommunikation kompensieren. Bei zwanzigtausend Anbietern in fünf Ländern ist das nicht mehr möglich — und dieselbe schwache Governance erzeugt Krisen, die teurer sind als die vorgezogene Stabilisierung gewesen wäre. Reife Plattform-Strategie wählt daher oft eine schrittweise Expansion: erst Pilotmarkt mit beschleunigten Governance-Maßnahmen, dann Validierung der Wirksamkeit, dann Skalierung. Das Risiko, Marktchancen zu verlieren, wird durch fokussiertes Vorgehen reduziert — selten verliert ein Markt sich vollständig in 12 Monaten, oft aber verspielt sich eine Plattform durch übereilte Expansion mit unzureichender Steuerungsarchitektur.",
-      "dauer_min": 5,
+      "typ": "video",
+      "titel": "Onlineshop rechtssicher aufstellen — AGB, Datenschutz, Impressum",
+      "youtube_id": "jPPd8LsM2p8",
+      "youtube_query": "onlineshop rechtssicher rechtstexte agb impressum",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Wann ist die bewusste Verzögerung einer Plattform-Expansion strategisch begründet?",
+        "frage": "Welche Pflichtelemente gehören zu einem rechtssicheren Online-Vertriebsangebot in Deutschland?",
         "typ": "multi",
         "optionen": [
-          "Wenn Governance-Strukturen für Anbieter-Qualität, Ranking-Transparenz oder Bewertungsmanagement noch nicht stabil sind",
-          "Wenn Vertragsrollen und AGB im Heimatmarkt noch uneinheitlich sind",
-          "Wenn die Geschäftsführung Wachstum fordert und Wettbewerber expandieren",
-          "Wenn Compliance-Verantwortlichkeiten im Unternehmen noch ungeklärt sind"
+          "Impressum nach Telemediengesetz",
+          "Datenschutzerklärung nach DSGVO mit klaren Informationspflichten",
+          "Allgemeine Geschäftsbedingungen für die Vertragsabwicklung",
+          "Widerrufsbelehrung im B2C-Bereich",
+          "Verpflichtende staatliche Vorabprüfung jedes Angebots"
         ],
-        "korrekt": [0, 1, 3],
-        "erklaerung": "Schwache Governance, unklare Verträge und ungeklärte Compliance-Verantwortung sind echte Verzögerungs-Gründe. Externer Druck allein ist kein Grund — er ist ein Argument, das überprüft werden muss, nicht ein automatisches Skalierungssignal."
+        "korrekt": [0, 1, 2, 3],
+        "erklaerung": "Impressum, Datenschutzerklärung, AGB und Widerrufsbelehrung sind klassische Pflichtelemente. Eine staatliche Vorabprüfung jedes Angebots ist im deutschen Recht nicht vorgesehen — die Verantwortung liegt beim Anbieter."
       }
     }
   ]

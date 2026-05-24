@@ -1,147 +1,139 @@
 {
   "kurs_id": "22_Bo_143",
   "tag_nr": 14,
-  "titel": "Chatbots, Conversational Commerce und digitale Vertriebstools verantwortlich einführen",
+  "titel": "Chatbots, Conversational Commerce und digitale Vertriebstools im Einsatz",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Chatbot-Typen — regelbasiert, KI-gestützt, hybrid",
-      "youtube_id": "",
-      "youtube_query": "chatbot typen regelbasiert ki hybrid unterschied deutsch",
-      "dauer_min": 7,
+      "titel": "Chatbots einfach erklärt — Grundlagen automatisierter Kundeninteraktion",
+      "youtube_id": "3ya1k29C3bA",
+      "youtube_query": "chatbot einfach erklärt funktionsweise deutsch",
+      "dauer_min": 5,
       "aufgabe": {
-        "frage": "Welcher Chatbot-Typ ist für eine erste B2B-Einführung mit klaren FAQ und Leadqualifizierung typischerweise am sinnvollsten?",
+        "frage": "Welche Aussage trifft die Funktion von Chatbots im Vertrieb am genauesten?",
         "typ": "single",
         "optionen": [
-          "Reiner KI-Bot ohne definierte Dialogpfade",
-          "Hybrider Ansatz: regelbasiert für Standardfragen und Qualifizierung, KI-gestützt für freie Sprache und Übergabe an Menschen bei komplexen Anfragen",
-          "Vollautomatischer Verkaufs-Bot, der ohne menschliches Eingreifen Abschlüsse erzeugt",
-          "Manueller Live-Chat ohne jede Automatisierung"
+          "Chatbots ersetzen vollständig den menschlichen Vertrieb",
+          "Chatbots übernehmen wiederkehrende, regelbasierte oder einfache wissensbasierte Kundeninteraktionen und entlasten Vertrieb und Service",
+          "Chatbots sind ausschliesslich Marketingspielereien ohne Geschäftsnutzen",
+          "Chatbots können nur einfache FAQ beantworten, aber keine Daten erfassen"
         ],
         "korrekt": 1,
-        "erklaerung": "Reine KI-Bots können bei B2B-Themen schnell falsche Antworten geben — was Vertrauen beschädigt. Reine Regel-Bots wirken stur, wenn Kunden andere Formulierungen wählen. Der hybride Ansatz kombiniert Verlässlichkeit (regelbasiert für Standardabläufe) mit Flexibilität (KI für freie Sprache) und klarer menschlicher Eskalation."
+        "erklaerung": "Chatbots haben einen klaren ökonomischen Nutzen: Sie skalieren Kundeninteraktion 24/7, qualifizieren erste Anfragen, beantworten Standardfragen und sammeln strukturierte Daten. Komplexe Beratung bleibt beim Menschen — das ist keine Schwäche, sondern die richtige Arbeitsteilung."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Einsatzfelder von Chatbots im Vertrieb",
-      "inhalt": "Chatbots entfalten ihren Wert in zehn Einsatzfeldern — alle gemeinsam, oder mehrere kombiniert. Erstinformation (Standardfragen zu Produkten, Preisen, Funktionen), Produktberatung (Konfiguration, Vergleich), Leadqualifizierung (Erfassung von Bedarf, Unternehmensgröße, Rolle), Terminbuchung (direkter Übergang zum Beratungs- oder Demo-Termin), FAQ (häufige Kundenfragen automatisiert), Angebotsvorbereitung (Erfassung von Spezifikationen), Statusabfragen (Bestellungen, Lieferungen, Tickets), Produktempfehlungen (basierend auf Interesse oder Verhalten), After-Sales-Service (häufige Servicefragen) und Reaktivierung (inaktive Kunden ansprechen). Jedes Einsatzfeld hat unterschiedliche Anforderungen an Komplexität und Risiko. Erstinformation und FAQ sind risikoarm und meist sofort sinnvoll. Produktberatung und Leadqualifizierung sind mittelkomplex, brauchen klare Dialogpfade. Vollautomatische Abschlüsse sind risikoreich und sollten nur bei klar standardisierten, niedrigkomplexen Produkten erwogen werden. Wer alles gleichzeitig automatisiert, scheitert meist an Qualität — gestufte Einführung ist die etablierte Praxis.",
+      "titel": "Conversational Commerce: Vertrieb über Messenger-Kanäle",
+      "inhalt": "Conversational Commerce bezeichnet Vertriebsinteraktionen über dialogorientierte Kanäle — vor allem WhatsApp Business, Facebook Messenger, Instagram DM und Webchat. Im Unterschied zum klassischen E-Commerce ist die Kommunikation zweiseitig, asynchron und sehr nah am persönlichen Verkaufsgespräch. Drei Use-Cases dominieren. Erstens Produktberatung mit Bot-Mensch-Übergabe: einfache Fragen beantwortet der Bot, komplexe Fälle übernimmt der Verkäufer. Zweitens transaktionale Updates: Bestellbestätigungen, Versandstatus, Wiederbestellungen — mit deutlich höheren Öffnungsraten als E-Mail. Drittens Re-Engagement: Warenkorbabbrecher, abgebrochene Anfragen, Wiederkauf-Trigger. Conversation rates auf WhatsApp liegen oft deutlich über E-Mail — was den Kanal strategisch wertvoll macht, sofern Datenschutz und Einwilligungen sauber geregelt sind.",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Chatbot-Einsatzfelder sind typischerweise risikoarm und gut geeignet für einen ersten Pilot?",
-        "typ": "multi",
-        "optionen": [
-          "FAQ und Erstinformation zu Standardthemen",
-          "Leadqualifizierung mit klar definierten Pflichtfragen",
-          "Vollautomatischer Vertragsabschluss bei komplexen B2B-Produkten",
-          "Terminbuchung mit Kalenderintegration"
+        "frage": "Ordnen Sie die Conversational-Commerce-Anwendungen ihrem typischen Einsatzfeld zu:",
+        "typ": "zuordnung",
+        "paare": [
+          { "links": "Produktberatung mit Bot-Mensch-Übergabe", "rechts": "Erstqualifizierung automatisiert, komplexe Beratung persönlich" },
+          { "links": "Transaktionale Updates", "rechts": "Bestellbestätigung, Versandstatus, Wiederbestellung" },
+          { "links": "Re-Engagement", "rechts": "Warenkorbabbrecher und Wiederkauf-Trigger" },
+          { "links": "Service-Bot", "rechts": "Beantwortung wiederkehrender Standardfragen rund um die Uhr" }
         ],
-        "korrekt": [0, 1, 3],
-        "erklaerung": "FAQ, Leadqualifizierung und Terminbuchung sind risikoarm und in der Praxis bewährt. Vollautomatischer Vertragsabschluss bei komplexen B2B-Produkten ist dagegen hochriskant — Vertragsfehler, falsche Beratung oder rechtliche Probleme schaden mehr als die Effizienzgewinne wert sind."
+        "erklaerung": "Conversational Commerce ist kein Tool, sondern eine Architektur. Jeder Use-Case hat eigene KPIs, Eskalationslogik und Einwilligungsanforderungen. Die Mischung schafft den wirtschaftlichen Hebel."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Bot-zu-Mensch-Übergabe — der erfolgskritische Punkt",
-      "youtube_id": "",
-      "youtube_query": "chatbot eskalation übergabe mensch hand off best practice deutsch",
-      "dauer_min": 7,
+      "titel": "Live-Chat und KI-Widget für Kundenservice und Lead-Gewinnung",
+      "youtube_id": "_mCADLc16yg",
+      "youtube_query": "live chat ki widget kundenservice leads erklärt deutsch",
+      "dauer_min": 9,
       "aufgabe": {
-        "frage": "Wann sollte ein Chatbot zwingend an einen Menschen übergeben?",
+        "frage": "Welche Vorteile bieten gut eingesetzte Chatbots im Vertrieb?",
         "typ": "multi",
         "optionen": [
-          "Bei expliziter Anfrage des Kunden nach persönlichem Kontakt",
-          "Wenn der Bot wiederholt keine passende Antwort findet (typischerweise nach 2-3 fehlgeschlagenen Versuchen)",
-          "Bei emotionalen oder eskalierten Kundenanliegen (Beschwerden, Kündigung, Notfälle)",
-          "Bei rechtlich verbindlichen Aussagen wie Vertragsbedingungen oder Garantien",
-          "Niemals — moderne Bots lösen alles selbst"
+          "Verfügbarkeit rund um die Uhr ohne Personalkostenwachstum",
+          "Strukturierte Datenerfassung im Erstkontakt",
+          "Sofortige Beantwortung von Standardanfragen mit niedriger Latenz",
+          "Vollständige Ersetzung der Vertriebsmitarbeitenden",
+          "Skalierbare Vorqualifizierung von Leads vor der Übergabe an den Vertrieb"
         ],
-        "korrekt": [0, 1, 2, 3],
-        "erklaerung": "Klare Übergabe-Trigger sind erfolgskritisch: explizite Anfrage, Wiederholungs-Failure, Emotionen, rechtliche Aussagen. Ein Bot, der nie übergibt, beschädigt Kundenvertrauen und kann rechtliche Folgen erzeugen — Übergabe ist ein Reife-Merkmal, kein Schwäche-Zeichen."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Chatbots punkten bei 24/7-Verfügbarkeit, Datenerfassung, niedrigen Reaktionszeiten und Vorqualifizierung. Die vollständige Ersetzung des Vertriebs ist weder realistisch noch wünschenswert — komplexe Beratung und Beziehungsaufbau bleiben menschliche Aufgaben."
       }
     },
     {
       "nr": 4,
       "typ": "text",
-      "titel": "Implementierungsphasen digitaler Vertriebstools",
-      "inhalt": "Eine seriöse Tool-Einführung folgt einer zehn-stufigen Logik. Erstens Zieldefinition: Welches konkrete Vertriebsproblem soll das Tool lösen? Zweitens Use-Case-Auswahl: Welche zwei bis drei Use Cases werden priorisiert — nicht alle gleichzeitig. Drittens Prozessdesign: Wie sieht der Idealprozess inkl. Übergaben und Eskalationen aus? Viertens Toolauswahl: Welches konkrete Produkt erfüllt die Anforderungen, welche Integration ist nötig? Fünftens Daten- und Systemintegration: Wie kommt der Lead aus dem Chat ins CRM, welche Kundendaten werden geteilt? Sechstens Pilot: Kleine, kontrollierte Testphase mit definierten Use Cases. Siebtens Rollout: Skalierung nach erfolgreichem Pilot. Achtens Schulung: Vertrieb, Service und Marketing müssen verstehen, was der Bot kann und nicht kann. Neuntens Monitoring: KPIs werden laufend ausgewertet. Zehntens Optimierung: Dialoge werden verfeinert, neue Use Cases werden integriert. Die häufigste Fehlerquelle: Schritte fünf bis acht (Integration, Pilot, Rollout, Schulung) werden übersprungen, weil das Tool ‚einfach‘ wirkt. Genau dort entstehen die meisten Implementierungsschäden.",
-      "dauer_min": 7,
+      "titel": "ROI-Bewertung digitaler Vertriebstools",
+      "inhalt": "Digitale Vertriebstools werden oft mit Featurelisten verkauft, müssen aber wirtschaftlich bewertet werden. Drei Kennzahlenkomplexe sind zentral. Erstens die Effizienzwirkung: gesparte Personalstunden, höhere Bearbeitungsgeschwindigkeit, sinkende Cost-to-Serve. Zweitens die Wirkung auf Conversion und Pipeline: gesteigerte Lead-Qualifizierungsrate, höhere Conversion auf Standardanfragen, schnellere Reaktionszeiten. Drittens die Wirkung auf Kundenbindung und CLV: verbesserte Customer Experience, höhere Net Promoter Score, geringere Abwanderung. Die Tool-Investition wird gegen diese drei Wirkungsdimensionen gerechnet — nicht gegen die Lizenzkosten allein. Ein guter Business Case rechnet Total Cost of Ownership inklusive Implementierung, Schulung, Datenpflege und Change-Management.",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussagen über die Implementierung digitaler Vertriebstools sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Zieldefinition und Use-Case-Auswahl gehen der Toolauswahl voraus",
-          "Pilotphasen sollten übersprungen werden, um Geschwindigkeit zu maximieren",
-          "Daten- und Systemintegration in CRM sind ein häufig unterschätzter Aufwandstreiber",
-          "Schulung von Vertrieb und Service ist Voraussetzung für nachhaltige Wirkung"
+        "frage": "Vervollständigen Sie die drei Wirkungsdimensionen einer wirtschaftlichen Tool-Bewertung:",
+        "typ": "lueckentext",
+        "text": "Eine seriöse ROI-Bewertung digitaler Vertriebstools betrachtet drei Wirkungsdimensionen: {0}wirkung (gesparte Stunden, sinkende Cost-to-Serve), Wirkung auf {1} und Pipeline (Lead-Qualifizierung, Reaktionszeit) und Wirkung auf Kundenbindung sowie {2}. Die Gesamtkostenbetrachtung heisst {3} of Ownership und umfasst neben Lizenzen auch Implementierung, Schulung und Datenpflege.",
+        "luecken": [
+          { "antwort": "Effizienz", "alternativen": ["Produktivitäts"] },
+          { "antwort": "Conversion", "alternativen": ["Conversion-Rate", "Pipeline"] },
+          { "antwort": "CLV", "alternativen": ["Customer Lifetime Value", "Kundenwert", "Lifetime Value"] },
+          { "antwort": "Total Cost", "alternativen": ["TCO", "Total-Cost", "Total"] }
         ],
-        "korrekt": [0, 2, 3],
-        "erklaerung": "Ziele vor Tool, Integration-Komplexität und Schulung sind etablierte Erfolgsfaktoren. Pilotphasen zu überspringen ist dagegen ein klassischer Implementierungsfehler — er erhöht die Wahrscheinlichkeit teurer Korrekturen im Live-Betrieb deutlich."
+        "erklaerung": "Effizienz-, Conversion- und CLV-Wirkung sind die drei Bewertungsdimensionen. Total Cost of Ownership (TCO) verhindert die typische Lizenzkostenfalle bei Tool-Investitionen."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "ROI digitaler Vertriebstools — über Kosteneinsparung hinaus",
-      "youtube_id": "",
-      "youtube_query": "roi chatbot digital sales tools messen deutsch",
-      "dauer_min": 7,
+      "titel": "Wann lohnt sich ein Chatbot für kleine Unternehmen?",
+      "youtube_id": "4ks3RY6lSRQ",
+      "youtube_query": "chatbot kleine unternehmen lohnt sich erklärt",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Wirkungen sollten in einer belastbaren ROI-Rechnung für einen B2B-Chatbot berücksichtigt werden?",
-        "typ": "multi",
+        "frage": "Welche Voraussetzungen sollten erfüllt sein, bevor ein Chatbot produktiv eingesetzt wird?",
+        "typ": "single",
         "optionen": [
-          "Eingesparte Arbeitszeit im Innendienst",
-          "Zusätzlich generierte qualifizierte Leads durch 24/7-Verfügbarkeit",
-          "Höhere Conversion durch schnellere Reaktionszeit",
-          "Auswirkung auf Kundenzufriedenheit und Bewertungen",
-          "Ausschließlich die Lizenzkosten des Bots"
+          "Möglichst hohe Investitionssumme von Anfang an",
+          "Klar definierte Use-Cases, gepflegte Wissensbasis und klare Eskalationslogik zum menschlichen Mitarbeiter",
+          "Vollständiger Ersatz aller bestehenden Kommunikationskanäle",
+          "Mehrsprachigkeit in allen Weltsprachen"
         ],
-        "korrekt": [0, 1, 2, 3],
-        "erklaerung": "Eine reife ROI-Rechnung berücksichtigt Zeitersparnis, Lead-Volumen, Conversion, Kundenzufriedenheit und Umsatzbeitrag — sowie selbstverständlich auch die Kosten. Wer nur Lizenzkosten betrachtet, sieht die Hälfte des Bildes."
+        "korrekt": 1,
+        "erklaerung": "Chatbots scheitern, wenn Use-Case, Wissensbasis und Eskalation unklar sind. Das ist eine Architekturfrage, keine Budgetfrage. Mehrsprachigkeit und Investitionshöhe sind nachgelagert."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Welche Interaktionen bleiben bewusst menschlich",
-      "inhalt": "Eine zentrale Senior-Level-Entscheidung im Conversational Commerce lautet: Welche Kundeninteraktionen werden bewusst nicht automatisiert? Vier Kategorien sind in der Praxis etabliert. Erstens vertrauenssensible Erstgespräche — der Erstkontakt mit einem hochwertigen B2B-Lead prägt die gesamte Beziehung; ein schlechter Bot-Eindruck ist dauerhaft schwer zu korrigieren. Zweitens komplexe Beratung mit hohem Erklärungsbedarf — bei erklärungsbedürftigen Produkten erzeugen automatisierte Beratungen falsche Erwartungen, die später zu schlechten Bewertungen, Retouren oder Vertrauensverlust führen. Drittens emotionale oder eskalierende Situationen — Beschwerden, Kündigungen, Notfälle brauchen menschliche Empathie und Entscheidungskompetenz; ein Bot, der hier antwortet, beschädigt die Beziehung. Viertens rechtlich verbindliche Aussagen — Vertragsbedingungen, Garantien, Datenschutz; falsche Auskunft kann rechtliche Folgen haben. In all diesen Fällen ist die bewusste menschliche Interaktion kein Defizit der Automatisierung, sondern eine strategische Entscheidung, die langfristiges Vertrauen und Markenwirkung schützt.",
-      "dauer_min": 6,
+      "titel": "Senior-Level-Frage: Conversational Commerce als Architekturentscheidung",
+      "inhalt": "Conversational Commerce ist auf Senior-Level keine Tool-Frage, sondern eine Architekturentscheidung. Vier Felder sind zu klären. Erstens Use-Case-Selektion: Welche Kundeninteraktionen werden automatisiert, welche bleiben menschlich? Zweitens Daten- und Einwilligungslogik: Welche Daten dürfen erhoben werden, wie wird DSGVO-konform Opt-In eingeholt? Drittens Eskalation und Übergabe: Wann übernimmt ein Mensch, mit welchen Kontextinformationen? Viertens Kundenerlebnis und Markenführung: Wirkt der Bot wie eine Erweiterung der Marke oder wie eine billige Abschiebemaschine? Wer diese vier Felder klärt, bekommt ein Conversational-System, das Effizienz, Conversion und Markenwert gleichermassen unterstützt. Wer sie übergeht, bekommt ein teures Tool ohne Wirkung.",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Kundeninteraktionen sollten bewusst menschlich bleiben — auch in einer hoch automatisierten Vertriebsorganisation?",
-        "typ": "multi",
-        "optionen": [
-          "Vertrauenssensible Erstgespräche mit hochwertigen B2B-Leads",
-          "Komplexe Beratung bei stark erklärungsbedürftigen Produkten",
-          "Standardfragen zu Lieferzeiten und Öffnungszeiten",
-          "Emotionale oder eskalierte Kundenanliegen wie Beschwerden",
-          "Rechtlich verbindliche Aussagen zu Vertragsbedingungen"
-        ],
-        "korrekt": [0, 1, 3, 4],
-        "erklaerung": "Erstgespräche, komplexe Beratung, Emotionen und rechtliche Aussagen sind die etablierten Stellen bewusster menschlicher Interaktion. Standardfragen zu Lieferzeiten sind dagegen klassische Bot-Stärken — sie zu automatisieren entlastet das Team und bedient den Kunden schnell."
+        "frage": "Sie sind Head of Digital Sales eines Modehändlers mit 250 Filialen und einem starken Onlineshop. Die Geschäftsführung will Conversational Commerce über WhatsApp und Website-Chatbot einführen. Skizzieren Sie in drei bis fünf Absätzen, welche Architektur Sie etablieren, welche Use-Cases Sie priorisieren und welche Maßnahme Sie bewusst nicht durchführen.",
+        "typ": "text",
+        "musterloesung": "Die Diagnose ist klar: Conversational Commerce kann im Modehandel ein enormer Hebel sein — gerade bei Beratung, Wiederkauf und Re-Engagement. Voraussetzung ist eine Architektur, die nicht aus Tool-Spielereien besteht, sondern aus klar definierten Use-Cases und sauberer Eskalation.\n\nDie drei priorisierten Use-Cases wären erstens transaktionale Updates über WhatsApp (Bestellbestätigung, Versandstatus, Rückgabe-Etikett) — schnell umsetzbar, hohe Öffnungsraten, klarer Service-Mehrwert. Zweitens Re-Engagement für Warenkorbabbrecher über WhatsApp Opt-In im Checkout — direkte Wirkung auf Conversion und Umsatz. Drittens ein Website-Chatbot für Standardfragen zu Grössen, Verfügbarkeit, Filialen und Retoure — mit klarer Eskalation zum Service-Team bei Beratungsbedarf.\n\nDie Architektur muss vier Bedingungen erfüllen. Saubere Datenflüsse zwischen Bot, CRM und Shop. DSGVO-konforme Opt-In-Logik im Checkout. Eskalation zu menschlichen Mitarbeitenden mit vollständigem Kontextübergang. Markenkonforme Tonalität, die den Bot wie eine Erweiterung des Filialservice wirken lässt, nicht wie eine billige Abschiebung.\n\nDie KPI-Architektur umfasst Conversion-Rate auf Bot-Touchpoints, Eskalationsquote, Customer Satisfaction Score, Wiederkaufrate aus WhatsApp-Kampagnen und Cost-to-Serve pro Standardanfrage. Daraus lässt sich der ROI der Tool-Investition belastbar herleiten.\n\nDie bewusste Nicht-Maßnahme: Ich würde keine vollautomatischen Beratungsdialoge ohne menschliche Eskalation einführen — auch nicht für komplexe Produkte oder hochwertige Designerstücke. Das Risiko schlechter Kaufentscheidungen, Retourenwellen und Markenschäden ist zu hoch. Bot übernimmt Routine, Mensch übernimmt Vertrauen und Beratung. Diese Arbeitsteilung ist der ökonomische Kern erfolgreicher Conversational-Commerce-Architektur.",
+        "erklaerung": "Senior-Level-Conversational-Commerce ist eine Architekturentscheidung mit klaren Use-Cases, Eskalationslogik und bewusster Nicht-Automatisierung. Die Musterlösung integriert KPI, DSGVO, Markenführung und ökonomischen Hebel."
       }
     },
     {
       "nr": 7,
-      "typ": "text",
-      "titel": "Governance digitaler Vertriebstools — Inhalte, Datenschutz, Verantwortung",
-      "inhalt": "Chatbots und digitale Vertriebstools brauchen klare Governance, um nicht zur Reputations- und Rechtsfalle zu werden. Sechs Governance-Bausteine sind etabliert. Erstens Inhaltsverantwortung: Wer schreibt die Bot-Antworten, wer prüft sie, wer aktualisiert sie bei Produktänderungen? Zweitens Datenschutz: Welche Daten erfasst der Bot, wie werden sie gespeichert, wie wird Einwilligung dokumentiert? Drittens Qualitätssicherung: Wie wird regelmäßig geprüft, ob Bot-Antworten noch korrekt und aktuell sind? Viertens Eskalation: Was passiert bei falschen Bot-Antworten oder Kundenbeschwerden — wer entscheidet, was zurückgenommen oder korrigiert wird? Fünftens Audit-Logik: Welche Bot-Interaktionen werden protokolliert, wer hat Zugriff auf diese Protokolle? Sechstens Rollenklarheit: Wer ist Bot-Owner (verantwortlich für Inhalte), wer Tech-Owner (verantwortlich für Betrieb), wer Compliance-Owner (verantwortlich für Datenschutz und rechtliche Konformität)? Ohne diese Governance entstehen schnell Lücken — entweder werden Bot-Antworten nie aktualisiert, oder niemand kennt die rechtliche Verantwortung, oder Kundenbeschwerden landen im Niemandsland.",
-      "dauer_min": 5,
+      "typ": "video",
+      "titel": "KI-Chatbot für den Kundenservice — Schritt-für-Schritt",
+      "youtube_id": "0beblzCWAF8",
+      "youtube_query": "ki chatbot kundenservice openai erstellen tutorial",
+      "dauer_min": 10,
       "aufgabe": {
-        "frage": "Welche Governance-Bausteine sollten beim Betrieb eines Vertriebs-Chatbots eingerichtet sein?",
+        "frage": "Welche Zielkonflikte muss eine verantwortungsvolle Chatbot-Architektur aktiv managen?",
         "typ": "multi",
         "optionen": [
-          "Klare Inhaltsverantwortung mit definierter Prüf- und Aktualisierungsroutine",
-          "Datenschutz-Konzept mit Einwilligungs- und Speicherregeln",
-          "Eskalations- und Korrekturprozess bei falschen Bot-Antworten",
-          "Möglichst lockere Verantwortlichkeit, damit alle Beteiligten flexibel handeln können",
-          "Rollenklare Trennung von Bot-Owner, Tech-Owner und Compliance-Owner"
+          "Automatisierung versus Kundenerlebnis",
+          "Datenqualität versus Datenschutz und Einwilligungslogik",
+          "Maximale Skalierung ohne Rücksicht auf Markenführung",
+          "Tool-Kosten versus messbarer ROI",
+          "Akzeptanz im Service-Team versus Effizienzgewinne"
         ],
-        "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Inhaltsverantwortung, Datenschutz, Eskalation und Rollentrennung sind notwendige Governance-Elemente. Lockere Verantwortlichkeit ist dagegen Gift — bei Problemen weiß niemand, wer entscheidet, und Reputationsschäden eskalieren ungesteuert."
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Automatisierung vs. CX, Datenqualität vs. Datenschutz, Kosten vs. ROI und Akzeptanz vs. Effizienz sind die zentralen Zielkonflikte. Maximale Skalierung ohne Markenführung ist keine Zielkonflikt-Abwägung, sondern eine Fehlentscheidung."
       }
     }
   ]

@@ -1,144 +1,140 @@
 {
   "kurs_id": "22_Bo_143",
   "tag_nr": 12,
-  "titel": "Revenue Streams optimieren, Multi-Channel skalieren und Wachstum steuern",
+  "titel": "Revenue Streams, Multi-Channel-Architektur und Skalierung von Plattformgeschäften",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Revenue Streams strategisch klassifizieren — primär, sekundär, strategisch",
-      "youtube_id": "",
-      "youtube_query": "revenue streams diversifikation plattform deutsch erklärt",
-      "dauer_min": 7,
+      "titel": "Revenue Streams im Business Model Canvas",
+      "youtube_id": "Sz9AIi8RMHQ",
+      "youtube_query": "revenue streams business model canvas erklärt",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Was unterscheidet ‚strategische‘ Revenue Streams von ‚primären‘ Einnahmequellen?",
+        "frage": "Welche Definition trifft den Begriff Revenue Stream am genauesten?",
         "typ": "single",
         "optionen": [
-          "Strategische Streams sind immer profitabler",
-          "Primäre Streams tragen den Hauptumsatz; strategische Streams sind oft kleiner, sichern aber zukünftige Wettbewerbsfähigkeit, Datenvorsprung oder Differenzierung",
-          "Strategische Streams sind dasselbe wie primäre",
-          "Strategische Streams sind ausschließlich Werbeumsätze"
+          "Revenue Stream beschreibt die Vertriebskanäle des Unternehmens",
+          "Revenue Stream bezeichnet einen Cashflow, den ein Unternehmen aus einem bestimmten Kundensegment erzielt",
+          "Revenue Stream meint die Marketingausgaben für ein Produkt",
+          "Revenue Stream beschreibt die Lieferantenkette"
         ],
         "korrekt": 1,
-        "erklaerung": "Primäre Streams sichern aktuelle Liquidität, strategische Streams sichern Zukunftsfähigkeit. Beispiel: Eine Plattform lebt heute von Provisionen (primär), baut aber Datenservices auf (strategisch) — letztere sind heute klein, schaffen aber langfristig Differenzierung. Beide Kategorien brauchen unterschiedliche Steuerungsformen."
+        "erklaerung": "Revenue Streams sind die Einnahmequellen pro Kundensegment. Ein Unternehmen kann mehrere Revenue Streams parallel betreiben — zum Beispiel Einmalverkäufe, Subscriptions, Provisionen, Lizenzgebühren oder Werbung."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Diversifikation — Chancen und Risiken im Gleichgewicht",
-      "inhalt": "Diversifikation der Revenue Streams reduziert Abhängigkeiten und erhöht Resilienz — wird aber oft als pauschal ‚gut‘ überschätzt. Vier Vorteile sind real: geringere Abhängigkeit von einer einzelnen Erlösquelle, bessere Kundenausschöpfung über verschiedene Bedürfnisstufen, höhere Resilienz gegen Marktschocks (wenn eine Quelle einbricht, tragen andere) und mehr Skalierungsoptionen. Vier Risiken sind ebenso real: Komplexität (jeder zusätzliche Stream braucht Steuerung, Reporting, Verantwortung), Kannibalisierung (Streams konkurrieren um dieselben Kunden), unklare Verantwortlichkeiten (wer ist für welchen Stream verantwortlich?) und Steuerungsverlust (zu viele KPIs ohne klare Priorisierung). Die Faustregel: Pro Stream muss eine klare Wertschöpfungslogik, eine zuständige Person und ein messbarer Beitrag definiert sein — sonst wird Diversifikation zur Verwässerung. Reife Plattformführung diversifiziert bewusst und begrenzt — meist drei bis fünf aktiv gesteuerte Streams, statt zehn schlecht gepflegte.",
-      "dauer_min": 6,
+      "titel": "Multi-Channel-Architektur: vom Kanal-Mix zur Ertragslogik",
+      "inhalt": "Multi-Channel bedeutet nicht, möglichst viele Kanäle zu bedienen, sondern Kanäle bewusst in einer Ertragsarchitektur zu verbinden. Drei Strukturentscheidungen sind zentral. Erstens die Rolle jedes Kanals: Akquisition (neue Kunden), Conversion (Kaufabschluss), Retention (Wiederkauf) oder Service. Zweitens die Datenflüsse zwischen Kanälen: Ein im Webshop gesammelter Kontakt sollte im CRM erscheinen, ein Beratungsgespräch in der Filiale sollte digital nachverfolgbar sein. Drittens die Marge je Kanal: Eigene Kanäle haben höhere Margen, aber geringere Reichweite. Plattformen erzeugen schnell Volumen, kosten aber Provision, Datenzugang und Markenkontrolle. Eine gute Architektur verteilt Lasten und Hebel so, dass keine einzelne Kanalkrise das Geschäftsmodell sprengt.",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Aussagen über Diversifikation von Revenue Streams sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Diversifikation reduziert Abhängigkeit und erhöht Resilienz",
-          "Jeder zusätzliche Stream bringt automatisch Vorteile, ohne Komplexitätskosten",
-          "Pro Stream sind klare Wertschöpfungslogik, Verantwortung und Messbarkeit nötig",
-          "Kannibalisierungseffekte zwischen Streams müssen aktiv gemanagt werden"
+        "frage": "Ordnen Sie die Kanäle ihrer typischen Rolle in einer Multi-Channel-Architektur zu:",
+        "typ": "zuordnung",
+        "paare": [
+          { "links": "Google Ads", "rechts": "Akquisition über akute Suchanfragen" },
+          { "links": "Eigener Webshop", "rechts": "Conversion mit voller Margenkontrolle" },
+          { "links": "Marktplatz", "rechts": "Reichweite und Volumen gegen Provision" },
+          { "links": "Kundenservice und CRM", "rechts": "Retention und Wiederkauf" },
+          { "links": "Affiliate-Netzwerk", "rechts": "Erfolgsbasierte Akquisitionserweiterung" }
         ],
-        "korrekt": [0, 2, 3],
-        "erklaerung": "Resilienzvorteil, klare Verantwortung und Kannibalisierungs-Management sind etablierte Diversifikations-Prinzipien. Option 2 ist falsch: Jeder zusätzliche Stream erzeugt Komplexität — Diversifikation ist nur dann vorteilhaft, wenn der Komplexitätsanstieg durch klare Steuerung kompensiert wird."
+        "erklaerung": "Jeder Kanal hat eine andere ökonomische Rolle. Wer alle Kanäle gleich behandelt, optimiert keinen. Eine saubere Architektur weist jedem Kanal eine Funktion zu — Akquisition, Conversion, Retention oder Reichweite."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Multi-Channel-Vertrieb — eigene Plattform, Direktvertrieb, Partner",
-      "youtube_id": "",
-      "youtube_query": "multi channel vertrieb b2b strategie kombination deutsch",
-      "dauer_min": 7,
+      "titel": "Skalierung von Wachstumsunternehmen — strategische Hebel",
+      "youtube_id": "eXjpapyKxYA",
+      "youtube_query": "skalierung wachstum unternehmen wie steuern",
+      "dauer_min": 12,
       "aufgabe": {
-        "frage": "Welche Aussage über Multi-Channel-Vertrieb ist korrekt?",
-        "typ": "single",
+        "frage": "Welche Aussagen über erfolgreiche Skalierung sind zutreffend?",
+        "typ": "multi",
         "optionen": [
-          "Möglichst viele Kanäle parallel führen automatisch zu mehr Umsatz",
-          "Kanäle ergänzen sich am besten, wenn sie unterschiedliche Kundensegmente, Bedürfnisstufen oder geografische Märkte bedienen — ohne sich gegenseitig zu kannibalisieren",
-          "Eigene Kanäle und Partnerkanäle sollten nie gleichzeitig genutzt werden",
-          "Kanal-Auswahl ist eine reine Marketing-Entscheidung"
+          "Skalierung gelingt nur, wenn Umsatz und Kundenbasis schneller wachsen als die Kosten",
+          "Asset-Light-Geschäftsmodelle lassen sich tendenziell leichter skalieren",
+          "Skalierung bedeutet vor allem, möglichst schnell viele Mitarbeitende einzustellen",
+          "Premature Scaling ist eine der häufigsten Ursachen für Startup-Scheitern",
+          "Erfolgreiche Skalierung setzt einen wiederholbaren Vertriebsprozess voraus"
         ],
-        "korrekt": 1,
-        "erklaerung": "Multi-Channel funktioniert, wenn die Kanäle sich ergänzen statt sich zu überlappen. Wenn alle Kanäle dieselbe Zielgruppe ansprechen, kannibalisieren sie sich und erzeugen interne Konflikte (Außendienst vs. Webshop vs. Partner). Klare Segmentierung pro Kanal ist Voraussetzung."
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Skalierung ist nicht Wachstum um jeden Preis. Sie verlangt einen wiederholbaren Vertriebsprozess, asset-light wirtschaftliche Struktur und Disziplin gegen vorzeitige Skalierung. Viele Mitarbeitende einzustellen ist ein Symptom, kein Erfolgsfaktor."
       }
     },
     {
       "nr": 4,
       "typ": "text",
-      "titel": "Conversion-Optimierung versus Mehr-Traffic — wo lohnt sich die Investition?",
-      "inhalt": "Eine der wichtigsten Senior-Level-Entscheidungen in der Revenue-Optimierung lautet: Investiere ich in mehr Traffic — oder in bessere Conversion bei bestehendem Traffic? Die Mathematik spricht meist für Conversion. Beispiel: Eine Plattform mit hunderttausend Besuchern und 1,9 Prozent Conversion erreicht 1900 Abschlüsse. Eine Verbesserung der Conversion auf 2,5 Prozent ergibt bei gleichem Traffic 2500 Abschlüsse — plus 32 Prozent ohne zusätzliche Akquisekosten. Um dieselbe Steigerung über mehr Traffic zu erreichen, müsste die Besucherzahl auf 132.000 wachsen — mit zusätzlichen Marketing-Kosten. Hinzu kommt: Wer Traffic ohne Conversion-Verbesserung skaliert, vergrößert ein leckes Schiff. Praktisch heißt das: Conversion-Engpässe entlang des Funnels (Landing Page, Formular, Vertrauen, Lieferzeitkommunikation, Zahlungsoptionen) zuerst analysieren und beheben, bevor zusätzliche Akquisebudgets freigegeben werden. Drei bis fünf gezielte A/B-Tests können oft mehr Wirkung erzeugen als eine Verdoppelung des Werbebudgets.",
-      "dauer_min": 7,
+      "titel": "Diversifikation: Erlösströme als Resilienzhebel",
+      "inhalt": "Diversifikation der Erlösströme ist nicht ein Wachstumshebel, sondern ein Risikohebel. Ein Unternehmen mit 80 Prozent Umsatz aus einem einzigen Kanal oder einem einzigen Produkt hat eine fragile Ertragsarchitektur. Bricht der Kanal oder das Produkt weg, kollabiert das Geschäftsmodell. Diversifikation entlang dreier Dimensionen erhöht die Resilienz: Kanaldiversifikation (Webshop, Marktplatz, Direkt, Partner), Produktdiversifikation (Kernprodukt, Add-ons, Services, Subscriptions) und Kundensegmentdiversifikation (B2C, B2B, KMU, Enterprise). Wichtig ist die Balance: Zu wenig Diversifikation erzeugt Klumpenrisiken, zu viel verteilt Ressourcen, ohne in einer Dimension stark zu werden. Senior-Level-Steuerung sucht den Punkt maximaler Wirkung bei kontrollierbarer Komplexität.",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Wann ist Conversion-Optimierung typisch wirtschaftlich sinnvoller als zusätzlicher Traffic?",
-        "typ": "multi",
-        "optionen": [
-          "Wenn klare Conversion-Engpässe entlang des Funnels identifizierbar sind",
-          "Wenn das Werbebudget knapp und CAC bereits hoch ist",
-          "Wenn die Plattform bereits sehr hohe Conversion-Raten hat und der Funnel praktisch optimal läuft",
-          "Wenn der Traffic ausreichend ist, aber sehr viele Besucher ohne Conversion abspringen"
+        "frage": "Vervollständigen Sie die drei Dimensionen der Diversifikation:",
+        "typ": "lueckentext",
+        "text": "Eine resiliente Ertragsarchitektur diversifiziert entlang von drei Dimensionen: {0}-Diversifikation (Webshop, Marktplatz, Direkt, Partner), {1}-Diversifikation (Kernprodukt, Add-ons, Subscription, Services) und {2}-Diversifikation (B2C, B2B, KMU, Enterprise). Die wirtschaftliche Gegenkennzahl, die das Klumpenrisiko sichtbar macht, ist die {3}-Quote pro Kanal oder Produkt.",
+        "luecken": [
+          { "antwort": "Kanal", "alternativen": ["Kanal", "Vertriebskanal"] },
+          { "antwort": "Produkt", "alternativen": ["Produkt", "Sortiment"] },
+          { "antwort": "Kundensegment", "alternativen": ["Kunden", "Kundengruppe", "Segment"] },
+          { "antwort": "Umsatz", "alternativen": ["Anteil", "Konzentration"] }
         ],
-        "korrekt": [0, 1, 3],
-        "erklaerung": "Bei identifizierbaren Engpässen, knappem Budget und hohem Absprungverhalten lohnt Conversion-Investition fast immer mehr als Mehr-Traffic. Wenn die Plattform bereits optimal konvertiert, sind weitere Conversion-Gewinne dagegen begrenzt — dann wird zusätzlicher Traffic der bessere Hebel."
+        "erklaerung": "Kanal-, Produkt- und Kundensegmentdiversifikation sind die drei klassischen Resilienzhebel. Die Umsatzkonzentrationsquote (Anteil pro Kanal / Produkt / Segment) macht das Klumpenrisiko sichtbar und steuerbar."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "Skalierungsstrategien — Kanal, Segment, Geografie, Produkt",
-      "youtube_id": "",
-      "youtube_query": "skalierungsstrategien b2b plattform optionen deutsch",
-      "dauer_min": 7,
+      "titel": "ROI im Marketing als Skalierungssteuerung",
+      "youtube_id": "vimK5KeVZQA",
+      "youtube_query": "vertrieb forecasting predictive analytics deutsch",
+      "dauer_min": 9,
       "aufgabe": {
-        "frage": "Welche Skalierungsdimensionen stehen einer reifen B2B-Plattform typischerweise zur Verfügung?",
-        "typ": "multi",
+        "frage": "Welche Kennzahl ist beim Skalieren digitaler Geschäftsmodelle besonders aussagekräftig?",
+        "typ": "single",
         "optionen": [
-          "Kanal-Skalierung (Erschließung zusätzlicher Vertriebskanäle)",
-          "Kundensegment-Skalierung (Erweiterung auf weitere Segmente)",
-          "Geografische Skalierung (Expansion in neue Regionen oder Länder)",
-          "Produkt- und Serviceausbau",
-          "Reine Erhöhung des Werbebudgets ohne weitere Maßnahmen"
+          "Anzahl der Mitarbeitenden",
+          "Verhältnis zwischen Customer Lifetime Value und Customer Acquisition Cost (CLV/CAC)",
+          "Anzahl der jährlich versendeten Newsletter",
+          "Anzahl der Social-Media-Follower"
         ],
-        "korrekt": [0, 1, 2, 3],
-        "erklaerung": "Kanal, Segment, Geografie und Produkt sind die etablierten Skalierungsdimensionen, jeweils mit eigenen Voraussetzungen und Risiken. Reine Werbebudget-Erhöhung ohne strukturelle Maßnahmen ist keine Skalierungsstrategie, sondern Aktivismus — sie skaliert Kosten, nicht Wertschöpfung."
+        "korrekt": 1,
+        "erklaerung": "Das CLV/CAC-Verhältnis zeigt, ob das Geschäftsmodell wirtschaftlich skalierbar ist. Als Daumenregel gilt CLV/CAC mindestens 3, im SaaS-Bereich ist eine Payback-Zeit unter 12 Monaten ein zusätzliches Qualitätssignal."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Net Revenue Retention — die strategische Wachstumskennzahl",
-      "inhalt": "Net Revenue Retention (NRR) ist eine der aussagekräftigsten KPIs zur Bewertung einer reifen Plattform. Sie misst, wie sich der Umsatz bestehender Kunden über die Zeit entwickelt — inklusive Upgrades (positive Wirkung), Downgrades und Churn (negative Wirkung). Eine NRR von 100 Prozent bedeutet, dass die bestehende Kundenbasis ihren Umsatz hält — Wachstum kommt nur aus Neukunden. Eine NRR von 110 oder 120 Prozent ist ein extrem starkes Signal: Die bestehende Basis wächst aus sich selbst, jeder Neukunde verstärkt diesen Effekt. NRR unter 90 Prozent dagegen ist eine Alarmstufe — selbst aggressives Neugeschäft kann den Verlust kaum kompensieren, das Geschäftsmodell ist strukturell instabil. Für Plattform-Management bedeutet das: NRR sollte fester Bestandteil monatlicher Reportings sein. Bei sinkender NRR ist die richtige Reaktion typischerweise Investition in Bestandskundenbetreuung, Upgrades, Cross-Selling und Churn-Prävention — nicht primär in Neuakquise. Eine reife Plattform optimiert beide Hebel, aber priorisiert dort, wo die Wirtschaftlichkeit besser ist.",
-      "dauer_min": 6,
+      "titel": "Senior-Level-Frage: Skalierungsentscheidung unter Unsicherheit",
+      "inhalt": "Skalierung ist die anspruchsvollste Entscheidung, die ein Geschäftsmodell zu treffen hat. Zu früh skalieren, bevor das Modell wiederholbar funktioniert, verbrennt Kapital. Zu spät skalieren, wenn der Markt sich öffnet, überlässt das Feld dem Wettbewerb. Vier Bedingungen sind Voraussetzung für die Skalierungsentscheidung: erstens ein wiederholbarer Akquisitionsprozess mit kontrolliertem CAC; zweitens ein nachweisbarer CLV, der den CAC deutlich übersteigt; drittens eine operative Infrastruktur (Personal, Systeme, Prozesse), die Volumenwachstum trägt; viertens ein Wettbewerbsfenster, das die Investition rechtfertigt. Wer diese vier Bedingungen ehrlich prüft und nicht eine davon übergeht, hat die Grundlage für eine belastbare Skalierungsentscheidung.",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Aussagen über Net Revenue Retention (NRR) sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "NRR über 100 % bedeutet, dass die bestehende Kundenbasis aus sich selbst wächst",
-          "NRR unter 90 % ist meist ein strukturelles Warnsignal",
-          "Sinkende NRR erfordert vor allem mehr Neukundenakquise — Bestandskunden sind weniger wichtig",
-          "NRR sollte fester Bestandteil reifer Management-Reportings sein"
-        ],
-        "korrekt": [0, 1, 3],
-        "erklaerung": "NRR-Schwellen und Management-Relevanz sind etabliert. Option 3 ist falsch: Sinkende NRR ist meist nicht durch Neuakquise zu kompensieren — die Reaktion muss bei Churn, Upgrades und Bestandskundenbetreuung ansetzen. Sonst füllt man ein leckes Fass."
+        "frage": "Sie sind CFO einer Plattform mit aktuell 25 Mio. Euro Umsatz, 70 Prozent davon aus einem einzigen Marktplatzkanal. Die Geschäftsführung will mit einer Series-B-Finanzierung in zwei Jahren auf 80 Mio. Euro wachsen. Skizzieren Sie in drei bis fünf Absätzen, welche Skalierungsentscheidung Sie verantworten, welche Diversifikationsmaßnahmen Sie priorisieren und welche Wachstumsstrategie Sie bewusst nicht verfolgen. Begründen Sie Ihre Entscheidung aus Sicht der Plattformresilienz.",
+        "typ": "text",
+        "musterloesung": "Die Diagnose ist klar: 70 Prozent Umsatz aus einem Marktplatzkanal ist ein systemisches Klumpenrisiko. Bei einer Series-B-Bewertung schaut jeder Investor auf Wachstumsqualität, nicht nur auf Wachstumstempo. Skalierung ohne Diversifikation würde das Risiko zementieren.\n\nAls CFO würde ich erstens die Diversifikation des Kanal-Mix priorisieren. Zielbild: Der Marktplatzkanal sinkt auf 40 bis 50 Prozent Anteil, während eigener Direktvertrieb (Webshop, Sales Team), Partnerkanal und Affiliate gemeinsam mindestens 50 Prozent erreichen. Das senkt das Klumpenrisiko und erhöht den Markenwert.\n\nZweitens würde ich die Erlösstruktur differenzieren. Subscription-Komponenten für wiederkehrende Services, Premium-Tiers für Power-User und Daten- beziehungsweise Insights-Produkte für Anbieter ergeben zusätzliche Erlösströme. Damit wird das CLV/CAC-Verhältnis robuster und planbarer.\n\nDrittens würde ich Skalierung erst dann freigeben, wenn der wiederholbare Akquisitionsprozess mit kontrolliertem CAC pro Kanal nachgewiesen ist. Vor der Series B sollen Pilotkampagnen die CAC-Bandbreite je Kanal sauber dokumentieren. Investorengespräche werden mit belastbaren Unit-Economics geführt, nicht mit Wachstumsversprechen.\n\nDie bewusste Nicht-Maßnahme: Ich würde nicht in geografische Internationalisierung investieren, solange die Heimatmarkt-Diversifikation nicht trägt. Geografische Expansion vervielfacht Komplexität (Sprachen, Logistik, Steuern, Lokalisierung) und kann eine wachsende Plattform überfordern. Die Resilienzlogik schlägt das Reichweitenmotiv — solange die ökonomische Substanz im Heimatmarkt nicht gefestigt ist.",
+        "erklaerung": "Die Musterlösung integriert Diversifikation, Skalierungs-Bedingungen und bewusste Nicht-Maßnahme zu einer kohärenten CFO-Argumentation. Sie verbindet Resilienz, Wachstum und Investorenlogik."
       }
     },
     {
       "nr": 7,
-      "typ": "text",
-      "titel": "Bewusste Entscheidung gegen attraktive Wachstumsoptionen",
-      "inhalt": "Die schwerste Senior-Level-Entscheidung in Revenue-Strategien ist oft die Entscheidung gegen eine attraktive Option. Drei Beispiele aus der Praxis. Erstens: Ein Premium-Partner bietet exklusive Zusammenarbeit gegen erhebliches Volumen — kurzfristig Umsatzsprung, langfristig gefährliche Abhängigkeit und Verlust strategischer Unabhängigkeit. Zweitens: Eine neue Produktkategorie verspricht hohen Umsatz, würde aber die operative Organisation überfordern und Qualität in der Kernkategorie gefährden. Drittens: Eine Listung auf einem reichweitenstarken Marktplatz erhöht Sichtbarkeit, würde aber die eigene Plattform-Direktbeziehung kannibalisieren und Daten an Dritte verschieben. In allen drei Fällen ist die richtige Entscheidung oft, bewusst zu verzichten — nicht weil die Option ‚schlecht‘ wäre, sondern weil sie strategische Kosten erzeugt, die kurzfristig unsichtbar bleiben. Senior-Level-Management bewertet Wachstum nicht nur nach Umsatzbeitrag, sondern nach Marge, Resilienz, Kundennutzen und strategischer Unabhängigkeit. Dieser Maßstab führt regelmäßig zu Entscheidungen, die operative Teams als ‚zu vorsichtig‘ empfinden — und sich später als richtig erweisen.",
-      "dauer_min": 5,
+      "typ": "video",
+      "titel": "Wachstum versus Skalierung — Unterschiede im Geschäftsmodell",
+      "youtube_id": "wlraVgn7nlU",
+      "youtube_query": "wachstum startup scale up skalierung deutsch",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Begründungen rechtfertigen oft den bewussten Verzicht auf eine kurzfristig attraktive Wachstumsoption?",
+        "frage": "Welche Warnsignale deuten auf eine kritische Skalierungsfalle hin?",
         "typ": "multi",
         "optionen": [
-          "Gefährliche strategische Abhängigkeit von einem dominanten Partner",
-          "Überforderung der operativen Organisation, die Kernqualität gefährdet",
-          "Hoher kurzfristiger Umsatzbeitrag bei stabiler Organisation",
-          "Kannibalisierung bestehender Kanäle und Verlust der direkten Kundenbeziehung"
+          "Steigender CAC bei stagnierendem CLV",
+          "Personalwachstum schneller als Umsatzwachstum",
+          "Steigender CLV bei sinkendem CAC",
+          "Wachstum nur in einem einzigen Kanal oder Kundensegment",
+          "Operative Belastung wächst überproportional zur Auftragslage"
         ],
-        "korrekt": [0, 1, 3],
-        "erklaerung": "Abhängigkeit, organisatorische Überforderung und Kannibalisierung sind etablierte Verzichts-Gründe. Hoher Umsatzbeitrag bei stabiler Organisation ist dagegen kein Verzichts-Grund, sondern ein Wachstumsargument — die Option sollte verfolgt werden, nicht abgelehnt."
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Steigender CAC ohne CLV-Wachstum, überproportionales Personalwachstum, Kanalkonzentration und operative Überlast sind klassische Symptome vorzeitiger oder fehlgeleiteter Skalierung. Steigender CLV bei sinkendem CAC ist dagegen das ideale Skalierungssignal."
       }
     }
   ]
