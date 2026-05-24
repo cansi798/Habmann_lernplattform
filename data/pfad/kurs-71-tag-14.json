@@ -1,148 +1,138 @@
 {
   "kurs_id": "71_Dig_42",
   "tag_nr": 14,
-  "titel": "Green IT als Managementsystem: CO2-Messung, Sustainable Software, E-Waste, Vendor",
+  "titel": "Green IT als Managementsystem: CO2-Messung, Sustainable Software, E-Waste und Vendor Sustainability",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Carbon Footprint Measurement: Systemgrenzen und Datenqualität",
-      "youtube_id": "",
-      "youtube_query": "carbon footprint measurement systemgrenze scope 1 2 3 deutsch",
+      "titel": "Green IT in der Praxis — Hardware, Server, Cloud, Software",
+      "youtube_id": "lWMzaoPTmX0",
+      "youtube_query": "green it einfach erklärt hardware server cloud software deutsch",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Warum ist die Definition der Systemgrenze bei der Carbon-Footprint-Messung so kritisch?",
+        "frage": "Welche Aussage über Green IT ist aus Senior-Sicht zutreffend?",
         "typ": "single",
         "optionen": [
-          "Damit die Zahl klein bleibt",
-          "Weil ohne klare Systemgrenzen (Was ist drin? Was ist draußen?) Werte nicht vergleichbar oder auditierbar sind",
-          "Weil es eine Marketing-Vorgabe ist",
-          "Weil Systemgrenzen nur in der Mathematik existieren"
+          "Green IT bedeutet vor allem, einzelne Hardware durch energieeffiziente Geräte zu ersetzen",
+          "Green IT ist ein Managementsystem, das Messung, Standards, Prozesse, Lieferanten und Reviews integriert — entlang ISO-14001-Logik",
+          "Green IT ist ein Reporting-Projekt, das einmal jährlich erledigt wird",
+          "Green IT richtet sich primär an Endgeräte und ignoriert Rechenzentrum und Cloud"
         ],
         "korrekt": 1,
-        "erklaerung": "Ohne explizite Systemgrenzen ist jede CO2-Zahl beliebig — was zählt zur Cloud-Last, was zur Lieferkette, was zu Endgeräten? Erst die saubere Definition macht Werte vergleichbar und auditierbar. ‚Klein halten‘ ist Greenwashing-Logik; Marketing-Vorgaben und mathematische Abstraktion treffen den Kern nicht."
+        "erklaerung": "Wirksame Green IT ist kein Einkaufsthema und kein einmaliges Projekt, sondern ein PDCA-Managementsystem nach ISO-14001-Logik: Aspekte identifizieren → Ziele setzen → Programme umsetzen → messen → korrigieren → verbessern. Sie umfasst Hardware, Rechenzentrum, Cloud, Software-Effizienz und Lieferkette. Punktuelle Hardware-Wechsel ohne System sind „Aktionismus” — sie sind weder belastbar noch auditfähig."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Sustainable Software Development: Effizienz als Qualitätsmerkmal",
-      "inhalt": "Sustainable Software Development (SSD) behandelt Effizienz wie Security oder Performance: als bewusst gesetztes Qualitätsmerkmal mit Budgets, Reviews und Gates. Drei Hebel sind besonders wirksam. ‚Rechenzeit reduzieren‘ — weniger Iterationen, intelligentere Algorithmen, Caching statt Mehrfachberechnung — kann Energie signifikant senken. ‚Datenbewegung minimieren‘ — Daten dort halten, wo sie verarbeitet werden, statt sie unnötig über Netzwerke zu schicken — hat oft größere Wirkung als Compute-Optimierung. ‚Ressourcenbewusste Defaults‘ — Skalierung nach Bedarf, Off-Hours-Shutdown von Non-Prod, sinnvolle Container-Limits — vermeidet Überprovisionierung. Konkret messbar wird SSD über ‚Performance Budgets‘ (z. B. ‚Antwort < 200 ms‘ als Pflicht), ‚Data Budgets‘ (z. B. ‚Payload < 1 MB‘) und Release Gates, die diese Budgets prüfen. Die Senior-Pointe: ‚Green by guesswork‘ scheitert verlässlich — erst Messung, dann Optimierung, dann Verankerung im Releaseprozess.",
+      "titel": "Carbon Footprint Measurement — Systemgrenzen und Datenqualität",
+      "inhalt": "Die Messung des IT-CO2-Fußabdrucks folgt einer einfachen Logik: Aktivitäten (z. B. Compute-Stunden, Storage-GB, Datentransfer) werden mit Emissionsfaktoren multipliziert und in CO2-Äquivalente (CO2e) übersetzt. Drei methodische Disziplinen entscheiden, ob die Zahlen belastbar sind: (1) Systemgrenzen — Was ist drin, was ist draußen? Eigenes Rechenzentrum (Scope 1+2), genutzte Cloud (Scope 3 upstream), Endgeräte, Datentransfer, Lieferkette? Die Grenzen müssen explizit dokumentiert sein. (2) Datenqualität — Sind die Verbrauchswerte gemessen (A), aus belastbaren Schätzungen abgeleitet (B) oder grob geschätzt (C)? Jede Kennzahl trägt ein Label. (3) Annahmenregister — wo wir schätzen (z. B. PUE des Cloud-Providers, Strommix in Region X), wird die Annahme mit Quelle und Datum dokumentiert. Wer ohne diese Disziplinen reportet, riskiert das Greenwashing-Etikett — und unter CSRD-/Assurance-Augen ist das ein materielles Risiko.",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Aussagen zu Sustainable Software Development (SSD) sind korrekt?",
+        "frage": "Welche Aussagen zu einem belastbaren Carbon-Footprint-Reporting sind korrekt?",
         "typ": "multi",
         "optionen": [
-          "Effizienz sollte wie Security als Qualitätsmerkmal mit Budgets behandelt werden",
-          "Datenbewegung zu reduzieren ist oft wirkungsvoller als reine Compute-Optimierung",
-          "Performance Budgets und Data Budgets können als Release Gates dienen",
-          "‚Green by guesswork‘ ohne Messung führt zuverlässig zu nachhaltiger IT",
-          "Caching und ressourcenbewusste Defaults sind klassische SSD-Hebel"
+          "Systemgrenzen werden explizit dokumentiert, nicht implizit angenommen",
+          "Jeder Wert wird mit einem Datenqualitäts-Label (gemessen / geschätzt) versehen",
+          "Annahmen und Emissionsfaktoren werden mit Quelle und Datum festgehalten",
+          "Eine grobe Schätzung darf als „gemessen” ausgewiesen werden, wenn niemand widerspricht",
+          "Lieferketten-Emissionen (Scope 3) werden ignoriert, wenn keine Vendor-Daten vorliegen"
         ],
-        "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Effizienz als Qualitätsmerkmal, Datenbewegung als zentraler Hebel, Budgets als Gates und Caching/Defaults bilden ein konsistentes SSD-Programm. ‚Green by guesswork‘ ist genau das Anti-Pattern, das diese Disziplin vermeidet: ohne Messung gibt es keine Verbesserung."
+        "korrekt": [0, 1, 2],
+        "erklaerung": "Systemgrenzen, Datenqualitäts-Label und transparente Annahmen sind die methodischen Pflichten. Schätzungen als gemessene Werte auszugeben ist Greenwashing — Auditoren und Stakeholder finden den Bruch. Scope-3-Emissionen werden bei Datenlücken nicht ignoriert, sondern transparent geschätzt mit Label C und Verbesserungsplan."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "E-Waste Management: Lifecycle und sichere Datenlöschung",
-      "youtube_id": "",
-      "youtube_query": "electronic waste management hardware lifecycle datenlöschung deutsch",
-      "dauer_min": 7,
+      "titel": "Sustainable Software Development — Effizienz als Qualitätsmerkmal",
+      "youtube_id": "Rjb6iyCT7SU",
+      "youtube_query": "nachhaltige softwareentwicklung code zukunft green it",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Schritte gehören in einen verantwortungsvollen E-Waste-Lifecycle?",
-        "typ": "single",
+        "frage": "Welche Hebel reduzieren die Umweltwirkung von Software effektiv?",
+        "typ": "multi",
         "optionen": [
-          "Nur Entsorgung",
-          "Beschaffung → Nutzung → Wartung/Reparatur → Wiederverwendung/Refurbish → Recycling/Entsorgung — mit dokumentierter Datenlöschung",
-          "Schnellstmögliche Ersatzbeschaffung alle 2 Jahre",
-          "Geräte werden gespendet, ohne Daten zu löschen"
+          "Weniger Rechenzeit pro Anfrage durch effiziente Algorithmen und Caching",
+          "Reduzierung unnötiger Datenbewegung (z. B. Payload-Größen, Polling vs. Push)",
+          "Skalierung nach Bedarf statt dauerhafter Überprovisionierung",
+          "Maximale Logging-Tiefe für jede Anfrage, um „alles zu erfassen”",
+          "Performance Budgets und Profiling als Gate vor Releases kritischer Services"
         ],
-        "korrekt": 1,
-        "erklaerung": "Ein vollständiger Lifecycle deckt Beschaffung, Nutzung, Reparatur, Wiederverwendung und kontrolliertes Recycling ab — inklusive nachweisbarer Datenlöschung. Reine Entsorgung verschwendet Nutzungswert; ungeprüfte Spenden ohne Datenlöschung sind ein Datenschutzdesaster mit absehbaren Findings."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Effiziente Algorithmen, weniger Datenbewegung, bedarfsorientierte Skalierung und Performance Budgets als Release-Gates sind wirksame Hebel. Übermäßiges Logging ist im Gegenteil ein verbreiteter Antipattern — es erhöht Speicher-, Netzwerk- und Verarbeitungslast erheblich, ohne fachlichen Mehrwert. Logging gehört auf das Nötige reduziert und mit Retention-Regeln gesteuert."
       }
     },
     {
       "nr": 4,
-      "typ": "text",
-      "titel": "Vendor Sustainability Scorecard: nicht Marketing, sondern Vertragsklauseln",
-      "inhalt": "Vendor-Nachhaltigkeit lässt sich nicht aus Hochglanzbroschüren ableiten. Eine seriöse Scorecard prüft sechs harte Kriterien. ‚Umweltpolitik‘ (gibt es eine, ist sie ISO-konform?), ‚CO2-Reporting‘ (transparent, methodisch nachvollziehbar?), ‚Energieeffizienz‘ (Hardware-Klassen, Konsolidierung), ‚Kreislaufwirtschaft‘ (Rücknahme- und Refurbish-Programme), ‚Subunternehmer-Transparenz‘ (wer baut wofür?) und ‚Nachweise/Zertifikate‘ (auditierbare Belege). Die eigentliche Wirkung entsteht nicht durch die Scorecard, sondern durch ihre Umsetzung in Vertragsklauseln: jährliches verpflichtendes Reporting, Right-to-Audit-Klausel, Subunternehmertransparenz als Vertragsbestandteil, Rücknahmepflicht für Hardware, Exit-Klauseln bei Verschlechterung. Ohne diese Klauseln sind Vendor-Versprechen genau das: Marketing. Senior-Pointe: Procurement ist Teil des Umweltmanagements — nicht ‚Einkauf allein‘; Service Owner müssen Kriterien mitverantworten und in der Vertragsverhandlung Rückgrat zeigen.",
-      "dauer_min": 7,
+      "typ": "zuordnung",
+      "titel": "Vendor Sustainability Scorecard — Kriterien priorisieren",
+      "inhalt": "Bei der Vergabe von Hardware- oder Service-Aufträgen werden Lieferanten nach klaren Nachhaltigkeitskriterien bewertet.",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussagen über Vendor Sustainability Assessment sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Eine Scorecard prüft mehrere Dimensionen (Umweltpolitik, CO2-Reporting, Kreislaufwirtschaft, Subunternehmer)",
-          "Wirksam wird die Scorecard erst durch Verankerung in Vertragsklauseln",
-          "Right-to-Audit ist eine sinnvolle Klausel für seriöses Vendor Sustainability Assessment",
-          "Hochglanz-Marketingmaterial des Vendors reicht als Nachweis",
-          "Subunternehmer-Transparenz ist nice-to-have, aber nicht zentral"
+        "frage": "Ordnen Sie jedem Scorecard-Kriterium ein typisches Indikatorbeispiel zu.",
+        "typ": "zuordnung",
+        "paare": [
+          { "links": "Umwelttransparenz und CO2-Reporting", "rechts": "Veröffentlichter Nachhaltigkeitsbericht mit verifizierten Emissionsdaten" },
+          { "links": "Kreislaufwirtschaft", "rechts": "Rücknahmeprogramm, Refurbishment und definierter Recyclingpfad" },
+          { "links": "Energieeffizienz der Produkte", "rechts": "Energy-Star- oder vergleichbare Effizienzklasse, dokumentierte Verbrauchswerte" },
+          { "links": "Subunternehmer-Transparenz", "rechts": "Liste der Subunternehmer inkl. Sustainability-Kriterien und Auditrecht" },
+          { "links": "Vertragliche Verankerung", "rechts": "Right-to-Audit-Klausel und jährliches Sustainability-Reporting im Vertrag" }
         ],
-        "korrekt": [0, 1, 2],
-        "erklaerung": "Mehrdimensionale Scorecards, Vertragsklauseln und Right-to-Audit sind das Rückgrat seriösen Vendor Sustainability Assessments. Marketingmaterial ersetzt keinen Nachweis, und Subunternehmer sind oft der entscheidende blinde Fleck — gerade dort entstehen Reputations- und Compliance-Risiken."
+        "erklaerung": "Eine belastbare Vendor-Scorecard kombiniert harte Daten (verifizierte Emissionen, Effizienzklassen) mit Prozesskriterien (Rücknahme, Subunternehmer-Transparenz) und vertraglichen Hebeln (Right-to-Audit, jährliches Reporting). Allein Marketing-Aussagen ohne Nachweise reichen nicht — bei CSRD-Reporting werden sie zum Reputations- und Compliance-Risiko."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "ISO-14001-Logik: PDCA für Green IT",
-      "youtube_id": "",
-      "youtube_query": "iso 14001 pdca umweltmanagement aspekt programm deutsch",
+      "titel": "Elektroschrott — Lifecycle, Recycling und Kreislaufwirtschaft",
+      "youtube_id": "P5_edASIcaE",
+      "youtube_query": "global e-waste report elektroschrott gut zu wissen",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Was beschreibt der PDCA-Zyklus im Kontext eines Umweltmanagementsystems?",
+        "frage": "Welche Lifecycle-Stufen gehören in einen verantworteten IT-Hardware-Lebenszyklus?",
         "typ": "single",
         "optionen": [
-          "Eine zufällige Reihenfolge von Maßnahmen",
-          "Plan → Do → Check → Act als kontinuierlichen Verbesserungszyklus",
-          "Nur einmaliges Planen ohne Reviewing",
-          "Eine reine Reporting-Pflicht ohne Steuerungswirkung"
+          "Beschaffung → Nutzung → Entsorgung",
+          "Beschaffung → Nutzung → Wartung/Reparatur → Wiederverwendung/Refurbish → Recycling/Entsorgung mit Nachweis",
+          "Beschaffung → Nutzung → Neukauf nach 2 Jahren",
+          "Beschaffung → Lagerung → Verschrottung"
         ],
         "korrekt": 1,
-        "erklaerung": "PDCA strukturiert kontinuierliche Verbesserung in vier Phasen und ist das Rückgrat jedes funktionierenden Managementsystems (auch ISO 14001). Einmaliges Planen oder reines Reporting greifen zu kurz — ohne Check-und-Act-Schleife stagniert das System bei seinen Anfangsmaßnahmen."
+        "erklaerung": "Ein vollständiger Lifecycle umfasst Beschaffung, Nutzung, Wartung/Reparatur (Nutzungsdauer verlängern), Wiederverwendung/Refurbish (intern oder extern), und erst am Ende Recycling/Entsorgung — alles mit Nachweisführung (Asset Register, Datenlöschungsprotokoll, Rücknahmebeleg, Recyclingzertifikat). Die größten Hebel liegen früh: Nutzungsdauer-Verlängerung und Wiederverwendung sind ökologisch wie ökonomisch besser als jedes Recycling."
       }
     },
     {
       "nr": 6,
-      "typ": "text",
-      "titel": "Datenqualitätslabel A/B/C: Transparenz statt Greenwashing",
-      "inhalt": "In jedem ESG-Reporting tauchen Werte auf, die unterschiedlich gut belegt sind — von präzise gemessen bis grob geschätzt. Ein einfaches und mächtiges Instrument dagegen ist das Datenqualitätslabel A/B/C. ‚A‘ markiert direkt gemessene Werte mit dokumentierter Methodik (z. B. abgelesener Stromverbrauch aus dem Rechenzentrums-Submeter). ‚B‘ markiert berechnete Werte aus belastbaren Quelldaten mit klarer Methodik (z. B. CO2-Berechnung aus Compute-Hours mit veröffentlichten Emissionsfaktoren). ‚C‘ markiert Schätzungen mit dokumentierten Annahmen (z. B. Lieferkettendaten aus Branchen-Durchschnittswerten). Drei Effekte entstehen: erstens wird Reporting ehrlich, weil die Datenqualität explizit sichtbar ist. Zweitens lässt sich gezielt verbessern (‚Vom C zum B in 12 Monaten‘). Drittens wird Greenwashing erschwert, weil Auditoren und Stakeholder sofort sehen, wo Substanz fehlt. Senior-Pointe: Datenqualitätslabels sind ein zentrales Anti-Greenwashing-Werkzeug — sie kosten kaum Aufwand und schaffen massive Glaubwürdigkeit.",
-      "dauer_min": 6,
+      "typ": "lueckentext",
+      "titel": "E-Waste-Standardprozess und Datenlöschung",
+      "inhalt": "Der Übergang von ausgemusterter Hardware in die Wiederverwendung oder das Recycling muss kontrolliert ablaufen.",
+      "dauer_min": 5,
       "aufgabe": {
-        "frage": "Welche Aussagen zu Datenqualitätslabels A/B/C in der ESG-Berichterstattung sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "A steht für direkt gemessene Werte mit dokumentierter Methodik",
-          "C-Werte (geschätzt) dürfen nie veröffentlicht werden, weil sie Greenwashing sind",
-          "B-Werte werden aus belastbaren Quelldaten berechnet",
-          "Labels machen den Verbesserungsweg sichtbar (z. B. C → B in 12 Monaten)",
-          "Labels sind ein Anti-Greenwashing-Instrument, weil Datenqualität transparent wird"
+        "frage": "Vervollständigen Sie die Aussagen zum E-Waste-Standardprozess.",
+        "typ": "lueckentext",
+        "text": "Bevor ein ausgemustertes Gerät den Standort verlässt, erfolgt eine zertifizierte {0} der Daten gemäß einem dokumentierten Standard. Das Gerät wird im {1} Register als „außer Betrieb” geführt. Anschließend wird geprüft, ob {2}/Refurbish möglich ist; erst danach geht das Gerät in das {3} mit Nachweis des Partnerunternehmens.",
+        "luecken": [
+          { "antwort": "Löschung", "alternativen": ["löschung", "Datenlöschung", "Datenvernichtung"] },
+          { "antwort": "Asset", "alternativen": ["asset", "CMDB"] },
+          { "antwort": "Wiederverwendung", "alternativen": ["Reuse", "Wiederverwertung", "Reuse/Refurbish"] },
+          { "antwort": "Recycling", "alternativen": ["recycling", "Recyclingverfahren"] }
         ],
-        "korrekt": [0, 2, 3, 4],
-        "erklaerung": "A/B/C-Klassifikation, Verbesserungspfade und Transparenz sind die Wirkprinzipien. C-Werte (Schätzungen) zu veröffentlichen ist nicht per se Greenwashing — solange sie als C markiert sind und die Methodik offengelegt wird; das Verbot würde nur Datenlücken kaschieren und ist daher kontraproduktiv."
+        "erklaerung": "Vier Schritte sichern den E-Waste-Prozess: zertifizierte Datenlöschung (Standard z. B. NIST 800-88), Aktualisierung im Asset Register (Verbleib nachvollziehbar), Prüfung auf Wiederverwendung/Refurbish (höchster Hebel) und kontrolliertes Recycling mit Nachweis. Ohne Datenlöschungs-Zertifikat ist die Übergabe ein Datenschutzrisiko — auch wenn der Partner „seriös wirkt”."
       }
     },
     {
       "nr": 7,
-      "typ": "video",
-      "titel": "Green IT Operating Model: Owner, Procurement, Service Lifecycle",
-      "youtube_id": "",
-      "youtube_query": "green it operating model owner procurement lifecycle deutsch",
-      "dauer_min": 8,
+      "typ": "text",
+      "titel": "Anti-Greenwashing — Datenqualität, Transparenz, Verbesserungsplan",
+      "inhalt": "Bei zunehmender Reporting-Pflicht (CSRD, EU-Taxonomie, Lieferkettengesetz) wächst das Risiko, mit guten Absichten in die Greenwashing-Falle zu laufen: Zahlen werden veröffentlicht, die methodisch nicht belastbar sind, Systemgrenzen werden geschickt gewählt, Schätzungen als Messung präsentiert. Senior-Steuerung baut drei Anti-Greenwashing-Mechanismen ein: (1) Datenqualitäts-Label — jede veröffentlichte Zahl trägt A (gemessen), B (belastbar geschätzt) oder C (grob geschätzt). Wer Label C kommuniziert, signalisiert Verbesserungsbedarf, nicht Schwäche. (2) Verbesserungsplan im Reporting — was wird wann von C auf B und auf A gehoben? Mit Owner und Termin. (3) Trade-off-Protokoll — wenn Trade-offs zugunsten Performance/Kosten gegen CO2 entschieden werden, wird das transparent gemacht und vom verantwortlichen Gremium freigegeben. So entsteht ein Reporting, das auch ein kritischer Auditor oder Journalist nicht zerlegen kann — weil es seine Lücken selbst benennt.",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Rollen und Anker sind für ein wirksames Green-IT-Operating-Model unverzichtbar?",
-        "typ": "multi",
-        "optionen": [
-          "Ein Sustainability Owner mit klarer Verantwortung pro Kernthema (Energie, Hardware, Vendor)",
-          "Verankerung von Sustainability-Kriterien im Service-Lifecycle (Design, Transition, Operation)",
-          "Eigenständige Procurement-Verantwortung mit verbindlichen Sustainability-Klauseln",
-          "Reportings als reine PR-Maßnahme ohne Steuerungsanspruch",
-          "Definierte Reviewzyklen und Entscheidungsprotokolle"
-        ],
-        "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Owner, Verankerung im Lifecycle, Procurement-Klauseln und Review-Disziplin bilden ein tragfähiges Operating Model. Reportings als reine PR untergraben das System genau dort, wo es greifen sollte — sie sind die Brutstätte von Greenwashing und Reputationsrisiken."
+        "frage": "Beschreiben Sie in 4–6 Sätzen: Sie sollen für TeleData Services in 4 Monaten ein auditfähiges Green-IT-Programm aufsetzen. Welche zwei Sofort-Maßnahmen und welche zwei verschobenen Maßnahmen wählen Sie — und wie verankern Sie Anti-Greenwashing in das Reporting?",
+        "typ": "text",
+        "musterloesung": "Sofort umsetzbar: Erstens ein Messplan-MVP für die Top-5-Services mit klar definierten Systemgrenzen, Datenqualitäts-Label (A/B/C) pro Kennzahl und Annahmenregister — Owner Service Owner, Frequenz monatlich. Zweitens Standardisierung des E-Waste-Prozesses mit zertifizierter Datenlöschung, Asset-Register-Update und dokumentiertem Recyclingpfad — Owner IT Asset Manager und Security gemeinsam. Verschoben werden komplexere Eingriffe: Vendor-Recontracting mit Right-to-Audit-Klauseln (Quartal 2, weil Beschaffungs- und Rechtsabstimmung nötig) und tiefe Cloud-Verbrauchsaudits (Quartal 2, weil Datenzugriff bei Providern erst gesichert werden muss). Anti-Greenwashing-Verankerung: Jede veröffentlichte Kennzahl trägt verpflichtend ein A/B/C-Label; ein Verbesserungsplan mit Datum macht sichtbar, wann C auf B/A gehoben wird; größere Trade-offs (Performance vs. CO2) werden im Sustainability Board protokolliert und vom CIO + Sustainability Lead gemeinsam freigegeben. Frühwarnsignale: Steigt der Anteil an C-Werten unerwartet oder werden Verbesserungstermine reißend verschoben, eskaliert der Reporting Lead an die Geschäftsleitung."
       }
     }
   ]

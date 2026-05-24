@@ -1,148 +1,138 @@
 {
   "kurs_id": "71_Dig_42",
   "tag_nr": 13,
-  "titel": "Nachhaltige IT-Services: Service-Portfolio, Capacity Planning und Rightsizing",
+  "titel": "Nachhaltige IT-Services steuern: Service-Portfolio, Kapazität und Rightsizing als auditfähige Entscheidungsarchitektur",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "ITIL-4-Service-Portfolio: Pipeline, Live, Retired",
-      "youtube_id": "",
-      "youtube_query": "itil 4 service portfolio management pipeline live retired deutsch",
+      "titel": "ITIL 4 Service Portfolio Management — Pipeline, Live, Retired",
+      "youtube_id": "778SxGGGbrI",
+      "youtube_query": "itil 4 portfolio management service portfolio deutsch",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche drei Hauptzustände kennt ein ITIL-4-konformes Service-Portfolio?",
+        "frage": "Was umfasst ein vollständiges Service-Portfolio nach ITIL 4?",
         "typ": "single",
         "optionen": [
-          "Aktiv, Inaktiv, Geheim",
-          "Pipeline (geplant/im Bau), Live (im Betrieb), Retired (ausgemustert)",
-          "Wichtig, Unwichtig, Egal",
-          "Cloud, Onpremise, Hybrid"
+          "Nur die aktuell produktiven Services (Service Catalogue)",
+          "Alle Services über ihren Lebenszyklus — Pipeline (geplant), Live (produktiv) und Retired (stillgelegt) — jeweils mit Owner, Kosten, Risiko und Nutzen",
+          "Eine reine Aufstellung der IT-Infrastruktur ohne Geschäftssicht",
+          "Eine reine Kostenrechnung ohne Lifecycle-Bezug"
         ],
         "korrekt": 1,
-        "erklaerung": "Pipeline, Live, Retired ist die klassische ITIL-Strukturierung — sie macht den gesamten Lebenszyklus inklusive geplanter und stillgelegter Services sichtbar und steuerbar. Alternative Kategorisierungen (aktiv/inaktiv, wichtig/unwichtig, Bereitstellungsformen) sind keine Lifecycle-Sicht."
+        "erklaerung": "Das ITIL-Service-Portfolio umfasst den gesamten Lebenszyklus: geplante Services (Pipeline), aktive Services (Service Catalogue / Live) und zurückgezogene Services (Retired). Pro Service werden Owner, Kosten, Risiko, Nutzen und zunehmend auch Nachhaltigkeitswirkung dokumentiert. Das Portfolio ist Grundlage für Investitions-, Sourcing- und Stilllegungs-Entscheidungen — ein Service Catalogue allein zeigt nur das Heute, nicht die Steuerungsoptionen."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Wert ist mehr als Geld: Kunde, Resilienz, Compliance, Nachhaltigkeit",
-      "inhalt": "In klassischen Service-Portfolios wird ‚Wert‘ häufig auf monetäre Größen reduziert — was den Blick auf strukturelle Wertbeiträge verstellt. Vier Dimensionen sollten gleichberechtigt mitlaufen. ‚Kundennutzen‘ ist der direkte Beitrag zur Kunden-Experience oder zum Umsatz — ein Patientenportal ist hier offensichtlich kritisch. ‚Regulatorische Relevanz‘ misst, wie sehr der Service zur Erfüllung verbindlicher Pflichten beiträgt — ein Reporting-Service kann monetär klein, regulatorisch aber unverzichtbar sein. ‚Resilienz‘ bewertet, wie sehr der Service zur Stabilität anderer Services beiträgt — ein zentraler Authentifizierungsdienst hat hohe Resilienz-Bedeutung, auch wenn sein eigener Umsatz null ist. ‚Nachhaltigkeit‘ schließlich erfasst Energieverbrauch, Hardware-Bedarf und Vendor-Footprint. Wer Portfolio-Entscheidungen ausschließlich nach Kosten trifft, optimiert kurzfristig und legt langfristig die falschen Services still. Senior-Pointe: die Mehrdimensionalität des Wertbegriffs muss im Scoring-Modell explizit auftauchen, sonst wird sie in der Praxis ignoriert.",
-      "dauer_min": 6,
+      "titel": "Kapazitätssteuerung — Sicherheit durch Messung statt durch Überdimensionierung",
+      "inhalt": "Klassische IT-Kapazitätsplanung war oft „lieber zu viel als zu wenig”: doppelte Reserven, weil Last unsicher war. Das produziert Idle-Ressourcen, hohe Kosten und unnötigen Energieverbrauch. Senior-Steuerung dreht das um: Sicherheit entsteht durch Messung — Monitoring der tatsächlichen Last, klare SLOs, Guardrails für Peak-Behandlung — nicht durch pauschale Überdimensionierung. Vier Bausteine sind nötig: (1) SLOs pro Service-Klasse (kritisch 99,9%, normal 99,5%, niedrig 99,0% z. B.). (2) Monitoring-Baseline — CPU-, RAM-, Storage-, Netzwerk-Auslastung über Zeit, inkl. Peak-Profile. (3) Autoscaling-Regeln oder zumindest dokumentierte Skalierungs-Trigger. (4) Rollback-Mechanik: Wenn nach einem Rightsizing-Schritt die SLO-Reserve unter Schwelle fällt, automatischer oder schneller manueller Rückbau. Faustregel: Rightsizing ohne Monitoring ist Glücksspiel, Monitoring ohne SLOs ist Datenrauschen, SLOs ohne Eskalation sind Folien.",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Wertdimensionen gehören in ein mehrdimensionales Service-Portfolio-Scoring?",
+        "frage": "Welche Voraussetzungen sind für ein verantwortbares Rightsizing-Programm zwingend?",
         "typ": "multi",
         "optionen": [
-          "Kundennutzen",
-          "Regulatorische Relevanz",
-          "Resilienzbeitrag zu anderen Services",
-          "Beliebtheit beim CTO",
-          "Nachhaltigkeitswirkung (Energie, Hardware, Vendor)"
+          "Belastbare Monitoring-Daten über typische Lastprofile inklusive Peaks",
+          "Klare SLOs pro Service-Klasse als Reduktions-Grenze",
+          "Ein Rollback-Plan, wenn die Reduktion die SLO-Reserve unterschreitet",
+          "Die Erlaubnis, ohne fachliche Abstimmung Ressourcen abzuschalten",
+          "Dokumentierte Annahmen über Peak-Verhalten und Abhängigkeiten"
         ],
         "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Kundennutzen, Regulatorik, Resilienz und Nachhaltigkeit bilden ein robustes mehrdimensionales Scoring. Persönliche Vorlieben einzelner Führungskräfte sind weder objektiv noch nachvollziehbar — sie gehören in keine Portfolio-Methodik."
+        "erklaerung": "Monitoring, SLO-Grenzen, Rollback und dokumentierte Annahmen bilden den Mindeststandard. Eigenmächtiges Abschalten ohne fachliche Abstimmung ist der schnellste Weg zu einem Vorfall und zerstört Vertrauen — Service Owner und Fachbereich müssen in die Entscheidung eingebunden sein, nicht nur informiert."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Capacity Planning und Rightsizing: Sicherheit durch Messung",
-      "youtube_id": "",
-      "youtube_query": "capacity planning rightsizing it slo monitoring deutsch tutorial",
+      "titel": "Nachhaltige Rechenzentren — Best Practices für mehr Energieeffizienz",
+      "youtube_id": "mW8RS3gND7o",
+      "youtube_query": "nachhaltige IT best practices energieeffizienz rechenzentren deutsch",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Was ist die grundlegende Voraussetzung für seriöses Rightsizing?",
-        "typ": "single",
+        "frage": "Welche Hebel reduzieren den Energieverbrauch eines Rechenzentrums wirksam?",
+        "typ": "multi",
         "optionen": [
-          "Eine Excel-Liste der gewünschten Einsparungen",
-          "Verlässliches Monitoring der realen Auslastung über einen ausreichenden Zeitraum sowie definierte SLOs als Guardrails",
-          "Eine Anweisung des CFO, 20% einzusparen",
-          "Ein Zufallsentscheid"
+          "Konsolidierung und Virtualisierung — weniger physische Server bei gleicher Last",
+          "Abschalten von Idle-Ressourcen, insbesondere Non-Prod außerhalb der Arbeitszeit",
+          "Optimierung der Kühlung (Free Cooling, Warmluft-/Kaltluft-Trennung)",
+          "Bewusstes Überdimensionieren aller Systeme um den Faktor 3 für „Sicherheit”",
+          "Workload-Shift in Zeitfenster mit besserem Strommix oder geringerer Last"
         ],
-        "korrekt": 1,
-        "erklaerung": "‚Sicherheit durch Messung‘ ist der Kern: ohne reale Auslastungsdaten und definierte SLOs ist jede Rightsizing-Entscheidung Glücksspiel. CFO-Vorgaben, Excel-Wünsche oder Zufallsentscheide ersetzen kein Monitoring — sie produzieren SLO-Verletzungen und teure Rollbacks."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Konsolidierung, Idle-Abschaltung, Kühlungsoptimierung und Workload-Shift sind wirksame Hebel mit oft schnellem ROI. Pauschale Überdimensionierung ist der Antipattern — sie verschwendet Energie und Geld und liefert nur Schein-Sicherheit; echte Sicherheit kommt aus Messung + SLOs + Guardrails."
       }
     },
     {
       "nr": 4,
-      "typ": "text",
-      "titel": "Low-Regret Moves: was fast immer hilft",
-      "inhalt": "In jeder Capacity-/Sustainability-Diskussion lohnt es sich, mit ‚Low-Regret Moves‘ zu starten — Maßnahmen, die unter fast allen plausiblen Zukunftsszenarien sinnvoll sind. Drei klassische Beispiele: ‚Non-Prod Off-Hours Shutdown‘ — Entwicklungs- und Testumgebungen müssen nachts und am Wochenende nicht laufen, was häufig 30–60% Verbrauch dieser Umgebungen einspart, ohne Produktivbetrieb zu gefährden. ‚Zombie-Services Retire‘ — Dienste, die niemand mehr nutzt, kosten Geld und Energie; ein Portfolio-Review identifiziert sie und legt sie kontrolliert still. ‚Standard-SLOs je Kritikalitätsklasse‘ — wenn jeder Service ‚99,99%‘ verlangt, ohne dass die Kritikalität es rechtfertigt, wird unnötig viel Redundanz gebaut; klare Klassen mit Standard-SLOs (z. B. 99/99,5/99,9/99,99) ermöglichen passgenaues Rightsizing. Gemeinsam sind diese Maßnahmen risikoarm, schnell umsetzbar und sofort messbar — und sie schaffen Vertrauen für die anspruchsvolleren Schritte.",
+      "typ": "zuordnung",
+      "titel": "Portfolio-Entscheidungen — Invest, Halten, Optimieren, Retire",
+      "inhalt": "Senior-Steuerung verlangt für jeden Service eine klare Portfolio-Entscheidung mit Begründung.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche der folgenden sind klassische ‚Low-Regret Moves‘ im IT-Service-Portfolio?",
-        "typ": "multi",
-        "optionen": [
-          "Off-Hours Shutdown von Non-Prod-Umgebungen",
-          "Retire von Services ohne aktive Nutzer:innen",
-          "Sofortiges Abschalten aller Produktivsysteme zum Energiesparen",
-          "Differenzierte Standard-SLOs je Kritikalitätsklasse",
-          "Verzicht auf jedes Monitoring, um Strom zu sparen"
+        "frage": "Ordnen Sie jede Service-Situation der passenden Portfolio-Entscheidung zu.",
+        "typ": "zuordnung",
+        "paare": [
+          { "links": "Kritischer Service, hoher Kundennutzen, wachsende Last", "rechts": "Invest — gezielt ausbauen, Skalierungspfad planen" },
+          { "links": "Stabiler Service, stabile Nutzung, vertretbare Kosten", "rechts": "Halten — Routinebetrieb, normale Reviews" },
+          { "links": "Service mit hohem Verbrauch, Auslastung dauerhaft <20%", "rechts": "Optimieren — Rightsizing, Konsolidierung, Off-Hours-Abschaltung" },
+          { "links": "„Zombie”-Service mit kaum Nutzung, hohen Folgekosten", "rechts": "Retire — kontrolliert stilllegen, Daten archivieren, Lizenzen kündigen" }
         ],
-        "korrekt": [0, 1, 3],
-        "erklaerung": "Off-Hours Shutdown, Retire ungenutzter Services und differenzierte SLOs sind risikoarme, schnell wirksame Maßnahmen. Produktivsysteme abzuschalten und Monitoring einzusparen sind Hochrisiko-Pseudoeinsparungen, die Compliance, Verfügbarkeit und Lernfähigkeit zerstören."
+        "erklaerung": "Diese vier Optionen — Invest, Halten, Optimieren, Retire — strukturieren die Portfolio-Entscheidung. Die Senior-Disziplin liegt darin, „Halten” nicht als Default zu nehmen: Jeder gehaltene Service muss seine Existenz im Review begründen, sonst wachsen Portfolio und Kosten unkontrolliert. Zombie-Services konsequent zu retiren ist oft der größte Nachhaltigkeits-Hebel."
       }
     },
     {
       "nr": 5,
-      "typ": "video",
-      "titel": "Energy Efficient Data Centers: Hebel und ihre Wirkung",
-      "youtube_id": "",
-      "youtube_query": "rechenzentrum energieeffizienz pue konsolidierung deutsch",
-      "dauer_min": 7,
+      "typ": "lueckentext",
+      "titel": "Rightsizing-Plan mit Guardrails",
+      "inhalt": "Ein Rightsizing-Vorhaben braucht klare Annahmen, Stop-Regeln und einen Rollback-Pfad.",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Hebel haben in modernen Rechenzentren typischerweise die größte Energiewirkung?",
-        "typ": "single",
-        "optionen": [
-          "Die Wandfarbe der Server-Racks",
-          "Konsolidierung/Virtualisierung, Abschalten Idle-Workloads, Kühlung optimieren, hardwareseitige Effizienzklassen",
-          "Mehr Bildschirme im Operations-Bereich",
-          "Längere Mittagspausen der Administrator:innen"
+        "frage": "Vervollständigen Sie die Aussagen zu Rightsizing-Guardrails.",
+        "typ": "lueckentext",
+        "text": "Ein Service läuft auf 10 VMs mit durchschnittlicher CPU-Auslastung von 15 Prozent. Vor dem Rightsizing dokumentieren wir die Annahme, dass das {0}-Profil stabil bleibt. Als harter Guardrail definieren wir: Steigt die CPU-Auslastung über {1} Prozent für mehr als 10 Minuten, erfolgt automatischer {2}. Das SLO für Verfügbarkeit bleibt unverändert bei mindestens 99,5 Prozent — es ist nicht {3}.",
+        "luecken": [
+          { "antwort": "Peak", "alternativen": ["Last", "peak", "Last-"] },
+          { "antwort": "85", "alternativen": ["80", "85%", "achtzig"] },
+          { "antwort": "Rollback", "alternativen": ["rollback", "Rückbau", "Rücknahme"] },
+          { "antwort": "verhandelbar", "alternativen": ["verhandeln", "verhandelt"] }
         ],
-        "korrekt": 1,
-        "erklaerung": "Konsolidierung/Virtualisierung, Abschalten von Idle-Workloads, Kühlungsoptimierung und Hardware-Effizienzklassen sind die nachgewiesen wirkungsvollsten Hebel — sie verändern den realen Energieverbrauch substanziell. Wandfarben, Monitor-Anzahl und Pausenlogistik sind keine ernsthaften Steuerungsinstrumente."
+        "erklaerung": "Drei Disziplinen sichern verantwortliches Rightsizing: dokumentierte Annahmen (Peak-Profil stabil?), Stop-Regel (z. B. CPU > 85% für > 10 Minuten → Rollback) und unverhandelbares SLO als Anker. Wer die SLO-Grenze verhandelt, um den Sparbetrag zu erreichen, optimiert die falsche Größe — er reduziert nicht Verbrauch, sondern Resilienz."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Anti-Greenwashing-Kopplung: Kostenreduktion gilt nur bei gehaltenem SLO",
-      "inhalt": "Eine der mächtigsten Schutzmaßnahmen gegen Greenwashing-KPIs ist die explizite Kopplung. ‚Kostenreduktion gilt nur dann als Erfolg, wenn das SLO gehalten wurde.‘ Ohne diese Kopplung passiert in der Praxis regelmäßig folgendes: ein Team senkt die Compute-Kosten um 30%, indem es Redundanzen entfernt — und produziert kurz darauf eine SLO-Verletzung, die teurer ist als die Ersparnis. Die Kopplung kann technisch über mehrere KPIs erfolgen: Reportings zeigen ‚Kostenreduktion‘ und ‚SLO-Quote‘ nebeneinander, und der ‚Erfolg‘ wird als logische UND-Bedingung definiert. Analog: ‚Energieeinsparung gilt nur, wenn Datenqualität ≥B und Control Pass Rate ≥X.‘ Diese Kopplungslogik macht aus weichen Nachhaltigkeitszielen harte Steuerungsgrößen — und verhindert, dass Pseudo-Erfolge gefeiert werden. Senior-Pointe: ohne Kopplung folgt die Organisation der naturgesetzlichen Goodhart-Logik und manipuliert die Kennzahl, nicht das gemeinte Verhalten.",
-      "dauer_min": 6,
+      "titel": "Anti-Gaming und Trade-off-Protokoll — Greenwashing-KPIs vermeiden",
+      "inhalt": "Wenn KPIs auf Energieverbrauch oder Kosten gemessen werden, entstehen vorhersagbare Gaming-Versuche: Last wird verlagert (aus dem Messbereich heraus), Reporting-Frequenz wird reduziert (weniger Zahlen, schöneres Bild), Definitionen werden angepasst (was vorher zählte, zählt jetzt nicht mehr). Senior-Steuerung verhindert das mit drei Mechanismen: (1) KPI-Kopplung — Kosten-/Verbrauchs-KPIs sind nur gültig, wenn SLO-KPIs gehalten werden (sonst wurde am falschen Hebel gespart). (2) Trade-off-Protokoll — jede größere Portfolio-Entscheidung wird mit Datum, Begründung, Alternativen, Frühwarnsignal und Review-Termin dokumentiert. Das ist die Audit-Grundlage und gleichzeitig Schutz vor späterem „das hätten wir gewusst”. (3) Datenqualitäts-Label (A/B/C) — Messwerte werden mit Qualität gekennzeichnet (gemessen / belegt geschätzt / grob geschätzt). Wer ein A-Label nimmt, wo eigentlich C steht, betreibt Greenwashing. Das Label ist verpflichtend Bestandteil jedes Reportings.",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Aussagen zur Anti-Greenwashing-Kopplung sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Kostenreduktion wird nur als Erfolg gewertet, wenn das SLO gleichzeitig eingehalten wurde",
-          "Eine alleinige Cost-KPI ohne Kopplung schützt zuverlässig vor Goodhart-Effekten",
-          "Energieeinsparung kann an Datenqualität und Control Pass Rate gekoppelt werden",
-          "Reportings sollten gekoppelte KPIs nebeneinander darstellen",
-          "Kopplungen sind unnötig, wenn die Mitarbeitenden ‚gute Absichten‘ haben"
-        ],
-        "korrekt": [0, 2, 3],
-        "erklaerung": "Logische UND-Bedingungen, klare Kopplung mit Datenqualität/Controls und kombinierte Darstellung sind die wirksamen Mechanismen. Eine isolierte Cost-KPI ist genau das, wovor Goodhart warnt; ‚gute Absichten‘ ersetzen kein KPI-Design — das ist eine der teuersten Annahmen in Sustainability-Programmen."
+        "frage": "Beschreiben Sie in 4–6 Sätzen: Sie sind CIO und sollen in 4 Monaten 15% Energie- und Betriebskosten reduzieren ohne SLO-Verletzung. Wie strukturieren Sie zwei „Quick Win”-Maßnahmen und welches Anti-Gaming-Element bauen Sie in das KPI-Reporting ein?",
+        "typ": "text",
+        "musterloesung": "Zwei sofort umsetzbare Maßnahmen mit niedrigem Risiko: Erstens eine Off-Hours-Abschaltung aller Non-Prod-Umgebungen mit Pflicht-Notfall-On unter 30 Minuten — Owner Plattformbetrieb, Wirkung typisch 15–30% Verbrauchsreduktion im Non-Prod-Anteil. Zweitens ein Rightsizing-Pilot auf zwei deutlich überdimensionierte Services mit Stop-Regel (CPU > 85% über 10 Minuten → Rollback) und SLO-Anker. Beide Maßnahmen werden mit Service Ownern abgestimmt und im Capacity Review Board protokolliert. Anti-Gaming-Element: Die Kostenreduktion zählt im KPI-Reporting nur, wenn gleichzeitig die SLO-Verfügbarkeit gehalten wurde — fällt die SLO-Erfüllung unter Zielwert, wird die Einsparung im Bericht negativ ausgewiesen. Zusätzlich tragen alle Energie-Werte ein Datenqualitäts-Label (A/B/C), und das Trade-off-Protokoll jeder Entscheidung wird mit Datum, Annahme und Frühwarnsignal monatlich reviewed. So entsteht ein Reporting, das auch unter Audit-Sampling belastbar bleibt."
       }
     },
     {
       "nr": 7,
       "typ": "video",
-      "titel": "Sustainable IT Governance: Portfolio Board und auditfähige Entscheidungen",
-      "youtube_id": "",
-      "youtube_query": "sustainable it portfolio board governance auditfähige entscheidung deutsch",
-      "dauer_min": 8,
+      "titel": "ITIL Capacity Management — Praxis und Kennzahlen",
+      "youtube_id": "nP4Dk68pulM",
+      "youtube_query": "itil capacity management process overview",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Bausteine kennzeichnen eine auditfähige Sustainable-IT-Governance?",
+        "frage": "Welche Aussagen über ITIL Capacity Management treffen zu?",
         "typ": "multi",
         "optionen": [
-          "Ein regelmäßig tagendes Portfolio Board mit klaren Entscheidungsbefugnissen",
-          "Entscheidungsprotokolle mit Kriterien, Datenbasis und Begründung",
-          "Klare Owner für Service, Kapazität, Kosten und Nachhaltigkeit",
-          "Mündliche Vereinbarungen ohne Dokumentation",
-          "Review-Zyklen mit klar definierter Cadence"
+          "Es verbindet Geschäftsanforderungen, Service-Performance und Komponenten-Kapazität in einem gesteuerten Prozess",
+          "Es betrachtet nur die aktuell verfügbare Hardware ohne Bezug zu künftiger Last",
+          "Es nutzt Demand Forecasting und Workload-Analyse als Grundlage für Investitions- und Stilllegungsentscheidungen",
+          "Es liefert Kennzahlen wie Auslastung, Sättigungspunkt und prognostizierten Engpass-Zeitpunkt",
+          "Es ist primär ein nachträglicher Reporting-Prozess für die Vergangenheit"
         ],
-        "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Board, Entscheidungsprotokolle, klare Owner und Review-Cadence sind die Auditfähigkeits-Bausteine. Mündliche Vereinbarungen mögen vertrauensvoll wirken, sind aber genau das Gegenteil von auditfähig — und führen regelmäßig zu Findings und Reputationsproblemen."
+        "korrekt": [0, 2, 3],
+        "erklaerung": "ITIL Capacity Management ist zukunftsgerichtet: Es koppelt Geschäftsanforderungen, Service-Performance und Komponenten-Kapazität, nutzt Forecasting und liefert steuerungsrelevante Kennzahlen wie Auslastung, Sättigungspunkt und prognostizierten Engpass-Zeitpunkt. Ein reines „Schauen, was da ist” oder nachträgliches Reporting wäre genau das Gegenteil — ohne Steuerungswirkung."
       }
     }
   ]

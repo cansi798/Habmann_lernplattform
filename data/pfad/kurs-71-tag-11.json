@@ -1,148 +1,140 @@
 {
   "kurs_id": "71_Dig_42",
   "tag_nr": 11,
-  "titel": "RPA als Steuerungs- und Risikohebel: Plattformen, attended vs. unattended, Eignung",
+  "titel": "RPA als Steuerungs- und Risikohebel: Plattform, attended vs. unattended und Use-Case-Eignung",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "RPA verstehen: wofür geeignet, wofür nicht",
-      "youtube_id": "",
-      "youtube_query": "robotic process automation rpa einfach erklärt deutsch use cases",
-      "dauer_min": 7,
+      "titel": "Was ist Robotic Process Automation — Einsatzgebiete und Grenzen",
+      "youtube_id": "YoGjxvTn1ms",
+      "youtube_query": "robotic process automation rpa einfach erklärt deutsch lernvideo",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welcher Prozess ist typischerweise besonders gut für RPA geeignet?",
+        "frage": "Welche Aussage zur Eignung von RPA trifft am besten zu?",
         "typ": "single",
         "optionen": [
-          "Eine kreative Designentscheidung mit hohem Interpretationsanteil",
-          "Eine regelbasierte, repetitive Tätigkeit mit stabilem UI, hohem Volumen und wenigen Ausnahmen",
-          "Eine strategische Vorstandsentscheidung",
-          "Ein Prozess, der täglich seine Schritte ändert"
+          "RPA eignet sich für jede manuelle Aufgabe, unabhängig von Regeln und UI-Stabilität",
+          "RPA ist besonders geeignet für regelbasierte, stabile Prozesse mit klarem Input/Output und hohem Volumen",
+          "RPA ersetzt vollständig Workflow-Engines und BPM-Systeme",
+          "RPA eignet sich primär für Aufgaben mit hoher Interpretations- und Entscheidungstiefe"
         ],
         "korrekt": 1,
-        "erklaerung": "RPA glänzt bei regelbasiert, repetitiv, stabiles UI, hohes Volumen, wenige Ausnahmen. Kreative oder strategische Entscheidungen und Prozesse mit ständig wechselnden Schritten sind klassische Anti-Use-Cases — dort produziert RPA fragile Bots und teure Folgekosten."
+        "erklaerung": "RPA spielt seine Stärken bei regelbasierten, stabilen Prozessen mit klarem Input/Output und hohem Volumen aus — typisch sind Datenübernahmen, Buchungen, Statusabfragen. Bei häufigen UI-Änderungen, vielen Sonderfällen oder hohem Interpretationsanteil ist RPA schwach — dort sind BPM-Engines, APIs oder KI-Komponenten besser geeignet. RPA ergänzt diese Werkzeuge, sie ersetzt sie nicht."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "Eignungs-Score: fünf Fragen vor jeder RPA-Investition",
-      "inhalt": "Bevor ein einziger Bot gebaut wird, lohnt sich ein nüchterner Eignungs-Score auf einer Skala von 1 bis 5 — denn schlechte RPA-Kandidaten sind in der Praxis teurer als ihre manuelle Variante. Fünf Fragen entscheiden. Erstens: ‚Stabilität‘ — ändert sich das UI oder die Logik selten oder häufig? Zweitens: ‚Regelbasiertheit‘ — sind die Schritte und Entscheidungen klar beschreibbar oder gibt es viel Interpretationsanteil? Drittens: ‚Volumen‘ — gibt es genug Fälle pro Tag, dass die Automatisierung sich rechnet? Viertens: ‚Ausnahmequote‘ — wie hoch ist der Anteil an Sonderfällen, der nicht automatisierbar ist? Fünftens: ‚Audit-Relevanz‘ — wie hoch sind die Anforderungen an Nachweisbarkeit, Logging und SoD? Ein Kandidat mit drei niedrigen Werten ist meistens ein Kandidat fürs Backlog-Archiv, nicht für den nächsten Sprint. Senior-Verantwortung heißt, ‚Nein‘ zu schlechten Use Cases zu sagen — auch wenn der Fachbereich drängt.",
+      "titel": "RPA-Plattform — Studio, Orchestrator, Bots",
+      "inhalt": "RPA-Plattformen folgen einem ähnlichen Aufbau, unabhängig vom Hersteller (UiPath, Automation Anywhere, Blue Prism, Power Automate u. a.). Drei Kernbestandteile: (1) Studio/Designer — hier werden Bots in Workflows aus Activities zusammengesetzt; gute Plattformen erlauben sowohl Low-Code-Drag-&-Drop als auch komplexere Skriptlogik. (2) Orchestrator/Control Center — verwaltet Bots, Queues, Zeitpläne, Credentials (idealerweise in einem Vault), Logs und Monitoring. (3) Bots/Runner — die ausführenden Einheiten, entweder am Arbeitsplatz (attended) oder serverseitig (unattended). Skalierung verlangt Standards: Namenskonventionen, Versionierung, Test-/Release-Prozesse, Exception-Codes, KPIs. Ohne diese Standards entsteht Schatten-IT: jeder baut, wie er will, niemand weiß, welcher Bot welche Version produktiv läuft, Auditfähigkeit geht verloren. Die Plattform allein liefert keine Governance — sie ist nur das Werkzeug.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Faktoren erhöhen den Eignungs-Score eines RPA-Use-Cases?",
+        "frage": "Welche Komponenten gehören typischerweise zu einer RPA-Plattform?",
         "typ": "multi",
         "optionen": [
-          "Stabiles UI/Logik",
-          "Hohes Volumen wiederkehrender Fälle",
-          "Niedrige Ausnahmequote",
-          "Hoher Interpretations- und Ermessensanteil",
-          "Klare regelbasierte Schritte"
+          "Ein Studio oder Designer zum Bau der Bot-Workflows",
+          "Ein Orchestrator für Queues, Zeitpläne, Logs und Credentials",
+          "Eine zentrale Geschäftsregel-Engine, die alle ERP-Daten ersetzt",
+          "Bots/Runner als attended oder unattended ausführbare Einheiten",
+          "Standards für Naming, Versionierung und Logging als Voraussetzung für Skalierung"
         ],
-        "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Stabilität, Volumen, niedrige Ausnahmequote und klare Regeln sind klassische RPA-Pluspunkte. Hoher Interpretationsanteil ist im Gegenteil ein Warnsignal — solche Use Cases gehören eher in eine Workflow-Engine mit menschlichen Entscheidungspunkten oder in eine KI-gestützte Lösung mit Human-in-the-loop."
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Studio (Bau), Orchestrator (Run/Steuerung), Bots (Ausführung) und verbindliche Standards bilden eine skalierfähige RPA-Plattform. Eine Geschäftsregel-Engine ist ein eigenes Werkzeug — RPA arbeitet typischerweise auf der Oberfläche bestehender Systeme und ersetzt keine ERP-Logik."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Attended vs. unattended Automation: Entscheidung unter Zielkonflikten",
-      "youtube_id": "",
-      "youtube_query": "attended unattended rpa unterschied entscheidung deutsch",
-      "dauer_min": 7,
+      "titel": "Attended vs. Unattended — Wann läuft der Bot wo?",
+      "youtube_id": "TeRPLv1nK5U",
+      "youtube_query": "attended vs unattended automation rpa erklärt",
+      "dauer_min": 5,
       "aufgabe": {
-        "frage": "Worin liegt der Hauptunterschied zwischen attended und unattended Automation?",
+        "frage": "Welche Aussage über attended und unattended Automation ist korrekt?",
         "typ": "single",
         "optionen": [
-          "Attended ist immer billiger",
-          "Attended läuft am Arbeitsplatz unter User-Aufsicht (Assistenz), unattended läuft serverseitig vollautomatisch über Queues/Pläne",
-          "Unattended ist ein Marketing-Begriff ohne technischen Unterschied",
-          "Attended benötigt mehr Hardware als unattended"
+          "Attended Bots laufen vollautomatisch serverseitig nach Zeitplan",
+          "Unattended Bots werden am Arbeitsplatz vom Nutzer gestartet und überwacht",
+          "Attended Bots laufen am Arbeitsplatz und unterstützen den Nutzer; Unattended Bots laufen vollautomatisch serverseitig",
+          "Attended und Unattended unterscheiden sich nur in der Lizenz, nicht in der Architektur"
         ],
-        "korrekt": 1,
-        "erklaerung": "Der entscheidende Unterschied ist die Betriebsumgebung: attended unter User-Kontrolle am Arbeitsplatz, unattended serverseitig vollautomatisch. Kosten und Hardware-Bedarf sind sekundär, und beide Begriffe haben technische Substanz. Für die Entscheidung sind Reife, Skalierungsziel und Risiko entscheidend."
+        "korrekt": 2,
+        "erklaerung": "Attended Bots laufen am Arbeitsplatz des Nutzers, werden von diesem getriggert oder überwacht und entlasten ihn bei Teilschritten — geringeres Betriebsrisiko, aber begrenzte Skalierung. Unattended Bots laufen serverseitig vollautomatisch (Queues, Zeitpläne) — hoher Skaleneffekt, aber höhere Anforderungen an Governance, Security und Exception-Handling. Architektur und Betriebsrisiko unterscheiden sich substanziell, nicht nur die Lizenz."
       }
     },
     {
       "nr": 4,
-      "typ": "text",
-      "titel": "Stufenplan: attended starten, später skalieren",
-      "inhalt": "In der Praxis bewährt sich häufig ein zweistufiger Ansatz. ‚Release 1 (attended)‘: Der Bot läuft am Arbeitsplatz, ein/eine Mitarbeitende:r überwacht und greift bei Ausnahmen ein. Vorteile: geringeres Change-Risiko, schnelle Lernkurve, niedrige Anforderungen an Governance. Nachteil: begrenzte Skalierung. ‚Release 2 (unattended)‘: Stabilisierte Prozesse werden serverseitig automatisiert, mit Queues, Scheduling, Monitoring und vollwertigem Audit Trail. Vorausgesetzt sind dann reife Exception-Behandlung, Credential-Vault, SoD und ein Operations-Team. Zwei Readiness-KPIs entscheiden über den Übergang: ‚Ausnahmequote‘ unter einer definierten Schwelle (z. B. ≤10%) und ‚UI-Änderungsrate‘ stabil über einen Beobachtungszeitraum. Wer ohne diese Readiness in unattended geht, erlebt regelmäßig Bot-Stürze, falsche Buchungen im großen Maßstab und unangenehme Audit-Findings. Senior-Pointe: die Stufenentscheidung ist eine Risiko-Entscheidung, keine Tool-Entscheidung.",
+      "typ": "zuordnung",
+      "titel": "Use-Case-Eignung systematisch bewerten",
+      "inhalt": "Senior-Steuerung verlangt eine systematische Bewertung jedes RPA-Kandidaten entlang Eignungskriterien.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Readiness-Indikatoren rechtfertigen den Übergang von attended zu unattended?",
-        "typ": "multi",
-        "optionen": [
-          "Ausnahmequote unter einer definierten Schwelle (z. B. ≤10%)",
-          "Stabile UI-Änderungsrate über einen Beobachtungszeitraum",
-          "Druck der Fachseite, möglichst schnell zu skalieren",
-          "Funktionierende Exception-Behandlung mit definierten Owner/Playbooks",
-          "Etablierter Credential-Vault und SoD"
+        "frage": "Ordnen Sie jedem Eignungskriterium die zutreffende RPA-Bewertung zu.",
+        "typ": "zuordnung",
+        "paare": [
+          { "links": "Regelbasiert, klare Bedingungen", "rechts": "Hohe RPA-Eignung — automatisierbar mit niedrigem Risiko" },
+          { "links": "Häufige UI-Änderungen im Zielsystem", "rechts": "Niedrige Eignung — fragile Automation, hoher Wartungsaufwand" },
+          { "links": "Hohes Volumen, repetitiv", "rechts": "Hohe Eignung — starker ROI durch Skaleneffekt" },
+          { "links": "Viele Sonderfälle und Interpretationsbedarf", "rechts": "Niedrige Eignung — RPA scheitert, ergänzende KI/BPM nötig" },
+          { "links": "Stabile API verfügbar", "rechts": "RPA selten erste Wahl — API-Integration ist robuster und besser zu warten" }
         ],
-        "korrekt": [0, 1, 3, 4],
-        "erklaerung": "Niedrige Ausnahmequote, stabile UI, reife Exception-Behandlung und Security-Grundlagen sind sachliche Readiness-Indikatoren. Reiner Druck der Fachseite ist genau das, wogegen die Readiness-Logik schützen soll — er ersetzt keine Reife und führt regelmäßig zu kostspieligen Rollbacks."
+        "erklaerung": "Eignung systematisch zu bewerten verhindert teure Fehlautomatisierungen. Faustregel: Regelbasiert + stabile UI + hohes Volumen = klarer Kandidat. UI-Volatilität, viele Ausnahmen oder verfügbare APIs sprechen gegen RPA — letzteres weil API-Integration langlebiger ist. Die Senior-Frage: Welche Eignung hat dieser Use Case wirklich, oder ist RPA hier ein Pflaster für ein eigentlich systemisches Problem?"
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "RPA-Plattformüberblick: Studio, Orchestrierung, Queues, Logs",
-      "youtube_id": "",
-      "youtube_query": "rpa plattform überblick studio orchestrator queues deutsch tutorial",
-      "dauer_min": 7,
+      "titel": "RPA im Unternehmen — Nutzen und Risiken in 138 Sekunden",
+      "youtube_id": "Z0mzGnzC1n8",
+      "youtube_query": "138 sekunden digital rpa robotic process automation",
+      "dauer_min": 4,
       "aufgabe": {
-        "frage": "Welche Komponente ist Pflicht in einer Enterprise-RPA-Plattform?",
-        "typ": "single",
+        "frage": "Welche typischen Risiken muss eine RPA-Senior-Steuerung von Anfang an adressieren?",
+        "typ": "multi",
         "optionen": [
-          "Eine Suite aus Studio/Designer, Orchestrierung mit Queues/Scheduling, zentrales Logging und Credential-/Secret-Management",
-          "Ein reines Excel-Makro",
-          "Eine grafische Notizfunktion ohne Logs",
-          "Ein nur einmal jährlich eingeschalteter Server"
+          "Schatten-IT durch Fachbereichs-Bots ohne zentrale Übersicht",
+          "Credential-Risiko durch hartcodierte oder geteilte Passwörter",
+          "Fragile UI-Automation, die bei jeder Oberflächenänderung bricht",
+          "Fehlbuchungen im großen Maßstab, wenn ein Bot mit fehlerhafter Logik produktiv geht",
+          "Vollständiger Wegfall jeglicher Compliance-Anforderungen, weil Bots automatisch konform sind"
         ],
-        "korrekt": 0,
-        "erklaerung": "Eine professionelle Plattform braucht alle vier Bausteine: Studio/Designer (Bauen), Orchestrierung mit Queues/Scheduling (Betreiben), zentrales Logging (Audit/Debug) und Credential-Management (Security). Excel-Makros sind nicht Enterprise-fähig, und Komponenten ohne Logs oder mit seltener Verfügbarkeit untergraben Auditfähigkeit."
+        "korrekt": [0, 1, 2, 3],
+        "erklaerung": "Die vier zentralen RPA-Risiken: Schatten-IT (Verlust der Übersicht), Credential-Risiko (Bots sind privilegierte Accounts), UI-Fragilität (jeder Portal-Relaunch bricht Bots) und Skalierungsschäden (ein Bot bucht in einer Stunde so viel wie 50 Mitarbeitende — Fehler skalieren mit). Compliance entfällt gerade nicht: Bots brauchen Logging, SoD und Audit Trail wie jeder andere Akteur."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Exception Handling: business, system, data — und ‚fail safe‘ als Designprinzip",
-      "inhalt": "Ein guter Bot scheitert kontrolliert. Drei Exception-Typen sind zu unterscheiden. ‚Business Exceptions‘ sind fachlich vorgesehene Sonderfälle — eine Rechnung über einer Freigabeschwelle, ein unbekannter Lieferant, eine Dublette. Die Behandlung gehört in eine Exception Queue, die ein/eine Mitarbeitende:r mit klarem SLA abarbeitet. ‚System Exceptions‘ sind technische Ausfälle — ERP nicht erreichbar, Authentifizierung fehlgeschlagen, Timeout. Hier helfen Retry-Strategien und Eskalation an IT-Operations. ‚Data Exceptions‘ sind Qualitätsprobleme — fehlende Pflichtfelder, inkonsistente Formate. Behandlung: Rückgabe an die Anforderungsstelle mit konkreter Fehlermeldung. Über allen drei steht das Prinzip ‚fail safe‘: der Bot bricht nie heimlich ab, sondern erzeugt immer ein dokumentiertes Arbeitspaket mit Owner und Status. Senior-Pointe: gute RPA-Programme messen nicht nur Durchsatz, sondern Exception Rate, Rework-Quote und MTTR — sonst tarnen sie sich erfolgreich, während die Folgekosten in der Buchhaltung anfallen.",
-      "dauer_min": 7,
+      "titel": "Attended-First — pragmatischer Einstieg, kontrollierter Übergang",
+      "inhalt": "Eine wirksame Senior-Strategie für RPA-Einführungen ist häufig „Attended First, Unattended Later”. Begründung: Attended-Bots am Arbeitsplatz erlauben dem Fachbereich, den Bot zu beobachten und zu korrigieren, der Schaden bei Fehlern bleibt klein, die Lernkurve beim Aufbau von Exception-Handling, Logging und Standards ist niedriger. Sobald der Prozess stabil läuft (UI-Änderungsrate niedrig, Ausnahmequote unter Zielwert, Audit Trail vollständig), erfolgt die Migration auf Unattended — mit klaren Readiness-KPIs: Exception Rate < 10%, UI-Stabilität bewiesen, Bot-Versionierung etabliert, Credential-Vault vorhanden, SoD-Regel überprüft (kein „anlegen und freigeben durch denselben Bot”). Der Übergang ist eine Senior-Entscheidung, kein technischer Switch — sie verlangt einen dokumentierten Trade-off zwischen Skalierungsnutzen und Betriebsrisiko, einen Rollback-Plan und eine Frühwarn-Logik (z. B. Stop-Regel: steigt die Fehlerquote nach Umzug auf Unattended um mehr als 20%, Rückzug binnen 24h).",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussagen über RPA Exception Handling sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Business Exceptions landen in einer Queue mit menschlichem Bearbeiter und SLA",
-          "System Exceptions können mit Retry-Strategien und Eskalation behandelt werden",
-          "‚Fail safe‘ bedeutet, dass der Bot bei Problemen heimlich abbricht und nichts dokumentiert",
-          "Data Exceptions sollten mit konkreter Fehlermeldung an die Anforderungsstelle zurückgegeben werden",
-          "Exception Rate ist eine sinnvolle Steuerungs-KPI für RPA-Programme"
-        ],
-        "korrekt": [0, 1, 3, 4],
-        "erklaerung": "Business in Queue, System mit Retry, Data zurück zur Quelle und Exception Rate als Steuerungs-KPI bilden ein konsistentes Exception-Design. ‚Heimlich abbrechen‘ ist das Gegenteil von ‚fail safe‘ — es verbirgt Probleme, untergräbt Audit und vergrößert Folgekosten."
+        "frage": "Beschreiben Sie in 4–6 Sätzen: Sie sind COO und müssen zwischen einem schnellen Start mit Attended-Bots in 6 Wochen oder einem direkten Unattended-Rollout in 12 Wochen entscheiden. Wie entscheiden Sie, welche Readiness-KPIs setzen Sie und welcher Guardrail ist nicht verhandelbar?",
+        "typ": "text",
+        "musterloesung": "Als COO entscheide ich für einen attended-first Ansatz mit klarem Stufenmodell: Release 1 in 6 Wochen mit attended Bots am Arbeitsplatz, Release 2 nach 6–10 weiteren Wochen mit Migration auf unattended, sofern definierte Readiness-Kriterien erreicht sind. Begründung: Das geringere Betriebsrisiko bei attended erlaubt schnelle Wirkung im Fachbereich, parallel reift Governance, Exception-Handling und Audit Trail. Readiness-KPIs für unattended: Exception Rate unter 10%, UI-Änderungsrate im Zielportal stabil über 8 Wochen, Audit-Trail-Vollständigkeit 100%, Credential-Vault produktiv. Nicht verhandelbarer Guardrail: Segregation of Duties — kein Bot darf in unattended-Modus eine Buchung anlegen UND freigeben, das bleibt zwingend an einen menschlichen Vier-Augen-Schritt gekoppelt. Frühwarnsignal nach Umzug: steigt die Fehlerquote um mehr als 20% gegenüber attended-Baseline, erfolgt automatischer Rückzug binnen 24h. Diese Entscheidung wird mit CFO und Compliance gemeinsam protokolliert."
       }
     },
     {
       "nr": 7,
       "typ": "video",
-      "titel": "RPA Operating Model: Bot Owner, Process Owner, Security",
-      "youtube_id": "",
-      "youtube_query": "rpa operating model bot owner process owner security governance deutsch",
-      "dauer_min": 8,
+      "titel": "RPA-Programm verantworten — Governance vor Bot-Bau",
+      "youtube_id": "Npbp0gFyKf0",
+      "youtube_query": "wieso software-roboter benutzen rpa unternehmen erklärt",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Rollen sind in einem reifen RPA-Operating-Model unverzichtbar?",
+        "frage": "Welche Aussagen über ein verantwortet aufgesetztes RPA-Programm sind korrekt?",
         "typ": "multi",
         "optionen": [
-          "Bot Owner — accountable für Run und Monitoring",
-          "Process Owner — fachlich accountable für den automatisierten Prozess",
-          "Security Owner — Credential-Vault, SoD, Logging-Integrität",
-          "Operations/Run — operative Überwachung und Incident-Bearbeitung",
-          "Eine einzige Person, die alle Rollen gleichzeitig hält"
+          "Ein „Automation Candidate Funnel” filtert Ideen über Eignung, PoC und Pilot vor dem Betrieb",
+          "Bots brauchen Owner — sowohl fachlich (Process Owner) als auch technisch (Bot Owner)",
+          "Wenn ein Bot häufig in Exceptions läuft, ist das ein KPI-Signal zum Stoppen oder Neudesign — nicht zum Ignorieren",
+          "Sobald 10 Bots in Produktion laufen, ist Governance überflüssig",
+          "Audit Trail Minimum (Bot-ID, Version, Timestamp, Quelle, Ergebnis) gehört in jedes Bot-Design von Anfang an"
         ],
-        "korrekt": [0, 1, 2, 3],
-        "erklaerung": "Bot Owner, Process Owner, Security und Operations sind die vier zwingenden Rollen — sie verteilen Accountability für Betrieb, Fachlichkeit, Sicherheit und Incident-Handling. Eine Einzelperson für alles erzeugt einen Single Point of Failure und macht Audits/Incident Response zur Glückssache."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Ein verantwortetes RPA-Programm filtert systematisch (Funnel), verteilt Verantwortung (Process Owner + Bot Owner), nutzt Exception-Rate als Steuerungssignal und verankert Audit Trail von Anfang an. Governance wird gerade ab einer gewissen Anzahl Bots unverzichtbar — sonst entsteht ein unsteuerbares Portfolio mit fragilen Abhängigkeiten."
       }
     }
   ]

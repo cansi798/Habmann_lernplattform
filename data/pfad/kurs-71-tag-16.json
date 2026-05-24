@@ -1,148 +1,141 @@
 {
   "kurs_id": "71_Dig_42",
   "tag_nr": 16,
-  "titel": "EU-Taxonomie und CSRD als Prozess-, Daten- und Kontrollarchitektur",
+  "titel": "Regulatorik in Steuerung übersetzen: EU-Taxonomie, CSRD und ESG als auditfähige Prozess- und Kontrollarchitektur",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "EU-Taxonomie und CSRD im Prozesskontext verstehen",
-      "youtube_id": "",
-      "youtube_query": "eu taxonomie csrd unternehmen reporting prozess deutsch erklärt",
+      "titel": "CSRD, ESRS und EU-Taxonomie — wie hängt das alles zusammen?",
+      "youtube_id": "_ypAyhFA3MQ",
+      "youtube_query": "esrs csrd eu taxonomie zusammenhang einfach erklärt",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Was ist die zentrale Pointe der CSRD aus Prozesssicht?",
+        "frage": "Welche Aussage über das Zusammenspiel von CSRD, ESRS und EU-Taxonomie ist korrekt?",
         "typ": "single",
         "optionen": [
-          "Sie verlangt nur ein paar zusätzliche Folien im Geschäftsbericht",
-          "Sie erzeugt Datenbedarfe, Nachweise, Kontrollen und Verantwortlichkeiten quer durch IT, Finance, Einkauf, Werke und HR",
-          "Sie betrifft ausschließlich die Marketing-Abteilung",
-          "Sie hat keine prozessualen Konsequenzen"
+          "CSRD und EU-Taxonomie sind dasselbe Regelwerk unter zwei Namen",
+          "Die CSRD ist die Berichtspflicht-Richtlinie, die ESRS sind die konkreten Reporting-Standards, die EU-Taxonomie klassifiziert nachhaltige Wirtschaftsaktivitäten",
+          "Die EU-Taxonomie ersetzt die CSRD ab 2025 vollständig",
+          "ESRS gelten nur für Banken, CSRD nur für Industrieunternehmen"
         ],
         "korrekt": 1,
-        "erklaerung": "CSRD ist im Kern kein Reporting-Projekt, sondern erzwingt Daten, Nachweise, Controls und Verantwortlichkeiten quer durch die Organisation. Wer sie als Folien-Update versteht, unterschätzt Aufwand und Risiko massiv und produziert verlässlich Audit-Findings."
+        "erklaerung": "Die drei Regelwerke greifen ineinander: Die CSRD (Corporate Sustainability Reporting Directive) verpflichtet zur Nachhaltigkeitsberichterstattung. Die ESRS (European Sustainability Reporting Standards) sind die konkreten inhaltlichen und methodischen Vorgaben für diesen Bericht. Die EU-Taxonomie ist ein Klassifizierungssystem für nachhaltige Wirtschaftsaktivitäten — sie definiert, was als „grün” gilt und wird im CSRD-Bericht verwendet. Sie ersetzen einander nicht, sondern bauen aufeinander auf."
       }
     },
     {
       "nr": 2,
-      "typ": "text",
-      "titel": "End-to-End-Reportingprozess: Plan, Collect, Validate, Consolidate, Approve, Report, Assure",
-      "inhalt": "Ein auditfähiger ESG-Reportingprozess hat sieben klar getrennte Phasen. ‚Plan‘ legt fest, welche KPIs für welchen Zeitraum benötigt werden, und aktualisiert das KPI-Dictionary. ‚Collect‘ holt die Daten aus den Quellsystemen (ERP, CRM, Facility, Einkauf, HR) — die Owner pro Datenquelle müssen klar benannt sein. ‚Validate‘ prüft Vollständigkeit und Plausibilität, markiert Datenqualität (A/B/C) und meldet Abweichungen zurück. ‚Consolidate‘ aggregiert die Daten zu Berichts-KPIs, dokumentiert die Berechnungsmethodik und versioniert Skripte/Spreadsheets. ‚Approve‘ ist die Zwei-Augen-Freigabe durch Owner und Reporting Lead — mit Audit Trail. ‚Report‘ veröffentlicht die Werte intern und extern. ‚Assure‘ schließlich ist die externe oder interne Prüfungslogik (z. B. eingeschränkte oder hinreichende Sicherheit gemäß CSRD). Jede Phase hat eigene Controls, Rollen und Evidence-Artefakte. Die Senior-Pointe: wer Phasen mischt oder Schritte überspringt, baut Compliance-Theater statt Compliance-System.",
-      "dauer_min": 7,
+      "typ": "zuordnung",
+      "titel": "ESG-Begriffe sicher zuordnen",
+      "inhalt": "Vor der Detailarbeit ist die Begriffsklarheit zentral — viele Diskussionen scheitern, weil dieselben Worte unterschiedlich verstanden werden.",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Phasen gehören in einen vollständigen ESG-Reportingprozess?",
-        "typ": "multi",
-        "optionen": [
-          "Plan (KPI-Dictionary, Datenanforderungen)",
-          "Collect, Validate, Consolidate, Approve, Report",
-          "Assure (Prüfung durch interne/externe Instanz)",
-          "Improvise (ad hoc Sammeln am letzten Tag)",
-          "Lessons Learned und Korrekturmaßnahmen für die nächste Periode"
+        "frage": "Ordnen Sie jeder Abkürzung die korrekte Bedeutung zu.",
+        "typ": "zuordnung",
+        "paare": [
+          { "links": "CSRD", "rechts": "Corporate Sustainability Reporting Directive — EU-Berichtspflicht-Richtlinie" },
+          { "links": "EU-Taxonomie", "rechts": "Klassifizierungssystem nachhaltiger Wirtschaftsaktivitäten" },
+          { "links": "ESRS", "rechts": "European Sustainability Reporting Standards — konkrete Reporting-Standards" },
+          { "links": "Scope 1", "rechts": "Direkte Emissionen aus eigenen Quellen (z. B. Fuhrpark, Heizungsanlagen)" },
+          { "links": "Scope 2", "rechts": "Indirekte Emissionen aus eingekaufter Energie (Strom, Fernwärme)" },
+          { "links": "Scope 3", "rechts": "Indirekte vor- und nachgelagerte Emissionen entlang der Wertschöpfungskette" }
         ],
-        "korrekt": [0, 1, 2, 4],
-        "erklaerung": "Plan, Collect-Validate-Consolidate-Approve-Report, Assure und Lessons Learned bilden den vollständigen Zyklus. ‚Improvise‘ ist genau die Methode, gegen die ein strukturierter Prozess entstanden ist — sie produziert Datenqualitäts- und Audit-Risiken in jeder Periode neu."
+        "erklaerung": "Diese Begriffe bilden das Vokabular jedes CSRD-Projekts. Besonders Scope 3 ist die schwierigste Kategorie — sie umfasst Lieferanten, Geschäftsreisen, Pendelverkehr, Nutzung der verkauften Produkte und Entsorgung. Datenqualität ist hier typischerweise C (grob geschätzt). Genau deshalb braucht es transparente Annahmen und einen Verbesserungsplan."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "Minimum Viable Controls: nicht alles prüfen, sondern das Richtige",
-      "youtube_id": "",
-      "youtube_query": "minimum viable controls risk based esg compliance deutsch",
+      "titel": "EU-Taxonomie kurz erklärt",
+      "youtube_id": "DfoXSnvrVhc",
+      "youtube_query": "eu taxonomie kurz erklärt nachhaltigkeit",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Was unterscheidet ‚Minimum Viable Controls‘ von einer unstrukturierten Kontrolllandschaft?",
-        "typ": "single",
+        "frage": "Welche Kriterien muss eine Wirtschaftsaktivität nach EU-Taxonomie erfüllen, um als nachhaltig zu gelten?",
+        "typ": "multi",
         "optionen": [
-          "Sie kontrolliert weniger und ist deshalb riskanter",
-          "Sie wählt risikobasiert die Controls, die maximalen Schutz pro Aufwand bieten — und priorisiert Compliance-kritische Bereiche",
-          "Sie verzichtet auf jede Form von Audit Trail",
-          "Sie ist nur eine Marketingbezeichnung"
+          "Wesentlicher Beitrag zu mindestens einem der sechs Umweltziele",
+          "Keine erhebliche Beeinträchtigung der anderen Umweltziele (Do No Significant Harm, DNSH)",
+          "Einhaltung von Mindestschutzkriterien (z. B. Menschenrechte, OECD-Leitsätze)",
+          "Veröffentlichung beliebiger Marketing-Aussagen ohne technische Prüfung",
+          "Erfüllung der technischen Screening-Kriterien für die jeweilige Aktivität"
         ],
-        "korrekt": 1,
-        "erklaerung": "Minimum Viable Controls sind eine risikobasierte Auswahl mit hohem Wirkungsgrad pro Aufwand — sie fokussieren auf compliance-kritische Bereiche statt alles flächendeckend zu prüfen. Reduktion ohne Risikobasis ist gefährlich; Verzicht auf Audit Trail unterläuft die Logik komplett."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Eine Aktivität gilt nur dann als taxonomiekonform, wenn sie kumulativ erfüllt: (1) wesentlicher Beitrag zu einem Umweltziel, (2) DNSH — kein erheblicher Schaden an anderen Zielen, (3) Mindestschutz (Menschenrechte, OECD), (4) technische Screening-Kriterien. Alle vier Hürden zusammen — keine ist optional. Marketingaussagen ohne technische Prüfung sind genau der Greenwashing-Antipattern, den die Taxonomie verhindern soll."
       }
     },
     {
       "nr": 4,
-      "typ": "text",
-      "titel": "Evidence Pack: was ein Auditor pro KPI sehen muss",
-      "inhalt": "Auditfähigkeit entsteht nicht erst am Tag der Prüfung — sie entsteht im Alltag durch konsistente Evidence Packs pro KPI. Sechs Artefakte gehören zur Pflichtausstattung. ‚Quellbeleg‘ — wo kommt die Zahl her, welcher Export, welcher System-Snapshot, mit welchem Zeitstempel. ‚Transformationslogik‘ — welche ETL-Schritte, welche Mapping-Regeln, welche Berechnungslogik, am besten als versioniertes Skript oder dokumentiertes Spreadsheet. ‚Freigabeprotokoll‘ — wer hat wann freigegeben, mit welcher Begründung. ‚Ausnahmenregister‘ — welche Abweichungen oder Schätzungen wurden vorgenommen, warum, mit welcher Methodik. ‚Datenqualitätslabel‘ — A/B/C inklusive Verbesserungsplan. ‚Change-Requests‘ — alle Änderungen an KPI-Definition, Berechnung oder Quellen mit Begründung und Genehmigung. Wer diese sechs Artefakte pro KPI standardisiert sammelt, verkürzt jeden Audit dramatisch und reduziert das Findings-Risiko. Senior-Pointe: ein Evidence Pack ist kein Aktendeckel, sondern eine lebende Datenstruktur — sie muss durchsuchbar, versionierbar und reproduzierbar sein.",
-      "dauer_min": 7,
+      "typ": "lueckentext",
+      "titel": "ESG-Reportingprozess in 7 Schritten",
+      "inhalt": "Ein belastbarer CSRD-Reportingprozess folgt einem klaren Ablauf von der Planung bis zur Prüfung.",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Artefakte gehören in ein vollständiges Evidence Pack für eine ESG-KPI?",
-        "typ": "multi",
-        "optionen": [
-          "Quellbeleg (System/Export, Zeitstempel)",
-          "Transformationslogik (versionierter Berechnungsweg)",
-          "Freigabeprotokoll und Ausnahmenregister",
-          "Datenqualitätslabel (A/B/C)",
-          "Mündliche Zusage der Datenowner als ausreichender Nachweis"
+        "frage": "Vervollständigen Sie die Schritte des Reportingprozesses.",
+        "typ": "lueckentext",
+        "text": "Der Reportingprozess startet mit der Aktualisierung des KPI-{0}, in dem alle Definitionen einheitlich gepflegt sind. Anschließend werden Daten aus den Quellsystemen erfasst und gegen Plausibilitäts- und Vollständigkeits-Regeln {1}. Nach der Konsolidierung erfolgt die {2} durch Owner und Reporting Lead. Erst dann wird veröffentlicht. Eine externe {3} prüft die Belastbarkeit der Zahlen.",
+        "luecken": [
+          { "antwort": "Dictionary", "alternativen": ["dictionary", "Wörterbuch", "Glossar"] },
+          { "antwort": "validiert", "alternativen": ["geprüft", "Validierung"] },
+          { "antwort": "Freigabe", "alternativen": ["freigabe", "Genehmigung", "Approval"] },
+          { "antwort": "Assurance", "alternativen": ["assurance", "Prüfung", "Audit"] }
         ],
-        "korrekt": [0, 1, 2, 3],
-        "erklaerung": "Quelle, Transformation, Freigabe, Ausnahmen und Datenqualitätslabel sind die fünf Pflichtartefakte. Mündliche Zusagen sind nicht auditierbar — sie sind das klassische Symptom unreifer ESG-Reportingprozesse und führen direkt zu kritischen Findings."
+        "erklaerung": "KPI-Dictionary (Single Source of Truth für Definitionen), Validierung (Plausibilität, Vollständigkeit), Freigabe (Vier-Augen-Prinzip) und externe Assurance bilden die Säulen eines auditfähigen Prozesses. Wer ohne Dictionary arbeitet, bekommt im Audit jeden Wert in Frage gestellt — Definitionen sind die Basis aller belastbaren Zahlen."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "Anti-Greenwashing-Kopplung: KPI-Validität an Datenqualität binden",
-      "youtube_id": "",
-      "youtube_query": "anti greenwashing kpi kopplung datenqualität csrd deutsch",
-      "dauer_min": 7,
+      "titel": "ESG, CSRD und EU-Richtlinien für Unternehmen",
+      "youtube_id": "vZ-kc1M0oSk",
+      "youtube_query": "esg csrd eu richtlinien unternehmen erklärt",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Kopplungslogik schützt vor Greenwashing-KPIs am wirksamsten?",
-        "typ": "single",
+        "frage": "Welche Aussagen über die ESG-Berichtspflicht aus Senior-Sicht sind korrekt?",
+        "typ": "multi",
         "optionen": [
-          "KPI-Werte werden ungeprüft veröffentlicht, solange sie schön klingen",
-          "Eine KPI gilt nur dann als ‚gültig veröffentlicht‘, wenn Datenqualitätslabel ≥B und Control Pass Rate ≥X erfüllt sind",
-          "KPIs werden nur einmal alle 5 Jahre überprüft",
-          "Die Reporting-Abteilung definiert KPIs allein, ohne Owner"
+          "Die CSRD verlangt eine doppelte Wesentlichkeitsanalyse (Inside-Out + Outside-In)",
+          "Externe Assurance ist Teil der Pflicht — die Zahlen müssen prüfbar sein",
+          "Lieferketten-Daten (Scope 3) sind irrelevant und müssen nicht berichtet werden",
+          "ESG-Reporting ist primär eine Marketing-Aufgabe ohne operative Auswirkungen",
+          "Die Datenqualität pro KPI muss transparent gemacht werden, inkl. Schätzungen und Annahmen"
         ],
-        "korrekt": 1,
-        "erklaerung": "Die Kopplung an Datenqualität und Control Pass Rate macht KPI-Veröffentlichung zur überprüfbaren Disziplin und stoppt Pseudo-Erfolge. Ungeprüfte Veröffentlichung, seltenes Review und Owner-loses KPI-Design sind genau die Anti-Patterns, die zu Greenwashing-Vorwürfen führen."
+        "korrekt": [0, 1, 4],
+        "erklaerung": "Drei Pflichten prägen die CSRD: doppelte Wesentlichkeit (welche Themen wirken auf das Unternehmen, welche wirkt das Unternehmen auf die Umwelt?), externe Assurance (Wirtschaftsprüfer attestiert die Belastbarkeit) und Transparenz bei Datenqualität (Schätzungen werden markiert, Annahmen dokumentiert). Lieferketten-Emissionen (Scope 3) sind explizit gefordert — oft die größte Schwachstelle. ESG-Reporting ist operative Pflicht mit Audit-Konsequenz, nicht Marketing."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "Risk Appetite und Transparenzregeln: nicht delegierbare Vorstandsentscheidungen",
-      "inhalt": "Im ESG-Bereich gibt es drei Entscheidungstypen, die nicht delegierbar sind und vom Vorstand selbst getroffen werden müssen. Erstens: ‚Risk Appetite‘ — welche Risiken (Reputation, regulatorisch, finanziell) ist die Organisation bereit zu tragen? Diese Entscheidung darf nicht in der Fachabteilung versanden, weil sie strategisch das Verhalten in allen Grenzfällen prägt. Zweitens: ‚Systemgrenzen‘ — was zählt zur Berichterstattung, was nicht? Hier prallen Aufwand, Aussagekraft und Konsistenz aufeinander; diese Entscheidung legt fest, ob das Reporting glaubwürdig ist. Drittens: ‚Transparenzregeln‘ — welche Werte werden auch dann veröffentlicht, wenn sie unbequem sind oder Datenqualität C tragen, mit welchen Erläuterungen? Die letzte Frage ist besonders heikel, weil Schweigen oft als Greenwashing gelesen wird, während ehrliche C-Werte mit Methodik gut kommunizierbar sind. Senior-Pointe: ein Vorstand, der diese drei Entscheidungen wegdelegiert, baut faktisch keine ESG-Compliance — er baut ein Risiko-Verteilungssystem, das sich beim ersten Audit-Sturm rächt.",
-      "dauer_min": 7,
+      "titel": "Capstone — ESG-Governance als Entscheidungsarchitektur",
+      "inhalt": "Wer CSRD und EU-Taxonomie als „Reporting-Projekt” behandelt, scheitert: Die Anforderungen erzeugen Datenbedarfe, Kontrollen und Verantwortlichkeiten, die nur durch eine integrierte Governance erfüllbar sind. Die zwölf zentralen Entscheidungen, die senior verantwortet werden müssen: (1) Systemgrenzen — was ist drin, was draußen, mit welcher Begründung? (2) KPI-Dictionary Ownership — wer pflegt Definitionen, wer entscheidet bei Disputen? (3) Datenqualitätslabels A/B/C — welche Schwelle ist akzeptabel, ab wann muss verbessert werden? (4) Control-Set — Minimum Viable Controls für den Dry Run, Skalierung danach. (5) Ausnahmeprozess — wer darf welche Ausnahme genehmigen, mit welcher Begründung? (6) Tooling-Architektur — DWH/ETL, BI, RPA-Datensammlung in einem System verankert. (7) Reporting-Cadence — wann wird intern berichtet, wann veröffentlicht? (8) Audit-Readiness — Evidence Packs, Versionierung, Change Log immer aktuell. (9) Vendor-Datenstrategie — wie kommen Scope-3-Daten in den Bericht? (10) Kommunikations- und Transparenzregeln gegen Greenwashing. (11) Priorisierung — welche Themen zuerst, welche später, mit welchen Frühwarnsignalen? (12) Budget und Ressourcen — wer ist accountable für Aufbau und Betrieb? Diese zwölf Entscheidungen verlangen klare Owner (CSO, CFO, CIO gemeinsam), ein dokumentiertes Entscheidungsprotokoll und einen Review-Takt. Erst damit wird aus „Reporting erfüllen” ein verantwortetes Governance-Betriebssystem.",
+      "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche ESG-Entscheidungen sollten typischerweise auf Vorstandsebene getroffen werden — und nicht delegiert?",
-        "typ": "multi",
-        "optionen": [
-          "Risk Appetite (welche Risiken werden bewusst getragen)",
-          "Definition der Systemgrenzen für das Reporting",
-          "Auswahl der Excel-Schriftart im Bericht",
-          "Transparenzregeln (welche Werte werden mit welcher Methodik veröffentlicht)",
-          "Tägliches Anpassen einzelner KPI-Werte"
-        ],
-        "korrekt": [0, 1, 3],
-        "erklaerung": "Risk Appetite, Systemgrenzen und Transparenzregeln sind nicht delegierbare strategische Festlegungen mit Außenwirkung. Schriftartenwahl und tägliches KPI-Tuning sind operative Mikroaktivitäten — sie auf Vorstandsebene zu bringen wäre Mikromanagement und würde die wirklich wichtigen Entscheidungen verdrängen."
+        "frage": "Capstone-Aufgabe: Sie sind CSO bei IndustriCo Europe und müssen in 14 Wochen einen auditfähigen Dry Run der CSRD-Berichterstattung liefern. Beschreiben Sie in 6–10 Sätzen Ihre Entscheidungsarchitektur (Top-3 Entscheidungen), Ihre Datenlücken-Strategie (welche akzeptieren Sie bewusst, mit welchen Guardrails) und Ihren Anti-Greenwashing-Mechanismus.",
+        "typ": "text",
+        "musterloesung": "Drei kritische Entscheidungen mit Begründung dokumentiere ich gemeinsam mit CFO und CIO: Erstens die Systemgrenzen — wir berichten Scope 1, Scope 2 vollständig und Scope 3 in den materiellen Kategorien (eingekaufte Güter, Geschäftsreisen, Pendeln), mit expliziter Markierung der ausgeschlossenen Subkategorien und Begründung. Zweitens das KPI-Dictionary mit klarer Ownership pro Kennzahl — fachliche Owner aus Werken, Einkauf und Finance, methodische Verantwortung beim ESG Steering. Drittens das Control-Set als Minimum Viable Controls für den Dry Run: Vollständigkeitscheck, Plausibilitätsgrenzen, Vier-Augen-Freigabe, Änderungslog, Zugriffskontrolle, Reconciliation gegen Finance — Skalierung in Welle 2 nach Lessons Learned. Datenlücken-Strategie: Scope-3-Lieferkettendaten werden mit Label C (grob geschätzt) berichtet, mit dokumentierter Methodik, Quellenangabe und Verbesserungsplan auf B in Quartal 4. Guardrails: Annahmen pro Schätzung im Annahmenregister, Freigabe der Schätzmethodik durch ESG Steering, kein A-Label ohne validierte Datenquelle. Anti-Greenwashing-Mechanismus: Jede veröffentlichte Kennzahl trägt verpflichtend ihr A/B/C-Datenqualitätslabel, ein Verbesserungsplan mit Zieldatum und Verantwortlichem macht die Reise sichtbar, und Kosten-/CO2-KPIs sind nur dann „erfolgreich erreicht”, wenn die Datenqualität mindestens B und die Control-Pass-Rate über 95% liegt. Frühwarnsignale für die Aufsichtsratsebene: Anstieg der C-Werte, Verschiebung von Verbesserungsterminen, Audit-Findings aus der Stichprobenprüfung — alle drei eskalieren binnen 5 Arbeitstagen an den CSO."
       }
     },
     {
       "nr": 7,
       "typ": "video",
-      "titel": "Integration in Transformation: DWH/ETL, Workflow, BI, RPA als ESG-Bausteine",
-      "youtube_id": "",
-      "youtube_query": "esg integration transformation dwh etl workflow bi rpa deutsch",
-      "dauer_min": 8,
+      "titel": "Nachhaltigkeitsberichterstattung in der Praxis — DAX-Beispiel",
+      "youtube_id": "xw55BGza2-g",
+      "youtube_query": "nachhaltigkeitsberichterstattung csrd eu taxonomie dax unternehmen",
+      "dauer_min": 9,
       "aufgabe": {
-        "frage": "Welche Bausteine einer Transformationsarchitektur zahlen direkt auf ESG-Reportingfähigkeit ein?",
+        "frage": "Welche Lehren für die eigene Senior-Steuerung lassen sich aus den Praxis-Beispielen großer Unternehmen ableiten?",
         "typ": "multi",
         "optionen": [
-          "DWH/ETL für strukturierte ESG-Datenerfassung",
-          "Workflow-Engines für KPI-Änderungen und Freigaben mit Audit Trail",
-          "BI-Dashboards mit Schwellen, Drilldown und Owner",
-          "RPA für standardisierte Datensammlung — mit klarer Governance",
-          "Eine Verzicht-Strategie: keine Tools, keine Daten, keine Compliance"
+          "Eine integrierte Datenarchitektur (DWH, ETL, BI) ist Voraussetzung — Excel-Silos skalieren nicht",
+          "Externe Assurance prüft nicht nur Zahlen, sondern auch Prozesse und Controls",
+          "Materialitätsanalyse strukturiert die Berichtspflichten und reduziert Aufwand auf das Wesentliche",
+          "ESG-Steuerung gelingt, wenn sie isoliert vom Transformationsprogramm geführt wird",
+          "Stakeholder-Dialog (Investoren, Mitarbeitende, Kunden) ist Teil der ESG-Wirksamkeit"
         ],
-        "korrekt": [0, 1, 2, 3],
-        "erklaerung": "DWH/ETL, Workflow, BI und RPA sind direkte ESG-Enabler, wenn sie mit Governance gebaut werden. ‚Keine Tools‘ ist keine Strategie — CSRD-Pflichten existieren unabhängig davon, ob die Organisation auf sie vorbereitet ist; Nichtstun ist die teuerste Option."
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Vier Lehren großer Praxisbeispiele: integrierte Daten (Excel-Silos sind das größte Skalierungs-Hindernis), Assurance auf Prozessebene (nicht nur Zahlen), Materialitätsanalyse als Fokussierungs-Hebel (nicht alles berichten, das Richtige) und aktiver Stakeholder-Dialog. Isoliertes ESG-Reporting ist genau der Antipattern — es bleibt Hülle ohne operative Wirkung. ESG gehört in Prozessdigitalisierung, Green IT, RPA-Programme und Change Management integriert."
       }
     }
   ]

@@ -1,148 +1,138 @@
 {
   "kurs_id": "71_Dig_42",
   "tag_nr": 9,
-  "titel": "Agile Delivery, CI und Infrastructure as Code als Steuerungssystem",
+  "titel": "Agile Delivery als Steuerungssystem: Scrum, Kanban, CI/CD und Infrastructure as Code",
   "erstellt_am": "2026-05-24",
   "schritte": [
     {
       "nr": 1,
       "typ": "video",
-      "titel": "Scrum vs. Kanban: Wann welches Framework?",
-      "youtube_id": "",
-      "youtube_query": "scrum kanban unterschied wann welches framework deutsch erklärt",
-      "dauer_min": 7,
+      "titel": "Scrum-Framework — Rollen, Events, Artefakte",
+      "youtube_id": "Ibz9STVjtzI",
+      "youtube_query": "scrum framework rollen events artefakte einfach erklärt deutsch",
+      "dauer_min": 6,
       "aufgabe": {
-        "frage": "Wann ist Kanban tendenziell die bessere Wahl als Scrum?",
+        "frage": "Welche Aussage über das Scrum-Framework trifft am präzisesten zu?",
         "typ": "single",
         "optionen": [
-          "Wenn man möglichst viele Meetings haben möchte",
-          "Wenn die Arbeit kontinuierlich anfällt, Prioritäten häufig wechseln und ein hoher Support-/Incident-Anteil existiert",
-          "Wenn man auf Outcomes verzichten will",
-          "Wenn das Team Scrum noch nie gehört hat"
+          "Scrum ist eine detaillierte Projektmanagement-Methode mit fest vorgegebenen Aufgabenlisten",
+          "Scrum ist ein leichtgewichtiges Framework mit drei Rollen, fünf Events und drei Artefakten zur iterativen Produktentwicklung",
+          "Scrum ersetzt sämtliche Anforderungen an Dokumentation und Governance in IT-Projekten",
+          "Scrum eignet sich ausschließlich für Softwareentwicklung in technischen Teams"
         ],
         "korrekt": 1,
-        "erklaerung": "Kanban passt besser zu kontinuierlicher Arbeit mit wechselnden Prioritäten und Support-Anteilen — die Pull-Logik und WIP-Limits stabilisieren Flow. Scrum mit seinen festen Sprints ist eher für Produktentwicklung mit klar formbarem Backlog gedacht. Meeting-Anzahl, Outcome-Verzicht und Unkenntnis sind keine Auswahlkriterien."
+        "erklaerung": "Scrum definiert drei Rollen (Product Owner, Scrum Master, Developers), fünf Events (Sprint, Sprint Planning, Daily, Review, Retrospektive) und drei Artefakte (Product Backlog, Sprint Backlog, Increment mit Definition of Done). Es ist bewusst leichtgewichtig — Teams füllen das Framework mit Praktiken, die zu ihrem Kontext passen. Scrum ersetzt weder Governance noch Dokumentation und ist nicht auf Software beschränkt."
       }
     },
     {
       "nr": 2,
       "typ": "text",
-      "titel": "WIP-Limits: warum Begrenzung Qualität schützt",
-      "inhalt": "Eines der mächtigsten Steuerungsinstrumente in Kanban (und in jeder Form agiler Lieferung) ist das Work-in-Progress-Limit. Die Idee ist kontraintuitiv: weniger gleichzeitig in Arbeit zu nehmen erhöht den Durchsatz. Der Grund: Multitasking erzeugt Kontextwechsel, jeder Kontextwechsel kostet 10–30 Minuten Rüstzeit, und je mehr offene Arbeit, desto höher die Wartezeit jedes einzelnen Vorgangs. Ein WIP-Limit von zwei pro Spalte zwingt das Team, Vorgänge fertig zu machen, bevor neue gestartet werden — und macht Engpässe sofort sichtbar (wenn die Spalte ‚Test‘ blockiert, kann die Spalte ‚Dev‘ nicht weiterziehen). Senior-Pointe: WIP-Limits sind kein Bürokratieinstrument, sondern Qualitätsschutz. Sie führen unweigerlich zu unangenehmen Gesprächen über Priorisierung — und genau das ist ihre eigentliche Wirkung.",
+      "titel": "Kanban — Flow-Design und WIP-Limits",
+      "inhalt": "Während Scrum mit getakteten Sprints arbeitet, ist Kanban ein Flow-System: Arbeit fließt kontinuierlich von links nach rechts über ein Board (z. B. Backlog → In Arbeit → Review → Fertig). Die vier Kernprinzipien sind: (1) Visualisierung der Arbeit, (2) WIP-Limits (Work in Progress) pro Spalte, (3) Pull-System (neue Arbeit wird gezogen, nicht zugeteilt) und (4) Messung des Flusses (Lead Time, Cycle Time, Durchsatz). WIP-Limits sind das wirksamste Element: Sie zwingen das Team, angefangene Arbeit fertigzustellen, bevor Neues begonnen wird. Das reduziert Multitasking, verkürzt Durchlaufzeiten und macht Engpässe sichtbar. Kanban eignet sich besonders für kontinuierliche Arbeit mit wechselnden Prioritäten (Support, Wartung, Operations) — Scrum dagegen für Produktentwicklung mit klaren Reviewpunkten. Ein häufiger Fehler: Kanban ohne klare Pull-Regeln und Replenishment-Meeting wird schnell zu einer reinen Tabelle mit Spalten ohne Steuerungswirkung.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Warum erhöhen WIP-Limits typischerweise den Durchsatz und die Qualität?",
+        "frage": "Welche Aussagen zu Kanban-WIP-Limits sind korrekt?",
         "typ": "multi",
         "optionen": [
-          "Weniger Kontextwechsel pro Person und damit kürzere Lead Times",
-          "Engpässe werden sofort sichtbar und können adressiert werden",
-          "Mehr offene Vorgänge bedeuten automatisch mehr fertige Vorgänge",
-          "Priorisierungsentscheidungen werden erzwungen statt verschoben",
-          "WIP-Limits sind nur kosmetische Visualisierung"
+          "WIP-Limits begrenzen die Anzahl gleichzeitig bearbeiteter Aufgaben pro Spalte",
+          "WIP-Limits machen Engpässe im Wertstrom sichtbar",
+          "WIP-Limits dienen primär dazu, einzelne Teammitglieder zu kontrollieren",
+          "Ohne WIP-Limits funktioniert das Pull-Prinzip nicht zuverlässig",
+          "WIP-Limits erhöhen die Auslastung der Teammitglieder auf 100 Prozent"
         ],
         "korrekt": [0, 1, 3],
-        "erklaerung": "Weniger Multitasking, sichtbare Engpässe und erzwungene Priorisierung sind die Kernmechanismen. Mehr offene Vorgänge erhöhen Wartezeiten und Fehlerquoten, nicht den Durchsatz — und WIP-Limits sind weit mehr als Kosmetik: sie sind eines der wenigen Werkzeuge, das systembedingten Druck zu Outcome erzeugt."
+        "erklaerung": "WIP-Limits begrenzen pro Spalte, wie viele Aufgaben gleichzeitig in Arbeit sein dürfen — das macht Engpässe sichtbar (Spalten füllen sich) und erzwingt das Pull-Prinzip. Sie zielen nicht auf Personenkontrolle, sondern auf Flow-Optimierung. Eine Auslastung von 100 Prozent ist gerade nicht das Ziel — sie führt zu Wartezeiten und längeren Durchlaufzeiten."
       }
     },
     {
       "nr": 3,
       "typ": "video",
-      "titel": "CI-Pipeline und Quality Gates: schnelle und sichere Änderungen",
-      "youtube_id": "",
-      "youtube_query": "continuous integration pipeline quality gates deutsch tutorial",
-      "dauer_min": 8,
+      "titel": "CI/CD-Pipelines — sichere und schnelle Änderungen",
+      "youtube_id": "xzV0KiprcZc",
+      "youtube_query": "continuous integration continuous delivery pipeline deutsch erklärt",
+      "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Stufen umfasst eine typische CI-Pipeline?",
+        "frage": "Was ist der zentrale Nutzen einer CI/CD-Pipeline mit Quality Gates?",
         "typ": "single",
         "optionen": [
-          "Nur Build und Deploy",
-          "Commit → Build → automatisierte Tests → Security/Quality Checks → Deploy (Staging/Prod)",
-          "Nur eine grafische Oberfläche zum Anzeigen von Logs",
-          "Eine Stufe, die alles auf einmal macht"
+          "Sie ersetzt die Notwendigkeit manueller Tests vollständig",
+          "Sie automatisiert Build, Tests und Deployment und verhindert durch Gates, dass fehlerhafte Änderungen Produktion erreichen",
+          "Sie macht jede Codeänderung sofort und ohne Prüfung produktiv",
+          "Sie ist primär ein Reporting-Werkzeug für das Management"
         ],
         "korrekt": 1,
-        "erklaerung": "Eine seriöse Pipeline kettet Commit, Build, Tests, Security/Quality Checks und Deploy — jede Stufe ist ein Gate, das Fehler früh fängt. Eine reduzierte Sicht (‚nur Build und Deploy‘, ‚alles in einer Stufe‘) verzichtet auf Schutzmechanismen und produziert teure Defekte in Produktion."
+        "erklaerung": "Eine CI/CD-Pipeline automatisiert die Kette Commit → Build → Tests → Security/Quality Checks → Deploy. Quality Gates wie Tests grün oder Security Scan ok sind Stop-Regeln: Erfüllt eine Stufe das Kriterium nicht, stoppt die Pipeline. Ziel ist nicht ungeprüft schnell, sondern schnell und sicher gleichzeitig — Geschwindigkeit durch Automatisierung, Sicherheit durch Gates."
       }
     },
     {
       "nr": 4,
-      "typ": "text",
-      "titel": "Infrastructure as Code: reproduzierbar, reviewbar, auditfähig",
-      "inhalt": "Infrastructure as Code (IaC) bedeutet, dass Server, Netzwerke, Datenbanken und Berechtigungen nicht mehr ‚per Klick‘ erzeugt werden, sondern als versionierter Code definiert sind — Terraform, CloudFormation oder Ansible sind die bekanntesten Werkzeuge. Drei Vorteile machen IaC zur Pflicht in Konzernumgebungen: ‚Reproduzierbarkeit‘ (eine Umgebung kann jederzeit gleich aufgebaut werden, was Disaster Recovery dramatisch verbessert), ‚Reviewbarkeit‘ (Änderungen laufen durch Pull Requests, sind diskutierbar und nachvollziehbar) und ‚Auditfähigkeit‘ (die Merge-Historie ist der Audit Trail: wer hat wann was geändert, und wer hat freigegeben). Risiken bleiben: falsche Rechte und Secrets im Repository sind klassische Anfängerfehler — Secrets gehören in einen Vault, nie in den Code. Senior-Pointe: IaC ist nicht primär ein Effizienztool, sondern ein Kontrolltool. Es verlagert die Diskussion von ‚wer hat das wann angeklickt?‘ zu ‚wer hat den Pull Request freigegeben?‘.",
-      "dauer_min": 6,
+      "typ": "lueckentext",
+      "titel": "Scrum-Eckpunkte im Detail",
+      "inhalt": "Scrum gibt dem Team einen klaren Rhythmus. Sprints dauern typischerweise wenige Wochen, jeder Sprint endet mit Review und Retrospektive, jedes Increment muss die Definition of Done erfüllen.",
+      "dauer_min": 5,
       "aufgabe": {
-        "frage": "Welche Aussagen über Infrastructure as Code (IaC) sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "IaC erlaubt reproduzierbares Aufsetzen von Umgebungen",
-          "Änderungen sollten über Pull Requests mit Review erfolgen",
-          "Secrets dürfen im IaC-Repository gespeichert werden, solange ein Passwort gesetzt ist",
-          "Die Merge-Historie kann als Audit Trail dienen",
-          "IaC verschiebt die Steuerung vom Klick zur Code-Review"
+        "frage": "Ergänzen Sie die zentralen Scrum-Begriffe in den Lücken.",
+        "typ": "lueckentext",
+        "text": "Ein Scrum-Sprint dauert typischerweise {0} Wochen und endet mit einem Sprint {1}, in dem das Increment dem Product Owner und Stakeholdern gezeigt wird. Anschließend reflektiert das Team in der Sprint {2} seine Zusammenarbeit. Das Increment ist nur dann auslieferbar, wenn es die Definition of {3} erfüllt.",
+        "luecken": [
+          { "antwort": "2", "alternativen": ["zwei", "1-4", "1 bis 4", "ein bis vier"] },
+          { "antwort": "Review", "alternativen": ["Sprint Review"] },
+          { "antwort": "Retrospektive", "alternativen": ["Retro", "Retrospective"] },
+          { "antwort": "Done", "alternativen": ["DoD", "Fertig"] }
         ],
-        "korrekt": [0, 1, 3, 4],
-        "erklaerung": "Reproduzierbarkeit, Review-Workflow, Audit-Historie und die Verlagerung der Steuerung sind die Hauptvorteile. Secrets ins Repo zu legen — egal ob mit Passwort — ist ein klassischer Sicherheitsfehler und führt regelmäßig zu Datenpannen; Secrets gehören in einen Vault."
+        "erklaerung": "Sprints dauern typischerweise 1–4 Wochen, mit 2 Wochen als häufigster Wahl. Das Sprint Review zeigt das Increment, die Sprint Retrospektive reflektiert das Wie der Zusammenarbeit. Die Definition of Done (DoD) ist die gemeinsame Vereinbarung des Teams, wann eine Arbeit wirklich fertig ist — sie ist die unverhandelbare Qualitätshürde."
       }
     },
     {
       "nr": 5,
       "typ": "video",
-      "titel": "DORA-Metriken: Lead Time, Deployment Frequency, Change Failure Rate, MTTR",
-      "youtube_id": "",
-      "youtube_query": "dora metrics lead time deployment frequency change failure rate deutsch",
+      "titel": "Infrastructure as Code — Reproduzierbarkeit und Auditierbarkeit",
+      "youtube_id": "3gZ_-k9t-KQ",
+      "youtube_query": "infrastructure as code iac terraform deutsch erklärt",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Was misst die Kennzahl ‚Change Failure Rate‘?",
-        "typ": "single",
+        "frage": "Welche Vorteile bietet Infrastructure as Code (IaC) für eine Senior-Steuerung?",
+        "typ": "multi",
         "optionen": [
-          "Wie oft Mitarbeitende die Kantine wechseln",
-          "Den Anteil von Releases, die in Produktion zu einem Fehler/Rollback/Hotfix geführt haben",
-          "Wie schnell Anforderungen geliefert werden",
-          "Wie hoch die Cloud-Kosten pro Monat sind"
+          "Infrastruktur wird versioniert und Änderungen sind in der Git-Historie nachvollziehbar",
+          "Umgebungen lassen sich reproduzierbar und schnell neu erstellen",
+          "IaC macht jegliche Sicherheitsprüfung überflüssig",
+          "Reviews und Freigaben können in den Merge-Prozess verankert werden",
+          "Manuelle Server-Konfigurationen am Produktivsystem sind weiterhin empfehlenswert"
         ],
-        "korrekt": 1,
-        "erklaerung": "Change Failure Rate ist eine der vier DORA-Metriken und misst, wie viele Releases zu Produktionsproblemen führen — eine zentrale Kopplungs-KPI gegen das ‚schnell und kaputt‘. Sie ist nicht mit Lead Time oder Kosten zu verwechseln und hat nichts mit HR oder Finanzen zu tun."
+        "korrekt": [0, 1, 3],
+        "erklaerung": "IaC bringt drei Hebel: (1) Versionierung — Änderungen sind nachvollziehbar wie Code, (2) Reproduzierbarkeit — Umgebungen können aus dem Code neu erzeugt werden, (3) Governance — Freigaben werden in den Pull-Request- oder Merge-Prozess verankert (Vier-Augen-Prinzip). Sicherheitsprüfungen entfallen nicht, sondern werden in die Pipeline integriert. Manuelle Änderungen am Produktivsystem (sogenannte Snowflake-Server) sind der Gegenentwurf zu IaC und sollten unterbunden werden."
       }
     },
     {
       "nr": 6,
       "typ": "text",
-      "titel": "‚Stop-the-line‘-Regeln und Anti-Gaming bei DORA-Metriken",
-      "inhalt": "DORA-Metriken (Lead Time, Deployment Frequency, Change Failure Rate, MTTR) sind sehr mächtig — und genau deshalb anfällig für Goodhart-Effekte. Wenn ‚Deployment Frequency‘ zum Ziel wird, releasen Teams sinnlose Mikroänderungen, um die Zahl zu treiben. Wenn ‚Change Failure Rate‘ zum Ziel wird, werden Incidents nicht mehr als Failures markiert. Der Schutz heißt Kopplung: ‚Deployment Frequency‘ wird nur gemeinsam mit ‚Change Failure Rate‘ bewertet — schneller releasen darf nicht heißen, dass mehr kaputtgeht. Eine zweite Schutzschicht sind ‚Stop-the-line‘-Regeln: bestimmte Bedingungen führen automatisch zum Release-Stopp, unabhängig von Zeitdruck (z. B. failende Security-Tests, fehlende Smoke-Tests in Produktion, kritische Open Incidents). Senior-Pointe: Kennzahlen ohne Kopplung und ohne Stop-Regeln führen verlässlich zu Reportingschönheit und Operations-Druck — die beiden zusammen aber zu echter Verbesserung.",
+      "titel": "Quality Gates und Risiko-Akzeptanz — die Senior-Sicht",
+      "inhalt": "Agile Delivery beschleunigt nur dann sicher, wenn Quality Gates klar und unverhandelbar definiert sind. Typische Gates: alle Unit-Tests grün, Security-/Dependency-Scan ohne kritische Findings, Code-Review durch zweite Person, Smoke-Test nach Deployment ok. Senior-Verantwortung heißt: Gates so wählen, dass sie tatsächlich Risiko reduzieren — nicht möglichst viele. Eine Pipeline mit 20 Gates ohne klare Konsequenz ist schwächer als drei harte Stop-Regeln. Genauso wichtig ist die Risikoakzeptanz: Was ist im MVP bewusst nur Pilot-Qualität (z. B. eingeschränkte E2E-Tests)? Welcher Kompensationsmechanismus federt das ab (Feature Toggle, Canary-Rollout, schneller Rollback, Beobachtung in Pilotgruppe)? Wer trägt die Entscheidung — und unter welchem Frühwarnsignal wird sie revidiert? Diese Trade-off-Logik trennt Senior-Steuerung von möglichst schnell deployen.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Maßnahmen schützen DORA-Metriken vor Goodhart/Gaming?",
-        "typ": "multi",
-        "optionen": [
-          "Kopplung von Deployment Frequency an Change Failure Rate",
-          "Definierte ‚Stop-the-line‘-Regeln, die Releases automatisch stoppen",
-          "Möglichst weiche Definitionen, damit Teams die Zahlen besser erreichen",
-          "Sichtbare Trends und Diskussion statt Bestrafung",
-          "Veröffentlichung der Kennzahlen als individuelle Personenbewertung"
-        ],
-        "korrekt": [0, 1, 3],
-        "erklaerung": "Kopplung, Stop-Regeln und ein Lernfokus statt Schuldzuweisung sichern DORA-Metriken gegen Manipulation. Weiche Definitionen erodieren Aussagekraft, und individuelle Personenbewertung erzeugt Angstkultur und massives Gaming — beides untergräbt genau das Outcome, das man messen wollte."
+        "frage": "Beschreiben Sie in 4–6 Sätzen: Welche zwei Quality Gates würden Sie für die wöchentliche Auslieferung eines digitalen Genehmigungsworkflows als nicht verhandelbar definieren — und welche Kompensationsmaßnahme erlauben Sie bewusst, um Geschwindigkeit zu sichern?",
+        "typ": "text",
+        "musterloesung": "Zwei unverhandelbare Gates sind sinnvoll: (1) Vollständige Unit- und Integrationstests grün — kein Release ohne automatisierte Absicherung der Kernlogik, da Genehmigungsentscheidungen revisionssicher sein müssen. (2) Security-/Dependency-Scan ohne kritische Findings — Verwaltungsdaten sind sensibel, eine bekannt verwundbare Abhängigkeit in Produktion ist nicht vertretbar. Als bewusste Kompensation für Geschwindigkeit erlaube ich reduzierte End-to-End-Tests im MVP (nur Happy Path und ein Fehlerfall), kombiniert mit einem Canary-Rollout auf eine Pilot-Behörde und einem Rollback-Plan, der innerhalb von 30 Minuten greift. Frühwarnsignal: Steigt die Fehlerrate in der Pilotgruppe über 2 Prozent oder die Lead Time nach Release deutlich an, wird gestoppt und die Teststrategie nachgeschärft. Diese Trade-off-Entscheidung wird im Change Advisory protokolliert — sie ist akzeptiertes Risiko, kein Versehen."
       }
     },
     {
       "nr": 7,
       "typ": "video",
-      "titel": "Agile Governance und Risikoakzeptanz: wer entscheidet was?",
-      "youtube_id": "",
-      "youtube_query": "agile governance risiko akzeptanz operating model release deutsch",
+      "titel": "DORA-Kennzahlen — Lead Time, Deployment Frequency, MTTR, Change Failure Rate",
+      "youtube_id": "lqsENcje41w",
+      "youtube_query": "dora metrics devops lead time deployment frequency mttr change failure rate",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche Aussagen zu Agile Governance sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Sicherheits-/Compliance-Baselines werden zentral definiert, Team-Backlog dezentral",
-          "Risikoakzeptanzregeln sollten dokumentiert sein (wer darf welches Risiko eingehen)",
-          "Agile bedeutet, dass jedes Team unabhängig alle Entscheidungen treffen darf",
-          "Quality Gates sind nur ‚nice to have‘",
-          "Emergency Changes (Hotfixes) brauchen einen geregelten Ausnahmeprozess"
+        "frage": "Ordnen Sie jeder DORA-Kennzahl die zutreffende Dimension und Beschreibung zu.",
+        "typ": "zuordnung",
+        "paare": [
+          { "links": "Lead Time for Changes", "rechts": "Geschwindigkeit — Zeit von Commit bis Produktion" },
+          { "links": "Deployment Frequency", "rechts": "Geschwindigkeit — wie oft wird in Produktion deployed" },
+          { "links": "Change Failure Rate", "rechts": "Stabilität — Anteil Releases mit Fehler oder Rollback" },
+          { "links": "Mean Time to Restore (MTTR)", "rechts": "Stabilität — Zeit bis Service nach Incident wiederhergestellt ist" }
         ],
-        "korrekt": [0, 1, 4],
-        "erklaerung": "Eine reife Agile Governance trennt zentrale Baselines (Security, Compliance, Plattformstandards) von dezentralen Entscheidungen (Team-Backlog) und regelt Risikoakzeptanz sowie Emergency Changes explizit. ‚Jedes Team entscheidet alles‘ erzeugt Konzernchaos; Quality Gates ohne Verbindlichkeit verfallen zu Marketing — beide Aussagen sind falsch."
+        "erklaerung": "Die vier DORA-Kennzahlen messen zwei Dimensionen: Geschwindigkeit (Lead Time, Deployment Frequency) und Stabilität (Change Failure Rate, MTTR). Senior-Steuerung koppelt beide bewusst — eine Verbesserung der Deployment Frequency, die gleichzeitig die Change Failure Rate hochtreibt, ist keine echte Verbesserung. Anti-Gaming-Regel: Geschwindigkeits-KPIs sind nur gültig, wenn Stabilitäts-KPIs gehalten werden."
       }
     }
   ]
