@@ -1,0 +1,792 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 7 - Lehrskript
+% Process Mining: Event Logs -> Discovery -> Conformance als Steuerungsinstrument
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 7}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Process Mining \textperiodcentered{} Discovery \textperiodcentered{} Conformance}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 3 \textperiodcentered{} TAG 7 VON 2 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 8.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Discovery\\\&\\Conformance\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Daten werden zur Realität --\\Vom Event-Log zum Ist-Prozess und zum Soll/Ist-Abgleich.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 7 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Modelle zeigen, wie ein Prozess \emph{gedacht} ist. Daten zeigen, wie er \emph{tatsächlich abläuft}. Diese Differenz ist die wichtigste Informationsquelle für Prozessverbesserung -- und gleichzeitig die häufigste Quelle für Audit-Findings. Heute führen wir die zwei zentralen Disziplinen des Process Mining ein: \fachbegriff{Discovery} (Ist-Prozess aus Event Logs ableiten) und \fachbegriff{Conformance Checking} (Abweichungen vom Soll erkennen, klassifizieren und behandeln).
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Event-Log-Mindestanforderungen kennen: Case ID, Aktivität, Timestamp (optional: Ressource, Kanal, Kosten, Standort).
+  \item Discovery-Ergebnisarten benennen: Prozessgraph, Variantentabelle, Durchlaufzeiten, Engpasshypothesen.
+  \item Conformance-Abweichungen klassifizieren: fehlende Schritte, zusätzliche Schritte, falsche Reihenfolge, Schleifen, SLA-Verletzungen.
+  \item Den Unterschied zwischen ``Abweichung als Risiko'' und ``Abweichung als Innovation/Notfall'' verstehen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Aus einem Mini-Event-Log Happy Path, Varianten und Engpässe ableiten -- ohne Tool.
+  \item Abweichungen in Compliance-Risiko, Qualitäts-/Kostenrisiko, legitime Variante und Datenproblem einsortieren.
+  \item Maßnahmen pro Abweichung definieren: Prozessregel, Training, Systemkontrolle oder Monitoring.
+  \item Eine ``bewusst zugelassene Variante'' mit Guardrail formulieren.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Conformance als Steuerungsinstrument nutzen -- nicht als reines Reporting.
+  \item Welche Abweichungen sind reputations-/compliancekritisch, welche Innovationspotenzial?
+  \item Datenverantwortung benennen: Process Owner, Data Steward, Compliance Reviewer.
+  \item Conformance-Programme unter Zielkonflikt (Speed vs.\ Compliance) verantworten.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Abweichungen vom Modell sind nicht automatisch Fehler. Sie sind \emph{Signale}: manche sind Compliance-Risiko, manche sind Innovation, manche sind Datenproblem. Die Senior-Disziplin liegt nicht im \emph{Finden} der Abweichungen -- sondern in der \emph{Klassifikation und der Konsequenz}.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Vom Modell zur Realität}
+
+In den vergangenen Tagen haben wir Modelle gezeichnet, in einem Repository steuerbar gemacht und über Workflows ausgeführt. Heute drehen wir den Spieß um: Wir beobachten, was \emph{tatsächlich} in den Systemen passiert, leiten daraus ein Ist-Bild ab, und vergleichen es mit unserem Soll-Modell. Diese Disziplin heißt \fachbegriff{Process Mining} und ist seit etwa 2010 von einem akademischen Spezialthema zu einer breit eingesetzten Management-Disziplin geworden. \quelle{van der Aalst, 2016; Reinkemeyer, 2020}
+
+\subsection{Warum Daten oft eine andere Wahrheit erzählen}
+
+Drei Beobachtungen aus Praxisprojekten:
+
+\begin{enumerate}
+  \item \fachbegriff{Modelle altern.} Ein BPMN-Diagramm von 2022 zeigt nicht den Prozess von 2026. Die Realität hat weitergedacht, das Modell ist eingefroren.
+  \item \fachbegriff{Workarounds entstehen.} Wenn ein offizieller Schritt zu kompliziert ist, findet die Organisation einen Weg drumherum. Das ist nicht Sabotage, sondern Pragmatismus -- der das Modell zur Fiktion macht.
+  \item \fachbegriff{Sonderfälle sind häufig.} Was im Modell als ``Ausnahme'' steht, ist in der Realität oft 30\,\% der Cases. Die Ausnahme ist die Regel.
+\end{enumerate}
+
+\subsection{Was Process Mining leistet}
+
+\begin{itemize}
+  \item \fachbegriff{Discovery.} Aus Event Logs einen Ist-Prozess rekonstruieren -- inklusive seltener Varianten, Schleifen, Durchlaufzeiten.
+  \item \fachbegriff{Conformance Checking.} Den Ist-Prozess mit einem Soll-Modell vergleichen -- wo wird abgewichen, wie oft, mit welchem Effekt.
+  \item \fachbegriff{Enhancement.} Modelle mit Daten anreichern -- Zeiten, Kosten, Ressourcen, Varianten (Thema von Tag 8).
+\end{itemize}
+
+\subsection{Die drei Bausteine eines Event Logs}
+
+Ein \fachbegriff{Event Log} ist eine Tabelle mit Zeilen (Events) und Spalten (Eigenschaften). Drei Spalten sind Pflicht, ohne sie geht nichts: \quelle{IEEE, 2016; van der Aalst, 2012}
+
+\begin{itemize}
+  \item \fachbegriff{Case ID.} Identifiziert den konkreten Fall (Auftrag 4711, Ticket I-2026-0815). Alle Events mit derselben Case ID gehören zusammen.
+  \item \fachbegriff{Aktivität (Activity).} Der Name des Schritts (``Auftrag angelegt'', ``Rechnung erstellt'', ``Versand''). Eindeutig benannt, idealerweise nach Verb + Objekt-Regel.
+  \item \fachbegriff{Timestamp.} Wann ist das Event passiert? Mindestens Datum + Uhrzeit; bei kurzen Prozessen auch Millisekunden.
+\end{itemize}
+
+Optional, aber sehr nützlich:
+
+\begin{itemize}
+  \item \fachbegriff{Ressource.} Welcher Mitarbeiter, welches System hat den Schritt ausgeführt? (Datenschutz beachten.)
+  \item \fachbegriff{Kanal.} Online, Filiale, Hotline, Partner?
+  \item \fachbegriff{Kosten.} Hat dieser Schritt einen Wert in Aufwand oder \text{\euro}?
+  \item \fachbegriff{Standort.} Welche Niederlassung, welches Land?
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{C-A-T}]
+Drei Pflichtspalten jedes Event Logs -- ohne sie kein Mining:\\[2pt]
+\textbf{C}ase ID -- welcher Fall?\\
+\textbf{A}ctivity -- welcher Schritt?\\
+\textbf{T}imestamp -- wann?\\[2pt]
+\emph{Wer C-A-T nicht in den Daten hat, kann Mining nicht starten -- nur Hoffen.}
+\end{eselsbox}
+
+\subsection{Typische Stolpersteine in Event Logs}
+
+\begin{itemize}
+  \item \fachbegriff{Fehlende oder unscharfe Activities.} Verschiedene Bezeichnungen für dieselbe Tätigkeit (``Approve'' vs.\ ``Genehmigen'').
+  \item \fachbegriff{Doppelte Events.} Ein Klick erzeugt zwei Logzeilen, der Prozessgraph zeigt eine Schleife.
+  \item \fachbegriff{Falsche Case IDs.} Ein Vorgang springt fälschlich zwischen zwei Cases.
+  \item \fachbegriff{Zeitstempel-Probleme.} Zeitzonen, fehlende Sekunden, rückwärtslaufende Stempel durch Systemwechsel.
+  \item \fachbegriff{Unvollständige Erfassung.} Manuelle Schritte werden nicht geloggt -- der Prozess ``springt''.
+\end{itemize}
+
+% --- 2. DISCOVERY --------------------------------------------------------
+\section{Process Discovery -- vom Log zum Ist-Modell}
+
+\fachbegriff{Process Discovery} ist die Disziplin, aus einem Event Log automatisch ein Prozessmodell zu erzeugen -- ohne dass jemand vorher ein Soll-Modell zeichnen muss. In der Praxis nutzen Tools (Celonis, UiPath Process Mining, Apromore, ProM, Disco u.\,a.) Algorithmen wie den \fachbegriff{Heuristics Miner}, den \fachbegriff{Inductive Miner} oder den \fachbegriff{Alpha-Algorithmus}, um aus Spuren typische Pfade und Varianten abzuleiten. \quelle{van der Aalst, 2016; van der Aalst \& Carmona, 2022}
+
+\subsection{Was Discovery typischerweise liefert}
+
+\begin{itemize}
+  \item Einen \fachbegriff{Prozessgraph} mit Knoten (Aktivitäten) und Kanten (Übergänge), oft mit Häufigkeit oder Durchlaufzeit annotiert.
+  \item Eine \fachbegriff{Variantentabelle} -- welche Pfad-Varianten kommen wie oft vor.
+  \item \fachbegriff{Durchlaufzeiten je Schritt} und insgesamt, mit Quartilen.
+  \item Erste \fachbegriff{Engpasshypothesen} -- wo stauen sich Cases?
+\end{itemize}
+
+\subsection{Discovery ohne Tool -- ein Mini-Log}
+
+Wir machen den Schritt manuell, um die Logik zu verstehen. Vier Cases eines Auftragsprozesses:
+
+\begin{quote}
+\begin{tabular}{@{}lp{0.7\linewidth}@{}}
+\toprule
+Case 101 & Start \textrightarrow{} Anfrage\_prüfen \textrightarrow{} Angebot\_erstellen \textrightarrow{} Kunde\_bestätigt \textrightarrow{} Auftrag\_anlegen \textrightarrow{} Versand \textrightarrow{} Rechnung \textrightarrow{} Ende \\
+Case 102 & Start \textrightarrow{} Anfrage\_prüfen \textrightarrow{} Rückfrage \textrightarrow{} Anfrage\_prüfen \textrightarrow{} Angebot\_erstellen \textrightarrow{} Kunde\_bestätigt \textrightarrow{} Auftrag\_anlegen \textrightarrow{} Rechnung \textrightarrow{} Versand \textrightarrow{} Ende \\
+Case 103 & Start \textrightarrow{} Anfrage\_prüfen \textrightarrow{} Angebot\_erstellen \textrightarrow{} Kunde\_bestätigt \textrightarrow{} Auftrag\_anlegen \textrightarrow{} Versand \textrightarrow{} Versand \textrightarrow{} Rechnung \textrightarrow{} Ende \\
+Case 104 & Start \textrightarrow{} Anfrage\_prüfen \textrightarrow{} Angebot\_erstellen \textrightarrow{} Kunde\_bestätigt \textrightarrow{} Auftrag\_anlegen \textrightarrow{} Storno \textrightarrow{} Ende \\
+\bottomrule
+\end{tabular}
+\end{quote}
+
+\subsubsection{Happy Path}
+
+Der typischste Ablauf, der in den meisten Cases vorkommt:
+\begin{quote}
+Start \textrightarrow{} Anfrage\_prüfen \textrightarrow{} Angebot\_erstellen \textrightarrow{} Kunde\_bestätigt \textrightarrow{} Auftrag\_anlegen \textrightarrow{} Versand \textrightarrow{} Rechnung \textrightarrow{} Ende.
+\end{quote}
+
+(Case 101 entspricht dem Happy Path.)
+
+\subsubsection{Drei Varianten}
+
+\begin{itemize}
+  \item \textbf{Variante A -- Rückfrage-Schleife (Case 102).} Ursache (Hypothese): Anfrage unvollständig, Daten fehlen. \emph{Risiko}: längere DLZ, mögliche Eskalation; \emph{möglicher Nutzen}: höhere Qualität der Angebote durch Klärung im Vorfeld.
+  \item \textbf{Variante B -- Doppelversand (Case 103).} Ursache: möglicherweise getrennt versendete Teilmengen, oder Bedienfehler. \emph{Risiko}: zusätzliche Versandkosten, potenziell Kundenirritation; \emph{möglicher Nutzen}: bei großen Sendungen evtl.\ gewollt.
+  \item \textbf{Variante C -- Storno nach Auftragsanlage (Case 104).} Ursache: Kundenrücktritt, Bonität, falsche Kalkulation. \emph{Risiko}: verlorene Bearbeitungszeit; \emph{möglicher Nutzen}: Lerneffekt, wenn häufig Stornos auftreten.
+\end{itemize}
+
+\subsubsection{Engpasshypothesen}
+
+\begin{itemize}
+  \item \fachbegriff{Anfrage\_prüfen} -- könnte Engpass sein, weil hier (Case 102) zurückgegangen wird und Rückfragen passieren.
+  \item \fachbegriff{Übergang Auftrag\_anlegen $\rightarrow$ Versand} -- könnte Engpass sein, weil hier (Case 103) Doppelversand auftritt, was auf Koordinations\-probleme hindeutet.
+\end{itemize}
+
+\subsubsection{Drei Klärfragen an die Fachseite}
+
+\begin{enumerate}
+  \item Sind Rückfragen ein systematisches Problem (Datenqualität der Eingangsanfragen)?
+  \item Ist der Doppelversand bewusst (Teillieferungen) oder ein Bedienfehler?
+  \item Welcher Anteil der Cases endet im Storno, und welche Gründe sind dominant?
+\end{enumerate}
+
+\subsection{Was Discovery \emph{nicht} kann}
+
+\begin{itemize}
+  \item Discovery liefert \fachbegriff{Hypothesen}, keine Wahrheit. Jede gefundene Variante braucht Validierung mit der Fachseite.
+  \item Discovery sieht nur, was \emph{geloggt} wird. Schritte, die manuell und ohne Log passieren, sind unsichtbar.
+  \item Discovery ist datenqualitäts-abhängig. Schlechte Logs erzeugen Spaghetti-Grafen, die niemand versteht.
+\end{itemize}
+
+\begin{merkbox}[Discovery erzeugt Hypothesen, nicht Wahrheiten]
+Ein Discovery-Modell sieht oft chaotisch aus. Das ist kein Tool-Problem -- es ist die Realität. Bevor man das Modell ``ordentlich'' macht, prüft die Senior-Disziplin: ist diese Variante echt, oder ein Datenartefakt? Ist diese Schleife Innovation, Fehler oder Pflicht? Erst nach Validierung wird aus dem Discovery-Graph ein belastbares Ist-Bild.
+\end{merkbox}
+
+\subsection{Filter-Techniken}
+
+In realen Discovery-Projekten sind die Daten zu viel und zu unscharf, um sie direkt zu visualisieren. Drei nützliche Filter:
+
+\begin{itemize}
+  \item \fachbegriff{Frequenz-Filter.} Nur Pfade behalten, die in $\geq$X\,\% der Cases vorkommen.
+  \item \fachbegriff{Zeitfenster-Filter.} Nur Cases aus einem bestimmten Zeitraum.
+  \item \fachbegriff{Variant-Filter.} Nur die Top-N häufigsten Varianten anzeigen.
+\end{itemize}
+
+Diese Filter machen den Graphen lesbar -- aber sie verbergen Information, die später wieder hervorgeholt werden muss. Senior-Praxis: zweite Sicht ohne Filter, um Long-Tail-Phänomene nicht zu übersehen.
+
+% --- 3. CONFORMANCE ------------------------------------------------------
+\section{Conformance Checking -- Soll vs.\ Ist}
+
+\fachbegriff{Conformance Checking} vergleicht den Ist-Prozess (aus Discovery) mit einem Soll-Modell (BPMN, EPC, Policy). Das Ergebnis sind \emph{Abweichungen} -- die zu klassifizieren und zu priorisieren sind. \quelle{Rozinat \& van der Aalst, 2008; van der Aalst, 2016}
+
+\subsection{Vier typische Abweichungs-Arten}
+
+\begin{enumerate}
+  \item \fachbegriff{Fehlende Schritte.} Ein im Soll vorgesehener Schritt fehlt im Ist (z.\,B.\ Vier-Augen-Freigabe wurde umgangen).
+  \item \fachbegriff{Zusätzliche Schritte.} Ein nicht vorgesehener Schritt erscheint (z.\,B.\ inoffizielle Sonderfreigabe).
+  \item \fachbegriff{Falsche Reihenfolge.} Schritte in einer Reihenfolge, die das Modell nicht erlaubt (z.\,B.\ Rechnung vor Wareneingang).
+  \item \fachbegriff{Schleifen oder Rework.} Schritte werden mehrfach durchgeführt (z.\,B.\ Anfrage\_prüfen wird wegen Rückfragen wiederholt).
+\end{enumerate}
+
+Hinzu kommen zwei spezielle Fälle:
+
+\begin{itemize}
+  \item \fachbegriff{SLA-Verletzungen.} Die Aktivitäten sind richtig, aber zu langsam.
+  \item \fachbegriff{Datenprobleme.} Eine vermeintliche Abweichung beruht auf einem Log-Fehler, nicht auf einer realen Abweichung.
+\end{itemize}
+
+\subsection{Klassifikation -- die Senior-Disziplin}
+
+Eine gefundene Abweichung ist erst dann steuerungstauglich, wenn sie in eine der vier Kategorien einsortiert wurde:
+
+\begin{itemize}
+  \item \fachbegriff{Compliance-Risiko.} Verstoß gegen Regel, Policy oder Gesetz. ``Zero Tolerance''-Kandidat.
+  \item \fachbegriff{Qualitäts-/Kostenrisiko.} Operativ teuer oder qualitätsmindernd, aber nicht regulatorisch. Steuerbar über Prozessregeln, Training, Systemkontrolle.
+  \item \fachbegriff{Legitime Variante.} Die Abweichung ist gewollt (Innovation, Service-Sonderfall) oder unvermeidlich. Ggf.\ ins Soll-Modell aufnehmen.
+  \item \fachbegriff{Datenproblem.} Keine echte Abweichung, sondern Log-/Erfassungsfehler. Datenqualitäts-Maßnahme.
+\end{itemize}
+
+\subsection{Beispiel-Abweichungen aus dem Mini-Log}
+
+\begin{tabularx}{\linewidth}{@{}lXl@{}}
+\toprule
+\textbf{Abweichung} & \textbf{Beschreibung} & \textbf{Kategorie} \\
+\midrule
+Rechnung vor Versand (Case 102) & Soll-Regel verletzt: ``Rechnung erst nach Versand'' & Compliance-Risiko \\
+Doppelversand (Case 103) & ``Doppelversand unzulässig'' verletzt & Qualitätsrisiko (kann legitim sein, prüfen) \\
+Rückfrage-Schleife (Case 102) & Modell erlaubt das, ok & Legitime Variante \\
+Storno nach Auftragsanlage (Case 104) & Vor Versand erlaubt, ok & Legitime Variante \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Priorisierung -- Schaden $\times$ Häufigkeit}
+
+Wenn Dutzende Abweichungen identifiziert werden, braucht es eine Priorisierung. Eine pragmatische Heuristik: \emph{Schaden $\times$ Häufigkeit.} Schaden ist eine Schätzung (in \text{\euro}, in Compliance-Punkten, in Kundenwirkung); Häufigkeit ist messbar.
+
+\begin{itemize}
+  \item Hohe Häufigkeit, hoher Schaden $\rightarrow$ \emph{Sofort handeln}.
+  \item Niedrige Häufigkeit, hoher Schaden $\rightarrow$ \emph{Kontrolle einbauen, Monitoring}.
+  \item Hohe Häufigkeit, niedriger Schaden $\rightarrow$ \emph{Prozessoptimierung, Training}.
+  \item Niedrige Häufigkeit, niedriger Schaden $\rightarrow$ \emph{tolerieren, beobachten}.
+\end{itemize}
+
+\subsection{Maßnahmen-Katalog}
+
+Pro Abweichung gehört eine Maßnahme:
+
+\begin{itemize}
+  \item \fachbegriff{Prozessregel.} Anpassung der SOP, neue Pflichtfelder, klarerer Hauptpfad.
+  \item \fachbegriff{Training.} Wissensvermittlung, Onboarding, Wiederholungen.
+  \item \fachbegriff{Systemkontrolle.} Pflichtfeld, Validierungsregel, automatische Eskalation.
+  \item \fachbegriff{Monitoring.} Dashboard, Alarmregel, regelmäßiger Review.
+\end{itemize}
+
+\subsection{Bewusst zugelassene Variante}
+
+Nicht alles, was vom Soll abweicht, ist falsch. Manchmal ist eine Abweichung eine bewusste pragmatische Entscheidung -- die dokumentiert werden muss, sonst wird sie zum Audit-Befund. Beispiel:
+
+\begin{itemize}
+  \item Variante: ``Rechnung kann vor Wareneingang verbucht werden'' für Drop-Ship- oder Service-Leistungen.
+  \item Guardrail: ``Nur für Lieferanten der Kategorie X, nur bis Betrag Y, mit Pflichtkennzeichen 'Drop-Ship'.''
+  \item Nachweispflicht: monatlicher Audit-Report, dass alle Drop-Ship-Cases dieser Regel folgen.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{C-Q-L-D}]
+Vier Kategorien für jede Conformance-Abweichung:\\[2pt]
+\textbf{C}ompliance-Risiko -- Zero Tolerance.\\
+\textbf{Q}ualitäts-/Kostenrisiko -- steuerbar, priorisierbar.\\
+\textbf{L}egitime Variante -- ins Modell aufnehmen.\\
+\textbf{D}atenproblem -- Log-/Erfassungsfehler beheben.\\[2pt]
+\emph{Ohne Klassifikation ist jede Liste von Abweichungen ein Bermuda-Dreieck der Verantwortung.}
+\end{eselsbox}
+
+% --- 4. INTERPRETATION VS. AUTOMATIK -------------------------------------
+\section{Interpretation: Abweichung als Signal, nicht als Fehler}
+
+Eine zentrale Senior-Disziplin im Conformance-Geschäft ist die Haltung: \emph{eine Abweichung ist ein Signal, kein automatischer Befund.} \quelle{van der Aalst, 2012}
+
+\subsection{Drei Arten, Signale zu lesen}
+
+\begin{enumerate}
+  \item \fachbegriff{Symptom-Lesart.} Abweichung zeigt, dass etwas nicht passt -- das Modell, der Prozess, die Daten, die Schulung. Frage: Was ist die Ursache?
+  \item \fachbegriff{Innovations-Lesart.} Abweichung zeigt, dass die Realität ``vor'' dem Modell ist -- Mitarbeiter haben einen besseren Weg gefunden. Frage: Sollten wir den Weg ins Modell aufnehmen?
+  \item \fachbegriff{Risiko-Lesart.} Abweichung zeigt, dass ein Risiko realisiert wird -- Compliance, Sicherheit, Qualität. Frage: Wie schließen wir die Lücke?
+\end{enumerate}
+
+\subsection{False-Compliance-Falle}
+
+Eine besondere Gefahr ist die \fachbegriff{False Compliance}: Das Papier ist erfüllt, die Realität ignoriert. Beispiele:
+
+\begin{itemize}
+  \item Vier-Augen-Freigabe ``digital geklickt'', aber der zweite Klickende hat nicht reingeschaut.
+  \item Kostenstellen-Pflichtfeld ist befüllt -- mit ``9999'' oder einer Catch-All-Stelle.
+  \item Sonderfreigabe wird in 30\,\% der Cases gezogen, weil der Standardprozess zu langsam ist.
+\end{itemize}
+
+False Compliance ist kein Conformance-Fortschritt -- sie ist \emph{Verlagerung des Problems}. Senior-Disziplin: Conformance-Quoten nicht isoliert betrachten, sondern mit qualitativen Stichproben kombinieren.
+
+\subsection{Zielkonflikt: Standardisierung vs.\ operative Flexibilität}
+
+Wer Conformance zu streng durchsetzt, lähmt das operative Geschäft. Wer sie zu lasch durchsetzt, schafft Audit-Risiken. Praktische Lösung:
+
+\begin{itemize}
+  \item \textbf{Harte Regeln} für regulatorisch verpflichtete Aspekte (KYC, Datenschutz, Vier-Augen-Prinzip).
+  \item \textbf{Weiche Regeln} mit klaren Eskalationspfaden für operative Flexibilität (Sonderfreigaben mit Schwellwert und Eskalations-Board).
+  \item \textbf{Beobachtung} ohne automatische Konsequenz für Innovations-Potenziale (Pilot-Phase).
+\end{itemize}
+
+\begin{merkbox}[Conformance braucht Klassifikation]
+Eine Abweichung ohne Klassifikation ist eine Suchanzeige ohne Verantwortlichen. Erst durch die Einsortierung in C-Q-L-D (Compliance, Qualität, Legitim, Daten) wird klar, wer handelt, mit welcher Dringlichkeit und mit welchem Werkzeug.
+\end{merkbox}
+
+% --- 5. FALLSTUDIE -------------------------------------------------------
+\section{Fallstudie: MedTech Supplies -- Procure-to-Pay Conformance}
+
+\emph{MedTech Supplies} ist ein reguliertes Unternehmen im Medizintechnik-Bereich. Auditoren bemängeln unklare Nachweise; gleichzeitig klagt der Einkauf über zu viel Bürokratie. Es gibt Hinweise auf ``Maverick Buying'' -- Einkäufe außerhalb des offiziellen Prozesses.
+
+\subsection{Ausgangslage und Restriktionen}
+
+\begin{itemize}
+  \item Zeit: 6 Wochen bis Audit.
+  \item Budget: 70\,000\,\text{\euro}.
+  \item Logs: nur ERP und E-Mail-Tickets verfügbar -- unvollständig.
+  \item Zielkonflikt: Speed (Einkauf) vs.\ Compliance (Audit).
+\end{itemize}
+
+\subsection{Schritt 1 -- Soll-Modell Procure-to-Pay (grob)}
+
+\begin{enumerate}
+  \item Bedarf erfassen (Anforderungsstelle).
+  \item Bedarf genehmigen (Vorgesetzter, ggf.\ Budgetverantwortlicher).
+  \item Bestellung anlegen (Einkauf).
+  \item Lieferung erhalten.
+  \item Wareneingang buchen (Lager).
+  \item Rechnung erfassen (Finance).
+  \item Drei-Wege-Abgleich (3-Way-Match: Bestellung, Wareneingang, Rechnung).
+  \item Freigabe der Rechnung (Finance/Fachbereich).
+  \item Zahlung auslösen (Finance).
+  \item Archivierung / Audit Trail.
+\end{enumerate}
+
+\subsection{Schritt 2 -- Ist-Hinweise (qualitativ)}
+
+\begin{itemize}
+  \item 30\,\% Rechnungen kommen vor Wareneingang.
+  \item 18\,\% haben fehlende Kostenstelle.
+  \item 12\,\% laufen über ``Sonderfreigabe''.
+  \item 8\,\% sind Dubletten.
+\end{itemize}
+
+\subsection{Schritt 3 -- Abweichungslandkarte}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXll@{}}
+\toprule
+Abweichung & Risiko / Ursache (Hypothese) & Maßnahme & Owner \\
+\midrule
+Rechnung vor Wareneingang & 3-Way-Match bricht / Dropship, Service & Ausnahmeprozess, Pflichtkennzeichen, Nachbuchungs-SLA & Finance Ops \\
+Fehlende Kostenstelle & Controlling, Compliance / schlechtes Formular & Pflichtfeld, Validierung, Rückgabe & Einkauf \\
+Sonderfreigaben & Umgehung / Zeitdruck & Schwellwert, Eskalations-Board, Monitoring & Procurement Lead \\
+Dubletten & Doppelzahlung / Datenqualität, Mehrfacherfassung & ID-Match, Sperrregel, Datenkonsolidierung & Finance Ops \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Schritt 4 -- 6-Wochen-Plan (Audit-fähig)}
+
+\begin{enumerate}
+  \item Pflichtfelder Kostenstelle + Validierung im Anforderungsformular (Woche 1--2).
+  \item Ausnahmeprozess für ``Rechnung vor Wareneingang'' formalisieren (Woche 2--3).
+  \item Monitoring-Dashboard für Abweichungen + wöchentliches Review (Woche 3--6).
+\end{enumerate}
+
+\subsection{Schritt 5 -- 3-Monats-Plan (nachhaltig)}
+
+\begin{enumerate}
+  \item Automatisierter 3-Way-Match im ERP (Wochen 7--14).
+  \item Lieferanten- und Stammdaten\-bereinigung (Wochen 8--16).
+  \item Training für Anforderungsstellen + Governance-Update (Wochen 10--18).
+\end{enumerate}
+
+\subsection{Schritt 6 -- Bewusst zugelassene Variante}
+
+\textbf{Variante:} ``Rechnung vor Wareneingang'' für Dropship-Service-Lieferanten.
+
+\textbf{Guardrails:}
+\begin{itemize}
+  \item Nur für Lieferanten mit Markierung ``Dropship'' in Stammdaten.
+  \item Nur bis Betrag 5\,000\,\text{\euro}.
+  \item Pflichtkennzeichen ``Dropship'' im Rechnungs-Datensatz.
+  \item Nachbuchungs-SLA: Wareneingang muss innerhalb 14\,Tagen erfolgen.
+  \item Monatlicher Audit-Report mit Stichprobe.
+\end{itemize}
+
+\textbf{Frühwarnsignal:} Mehr als 5\,\% der Dropship-Cases ohne Nachbuchung innerhalb SLA $\rightarrow$ Regel re-evaluieren.
+
+\subsection{Annahmen und Frühwarnsignale}
+
+\begin{itemize}
+  \item \textbf{Annahme:} Die Kostenstellen-Datenqualität verbessert sich durch Pflichtfeld + Validierung um $>$60\,\%.
+  \item \textbf{Annahme:} Sonderfreigaben werden durch Schwellwert + Eskalation auf $<$5\,\% reduziert.
+  \item \textbf{Frühwarnsignal 1:} Trotz Pflichtfeld bleiben Kostenstellen-Fehler $>$10\,\% $\rightarrow$ Validierung verschärfen.
+  \item \textbf{Frühwarnsignal 2:} Sonderfreigaben steigen wieder $>$10\,\% $\rightarrow$ Eskalations-Board prüfen, Schwellwert anpassen.
+\end{itemize}
+
+\subsection{Lessons aus der Fallstudie}
+
+\begin{itemize}
+  \item Abweichungen müssen klassifiziert werden -- erst dann werden sie steuerbar.
+  \item Eine bewusst zugelassene Variante ist Audit-fähig, wenn sie Guardrails und Frühwarnsignale hat.
+  \item Speed-vs.-Compliance ist kein Entweder-Oder, sondern eine Frage der \emph{Schwellwerte und Eskalationspfade}.
+\end{itemize}
+
+% --- 6. DATENQUALITAET ---------------------------------------------------
+\section{Datenqualität als Voraussetzung}
+
+Discovery und Conformance liefern nur dann belastbare Ergebnisse, wenn die zugrunde liegenden Daten ``mining-tauglich'' sind. Die meisten Process-Mining-Projekte verbringen 40--60\,\% der Zeit mit Datenaufbereitung -- nicht mit Analyse. \quelle{van der Aalst, 2012; Reinkemeyer, 2020}
+
+\subsection{Die fünf wichtigsten Datenqualitäts-Probleme}
+
+\begin{enumerate}
+  \item \fachbegriff{Inkonsistente Aktivitäten-Namen.} ``Approve'' / ``Genehmigen'' / ``Freigegeben'' werden als verschiedene Aktivitäten gezählt, obwohl es dieselbe ist. Maßnahme: Mapping-Tabelle, harmonisierte Naming.
+  \item \fachbegriff{Lücken in Case IDs.} Zwei zusammengehörige Vorgänge tauchen unter verschiedenen IDs auf, oder ein Vorgang springt fälschlich zwischen IDs. Maßnahme: Case-ID-Strategie definieren (z.\,B.\ ``führende Order-ID'' für ganze P2P-Kette).
+  \item \fachbegriff{Zeitstempel-Probleme.} Zeitzonen, fehlende Sekunden, rückwärtslaufende Stempel. Maßnahme: zentrale Normalisierung in Staging.
+  \item \fachbegriff{Doppelte Events.} Ein Klick erzeugt zwei Logzeilen, der Graph zeigt Pseudo-Schleifen. Maßnahme: Deduplikation auf Basis Case+Activity+Timestamp (mit Toleranz).
+  \item \fachbegriff{Manuelle Schritte ohne Log.} Aktivitäten, die per E-Mail oder Telefon passieren, fehlen vollständig. Maßnahme: Lücken explizit benennen, ggf.\ kurzfristige manuelle Erfassung.
+\end{enumerate}
+
+\subsection{Case-ID-Strategie}
+
+Die zentrale Designentscheidung in jedem Mining-Projekt: \emph{Was ist die führende Case-ID?} Für P2P könnte das die Bestellnummer sein; für O2C die Auftragsnummer; für Incident-Management die Ticketnummer. Wichtig:
+
+\begin{itemize}
+  \item Pro Mining-Sicht gibt es \emph{eine} führende ID.
+  \item Andere IDs (z.\,B.\ Rechnungsnummern) werden über Mapping mit der führenden ID verbunden.
+  \item Wechsel der führenden ID erlaubt andere Sichten (z.\,B.\ Lieferanten-Sicht statt Bestell-Sicht).
+\end{itemize}
+
+\subsection{Datenqualitäts-SLAs}
+
+Wer Process Mining im Dauerbetrieb fahren will, braucht \fachbegriff{Data Quality SLAs}: messbare Anforderungen an die Daten, mit Owner und Eskalationspfad.
+
+\begin{itemize}
+  \item \emph{Vollständigkeit Case ID:} $>$99\,\% der Events haben Case ID.
+  \item \emph{Konsistenz Aktivitäten-Namen:} 100\,\% bekannt aus Mapping-Tabelle.
+  \item \emph{Zeitstempel-Plausibilität:} 100\,\% innerhalb Quartal, keine Sprünge.
+  \item \emph{Dubletten-Rate:} $<$0,5\,\% nach Deduplikation.
+\end{itemize}
+
+% --- 7. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: Conformance als Steuerungsinstrument}
+
+Auf Wissens-Ebene sind Discovery und Conformance methodische Disziplinen. Auf Anwendungs-Ebene sind sie Handwerk. Auf Management-Ebene sind sie ein \emph{Steuerungs- und Compliance-Programm} -- mit Konsequenzen für Rollen, Datenschutz, Akzeptanz und Eskalationslogik.
+
+\subsection{Zwei zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Compliance vs.\ Speed.} Strikte Conformance-Erzwingung erhöht Audit-Sicherheit -- und Bürokratie. Lockere Conformance bringt Tempo -- und Risiko. Empfehlung: \emph{harte Regeln für nicht verhandelbares, weiche Regeln mit Eskalation für operatives.}
+  \item \textbf{Transparenz vs.\ Vertrauen.} Process Mining kann als ``Überwachung'' empfunden werden. Wer die Daten transparent macht, riskiert Akzeptanzverlust bei Mitarbeitenden. Empfehlung: Daten aggregiert nutzen, Personenbezug minimieren, Betriebsrat/Datenschutz früh einbinden.
+\end{enumerate}
+
+\subsection{Rollen im Conformance Operating Model}
+
+\begin{itemize}
+  \item \fachbegriff{Process Owner.} Fachliche End-to-End-Verantwortung. Entscheidet, welche Abweichungen toleriert werden.
+  \item \fachbegriff{Data Steward.} Verantwortet Datenqualität, Mapping-Tabellen, Case-ID-Strategie.
+  \item \fachbegriff{Compliance Reviewer.} Prüft regulatorische Aspekte, definiert Zero-Tolerance-Liste.
+  \item \fachbegriff{Mining-Owner / Product Owner.} Verantwortet die Mining-Plattform als Produkt -- Releases, Use-Case-Pipeline, Stakeholder.
+\end{itemize}
+
+\subsection{Welche Abweichungen sind ``Zero Tolerance''?}
+
+Eine kleine, aber harte Liste sollte jede Organisation explizit benennen. Typische Kandidaten:
+
+\begin{itemize}
+  \item Vier-Augen-Prinzip umgangen bei finanzwirksamen Freigaben.
+  \item KYC-Schritte übersprungen oder unvollständig.
+  \item Audit-Trail manipuliert oder gelöscht.
+  \item Datenschutz-Rechte des Kunden umgangen (z.\,B.\ Löschanträge ignoriert).
+\end{itemize}
+
+\subsection{Datenlücken akzeptieren -- mit Kontrollen}
+
+In der Realität sind nicht alle Datenquellen sofort minable. Senior-Praxis akzeptiert Lücken \emph{bewusst} und kompensiert sie:
+
+\begin{itemize}
+  \item Manuelle Schritte ohne Log: kompensieren durch wöchentliche manuelle Stichprobe.
+  \item Lieferanten-IDs uneinheitlich: kompensieren durch Mapping-Tabelle und regelmäßiges Reconciliation.
+  \item Zeitstempel-Lücken: kompensieren durch geschätzte Bandbreiten, mit Hinweis im Dashboard.
+\end{itemize}
+
+\subsection{Anti-Gaming der Conformance-KPIs}
+
+Eine Fitness- oder Conformance-Quote als KPI hat denselben Gaming-Risiken wie jede andere. Beispiele:
+
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+KPI & Gaming-Risiko & Gegenmaßnahme \\
+\midrule
+Conformance-Quote & Cases umetikettieren, damit sie ``passen'' & Stichproben mit qualitativem Audit \\
+SLA-Hit-Rate & Cases früh ``vorläufig'' schließen & Verkoppeln mit Reopen-Rate \\
+Abweichungs-Anzahl & Abweichungen nicht melden & Audit-Trail-Vergleich \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Conformance als Steuerungsinstrument}
+
+Wenn Process Mining nur Reporting erzeugt, bringt es wenig. Es entfaltet seinen Wert, wenn:
+
+\begin{itemize}
+  \item jede Abweichung eine \fachbegriff{Maßnahme} hat (Prozessregel, Training, Systemkontrolle, Monitoring).
+  \item jede Maßnahme einen \fachbegriff{Owner} hat.
+  \item jeder Owner eine \fachbegriff{Eskalationsregel} hat (was bei Unwirksamkeit der Maßnahme?).
+  \item das Programm einen \fachbegriff{Lern-Rhythmus} hat (monatlicher oder vierteljährlicher Review).
+\end{itemize}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 7]
+Process Mining ohne Conformance ist Reporting; Conformance ohne Owner ist Liste; Owner ohne Eskalationsregel ist Theater. Erst die Kette \emph{Daten $\rightarrow$ Abweichung $\rightarrow$ Klassifikation $\rightarrow$ Maßnahme $\rightarrow$ Owner $\rightarrow$ Eskalation} macht aus Mining ein Steuerungssystem.
+\end{merkbox}
+
+% --- 8. TAKE-AWAYS -------------------------------------------------------
+\section{Take-aways aus Tag 7}
+
+\begin{enumerate}
+  \item \textbf{Event Log = C-A-T.} Case ID, Activity, Timestamp -- ohne diese drei keine Discovery.
+  \item \textbf{Discovery erzeugt Hypothesen, keine Wahrheiten.} Jede Variante mit Fachseite validieren.
+  \item \textbf{Conformance braucht Klassifikation.} C-Q-L-D: Compliance, Qualität, Legitim, Daten.
+  \item \textbf{Schaden $\times$ Häufigkeit} als pragmatische Priorisierungs-Heuristik.
+  \item \textbf{Bewusst zugelassene Variante = Guardrails + Frühwarnsignal.} Sonst wird sie zum Audit-Befund.
+  \item \textbf{False Compliance ist kein Fortschritt.} Stichproben mit qualitativer Tiefe kombinieren.
+  \item \textbf{Datenqualität ist 50\,\% des Projekts.} Mapping, Case-ID-Strategie, Datenqualitäts-SLAs.
+  \item \textbf{Mining-Programm braucht Operating Model.} Process Owner, Data Steward, Compliance Reviewer, Mining-Product-Owner.
+\end{enumerate}
+
+% --- 9. LITERATUR --------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Dumas, M., La Rosa, M., Mendling, J., \& Reijers, H.\,A. (2018).] \emph{Fundamentals of business process management} (2nd ed.). Springer. \href{https://doi.org/10.1007/978-3-662-56509-4}{https://doi.org/10.1007/978-3-662-56509-4}
+  \item[IEEE Computational Intelligence Society. (2016).] \emph{IEEE Standard for eXtensible Event Stream (XES) for achieving interoperability in event logs and event streams} (IEEE Std 1849-2016). IEEE. \href{https://doi.org/10.1109/IEEESTD.2016.7740858}{https://doi.org/10.1109/IEEESTD.2016.7740858}
+  \item[Reinkemeyer, L. (Hrsg.). (2020).] \emph{Process mining in action: Principles, use cases and outlook}. Springer. \href{https://doi.org/10.1007/978-3-030-40172-6}{https://doi.org/10.1007/978-3-030-40172-6}
+  \item[Rozinat, A., \& van der Aalst, W.\,M.\,P. (2008).] Conformance checking of processes based on monitoring real behavior. \emph{Information Systems, 33}(1), 64--95. \href{https://doi.org/10.1016/j.is.2007.07.001}{https://doi.org/10.1016/j.is.2007.07.001}
+  \item[van der Aalst, W.\,M.\,P. (2012).] Process mining manifesto. In F.~Daniel, K.~Barkaoui, \& S.~Dustdar (Hrsg.), \emph{Business process management workshops (BPM 2011)} (Lecture Notes in Business Information Processing, Vol.~99, S.~169--194). Springer. \href{https://doi.org/10.1007/978-3-642-28108-2_19}{https://doi.org/10.1007/978-3-642-28108-2\_19}
+  \item[van der Aalst, W.\,M.\,P. (2016).] \emph{Process mining: Data science in action} (2nd ed.). Springer. \href{https://doi.org/10.1007/978-3-662-49851-4}{https://doi.org/10.1007/978-3-662-49851-4}
+  \item[van der Aalst, W.\,M.\,P., \& Carmona, J. (Hrsg.). (2022).] \emph{Process mining handbook} (Lecture Notes in Business Information Processing, Vol.~448). Springer. \href{https://doi.org/10.1007/978-3-031-08848-3}{https://doi.org/10.1007/978-3-031-08848-3}
+\end{description}
+
+% --- 10. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Activity (Aktivität)] Bezeichnung eines Schrittes im Event Log, üblich nach Verb + Objekt-Regel.
+  \item[Alpha-Algorithmus] Klassischer Discovery-Algorithmus; Grundlage vieler Erweiterungen.
+  \item[Case ID] Eindeutiger Identifier eines Vorgangs im Event Log. Bündelt alle zugehörigen Events.
+  \item[Compliance-Risiko] Verstoß gegen Regel, Policy oder Gesetz; ``Zero Tolerance''-Kandidat.
+  \item[Conformance Checking] Vergleich des Ist-Prozesses mit einem Soll-Modell zur Identifikation von Abweichungen.
+  \item[Datenproblem (Abweichungs-Kategorie)] Vermeintliche Abweichung, die auf Log- oder Erfassungsfehler beruht.
+  \item[Data Quality SLA] Messbare Anforderung an Eventlog-Daten, mit Owner und Eskalationspfad.
+  \item[Data Steward] Rolle mit Verantwortung für Datenqualität, Mapping und Case-ID-Strategie.
+  \item[Discovery (Process Discovery)] Disziplin, aus Event Logs einen Ist-Prozess automatisch abzuleiten.
+  \item[Enhancement] Anreicherung eines Prozessmodells mit Daten (Zeiten, Kosten, Ressourcen). Thema Tag 8.
+  \item[Event Log] Tabelle von Events mit mindestens Case ID, Activity und Timestamp.
+  \item[False Compliance] Zustand, in dem die Form erfüllt ist, aber die Realität nicht (z.\,B.\ Vier-Augen-Klick ohne Prüfung).
+  \item[Filter (Frequenz/Variant/Zeit)] Techniken, um Discovery-Graphen lesbar zu halten -- auf Kosten von Long-Tail-Information.
+  \item[Fitness] Maß, wie gut ein Event Log zu einem Modell passt (in Conformance-Tools).
+  \item[Guardrail] Bedingung, unter der eine bewusst zugelassene Variante akzeptabel ist.
+  \item[Happy Path] Typischer Hauptpfad im Discovery-Graphen, in den meisten Cases vorkommend.
+  \item[Heuristics Miner] Discovery-Algorithmus, der mit verrauschten Logs robust umgeht.
+  \item[Inductive Miner] Discovery-Algorithmus mit garantiert ``sound'' erzeugten Prozessmodellen.
+  \item[Legitime Variante] Abweichung, die nicht Fehler ist, sondern gewollt -- ggf.\ ins Modell aufnehmen.
+  \item[Maverick Buying] Einkäufe außerhalb des offiziellen Prozesses; klassisches Conformance-Symptom.
+  \item[Process Mining] Sammeldisziplin für Discovery, Conformance und Enhancement auf Basis von Event Logs.
+  \item[Qualitätsrisiko] Abweichungs-Kategorie: operativ teuer oder qualitätsmindernd, aber nicht regulatorisch.
+  \item[Schaden $\times$ Häufigkeit] Priorisierungs-Heuristik für Abweichungen.
+  \item[Soll-Modell] Normatives Modell (BPMN, EPC, Policy), gegen das Conformance gemessen wird.
+  \item[Variante (Process Mining)] Konkrete Pfad-Folge im Event Log, die sich vom Happy Path unterscheidet.
+  \item[XES] \emph{eXtensible Event Stream.} IEEE-Standard für interoperable Event Logs.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 7 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

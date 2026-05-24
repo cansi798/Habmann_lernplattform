@@ -1,0 +1,863 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 9 - Lehrskript
+% Scrum, Kanban, CI/CD, Infrastructure as Code als Steuerungssystem
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 9}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Scrum \textperiodcentered{} Kanban \textperiodcentered{} CI \textperiodcentered{} IaC}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 4 \textperiodcentered{} TAG 9 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 10.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Agile\\\&\\CI/IaC\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Agile Delivery als Steuerungssystem --\\Scrum, Kanban, CI/CD und Infrastructure as Code für sichere Änderungen.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 9 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Modelle, Mining und Predictive Analytics sind die analytischen Schichten -- sie zeigen, was passiert. Heute treten wir auf die \emph{Liefer-Ebene}: Wie werden Prozess- und IT-Änderungen \emph{verantwortet, getaktet und sicher in Produktion gebracht?} Vier Bausteine machen das möglich -- Scrum als Sprint-Framework, Kanban als Flow-Methode, Continuous Integration als Beschleuniger und Infrastructure as Code als versionierbares Fundament.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Scrum-Bausteine kennen: Rollen (Product Owner, Scrum Master, Developers), Events, Artefakte, Definition of Done.
+  \item Kanban-Prinzipien einordnen: Visualisieren, WIP-Limits, Pull-System, Flow-Metriken.
+  \item CI-Pipeline und ihre typischen Stufen kennen: Build, Tests, Security/Quality Checks, Deploy.
+  \item Infrastructure-as-Code-Grundlagen benennen: Code statt Click, Versionierung, Reviews, Audit-Trail.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Eine fundierte Entscheidung Scrum / Kanban / Hybrid in einem konkreten Setting treffen.
+  \item Ein Sprint- oder Kanban-Board mit Rollen, Policies und Replenishment-Mechanik entwerfen.
+  \item Eine minimale CI-Pipeline mit zwei nicht verhandelbaren Quality Gates konstruieren.
+  \item IaC-Policy mit Review-Pflicht, Freigabe und Audit-Trail formulieren.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item DORA-Metriken (Lead Time, Deployment Frequency, Change Failure Rate, MTTR) als Steuerungssprache nutzen.
+  \item Zentrale (Gates, Security, IaC-Standards) vs.\ dezentrale Entscheidungen (Team Backlog) bewusst trennen.
+  \item ``Fast vs.\ Safe''-Entscheidungen unter Zielkonflikt schriftlich begründen.
+  \item Anti-Gaming-Mechanismen für Flow-Kennzahlen einbauen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Agile ist kein Synonym für ``schneller''. Es ist ein Synonym für ``häufig liefern, kurz feedbacken, früh lernen.'' CI/IaC sind keine Tools, sondern \emph{Vereinbarungen}: jeder Build prüfbar, jede Änderung versioniert, jedes Deployment rückbaubar. Senior-Praxis verbindet: \emph{Flow plus Gates plus Ownership = sichere Geschwindigkeit.}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Veränderung als gesteuertes System}
+
+Jedes BPM-, Digital- oder Transformations-Programm hat eine Lieferschicht. Hier werden Prozess- und IT-Änderungen entworfen, gebaut, getestet, freigegeben, ausgerollt -- und im Idealfall messbar verbessert. Wer diese Schicht ignoriert, hat zwar Modelle und Pipelines, aber keine Lieferfähigkeit. \quelle{Beck et al., 2001; Forsgren et al., 2018}
+
+\subsection{Symptome einer fehlenden Lieferarchitektur}
+
+\begin{itemize}
+  \item \fachbegriff{``Release Friday Fear''.} Niemand traut sich, am Freitag noch zu deployen -- aus Angst, das Wochenende durchzukämpfen.
+  \item \fachbegriff{Sprint Theater.} Scrum-Events laufen, aber jede Iteration liefert das Gleiche: Tickets schieben, keine Outcomes.
+  \item \fachbegriff{Kanban-Wildwuchs.} Boards mit 30 Tickets in ``In Progress''; WIP-Limits nicht durchgesetzt; Pull-System nur auf dem Papier.
+  \item \fachbegriff{Deploys per Klick.} Niemand weiß, was im letzten Release wirklich geändert wurde; Rollback ist Glücksspiel.
+\end{itemize}
+
+\subsection{Die vier Bausteine sicherer Lieferung}
+
+\begin{enumerate}
+  \item \fachbegriff{Scrum} -- Sprint-Taktung, Rollen, Events, Definition of Done.
+  \item \fachbegriff{Kanban} -- Flow, WIP-Limits, Pull-System, Lead Time messen.
+  \item \fachbegriff{CI/CD} -- automatisierte Build/Test/Deploy-Pipelines mit Quality Gates.
+  \item \fachbegriff{Infrastructure as Code} -- versionierte, reviewbare, reproduzierbare Infrastruktur.
+\end{enumerate}
+
+Diese vier Bausteine sind keine isolierten Tools, sondern Bausteine eines \emph{Steuerungssystems}: Taktung, Flow, Sicherheit, Rückbaubarkeit.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{S-K-C-I}]
+Vier Bausteine sicherer Liefer-Architektur:\\[2pt]
+\textbf{S}crum -- Taktung für planbare Increments.\\
+\textbf{K}anban -- Flow für kontinuierliche Lieferung.\\
+\textbf{C}I/CD -- automatisiertes Bauen, Testen, Deployen.\\
+\textbf{I}aC -- Infrastruktur versionieren, reviewen, rückbauen.\\[2pt]
+\emph{Wer alle vier zusammen denkt, baut sichere Geschwindigkeit -- statt schnellem Chaos.}
+\end{eselsbox}
+
+% --- 2. SCRUM ------------------------------------------------------------
+\section{Scrum: Sprints, Rollen, Events, Artefakte}
+
+\fachbegriff{Scrum} ist seit den 1990ern das verbreitetste agile Framework. Der aktuelle Scrum Guide (Schwaber \& Sutherland, 2020) reduziert es auf wenige, klar definierte Rollen, Events und Artefakte. \quelle{Schwaber \& Sutherland, 2020; Highsmith, 2009}
+
+\subsection{Die drei Rollen}
+
+\begin{itemize}
+  \item \fachbegriff{Product Owner.} Verantwortet das Produkt-Backlog, priorisiert nach Wert, entscheidet über Inhalte. \emph{Eine Person} -- nicht ein Komitee.
+  \item \fachbegriff{Scrum Master.} Coacht das Team, beseitigt Impediments, stellt sicher, dass Scrum gelebt wird (kein klassischer Projektmanager).
+  \item \fachbegriff{Developers.} Cross-funktionales Team, das das Increment liefert (umfasst Entwickler, Tester, Designer, Architekten).
+\end{itemize}
+
+\subsection{Die vier Events}
+
+\begin{itemize}
+  \item \fachbegriff{Sprint Planning.} Zu Beginn des Sprints. Team wählt aus Backlog, definiert Sprint Goal und Sprint Backlog. Dauer typischerweise 2--4\,h für einen 2-Wochen-Sprint.
+  \item \fachbegriff{Daily Scrum.} Tägliche 15-Minuten-Synchronisation. Nicht Status für Manager, sondern Team-Selbstkoordination.
+  \item \fachbegriff{Sprint Review.} Am Ende des Sprints. Increment wird Stakeholdern vorgestellt, Feedback fließt ins Backlog.
+  \item \fachbegriff{Sprint Retrospective.} Team-Reflexion: Was lief gut, was nicht, welche eine Sache verbessern wir?
+\end{itemize}
+
+\subsection{Die drei Artefakte}
+
+\begin{itemize}
+  \item \fachbegriff{Product Backlog.} Geordnete Liste aller bekannten Anforderungen. Lebt, wird ständig gepflegt.
+  \item \fachbegriff{Sprint Backlog.} Auswahl des Sprints + Plan zur Lieferung.
+  \item \fachbegriff{Increment.} Nutzbares Inkrement am Sprint-Ende. Muss die \fachbegriff{Definition of Done (DoD)} erfüllen.
+\end{itemize}
+
+\subsection{Definition of Done}
+
+Die DoD ist eine ehrliche Liste prüfbarer Kriterien, ab denen ein Backlog Item ``fertig'' ist. Sie ist team- und produktabhängig. Typische DoD-Punkte:
+
+\begin{itemize}
+  \item Code-Reviews vollständig.
+  \item Unit-Tests grün.
+  \item Integration-Tests grün.
+  \item Security-Scan ohne kritische Findings.
+  \item Dokumentation aktualisiert.
+  \item In Staging deployed.
+  \item Vom Product Owner abgenommen.
+\end{itemize}
+
+\subsection{Nutzen und Risiken}
+
+\begin{itemize}
+  \item \textbf{Nutzen:} planbare Taktung, regelmäßiges Feedback, klare Priorisierung.
+  \item \textbf{Risiken:} \emph{Cargo-Cult Scrum} (Events ohne Outcome), Sprint als Wasserfall-Mini-Projekt, Backlog als Wunschzettel statt Priorität.
+\end{itemize}
+
+\begin{merkbox}[Scrum-Disziplin]
+Ein Daily ohne Selbst-Koordination ist Status-Theater. Ein Sprint Review ohne Stakeholder-Feedback ist Demo ohne Schluss. Eine Retrospective ohne konkreten Verbesserungs-Schritt ist Therapie. Scrum trägt nur, wenn die Events \emph{Wirkung} statt \emph{Ritual} sind.
+\end{merkbox}
+
+% --- 3. KANBAN -----------------------------------------------------------
+\section{Kanban: Flow, WIP-Limits, Pull-System}
+
+\fachbegriff{Kanban} stammt aus der Lean-Tradition und wurde von David J.\ Anderson für Wissensarbeit adaptiert. Im Gegensatz zu Scrum hat Kanban keine fixe Iteration -- es ist ein \emph{kontinuierlicher Flow}. \quelle{Anderson, 2010; Reinertsen, 2009}
+
+\subsection{Die fünf Kanban-Prinzipien}
+
+\begin{enumerate}
+  \item \fachbegriff{Visualisieren.} Alle Arbeit auf einem Board sichtbar machen.
+  \item \fachbegriff{WIP limitieren.} ``Work In Progress'' pro Spalte begrenzen.
+  \item \fachbegriff{Flow messen.} Lead Time, Cycle Time, Throughput.
+  \item \fachbegriff{Policies explizit machen.} Was ist die Definition pro Spalte, was ist Done-Kriterium?
+  \item \fachbegriff{Kontinuierlich verbessern.} Kaizen-Mentalität, datengetriebene Optimierung.
+\end{enumerate}
+
+\subsection{Board-Aufbau}
+
+Ein typisches Board hat Spalten wie:
+
+\begin{itemize}
+  \item \emph{Backlog} -- gepflegt, priorisiert.
+  \item \emph{Ready} -- definiert, ziehbar.
+  \item \emph{In Progress} -- WIP limitiert.
+  \item \emph{Review} -- Code Review, Test.
+  \item \emph{Done} -- abgeschlossen, geht in Cycle-Time-Messung ein.
+\end{itemize}
+
+Jede Spalte mit \fachbegriff{Eintrittskriterien} (was muss erfüllt sein, um in die Spalte zu ziehen) und \fachbegriff{Austrittskriterien} (was muss erfüllt sein, um weiterzugehen).
+
+\subsection{WIP-Limits}
+
+WIP-Limits sind die wichtigste Stellschraube im Kanban. Sie verhindern Multitasking, machen Engpässe sichtbar und reduzieren Lead Time.
+
+\begin{itemize}
+  \item Faustregel: \emph{Anzahl Team-Mitglieder $\times$ 1 bis 1,5} pro Spalte.
+  \item Bei Überschreitung: Stop the Line. Niemand neues anfangen, bevor blockiertes Item gelöst ist.
+  \item Tägliches Stand-up: ``Wo blockiert es, was tut der Schwarm?''.
+\end{itemize}
+
+\subsection{Flow-Metriken}
+
+\begin{itemize}
+  \item \fachbegriff{Lead Time.} Zeit von ``in Backlog'' bis ``Done''. Geschäftsrelevant.
+  \item \fachbegriff{Cycle Time.} Zeit von ``In Progress'' bis ``Done''. Teamintern.
+  \item \fachbegriff{Throughput.} Anzahl Items pro Zeiteinheit.
+  \item \fachbegriff{Aging WIP.} Wie lange ist ein Item schon ``In Progress''? Frühwarnsignal für Stuck-Items.
+\end{itemize}
+
+\subsection{Replenishment-Meeting}
+
+Wenn ``Ready'' leerläuft, muss nachgefüllt werden -- ohne Sprint-Rhythmus. Pragmatisch: ein wöchentliches \fachbegriff{Replenishment-Meeting} mit Product Owner, Lead, Team. Auswahl der nächsten Items, Aufnahme in ``Ready''.
+
+\begin{merkbox}[WIP-Limit als Selbstdisziplin]
+WIP-Limits funktionieren nur, wenn das Team sie \emph{respektiert} -- sonst werden sie zur Dekoration. Ein Team, das WIP-Limits konsequent durchhält, wird kurzfristig langsamer wirken (weniger gleichzeitige Tickets), aber mittelfristig deutlich schneller liefern (kürzere Lead Time, weniger Rework).
+\end{merkbox}
+
+\subsection{Nutzen und Risiken}
+
+\begin{itemize}
+  \item \textbf{Nutzen:} Stabilität, Durchsatz, weniger Multitasking, klare Engpässe.
+  \item \textbf{Risiken:} ohne explizite Policies und Replenishment wird Kanban zu ``Trello-Board mit Spalten'' -- ohne Steuerungseffekt.
+\end{itemize}
+
+% --- 4. SCRUM ODER KANBAN ------------------------------------------------
+\section{Scrum, Kanban oder Hybrid?}
+
+Es gibt keine universelle Antwort. Die Wahl hängt von Arbeitsart, Stakeholder-Erwartungen, Team-Reife und Abhängigkeiten ab.
+
+\subsection{Faustregeln}
+
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+& \textbf{Scrum} & \textbf{Kanban} \\
+\midrule
+Arbeitsart & Produkt mit Iterationen, klare Sprint-Ziele & kontinuierliche Arbeit, wechselnde Prioritäten \\
+Stakeholder & wollen Reviews in Sprint-Rhythmus & wollen schnelle Reaktion \\
+Workload & einigermaßen planbar & viel Support, Unterbrechungen \\
+Team-Reife & profitiert von Struktur & profitiert von Flexibilität \\
+Abhängigkeiten & wenige innerhalb Sprint & flexibel pro Item \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Hybrid-Modelle}
+
+In der Praxis nutzen viele Teams Mischformen:
+
+\begin{itemize}
+  \item \fachbegriff{Scrumban.} Scrum-Events (Planning, Review, Retro), aber Kanban-Board und WIP-Limits statt Sprint-Commitment.
+  \item \fachbegriff{Scrum + Kanban-Lane.} Klassischer Scrum-Backlog für Features, separate Kanban-Lane für Incidents/Anfragen mit WIP-Limit.
+\end{itemize}
+
+\subsection{Entscheidung für ein konkretes Beispiel}
+
+\textbf{Setting:} Ein Unternehmen will in 12 Wochen einen digitalen Prozess (z.\,B.\ Rechnungsfreigabe) verbessern. Anforderungen ändern sich, Stakeholder sind viele, IT-Kapazität begrenzt.
+
+\textbf{Bewertung:}
+\begin{itemize}
+  \item \emph{Risiko:} hoch (mehrere Schnittstellen, Compliance) $\rightarrow$ Struktur hilft.
+  \item \emph{Planbarkeit:} mittelmäßig (Anforderungen ändern sich).
+  \item \emph{Stakeholder:} viele, wollen Demos sehen.
+  \item \emph{Team-Reife:} mittel.
+  \item \emph{Workload:} Mix aus Features und Bugfixes/Anfragen.
+  \item \emph{Abhängigkeiten:} mehrere Systeme.
+\end{itemize}
+
+\textbf{Empfehlung:} \emph{Hybrid -- Scrum für Features (2-Wochen-Sprints), Kanban-Lane für Bugfixes und Anfragen mit WIP-Limit 2.}
+
+\subsection{Drei Policies, die Verantwortungsfähigkeit fördern}
+
+\begin{enumerate}
+  \item Klare Abnahme-Regel: \emph{Erst wenn Product Owner ``akzeptiert'' geklickt hat, ist es Done.}
+  \item Stop-the-Line: \emph{Wenn Quality Gate rot, niemand übernimmt neues Item, bis Gate grün ist.}
+  \item Transparenz: \emph{Jedes Blocker wird sichtbar gemacht, mit Owner und Eskalations-Datum.}
+\end{enumerate}
+
+% --- 5. CI/CD ------------------------------------------------------------
+\section{Continuous Integration und Continuous Delivery}
+
+\fachbegriff{CI/CD} ist die automatisierte Verwirklichung des Versprechens ``schnelle, sichere Änderungen''. CI sorgt dafür, dass jeder Code-Commit automatisch gebaut und geprüft wird; CD sorgt dafür, dass Änderungen mit hoher Frequenz in höhere Umgebungen ausgerollt werden. \quelle{Humble \& Farley, 2010; Forsgren et al., 2018}
+
+\subsection{Eine typische Pipeline in sechs Stufen}
+
+\begin{enumerate}
+  \item \fachbegriff{Commit.} Code wird in Versionskontrolle eingecheckt.
+  \item \fachbegriff{Build.} Quellcode wird kompiliert/gebündelt.
+  \item \fachbegriff{Unit Tests.} Komponenten-Tests laufen.
+  \item \fachbegriff{Integration Tests.} Tests gegen andere Services, Datenbanken, APIs.
+  \item \fachbegriff{Security / Quality Checks.} Statische Analyse, Vulnerability-Scan, Coverage-Check.
+  \item \fachbegriff{Deploy.} Staging, dann Production -- mit Smoke Tests dazwischen.
+\end{enumerate}
+
+\subsection{Quality Gates}
+
+Ein \fachbegriff{Quality Gate} ist eine Stop-Regel: Wenn eine Bedingung nicht erfüllt ist, geht die Pipeline nicht weiter. Zwei Gates sind in jeder produktiven Pipeline Pflicht:
+
+\begin{itemize}
+  \item \fachbegriff{Tests grün.} Unit- und Integration-Tests bestehen.
+  \item \fachbegriff{Security-Scan ok.} Keine kritischen Vulnerabilities, keine offenen Secrets im Code.
+\end{itemize}
+
+Weitere Gates (kontextabhängig):
+
+\begin{itemize}
+  \item Code-Coverage über Schwelle.
+  \item Statische Analyse ohne kritische Findings.
+  \item Performance-Tests im Rahmen.
+  \item Smoke Tests nach Deploy ok.
+\end{itemize}
+
+\subsection{Deployment-Strategien}
+
+\begin{itemize}
+  \item \fachbegriff{Blue/Green.} Schneller Rollback durch Switch zwischen Umgebungen.
+  \item \fachbegriff{Canary.} Schrittweise Aktivierung auf Prozent der Nutzer.
+  \item \fachbegriff{Rolling.} Schrittweise Ablösung der Instanzen.
+  \item \fachbegriff{Feature Toggle.} Funktion deployed, aber per Schalter ein/aus.
+\end{itemize}
+
+\subsection{DORA-Metriken}
+
+Vier Kennzahlen aus dem ``Accelerate''-Buch (Forsgren et al., 2018), die den Reifegrad von Liefer-Organisationen messen:
+
+\begin{itemize}
+  \item \fachbegriff{Lead Time for Changes.} Zeit von Code-Commit bis Production.
+  \item \fachbegriff{Deployment Frequency.} Wie oft wird in Production deployed?
+  \item \fachbegriff{Change Failure Rate.} Anteil Deployments, die zu Incident führen.
+  \item \fachbegriff{Mean Time to Restore (MTTR).} Wie schnell ist nach Incident wieder Service da?
+\end{itemize}
+
+\subsubsection{DORA als Steuerungssprache}
+
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+DORA-Metrik & ``High Performer'' & ``Low Performer'' \\
+\midrule
+Lead Time for Changes & $<$1 Tag & $>$1 Monat \\
+Deployment Frequency & mehrmals täglich & weniger als einmal pro Monat \\
+Change Failure Rate & $<$15\,\% & $>$45\,\% \\
+MTTR & $<$1 Stunde & $>$1 Woche \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Anti-Gaming bei DORA}
+
+DORA-Metriken sind nicht immun gegen Gaming:
+
+\begin{itemize}
+  \item Deployment Frequency hochtreiben durch leere Deploys $\rightarrow$ Verkoppeln mit Change Failure Rate.
+  \item Change Failure Rate künstlich niedrig halten durch nicht-Reporting von Incidents $\rightarrow$ unabhängige Beobachtung (Monitoring-Alerts).
+  \item MTTR senken durch ``schließen ohne lösen'' $\rightarrow$ Verkoppeln mit Reopen-Rate.
+\end{itemize}
+
+\begin{merkbox}[CI/CD ist nicht Tool, sondern Vertrag]
+Eine Pipeline ohne Quality Gates ist eine schnelle Möglichkeit, Defekte in Produktion zu bringen. Quality Gates ohne Konsequenz (wenn rot, deployt jemand trotzdem manuell) sind Theater. CI/CD trägt nur, wenn die Gates auch unter Druck verteidigt werden -- das ist eine Führungs-Aufgabe, nicht eine Tool-Konfiguration.
+\end{merkbox}
+
+% --- 6. INFRASTRUCTURE AS CODE -------------------------------------------
+\section{Infrastructure as Code (IaC)}
+
+\fachbegriff{Infrastructure as Code} bedeutet: Infrastruktur (Server, Netzwerke, Datenbanken, Konfigurationen) wird in versioniertem Code beschrieben -- und nur über diesen Code geändert. Klick-Konfiguration ist tabu. \quelle{Morris, 2020}
+
+\subsection{Vier Kernprinzipien}
+
+\begin{itemize}
+  \item \fachbegriff{Code statt Click.} Jede Infrastruktur-Änderung als Pull Request.
+  \item \fachbegriff{Versionierung.} Git oder ähnliches Repository als Single Source of Truth.
+  \item \fachbegriff{Review-Pflicht.} Vier Augen vor Merge in Hauptzweig.
+  \item \fachbegriff{Reproduzierbarkeit.} Aus dem Code wird jede Umgebung identisch erzeugt.
+\end{itemize}
+
+\subsection{Typische Werkzeuge (toolneutral)}
+
+\begin{itemize}
+  \item \emph{Terraform} -- Cloud-übergreifend, deklarativ.
+  \item \emph{CloudFormation / Bicep / ARM} -- Cloud-spezifisch.
+  \item \emph{Ansible / Puppet / Chef} -- Konfigurations-Management.
+  \item \emph{Kubernetes Manifests / Helm} -- für Container-Orchestrierung.
+\end{itemize}
+
+\subsection{IaC-Policy in fünf Punkten}
+
+\begin{enumerate}
+  \item \fachbegriff{Wer darf was?} -- Klares Rollenmodell: wer schreibt, wer reviewt, wer merged.
+  \item \fachbegriff{Pull Request Pflicht.} Keine direkten Pushes in Main.
+  \item \fachbegriff{Mindestens 2-Augen-Review.} Für produktive Umgebungen.
+  \item \fachbegriff{Secrets-Management.} Keine Secrets im Repo. Vault oder Cloud-Secrets-Service.
+  \item \fachbegriff{Audit-Trail.} Merge-Historie als Audit-Log; Auswertbar pro Umgebung und Zeitraum.
+\end{enumerate}
+
+\subsection{Nutzen und Risiken}
+
+\begin{itemize}
+  \item \textbf{Nutzen:} Standardisierung, Audit-Fähigkeit, schnelle Umgebungen, Rollback per Git-Revert.
+  \item \textbf{Risiken:} Falsche Rechte (jemand merged etwas Kritisches ohne Review), Secrets-Leaks (versehentliches Einchecken), unkontrollierte ``Hot Fixes'' direkt in der Umgebung, die später vom Code überschrieben werden.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{C-V-R-R}]
+Vier IaC-Eigenschaften, die zusammen tragen:\\[2pt]
+\textbf{C}ode statt Click.\\
+\textbf{V}ersionierung im Repo.\\
+\textbf{R}eview-Pflicht vor Merge.\\
+\textbf{R}eproduzierbarkeit der Umgebungen.\\[2pt]
+\emph{Wer einen Buchstaben weglässt, baut Infrastruktur-Wildwuchs unter neuem Namen.}
+\end{eselsbox}
+
+% --- 7. FALLSTUDIE -------------------------------------------------------
+\section{Fallstudie: CityServices -- digitaler Genehmigungsworkflow}
+
+\emph{CityServices} ist ein öffentlicher Service-Provider (Verwaltung). Ein Genehmigungsprozess dauert aktuell 6 Wochen, hat Medienbrüche, Bürger sind unzufrieden. Gleichzeitig hohe Compliance-Anforderungen, Releases sind selten und riskant.
+
+\subsection{Ausgangslage und Restriktionen}
+
+\begin{itemize}
+  \item Zeit: 10 Wochen bis Pilot.
+  \item Budget: 130\,000\,\text{\euro}.
+  \item Fachbereich will schnelle Änderungen, IT fürchtet Instabilität.
+  \item Anforderungen sind unklar, ändern sich erfahrungsgemäß.
+\end{itemize}
+
+\subsection{Schritt 1 -- Scrum/Kanban-Entscheidung}
+
+\textbf{Empfehlung:} Hybrid.
+
+\begin{itemize}
+  \item \emph{Scrum} für neue Features in 2-Wochen-Sprints, mit Stakeholder-Demos.
+  \item \emph{Kanban-Lane} für Bugfixes und Bürger-Anfragen, WIP-Limit 2.
+\end{itemize}
+
+\subsubsection{Operating Model}
+
+\begin{itemize}
+  \item Rollen: Product Owner (Fachbereich), Scrum Master (Service-Lead), Developers (Mixed Team Fach + IT).
+  \item Events: Planning Mo, Daily 10\,min Mo--Fr, Review Fr Woche 2, Retro im Anschluss.
+  \item Backlog: priorisiert nach Wert für Bürger (Mess-Surrogat: ``Bedeutung für Verfahrens-Beschleunigung'').
+  \item Kanban-Lane Policies: Pull bei freier Kapazität, WIP-Limit 2, Eskalation an Service-Lead bei $>$5 Tage Aging.
+\end{itemize}
+
+\subsection{Schritt 2 -- 12-Wochen-Plan in drei Releases}
+
+\subsubsection{MVP (Woche 1--4)}
+
+\begin{itemize}
+  \item Digitaler Antrag online (Pflichtfelder, Vorab-Validierung).
+  \item Statusanzeige für Bürger (``Mein Antrag wird gerade geprüft'').
+  \item Ein Genehmigungsweg (häufigster Antragstyp).
+\end{itemize}
+
+\textbf{Outcomes (nicht Tasks):}
+\begin{itemize}
+  \item Antrag in $<$10\,min vom Bürger ausfüllbar.
+  \item 100\,\% der Anträge laufen über das System (kein Paper-Backup).
+  \item Statusanzeige aktualisiert in $<$1\,h.
+\end{itemize}
+
+\subsubsection{Beta (Woche 5--8)}
+
+\begin{itemize}
+  \item Rollenmodell (Antragsteller, Bearbeitende, Genehmigende, Audit).
+  \item SLA-Reminder und Eskalation bei Fristüberschreitung.
+  \item Audit Trail.
+  \item Zweiter Genehmigungsweg.
+\end{itemize}
+
+\textbf{Outcomes:}
+\begin{itemize}
+  \item Fristen werden in $>$90\,\% der Fälle eingehalten.
+  \item Audit-Stichprobe besteht ohne Findings.
+  \item Bürger-Eskalationen sinken um $>$50\,\%.
+\end{itemize}
+
+\subsubsection{Stabilisierung (Woche 9--12)}
+
+\begin{itemize}
+  \item Performance-Optimierung.
+  \item Monitoring + Alerts.
+  \item Fehlerfall-Behandlung.
+  \item Prozess-KPIs für Steuerung.
+\end{itemize}
+
+\textbf{Outcomes:}
+\begin{itemize}
+  \item p95-Antwortzeit $<$2\,s.
+  \item MTTR im Pilot-Betrieb $<$2\,h.
+  \item KPI-Dashboard für Service-Lead live.
+\end{itemize}
+
+\subsection{Schritt 3 -- CI-Pipeline und Quality Gates}
+
+\textbf{Pipeline:}
+\begin{itemize}
+  \item Commit $\rightarrow$ Build $\rightarrow$ Unit Tests $\rightarrow$ Integration Tests $\rightarrow$ Security Scan $\rightarrow$ Deploy Staging $\rightarrow$ Smoke Tests.
+\end{itemize}
+
+\textbf{Quality Gates (nicht verhandelbar):}
+\begin{enumerate}
+  \item Tests grün (Unit + Integration).
+  \item Security Scan ohne kritische Findings.
+\end{enumerate}
+
+\textbf{Release-Policy:}
+\begin{itemize}
+  \item Deploys nach Production: Mo--Do, nicht Freitag.
+  \item Emergency Releases: nur mit explizitem Approval des Service-Leads, mit Rollback-Plan.
+\end{itemize}
+
+\subsection{Schritt 4 -- IaC-Policy}
+
+\begin{itemize}
+  \item Pull-Request-Pflicht für alle Änderungen.
+  \item 2-Augen-Freigabe für Produktiv-Umgebungen.
+  \item Umgebungen reproduzierbar (Staging = Production minus Skalierung und Daten).
+  \item Secrets nicht im Repo; zentrale Secret-Lösung.
+  \item Audit-Log via Merge-Historie; monatlicher Audit-Report.
+\end{itemize}
+
+\subsection{Schritt 5 -- Fast vs.\ Safe-Entscheidungen}
+
+\textbf{Bewusst Speed:}
+\begin{itemize}
+  \item MVP ohne vollständige Automatisierung aller Sonderfälle (manuelle Fallbacks akzeptiert).
+  \item Performance-Optimierung erst in Stabilisierung-Phase.
+\end{itemize}
+
+\textbf{Bewusst Safety:}
+\begin{itemize}
+  \item Nicht verhandelbare Quality Gates (Security + Smoke).
+  \item Rollback-Plan vor jedem Production-Deploy verpflichtend.
+  \item Datenschutz-Review vor Live-Gang der Antragsdaten.
+\end{itemize}
+
+\subsection{Annahmen und Frühwarnsignale}
+
+\begin{itemize}
+  \item \textbf{Annahme:} 2-Wochen-Sprints reichen für die geplanten Outcomes.
+  \item \textbf{Annahme:} Pull-Request-Reviews schaffen einen Tag.
+  \item \textbf{Frühwarnsignal 1:} Change Failure Rate $>$20\,\% in einer Woche $\rightarrow$ Quality Gates verschärfen.
+  \item \textbf{Frühwarnsignal 2:} Lead Time steigt $>$5 Tage $\rightarrow$ WIP-Limit oder Replenishment prüfen.
+\end{itemize}
+
+\subsection{Lessons aus der Fallstudie}
+
+\begin{itemize}
+  \item Hybrid kann ehrlicher sein als ``rein Scrum'' oder ``rein Kanban''.
+  \item Outcomes statt Tasks zwingen das Team zur Wirkungs-Perspektive.
+  \item Quality Gates sind kein IT-Thema, sondern eine Führungsentscheidung.
+\end{itemize}
+
+% --- 8. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: Agile als Steuerungssystem}
+
+Auf Wissens-Ebene sind Scrum, Kanban, CI/CD und IaC einzelne Methoden. Auf Anwendungs-Ebene sind sie Handwerk. Auf Management-Ebene sind sie zusammen ein \emph{Steuerungssystem für Veränderung}. \quelle{Highsmith, 2009; Forsgren et al., 2018}
+
+\subsection{Zwei zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Release-Frequenz vs.\ Risiko.} Mehr Releases pro Woche bedeuten kürzere Lead Times -- und potenziell mehr Incidents, wenn die Gates schwach sind. Praxis: \emph{Release-Frequenz schrittweise erhöhen, mit Change Failure Rate als Gate.} Wenn Failure Rate steigt $\rightarrow$ Frequenz reduzieren, Quality Gates verschärfen.
+  \item \textbf{Standardisierung vs.\ Team-Autonomie.} Zentrale CI/IaC-Standards (Pipelines, Quality Gates, Security) erhöhen Sicherheit -- und reduzieren Team-Geschwindigkeit. Pure Team-Autonomie schafft Wildwuchs. Praktikabel: \emph{harte Standards für Cross-Cutting (Security, Audit, IaC-Struktur), Autonomie bei Sprint-Inhalt, Tooling-Details, Implementations-Entscheidungen.}
+\end{enumerate}
+
+\subsection{Operating Model -- wer verantwortet was}
+
+\begin{itemize}
+  \item \fachbegriff{Product Owner.} Verantwortet Backlog-Inhalt, Prioritäten, Akzeptanz.
+  \item \fachbegriff{Scrum Master / Team Coach.} Verantwortet Lebensfähigkeit des Prozesses.
+  \item \fachbegriff{Platform Team.} Stellt CI/CD-Plattform und IaC-Standards bereit.
+  \item \fachbegriff{Security Team.} Definiert Security-Standards, betreibt Scans, verantwortet kritische Gates.
+  \item \fachbegriff{Service-Owner / Operations.} Verantwortet Production-Betrieb, MTTR.
+\end{itemize}
+
+\subsection{Risiko-Akzeptanz-Modell}
+
+Eine zentrale Entscheidung: \emph{Wer darf welches Risiko akzeptieren?} Beispiele:
+
+\begin{itemize}
+  \item Production-Deploy am Freitag: nur Service-Lead, mit Rollback-Plan und Pager-Bereitschaft.
+  \item Emergency-Release ohne vollständige Integration-Tests: Service-Lead + Head of Engineering.
+  \item Bypass eines Quality Gates: nur CTO oder benanntes Risk-Komitee.
+\end{itemize}
+
+\subsection{Stop-the-Line-Regel}
+
+Eine Senior-Disziplin: definiere klar, wann \emph{niemand} mehr liefern darf. Typische Trigger:
+
+\begin{itemize}
+  \item Security-Scan zeigt kritische Schwachstelle.
+  \item Change Failure Rate $>$30\,\% in einer Woche.
+  \item Wiederkehrende Incidents auf demselben Service.
+\end{itemize}
+
+In diesen Fällen wird das Team aus dem Sprint herausgenommen und konzentriert sich auf die Ursachen-Behebung. Diese Regel schriftlich, mit Owner und Eskalations-Pfad.
+
+\subsection{Vermeidung des ``Agile = mehr Arbeit''-Falle}
+
+Eine häufige Fehlinterpretation: Agile bedeutet, dass das Team in derselben Zeit mehr liefert. Realistischer: Agile bedeutet, dass das Team in derselben Zeit \emph{wirksamer} liefert -- weniger Verschwendung, weniger Rework, kleinere Increments. Drei Maßnahmen:
+
+\begin{itemize}
+  \item Outcomes statt Tasks im Backlog (was wird besser, nicht was wird getan).
+  \item Definition of Done streng halten -- weniger ``halbfertige'' Items.
+  \item Retrospective mit \emph{einer} konkreten Verbesserung pro Sprint, nicht zehn.
+\end{itemize}
+
+\subsection{Entscheidungen unter Unsicherheit}
+
+\begin{itemize}
+  \item \textbf{Release-Frequenz-Ziel.} Wo wollen wir in 6 Monaten sein? Schriftlich, mit Trigger (Change Failure Rate über X $\rightarrow$ Frequenz reduzieren).
+  \item \textbf{Standardisierung vs.\ Team-Autonomie.} Welche fünf Cross-Cutting-Themen sind nicht verhandelbar? Welche bleiben lokale Entscheidung?
+\end{itemize}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 9]
+Scrum/Kanban sind Steuerungssysteme, keine Meeting-Kalender. CI/IaC sind Verträge, keine Tools. DORA-Metriken sind Sprache, kein Selbstzweck. Senior-Praxis verbindet alle drei zu einem System, in dem \emph{Veränderung gesteuert, nicht erlitten} wird.
+\end{merkbox}
+
+% --- 9. TAKE-AWAYS -------------------------------------------------------
+\section{Take-aways aus Tag 9}
+
+\begin{enumerate}
+  \item \textbf{Scrum = Taktung, Kanban = Flow.} Hybrid ist legitim, oft ehrlicher als ``rein''.
+  \item \textbf{WIP-Limit ist Selbstdisziplin.} Ohne Disziplin nur Dekoration.
+  \item \textbf{Outcomes statt Tasks.} Backlog-Items zeigen, was \emph{besser} wird -- nicht was \emph{getan} wird.
+  \item \textbf{Quality Gates nicht verhandelbar.} Mindestens Tests grün und Security ok -- der Rest pro Kontext.
+  \item \textbf{IaC = C-V-R-R.} Code, Versionierung, Reviews, Reproduzierbarkeit.
+  \item \textbf{DORA als Sprache.} Lead Time, Deployment Frequency, Change Failure Rate, MTTR -- alle vier mit Anti-Gaming.
+  \item \textbf{Stop-the-Line-Regel.} Schriftlich, mit Owner und Eskalation. Niemand liefert, wenn Gate rot.
+  \item \textbf{Fast vs.\ Safe schriftlich entscheiden.} Wo bewusst Speed, wo bewusst Safety -- begründet, mit Frühwarnsignal.
+\end{enumerate}
+
+% --- 10. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Anderson, D.\,J. (2010).] \emph{Kanban: Successful evolutionary change for your technology business}. Blue Hole Press.
+  \item[Beck, K., Beedle, M., van Bennekum, A., Cockburn, A., Cunningham, W., Fowler, M., \ldots\ \& Thomas, D. (2001).] \emph{Manifesto for agile software development}. \href{https://agilemanifesto.org/}{https://agilemanifesto.org/}
+  \item[Forsgren, N., Humble, J., \& Kim, G. (2018).] \emph{Accelerate: The science of lean software and DevOps -- Building and scaling high performing technology organizations}. IT Revolution Press.
+  \item[Highsmith, J. (2009).] \emph{Agile project management: Creating innovative products} (2nd ed.). Addison-Wesley.
+  \item[Humble, J., \& Farley, D. (2010).] \emph{Continuous delivery: Reliable software releases through build, test, and deployment automation}. Addison-Wesley.
+  \item[Morris, K. (2020).] \emph{Infrastructure as code: Dynamic systems for the cloud age} (2nd ed.). O'Reilly.
+  \item[Reinertsen, D.\,G. (2009).] \emph{The principles of product development flow: Second generation lean product development}. Celeritas Publishing.
+  \item[Schwaber, K., \& Sutherland, J. (2020).] \emph{The Scrum Guide: The definitive guide to Scrum -- The rules of the game}. Scrum.org. \href{https://scrumguides.org/scrum-guide.html}{https://scrumguides.org/scrum-guide.html}
+\end{description}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Aging WIP] Wie lange ist ein Backlog-Item bereits ``In Progress''? Frühwarnsignal für Stuck-Items.
+  \item[Backlog] Geordnete Liste aller bekannten Anforderungen, gepflegt vom Product Owner.
+  \item[Blue/Green Deployment] Strategie mit zwei Umgebungen, Wechsel per Switch -- schneller Rollback.
+  \item[Canary Deployment] Strategie, bei der eine neue Version zuerst auf wenige Nutzer aktiviert wird.
+  \item[Change Failure Rate] DORA-Metrik: Anteil der Deployments, die zu Incident führen.
+  \item[CI/CD] \emph{Continuous Integration / Continuous Delivery.} Automatisierter Build-, Test-, Deploy-Prozess.
+  \item[Cycle Time] Zeit von ``In Progress'' bis ``Done'' im Kanban; teamintern.
+  \item[Daily Scrum] Tägliche 15-Minuten-Synchronisation des Scrum-Teams.
+  \item[Definition of Done (DoD)] Prüfbare Liste, ab wann ein Backlog-Item als fertig gilt.
+  \item[Deployment Frequency] DORA-Metrik: Wie oft wird in Produktion deployed?
+  \item[DevOps] Kultur und Praxis, die Entwicklung und Betrieb durch Automation und gemeinsame Verantwortung verbindet.
+  \item[DORA-Metriken] Vier Kennzahlen aus dem ``Accelerate''-Buch zur Messung des Liefer-Reifegrads.
+  \item[Feature Toggle] Mechanismus, mit dem deployte Funktionen ein-/ausgeschaltet werden können.
+  \item[Flow] Kontinuierliche Bewegung von Arbeit durch das System; zentrale Kanban-Idee.
+  \item[Infrastructure as Code (IaC)] Versionierte, reviewbare, reproduzierbare Beschreibung der Infrastruktur.
+  \item[Increment] Nutzbares Ergebnis am Ende eines Sprints, das die DoD erfüllt.
+  \item[Kanban] Lean-basierte Flow-Methode mit Visualisierung, WIP-Limits und Pull-System.
+  \item[Lead Time] Zeit von ``in Backlog'' bis ``Done''; geschäftsrelevante Größe.
+  \item[MTTR] \emph{Mean Time to Restore.} DORA-Metrik: durchschnittliche Zeit bis Wiederherstellung nach Incident.
+  \item[Product Backlog] Geordnete Liste aller bekannten Anforderungen in Scrum.
+  \item[Product Owner] Scrum-Rolle, verantwortet Inhalt und Priorisierung des Backlogs.
+  \item[Pull Request] Anforderung zur Übernahme von Code-Änderungen, mit Review-Pflicht.
+  \item[Pull-System] Prinzip im Kanban: Arbeit wird gezogen, nicht zugeteilt.
+  \item[Quality Gate] Stop-Regel in einer Pipeline: ohne Erfüllung kein Weiterlaufen.
+  \item[Replenishment-Meeting] Treffen, bei dem ``Ready''-Spalte im Kanban nachgefüllt wird.
+  \item[Retrospective] Scrum-Event am Ende des Sprints zur Team-Reflexion und Verbesserung.
+  \item[Rollback] Rücknahme einer Änderung in einen vorherigen Zustand.
+  \item[Scrum Master] Scrum-Rolle, coacht Team und beseitigt Impediments.
+  \item[Sprint] Zeitlich begrenzte Iteration in Scrum, typischerweise 1 bis 4 Wochen.
+  \item[Sprint Goal] Übergeordnetes Ziel des Sprints, das das Team gemeinsam verfolgt.
+  \item[Stop-the-Line] Regel, nach der Lieferung gestoppt wird, wenn ein kritisches Gate verletzt ist.
+  \item[Throughput] Anzahl abgeschlossener Items pro Zeiteinheit im Kanban.
+  \item[WIP-Limit] Maximale Anzahl gleichzeitiger Items in einer Spalte; schützt Flow und Qualität.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 9 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

@@ -1,0 +1,781 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 4 - Lehrskript
+% Repository, Governance, Kollaboration; Execution-Modelle (Automatisierung, Workflows)
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+% Charter als Body. Fallback: TeX Gyre Schola (sehr aehnlich, in MiKTeX dabei).
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+% Sans = Source Sans 3 / Source Sans Pro. Fallback: TeX Gyre Heros.
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+% Caveat fuer Akzente. Wenn nicht da -> faellt auf italic Hauptschrift zurueck.
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+% Monospace
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+% Kurs 71 Akzent: Orange (#9d4a1a)
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+% Eselsbruecke - amber, dashed
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Merkkasten - orange fuer Kurs 71
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 4}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Repository \textperiodcentered{} Governance \textperiodcentered{} Execution}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 2 \textperiodcentered{} TAG 4 VON 4 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 2.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Repository\\\&\\Execution\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom Prozessbild zum steuerbaren System --\\Single Source of Truth, Governance und ausführbare Workflows.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 4 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent An den ersten drei Tagen haben Sie Prozesse aus mehreren Perspektiven \emph{modelliert} -- als Notation, als Wertstrom, als Datenrealität, mit Blick auf Stakeholder, KPIs und SOA. Heute machen wir den entscheidenden Schritt von der einzelnen Diagrammdatei zum \emph{betriebenen System}: einem Repository, das Modelle steuerbar macht, und einer Execution-Schicht, die Prozesse ausführbar und auditierbar werden lässt.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Den Repository-Ansatz mit seinen Bestandteilen (Prozesslandkarte, Modelle, Rollen, Dokumente, Versionen, KPIs, Risiken) einordnen.
+  \item Modell-Governance benennen: Owner, Modeler, Reviewer, Approver -- und das Zusammenspiel mit Benennungs-, Versions- und Freigaberegeln.
+  \item Die Differenz zwischen \emph{Business-BPMN} (verständlich, kommuniziert Verantwortung) und \emph{Execution-BPMN} (präzise, maschinen-nah) erklären.
+  \item Camunda-typische Konstrukte einordnen: User Task, Service Task, Timer-/Message-/Error-Event, Datenobjekte und Variablen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Eine Repository-Struktur in drei Ebenen (E2E-Prozess \textrightarrow{} Subprozess \textrightarrow{} Arbeitsdokument) für einen Beispielprozess entwerfen.
+  \item Einen Mini-Prozess in einen \emph{Automations-Slice} schneiden: Start, Ende, Datenminimum, Ausnahmepolitik definieren.
+  \item Variantenführung bewusst entscheiden: separate Modelle oder Variantenattribute -- mit Trade-off-Begründung.
+  \item KPIs für ein Workflow-Programm definieren (Durchlaufzeit, Eskalationsquote, Rework) und Owner zuordnen.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Repository als \emph{Betriebssystem} für Prozesssteuerung verstehen -- nicht als Ablage.
+  \item Execution als \emph{Vertrag} zwischen Fach, IT und Compliance behandeln: Daten, Fehler, SLAs, Eskalation.
+  \item Entscheidungen unter Unsicherheit treffen: MVP statt Perfektion, mit Frühwarnsignalen abgesichert.
+  \item Governance-Regeln auf das Minimum reduzieren, das 80\,\% des Chaos verhindert -- und alles weitere bewusst delegieren.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Modelle leben oder sterben \emph{nach} der Modellierung -- in einem Repository mit Governance, oder ausgeführt in einer Engine mit Audit Trail. Wer modelliert, ohne den Lebenszyklus mitzudenken, baut Diagramme für Schubladen. Senior-Praxis heißt: \emph{Repository steuert Transparenz, Execution steuert Durchlaufzeit -- und beide brauchen denselben Owner.}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Vom Diagramm zum steuerbaren System}
+
+Es gibt eine bemerkenswerte Konstante in fast jeder Organisation, die seit ein paar Jahren modelliert hat: Es existieren \emph{viele} Diagramme. Sie liegen in SharePoint-Ordnern, in Visio-Dateien, in Powerpoint-Anhängen, in PDF-Exporten. Was meist fehlt, ist die Fähigkeit, sie als \emph{System} zu betreiben. Niemand weiß, welches die aktuelle Version ist; niemand weiß, wer entscheidet, ob eine Änderung freigegeben wird; niemand weiß, ob das, was im Diagramm steht, mit dem übereinstimmt, was die Workflow-Engine ausführt. \quelle{Dumas et al., 2018, Kap.~1; Harmon, 2019}
+
+Der heutige Tag adressiert genau diese Lücke. Modellieren ist eine notwendige Bedingung, aber keine hinreichende, um Prozesse zu \emph{steuern}. Hinreichend wird es erst durch zwei Schichten, die typischerweise unterschätzt werden: eine \fachbegriff{Repository-Schicht}, die Modelle als verwaltete Artefakte hält, und eine \fachbegriff{Execution-Schicht}, die ausgewählte Modelle tatsächlich ausführbar macht.
+
+\subsection{Drei Symptome eines fehlenden Repository}
+
+\begin{enumerate}
+  \item \fachbegriff{Niemand findet die aktuelle Version.} Ein Auditor fragt, welcher Stand verbindlich ist. Drei Antworten von drei Personen, alle leicht unterschiedlich.
+  \item \fachbegriff{Standorte modellieren divergent.} Jede Niederlassung benennt anders, modelliert in unterschiedlichen Tiefen, dokumentiert auf eigenen Laufwerken. Vergleichbarkeit ist Glücksspiel.
+  \item \fachbegriff{Änderungen passieren ``irgendwie''.} Eine Anpassung des Genehmigungsworkflows landet als E-Mail-Notiz im Postfach, nicht als versionierter Change Request mit Reviewer-Verantwortung.
+\end{enumerate}
+
+Diese Symptome sind nicht primär Tool-Probleme. Sie sind \emph{Governance-Probleme}, die durch ein gutes Tool unterstützt -- aber nicht ersetzt -- werden können.
+
+\subsection{Was ein Repository leisten muss}
+
+Ein \fachbegriff{Prozess-Repository} ist mehr als ein Ordner mit Diagrammen. Es ist eine kuratierte Sammlung von Artefakten mit definierten Metadaten, Verantwortlichkeiten und Lebenszyklen. Im Kern braucht es: \quelle{Scheer, 2002; Rosemann \& vom Brocke, 2010}
+
+\begin{itemize}
+  \item Eine \fachbegriff{Prozesslandkarte} (Value Chain), die die End-to-End-Sicht ordnet -- typischerweise 8 bis 15 Kernprozesse auf der obersten Ebene.
+  \item Die zugehörigen \fachbegriff{Prozessmodelle} (BPMN, EPC, Activity), Subprozesse und Arbeitsdokumente.
+  \item \fachbegriff{Rollen}: Process Owner, Modeler, Reviewer, Approver. Pflicht, nicht optional.
+  \item \fachbegriff{Metadaten}: Owner, Gültigkeit, Status (Draft, Review, Approved, Retired), Version, letzte Änderung, Standort, Risikoklasse.
+  \item Optional: Verlinkung zu \fachbegriff{KPIs}, \fachbegriff{Risiken}, \fachbegriff{Controls} -- damit das Repository nicht nur Diagramme hält, sondern \emph{Steuerungsobjekte}.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{P-M-R-V}]
+Ein Repository steht auf vier Beinen, das fünfte ist der Owner:\\[2pt]
+\textbf{P}rozesslandkarte -- die Übersicht über alle Kernprozesse.\\
+\textbf{M}odelle -- BPMN, EPC, Subprozesse, Arbeitsdokumente.\\
+\textbf{R}ollen -- Owner, Modeler, Reviewer, Approver.\\
+\textbf{V}ersionen -- Status, Gültigkeit, Änderungslog.\\[2pt]
+\emph{Wer ein Bein vergisst, steht auf einem Tisch, der wackelt. Wer alle fünf hat, hat ein Betriebssystem für Prozesse.}
+\end{eselsbox}
+
+\subsection{Was Execution leisten muss}
+
+Wenn das Repository der ``Bibliothekar'' ist, ist die Execution-Schicht die ``Maschine''. Sie nimmt ausgewählte Modelle und führt sie aus -- als Workflows mit User Tasks, Service Tasks, Timern, Eskalationen und Audit Trail. \quelle{Freund \& Rücker, 2019; OMG, 2014}
+
+Nicht jedes Modell muss ausführbar sein. Im Gegenteil: Die wertvollsten Modelle sind oft die \emph{Übersichtsmodelle}, die Verantwortung sichtbar machen und Kommunikation strukturieren. Aber bestimmte Teilstrecken -- typischerweise solche mit klarer Start-Ende-Definition, eindeutigen Daten und nachvollziehbaren Fehlerfällen -- profitieren massiv davon, in einer \fachbegriff{Workflow-Engine} (Camunda, Flowable, jBPM, oder vergleichbare BPMS-Produkte) zu laufen.
+
+% --- 2. REPOSITORY-DESIGN ------------------------------------------------
+\section{Repository-Design: Single Source of Truth in drei Ebenen}
+
+Ein praxistaugliches Repository kommt mit einer überraschend einfachen Struktur aus. Drei Ebenen reichen für den Start -- mehr Ebenen erzeugen Pflegeaufwand, der den Nutzen oft übersteigt.
+
+\subsection{Die drei kanonischen Ebenen}
+
+\begin{enumerate}
+  \item \fachbegriff{Ebene 1 -- E2E-Prozess.} Die Sicht auf einen vollständigen Wertschöpfungsstrang: ``Order-to-Cash'', ``Incident-to-Resolution'', ``Lead-to-Order'', ``Hire-to-Retire''. Auf dieser Ebene wird \emph{nicht} im Detail modelliert, sondern Scope, Owner, KPI und übergeordneter Verlauf geklärt.
+  \item \fachbegriff{Ebene 2 -- Subprozess.} Die Detail-Modelle, die zeigen, wie ein Teil des E2E-Prozesses tatsächlich abläuft. Hier wohnt das eigentliche BPMN/EPC-Diagramm mit Lanes, Gateways und Tasks. Pro E2E-Prozess typischerweise 3 bis 8 Subprozesse.
+  \item \fachbegriff{Ebene 3 -- Arbeits- und Nachweisdokument.} Die operativen Artefakte: SOP (Standard Operating Procedure), Checklisten, Formulare, Anweisungen, Schulungsunterlagen, Auditnachweise. Sie hängen an einzelnen Subprozessen oder Tasks.
+\end{enumerate}
+
+\subsection{Die Mindestmenge an Metadaten}
+
+Wer Modelle vergleichbar halten will, muss Pflichtfelder definieren. \emph{Fünf} Felder sind ein guter Anfang -- mehr ist Komfort, weniger ist Schluderei: \quelle{Allweyer, 2020; Harmon, 2019}
+
+\begin{itemize}
+  \item \textbf{Owner.} Genau eine Person (Rolle), nicht ein Verteiler. ``Wer eskaliert, ruft Owner an.''
+  \item \textbf{Gültigkeit.} Ab wann gilt diese Version, bis wann ist sie aktuell, wann ist Review fällig?
+  \item \textbf{Status.} Draft, Review, Approved, Retired. Keine ``halben'' Zustände dazwischen.
+  \item \textbf{Standort/Variante.} Welche Organisation, welche Region, welche Produkt-Variante?
+  \item \textbf{Risikoklasse.} Hoch (compliance- oder geldkritisch), Mittel, Niedrig -- steuert Review-Tiefe.
+\end{itemize}
+
+\begin{merkbox}[Owner ist eine Person, nicht eine Abteilung]
+Ein Process Owner ist eine \emph{konkrete Rolle} mit Namen, nicht ``Bereich Vertrieb''. Wer als Owner einen Verteiler einträgt, hat de facto keinen Owner. Im Audit-Fall stellt sich heraus: niemand fühlt sich zuständig, weil alle gemeint waren und keiner verantwortet hat.
+\end{merkbox}
+
+\subsection{Variantenführung -- als Attribut oder als eigenes Modell?}
+
+Die schwierigste Repository-Entscheidung ist meist nicht die Struktur, sondern die \emph{Variantenpolitik}. Drei Standorte machen das Onboarding leicht unterschiedlich; zwei Produktlinien folgen ähnlichen, aber nicht identischen Prozessen. Sollen das separate Modelle sein, oder ein Modell mit Variantenattributen?
+
+Faustregel:
+\begin{itemize}
+  \item \textbf{Variantenattribut} -- wenn 80\,\% des Modells identisch ist und nur Detail-Felder (Schwellwert, Approver-Rolle, SLA) variieren. Vorteil: Pflege einmal, Konsistenz hoch. Nachteil: Modell wirkt überladen.
+  \item \textbf{Separates Modell} -- wenn Hauptpfade abweichen, andere Akteure beteiligt sind oder regulatorische Unterschiede bestehen. Vorteil: Klarheit. Nachteil: Pflegeaufwand multipliziert sich.
+\end{itemize}
+
+\subsection{Repository-Blueprint -- ein Beispiel}
+
+Für einen E2E-Prozess ``Order-to-Cash'' kann ein realistisches Repository so aussehen:
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Ebene 1 & Order-to-Cash (Owner: Head of Sales Ops, KPI: DLZ 7\,Tage, Status: Approved v3.1) \\
+Ebene 2 & Auftragsannahme, Verfügbarkeitsprüfung, Kreditcheck, Auslieferung, Fakturierung, Mahnwesen \\
+Ebene 3 & SOP Verfügbarkeitsprüfung, Eskalationsleitfaden Kreditcheck, Mahnstufen-Brieftexte, Audit-Nachweis Fakturierung \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Diese Sicht ist nicht spektakulär -- aber sie ist \emph{vollständig}. Sie macht sichtbar, wer im Notfall anzurufen ist, welche Version gilt, und wo das nächste Detail liegt. Das ist der Unterschied zwischen einer Ordnerstruktur und einem Steuerungsinstrument.
+
+% --- 3. GOVERNANCE & ROLLEN ----------------------------------------------
+\section{Governance: Rollen, Reviews und Freigaben}
+
+Ohne Rollen wird ein Repository binnen Monaten zur Abstellkammer. \emph{Mit} Rollen, klaren Regeln und einem ehrlichen Review wird es zum Steuerungssystem. Die Verteilung darf dabei pragmatisch sein: vier Rollen sind in der Praxis ausreichend, mehr macht es schwerfällig. \quelle{Rosemann \& vom Brocke, 2010}
+
+\subsection{Die vier Kernrollen}
+
+\begin{itemize}
+  \item \fachbegriff{Process Owner.} Verantwortet den E2E-Prozess fachlich, vertritt ihn nach außen, entscheidet über strategische Änderungen. Hängt an Ebene 1.
+  \item \fachbegriff{Modeler.} Modelliert konkret, in Abstimmung mit den Fachbereichen. Beherrscht das Handwerk. Hängt an Ebene 2.
+  \item \fachbegriff{Reviewer.} Prüft Modelle gegen Konventionen, GoM und 7PMG. Mindestens vier Augen pro Approval.
+  \item \fachbegriff{Approver.} Gibt finale Modellversionen frei. Häufig der Process Owner selbst, oder ein Bereichsleiter mit fachlicher Verantwortung.
+\end{itemize}
+
+\subsection{Der Freigabeprozess in drei Stufen}
+
+Ein einfacher und in jeder Organisation tragfähiger Lebenszyklus:
+
+\begin{enumerate}
+  \item \fachbegriff{Draft.} Modeler arbeitet am Modell, schreibt Annahmen sichtbar in Annotations.
+  \item \fachbegriff{Review.} Reviewer prüft auf Konsistenz, Vollständigkeit, Konventionen. Feedback zurück an Modeler, ggf. mehrere Iterationen.
+  \item \fachbegriff{Approved.} Approver gibt frei. Version wird mit Datum, Reviewer-Namen und Approver-Namen versiegelt. Nur diese Version ist verbindlich für Operation und Audit.
+\end{enumerate}
+
+Hinzu kommt ein vierter Status: \fachbegriff{Retired}, wenn ein Modell durch eine neuere Version oder einen veränderten Prozess obsolet wird. Wichtig: \emph{Retired-Modelle nicht löschen}, sondern archivieren -- für Audit-Rückfragen.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{D-R-A-R}]
+Vier Stationen im Modell-Lebenszyklus, in dieser Reihenfolge:\\[2pt]
+\textbf{D}raft -- Modeler arbeitet, Annahmen sichtbar.\\
+\textbf{R}eview -- Reviewer prüft gegen Konvention.\\
+\textbf{A}pproved -- Approver versiegelt mit Datum und Namen.\\
+\textbf{R}etired -- archivieren, nicht löschen.\\[2pt]
+\emph{Wer eine Station überspringt, sammelt Schulden im Repository -- die spätestens im Audit fällig werden.}
+\end{eselsbox}
+
+\subsection{Modellierungs-Policy auf einer Seite}
+
+Eine effektive \fachbegriff{Modellierungs-Policy} passt auf eine Seite und regelt das Minimum. Mehr ist Bürokratie:
+
+\begin{enumerate}
+  \item Notation: BPMN 2.0 für ausführungsnahe Modelle, EPC oder Activity für Übersichten.
+  \item Benennung: Verb + Objekt für Aktivitäten/Funktionen, Zustand für Ereignisse, ``X-to-Y'' für E2E-Prozesse.
+  \item Pflicht-Metadaten: Owner, Status, Version, Gültigkeit, Risikoklasse.
+  \item Pflicht-Elemente in jedem Modell: Start- und End-Ereignis, mindestens eine Lane mit klarer Rolle, jede Gateway-Bedingung beschriftet.
+  \item Review-Pflicht: vor jedem Approved-Status, ohne Ausnahme.
+  \item Variantenregel: Attribute bevorzugt, separate Modelle nur bei begründeter Hauptpfad-Divergenz.
+  \item Update-Rhythmus: jedes Modell mindestens jährlich reviewen, bei Prozess-Änderungen sofort.
+\end{enumerate}
+
+\subsection{Die zwei Regeln, die 80\,\% des Chaos verhindern}
+
+Wenn man nur zwei Governance-Regeln durchsetzen darf, sind es diese: \quelle{Harmon, 2019}
+
+\begin{itemize}
+  \item \emph{Jedes Modell hat einen genannten Owner und einen Approved-Status mit Datum.} Das eliminiert Versions-Verwirrung und Verantwortungs-Vakuum.
+  \item \emph{Änderungen laufen über einen Change Request mit Reviewer.} Das eliminiert die ``mal eben angepasst''-Kategorie, die Audit-Findings produziert.
+\end{itemize}
+
+Alles weitere ist Komfort und kann später ergänzt werden, wenn die Organisation gelernt hat, mit dem Minimum zu leben.
+
+% --- 4. BUSINESS- VS. EXECUTION-BPMN -------------------------------------
+\section{Business-BPMN vs.\ Execution-BPMN}
+
+Eine der häufigsten Quellen für Frust in Modellierungs-Projekten ist die unsichtbare Annahme, dass \emph{ein} Modell gleichzeitig dem Vorstand etwas erklären und der Workflow-Engine etwas vorgeben kann. In der Praxis sind das zwei verschiedene Modelle, die denselben Prozess beschreiben -- mit unterschiedlicher Tiefe und Strenge. \quelle{Freund \& Rücker, 2019; OMG, 2014}
+
+\subsection{Business-BPMN: verständlich, kommuniziert Verantwortung}
+
+Ein \fachbegriff{Business-BPMN}-Modell ist für die \emph{Fachseite} optimiert. Es darf an manchen Stellen unscharf sein, solange es:
+
+\begin{itemize}
+  \item den Hauptpfad sauber zeigt,
+  \item Verantwortlichkeiten über Lanes sichtbar macht,
+  \item Entscheidungspunkte (Gateways) eindeutig benennt,
+  \item Schnittstellen zu anderen Pools markiert,
+  \item Annahmen explizit dokumentiert.
+\end{itemize}
+
+Ziel ist Verständigung -- nicht Vollständigkeit. Ein Business-BPMN kann an einzelnen Stellen Sub-Prozesse nutzen, ohne sie zu detaillieren, oder Manual Tasks beschreiben, ohne sie ausführbar zu machen.
+
+\subsection{Execution-BPMN: präzise, maschinen-nah}
+
+Ein \fachbegriff{Execution-BPMN}-Modell muss in eine Workflow-Engine laden und dort \emph{ausgeführt} werden können. Das verlangt eine andere Disziplin: jede Bedingung formal, jeder Pfad vollständig, jede Variable typisiert. Konkret kommen folgende Elemente in den Vordergrund:
+
+\begin{itemize}
+  \item \fachbegriff{User Task} -- ein menschlicher Schritt mit Form, Zuweisungsregel und SLA.
+  \item \fachbegriff{Service Task} -- ein Systemschritt, typischerweise ein API-Aufruf oder eine Datenbankoperation.
+  \item \fachbegriff{Send/Receive Task} -- expliziter Nachrichtenaustausch über System- oder Pool-Grenzen.
+  \item \fachbegriff{Business Rule Task} -- delegiert Entscheidung an eine Decision Engine (DMN).
+  \item \fachbegriff{Timer Event} -- Reminder, Eskalation, Deadlines (``nach 3 Tagen erinnern, nach 5 Tagen eskalieren'').
+  \item \fachbegriff{Message Event} -- asynchrone Auslöser, z.\,B.\ Eingang eines externen Events.
+  \item \fachbegriff{Error Event} -- Fehlerbehandlung mit Boundary Events an User/Service Tasks.
+  \item \fachbegriff{Datenobjekte und Prozess-Variablen} -- typisierte Datenstruktur, die zwischen Tasks weitergegeben wird.
+\end{itemize}
+
+\subsection{Gegenüberstellung}
+
+\begin{tabularx}{\linewidth}{@{}l X X@{}}
+\toprule
+& \textbf{Business-BPMN} & \textbf{Execution-BPMN} \\
+\midrule
+\textbf{Adressat} & Fachseite, Management, Audit-Übersicht & Workflow-Engine, IT, Operation \\
+\textbf{Tiefe} & Hauptpfad, wichtige Varianten & jeder Pfad vollständig durchführbar \\
+\textbf{Gateways} & Benennung der Entscheidung & formale Bedingung in FEEL/Skript \\
+\textbf{Tasks} & generisch (``Rechnung prüfen'') & typisiert (User/Service/Script/BR) \\
+\textbf{Daten} & implizit oder annotiert & Variablen mit Typ, Datenobjekte \\
+\textbf{Fehlerfälle} & ``geht zurück an Sachbearbeitung'' & Error Boundary Event, Eskalation \\
+\textbf{Versionierung} & semantisch (v3.1 = Geschäftsänderung) & technisch (Deployment-Version) \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Beide Modelle haben Existenzrecht. Es ist Senior-Praxis, sie \emph{nicht} zu vermischen: das eine ist ein Kommunikationsobjekt, das andere ein Ausführungsobjekt. Die Brücke ist eine \fachbegriff{Übergabe-Routine}, die definiert, welche Teile des Business-BPMN in Execution-BPMN überführt werden -- und welche bewusst nicht.
+
+\begin{merkbox}[Zwei Modelle, ein Owner]
+Business- und Execution-BPMN sollten denselben \emph{Owner} haben. Wenn ``die Fachseite'' das Business-Modell pflegt und ``die IT'' das Execution-Modell, driften beide auseinander, sobald Änderungen kommen. Geteilte Verantwortung ist Geheimnis um Verantwortung.
+\end{merkbox}
+
+% --- 5. AUTOMATIONS-SLICE ------------------------------------------------
+\section{Den automatisierbaren Slice finden}
+
+Nicht jeder Prozess gehört in eine Engine. Die Kunst besteht darin, in einem dokumentierten Prozess die Teilstrecke zu identifizieren, die \emph{realistisch} und \emph{wertvoll} automatisierbar ist. Diese Teilstrecke nennen wir den \fachbegriff{Automations-Slice}. \quelle{vom Brocke \& Mendling, 2021}
+
+\subsection{Sechs Kriterien für einen guten Slice}
+
+\begin{enumerate}
+  \item \textbf{Klarer Start und klares Ende.} Was triggert den Slice, wann ist er fertig? Wenn diese Grenzen verschwimmen, wird der Workflow zur Sammlung von Sonderlocken.
+  \item \textbf{Eindeutige Daten.} Welche Felder kommen rein, welche werden zwischen Tasks weitergegeben, welche werden geschrieben? Ohne Datenklarheit kann keine Service Task funktionieren.
+  \item \textbf{Bekannte Fehlerfälle.} Was passiert bei Timeout, fehlenden Daten, abgelehntem Antrag? Mindestens die häufigsten drei Fehlerpfade müssen vor Go-Live definiert sein.
+  \item \textbf{Hohe Frequenz und niedrige Varianz.} Ein Workflow, der hundertmal pro Tag in fast immer derselben Form läuft, lohnt sich. Ein Workflow für drei Sonderfälle pro Jahr ist eine Checkliste.
+  \item \textbf{Vorhandene Schnittstellen.} Wenn die Service Tasks auf nicht existierende APIs zugreifen sollen, ist die Automatisierung ein API-Projekt mit Workflow-Dekoration -- das muss man wissen.
+  \item \textbf{Messbarer Nutzen.} Eine KPI vor Go-Live (Durchlaufzeit, Fehlerquote, Personenstunden) und ein realistischer Zielwert.
+\end{enumerate}
+
+\subsection{Beispiel: Rechnungsfreigabe als Slice}
+
+Nehmen wir den klassischen Mini-Prozess ``Rechnungsfreigabe'':
+
+\begin{enumerate}
+  \item Rechnung kommt per E-Mail.
+  \item Buchhaltung erfasst Grunddaten.
+  \item Wenn Betrag $> 5.000\,\text{\euro}$, muss Teamleitung freigeben.
+  \item Wenn Kostenstelle fehlt, geht es zurück an die Anforderungsstelle.
+  \item Nach Freigabe wird im ERP gebucht und Zahlung angestoßen.
+  \item Bei Fristüberschreitung wird erinnert und nach 3 Tagen eskaliert.
+\end{enumerate}
+
+\subsection{Slice-Analyse}
+
+Wir markieren typisiert: \textit{User Tasks} (Menschenarbeit), \textit{Service Tasks} (Systemaktionen), \textit{Entscheidungen}, \textit{Fehlerfälle}, \textit{Fristen}.
+
+\begin{itemize}
+  \item Schritt 1 (Rechnung per E-Mail) -- \emph{Trigger} (Message Event aus Mailbox), evtl.\ Vorverarbeitung Service Task.
+  \item Schritt 2 (Grunddaten erfassen) -- \emph{User Task} Buchhaltung, mit Pflichtfeldern (Betrag, Kostenstelle, Lieferant).
+  \item Schritt 3 (Schwellwert-Entscheidung) -- \emph{Gateway} (Business Rule Task möglich).
+  \item Schritt 3a (Freigabe Teamleitung) -- \emph{User Task} mit SLA.
+  \item Schritt 4 (Kostenstelle fehlt) -- \emph{Error Path} mit Rückgabe an Anforderungsstelle.
+  \item Schritt 5 (ERP-Buchung) -- \emph{Service Task} (API ERP).
+  \item Schritt 5b (Zahlung) -- \emph{Service Task} (API Payment).
+  \item Schritt 6 (Frist) -- \emph{Timer Boundary Event} an User Task, mit Reminder nach 24\,h und Eskalation nach 72\,h.
+\end{itemize}
+
+Datenminimum (drei Felder, die der Workflow zwingend braucht): \fachbegriff{Betrag}, \fachbegriff{Kostenstelle}, \fachbegriff{Freigeber-Rolle}.
+
+\subsection{Ausnahmepolitik -- bewusst nicht automatisieren}
+
+Es ist Senior-Praxis, im ersten Release nicht alle Ausnahmen abzubilden. Eine sinnvolle Ausnahmepolitik benennt explizit, welche Fälle \emph{organisatorisch} und nicht \emph{technisch} abgefangen werden. Beispiele für die Rechnungsfreigabe:
+
+\begin{itemize}
+  \item Lieferanten ohne Stammdatensatz: erst manuell in ERP anlegen, dann Workflow neu starten.
+  \item Fremdwährungen: vorläufig nicht automatisiert, manueller Prozess.
+  \item Sammelrechnungen mit mehreren Kostenstellen: vorläufig manuell, in Release 2 einplanen.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{S-D-F-F}]
+Vor jedem Automations-Slice prüfen:\\[2pt]
+\textbf{S}tart/Ende -- klar abgrenzbar?\\
+\textbf{D}aten -- Minimum-Set definiert?\\
+\textbf{F}ehlerfälle -- mindestens drei dokumentiert?\\
+\textbf{F}requenz -- hoch genug, dass es sich lohnt?\\[2pt]
+\emph{Wenn auch nur ein S-D-F-F-Buchstabe wackelt, ist es kein Slice, sondern ein Wunschzettel.}
+\end{eselsbox}
+
+% --- 6. KPIs UND STEUERUNG -----------------------------------------------
+\section{KPIs für Repository und Workflows}
+
+Was nicht gemessen wird, wird nicht gesteuert. Aber: was falsch gemessen wird, erzeugt Fehlanreize. KPIs für Repository und Execution sollten zugleich \emph{wenig}, \emph{wirksam} und \emph{nicht gameable} sein. \quelle{Reinkemeyer, 2020}
+
+\subsection{KPI-Kandidaten für das Repository}
+
+\begin{itemize}
+  \item \fachbegriff{Approval-Quote.} Anteil der Modelle in Status ``Approved'' (Ziel: $>80\,\%$). Niedrig $\rightarrow$ Reviews stocken.
+  \item \fachbegriff{Review-Aktualität.} Anteil der Modelle mit Review jünger als 12 Monate. Niedrig $\rightarrow$ Repository altert.
+  \item \fachbegriff{Owner-Vollständigkeit.} Anteil der Modelle mit eindeutig benanntem Owner (Ziel: 100\,\%).
+\end{itemize}
+
+\subsection{KPI-Kandidaten für Workflow-Execution}
+
+\begin{itemize}
+  \item \fachbegriff{Durchlaufzeit (DLZ).} Zeit von Start- bis End-Event. Owner: Process Owner. Achtung: SLA-Definition muss vorher klar sein.
+  \item \fachbegriff{Eskalationsquote.} Anteil der Cases, die mindestens einmal eskaliert wurden. Steigend $\rightarrow$ Slice zu eng geschnitten oder Ressourcen fehlen.
+  \item \fachbegriff{Rework-Quote.} Anteil der Cases mit Korrekturschleife. Steigend $\rightarrow$ Datenqualität oder Pflichtfelder am Eingang prüfen.
+  \item \fachbegriff{Auto-Resolution-Rate.} Anteil vollständig automatisch abgeschlossener Cases ohne manuelle Intervention.
+\end{itemize}
+
+\subsection{Anti-Gaming und Owner}
+
+Jede KPI braucht einen Owner -- und ein Bewusstsein dafür, wie sie verfälscht werden könnte:
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXl@{}}
+\toprule
+KPI & Mögliches Gaming & Gegenmaßnahme \\
+\midrule
+DLZ & Cases früh ``vorläufig'' schließen & gekoppelt mit Rework-Quote \\
+Eskalationsquote & Eskalationen umgehen oder umetikettieren & Audit-Trail-Check Stichprobe \\
+Auto-Resolution & einfache Cases bevorzugen, schwere blockieren & Verteilung nach Komplexität \\
+Approval-Quote & ``Quick Approvals'' ohne echte Reviews & Reviewer-Vier-Augen-Pflicht \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\begin{merkbox}[KPI braucht Kontext]
+Eine KPI ohne Owner ist Statistik. Eine KPI ohne Gegenkontrolle ist Einladung zum Gaming. Eine KPI ohne Maßnahmen-Verknüpfung ist Dekoration. Senior-Steuerung verlangt: Owner, Gegenkontrolle, Maßnahmen-Verknüpfung -- für jede einzelne Kennzahl.
+\end{merkbox}
+
+% --- 7. FALLSTUDIE -------------------------------------------------------
+\section{Fallstudie: MediSupply Services -- E2E-Repository und Pilot}
+
+Wir betrachten ein realistisches Szenario, das die Themen des Tages verbindet -- Repository-Design, Pilot-Auswahl, Automations-Slice und KPI-Steuerung. \emph{MediSupply Services} ist ein B2B-Anbieter im Medizinprodukte-Umfeld mit mehreren Standorten. Die Probleme sind typisch: uneinheitliche Prozesse, schwankende Durchlaufzeiten, lückenhafte Audit-Nachweise. Ein Teilprozess soll schnell automatisiert werden, aber IT-Kapazität ist knapp.
+
+\subsection{Ausgangslage und Restriktionen}
+
+\begin{itemize}
+  \item Zeit: 8 Wochen für Pilot.
+  \item Budget: 90\,000\,\text{\euro}.
+  \item ERP-Schnittstelle: existiert, aber nicht vollständig dokumentiert.
+  \item Standorte: drei in DACH, jeweils mit eigenen Varianten.
+\end{itemize}
+
+\subsection{Schritt 1 -- E2E-Prozesslandkarte}
+
+Wir entwerfen eine Landkarte mit fünf Kernprozessen:
+
+\begin{enumerate}
+  \item \emph{Lead-to-Order} -- Anfrage bis Auftragsbestätigung.
+  \item \emph{Order-to-Delivery} -- Auftragsabwicklung bis Auslieferung.
+  \item \emph{Invoice-to-Cash} -- Rechnungsstellung bis Zahlungseingang.
+  \item \emph{Quality-to-CAPA} -- Qualitätsereignis bis Korrekturmaßnahme.
+  \item \emph{Hire-to-Onboarding} -- Personalprozess.
+\end{enumerate}
+
+\subsection{Schritt 2 -- Pilot wählen}
+
+Wir wählen \fachbegriff{Lead-to-Order} als Pilot. Begründung:
+
+\begin{itemize}
+  \item Hohe Frequenz (mehrere hundert Cases pro Monat).
+  \item Klare Start-Ende-Definition (Anfrage rein, Bestätigung raus).
+  \item Existierende Stammdaten (Kunde, Produkt) -- Datenminimum greifbar.
+  \item Sichtbare DLZ-Probleme (Beschwerden aus Vertrieb).
+\end{itemize}
+
+Verworfene Alternative: \emph{Invoice-to-Cash}. Zwar hohe Wirkung auf Cashflow, aber abhängig von der unklaren ERP-Schnittstelle -- zu hohes Risiko im 8-Wochen-Zeitraum.
+
+\subsection{Schritt 3 -- Repository-Struktur für den Pilot}
+
+\begin{itemize}
+  \item Ebene 1: ``Lead-to-Order'' (Owner: Head of Sales Ops, KPI-Set: DLZ, Konversionsrate, Reklamationsquote).
+  \item Ebene 2 (Subprozesse): Anfrageannahme, Bonitäts-/Verfügbarkeitscheck, Angebotserstellung, Vertragsabschluss, Auftragsanlage.
+  \item Ebene 3: SOP Anfrageannahme (Pflichtfelder), Eskalationsleitfaden Bonität, Angebots-Templates pro Produktkategorie.
+\end{itemize}
+
+Metadaten-Standard (fünf Pflichtfelder): Owner, Gültigkeit, Status, Standort, Risikoklasse. Zusätzlich: KPI-Verlinkung und letzte Änderung mit Approver-Name.
+
+\subsection{Schritt 4 -- Automationskandidat identifizieren}
+
+Innerhalb von Lead-to-Order ist der Subprozess \emph{Bonitäts- und Verfügbarkeitscheck} der heißeste Kandidat:
+
+\begin{itemize}
+  \item Start: Anfrage liegt vor, Kundendaten erfasst.
+  \item Service Tasks: Bonitätsanfrage an externen Provider (sync), Verfügbarkeitscheck an ERP (sync).
+  \item XOR: Bonität ok? Verfügbar?
+  \item User Task bei Sonderfall: Sales-Mitarbeiter validiert manuell.
+  \item Ende: Ergebnis-Datensatz für Angebotserstellung übergeben.
+\end{itemize}
+
+\subsection{Schritt 5 -- Execution-Skizze (Camunda-Style)}
+
+\begin{quote}
+\textbf{Start} (Message Event ``Anfrage geprüft'') \\
+\textrightarrow{} \emph{Service Task ``Bonität abfragen''} (API extern, Timeout 5\,s, 2 Retries) \\
+\textrightarrow{} \emph{Service Task ``Verfügbarkeit prüfen''} (API ERP, Idempotent, Case-ID) \\
+\textrightarrow{} \textbf{XOR-Gateway} ``Beide ok?'' \\
+\qquad \emph{Ja}: \textrightarrow{} \emph{Service Task ``Ergebnis speichern''} \textrightarrow{} \textbf{Ende} ``Check positiv'' \\
+\qquad \emph{Nein}: \textrightarrow{} \emph{User Task ``Manuelle Prüfung''} (SLA 4\,h, Eskalation an Sales-Lead) \\
+\qquad\quad \textrightarrow{} \emph{XOR ``Freigegeben?''} \textrightarrow{} \textbf{Ende} ``Check positiv'' oder ``Check negativ''.
+\end{quote}
+
+Fehlerfälle: API-Timeout (Retry, dann manuelle Prüfung), unbekannter Kunde (zurück an Sales mit Hinweis), ERP nicht verfügbar (Timer Event, Wiederholung nach 15\,min, dann Eskalation).
+
+\subsection{Schritt 6 -- KPIs für den Pilot}
+
+\begin{itemize}
+  \item \fachbegriff{DLZ Bonitäts-/Verfügbarkeitscheck} -- Ziel: $<30\,\text{min}$ in 90\,\% der Fälle. Owner: Process Owner Lead-to-Order.
+  \item \fachbegriff{Eskalationsquote manuelle Prüfung} -- Ziel: $<15\,\%$. Owner: Sales-Lead.
+  \item \fachbegriff{Rework-Quote} -- Cases, die nach Check zurück an Sales gehen. Ziel: $<5\,\%$. Owner: Sales Ops.
+\end{itemize}
+
+\subsection{Lessons aus der Fallstudie}
+
+\begin{itemize}
+  \item Pilotwahl ist kein Lostopf, sondern eine Bewertung nach Frequenz, Klarheit, Datenverfügbarkeit, Schnittstellen-Reife.
+  \item Variantenpolitik wird früh, nicht spät, entschieden -- sonst wachsen drei Modelle parallel.
+  \item Automation ohne KPI ist Selbstzweck. KPI ohne Owner ist Statistik. Owner ohne Maßnahmenrecht ist Theater.
+\end{itemize}
+
+% --- 8. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: Repository als Betriebssystem, Execution als Vertrag}
+
+Auf Wissens-Ebene sind Repository und Execution Notations- und Werkzeug-Themen. Auf Anwendungs-Ebene sind sie Handwerk. Auf Management-Ebene sind sie \emph{Operating-Model-Entscheidungen} -- mit Auswirkungen auf Verantwortlichkeiten, Kosten, Risiken und Kultur.
+
+\subsection{Zwei zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Governance-Strenge vs.\ Akzeptanz.} Strenge Reviews und Freigabeprozesse erzeugen Qualität -- und Widerstand. Zu lockere Regeln erzeugen Wildwuchs. Praxis: Minimum-Set definieren, alles darüber bewusst entscheiden -- nicht ``alles oder nichts''.
+  \item \textbf{Standardisierung vs.\ Standortautonomie.} Wenn jeder Standort seine Variante behalten will, gibt es keine Vergleichbarkeit. Wenn ein zentrales Modell alle Standorte zwingt, geht lokale Klugheit verloren. Praxis: \emph{Guardrails statt Wildwuchs} -- harte Regeln für 5 nicht verhandelbare Standards, lokale Freiheit innerhalb dieser Leitplanken.
+\end{enumerate}
+
+\subsection{Entscheidungen unter Unsicherheit}
+
+In Repository- und Workflow-Initiativen sind die Entscheidungen mit langer Halbwertszeit besonders teuer:
+
+\begin{itemize}
+  \item \fachbegriff{Tool-Stack.} Einmal etabliert, kostet ein Tool-Wechsel mindestens ein Jahr. Vorher klären: braucht es ein BPMS, oder reicht eine Modellierungs-Plattform mit Workflow-Anschluss?
+  \item \fachbegriff{Owner-Modell.} Wer ist End-to-End-Owner -- ein Fachbereich, ein Querschnittsamt, oder eine Linien-Rolle? Diese Entscheidung prägt die nächsten drei bis fünf Jahre.
+  \item \fachbegriff{Variantenpolitik.} ``Ein Modell für alle'' vs.\ ``ein Modell pro Standort'' -- jede Antwort hat sechsstellige Folgekosten in Pflege.
+\end{itemize}
+
+Für jede dieser Entscheidungen gilt: schriftlich treffen, mit verworfener Alternative dokumentieren, mit Frühwarnsignal versehen (``wenn Bedingung X eintritt, prüfen wir die Entscheidung erneut'').
+
+\subsection{Risikoarchitektur eines Workflow-Programms}
+
+\begin{enumerate}
+  \item \textbf{Daten-Risiko.} Workflow scheitert an Datenqualität. Mitigation: Pflichtfelder im Eingangs-Formular, Service-Task ``Datenvalidierung'' vor jedem Service Task mit externem System.
+  \item \textbf{Schnittstellen-Risiko.} APIs ändern sich, ohne dass es jemand merkt. Mitigation: Versionierung, Contract Tests (konzeptionell), API-Owner mit Change-Notification-Pflicht.
+  \item \textbf{Compliance-Risiko.} Audit-Findings durch fehlende Trails. Mitigation: jedes Approved-Modell mit Datum/Approver, jeder Workflow-Lauf mit unveränderlichem Audit-Log.
+  \item \textbf{Akzeptanz-Risiko.} Operative Teams umgehen den Workflow durch Schatten-Prozesse. Mitigation: frühzeitige Einbindung, ``Was wird für mich besser?''-Argumentation, klare Eskalationswege.
+\end{enumerate}
+
+\subsection{Senior-Shift: vom Tool-Verstehen zur Verantwortungsarchitektur}
+
+Der Wechsel von ``ich modelliere ein Diagramm'' zu ``ich verantworte ein Steuerungssystem'' erkennt man an drei Kennzeichen:
+
+\begin{itemize}
+  \item Man entscheidet die Variantenpolitik \emph{vor} dem ersten Tool-Klick.
+  \item Man kennt die zwei Governance-Regeln, die 80\,\% des Chaos verhindern -- und verteidigt sie auch unter Druck.
+  \item Man kann in 90 Sekunden gegenüber einem Vorstand begründen, warum genau dieser Slice automatisiert wurde und nicht ein anderer.
+\end{itemize}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 4]
+Ein Repository ohne Owner ist eine Ablage. Eine Execution ohne Audit Trail ist eine Black Box. Ein Workflow ohne KPI ist eine Verlagerung des Problems. Senior-Praxis verbindet alle drei: \emph{Owner steuert das Repository, Audit Trail sichert die Execution, KPI macht beides messbar.}
+\end{merkbox}
+
+% --- 9. TAKE-AWAYS -------------------------------------------------------
+\section{Take-aways aus Tag 4}
+
+\begin{enumerate}
+  \item \textbf{Repository = Betriebssystem.} Drei Ebenen (E2E \textrightarrow{} Subprozess \textrightarrow{} Arbeitsdokument), fünf Pflicht-Metadaten, vier Rollen -- mehr braucht es zum Start nicht.
+  \item \textbf{Execution = Vertrag.} Daten, Fehler, SLAs, Eskalation -- jeder Punkt schriftlich, sonst trägt im Ernstfall niemand.
+  \item \textbf{Business-BPMN $\neq$ Execution-BPMN.} Zwei Modelle, ein Owner, eine definierte Übergabe-Routine.
+  \item \textbf{Slice statt All-in.} Ein klar abgegrenzter Automations-Slice mit messbarem Nutzen schlägt jede ``großen Wurf''-Ankündigung.
+  \item \textbf{Zwei Governance-Regeln verhindern 80\,\% Chaos.} Owner + Approved-Status mit Datum sowie Change Requests mit Reviewer.
+  \item \textbf{Variantenpolitik früh entscheiden.} Attribute oder separate Modelle -- die Wahl prägt Pflegekosten über Jahre.
+  \item \textbf{KPI braucht Owner + Anti-Gaming.} Jede Kennzahl mit verantwortlicher Person und Gegenkontrolle, sonst entsteht Reporting ohne Steuerung.
+  \item \textbf{Guardrails statt Wildwuchs.} Zentrale Standards für das Minimum, lokale Freiheit innerhalb -- Standortautonomie ohne Beliebigkeit.
+\end{enumerate}
+
+% --- 10. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Allweyer, T. (2020).] \emph{BPMN 2.0 -- Business Process Model and Notation: Einführung in den Standard für die Geschäftsprozessmodellierung} (4.\ Aufl.). BoD.
+  \item[Dumas, M., La Rosa, M., Mendling, J., \& Reijers, H.\,A. (2018).] \emph{Fundamentals of business process management} (2nd ed.). Springer. \href{https://doi.org/10.1007/978-3-662-56509-4}{https://doi.org/10.1007/978-3-662-56509-4}
+  \item[Freund, J., \& Rücker, B. (2019).] \emph{Real-life BPMN: Includes an introduction to DMN} (4th ed.). CreateSpace.
+  \item[Harmon, P. (2019).] \emph{Business process change: A business process management guide for managers and process professionals} (4th ed.). Morgan Kaufmann.
+  \item[Object Management Group. (2014).] \emph{Business Process Model and Notation (BPMN), Version 2.0.2} (formal/2013-12-09). \href{https://www.omg.org/spec/BPMN/2.0.2/}{https://www.omg.org/spec/BPMN/2.0.2/}
+  \item[Reinkemeyer, L. (Hrsg.). (2020).] \emph{Process mining in action: Principles, use cases and outlook}. Springer. \href{https://doi.org/10.1007/978-3-030-40172-6}{https://doi.org/10.1007/978-3-030-40172-6}
+  \item[Rosemann, M., \& vom Brocke, J. (2010).] The six core elements of business process management. In J. vom Brocke \& M. Rosemann (Hrsg.), \emph{Handbook on business process management 1} (S.~107--122). Springer. \href{https://doi.org/10.1007/978-3-642-00416-2_5}{https://doi.org/10.1007/978-3-642-00416-2\_5}
+  \item[Scheer, A.-W. (2002).] \emph{ARIS -- Vom Geschäftsprozess zum Anwendungssystem} (4.\ Aufl.). Springer.
+  \item[vom Brocke, J., \& Mendling, J. (Hrsg.). (2021).] \emph{Business process management cases: Digital innovation and business transformation in practice} (Vol.~2). Springer. \href{https://doi.org/10.1007/978-3-662-63047-1}{https://doi.org/10.1007/978-3-662-63047-1}
+\end{description}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Approval-Quote] Anteil der Modelle in Status ``Approved''. Indikator für Governance-Aktivität.
+  \item[Approver] Rolle, die finale Modellversionen freigibt. Häufig der Process Owner.
+  \item[Audit Trail] Unveränderliches Log aller Schritte und Entscheidungen eines Workflow-Laufs. Pflicht in regulierten Umfeldern.
+  \item[Automations-Slice] Klar abgegrenzte Teilstrecke eines Prozesses, die als Workflow ausgeführt wird. Erfordert Start/Ende, Datenminimum, Fehlerfälle.
+  \item[BPMS] \emph{Business Process Management System.} Kombiniert Modellierung, Ausführung, Überwachung und Optimierung in einer Plattform.
+  \item[Business-BPMN] BPMN-Variante für Fach- und Management-Sicht. Hauptpfade, Lanes, Annotations -- nicht zwingend ausführbar.
+  \item[Camunda] Verbreitete Workflow-Engine, die BPMN 2.0 ausführt. Open-Core mit Enterprise-Erweiterungen.
+  \item[Change Request] Strukturierter Antrag zur Änderung eines Modells, mit Reviewer und Freigabe.
+  \item[Datenminimum] Kleinste Menge an Feldern, die ein Workflow zwingend braucht, um ausgeführt zu werden.
+  \item[Definition of Done (DoD)] Liste prüfbarer Kriterien, ab denen ein Modell oder Workflow als fertig gilt.
+  \item[E2E-Prozess] End-to-End-Prozess: vollständiger Wertschöpfungsstrang von Trigger bis Outcome.
+  \item[Eskalationsquote] Anteil der Cases, die mindestens einmal eskaliert wurden. KPI für Workflow-Steuerung.
+  \item[Execution-BPMN] BPMN-Variante für Workflow-Engine. Jeder Pfad vollständig, jede Bedingung formal, Tasks typisiert.
+  \item[Freigabeprozess] Lifecycle eines Modells: Draft \textrightarrow{} Review \textrightarrow{} Approved \textrightarrow{} Retired.
+  \item[Governance] Regeln, Rollen und Prozesse, die Modelle steuerbar und auditierbar machen.
+  \item[Guardrails] Verbindliche Leitplanken, innerhalb derer lokale Autonomie zulässig ist.
+  \item[MVP] \emph{Minimum Viable Product.} Erste Version, die Lerneffekt erzeugt -- nicht alle Features.
+  \item[Owner (Process Owner)] Person mit fachlicher End-to-End-Verantwortung für einen Prozess. Pflicht-Metadatum jedes Modells.
+  \item[Repository] Verwaltete Sammlung von Prozessmodellen und Artefakten mit Metadaten, Versionen und Lebenszyklus.
+  \item[Service Task] BPMN-Element: ein Schritt, der durch ein System ausgeführt wird, typischerweise API-Aufruf.
+  \item[SLA] \emph{Service Level Agreement.} Vereinbarung über Antwort- oder Durchlaufzeiten.
+  \item[Status] Zustand eines Modells im Lebenszyklus: Draft, Review, Approved, Retired.
+  \item[Timer Event] BPMN-Element für zeitgesteuerte Aktionen: Reminder, Eskalation, Deadlines.
+  \item[User Task] BPMN-Element: ein Schritt, der durch einen Menschen ausgeführt wird, typischerweise mit Form.
+  \item[Variantenattribut] Mechanismus, um Modellvarianten als Datenfeld am gemeinsamen Modell zu führen.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 4 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

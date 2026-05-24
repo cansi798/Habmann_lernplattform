@@ -1,0 +1,744 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 5 - Lehrskript
+% Kollaboration & Standards (Visio/Lucidchart), Enterprise Architecture, MDA
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 5}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Kollaboration \textperiodcentered{} EA \textperiodcentered{} MDA}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 2 \textperiodcentered{} TAG 5 VON 4 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 3.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}EA\\\&\\MDA\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Von Diagrammen zu Enterprise-Fähigkeit --\\Standards, Capabilities und die Trennung von Business und Implementierung.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 5 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Gestern haben wir das Repository als Betriebssystem für Prozessmodelle aufgesetzt. Heute heben wir die Perspektive an: weg vom einzelnen Diagramm, hin zur \emph{unternehmensweiten Modellierungsfähigkeit}. Drei Themen führen das zusammen -- kollaborative Tools mit Standards (Visio/Lucidchart als Stellvertreter), Enterprise Architecture als Steuerungsrahmen und Model-Driven Architecture als Übersetzungslogik zwischen Business-Entscheidung und Implementierungsdetail.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Den Unterschied zwischen Einzeldatei-Modellierung und kollaborativer Plattform-Modellierung benennen (Versionen, Kommentare, Review-Workflows, Templates, Shapesets).
+  \item Enterprise Architecture (EA) toolneutral einordnen: Capabilities, Prozesse, Applikationen, Daten, Technologie.
+  \item TOGAF-ADM und Zachman-Framework als orientierende Rahmenwerke einordnen, ohne sie auswendig zu können.
+  \item MDA-Ebenen (CIM, PIM, PSM) sauber abgrenzen und ihre Verantwortungsbereiche benennen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Eine \fachbegriff{Modelling Charter} mit fünf nicht verhandelbaren Standards und drei Freiheitsgraden formulieren.
+  \item Eine Capability Map mit 8 bis 12 Capabilities für ein konkretes Geschäftsfeld erstellen und priorisieren.
+  \item Den MDA-Pfad für eine priorisierte Capability skizzieren: CIM (Business-Ziel + Scope), PIM (Service-/Datenlogik), PSM (Umsetzungsidee).
+  \item Vier KPIs (zwei Outcome/Speed, zwei Risk/Compliance) mit Ownern festlegen.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Modellierungs-Governance als \emph{Produkt} verstehen -- mit Product Owner, Release-Mechanik und Akzeptanzstrategie.
+  \item EA als Priorisierungs- und Investitions\-instrument einsetzen, nicht als Dokumentations-Selbstzweck.
+  \item Die Verantwortungsgrenze zwischen CIM (Business-Entscheidung) und PIM/PSM (Implementierungsdetail) bewusst ziehen.
+  \item Toolstrategie und Governance-Strenge unter Unsicherheit entscheiden, mit Frühwarnsignalen zur Nachsteuerung.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Ein Modellierungs-Werkzeug ist keine Strategie. Erst durch Standards, Capabilities und eine bewusste MDA-Grenze wird aus Diagrammen ein \emph{Steuerungssystem}. Senior-Disziplin heißt: \emph{Tool als Enabler, nicht als Methode -- und Governance als Produkt, nicht als Dokument.}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Von Einzeldateien zu Enterprise-Fähigkeit}
+
+Es ist ein vertrautes Bild: Sechs Teams modellieren Prozesse. Jedes Team hat sein eigenes Tool, sein eigenes Vorgehen, seine eigenen Konventionen. Das Management klagt über mangelnde Vergleichbarkeit. Audit verlangt Versionsstände, die niemand zentral kennt. Die operativen Teams wiederum verlangen Flexibilität, weil sie die Eigenheiten ihrer Standorte und Produkte respektieren wollen. \quelle{Lankhorst, 2017; Allweyer, 2020}
+
+Dieses Muster lässt sich nicht durch ein besseres Tool lösen. Es ist ein \emph{Reifegrad-Problem}: Die Organisation hat Modellierung gelernt, aber noch keine \fachbegriff{Enterprise-Modellierungs\-fähigkeit} aufgebaut. Heute schauen wir uns drei Bausteine an, die diese Fähigkeit ausmachen.
+
+\subsection{Drei Symptome fehlender Enterprise-Fähigkeit}
+
+\begin{enumerate}
+  \item \fachbegriff{Tool-Wildwuchs.} Visio in Bereich A, Lucidchart in Bereich B, draw.io in Bereich C -- jedes Modell ein eigener Datenfriedhof.
+  \item \fachbegriff{Diskussionen drehen sich um Notation, nicht um Inhalt.} Statt über den Prozess wird über das Symbol gestritten.
+  \item \fachbegriff{Business und IT reden aneinander vorbei.} Das Business spricht über ``den Prozess'', die IT über ``das System'' -- niemand übersetzt zwischen den Ebenen.
+\end{enumerate}
+
+\subsection{Drei Hebel für Enterprise-Fähigkeit}
+
+\begin{itemize}
+  \item \fachbegriff{Kollaboration mit Standards.} Visio, Lucidchart, Signavio, ARIS und andere unterstützen heute gleichzeitiges Arbeiten, Kommentare, Versions-Workflows. Ohne klare Standards bleibt das aber ``Zeichenprogramm mit Cloud''.
+  \item \fachbegriff{Enterprise Architecture.} Ein Rahmen, der Modelle in einen größeren Zusammenhang stellt: Welche Fähigkeiten haben wir, welche Prozesse leben sie, welche Applikationen unterstützen sie, welche Daten fließen?
+  \item \fachbegriff{Model-Driven Architecture.} Eine Übersetzungslogik, die Business-Entscheidungen sauber von Implementierungsdetails trennt -- damit Technik später nicht ``am Business vorbei'' baut.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{S-C-E}]
+Drei Bausteine, die aus Einzelmodellierung Enterprise-Fähigkeit machen:\\[2pt]
+\textbf{S}tandards -- Naming, Pflichtfelder, Freigaben.\\
+\textbf{C}apabilities -- was kann die Organisation, in welcher Tiefe?\\
+\textbf{E}bnen-Trennung -- Business-Entscheidung vs.\ technische Umsetzung.\\[2pt]
+\emph{Wer S-C-E zusammen denkt, baut Modellierung als unternehmensweite Kompetenz auf -- nicht als Tool-Skill.}
+\end{eselsbox}
+
+% --- 2. KOLLABORATION UND STANDARDS --------------------------------------
+\section{Kollaboration mit Standards: Tools allein reichen nicht}
+
+Moderne Modellierungs-Tools (Visio, Lucidchart, Signavio, ARIS, Camunda Modeler, draw.io u.\,a.) haben sich in den letzten zehn Jahren stark weiterentwickelt. Was früher Einzeldateien waren, sind heute kollaborative Räume mit Echtzeit-Editing, Kommentaren, Versionierung und Review-Workflows. Diese Fähigkeiten machen aus einem Diagramm-Editor erst eine Modellierungs-\emph{Plattform}. \quelle{Allweyer, 2020}
+
+\subsection{Was kollaborative Modellierung leistet}
+
+\begin{itemize}
+  \item \fachbegriff{Gleichzeitiges Arbeiten.} Zwei Modeler an einem Modell, mit Konfliktauflösung.
+  \item \fachbegriff{Kommentare und Diskussionen} direkt am Diagramm-Element, statt in einer separaten E-Mail-Schleife.
+  \item \fachbegriff{Versionsstände} mit Vergleichsfunktion: was wurde wann, von wem geändert?
+  \item \fachbegriff{Review-Workflows.} Modell wird in Review gestellt, ein zweiter Modeler/Reviewer prüft, dokumentiert Feedback, gibt frei.
+  \item \fachbegriff{Templates und Shapesets.} Vordefinierte Strukturen und Symbol-Sets, die Konsistenz erleichtern.
+  \item \fachbegriff{Verlinkung} auf Artefakte (Policies, Arbeitsanweisungen, KPIs) -- Modell als Hub.
+\end{itemize}
+
+\subsection{Was Tools \emph{nicht} leisten}
+
+Drei Dinge, die kein Tool kompensiert, egal wie modern es ist:
+
+\begin{itemize}
+  \item Inkonsistente Benennungen. Wenn ``Bestellung prüfen'' neben ``Prüfung Bestellung'' steht, hilft kein Diff.
+  \item Fehlende Owner. Ein Modell ohne benannten Verantwortlichen wird vom Tool freundlich verwaltet -- und im Audit als Lücke aufgedeckt.
+  \item Fehlende Definition of Done. Ohne klare Kriterien, wann ein Modell ``fertig'' ist, wandert es jahrelang im Status ``Draft''.
+\end{itemize}
+
+\subsection{Die Modelling Charter -- eine Seite, fünf Standards, drei Freiheiten}
+
+Eine pragmatische \fachbegriff{Modelling Charter} fasst die unternehmensweiten Spielregeln auf eine Seite zusammen. Sie hat zwei Teile: das, was nicht verhandelbar ist, und das, was lokal entschieden werden darf. \quelle{Fowler, 2003}
+
+\subsubsection{Fünf nicht verhandelbare Standards}
+
+\begin{enumerate}
+  \item \textbf{Naming-Regel.} Verb + Objekt für Aktivitäten und Funktionen; ``X-to-Y'' für E2E-Prozesse; Zustand (passiv) für Ereignisse.
+  \item \textbf{Pflicht-Metadaten.} Owner, Status, Version, Gültigkeit, letzte Änderung -- in jedem Modell, ohne Ausnahme.
+  \item \textbf{Rollen sichtbar.} Lanes oder Organisationseinheiten in jedem ausführungsnahen Modell.
+  \item \textbf{Start und Ende eindeutig.} Jeder Pfad endet in einem benannten End-Ereignis; kein Pfad verliert sich.
+  \item \textbf{Änderungslog (Change Request).} Jede Änderung über einen strukturierten Antrag, mit Reviewer und Approver-Vermerk.
+\end{enumerate}
+
+\subsubsection{Drei Freiheitsgrade}
+
+\begin{itemize}
+  \item \textbf{Detailtiefe.} Innerhalb der Konvention darf jedes Team selbst entscheiden, wie tief modelliert wird -- abhängig von Zweck und Zielgruppe.
+  \item \textbf{Visual Style innerhalb des Templates.} Farb-Akzente, Layout, Lesefluss bleiben lokale Entscheidung, solange Pflichtelemente vorhanden sind.
+  \item \textbf{Lokale Varianten.} Standorte oder Produktlinien dürfen Varianten als Attribut führen, ohne dass jedes Modell zentral übersetzt werden muss.
+\end{itemize}
+
+\subsection{Freigabeprozess in vier Schritten}
+
+\begin{enumerate}
+  \item \fachbegriff{Draft.} Modeler arbeitet, Annahmen explizit.
+  \item \fachbegriff{Review.} Reviewer (mindestens vier Augen) prüft Konvention und Logik.
+  \item \fachbegriff{Approved.} Owner gibt frei, mit Datum, Reviewer- und Approver-Name.
+  \item \fachbegriff{Retired.} Bei Ablösung wird das Modell archiviert (nicht gelöscht).
+\end{enumerate}
+
+\begin{merkbox}[Tool als Enabler, nicht als Strategie]
+Visio und Lucidchart sind Werkzeuge -- so wie ein guter Stift kein guter Aufsatz ist. Strategie entsteht durch Standards, Freiheitsgrade und eine ehrliche Definition of Done. Ohne diese Elemente wird ein modernes Modellierungs-Tool zur ``schnelleren Möglichkeit, Modelle zu produzieren, die niemand reviewen kann''.
+\end{merkbox}
+
+\subsection{Was sofort, was später -- Entscheidungen unter Unsicherheit}
+
+In einer wachsenden Organisation lassen sich nicht alle Standards gleichzeitig einführen. Eine bewährte Reihenfolge:
+
+\begin{itemize}
+  \item \textbf{Sofort (2 Wochen).} Naming-Regel + Pflicht-Metadaten. Wirkung hoch, Aufwand niedrig.
+  \item \textbf{Kurzfristig (4--6 Wochen).} Review-/Approval-Workflow, Pilotbereich.
+  \item \textbf{Mittelfristig (3 Monate).} Change Request mit Reviewer-Rollen, Variantenpolitik.
+  \item \textbf{Längerfristig (6--12 Monate).} KPI-Verlinkung, Risikoklasse, Capability-Mapping.
+\end{itemize}
+
+% --- 3. ENTERPRISE ARCHITECTURE ------------------------------------------
+\section{Enterprise Architecture: Capabilities, Prozesse, Applikationen}
+
+\fachbegriff{Enterprise Architecture (EA)} ist die Disziplin, die Geschäftsfähigkeiten, Prozesse, Informationen, Applikationen und Technologie konsistent zueinander in Beziehung setzt. Sie ist toolneutral; jedes große Framework (TOGAF, Zachman, ArchiMate) ist im Kern ein Strukturierungsangebot. \quelle{The Open Group, 2022; Zachman, 1987; Lankhorst, 2017}
+
+\subsection{Die zentrale EA-Frage}
+
+EA beantwortet im Kern drei Fragen, die alle anderen einrahmen:
+
+\begin{enumerate}
+  \item \textbf{Was können wir?} -- Capabilities (Fähigkeiten der Organisation).
+  \item \textbf{Wie arbeiten wir?} -- Prozesse.
+  \item \textbf{Womit?} -- Applikationen, Datenobjekte, Technologie.
+\end{enumerate}
+
+\subsection{Typische EA-Sichten}
+
+\begin{itemize}
+  \item \fachbegriff{Capability Map.} Eine hierarchische Sicht aller Fähigkeiten, typischerweise zwei bis drei Ebenen. Stabil über Reorganisationen hinweg.
+  \item \fachbegriff{Prozesslandkarte.} Die E2E-Prozesse, die Capabilities aktivieren. Kann sich häufiger ändern als die Capability-Sicht.
+  \item \fachbegriff{Applikationslandschaft.} Welche Systeme unterstützen welche Prozesse, welche Capabilities, welche Datenobjekte.
+  \item \fachbegriff{Datenobjekte.} Die Kerninformationsobjekte (Kunde, Vertrag, Auftrag, Konto) -- inklusive Verantwortlichkeit (Data Owner).
+  \item \fachbegriff{Schnittstellen.} Wo fließen Daten zwischen Systemen, wo gibt es Brüche?
+\end{itemize}
+
+\subsection{Capability Map -- das Rückgrat}
+
+Eine Capability ist eine \emph{Fähigkeit}, nicht ein Prozess und nicht eine Applikation. ``Kunde identifizieren'', ``Vertrag prüfen'', ``Zugang provisionieren'' sind Capabilities. ``Onboarding durchführen'' ist ein Prozess, ``IAM-System'' ist eine Applikation. Diese Unterscheidung ist nicht akademisch -- sie macht den Unterschied zwischen einer stabilen Strategie-Sicht und einem flüchtigen Tool-Inventar. \quelle{Ross et al., 2006}
+
+\subsubsection{Beispiel ``Digital Customer Onboarding''}
+
+Eine realistische Capability-Liste:
+
+\begin{enumerate}
+  \item Marketing-Lead generieren.
+  \item Interessent qualifizieren.
+  \item Kunde identifizieren (KYC).
+  \item Vertrag prüfen und kalkulieren.
+  \item Bonität bewerten.
+  \item Vertrag abschließen.
+  \item Zugang/Account provisionieren.
+  \item Daten initial befüllen.
+  \item Training/Enablement durchführen.
+  \item Go-Live-Übergabe an Operations.
+\end{enumerate}
+
+\subsubsection{Top-3 mit höchstem Hebel}
+
+In diesem Beispiel sind die Capabilities mit höchstem Hebel auf Durchlaufzeit und Compliance:
+
+\begin{itemize}
+  \item \textbf{Kunde identifizieren (KYC).} Gleichzeitig Compliance-kritisch und Hauptengpass im DLZ.
+  \item \textbf{Bonität bewerten.} Externe Schnittstelle, häufige Fehlerquelle.
+  \item \textbf{Zugang/Account provisionieren.} Technische Brücke zwischen Vertrieb und IT, oft mehrere Tage statt Stunden.
+\end{itemize}
+
+\subsection{Datenobjekte und Risiken}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXX@{}}
+\toprule
+Datenobjekt & Beschreibung & Typische Risiken \\
+\midrule
+Kunde & Identifizierende und kontaktbezogene Informationen & Datenqualität, Datenschutz, Dubletten \\
+Vertrag & Rechtlich verbindliche Vereinbarung & Versionierung, Schriftform, Archivierung \\
+Identitäts\-nachweis & Dokument zur KYC-Erfüllung & Echtheit, Fristen, Audit-Trail \\
+Account & Technische Zugangsentität & Rollenmodell, Provisioning, Off-Boarding \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\begin{merkbox}[Capability vs.\ Prozess vs.\ Applikation]
+Eine Capability ist eine \emph{Fähigkeit}: ``Wir können Kunden identifizieren.'' Ein Prozess ist eine \emph{Ablauffolge}, die diese Fähigkeit aktiviert: ``Onboarding durchführen.'' Eine Applikation ist ein \emph{Werkzeug}, mit dem der Prozess die Capability operationalisiert: ``IAM-System.'' Capabilities sind stabil. Prozesse wandern. Applikationen kommen und gehen.
+\end{merkbox}
+
+\subsection{TOGAF-ADM und Zachman -- zwei Hilfsstrukturen}
+
+\fachbegriff{TOGAF} (The Open Group Architecture Framework) bringt mit dem \fachbegriff{ADM} (Architecture Development Method) einen iterativen Vorgehensplan -- von Architecture Vision über Business Architecture, Information Systems Architectures, Technology Architecture, Opportunities/Solutions, Migration Planning, Implementation Governance bis Architecture Change Management. ADM ist kein Wasserfall, sondern ein Zyklus.
+
+Das \fachbegriff{Zachman-Framework} ordnet Architekturen entlang sechs Fragen (Was, Wie, Wo, Wer, Wann, Warum) und sechs Perspektiven (Executive, Business Management, Architect, Engineer, Subcontractor, Functioning Enterprise) -- eine 6$\times$6-Matrix als Klassifikationsschema. \quelle{Zachman, 1987}
+
+Praktischer Umgang: beide Frameworks lassen sich \emph{leichtgewichtig} nutzen -- als Strukturanker, nicht als Vorgabe. Ein praktischer Anteil von 20\,\% an Inhalten reicht, um Diskussionen zu strukturieren. Der Rest ist akademisch interessant, aber im Tagesgeschäft selten relevant.
+
+% --- 4. MDA --------------------------------------------------------------
+\section{Model-Driven Architecture (MDA)}
+
+\fachbegriff{MDA} ist ein OMG-Standard, der eine zentrale Übersetzungslogik anbietet: vom Business-Anliegen zur technischen Umsetzung in drei sauber getrennten Ebenen. \quelle{OMG, 2014; Kleppe et al., 2003}
+
+\subsection{Die drei Ebenen}
+
+\begin{enumerate}
+  \item \fachbegriff{CIM -- Computation Independent Model.} Die Business-Sicht. Ziele, Prozesse, Begriffe, Scope, Datenobjekte aus Fachperspektive. Hier entscheidet das Business, \emph{was} es will -- ohne Rücksicht auf Plattformen.
+  \item \fachbegriff{PIM -- Platform Independent Model.} Die logische System- und Service-Sicht. Welche Services, welche Datenflüsse, welche Fehlerfälle, welche Schnittstellen -- aber ohne konkrete Plattform.
+  \item \fachbegriff{PSM -- Platform Specific Model.} Die konkrete technische Umsetzung. Welche konkrete Cloud-Plattform, welche konkrete API-Technologie, welche konkrete Deployment-Variante.
+\end{enumerate}
+
+\subsection{Verantwortungsfähigkeit -- wer entscheidet was}
+
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{CIM} & Business / Process Owner / Product Owner entscheiden. \\
+\textbf{PIM} & Architekten / Lösungs-Engineers / Senior-Fachleute entwerfen, in Abstimmung mit Business. \\
+\textbf{PSM} & IT-Teams / Plattform-Engineers / Spezialisten setzen um -- mit Architektur-Review. \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Was im CIM stehen muss}
+
+Ein CIM, das mehr als eine Überschrift ist, enthält:
+
+\begin{itemize}
+  \item Das Business-Ziel (messbar, falls möglich).
+  \item Den Scope (was gehört dazu, was nicht).
+  \item Die wichtigsten Datenobjekte mit Pflichtfeldern.
+  \item Die zentralen Prozesse mit Hauptpfad.
+  \item Die nicht verhandelbaren Regeln (Compliance, Security, Governance).
+  \item Die Erfolgskriterien.
+\end{itemize}
+
+\subsubsection{Beispiel ``Digital Customer Onboarding'' CIM}
+
+\begin{itemize}
+  \item \textbf{Business-Ziel:} ``Kunde in $<24\,\text{h}$ aktiv, ohne manuelle Re-Eingaben.''
+  \item \textbf{Scope:} Komplettes Onboarding ab unterschriebenem Vertrag bis Go-Live; explizit \emph{nicht} im Scope: Marketing-Lead-Generierung.
+  \item \textbf{Datenobjekt ``Kunde'':} Pflichtfelder Name, Adresse, Identifikationsnachweis, Vertragsreferenz.
+  \item \textbf{Kernprozesse:} KYC, Bonität, Vertragsabschluss, Provisioning, Training.
+  \item \textbf{Nicht verhandelbar:} KYC vor jedem Provisioning; Audit-Logging Pflicht; Datenlöschung gemäß DSGVO.
+  \item \textbf{Erfolgskriterien:} DLZ-Median $<24\,\text{h}$; Compliance-Findings = 0; Kunden-NPS $>+30$.
+\end{itemize}
+
+\subsection{Was im PIM stehen muss}
+
+\begin{itemize}
+  \item Die logischen \emph{Services}, die das CIM operationalisieren (``VerifyIdentity'', ``CheckCreditScore'', ``CreateAccount'', ``AssignRoles'').
+  \item Die \emph{Datenflüsse} zwischen Services -- welche Felder gehen wohin.
+  \item Die \emph{Fehlerfälle} und deren Behandlung (fehlende Dokumente, Service nicht erreichbar, Negativ-Ergebnisse).
+  \item Die \emph{Service-Verträge} (Input, Output, Idempotenz, Versionierung -- noch nicht plattformspezifisch).
+\end{itemize}
+
+\subsection{Was im PSM stehen muss}
+
+\begin{itemize}
+  \item Die konkrete \emph{Plattformwahl} (Cloud-Provider, Region, Tenant).
+  \item Die konkreten \emph{Schnittstellen} (REST/gRPC/AsyncAPI, Auth-Verfahren, Endpoints).
+  \item Die \emph{Deployment-Strategie} (Container, IaC, CI/CD).
+  \item \emph{Audit-Logging} mit konkretem Logging-Stack.
+  \item Die \emph{Sicherheits-Konfiguration} (Secrets, Netzwerk-Policies).
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{C-P-S}]
+Die drei MDA-Ebenen, von Business nach Technik:\\[2pt]
+\textbf{C}IM -- \emph{Was} wollen wir? (Business)\\
+\textbf{P}IM -- \emph{Wie} logisch? (Service-/Datensicht)\\
+\textbf{P}SM -- \emph{Womit} konkret? (Plattform-Umsetzung)\\[2pt]
+\emph{Wer CIM und PSM vermischt, bekommt entweder ein Architekturpapier, das Business nicht versteht, oder ein Business-Dokument, das die IT nicht bauen kann.}
+\end{eselsbox}
+
+\subsection{Die Grenze als Senior-Disziplin}
+
+Die häufigste MDA-Falle ist \emph{nicht}, dass die Ebenen fehlen -- sondern dass sie unscharf vermischt werden. Drei typische Symptome:
+
+\begin{itemize}
+  \item Das CIM enthält Plattform-Details (``wir nutzen AWS Step Functions''). Folge: Business bindet sich an Technik, ohne zu wissen, was sie damit ausschließt.
+  \item Das PIM fehlt komplett -- Business springt direkt auf PSM. Folge: Lock-in, kein zweiter Anbieter denkbar.
+  \item Das PSM widerspricht dem CIM. Folge: gebaut wird etwas, das das Business nicht wollte -- aber jeder dachte, der andere hätte zugestimmt.
+\end{itemize}
+
+\begin{merkbox}[MDA als Verantwortungsgrenze]
+MDA ist nicht primär eine Notations-Vorgabe, sondern eine \emph{Verantwortungsgrenze}: Was darf das Business entscheiden, was die Architektur, was die Implementation? Diese Trennung schützt das Business vor verfrühter Technik-Bindung -- und die IT vor unklaren Business-Anforderungen.
+\end{merkbox}
+
+% --- 5. FALLSTUDIE -------------------------------------------------------
+\section{Fallstudie: RetailGroup Europe -- Charter, Capabilities und MDA-Pfad}
+
+Wir betrachten ein realistisches Szenario: \emph{RetailGroup Europe} hat Filialgeschäft und Online-Vertrieb in mehreren Ländern. Es gibt viele Prozessdokumente, aber keine Vergleichbarkeit. Digitalisierungsinitiativen stocken, weil Business und IT aneinander vorbeireden.
+
+\subsection{Ausgangslage und Restriktionen}
+
+\begin{itemize}
+  \item Zeit: 10 Wochen bis Audit-Vorbereitung.
+  \item Budget: 100\,000\,\text{\euro}.
+  \item Zwei parallele IT-Projekte konkurrieren um Kapazität.
+  \item Verantwortlichkeiten zwischen Zentrale und Länderorganisationen unklar.
+\end{itemize}
+
+\subsection{Schritt 1 -- Modelling Charter (Standards + Freiheiten + Freigabe)}
+
+\subsubsection{Fünf Standards (nicht verhandelbar)}
+
+\begin{enumerate}
+  \item Naming-Regel: Verb + Objekt für Aktivitäten, ``X-to-Y'' für E2E.
+  \item Pflicht-Metadaten: Owner, Status, Version, Standort, Risikoklasse.
+  \item Rollen sichtbar (Lanes/Organisationseinheiten in jedem ausführungsnahen Modell).
+  \item Start- und End-Ereignis verpflichtend.
+  \item Änderungslog über Change Request.
+\end{enumerate}
+
+\subsubsection{Drei Freiheitsgrade}
+
+\begin{itemize}
+  \item Detailtiefe nach Bedarf und Zweck.
+  \item Visual Style innerhalb des Templates.
+  \item Lokale Varianten als Attribute.
+\end{itemize}
+
+\subsubsection{Freigabe-/Änderungsprozess}
+
+Draft \textrightarrow{} Review (Modeler + Reviewer, vier Augen) \textrightarrow{} Approved (Owner) \textrightarrow{} Retired (nach Ablösung).
+
+\subsection{Schritt 2 -- Capability Map (Auszug, 12 Capabilities)}
+
+\begin{enumerate}
+  \item Sortiment planen.
+  \item Lieferanten managen.
+  \item Beschaffen.
+  \item Lager bewirtschaften.
+  \item Filialprozesse steuern.
+  \item Kunden gewinnen.
+  \item Online-Verkauf abwickeln.
+  \item Bezahlen / Kassieren.
+  \item Identifizieren / Authentifizieren.
+  \item Liefern (eigene + Partner).
+  \item Reklamieren und Retournieren.
+  \item Reporten und Auditieren.
+\end{enumerate}
+
+\subsection{Schritt 3 -- Zwei Digitalisierungsprioritäten}
+
+\begin{itemize}
+  \item \textbf{Identifizieren/Authentifizieren} (Capability 9). Begründung: Hebel auf DLZ Onboarding, Compliance-relevant (Geldwäsche, Altersprüfung), Wiederverwendung in mehreren Prozessen.
+  \item \textbf{Zugang/Account Provisioning} (Capability nahe 7/9). Begründung: Hebel auf Customer Lifetime Value, DLZ-Killer für Neukunden, Schnittstelle zu IT-Architektur als Folgeeffekt.
+\end{itemize}
+
+\subsection{Schritt 4 -- MDA-Pfad für ``Identifizieren''}
+
+\subsubsection{CIM}
+
+\begin{itemize}
+  \item \textbf{Ziel:} ``Kundenidentität in $<5\,\text{min}$ verifizierbar, in 95\,\% der Fälle digital.''
+  \item \textbf{Scope:} Online und Filiale (gleicher Anker für beide Kanäle).
+  \item \textbf{Datenobjekt ``Kunde'':} Pflichtfelder Vor-/Nachname, Geburtsdatum, Adresse, eindeutige ID.
+  \item \textbf{Regeln:} KYC-Pflicht über bestimmten Transaktionswert; DSGVO-konforme Speicherung; Audit-Logging.
+\end{itemize}
+
+\subsubsection{PIM}
+
+\begin{itemize}
+  \item Service ``VerifyIdentity'' (Input: Kunde-Stammdaten + Identitätsnachweis; Output: Verifikations-Status + Verifikations-ID + Zeitstempel).
+  \item Datenfluss: Kunde-Stammdaten kommen aus CRM, Identitätsnachweis aus Filial-Scanner oder Online-Upload.
+  \item Fehlerfälle: schlechte Bildqualität (Rückfrage), Unstimmigkeit Daten/Dokument (manuelle Prüfung), Verifikations-Service nicht erreichbar (Fallback auf manuelle Bearbeitung).
+\end{itemize}
+
+\subsubsection{PSM}
+
+\begin{itemize}
+  \item Konkrete Plattform: bestehendes IAM-System plus Verifikations-Service eines Anbieters.
+  \item REST-API mit OAuth-2.0, Versionierung in URL.
+  \item Audit-Logging zentral, mit unveränderlichem Speicher.
+  \item Deployment in Container, IaC für Test-/Produktivumgebung.
+\end{itemize}
+
+\subsection{Schritt 5 -- Vier KPIs (zwei Outcome, zwei Risk/Compliance)}
+
+\begin{itemize}
+  \item \fachbegriff{Lead Time Onboarding} (Outcome). Ziel: Median $<24\,\text{h}$.
+  \item \fachbegriff{First-Pass-Yield} (Outcome). Anteil Fälle, die ohne Rückfrage durchlaufen. Ziel: $>85\,\%$.
+  \item \fachbegriff{Compliance-Findings} (Risk). Audit-Befunde pro Quartal. Ziel: 0.
+  \item \fachbegriff{Rework-Rate} (Risk). Anteil Fälle mit manueller Nachbearbeitung. Ziel: $<10\,\%$.
+\end{itemize}
+
+\subsection{Lessons aus der Fallstudie}
+
+\begin{itemize}
+  \item Standards entstehen nicht in einem Workshop -- sie entstehen durch \emph{wiederholte} Anwendung und Konsequenz.
+  \item Capabilities sind robuster als Prozesse: eine gute Capability Map überlebt zwei Reorganisationen.
+  \item MDA wirkt erst dann als Steuerungslogik, wenn die Grenze \emph{durchgehalten} wird -- auch unter Zeitdruck.
+\end{itemize}
+
+% --- 6. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: Modellierung als Produkt}
+
+Auf Wissens-Ebene sind Standards und Frameworks Lernstoff. Auf Anwendungs-Ebene sind sie Handwerk. Auf Management-Ebene wird Modellierung selbst zum \emph{Produkt} -- mit einem Owner, Releases, Akzeptanzstrategie und messbaren Erfolgskriterien.
+
+\subsection{Zwei zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Tool-Strenge (ein Standardtool) vs.\ Föderation (mehrere zugelassene Tools).} Ein zentrales Tool maximiert Vergleichbarkeit -- und Widerstand. Eine Föderation schont Akzeptanz -- und multipliziert Pflege. Praktische Lösung: \emph{ein} primäres Tool + ein bis zwei zugelassene Sekundär-Tools mit Export-Pflicht in gemeinsamen Standard.
+  \item \textbf{Governance-Strenge vs.\ Schnelligkeit.} Strenge Reviews machen Modelle audit-fest -- und langsam. Lockere Reviews machen Modelle schnell -- und unzuverlässig. Empfehlung: harte Regeln für die \emph{vier nicht verhandelbaren Standards}, lokale Freiheit innerhalb dieser Leitplanken. \quelle{Ross et al., 2006}
+\end{enumerate}
+
+\subsection{Modellierung als Produkt -- Product-Owner-Modell}
+
+\begin{itemize}
+  \item Ein benannter \fachbegriff{Product Owner} des Modellierungs-Systems (häufig: Head of Enterprise Architecture oder Chief Process Officer).
+  \item Ein \fachbegriff{Release-Rhythmus} der Standards: zwei Mal pro Jahr Updates, mit Vorlauf und Schulungs-Snippets.
+  \item Eine \fachbegriff{Review-Mechanik}: Reviewer-Pool, Vier-Augen-Pflicht, regelmäßiges Reviewer-Treffen.
+  \item Ein \fachbegriff{Feedback-Kanal} aus Fachbereichen: was funktioniert, was nicht, welche Standards wirken aufwendig ohne Nutzen?
+\end{itemize}
+
+\subsection{EA als Priorisierungs- und Investitionsinstrument}
+
+EA-Capabilities sind nicht primär Dokumentation -- sie sind \fachbegriff{Priorisierungssprache}. Wenn ein Investment-Antrag auf zwei Capabilities einzahlt, die in der Capability Map als kritisch markiert sind, wird er anders bewertet als ein Antrag auf eine Capability, die strategisch keine Priorität hat. \quelle{Ross et al., 2006}
+
+Drei Anwendungsfelder:
+
+\begin{itemize}
+  \item \textbf{Investitions\-priorisierung.} Welche Capabilities erhalten Budget?
+  \item \textbf{Standardisierungs\-entscheidungen.} Wo lohnt sich ein Standard, wo darf lokal divergiert werden?
+  \item \textbf{Risiko-/Compliance-Steuerung.} Welche Capabilities sind compliance-kritisch und müssen entsprechend gemonitort werden?
+\end{itemize}
+
+\subsection{MDA-Grenze unter Zeitdruck}
+
+Die häufigste Erosion der MDA-Grenze passiert unter Zeitdruck. Ein Vorstand fragt nach einer Lösung, und in der Hektik werden CIM und PSM vermischt. Das ist nicht Bösartigkeit, sondern operative Notwendigkeit -- und genau hier braucht es Senior-Disziplin:
+
+\begin{itemize}
+  \item Wenn ein CIM unterschrieben werden muss, ohne dass Plattformfragen geklärt sind: explizit als ``offen'' markieren, nicht durch spontane Entscheidungen schließen.
+  \item Wenn das PSM ohne PIM gebaut wird: dokumentieren, dass dies eine bewusste MVP-Entscheidung ist, mit Trigger für ein nachträgliches PIM-Reverse-Engineering.
+\end{itemize}
+
+\subsection{Entscheidungen unter Unsicherheit}
+
+\begin{itemize}
+  \item \textbf{Tool-Strategie.} Standardtool jetzt, später öffnen? Oder föderiert starten, später konsolidieren? Beide Wege haben sechsstellige Folgekosten. Schriftliche Entscheidung, verworfene Alternative dokumentieren, Frühwarnsignal definieren (z.\,B.\ ``mehr als drei aktive Tools $\rightarrow$ Konsolidierungs-Workshop'').
+  \item \textbf{Governance-Strenge.} Minimal-Set jetzt, ergänzen nach Akzeptanz? Oder vollständig jetzt mit Schmerz? Empfehlung: Minimum-Set zuerst, mit Trigger zur Verschärfung bei wiederholten Audit-Findings.
+\end{itemize}
+
+\begin{merkbox}[Senior-Shift -- vom Diagramm zur Architektur-Verantwortung]
+Der Wechsel von ``ich modelliere einen Prozess'' zu ``ich verantworte ein Modellierungs-System'' ist erkennbar an drei Symptomen: man entscheidet die Standards \emph{vor} der ersten Datei; man kann die MDA-Grenze auch unter Druck verteidigen; man sieht Capabilities als langlebige Sprache, nicht als Reporting-Element.
+\end{merkbox}
+
+% --- 7. TAKE-AWAYS -------------------------------------------------------
+\section{Take-aways aus Tag 5}
+
+\begin{enumerate}
+  \item \textbf{Tool ist Enabler, nicht Strategie.} Visio/Lucidchart erlauben Kollaboration -- aber Standards machen daraus Steuerung.
+  \item \textbf{Modelling Charter auf einer Seite.} Fünf nicht verhandelbare Standards, drei Freiheitsgrade, Freigabe-/Änderungsprozess -- nicht mehr, nicht weniger.
+  \item \textbf{EA = Capabilities + Prozesse + Applikationen + Daten.} Capabilities sind das stabile Rückgrat -- robuster als Prozesse, langlebiger als Applikationen.
+  \item \textbf{TOGAF und Zachman leichtgewichtig nutzen.} Strukturanker, keine Wasserfall-Vorgabe -- 20\,\% des Frameworks reichen meist.
+  \item \textbf{MDA = CIM (Business) + PIM (logisch) + PSM (konkret).} Drei Ebenen, drei Verantwortungen, eine durchgehaltene Grenze.
+  \item \textbf{Capability-Priorisierung als Steuerungssprache.} Investitionen, Standards und Risiken folgen der Capability Map.
+  \item \textbf{Governance als Produkt.} Ein Owner, ein Rhythmus, ein Feedback-Kanal -- sonst altert das System.
+  \item \textbf{Entscheidungen unter Unsicherheit schriftlich.} Verworfene Alternative + Frühwarnsignal + Trigger zur Re-Evaluation.
+\end{enumerate}
+
+% --- 8. LITERATUR --------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Allweyer, T. (2020).] \emph{BPMN 2.0 -- Business Process Model and Notation: Einführung in den Standard für die Geschäftsprozessmodellierung} (4.\ Aufl.). BoD.
+  \item[Fowler, M. (2003).] \emph{UML distilled: A brief guide to the standard object modeling language} (3rd ed.). Addison-Wesley.
+  \item[Kleppe, A., Warmer, J., \& Bast, W. (2003).] \emph{MDA explained: The model driven architecture -- practice and promise}. Addison-Wesley.
+  \item[Lankhorst, M. (2017).] \emph{Enterprise architecture at work: Modelling, communication and analysis} (4th ed.). Springer. \href{https://doi.org/10.1007/978-3-662-53933-0}{https://doi.org/10.1007/978-3-662-53933-0}
+  \item[Object Management Group. (2014).] \emph{Model Driven Architecture (MDA) Guide rev. 2.0} (ormsc/2014-06-01). \href{https://www.omg.org/cgi-bin/doc?ormsc/14-06-01}{https://www.omg.org/cgi-bin/doc?ormsc/14-06-01}
+  \item[Ross, J.\,W., Weill, P., \& Robertson, D.\,C. (2006).] \emph{Enterprise architecture as strategy: Creating a foundation for business execution}. Harvard Business School Press.
+  \item[The Open Group. (2022).] \emph{TOGAF\textregistered{} standard, version 9.2: A standard of The Open Group}. The Open Group. \href{https://www.opengroup.org/togaf}{https://www.opengroup.org/togaf}
+  \item[Zachman, J.\,A. (1987).] A framework for information systems architecture. \emph{IBM Systems Journal, 26}(3), 276--292. \href{https://doi.org/10.1147/sj.263.0276}{https://doi.org/10.1147/sj.263.0276}
+\end{description}
+
+% --- 9. GLOSSAR ----------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Applikationslandschaft] Sicht auf Systeme einer Organisation und ihre Zuordnung zu Capabilities, Prozessen und Datenobjekten.
+  \item[ArchiMate] Open-Group-Notationssprache für Enterprise-Architektur-Modelle.
+  \item[Capability] Fähigkeit der Organisation (``Kunde identifizieren''). Stabil über Reorganisationen.
+  \item[Capability Map] Hierarchische Sicht aller Capabilities einer Organisation, meist zwei bis drei Ebenen.
+  \item[Change Request] Strukturierter Antrag zur Änderung eines Modells, mit Reviewer und Approver.
+  \item[CIM] \emph{Computation Independent Model.} Business-Sicht eines MDA-Pfads -- Ziele, Prozesse, Begriffe, Regeln.
+  \item[Datenobjekt] Kerninformationsobjekt (Kunde, Vertrag, Konto) inklusive Data Owner.
+  \item[Definition of Done] Liste prüfbarer Kriterien, ab denen ein Modell als fertig gilt.
+  \item[EA] \emph{Enterprise Architecture.} Disziplin der konsistenten Beziehung von Capabilities, Prozessen, Applikationen, Daten, Technologie.
+  \item[Freiheitsgrad] Bereich der Modellierungs-Entscheidung, der bewusst lokal bleibt.
+  \item[Lucidchart] Cloud-basiertes kollaboratives Modellierungs-Tool, breit für Prozess- und EA-Diagramme verwendet.
+  \item[MDA] \emph{Model Driven Architecture.} OMG-Standard zur Trennung von Business (CIM), logischer Architektur (PIM) und konkreter Umsetzung (PSM).
+  \item[Modelling Charter] Einseitiges Dokument mit den unternehmensweiten Standards und Freiheitsgraden für Modellierung.
+  \item[PIM] \emph{Platform Independent Model.} Logische Service- und Datensicht in MDA, unabhängig von Plattform.
+  \item[PSM] \emph{Platform Specific Model.} Konkrete technische Umsetzung in MDA.
+  \item[Product Owner (Modellierungs-System)] Verantwortliche Person für Standards, Releases und Akzeptanz des Modellierungs-Systems.
+  \item[Prozesslandkarte] E2E-Sicht auf alle Kernprozesse einer Organisation; Mappt Capabilities auf Abläufe.
+  \item[Reviewer] Rolle, die ein Modell vor Approval auf Konventionen und Logik prüft.
+  \item[Shapeset] Vordefinierte Symbolbibliothek, die in einem Modellierungs-Tool Konsistenz erleichtert.
+  \item[Standard (nicht verhandelbar)] Regel in der Modelling Charter, die unternehmensweit ohne Ausnahme gilt.
+  \item[TOGAF] \emph{The Open Group Architecture Framework.} Verbreitetes EA-Rahmenwerk mit der Architecture Development Method (ADM).
+  \item[Visio] Microsoft-Modellierungs-Tool, weit verbreitet in Unternehmen für BPMN-, EPC- und EA-Diagramme.
+  \item[Zachman-Framework] Klassifikationsschema (6$\times$6-Matrix) für EA-Artefakte; ursprünglich Zachman, 1987.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 5 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

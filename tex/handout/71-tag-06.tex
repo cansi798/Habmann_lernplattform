@@ -1,0 +1,787 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 6 - Lehrskript
+% BPMS, API-Integration, Cloud-native Skalierung, E2E-Steuerungsarchitektur
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 6}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}BPMS \textperiodcentered{} APIs \textperiodcentered{} Cloud-native}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 2 \textperiodcentered{} TAG 6 VON 4 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 5.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}BPMS, APIs\\\&\\Cloud-native\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Von der Prozesslandkarte zur integrierten Ausführung --\\E2E-Integration als Steuerungsarchitektur.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 6 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Bisher haben wir Modelle entworfen, in einem Repository steuerbar gemacht und über Capabilities/MDA in eine Architekturlogik gebracht. Heute treten wir in die Schicht ein, in der Prozesse tatsächlich \emph{laufen}: BPMS-Plattformen führen Workflows aus, APIs verbinden Systeme als Verträge, Cloud-native Praktiken machen das Ganze skalierbar und betreibbar. Diese drei Themen sind nicht primär IT-Inhalte -- sie sind \emph{Steuerungsarchitektur}.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item BPMS-Kernbausteine kennen: Prozessengine, Aufgaben-/Worklist, Forms, Regelwerk, Monitoring, Audit Trail, Versionierung.
+  \item API-Verträge benennen: Endpoint, Input/Output, Fehlercodes, Auth, Rate Limits, Versionierung, Idempotenz.
+  \item Integrationsmuster unterscheiden: synchroner API-Call vs.\ asynchrones Event/Message.
+  \item Cloud-native Prinzipien einordnen: stateless Services, horizontale Skalierung, Observability (Logs, Metrics, Traces), Resilienz-Patterns.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Einen BPMS-Blueprint für einen E2E-Prozess (Rollen, Tasks, SLAs, Eskalation, Audit Trail) entwerfen.
+  \item Einen API-Vertrag mit Input/Output, Fehlerfällen und Versionierung formulieren.
+  \item Sync- vs.\ Async-Entscheidung mit Speed/Robustheit-Trade-off begründen.
+  \item Cloud-native Betriebsanforderungen ableiten (Skalierung, Observability, Resilienz, Security).
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item ``System of Record'' pro Datenobjekt definieren und Data Ownership klären.
+  \item Architekturpfade (event-driven vs.\ überwiegend sync) bewusst entscheiden -- mit Begründung und Frühwarnsignal.
+  \item Plattform als \emph{Steuerungssystem für Entscheidungen} verstehen, nicht nur als technische Infrastruktur.
+  \item ``Minimum Viable Integration'' priorisieren: lieber zwei kritische Integrationen stabil als zehn halbgar.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Ein Prozess, der in einer BPMS-Engine läuft, ist nur so gut wie seine Integrationen. Eine API, die keinen klaren Vertrag hat, ist eine Wette. Eine Cloud-native Architektur ohne Observability ist Blindflug. Senior-Praxis verbindet alle drei: \emph{Engine plus Verträge plus Beobachtbarkeit = E2E-Steuerungsarchitektur.}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Vom Diagramm zur integrierten Ausführung}
+
+In den vergangenen Tagen wurde Prozessmodellierung zunehmend technisch -- vom Diagramm über das Repository zur Execution-Schicht. Heute schließt sich der Kreis: Prozesse laufen in \emph{Systemen}, sie sprechen über \emph{APIs}, und sie skalieren in \emph{Cloud-nativen} Umgebungen. Das Verständnis dieser drei Bausteine ist die Voraussetzung dafür, BPM nicht als isolierte Disziplin zu verantworten, sondern als integriertes Steuerungssystem. \quelle{Dumas et al., 2018, Kap.~9; Freund \& Rücker, 2019}
+
+\subsection{Was ``E2E-Integration'' bedeutet}
+
+End-to-End-Integration ist nicht ``alle Systeme miteinander verbinden''. Es ist eine \emph{durchgängige Sicht} entlang eines Prozesses: \emph{Prozess + Daten + Systeme + Rollen + KPIs + Controls -- als ein zusammenhängendes Bild.} Wenn nur eines dieser Elemente fehlt, fehlt die Steuerungsfähigkeit:
+
+\begin{itemize}
+  \item Prozess ohne Daten -- man modelliert ein Idealbild ohne Realität.
+  \item Daten ohne Systeme -- man hat Datenmodelle, aber niemand weiß, wo sie leben.
+  \item Systeme ohne Rollen -- niemand verantwortet die Schnittstelle.
+  \item Rollen ohne KPIs -- niemand misst, ob es funktioniert.
+  \item KPIs ohne Controls -- man sieht Abweichungen, ohne sie behandeln zu können.
+\end{itemize}
+
+\subsection{Der ``Model-Run-Improve''-Zyklus}
+
+Eine pragmatische Sicht auf den BPM-Lebenszyklus: \quelle{Dumas et al., 2018; Reinkemeyer, 2020}
+
+\begin{enumerate}
+  \item \fachbegriff{Model.} Soll-Prozess als BPMN oder VSM dokumentieren.
+  \item \fachbegriff{Run.} Prozess in der Workflow-Engine ausführen, in echten Systemen.
+  \item \fachbegriff{Measure.} KPIs erfassen, Process-Mining für Varianten und Engpässe.
+  \item \fachbegriff{Improve.} Maßnahmen ableiten, Governance/Change anstoßen.
+\end{enumerate}
+
+Wir bewegen uns heute auf der \emph{Run}- und \emph{Measure}-Schicht und schaffen die Voraussetzungen, dass \emph{Improve} überhaupt möglich wird.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{B-A-C}]
+Drei Bausteine der E2E-Steuerungsarchitektur:\\[2pt]
+\textbf{B}PMS -- Modellieren, Ausführen, Überwachen, Optimieren.\\
+\textbf{A}PIs -- Verträge zwischen Systemen: Input, Output, Fehler, Auth, Versionierung.\\
+\textbf{C}loud-native -- Skalieren und beobachten in Containern, mit SLOs.\\[2pt]
+\emph{Wer B-A-C zusammen denkt, baut Steuerungsarchitektur. Wer einzeln denkt, baut Inseln.}
+\end{eselsbox}
+
+% --- 2. BPMS -------------------------------------------------------------
+\section{BPMS -- Business Process Management Systeme}
+
+Ein \fachbegriff{BPMS} ist eine Software-Plattform, die vier Disziplinen vereint: \emph{Modellieren, Ausführen, Überwachen, Optimieren} -- der sogenannte \fachbegriff{Closed Loop} der Prozesssteuerung. Bekannte Vertreter: Camunda Platform, Flowable, jBPM, IBM Business Automation Workflow, Pega; je nach Schwerpunkt mehr ``Pure-BPM'' oder ``Low-Code-Suite''. \quelle{Freund \& Rücker, 2019; Dumas et al., 2018, Kap.~9}
+
+\subsection{Kernbausteine eines BPMS}
+
+\begin{itemize}
+  \item \fachbegriff{Prozessengine.} Führt BPMN-Modelle aus, verwaltet Zustände (Token), behandelt Events, ruft Tasks auf.
+  \item \fachbegriff{Aufgaben-/Worklist.} Liste der offenen User Tasks pro Benutzer/Rolle, mit Filtern und Priorisierung.
+  \item \fachbegriff{Forms.} Eingabe-Oberflächen für User Tasks (vom einfachen Web-Formular bis zur eingebetteten Custom-UI).
+  \item \fachbegriff{Regelwerk (DMN).} Decision Tables für Entscheidungslogik, die explizit aus dem Prozessmodell ausgelagert wird.
+  \item \fachbegriff{Monitoring/Dashboards.} Sicht auf laufende und abgeschlossene Cases, KPIs, Anomalien.
+  \item \fachbegriff{Audit Trail.} Unveränderliches Log aller Schritte, Entscheidungen und Datenänderungen -- Pflicht in regulierten Umfeldern.
+  \item \fachbegriff{Versionierung.} Mehrere Prozess-Versionen können parallel existieren; Migration laufender Cases ist eine eigene Disziplin.
+  \item \fachbegriff{Case-/Human-Workflow.} Ergänzung zur strengen BPMN-Steuerung für wissensintensive Fälle (CMMN-Logik).
+\end{itemize}
+
+\subsection{Nutzen und Risiken eines BPMS}
+
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+& \textbf{Nutzen} & \textbf{Risiken} \\
+\midrule
+Standardisierung & gleiche Abläufe, vergleichbare Daten & ``Schablone für alles'' \\
+Durchlaufzeit & weniger Liegezeit, klare Eskalation & Overengineering, Sonderlocken \\
+Compliance & Audit Trail, klare Verantwortung & Falsche Prozessgrenzen \\
+Transparenz & Dashboards, Variantenanalyse & ``False Compliance'' (Papier ok, Realität nicht) \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{BPMS-Blueprint für Customer-Complaint-Handling}
+
+Wir nehmen einen realistischen Mini-Prozess: \emph{Customer Complaint Handling.} Reklamation kommt rein \textrightarrow{} klassifizieren \textrightarrow{} ggf.\ Rückfrage \textrightarrow{} Entscheidung Kulanz/Retoure \textrightarrow{} Abwicklung \textrightarrow{} Abschluss \textrightarrow{} Reporting. SLAs: 48\,h Erstreaktion, 10 Tage Abschluss. Daten in CRM, ERP, E-Mail.
+
+\subsubsection{Blueprint-Skizze (Kästchenmodell)}
+
+\begin{itemize}
+  \item \textbf{Trigger:} Message Event ``Complaint empfangen'' (E-Mail-Eingang, Webformular, oder API).
+  \item \textbf{User Task ``Klassifizieren''} (Lane Customer Service) -- 30\,min SLA. Daten: Typ, Schweregrad, Produktbezug.
+  \item \textbf{XOR Gateway ``Klärung nötig?''} \\
+    Ja $\rightarrow$ User Task ``Rückfrage stellen'' + Receive Task ``Antwort erhalten'' (Timer 5\,Tage). \\
+    Nein $\rightarrow$ direkt zu Entscheidung.
+  \item \textbf{Business Rule Task ``Kulanz vs.\ Retoure''} (DMN-Tabelle) -- Schwellwert, Kundenwert, Produkthistorie.
+  \item \textbf{User Task ``Abwicklung''} (Lane Sales Ops oder Logistik) -- abhängig vom Ergebnis.
+  \item \textbf{Service Task ``Kundenkommunikation''} (Mail/Push) + Audit-Logging.
+  \item \textbf{End Event ``Abgeschlossen''} -- Reporting-Trigger.
+\end{itemize}
+
+\subsubsection{SLAs und Eskalation}
+
+\begin{itemize}
+  \item Erstreaktion 2\,h (Klassifizierung muss innerhalb 2\,h erfolgen, sonst Eskalation an Schichtleitung).
+  \item Lösung 10 Tage (gesamter Case in 10 Werktagen abgeschlossen).
+  \item Eskalation nach 4\,h ohne Aktivität an Duty Manager (Timer Boundary Event).
+\end{itemize}
+
+\subsubsection{KPIs}
+
+\begin{itemize}
+  \item \fachbegriff{SLA-Einhaltung} -- Anteil der Cases mit Erstreaktion innerhalb SLA. Owner: Head of Customer Service.
+  \item \fachbegriff{Rework-Quote} -- Anteil der Cases mit Wiedereröffnung nach Abschluss. Owner: Process Owner.
+  \item \fachbegriff{Kundenzufriedenheit} -- NPS oder CSAT pro abgeschlossenem Case. Owner: VP Customer Experience.
+\end{itemize}
+
+\subsubsection{MVP-Entscheidung}
+
+Eine \fachbegriff{Funktion gehört rein:} der Audit Trail. Ohne Audit Trail kein BPMS-Wert. \\
+Eine \fachbegriff{Funktion bleibt vorerst draußen:} die automatische Kategorisierung per ML. Sie ist verlockend, aber sie erfordert Trainingsdaten, die zum Start nicht in der nötigen Qualität existieren. Stattdessen: regelbasierte Vorklassifikation in der DMN-Tabelle. Trigger für die Erweiterung: $>$3000 Cases im Trainingskorpus mit Label.
+
+\begin{merkbox}[BPMS ist nicht Workflow-Engine ist nicht Modellierungs-Tool]
+Ein BPMS umschließt eine Workflow-Engine, ein Modellierungs-Tool, ein Forms-System, ein Regelwerk, Monitoring und Audit. Wer mit ``wir kaufen eine Workflow-Engine'' startet und denkt, das sei BPMS, unterschätzt den organisatorischen Anteil -- Forms, Rollen, Audit, Reporting machen 70\,\% der Komplexität aus.
+\end{merkbox}
+
+% --- 3. APIs -------------------------------------------------------------
+\section{APIs -- Verträge zwischen Systemen}
+
+Eine \fachbegriff{API} (Application Programming Interface) ist ein \emph{Vertrag} zwischen zwei Systemen. Die wichtigsten Vertragsbestandteile: Endpoint (Adresse), Input (was wird mitgegeben), Output (was kommt zurück), Fehlercodes (was geht schief), Authentifizierung (wer darf), Rate Limits (wie oft), Versionierung (welche Ausgabe). \quelle{Fielding, 2000; Richardson, 2018; Newman, 2021}
+
+\subsection{Vertragsbestandteile im Detail}
+
+\begin{itemize}
+  \item \fachbegriff{Endpoint.} URL/Adresse, unter der die Funktion erreichbar ist. Z.\,B.\ \texttt{POST /v2/orders/\{orderId\}/cancel}.
+  \item \fachbegriff{Input.} Schema der erwarteten Felder (Pflicht, optional, Typ, Wertebereich).
+  \item \fachbegriff{Output.} Schema der Antwort (Erfolg, Fehler, Status, Body).
+  \item \fachbegriff{Fehlercodes.} HTTP-Status plus optional fachliche Fehlercodes (z.\,B.\ \texttt{ERR\_ORDER\_NOT\_FOUND}).
+  \item \fachbegriff{Auth.} OAuth-2.0, API-Key, mTLS -- wer ist berechtigt?
+  \item \fachbegriff{Rate Limits.} Anzahl Aufrufe pro Zeitfenster, um Last zu steuern.
+  \item \fachbegriff{Versionierung.} URL-Path, Header oder Content-Type-Negotiation; Lebenszyklen mit Deprecation-Zeitfenstern.
+  \item \fachbegriff{Idempotenz.} Mehrfacher Aufruf mit gleicher ID liefert dasselbe Ergebnis -- kritisch für Retries.
+\end{itemize}
+
+\subsection{Sync vs.\ Async -- der zentrale Designentscheid}
+
+\subsubsection{Synchrone API-Aufrufe}
+
+\begin{itemize}
+  \item Aufrufer wartet auf Antwort. Klassisches REST über HTTPS.
+  \item Vorteil: einfach, sofortige Rückmeldung, Fehler direkt sichtbar.
+  \item Nachteil: koppelt Verfügbarkeit (wenn Aufgerufener down, blockiert Aufrufer), erschwert horizontale Skalierung.
+  \item Geeignet für: Abfragen, kurze Operationen, Benutzerinteraktionen.
+\end{itemize}
+
+\subsubsection{Asynchrone Events/Messages}
+
+\begin{itemize}
+  \item Sender legt Event/Message in Kanal (Kafka, RabbitMQ, Cloud-Bus), Empfänger holt asynchron.
+  \item Vorteil: Entkopplung, lastrobust, einfache Skalierung.
+  \item Nachteil: Komplexere Fehlerbehandlung, ``eventual consistency'', Diagnose schwieriger.
+  \item Geeignet für: Hintergrundverarbeitung, Skalierungs-Spitzen, Domänen-Events (``Order placed'').
+\end{itemize}
+
+\subsection{API-Vertrags-Template}
+
+Ein praktikables Template für jede neue API:
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Name/Zweck & \texttt{POST /v2/shipments/\{id\}/status} -- Statusabfrage Sendung \\
+Input & Path: shipmentId; Header: X-Correlation-ID, Authorization \\
+Output & 200: \{status, estimatedDelivery, carrier, lastUpdate\}; 404: not found \\
+Fehlerfälle & 401 Unauthorized; 404 Not Found; 503 Service Unavailable \\
+Security & OAuth-2.0 Bearer Token; Scope ``shipment:read'' \\
+Versionierung & URL-Path \texttt{/v2/}; \texttt{/v1/} deprecated bis 30.06.2026 \\
+Monitoring & Log mit X-Correlation-ID; SLO: 95\,\% $<200\,\text{ms}$ \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Zwei Beispiel-APIs für Customer-Complaint-Integration}
+
+\subsubsection{API 1 -- GetOrderStatus (sync)}
+
+\begin{itemize}
+  \item Input: orderId (Pflicht), customerId (optional).
+  \item Output: status, currentStep, lastUpdate, items[].
+  \item Fehlerfälle: 401 (Auth fail), 404 (Order nicht gefunden), 503 (Backend nicht erreichbar).
+  \item Security: OAuth-2.0 mit Scope ``order:read''.
+  \item Versionierung: /v2/orders/\{id\}.
+  \item Monitoring: Correlation-ID, SLO 95\,\% $<300\,\text{ms}$.
+\end{itemize}
+
+\subsubsection{API 2 -- CreateReturn (sync, mit Idempotenz)}
+
+\begin{itemize}
+  \item Input: orderId, reasonCode, items[], idempotencyKey.
+  \item Output: returnId, status, instructions.
+  \item Fehlerfälle: 401, 409 (Conflict, idempotencyKey bereits genutzt), 422 (validation), 503.
+  \item Security: OAuth-2.0 mit Scope ``return:write''.
+  \item Idempotenz: idempotencyKey verhindert doppelte Returns bei Retry.
+\end{itemize}
+
+\subsection{Fehler-Strategien im Workflow}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Fehlerfall & Workflow-Reaktion \\
+\midrule
+Timeout & Retry max.\ 3$\times$ mit Exponential Backoff, dann Manual Fallback. \\
+Daten fehlen (4xx) & User Task ``Daten ergänzen'' zurück an Sender. \\
+Auth-Fehler (401) & Eskalation an System-Owner, kein Retry. \\
+Service unavailable (5xx) & Cache/Fallback nutzen, asynchron erneut versuchen. \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\begin{merkbox}[API ist ein Vertrag, kein Nebenprodukt]
+Eine API ohne explizit dokumentierten Vertrag ist eine Wette, dass die andere Seite immer dasselbe meint. Sobald die andere Seite ein Update macht, ohne den Vertrag zu pflegen, wandert die Wette ins Risiko. \emph{API-Verträge gehören in das Repository, sind versioniert, haben Owner.}
+\end{merkbox}
+
+\subsection{Sync vs.\ Async -- Faustregel}
+
+\begin{itemize}
+  \item \textbf{Sync,} wenn: Benutzer wartet auf Antwort, kurzer Aufruf, niedrige Last, einfache Fehlerbehandlung gewünscht.
+  \item \textbf{Async,} wenn: lange laufende Verarbeitung, Lastspitzen, mehrere Empfänger desselben Events (Fan-out), oder Entkopplung gewünscht.
+\end{itemize}
+
+% --- 4. CLOUD-NATIVE -----------------------------------------------------
+\section{Cloud-native Skalierung und Betrieb}
+
+\fachbegriff{Cloud-native} ist nicht ``in der Cloud betrieben''. Es ist ein Architekturansatz, der bewusst die Eigenschaften der Cloud nutzt: horizontale Skalierung, automatisches Deployment, Resilienz durch Replikation, beobachtbarer Betrieb. \quelle{Newman, 2021; Burns et al., 2022}
+
+\subsection{Sechs Prinzipien}
+
+\begin{enumerate}
+  \item \fachbegriff{Stateless Services.} Dienste halten keinen Zustand lokal -- der Zustand liegt in Datenbanken oder Message-Bussen. Voraussetzung für horizontale Skalierung.
+  \item \fachbegriff{Horizontale Skalierung.} Mehr Instanzen statt größere Maschinen. Wirkt nur, wenn Services stateless sind.
+  \item \fachbegriff{Container und Orchestrierung.} Container (Docker) als Verpackung, Kubernetes als Orchestrator. Wiederholbare Deployments.
+  \item \fachbegriff{Observability.} Drei Säulen: \emph{Logs} (was ist passiert), \emph{Metrics} (wie viel), \emph{Traces} (wie hängt es zusammen über Service-Grenzen).
+  \item \fachbegriff{Resilienz.} Circuit Breaker, Retries, Timeouts, Bulkheads -- Muster, die Fehler isolieren, statt sie zu propagieren.
+  \item \fachbegriff{Deklarative Infrastruktur.} Konfiguration als Code (Infrastructure-as-Code), Pipelines (CI/CD) statt manueller Deployments.
+\end{enumerate}
+
+\subsection{SLAs und SLOs}
+
+\begin{itemize}
+  \item \fachbegriff{SLA} (Service Level Agreement) -- vertraglich zugesicherte Service-Qualität (z.\,B.\ 99,9\,\% Verfügbarkeit pro Monat).
+  \item \fachbegriff{SLO} (Service Level Objective) -- internes Ziel, das hinter dem SLA mit Puffer liegt (z.\,B.\ 99,95\,\%). Wenn SLO verletzt wird, gibt es Maßnahmen \emph{bevor} der SLA reißt.
+  \item \fachbegriff{SLI} (Service Level Indicator) -- die Messgröße selbst (Antwortzeit, Verfügbarkeit, Fehlerrate).
+\end{itemize}
+
+\subsection{Resilienz-Patterns}
+
+\begin{itemize}
+  \item \fachbegriff{Circuit Breaker.} Nach mehreren Fehlern wird der Aufruf temporär blockiert -- der Service hat Zeit, sich zu erholen, und der Aufrufer wartet nicht endlos.
+  \item \fachbegriff{Retry mit Exponential Backoff.} Wiederholte Versuche mit immer längeren Pausen, statt Hammer-Retries.
+  \item \fachbegriff{Timeout.} Jeder Aufruf hat eine Obergrenze -- ohne Timeout kann ein einzelner Hänger die ganze Kette blockieren.
+  \item \fachbegriff{Bulkhead.} Trennung von Ressourcen-Pools, damit ein überlasteter Service nicht andere mitreißt.
+  \item \fachbegriff{Idempotenz} (auf Aufrufer-Seite). Erlaubt sicheres Wiederholen, wenn Unsicherheit über vorigen Aufruf besteht.
+\end{itemize}
+
+\subsection{Security -- Zero-Trust-Grundgedanke}
+
+\fachbegriff{Zero Trust} bedeutet: kein internes Netzwerk wird ``vertraut''. Jede Anfrage muss sich authentifizieren und autorisieren, auch innerhalb der Organisation. Konsequenzen für Architektur: mTLS zwischen Services, Token-basierte Auth, Secrets aus Vault statt Konfig-Datei.
+
+\subsection{Deployment-Strategien (konzeptionell)}
+
+\begin{itemize}
+  \item \fachbegriff{Blue/Green.} Zwei Umgebungen, Wechsel per Switch. Schneller Rollback, doppelter Ressourcenbedarf.
+  \item \fachbegriff{Canary.} Neue Version auf wenige Nutzer/Prozente, schrittweise erhöhen. Frühe Erkennung von Problemen.
+  \item \fachbegriff{Rolling.} Schrittweise Ablösung der alten Instanzen. Geringerer Ressourcenbedarf, etwas längere Migration.
+  \item \fachbegriff{Feature Toggle.} Funktion deployed, aber per Schalter aus/ein -- erlaubt Test in Prod ohne Risiko.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{L-M-T}]
+Die drei Säulen der Observability:\\[2pt]
+\textbf{L}ogs -- was ist passiert, in welcher Reihenfolge?\\
+\textbf{M}etrics -- wie viel, wie schnell, wie oft?\\
+\textbf{T}races -- wie hängt es service-übergreifend zusammen?\\[2pt]
+\emph{Cloud-native ohne L-M-T ist Blindflug. Wer im Fehlerfall raten muss, hat die Plattform nicht im Griff.}
+\end{eselsbox}
+
+% --- 5. FALLSTUDIE -------------------------------------------------------
+\section{Fallstudie: EuroLogix -- E2E Shipment Exception Handling}
+
+\emph{EuroLogix} ist ein Logistikdienstleister. Der E2E-Prozess ``Shipment Exception Handling'' ist langsam, hat viele Medienbrüche, erzeugt Kundenbeschwerden. Systeme: TMS (Transport-Management), CRM, E-Mail, Data Warehouse. Volumen schwankt stark (Peaks zu Saisons).
+
+\subsection{Ausgangslage und Restriktionen}
+
+\begin{itemize}
+  \item Zeit: 9 Wochen für Release 1.
+  \item Budget: 150\,000\,\text{\euro}.
+  \item Legacy-TMS mit eingeschränkten APIs.
+  \item Security-Anforderungen erhöht (regulatorischer Druck).
+  \item Peak-Lastdaten lückenhaft.
+\end{itemize}
+
+\subsection{Schritt 1 -- BPMS-gestützter Prozess}
+
+\begin{quote}
+\textbf{Start} (Event ``ExceptionRaised'' aus TMS, asynchron) \\
+\textrightarrow{} \emph{User Task ``Klassifizieren''} (Lane Exception Desk; SLA 30\,min). \\
+\textrightarrow{} \textbf{XOR ``Kritisch?''} \\
+\qquad \emph{Ja}: \textrightarrow{} \emph{Service Task ``Sofortige Eskalation''} + \emph{Service Task ``Kundeninfo''} (proaktiv). \\
+\qquad \emph{Nein}: \textrightarrow{} \emph{User Task ``Ursache klären''} (CRM/TMS-Lookup, SLA 4\,h). \\
+\textrightarrow{} \emph{User/Service Task ``Maßnahme''} (Umroute, Neuversand, Gutschrift). \\
+\textrightarrow{} \emph{Service Task ``Kundenkommunikation''} (Mail/Push) + Audit-Logging. \\
+\textrightarrow{} \textbf{Ende ``Geschlossen''} + Reporting.
+\end{quote}
+
+\subsubsection{SLAs und Eskalation}
+
+\begin{itemize}
+  \item Erstreaktion: 2\,h ab Event.
+  \item Lösung: 24\,h ab Klassifizierung als nicht-kritisch.
+  \item Eskalation: nach 4\,h ohne Bewegung an Duty Manager (Timer Boundary).
+  \item Notfall-Eskalation: bei ``kritisch'' sofort an Duty Manager, parallel.
+\end{itemize}
+
+\subsection{Schritt 2 -- Drei Integrationspunkte}
+
+\subsubsection{Event ExceptionRaised (async)}
+
+\begin{itemize}
+  \item Quelle: TMS via Message Broker.
+  \item Felder: caseId, shipmentId, timestamp, severity, sourceSystem.
+  \item Idempotenz: caseId als Schlüssel.
+\end{itemize}
+
+\subsubsection{API GetShipmentStatus (sync)}
+
+\begin{itemize}
+  \item Endpoint: \texttt{GET /v2/shipments/\{id\}}.
+  \item Auth: OAuth-2.0, Scope ``shipment:read''.
+  \item Fehler-Fallback bei 503: Cache letzter bekannter Status nutzen, Hinweis im UI ``Daten möglicherweise veraltet''.
+  \item Fehler-Fallback bei Timeout: nach 2\,s, Retry 2$\times$, dann manuelle Prüfung.
+\end{itemize}
+
+\subsubsection{API/Event NotifyCustomer}
+
+\begin{itemize}
+  \item Bei kleineren Mitteilungen: Event in Mail-Bus.
+  \item Bei rechtlich relevanten Mitteilungen: synchroner API-Call ans CRM mit Bestätigung.
+  \item Audit-Logging in beiden Fällen Pflicht (mit korrelierter caseId).
+\end{itemize}
+
+\subsection{Schritt 3 -- Cloud-native Anforderungen}
+
+\begin{itemize}
+  \item \fachbegriff{Auto-Scaling} bei Peak-Saisons (Black Friday, Weihnachten); horizontale Skalierung der Engine-Worker.
+  \item \fachbegriff{Observability}: zentrale Logs (mit caseId-Korrelation), Metrics (Cases/h, SLA-Hit-Rate, p95-Latenz), Traces über Service-Grenzen.
+  \item \fachbegriff{Resilienz}: Circuit Breaker an TMS-API, Retry-Policy mit Exponential Backoff, Idempotenz via caseId.
+  \item \fachbegriff{Security}: Secrets in zentralem Vault, mTLS zwischen Services, Audit-Trail unveränderlich.
+  \item \fachbegriff{Deployment}: Blue/Green für die BPMS-Engine, Canary für Service Tasks mit hohem Änderungsrisiko.
+\end{itemize}
+
+\subsection{Schritt 4 -- E2E-Methodenintegration}
+
+Das Methodenkonzept verbindet die Bausteine:
+
+\begin{itemize}
+  \item BPMN als Soll-Modell, gepflegt im Repository.
+  \item VSM für Engpässe (Klassifizieren oft Engpass, weil Klassifikations-Skills knapp).
+  \item KPIs als Steuerung (SLA-Hit-Rate, Eskalationsquote, NPS).
+  \item Process Mining für Varianten (welche Sonderfälle treten häufig auf?).
+  \item Monatliches \fachbegriff{Process Review Board} mit Process Owner, IT-Lead, Operations.
+\end{itemize}
+
+\subsection{Schritt 5 -- MVP-Entscheidung}
+
+\textbf{Drin in Release 1:}
+\begin{itemize}
+  \item BPMS-Case-Handling für Standardfälle (80\,\% Coverage).
+  \item Event ExceptionRaised vom TMS.
+  \item Status-API GetShipmentStatus (mit Cache-Fallback).
+  \item SLA-Eskalation und Audit Trail.
+  \item Dashboard mit Top-5 KPIs.
+\end{itemize}
+
+\textbf{Bewusst nicht in Release 1:}
+\begin{itemize}
+  \item Full Data Warehouse Rebuild (zu großer Umfang).
+  \item ML-basierte Klassifikation (zu wenig Trainingsdaten).
+  \item Mobile-App für Exception Desk (kann Release 2 werden).
+\end{itemize}
+
+\subsection{Frühwarnsignale}
+
+\begin{itemize}
+  \item SLA-Hit-Rate sinkt unter 90\,\% in einer Woche $\rightarrow$ Eskalation an Process Owner.
+  \item Eskalationsquote steigt über 20\,\% $\rightarrow$ Slice oder Ressourcen prüfen.
+  \item TMS-API-Verfügbarkeit unter 99\,\% pro Tag $\rightarrow$ Architektur-Review.
+\end{itemize}
+
+% --- 6. SOA UND DIE EVOLUTION VON INTEGRATION ----------------------------
+\section{SOA, ESB, API-Ökonomie -- ein kurzer historischer Bogen}
+
+Wer heute APIs entwirft, profitiert von einem historischen Kontext, der die letzten 25 Jahre prägt. \quelle{Erl, 2005; Richardson, 2018}
+
+\subsection{Service-orientierte Architektur (SOA)}
+
+In den 2000ern setzte sich das Konzept der \fachbegriff{SOA} durch: fachlich geschnittene Services mit klaren Verträgen, oft koordiniert über einen \fachbegriff{Enterprise Service Bus (ESB)}. Ziel: Wiederverwendung, Standardisierung, Entkopplung. In der Praxis kollabierte SOA oft an zentralen ESBs, die zu Single Points of Failure wurden.
+
+\subsection{Microservices}
+
+Die Microservices-Bewegung der 2010er antwortete mit kleineren, eigenständigen Services und der Vermeidung zentraler Koordinations\-knoten. Stattdessen: \emph{Smart Endpoints, dumb pipes.} Jede Integration explizit, keine versteckten Transformationen im Bus.
+
+\subsection{Cloud-native API-Ökonomie}
+
+Heute leben wir in einer Welt, in der APIs als Produkt verstanden werden -- mit Produktmanagement, Versionierung, Marketing-ähnlichen Adoption-Strategien. API-Gateways übernehmen Cross-Cutting Concerns (Auth, Rate Limiting, Logging), während die fachlichen Services darunter laufen.
+
+\begin{merkbox}[``Smart Endpoints, dumb pipes'' -- ein Senior-Prinzip]
+Wer Integrationen baut, sollte Logik in die Services legen, nicht in die Mittelschicht. Bus oder Gateway lösen Cross-Cutting-Themen (Auth, Rate Limit, Logging); fachliche Logik gehört dort hin, wo die Daten sind. Sonst entsteht ein neuer ESB-Monolith mit anderem Namen.
+\end{merkbox}
+
+% --- 7. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: Plattform als Steuerungssystem}
+
+Auf der Wissens-Ebene sind BPMS, APIs und Cloud-native technische Themen. Auf Anwendungs-Ebene sind sie Handwerk. Auf Management-Ebene sind sie \emph{Plattform-Entscheidungen} -- mit fünf- bis sechsstelligen Konsequenzen über Jahre. \quelle{Humble \& Molesky, 2011; vom Brocke \& Mendling, 2021}
+
+\subsection{Zwei zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Architekturpfad: event-driven vs.\ überwiegend sync.} Event-driven bringt Skalierbarkeit und Entkopplung -- und Debugging-Komplexität. Überwiegend sync ist verständlicher -- und koppelt Verfügbarkeit. Empfehlung: \emph{sync für Benutzer-Interaktion, async für Hintergrund-Workflows und Domänen-Events}; explizite Architekturentscheidung pro Use Case, nicht ``one size fits all''.
+  \item \textbf{Standardisierung vs.\ Team-Autonomie.} Zentrale API-Standards (REST-Konventionen, Versionierung, Auth) erleichtern Wiederverwendung -- und nehmen Teams Geschwindigkeit. Pure Team-Autonomie erzeugt API-Wildwuchs. Praktikabel: \emph{verbindliche Standards für Cross-Cutting-Themen, lokale Freiheit bei fachlicher Modellierung.}
+\end{enumerate}
+
+\subsection{Operating Model -- wer verantwortet was}
+
+\begin{itemize}
+  \item \fachbegriff{Platform Engineering Team.} Betreibt BPMS-Plattform, API-Gateway, Observability-Stack -- als interner Service-Provider.
+  \item \fachbegriff{Domain Teams.} Entwerfen und betreiben fachliche Services und Workflows; nutzen die Plattform.
+  \item \fachbegriff{API-Owner pro Domäne.} Verantwortet API-Verträge, Versionierung, SLAs.
+  \item \fachbegriff{Process Owner.} Fachlich verantwortlich für E2E-Prozess; entscheidet über Workflow-Logik.
+  \item \fachbegriff{Security/Compliance.} Definiert Standards, prüft Audit Trail.
+\end{itemize}
+
+\subsection{System of Record -- Datenverantwortung}
+
+Pro Datenobjekt muss ein \fachbegriff{System of Record (SoR)} festgelegt sein -- das System, das die ``Wahrheit'' hält. Beispielsweise:
+
+\begin{itemize}
+  \item Kunde: CRM.
+  \item Auftrag: ERP.
+  \item Sendung: TMS.
+  \item Reklamation: BPMS-Case.
+\end{itemize}
+
+Andere Systeme dürfen Kopien halten, müssen aber bei Diskrepanz das SoR konsultieren. Diese Vereinbarung schriftlich, mit Data Owner pro SoR.
+
+\subsection{Entscheidungen unter Unsicherheit}
+
+\begin{itemize}
+  \item \textbf{MVP-Scope.} Welche zwei Integrationen zuerst -- mit ``Stop Doing''-Liste der bewusst zurückgestellten. Frühwarnsignal: Wenn nach Release 1 nicht mindestens eine KPI um 20\,\% bewegt wurde, war die Auswahl falsch.
+  \item \textbf{Plattform-Wahl.} BPMS Camunda vs.\ Flowable vs.\ Pega -- Entscheidung gilt 3 bis 5 Jahre. Frühwarnsignal: zwei kritische Use Cases scheitern an Plattform-Limits $\rightarrow$ Re-Evaluation.
+  \item \textbf{Team-Topologie.} Platform Team zentral vs.\ in jedem Domain Team eingebettet. Frühwarnsignal: zentrale Wartezeit auf Plattform-Anfragen $>$2 Wochen $\rightarrow$ Self-Service-Modell ausbauen.
+\end{itemize}
+
+\subsection{Risikoarchitektur}
+
+\begin{enumerate}
+  \item \textbf{Daten-Risiko.} Falsche oder fehlende Daten in Workflows. Mitigation: Pflichtfelder, Schema-Validierung, Data Quality SLAs.
+  \item \textbf{Integrations-Risiko.} APIs ändern sich, ohne dass es jemand merkt. Mitigation: Versionierung mit Deprecation-Fenster, Contract Tests, API-Change-Notifications.
+  \item \textbf{Verfügbarkeits-Risiko.} Ein kritischer Service down, kompletter Prozess steht. Mitigation: Circuit Breaker, Fallbacks, Degraded-Mode definieren.
+  \item \textbf{Security-Risiko.} Token-Diebstahl, Secrets-Leak. Mitigation: Vault, mTLS, regelmäßige Rotation, Audit auf Anomalien.
+  \item \textbf{Compliance-Risiko.} Audit Trail unvollständig oder manipuliert. Mitigation: unveränderlicher Log-Speicher, separate Lese- und Schreibrechte.
+\end{enumerate}
+
+\subsection{``Minimum Viable Integration''}
+
+Die häufigste Fehleinschätzung in Plattform-Programmen ist Überdimensionierung am Start. Senior-Praxis verfolgt das Gegenteil: \emph{lieber zwei Integrationen stabil als zehn halbgar.}
+
+\begin{itemize}
+  \item Wähle zwei Integrationen mit höchstem Wert und niedrigstem Risiko.
+  \item Baue sie vollständig: Vertrag, Tests, Monitoring, Audit.
+  \item Lerne -- und nutze die Erkenntnisse für das nächste Set.
+  \item Niemals ``alle gleichzeitig'' -- die Komplexität wächst exponentiell.
+\end{itemize}
+
+\begin{merkbox}[Plattform ist Steuerungssystem, nicht Infrastruktur]
+Eine Plattform ohne Operating Model ist eine Sammlung von Werkzeugen. Erst durch Owner, Verträge, SLOs, Audit und KPIs wird sie zum Steuerungssystem. Wer in Plattform-Themen rein technisch denkt, baut die richtige Maschine -- ohne dass jemand sie verantwortet.
+\end{merkbox}
+
+% --- 8. TAKE-AWAYS -------------------------------------------------------
+\section{Take-aways aus Tag 6}
+
+\begin{enumerate}
+  \item \textbf{BPMS = Modellieren + Ausführen + Überwachen + Optimieren.} Closed Loop -- alle vier Schritte gehören zusammen.
+  \item \textbf{API = Vertrag.} Endpoint, Input, Output, Fehler, Auth, Versionierung, Idempotenz -- vollständig oder gar nicht.
+  \item \textbf{Sync für Interaktion, Async für Hintergrund.} Entscheidung pro Use Case, nicht pauschal.
+  \item \textbf{Cloud-native = Skalierung + Beobachtbarkeit + Resilienz.} L-M-T (Logs, Metrics, Traces) ist Pflicht.
+  \item \textbf{System of Record pro Datenobjekt.} Eine Wahrheit, klar benannte Data Owner.
+  \item \textbf{``Minimum Viable Integration''.} Lieber zwei stabil als zehn halbgar.
+  \item \textbf{Smart Endpoints, dumb pipes.} Fachliche Logik in Services, nicht in der Mittelschicht.
+  \item \textbf{Plattform braucht Operating Model.} Owner, SLOs, Audit, KPIs -- sonst bleibt es Infrastruktur ohne Steuerung.
+\end{enumerate}
+
+% --- 9. LITERATUR --------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Burns, B., Villalba, E., Strebel, D., \& Evenson, L. (2022).] \emph{Kubernetes: Up and running -- Dive into the future of infrastructure} (3rd ed.). O'Reilly.
+  \item[Dumas, M., La Rosa, M., Mendling, J., \& Reijers, H.\,A. (2018).] \emph{Fundamentals of business process management} (2nd ed.). Springer. \href{https://doi.org/10.1007/978-3-662-56509-4}{https://doi.org/10.1007/978-3-662-56509-4}
+  \item[Erl, T. (2005).] \emph{Service-oriented architecture: Concepts, technology, and design}. Prentice Hall.
+  \item[Fielding, R.\,T. (2000).] \emph{Architectural styles and the design of network-based software architectures} [Doctoral dissertation, University of California, Irvine]. \href{https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm}{https://www.ics.uci.edu/\~{}fielding/pubs/dissertation/top.htm}
+  \item[Freund, J., \& Rücker, B. (2019).] \emph{Real-life BPMN: Includes an introduction to DMN} (4th ed.). CreateSpace.
+  \item[Humble, J., \& Molesky, J. (2011).] Why enterprises must adopt devops to enable continuous delivery. \emph{Cutter IT Journal, 24}(8), 6--12.
+  \item[Newman, S. (2021).] \emph{Building microservices: Designing fine-grained systems} (2nd ed.). O'Reilly.
+  \item[Reinkemeyer, L. (Hrsg.). (2020).] \emph{Process mining in action: Principles, use cases and outlook}. Springer. \href{https://doi.org/10.1007/978-3-030-40172-6}{https://doi.org/10.1007/978-3-030-40172-6}
+  \item[Richardson, C. (2018).] \emph{Microservices patterns: With examples in Java}. Manning.
+  \item[vom Brocke, J., \& Mendling, J. (Hrsg.). (2021).] \emph{Business process management cases: Digital innovation and business transformation in practice} (Vol.~2). Springer. \href{https://doi.org/10.1007/978-3-662-63047-1}{https://doi.org/10.1007/978-3-662-63047-1}
+\end{description}
+
+% --- 10. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[API] \emph{Application Programming Interface.} Vertrag zwischen zwei Systemen mit Endpoint, Input, Output, Fehlern und Auth.
+  \item[API-Gateway] Vorgeschalteter Dienst für Cross-Cutting-Themen (Auth, Rate Limit, Logging) bei API-Aufrufen.
+  \item[Audit Trail] Unveränderliches Log aller Schritte, Entscheidungen und Datenänderungen eines Workflow-Laufs.
+  \item[BPMS] \emph{Business Process Management System.} Plattform für Modellieren, Ausführen, Überwachen, Optimieren von Prozessen.
+  \item[Blue/Green Deployment] Strategie mit zwei Umgebungen, Wechsel per Switch.
+  \item[Canary Deployment] Strategie, bei der eine neue Version zuerst auf wenige Nutzer oder Anteile aktiviert wird.
+  \item[Cloud-native] Architekturansatz mit stateless Services, Containern, horizontaler Skalierung, Observability und Resilienz.
+  \item[Circuit Breaker] Resilienz-Pattern: nach mehreren Fehlern wird ein Aufruf temporär blockiert.
+  \item[CMMN] \emph{Case Management Model and Notation.} OMG-Standard für wissensintensive Fälle, ergänzend zu BPMN.
+  \item[Container] Verpackung einer Anwendung samt Abhängigkeiten (z.\,B.\ Docker), Voraussetzung für Cloud-native Deployments.
+  \item[DMN] \emph{Decision Model and Notation.} OMG-Standard für Entscheidungsregeln, in BPMS oft als Business Rule Task aufgerufen.
+  \item[ESB] \emph{Enterprise Service Bus.} Zentrale Integrations\-schicht; oft kritisch wegen Single-Point-of-Failure-Risiko.
+  \item[Event] Asynchrone Mitteilung, dass etwas geschehen ist (``OrderPlaced''); wird in Message Broker oder Bus gelegt.
+  \item[Idempotenz] Eigenschaft eines API-Aufrufs: wiederholter Aufruf mit gleicher ID liefert dasselbe Ergebnis.
+  \item[Kubernetes] Verbreiteter Container-Orchestrator für Cloud-native Anwendungen.
+  \item[Microservices] Architekturstil mit kleinen, eigenständigen Services und expliziten Integrationen.
+  \item[Observability] Fähigkeit, das Verhalten eines Systems von außen zu verstehen; drei Säulen: Logs, Metrics, Traces.
+  \item[Process Engine] Kernkomponente eines BPMS, die BPMN-Modelle ausführt und Zustände verwaltet.
+  \item[REST] Architekturstil für APIs auf Basis von HTTP-Ressourcen, ursprünglich beschrieben von Fielding (2000).
+  \item[Rate Limit] Obergrenze für Aufrufe pro Zeitfenster; Schutz gegen Überlast und Missbrauch.
+  \item[Resilienz-Pattern] Sammelbegriff für Muster wie Circuit Breaker, Retry, Timeout, Bulkhead, Idempotenz.
+  \item[SLA] \emph{Service Level Agreement.} Vertraglich zugesicherte Servicequalität.
+  \item[SLO] \emph{Service Level Objective.} Internes Ziel hinter dem SLA, oft mit Puffer.
+  \item[SoR] \emph{System of Record.} Das System, das pro Datenobjekt die ``Wahrheit'' hält.
+  \item[Zero Trust] Sicherheitsansatz, der internen Netzwerken nicht ``vertraut'' und jede Anfrage authentifiziert/autorisiert.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 6 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

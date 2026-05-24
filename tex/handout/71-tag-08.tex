@@ -1,0 +1,798 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 8 - Lehrskript
+% Enhancement, Predictive Analytics, Real-time Monitoring, DWH/ETL, BI-Dashboards
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 8}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Predictive \textperiodcentered{} DWH \textperiodcentered{} Dashboards}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 3 \textperiodcentered{} TAG 8 VON 2 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 9.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Predictive\\\&\\Dashboards\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom Ist verstehen zum Zukunft steuern --\\Enhancement, Vorhersagen und Real-time Monitoring auf DWH/BI-Basis.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 8 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Gestern haben wir mit Discovery und Conformance den Ist-Prozess gegen das Soll-Modell gespiegelt. Heute machen wir den nächsten Schritt: vom \emph{Verstehen} zum \emph{Vorhersagen} und \emph{Steuern in Echtzeit}. Drei Bausteine machen das möglich -- Process Enhancement (Modelle mit Daten anreichern), Predictive Process Analytics (Risiken vor Eintritt erkennen) und ein solides Daten-Fundament aus DWH, ETL und BI-Dashboards.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Process Enhancement als Anreicherungs-Disziplin einordnen (Zeiten, Ressourcen, Kosten, Varianten).
+  \item ML-Typen im Prozesskontext unterscheiden: Klassifikation, Regression, Clustering, Anomalieerkennung.
+  \item DWH/ETL-Grundlagen kennen: Fakten und Dimensionen, Staging, Mapping, Quality Checks.
+  \item Dashboard-Prinzipien benennen: Executive-KPIs, Drilldown, Alerts, ``next best action''.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Einen Predictive-Use-Case-Canvas (Zielentscheidung, Prognose, Handlung, Datenminimum, Risiko, Erfolg) ausfüllen.
+  \item Eine Baseline-Heuristik formulieren, die ohne ML sofort wirken kann.
+  \item Eine ETL-Pipeline in sechs Schritten skizzieren und fünf Data-Quality-Checks definieren.
+  \item Ein Dashboard mit Executive-, Prozess- und Risiko-KPI sowie einer Alert-Kachel entwerfen.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Predictive Analytics als \emph{Produkt} verantworten: Product Owner, Release-Zyklus, Modell-Monitoring.
+  \item Alerts und Playbooks koppeln: jeder Alarm hat Owner, Handlung, Eskalation und Dokumentation.
+  \item Anti-Gaming-Mechanismen bei Executive-KPIs etablieren.
+  \item Entscheidungen unter Unsicherheit treffen: welche Use Cases zuerst, welche Datenlücken bewusst akzeptiert.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Eine Vorhersage ohne Handlung ist Reporting. Ein Alert ohne Owner ist Lärm. Ein Modell ohne Monitoring altert unbemerkt. Senior-Praxis verbindet alle drei: \emph{Prognose $\rightarrow$ Owner $\rightarrow$ Playbook $\rightarrow$ Feedback in das Modell.}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Vom Rückblick zur Zukunftssteuerung}
+
+Die meisten BPM-Programme haben in den letzten zehn Jahren gelernt, Vergangenheit zu \emph{messen}: KPIs aus Vormonats-Daten, Reports aus Quartals-Abschlüssen, Audit-Findings aus Stichproben. Was darin fehlt, ist die Fähigkeit zur \emph{Zukunftssteuerung}: \emph{Welche Cases werden in den nächsten Stunden eskalieren? Welcher Engpass bildet sich gerade? Welche Anomalie sollte heute mein Eingreifen auslösen?} \quelle{Davenport, 2018; Maggi et al., 2014}
+
+\subsection{Drei Reifegrade der Prozesssteuerung}
+
+\begin{enumerate}
+  \item \fachbegriff{Reporting-Reifegrad.} Vergangenheit beschreiben (Monatsbericht, Quartals-KPI). Hilft bei Diagnose, nicht bei Steuerung.
+  \item \fachbegriff{Real-time-Reifegrad.} Gegenwart beobachten (Live-Dashboard, KPI in Near-Real-Time). Schnellere Diagnose, aber noch reaktiv.
+  \item \fachbegriff{Predictive-Reifegrad.} Zukunft vorhersagen (Welche Cases werden in den nächsten 4\,h SLA reißen?). Erlaubt \emph{präventives} Eingreifen.
+\end{enumerate}
+
+\subsection{Die drei Bausteine des heutigen Tages}
+
+\begin{itemize}
+  \item \fachbegriff{Process Enhancement.} Modelle werden mit Daten angereichert -- Zeiten, Ressourcen, Kosten, Varianten -- und werden so vom Bild zum steuerbaren Modell.
+  \item \fachbegriff{Predictive Process Analytics + Real-time Monitoring.} ML-Modelle erzeugen Vorhersagen (SLA-Breach, Rework, Abbruch), die mit Alerts und Playbooks verknüpft werden.
+  \item \fachbegriff{DWH/ETL und BI-Dashboards.} Das Datenfundament, ohne das Predictive und Monitoring beliebig werden.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{E-P-D}]
+Drei Bausteine, in Reihenfolge des Wertbeitrags:\\[2pt]
+\textbf{E}nhancement -- Modelle mit Daten anreichern.\\
+\textbf{P}redictive -- Zukunft anhand der Daten antizipieren.\\
+\textbf{D}ashboards -- Steuerung und Handlung sichtbar machen.\\[2pt]
+\emph{Wer ohne E startet, baut ML auf Sand. Wer ohne D arbeitet, hat Modelle, die niemand sieht.}
+\end{eselsbox}
+
+% --- 2. PROCESS ENHANCEMENT ---------------------------------------------
+\section{Process Enhancement -- vom Bild zum steuerbaren Modell}
+
+\fachbegriff{Process Enhancement} ist die dritte Disziplin neben Discovery und Conformance. Während Discovery aus Logs ein Modell erzeugt und Conformance Ist und Soll vergleicht, \emph{erweitert} Enhancement vorhandene Modelle um Daten: Zeiten, Kosten, Ressourcen, Varianten, Kontext. Das Modell wird dadurch nicht mehr nur \emph{strukturell}, sondern \emph{operationell} verwertbar. \quelle{van der Aalst, 2016}
+
+\subsection{Drei Hauptdimensionen der Anreicherung}
+
+\begin{itemize}
+  \item \fachbegriff{Zeit.} Bearbeitungszeit (BT), Wartezeit (WT), Durchlaufzeit (DLZ), p50/p95-Quartile pro Schritt.
+  \item \fachbegriff{Kosten und Ressourcen.} Welche Ressource hat den Schritt gemacht, was kostet er, wer ist Engpass?
+  \item \fachbegriff{Varianten und Kontext.} Welche Pfad-Varianten gibt es, korreliert mit welchem Kontext (Standort, Produkt, Kunden\-segment, Tageszeit)?
+\end{itemize}
+
+\subsection{Beispiel -- ein Modell wird operationell}
+
+Ein einfaches BPMN-Modell ``Reklamation bearbeiten'' wird durch Enhancement zu:
+
+\begin{itemize}
+  \item Activity ``Klassifizieren'': BT-Median 12\,min, WT-Median 35\,min, p95 BT 45\,min, p95 WT 4\,h.
+  \item Engpass: Klassifizieren tagsüber Personalengpass, abends $<$5 Cases/h.
+  \item Variante: ``Klassifizieren $\rightarrow$ Rückfrage $\rightarrow$ Klassifizieren'' tritt in 18\,\% der Cases auf, korreliert mit Produktkategorie X.
+  \item Kosten: durchschnittlich 8\,\text{\euro}\ pro Case, davon 65\,\% Personalkosten Klassifizieren.
+\end{itemize}
+
+Aus einem ``Bild'' wird so eine Steuerungsbasis: \emph{wo lohnt sich Personal-Aufstockung? Wo Re-Design? Wo Automatisierung?}
+
+\subsection{Voraussetzungen für Enhancement}
+
+\begin{itemize}
+  \item Event Log mit Pflicht-Spalten (C-A-T, siehe Tag 7).
+  \item Idealerweise zusätzlich Ressource, Kosten, Kontext-Attribute.
+  \item Saubere Datenqualität (Mapping, Case-ID-Strategie, Dedup).
+  \item Soll-Modell als Vergleichsbasis.
+\end{itemize}
+
+\begin{merkbox}[Enhancement schließt den BPM-Lifecycle]
+Discovery + Conformance + Enhancement bilden zusammen die analytische Schicht eines BPM-Programms. Ohne Enhancement bleiben Discovery-Modelle hübsche Bilder; ohne Conformance bleiben Enhancement-Daten reine Statistik; ohne Discovery fehlt der Anschluss an die Realität.
+\end{merkbox}
+
+% --- 3. ML IM PROZESSKONTEXT --------------------------------------------
+\section{Machine Learning in der Prozessoptimierung}
+
+Predictive Process Monitoring -- also ML-basierte Vorhersagen auf Prozessdaten -- ist die jüngste Schicht des Process-Mining-Spektrums. Die meisten Use Cases lassen sich in vier ML-Typen einordnen. \quelle{Maggi et al., 2014; Shmueli, 2010}
+
+\subsection{Vier ML-Typen für Prozesse}
+
+\begin{enumerate}
+  \item \fachbegriff{Klassifikation.} Vorhersage einer binären oder kategorialen Zielgröße: \emph{Wird Case eskalieren?} (ja/nein), \emph{Welcher Pfad wird gewählt?} (A/B/C).
+  \item \fachbegriff{Regression.} Vorhersage einer kontinuierlichen Größe: \emph{Wie lange wird Case noch dauern? Wie hoch werden Kosten?}.
+  \item \fachbegriff{Clustering.} Gruppierung ähnlicher Cases ohne vorgegebene Labels: \emph{Welche Falltypen gibt es überhaupt?}.
+  \item \fachbegriff{Anomalieerkennung.} Identifikation ungewöhnlicher Pfade, Fehler oder potenzieller Manipulation: \emph{Was unterscheidet diesen Case stark vom Rest?}.
+\end{enumerate}
+
+\subsection{Typische Predictive Use Cases}
+
+\begin{itemize}
+  \item \fachbegriff{SLA-Risiko.} ``Wahrscheinlichkeit, dass dieser Case die SLA verletzt, in den nächsten 4\,h.''
+  \item \fachbegriff{Rework-Risiko.} ``Wahrscheinlichkeit, dass dieser Case in eine Korrekturschleife geht.''
+  \item \fachbegriff{Abbruch-/Storno-Risiko.} ``Wahrscheinlichkeit, dass dieser Case nicht erfolgreich abgeschlossen wird.''
+  \item \fachbegriff{Engpassbildung.} ``Welche Queue wird in den nächsten 2\,h überlastet sein?''
+\end{itemize}
+
+\subsection{Grenzen und Risiken}
+
+\begin{itemize}
+  \item \fachbegriff{Datenqualität.} Schlechte Daten erzeugen schöne, aber falsche Modelle.
+  \item \fachbegriff{Konzeptdrift.} Modelle, die auf alten Daten trainiert wurden, verlieren Genauigkeit, wenn sich die Realität ändert.
+  \item \fachbegriff{Erklärbarkeit.} ``Black-Box''-Modelle (Deep Learning, manche Ensembles) sind schwer zu erklären -- problematisch im regulierten Umfeld.
+  \item \fachbegriff{Gaming/Fehlanreize.} Wenn Mitarbeitende wissen, wie das Modell entscheidet, können sie es manipulieren (Datenfeld so füllen, dass Alert nicht auslöst).
+  \item \fachbegriff{Bias/Fairness.} Wenn das Modell historische Diskriminierung lernt, verlagert es sie in die Vorhersagen.
+\end{itemize}
+
+\subsection{Baseline vor ML}
+
+Eine pragmatische Heuristik: \emph{Bevor man ML einsetzt, prüft man, ob eine einfache Baseline-Regel 60--80\,\% des Nutzens bringt.} Beispiele:
+
+\begin{itemize}
+  \item ``Wenn Ticket-Alter $> 70\,\%$ der SLA-Zeit, dann Alert.''
+  \item ``Wenn Anzahl Reassignments $> 2$, dann Eskalation.''
+  \item ``Wenn Service-Kategorie X UND Schicht Y, dann Vorabkennzeichen ``kritisch''.''
+\end{itemize}
+
+Baseline-Regeln haben drei Vorteile: \emph{auditierbar, erklärbar, sofort wirksam.} Sie sind keine ``ML-Schande'', sondern oft die produktivste erste Stufe.
+
+\begin{merkbox}[Baseline schlägt schlechtes ML]
+Eine erklärbare Baseline-Regel mit 70\,\%-Genauigkeit ist oft wertvoller als ein ML-Modell mit 80\,\%-Genauigkeit, das niemand versteht. Wer mit Baseline startet und gezielt nach Lücken sucht, baut ML auf Substanz. Wer mit ML startet, baut oft auf einen Datenstand, der dafür nicht reif ist.
+\end{merkbox}
+
+\subsection{Predictive Use Case Canvas}
+
+Ein praktikabler Canvas zur Strukturierung eines Predictive Use Case:
+
+\begin{enumerate}
+  \item \textbf{Zielentscheidung.} Was soll konkret entschieden werden? (z.\,B.\ ``Soll dieser Case priorisiert werden?'')
+  \item \textbf{Prognose.} Was wird vorhergesagt? (z.\,B.\ ``SLA-Breach-Wahrscheinlichkeit in 4\,h'')
+  \item \textbf{Handlung.} Was passiert bei hohem Risiko? (z.\,B.\ ``Duty Manager Notification + Triage'')
+  \item \textbf{Datenminimum.} Welche 5--10 Felder werden zwingend benötigt?
+  \item \textbf{Risiko/Compliance.} Was darf nicht passieren? (Falsch-Negative, Diskriminierung, Datenschutz)
+  \item \textbf{Erfolgskriterium.} Wie messen wir den Nutzen? (z.\,B.\ ``SLA-Hit-Rate steigt um 10\,\%'')
+\end{enumerate}
+
+\subsubsection{Canvas für ``SLA-Risiko früh erkennen''}
+
+\begin{itemize}
+  \item Ziel: Priorisierung bei knappen Ressourcen.
+  \item Prognose: P(SLA-Breach in den nächsten 4\,h).
+  \item Handlung: Risk $>0,8$ $\rightarrow$ Duty Manager Notification; Risk $0,5$--$0,8$ $\rightarrow$ Markierung im Dashboard.
+  \item Datenminimum: Priorität, Ticket-Alter, Anzahl Reassignments, Service-Kategorie, Schichtzeit.
+  \item Risiko: False Positives erzeugen Alarmmüdigkeit; Datenschutz bei Personenbezug.
+  \item Erfolg: SLA-Hit-Rate $\geq$95\,\% bei stabilem oder reduzierten Personaleinsatz.
+\end{itemize}
+
+\subsubsection{Canvas für ``Rework früh erkennen''}
+
+\begin{itemize}
+  \item Ziel: Frühe Korrektur statt späte Wiedereröffnung.
+  \item Prognose: P(Rework innerhalb von 7 Tagen).
+  \item Handlung: Risk $>0,7$ $\rightarrow$ Vier-Augen-Prüfung vor Abschluss; Risk $0,4$--$0,7$ $\rightarrow$ Checkliste an Bearbeitenden.
+  \item Datenminimum: Falltyp, Kategorie, Anzahl Korrekturschleifen, Bearbeitungsdauer, Kunden\-segment.
+  \item Risiko: Über-Eingreifen verlangsamt den Prozess.
+  \item Erfolg: Rework-Rate halbiert sich bei stabilem Bearbeitungs-Tempo.
+\end{itemize}
+
+% --- 4. REAL-TIME MONITORING --------------------------------------------
+\section{Real-time Monitoring und Alert Playbooks}
+
+Predictive ohne Real-time-Anbindung bleibt akademisch. Erst die Verknüpfung von Vorhersage, Anzeige, Alert und Handlungsanweisung macht aus Predictive Analytics ein Steuerungsinstrument. \quelle{Few, 2013; Davenport, 2018}
+
+\subsection{Vier Bausteine eines Real-time-Programms}
+
+\begin{itemize}
+  \item \fachbegriff{Event Stream.} Quelle der Daten in Near-Real-Time (Kafka, Cloud-Bus, Change Data Capture).
+  \item \fachbegriff{Inference Engine.} ML-Modell oder Baseline-Regel, die Vorhersagen erzeugt.
+  \item \fachbegriff{Alert-System.} Schwellenwert-basierte Auslöser, mit Eskalationsstufen.
+  \item \fachbegriff{Playbook.} Schriftliche Handlungsanweisung: wer macht was, in welcher Zeit, mit welcher Dokumentation.
+\end{itemize}
+
+\subsection{Alert Design}
+
+\subsubsection{Schwellen festlegen}
+
+\begin{itemize}
+  \item Drei Stufen: \emph{warn} (gelb), \emph{alert} (orange), \emph{critical} (rot).
+  \item Schwellen anhand historischer Daten kalibrieren, nicht raten.
+  \item Bei Unsicherheit: konservativ starten (eher zu wenig Alerts), mit definiertem Re-Tuning.
+\end{itemize}
+
+\subsubsection{Alert-Ermüdung verhindern}
+
+\begin{itemize}
+  \item Pro Empfänger \emph{maximal} Alerts pro Tag/Schicht festlegen.
+  \item Korrelation: zehn Alerts ``derselbe Service down'' nicht als zehn Alerts schicken.
+  \item Snooze-/Acknowledge-Mechanismus, damit Bearbeitete nicht erneut alarmieren.
+  \item Regelmäßig (z.\,B.\ monatlich) Alert-Wirksamkeit reviewen: welche Alerts führten zu Handlung?
+\end{itemize}
+
+\subsection{Playbook-Struktur}
+
+Ein gutes Playbook für einen kritischen Alert hat fünf Komponenten:
+
+\begin{enumerate}
+  \item \textbf{Owner.} Wer ist verantwortlich (Rolle, Kontaktweg)?
+  \item \textbf{Handlung.} Was ist die erste Handlung in den ersten Minuten?
+  \item \textbf{Eskalation.} Wann und an wen wird eskaliert, falls Handlung nicht greift?
+  \item \textbf{Dokumentation.} Wo wird die Bearbeitung dokumentiert (Ticket, Audit-Log)?
+  \item \textbf{Post-Review.} Wer schaut bei wiederkehrenden Mustern auf Ursachen-Analyse?
+\end{enumerate}
+
+\subsection{Beispiel-Playbook ``SLA-Breach-Risiko hoch''}
+
+\begin{itemize}
+  \item \textbf{Trigger:} Risk $>0,8$ für Case mit Priorität High.
+  \item \textbf{Owner:} Duty Manager Schicht aktiv.
+  \item \textbf{Handlung:} ``Fast Triage'' in 15\,min: Case lesen, mit Bearbeitenden abstimmen, ggf.\ Ressourcen umschichten.
+  \item \textbf{Eskalation:} Falls Risk weiterhin $>0,8$ nach 30\,min, an Head of Operations.
+  \item \textbf{Dokumentation:} Eintrag im Ticket-System, Risk-Snapshot, Maßnahme.
+  \item \textbf{Post-Review:} Bei wiederholtem Auftreten (3 Cases pro Woche): Service-Kategorie analysieren, Verbesserung priorisieren.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{O-H-E-D-P}]
+Fünf Pflichtfelder jedes Alert-Playbooks:\\[2pt]
+\textbf{O}wner -- wer trägt?\\
+\textbf{H}andlung -- was sofort?\\
+\textbf{E}skalation -- wann an wen?\\
+\textbf{D}okumentation -- wo wird festgehalten?\\
+\textbf{P}ost-Review -- wer lernt?\\[2pt]
+\emph{Wenn ein Buchstabe fehlt, ist es kein Playbook, sondern eine Hoffnung.}
+\end{eselsbox}
+
+% --- 5. DWH UND ETL -----------------------------------------------------
+\section{DWH und ETL als Daten-Fundament}
+
+Predictive Analytics, Conformance und Dashboards stehen alle auf demselben Fundament: einem \fachbegriff{Data Warehouse (DWH)}, in dem Prozessdaten aus verschiedenen Quellsystemen konsolidiert, gemappt und qualitätsgesichert werden. Der Prozess der Befüllung heißt \fachbegriff{ETL} (Extract -- Transform -- Load) oder in moderner Variante \fachbegriff{ELT} (Extract -- Load -- Transform), bei der die Transformation im DWH selbst geschieht. \quelle{Kimball \& Ross, 2013; Inmon, 2005; Russom, 2011}
+
+\subsection{Typische Quellsysteme}
+
+\begin{itemize}
+  \item \fachbegriff{ERP} (Aufträge, Rechnungen, Stammdaten).
+  \item \fachbegriff{CRM} (Kunden, Kommunikation, Interaktionen).
+  \item \fachbegriff{Ticket-/Workflow-Systeme} (Cases, Bearbeitungsschritte, Zuweisungen).
+  \item \fachbegriff{Logs aus Workflow-Engines} (BPMS-Audit-Trail).
+  \item \fachbegriff{Externe Daten} (Marktdaten, Wetter, Lieferanten-Updates).
+\end{itemize}
+
+\subsection{Sechs ETL-Schritte}
+
+\begin{enumerate}
+  \item \fachbegriff{Extract.} Aus Quellsystemen via API, DB-Replikation oder Datei-Export entnehmen.
+  \item \fachbegriff{Staging.} Rohdaten unverändert in einem Staging-Bereich ablegen, bevor sie transformiert werden -- Sicherheitsnetz für Re-Runs.
+  \item \fachbegriff{Mapping.} Aktivitäten harmonisieren (``Approve''/``Genehmigen''/``OK''), Lookup-Tabellen pflegen.
+  \item \fachbegriff{Join.} Datenströme zu Events mit Case ID verknüpfen.
+  \item \fachbegriff{Quality Checks.} Vor dem Laden ins DWH systematisch prüfen.
+  \item \fachbegriff{Load DWH.} Faktentabelle ``Events'' plus Dimensionen befüllen.
+\end{enumerate}
+
+\subsection{Datenmodell -- Fakten und Dimensionen}
+
+In der \fachbegriff{Dimensionalen Modellierung} (Kimball) gibt es zwei Tabellenklassen:
+
+\begin{itemize}
+  \item \fachbegriff{Faktentabelle Events} -- jede Zeile ein Event, mit Maßzahlen (Bearbeitungs\-zeit, Kosten) und Fremdschlüsseln zu den Dimensionen.
+  \item \fachbegriff{Dimensionen} -- beschreibende Attribute: Aktivität, Zeit, Kunde, Produkt, Standort, Ressource. Jede Dimension hat eine ID und beschreibende Felder.
+\end{itemize}
+
+Vorteil dieses Modells: einfaches Star-Schema, schnelle Aggregationen, gute Eignung für BI-Tools.
+
+\subsection{Fünf Data-Quality-Checks}
+
+\begin{enumerate}
+  \item \fachbegriff{Fehlende Case ID.} Events ohne Case ID lassen sich nicht zuordnen $\rightarrow$ in Quarantäne, manuelle Klärung.
+  \item \fachbegriff{Zeitstempel rückwärts.} Event vor seinem Vorgänger laut Logik $\rightarrow$ Hinweis, Datenquelle prüfen.
+  \item \fachbegriff{Unbekannte Aktivität.} Activity-Name nicht in Mapping-Tabelle $\rightarrow$ Mapping ergänzen oder Datenquelle prüfen.
+  \item \fachbegriff{Dubletten.} Identische Event-Signaturen $\rightarrow$ Dedup-Regel anwenden, Zähler im Quality-Report.
+  \item \fachbegriff{Plausibilität.} Bearbeitungs\-zeit $> N$ Standardabweichungen vom Mittel $\rightarrow$ Outlier-Markierung, optional Ausschluss.
+\end{enumerate}
+
+\begin{merkbox}[ETL ist 60\,\% des Wertes]
+In jedem Mining-/Predictive-Programm liegt der Großteil der Wert\-schöpfung in der ETL-Schicht: Mapping, Case-ID-Strategie, Quality Checks. Tools für Discovery, Conformance und ML kommen und gehen -- ein sauberes, gepflegtes DWH ist die Investition, die jahrelang trägt.
+\end{merkbox}
+
+% --- 6. BI DASHBOARDS ----------------------------------------------------
+\section{BI Dashboards -- vom Datenstand zur Steuerung}
+
+Ein Dashboard ist kein Selbstzweck. Es ist ein \emph{Steuerungswerkzeug} für definierte Adressaten und Entscheidungen. Drei Prinzipien helfen, gute Dashboards von dekorativen zu unterscheiden. \quelle{Few, 2013}
+
+\subsection{Drei Dashboard-Prinzipien}
+
+\begin{enumerate}
+  \item \fachbegriff{Executive KPIs (wenige, klar).} Auf der obersten Ebene maximal 6--8 Kacheln. Jede mit Ziel/Schwelle, klarer Beschriftung, Trend.
+  \item \fachbegriff{Drilldown (Ursachen).} Ein Klick auf eine Kachel öffnet die nächsten Detailebenen -- Segmentierung nach Standort, Produkt, Zeit, Schicht.
+  \item \fachbegriff{Alarme (Handlung).} Eine Kachel zeigt aktive Alerts mit Owner und nächstem Schritt -- damit das Dashboard nicht nur informiert, sondern Handlung ermöglicht.
+\end{enumerate}
+
+\subsection{Was ein gutes Dashboard zeigt}
+
+\begin{itemize}
+  \item \fachbegriff{Trend.} Wo bewegen wir uns hin (Linie, Sparkline)?
+  \item \fachbegriff{Ziel/Schwellen.} Soll-Wert, Warn- und Kritisch-Linien.
+  \item \fachbegriff{Segmentierung.} Mindestens eine Aufschlüsselung (Standort, Service, Kunden\-segment).
+  \item \fachbegriff{Next best action.} Was ist die empfohlene Reaktion?
+\end{itemize}
+
+\subsection{Beispiel-Dashboard ``SLA-Frühwarnsystem''}
+
+Sechs Kacheln:
+
+\begin{enumerate}
+  \item \textbf{Executive 1 -- SLA-Hit-Rate Tag} (Zielwert 95\,\%, Trend 7 Tage).
+  \item \textbf{Executive 2 -- Anzahl aktive Cases mit Risk $>0,5$}.
+  \item \textbf{Prozess 1 -- Top-10 Risikotickets} (Risk, Service, Owner).
+  \item \textbf{Prozess 2 -- Heatmap Service $\times$ Queue} (Risk-Konzentration).
+  \item \textbf{Risk/Compliance -- Alarm Log} (Alerts der letzten 24\,h, Status, Owner).
+  \item \textbf{Alert-Kachel -- aktuelle kritische Alerts} (Risk $>0,8$, Eskalations\-status).
+\end{enumerate}
+
+\subsection{Anti-Gaming -- welche KPI \emph{nicht} sofort}
+
+Eine bewusste Entscheidung in jedem Dashboard-Design ist die \emph{Auslassung}. Beispiele für problematische KPIs:
+
+\begin{itemize}
+  \item \fachbegriff{Cases pro Mitarbeitenden pro Stunde.} Risiko: ``Schnell-und-Schlampig'' wird belohnt. Gegenmaßnahme: Kopplung an Rework-Rate, oder gar nicht einführen.
+  \item \fachbegriff{Erstanruf-Lösungsquote.} Risiko: Tickets werden vorzeitig geschlossen. Gegenmaßnahme: Kopplung an Reopen-Rate.
+  \item \fachbegriff{Bearbeitungs\-zeit-Reduktion.} Risiko: ``Quick-Close'' ohne Lösung. Gegenmaßnahme: Kombination mit Kunden-NPS.
+\end{itemize}
+
+% --- 7. FALLSTUDIE -------------------------------------------------------
+\section{Fallstudie: FinServe IT Operations -- SLA-Frühwarnsystem}
+
+\emph{FinServe IT Operations} ist stark SLA-getrieben -- jedes Service-Level-Agreement gegenüber den Geschäftsbereichen ist vertraglich gesichert. Problem: SLA-Verletzungen werden zu spät erkannt, Eskalationen passieren hektisch, Management will Real-time-Transparenz.
+
+\subsection{Ausgangslage und Restriktionen}
+
+\begin{itemize}
+  \item Zeit: 8 Wochen.
+  \item Budget: 120\,000\,\text{\euro}.
+  \item Daten: Ticketing, Monitoring, E-Mail.
+  \item Labels (SLA breach) sind unvollständig.
+  \item Zielkonflikt: Transparenz vs.\ Druck auf Teams.
+\end{itemize}
+
+\subsection{Schritt 1 -- Predictive Use Case definieren}
+
+\textbf{Vorhersage:} ``Wahrscheinlichkeit SLA breach in den nächsten 4\,h.''
+\textbf{Entscheidung:} Priorisierung der Tickets bei Bearbeitungs-Engpass.
+\textbf{Handlung:} Bei Risk $>0,8$ Duty Manager benachrichtigen + Triage 15\,min.
+
+\subsection{Schritt 2 -- Features (mindestens 8)}
+
+\begin{enumerate}
+  \item Priorität (P1--P4).
+  \item Ticket-Alter (Minuten).
+  \item Queue (Service-Gruppe).
+  \item Anzahl Reassignments.
+  \item Service betroffen (kategorial).
+  \item Kategorie (Incident-Typ).
+  \item Open Incidents per Service (Last-Indikator).
+  \item Time since last update.
+  \item Shift (Tag/Nacht/Wochenende).
+  \item Customer tier (Gold/Silver/Bronze).
+\end{enumerate}
+
+\subsection{Schritt 3 -- Label und Umgang mit Lücken}
+
+\textbf{Label:} SLA breach = Ticket nicht gelöst vor SLA-Zeit.
+
+\textbf{Lücken:} Historische Labels nur teilweise gepflegt.
+
+\textbf{Pragmatische Lösung:} Baseline-Heuristik ``Ticket Age $>$ 70\,\% SLA'' als Proxy-Label fürs erste Training; parallel manuelle Label-Pflege, in Release 2 ablösen.
+
+\subsection{Schritt 4 -- ETL-Pipeline}
+
+\begin{enumerate}
+  \item \textbf{Extract.} Ticketing API + Monitoring Stream + E-Mail-Headers.
+  \item \textbf{Staging.} Rohdaten 30 Tage rollend.
+  \item \textbf{Mapping.} Service/Kategorie auf Standardliste, harmonisierte Activity-Namen.
+  \item \textbf{Join.} Events mit Monitoring-Signalen über Service-ID.
+  \item \textbf{Quality Checks.} Case ID, Timestamps, Dubletten, Plausibilität, Mapping-Coverage.
+  \item \textbf{Load DWH.} Faktentabelle Events + Dimensionen (Ticket-Facts, Service, Customer, Time).
+\end{enumerate}
+
+\subsection{Schritt 5 -- Dashboard und Playbook}
+
+\textbf{Dashboard-Kacheln:}
+\begin{enumerate}
+  \item SLA-Risk Heatmap (Service $\times$ Queue).
+  \item Top-10 Risikotickets.
+  \item Trend Breach-Rate 7\,d.
+  \item Durchschnittliche Resolution Time.
+  \item Anzahl Reassignments.
+  \item Alert Log (mit Owner, Status).
+\end{enumerate}
+
+\textbf{Playbook:}
+\begin{itemize}
+  \item Trigger: Risk $>0,8$.
+  \item Owner: Duty Manager.
+  \item Handlung: ``Fast Triage'' in 15\,min, Ressourcen-Umschichtung.
+  \item Eskalation: bei anhaltendem Risk an Head of Operations.
+  \item Dokumentation: im Ticket, Risk-Snapshot, Maßnahmen-Log.
+  \item Post-Review: monatlicher Service-Excellence-Termin.
+\end{itemize}
+
+\subsection{Schritt 6 -- MVP-Entscheidung}
+
+\textbf{Im MVP:}
+\begin{itemize}
+  \item Ticketing-Daten als einzige Quelle (kein Join mit Monitoring im Release 1).
+  \item Sechs der zehn Features.
+  \item Baseline-Heuristik als Fallback bei Modell-Ausfall.
+  \item Dashboard mit den sechs Kernkacheln.
+\end{itemize}
+
+\textbf{Bewusst nicht im MVP:}
+\begin{itemize}
+  \item Monitoring-Signal-Join (komplex, schwankende Datenqualität).
+  \item Customer-Tier-Feature (Sensibilität gegenüber Fairness/Bias prüfen).
+\end{itemize}
+
+\textbf{Kompensation:} manuelle ``Service Impact''-Kennzeichnung im Ticket; wöchentliche Outcome-Reviews.
+
+\subsection{Annahmen und Frühwarnsignale}
+
+\begin{itemize}
+  \item \textbf{Annahme:} Baseline-Heuristik liefert für Training/Start brauchbare Proxy-Labels.
+  \item \textbf{Annahme:} Mit 6 Features ist Genauigkeit $>$75\,\% erreichbar.
+  \item \textbf{Frühwarnsignal 1:} Alarmmüdigkeit (Acknowledge-Rate sinkt unter 60\,\%) $\rightarrow$ Schwellen neu justieren.
+  \item \textbf{Frühwarnsignal 2:} False Negatives nehmen zu (SLA-Breaches ohne vorigen Alert) $\rightarrow$ Modell re-trainieren oder Features ergänzen.
+\end{itemize}
+
+\subsection{Lessons aus der Fallstudie}
+
+\begin{itemize}
+  \item Baseline-Heuristik ist ein vollwertiger MVP, nicht nur eine ``Notlösung''.
+  \item Daten-Joins früh planen, aber nicht früh erzwingen.
+  \item Anti-Gaming und Alarmmüdigkeit gehören in das Design, nicht in das Post-Mortem.
+\end{itemize}
+
+% --- 8. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: Analytics als verantwortetes Produkt}
+
+Auf Wissens-Ebene sind Enhancement und Predictive methodische Themen. Auf Anwendungs-Ebene sind sie Handwerk. Auf Management-Ebene werden sie zu einem \emph{Analytics-Produkt} -- mit Product Owner, Releases, Monitoring und Audit. \quelle{Davenport, 2018; Shmueli, 2010}
+
+\subsection{Zwei zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Performance vs.\ Erklärbarkeit.} Hochgenaue Black-Box-Modelle sind oft schwer zu erklären -- problematisch im regulierten Umfeld, in dem Entscheidungen begründet werden müssen. Praktische Lösung: \emph{erklärbares Modell mit etwas niedrigerer Genauigkeit für Produktionseinsatz, Black-Box-Modell als Vergleichs-Benchmark.}
+  \item \textbf{Transparenz vs.\ Vertrauen.} Mehr Daten und Vorhersagen können als Überwachung empfunden werden. Praktikabel: aggregierte Sichten priorisieren, individuelle Vorhersagen mit eindeutigem Handlungs-Nutzen statt mit ``Score'' kommunizieren, Betriebsrat und Datenschutz früh einbinden.
+\end{enumerate}
+
+\subsection{Analytics als Produkt -- vier Pflichtelemente}
+
+\begin{itemize}
+  \item \fachbegriff{Product Owner.} Verantwortet das Analytics-Produkt fachlich und priorisiert die Pipeline.
+  \item \fachbegriff{Release-Zyklus.} Modelle haben Lebenszyklus -- Training, Validierung, Shadow-Mode, Production, Retirement.
+  \item \fachbegriff{Modell-Monitoring.} Vorhersage-Qualität wird selbst beobachtet (Genauigkeit, Drift, Bias). Auch das Modell hat ``Operations''.
+  \item \fachbegriff{Audit-Trail.} Welche Vorhersage zu welcher Entscheidung geführt hat, ist nachvollziehbar -- in regulierten Umfeldern Pflicht.
+\end{itemize}
+
+\subsection{Konzeptdrift und Modell-Operations}
+
+ML-Modelle altern. ``Konzeptdrift'' bedeutet, dass die Realität sich gegenüber den Trainingsdaten verschiebt, ohne dass es jemand bemerkt. Drei Warnzeichen:
+
+\begin{itemize}
+  \item Genauigkeit sinkt schleichend.
+  \item Vorhersage-Verteilungen verschieben sich (mehr High-Risk-Cases, ohne dass mehr Breaches eintreten).
+  \item Feature-Verteilungen ändern sich (neue Service-Kategorien, andere Schicht-Muster).
+\end{itemize}
+
+Senior-Praxis: Modell-Monitoring von Beginn an, mit klaren Re-Trainings-Triggern (z.\,B.\ ``Genauigkeit sinkt unter 70\,\% für zwei Wochen $\rightarrow$ Re-Training''.).
+
+\subsection{Datenethik und Governance}
+
+\begin{itemize}
+  \item \fachbegriff{Fairness/Bias.} Wenn historische Daten Diskriminierung enthalten, lernt das Modell sie. Pflicht-Check auf protected attributes (z.\,B.\ Geschlecht, Alter, ethnische Zugehörigkeit), wo relevant.
+  \item \fachbegriff{Erklärbarkeit.} Für Entscheidungen mit Außenwirkung (z.\,B.\ Bonität, Recruiting) ist Erklärbarkeit häufig regulatorisch gefordert.
+  \item \fachbegriff{Zugriff und Audit-Trail.} Wer hat welche Vorhersage gesehen, mit welcher Begründung gehandelt? -- Pflicht in regulierten Umfeldern.
+\end{itemize}
+
+\subsection{``Minimum Viable Data Product''}
+
+Senior-Disziplin: \emph{lieber ein kleines Data Product, das wirklich verwendet wird, als ein großes, das niemand benutzt.} Drei Kriterien für das MVP:
+
+\begin{itemize}
+  \item Eine klare, dokumentierte Entscheidung, die unterstützt wird.
+  \item Ein nachvollziehbares Baseline-Modell oder eine erklärbare Heuristik.
+  \item Ein Playbook, das jeden Alarm mit Handlung verknüpft.
+\end{itemize}
+
+\subsection{Entscheidungen unter Unsicherheit}
+
+\begin{itemize}
+  \item \textbf{Welche drei Use Cases zuerst -- trotz Datenlücken?} Schriftlich entscheiden, verworfene Alternative dokumentieren, Frühwarnsignal benennen.
+  \item \textbf{Welche KPIs werden ``Executive''?} Bewusst auswählen, Anti-Gaming-Mechanismus festlegen, Review-Rhythmus.
+\end{itemize}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 8]
+Predictive ohne Playbook ist Reporting; Playbook ohne Owner ist Theater; Owner ohne Modell-Monitoring ist Hoffnung. Senior-Steuerung verbindet alle vier: \emph{Daten $\rightarrow$ Modell $\rightarrow$ Alert $\rightarrow$ Owner $\rightarrow$ Playbook $\rightarrow$ Modell-Monitoring.}
+\end{merkbox}
+
+% --- 9. TAKE-AWAYS -------------------------------------------------------
+\section{Take-aways aus Tag 8}
+
+\begin{enumerate}
+  \item \textbf{Drei Reifegrade.} Reporting (Vergangenheit) $\rightarrow$ Real-time (Gegenwart) $\rightarrow$ Predictive (Zukunft).
+  \item \textbf{Enhancement schließt den Lifecycle.} Discovery + Conformance + Enhancement zusammen.
+  \item \textbf{Baseline vor ML.} Erklärbare Regeln bringen oft 60--80\,\% des Nutzens, sofort.
+  \item \textbf{Use Case Canvas.} Ziel, Prognose, Handlung, Datenminimum, Risiko, Erfolg -- alle sechs Felder gefüllt.
+  \item \textbf{O-H-E-D-P.} Owner, Handlung, Eskalation, Dokumentation, Post-Review pro Alert-Playbook.
+  \item \textbf{ETL ist 60\,\% des Wertes.} Mapping, Case-ID-Strategie, Quality Checks -- die nicht-glanzvolle, aber tragende Arbeit.
+  \item \textbf{Dashboards mit Handlung.} Trend + Ziel + Segmentierung + Next-Best-Action.
+  \item \textbf{Anti-Gaming.} Jede KPI mit Gegenkontrolle, jede problematische KPI bewusst weggelassen.
+  \item \textbf{Konzeptdrift überwachen.} Modell-Operations als eigene Disziplin -- ML altert.
+\end{enumerate}
+
+% --- 10. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Davenport, T.\,H. (2018).] \emph{The AI advantage: How to put the artificial intelligence revolution to work}. MIT Press.
+  \item[Few, S. (2013).] \emph{Information dashboard design: Displaying data for at-a-glance monitoring} (2nd ed.). Analytics Press.
+  \item[Inmon, W.\,H. (2005).] \emph{Building the data warehouse} (4th ed.). Wiley.
+  \item[Kimball, R., \& Ross, M. (2013).] \emph{The data warehouse toolkit: The definitive guide to dimensional modeling} (3rd ed.). Wiley.
+  \item[Maggi, F.\,M., Di Francescomarino, C., Dumas, M., \& Ghidini, C. (2014).] Predictive monitoring of business processes. In M.~Jarke et al.\ (Hrsg.), \emph{Advanced information systems engineering (CAiSE 2014)} (Lecture Notes in Computer Science, Vol.~8484, S.~457--472). Springer. \href{https://doi.org/10.1007/978-3-319-07881-6_31}{https://doi.org/10.1007/978-3-319-07881-6\_31}
+  \item[Russom, P. (2011).] \emph{Big data analytics} (TDWI Best Practices Report, Q4 2011). The Data Warehousing Institute. \href{https://tdwi.org/research/2011/09/best-practices-report-q4-big-data-analytics.aspx}{https://tdwi.org/research/2011/09/best-practices-report-q4-big-data-analytics.aspx}
+  \item[Shmueli, G. (2010).] To explain or to predict? \emph{Statistical Science, 25}(3), 289--310. \href{https://doi.org/10.1214/10-STS330}{https://doi.org/10.1214/10-STS330}
+  \item[van der Aalst, W.\,M.\,P. (2016).] \emph{Process mining: Data science in action} (2nd ed.). Springer. \href{https://doi.org/10.1007/978-3-662-49851-4}{https://doi.org/10.1007/978-3-662-49851-4}
+\end{description}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Alert] Auslöser einer Reaktion, wenn ein KPI oder ein Risiko-Score eine Schwelle überschreitet.
+  \item[Alarmmüdigkeit] Effekt, bei dem zu viele Alerts dazu führen, dass Bearbeitende sie ignorieren.
+  \item[Anomalieerkennung] ML-Disziplin zur Identifikation ungewöhnlicher Pfade, Daten oder Verhaltensmuster.
+  \item[Baseline-Heuristik] Einfache, erklärbare Entscheidungsregel, oft als Vorstufe oder Vergleich zu ML.
+  \item[BI-Dashboard] Visualisierungs-Werkzeug, das KPIs, Trends und Alerts für eine Zielgruppe konsolidiert.
+  \item[Clustering] ML-Disziplin zur Gruppierung ähnlicher Cases ohne vorgegebene Labels.
+  \item[Data Quality Check] Regel-Test, der Daten vor dem Laden ins DWH auf Vollständigkeit, Konsistenz und Plausibilität prüft.
+  \item[DWH] \emph{Data Warehouse.} Konsolidierter Speicher analytischer Daten, häufig mit dimensionalem Modell.
+  \item[Dimension] Beschreibende Attribute in dimensionaler Modellierung (Zeit, Kunde, Produkt, Service).
+  \item[Drift (Konzeptdrift)] Schleichende Veränderung der Realität gegenüber den Trainingsdaten eines ML-Modells.
+  \item[ETL/ELT] \emph{Extract-Transform-Load} bzw.\ \emph{Extract-Load-Transform.} Verfahren zur Befüllung eines DWH.
+  \item[Enhancement] Disziplin im Process Mining: Anreicherung von Modellen mit Daten (Zeiten, Kosten, Ressourcen).
+  \item[Faktentabelle] Zentrale Tabelle in dimensionaler Modellierung; jede Zeile ein Event mit Maßzahlen und Fremdschlüsseln.
+  \item[Fairness/Bias] Eigenschaft eines ML-Modells, geschützte Attribute nicht zu Diskriminierung zu verwenden.
+  \item[Klassifikation] ML-Disziplin: Vorhersage einer kategorialen Größe (ja/nein, A/B/C).
+  \item[Konzeptdrift-Monitoring] Beobachtung der Modell-Genauigkeit und Feature-Verteilungen, mit Re-Training-Trigger.
+  \item[Minimum Viable Data Product] Kleinste sinnvolle Daten- oder Analytics-Lösung, die in Produktion verwendet wird.
+  \item[Playbook] Strukturierte Handlungsanweisung für einen bestimmten Alarm: Owner, Handlung, Eskalation, Dokumentation, Post-Review.
+  \item[Predictive Process Monitoring] ML-basierte Vorhersagen auf Prozessdaten (SLA, Rework, Abbruch).
+  \item[Real-time Monitoring] Beobachtung von Prozessen in Near-Real-Time mit Alerts und Dashboards.
+  \item[Regression] ML-Disziplin: Vorhersage einer kontinuierlichen Größe (Dauer, Kosten).
+  \item[Staging] Bereich, in dem Rohdaten unverändert vor der Transformation abgelegt werden.
+  \item[Star-Schema] Dimensionales Datenmodell mit zentraler Faktentabelle und umlaufenden Dimensionen.
+  \item[Use Case Canvas] Struktur-Werkzeug zur Definition eines Predictive Use Cases (Ziel, Prognose, Handlung, Daten, Risiko, Erfolg).
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 8 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
