@@ -26,7 +26,7 @@
     },
     {
       "nr": 2,
-      "typ": "zuordnung",
+      "typ": "text",
       "titel": "ESG-Begriffe sicher zuordnen",
       "inhalt": "Vor der Detailarbeit ist die Begriffsklarheit zentral — viele Diskussionen scheitern, weil dieselben Worte unterschiedlich verstanden werden.",
       "dauer_min": 6,
@@ -34,12 +34,30 @@
         "frage": "Ordnen Sie jeder Abkürzung die korrekte Bedeutung zu.",
         "typ": "zuordnung",
         "paare": [
-          { "links": "CSRD", "rechts": "Corporate Sustainability Reporting Directive — EU-Berichtspflicht-Richtlinie" },
-          { "links": "EU-Taxonomie", "rechts": "Klassifizierungssystem nachhaltiger Wirtschaftsaktivitäten" },
-          { "links": "ESRS", "rechts": "European Sustainability Reporting Standards — konkrete Reporting-Standards" },
-          { "links": "Scope 1", "rechts": "Direkte Emissionen aus eigenen Quellen (z. B. Fuhrpark, Heizungsanlagen)" },
-          { "links": "Scope 2", "rechts": "Indirekte Emissionen aus eingekaufter Energie (Strom, Fernwärme)" },
-          { "links": "Scope 3", "rechts": "Indirekte vor- und nachgelagerte Emissionen entlang der Wertschöpfungskette" }
+          {
+            "links": "CSRD",
+            "rechts": "Corporate Sustainability Reporting Directive — EU-Berichtspflicht-Richtlinie"
+          },
+          {
+            "links": "EU-Taxonomie",
+            "rechts": "Klassifizierungssystem nachhaltiger Wirtschaftsaktivitäten"
+          },
+          {
+            "links": "ESRS",
+            "rechts": "European Sustainability Reporting Standards — konkrete Reporting-Standards"
+          },
+          {
+            "links": "Scope 1",
+            "rechts": "Direkte Emissionen aus eigenen Quellen (z. B. Fuhrpark, Heizungsanlagen)"
+          },
+          {
+            "links": "Scope 2",
+            "rechts": "Indirekte Emissionen aus eingekaufter Energie (Strom, Fernwärme)"
+          },
+          {
+            "links": "Scope 3",
+            "rechts": "Indirekte vor- und nachgelagerte Emissionen entlang der Wertschöpfungskette"
+          }
         ],
         "erklaerung": "Diese Begriffe bilden das Vokabular jedes CSRD-Projekts. Besonders Scope 3 ist die schwierigste Kategorie — sie umfasst Lieferanten, Geschäftsreisen, Pendelverkehr, Nutzung der verkauften Produkte und Entsorgung. Datenqualität ist hier typischerweise C (grob geschätzt). Genau deshalb braucht es transparente Annahmen und einen Verbesserungsplan."
       }
@@ -61,13 +79,18 @@
           "Veröffentlichung beliebiger Marketing-Aussagen ohne technische Prüfung",
           "Erfüllung der technischen Screening-Kriterien für die jeweilige Aktivität"
         ],
-        "korrekt": [0, 1, 2, 4],
+        "korrekt": [
+          0,
+          1,
+          2,
+          4
+        ],
         "erklaerung": "Eine Aktivität gilt nur dann als taxonomiekonform, wenn sie kumulativ erfüllt: (1) wesentlicher Beitrag zu einem Umweltziel, (2) DNSH — kein erheblicher Schaden an anderen Zielen, (3) Mindestschutz (Menschenrechte, OECD), (4) technische Screening-Kriterien. Alle vier Hürden zusammen — keine ist optional. Marketingaussagen ohne technische Prüfung sind genau der Greenwashing-Antipattern, den die Taxonomie verhindern soll."
       }
     },
     {
       "nr": 4,
-      "typ": "lueckentext",
+      "typ": "text",
       "titel": "ESG-Reportingprozess in 7 Schritten",
       "inhalt": "Ein belastbarer CSRD-Reportingprozess folgt einem klaren Ablauf von der Planung bis zur Prüfung.",
       "dauer_min": 6,
@@ -76,10 +99,37 @@
         "typ": "lueckentext",
         "text": "Der Reportingprozess startet mit der Aktualisierung des KPI-{0}, in dem alle Definitionen einheitlich gepflegt sind. Anschließend werden Daten aus den Quellsystemen erfasst und gegen Plausibilitäts- und Vollständigkeits-Regeln {1}. Nach der Konsolidierung erfolgt die {2} durch Owner und Reporting Lead. Erst dann wird veröffentlicht. Eine externe {3} prüft die Belastbarkeit der Zahlen.",
         "luecken": [
-          { "antwort": "Dictionary", "alternativen": ["dictionary", "Wörterbuch", "Glossar"] },
-          { "antwort": "validiert", "alternativen": ["geprüft", "Validierung"] },
-          { "antwort": "Freigabe", "alternativen": ["freigabe", "Genehmigung", "Approval"] },
-          { "antwort": "Assurance", "alternativen": ["assurance", "Prüfung", "Audit"] }
+          {
+            "antwort": "Dictionary",
+            "alternativen": [
+              "dictionary",
+              "Wörterbuch",
+              "Glossar"
+            ]
+          },
+          {
+            "antwort": "validiert",
+            "alternativen": [
+              "geprüft",
+              "Validierung"
+            ]
+          },
+          {
+            "antwort": "Freigabe",
+            "alternativen": [
+              "freigabe",
+              "Genehmigung",
+              "Approval"
+            ]
+          },
+          {
+            "antwort": "Assurance",
+            "alternativen": [
+              "assurance",
+              "Prüfung",
+              "Audit"
+            ]
+          }
         ],
         "erklaerung": "KPI-Dictionary (Single Source of Truth für Definitionen), Validierung (Plausibilität, Vollständigkeit), Freigabe (Vier-Augen-Prinzip) und externe Assurance bilden die Säulen eines auditfähigen Prozesses. Wer ohne Dictionary arbeitet, bekommt im Audit jeden Wert in Frage gestellt — Definitionen sind die Basis aller belastbaren Zahlen."
       }
@@ -101,7 +151,11 @@
           "ESG-Reporting ist primär eine Marketing-Aufgabe ohne operative Auswirkungen",
           "Die Datenqualität pro KPI muss transparent gemacht werden, inkl. Schätzungen und Annahmen"
         ],
-        "korrekt": [0, 1, 4],
+        "korrekt": [
+          0,
+          1,
+          4
+        ],
         "erklaerung": "Drei Pflichten prägen die CSRD: doppelte Wesentlichkeit (welche Themen wirken auf das Unternehmen, welche wirkt das Unternehmen auf die Umwelt?), externe Assurance (Wirtschaftsprüfer attestiert die Belastbarkeit) und Transparenz bei Datenqualität (Schätzungen werden markiert, Annahmen dokumentiert). Lieferketten-Emissionen (Scope 3) sind explizit gefordert — oft die größte Schwachstelle. ESG-Reporting ist operative Pflicht mit Audit-Konsequenz, nicht Marketing."
       }
     },
@@ -134,7 +188,12 @@
           "ESG-Steuerung gelingt, wenn sie isoliert vom Transformationsprogramm geführt wird",
           "Stakeholder-Dialog (Investoren, Mitarbeitende, Kunden) ist Teil der ESG-Wirksamkeit"
         ],
-        "korrekt": [0, 1, 2, 4],
+        "korrekt": [
+          0,
+          1,
+          2,
+          4
+        ],
         "erklaerung": "Vier Lehren großer Praxisbeispiele: integrierte Daten (Excel-Silos sind das größte Skalierungs-Hindernis), Assurance auf Prozessebene (nicht nur Zahlen), Materialitätsanalyse als Fokussierungs-Hebel (nicht alles berichten, das Richtige) und aktiver Stakeholder-Dialog. Isoliertes ESG-Reporting ist genau der Antipattern — es bleibt Hülle ohne operative Wirkung. ESG gehört in Prozessdigitalisierung, Green IT, RPA-Programme und Change Management integriert."
       }
     }

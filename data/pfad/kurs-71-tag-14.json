@@ -40,7 +40,11 @@
           "Eine grobe Schätzung darf als „gemessen” ausgewiesen werden, wenn niemand widerspricht",
           "Lieferketten-Emissionen (Scope 3) werden ignoriert, wenn keine Vendor-Daten vorliegen"
         ],
-        "korrekt": [0, 1, 2],
+        "korrekt": [
+          0,
+          1,
+          2
+        ],
         "erklaerung": "Systemgrenzen, Datenqualitäts-Label und transparente Annahmen sind die methodischen Pflichten. Schätzungen als gemessene Werte auszugeben ist Greenwashing — Auditoren und Stakeholder finden den Bruch. Scope-3-Emissionen werden bei Datenlücken nicht ignoriert, sondern transparent geschätzt mit Label C und Verbesserungsplan."
       }
     },
@@ -61,13 +65,18 @@
           "Maximale Logging-Tiefe für jede Anfrage, um „alles zu erfassen”",
           "Performance Budgets und Profiling als Gate vor Releases kritischer Services"
         ],
-        "korrekt": [0, 1, 2, 4],
+        "korrekt": [
+          0,
+          1,
+          2,
+          4
+        ],
         "erklaerung": "Effiziente Algorithmen, weniger Datenbewegung, bedarfsorientierte Skalierung und Performance Budgets als Release-Gates sind wirksame Hebel. Übermäßiges Logging ist im Gegenteil ein verbreiteter Antipattern — es erhöht Speicher-, Netzwerk- und Verarbeitungslast erheblich, ohne fachlichen Mehrwert. Logging gehört auf das Nötige reduziert und mit Retention-Regeln gesteuert."
       }
     },
     {
       "nr": 4,
-      "typ": "zuordnung",
+      "typ": "text",
       "titel": "Vendor Sustainability Scorecard — Kriterien priorisieren",
       "inhalt": "Bei der Vergabe von Hardware- oder Service-Aufträgen werden Lieferanten nach klaren Nachhaltigkeitskriterien bewertet.",
       "dauer_min": 6,
@@ -75,11 +84,26 @@
         "frage": "Ordnen Sie jedem Scorecard-Kriterium ein typisches Indikatorbeispiel zu.",
         "typ": "zuordnung",
         "paare": [
-          { "links": "Umwelttransparenz und CO2-Reporting", "rechts": "Veröffentlichter Nachhaltigkeitsbericht mit verifizierten Emissionsdaten" },
-          { "links": "Kreislaufwirtschaft", "rechts": "Rücknahmeprogramm, Refurbishment und definierter Recyclingpfad" },
-          { "links": "Energieeffizienz der Produkte", "rechts": "Energy-Star- oder vergleichbare Effizienzklasse, dokumentierte Verbrauchswerte" },
-          { "links": "Subunternehmer-Transparenz", "rechts": "Liste der Subunternehmer inkl. Sustainability-Kriterien und Auditrecht" },
-          { "links": "Vertragliche Verankerung", "rechts": "Right-to-Audit-Klausel und jährliches Sustainability-Reporting im Vertrag" }
+          {
+            "links": "Umwelttransparenz und CO2-Reporting",
+            "rechts": "Veröffentlichter Nachhaltigkeitsbericht mit verifizierten Emissionsdaten"
+          },
+          {
+            "links": "Kreislaufwirtschaft",
+            "rechts": "Rücknahmeprogramm, Refurbishment und definierter Recyclingpfad"
+          },
+          {
+            "links": "Energieeffizienz der Produkte",
+            "rechts": "Energy-Star- oder vergleichbare Effizienzklasse, dokumentierte Verbrauchswerte"
+          },
+          {
+            "links": "Subunternehmer-Transparenz",
+            "rechts": "Liste der Subunternehmer inkl. Sustainability-Kriterien und Auditrecht"
+          },
+          {
+            "links": "Vertragliche Verankerung",
+            "rechts": "Right-to-Audit-Klausel und jährliches Sustainability-Reporting im Vertrag"
+          }
         ],
         "erklaerung": "Eine belastbare Vendor-Scorecard kombiniert harte Daten (verifizierte Emissionen, Effizienzklassen) mit Prozesskriterien (Rücknahme, Subunternehmer-Transparenz) und vertraglichen Hebeln (Right-to-Audit, jährliches Reporting). Allein Marketing-Aussagen ohne Nachweise reichen nicht — bei CSRD-Reporting werden sie zum Reputations- und Compliance-Risiko."
       }
@@ -106,7 +130,7 @@
     },
     {
       "nr": 6,
-      "typ": "lueckentext",
+      "typ": "text",
       "titel": "E-Waste-Standardprozess und Datenlöschung",
       "inhalt": "Der Übergang von ausgemusterter Hardware in die Wiederverwendung oder das Recycling muss kontrolliert ablaufen.",
       "dauer_min": 5,
@@ -115,10 +139,36 @@
         "typ": "lueckentext",
         "text": "Bevor ein ausgemustertes Gerät den Standort verlässt, erfolgt eine zertifizierte {0} der Daten gemäß einem dokumentierten Standard. Das Gerät wird im {1} Register als „außer Betrieb” geführt. Anschließend wird geprüft, ob {2}/Refurbish möglich ist; erst danach geht das Gerät in das {3} mit Nachweis des Partnerunternehmens.",
         "luecken": [
-          { "antwort": "Löschung", "alternativen": ["löschung", "Datenlöschung", "Datenvernichtung"] },
-          { "antwort": "Asset", "alternativen": ["asset", "CMDB"] },
-          { "antwort": "Wiederverwendung", "alternativen": ["Reuse", "Wiederverwertung", "Reuse/Refurbish"] },
-          { "antwort": "Recycling", "alternativen": ["recycling", "Recyclingverfahren"] }
+          {
+            "antwort": "Löschung",
+            "alternativen": [
+              "löschung",
+              "Datenlöschung",
+              "Datenvernichtung"
+            ]
+          },
+          {
+            "antwort": "Asset",
+            "alternativen": [
+              "asset",
+              "CMDB"
+            ]
+          },
+          {
+            "antwort": "Wiederverwendung",
+            "alternativen": [
+              "Reuse",
+              "Wiederverwertung",
+              "Reuse/Refurbish"
+            ]
+          },
+          {
+            "antwort": "Recycling",
+            "alternativen": [
+              "recycling",
+              "Recyclingverfahren"
+            ]
+          }
         ],
         "erklaerung": "Vier Schritte sichern den E-Waste-Prozess: zertifizierte Datenlöschung (Standard z. B. NIST 800-88), Aktualisierung im Asset Register (Verbleib nachvollziehbar), Prüfung auf Wiederverwendung/Refurbish (höchster Hebel) und kontrolliertes Recycling mit Nachweis. Ohne Datenlöschungs-Zertifikat ist die Übergabe ein Datenschutzrisiko — auch wenn der Partner „seriös wirkt”."
       }

@@ -26,7 +26,7 @@
     },
     {
       "nr": 2,
-      "typ": "zuordnung",
+      "typ": "text",
       "titel": "Kotter — Die 8 Stufen im Überblick",
       "inhalt": "Kotters Modell strukturiert Veränderung in acht aufeinanderfolgende Schritte. Jeder Schritt hat einen klaren Kerngedanken.",
       "dauer_min": 7,
@@ -34,11 +34,26 @@
         "frage": "Ordnen Sie die Kotter-Stufen ihrem Kerngedanken zu.",
         "typ": "zuordnung",
         "paare": [
-          { "links": "Stufe 1: Dringlichkeit erzeugen", "rechts": "Geteiltes Verständnis schaffen, warum Veränderung jetzt nötig ist" },
-          { "links": "Stufe 2: Führungskoalition aufbauen", "rechts": "Mächtige, glaubwürdige Allianz aus Sponsoren und Multiplikatoren bilden" },
-          { "links": "Stufe 3: Vision und Strategie entwickeln", "rechts": "Klares Zielbild plus Weg dorthin formulieren" },
-          { "links": "Stufe 6: Kurzfristige Erfolge sichtbar machen", "rechts": "Quick Wins erzeugen Energie und Glaubwürdigkeit für die nächste Welle" },
-          { "links": "Stufe 8: Veränderung in der Kultur verankern", "rechts": "Neue Standards, KPIs und Routinen institutionalisieren — Sustainment" }
+          {
+            "links": "Stufe 1: Dringlichkeit erzeugen",
+            "rechts": "Geteiltes Verständnis schaffen, warum Veränderung jetzt nötig ist"
+          },
+          {
+            "links": "Stufe 2: Führungskoalition aufbauen",
+            "rechts": "Mächtige, glaubwürdige Allianz aus Sponsoren und Multiplikatoren bilden"
+          },
+          {
+            "links": "Stufe 3: Vision und Strategie entwickeln",
+            "rechts": "Klares Zielbild plus Weg dorthin formulieren"
+          },
+          {
+            "links": "Stufe 6: Kurzfristige Erfolge sichtbar machen",
+            "rechts": "Quick Wins erzeugen Energie und Glaubwürdigkeit für die nächste Welle"
+          },
+          {
+            "links": "Stufe 8: Veränderung in der Kultur verankern",
+            "rechts": "Neue Standards, KPIs und Routinen institutionalisieren — Sustainment"
+          }
         ],
         "erklaerung": "Die acht Stufen lauten: Dringlichkeit, Führungskoalition, Vision/Strategie, Vision kommunizieren, Befähigung der Mitarbeiter, Quick Wins, Veränderung konsolidieren, Verankerung in der Kultur. Schwächste Stelle in der Praxis: Stufe 8 — viele Veränderungen bleiben Projekte und werden nie zum Betriebssystem. Sustainment ist Senior-Verantwortung."
       }
@@ -65,7 +80,7 @@
     },
     {
       "nr": 4,
-      "typ": "lueckentext",
+      "typ": "text",
       "titel": "ADKAR — Veränderung auf Personenebene",
       "inhalt": "Während Kotter und Lewin auf Organisationsebene wirken, beschreibt ADKAR (Prosci) die individuelle Veränderungsreise.",
       "dauer_min": 6,
@@ -74,10 +89,36 @@
         "typ": "lueckentext",
         "text": "ADKAR steht für fünf Phasen: {0} (Bewusstsein für die Notwendigkeit), {1} (Wille zur Veränderung), Knowledge (Wissen, wie), {2} (Fähigkeit zur Umsetzung) und {3} (Verankerung im Alltag). Fehlt eine Phase, scheitert die Veränderung an genau dieser Stelle.",
         "luecken": [
-          { "antwort": "Awareness", "alternativen": ["awareness", "Bewusstsein"] },
-          { "antwort": "Desire", "alternativen": ["desire", "Wunsch", "Wille"] },
-          { "antwort": "Ability", "alternativen": ["ability", "Fähigkeit"] },
-          { "antwort": "Reinforcement", "alternativen": ["reinforcement", "Verstärkung", "Verankerung"] }
+          {
+            "antwort": "Awareness",
+            "alternativen": [
+              "awareness",
+              "Bewusstsein"
+            ]
+          },
+          {
+            "antwort": "Desire",
+            "alternativen": [
+              "desire",
+              "Wunsch",
+              "Wille"
+            ]
+          },
+          {
+            "antwort": "Ability",
+            "alternativen": [
+              "ability",
+              "Fähigkeit"
+            ]
+          },
+          {
+            "antwort": "Reinforcement",
+            "alternativen": [
+              "reinforcement",
+              "Verstärkung",
+              "Verankerung"
+            ]
+          }
         ],
         "erklaerung": "Awareness, Desire, Knowledge, Ability, Reinforcement — die fünf ADKAR-Phasen sind keine optionale Reihenfolge, sondern notwendige Bedingungen. Wer Trainings vor Awareness anbietet, baut Schulungen, die niemand braucht. Wer ohne Reinforcement bleibt, sieht alte Gewohnheiten zurückkehren. Für die Praxis: Bei jedem stockenden Change-Vorhaben mit ADKAR diagnostizieren — an welcher Phase hängt es?"
       }
@@ -99,7 +140,11 @@
           "Klare Entscheidungen und faire Kommunikation erhöhen die Akzeptanz auch bei Andersmeinenden",
           "Schweigen der Betroffenen ist verlässliches Zeichen für Zustimmung"
         ],
-        "korrekt": [0, 1, 3],
+        "korrekt": [
+          0,
+          1,
+          3
+        ],
         "erklaerung": "Widerstand ist Diagnoseinformation, kein Defizit. Wirksame Hebel: zuhören, Co-Design, faire Entscheidungen mit Begründung. Sanktionierung verstärkt Widerstand und vertreibt Multiplikatoren. Schweigen ist kein Zeichen für Zustimmung — es ist oft das verlässlichste Zeichen für Resignation oder stille Verweigerung. Pulse-Surveys und offene Q&A schaffen Sichtbarkeit."
       }
     },
@@ -132,7 +177,12 @@
           "Alle Stakeholder werden unabhängig von Einfluss/Betroffenheit gleich behandelt",
           "Geringer Einfluss + geringe Betroffenheit: minimal informieren reicht"
         ],
-        "korrekt": [0, 1, 2, 4],
+        "korrekt": [
+          0,
+          1,
+          2,
+          4
+        ],
         "erklaerung": "Die klassische 2x2-Matrix differenziert vier Einbindungsstrategien: Mitentscheiden/Verantworten (hoch/hoch), Konsultieren/Informieren (hoch/niedrig), Aktiv einbinden (niedrig/hoch), Minimal informieren (niedrig/niedrig). Wer alle gleich behandelt, verbraucht Energie an falscher Stelle und verliert die wirklich wichtigen Stakeholder. Senior-Disziplin: Die Matrix regelmäßig prüfen — Einfluss und Betroffenheit verschieben sich im Projektverlauf."
       }
     }

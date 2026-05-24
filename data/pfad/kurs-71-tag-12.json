@@ -41,13 +41,19 @@
           "Exception-Code und ggf. manuelle Übernahme durch wen",
           "Auslöser (User oder Queue)"
         ],
-        "korrekt": [0, 1, 2, 4, 5],
+        "korrekt": [
+          0,
+          1,
+          2,
+          4,
+          5
+        ],
         "erklaerung": "Audit-Minimum: Bot-ID/Version (Rückverfolgbarkeit), Zeit und Quelle (Reproduzierbarkeit), Vorher-/Nachher-Werte (Wirkungs-Nachweis), Exception-Code/manuelle Übernahme (Steuerung) und Auslöser (Zuordnung). Subjektive Meinungen gehören nicht in den Audit Trail — sie sind weder beweisbar noch reviewfähig."
       }
     },
     {
       "nr": 3,
-      "typ": "zuordnung",
+      "typ": "text",
       "titel": "Exception-Kategorien und ihre Behandlung",
       "inhalt": "Ein robuster Bot scheitert kontrolliert. Exceptions werden in klare Kategorien einsortiert — jede mit eigenem Playbook.",
       "dauer_min": 6,
@@ -55,17 +61,29 @@
         "frage": "Ordnen Sie jede Exception-Kategorie der typischen Behandlung zu.",
         "typ": "zuordnung",
         "paare": [
-          { "links": "Business Exception (z. B. Freigabe nötig, Dublette)", "rechts": "Übergabe an fachlichen Owner mit Task-Ticket und SLA" },
-          { "links": "Data Exception (z. B. fehlende Kostenstelle)", "rechts": "Datenkorrektur durch Fachbereich, Re-Submit in Queue" },
-          { "links": "System Exception (z. B. ERP nicht erreichbar)", "rechts": "Retry mit Backoff, dann Ticket an IT-Operations" },
-          { "links": "Security Exception (z. B. Auth-Fail)", "rechts": "Sofortige Eskalation an Security Owner, kein automatischer Retry" }
+          {
+            "links": "Business Exception (z. B. Freigabe nötig, Dublette)",
+            "rechts": "Übergabe an fachlichen Owner mit Task-Ticket und SLA"
+          },
+          {
+            "links": "Data Exception (z. B. fehlende Kostenstelle)",
+            "rechts": "Datenkorrektur durch Fachbereich, Re-Submit in Queue"
+          },
+          {
+            "links": "System Exception (z. B. ERP nicht erreichbar)",
+            "rechts": "Retry mit Backoff, dann Ticket an IT-Operations"
+          },
+          {
+            "links": "Security Exception (z. B. Auth-Fail)",
+            "rechts": "Sofortige Eskalation an Security Owner, kein automatischer Retry"
+          }
         ],
         "erklaerung": "Klare Kategorisierung verhindert, dass alle Exceptions im selben Topf landen und unbearbeitet liegen bleiben. Business-Exceptions gehen an den Fachbereich (mit SLA), Data-Exceptions zurück an die Datenquelle, System-Exceptions an IT (mit kontrolliertem Retry), Security-Exceptions sofort eskaliert ohne Retry — Letzteres ist eine Sicherheitsregel, um Brute-Force-Effekte oder Sperrungen zu vermeiden."
       }
     },
     {
       "nr": 4,
-      "typ": "lueckentext",
+      "typ": "text",
       "titel": "Security by Design für Bots",
       "inhalt": "Ein Bot ist ein privilegierter Akteur im System und muss entsprechend abgesichert werden.",
       "dauer_min": 5,
@@ -74,10 +92,36 @@
         "typ": "lueckentext",
         "text": "Jeder Bot benötigt einen eigenen technischen Account mit dem Prinzip der geringsten Rechte, dem sogenannten {0} Privilege. Anmeldedaten gehören niemals in den Code, sondern in einen zentralen {1} Vault. Damit ein Bot nicht gleichzeitig anlegen und freigeben darf, gilt die Regel der Aufgabentrennung, kurz {2}. Audit-Logs werden idealerweise {3}-only geführt, also nicht überschreibbar.",
         "luecken": [
-          { "antwort": "Least", "alternativen": ["least", "minimum"] },
-          { "antwort": "Credential", "alternativen": ["credential", "Secret", "secret", "Secrets"] },
-          { "antwort": "SoD", "alternativen": ["Segregation of Duties", "segregation of duties"] },
-          { "antwort": "append", "alternativen": ["Append", "write"] }
+          {
+            "antwort": "Least",
+            "alternativen": [
+              "least",
+              "minimum"
+            ]
+          },
+          {
+            "antwort": "Credential",
+            "alternativen": [
+              "credential",
+              "Secret",
+              "secret",
+              "Secrets"
+            ]
+          },
+          {
+            "antwort": "SoD",
+            "alternativen": [
+              "Segregation of Duties",
+              "segregation of duties"
+            ]
+          },
+          {
+            "antwort": "append",
+            "alternativen": [
+              "Append",
+              "write"
+            ]
+          }
         ],
         "erklaerung": "Least Privilege, Credential Vault, Segregation of Duties (SoD) und append-only Logs bilden den Sicherheits-Mindeststandard für RPA. Verletzt ein Bot eine dieser Regeln, ist er kein operatives Risiko, sondern ein Compliance-Risiko — bis hin zum bewussten Stilllegen, wenn der Compliance-Befund gravierend ist."
       }
@@ -131,7 +175,12 @@
           "Klare Entscheidungen und Fairness erhöhen die Akzeptanz auch bei Betroffenen, die anders entschieden hätten",
           "Konsequenz bei dauerhafter Blockade gehört in das Repertoire — als letztes Mittel und transparent kommuniziert"
         ],
-        "korrekt": [0, 1, 3, 4],
+        "korrekt": [
+          0,
+          1,
+          3,
+          4
+        ],
         "erklaerung": "Widerstand ist nicht Feind, sondern Diagnoseinformation: Was sind die echten Sorgen (Identitätsverlust? Überlastung? Misstrauen?). Wirksame Hebel sind Co-Design, transparente Entscheidungen, fairer Umgang und — wenn nötig — Konsequenz bei dauerhafter Blockade. Ignorieren und Druck verstärken den Widerstand, vertreiben Multiplikatoren und beschädigen Vertrauen langfristig."
       }
     }

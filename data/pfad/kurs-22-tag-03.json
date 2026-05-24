@@ -12,8 +12,8 @@
       "youtube_query": "plattform marktmodell mehrseitig deutsch einführung",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Was unterscheidet ein Plattform-Geschäftsmodell strukturell von einem linearen Geschäftsmodell?",
         "typ": "single",
+        "frage": "Was unterscheidet ein Plattform-Geschäftsmodell strukturell von einem linearen Geschäftsmodell?",
         "optionen": [
           "Es nutzt ausschließlich digitale Kanäle",
           "Es schafft Wert durch Vermittlung zwischen mehreren Marktseiten — nicht durch Eigenproduktion",
@@ -28,19 +28,19 @@
       "nr": 2,
       "typ": "text",
       "titel": "Akteursgruppen und ihre Nutzenversprechen",
-      "inhalt": "Eine Plattform funktioniert nur, wenn jede beteiligte Akteursgruppe einen klaren, dauerhaften Vorteil zieht. Typischerweise sind sieben Akteursgruppen relevant: ‚Anbieter‘ (stellen ein), ‚Nachfrager‘ (kaufen/nutzen), ‚Partner‘ (erweiternde Leistungen wie Versand, Versicherung), ‚Plattformbetreiber‘ (gestaltet und steuert), ‚Zahlungsdienstleister‘, ‚Datenpartner‘ und ‚Serviceanbieter‘ (Customer Service, Streitschlichtung). Für jede Gruppe muss ein konkretes Nutzenversprechen formulierbar sein — vage ‚mehr Sichtbarkeit‘ reicht nicht. Eine Plattform-Strategie beginnt mit dieser Tabelle, nicht mit der Technik. Wenn die Spalte ‚Nutzenversprechen‘ für eine Gruppe leer bleibt, fehlt die Geschäftslogik.",
+      "inhalt": "Eine Plattform funktioniert nur, wenn jede beteiligte Akteursgruppe einen klaren, dauerhaften Vorteil zieht. Typischerweise sind sieben Akteursgruppen relevant: „Anbieter” (stellen ein), „Nachfrager” (kaufen/nutzen), „Partner” (erweiternde Leistungen wie Versand, Versicherung), „Plattformbetreiber” (gestaltet und steuert), „Zahlungsdienstleister”, „Datenpartner” und „Serviceanbieter” (Customer Service, Streitschlichtung). Für jede Gruppe muss ein konkretes Nutzenversprechen formulierbar sein — vage „mehr Sichtbarkeit” reicht nicht. Eine Plattform-Strategie beginnt mit dieser Tabelle, nicht mit der Technik. Wenn die Spalte „Nutzenversprechen” für eine Gruppe leer bleibt, fehlt die Geschäftslogik.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussagen über Plattformakteure sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Jede Akteursgruppe braucht ein klares, konkretes Nutzenversprechen",
-          "Es reicht, wenn nur eine Marktseite überzeugt wird",
-          "Die Plattform-Strategie beginnt mit der Tabelle der Nutzenversprechen, nicht mit der Technik",
-          "Wenn eine Akteursgruppe kein klares Nutzenversprechen hat, fehlt die Geschäftslogik"
+        "typ": "zuordnung",
+        "frage": "Ordnen Sie für die Plattform CraftConnect (Handwerker-Vermittlung) die Akteursgruppen ihrem typischen Nutzenversprechen zu.",
+        "paare": [
+          {"links": "Handwerksbetriebe (Anbieterseite)", "rechts": "Planbare, qualitativ passende Aufträge ohne Akquise-Aufwand"},
+          {"links": "Privatkunden & Hausverwaltungen (Nachfragerseite)", "rechts": "Geprüfte Handwerker mit transparenten Bewertungen und schneller Verfügbarkeit"},
+          {"links": "Zahlungsdienstleister", "rechts": "Provision auf jede vermittelte Transaktion, niedriges Ausfallrisiko durch Treuhand"},
+          {"links": "Versicherungs-/Garantiepartner", "rechts": "Zugang zu vorqualifizierten Endkunden für Zusatzleistungen"},
+          {"links": "Plattformbetreiber", "rechts": "Vermittlungsgebühr, Datenhoheit und langfristige Ökosystem-Kontrolle"}
         ],
-        "korrekt": [0, 2, 3],
-        "erklaerung": "Eine Plattform ohne Nutzenversprechen für jede beteiligte Marktseite ist nicht tragfähig — die fehlende Seite wandert ab und das Modell kippt. Falsch ist Option 2: ‚nur eine Seite überzeugen‘ reicht nicht für eine mehrseitige Plattform."
+        "erklaerung": "Wenn ein Nutzenversprechen für eine Gruppe vage oder leer bleibt, fehlt die Geschäftslogik. Reife Plattformstrategien füllen jede Zeile dieser Tabelle bevor das erste Wireframe gezeichnet wird."
       }
     },
     {
@@ -51,8 +51,8 @@
       "youtube_query": "netzwerkeffekte digitale plattformen deutsch direkt indirekt",
       "dauer_min": 9,
       "aufgabe": {
-        "frage": "Welche Aussage über direkte und indirekte Netzwerkeffekte trifft zu?",
         "typ": "single",
+        "frage": "Welche Aussage über direkte und indirekte Netzwerkeffekte trifft zu?",
         "optionen": [
           "Direkte Netzwerkeffekte sind immer wertvoller",
           "Direkte Netzwerkeffekte wirken innerhalb einer Nutzergruppe (z. B. WhatsApp: mehr Nutzer = wertvoller für alle), indirekte zwischen Marktseiten (z. B. mehr Anbieter = attraktiver für Nachfrager)",
@@ -60,26 +60,25 @@
           "Beide sind identisch"
         ],
         "korrekt": 1,
-        "erklaerung": "Direkte Netzwerkeffekte sind same-side (innerhalb einer Gruppe), indirekte sind cross-side (zwischen Marktseiten). Letztere sind die typische Dynamik mehrseitiger Plattformen und besonders relevant für B2B-Plattformen mit Anbieter- und Nachfragerseite."
+        "erklaerung": "Direkte Netzwerkeffekte sind same-side (innerhalb einer Gruppe), indirekte sind cross-side (zwischen Marktseiten). Letztere sind die typische Dynamik mehrseitiger Plattformen und besonders relevant für B2B-Plattformen wie MachineHub mit Ersatzteil- und Wartungsseite."
       }
     },
     {
       "nr": 4,
       "typ": "text",
       "titel": "Positive und negative Netzwerkeffekte",
-      "inhalt": "Netzwerkeffekte sind nicht automatisch positiv. ‚Negative Netzwerkeffekte‘ entstehen, wenn mehr Teilnehmer das Erlebnis verschlechtern: Zu viele Anbieter mit niedriger Qualität verwässern den Wert für Nachfrager. Zu viele unqualifizierte Anfragen frustrieren Anbieter. Anonymität auf großen Plattformen senkt Vertrauen. Wer Netzwerkeffekte plant, muss auch deren Schattenseiten antizipieren und mit Governance-Regeln gegensteuern. Vier Effekttypen entstehen gleichzeitig: ‚Same-Side positiv‘ (mehr Nutzer ziehen mehr Nutzer derselben Gruppe an), ‚Same-Side negativ‘ (mehr Verkäufer verdrängen sich gegenseitig), ‚Cross-Side positiv‘ (mehr Anbieter = mehr Nachfrager) und ‚Cross-Side negativ‘ (mehr Werbung stört Zuschauer). Reife Plattform-Strategien kennen alle vier Wirkungen für ihren Kontext und steuern sie aktiv.",
+      "inhalt": "Netzwerkeffekte sind nicht automatisch positiv. „Negative Netzwerkeffekte” entstehen, wenn mehr Teilnehmer das Erlebnis verschlechtern: Zu viele Anbieter mit niedriger Qualität verwässern den Wert für Nachfrager. Zu viele unqualifizierte Anfragen frustrieren Anbieter. Anonymität auf großen Plattformen senkt Vertrauen. Wer Netzwerkeffekte plant, muss auch deren Schattenseiten antizipieren und mit Governance-Regeln gegensteuern. Vier Effekttypen entstehen gleichzeitig: „Same-Side positiv” (mehr Nutzer ziehen mehr Nutzer derselben Gruppe an), „Same-Side negativ” (mehr Verkäufer verdrängen sich gegenseitig), „Cross-Side positiv” (mehr Anbieter = mehr Nachfrager) und „Cross-Side negativ” (mehr Werbung stört Zuschauer). Reife Plattform-Strategien kennen alle vier Wirkungen für ihren Kontext und steuern sie aktiv.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Was ist ein typischer negativer Netzwerkeffekt auf einer B2B-Plattform?",
-        "typ": "single",
-        "optionen": [
-          "Mehr Anbieter machen die Plattform immer attraktiver",
-          "Zu viele Anbieter mit niedriger Qualität verwässern den Wert für Nachfrager — Vertrauen sinkt",
-          "Plattformen wachsen immer linear",
-          "Negative Netzwerkeffekte gibt es nicht"
+        "typ": "lueckentext",
+        "frage": "Vervollständigen Sie die Typologie der Netzwerkeffekte:",
+        "text": "Netzwerkeffekte wirken in vier Richtungen. {0}-Side positiv: mehr Nutzer derselben Gruppe ziehen weitere Nutzer dieser Gruppe an (Beispiel: WhatsApp). {1}-Side positiv: eine Marktseite macht die Plattform für die andere attraktiver (Beispiel: mehr Anbieter = mehr Nachfrager). Eine reife Plattformstrategie kennt zusätzlich die beiden {2}-Effekte und steuert sie aktiv mit Governance-Regeln.",
+        "luecken": [
+          {"antwort": "Same", "alternativen": ["same", "Gleichseiten", "Einseitig"]},
+          {"antwort": "Cross", "alternativen": ["cross", "Zweiseitig", "Mehrseitig"]},
+          {"antwort": "negativen", "alternativen": ["negativ", "schädlichen"]}
         ],
-        "korrekt": 1,
-        "erklaerung": "Qualitätsverwässerung durch unkontrolliertes Anbieter-Wachstum ist der häufigste negative Netzwerkeffekt. Lösung: aktive Anbieter-Qualitätskontrolle, klare Verhaltensregeln, transparente Bewertungen — bevor das Vertrauen kippt."
+        "erklaerung": "Same-Side und Cross-Side, jeweils positiv und negativ — vier Wirkungen, die parallel laufen. Wer nur die positiven sieht, baut Governance zu spät auf. Lösung gegen negative Cross-Side-Effekte: aktive Anbieter-Qualitätskontrolle, klare Verhaltensregeln, transparente Bewertungen."
       }
     },
     {
@@ -90,8 +89,8 @@
       "youtube_query": "henne ei problem plattform start deutsch",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Welche der folgenden Strategien sind klassische Lösungen des Henne-Ei-Problems?",
         "typ": "multi",
+        "frage": "Welche der folgenden Strategien sind klassische Lösungen des Henne-Ei-Problems?",
         "optionen": [
           "Seitenpriorisierung — eine Seite zuerst aktiv aufbauen",
           "Subventionierung einer Seite (z. B. Anbieter kostenlos)",
@@ -99,26 +98,20 @@
           "Auf das Beste hoffen, ohne aktive Maßnahmen"
         ],
         "korrekt": [0, 1, 2],
-        "erklaerung": "Seitenpriorisierung, Subventionierung und Nischenstart sind die drei klassischen Henne-Ei-Lösungen. Plattformen werden oft Kombinationen davon nutzen. ‚Hoffen‘ ist keine Strategie — viele Plattformen scheitern genau daran."
+        "erklaerung": "Seitenpriorisierung, Subventionierung und Nischenstart sind die drei klassischen Henne-Ei-Lösungen. Plattformen werden oft Kombinationen davon nutzen. „Hoffen” ist keine Strategie — viele Plattformen scheitern genau daran. MachineHub würde z. B. zuerst 20–30 geprüfte Wartungspartner gewinnen und mit Bestandskunden starten."
       }
     },
     {
       "nr": 6,
       "typ": "text",
       "titel": "Launch-Strategien und Erfolgsfaktoren",
-      "inhalt": "Sechs Launch-Ansätze stehen zur Verfügung: ‚Nischenstart‘ (kleine Untergruppe ausreichend dicht aufbauen), ‚Pilotmarkt‘ (eine Region vollständig bedienen), ‚Angebotsseite zuerst‘ (Anbieter mit Subvention), ‚Nachfrageseite zuerst‘ (Bestandskunden zuerst), ‚Kuratierter Start‘ (manuelle Auswahl, hohe Qualität) und ‚Partnerschaftsstart‘ (etablierter Partner bringt eine Seite mit). Sechs Erfolgsfaktoren entscheiden über das Gelingen: ‚Fokus‘ (nicht zu breit), ‚Vertrauen‘ (von Anfang an), ‚Qualität‘ (lieber weniger gute als viele schlechte), ‚einfache Nutzung‘ (Onboarding-Reibung minimieren), ‚klare Regeln‘ (früh definieren) und ‚messbare Aktivierung‘ (klare Definition wann ein Nutzer ‚aktiv‘ ist). Die häufigste Falle: zu groß starten — dünne Verteilung verhindert Netzwerkeffekte, beide Seiten verlieren Wert und gehen wieder.",
+      "inhalt": "Sechs Launch-Ansätze stehen zur Verfügung: „Nischenstart” (kleine Untergruppe ausreichend dicht aufbauen), „Pilotmarkt” (eine Region vollständig bedienen), „Angebotsseite zuerst” (Anbieter mit Subvention), „Nachfrageseite zuerst” (Bestandskunden zuerst), „Kuratierter Start” (manuelle Auswahl, hohe Qualität) und „Partnerschaftsstart” (etablierter Partner bringt eine Seite mit). Sechs Erfolgsfaktoren entscheiden über das Gelingen: „Fokus” (nicht zu breit), „Vertrauen” (von Anfang an), „Qualität” (lieber weniger gute als viele schlechte), „einfache Nutzung” (Onboarding-Reibung minimieren), „klare Regeln” (früh definieren) und „messbare Aktivierung” (klare Definition wann ein Nutzer „aktiv” ist). Die häufigste Falle: zu groß starten — dünne Verteilung verhindert Netzwerkeffekte, beide Seiten verlieren Wert und gehen wieder.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welcher Launch-Fehler ist in der Praxis am häufigsten — und führt am häufigsten zum Scheitern?",
-        "typ": "single",
-        "optionen": [
-          "Zu klein starten",
-          "Zu groß starten — dünne Verteilung verhindert Netzwerkeffekte, beide Seiten verlieren Wert",
-          "Zu viel Vertrauen aufbauen",
-          "Zu wenig Werbung"
-        ],
-        "korrekt": 1,
-        "erklaerung": "‚Lieber dicht in einer Nische als dünn überall‘ ist die Faustregel. Eine Plattform mit 30 aktiven Anbietern und 200 Nachfragern in einer Stadt schlägt 300 Anbieter und 2.000 Nachfrager verteilt über Deutschland — Netzwerkeffekte brauchen Dichte, nicht Reichweite."
+        "typ": "text",
+        "frage": "MachineHub steht vor der Entscheidung zwischen vier Plattform-Optionen (A: reiner Ersatzteil-Marktplatz, B: Ersatzteile + Wartungsdienstleister, C: geschlossenes Kundenportal nur für Bestandskunden, D: offenes Ökosystem). Welcher Launch-Ansatz und welche Option würden Sie wählen? Begründen Sie aus Henne-Ei- und Fokus-Perspektive.",
+        "musterloesung": "Empfehlung: Option B (Ersatzteile + Wartungsdienstleister) als fokussierter Nischenstart kombiniert mit Partnerschaftsstart.\n\nWarum Option B und nicht A, C oder D? Option A (reiner Ersatzteil-Marktplatz) ist schnell umsetzbar, aber strukturell schwach: er konkurriert direkt mit Amazon Business und größeren Industriemarktplätzen — Preisvergleich pur, keine Differenzierung, keine echten indirekten Netzwerkeffekte. Option C (geschlossenes Kundenportal) ist risikoarm, erzeugt aber keine Plattformdynamik — es bleibt ein Webshop für Bestandskunden. Option D (offenes Ökosystem) ist langfristig das attraktivste Ziel, aber für den Start zu komplex: zu viele Akteure parallel überzeugen, zu hohes Henne-Ei-Risiko, zu hoher Kapitalbedarf.\n\nOption B löst das Henne-Ei-Problem strukturell besser, weil zwei Seiten zusammengeführt werden, die wechselseitig Wert erzeugen: mehr Wartungspartner machen die Plattform für Produktionsbetriebe attraktiver (kürzere Stillstandszeiten); mehr Produktionsbetriebe machen sie für Wartungspartner attraktiver (planbare Auslastung). Das ist ein echter indirekter Netzwerkeffekt, der ein reiner Marktplatz nicht hätte.\n\nLaunch-Ansatz: Nischenstart kombiniert mit Partnerschaftsstart. Konkret heißt das: (1) eine Pilotregion auswählen, (2) nur 2–3 kritische Ersatzteilgruppen zulassen, (3) 20–30 manuell geprüfte Wartungspartner an Bord holen, (4) mit Bestandskunden starten (Nachfrageseite ist schon da). MachineHubs strategischer Vorteil ist der existierende Kundenstamm — diesen für den Henne-Ei-Sprung nutzen, nicht parallel von Null aufbauen.\n\nFokus-Trade-off: Bewusster Verzicht auf bundesweiten Launch in 9 Monaten. Senior-Level-Faustregel: lieber 30 aktive Wartungspartner und 200 Bestandskunden in einer Region als 300 Partner und 2.000 Kunden verteilt über Deutschland. Netzwerkeffekte brauchen Dichte, nicht Reichweite.",
+        "erklaerung": "Eine gute Antwort sollte (1) eine klare Option wählen und begründen warum die anderen nicht, (2) den Launch-Ansatz konkret benennen (Nischenstart + Partnerschaftsstart), (3) den Henne-Ei-Sprung über existierende Kundenbasis erkennen, (4) Dichte über Reichweite priorisieren."
       }
     },
     {
@@ -129,8 +122,8 @@
       "youtube_query": "digitale ökosysteme erklärung deutsch",
       "dauer_min": 9,
       "aufgabe": {
-        "frage": "Welche Aussagen über Plattform-Ökosysteme und Governance sind korrekt?",
         "typ": "multi",
+        "frage": "Welche Aussagen über Plattform-Ökosysteme und Governance sind korrekt?",
         "optionen": [
           "Eine Plattform ist die Infrastruktur, ein Ökosystem ist die Gesamtheit aller Teilnehmer plus Regeln, Anreize und Datenflüsse",
           "Governance ist Bürokratie und sollte vermieden werden",
@@ -138,7 +131,7 @@
           "Anreize müssen mit Gegen-Mechanismen gekoppelt sein (analog zu Goodhart-Schutz bei KPIs)"
         ],
         "korrekt": [0, 2, 3],
-        "erklaerung": "Plattform ist Infrastruktur, Ökosystem ist die gesteuerte Gesamtheit. Vertrauen ist Kernwährung. Anreize ohne Kopplung erzeugen unerwünschtes Verhalten (z. B. ‚wer am meisten Bewertungen hat, kommt oben‘ → Bewertungen werden gekauft). Governance ist Wettbewerbsvorteil, keine Bürokratie."
+        "erklaerung": "Plattform ist Infrastruktur, Ökosystem ist die gesteuerte Gesamtheit. Vertrauen ist Kernwährung. Anreize ohne Kopplung erzeugen unerwünschtes Verhalten (z. B. „wer am meisten Bewertungen hat, kommt oben” → Bewertungen werden gekauft). Governance ist Wettbewerbsvorteil, keine Bürokratie."
       }
     }
   ]

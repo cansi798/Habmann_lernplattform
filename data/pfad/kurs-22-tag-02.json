@@ -12,8 +12,8 @@
       "youtube_query": "lean startup methode deutsch erklärt eric ries",
       "dauer_min": 8,
       "aufgabe": {
-        "frage": "Was ist der zentrale Vorteil des Build-Measure-Learn-Zyklus bei einer Plattform-Einführung?",
         "typ": "single",
+        "frage": "Was ist der zentrale Vorteil des Build-Measure-Learn-Zyklus bei einer Plattform-Einführung?",
         "optionen": [
           "Maximaler Rollout in kürzester Zeit",
           "Schnelles Lernen aus realem Marktfeedback in einem kleinen, kontrollierten Pilot",
@@ -21,26 +21,27 @@
           "Reduktion der Notwendigkeit, KPIs zu definieren"
         ],
         "korrekt": 1,
-        "erklaerung": "Lean Startup setzt darauf, mit einem Minimum Viable Product/Pilot real zu testen, statt 12 Monate vorab zu planen. Der Wert liegt darin, schneller aus echtem Marktfeedback zu lernen — auch wenn es bedeutet, mit weniger Funktionen zu starten."
+        "erklaerung": "Lean Startup setzt darauf, mit einem Minimum Viable Product/Pilot real zu testen, statt 12 Monate vorab zu planen. Der Wert liegt darin, schneller aus echtem Marktfeedback zu lernen — auch wenn es bedeutet, mit weniger Funktionen zu starten. Bei SmartOffice24 würde das bedeuten: Marktplatz-Pilot in 3 Monaten mit kleinem Sortiment, nicht Vollausbau."
       }
     },
     {
       "nr": 2,
       "typ": "text",
       "titel": "Die sechs Implementierungsphasen",
-      "inhalt": "Eine seriöse Plattformimplementierung läuft in sechs Phasen — nicht alle gleich lang, aber alle wichtig. (1) ‚Zielbild‘ klärt Zweck, Zielgruppe und Erfolgskriterien (2–6 Wochen). (2) ‚Pilotierung‘ ist die kleine Testumsetzung mit ausgewähltem Sortiment und Kunden (6–12 Wochen). (3) ‚Rollout‘ ist die volle Einführung im definierten Scope (3–6 Monate). (4) ‚Betrieb‘ ist das stabile Tagesgeschäft mit klaren Rollen — dauerhaft. (5) ‚Skalierung‘ erweitert Sortiment, Reichweite und Kanäle (6–18 Monate). (6) ‚Optimierung‘ ist kontinuierliche Verbesserung über KPIs und Tests — ebenfalls dauerhaft. Die typische Falle ist es, Phasen zu überspringen oder zu vermischen. ‚Wir sind im Rollout, aber das Zielbild ist noch unklar‘ bedeutet faktisch: das Zielbild fehlt — der Rollout ist Aktivismus.",
+      "inhalt": "Eine seriöse Plattformimplementierung läuft in sechs Phasen — nicht alle gleich lang, aber alle wichtig. Erstens „Zielbild” klärt Zweck, Zielgruppe und Erfolgskriterien (2–6 Wochen). Zweitens „Pilotierung” ist die kleine Testumsetzung mit ausgewähltem Sortiment und Kunden (6–12 Wochen). Drittens „Rollout” ist die volle Einführung im definierten Scope (3–6 Monate). Viertens „Betrieb” ist das stabile Tagesgeschäft mit klaren Rollen — dauerhaft. Fünftens „Skalierung” erweitert Sortiment, Reichweite und Kanäle (6–18 Monate). Sechstens „Optimierung” ist kontinuierliche Verbesserung über KPIs und Tests — ebenfalls dauerhaft. Die typische Falle ist es, Phasen zu überspringen oder zu vermischen. „Wir sind im Rollout, aber das Zielbild ist noch unklar” bedeutet faktisch: das Zielbild fehlt — der Rollout ist Aktivismus.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Aussagen über die sechs Phasen sind korrekt?",
-        "typ": "multi",
-        "optionen": [
-          "Betrieb und Optimierung haben kein Enddatum — sie laufen dauerhaft",
-          "Pilotierung sollte 12–18 Monate dauern, um alle Risiken zu eliminieren",
-          "Phasen zu überspringen rächt sich später meist teuer",
-          "Das Zielbild beantwortet u. a. ‚Welche Trade-offs akzeptieren wir bewusst?‘"
+        "typ": "zuordnung",
+        "frage": "Ordnen Sie die sechs Implementierungsphasen ihrer typischen Zeitdauer und Hauptfrage zu.",
+        "paare": [
+          {"links": "Zielbild (2–6 Wochen)", "rechts": "Was soll die Plattform leisten, für wen, mit welchen Erfolgskriterien?"},
+          {"links": "Pilotierung (6–12 Wochen)", "rechts": "Funktioniert das Modell mit echtem Sortiment und echten Kunden?"},
+          {"links": "Rollout (3–6 Monate)", "rechts": "Wie führen wir das Modell im definierten Scope flächig ein?"},
+          {"links": "Betrieb (dauerhaft)", "rechts": "Wer ist im Tagesgeschäft wofür verantwortlich?"},
+          {"links": "Skalierung (6–18 Monate)", "rechts": "Wie erweitern wir Sortiment, Reichweite und Kanäle?"},
+          {"links": "Optimierung (dauerhaft)", "rechts": "Welche KPIs zeigen Verbesserungspotenzial?"}
         ],
-        "korrekt": [0, 2, 3],
-        "erklaerung": "Betrieb und Optimierung sind Dauerzustände — kein Projektmodus. Phasen-Überspringen ist die häufigste Falle. Das Zielbild ist nur dann tragfähig, wenn es bewusste Trade-offs benennt. Falsch ist Option 2: Pilotierung sollte bewusst kurz sein (6–12 Wochen), um schnell zu lernen."
+        "erklaerung": "Phasen-Überspringen ist die häufigste Falle der Plattformimplementierung. Betrieb und Optimierung sind Dauerzustände — kein Projektmodus. Das Zielbild ist nur dann tragfähig, wenn es bewusste Trade-offs benennt."
       }
     },
     {
@@ -51,8 +52,8 @@
       "youtube_query": "conversion rate optimierung e-commerce deutsch shopify tipps",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welcher Optimierungs-Hebel hat in der Regel den schnellsten Effekt auf die Conversion Rate?",
         "typ": "single",
+        "frage": "Welcher Optimierungs-Hebel hat in der Regel den schnellsten Effekt auf die Conversion Rate?",
         "optionen": [
           "Mehr Werbebudget für Reichweite",
           "Checkout-Optimierung (weniger Schritte, klare Vertrauenselemente)",
@@ -60,26 +61,25 @@
           "Mehr Produkte ins Sortiment aufnehmen"
         ],
         "korrekt": 1,
-        "erklaerung": "Checkout-Optimierung wirkt direkt am letzten und kritischsten Schritt vor der Conversion und bringt in der Praxis oft 20–40 % mehr Abschlüsse. Mehr Werbebudget steigert Reichweite, nicht Conversion. Markenstrategie und Sortimentsausbau wirken auf andere Hebel."
+        "erklaerung": "Checkout-Optimierung wirkt direkt am letzten und kritischsten Schritt vor der Conversion und bringt in der Praxis oft 20–40 % mehr Abschlüsse. Mehr Werbebudget steigert Reichweite, nicht Conversion. Im SmartOffice24-Fall mit Conversion Rate 1,0 % und vielen Abbrüchen im Checkout liegt hier der schnellste Hebel."
       }
     },
     {
       "nr": 4,
       "typ": "text",
       "titel": "KPI-Cluster: Reichweite, Conversion, Lifetime",
-      "inhalt": "Plattform-KPIs lassen sich in drei klare Cluster sortieren. ‚Reichweite‘ misst, wer überhaupt kommt: Besucher, Produktaufrufe, Traffic-Quellen, Reichweiten-Kosten. ‚Conversion‘ misst, was passiert: Leads, Conversion Rate, durchschnittlicher Warenkorb, Customer Acquisition Cost (CAC). ‚Lifetime‘ misst, was langfristig hängenbleibt: Wiederkaufrate, Customer Lifetime Value (CLV), Churn Rate und das wichtigste Verhältnis CLV/CAC. Die Faustregel: Eine Plattform ist tragfähig, wenn der CLV mindestens das Dreifache der CAC erreicht — bei CLV/CAC < 3 ist langfristig keine Profitabilität zu erwarten. Vorsicht vor Vanity Metrics: ‚Wir haben 500.000 Besucher‘ ist nur dann eine Steuerungs-Kennzahl, wenn ich daraus eine Entscheidung ableiten kann.",
+      "inhalt": "Plattform-KPIs lassen sich in drei klare Cluster sortieren. „Reichweite” misst, wer überhaupt kommt: Besucher, Produktaufrufe, Traffic-Quellen, Reichweiten-Kosten. „Conversion” misst, was passiert: Leads, Conversion Rate, durchschnittlicher Warenkorb, Customer Acquisition Cost (CAC). „Lifetime” misst, was langfristig hängenbleibt: Wiederkaufrate, Customer Lifetime Value (CLV), Churn Rate und das wichtigste Verhältnis CLV/CAC. Die Faustregel: Eine Plattform ist tragfähig, wenn der CLV mindestens das Dreifache der CAC erreicht — bei CLV/CAC kleiner 3 ist langfristig keine Profitabilität zu erwarten. Vorsicht vor Vanity Metrics: „Wir haben 500.000 Besucher” ist nur dann eine Steuerungs-Kennzahl, wenn ich daraus eine Entscheidung ableiten kann.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Kennzahl ist KEINE Vanity Metric — sondern eine echte Steuerungs-Kennzahl?",
-        "typ": "single",
-        "optionen": [
-          "Anzahl der Newsletter-Abonnenten ohne Öffnungs- oder Klickrate",
-          "Verhältnis Customer Lifetime Value zu Customer Acquisition Cost (CLV/CAC)",
-          "Anzahl Social-Media-Follower ohne Conversion-Bezug",
-          "Anzahl Besucher pro Monat ohne weitere Kontextzahlen"
+        "typ": "lueckentext",
+        "frage": "Vervollständigen Sie die KPI-Faustregel für tragfähige Plattformen:",
+        "text": "Eine Plattform ist langfristig tragfähig, wenn der {0} mindestens das {1}-fache der {2} erreicht. Bei einem Verhältnis kleiner als 1 verliert die Plattform mit jedem neuen Kunden Geld.",
+        "luecken": [
+          {"antwort": "CLV", "alternativen": ["Customer Lifetime Value", "Kundenlebenswert"]},
+          {"antwort": "drei", "alternativen": ["3", "Drei"]},
+          {"antwort": "CAC", "alternativen": ["Customer Acquisition Cost", "Kundenakquisitionskosten", "Kundenakquise-Kosten"]}
         ],
-        "korrekt": 1,
-        "erklaerung": "CLV/CAC ist die wirkungsrelevanteste Plattform-Kennzahl — daraus folgen direkte Entscheidungen über Wachstum, Profitabilität und Investitionen. Die anderen drei sind klassische Vanity Metrics: Sie sehen beeindruckend aus, aber Verdoppelung oder Halbierung ändert keine konkrete Entscheidung."
+        "erklaerung": "CLV/CAC ≥ 3 ist die etablierte Tragfähigkeitsgrenze. Unter 3 ist die Plattform „grenzwertig”, unter 1 schreibt sie strukturell rote Zahlen. Die Kennzahl ist deshalb so wichtig, weil sie Wachstum, Profitabilität und Investitionsentscheidungen gleichzeitig verbindet."
       }
     },
     {
@@ -90,27 +90,21 @@
       "youtube_query": "customer lifetime value clv einfach erklärt deutsch",
       "dauer_min": 7,
       "aufgabe": {
-        "frage": "Welche Faustregel gilt für das Verhältnis CLV/CAC bei einer tragfähigen Plattformstrategie?",
-        "typ": "single",
-        "optionen": [
-          "CLV/CAC sollte mindestens 0,5 betragen",
-          "CLV/CAC sollte mindestens 1 betragen",
-          "CLV/CAC sollte mindestens 3 betragen",
-          "CLV/CAC ist eine reine Vanity Metric ohne Steuerungswert"
-        ],
-        "korrekt": 2,
-        "erklaerung": "Die etablierte Faustregel: CLV/CAC ≥ 3 ist tragfähig, CLV/CAC < 1 bedeutet, dass die Kundenakquise mehr kostet als der Kunde langfristig einbringt — also direkter Verlust. Zwischen 1 und 3 ist es ‚grenzwertig‘ und braucht Verbesserung."
+        "typ": "text",
+        "frage": "BauTech Connect erzielt im B2B-Shop einen Warenkorb von 760 €, Conversion 1,24 %, Wiederkaufrate 18 % — gleichzeitig 1.900 Bestellungen auf externen Marktplätzen bei 230 € Warenkorb und kaum Kundendatenzugang. Warum kann der eigene Shop strategisch wertvoller sein als der Marktplatz, obwohl der Marktplatz mehr Bestellungen liefert? Argumentieren Sie über CLV und CAC.",
+        "musterloesung": "Die Marktplatz-Bestellungen sehen volumenstark aus, aber der strategische Wert pro Kunde ist deutlich niedriger — aus drei Gründen.\n\nErstens: Der CLV eines Marktplatzkunden ist strukturell gedeckelt. Ohne Kundendatenzugang gibt es kein Nurturing, keine gezielten Folgeangebote, keine Wiederkaufimpulse außerhalb der Plattform-Logik. Der Kunde gehört der Plattform, nicht BauTech Connect. Bei 230 € Warenkorb und ohne aktive Bindung liegt der CLV oft nahe am Erstkaufwert.\n\nZweitens: Im eigenen Shop ist der CLV strukturell höher. 760 € Warenkorb plus 18 % Wiederkaufrate sind belastbare Bausteine — vor allem, weil BauTech Connect den Kunden direkt nachfassen, Cross-Sell-Angebote machen und nach 6–12 Monaten erneut ansprechen kann. Bei realistischen Annahmen (z. B. 2,5 Käufe pro Kundenlebensdauer im Schnitt) liegt der CLV bei 1.500–2.000 € — vielfach höher als auf dem Marktplatz.\n\nDrittens: Der CAC unterscheidet sich. Auf dem Marktplatz zahlt BauTech Connect Provision pro Verkauf — laufend, nicht einmalig. Eine 10 %-Provision auf 230 € sind 23 € pro Bestellung, immer wieder. Im eigenen Shop ist der CAC einmalig (z. B. 80 € pro Kunde über SEA), danach kommen Folgekäufe ohne neuen CAC dazu. Das Verhältnis CLV/CAC verbessert sich mit jedem Wiederkauf — auf dem Marktplatz nicht.\n\nFazit: Marktplatz-Bestellungen sind Umsatz, eigener Shop ist Asset. Wer langfristig profitabel skalieren will, investiert in die Kanäle mit niedrigerem laufenden CAC und besserem Kundendatenzugriff — auch wenn die Bestellzahlen kurzfristig kleiner aussehen.",
+        "erklaerung": "Eine gute Antwort macht klar: (1) CLV ist nicht der Erstkauf, sondern die Summe aller zu erwartenden Käufe; (2) ohne Datenzugang sinkt die Wiederkaufquote strukturell; (3) Marktplatz-Provision ist ein wiederkehrender CAC, nicht ein einmaliger — das zerstört das CLV/CAC-Verhältnis langfristig."
       }
     },
     {
       "nr": 6,
       "typ": "text",
       "titel": "Strategische Risiken: Lock-in, Datenhoheit, Regulatorik",
-      "inhalt": "Plattformstrategie hat fünf strukturelle Risiken, die sich nicht ‚wegoptimieren‘ lassen — sie müssen bewusst entschieden werden. (1) ‚Plattform-Lock-in‘: Je tiefer die Integration in eine externe Plattform, desto teurer der Ausstieg (Shapiro & Varian, 1999). (2) ‚Datenverlust‘: Externe Plattformen behalten Kundendaten — wir sehen Bestellungen, aber selten das vollständige Verhalten. (3) ‚Marktpreis-Erosion‘: Vergleichsdruck auf Marktplätzen führt zu sinkenden Margen. (4) ‚Technische Komplexität‘: Mit jedem Kanal wächst der Pflegeaufwand exponentiell. (5) ‚Organisatorische Überforderung‘: Wenn alle Bereiche ‚ihre‘ Plattform-Initiative haben, entstehen Silos. Reife zeigt sich am Plattform-Verlust-Test: Was passiert, wenn die wichtigste externe Plattform morgen rauswirft? Wenn das existenzbedrohend ist, ist das Risiko nicht ausreichend gemanagt.",
+      "inhalt": "Plattformstrategie hat fünf strukturelle Risiken, die sich nicht „wegoptimieren” lassen — sie müssen bewusst entschieden werden. Erstens „Plattform-Lock-in”: Je tiefer die Integration in eine externe Plattform, desto teurer der Ausstieg (Shapiro & Varian, 1999). Zweitens „Datenverlust”: Externe Plattformen behalten Kundendaten — wir sehen Bestellungen, aber selten das vollständige Verhalten. Drittens „Marktpreis-Erosion”: Vergleichsdruck auf Marktplätzen führt zu sinkenden Margen. Viertens „Technische Komplexität”: Mit jedem Kanal wächst der Pflegeaufwand exponentiell. Fünftens „Organisatorische Überforderung”: Wenn alle Bereiche „ihre” Plattform-Initiative haben, entstehen Silos. Reife zeigt sich am Plattform-Verlust-Test: Was passiert, wenn die wichtigste externe Plattform morgen rauswirft? Wenn das existenzbedrohend ist, ist das Risiko nicht ausreichend gemanagt.",
       "dauer_min": 6,
       "aufgabe": {
-        "frage": "Welche Maßnahmen reduzieren Plattform-Lock-in aktiv?",
         "typ": "multi",
+        "frage": "Welche Maßnahmen reduzieren Plattform-Lock-in aktiv?",
         "optionen": [
           "Mindestens einen eigenen Direktkanal mit Datenhoheit aufbauen",
           "Den Umsatzanteil pro externer Plattform unter einer Schwelle (z. B. 30 %) halten",
@@ -129,8 +123,8 @@
       "youtube_query": "KI im B2B-Vertrieb deutsch webinar optimieren",
       "dauer_min": 9,
       "aufgabe": {
-        "frage": "Welche Aussagen über KI in der Plattformsteuerung sind korrekt?",
         "typ": "multi",
+        "frage": "Welche Aussagen über KI in der Plattformsteuerung sind korrekt?",
         "optionen": [
           "KI kann Preise dynamisch steuern, Lagerbestände prognostizieren und Marketing-Budget-Allokation optimieren",
           "Datenqualität wird mit KI unwichtig, weil KI Lücken automatisch schließt",

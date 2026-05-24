@@ -40,7 +40,12 @@
           "Die Schnittstelle ist versioniert und idempotent",
           "Der Service hat genau einen verantwortlichen Owner für Build und Run"
         ],
-        "korrekt": [0, 1, 3, 4],
+        "korrekt": [
+          0,
+          1,
+          3,
+          4
+        ],
         "erklaerung": "Gute Servicegrenzen folgen Geschäftsfähigkeiten (Bounded Contexts), erlauben lokale Änderungen ohne Kaskaden, definieren versionierte und idempotente Schnittstellen und haben einen klaren Owner. Geteilte Datenbanken zwischen Services sind ein typischer Antipattern — sie zerstören die Unabhängigkeit und führen zu verstecker Kopplung über Schema-Änderungen."
       }
     },
@@ -66,7 +71,7 @@
     },
     {
       "nr": 4,
-      "typ": "zuordnung",
+      "typ": "text",
       "titel": "Deployment-Strategien — Risiko vs. Geschwindigkeit",
       "inhalt": "Kubernetes ermöglicht verschiedene Rollout-Strategien. Jede hat ein eigenes Risiko-/Geschwindigkeitsprofil.",
       "dauer_min": 6,
@@ -74,10 +79,22 @@
         "frage": "Ordnen Sie jeder Deployment-Strategie ihre Kerncharakteristik zu.",
         "typ": "zuordnung",
         "paare": [
-          { "links": "Blue/Green Deployment", "rechts": "Zwei vollständige Umgebungen parallel; Umschalten per Router, Rollback durch Zurückschalten" },
-          { "links": "Canary Release", "rechts": "Neue Version erhält zunächst nur einen kleinen Prozentsatz des Traffics zur Risikoreduktion" },
-          { "links": "Rolling Update", "rechts": "Instanzen werden schrittweise ersetzt, alte und neue Version laufen kurzzeitig parallel" },
-          { "links": "Recreate", "rechts": "Alle alten Instanzen werden gestoppt, dann neue gestartet — Downtime in Kauf genommen" }
+          {
+            "links": "Blue/Green Deployment",
+            "rechts": "Zwei vollständige Umgebungen parallel; Umschalten per Router, Rollback durch Zurückschalten"
+          },
+          {
+            "links": "Canary Release",
+            "rechts": "Neue Version erhält zunächst nur einen kleinen Prozentsatz des Traffics zur Risikoreduktion"
+          },
+          {
+            "links": "Rolling Update",
+            "rechts": "Instanzen werden schrittweise ersetzt, alte und neue Version laufen kurzzeitig parallel"
+          },
+          {
+            "links": "Recreate",
+            "rechts": "Alle alten Instanzen werden gestoppt, dann neue gestartet — Downtime in Kauf genommen"
+          }
         ],
         "erklaerung": "Die Wahl der Strategie ist eine Senior-Entscheidung über Risiko und Verfügbarkeit. Blue/Green und Canary sind die sichersten Verfahren für kritische Services (Rollback in Minuten). Rolling Update ist der Default-Kompromiss. Recreate akzeptiert bewusst Downtime und ist nur bei Wartungsfenstern oder inkompatiblen Schemaänderungen sinnvoll."
       }
@@ -104,7 +121,7 @@
     },
     {
       "nr": 6,
-      "typ": "lueckentext",
+      "typ": "text",
       "titel": "Testpyramide und SLOs",
       "inhalt": "Eine ausgewogene Teststrategie folgt der Testpyramide: viele günstige Unit-Tests, weniger Integrationstests, wenige End-to-End-Tests. SLOs (Service Level Objectives) machen Betriebs-Qualität messbar.",
       "dauer_min": 6,
@@ -113,10 +130,34 @@
         "typ": "lueckentext",
         "text": "Die Testpyramide empfiehlt eine breite Basis aus schnellen {0}-Tests, eine mittlere Schicht aus {1}-Tests für Schnittstellen und nur wenige aufwändige {2}-Tests für Geschäftsabläufe. Im Betrieb beschreibt ein {3} die messbare Qualitätsanforderung an einen Service, zum Beispiel eine Verfügbarkeit von 99,9 Prozent.",
         "luecken": [
-          { "antwort": "Unit", "alternativen": ["unit"] },
-          { "antwort": "Integration", "alternativen": ["Integrations", "integration"] },
-          { "antwort": "E2E", "alternativen": ["End-to-End", "End to End", "e2e"] },
-          { "antwort": "SLO", "alternativen": ["Service Level Objective", "Service-Level-Objective"] }
+          {
+            "antwort": "Unit",
+            "alternativen": [
+              "unit"
+            ]
+          },
+          {
+            "antwort": "Integration",
+            "alternativen": [
+              "Integrations",
+              "integration"
+            ]
+          },
+          {
+            "antwort": "E2E",
+            "alternativen": [
+              "End-to-End",
+              "End to End",
+              "e2e"
+            ]
+          },
+          {
+            "antwort": "SLO",
+            "alternativen": [
+              "Service Level Objective",
+              "Service-Level-Objective"
+            ]
+          }
         ],
         "erklaerung": "Unit-Tests sind schnell und billig — sie bilden die breite Basis. Integrationstests prüfen Schnittstellen zwischen Services oder Modulen. E2E-Tests sichern den Geschäftsfluss, sind aber teuer und fragil — daher sparsam einsetzen (z. B. nur Happy Path und ein kritischer Fehlerfall). SLOs übersetzen Betriebsqualität in messbare Ziele (Verfügbarkeit, Latenz, Fehlerquote) und sind die Grundlage für Error Budgets und Eskalationsregeln."
       }
@@ -138,7 +179,12 @@
           "Architektur-Governance wird auf jede einzelne Codeänderung ausgedehnt",
           "Klare SLOs und Error Budgets steuern den Trade-off zwischen Geschwindigkeit und Stabilität"
         ],
-        "korrekt": [0, 1, 2, 4],
+        "korrekt": [
+          0,
+          1,
+          2,
+          4
+        ],
         "erklaerung": "Ein tragfähiges DevOps-Operating-Model kombiniert Produktteams mit echter Run-Verantwortung („you build it, you run it”), ein Plattformteam, das Standards bereitstellt (Inner Source statt Inner Bottleneck), eine schlanke Security-/Compliance-Funktion mit Baselines und Ausnahmeprozess sowie SLO-/Error-Budget-basierte Steuerung. Eine Architektur-Governance, die jede Codeänderung prüfen will, wird zum Engpass und verhindert die Skalierung."
       }
     }

@@ -40,7 +40,11 @@
           "Ohne WIP-Limits funktioniert das Pull-Prinzip nicht zuverlässig",
           "WIP-Limits erhöhen die Auslastung der Teammitglieder auf 100 Prozent"
         ],
-        "korrekt": [0, 1, 3],
+        "korrekt": [
+          0,
+          1,
+          3
+        ],
         "erklaerung": "WIP-Limits begrenzen pro Spalte, wie viele Aufgaben gleichzeitig in Arbeit sein dürfen — das macht Engpässe sichtbar (Spalten füllen sich) und erzwingt das Pull-Prinzip. Sie zielen nicht auf Personenkontrolle, sondern auf Flow-Optimierung. Eine Auslastung von 100 Prozent ist gerade nicht das Ziel — sie führt zu Wartezeiten und längeren Durchlaufzeiten."
       }
     },
@@ -66,7 +70,7 @@
     },
     {
       "nr": 4,
-      "typ": "lueckentext",
+      "typ": "text",
       "titel": "Scrum-Eckpunkte im Detail",
       "inhalt": "Scrum gibt dem Team einen klaren Rhythmus. Sprints dauern typischerweise wenige Wochen, jeder Sprint endet mit Review und Retrospektive, jedes Increment muss die Definition of Done erfüllen.",
       "dauer_min": 5,
@@ -75,10 +79,35 @@
         "typ": "lueckentext",
         "text": "Ein Scrum-Sprint dauert typischerweise {0} Wochen und endet mit einem Sprint {1}, in dem das Increment dem Product Owner und Stakeholdern gezeigt wird. Anschließend reflektiert das Team in der Sprint {2} seine Zusammenarbeit. Das Increment ist nur dann auslieferbar, wenn es die Definition of {3} erfüllt.",
         "luecken": [
-          { "antwort": "2", "alternativen": ["zwei", "1-4", "1 bis 4", "ein bis vier"] },
-          { "antwort": "Review", "alternativen": ["Sprint Review"] },
-          { "antwort": "Retrospektive", "alternativen": ["Retro", "Retrospective"] },
-          { "antwort": "Done", "alternativen": ["DoD", "Fertig"] }
+          {
+            "antwort": "2",
+            "alternativen": [
+              "zwei",
+              "1-4",
+              "1 bis 4",
+              "ein bis vier"
+            ]
+          },
+          {
+            "antwort": "Review",
+            "alternativen": [
+              "Sprint Review"
+            ]
+          },
+          {
+            "antwort": "Retrospektive",
+            "alternativen": [
+              "Retro",
+              "Retrospective"
+            ]
+          },
+          {
+            "antwort": "Done",
+            "alternativen": [
+              "DoD",
+              "Fertig"
+            ]
+          }
         ],
         "erklaerung": "Sprints dauern typischerweise 1–4 Wochen, mit 2 Wochen als häufigster Wahl. Das Sprint Review zeigt das Increment, die Sprint Retrospektive reflektiert das Wie der Zusammenarbeit. Die Definition of Done (DoD) ist die gemeinsame Vereinbarung des Teams, wann eine Arbeit wirklich fertig ist — sie ist die unverhandelbare Qualitätshürde."
       }
@@ -100,7 +129,11 @@
           "Reviews und Freigaben können in den Merge-Prozess verankert werden",
           "Manuelle Server-Konfigurationen am Produktivsystem sind weiterhin empfehlenswert"
         ],
-        "korrekt": [0, 1, 3],
+        "korrekt": [
+          0,
+          1,
+          3
+        ],
         "erklaerung": "IaC bringt drei Hebel: (1) Versionierung — Änderungen sind nachvollziehbar wie Code, (2) Reproduzierbarkeit — Umgebungen können aus dem Code neu erzeugt werden, (3) Governance — Freigaben werden in den Pull-Request- oder Merge-Prozess verankert (Vier-Augen-Prinzip). Sicherheitsprüfungen entfallen nicht, sondern werden in die Pipeline integriert. Manuelle Änderungen am Produktivsystem (sogenannte Snowflake-Server) sind der Gegenentwurf zu IaC und sollten unterbunden werden."
       }
     },
@@ -127,10 +160,22 @@
         "frage": "Ordnen Sie jeder DORA-Kennzahl die zutreffende Dimension und Beschreibung zu.",
         "typ": "zuordnung",
         "paare": [
-          { "links": "Lead Time for Changes", "rechts": "Geschwindigkeit — Zeit von Commit bis Produktion" },
-          { "links": "Deployment Frequency", "rechts": "Geschwindigkeit — wie oft wird in Produktion deployed" },
-          { "links": "Change Failure Rate", "rechts": "Stabilität — Anteil Releases mit Fehler oder Rollback" },
-          { "links": "Mean Time to Restore (MTTR)", "rechts": "Stabilität — Zeit bis Service nach Incident wiederhergestellt ist" }
+          {
+            "links": "Lead Time for Changes",
+            "rechts": "Geschwindigkeit — Zeit von Commit bis Produktion"
+          },
+          {
+            "links": "Deployment Frequency",
+            "rechts": "Geschwindigkeit — wie oft wird in Produktion deployed"
+          },
+          {
+            "links": "Change Failure Rate",
+            "rechts": "Stabilität — Anteil Releases mit Fehler oder Rollback"
+          },
+          {
+            "links": "Mean Time to Restore (MTTR)",
+            "rechts": "Stabilität — Zeit bis Service nach Incident wiederhergestellt ist"
+          }
         ],
         "erklaerung": "Die vier DORA-Kennzahlen messen zwei Dimensionen: Geschwindigkeit (Lead Time, Deployment Frequency) und Stabilität (Change Failure Rate, MTTR). Senior-Steuerung koppelt beide bewusst — eine Verbesserung der Deployment Frequency, die gleichzeitig die Change Failure Rate hochtreibt, ist keine echte Verbesserung. Anti-Gaming-Regel: Geschwindigkeits-KPIs sind nur gültig, wenn Stabilitäts-KPIs gehalten werden."
       }

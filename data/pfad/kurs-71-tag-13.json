@@ -40,7 +40,12 @@
           "Die Erlaubnis, ohne fachliche Abstimmung Ressourcen abzuschalten",
           "Dokumentierte Annahmen über Peak-Verhalten und Abhängigkeiten"
         ],
-        "korrekt": [0, 1, 2, 4],
+        "korrekt": [
+          0,
+          1,
+          2,
+          4
+        ],
         "erklaerung": "Monitoring, SLO-Grenzen, Rollback und dokumentierte Annahmen bilden den Mindeststandard. Eigenmächtiges Abschalten ohne fachliche Abstimmung ist der schnellste Weg zu einem Vorfall und zerstört Vertrauen — Service Owner und Fachbereich müssen in die Entscheidung eingebunden sein, nicht nur informiert."
       }
     },
@@ -61,13 +66,18 @@
           "Bewusstes Überdimensionieren aller Systeme um den Faktor 3 für „Sicherheit”",
           "Workload-Shift in Zeitfenster mit besserem Strommix oder geringerer Last"
         ],
-        "korrekt": [0, 1, 2, 4],
+        "korrekt": [
+          0,
+          1,
+          2,
+          4
+        ],
         "erklaerung": "Konsolidierung, Idle-Abschaltung, Kühlungsoptimierung und Workload-Shift sind wirksame Hebel mit oft schnellem ROI. Pauschale Überdimensionierung ist der Antipattern — sie verschwendet Energie und Geld und liefert nur Schein-Sicherheit; echte Sicherheit kommt aus Messung + SLOs + Guardrails."
       }
     },
     {
       "nr": 4,
-      "typ": "zuordnung",
+      "typ": "text",
       "titel": "Portfolio-Entscheidungen — Invest, Halten, Optimieren, Retire",
       "inhalt": "Senior-Steuerung verlangt für jeden Service eine klare Portfolio-Entscheidung mit Begründung.",
       "dauer_min": 6,
@@ -75,17 +85,29 @@
         "frage": "Ordnen Sie jede Service-Situation der passenden Portfolio-Entscheidung zu.",
         "typ": "zuordnung",
         "paare": [
-          { "links": "Kritischer Service, hoher Kundennutzen, wachsende Last", "rechts": "Invest — gezielt ausbauen, Skalierungspfad planen" },
-          { "links": "Stabiler Service, stabile Nutzung, vertretbare Kosten", "rechts": "Halten — Routinebetrieb, normale Reviews" },
-          { "links": "Service mit hohem Verbrauch, Auslastung dauerhaft <20%", "rechts": "Optimieren — Rightsizing, Konsolidierung, Off-Hours-Abschaltung" },
-          { "links": "„Zombie”-Service mit kaum Nutzung, hohen Folgekosten", "rechts": "Retire — kontrolliert stilllegen, Daten archivieren, Lizenzen kündigen" }
+          {
+            "links": "Kritischer Service, hoher Kundennutzen, wachsende Last",
+            "rechts": "Invest — gezielt ausbauen, Skalierungspfad planen"
+          },
+          {
+            "links": "Stabiler Service, stabile Nutzung, vertretbare Kosten",
+            "rechts": "Halten — Routinebetrieb, normale Reviews"
+          },
+          {
+            "links": "Service mit hohem Verbrauch, Auslastung dauerhaft <20%",
+            "rechts": "Optimieren — Rightsizing, Konsolidierung, Off-Hours-Abschaltung"
+          },
+          {
+            "links": "„Zombie”-Service mit kaum Nutzung, hohen Folgekosten",
+            "rechts": "Retire — kontrolliert stilllegen, Daten archivieren, Lizenzen kündigen"
+          }
         ],
         "erklaerung": "Diese vier Optionen — Invest, Halten, Optimieren, Retire — strukturieren die Portfolio-Entscheidung. Die Senior-Disziplin liegt darin, „Halten” nicht als Default zu nehmen: Jeder gehaltene Service muss seine Existenz im Review begründen, sonst wachsen Portfolio und Kosten unkontrolliert. Zombie-Services konsequent zu retiren ist oft der größte Nachhaltigkeits-Hebel."
       }
     },
     {
       "nr": 5,
-      "typ": "lueckentext",
+      "typ": "text",
       "titel": "Rightsizing-Plan mit Guardrails",
       "inhalt": "Ein Rightsizing-Vorhaben braucht klare Annahmen, Stop-Regeln und einen Rollback-Pfad.",
       "dauer_min": 6,
@@ -94,10 +116,37 @@
         "typ": "lueckentext",
         "text": "Ein Service läuft auf 10 VMs mit durchschnittlicher CPU-Auslastung von 15 Prozent. Vor dem Rightsizing dokumentieren wir die Annahme, dass das {0}-Profil stabil bleibt. Als harter Guardrail definieren wir: Steigt die CPU-Auslastung über {1} Prozent für mehr als 10 Minuten, erfolgt automatischer {2}. Das SLO für Verfügbarkeit bleibt unverändert bei mindestens 99,5 Prozent — es ist nicht {3}.",
         "luecken": [
-          { "antwort": "Peak", "alternativen": ["Last", "peak", "Last-"] },
-          { "antwort": "85", "alternativen": ["80", "85%", "achtzig"] },
-          { "antwort": "Rollback", "alternativen": ["rollback", "Rückbau", "Rücknahme"] },
-          { "antwort": "verhandelbar", "alternativen": ["verhandeln", "verhandelt"] }
+          {
+            "antwort": "Peak",
+            "alternativen": [
+              "Last",
+              "peak",
+              "Last-"
+            ]
+          },
+          {
+            "antwort": "85",
+            "alternativen": [
+              "80",
+              "85%",
+              "achtzig"
+            ]
+          },
+          {
+            "antwort": "Rollback",
+            "alternativen": [
+              "rollback",
+              "Rückbau",
+              "Rücknahme"
+            ]
+          },
+          {
+            "antwort": "verhandelbar",
+            "alternativen": [
+              "verhandeln",
+              "verhandelt"
+            ]
+          }
         ],
         "erklaerung": "Drei Disziplinen sichern verantwortliches Rightsizing: dokumentierte Annahmen (Peak-Profil stabil?), Stop-Regel (z. B. CPU > 85% für > 10 Minuten → Rollback) und unverhandelbares SLO als Anker. Wer die SLO-Grenze verhandelt, um den Sparbetrag zu erreichen, optimiert die falsche Größe — er reduziert nicht Verbrauch, sondern Resilienz."
       }
@@ -131,7 +180,11 @@
           "Es liefert Kennzahlen wie Auslastung, Sättigungspunkt und prognostizierten Engpass-Zeitpunkt",
           "Es ist primär ein nachträglicher Reporting-Prozess für die Vergangenheit"
         ],
-        "korrekt": [0, 2, 3],
+        "korrekt": [
+          0,
+          2,
+          3
+        ],
         "erklaerung": "ITIL Capacity Management ist zukunftsgerichtet: Es koppelt Geschäftsanforderungen, Service-Performance und Komponenten-Kapazität, nutzt Forecasting und liefert steuerungsrelevante Kennzahlen wie Auslastung, Sättigungspunkt und prognostizierten Engpass-Zeitpunkt. Ein reines „Schauen, was da ist” oder nachträgliches Reporting wäre genau das Gegenteil — ohne Steuerungswirkung."
       }
     }
