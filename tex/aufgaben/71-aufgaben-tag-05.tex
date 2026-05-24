@@ -1,0 +1,548 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 5 - Aufgabenheft
+% Von Diagrammen zu Enterprise-Faehigkeit: Visio/Lucidchart + EA + MDA
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable, colback=white, colframe=lpGray,
+  boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 5}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Visio/Lucidchart \textperiodcentered{} EA \textperiodcentered{} MDA}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 2 \textperiodcentered{} TAG 5 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 3.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 5\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Von Diagrammen zu Enterprise-\\F\"ahigkeit \textendash{} Visio/Lucidchart,\\EA-Rahmen und MDA.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 5 \textendash{} \emph{Von Diagrammen zu Enterprise-F\"ahigkeit}: kollaboratives Modellieren (Visio / Lucidchart), Enterprise Architecture (Capability Map) und Model-Driven Architecture (CIM / PIM / PSM). Die Aufgaben gliedern sich in drei Niveaus:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Standards, Capability-Definition, MDA-Ebenen. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Modelling Charter, Capability Map, MDA-Pfad, Naming-Audit, KPI-Set. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Fallstudie \emph{RetailGroup Europe}, Tool-Strategie, Operating Model. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt:
+
+\begin{itemize}
+  \item eine Niveau-Markierung und einen Zeit-Richtwert,
+  \item den Aufgabentext (oft mit Kontext oder Fallbeschreibung),
+  \item einen Antwort-Freiraum f\"ur Ihre L\"osung,
+  \item eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 5}. Versuchen Sie jede Aufgabe zuerst eigenst\"andig. Insbesondere auf L3 ist die \emph{Entscheidung} entscheidend, nicht die Vollst\"andigkeit der Beschreibung. Wer auf CIM-Ebene Plattform-Namen schreibt, hat MDA missverstanden \textendash{} und wer auf PSM-Ebene Business-Ziele formuliert, ebenfalls.
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Visio/Lucidchart als Enterprise-Werkzeug}{\nivLi}{8\,min}
+
+\noindent Erkl\"aren Sie pr\"agnant: Was unterscheidet ein \emph{Enterprise-Modellierungs\-werkzeug} (z.\,B.\ Visio/Lucidchart in der Enterprise-Lizenz) von einer \emph{Einzeldatei} (z.\,B.\ eine \texttt{.vsdx} auf dem Laufwerk)? Listen Sie die \emph{vier Enterprise-Capabilities}:
+
+\medskip
+\noindent\textbf{Hinweis:} (a) \emph{Kollaboration} (gleichzeitiges Arbeiten, Kommentare), (b) \emph{Standards} (Templates, Shapesets, Naming), (c) \emph{Freigaben} (Lifecycle, Versionierung), (d) \emph{Single Source of Truth} (Verlinkung zu Policies, KPIs, Artefakten).
+
+\medskip
+\noindent F\"ur jede Capability:
+\begin{enumerate}
+  \item Beschreiben Sie in einem Satz, was sie konkret leistet.
+  \item Geben Sie ein \emph{Anti-Muster} an, das ohne sie entsteht (``Ohne X passiert\ldots'').
+\end{enumerate}
+
+\ytquery{Lucidchart Visio Enterprise Kollaboration Shape Library Vergleich}
+
+\noindent Erg\"anzen Sie eine Vergleichstabelle:
+
+\medskip
+\begin{tabularx}{\linewidth}{@{}p{4.4cm}|X|X@{}}
+\toprule
+\textbf{Capability} & \textbf{Mit Enterprise-Tool} & \textbf{Ohne (Einzeldatei)} \\
+\midrule
+Kollaboration       & & \\[12pt]
+\midrule
+Standards           & & \\[12pt]
+\midrule
+Freigaben           & & \\[12pt]
+\midrule
+Single Source of Truth & & \\[12pt]
+\bottomrule
+\end{tabularx}
+
+\antwortlinien{8}
+
+\clearpage
+
+\aufgabenkopf{2}{Enterprise Architecture \textendash{} f\"unf Sichten}{\nivLi}{10\,min}
+
+\noindent Enterprise Architecture (EA) beantwortet drei strategische Fragen:
+\begin{itemize}
+  \item \emph{Was k\"onnen wir?} \textendash{} Capabilities.
+  \item \emph{Wie arbeiten wir?} \textendash{} Prozesse.
+  \item \emph{Womit arbeiten wir?} \textendash{} Applikationen / Daten / Technologie.
+\end{itemize}
+
+\noindent Listen Sie die \emph{f\"unf typischen EA-Sichten} auf und beschreiben Sie pro Sicht: \emph{Was zeigt sie?}, \emph{Wer ist Zielgruppe?}, \emph{Welches Steuerungsproblem l\"ost sie?}
+
+\medskip
+\noindent\textbf{Hinweis:} Capability Map \textperiodcentered{} Prozesslandkarte \textperiodcentered{} Applikationslandschaft \textperiodcentered{} Datenobjekt-\"Ubersicht \textperiodcentered{} Schnittstellen-/Integrations-Map.
+
+\ytquery{Enterprise Architecture Capability Map Sichten TOGAF ArchiMate Beispiel}
+
+\antwortlinien{14}
+
+\clearpage
+
+\aufgabenkopf{3}{MDA \textendash{} CIM / PIM / PSM}{\nivLi}{8\,min}
+
+\noindent Erkl\"aren Sie die drei Ebenen von \fachbegriff{Model-Driven Architecture (MDA)}:
+
+\begin{enumerate}
+  \item \emph{CIM (Computation Independent Model)} \textendash{} Business-Sicht: Ziele, Prozesse, Begriffe.
+  \item \emph{PIM (Platform Independent Model)} \textendash{} logische System-/Service-Sicht (\emph{ohne} konkrete Plattform).
+  \item \emph{PSM (Platform Specific Model)} \textendash{} konkrete technische Umsetzung (Plattform, Schnittstellen, Deployments).
+\end{enumerate}
+
+\medskip
+\noindent F\"ur jede Ebene:
+\begin{itemize}
+  \item Wer ist die Zielgruppe / der Owner?
+  \item Was \emph{geh\"ort hinein}, was \emph{nicht}?
+\end{itemize}
+
+\noindent Schlie{\ss}en Sie mit einem Satz: Warum ist die saubere Trennung CIM/PIM/PSM eine \emph{Verantwortungs}-Trennung \textendash{} und kein technisches Detail?
+
+\ytquery{Model Driven Architecture MDA CIM PIM PSM Beispiel OMG}
+
+\antwortlinien{10}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Modelling Charter in 45 Minuten}{\nivLii}{25\,min}
+
+\begin{infobox}[Ausgangslage]
+Sechs Teams modellieren Prozesse in unterschiedlichen Tools und Stilen. Management will Vergleichbarkeit, Audit will Versionen, Teams wollen Flexibilit\"at.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{F\"unf nicht verhandelbare Standards:} z.\,B.\ Naming, Start/Ende, Rollen sichtbar, Status/Version, Owner. F\"ur jeden Standard: \emph{Begr\"undung} und \emph{Sanktion bei Versto{\ss}}.
+  \item \textbf{Drei Freiheitsgrade:} z.\,B.\ Detailtiefe, Notation f\"ur \"Ubersichten, lokale Varianten. F\"ur jeden: warum bewusst freigegeben?
+  \item \textbf{Freigabe- \& \"Anderungsprozess:} Draft \textrightarrow{} Review \textrightarrow{} Approved \textrightarrow{} Retired, inkl.\ Rollen (Modeler / Reviewer / Owner).
+  \item \textbf{Entscheidung unter Unsicherheit:} Was setzen Sie \emph{sofort} um (2 Wochen), was erst \emph{sp\"ater} (3 Monate) \textendash{} mit Begr\"undung.
+\end{enumerate}
+
+\noindent Abgabe: 1-Seiten-\emph{Modelling Charter}.
+
+\noindent\textbf{Anti-Beispiel zum Reflektieren:} Eine Charter, die 24 Regeln enth\"alt, wird zu Tapete. Eine, die 5 Regeln mit Z\"ahnen hat, steuert. Was machen Sie, wenn ein Fachbereich-Lead sagt: ``Bei uns funktioniert das anders''? Notieren Sie eine Linie.
+
+\ytquery{Modelling Charter Process Standards Naming Convention BPM Governance}
+
+\antwortlinien{20}
+
+\clearpage
+
+\aufgabenkopf{5}{Capability Map ``Digital Customer Onboarding''}{\nivLii}{22\,min}
+
+\begin{infobox}[Mini-Fall]
+Ein Unternehmen will \emph{Digital Customer Onboarding} verbessern: langsam, viele R\"uckfragen, Compliance-Risiko, IT-Schnittstellen br\"uchig.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Capability Map} mit \emph{8\,--\,12 Capabilities} (z.\,B.\ ``Kunde identifizieren'', ``Vertrag pr\"ufen'', ``Zugang provisionieren''). Optional in 2\,--\,3 Cluster.
+  \item Markieren Sie die \emph{Top-3 Capabilities mit h\"ochstem Hebel} auf Durchlaufzeit oder Compliance.
+  \item Zeichnen Sie eine einfache \emph{Prozesslandkarte} (E2E) und ordnen Sie Capabilities zu (welche Capability wird wo gebraucht?).
+  \item Definieren Sie \emph{3 kritische Datenobjekte} (z.\,B.\ Kunde, Vertrag, Identit\"atsnachweis) und \emph{2 Risiken} (Datenqualit\"at, Datenschutz).
+\end{enumerate}
+
+\noindent\textbf{Bonus-Frage:} Welche \emph{eine Capability} bleibt in Ihrem Cluster bewusst ohne Hebel-Markierung \textendash{} und warum? (Senior-Reflex: nicht alles ist gleich wichtig.)
+
+\ytquery{Capability Map Customer Onboarding Enterprise Architecture Hebel}
+
+\antwortlinien{20}
+
+\clearpage
+
+\aufgabenkopf{6}{MDA-Pfad f\"ur eine priorisierte Capability}{\nivLii}{25\,min}
+
+\begin{infobox}[Vorgabe]
+W\"ahlen Sie eine der priorisierten Capabilities aus Aufgabe 5 (z.\,B.\ \emph{``Identit\"atspr\"ufung''} oder \emph{``Zugang provisionieren''}). Sie f\"uhren den MDA-Pfad CIM \textrightarrow{} PIM \textrightarrow{} PSM durch.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{CIM:} Formulieren Sie das \emph{Business-Ziel} (z.\,B.\ ``Kunde in $<$\,24\,h aktiv''), den \emph{Prozess-Scope} und die Definition des zentralen Datenobjekts \emph{Kunde} (Pflichtfelder).
+  \item \textbf{PIM:} Identifizieren Sie \emph{3 logische Services} (Name, Input, Output) \emph{ohne} konkrete Plattform. Skizzieren Sie den Datenfluss zwischen Services und 2 Fehlerf\"alle.
+  \item \textbf{PSM:} Skizzieren Sie die konkrete Umsetzung: Welche bestehende Plattform (IAM, Workflow-Engine), welche Schnittstellen, welche Audit-Logging-Pflicht?
+  \item Schlie{\ss}en Sie mit \emph{einem Satz}: Welche Entscheidung gilt auf CIM-Ebene \emph{nicht verhandelbar} \textendash{} und welche darf auf PSM-Ebene noch ge\"andert werden?
+\end{enumerate}
+
+\ytquery{MDA CIM PIM PSM Beispiel Identity Service Onboarding Capability}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{7}{Naming \& Konvention \textendash{} 8 Mini-F\"alle}{\nivLii}{15\,min}
+
+\begin{infobox}[Acht reale Modellname-Beispiele]
+\textbf{A.} \texttt{O2C\_final\_v3\_neu.vsdx}\\
+\textbf{B.} \texttt{Bestellung}\\
+\textbf{C.} \texttt{Order-to-Cash}\\
+\textbf{D.} \texttt{ProcRevAB\_Hoehl\_2025.vsdx}\\
+\textbf{E.} \texttt{Rechnung erstellen v1.0 - Draft - DE}\\
+\textbf{F.} \texttt{Onboarding (cleaner version - DO NOT DELETE)}\\
+\textbf{G.} \texttt{P2P Subprozess - QA - 2026-06-02}\\
+\textbf{H.} \texttt{Untitled Diagram (37)}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent F\"ur jedes der acht Beispiele:
+\begin{enumerate}
+  \item Bewerten Sie auf einer Skala \emph{gut / mittel / schlecht}.
+  \item Begr\"unden Sie in einem Satz.
+  \item Schlagen Sie \emph{einen korrigierten Namen} vor (nach Modelling-Charter-Standard: Prozess-/Subprozess, Status, Version, Standort, ohne pers\"onliche Marker).
+\end{enumerate}
+
+\noindent\textbf{Hinweis:} Es geht nicht darum, ``sch\"on'' zu benennen, sondern \emph{rezeptierbar}: Wer das Modell sucht, soll \emph{ohne Insider-Wissen} finden, ob es aktuell ist, wem es geh\"ort und f\"ur welchen Standort es gilt.
+
+\ytquery{Naming Convention BPM Files Best Practice Versioning Process Model}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{8}{KPI-Set f\"ur Modellqualit\"at}{\nivLii}{18\,min}
+
+\begin{infobox}[Vorgabe]
+Eine Modelling Charter ohne Steuerung verkommt zur Papiertiger-Sammlung. Definieren Sie ein KPI-Set, das \emph{Modellqualit\"at} und \emph{Nutzen} messbar macht.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Vier KPIs}: zwei \emph{Outcome / Speed} (Wirkung des Repositories), zwei \emph{Risk / Compliance}. Pro KPI: Name, Formel, Quelle, Frequenz, Owner.
+  \item \textbf{Pro KPI ein Manipulationsrisiko:} Wie k\"onnte sie ``gespielt'' werden?
+  \item \textbf{Kopplung (Goodhart-Schutz):} Wie verhindern Sie, dass Speed-KPIs Qualit\"at zerst\"oren?
+  \item \textbf{Entscheidung:} Welche \emph{eine KPI} f\"uhren Sie nicht ein \textendash{} und warum (Akzeptanzproblem, Datenrisiko)?
+\end{enumerate}
+
+\noindent Erg\"anzen Sie eine \emph{Schluss\-bemerkung} (3 S\"atze): Wie messen Sie, ob Ihr KPI-Set \emph{Wirkung} hat \textendash{} und nicht nur \emph{Reporting} erzeugt?
+
+\ytquery{KPI Modellqualitaet Process Repository Goodhart Compliance Steuerung}
+
+\antwortlinien{18}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{RetailGroup Europe} \textendash{} Enterprise Model Governance + EA/MDA Roadmap}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie \emph{RetailGroup Europe}]
+\textbf{Unternehmen:} \emph{RetailGroup Europe} (Filialen + Online).\\
+\textbf{Problem:} Viele Prozessdokumente, keine Vergleichbarkeit; Digitalisierung stockt, weil Business und IT aneinander vorbeireden.
+
+\smallskip
+\textbf{Restriktionen:} \textbf{10 Wochen} bis Audit-Vorbereitung, Budget \textbf{100\,k\,\euro}, zwei parallel laufende IT-Projekte, unklare Verantwortlichkeiten.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Modelling Charter}: Standards + Freiheiten + Freigabeprozess.
+  \item \textbf{Capability Map} (10\,--\,12) und Wahl von \emph{2 Capabilities} als Digitalisierungs\-priorit\"at.
+  \item Definieren Sie f\"ur \emph{eine} priorisierte Capability den \textbf{MDA-Pfad}:
+    \begin{itemize}
+      \item CIM: Business-Ziel + Prozess-Scope + Datenobjekt-Pflichtfelder.
+      \item PIM: Service-/Datenlogik, Fehlerf\"alle.
+      \item PSM: konkrete Umsetzungsidee.
+    \end{itemize}
+  \item \textbf{4 KPIs} (2 Outcome / Speed, 2 Risk / Compliance) inkl.\ Owner.
+  \item \textbf{Management\-entscheidung:} Welche \emph{2 Quick Wins} in den ersten 4 Wochen? Welche 2 strukturellen Ma{\ss}nahmen f\"ur Wochen 5\,--\,10?
+\end{enumerate}
+
+\noindent\textbf{Format-Hinweis:} Pr\"asentieren Sie das Ergebnis als \emph{eine A4-Seite}: oben Modelling Charter (Top-5 Bullets), Mitte Capability Map (Skizze), unten MDA-Pfad (Tabelle) und KPI-Set. ``Senior-Format'': es muss in 90 Sekunden lesbar sein.
+
+\ytquery{Enterprise Model Governance Capability Map MDA Roadmap Retail Audit}
+
+\antwortlinien{36}
+
+\clearpage
+
+\aufgabenkopf{10}{Tool-Strategie: Standard vs.\ f\"oderiert}{\nivLiii}{25\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent \emph{RetailGroup} steht vor einer Tool-Entscheidung: \emph{ein Standard\-tool} f\"ur alle Bereiche, oder \emph{f\"oderierte} Toollandschaft mit klaren \"Ubergangs-Regeln. Beide Optionen haben gravierende Folgen.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Trade-off-Matrix}: Stellen Sie beide Optionen in 4 Dimensionen gegen\"uber: \emph{Kollaboration}, \emph{Vergleichbarkeit}, \emph{Akzeptanz}, \emph{Migrations\-aufwand}.
+  \item \textbf{Entscheidung}: Welche Option w\"ahlen Sie? Begr\"undung in 4\,--\,5 S\"atzen.
+  \item \textbf{Risiko und Fr\"uhwarnsignal}: Welches Risiko nehmen Sie bewusst in Kauf? Welches Signal w\"urde Sie zum Wechsel zwingen?
+  \item \textbf{Migrationspfad} (bei f\"oderiert \textrightarrow{} Standard): Welche 3 Schritte sind die \emph{unumgehbaren} Voraussetzungen?
+\end{enumerate}
+
+\ytquery{BPM Tool Strategy Standard vs Federated Visio Lucidchart Enterprise Decision}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Enterprise Modelling Operating Model}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Enterprise Architect / Chief Transformation Officer / Head of Governance.
+
+\smallskip
+\textbf{Auftrag:} In \textbf{12 Wochen} ein unternehmensweites Modellierungs- und Architektur-Betriebs\-modell etablieren, das Projekte beschleunigt, Auditf\"ahigkeit erh\"oht und Verantwortlichkeiten kl\"art.
+
+\smallskip
+\textbf{Restriktionen:} unterschiedliche Tool-Reife, Widerstand aus Fachbereichen, Budget \textbf{180\,k\,\euro}, parallele IT-Programme, unklare Datenverantwortung.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Entscheidungs\-architektur:} \emph{Top-8 Entscheidungen}, die durch Modelle / EA unterst\"utzt werden (Priorisierung, Standardisierung, Investitionen, Risiken, Schnittstellen).
+  \item \textbf{Modelling Charter v2:} nicht verhandelbare Standards, Freiheitsgrade, Freigabe-/Change-Prozess, KPI-Set f\"ur Modell\-qualit\"at und Nutzen.
+  \item \textbf{EA-Minimum Viable Architecture}: Capability Map + Prozesslandkarte + Applikations-/Datenobjekt-Minimum inkl.\ Verantwortliche (Data Owners).
+  \item \textbf{MDA-Guardrails:} Was muss CIM enthalten (Definitionen, Ziele, Scope), was geh\"ort ins PIM, wann PSM \textendash{} inkl.\ Review-Gates.
+  \item \textbf{Rollout \& Enablement:} 3 Wellen (Pilot \textrightarrow{} Scale \textrightarrow{} Sustain), Trainingspfad Level 1\,--\,3, Akzeptanzstrategie.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:}
+    \begin{itemize}
+      \item \emph{Tool-Strategie:} ``Standardtool'' vs.\ ``f\"oderiert'' \textendash{} Entscheidung + Risiko + Fr\"uhwarnsignal.
+      \item \emph{Governance-Strenge:} minimal vs.\ streng \textendash{} Entscheidung + Akzeptanzplan + Trigger zum Nachsch\"arfen.
+    \end{itemize}
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien:} Strategie-Anschluss \textperiodcentered{} Verantwortungs\-klarheit \textperiodcentered{} Pragmatismus unter Restriktionen \textperiodcentered{} Entscheidungslogik und Risikoreife.
+
+\noindent\textbf{Senior-Reflex:} Eine reine Ma{\ss}nahmenliste ist kein Operating Model. Sie m\"ussen erkl\"aren, \emph{warum} diese Entscheidungen in dieser Reihenfolge fallen, \emph{wer} sie tr\"agt und \emph{woran} Sie erkennen, dass es nicht funktioniert.
+
+\ytquery{Enterprise Modelling Operating Model EA MDA Governance Rollout CEA}
+
+\antwortlinien{38}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 5}. Pr\"ufen Sie insbesondere folgende drei Punkte:
+
+\begin{itemize}
+  \item Habe ich die Modelling Charter \emph{tats\"achlich} verwendet, um eine Tool-Entscheidung zu treffen?
+  \item Sind meine Capabilities wirklich F\"ahigkeiten \textendash{} oder Prozesse mit anderem Namen?
+  \item Habe ich CIM, PIM und PSM sauber getrennt \textendash{} oder Business-Anforderungen mit Technik-Details verschmolzen?
+  \item Habe ich beim Naming-Audit die acht Beispiele \emph{nach Konvention} bewertet \textendash{} oder nach pers\"onlichem Geschmack?
+  \item Hat mein KPI-Set einen \emph{wirksamen} Goodhart-Schutz \textendash{} oder ist die Kopplung kosmetisch?
+\end{itemize}
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Enterprise-Modellierungs\-werkzeuge (Visio / Lucidchart) als \emph{Kollaborationsplattform} statt Zeichenprogramm einsetzen.
+  \item Capability Map und Prozesslandkarte als zwei unabh\"angige EA-Sichten verstehen und kombinieren.
+  \item Den MDA-Pfad CIM \textrightarrow{} PIM \textrightarrow{} PSM als \emph{Verantwortungs}-Trennung nutzen.
+  \item Eine Modelling Charter so schreiben, dass sie Akzeptanz erzeugt \textendash{} statt Widerstand.
+  \item Eine Tool-Strategie (Standard vs.\ f\"oderiert) auf Basis von Trade-offs entscheiden.
+  \item Naming und Lifecycle-Status in der Datei-Benennung sichtbar machen \textendash{} damit Audit, Owner und Aktualit\"at recherchierbar sind.
+  \item Modellqualit\"at messbar machen \textendash{} mit Goodhart-Schutz \"uber gekoppelte KPIs.
+\end{itemize}
+\end{infobox}
+
+\medskip
+\noindent\textbf{Hinweis f\"ur Tag 6:} Morgen verlassen wir die Modellierungs-Ebene und gehen in die \emph{Ausf\"uhrung} \textendash{} BPMS-Plattformen, API-Vertr\"age, Cloud-native Skalierung. Bringen Sie Ihre Capability-Priorit\"aten von heute mit \textendash{} sie sind die Grundlage f\"ur die Plattform-Entscheidung von morgen.
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 5 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

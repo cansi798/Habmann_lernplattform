@@ -1,0 +1,547 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 4 - Aufgabenheft
+% Vom Prozessbild zum steuerbaren System: Repository, Governance, Execution-Modelle
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable, colback=white, colframe=lpGray,
+  boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 4}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Repository \textperiodcentered{} Governance \textperiodcentered{} Execution}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 2 \textperiodcentered{} TAG 4 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 2.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 4\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom Prozessbild zum steuerbaren\\System \textendash{} Repository, Governance\\und Execution-Modelle.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 4 \textendash{} \emph{Vom Prozessbild zum steuerbaren System}: Repository-Ansatz, Governance, Lifecycle und Execution-Modelle (Camunda-Style). Die Aufgaben gliedern sich in drei Niveaus:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Repository-Pflichtfelder, Business- vs.\ Execution-BPMN, Lifecycle. 5\,--\,10 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Repository-Blueprint, Automations-Slice, Execution-Logik. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Fallstudie \emph{MediSupply Services}, Operating Model, Variantenstrategie. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt:
+\begin{itemize}
+  \item eine Niveau-Markierung und einen Zeit-Richtwert,
+  \item den Aufgabentext (oft mit Kontext oder Fallbeschreibung),
+  \item einen Antwort-Freiraum f\"ur Ihre L\"osung,
+  \item eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 4}. Versuchen Sie jede Aufgabe zuerst eigenst\"andig \textendash{} der Mehrwert entsteht in den Entscheidungen, die Sie selbst treffen, nicht im Abschreiben der Beispiele.
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Repository: Pflichtbausteine}{\nivLi}{8\,min}
+
+\noindent Ein \fachbegriff{Process Repository} ist mehr als eine Dateiablage. Listen Sie die \emph{sechs Pflichtbausteine} auf, ohne die ein Repository als ``Single Source of Truth'' nicht funktioniert.
+
+\medskip
+\noindent\textbf{Hinweis:} Die Bausteine sind \emph{Prozesslandkarte}, \emph{Prozessmodelle}, \emph{Rollen/Owner}, \emph{Dokumente/Links}, \emph{Version/Freigabe-Status}, optional \emph{Risiken/KPIs/Controls}.
+
+\medskip
+\noindent F\"ur jeden Baustein:
+\begin{enumerate}
+  \item Geben Sie in einem Satz seinen Zweck an.
+  \item Beschreiben Sie \emph{ein konkretes Risiko}, das entsteht, wenn dieser Baustein fehlt.
+\end{enumerate}
+
+\noindent Schlie{\ss}en Sie mit einem Satz: Welcher Baustein wird am h\"aufigsten ``vergessen'' \textendash{} und warum?
+
+\ytquery{Process Repository Single Source of Truth Aufbau Komponenten BPM}
+
+\antwortlinien{14}
+
+\clearpage
+
+\aufgabenkopf{2}{Business-BPMN vs.\ Execution-BPMN}{\nivLi}{8\,min}
+
+\noindent Unterscheiden Sie pr\"agnant \fachbegriff{Business-BPMN} und \fachbegriff{Execution-BPMN}. F\"ullen Sie die Vergleichstabelle aus:
+
+\medskip
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}|X|X@{}}
+\toprule
+\textbf{Aspekt} & \textbf{Business-BPMN} & \textbf{Execution-BPMN} \\
+\midrule
+Zielgruppe & & \\[16pt]
+\midrule
+Detailtiefe & & \\[16pt]
+\midrule
+Datenobjekte / Variablen & & \\[16pt]
+\midrule
+User Task / Service Task & & \\[16pt]
+\midrule
+Events (Timer / Message / Error) & & \\[16pt]
+\midrule
+Fehlerbehandlung & & \\[16pt]
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\noindent Erkl\"aren Sie zus\"atzlich das \emph{\"Ubergabeprinzip}: Wie schneidet man eine ``automatisierbare Teilstrecke'' (Start / Ende / Daten / Fehler) aus einem Business-BPMN heraus?
+
+\ytquery{BPMN Business vs Execution Camunda User Task Service Task Variable}
+
+\antwortlinien{8}
+
+\clearpage
+
+\aufgabenkopf{3}{Lifecycle: Draft \textrightarrow{} Approved \textrightarrow{} Retired}{\nivLi}{8\,min}
+
+\noindent Ein Prozessmodell durchl\"auft einen \fachbegriff{Lifecycle}. Skizzieren Sie die vier (oder f\"unf) Stati und benennen Sie pro Stati den \emph{Owner-Wechsel} oder die \emph{Freigabe-Bedingung}.
+
+\medskip
+\noindent\textbf{Mindest-Stati:} \emph{Draft \textendash{} Review \textendash{} Approved \textendash{} Retired}. Erg\"anzen Sie ggf.\ \emph{Hotfix} oder \emph{Deprecated}.
+
+\medskip
+\noindent F\"ur jeden Status:
+\begin{enumerate}
+  \item Wer darf das Modell in diesem Status \emph{\"andern}?
+  \item Wer darf das Modell in den n\"achsten Status \emph{schieben}?
+  \item Welches \emph{Pflicht-Artefakt} ist Bedingung f\"ur den Weiterzug (Review-Protokoll, Test, Sign-off)?
+\end{enumerate}
+
+\noindent Skizze als Pfeildiagramm: \emph{Draft} \textrightarrow{} \emph{Review} \textrightarrow{} \emph{Approved} \textrightarrow{} \emph{Retired}, mit R\"ucksprung-Pfeil aus \emph{Review} zur\"uck zu \emph{Draft}.
+
+\ytquery{Process Model Lifecycle Draft Approved Retired Workflow Governance}
+
+\antwortlinien{12}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Repository-Blueprint aus Chaos-Text}{\nivLii}{25\,min}
+
+\begin{infobox}[Ausgangslage]
+\emph{``Bei uns gibt es Prozessdokumente \"uberall: SharePoint-Ordner, PDFs, Visio-Dateien, E-Mails. Jeder Standort macht es anders. Wenn Auditoren fragen, finden wir die aktuelle Version nicht. \"Anderungen passieren `irgendwie'.''}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Repository-Struktur f\"ur 1 E2E-Prozess} (z.\,B.\ \emph{Order-to-Cash} oder \emph{Incident-to-Resolution}): Ordner-/Objektstruktur mit \emph{3 Ebenen} (E2E-Prozess \textrightarrow{} Subprozess \textrightarrow{} Arbeitsanweisung).
+  \item \textbf{Vier Metadatenfelder}, die jedes Modell zwingend haben muss (z.\,B.\ Owner, G\"ultigkeit, Standort, Risikoklasse).
+  \item \textbf{Freigabeprozess} \emph{Draft \textrightarrow{} Review \textrightarrow{} Approved} inkl.\ Rollen.
+  \item \textbf{Varianten-Entscheidung:} Wo dokumentieren Sie Varianten \textendash{} \emph{separate Modelle} oder \emph{Variantenattribute}? Begr\"undung in 3 Stichpunkten (Trade-off Pflege vs.\ Klarheit).
+\end{enumerate}
+
+\noindent Abgabe: 1-Seiten-Blueprint + Freigabefluss + Variantenentscheidung.
+
+\ytquery{Process Repository Blueprint Metadaten Order to Cash Freigabe Varianten}
+
+\antwortlinien{20}
+
+\clearpage
+
+\aufgabenkopf{5}{Automations-Slice \textendash{} Rechnungsfreigabe}{\nivLii}{22\,min}
+
+\begin{infobox}[Mini-Prozess \emph{Rechnungsfreigabe}]
+\begin{enumerate}
+  \item Rechnung kommt per E-Mail.
+  \item Buchhaltung erfasst Grunddaten.
+  \item Wenn Betrag $>$\,5.000\,\euro{}, muss Teamleitung freigeben.
+  \item Wenn Kostenstelle fehlt, geht es zur\"uck zur Anforderungsstelle.
+  \item Nach Freigabe wird im ERP gebucht und Zahlung angesto{\ss}en.
+  \item Bei Fristen\-\"uberschreitung wird erinnert und nach 3 Tagen eskaliert.
+\end{enumerate}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Markieren Sie im Text:} \emph{User Tasks} (Menschenarbeit), \emph{Service Tasks} (Systemaktion), \emph{Entscheidungen}, \emph{Fehlerf\"alle}, \emph{Fristen}.
+  \item \textbf{Automations-Slice:} Schneiden Sie eine Teilstrecke heraus, die realistisch automatisierbar ist \textendash{} mit klarem Start und Ende.
+  \item \textbf{Minimum-Daten} (3 Pflichtfelder f\"ur den Workflow, z.\,B.\ Betrag, Kostenstelle, Freigeber).
+  \item \textbf{Entscheidung unter Unsicherheit:} Welche \emph{eine Ausnahme} behandeln Sie im ersten Release \emph{nicht} im Workflow \textendash{} und wie fangen Sie sie \emph{organisatorisch} ab?
+\end{enumerate}
+
+\ytquery{Camunda Execution BPMN Rechnungsfreigabe User Task Service Task Slice}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{6}{Execution-BPMN modellieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Aufgabe]
+Nehmen Sie den \emph{Automations-Slice} aus Aufgabe 5 und modellieren Sie ihn als \fachbegriff{Execution-BPMN} \textendash{} pr\"azise genug, dass ein Camunda-Modellierer ihn \"ubernehmen kann.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Skizzieren Sie} mit:
+  \begin{itemize}
+    \item \emph{1 Start-Event} (Message: ``Rechnung E-Mail eingegangen'').
+    \item \emph{$\geq$\,2 User Tasks} (Erfassung, Pr\"ufung) mit \emph{Rolle}.
+    \item \emph{$\geq$\,1 Service Task} (z.\,B.\ ``Im ERP buchen'').
+    \item \emph{$\geq$\,1 XOR-Gateway} (z.\,B.\ Betrag $>$\,5\,k\,\euro{}?).
+    \item \emph{1 Timer-Event} (Frist 3\,Tage).
+    \item \emph{1 Error-Boundary-Event} (z.\,B.\ ERP nicht erreichbar).
+    \item \emph{1 End-Event} (``Rechnung bezahlt'').
+  \end{itemize}
+  \item \textbf{Datenobjekte / Variablen:} Listen Sie die Variablen, die der Prozess \emph{lesen} und \emph{schreiben} muss.
+  \item \textbf{Fehlerbehandlung:} Wie verh\"alt sich der Prozess, wenn die Service Task ``ERP buchen'' technisch scheitert (Retry, Eskalation, manuell)?
+\end{enumerate}
+
+\ytquery{Camunda BPMN Execution Service Task Timer Error Boundary Event Beispiel}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{7}{Variantenstrategie \textendash{} Attribut oder eigenes Modell?}{\nivLii}{20\,min}
+
+\begin{infobox}[Mini-Szenario]
+\emph{MediSupply Services} betreibt den Prozess \emph{Order-to-Cash} an drei Standorten (DE, AT, CH). 80\,\% des Prozesses sind identisch, aber:
+\begin{itemize}
+  \item DE: Skonto 2\,\% bei 14 Tagen.
+  \item AT: zus\"atzlich gesetzliche QM-Pr\"ufung bei Medizinprodukten.
+  \item CH: zollrechtliche Sonderdokumentation (Lieferschein in zwei Sprachen).
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Drei Optionen:} (a) drei separate Modelle, (b) ein Modell mit Variantenattributen, (c) ein Modell mit Subprozessen pro Land. Diskutieren Sie pro Option \emph{Aufwand}, \emph{Pflegerisiko} und \emph{Auditf\"ahigkeit}.
+  \item \textbf{Entscheidung:} Welche Option w\"ahlen Sie f\"ur \emph{MediSupply}? Begr\"undung in 3\,--\,4 S\"atzen.
+  \item \textbf{Guardrails:} Welche \emph{drei Guardrails} verhindern, dass aus ``Variantenattributen'' im Lauf der Zeit ``Wildwuchs'' wird?
+  \item \textbf{Eskalation:} Wann m\"ussen Sie auf eine andere Option wechseln (Trigger benennen)?
+\end{enumerate}
+
+\ytquery{BPM Variant Management Process Variants Country Multi Site Governance}
+
+\antwortlinien{16}
+
+\clearpage
+
+\aufgabenkopf{8}{Governance-Audit \textendash{} vier Mini-F\"alle}{\nivLii}{20\,min}
+
+\begin{infobox}[Vier Mini-F\"alle]
+\textbf{A.} Ein Modell zeigt einen Prozess von 2023, ist aber als ``Approved 2026'' markiert. Approver hat l\"angst die Firma verlassen.
+
+\smallskip
+\textbf{B.} F\"ur drei Standorte gibt es drei \"ahnliche, aber inkonsistente Versionen desselben Prozesses. Keine Master-Version ist gekennzeichnet.
+
+\smallskip
+\textbf{C.} Ein Modell ist auf einem pers\"onlichen Laufwerk; nur eine Person hat Zugriff. Sie ist krank.
+
+\smallskip
+\textbf{D.} Ein Modell ist \"offentlich im Wiki, aber zum Inhalt liegt keine \emph{Approval-Signatur}, keine \emph{Versionsnummer}, kein \emph{Owner}.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent F\"ur jeden Fall:
+\begin{enumerate}
+  \item Benennen Sie das \emph{Governance-Versagen} mit einem pr\"agnanten Begriff.
+  \item Beschreiben Sie in einem Satz, \emph{welches Compliance- oder Audit-Risiko} entsteht.
+  \item Schlagen Sie eine konkrete \emph{Sofortma{\ss}nahme} (24\,h) und eine \emph{strukturelle Ma{\ss}nahme} (30\,Tage) vor.
+\end{enumerate}
+
+\ytquery{Process Repository Governance Audit Findings Owner Version Approval}
+
+\antwortlinien{16}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{MediSupply Services}}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie \emph{MediSupply Services}]
+\textbf{Unternehmen:} \emph{MediSupply Services} (B2B, mehrere Standorte).\\
+\textbf{Problem:} Uneinheitliche Prozesse, schwankende Durchlaufzeiten, fehlende Audit-Nachweise. Ein Teilprozess soll schnell automatisiert werden, aber IT hat Engp\"asse.
+
+\smallskip
+\textbf{Restriktionen:}
+\begin{itemize}
+  \item \textbf{8 Wochen}, Budget \textbf{90.000\,\euro}.
+  \item Unklare ERP-Schnittstelle.
+  \item Standorte wollen Varianten behalten.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Prozesslandkarte} (3\,--\,5 Kernprozesse) und Wahl eines E2E-Prozesses als \emph{Pilot} \textendash{} mit Begr\"undung (Volumen, Schmerz, Sichtbarkeit).
+  \item F\"ur den Pilot: \textbf{Repository-Struktur} (3 Ebenen), \textbf{Metadaten-Standard} ($\geq$\,5 Felder), \textbf{Freigabeflow} (Rollen).
+  \item Modellieren Sie den Pilot grob (\emph{Business-BPMN/EPC/Activity}, frei w\"ahlbar) und identifizieren Sie einen \textbf{Subprozess als Automations\-kandidat}.
+  \item Skizzieren Sie den Automations\-kandidaten als \textbf{Execution-Logik} (Camunda-Style): User Tasks, XOR, Timer / Eskalation, Service Task, Fehlerfall.
+  \item Definieren Sie \textbf{3 KPIs} (Durchlaufzeit, Eskalationsquote, Rework) inkl.\ Owner.
+  \item \textbf{Entscheidung unter Unsicherheit:} Welche \emph{Ausnahme} bleibt im ersten Release au{\ss}en vor \textendash{} und wie wird sie organisatorisch abgefedert?
+\end{enumerate}
+
+\ytquery{Process Repository Automation Camunda Pilot KPI Roadmap Mittelstand}
+
+\antwortlinien{34}
+
+\clearpage
+
+\aufgabenkopf{10}{Governance-Spannung: Speed vs.\ Compliance}{\nivLiii}{25\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Repository ist ein Betriebssystem: ohne Owner / Review / Lifecycle wird es zur Ablage \textendash{} nicht zur Steuerung. Gleichzeitig ist \emph{Execution} ein Vertrag: Daten, Fehler, SLAs, Eskalation \textendash{} wer tr\"agt das Risiko bei falscher Automatisierung?
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Zwei Regeln, die 80\,\% Chaos verhindern:} Formulieren Sie zwei nicht verhandelbare Regeln \textendash{} mit Begr\"undung und Sanktion bei Versto{\ss}.
+  \item \textbf{Verantwortungsmatrix (RACI):} Skizzieren Sie ein RACI f\"ur \emph{Owner / Modeler / Reviewer / Approver / Data Steward / Automation Owner} entlang von vier Aktivit\"aten: \emph{Modell erstellen}, \emph{Modell freigeben}, \emph{Automation deployen}, \emph{Audit beantworten}.
+  \item \textbf{Irreversibilit\"at:} Benennen Sie \emph{zwei Entscheidungen}, die in 6 Monaten \emph{teuer zu \"andern} sind (z.\,B.\ Tool-Plattform, Variantenstrategie). Wie dokumentieren Sie diese?
+  \item \textbf{Faustregel} (1 Satz): Wann ist Governance \emph{zwingend}, wann ist sie \emph{Overhead}?
+\end{enumerate}
+
+\ytquery{Process Repository Governance RACI Owner Approver Decision Architecture}
+
+\antwortlinien{20}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Operating Model Repository \& Automation}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Process Officer / Head of Digital Transformation / Enterprise Architect.
+
+\smallskip
+\textbf{Auftrag:} In \textbf{12 Wochen} ein belastbares Operating Model etablieren, das E2E-Repository-Transparenz (Prozessarchitektur, Varianten, Governance) mit Workflow-Automation (Execution, Audit Trail, KPIs) verbindet.
+
+\smallskip
+\textbf{Restriktionen:} Reorg m\"oglich, IT-Kapazit\"at schwankt, Integrationen unklar, Budget \textbf{200\,k\,\euro}, Audit in 6 Monaten.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Entscheidungsarchitektur:} \emph{Top-7 Entscheidungen}, die das System unterst\"utzen muss (Priorisierung, Prozessstandard, Variantenpolitik, Freigaben, Automations\-kandidaten, KPI-Steuerung, Audit-Nachweise).
+  \item \textbf{Governance \& Rollenmodell:} Owner / Modeler / Reviewer / Approver / Data Steward / Automation Owner inkl.\ RACI \& Eskalation bei Zielkonflikten.
+  \item \textbf{Lifecycle-Design:} Draft \textrightarrow{} Approved \textrightarrow{} Retired, Change-Request-Prozess, Release-Cadence f\"ur Workflows, Qualit\"atsgates (Definition of Done).
+  \item \textbf{Variantenstrategie:} Wann \emph{Attribute}, wann \emph{separate Modelle}? Umgang mit Standort\-autonomie (Guardrails statt Wildwuchs).
+  \item \textbf{Automation-Pipeline} (MVP \textrightarrow{} Scale): Auswahlkriterien, Datenminimum, Exception-Policy, Monitoring / Audit Trail, KPI-Set (Leading / Lagging).
+  \item \textbf{Roadmap 12 Wochen:} Pilot w\"ahlen, Rollout in Wellen, Enablement Level 1\,--\,3, messbare Outcomes.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:}
+    \begin{itemize}
+      \item \emph{Pilotprozess}: Begr\"undung + verworfene Alternative + Fr\"uhwarnsignal.
+      \item \emph{Drei nicht verhandelbare Governance-Regeln}: Begr\"undung + Akzeptanzstrategie.
+    \end{itemize}
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien:} Strategie-Anschluss \textperiodcentered{} Klarheit der Verantwortung \textperiodcentered{} Pragmatismus unter Budget/Reorg-Risiko \textperiodcentered{} Entscheidungslogik.
+
+\ytquery{Process Operating Model Repository Automation Camunda Governance Roadmap CPO}
+
+\antwortlinien{36}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 4}. Pr\"ufen Sie besonders folgende Punkte:
+
+\begin{itemize}
+  \item Habe ich Business-BPMN und Execution-BPMN sauber unterschieden \textendash{} oder die Grenze verwaschen?
+  \item Habe ich Varianten als bewusste Entscheidung \emph{eingef\"uhrt} oder ist die Variante ``passiert''?
+  \item Hat mein Automations-Slice eine vollst\"andige Fehlerbehandlung \textendash{} oder nur den Happy Path?
+\end{itemize}
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Ein Process Repository als Steuerungssystem konzipieren \textendash{} mit Pflichtbausteinen, Metadaten und Lifecycle.
+  \item Business-BPMN und Execution-BPMN sauber trennen und einen Automations-Slice schneiden.
+  \item Variantenstrategie entscheiden \textendash{} Attribute vs.\ separate Modelle vs.\ Subprozesse \textendash{} mit Guardrails.
+  \item Eine Repository-Governance entwerfen, die Speed und Compliance gleichzeitig schultert.
+  \item Eine Roadmap f\"ur ein E2E-Operating-Model formulieren, das in 12 Wochen lieferbar ist.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 4 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

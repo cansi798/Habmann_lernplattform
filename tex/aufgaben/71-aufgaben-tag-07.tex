@@ -1,0 +1,536 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 7 - Aufgabenheft
+% Daten werden zu Realitaet: Event Logs, Discovery, Conformance
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable, colback=white, colframe=lpGray,
+  boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 7}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Discovery \textperiodcentered{} Conformance}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 3 \textperiodcentered{} TAG 7 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 8.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 7\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Daten werden zu Realit\"at \textendash{}\\Event Logs, Discovery und\\Conformance Checking.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 7 \textendash{} \emph{Daten werden zu Realit\"at}: Process Discovery (Ist-Prozess aus Logs), Conformance Checking (Ist vs.\ Soll) und Abweichungssteuerung. Die Aufgaben gliedern sich in drei Niveaus:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Event-Log-Aufbau, Discovery-Grundlagen, Conformance-Logik. 5\,--\,10 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Happy Path ableiten, Abweichungen klassifizieren, Guardrails. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Fallstudie \emph{MedTech Supplies}, Conformance Governance. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt:
+\begin{itemize}
+  \item eine Niveau-Markierung und einen Zeit-Richtwert,
+  \item den Aufgabentext (oft mit Kontext oder Fallbeschreibung),
+  \item einen Antwort-Freiraum f\"ur Ihre L\"osung,
+  \item eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+\end{itemize}
+
+\noindent\textbf{Format der Klassifikation:} F\"ur jede Abweichung pr\"ufen Sie vier Kategorien: \emph{Compliance-Risiko} (Audit), \emph{Qualit\"ats-/Kostenrisiko}, \emph{Legitime Variante} (Innovation), \emph{Datenproblem} (Log-Fehler). Die Kategorie steuert die Reaktion.
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 7}. Heute steht der Senior-Reflex im Vordergrund: \emph{Abweichungen sind Signale, nicht nur Fehler}. Welche Abweichung beweist Innovationskraft \textendash{} welche kostet sie? Pr\"ufen Sie bei jeder Aufgabe: Habe ich die Abweichung \emph{klassifiziert} (Compliance, Qualit\"at, Legitim, Daten) \textendash{} oder nur gez\"ahlt? Conformance-Steuerung ohne Klassifikation ist Reporting, nicht Steuerung.
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Event Log: Pflichtfelder, Optional-Felder, Stolpersteine}{\nivLi}{8\,min}
+
+\noindent Ein \fachbegriff{Event Log} ist die Grundlage f\"ur Process Mining. Listen Sie:
+
+\begin{enumerate}
+  \item Die \emph{drei Pflichtfelder} eines Event Logs: Case ID, Aktivit\"at, Timestamp.
+  \item Vier \emph{Optional-Felder}, die typischerweise zu mehr Erkenntnissen f\"uhren (Ressource, Kanal, Kosten, Standort).
+  \item Vier typische \emph{Stolpersteine} (fehlende/unscharfe Activities, doppelte Events, falsche Case IDs, Zeitstempel-Probleme).
+\end{enumerate>
+
+\medskip
+\noindent F\"ur jeden Stolperstein:
+\begin{itemize}
+  \item Wie erkennen Sie ihn? (Symptom in der Discovery-Ausgabe.)
+  \item Wie reagieren Sie? (Korrektur, Ausschluss, R\"uckfrage an den Quellsystem-Owner.)
+\end{itemize}
+
+\ytquery{Process Mining Event Log Required Fields Case ID Activity Timestamp Quality}
+
+\antwortlinien{14}
+
+\clearpage
+
+\aufgabenkopf{2}{Discovery: Happy Path, Variante, Schleife}{\nivLi}{8\,min}
+
+\noindent Definieren Sie pr\"agnant (je 1\,--\,2 S\"atze):
+
+\begin{enumerate}
+  \item \fachbegriff{Happy Path} \textendash{} der typischste / h\"aufigste Ablauf.
+  \item \fachbegriff{Variante} \textendash{} ein abweichender Pfad (z.\,B.\ R\"uckfrage, Storno).
+  \item \fachbegriff{Schleife (Rework)} \textendash{} eine Aktivit\"at wiederholt sich.
+  \item \fachbegriff{Engpass} \textendash{} ein Schritt mit \"uberproportional langer Wartezeit.
+\end{enumerate}
+
+\medskip
+\noindent Erkl\"aren Sie zus\"atzlich die drei Ergebnisarten von Discovery: \emph{Prozessgraph}, \emph{Variantentabelle}, \emph{Durchlaufzeiten je Schritt}.
+
+\ytquery{Process Discovery Happy Path Variants Loops Bottleneck Beispiel}
+
+\antwortlinien{10}
+
+\clearpage
+
+\aufgabenkopf{3}{Conformance: vier Abweichungstypen}{\nivLi}{10\,min}
+
+\noindent Bei \fachbegriff{Conformance Checking} vergleichen wir Ist (Logs) mit Soll (Policy / BPMN). Listen Sie die vier zentralen Abweichungstypen:
+
+\begin{enumerate}
+  \item \emph{Fehlende Schritte} (im Soll, nicht im Ist).
+  \item \emph{Zus\"atzliche Schritte} (im Ist, nicht im Soll).
+  \item \emph{Falsche Reihenfolge}.
+  \item \emph{Schleifen / Rework}.
+\end{enumerate}
+
+\medskip
+\noindent F\"ur jeden Typ:
+\begin{itemize}
+  \item Beispiel aus einem Procure-to-Pay-Prozess.
+  \item Welche Interpretation ist m\"oglich (Compliance-Versto{\ss} / Datenproblem / legitime Variante / Innovation)?
+\end{itemize}
+
+\noindent Schlusssatz (1 Satz): Warum ist die Interpretation einer Abweichung wichtiger als die Z\"ahlung?
+
+\ytquery{Conformance Checking Process Mining Deviation Types Compliance Variant}
+
+\antwortlinien{14}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Discovery ohne Tool}{\nivLii}{22\,min}
+
+\begin{infobox}[Mini-Eventlog]
+\textbf{Case 101:} Start \textrightarrow{} Anfrage\_pr\"ufen \textrightarrow{} Angebot\_erstellen \textrightarrow{} Kunde\_best\"atigt \textrightarrow{} Auftrag\_anlegen \textrightarrow{} Versand \textrightarrow{} Rechnung \textrightarrow{} Ende.
+
+\smallskip
+\textbf{Case 102:} Start \textrightarrow{} Anfrage\_pr\"ufen \textrightarrow{} R\"uckfrage \textrightarrow{} Anfrage\_pr\"ufen \textrightarrow{} Angebot\_erstellen \textrightarrow{} Kunde\_best\"atigt \textrightarrow{} Auftrag\_anlegen \textrightarrow{} Rechnung \textrightarrow{} Versand \textrightarrow{} Ende.
+
+\smallskip
+\textbf{Case 103:} Start \textrightarrow{} Anfrage\_pr\"ufen \textrightarrow{} Angebot\_erstellen \textrightarrow{} Kunde\_best\"atigt \textrightarrow{} Auftrag\_anlegen \textrightarrow{} Versand \textrightarrow{} Versand \textrightarrow{} Rechnung \textrightarrow{} Ende.
+
+\smallskip
+\textbf{Case 104:} Start \textrightarrow{} Anfrage\_pr\"ufen \textrightarrow{} Angebot\_erstellen \textrightarrow{} Kunde\_best\"atigt \textrightarrow{} Auftrag\_anlegen \textrightarrow{} Storno \textrightarrow{} Ende.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Leiten Sie den \fachbegriff{Happy Path} (typischster Ablauf) ab.
+  \item Identifizieren Sie \emph{drei Varianten} und beschreiben Sie je: Ursache (Hypothese), Risiko, m\"oglicher Nutzen.
+  \item Markieren Sie \emph{zwei mögliche Engp\"asse} (rein logisch, ohne Zeiten) und begr\"unden Sie.
+  \item Formulieren Sie \emph{drei Fragen} an die Fachseite zum Daten-/Prozessverst\"andnis.
+\end{enumerate}
+
+\ytquery{Process Mining Discovery Cases Happy Path Variants ohne Tool Beispiel}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{5}{Conformance ohne Tool}{\nivLii}{22\,min}
+
+\begin{infobox}[Soll-Regeln (Policy)]
+\begin{enumerate}
+  \item Rechnung darf erst \emph{nach} Versand erstellt werden.
+  \item R\"uckfragen m\"ussen \emph{vor} Angebotserstellung abgeschlossen sein.
+  \item Doppelversand ist unzul\"assig.
+  \item Storno nur \emph{vor} Versand.
+\end{enumerate}
+
+\smallskip
+\textbf{Ist-Beispiele (aus Logs, siehe Aufgabe 4):}
+\begin{itemize}
+  \item Case 102: Rechnung \emph{vor} Versand.
+  \item Case 103: Versand \emph{doppelt}.
+  \item Case 102: R\"uckfrage-Schleife (ok) \textendash{} ggf.\ Angebot zu fr\"uh erstellt.
+  \item Case 104: Storno (ok, vor Versand).
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Klassifizieren Sie jede Abweichung in: \emph{Compliance-Risiko}, \emph{Qualit\"ats-/Kostenrisiko}, \emph{Legitime Variante}, \emph{Datenproblem}.
+  \item Priorisieren Sie \emph{drei Abweichungen} nach \emph{Schaden $\times$ H\"aufigkeit} (Sch\"atzung reicht).
+  \item Definieren Sie zu jeder Top-Abweichung eine \emph{Gegenma{\ss}nahme} (Prozessregel, Training, Systemkontrolle, Monitoring).
+  \item \textbf{Entscheidung unter Unsicherheit:} W\"ahlen Sie \emph{eine Abweichung}, die Sie bewusst \emph{zulassen} \textendash{} mit \emph{Guardrail} (Bedingung / Schwelle).
+\end{enumerate}
+
+\ytquery{Conformance Checking Deviation Classification Priorization Guardrail Mining}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{6}{Hypothesen vs.\ Wahrheit \textendash{} Validierung mit Fachseite}{\nivLii}{18\,min}
+
+\begin{infobox}[Vorgabe]
+Discovery liefert \emph{Hypothesen}, keine Wahrheit. Die Fachseite muss validieren \textendash{} sonst basiert die Steuerung auf Unsinn.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Formulieren Sie f\"unf \emph{Validierungsfragen}, die Sie der Fachseite zur Mini-Discovery (Aufgabe 4) stellen w\"urden \textendash{} \emph{nicht} ``Stimmt das?'', sondern offene Fragen, die Annahmen pr\"ufen.
+  \item Definieren Sie ein \emph{Validierungsformat}: Wer, wie lange, mit welchen Artefakten?
+  \item \textbf{Anti-Muster}: Was ist die typische Falle bei Discovery-Pr\"asentationen \textendash{} und wie verhindern Sie sie?
+  \item \textbf{Faustregel} (1 Satz): Wann ist eine Discovery-Aussage ``robust genug'' f\"ur eine Managemententscheidung?
+\end{enumerate}
+
+\ytquery{Process Mining Validation Stakeholder Discovery Workshop Hypothesis}
+
+\antwortlinien{14}
+
+\clearpage
+
+\aufgabenkopf{7}{Bewusst zugelassene Variante \textendash{} Guardrails entwerfen}{\nivLii}{20\,min}
+
+\begin{infobox}[Szenario]
+Im \emph{MedTech Supplies}-P2P-Prozess kommen 30\,\% Rechnungen \emph{vor} Wareneingang an (Dropshipping, Serviceleistungen, fehlende Buchung). Eine ``Zero-Tolerance''-Regel w\"are operativ teuer.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Formulieren Sie einen \emph{Ausnahmeprozess}: \emph{Welche Bedingung} (Schwellenwert, Lieferanten\-typ, Vertrag) macht ``Rechnung vor Wareneingang'' tempor\"ar zul\"assig?
+  \item Definieren Sie \emph{drei Guardrails}: (a) Sichtbarkeit (Pflichtkennzeichen ``EXCEPTION''), (b) SLA f\"ur Nachbuchung, (c) Monitoring + Owner.
+  \item \textbf{Audit-Strategie:} Wie wei{\ss} ein Auditor in 6 Monaten, dass die Ausnahme \emph{bewusst} und \emph{kontrolliert} ist \textendash{} nicht ``\"ubersehen''?
+  \item Definieren Sie das \emph{Eskalations-Trigger}: ab welcher Quote eskaliert die Ausnahme zum Prozess-\"Anderungs-Antrag?
+\end{enumerate}
+
+\ytquery{Process Compliance Tolerated Exception Guardrail Audit Trail Procurement}
+
+\antwortlinien{16}
+
+\clearpage
+
+\aufgabenkopf{8}{Goodhart vs.\ Echte Steuerung \textendash{} Conformance-KPI-Set}{\nivLii}{18\,min}
+
+\begin{infobox}[Vorgabe]
+F\"ur Conformance gibt es typische KPIs: \emph{Fitness-Score}, \emph{Abweichungsquote}, \emph{Top-3 Abweichungstypen}, \emph{Trend}. Jede dieser KPIs kann gespielt werden.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Listen Sie f\"ur jede der vier KPIs ein typisches Manipulations-Muster (Goodhart-Falle).
+  \item Definieren Sie pro KPI eine \emph{Gegenkennzahl} oder eine Kopplungs-Regel.
+  \item \textbf{Anti-Reporting-Regel}: Welche KPI w\"urden Sie auf Executive-Ebene \emph{nicht} zeigen \textendash{} obwohl sie dort verlangt wird \textendash{} und wie kommunizieren Sie das?
+  \item \textbf{Faustregel}: Woran erkennen Sie, dass Conformance ``echt steuert'' vs.\ ``nur Reports'' produziert?
+\end{enumerate}
+
+\ytquery{Process Mining KPI Fitness Score Conformance Anti Gaming Manipulation}
+
+\antwortlinien{14}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{MedTech Supplies} \textendash{} Procure-to-Pay Conformance}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie \emph{MedTech Supplies}]
+\textbf{Unternehmen:} \emph{MedTech Supplies} (regulierte Branche, auditrelevant).\\
+\textbf{Problem:} Auditoren bem\"angeln unklare Nachweise; Einkauf klagt \"uber Bürokratie. Hinweise auf \emph{Maverick Buying} (Eink\"aufe au{\ss}erhalb des Prozesses).
+
+\smallskip
+\textbf{Restriktionen:} \textbf{6 Wochen} bis Audit; Budget \textbf{70\,k\,\euro}; Logs unvollst\"andig (nur ERP + E-Mail-Tickets); Zielkonflikt Speed vs.\ Compliance.
+
+\smallskip
+\textbf{Ist-Hinweise (qualitativ):}
+\begin{itemize}
+  \item 30\,\% Rechnungen \emph{vor} Wareneingang.
+  \item 18\,\% mit fehlender Kostenstelle.
+  \item 12\,\% \"uber ``Sonderfreigabe''.
+  \item 8\,\% Dubletten.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Soll-Modell P2P} (grob, 8\,--\,10 Schritte): Bedarf \textrightarrow{} Bestellung \textrightarrow{} Wareneingang \textrightarrow{} Rechnung \textrightarrow{} Freigabe \textrightarrow{} Zahlung.
+  \item \textbf{Abweichungslandkarte}: pro Abweichung \emph{Risiko}, \emph{Ursache (Hypothese)}, \emph{Gegenma{\ss}nahme}, \emph{Owner}.
+  \item Priorisieren Sie \emph{3 Ma{\ss}nahmen f\"ur 6 Wochen} (Auditf\"ahig) + \emph{2 Ma{\ss}nahmen f\"ur 3 Monate} (nachhaltig).
+  \item \textbf{Entscheidung unter Unsicherheit:} Welche Variante (z.\,B.\ Rechnung vor Wareneingang) wird tempor\"ar zugelassen \textendash{} unter welchen Bedingungen (Guardrails)?
+\end{enumerate}
+
+\ytquery{Procure to Pay Conformance Audit Maverick Buying 3 Way Match Mining}
+
+\antwortlinien{34}
+
+\clearpage
+
+\aufgabenkopf{10}{Datenverantwortung \textendash{} Logqualit\"at sichern}{\nivLiii}{25\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Process Mining ist nur so gut wie der Event Log. Bei \emph{MedTech} sind die Logs unvollst\"andig (nur ERP + E-Mail). Wer tr\"agt die Verantwortung f\"ur Datenqualit\"at \textendash{} und wie wird sie operationalisiert?
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie die Rolle \fachbegriff{Data Steward} f\"ur P2P-Logs: Aufgaben (Pflege, Pr\"ufung, Reporting), Mandat (was darf sie entscheiden?), Eskalations\-pfad.
+  \item Erarbeiten Sie ein \emph{Datenqualit\"ats-SLA}: 4 Kennzahlen (Vollst\"andigkeit, Aktualit\"at, Konsistenz, Eindeutigkeit) inkl.\ Ziel\-werten.
+  \item \textbf{Trade-off}: Wie balancieren Sie ``perfekte Logs'' (Aufwand) gegen ``brauchbare Logs'' (Quick Insight)? Geben Sie eine Faustregel.
+  \item \textbf{Audit-Beweisf\"uhrung:} Welche Artefakte zeigen einem Auditor, dass Sie Datenverantwortung \emph{ernst nehmen}?
+\end{enumerate}
+
+\ytquery{Data Steward Process Mining Event Log Quality Compliance Governance Pharma}
+
+\antwortlinien{20}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Conformance Governance \& Decision Architecture}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Compliance Officer / Chief Process Officer / Head of Audit Readiness.
+
+\smallskip
+\textbf{Auftrag:} Unternehmensweites Conformance-Programm aufsetzen, das Audit-F\"ahigkeit erh\"oht \emph{und} operative Performance nicht zerst\"ort.
+
+\smallskip
+\textbf{Restriktionen:} uneinheitliche Systeme, schwankende Log-Qualit\"at, Budget \textbf{200\,k\,\euro}, starke Standortautonomie, Zielkonflikt Compliance vs.\ Speed.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Regelwerk-Architektur}: Muss / Kann / Ausnahmeprozesse; Verantwortliche; Review-Zyklus; Dokumentation (Audit Trail).
+  \item \textbf{Daten- \& Log-Standard}: Mindestfelder, Case-ID-Strategie, Datenqualit\"ats-Checks, Ownership.
+  \item \textbf{Conformance Operating Model}: Rollen (Process Owner, Data Steward, Compliance Reviewer); Eskalation; Kommunikationsplan.
+  \item \textbf{Portfolio der Abweichungen}: Klassifikation nach Risiko; Schwellenwerte / Guardrails; Ma{\ss}nahmen\-katalog (Prozess, Training, Systemkontrolle).
+  \item \textbf{Messkonzept}: Fitness- / Abweichungsquote als Steuerung + Anti-Gaming-Mechanismen.
+  \item \textbf{Roadmap 12 Wochen}: Pilotprozess w\"ahlen, Quick Wins, Skalierungsstrategie, Enablement Level 1\,--\,3.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit}:
+    \begin{itemize}
+      \item Welche Abweichungen werden ab sofort ``\fachbegriff{Zero Tolerance}''? Begr\"undung + Risiko + Akzeptanzstrategie.
+      \item Welche Datenl\"ucken akzeptieren Sie tempor\"ar \textendash{} und mit welchen Kontrollen kompensieren Sie? Guardrails + Fr\"uhwarnsignale.
+    \end{itemize}
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien:} Audit-Robustheit \textperiodcentered{} operative Tragf\"ahigkeit \textperiodcentered{} Klarheit der Verantwortung \textperiodcentered{} Entscheidungslogik.
+
+\ytquery{Conformance Governance Decision Architecture Process Mining CCO Audit Readiness}
+
+\antwortlinien{38}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 7}. Pr\"ufen Sie:
+
+\begin{itemize}
+  \item Habe ich Abweichungen \emph{klassifiziert} \textendash{} oder nur gez\"ahlt?
+  \item Habe ich eine bewusst zugelassene Variante \emph{mit Guardrails} ausgestattet \textendash{} oder einfach toleriert?
+  \item Hat mein Conformance-KPI-Set einen wirksamen \emph{Goodhart-Schutz}?
+  \item Habe ich Data Steward / Log-Verantwortung \emph{operationalisiert} \textendash{} oder nur erw\"ahnt?
+\end{itemize}
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Event Logs auf Pflichtfelder, Optional-Felder und Stolpersteine pr\"ufen.
+  \item Happy Path, Varianten und Schleifen aus Mini-Logs ableiten \textendash{} ohne Tool.
+  \item Conformance-Abweichungen in vier Typen klassifizieren \textendash{} und nach Schaden $\times$ H\"aufigkeit priorisieren.
+  \item Eine bewusst zugelassene Variante mit Guardrails verantworten.
+  \item Ein Conformance Operating Model entwerfen, das Audit-F\"ahigkeit und Performance gleichzeitig steuert.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 7 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

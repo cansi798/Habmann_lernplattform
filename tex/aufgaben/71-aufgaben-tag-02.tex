@@ -1,0 +1,608 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 2 - Aufgabenheft
+% UML, VSM & Process Mining als Dreiklang aus Struktur, Wertfluss und Datenrealitaet
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 2}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}UML \textperiodcentered{} VSM \textperiodcentered{} Process Mining}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 1 \textperiodcentered{} TAG 2 VON 3 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 29.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 2\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}UML, VSM \& Process Mining \textendash{}\\Struktur, Wertfluss und Daten\-realit\"at\\als Dreiklang in elf Aufgaben.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- ANLEITUNG -----------------------------------------------------------
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 2 \textendash{} \emph{UML, VSM und Process Mining als Dreiklang}: Use-Case- und Activity-Diagramme f\"ur Struktur und Verantwortung, Value Stream Mapping f\"ur den Wertfluss sowie Process Mining f\"ur die Datenrealit\"at. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Begriffe ordnen, Notation reproduzieren, Mini-Eventlogs lesen. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Methoden auf konkrete F\"alle anwenden, Engp\"asse identifizieren, Steuerungslogiken entwerfen. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Fallstudie, Operating Model, Entscheidungsarchitektur. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt eine Niveau-Markierung, einen Zeit-Richtwert, den Aufgabentext, einen Antwort-Freiraum sowie eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 2}. Versuchen Sie jede Aufgabe zuerst eigenst\"andig \textendash{} der Mehrwert entsteht im eigenen Modellieren, im Lesen der Daten und im Begr\"unden Ihrer Entscheidungen.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Drei Methoden \textendash{} drei Perspektiven}{\nivLi}{8\,min}
+
+\noindent Drei Methoden geh\"oren zum heutigen Dreiklang: \fachbegriff{UML} (Use Case + Activity), \fachbegriff{VSM} (Value Stream Mapping) und \fachbegriff{Process Mining}. F\"ur jede Methode geben Sie an: (a) den \emph{Hauptzweck}, (b) den typischen \emph{Output} und (c) die zentrale \emph{Frage}, die sie beantwortet.
+
+\medskip
+\noindent\textbf{Hinweis:} F\"ullen Sie die Tabelle aus. F\"ur die zentrale Frage gen\"ugt ein Halbsatz (z.\,B.\ ``Wer will was?'' / ``Wo staut es?'' / ``Was passiert wirklich?'').
+
+\medskip
+\noindent\begin{tabularx}{\linewidth}{@{}p{3.6cm}|X|X|X@{}}
+\toprule
+\textbf{Methode} & \textbf{Hauptzweck} & \textbf{Typischer Output} & \textbf{Zentrale Frage} \\
+\midrule
+UML Use Case        & & & \\[18pt]
+\midrule
+UML Activity        & & & \\[18pt]
+\midrule
+VSM                 & & & \\[18pt]
+\midrule
+Process Mining      & & & \\[18pt]
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\noindent Notieren Sie unter der Tabelle einen \emph{Schlusssatz}: Welche Methode w\"ahlen Sie, wenn die zentrale Frage \emph{``Wo gehen unsere Durchlaufzeiten verloren?''} lautet \textendash{} und warum?
+
+\ytquery{UML Use Case Activity Diagram VSM Process Mining Vergleich Zweck}
+
+\antwortlinien{6}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{VSM-Symbolik und Wertschöpfung}{\nivLi}{8\,min}
+
+\noindent Definieren Sie pr\"agnant (je 1\,--\,2 S\"atze) die folgenden VSM-Begriffe und ordnen Sie jeden Begriff der korrekten Kategorie zu: \emph{Wertschöpfend (VA)} \textendash{} \emph{Notwendig, aber nicht wertschöpfend (NNVA)} \textendash{} \emph{Verschwendung (NVA)}.
+
+\medskip
+\noindent\textbf{Begriffe:}
+\begin{enumerate}
+  \item \fachbegriff{Bearbeitungszeit (BT)}
+  \item \fachbegriff{Wartezeit (WT)}
+  \item \fachbegriff{Work in Progress (WIP)}
+  \item \fachbegriff{Durchlaufzeit (DLZ)}
+  \item \fachbegriff{Engpass}
+  \item \fachbegriff{Informationsfluss}
+  \item \fachbegriff{Materialfluss}
+  \item \fachbegriff{Queue / Warteschlange}
+\end{enumerate}
+
+\noindent Erg\"anzen Sie zwei Beispiele aus Ihrer eigenen Arbeitswelt: ein typisches \emph{notwendiges, aber nicht wertsch\"opfendes} und ein typisch \emph{verschwenderisches} Element.
+
+\ytquery{Value Stream Mapping VSM Symbole Verschwendung Lean Bearbeitungszeit Wartezeit}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Event Log lesen \textendash{} Pflichtfelder und Stolpersteine}{\nivLi}{10\,min}
+
+\begin{infobox}[Mini-Eventlog: \emph{RetailNova} Webshop]
+\textbf{Case A:} \emph{Bestellung\_eingegangen} (09:00) \textrightarrow{} \emph{Angaben\_pr\"ufen} (09:05) \textrightarrow{} \emph{Nachfragen} (09:20) \textrightarrow{} \emph{Angaben\_vollst\"andig} (10:30) \textrightarrow{} \emph{Zahlung\_pr\"ufen} (10:35) \textrightarrow{} \emph{Versand} (16:00).
+
+\smallskip
+\textbf{Case B:} \emph{Bestellung\_eingegangen} (11:00) \textrightarrow{} \emph{Angaben\_pr\"ufen} (11:05) \textrightarrow{} \emph{Zahlung\_pr\"ufen} (11:06) \textrightarrow{} \emph{Kommissionieren} (14:00) \textrightarrow{} \emph{Versand} (14:45).
+
+\smallskip
+\textbf{Case C:} \emph{Bestellung\_eingegangen} (08:10) \textrightarrow{} \emph{Angaben\_pr\"ufen} (08:20) \textrightarrow{} \emph{Zahlung\_pr\"ufen} (08:25) \textrightarrow{} \emph{Warten\_auf\_Nachschub} (08:26) \textrightarrow{} \emph{Kommissionieren} (2 Tage sp\"ater 09:00) \textrightarrow{} \emph{Versand} (09:30).
+\end{infobox}
+
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Nennen Sie die drei \fachbegriff{Pflichtfelder} eines Event Logs und benennen Sie sie in obigem Beispiel.
+  \item Identifizieren Sie \emph{zwei} verschiedene Prozessvarianten (welche Cases folgen welchem Pfad?).
+  \item Markieren Sie den wahrscheinlichsten \fachbegriff{Engpass} \textendash{} ausschlie{\ss}lich anhand der Zeiten.
+  \item Listen Sie drei typische \fachbegriff{Stolpersteine} bei Event-Log-Daten (z.\,B.\ inkonsistente Case-IDs, fehlerhafte Zeitstempel) und beschreiben Sie je einen Satz, wie man sie erkennt.
+\end{enumerate}
+
+\ytquery{Process Mining Event Log Case ID Timestamp Activity Discovery Datenqualitaet}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{\emph{RetailNova} \textendash{} VSM aus Alltagstext}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung \emph{RetailNova}]
+``Ein Kunde bestellt einen Artikel im \emph{RetailNova}-Online-Shop. Die Bestellung wird gepr\"uft, manchmal fehlen Angaben. Danach wird Zahlung gepr\"uft. Wenn Zahlung ok, wird Ware kommissioniert, verpackt und versendet. Bei Engp\"assen wird auf Nachschub gewartet. Manche Kunden rufen an und \"andern die Lieferadresse. Retouren kommen vor; dann wird gepr\"uft und erstattet.''
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Scope festlegen} (Start und Ende des E2E-Prozesses) in zwei S\"atzen.
+  \item Listen Sie \textbf{8\,--\,12 Schritte} in Reihenfolge (R\"uckspr\"unge und Retoure als Nebenpfad markieren).
+  \item Markieren Sie jeden Schritt mit \emph{VA} (wertsch\"opfend) \textperiodcentered{} \emph{NNVA} (notwendig, aber nicht wertsch\"opfend) \textperiodcentered{} \emph{NVA} (Verschwendung).
+  \item Sch\"atzen Sie BT/WT grob (Minuten / Stunden / Tage) und markieren Sie eine \fachbegriff{Engpasshypothese} (``wo staut es?'').
+\end{enumerate}
+
+\noindent Schlie{\ss}en Sie ab mit f\"unf Stichpunkten: \emph{Top-3 Verschwendungen}, \emph{gr\"o{\ss}ter Engpass}, \emph{wichtigste offene Frage} an den Fachbereich.
+
+\ytquery{Value Stream Mapping E2E Online Shop Bestellung Bearbeitungszeit Wartezeit Engpass}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Datenblick \textendash{} Process-Mining-Logik aus Eventlog}{\nivLii}{20\,min}
+
+\begin{infobox}[Datenausschnitt \emph{RetailNova} (drei Cases)]
+\textbf{Case A:} Bestellung\_eingegangen (09:00) \textrightarrow{} Angaben\_pr\"ufen (09:05) \textrightarrow{} Nachfragen (09:20) \textrightarrow{} Angaben\_vollst\"andig (10:30) \textrightarrow{} Zahlung\_pr\"ufen (10:35) \textrightarrow{} Versand (16:00).
+
+\smallskip
+\textbf{Case B:} Bestellung\_eingegangen (11:00) \textrightarrow{} Angaben\_pr\"ufen (11:05) \textrightarrow{} Zahlung\_pr\"ufen (11:06) \textrightarrow{} Kommissionieren (14:00) \textrightarrow{} Versand (14:45).
+
+\smallskip
+\textbf{Case C:} Bestellung\_eingegangen (08:10) \textrightarrow{} Angaben\_pr\"ufen (08:20) \textrightarrow{} Zahlung\_pr\"ufen (08:25) \textrightarrow{} Warten\_auf\_Nachschub (08:26) \textrightarrow{} Kommissionieren (2 Tage sp\"ater 09:00) \textrightarrow{} Versand (09:30).
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Identifizieren Sie \emph{zwei} Prozessvarianten und benennen Sie diese (z.\,B.\ ``Happy Path'', ``Nachfrage-Schleife'', ``Nachschub-Wartepfad'').
+  \item Bestimmen Sie den wahrscheinlichsten \fachbegriff{Engpass} (nur anhand der Zeiten) und begr\"unden Sie in zwei S\"atzen.
+  \item Formulieren Sie \emph{drei Hypothesen}, warum Abweichungen auftreten (Datenqualit\"at, Bestandslage, Kundeninteraktion, \ldots).
+  \item Entscheiden Sie: Welche \emph{zwei Datenfelder} fehlen f\"ur bessere Steuerung (z.\,B.\ Ressource, Lagerstatus, Grundcode der Nachfrage)?
+\end{enumerate}
+
+\ytquery{Process Mining Discovery Variants Bottleneck Eventlog Analyse Beispiel}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{UML Use Case \textendash{} \emph{CloudWorks B2B} Onboarding}{\nivLii}{22\,min}
+
+\begin{infobox}[Fallbeschreibung \emph{CloudWorks B2B}]
+\textbf{Unternehmen:} \emph{CloudWorks B2B} (SaaS).\\
+\textbf{Problem:} Onboarding dauert 2\,--\,6 Wochen, Kunden springen ab, Support eskaliert, Vertrieb verspricht zu viel.
+
+\smallskip
+\textbf{Akteure:} Kunde, Sales, Onboarding-Team, IT, Compliance, Support.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Skizzieren Sie ein \fachbegriff{UML-Use-Case-Diagramm} mit den sechs Akteuren und \emph{6\,--\,8 Use Cases} (z.\,B.\ ``Account anlegen'', ``Vertrags-/Scope-Check'', ``Zug\"ange vergeben'', ``Datenimport'', ``Security/Compliance-Check'', ``Kunden-Training'', ``Go-Live-Freigabe'', ``Hypercare starten'').
+  \item Zeichnen Sie die \emph{Beziehungen} \"uber Linien (welcher Akteur initiiert / nutzt welchen Use Case?).
+  \item Identifizieren Sie \emph{zwei Use Cases}, die \emph{nicht} im Scope des aktuellen 6-Wochen-Ziels liegen sollten \textendash{} mit Begr\"undung.
+  \item Benennen Sie pro Akteur \emph{eine zentrale Verantwortung} (in einem Satz).
+\end{enumerate}
+
+\ytquery{UML Use Case Diagram Beispiel Customer Onboarding Akteure SaaS}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{UML Activity \textendash{} Kernablauf mit Swimlanes}{\nivLii}{25\,min}
+
+\begin{infobox}[Ausgangslage \emph{CloudWorks B2B}]
+Aus dem Use-Case-Diagramm (Aufgabe 6) soll der \emph{Kernablauf} entstehen: Sales \"ubergibt das Onboarding-Briefing, IT provisioniert, Compliance pr\"uft. R\"ucksprung bei fehlenden Daten ist h\"aufig. Provisioning dauert ohne SLA tagelang.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Modellieren Sie ein \fachbegriff{UML-Activity-Diagramm} mit \emph{zwei bis drei Swimlanes} (z.\,B.\ Sales / Onboarding / IT / Compliance).
+  \item Bauen Sie \emph{mindestens zwei Entscheidungen} ein: \emph{``Kundendaten vollst\"andig?''} und \emph{``Security Check bestanden?''}.
+  \item Markieren Sie eine \fachbegriff{Eskalationsregel} (z.\,B.\ ``Provisioning $>$\,48\,h \textrightarrow{} Eskalation an IT-Lead'').
+  \item Erg\"anzen Sie unter der Skizze: \emph{Modellzweck} (1 Satz), \emph{drei Annahmen}, \emph{zwei Fragen} an den Fachbereich.
+\end{enumerate}
+
+\ytquery{UML Activity Diagram Swimlanes Beispiel Onboarding Entscheidung Eskalation}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Goldene Klammer \textendash{} drei Sichten auf eine Story}{\nivLii}{22\,min}
+
+\begin{infobox}[Log-Hinweis \emph{CloudWorks B2B}]
+Qualitatives Profil aus den Eventlogs:
+\begin{itemize}
+  \item 40\,\% der F\"alle enthalten \fachbegriff{R\"uckspr\"unge} wegen ``fehlender Kundendaten''.
+  \item 25\,\% warten $>$\,5\,Tage auf ``IT-Provisioning''.
+  \item 15\,\% \fachbegriff{eskalieren} im Support \emph{vor} Go-Live.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+Verbinden Sie die drei Methoden \textendash{} \emph{UML / VSM / Process Mining} \textendash{} zu einer ``goldenen Klammer''. Pro Methode ein Absatz von 3\,--\,5 S\"atzen:
+
+\begin{enumerate}
+  \item \textbf{UML-Sicht (Struktur):} Welche \emph{Verantwortung} ist im Use-Case-/Activity-Modell unscharf? Wo muss eine Rolle klarer benannt werden?
+  \item \textbf{VSM-Sicht (Wertfluss):} Welcher \emph{Engpass} dominiert (Daten-R\"uckspr\"unge oder IT-Provisioning) \textendash{} und warum?
+  \item \textbf{Process-Mining-Sicht (Datenrealit\"at):} Welche \emph{Hypothese} der Modelle wird durch die Daten \emph{best\"atigt}, welche \emph{widerlegt}?
+\end{enumerate}
+
+\noindent Schlie{\ss}en Sie mit \emph{einer Entscheidung}: Wo greifen Sie zuerst ein \textendash{} an der Daten\-vollst\"andig\-keit, am IT-Provisioning oder am Support? Begr\"undung in zwei S\"atzen.
+
+\ytquery{End to End Process Methodik UML VSM Process Mining Triangulation Onboarding}
+
+\antwortlinien{18}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Fallstudie \emph{CloudWorks B2B} \textendash{} Customer Onboarding stabilisieren}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie \emph{CloudWorks B2B}]
+\textbf{Unternehmen:} \emph{CloudWorks B2B} (SaaS).\\
+\textbf{Problem:} Onboarding dauert 2\,--\,6 Wochen, Kunden springen ab, Support eskaliert, Vertrieb verspricht zu viel.
+
+\smallskip
+\textbf{Rahmenbedingungen / Restriktionen:}
+\begin{itemize}
+  \item Zeitdruck: In \textbf{6 Wochen} muss die Durchlaufzeit um \textbf{30\,\%} sinken.
+  \item Budget: \textbf{60.000\,\euro} \textendash{} keine gro{\ss}en Tool-/IT-Projekte.
+  \item Unvollst\"andige Infos: Daten sind fragmentiert (CRM, Tickets, E-Mail).
+  \item Zielkonflikt: ``schnell aktivieren'' vs.\ ``sauber konfigurieren \& Compliance''.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{UML Use Case (Scope \& Verantwortung):} Definieren Sie Akteure (Kunde, Sales, Onboarding, IT, Compliance, Support) und \emph{6\,--\,8 Use Cases}.
+  \item \textbf{UML Activity (Ablauf):} Modellieren Sie den Kernablauf mit \emph{2\,--\,3 Swimlanes} und \emph{mindestens 2 Entscheidungen} (z.\,B.\ ``Daten vollst\"andig?'', ``Security Check bestanden?'').
+  \item \textbf{VSM (E2E):} Skizzieren Sie eine VSM mit \emph{8\,--\,12 Schritten} und markieren Sie Wert/Non-Value sowie \emph{einen Engpass}.
+  \item \textbf{Process-Mining-Brille:} Nutzen Sie den Log-Hinweis (40\,\% R\"uckspr\"unge, 25\,\% Wartezeit $>$\,5\,Tage IT, 15\,\% Support-Eskalationen) und leiten Sie zwei \emph{Hypothesen f\"ur die Ursache} ab.
+  \item \textbf{Entscheidung unter Unsicherheit:} Priorisieren Sie \emph{2 Ma{\ss}nahmen}, die in 6 Wochen realistisch sind (ohne gro{\ss}es Tooling). Begr\"undung mit \emph{Impact / Risiko / Aufwand}.
+  \item \textbf{Governance-Mini:} Benennen Sie Owner f\"ur \emph{Onboarding-Checkliste}, \emph{IT-SLA}, \emph{Compliance-Gate} sowie drei Kennzahlen (Durchlaufzeit, R\"uckspr\"unge, Eskalationsquote).
+\end{enumerate}
+
+\ytquery{Customer Onboarding SaaS Operating Model VSM UML Process Mining Fallstudie}
+
+\antwortlinien{32}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Methodenauswahl \textendash{} Wann was?}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Methoden sind keine Glaubensfrage, sondern eine \emph{Entscheidung}. Auf einem Senior-Level entscheidet man bewusst: ``Wir nehmen UML, weil\ldots'', ``Wir nutzen VSM, weil\ldots'', ``Wir starten mit Mining, weil\ldots''.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Methodenlandkarte (1 Seite):} F\"ullen Sie f\"ur jede Methode (UML Use Case, UML Activity, VSM, Process Mining) vier Felder aus: \emph{Zweck}, \emph{Zielgruppe}, \emph{Output}, \emph{Qualit\"atsschwelle}.
+  \item \textbf{Zielkonflikt:} Wann \emph{kombinieren} Sie Methoden? Diskutieren Sie in 4\,--\,5 S\"atzen: Warum erzeugt eine \emph{einzige} Methode systematisch blinde Flecken?
+  \item \textbf{Umgang mit Unvollst\"andigkeit:} Definieren Sie 3 \emph{akzeptable} Annahmen und 2 \emph{risikorelevante} Annahmen, die immer dokumentiert werden m\"ussen.
+  \item \textbf{Faustregel} (1\,--\,2 S\"atze): Ab welchem Reifegrad einer Organisation lohnt sich Process Mining (Datenqualit\"at, Log-Verf\"ugbarkeit, Akzeptanz)?
+\end{enumerate}
+
+\ytquery{Methodenauswahl Process Mining VSM UML Reifegrad Operating Model Entscheidung}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} E2E-Operating Model f\"ur Prozess\-modellierung \& Mining}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Transformation Officer / Lead Architect.
+
+\smallskip
+\textbf{Auftrag:} In \textbf{10 Wochen} ein minimal tragf\"ahiges E2E-System etablieren, das Modelle (UML/BPMN/EPC), Wertfluss (VSM) und Datenrealit\"at (Process Mining) zusammenf\"uhrt \textendash{} \emph{ohne} Gro{\ss}tool-Projekt.
+
+\smallskip
+\textbf{Restriktionen / Unsicherheit:}
+\begin{itemize}
+  \item Datenquellen heterogen (CRM, Ticketing, ERP, E-Mail).
+  \item Tooling-Entscheidung offen, Budget begrenzt.
+  \item Akzeptanz im Fachbereich ungleich verteilt.
+  \item Reorganisation in 6 Monaten m\"oglich.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine \emph{Entscheidungsarchitektur} \textendash{} keine reine Ma{\ss}nahmenliste \textendash{} f\"ur das E2E-Operating-Model in acht Schritten:
+
+\begin{enumerate}
+  \item \textbf{Methodenlandkarte (1 Seite):} F\"ur UML Use Case / UML Activity / BPMN / EPC / VSM / Process Mining jeweils Zweck, Zielgruppe, Output, Qualit\"atsschwelle.
+  \item \textbf{Daten-Minimum (Eventlog-Anforderungen):} Minimale Pflichtfelder, Verantwortliche, Datenquellenstrategie (auch wenn unvollst\"andig).
+  \item \textbf{Governance:} Rollen (Process Owner / Modeler / Data Steward / Reviewer), Freigaben, Review-Zyklen, Eskalation bei Zielkonflikten.
+  \item \textbf{Entscheidungsarchitektur:} Top-5 Entscheidungen, die k\"unftig auf Basis dieser Artefakte getroffen werden (Priorisierung, Gate-Freigabe, Automatisierungs\-kandidaten, Compliance-Risiken, Kapazit\"aten).
+  \item \textbf{Roadmap (10 Wochen):} Pilotprozess, Messgr\"o{\ss}en (DLZ, R\"uckspr\"unge, Varianten), Kommunikations- und Bef\"ahigungsplan.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:} Treffen Sie \emph{zwei} bewusste Entscheidungen trotz Datenl\"ucken (z.\,B.\ Pilotprozess w\"ahlen, Minimalstandard festlegen). Dokumentieren Sie je: Annahme, verworfene Alternative, \fachbegriff{Fr\"uhwarnsignal}.
+  \item \textbf{Risiken \& Gegenma{\ss}nahmen:} Top-5 Risiken (Akzeptanz, Datenqualit\"at, \"Ubermodellierung, Tool-Lock-in, Reorg-Risiko).
+  \item \textbf{Anschluss an Strategie:} Drei Argumente f\"ur die Gesch\"aftsleitung \textendash{} warum dieses Vorhaben jetzt Vorrang hat (Compliance, Time-to-Market, Skalierbarkeit).
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien:} Anschlussf\"ahigkeit an Strategie \textperiodcentered{} Verantwortungsklarheit \textperiodcentered{} Pragmatismus unter Restriktionen \textperiodcentered{} Entscheidungslogik \& Risikoreife.
+
+\ytquery{E2E Operating Model Process Mining Governance Decision Architecture Roadmap}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 2}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item UML-Use-Case- und Activity-Diagramme als Strukturwerkzeug f\"ur Verantwortung und Ablauf einsetzen.
+  \item Value Stream Mapping aus Alltagstext herstellen \textendash{} mit klarer Trennung von VA / NNVA / NVA und einer Engpasshypothese.
+  \item Mini-Eventlogs lesen, Varianten erkennen und Engp\"asse rein aus Zeiten ableiten.
+  \item Drei Sichten (Struktur / Wertfluss / Daten) bewusst kombinieren \textendash{} und Methodenauswahl als Entscheidung treffen.
+  \item Ein E2E-Operating-Model entwerfen, das Modelle, Daten und Verantwortlichkeiten zu einer Steuerungslogik verbindet.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 2 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

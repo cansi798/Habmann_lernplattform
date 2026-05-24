@@ -1,0 +1,583 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 6 - Loesungsheft
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 6}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}BPMS \textperiodcentered{} APIs \textperiodcentered{} Cloud-native}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 2 \textperiodcentered{} TAG 6 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 5.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 6\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen \textendash{} BPMS, APIs,\\Cloud-native und Plattform-Strategie.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 6}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterl\"osungen sind \emph{eine} m\"ogliche, didaktisch nachvollziehbare L\"osung. Heute besonders wichtig: \emph{Plattform-Entscheidungen sind 6+\,Monate \"andert} \textendash{} die L\"osung muss daher zwingend \emph{Annahmen}, \emph{verworfene Alternativen} und \emph{Fr\"uhwarnsignale} dokumentieren.
+
+\begin{infobox}[Nutzung im Coaching]
+Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Welche Entscheidung ist in 6\,Monaten teuer zu \"andern? (2) Welche habe ich bewusst getroffen, welche per Default? (3) Welches Fr\"uhwarnsignal w\"urde mich zur Kurskorrektur zwingen?
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{BPMS-Bausteine}{\nivLi}{8\,min}
+
+\ytquery{BPMS Bausteine Prozessengine Workflow Engine Closed Loop Camunda}
+
+\begin{loesungbox}
+\textbf{Sieben Kernbausteine:}
+\begin{enumerate}
+  \item \emph{Prozessengine}: f\"uhrt das Modell aus. Risiko ohne: alles bleibt Skizze.
+  \item \emph{Aufgaben-/Worklist}: stellt Tasks an User. Risiko: keine Sichtbarkeit, was zu tun ist.
+  \item \emph{Regelwerk (DMN)}: Entscheidungslogik au{\ss}erhalb des Prozesses. Risiko: Logik im Code versteckt.
+  \item \emph{Forms}: Datenerfassung im Prozess. Risiko: Excel-Workarounds.
+  \item \emph{Monitoring / Dashboards}: Real-time Steuerung. Risiko: blinde Steuerung.
+  \item \emph{Audit Trail}: revisionssichere Historie. Risiko: keine Audit-F\"ahigkeit.
+  \item \emph{Versionierung}: parallele Modellst\"ande. Risiko: Roll-back unm\"oglich.
+\end{enumerate}
+
+\smallskip
+\textbf{Closed Loop:} \emph{Modellieren} (BPMN-Soll) \textrightarrow{} \emph{Ausf\"uhren} (Engine + Tasks) \textrightarrow{} \emph{\"Uberwachen} (KPIs + Mining) \textrightarrow{} \emph{Optimieren} (Change Request, neue Version). Ohne \"Uberwachen+Optimieren ist es nur ``Run'' \textendash{} kein Loop.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{API als Vertrag}{\nivLi}{10\,min}
+
+\ytquery{API Contract REST Endpoint Versioning Auth Rate Limiting Best Practice}
+
+\begin{loesungbox}
+\textbf{Acht Pflichtbestandteile:}
+\begin{enumerate}
+  \item \emph{Endpoint} \textendash{} URL + HTTP-Methode. Fehlt: Aufruf nicht reproduzierbar.
+  \item \emph{Input} \textendash{} getypte Felder + Pflicht/Optional. Fehlt: ``mal mit, mal ohne'' \textrightarrow{} Engineering h\"olle.
+  \item \emph{Output} \textendash{} Struktur + Typ + Beispiele. Fehlt: Konsument interpretiert frei.
+  \item \emph{Fehlercodes} \textendash{} klare Liste (4xx vs.\ 5xx). Fehlt: Retry / manuell nicht entscheidbar.
+  \item \emph{Auth} \textendash{} OAuth, mTLS, API-Key. Fehlt: Security-Gap, Audit-Versagen.
+  \item \emph{Rate Limits} \textendash{} Anfragen pro Zeit. Fehlt: Lieferantenseite kann Sie blockieren.
+  \item \emph{Versionierung} \textendash{} \texttt{/v1/} oder Header. Fehlt: ``Breaking Change am Mittwoch'' \textrightarrow{} Ausfall.
+  \item \emph{Monitoring / Correlation-ID} \textendash{} Trace-Header. Fehlt: Fehlersuche unm\"oglich.
+\end{enumerate}
+
+\smallskip
+\textbf{Eigent\"umer:} der \emph{Anbieter}. Er verantwortet Stabilit\"at, Versionierung und Deprecation. Der Konsument darf den Vertrag nur konsumieren \textendash{} nicht neu definieren.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{Sync vs.\ Async, Idempotenz, Retry}{\nivLi}{8\,min}
+
+\ytquery{Sync vs Async API Event Driven Architecture Idempotency Retry Exponential}
+
+\begin{loesungbox}
+\textbf{1. Sync vs.\ Async:}
+\emph{Sync} = Anfrage wartet auf Antwort; Aufrufer wei{\ss} sofort, was passiert. \emph{Async} = Anfrage geht raus; Antwort kommt sp\"ater (Event/Webhook). Sync ist gut bei interaktiven UI-Pfaden; Async ist gut bei langlaufenden, fehleranf\"alligen Prozessen.
+
+\smallskip
+\textbf{2. Idempotenz:}
+Mehrfacher Aufruf hat dieselbe Wirkung wie ein einzelner. Beispiel: PUT mit ID = idempotent; POST ohne ID = nicht idempotent. Pflicht f\"ur Retry: ohne Idempotenz erzeugt jeder Retry potenziell eine \emph{neue} Wirkung (Doppelbuchung).
+
+\smallskip
+\textbf{3. Retry mit exponential backoff:}
+Wartezeiten verdoppeln sich pro Retry (z.\,B.\ 1\,s, 2\,s, 4\,s, 8\,s). Schutz vor ``Cascading Failure'' bei \"uberlastetem Downstream. \emph{Nicht retryen}: bei Side-Effects ohne Idempotenz, bei 4xx-Errors (Client-Fehler), bei Auth-Fail.
+
+\smallskip
+\textbf{4. Correlation-ID:}
+Bindet alle Async-Schritte an einen Case. Erm\"oglicht Fehleranalyse und Audit. Pflicht-Header f\"ur jeden Aufruf.
+
+\smallskip
+\textbf{Vergleichstabelle:}
+\begin{tabularx}{\linewidth}{@{}p{3.2cm}|X|X@{}}
+\toprule
+\textbf{Aspekt} & \textbf{Sync} & \textbf{Async} \\
+\midrule
+Antwort         & sofort & sp\"ater (Event) \\
+Kopplung        & eng & lose \\
+Resilienz       & gering (Kaskade) & hoch (Pufferung) \\
+Komplexit\"at   & gering & h\"oher (Correlation) \\
+\bottomrule
+\end{tabularx}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{BPMS-Blueprint \emph{Customer Complaint Handling}}{\nivLii}{25\,min}
+
+\ytquery{BPMS Blueprint Customer Complaint Workflow SLA Eskalation Camunda}
+
+\begin{loesungbox}
+\textbf{BPMS-Blueprint:}
+
+\smallskip
+\textbf{Start:} \emph{Reklamation eingegangen} (Message via E-Mail-Gateway oder CRM).
+\begin{itemize}
+  \item User Task (Service Agent): \emph{Klassifizieren} (Kulanz / Defekt / Lieferung). SLA 4\,h. System: CRM.
+  \item \textbf{XOR}: \emph{R\"uckfrage n\"otig?}
+  \begin{itemize}
+    \item Ja \textrightarrow{} User Task (Service Agent): \emph{R\"uckfrage stellen}. Timer 48\,h. Eskalation nach Ablauf.
+    \item Nein \textrightarrow{} weiter.
+  \end{itemize}
+  \item User Task (Service Lead): \emph{Entscheidung Kulanz/Retoure}. Regel DMN (Schwellenwert + Kundenstatus). SLA 2\,Tage.
+  \item Service Task: \emph{Abwicklung im ERP} (Gutschrift / R\"ucknahme).
+  \item Service Task: \emph{Kundenkommunikation} (E-Mail). Audit-Log.
+  \item End: \emph{Reklamation abgeschlossen} + Reporting (KPI-Update).
+\end{itemize}
+
+\smallskip
+\textbf{SLAs / Eskalation:} 48\,h Erstreaktion, 10\,T Abschluss. Bei \"Uberschreitung Eskalation an Service Lead.
+
+\smallskip
+\textbf{Drei KPIs:}
+\begin{itemize}
+  \item \emph{SLA-Einhaltung} (\% F\"alle in SLA) \textendash{} Owner: Service Lead.
+  \item \emph{Rework-Quote} (\% F\"alle mit Nachbearbeitung) \textendash{} Owner: QM.
+  \item \emph{Customer Satisfaction nach Reklamation} \textendash{} Owner: VoC-Team.
+\end{itemize}
+
+\smallskip
+\textbf{Entscheidung unter Unsicherheit:} \emph{Im BPMS muss:} Klassifizierung + SLA + Eskalation. \emph{Au{\ss}erhalb:} VoC-Befragung (eigenes Tool, kein Workflow-Step) \textendash{} sonst werden Kunden zu fr\"uh kontaktiert, die KPI verzerrt.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{API-Vertr\"age}{\nivLii}{22\,min}
+
+\ytquery{REST API Contract Order Status Return GetOrderStatus CreateReturn Error}
+
+\begin{loesungbox}
+\textbf{API 1: \texttt{GetOrderStatus} (sync)}
+\begin{itemize}
+  \item Endpoint: \texttt{GET /v1/orders/\{order\_id\}/status}.
+  \item Input: \texttt{order\_id} (Pfad), \texttt{X-Correlation-ID} (Header).
+  \item Output: \texttt{status, last\_event\_at, carrier, tracking\_id}.
+  \item Fehler: 404 (Order unknown), 401/403 (Auth), 503 (Backend down).
+  \item Auth: OAuth2 client\_credentials.
+  \item Versionierung: \texttt{/v1/}.
+  \item Monitoring: Correlation-ID + Response-Time-Logging.
+\end{itemize}
+
+\smallskip
+\textbf{API 2: \texttt{CreateReturn} (async via Event)}
+\begin{itemize}
+  \item Endpoint: POST \texttt{/v1/returns} (sync acknowledgement) + Event \texttt{ReturnCreated} (async).
+  \item Input: \texttt{order\_id, reason\_code, items[], customer\_contact}.
+  \item Output (sync): \texttt{return\_id, acknowledged\_at}; (async event): \texttt{status\_change}.
+  \item Fehler: 400 (Pflichtfeld fehlt), 409 (Order nicht reklamierbar), 503.
+  \item Auth: OAuth2 + Idempotenz-Key.
+  \item Versionierung: \texttt{/v1/}.
+  \item Monitoring: Correlation-ID + Event-Auditing.
+\end{itemize}
+
+\smallskip
+\textbf{Drei Fehlerstrategien:}
+\begin{itemize}
+  \item \emph{Timeout 503:} 3$\times$ Retry mit exponential backoff; danach Eskalation an Service Lead.
+  \item \emph{Daten fehlen 400:} Sofort manuell (User Task ``Pflichtfeld erg\"anzen'').
+  \item \emph{Auth-Fail 401/403:} keine Retry; sofortige Eskalation an IT-Security.
+\end{itemize}
+
+\smallskip
+\textbf{Sync/Async:}
+\begin{itemize}
+  \item \emph{GetOrderStatus} = sync (UI braucht sofortige Antwort).
+  \item \emph{CreateReturn} = async (langlaufender Prozess, mehrere Status-\"Anderungen). Sync-Acknowledgement zur sofortigen Best\"atigung, dann Event-Stream.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{Cloud-native Betriebsanforderungen}{\nivLii}{20\,min}
+
+\ytquery{Cloud Native Twelve Factor Auto Scaling Observability Circuit Breaker SLO}
+
+\begin{loesungbox}
+\textbf{F\"unf Anforderungen:}
+\begin{enumerate}
+  \item \emph{Auto-Scaling (horizontal):} Container-Anzahl skaliert mit Last; sichtbar im Peak-Saison-Verhalten. Begr\"undung: Skalierungs-Bedarf ist 10$\times$ in der Peak.
+  \item \emph{Observability:} \emph{Logs} (strukturiert, JSON), \emph{Metrics} (Latenz, Error-Rate, Throughput), \emph{Traces} (Distributed Tracing pro Case-ID).
+  \item \emph{Resilienz:} \emph{Circuit Breaker} verhindert Kaskaden bei Downstream-Ausfall; \emph{Retry mit Backoff} f\"angt transiente Fehler ab.
+  \item \emph{Deployment:} \emph{CI/CD} mit Staging; \emph{Blue/Green} f\"ur Zero-Downtime; \emph{Rollback} in $<$\,5\,Minuten.
+  \item \emph{Security (Zero Trust):} \emph{mTLS} zwischen Services; \emph{Secrets Management} (kein Klartext im Repo); Least-Privilege-Berechtigungen.
+\end{enumerate}
+
+\smallskip
+\textbf{Anti-Muster ``Skalierung ohne Observability'':}\\
+Wenn Container im Peak auf 20 hochskaliert, aber niemand Latenz, Error-Rate und Traces sieht, ist ein Ausfall im 10.\ Container unsichtbar \textendash{} bis Kunden anrufen. Observability ist die einzige Sicherheit, dass Skalierung tats\"achlich \emph{Wirkung} erzielt und nicht nur \emph{Kosten} produziert.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{System-of-Record-Entscheidung}{\nivLii}{18\,min}
+
+\ytquery{System of Record Data Ownership Master Data Management CRM ERP Conflict}
+
+\begin{loesungbox}
+\textbf{1. System of Record pro Datenobjekt:}
+\begin{itemize}
+  \item \emph{Kunde}: \fachbegriff{CRM} (vertriebsseitig, vollst\"andigste Stammdaten).
+  \item \emph{Auftrag}: \fachbegriff{ERP} (rechnungs-/buchhalterisch verbindlich).
+  \item \emph{Reklamation}: \fachbegriff{BPMS} (Workflow-Case ist der ``Master-Case'').
+\end{itemize}
+
+\smallskip
+\textbf{2. Konflikt bei Datenobjekt \emph{Kunde}:}\\
+Wenn CRM eine neue Lieferadresse f\"uhrt, das ERP eine ``alte'' Adresse aus einer fr\"uheren Rechnung, gilt: \emph{CRM ist Master} \textrightarrow{} ERP wird \"uber Event \emph{CustomerAddressUpdated} aktualisiert. Bei manuellen \"Anderungen im ERP wird ein \emph{Konflikt-Event} erzeugt, Data Steward muss entscheiden.
+
+\smallskip
+\textbf{3. Master-Slave-Regel:}\\
+\emph{Master-System publiziert Events; alle Slave-Systeme konsumieren.} Bei manuellen \"Anderungen am Slave: \emph{Event back to Master} (``Pull-Request''); Master Steward entscheidet.
+
+\smallskip
+\textbf{4. Bewusst akzeptiert vs.\ nie:}
+\begin{itemize}
+  \item \emph{Akzeptiert (mit Guardrail):} bis zu 4\,h Verz\"ogerung bei Kundendaten-Sync ist OK \textendash{} solange ein End-User-sichtbares Banner im ERP zeigt ``Daten werden synchronisiert''. Guardrail: nach 4\,h muss Alerting kommen.
+  \item \emph{Nie:} Inkonsistenz beim \emph{Reklamationsstatus} \textendash{} sonst bekommen Kunden falsche Auskunft. Hier ist Real-time-Sync verpflichtend.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{E2E-Methodenintegration: Model \textrightarrow{} Run \textrightarrow{} Improve}{\nivLii}{18\,min}
+
+\ytquery{Process Model Run Improve Closed Loop BPMS Mining KPI Continuous Improvement}
+
+\begin{loesungbox}
+\textbf{Model:} \emph{BPMN} als Soll (ausf\"uhrbar im BPMS) + \emph{VSM} als End-to-End-\"Ubersicht f\"ur Engp\"asse. BPMN steuert Ausf\"uhrung, VSM steuert Optimierung.
+
+\smallskip
+\textbf{Run:} \emph{BPMS-Engine} f\"uhrt den BPMN-Prozess aus; \emph{REST-API zum CRM/ERP} integriert; \emph{Event-Bus} f\"ur asynchrone Schritte.
+
+\smallskip
+\textbf{Improve:} \emph{Process Mining} auf den Audit-Logs des BPMS \textrightarrow{} Discovery zeigt Ist-Pfade + Varianten; \emph{KPI-Dashboard} (SLA-Einhaltung, Rework, CSAT) im Review-Zyklus.
+
+\smallskip
+\textbf{Process Review Board:}
+\begin{itemize}
+  \item Rollen: Process Owner, IT-Lead, Operations-Lead, Data Steward, Compliance-Lead.
+  \item Frequenz: monatlich, 90\,Min.
+  \item Entscheidet: Change Requests zum BPMN, KPI-Anpassungen, Audit-Themen.
+\end{itemize}
+
+\smallskip
+\textbf{Faustregel:} Der Loop ist \emph{geschlossen}, sobald eine im Mining entdeckte Abweichung in einem dokumentierten Change Request endet \textendash{} und dieser zu einer neuen BPMN-Version f\"uhrt, die wieder gemessen wird. Wenn drei Reviews kein Change Request produzieren, ist es \emph{kein} Loop, sondern Reporting.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{EuroLogix}}{\nivLiii}{45\,min}
+
+\ytquery{Logistics Exception Handling BPMS Cloud Native API Integration Roadmap}
+
+\begin{loesungbox}
+\textbf{1. BPMS-Prozess:}\\
+Start ``Exception erkannt'' (Event aus TMS) \textrightarrow{} Task \emph{Klassifizieren} \textrightarrow{} XOR ``kritisch?'' (Ja \textrightarrow{} sofortige Eskalation + Kundeninfo; Nein \textrightarrow{} normal) \textrightarrow{} Task \emph{Ursache kl\"aren} (CRM/TMS) \textrightarrow{} Task \emph{Ma{\ss}nahme} (Umroute / Neuversand) \textrightarrow{} Task \emph{Kundenkommunikation} \textrightarrow{} End ``geschlossen'' + Reporting. \emph{SLAs:} Erstreaktion 2\,h, L\"osung 24\,h, Eskalation nach 4\,h an Duty Manager.
+
+\smallskip
+\textbf{2. Integrationspunkte:}
+\begin{enumerate}
+  \item \emph{Event \texttt{ExceptionRaised}} (async) mit Case-ID, Shipment-ID, Timestamp, Severity.
+  \item \emph{API \texttt{GetShipmentStatus}} (sync); Fallback Cache/Manuell bei Timeout.
+  \item \emph{API \texttt{NotifyCustomer}} / \emph{Event \texttt{CustomerNotified}}; Audit-Logging Pflicht.
+\end{enumerate}
+
+\smallskip
+\textbf{3. Cloud-native (4 Punkte):} Auto-Scaling bei Peak; zentrale Logs/Metrics/Traces; Circuit Breaker + Retry; Blue/Green-Deployment.
+
+\smallskip
+\textbf{4. Methodenintegration:} BPMN als Soll, VSM f\"ur Engp\"asse, KPIs als Steuerung, Mining f\"ur Varianten \textrightarrow{} monatliches Process Review Board (Owner + IT + Ops).
+
+\smallskip
+\textbf{5. MVP (Release 1):}
+\emph{Drin:} BPMS-Case-Handling + 1 Event + 1 Status-API + SLA/Eskalation + Dashboard.\\
+\emph{Bewusst nicht:} Full Data Warehouse Rebuild; Predictive Modelle; mobile App f\"ur Driver. Begr\"undung: 9 Wochen sind zu kurz, Risiko zu hoch; alle drei k\"onnen in Release 2 nachgezogen werden, ohne MVP umzubauen.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Architekturpfad: event-driven vs.\ sync}{\nivLiii}{25\,min}
+
+\ytquery{Event Driven Architecture vs Synchronous Trade Off Resilience Audit}
+
+\begin{loesungbox}
+\textbf{Trade-off-Matrix:}
+
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}|X|X@{}}
+\toprule
+\textbf{Dimension} & \textbf{Event-driven} & \textbf{\"Uberwiegend sync} \\
+\midrule
+Resilienz       & hoch (Pufferung) & gering (Kaskade) \\
+\midrule
+Audit / Nachverfolg. & schwieriger (Event-Order) & einfacher (lineare Aufrufkette) \\
+\midrule
+Skalierung      & sehr gut (lose Kopplung) & limitiert durch synchrone Wartezeiten \\
+\midrule
+Komplexit\"at   & hoch (Correlation, Order, Idempotenz) & niedrig \\
+\midrule
+Team-Skills     & verlangt Senior-Engineering & breiter verf\"ugbar \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Entscheidung f\"ur \emph{EuroLogix}:}\\
+\emph{\"Uberwiegend event-driven mit sync-Inseln.} Begr\"undung: Peak-Saison verlangt Pufferung; Shipment-Lifecycle ist von Natur aus eventbasiert. Reine Sync-Architektur w\"urde bei Peak kollabieren. Sync bleibt nur f\"ur UI-getriebene Lookups.
+
+\smallskip
+\textbf{Sync-Inseln:}
+\begin{itemize}
+  \item \emph{GetShipmentStatus} (UI braucht sofort Antwort).
+  \item \emph{Customer-Notification-Status-Check} (Service-Agent fragt im Gespr\"ach).
+\end{itemize}
+
+\smallskip
+\textbf{Fr\"uhwarnsignal zur Umkehr:}\\
+Wenn nach 3\,Monaten die durchschnittliche Event-Latenz \"uber 2\,Sekunden steigt oder das Team f\"ur jeden neuen Use Case 4+\,Tage Setup-Zeit braucht \textendash{} dann ist event-driven f\"ur dieses Team zu komplex. R\"uckweg: BPMS-Engine als Orchestrator weiterhin behalten, Events nur f\"ur n\"otige Pufferung.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} E2E Integration \& BPMS Platform Strategy}{\nivLiii}{45\,min}
+
+\ytquery{Platform Strategy BPMS Integration Cloud Native API Governance CDO}
+
+\begin{loesungbox}
+\textbf{1. Plattform-Entscheidungsarchitektur:}
+\begin{itemize}
+  \item \emph{Zentral:} API-Standards (OpenAPI, Auth-Pattern), Observability-Stack, Security-Standards, BPMN-Style-Guide.
+  \item \emph{Dezentral:} Team-Backlog, Service-Implementation, Tech-Stack innerhalb der Standards.
+\end{itemize}
+
+\smallskip
+\textbf{2. API Governance:}
+\begin{itemize}
+  \item Versionierung: \texttt{/v\{N\}/} im Pfad; Deprecation 12\,Monate angek\"undigt.
+  \item SLA/SLO pro API (Latenz P95, Verf\"ugbarkeit 99,5\,\%).
+  \item Ownership: jede API hat \emph{einen} Team-Owner.
+  \item Contract Testing: Konsumenten testen gegen Pact-\"ahnliche Specs in CI.
+  \item Change-Prozess: API-Review-Board, mind.\ 2 Wochen vor Release.
+\end{itemize}
+
+\smallskip
+\textbf{3. BPMS Governance:}
+\begin{itemize}
+  \item Prozess-Lifecycle: Draft \textrightarrow{} Approved \textrightarrow{} Retired (siehe Tag 4).
+  \item Release-Management: monatlich, Hotfix on demand.
+  \item Exception-Policy: max.\ 10\,\% Manual-Exit pro Prozess.
+  \item Audit Trail: 7 Jahre, suchbar.
+  \item KPI-Steuerung: SLA-Einhaltung, Rework, CSAT pro Prozess.
+\end{itemize}
+
+\smallskip
+\textbf{4. Cloud-native Betriebsmodell:}
+\begin{itemize}
+  \item SLOs: 99,5\,\% Verf\"ugbarkeit Tier-1 Services; P95 Latenz $<$\,500\,ms.
+  \item Skalierungsstrategie: Auto-Scaling auf CPU + Custom Metrics (Queue-L\"ange).
+  \item Incident Management: PagerDuty-\"ahnlich, On-Call-Rotation, Post-Mortem-Pflicht.
+  \item FinOps light: monatliches Kosten-Review pro Service-Team; Budget-Alerts.
+\end{itemize}
+
+\smallskip
+\textbf{5. Roadmap (16 Wochen, 3 Releases):}
+\begin{itemize}
+  \item \emph{Rel 1 (Wo 1\,--\,6, MVP):} 1 Prozess, 2 APIs, 1 Event, 1 Dashboard, Audit Trail.
+  \item \emph{Rel 2 (Wo 7\,--\,12, Skalierung):} 3 Prozesse, 5 APIs, Auto-Scaling, Observability-Stack.
+  \item \emph{Rel 3 (Wo 13\,--\,16, Sustain):} Governance Board, Incident-Modell, FinOps.
+\end{itemize}
+\emph{Messkonzept:} Leading = Lead Time pro Change; Lagging = Anzahl Incidents, Anteil SLA-Verletzungen, Audit-Findings.
+
+\smallskip
+\textbf{6. Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Architekturpfad:} \"uberwiegend event-driven mit sync-Inseln (siehe Aufgabe 10). Fr\"uhwarnsignal: Event-Latenz $>$\,2\,s, Setup-Zeit $>$\,4\,T pro Use Case.
+  \item \emph{MVP-Scope = 2 Integrationen:} GetShipmentStatus + ExceptionRaised-Event. \emph{Stop-Doing:} keine Customer-Mobile-App, kein Real-time-ETL ins DWH, keine ML-Komponente in Release 1. Begr\"undung: jede dieser drei Optionen verschwendet das 9-Wochen-Fenster.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Heute pr\"ufen Sie besonders: Habe ich BPMS, API und Cloud-native als \emph{drei Teile einer Plattform-Entscheidung} verstanden \textendash{} oder als isolierte Themen?
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie ins Coaching: Welche API gilt bei Ihnen heute als ``Vertrag mit Versionierung''? Welche f\"uhrt heute ein Schattendasein \textendash{} und welcher Audit w\"urde sie sichtbar machen?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 6 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

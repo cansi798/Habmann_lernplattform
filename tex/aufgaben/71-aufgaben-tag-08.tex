@@ -1,0 +1,524 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 8 - Aufgabenheft
+% Vom Ist verstehen zum Zukunft steuern: Enhancement, Predictive, Real-time, DWH/ETL, BI
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable, colback=white, colframe=lpGray,
+  boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 8}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Predictive \textperiodcentered{} DWH \textperiodcentered{} BI}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 3 \textperiodcentered{} TAG 8 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 9.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 8\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom Ist verstehen zum Zukunft\\steuern \textendash{} Enhancement,\\Predictive und Real-time Monitoring.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 8 \textendash{} \emph{Vom Ist verstehen zum Zukunft steuern}: Process Enhancement, Predictive Analytics, Real-time Monitoring, DWH/ETL und BI-Dashboards. Heute schlie{\ss}en sich die Themen von Tag 7 (Discovery + Conformance) um die Predictive-Schicht: \emph{wir bewegen uns vom ``Was war?'' zum ``Was kommt?''}. Die Aufgaben gliedern sich in drei Niveaus:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} ML-Typen, ETL-Schritte, Dashboard-Prinzipien. 5\,--\,10 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Predictive Canvas, ETL-Pipeline, BI-Dashboard. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Fallstudie \emph{FinServe IT Operations}, Process Intelligence Plattform. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt:
+\begin{itemize}
+  \item eine Niveau-Markierung und einen Zeit-Richtwert,
+  \item den Aufgabentext (oft mit Kontext oder Fallbeschreibung),
+  \item einen Antwort-Freiraum f\"ur Ihre L\"osung,
+  \item eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 8}. Heute besonders wichtig: \emph{Predictive ohne Handlungsplan ist wertlos}. Alert \textrightarrow{} Owner \textrightarrow{} Playbook. Und: \emph{Baseline vor ML}. Einfache Regeln liefern oft 60\,--\,80\,\% Nutzen und sind auditierbar. Ein zweites Senior-Prinzip: \emph{Erkl\"arbarkeit ist Pflicht}, nicht K\"ur \textendash{} ein Black-Box-Modell, das niemand verteidigen kann, wird im Audit zur Falle.
+\end{infobox}
+
+\medskip
+\noindent\textbf{Predictive Use Case Canvas (Erinnerung):} 6 Felder \textendash{} Zielentscheidung, Prognose, Handlung, Datenminimum, Risiko/Compliance, Erfolgskriterium. Nutzen Sie den Canvas konsequent.
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{ML-Typen im Prozesskontext}{\nivLi}{8\,min}
+
+\noindent Listen Sie die \emph{vier ML-Typen}, die im Prozesskontext relevant sind, mit je einem \emph{konkreten Use Case}:
+
+\begin{enumerate}
+  \item \fachbegriff{Klassifikation} \textendash{} z.\,B.\ ``Wird Fall eskalieren?'' (ja/nein).
+  \item \fachbegriff{Regression} \textendash{} z.\,B.\ Restlaufzeit prognostizieren.
+  \item \fachbegriff{Clustering} \textendash{} z.\,B.\ Falltypen erkennen.
+  \item \fachbegriff{Anomalieerkennung} \textendash{} z.\,B.\ ungew\"ohnliche Pfade.
+\end{enumerate}
+
+\medskip
+\noindent Erg\"anzen Sie f\"ur jeden Typ: \emph{Welches Datenminimum} brauchen Sie? \emph{Welche Grenzen} (Datenqualit\"at, Konzeptdrift, Erkl\"arbarkeit, Fehlanreize)?
+
+\ytquery{Machine Learning Process Mining Classification Regression Clustering Anomaly}
+
+\antwortlinien{14}
+
+\clearpage
+
+\aufgabenkopf{2}{ETL-Pipeline: sechs Schritte}{\nivLi}{8\,min}
+
+\noindent Erkl\"aren Sie die sechs Schritte einer typischen \fachbegriff{ETL}-Pipeline f\"ur Prozessdaten:
+
+\begin{enumerate}
+  \item \emph{Quelle} (CRM, ERP, Tickets, Logs).
+  \item \emph{Staging} (Rohdaten unver\"andert ablegen).
+  \item \emph{Mapping} (Aktivit\"atsnamen, Status normalisieren).
+  \item \emph{Join} (\"uber Case-IDs oder Korrelationsschl\"ussel).
+  \item \emph{Quality Checks} (Pflichtfelder, Timestamps, Dubletten).
+  \item \emph{DWH} (Faktentabelle Events + Dimensionen).
+\end{enumerate}
+
+\medskip
+\noindent Geben Sie pro Schritt einen \emph{typischen Stolperstein} an. Schlie{\ss}en Sie mit einem Satz: Wo entsteht die meiste Arbeit \textendash{} und wo der gr\"o{\ss}te Wert?
+
+\ytquery{ETL Pipeline Process Data Staging Mapping Join Data Quality DWH}
+
+\antwortlinien{14}
+
+\clearpage
+
+\aufgabenkopf{3}{BI-Dashboard: drei Prinzipien, sechs Kacheln}{\nivLi}{10\,min}
+
+\noindent Ein gutes BI-Dashboard folgt drei Prinzipien:
+
+\begin{enumerate}
+  \item \emph{Wenige Executive-KPIs} (Top-Level-\"Ubersicht).
+  \item \emph{Drilldown} (Ursachen).
+  \item \emph{Alarme} (Handlung).
+\end{enumerate}
+
+\medskip
+\noindent Beschreiben Sie pro Prinzip in einem Satz: Was leistet es? Welches Anti-Muster (``zuviel'' / ``zuwenig'') entsteht ohne?
+
+\medskip
+\noindent Entwerfen Sie ein \emph{Mini-Layout} f\"ur ein Dashboard ``Incident Operations'' mit \emph{sechs Kacheln}: 2 Executive-KPIs, 2 Prozess-KPIs, 1 Risiko/Compliance-KPI, 1 Alert-Kachel.
+
+\ytquery{BI Dashboard Best Practice Executive KPI Drilldown Alert Tableau Power BI}
+
+\antwortlinien{14}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Predictive Use Case Canvas (zwei Use Cases)}{\nivLii}{25\,min}
+
+\begin{infobox}[Ausgangslage]
+Ein Prozess (z.\,B.\ Reklamationsbearbeitung) schwankt stark in Durchlaufzeit; Management will Fr\"uhwarnung statt Ausreden.
+\end{infobox}
+
+\noindent\textbf{Canvas-Felder:}
+\begin{enumerate}
+  \item Zielentscheidung
+  \item Prognose
+  \item Handlung (was tun bei hohem Risiko?)
+  \item Datenminimum (5 Felder)
+  \item Risiko / Compliance
+  \item Erfolgskriterium
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item F\"ullen Sie den Canvas f\"ur \emph{Use Case A: ``SLA-Risiko fr\"uh erkennen''}.
+  \item F\"ullen Sie den Canvas f\"ur \emph{Use Case B: ``Rework / Fehler fr\"uh erkennen''}.
+  \item Definieren Sie je Use Case eine \fachbegriff{Baseline-Heuristik}, die auch \emph{ohne ML} sofort wirkt.
+  \item \textbf{Entscheidung unter Unsicherheit:} Welche Daten fehlen vermutlich \textendash{} und wie erfassen Sie sie pragmatisch (ohne Tool-Projekt)?
+\end{enumerate}
+
+\ytquery{Predictive Process Analytics Use Case Canvas SLA Risk Rework Baseline}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{5}{ETL \& Dashboard in 30 Minuten}{\nivLii}{25\,min}
+
+\begin{infobox}[Szenario]
+Prozessdaten liegen in drei Quellen: \emph{CRM} (Kunde), \emph{Ticketing} (Bearbeitung), \emph{ERP} (Rechnung/Zahlung). IDs sind nicht sauber verkn\"upft.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Entwerfen Sie eine \textbf{ETL-Pipeline} als 6 Schritte (Quelle \textrightarrow{} Staging \textrightarrow{} Mapping \textrightarrow{} Join \textrightarrow{} Quality Checks \textrightarrow{} DWH).
+  \item Definieren Sie \emph{f\"unf Datenqualit\"ats-Checks} (z.\,B.\ fehlende Case-ID, Zeitstempel r\"uckw\"arts, unbekannte Aktivit\"at, Dublette, leeres Pflichtfeld).
+  \item Entwerfen Sie ein \textbf{BI-Dashboard} mit 6 Kacheln (2 Executive, 2 Prozess, 1 Risk, 1 Alert).
+  \item \textbf{Anti-Gaming-Entscheidung:} Welche \emph{eine KPI} f\"uhren Sie \emph{nicht} sofort ein, um Fehlanreize zu vermeiden \textendash{} und warum?
+\end{enumerate}
+
+\ytquery{ETL Pipeline 6 Steps Data Quality Checks BI Dashboard Anti Gaming}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{6}{Baseline-Regel vor ML}{\nivLii}{18\,min}
+
+\begin{infobox}[Vorgabe]
+Vor jeder ML-L\"osung lohnt sich eine \fachbegriff{Baseline-Heuristik}: einfache Regel, die 60\,--\,80\,\% des Nutzens liefert und auditierbar ist.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item F\"ur den Use Case ``SLA-Breach in 4\,h'' (Incident-Tickets): Formulieren Sie eine \emph{Baseline-Regel} (z.\,B.\ ``Ticket-Alter $>$\,70\,\% der SLA \textrightarrow{} Risiko hoch'').
+  \item Beschreiben Sie, wie Sie diese Regel \emph{messbar machen}: Welche zwei KPIs vergleichen Sie \emph{vor} ML- und \emph{mit} Baseline?
+  \item Diskutieren Sie: Wann lohnt sich der Wechsel zu einem ML-Modell? Welche zwei Kriterien?
+  \item \textbf{Anti-Muster}: Wann ist die Baseline \emph{besser} als ein ML-Modell (Erkl\"arbarkeit, Auditierbarkeit, Stabilit\"at)?
+\end{enumerate}
+
+\ytquery{Baseline Heuristic vs Machine Learning When Simpler is Better Process}
+
+\antwortlinien{14}
+
+\clearpage
+
+\aufgabenkopf{7}{Alert-Playbook: Alert \textrightarrow{} Owner \textrightarrow{} Handlung}{\nivLii}{20\,min}
+
+\begin{infobox}[Mini-Szenario]
+Das Predictive-Modell wirft pro Tag 30 Alerts. Niemand reagiert. Nach 6 Wochen wird das Modell still abgeschaltet.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Alert-Playbook} f\"ur den Use Case ``SLA-Risiko''. Pro Alert-Stufe (z.\,B.\ Risk $>$\,0,8): \emph{Owner}, \emph{Handlung}, \emph{Eskalation}, \emph{Dokumentation}.
+  \item \textbf{Alarmm\"udigkeit:} Welche \emph{drei Ma{\ss}nahmen} verhindern, dass Alerts ignoriert werden? (Schwellen, Eskalation, Feedback-Schleife.)
+  \item \textbf{Drift-Monitoring:} Wie merken Sie, dass das Modell \emph{altert} (Konzeptdrift)? Welche zwei Indikatoren?
+  \item \textbf{Faustregel} (1 Satz): Ab wann ist ein Predictive-System ``produktiv'' \textendash{} im Gegensatz zu ``demoreif''?
+\end{enumerate}
+
+\ytquery{Alert Playbook Process Mining MLOps Drift Detection Alarm Fatigue}
+
+\antwortlinien{16}
+
+\clearpage
+
+\aufgabenkopf{8}{False Positive vs.\ False Negative}{\nivLii}{18\,min}
+
+\begin{infobox}[Vorgabe]
+Bei Predictive sind \emph{beide} Fehler m\"oglich: ein \emph{False Positive} (Alarm ohne Realit\"at) und ein \emph{False Negative} (verpasster Fall). F\"ur eine Managemententscheidung m\"ussen Sie wissen, welcher Fehler \emph{teurer} ist.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent F\"ur jeden der vier Use Cases:
+
+\begin{enumerate}
+  \item ``SLA-Breach in 4\,h'' (Incident).
+  \item ``Maverick Buying'' (P2P).
+  \item ``Kunde wird abspringen'' (Onboarding).
+  \item ``Versand verz\"ogert sich'' (Logistik).
+\end{enumerate}
+
+\noindent Sagen Sie pro Use Case: (a) Was ist False Positive konkret? (b) Was ist False Negative konkret? (c) Welcher ist teurer und warum? (d) Welche Konsequenz hat das f\"ur den \emph{Schwellenwert} (sensitiv vs.\ konservativ)?
+
+\ytquery{False Positive vs False Negative Cost Sensitive ML Process Mining Threshold}
+
+\antwortlinien{16}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{FinServe IT Operations}}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie \emph{FinServe IT Operations}]
+\textbf{Unternehmen:} \emph{FinServe IT Operations} (stark SLA-getrieben).\\
+\textbf{Problem:} SLA-Verletzungen werden zu sp\"at erkannt; Eskalationen hektisch; Management will Real-time Transparenz.
+
+\smallskip
+\textbf{Restriktionen:} \textbf{8 Wochen}, Budget \textbf{120\,k\,\euro}, Daten in Ticketing + Monitoring + E-Mail, Labels (SLA breach) unvollst\"andig, Zielkonflikt Transparenz vs.\ Druck.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Predictive Use Case:} ``Wahrscheinlichkeit SLA-Breach in den n\"achsten 4\,h''.
+  \item \textbf{Features} (min.\ 8): Priorit\"at, Ticket-Alter, Reassignments, Kategorie, Service, Queue-L\"ange, Tageszeit, letzte Aktivit\"at, Kommentare.
+  \item \textbf{Label-Definition:} Was ist ``Breach''? Umgang mit fehlenden Labels (Proxy).
+  \item \textbf{ETL-Pipeline} + \textbf{Datenqualit\"ats-Checks} + Case-ID-Strategie.
+  \item \textbf{Real-time Dashboard} + \textbf{Alert Playbook} (Owner, Handlung, Eskalation, Dokumentation).
+  \item \textbf{MVP-Entscheidung:} Welche \emph{2 Features} und welche \emph{1 Datenquelle} lassen Sie zuerst weg \textendash{} und wie kompensieren Sie?
+\end{enumerate}
+
+\ytquery{SLA Predictive Incident Management Features ETL Dashboard Real Time}
+
+\antwortlinien{34}
+
+\clearpage
+
+\aufgabenkopf{10}{Modell-Governance: Drift, Erkl\"arbarkeit, Fairness}{\nivLiii}{25\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Ein produktives ML-Modell ist ein \fachbegriff{Produkt}: Product Owner, Release-Zyklus, Monitoring, Auditf\"ahigkeit.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie die Rolle \emph{ML Product Owner} f\"ur das SLA-Modell: Aufgaben, Mandat, Eskalation.
+  \item \textbf{Drift-Monitoring:} Welche \emph{zwei Drift-Typen} (Data Drift / Concept Drift) und wie messen Sie sie?
+  \item \textbf{Erkl\"arbarkeit:} Wie erkl\"aren Sie ein Alert dem Duty Manager? Welche \emph{2 Methoden} (Feature Importance, lokale Erkl\"arungen)?
+  \item \textbf{Fairness:} Welcher \emph{Bias} k\"onnte das Modell entwickeln (z.\,B.\ benachteiligt Service A gegen\"uber Service B)? Welche Gegenma{\ss}nahme?
+\end{enumerate}
+
+\ytquery{MLOps Model Governance Drift Detection Explainability XAI Fairness Bias}
+
+\antwortlinien{20}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Process Intelligence Platform}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Data Officer / Chief Operations Officer / Head of Process Excellence.
+
+\smallskip
+\textbf{Auftrag:} In \textbf{20 Wochen} eine unternehmensweite Process-Intelligence-Plattform etablieren (DWH/ETL, Dashboards, Predictive, Real-time), die konkrete Managemententscheidungen unterst\"utzt.
+
+\smallskip
+\textbf{Restriktionen:} Datenquellen heterogen, Datenschutz / Compliance, Budget \textbf{300\,k\,\euro}, Fachbereiche misstrauen ``\"Uberwachung'', Modell-Drift wahrscheinlich.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Entscheidungs\-architektur:} Top-10 Entscheidungen, die die Plattform unterst\"utzen muss.
+  \item \textbf{Data Product Design:} Event-Log-Standard, Case-ID-Strategie, Datenmodell, Data Quality SLAs, Ownership.
+  \item \textbf{Analytics Portfolio:} Use Case Priorisierung (Value/Risk/Effort), Baseline-Regeln vs.\ ML, Erkl\"arbarkeit, Monitoring/Drift-Plan.
+  \item \textbf{Real-time Operating Model:} Alerting Governance, Playbooks, Eskalationslogik, Audit Trail, ``Human-in-the-loop''.
+  \item \textbf{BI \& KPI Governance:} KPI-Definitionen, Anti-Gaming-Kopplungen, Review-Zyklen, Training/Enablement.
+  \item \textbf{Roadmap:} MVP (8\,W), Scale (12\,W), Sustain (laufend) \textendash{} mit messbaren Outcomes.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:}
+    \begin{itemize}
+      \item Welche \emph{3 Use Cases zuerst} \textendash{} trotz Datenl\"ucken? Begr\"undung + verworfene Alternativen + Fr\"uhwarnsignale.
+      \item Welche \emph{KPI / Alerts} werden Executive \textendash{} und wie verhindern Sie Fehlanreize? (Guardrails.)
+    \end{itemize}
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien:} Senior-Level-Denken: von ``Dashboards bauen'' zu ``Steuerungs- und Entscheidungsarchitektur verantworten''.
+
+\noindent\textbf{Format-Hinweis:} Pr\"asentieren Sie das Ergebnis als \emph{Executive Briefing} \textendash{} 2 Seiten max. Seite 1: Entscheidungsarchitektur + Roadmap-Skizze. Seite 2: KPI-Set + Risiken + Fr\"uhwarnsignale. Senior-Reflex: ein CDO liest in 90\,Sekunden, was er entscheiden muss \textendash{} nicht 30\,Seiten Konzept.
+
+\ytquery{Process Intelligence Platform Decision Architecture CDO Real Time Predictive}
+
+\antwortlinien{40}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 8}. Pr\"ufen Sie:
+
+\begin{itemize}
+  \item Habe ich vor jedem ML-Modell die \emph{Baseline-Regel} ernsthaft gepr\"uft \textendash{} oder direkt ``ML'' geschrieben?
+  \item Hat jeder Alert einen \emph{Owner} und ein \emph{Playbook} \textendash{} oder verhallt er?
+  \item Habe ich \emph{False Positive} und \emph{False Negative} bewusst gewichtet \textendash{} oder Default-Schwelle 0,5?
+  \item Hat mein Modell-Governance \emph{Drift-Monitoring} und \emph{Erkl\"arbarkeit} \textendash{} oder ist es eine Black Box?
+\end{itemize}
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Vier ML-Typen (Klassifikation, Regression, Clustering, Anomalie) im Prozesskontext einsetzen.
+  \item ETL-Pipelines mit Quality-Checks entwerfen.
+  \item BI-Dashboards mit Executive-KPI, Drilldown und Alert strukturieren.
+  \item Baseline-Heuristiken vor ML einsetzen \textendash{} und den Wechsel begr\"unden.
+  \item Alert-Playbooks formulieren, die Alarm\-m\"udigkeit verhindern.
+  \item False Positive und False Negative bewusst gewichten und den Schwellenwert begr\"unden.
+  \item Eine Process Intelligence Platform mit Use-Case-Portfolio und MLOps-Governance entwerfen.
+\end{itemize}
+\end{infobox}
+
+\medskip
+\noindent\textbf{Anschluss an Tag 9:} Morgen sehen wir, wie wir die heute entwickelten Erkenntnisse \emph{in Lieferzyklen \"ubersetzen} \textendash{} Scrum/Kanban als Steuerungssystem, CI/IaC als sichere Beschleuniger. Die Predictive-Use-Cases von heute wandern morgen in die Sprint-Backlogs.
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 8 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

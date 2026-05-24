@@ -1,0 +1,553 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 9 - Loesungsheft
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 9}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Scrum \textperiodcentered{} Kanban \textperiodcentered{} CI/IaC}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 4 \textperiodcentered{} TAG 9 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 10.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 9\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen \textendash{} Scrum, Kanban\\und CI/IaC als Steuerungssystem.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 9}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Heute steht der Senior-Reflex im Vordergrund: \emph{Agile ist Steuerung, nicht Meeting-Kalender}. Eine L\"osung ohne klare Quality Gates, ohne Stop-the-Line-Regel und ohne Goodhart-Schutz f\"ur DORA-Kennzahlen ist nicht ``Senior''.
+
+\begin{infobox}[Nutzung im Coaching]
+Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Habe ich Scrum/Kanban-Wahl mit \emph{6 Stichpunkten} begr\"undet? (2) Hat meine Pipeline echte Stop-Regeln? (3) Habe ich DORA-Anti-Gaming eingebaut?
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Scrum-Framework}{\nivLi}{8\,min}
+
+\ytquery{Scrum Framework Roles Events Artifacts Cargo Cult Scrum}
+
+\begin{loesungbox}
+\textbf{Drei Rollen:}
+\begin{itemize}
+  \item \emph{Product Owner} \textendash{} verantwortet \emph{Was?} (Wert, Priorisierung, Akzeptanz).
+  \item \emph{Scrum Master} \textendash{} verantwortet \emph{Wie?} (Prozess, Hindernisse beseitigen, kein Team-Lead).
+  \item \emph{Developers} \textendash{} verantworten \emph{Lieferung} (Increment in Definition of Done).
+\end{itemize}
+
+\textbf{Vier Events:}
+\begin{itemize}
+  \item \emph{Sprint Planning} \textendash{} \emph{Was} im Sprint, \emph{wie} l\"osen wir es.
+  \item \emph{Daily} \textendash{} 15\,Min Sync auf das Sprint Goal; keine Status-Show.
+  \item \emph{Review} \textendash{} Increment den Stakeholdern zeigen, Feedback.
+  \item \emph{Retro} \textendash{} Prozess verbessern, kein Schuldfinden.
+\end{itemize}
+
+\textbf{Drei Artefakte:}
+\begin{itemize}
+  \item \emph{Product Backlog} \textendash{} priorisierte Liste aller Anforderungen.
+  \item \emph{Sprint Backlog} \textendash{} Auswahl f\"ur den Sprint + Plan.
+  \item \emph{Increment} \textendash{} fertig (Definition of Done) und potenziell auslieferbar.
+\end{itemize}
+
+\smallskip
+\textbf{Cargo Cult Scrum:} Rituale werden gespielt (Dailies, Plannings), aber ohne Wirkung. Symptome: lange Meetings, kein klares Sprint Goal, Backlog wandert nicht; Review wird zur ``Status-Show''. Verlorener Wert: \emph{empirische Steuerung} (Inspect \& Adapt) \textendash{} der Kern von Scrum ist weg.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{Kanban-Prinzipien}{\nivLi}{8\,min}
+
+\ytquery{Kanban Principles Visualize WIP Limit Pull Flow Lead Time Cycle Time}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{3.0cm}|X|X@{}}
+\toprule
+\textbf{Prinzip} & \textbf{Wirkung} & \textbf{Fehlt es\ldots} \\
+\midrule
+Visualisieren & Arbeit sichtbar, Bottlenecks erkennbar. & ``unsichtbare Arbeit'', alles in K\"opfen. \\
+WIP limitieren & weniger Multitasking, k\"urzere Lead Time. & ``alles parallel'', nichts wird fertig. \\
+Pull-System & Team zieht, wenn Kapazit\"at frei. & Push erzeugt ``In Progress''-Stau. \\
+Flow messen & Lead/Cycle Time als objektive Steuerung. & subjektive Bewertung, kein Lerneffekt. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{WIP-Limit als Schutz, kein Aufwand-Hindernis:}\\
+Ein WIP-Limit zwingt das Team, \emph{Ende} (Done) wichtiger zu nehmen als \emph{Anfang} (Start). Multitasking erh\"oht Lead Time nachweislich \textendash{} weniger ist mehr. Das WIP-Limit ist ein \emph{Schutzmechanismus} f\"ur Qualit\"at und Fokus, kein b\"urokratisches Hindernis.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{CI-Pipeline \& IaC}{\nivLi}{10\,min}
+
+\ytquery{CI Pipeline Build Test Deploy Quality Gate IaC Infrastructure as Code}
+
+\begin{loesungbox}
+\textbf{CI-Pipeline Stufen + Quality Gates:}
+
+\begin{tabularx}{\linewidth}{@{}p{2.8cm}|X|X@{}}
+\toprule
+\textbf{Stufe} & \textbf{Was passiert?} & \textbf{Quality Gate} \\
+\midrule
+Commit  & Code wird gepusht. & Pre-commit-Check (Linter, Format). \\
+Build   & Quellcode \textrightarrow{} Artefakt (z.\,B.\ Container Image). & Build erfolgreich, keine Warnings. \\
+Tests   & Unit + Integration. & Test-Quote $\geq$ Schwelle (z.\,B.\ 80\,\%). \\
+Security/Quality & Static Analysis, Dependency Scan. & Keine kritischen Vulnerabilities. \\
+Deploy Staging & Auf Staging-Umgebung. & Smoke Tests gr\"un. \\
+Deploy Prod & Auf Production. & Smoke Tests + Health-Check OK; Rollback-Plan dokumentiert. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Infrastructure as Code:}\\
+\emph{Was:} Infrastruktur wird in Code-Dateien beschrieben (Terraform, Pulumi, Ansible) und versioniert. \emph{Vorteile:} (a) reproduzierbar (gleiche Umgebung jedes Mal), (b) reviewbar (Pull Requests), (c) auditierbar (Versionshistorie). \emph{Risiken:} (a) falsche Rechte (zu weit gefasst), (b) unkontrollierte \"Anderungen ohne Review (``Quick-Fix \"uber Console'' h\"angt nicht im Code).
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Scrum oder Kanban?}{\nivLii}{25\,min}
+
+\ytquery{Scrum vs Kanban Hybrid Decision Process Improvement Operating Model}
+
+\begin{loesungbox}
+\textbf{1. Entscheidung: Hybrid.} 6 Stichpunkte:
+\begin{itemize}
+  \item Risiko: Hybrid spreizt das Risiko \textendash{} Sprints f\"ur Features, Kanban-Lane f\"ur Incidents.
+  \item Planbarkeit: Sprints geben Stakeholdern Taktung.
+  \item Stakeholder: viele Stakeholder $\to$ Review-Format n\"otig (Scrum-Review).
+  \item Teamreife: Hybrid passt zu mittlerer Reife; reines Scrum w\"urde Incidents st\"oren.
+  \item Workload: schwankender Anteil Anforderungs\"anderungen $\to$ Kanban-Lane absorbiert.
+  \item Abh\"angigkeiten: gegen\"uber externen Stakeholdern: Sprint Review als ``Verl\"asslichkeits-Anker''.
+\end{itemize}
+
+\smallskip
+\textbf{2. Ablauf-Skizze (2\,Wochen, Hybrid):}
+\begin{itemize}
+  \item \emph{Scrum-Lane (Features):} Sprint Goal ``MVP Genehmigungsweg 1 live''; 5 Backlog Items; DoD inkl.\ Tests + Doku + Audit-Log; Review-Agenda 60\,Min.
+  \item \emph{Kanban-Lane (Incidents/Requests):} Spalten Backlog \textrightarrow{} In Progress (WIP 2) \textrightarrow{} Review \textrightarrow{} Done; Pull-Regel ``erst leeren, dann ziehen''; Replenishment-Meeting Mo + Mi.
+\end{itemize}
+
+\smallskip
+\textbf{3. Drei Policies (Verantwortungs\-f\"ahigkeit):}
+\begin{enumerate}
+  \item \emph{Klare Abnahme}: jedes Item hat einen genannten Approver vor ``Done''.
+  \item \emph{Eskalation}: blockierte Items nach 24\,h \textrightarrow{} Scrum Master / Team-Lead.
+  \item \emph{Transparenz}: Board und Backlog sind \"offentlich (kein ``Schatten-Board'').
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{CI-Pipeline \& Quality Gates}{\nivLii}{22\,min}
+
+\ytquery{CI CD Pipeline Quality Gates IaC Policy Rollback Canary Feature Toggle}
+
+\begin{loesungbox}
+\textbf{1. Minimal-Pipeline (6 Stufen):}\\
+Build \textrightarrow{} Unit Tests \textrightarrow{} Integration Tests \textrightarrow{} Security Scan \textrightarrow{} Deploy Staging \textrightarrow{} Smoke Tests.
+
+\smallskip
+\textbf{2. Zwei Quality Gates:}
+\begin{enumerate}
+  \item \emph{Gate 1 \textendash{} Tests + Security:} alle Tests gr\"un \emph{und} kein kritischer Security-Finding offen.
+  \item \emph{Gate 2 \textendash{} Smoke Tests + Health:} Staging-Smoke-Test gr\"un \emph{und} Health-Check OK vor Production-Deploy.
+\end{enumerate}
+
+\smallskip
+\textbf{3. IaC-Policy:}
+\begin{itemize}
+  \item \emph{\"Anderungen via Pull Request:} keine Konsolen-\"Anderungen.
+  \item \emph{Vier-Augen-Prinzip:} mind.\ 2 Reviewer bei Production-Umgebung, Secrets, Berechtigungen.
+  \item \emph{Audit Trail:} Merge-Historie + Deploy-Log; 7 Jahre Aufbewahrung.
+  \item \emph{Secrets:} im Secrets-Manager, nie im Repo.
+\end{itemize}
+
+\smallskip
+\textbf{4. Bewusstes Risiko + Schutz:}
+\begin{itemize}
+  \item \emph{MVP-Risiko:} Integration Tests nur f\"ur Happy Path \textendash{} Edge Cases bleiben offen.
+  \item \emph{Schutz:} \fachbegriff{Feature Toggle} f\"ur den neuen Genehmigungsweg + \fachbegriff{Canary Deploy} (5\,\% Traffic erst); \fachbegriff{Rollback}-Plan getestet (1 Klick = vorherige Version). So bleibt der ``Blast Radius'' begrenzt.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{DORA-Kennzahlen}{\nivLii}{20\,min}
+
+\ytquery{DORA Metrics Lead Time Deployment Frequency MTTR Change Failure Rate}
+
+\begin{loesungbox}
+\textbf{DORA-Kennzahlen:}
+
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}|X|X@{}}
+\toprule
+\textbf{KPI} & \textbf{Misst + Verhalten} & \textbf{Manipulation + Gegenkopplung} \\
+\midrule
+Lead Time for Changes & Commit \textrightarrow{} Production. F\"ordert kleine, h\"aufige \"Anderungen. & Tasks splitten $\to$ Lead Time scheinbar k\"urzer. Gegenkopplung: Change Failure Rate. \\
+\midrule
+Deployment Frequency & Wie oft pro Zeitraum. F\"ordert Routine im Deployen. & ``Leer-Deploys'' $\to$ K\"unstlich h\"aufig. Gegenkopplung: Anzahl Production-Bugs. \\
+\midrule
+MTTR & Wie schnell Wiederherstellung. F\"ordert Incident-Reife. & Incidents zu fr\"uh ``geschlossen''. Gegenkopplung: Recurrence-Rate. \\
+\midrule
+Change Failure Rate & \% Deployments mit Incidents. F\"ordert Qualit\"at. & Klein-Releases als ``erfolgreich'' z\"ahlen. Gegenkopplung: Inkl.\ Edge-Case-Failures, kein Smart-Filter. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Executive-KPIs:} \emph{Lead Time} und \emph{Change Failure Rate}. Begr\"undung: Sie messen \emph{Geschwindigkeit \"uberlebt nur, wenn Qualit\"at stimmt}. \emph{Intern:} Deployment Frequency (operative Routine) und MTTR (Incident-Reife) \textendash{} wichtig, aber als Executive-Signal anf\"alliger f\"ur Manipulation.
+
+\smallskip
+\textbf{Faustregel (DORA):} ``Elite'' = Lead Time $<$\,1\,Tag, Deployment Frequency $>$\,1/Tag, MTTR $<$\,1\,h, Change Failure Rate $<$\,15\,\%.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{IaC-Workflow}{\nivLii}{20\,min}
+
+\ytquery{Infrastructure as Code GitOps Pull Request Review Secrets Management Audit}
+
+\begin{loesungbox}
+\textbf{1. IaC-Workflow:}\\
+\emph{Branch} (Entwickler erstellt) \textrightarrow{} \emph{\"Anderung} (Terraform/Pulumi, Commit) \textrightarrow{} \emph{Pull Request} (Beschreibung, Test-Plan) \textrightarrow{} \emph{Review} (Reviewer pr\"uft Plan-Output, Berechtigungen, Secrets) \textrightarrow{} \emph{Merge} (nach Approval) \textrightarrow{} \emph{Deploy} (automatisch via Pipeline, mit Lock zur Verhinderung paralleler L\"aufe).
+
+\smallskip
+\textbf{2. Vier-Augen-Pflicht}:
+\begin{itemize}
+  \item Production-Umgebung.
+  \item Secrets / Credential-\"Anderungen.
+  \item IAM / Berechtigungen / Policies.
+  \item Netzwerk (Security Groups, Firewall, VPN).
+\end{itemize}
+
+\smallskip
+\textbf{3. Secrets-Policy:}
+\begin{itemize}
+  \item Secrets liegen im Secrets-Manager (z.\,B.\ Vault).
+  \item \emph{Anti-Muster:} (a) ``Secret im Repo'' (Git-Historie f\"ur immer kompromittiert), (b) ``Secret im Wiki'' (kein Audit), (c) ``Secret in Slack'' (keine Rotation, kein Audit).
+  \item Rotation: regelm\"a{\ss}ig (z.\,B.\ alle 90\,Tage); nach Kompromittierung sofort.
+\end{itemize}
+
+\smallskip
+\textbf{4. Audit Trail:}\\
+Auditor sieht: (a) Git-Historie (wer hat commitet), (b) Pull-Request-Review (wer hat approved), (c) Deploy-Log (wann auf welche Umgebung), (d) Secrets-Manager-Log (wer hat welches Secret abgerufen). Vier zusammen erzeugen den vollst\"andigen Nachweis.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{Anti-Muster im Agile Delivery}{\nivLii}{18\,min}
+
+\ytquery{Scrum Kanban Anti Patterns Cargo Cult Friday Release Sprint Goal}
+
+\begin{loesungbox}
+\textbf{A \textendash{} ``Backlog-Abarbeitungs-Sprint'':} \emph{Anti-Muster:} kein Sprint Goal, kein Outcome. \emph{Schaden:} Team verliert Fokus, Stakeholder bekommen Aufz\"ahlung statt Wert. \emph{Sofort:} Sprint Goal als Outcome formulieren (``Bef\"ahige X''); \emph{Strukturell:} Planning auf max.\ 2\,h fokussieren, Backlog vorher refinen.
+
+\smallskip
+\textbf{B \textendash{} ``Status-Daily mit Detail-Moderation'':} \emph{Anti-Muster:} Scrum Master als Statusgeber. \emph{Schaden:} Team-Selbstorganisation verloren; Daily wird zur Pflicht. \emph{Sofort:} Scrum Master sitzt 5\,Min still und beobachtet. \emph{Strukturell:} Daily-Format auf 3 Fragen reduzieren (Was gestern? Was heute? Blocker?), Owner-Pattern (jede Person berichtet zur Sprint-Goal-Spalte).
+
+\smallskip
+\textbf{C \textendash{} ``Board ohne WIP-Limit'':} \emph{Anti-Muster:} 47 Tickets parallel, Lead Time steigt. \emph{Schaden:} nichts wird fertig, Multitasking. \emph{Sofort:} WIP-Limit ``In Progress'' auf 5 setzen (Team-Gr\"o{\ss}e $\times$ 1,5). \emph{Strukturell:} Replenishment-Meeting; ``erst leeren, dann ziehen''-Policy; Cycle Time pro Spalte messen.
+
+\smallskip
+\textbf{D \textendash{} ``Freitag 17:00-Release ohne Rollback-Test'':} \emph{Anti-Muster:} ``ship it''-Kultur ohne Sicherheitsnetz. \emph{Schaden:} Incident im Wochenende; niemand reagiert, Kunden frustriert. \emph{Sofort:} Friday-Release-Verbot (au{\ss}er Hotfix). \emph{Strukturell:} Rollback monatlich \"uben (``Game Day''); Canary Releases einf\"uhren; Deployment-Windows definieren (Mo\,--\,Do 08:00\,--\,15:00).
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{CityServices}}{\nivLiii}{45\,min}
+
+\ytquery{Public Sector Digital Approval Workflow Agile Scrum Kanban CI Release}
+
+\begin{loesungbox}
+\textbf{1. Hybrid-Ansatz:} Scrum f\"ur Features (2-Wochen-Sprints) + Kanban-Lane f\"ur Incidents/Requests (WIP 2). Rollen: PO (Fachbereich), SM, Dev-Team, Plattform-Lead. Policies (siehe Aufgabe 4).
+
+\smallskip
+\textbf{2. 3-Releases-Plan (12 Wochen):}
+\begin{itemize}
+  \item \emph{MVP (Wo 1\,--\,4):} 3 Outcomes: digitaler Antrag + Statusanzeige + 1 Genehmigungsweg live.
+  \item \emph{Beta (Wo 5\,--\,8):} 3 Outcomes: Rollenmodell + SLA-Reminder + Audit Trail; 2.\ Genehmigungsweg.
+  \item \emph{Stabilisierung (Wo 9\,--\,12):} 3 Outcomes: Performance + Monitoring + Prozess-KPIs.
+\end{itemize}
+
+\smallskip
+\textbf{3. CI-Pipeline:} Build \textrightarrow{} Unit Tests \textrightarrow{} Integration Tests \textrightarrow{} Security Scan \textrightarrow{} Deploy Staging \textrightarrow{} Smoke Tests. \emph{2 Quality Gates:} Tests \& Scan gr\"un; Smoke + Health OK. \emph{Release-Policy:} Mo\,--\,Do 08\,--\,15\,Uhr, keine Friday-Releases au{\ss}er Hotfix mit Approver.
+
+\smallskip
+\textbf{4. IaC-Policy:} \"Anderungen via Pull Request; 2-Augen-Freigabe; Umgebungen reproduzierbar; Secrets im Manager; Audit Log via Merge-Historie.
+
+\smallskip
+\textbf{5. Fast vs.\ Safe:}
+\begin{itemize}
+  \item \emph{Speed:} (a) MVP ohne vollst\"andige Automatisierung aller Sonderf\"alle (manuelle Sonder\-pfade); (b) Integration Tests nur f\"ur Happy Path.
+  \item \emph{Safety:} (c) Security-Scan + Smoke-Test unverhandelbar; (d) Rollback-Plan und Feature-Toggle f\"ur Genehmigungswege.
+\end{itemize}
+
+\smallskip
+\textbf{6. Fr\"uhwarnsignale:} (i) Change Failure Rate $>$\,15\,\% in 2 aufeinander\-folgenden Wochen; (ii) Lead Time pro Item $>$\,5\,Tage. Beide ausl\"osen Re-Planning.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Stop-the-Line}{\nivLiii}{25\,min}
+
+\ytquery{Stop The Line Andon Continuous Delivery Emergency Change Management}
+
+\begin{loesungbox}
+\textbf{1. Drei Stop-the-Line-Regeln:}
+\begin{enumerate}
+  \item \emph{Tests rot} \textendash{} keine Production-Releases, bis alle gr\"un.
+  \item \emph{Security-Finding offen} (kritisch oder hoch) \textendash{} keine Production-Releases, bis adressiert oder dokumentiert akzeptiert.
+  \item \emph{Production-Incident l\"auft} \textendash{} keine Deployments w\"ahrend Incident-Bearbeitung.
+\end{enumerate}
+
+\smallskip
+\textbf{2. Mandat ``Stop'':}\\
+Das Mandat liegt beim \emph{Platform Lead} bzw.\ \emph{Release Manager}. Wenn das Mandat \emph{unklar} verteilt ist: Eskalation l\"auft im Kreis (``Wer entscheidet?''), Releases werden trotzdem freigegeben, Incidents h\"aufen sich. Wichtig: \emph{kein einzelner Entwickler} sollte das Mandat haben \textendash{} und \emph{kein Manager} sollte ohne Plattform-Vertretung dr\"uberentscheiden.
+
+\smallskip
+\textbf{3. Emergency Change:}\\
+Ausnahme: \emph{Hotfix bei Production-Outage}. \emph{Nachprozess:} (a) Sofortige Notifikation an Platform Lead + SM, (b) Audit-Log mit ``EMERGENCY''-Tag, (c) Post-Mortem innerhalb 5\,Tagen, (d) ggf.\ Nachzieh-Tests in den n\"achsten Sprint.
+
+\smallskip
+\textbf{4. Eskalation \"uberstimmt Stop:}\\
+Wenn das Management eine Stop-Regel \emph{politisch} \"uberstimmt (``muss heute raus''), gilt:
+\begin{itemize}
+  \item Schriftliche Risiko-\"Ubernahme durch den \"Uberstimmenden (E-Mail / Ticket).
+  \item Audit-Log markiert das Release als ``Override''.
+  \item Folgen f\"ur Glaubw\"urdigkeit: wenn \"Uberstimmungen \emph{Routine} werden, ist die Stop-Regel tot \textendash{} und das Team hat keine Sicherheit mehr. Faustregel: max.\ 1$\times$/Halbjahr.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Agile + DevOps Operating Model}{\nivLiii}{45\,min}
+
+\ytquery{Agile DevOps Operating Model DORA Team Topologies Quality Gates Roadmap}
+
+\begin{loesungbox}
+\textbf{1. Entscheidungs\-architektur:}
+\begin{itemize}
+  \item \emph{Zentral:} Quality Gates, Security-Standards, IaC-Standards, Release-Policy, DORA-Definitionen.
+  \item \emph{Dezentral:} Team-Backlog, technische Umsetzung innerhalb der Standards, Sprint-Pl\"ane.
+\end{itemize}
+
+\smallskip
+\textbf{2. Team-Topologie \& Governance:}
+\begin{itemize}
+  \item \emph{Stream-Aligned Teams} (PO, SM, Dev) liefern Features.
+  \item \emph{Platform Team} stellt CI/IaC/Secrets-Stack bereit (``X-as-a-Service'' f\"ur Stream-Teams).
+  \item \emph{Enabling Team} (Security/Compliance) ber\"at, nicht reviewt jeden Commit.
+  \item RACI: PO accountable f\"ur Wert; Platform Lead accountable f\"ur Plattform-SLOs; Security accountable f\"ur Audit-Findings.
+  \item Risikoakzeptanz: PO darf Feature-Toggles + Speed-Risiko entscheiden; Security darf Gate-Override blockieren.
+\end{itemize}
+
+\smallskip
+\textbf{3. Flow-Kennzahlen:} DORA-4 (Lead Time, Deployment Frequency, MTTR, Change Failure Rate); Anti-Gaming siehe Aufgabe 6.
+
+\smallskip
+\textbf{4. Quality Gate Strategy:} Mindesttests (Unit + Integration auf Happy Path), Security-Scan, Release-Policy (Deployment-Windows), Audit Trail; Emergency Change geregelt mit Post-Mortem-Pflicht.
+
+\smallskip
+\textbf{5. Roadmap (16 Wochen):}
+\begin{itemize}
+  \item Wo 1\,--\,4: Pilotteam (1 Stream-Team), Plattform-MVP, Charter publiziert.
+  \item Wo 5\,--\,8: Plattform skaliert auf 3 Teams, DORA-Messung produktiv.
+  \item Wo 9\,--\,12: Skalierung auf 6 Teams, Audit-Vorbereitung.
+  \item Wo 13\,--\,16: Sustain, Optimierung, Lessons Learned.
+  \item Enablement: L1 (Lesen + Daily), L2 (Pipeline + IaC), L3 (Governance + Architecture).
+\end{itemize}
+
+\smallskip
+\textbf{6. Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Release-Frequenz-Ziel:} 1$\times$/Woche pro Team in den ersten 8\,Wochen, danach Steigerung auf 2$\times$/Woche. \emph{Risiko:} \"Uberlastung Plattform-Team. \emph{Fr\"uhwarnsignal:} Plattform-Incident-Rate $>$\,2/Woche.
+  \item \emph{Standardisierung vs.\ Autonomie:} Standards f\"ur Pipeline-Stufen, Security, IaC; Autonomie f\"ur Tech-Stack innerhalb der Standards. \emph{Akzeptanzstrategie:} Standards zusammen mit Tech-Leads formulieren. \emph{Trigger zum Nachsch\"arfen:} wenn 2+ Teams das gleiche Workaround entwickeln.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Heute besonders: Habe ich \emph{Agile} als Steuerung verstanden \textendash{} oder als Ritual?
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie ins Coaching: Welche \emph{eine} Stop-the-Line-Regel w\"urden Sie morgen in Ihrer Organisation einf\"uhren? Wer h\"atte das Mandat? Was w\"urde im ersten Override passieren? Sind Ihre DORA-Kennzahlen \emph{gekoppelt} \textendash{} oder optimieren sie sich gegenseitig zu Tode?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 9 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

@@ -1,0 +1,532 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 9 - Aufgabenheft
+% Agile Delivery als Steuerungssystem: Scrum/Kanban + CI/IaC
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable, colback=white, colframe=lpGray,
+  boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 9}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Scrum \textperiodcentered{} Kanban \textperiodcentered{} CI/IaC}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 4 \textperiodcentered{} TAG 9 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 10.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 9\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Agile Delivery als Steuerungs-\\system \textendash{} Scrum, Kanban und\\CI/IaC als Beschleuniger.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 9 \textendash{} \emph{Agile Delivery als Steuerungssystem}: Scrum, Kanban, CI-Pipelines und Infrastructure as Code. Die Aufgaben gliedern sich in drei Niveaus:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Scrum-Rollen + Events, Kanban-Prinzipien, CI-Pipeline-Bausteine, IaC. 5\,--\,10 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Delivery-Design w\"ahlen, Pipeline + Gates, IaC-Policy. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Fallstudie \emph{CityServices}, Operating Model Agile + DevOps. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt:
+\begin{itemize}
+  \item eine Niveau-Markierung und einen Zeit-Richtwert,
+  \item den Aufgabentext (oft mit Kontext oder Fallbeschreibung),
+  \item einen Antwort-Freiraum f\"ur Ihre L\"osung,
+  \item eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 9}. Heute besonders wichtig: \emph{Agile ist Steuerung, nicht Meeting-Kalender}. Scrum-Events ohne Outcome sind ``Cargo Cult Scrum''. Kanban ohne WIP-Limits ist nur ein Whiteboard. CI/IaC ohne Quality Gates ist gef\"ahrlicher als kein CI \textendash{} denn er erzeugt das Gef\"uhl, sicher zu sein, ohne es zu sein.
+\end{infobox}
+
+\medskip
+\noindent\textbf{Begriffe-Spickzettel:}
+\begin{itemize}
+  \item \emph{DoR} = Definition of Ready (was muss vor dem Sprint vorliegen).
+  \item \emph{DoD} = Definition of Done (was hei{\ss}t ``fertig'').
+  \item \emph{WIP} = Work in Progress (gleichzeitig laufende Items).
+  \item \emph{MTTR} = Mean Time to Restore (Wiederherstellungszeit nach Incident).
+\end{itemize}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Scrum-Framework}{\nivLi}{8\,min}
+
+\noindent Listen Sie die drei \fachbegriff{Rollen}, vier \fachbegriff{Events} und drei \fachbegriff{Artefakte} von Scrum, mit je einem Satz \emph{Zweck}:
+
+\medskip
+\noindent\textbf{Hinweis:} Rollen = Product Owner, Scrum Master, Developers. Events = Sprint Planning, Daily, Review, Retro. Artefakte = Product Backlog, Sprint Backlog, Increment + Definition of Done.
+
+\medskip
+\noindent Erkl\"aren Sie zus\"atzlich den \emph{Anti-Muster-Begriff} ``Cargo Cult Scrum'' in 2\,--\,3 S\"atzen: Welche Symptome treten auf? Welcher Wert ist verloren gegangen?
+
+\ytquery{Scrum Framework Roles Events Artifacts Cargo Cult Scrum}
+
+\antwortlinien{14}
+
+\clearpage
+
+\aufgabenkopf{2}{Kanban-Prinzipien}{\nivLi}{8\,min}
+
+\noindent Erkl\"aren Sie pr\"agnant die vier Kanban-Prinzipien:
+
+\begin{enumerate}
+  \item \fachbegriff{Visualisieren}.
+  \item \fachbegriff{WIP limitieren}.
+  \item \fachbegriff{Pull-System} (statt Push).
+  \item \fachbegriff{Flow messen} (Lead Time, Cycle Time).
+\end{enumerate}
+
+\medskip
+\noindent F\"ur jedes Prinzip:
+\begin{itemize}
+  \item Was bewirkt es?
+  \item Was passiert, wenn es \emph{fehlt}?
+\end{itemize}
+
+\noindent Diskutieren Sie: Warum ist ein \emph{WIP-Limit} ein Schutzmechanismus, kein Aufwand-Hindernis?
+
+\ytquery{Kanban Principles Visualize WIP Limit Pull Flow Lead Time Cycle Time}
+
+\antwortlinien{12}
+
+\clearpage
+
+\aufgabenkopf{3}{CI-Pipeline \& IaC: Grundbausteine}{\nivLi}{10\,min}
+
+\noindent Erkl\"aren Sie die typischen Stufen einer \fachbegriff{CI-Pipeline} (in Reihenfolge):
+
+\[ \text{Commit} \to \text{Build} \to \text{Tests} \to \text{Security/Quality Checks} \to \text{Deploy (Staging/Prod)} \]
+
+\medskip
+\noindent F\"ur jede Stufe:
+\begin{itemize}
+  \item Was passiert?
+  \item Welches \emph{Quality Gate} kann hier sitzen?
+\end{itemize}
+
+\medskip
+\noindent Erkl\"aren Sie au{\ss}erdem \fachbegriff{Infrastructure as Code}: Was ist es? Welche \emph{drei Vorteile} (Reproduzierbarkeit, Reviewbarkeit, Auditability)? Welche \emph{zwei Risiken} (falsche Rechte, unkontrollierte \"Anderungen ohne Review)?
+
+\ytquery{CI Pipeline Build Test Deploy Quality Gate IaC Infrastructure as Code}
+
+\antwortlinien{12}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Scrum oder Kanban? Delivery-Design}{\nivLii}{25\,min}
+
+\begin{infobox}[Ausgangslage]
+Ein Unternehmen will in 12 Wochen einen digitalen Prozess (z.\,B.\ \emph{Rechnungsfreigabe}) verbessern. Anforderungen \"andern sich, Stakeholder sind viele, IT-Kapazit\"at ist begrenzt.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Entscheidung: Scrum oder Kanban (oder Hybrid)?} Begr\"unden Sie in \emph{sechs} Stichpunkten: Risiko, Planbarkeit, Stakeholder, Teamreife, Workload, Abh\"angigkeiten.
+  \item \textbf{Ablauf-Skizze f\"ur 2 Wochen:}
+    \begin{itemize}
+      \item Scrum: Sprint Goal, 5 Backlog Items, DoD, Review-Agenda.
+      \item Kanban: Board-Spalten, WIP-Limits, Pull-Regeln, Replenishment-Meeting.
+    \end{itemize}
+  \item \textbf{Drei Policies}, die ``Verantwortungs\-f\"ahigkeit'' f\"ordern: klare Abnahme, Eskalation, Transparenz.
+\end{enumerate}
+
+\ytquery{Scrum vs Kanban Hybrid Decision Process Improvement Operating Model}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{5}{CI-Pipeline \& Quality Gates}{\nivLii}{22\,min}
+
+\begin{infobox}[Mini-Szenario]
+Sie liefern jede Woche Prozess-/IT-\"Anderungen aus. Bisher entstehen Fehler nach Deployments und es gibt Angst vor Releases.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Minimal-Pipeline} (max.\ 6 Stufen) f\"ur ``sichere schnelle \"Anderungen''.
+  \item \textbf{Zwei Quality Gates} (Stop-Regeln), die \emph{immer} erf\"ullt sein m\"ussen (z.\,B.\ Tests gr\"un, Security-Scan ok).
+  \item \textbf{IaC-Policy}: Wer darf Infrastruktur\-\"anderungen freigeben? Wie wird dokumentiert (Audit Trail)?
+  \item \textbf{Entscheidung unter Unsicherheit:} Wo akzeptieren Sie bewusst \emph{Risiko} im MVP (z.\,B.\ weniger Tests) \textendash{} und wie begrenzen Sie den Schaden (Rollback, Canary, Feature Toggle)?
+\end{enumerate}
+
+\ytquery{CI CD Pipeline Quality Gates IaC Policy Rollback Canary Feature Toggle}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{6}{DORA-Kennzahlen: Lead Time, Deployment Frequency, MTTR, Change Failure Rate}{\nivLii}{20\,min}
+
+\begin{infobox}[Vorgabe]
+DORA-Kennzahlen sind das ``Quartett'' der Delivery-Performance:
+\begin{itemize}
+  \item \emph{Lead Time for Changes}: vom Commit bis Production.
+  \item \emph{Deployment Frequency}: wie oft wird deployed?
+  \item \emph{Mean Time to Restore (MTTR)}: wie lange dauert die Wiederherstellung nach Incident?
+  \item \emph{Change Failure Rate}: \% Deployments, die zu Incidents f\"uhren.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item F\"ur jede DORA-Kennzahl: \emph{Was misst sie? Welche Verhaltens\-wirkung erzeugt sie?}
+  \item \textbf{Anti-Gaming:} Wie k\"onnte jede gespielt werden? Welche Gegenkopplung sch\"utzt?
+  \item \textbf{Senior-KPI-Set:} Welche \emph{zwei} der vier f\"uhren Sie als Executive-KPIs \textendash{} und warum lassen Sie die anderen zwei intern?
+  \item \textbf{Faustregel:} Ab welchem Niveau gilt eine Organisation als ``High Performer'' (DORA-Benchmark)?
+\end{enumerate}
+
+\ytquery{DORA Metrics Lead Time Deployment Frequency MTTR Change Failure Rate}
+
+\antwortlinien{16}
+
+\clearpage
+
+\aufgabenkopf{7}{IaC: Pull Request, Review, Secrets}{\nivLii}{20\,min}
+
+\begin{infobox}[Vorgabe]
+Infrastructure as Code ist ein Vertrag: Umgebungen werden per Code beschrieben, \"Anderungen nur \"uber Pull Request, mit Review und Audit Log.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{IaC-Workflow:} Skizzieren Sie die Schritte: \emph{Branch \textrightarrow{} \"Anderung \textrightarrow{} Pull Request \textrightarrow{} Review \textrightarrow{} Merge \textrightarrow{} Deploy}. Wer ist pro Schritt verantwortlich?
+  \item \textbf{Vier-Augen-Pflicht:} Welche \"Anderungen verlangen 2 Reviewer? (Production-Umgebung, Secrets, Berechtigungen, Netzwerk.)
+  \item \textbf{Secrets-Policy:} Wie werden Secrets gespeichert? Drei Anti-Muster (``Secret im Repo'', ``Secret im Wiki'', ``Secret in Slack'').
+  \item \textbf{Audit Trail:} Wie weist man dem Auditor in 6 Monaten nach, \emph{wer} \emph{wann} \emph{was} ge\"andert hat?
+\end{enumerate}
+
+\ytquery{Infrastructure as Code GitOps Pull Request Review Secrets Management Audit}
+
+\antwortlinien{16}
+
+\clearpage
+
+\aufgabenkopf{8}{Anti-Muster im Agile Delivery}{\nivLii}{18\,min}
+
+\begin{infobox}[Vier Mini-Beispiele]
+\textbf{A.} Sprint Planning dauert 4\,h, alle sind genervt. Sprint Goal ``Wir machen das Backlog ab''.
+
+\smallskip
+\textbf{B.} Daily ist 30\,min lang, der Scrum Master ``moderiert'' und stellt Detailfragen.
+
+\smallskip
+\textbf{C.} Kanban-Board hat 47 Tickets in ``In Progress''. WIP-Limit nicht definiert. Lead Time steigt seit 8 Wochen.
+
+\smallskip
+\textbf{D.} Releases passieren ``Freitag 17:00 vor Feierabend''. CI gr\"un. Aber Rollback wurde nie getestet.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent F\"ur jedes der vier Beispiele:
+
+\begin{enumerate}
+  \item Benennen Sie das \emph{Anti-Muster} pr\"agnant.
+  \item Beschreiben Sie in einem Satz, welcher \emph{Schaden} entsteht.
+  \item Schlagen Sie eine \emph{Sofortma{\ss}nahme} (24\,h) und eine \emph{strukturelle Ma{\ss}nahme} (30\,T) vor.
+\end{enumerate}
+
+\ytquery{Scrum Kanban Anti Patterns Cargo Cult Friday Release Sprint Goal}
+
+\antwortlinien{16}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{CityServices} \textendash{} Digitaler Genehmigungsworkflow}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie \emph{CityServices}]
+\textbf{Unternehmen:} \emph{CityServices} (\"offentliche Verwaltung / Serviceprovider).\\
+\textbf{Problem:} Ein Genehmigungsprozess dauert 6\,Wochen, Medienbr\"uche, B\"urger unzufrieden. Compliance-Anforderungen hoch, Releases selten und riskant.
+
+\smallskip
+\textbf{Restriktionen:} \textbf{10 Wochen} bis Pilot, Budget \textbf{130\,k\,\euro}, Fachbereich will schnelle \"Anderungen, IT f\"urchtet Instabilit\"at; Anforderungen unklar.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Scrum / Kanban / Hybrid} w\"ahlen und das \emph{Operating Model} designen: Rollen, Meetings / Policies, Backlog / Board.
+  \item \textbf{12-Wochen-Plan} in 3 Releases (MVP, Beta, Stabilisierung) mit je \emph{3 Outcomes} (nicht nur Tasks).
+  \item \textbf{CI-Pipeline} + \emph{2 Quality Gates} + \emph{Release-Policy} (wann darf in Prod?).
+  \item \textbf{IaC-Policy} (Review, Freigabe, Secrets, Audit Trail \textendash{} konzeptionell).
+  \item \textbf{Entscheidung Fast vs.\ Safe:}
+    \begin{itemize}
+      \item \emph{2 Entscheidungen zugunsten Speed.}
+      \item \emph{2 Entscheidungen zugunsten Safety.}
+    \end{itemize}
+  \item \textbf{2 Fr\"uhwarnsignale:} z.\,B.\ ``Fehlerrate nach Release steigt'' oder ``Lead Time steigt''.
+\end{enumerate}
+
+\ytquery{Public Sector Digital Approval Workflow Agile Scrum Kanban CI Release}
+
+\antwortlinien{34}
+
+\clearpage
+
+\aufgabenkopf{10}{Stop-the-Line: Wann wird nicht released?}{\nivLiii}{25\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent ``Stop the Line'' ist die wichtigste Sicherheitsregel im Delivery-System: wann wird \emph{nicht} released \textendash{} selbst wenn Pl\"ane es vorgesehen haben?
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Formulieren Sie \emph{drei Stop-the-Line-Regeln}: Tests rot, Security-Finding offen, Production-Incident l\"auft\ldots.
+  \item Welche Rolle hat das \emph{Mandat} ``Stop''? Was passiert, wenn dieses Mandat \emph{nicht klar} verteilt ist?
+  \item \textbf{Emergency Change:} Welche Ausnahme erlauben Sie \textendash{} z.\,B.\ Hotfix bei Production-Outage \textendash{} mit welchem Nachprozess?
+  \item \textbf{Eskalation:} Wann \"uberstimmt das Management die Stop-the-Line-Regel? Welche Folgen hat das f\"ur die Glaubw\"urdigkeit?
+\end{enumerate}
+
+\ytquery{Stop The Line Andon Continuous Delivery Emergency Change Management}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Agile + DevOps Operating Model}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Digital Officer / Head of Delivery / Transformation Lead.
+
+\smallskip
+\textbf{Auftrag:} Organisationsweites Operating Model etablieren, das schnelle \"Anderungen erm\"oglicht \emph{und} Compliance/Qualit\"at messbar absichert (Scrum/Kanban + CI/IaC).
+
+\smallskip
+\textbf{Restriktionen:} mehrere Teams, unterschiedliche Reifegrade, Budget \textbf{250\,k\,\euro}, Legacy-Umgebung, politischer Druck auf schnelle Ergebnisse.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Entscheidungs\-architektur:} Welche Entscheidungen sind \emph{zentral} (Gates, Security, IaC-Standards), welche \emph{dezentral} (Team-Backlog, technische Umsetzung)?
+  \item \textbf{Team-Topologie \& Governance:} Rollen (PO, SM, Platform, Security), RACI, Risikoakzeptanzmodell (``wer darf was entscheiden?'').
+  \item \textbf{Flow-Kennzahlen:} Lead Time, Deployment Frequency, Change Failure Rate, MTTR \textendash{} plus Anti-Gaming-Mechanismen.
+  \item \textbf{Quality Gate Strategy:} Mindesttests, Security-Checks, Release-Policies, Audit Trail; \emph{Ausnahmen (Emergency Change)} geregelt.
+  \item \textbf{Roadmap (16 Wochen):} Pilotteams, Enablement, Plattform-Bausteine, Skalierung.
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:}
+    \begin{itemize}
+      \item \emph{Release-Frequenz-Ziel vs.\ Risiko}: Entscheidung + Begr\"undung + Fr\"uhwarnsignal.
+      \item \emph{Standardisierung vs.\ Teamautonomie}: Entscheidung + Akzeptanzstrategie + Trigger zum Nachsteuern.
+    \end{itemize}
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien:} Senior-Level-Denken: Ver\"anderung als gesteuertes System (Outcomes, Risiken, Ownership) \textendash{} nicht als Taskliste.
+
+\ytquery{Agile DevOps Operating Model DORA Team Topologies Quality Gates Roadmap}
+
+\antwortlinien{38}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 9}. Pr\"ufen Sie:
+
+\begin{itemize}
+  \item Habe ich Scrum / Kanban \emph{bewusst} gew\"ahlt \textendash{} oder per Default?
+  \item Hat meine CI-Pipeline \emph{echte Quality Gates}, die im Notfall stoppen?
+  \item Habe ich IaC mit Pull Request, Review und Secrets-Policy \emph{vollst\"andig} adressiert?
+  \item Habe ich Stop-the-Line-Regeln formuliert \textendash{} und das Mandat klar verteilt?
+  \item Sind meine DORA-Kennzahlen \emph{gekoppelt}, sodass keine sich auf Kosten der anderen verbessern kann?
+\end{itemize}
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Scrum-Framework und Kanban-Methodik als Steuerungssysteme einordnen \textendash{} nicht als Meeting-Kalender.
+  \item Eine CI-Pipeline mit Quality Gates + Release-Policy entwerfen.
+  \item IaC-Workflows mit Pull Request, Review, Audit Trail und Secrets-Policy aufsetzen.
+  \item DORA-Kennzahlen einsetzen \textendash{} inkl.\ Anti-Gaming.
+  \item Eine Stop-the-Line-Regel formulieren und das Mandat verteilen.
+  \item Ein Operating Model entwerfen, das zentral standardisiert und dezentral autonom liefert.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 9 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

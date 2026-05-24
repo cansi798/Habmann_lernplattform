@@ -1,0 +1,598 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 4 - Loesungsheft
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 4}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Repository \textperiodcentered{} Governance \textperiodcentered{} Execution}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 2 \textperiodcentered{} TAG 4 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 2.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 4\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen \textendash{} Repository,\\Governance und Execution-Modelle.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 4}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterl\"osungen sind \emph{eine} m\"ogliche, didaktisch nachvollziehbare L\"osung. Insbesondere auf L2 und L3 sind mehrere Begr\"undungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den Begriffsapparat (Repository, Business- vs.\ Execution-BPMN, Lifecycle) sauber nutzen,
+  \item Annahmen explizit machen,
+  \item Zielkonflikte (Speed vs.\ Compliance, Standardisierung vs.\ Standortautonomie) benennen,
+  \item zu einer klar formulierten Entscheidung f\"uhren.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihre Argumentation ab?
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Repository: Pflichtbausteine}{\nivLi}{8\,min}
+
+\ytquery{Process Repository Single Source of Truth Aufbau Komponenten BPM}
+
+\begin{loesungbox}
+\textbf{Sechs Pflichtbausteine:}
+
+\begin{enumerate}
+  \item \emph{Prozesslandkarte} \textendash{} \"Ubersicht aller E2E-Prozesse, Hierarchie, Schnittstellen. Ohne diese fehlt der ``Kompass'' f\"ur Priorisierung.
+  \item \emph{Prozessmodelle} \textendash{} die eigentlichen Diagramme (BPMN/EPC/Activity). Risiko bei Fehlen: Wissen lebt nur in K\"opfen, Audit nicht m\"oglich.
+  \item \emph{Rollen / Owner} \textendash{} eindeutige Verantwortung pro Modell. Risiko: ``Niemand weiss, wer das pflegt'' \textendash{} Modelle veralten.
+  \item \emph{Dokumente / Links} \textendash{} Verkn\"upfung zu Policies, Arbeits\-anweisungen, Risiken, Controls. Risiko: Modelle h\"angen isoliert, Compliance-Kette bricht.
+  \item \emph{Version / Freigabe-Status} \textendash{} Lifecycle (Draft, Approved, Retired) + Approval-Signatur. Risiko: niemand wei{\ss}, ob ein Modell aktuell ist.
+  \item \emph{Risiken / KPIs / Controls} (optional, aber empfohlen) \textendash{} kn\"upft Prozess an Steuerung und Audit. Risiko: Repository wird ``Dokumentations-Friedhof''.
+\end{enumerate}
+
+\smallskip
+\textbf{H\"aufig vergessen:} \emph{Version / Freigabe-Status} \textendash{} weil er ``Pflege'' bedeutet, nicht ``Kreativ\-arbeit''. Auditoren entlarven das sofort.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{Business-BPMN vs.\ Execution-BPMN}{\nivLi}{8\,min}
+
+\ytquery{BPMN Business vs Execution Camunda User Task Service Task Variable}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}|X|X@{}}
+\toprule
+\textbf{Aspekt} & \textbf{Business-BPMN} & \textbf{Execution-BPMN} \\
+\midrule
+Zielgruppe & Fachbereich, Management, Kommunikation. & Engine, Entwickler, BPM-Team. \\
+\midrule
+Detailtiefe & ``Gut genug zum Verstehen'' \textendash{} darf abstrahieren. & Pr\"azise; jede Variable benannt. \\
+\midrule
+Datenobjekte / Variablen & Optional, oft als Notiz. & Pflicht; getypt; klar in/out. \\
+\midrule
+User / Service Task & Selten unterschieden. & Klar getrennt; Service Task hat Endpoint / API. \\
+\midrule
+Events (Timer / Message / Error) & Selten modelliert. & Vollst\"andig (Boundary, Intermediate). \\
+\midrule
+Fehlerbehandlung & Implizit (``muss man kl\"aren''). & Explizit (Error / Compensation / Retry). \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{\"Ubergabeprinzip:} Ein automatisierbarer Slice braucht (a) ein definiertes Start-Event (oft Message-Trigger oder Timer), (b) ein definiertes End-Event, (c) klare Datenobjekte/Variablen am \"Ubergang, (d) eine vollst\"andige Fehlerbehandlung (was passiert, wenn ein Schritt scheitert?). Erst dann ist der Schnitt sauber genug, um \emph{auszuf\"uhren} statt nur zu \emph{beschreiben}.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{Lifecycle: Draft \textrightarrow{} Approved \textrightarrow{} Retired}{\nivLi}{8\,min}
+
+\ytquery{Process Model Lifecycle Draft Approved Retired Workflow Governance}
+
+\begin{loesungbox}
+\textbf{Lifecycle-Stati:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{2.6cm}XXX@{}}
+\toprule
+\textbf{Status} & \textbf{Wer \"andert?} & \textbf{Wer schiebt?} & \textbf{Pflicht-Artefakt} \\
+\midrule
+Draft     & Modeler (frei) & Modeler stellt zu Review & Vollst\"andiger Modell-Inhalt + Metadaten. \\
+\midrule
+Review    & Reviewer (annotiert; nicht inhaltlich) & Reviewer (zur\"uck zu Draft \emph{oder} weiter zu Approved) & Review-Protokoll + Quality-Score. \\
+\midrule
+Approved  & niemand (read-only); \"Anderung nur \"uber Change-Request & Approver (zu Retired bei Ablauf) & Approval-Signatur + G\"ultigkeit. \\
+\midrule
+Retired   & niemand & --- (final) & Retirement-Begr\"undung + Nachfolger-Modell. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Optional \emph{Hotfix}:} kurze Notfall-\"Anderung am Approved-Modell durch Owner, mit verpflichtendem Re-Review innerhalb von 30 Tagen.
+
+\smallskip
+\textbf{Pfeildiagramm:} \emph{Draft} \textrightarrow{} \emph{Review} \textrightarrow{} \emph{Approved} \textrightarrow{} \emph{Retired}; R\"uckkanten: \emph{Review} \textrightarrow{} \emph{Draft} (bei Mangel); \emph{Approved} \textrightarrow{} \emph{Draft} (bei Change-Request).
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Repository-Blueprint aus Chaos-Text}{\nivLii}{25\,min}
+
+\ytquery{Process Repository Blueprint Metadaten Order to Cash Freigabe Varianten}
+
+\begin{loesungbox}
+\textbf{1. Repository-Struktur f\"ur \emph{Order-to-Cash}:}
+\begin{itemize}
+  \item \emph{Ebene 1 \textendash{} E2E-Prozess:} ``Order-to-Cash''.
+  \item \emph{Ebene 2 \textendash{} Subprozesse:} (a) Auftragsannahme, (b) Lagerabwicklung, (c) Rechnungsstellung, (d) Zahlungseingang, (e) Mahnwesen.
+  \item \emph{Ebene 3 \textendash{} Arbeits-/Nachweis-Dokumente:} Checkliste Auftragspr\"ufung, Versanddokument, Rechnungsmuster, Reklamations-Formular.
+\end{itemize}
+
+\smallskip
+\textbf{2. Vier Metadatenfelder:}
+\begin{enumerate}
+  \item \emph{Owner} (Fachbereichsverantwortliche/r).
+  \item \emph{G\"ultigkeit} (Approval-Datum + n\"achster Review-Termin).
+  \item \emph{Standort / Geltungsbereich} (DE / AT / CH / global).
+  \item \emph{Risikoklasse} (z.\,B.\ ``audit-relevant'', ``intern'', ``Kunde-betreffend'').
+\end{enumerate}
+
+\smallskip
+\textbf{3. Freigabeprozess:}\\
+\emph{Draft} (Modeler erstellt; Owner gibt Input) \textrightarrow{} \emph{Review} (Reviewer pr\"uft GoM-Check + Konsistenz) \textrightarrow{} \emph{Approved} (Approver freigibt, Audit-Signatur). R\"uckkante: Review \textrightarrow{} Draft bei Mangel.
+
+\smallskip
+\textbf{4. Variantenstrategie f\"ur \emph{Order-to-Cash}:}\\
+\emph{Empfehlung: Ein Modell mit Variantenattributen} \textendash{} weil 80\,\% \"Uberlappung; Standort wird als Attribut pro Subprozess gef\"uhrt.
+\begin{itemize}
+  \item Aufwand: gering (1 Modell, 3 Variantenattribute).
+  \item Pflegerisiko: gering (eine \"Anderung an einem Ort).
+  \item Klarheit: leicht reduziert (Standort-Bedingungen lesen lernen).
+\end{itemize}
+\emph{Trigger zum Wechsel} auf separate Modelle: sobald $>$ 30\,\% des Modells standort\-abh\"angig wird.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{Automations-Slice \textendash{} Rechnungsfreigabe}{\nivLii}{22\,min}
+
+\ytquery{Camunda Execution BPMN Rechnungsfreigabe User Task Service Task Slice}
+
+\begin{loesungbox}
+\textbf{1. Markierung:}
+\begin{itemize}
+  \item \emph{User Tasks}: ``Buchhaltung erfasst Grunddaten'' (manuell), ``Teamleitung gibt frei'' (manuell), ``Anforderungsstelle erg\"anzt Kostenstelle'' (manuell).
+  \item \emph{Service Tasks}: ``ERP buchen'', ``Zahlung ansto{\ss}en'', ``Erinnerung versenden''.
+  \item \emph{Entscheidungen}: ``Betrag $>$\,5.000\,\euro?'', ``Kostenstelle vorhanden?''.
+  \item \emph{Fehlerf\"alle}: ERP nicht erreichbar; Freigeber nicht im System; Frist \"uberschritten.
+  \item \emph{Fristen}: Erinnerung; Eskalation nach 3 Tagen.
+\end{itemize}
+
+\smallskip
+\textbf{2. Automations-Slice:}\\
+\emph{Start:} Message ``Rechnung E-Mail eingegangen''.\\
+\emph{Ende:} ``Rechnung bezahlt'' \emph{oder} ``Eskalation an Teamleitung''.\\
+\emph{Innen:} Erfassung (User), XOR Betrag, ggf.\ Freigabe (User), XOR Kostenstelle, ERP-Buchung (Service), Zahlung (Service), Timer-Reminder.
+
+\smallskip
+\textbf{3. Minimum-Daten:} \emph{Betrag}, \emph{Kostenstelle}, \emph{Freigeber-ID}.
+
+\smallskip
+\textbf{4. Entscheidung unter Unsicherheit:}\\
+Wir behandeln \emph{Sammelrechnungen mit mehreren Kostenstellen} \emph{nicht} im ersten Release. \emph{Organisatorischer Fallback:} solche Rechnungen werden vom Workflow erkannt (eine Kostenstelle = ``MULTI'') und in eine \emph{manuelle Bearbeitung} ausgesteuert, mit klarer Annotation im Audit Trail. So bleibt der Slice fokussiert und 80\,\% Volumen automatisiert.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{Execution-BPMN modellieren}{\nivLii}{25\,min}
+
+\ytquery{Camunda BPMN Execution Service Task Timer Error Boundary Event Beispiel}
+
+\begin{loesungbox}
+\textbf{Execution-BPMN (textuelle Soll-Logik):}
+
+\smallskip
+\textbf{Start-Event} (Message): \emph{Rechnung E-Mail eingegangen}.
+\begin{itemize}
+  \item User Task (Buchhaltung): \emph{Rechnung erfassen}; schreibt Variablen: \emph{betrag}, \emph{kostenstelle}, \emph{freigeber}.
+  \item \textbf{XOR} \emph{kostenstelle vorhanden?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} User Task (Anforderungsstelle): \emph{Kostenstelle erg\"anzen} \textrightarrow{} zur\"uck.
+    \item Ja \textrightarrow{} weiter.
+  \end{itemize}
+  \item \textbf{XOR} \emph{betrag $>$\,5\,000\,\euro?}
+  \begin{itemize}
+    \item Ja \textrightarrow{} User Task (Teamleitung): \emph{Freigabe erteilen} mit \fachbegriff{Timer-Boundary} 3\,Tage \textrightarrow{} bei Timer: Eskalation an Bereichsleitung.
+    \item Nein \textrightarrow{} weiter.
+  \end{itemize}
+  \item Service Task: \emph{Im ERP buchen}; \fachbegriff{Error-Boundary} \emph{ERPUnavailable} \textrightarrow{} Retry 3$\times$ mit exponential backoff; danach Eskalation an IT.
+  \item Service Task: \emph{Zahlung ansto{\ss}en}.
+\end{itemize}
+\textbf{End-Event:} \emph{Rechnung bezahlt}.
+
+\smallskip
+\textbf{Variablen:}
+\begin{itemize}
+  \item \emph{Input:} \texttt{rechnung\_id}, \texttt{betrag}, \texttt{rechnungsdatum}, \texttt{lieferant}.
+  \item \emph{Lese/Schreibe:} \texttt{kostenstelle}, \texttt{freigeber}, \texttt{freigabe\_status}.
+  \item \emph{Output:} \texttt{buchungs\_id}, \texttt{zahlungs\_id}, \texttt{bezahlt\_am}.
+\end{itemize}
+
+\smallskip
+\textbf{Fehlerbehandlung ``ERP nicht erreichbar'':} 3 Retries; bei Fehlschlag Eskalation an IT-Lead (User Task) + Notification an Buchhaltung. Audit Trail dokumentiert jeden Retry-Versuch mit Zeitstempel.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{Variantenstrategie}{\nivLii}{20\,min}
+
+\ytquery{BPM Variant Management Process Variants Country Multi Site Governance}
+
+\begin{loesungbox}
+\textbf{1. Drei Optionen \textendash{} Trade-offs:}
+
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}|X|X|X@{}}
+\toprule
+\textbf{Option} & \textbf{Aufwand} & \textbf{Pflegerisiko} & \textbf{Auditf\"ahigkeit} \\
+\midrule
+3 separate Modelle & hoch (Triple-Pflege) & sehr hoch (Divergenz) & gut (jeweils auditierbar). \\
+\midrule
+1 Modell + Attribute & gering & gering (1 Quelle) & gut, falls Attribute audit-sichtbar. \\
+\midrule
+1 Modell + Subprozesse pro Land & mittel & mittel (Subprozesse pflegen) & sehr gut (Land klar gekapselt). \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Entscheidung f\"ur \emph{MediSupply}:}\\
+\emph{Option 3 \textendash{} ein Hauptmodell mit Subprozessen pro Land}, weil die landesrechtlichen Sonderpfade (AT-QM, CH-Zoll) substanziell sind und gekapselt sauber zu auditieren bleiben. Skonto (DE) ist ein Attribut innerhalb des Hauptmodells.
+
+\smallskip
+\textbf{3. Drei Guardrails:}
+\begin{enumerate}
+  \item \emph{Hauptmodell darf $>$\,80\,\% des Inhalts halten} \textendash{} bei Unterschreitung: Re-Architektur.
+  \item \emph{Subprozesse haben einen festen Owner pro Land} \textendash{} keine Variante ``ohne Eigent\"umer''.
+  \item \emph{Naming-Regel:} Subprozesse hei{\ss}en \texttt{O2C\_Subprozess\_DE\_v1}, niemals \texttt{O2C\_DE\_finalfinal}.
+\end{enumerate}
+
+\smallskip
+\textbf{4. Trigger zum Wechsel auf andere Option:}\\
+\emph{Wechsel zu drei separaten Modellen}, sobald (a) eine Land-Variante $>$\,50\,\% Unterschied zum Standard hat, oder (b) der Audit findet, dass Subprozess-Logik im Hauptmodell ``\"uberblendet'' wird.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{Governance-Audit \textendash{} vier Mini-F\"alle}{\nivLii}{20\,min}
+
+\ytquery{Process Repository Governance Audit Findings Owner Version Approval}
+
+\begin{loesungbox}
+\textbf{A \textendash{} Approved-Modell mit toten Daten.}\\
+\emph{Versagen:} ``Falsche Aktualit\"at'' (Stale Approved). \emph{Risiko:} Auditor akzeptiert das Modell als Nachweis, Realit\"at ist andere \textendash{} Audit-Finding. \emph{Sofort:} Modell auf ``Deprecated'' setzen, Banner ``Inhalt veraltet, Owner gesucht''. \emph{Strukturell:} Lifecycle erzwingt j\"ahrlichen Review, Approver kann nicht ``deren Person'' sein \textendash{} immer Rolle.
+
+\smallskip
+\textbf{B \textendash{} drei inkonsistente Versionen.}\\
+\emph{Versagen:} ``Fehlende Master-Version'' (Forking ohne Merge). \emph{Risiko:} Inkonsistente Ausf\"uhrung an Standorten + Audit-Findings. \emph{Sofort:} eine Version als ``Master \textendash{} alle anderen Deprecated'' markieren; den drei Owner einen 30-Tage-Konsolidierungs-Auftrag geben. \emph{Strukturell:} Variantenpolitik (siehe Aufgabe 7) als verpflichtende Policy.
+
+\smallskip
+\textbf{C \textendash{} Modell auf pers\"onlichem Laufwerk.}\\
+\emph{Versagen:} ``Bus-Faktor 1'' / ``Shadow Repository''. \emph{Risiko:} bei Krankheit / K\"undigung verschwindet Wissen. \emph{Sofort:} Modell ins Repository \"uberf\"uhren (mit Owner-Markierung). \emph{Strukturell:} Repository-Policy verbietet pers\"onliche Laufwerke; Audit-Stichprobe alle 90\,Tage.
+
+\smallskip
+\textbf{D \textendash{} Modell ohne Approval / Version / Owner.}\\
+\emph{Versagen:} ``Unzertifiziertes Artefakt im \"offentlichen Raum''. \emph{Risiko:} Mitarbeitende handeln nach Wiki-Inhalt, der nicht abgenommen ist \textendash{} fachlich \emph{und} compliance-rechtlich gef\"ahrlich. \emph{Sofort:} Modell aus Wiki entfernen oder mit Warn-Banner ``Draft, nicht handlungsleitend'' versehen. \emph{Strukturell:} Wiki-Hook verbietet Publikation ohne Approval-Signatur; Repository ist Single Source.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{MediSupply Services}}{\nivLiii}{45\,min}
+
+\ytquery{Process Repository Automation Camunda Pilot KPI Roadmap Mittelstand}
+
+\begin{loesungbox}
+\textbf{1. Prozesslandkarte (5 Kernprozesse):} Lead-to-Order \textperiodcentered{} Order-to-Cash \textperiodcentered{} Procure-to-Pay \textperiodcentered{} Incident-to-Resolution \textperiodcentered{} Hire-to-Retire. \emph{Pilot: Order-to-Cash} \textendash{} hohes Volumen, sichtbarer Kundenwert, Audit-relevant, klare Subprozessgrenzen.
+
+\smallskip
+\textbf{2. Repository-Struktur:} 3 Ebenen (siehe Aufgabe 4). Metadaten (5): Owner, G\"ultigkeit, Standort, Risikoklasse, Audit-Kategorie. Freigabe: Draft \textrightarrow{} Review (BPM-Team) \textrightarrow{} Approved (Process Owner + Audit-Lead).
+
+\smallskip
+\textbf{3. Pilot grob modelliert (Business-BPMN, Soll):}\\
+\emph{Pool}: MediSupply. \emph{Lanes}: Vertrieb \textperiodcentered{} Lager \textperiodcentered{} Buchhaltung. Start: Bestellung \textrightarrow{} pr\"ufen \textrightarrow{} Verf\"ugbarkeit \textrightarrow{} kommissionieren \textrightarrow{} versenden \textrightarrow{} Rechnung erstellen \textrightarrow{} Zahlungseingang verbuchen \textrightarrow{} Ende.\\
+\emph{Automationskandidat:} Subprozess \emph{Rechnungsstellung + Zahlungserinnerung}.
+
+\smallskip
+\textbf{4. Execution-Logik (Camunda):}\\
+Start: Message ``Versand abgeschlossen'' \textrightarrow{} Service Task ``Rechnung im ERP erstellen'' \textrightarrow{} Service Task ``Rechnung per E-Mail versenden'' \textrightarrow{} Timer-Wait 14 Tage \textrightarrow{} XOR ``Zahlung eingegangen?'' (Ja: End ``bezahlt''; Nein: Service Task ``Erinnerung versenden'' + Timer 7 Tage + XOR) \textrightarrow{} bei 3$\times$ unbeantwortet: Eskalation an Forderungsmanagement.
+
+\smallskip
+\textbf{5. Drei KPIs:}
+\begin{itemize}
+  \item \emph{Durchlaufzeit Order-to-Cash}: Median Bestellung \textrightarrow{} Zahlungseingang. Owner: COO.
+  \item \emph{Eskalationsquote}: \% F\"alle mit Erinnerungs-Eskalation. Owner: Forderungsmanagement.
+  \item \emph{Rework-Rate}: \% F\"alle mit nachtr\"aglicher Rechnungskorrektur. Owner: Buchhaltung-Lead.
+\end{itemize}
+
+\smallskip
+\textbf{6. Entscheidung unter Unsicherheit:}\\
+\emph{Ausnahme im ersten Release nicht behandelt:} Teilzahlungen / Skonto-Streit. \emph{Organisatorischer Fallback:} solche F\"alle aus dem Workflow ``ausschleusen'' und manuell bearbeiten; Audit Trail explizit markiert ``MANUAL\_EXCEPTION''.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Governance-Spannung}{\nivLiii}{25\,min}
+
+\ytquery{Process Repository Governance RACI Owner Approver Decision Architecture}
+
+\begin{loesungbox}
+\textbf{1. Zwei nicht verhandelbare Regeln:}
+\begin{enumerate}
+  \item \emph{``Kein Approved ohne Owner''} \textendash{} Modelle ohne benannte Rolle (nicht Person) als Owner gelangen nicht in Approved. Sanktion: automatischer Roll-back auf Draft.
+  \item \emph{``Keine Production-Automation ohne Test in Staging''} \textendash{} jeder neue oder ge\"anderte Service Task muss in Staging durchgespielt sein. Sanktion: kein Deploy-Token f\"ur Production.
+\end{enumerate}
+
+\smallskip
+\textbf{2. RACI:}
+\begin{tabularx}{\linewidth}{@{}lcccccc@{}}
+\toprule
+ & \textbf{Owner} & \textbf{Modeler} & \textbf{Rev.} & \textbf{Appr.} & \textbf{Data St.} & \textbf{Auto.\,Owner} \\
+\midrule
+Modell erstellen     & A & R & C & I & C & I \\
+Modell freigeben     & C & I & R & A & I & I \\
+Automation deployen  & C & I & C & A & C & R \\
+Audit beantworten    & A & C & C & C & C & R \\
+\bottomrule
+\end{tabularx}
+\emph{R=Responsible, A=Accountable, C=Consulted, I=Informed.}
+
+\smallskip
+\textbf{3. Irreversible Entscheidungen:}
+\begin{itemize}
+  \item \emph{Tool-Plattform-Entscheidung} (Repository + BPMS). Dokumentation: ADR (Architectural Decision Record) mit Annahmen, verworfenen Alternativen, Fr\"uhwarnsignal.
+  \item \emph{Variantenstrategie} (Attribute vs.\ Subprozesse). Dokumentation als Policy mit Trigger zum Re-Design.
+\end{itemize}
+
+\smallskip
+\textbf{4. Faustregel:}\\
+Governance ist \emph{zwingend}, sobald (a) regulatorische Audit-Pflicht besteht, (b) ein Prozess hochfrequent durch mehrere Teams l\"auft, oder (c) Automation am Werk ist; sie ist \emph{Overhead}, sobald sie f\"ur Einmal-Modelle ohne Compliance-Bezug eingef\"uhrt wird.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Operating Model}{\nivLiii}{45\,min}
+
+\ytquery{Process Operating Model Repository Automation Camunda Governance Roadmap CPO}
+
+\begin{loesungbox}
+\textbf{1. Top-7 Entscheidungen:}
+\begin{enumerate}
+  \item Priorisierung der Kernprozesse f\"ur Repository-Aufbau.
+  \item Prozessstandard (BPMN-Style-Guide, Naming).
+  \item Variantenpolitik (Attribute / Subprozess / separate).
+  \item Freigaben (Lifecycle, Approver-Regel).
+  \item Automations\-kandidaten (Auswahl-Kriterien Volumen $\times$ Stabilit\"at $\times$ Datenreife).
+  \item KPI-Steuerung (Modell-Qualit\"at, DLZ, Audit-Findings).
+  \item Audit-Nachweise (Archivierung 7 Jahre + Suchbarkeit).
+\end{enumerate}
+
+\smallskip
+\textbf{2. Governance \& Rollen:}
+\begin{itemize}
+  \item Process Owner = Fachbereichsleiter (A).
+  \item Modeler = BPM-Team / geschulter Key-User (R).
+  \item Reviewer = BPM-Lead + Quality (R).
+  \item Approver = CPO oder Bereichsleitung (A).
+  \item Data Steward = je Quellsystem (CRM, ERP).
+  \item Automation Owner = IT-Team-Lead.
+  \item Eskalation: Owner \textrightarrow{} CPO \textrightarrow{} Vorstand bei Zielkonflikt Speed/Compliance.
+\end{itemize}
+
+\smallskip
+\textbf{3. Lifecycle-Design:}\\
+Draft \textrightarrow{} Review \textrightarrow{} Approved \textrightarrow{} Retired; Hotfix-Branch erlaubt mit Pflicht-Re-Review in 30\,T. Change-Request mit ADR-Pflicht ab ``Approved''. Release-Cadence Workflow: monatlich; Hotfix on demand. ``Definition of Done'' = Test in Staging + Review + Schulung der Betroffenen.
+
+\smallskip
+\textbf{4. Variantenstrategie:} Attribute bei $<$\,20\,\% Abweichung; Subprozess bei $<$\,50\,\%; separate Modelle dar\"uber. Guardrails: Owner pro Variante, Audit-Sichtbarkeit, Naming.
+
+\smallskip
+\textbf{5. Automation-Pipeline:} MVP-Auswahl nach Volumen $\geq$\,50/Monat, Datenqualit\"at $\geq$\,80\,\% Pflichtfelder, Stabilit\"at $\geq$\,12 Monate. Datenminimum: Case-ID, Status, Owner. Exception-Policy: max.\ 10\,\% Manual-Exit, sonst Re-Design. Monitoring: pro Workflow ein Dashboard. KPIs: DLZ (Lagging), Eskalationsquote (Leading), Error-Rate (Leading).
+
+\smallskip
+\textbf{6. Roadmap 12 Wochen:}
+\begin{itemize}
+  \item Wo 1\,--\,2: Policy + Tool-Anforderungen + Pilot festlegen.
+  \item Wo 3\,--\,4: Tool-Auswahl Shortlist, Trainingscurriculum.
+  \item Wo 5\,--\,8: Pilot Repository + Automation Slice live.
+  \item Wo 9\,--\,10: Auswertung, Policy nachsch\"arfen.
+  \item Wo 11\,--\,12: Rollout-Plan Welle 2.
+\end{itemize}
+
+\smallskip
+\textbf{7. Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Pilot = Order-to-Cash} (statt P2P). Verworfen: P2P (gro{\ss}e ERP-Abh\"angigkeit). Fr\"uhwarnsignal: weniger als 5 Modelle in 6 Wochen freigegeben.
+  \item \emph{Drei nicht verhandelbare Regeln:} (a) Owner-Pflicht, (b) Staging-Pflicht, (c) Approval-Signatur. Akzeptanz: in der Kommunikation klarmachen, dass sie \emph{Schutz} sind, nicht ``Schikane'' \textendash{} und mit konkreten Audit-Beispielen unterlegen.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Fragen Sie sich, wo Ihre Antwort von der unsrigen abweicht \textendash{} und ob das andere Annahmen oder ein Denkfehler war.
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie Ihre L\"osungen ins Coaching mit: Welche Owner-Regel haben Sie unverhandelbar gesetzt? Welche Variantenstrategie passt zu Ihrer Realit\"at? Welche Automation w\"urden Sie als erstes umsetzen?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 4 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

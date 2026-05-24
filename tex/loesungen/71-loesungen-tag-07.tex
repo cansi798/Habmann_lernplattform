@@ -1,0 +1,564 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 7 - Loesungsheft
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 7}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Discovery \textperiodcentered{} Conformance}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 3 \textperiodcentered{} TAG 7 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 8.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 7\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen \textendash{} Event Logs,\\Discovery und Conformance.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 7}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Heute steht der Senior-Reflex im Vordergrund: \emph{Abweichungen sind Signale}. Eine reine Z\"ahlung \"uberzeugt keinen Auditor und keine Gesch\"aftsleitung \textendash{} die Interpretation entscheidet.
+
+\begin{infobox}[Nutzung im Coaching]
+Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Habe ich Abweichungen \emph{klassifiziert} oder nur sortiert? (2) Habe ich die zugelassene Variante mit \emph{Guardrails} ausgestattet? (3) Verstehe ich, welche Logl\"ucke ich akzeptiere und welche nicht?
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Event Log: Pflicht, Optional, Stolpersteine}{\nivLi}{8\,min}
+
+\ytquery{Process Mining Event Log Required Fields Case ID Activity Timestamp Quality}
+
+\begin{loesungbox}
+\textbf{Pflichtfelder (3):} Case ID, Aktivit\"at, Timestamp.
+
+\smallskip
+\textbf{Optional-Felder (4):} Ressource (wer hat es getan?), Kanal (Telefon/Web/E-Mail), Kosten, Standort.
+
+\smallskip
+\textbf{Stolpersteine:}
+\begin{enumerate}
+  \item \emph{Fehlende / unscharfe Activities} \textendash{} Discovery zeigt zu viele oder zu wenige Schritte. Erkennen: Liste der Aktivit\"atsnamen pr\"ufen. Reagieren: Normalisieren in Mapping-Tabelle.
+  \item \emph{Doppelte Events} \textendash{} Discovery zeigt ``selbst-zu-selbst''-Schleifen. Erkennen: identische Case-ID + Aktivit\"at + Timestamp $\pm$ 1\,s. Reagieren: Deduplizieren im ETL.
+  \item \emph{Falsche Case IDs} \textendash{} ``Rummelpfade'' aus unabh\"angigen F\"allen. Erkennen: ungew\"ohnlich lange Cases mit nicht-passenden Schritten. Reagieren: ID-Logik in der Quelle pr\"ufen.
+  \item \emph{Zeitstempel-Probleme} \textendash{} Zeitzonen, negative Deltas. Erkennen: $\Delta t < 0$. Reagieren: Quelldaten korrigieren, ggf.\ Cases ausschlie{\ss}en.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{Discovery: Happy Path, Variante, Schleife}{\nivLi}{8\,min}
+
+\ytquery{Process Discovery Happy Path Variants Loops Bottleneck Beispiel}
+
+\begin{loesungbox}
+\textbf{Definitionen:}
+\begin{itemize}
+  \item \emph{Happy Path} \textendash{} der typischste, h\"aufigste Ablauf \"uber alle Cases (in der Regel mehr als 50\,\% der F\"alle).
+  \item \emph{Variante} \textendash{} ein abweichender Pfad (z.\,B.\ R\"uckfrage, Storno). Varianten sind nicht per se schlecht; sie zeigen Reaktion auf Realit\"at.
+  \item \emph{Schleife / Rework} \textendash{} eine Aktivit\"at wiederholt sich (z.\,B.\ ``Pr\"ufen'' zweimal). Indikator f\"ur Datenqualit\"ats- oder Pr\"ufprozess-Probleme.
+  \item \emph{Engpass} \textendash{} ein Schritt mit \"uberproportional langer Wartezeit. Erkennbar an Zeitstempel-Differenz zum n\"achsten Schritt.
+\end{itemize}
+
+\smallskip
+\textbf{Ergebnisarten:}
+\begin{itemize}
+  \item \emph{Prozessgraph} \textendash{} visualisiert alle beobachteten Pfade.
+  \item \emph{Variantentabelle} \textendash{} listet die N h\"aufigsten Varianten mit Frequenz.
+  \item \emph{Durchlaufzeiten je Schritt} \textendash{} Median und Streuung pro Aktivit\"at oder \"Ubergang.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{Conformance: vier Abweichungstypen}{\nivLi}{10\,min}
+
+\ytquery{Conformance Checking Process Mining Deviation Types Compliance Variant}
+
+\begin{loesungbox}
+\textbf{Vier Abweichungstypen:}
+\begin{enumerate}
+  \item \emph{Fehlende Schritte (Skip)}: z.\,B.\ \emph{``Wareneingang buchen''} fehlt. Interpretation: Compliance-Versto{\ss} oder Datenproblem.
+  \item \emph{Zus\"atzliche Schritte (Insert)}: z.\,B.\ \emph{``Sonderfreigabe''} im Soll nicht vorgesehen. Interpretation: legitime Notfall-Variante oder Maverick-Workaround.
+  \item \emph{Falsche Reihenfolge}: z.\,B.\ Rechnung \emph{vor} Wareneingang. Interpretation: oft Dropship-Service oder fehlende Buchung.
+  \item \emph{Schleifen / Rework}: z.\,B.\ Pr\"ufung 2$\times$. Interpretation: Daten-/Qualit\"atsproblem oder bewusster Eskalations\-pfad.
+\end{enumerate}
+
+\smallskip
+\textbf{Schlusssatz:} Z\"ahlen reicht nicht \textendash{} \emph{Interpretation} entscheidet, ob Sie sanktionieren, optimieren oder lernen. ``20\,\% Abweichung'' kann Compliance-Notfall sein \emph{oder} Innovationsbeweis. Nur die Fachseite kann zwischen den drei Interpretations-Schienen unterscheiden.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Discovery ohne Tool}{\nivLii}{22\,min}
+
+\ytquery{Process Mining Discovery Cases Happy Path Variants ohne Tool Beispiel}
+
+\begin{loesungbox}
+\textbf{1. Happy Path:}\\
+Start \textrightarrow{} Anfrage\_pr\"ufen \textrightarrow{} Angebot\_erstellen \textrightarrow{} Kunde\_best\"atigt \textrightarrow{} Auftrag\_anlegen \textrightarrow{} Versand \textrightarrow{} Rechnung \textrightarrow{} Ende. (3 von 4 Cases folgen diesem Schema im Wesentlichen \textendash{} Cases 101 und 103, im Kern auch 102.)
+
+\smallskip
+\textbf{2. Drei Varianten:}
+\begin{itemize}
+  \item \emph{R\"uckfrage-Schleife (Case 102):} Anfrage\_pr\"ufen wiederholt sich. Ursache (Hypothese): Anfrage unvollst\"andig. Risiko: l\"angere DLZ, Kunde-Frustration. Nutzen: vermeidet falsche Angebote.
+  \item \emph{Doppelversand (Case 103):} Versand wiederholt sich. Ursache: Teil-Lieferung oder fehlerhafte Buchung. Risiko: Kosten, Kundenirritation. Nutzen: keiner \textendash{} reines Datenproblem.
+  \item \emph{Storno (Case 104):} Auftrag wird storniert. Ursache: Kunde springt ab. Risiko: Umsatzverlust. Nutzen: vermeidet sp\"atere R\"ucksendung.
+\end{itemize}
+
+\smallskip
+\textbf{3. M\"ogliche Engp\"asse (logisch):}
+\begin{itemize}
+  \item \emph{Anfrage\_pr\"ufen} \textendash{} bei R\"uckfrage-Schleife potenziell verz\"ogert.
+  \item \emph{Versand} \textendash{} bei Doppelversand offensichtlich problematisch; Versand-Reihenfolge gegen Rechnung in Case 102 ungekl\"art.
+\end{itemize}
+
+\smallskip
+\textbf{4. Drei Fragen an die Fachseite:}
+\begin{enumerate}
+  \item Welche Pflichtfelder bei \emph{Anfrage} werden h\"aufig leer gelassen?
+  \item Ist die Reihenfolge \emph{Rechnung vor Versand} bei Case 102 dokumentiert (z.\,B.\ als Service-Leistung) oder ein Datenfehler?
+  \item Wann gilt ein \emph{Doppelversand} als legitim (z.\,B.\ Teil-Lieferung)?
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{Conformance ohne Tool}{\nivLii}{22\,min}
+
+\ytquery{Conformance Checking Deviation Classification Priorization Guardrail Mining}
+
+\begin{loesungbox}
+\textbf{1. Klassifikation:}
+\begin{itemize}
+  \item \emph{Case 102 \textendash{} Rechnung vor Versand:} Compliance-Risiko (Verst\"o{\ss}t gegen Soll-Regel\,1) \emph{oder} legitime Variante (Service vor Versand). \emph{Zu validieren mit Fachseite.}
+  \item \emph{Case 103 \textendash{} Doppelversand:} Qualit\"ats-/Kostenrisiko (Soll-Regel\,3 verletzt).
+  \item \emph{Case 102 \textendash{} R\"uckfrage-Schleife:} Legitime Variante (Regel\,2 wird eingehalten, da R\"uckfrage \emph{vor} Angebot abgeschlossen ist).
+  \item \emph{Case 104 \textendash{} Storno:} Legitime Variante (Soll-Regel\,4 eingehalten).
+\end{itemize}
+
+\smallskip
+\textbf{2. Priorisierung (Schaden $\times$ H\"aufigkeit):}
+\begin{enumerate}
+  \item \emph{Doppelversand} (hohe Kosten + jede Verdoppelung sp\"urbar).
+  \item \emph{Rechnung vor Versand} (Compliance + 25\,\% Anteil).
+  \item \emph{R\"uckfrage-Schleife} (DLZ-Treiber; weniger Compliance-Risiko).
+\end{enumerate}
+
+\smallskip
+\textbf{3. Gegenma{\ss}nahmen:}
+\begin{itemize}
+  \item \emph{Doppelversand:} Systemkontrolle (Pr\"ufung Versand-Status vor zweiter Buchung).
+  \item \emph{Rechnung vor Versand:} Ausnahmeprozess mit Pflichtfeld ``Begr\"undung'' + Monitoring.
+  \item \emph{R\"uckfrage-Schleife:} Pflichtfeld-Validierung im Anfrage-Formular + Training Vertrieb.
+\end{itemize}
+
+\smallskip
+\textbf{4. Entscheidung unter Unsicherheit:}\\
+\emph{Bewusst zugelassen:} ``Rechnung vor Versand'' f\"ur Service-Leistungen und Dropship. \emph{Guardrail:} Pflicht-Kennzeichen ``EXCEPTION'' im ERP-Buchungs\-satz; max.\ 30\,\% Anteil; w\"ochentliches Monitoring; ab Schwelle 35\,\% Eskalation an CFO.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{Hypothesen vs.\ Wahrheit}{\nivLii}{18\,min}
+
+\ytquery{Process Mining Validation Stakeholder Discovery Workshop Hypothesis}
+
+\begin{loesungbox}
+\textbf{1. F\"unf Validierungsfragen:}
+\begin{enumerate}
+  \item ``Was \emph{erkl\"art} die R\"uckfrage-Schleife \textendash{} fehlende Pflichtfelder, unklare Kundenanforderung oder Anfrageeingangs-Kanal?''
+  \item ``Wann ist \emph{Rechnung vor Versand} dokumentiert legitim \textendash{} und wo entstehen die ``Phantom-F\"alle''?''
+  \item ``Welche Aktivit\"ats\-namen sind eigentlich \emph{Synonyme} \textendash{} und sollten zusammengefasst werden?''
+  \item ``In welchen Cases fehlt der \emph{Versand}-Eintrag im Log \textendash{} obwohl die Ware den Standort verlassen hat?''
+  \item ``Welche Cases sind im Log ``zu kurz'' \textendash{} weil Schritte au{\ss}erhalb des ERP stattfinden?''
+\end{enumerate}
+
+\smallskip
+\textbf{2. Validierungsformat:} 90-Min-Workshop mit Process Owner + 2 Power-Usern + Data Steward; Artefakte: Discovery-Plot, Variantentabelle Top-10, 4 Beispiel-Cases volltext.
+
+\smallskip
+\textbf{3. Anti-Muster:} \emph{Pr\"asentation als ``Fakt''.} Wenn das BPM-Team Discovery-Befunde als ``Wahrheit'' pr\"asentiert, blockiert die Fachseite. \emph{Verhinderung:} immer als \emph{Hypothese} formulieren; Validierungs-Workshop \emph{vor} jedem Management-Pitch.
+
+\smallskip
+\textbf{4. Faustregel:} Eine Discovery-Aussage ist ``robust genug'' f\"ur eine Managemententscheidung, wenn \emph{(a)} die Datenbasis $>$\,200 Cases umfasst, \emph{(b)} die Fachseite den Pfad qualitativ best\"atigt und \emph{(c)} mindestens eine alternative Hypothese geh\"ort und verworfen wurde.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{Bewusst zugelassene Variante \textendash{} Guardrails}{\nivLii}{20\,min}
+
+\ytquery{Process Compliance Tolerated Exception Guardrail Audit Trail Procurement}
+
+\begin{loesungbox}
+\textbf{1. Ausnahmeprozess f\"ur ``Rechnung vor Wareneingang'':}\\
+\emph{Bedingung:} (a) Lieferant ist als \emph{Service-/Dropship-Lieferant} im Stammdaten-Flag markiert, \emph{oder} (b) Vertrag enth\"alt explizit ``Zahlung gegen Leistung'' (z.\,B.\ Wartungsvertrag), \emph{oder} (c) Betrag $<$\,2.500\,\euro{} bei vertrauensw\"urdigen A-Lieferanten.
+
+\smallskip
+\textbf{2. Drei Guardrails:}
+\begin{enumerate}
+  \item \emph{Sichtbarkeit:} Pflicht-Kennzeichen \texttt{EXCEPTION\_INV\_BEFORE\_GR} im Buchungssatz, automatisch im Conformance-Dashboard.
+  \item \emph{SLA Nachbuchung:} Wareneingang muss innerhalb 14\,Tagen nachgebucht sein. Bei \"Uberschreitung Eskalation an Finance Ops.
+  \item \emph{Monitoring + Owner:} \emph{Finance Ops Lead} pr\"uft w\"ochentlich; berichtet quartalsweise an CFO und Auditor.
+\end{enumerate}
+
+\smallskip
+\textbf{3. Audit-Strategie:}\\
+Auditor sieht \emph{drei Artefakte}: (a) dokumentierten Ausnahmeprozess mit Schwellen, (b) Audit-Log aller ``EXCEPTION''-Buchungen mit Begr\"undung, (c) Monatsbericht des Finance Ops Lead. Diese drei Artefakte zeigen: bewusste, kontrollierte Variante.
+
+\smallskip
+\textbf{4. Eskalations-Trigger:} Wenn die Quote ``Rechnung vor Wareneingang'' \"uber drei Quartale hinweg \"uber 35\,\% steigt, l\"ost das einen \emph{Prozess\-\"anderungsantrag} aus \textendash{} entweder Soll-Modell anpassen (z.\,B.\ Service-Lieferanten als regul\"aren Pfad) oder Massenkontrolle einleiten (z.\,B.\ Lieferanten-Audit).
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{Goodhart vs.\ Echte Steuerung}{\nivLii}{18\,min}
+
+\ytquery{Process Mining KPI Fitness Score Conformance Anti Gaming Manipulation}
+
+\begin{loesungbox}
+\textbf{KPI-Manipulationsmuster + Gegenkennzahl:}
+
+\begin{tabularx}{\linewidth}{@{}p{3.0cm}|X|X@{}}
+\toprule
+\textbf{KPI} & \textbf{Manipulation} & \textbf{Gegenkennzahl} \\
+\midrule
+Fitness-Score & Soll-Modell aufweichen, bis fast alles passt. & Anzahl Soll-\"Anderungen pro Quartal; Audit-Stichprobe. \\
+\midrule
+Abweichungs\-quote & Aktivit\"aten umbenennen, sodass sie ``passen''. & Anzahl Mapping-\"Anderungen; Liste neuer Aktivit\"atsnamen pro Monat. \\
+\midrule
+Top-3 Abweichungs\-typen & Wenig kritische Typen vorne; brisante Typen ``versteckt''. & Fokus-KPI ``\% audit-relevanter Abweichungen''. \\
+\midrule
+Trend (sinkende Abweichung) & ``Definition-Anpassung'' senkt scheinbar. & Vergleich mit Vorquartal bei gleicher Definition (Definitions-Tag). \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Anti-Reporting-Regel:} ``Fitness-Score'' wird \emph{nicht} als Executive-KPI gef\"uhrt \textendash{} obwohl es einfach klingt. Begr\"undung: zu leicht manipulierbar (Soll-Anpassung), entkoppelt von Wirkung. Kommunikation: ``Wir zeigen Ihnen die Quote der audit-relevanten Abweichungen \emph{vor} und \emph{nach} Definitions\-anpassung'' \textendash{} so bleibt Steuerung transparent.
+
+\smallskip
+\textbf{Faustregel:} Conformance \emph{steuert echt}, wenn jede Abweichungs-Welle in einer dokumentierten Entscheidung endet (Soll \"andern, Training ansto{\ss}en, Systemkontrolle einf\"uhren). Wenn drei Reviews kein Change ausl\"osen, ist es reines Reporting \textendash{} und der Aufwand ist verschwendet.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{MedTech Supplies}}{\nivLiii}{45\,min}
+
+\ytquery{Procure to Pay Conformance Audit Maverick Buying 3 Way Match Mining}
+
+\begin{loesungbox}
+\textbf{1. Soll-Modell P2P (10 Schritte):}\\
+Bedarf \textrightarrow{} Genehmigung \textrightarrow{} Bestellung \textrightarrow{} Lieferung \textrightarrow{} Wareneingang buchen \textrightarrow{} Rechnung erfassen \textrightarrow{} 3-Way-Match \textrightarrow{} Freigabe \textrightarrow{} Zahlung \textrightarrow{} Archiv/Audit Trail.
+
+\smallskip
+\textbf{2. Abweichungs\-landkarte (Top-3):}
+
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}|X|l@{}}
+\toprule
+\textbf{Abweichung} & \textbf{Risiko / Ursache / Ma{\ss}nahme} & \textbf{Owner} \\
+\midrule
+Rechnung vor Wareneingang (30\,\%) & 3-Way-Match bricht; Dropship/Service; Ausnahme\-prozess + Pflichtkennzeichen + Nachbuchungs-SLA. & Finance Ops Lead \\
+\midrule
+Fehlende Kostenstelle (18\,\%) & Controlling/Compliance; Anforderungs-Formular schlecht; Pflichtfeld + Validierung + R\"uckgabe im Workflow. & Einkauf-Lead \\
+\midrule
+Sonderfreigaben (12\,\%) & Umgehung des regul\"aren Wegs; Zeitdruck; Schwellenwert + Eskalations\-board + Monitoring. & Procurement Lead \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Drei Ma{\ss}nahmen in 6 Wochen (Auditf\"ahig):}
+\begin{itemize}
+  \item Pflichtfelder + R\"uckgabe-Logik im ERP-Anforderungs-Formular.
+  \item Ausnahmeprozess ``Rechnung vor Wareneingang'' dokumentieren + Pflichtkennzeichen.
+  \item Monitoring-Dashboard f\"ur Abweichungen + w\"ochentliches Review mit Auditor-Ansicht.
+\end{itemize}
+
+\smallskip
+\textbf{Zwei Ma{\ss}nahmen in 3 Monaten (nachhaltig):}
+\begin{itemize}
+  \item Automatisierter 3-Way-Match mit Toleranzgrenzen.
+  \item Lieferanten-/Stammdaten\-bereinigung + Training Einkauf.
+\end{itemize}
+
+\smallskip
+\textbf{4. Bewusst zugelassene Variante:} \emph{Rechnung vor Wareneingang} unter den drei Bedingungen (siehe Aufgabe 7). Guardrails: Pflichtkennzeichen, 14-Tage-Nachbuchungs-SLA, Quartalsbericht an CFO.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Datenverantwortung \textendash{} Logqualit\"at sichern}{\nivLiii}{25\,min}
+
+\ytquery{Data Steward Process Mining Event Log Quality Compliance Governance Pharma}
+
+\begin{loesungbox}
+\textbf{1. Rolle \emph{Data Steward} f\"ur P2P-Logs:}
+\begin{itemize}
+  \item Aufgaben: ETL-Pipeline pflegen, Mapping-Tabelle aktualisieren, Qualit\"atschecks definieren, Bericht an Process Owner.
+  \item Mandat: darf Aktivit\"aten\-mapping ohne R\"uckfrage anpassen; bei strukturellen \"Anderungen (z.\,B.\ neue Quelle, neuer Aktivit\"atstyp) Change-Request an Process Owner.
+  \item Eskalationspfad: Process Owner \textrightarrow{} CIO bei ungekl\"arten Datenquellen; CCO bei Compliance-Themen.
+\end{itemize}
+
+\smallskip
+\textbf{2. Datenqualit\"ats-SLA:}
+
+\begin{tabularx}{\linewidth}{@{}p{3.2cm}cX@{}}
+\toprule
+\textbf{Kennzahl} & \textbf{Ziel} & \textbf{Definition} \\
+\midrule
+Vollst\"andigkeit & $\geq$\,95\,\% & Anteil Events mit allen Pflichtfeldern. \\
+Aktualit\"at      & $\leq$\,4\,h    & Latenz zwischen Quell-Event und Log-Eintrag. \\
+Konsistenz        & $\leq$\,1\,\%   & Anteil Events mit $\Delta t < 0$ oder fehlender Reihenfolge. \\
+Eindeutigkeit     & $\geq$\,99\,\%  & Anteil Cases ohne doppelte Events. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Trade-off Perfekt vs.\ brauchbar:}\\
+Faustregel: \emph{80/20-Daten} reichen f\"ur Quick Insights und erste Steuerung. \emph{$>$\,95\,\%} ist Voraussetzung f\"ur Audit-relevante Aussagen. Aufwand zwischen 80\,\% und 95\,\% ist meist gr\"o{\ss}er als der Aufwand bis 80\,\%. \emph{Entscheiden Sie bewusst}, wo Sie sind \textendash{} und kommunizieren Sie es.
+
+\smallskip
+\textbf{4. Audit-Beweisf\"uhrung:} Auditor sieht (a) dokumentiertes Datenqualit\"ats-SLA, (b) monatlichen DQ-Bericht mit Trend, (c) Eskalations-Log bei SLA-Verletzungen, (d) Change-Log der Mapping-Tabelle.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Conformance Governance \& Decision Architecture}{\nivLiii}{45\,min}
+
+\ytquery{Conformance Governance Decision Architecture Process Mining CCO Audit Readiness}
+
+\begin{loesungbox}
+\textbf{1. Regelwerk-Architektur:}
+\begin{itemize}
+  \item \emph{Muss-Regeln} (nicht verhandelbar): Pflichtfelder, 3-Way-Match, Approval-Signatur \"uber Schwelle.
+  \item \emph{Kann-Regeln} (best practice): Service-Variante, lokale Sonderpfade.
+  \item \emph{Ausnahmeprozesse}: dokumentiert, sichtbar, mit Guardrails.
+  \item Verantwortliche: Process Owner pro Prozessfamilie. Review-Zyklus: quartalsweise.
+  \item Audit Trail: 7 Jahre, suchbar pro Case-ID.
+\end{itemize}
+
+\smallskip
+\textbf{2. Daten- \& Log-Standard:} 5 Pflichtfelder (Case-ID, Aktivit\"at, Timestamp, Owner-ID, Quelle); Case-ID-Strategie: master-system-vergeben + UUID; Qualit\"ats-Checks im ETL (siehe Aufgabe 10); Data Steward pro Quellsystem.
+
+\smallskip
+\textbf{3. Conformance Operating Model:}
+\begin{itemize}
+  \item Process Owner: Accountable f\"ur Prozess + Modell + Conformance.
+  \item Data Steward: Responsible f\"ur Log-Qualit\"at.
+  \item Compliance Reviewer: Responsible f\"ur Audit-Befragung + Interpretation.
+  \item Eskalation: Owner \textrightarrow{} CCO bei Zielkonflikten.
+  \item Kommunikationsplan: monatliches Process Board; quartalsweiser CCO-Report an Vorstand.
+\end{itemize}
+
+\smallskip
+\textbf{4. Portfolio der Abweichungen:}
+\begin{itemize}
+  \item Klassifikation: Compliance-Risiko / Qualit\"atsrisiko / Legitime Variante / Datenproblem.
+  \item Schwellenwerte: $<$\,5\,\% = OK; 5\,--\,20\,\% = Monitoring; $>$\,20\,\% = Eskalation.
+  \item Ma{\ss}nahmen\-katalog: Prozessregel, Training, Systemkontrolle, Monitoring, Soll-Anpassung.
+\end{itemize}
+
+\smallskip
+\textbf{5. Messkonzept:} \emph{Fitness-Score} als interne Diagnose (nicht Executive); \emph{Quote audit-relevanter Abweichungen} als Executive-KPI; Anti-Gaming durch Definitions-Tag + Audit-Stichprobe.
+
+\smallskip
+\textbf{6. Roadmap 12 Wochen:}
+\begin{itemize}
+  \item Wo 1\,--\,2: Pilot festlegen (P2P), Datenqualit\"ats-Check.
+  \item Wo 3\,--\,5: Conformance-Lauf, Validierungs-Workshops.
+  \item Wo 6\,--\,8: Ma{\ss}nahmenpaket in Pilotbereich live.
+  \item Wo 9\,--\,12: Skalierung Bereich 2 + 3, Governance Board konstituieren.
+  \item Enablement: L1 (Lesen), L2 (Interpretieren), L3 (Entscheiden).
+\end{itemize}
+
+\smallskip
+\textbf{7. Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Zero Tolerance:} (a) Doppel\-buchungen, (b) fehlende Approval-Signatur \"uber 25\,k\,\euro. Begr\"undung: direkte Audit-Risiken. Akzeptanz: kommuniziert als Schutz vor Bu{\ss}geld, nicht als Schikane.
+  \item \emph{Akzeptierte Datenl\"ucken:} (a) fehlende Ressource-Information in Telefon-Tickets (kompensiert durch Stichprobe), (b) fehlende Lieferanten-Stammdaten f\"ur 5\,\% Bestellungen (kompensiert durch Bereinigungs-Roadmap). Fr\"uhwarnsignale: wenn Stichprobe systematisch fehlt oder Bereinigung nach 3 Monaten unter 50\,\% \textrightarrow{} Pilot stoppen und IT-Prio anheben.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Heute pr\"ufen Sie besonders: Sind Ihre Abweichungen klassifiziert? Sind Ihre Guardrails operationalisiert? Ist Ihr Goodhart-Schutz wirksam?
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie ins Coaching: Welche Abweichung in Ihrer Realit\"at w\"urden Sie \emph{ab sofort} zulassen \textendash{} mit klar definierten Guardrails? Welche w\"are \emph{Zero Tolerance}? Und woran erkennt Ihr Auditor, dass beide Entscheidungen \emph{bewusst} sind?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 7 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

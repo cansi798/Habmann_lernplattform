@@ -1,0 +1,554 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 3 - Aufgabenheft
+% Vom Prozessbild zur Steuerung: Stakeholder, KPIs, SOA-Services, Workflow-Orchestrierung
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable, colback=white, colframe=lpGray,
+  boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 3}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Stakeholder \textperiodcentered{} KPIs \textperiodcentered{} Services}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 1 \textperiodcentered{} TAG 3 VON 3 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 1.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 3\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom Prozessbild zur Steuerung \textendash{}\\Stakeholder, KPIs, SOA-Services\\und Workflow-Orchestrierung.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& L\"osungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 3 \textendash{} \emph{Vom Prozessbild zur Steuerung}: Stakeholder-Analyse, KPI-Steckbriefe, SOA-Servicegrenzen und Workflow-Orchestrierung. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Begriffe ordnen, Steckbriefe lesen, Matrix richtig anwenden. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Stakeholder-Maps bauen, KPIs definieren, Services schneiden, Workflows skizzieren. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Fallstudie \emph{AeroTech Components}, Steuerungsarchitektur, Governance-Design. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enth\"alt:
+
+\begin{itemize}
+  \item eine Niveau-Markierung und einen Zeit-Richtwert,
+  \item den Aufgabentext (oft mit Kontext oder Fallbeschreibung),
+  \item einen Antwort-Freiraum f\"ur Ihre L\"osung,
+  \item eine \emph{YouTube-Suchquery} f\"ur den begleitenden Lernpfad.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 3}. Versuchen Sie jede Aufgabe zuerst eigenst\"andig \textendash{} die Aufgaben sind so geschnitten, dass das Argumentieren im Vordergrund steht, nicht das blo{\ss}e Reproduzieren. Insbesondere die L3-Aufgaben verlangen eine \emph{Entscheidung} unter unvollst\"andigen Informationen \textendash{} genau die Situation, in der Sie als CPO oder Architect t\"aglich arbeiten.
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Stakeholder-2$\times$2-Matrix und Einbindungsstufen}{\nivLi}{8\,min}
+
+\noindent Erkl\"aren Sie die \fachbegriff{Stakeholder-2$\times$2-Matrix} (Achsen: \emph{Einfluss} und \emph{Interesse/Betroffenheit}, jeweils niedrig/hoch). F\"ur jeden der vier Quadranten:
+
+\begin{enumerate}
+  \item Beschreiben Sie den Quadranten in einem Halbsatz.
+  \item Ordnen Sie ihm \emph{eine} der vier Einbindungsstufen zu: \emph{Informieren \textendash{} Konsultieren \textendash{} Mitentscheiden \textendash{} Verantworten}.
+  \item Geben Sie ein \emph{Beispiel-Stakeholder} an (intern \emph{oder} extern).
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Vorlage:}
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}|X|X|X@{}}
+\toprule
+\textbf{Quadrant} & \textbf{Beschreibung} & \textbf{Einbindungsstufe} & \textbf{Beispiel-Stakeholder} \\
+\midrule
+Einfluss hoch / Interesse hoch  & & & \\[18pt]
+\midrule
+Einfluss hoch / Interesse niedrig & & & \\[18pt]
+\midrule
+Einfluss niedrig / Interesse hoch & & & \\[18pt]
+\midrule
+Einfluss niedrig / Interesse niedrig & & & \\[18pt]
+\bottomrule
+\end{tabularx}
+
+\ytquery{Stakeholder Analyse Matrix Einfluss Interesse Power Grid Mendelow}
+
+\antwortlinien{6}
+
+\clearpage
+
+\aufgabenkopf{2}{KPI-Steckbrief \textendash{} Pflichtfelder}{\nivLi}{8\,min}
+
+\noindent Ein vollst\"andiger \fachbegriff{KPI-Steckbrief} hat acht bis neun Pflichtfelder. Listen Sie diese Felder auf und beschreiben Sie pro Feld in einem Satz, \emph{warum} es Pflicht ist.
+
+\medskip
+\noindent\textbf{Hinweis:} Die Felder sind \emph{Name}, \emph{Definition / Formel}, \emph{Datenquelle}, \emph{Messfrequenz}, \emph{Owner}, \emph{Ziel- / Schwellwert}, \emph{Gew\"unschtes Verhalten}, \emph{Manipulationsrisiko}, optional \emph{Gegenkennzahl}.
+
+\medskip
+\noindent Erkl\"aren Sie au{\ss}erdem in 2\,--\,3 S\"atzen den \fachbegriff{Goodhart-Effekt} und nennen Sie ein konkretes Beispiel, wo eine harmlose KPI ``aus der Spur l\"auft'', sobald sie zum Ziel wird.
+
+\ytquery{KPI Steckbrief Template Manipulationsrisiko Goodhart Effekt Leading Lagging}
+
+\antwortlinien{14}
+
+\clearpage
+
+\aufgabenkopf{3}{SOA: Orchestrierung vs.\ Choreographie}{\nivLi}{10\,min}
+
+\noindent Erkl\"aren Sie pr\"agnant (je 2\,--\,3 S\"atze):
+
+\begin{enumerate}
+  \item Was ist ein \fachbegriff{Service} in der SOA-Definition? Welche zwei Eigenschaften pr\"agen seine Grenzen (\emph{Kohäsion}, \emph{Kopplung})?
+  \item Was unterscheidet \fachbegriff{Orchestrierung} (Prozess steuert Services) von \fachbegriff{Choreographie} (Services interagieren)?
+  \item Wann w\"urden Sie eine \emph{Orchestrierung} bevorzugen, wann eine \emph{Choreographie}? Geben Sie je ein konkretes Beispiel.
+\end{enumerate}
+
+\medskip
+\noindent Erg\"anzen Sie eine \emph{Vergleichstabelle}:
+
+\medskip
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}|X|X@{}}
+\toprule
+\textbf{Aspekt} & \textbf{Orchestrierung} & \textbf{Choreographie} \\
+\midrule
+Steuerung      & & \\[16pt]
+\midrule
+Kopplung       & & \\[16pt]
+\midrule
+Skalierung     & & \\[16pt]
+\midrule
+Typischer Einsatz & & \\[16pt]
+\bottomrule
+\end{tabularx}
+
+\ytquery{SOA Orchestration vs Choreography Service Boundaries Cohesion Coupling}
+
+\antwortlinien{6}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Stakeholder-Map \emph{Idee~\textrightarrow~Freigabe}}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Situation:} Ein Unternehmen will den Prozess \emph{``Idee \textrightarrow{} Prototyp \textrightarrow{} Freigabe''} st\"arker standardisieren und teilweise \"uber ein Workflow-System steuern. Es gibt Widerst\"ande: \emph{F\&E} will Freiheit, \emph{Qualit\"at} will mehr Gates, \emph{Vertrieb} will Speed, \emph{IT} warnt vor Aufwand.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Listen Sie mindestens \emph{10 Stakeholder} \textendash{} davon \emph{zwei externe} (z.\,B.\ Schl\"usselkunde, Auditor, Lieferant).
+  \item Ordnen Sie sie in die 2$\times$2-Matrix (Einfluss $\times$ Interesse).
+  \item Identifizieren Sie \emph{drei Zielkonflikte} (z.\,B.\ Speed vs.\ Compliance) und formulieren Sie je eine \emph{Moderationsfrage} (``Woran w\"urden wir erkennen, dass\ldots?'').
+  \item Legen Sie \emph{zwei Governance-Entscheidungen} fest: \emph{(a)} Wer darf Prozess-/KPI-\"Anderungen freigeben? \emph{(b)} Wer ist Owner des Workflows?
+\end{enumerate}
+
+\noindent Abschluss: \emph{Top-5-Einbindungsplan} (1 Seite) mit konkreten Ma{\ss}nahmen je Top-Stakeholder.
+
+\ytquery{Stakeholder Map Innovation Prozess Workflow F\&E Vertrieb Compliance Konflikt}
+
+\antwortlinien{20}
+
+\clearpage
+
+\aufgabenkopf{5}{KPI-Design unter Unsicherheit}{\nivLii}{22\,min}
+
+\begin{infobox}[Situation]
+Der gleiche Prozess \emph{``Idee \textrightarrow{} Prototyp \textrightarrow{} Freigabe''} soll messbar gesteuert werden. Daten sind unvollst\"andig, Teams haben Angst vor ``\"Uberwachung''.
+
+\smallskip
+\textbf{Constraints:}
+\begin{itemize}
+  \item Zeitdruck: 30\,Min bis Pr\"asentation.
+  \item Budget: keine neuen Tools, nur vorhandene Daten (Excel, Tickets, ERP-Zeitstempel teilweise).
+  \item Zielkonflikt: Speed erh\"ohen \emph{und} Qualit\"atsrisiken senken.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie \emph{vier KPIs}: zwei \emph{Speed-KPIs} und zwei \emph{Quality-KPIs}. Pro KPI: Name, Formel, Datenquelle.
+  \item F\"ur \emph{zwei} der vier KPIs schreiben Sie einen \emph{vollst\"andigen Steckbrief} (Name, Definition, Quelle, Messfrequenz, Owner, Ziel, gew\"unschtes Verhalten, Manipulationsrisiko, optionale Gegenkennzahl).
+  \item Formulieren Sie eine \emph{KPI-Kopplung} (Goodhart-Schutz): Welche KPI \emph{erzwingt} welche andere KPI in einer ``vern\"unftigen Balance''?
+  \item Entscheidung unter Unsicherheit: Welche \emph{eine KPI} f\"uhren Sie \emph{noch nicht} ein \textendash{} und warum (Datenrisiko, Manipulationsgefahr, Akzeptanz)?
+\end{enumerate}
+
+\ytquery{KPI Design Innovation Prozess Lead Time Rework Gate Pass Rate Steckbrief}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{6}{Servicegrenzen schneiden \textendash{} f\"unf SOA-Kandidaten}{\nivLii}{20\,min}
+
+\begin{infobox}[Prozess \emph{``Idee \textrightarrow{} Freigabe''}]
+Der Prozess hat die Schritte: Idee einreichen, Vollst\"andigkeit pr\"ufen, Business Case bewerten, Prototyp planen, Prototyp bauen, Qualit\"atsnachweis erzeugen, Freigabe orchestrieren. Beteiligte: PM, Finance, F\&E, QM, Governance Board.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Identifizieren Sie \emph{f\"unf Service-Kandidaten} und f\"ullen Sie f\"ur jeden aus: \emph{Name}, \emph{Input}, \emph{Output}, \emph{Owner}.
+  \item Pr\"ufen Sie pro Service die zwei Servicegrenz-Kriterien: \emph{hohe Kohäsion} (alles, was zusammen geh\"ort, ist drin) und \emph{geringe Kopplung} (Service ist unabh\"angig nutzbar).
+  \item Markieren Sie einen Service, der \emph{wiederverwendbar} \"uber andere Prozesse hinaus ist (z.\,B.\ ``Business Case bewerten'' k\"onnte auch f\"ur Investitionsentscheidungen genutzt werden).
+  \item Entscheidung: Welcher Service-Kandidat ist \emph{Over-Engineering} \textendash{} also kein echter Service, sondern eine Activity, die in einen anderen Service geh\"ort? Begr\"undung in einem Satz.
+\end{enumerate}
+
+\ytquery{SOA Service Boundaries Kohaesion Kopplung Wiederverwendung Beispiel}
+
+\antwortlinien{14}
+
+\clearpage
+
+\aufgabenkopf{7}{Workflow-Orchestrierung \textendash{} Aufgaben, SLAs, Eskalation}{\nivLii}{25\,min}
+
+\begin{infobox}[Vorgabe]
+F\"ur den Prozess \emph{``Idee \textrightarrow{} Prototyp \textrightarrow{} Freigabe''} soll ein \fachbegriff{Workflow} entworfen werden \textendash{} ausf\"uhrbar in einem Workflow-System mit \emph{Aufgaben}, \emph{Regeln}, \emph{Rollen}, \emph{Eskalationen}, \emph{SLAs}, \emph{Audit Trail} und \emph{Monitoring}.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Skizzieren Sie die \emph{Workflow-Logik} mit:
+  \begin{itemize}
+    \item \emph{mindestens 7 Tasks} (Verb + Objekt, je mit \emph{Rolle}),
+    \item \emph{mindestens 2 SLAs} (z.\,B.\ ``R\"uckfrage innerhalb 48\,h'', ``Prototyp-Plan in 5\,Tagen''),
+    \item \emph{1 Eskalation} (z.\,B.\ ``Nach 2 fehlgeschlagenen Tests \textrightarrow{} Eskalation an Governance Board''),
+    \item \emph{2 XOR-Entscheidungen} (z.\,B.\ ``Vollst\"andig?'', ``Score $\geq$ Schwelle?'').
+  \end{itemize}
+  \item Definieren Sie eine \emph{Audit-Trail-Anforderung}: Welche Felder werden zwingend protokolliert?
+  \item Formulieren Sie eine \emph{Faustregel} (1 Satz): Wann lohnt sich ein Workflow-System \textendash{} und wann reicht eine Checkliste in Excel?
+\end{enumerate}
+
+\ytquery{Workflow Engine Tasks SLA Eskalation Audit Trail BPMS Beispiel}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{8}{Goodhart-Falle erkennen}{\nivLii}{18\,min}
+
+\begin{infobox}[Vier Verdachtsf\"alle]
+\textbf{A.} ``Lead Time'' wird belohnt. Reaktion der Teams: Tickets werden vorzeitig auf ``geschlossen'' gesetzt; offene Punkte landen als ``Folge-Ticket''.
+
+\smallskip
+\textbf{B.} ``Gate-Pass-Rate'' soll hoch sein. Reaktion: Schwellenwerte werden in den Steckbriefen leicht abgesenkt; das Gate-Komitee \"ubergeht Bedenken der QM.
+
+\smallskip
+\textbf{C.} ``Kundenfeedback-Score'' wird gemessen. Reaktion: Vertrieb erinnert Kunden vor der Befragung mit Geschenken an ``positives Feedback''.
+
+\smallskip
+\textbf{D.} ``Anteil Ideen mit Business Case'' soll steigen. Reaktion: F\&E schreibt formelle Business Cases f\"ur l\"angst beschlossene Projekte \textendash{} reine Pflichtdokumentation.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent F\"ur jeden der vier Verdachtsf\"alle:
+
+\begin{enumerate}
+  \item Benennen Sie das \emph{Goodhart-Muster} (z.\,B.\ ``Definition-Drift'', ``Schwellenwert-Schleichen'', ``Verhalten\-skopie'', ``Pflichterf\"ullung statt Wirkung'').
+  \item Beschreiben Sie in 1\,--\,2 S\"atzen, welcher \emph{eigentliche Schaden} entsteht.
+  \item Schlagen Sie eine konkrete \emph{Gegenma{\ss}nahme} vor: Kopplung mit Gegen-KPI, Audit, Definition gesch\"arft, Anreiz entkoppelt.
+\end{enumerate}
+
+\ytquery{Goodhart Law KPI Manipulation Gegenmassnahmen Anti Gaming Process}
+
+\antwortlinien{14}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{AeroTech Components} \textendash{} workflow-gesteuerte Innovationsfreigabe}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie \emph{AeroTech Components}]
+\textbf{Unternehmen:} \emph{AeroTech Components} (Komponenten f\"ur Industriekunden).\\
+\textbf{Problem:} Viele Ideen, chaotische Priorisierung, Prototypen verz\"ogern sich, Qualit\"atsnachweise fehlen. Kunden drohen mit Lieferantenwechsel.
+
+\smallskip
+\textbf{Rahmenbedingungen / Restriktionen:}
+\begin{itemize}
+  \item Zeitdruck: In \textbf{10\,Wochen} muss ein stabiler ``Idee\,\textrightarrow{}\,Freigabe''-Prozess stehen.
+  \item Budget: \textbf{120.000\,\euro} (Workflow-Tool m\"oglich, IT-Kapazit\"at unklar).
+  \item Zielkonflikte: Speed vs.\ Compliance, Standardisierung vs.\ Innovationsfreiheit.
+  \item Datenlage: Zeitstempel aus Ticketing vorhanden, Qualit\"atsdaten verteilt.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Stakeholder-Analyse:} \emph{Top-8 Stakeholder} + 2$\times$2-Matrix + Einbindungs\-strategie inklusive ``Stopper-Stakeholder''.
+  \item \textbf{KPI-Framework:} \emph{6 KPIs} (Outcome / Speed / Quality / Compliance) + \emph{2 vollst\"andige KPI-Steckbriefe} inklusive Manipulationsrisiko.
+  \item \textbf{SOA-Ableitung:} \emph{5 Service-Kandidaten} (Name, Input, Output, Owner).
+  \item \textbf{Workflow-Skizze:} Aufgaben / Rollen / Regeln mit \emph{$\geq$\,2 SLAs}, \emph{1 Eskalation}, \emph{2 XOR-Entscheidungen}.
+  \item \textbf{Management\-entscheidung:} \emph{2 Ma{\ss}nahmen} in 10 Wochen realistisch (unter IT-Unsicherheit) \textendash{} Begr\"undung mit Impact / Risiko / Aufwand.
+\end{enumerate}
+
+\ytquery{Workflow gesteuerte Innovationsfreigabe Stakeholder KPI SOA Roadmap Mittelstand}
+
+\antwortlinien{34}
+
+\clearpage
+
+\aufgabenkopf{10}{Stopper-Stakeholder einbinden}{\nivLiii}{25\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent In jedem Transformations\-vorhaben gibt es \emph{Stopper-Stakeholder}: Personen oder Bereiche, die das Vorhaben aus Eigeninteresse oder Risikoaversion blockieren k\"onnen, selbst wenn sie formal ``nur konsultiert'' werden. F\"ur \emph{AeroTech} sind das typischerweise \emph{IT} (Kapazit\"at) und \emph{F\&E-Leitung} (Angst vor Bürokratie-Monster).
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item \textbf{Identifikation:} Definieren Sie pr\"agnant: Woran erkennen Sie einen Stopper-Stakeholder? Drei Merkmale.
+  \item \textbf{Strategie:} Erarbeiten Sie eine \emph{Einbindungs\-strategie f\"ur IT} und eine f\"ur \emph{F\&E-Leitung}. Pro Strategie: ein Modus (Informieren / Konsultieren / Mitentscheiden / Verantworten), eine \emph{erste Ma{\ss}nahme} in den ersten 2 Wochen, ein \emph{Fr\"uhwarnsignal}, wenn die Strategie nicht greift.
+  \item \textbf{Reflexion:} Welche \emph{Stopper-Variante} ist gef\"ahrlicher \textendash{} der laute Kritiker oder der stille Verweigerer? Begr\"undung in 3 S\"atzen.
+  \item \textbf{Faustregel} (1 Satz): Ab welchem Punkt sollten Sie einen Stopper-Stakeholder \emph{eskalieren} (an Vorstand) statt weiterzumoderieren?
+\end{enumerate}
+
+\ytquery{Stakeholder Management Stopper Widerstand Change Resistance Eskalation}
+
+\antwortlinien{18}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Digitales Prozess-Steuerungssystem}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Process Officer / Chief Digital Officer / Lead Enterprise Architect.
+
+\smallskip
+\textbf{Ausgangslage:} Prozesslandschaft w\"achst, Teams arbeiten unterschiedlich, KPIs sind inkonsistent, Workflow-Automatisierung passiert ``wild''. In \textbf{12 Wochen} muss ein steuerbarer Standard stehen.
+
+\smallskip
+\textbf{Restriktionen:} Reorganisation m\"oglich, IT-Kapazit\"at schwankt, Budget \textbf{150\,k\,\euro}, Audit in 6 Monaten.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strukturierte \emph{Steuerungsarchitektur} in acht Schritten:
+
+\begin{enumerate}
+  \item \textbf{Steuerungsarchitektur (1 Seite):} Welche Entscheidungen sollen KPIs/Workflows k\"unftig unterst\"utzen (Priorisierung, Gate-Freigabe, Risiko, Ressourcen, Compliance)?
+  \item \textbf{KPI-Policy:} KPI-Klassifikation (Outcome / Output / Prozess / Risiko), Definitions-Standards, Owner-Regeln, Review-Zyklus, Goodhart-Schutz (KPI-Kopplungen).
+  \item \textbf{Stakeholder-Governance:} RACI f\"ur \emph{KPI-\"Anderungen}, \emph{Workflow-\"Anderungen} und \emph{Service-Katalog}; Eskalationspfad bei Zielkonflikten.
+  \item \textbf{SOA / Service-Katalog-Minimum:} Kriterien f\"ur Servicekandidaten, Namens- und Vertragsstandard (Input / Output), Integrationsprinzip (API-First / Events, konzeptionell).
+  \item \textbf{Workflow-Betriebsmodell:} SLAs, Eskalationen, Audit Trail, Monitoring; ``Definition of Done'' f\"ur Workflow-\"Anderungen.
+  \item \textbf{12-Wochen-Roadmap:} Pilotprozess w\"ahlen, Rollout in Wellen, Schulung Level 1\,--\,3, Erfolgskennzahlen (Durchlaufzeit, Rework, Audit-Findings).
+  \item \textbf{Zwei Entscheidungen unter Unsicherheit:}
+    \begin{itemize}
+      \item Welcher \emph{Pilotprozess}? Begr\"undung + verworfene Alternative + Fr\"uhwarnsignal.
+      \item Welche \emph{3 KPIs} werden ``Executive KPIs''? Trade-offs + Manipulations\-schutz.
+    \end{itemize}
+  \item \textbf{Anschluss an Strategie:} Drei Argumente f\"ur die Gesch\"aftsleitung (Compliance, Time-to-Market, Skalierbarkeit).
+\end{enumerate}
+
+\noindent\textbf{Bewertungskriterien:} Strategie-Anschluss \textperiodcentered{} Verantwortungsklarheit \textperiodcentered{} Pragmatismus \textperiodcentered{} Entscheidungslogik und Risikoreife.
+
+\ytquery{Process Steuerung Architecture KPI Governance RACI Workflow Operating Model CPO}
+
+\antwortlinien{36}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{L\"osungsheft Tag 3}. Achten Sie dabei besonders auf folgende drei Pr\"ufpunkte:
+
+\begin{itemize}
+  \item Habe ich eine Stakeholder-2$\times$2-Matrix \emph{tats\"achlich} f\"ur Einbindungsentscheidungen genutzt \textendash{} oder nur als hypothetische \"Ubung gezeichnet?
+  \item Sind meine KPIs \emph{gekoppelt}? Wo k\"onnte ein Team meine Speed-KPI ``gamen'', ohne dass es im Steckbrief abgesichert w\"are?
+  \item Hat mein Workflow eine \emph{echte Eskalation} \textendash{} oder ist es eine ``Happy-Path-Skizze''?
+\end{itemize}
+
+\medskip
+\begin{infobox}[Was Sie jetzt k\"onnen sollten]
+\begin{itemize}
+  \item Stakeholder mit der 2$\times$2-Matrix systematisch in Einbindungsstufen \"ubersetzen.
+  \item KPI-Steckbriefe vollst\"andig schreiben \textendash{} mit Manipulationsrisiko und Gegenkennzahl.
+  \item SOA-Servicegrenzen mit Kohäsion und Kopplung als Kriterium schneiden.
+  \item Workflow-Logiken (Tasks, SLAs, Eskalationen, Audit) auf eine ausf\"uhrbare Mindesttiefe bringen.
+  \item Eine Steuerungsarchitektur entwerfen, die Stakeholder, KPIs, Services und Workflows zu \emph{einem} Operating Model verbindet.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 3 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

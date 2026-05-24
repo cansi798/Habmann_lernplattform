@@ -1,0 +1,678 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 3 - Loesungsheft
+% Vom Prozessbild zur Steuerung: Stakeholder, KPIs, SOA-Services, Workflow-Orchestrierung
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 3}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Stakeholder \textperiodcentered{} KPIs \textperiodcentered{} Services}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 1 \textperiodcentered{} TAG 3 VON 3 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 1.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 3\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen \textendash{} Stakeholder, KPIs,\\SOA-Services und Workflow-\\Orchestrierung.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 3}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterl\"osungen sind \emph{eine} m\"ogliche, didaktisch nachvollziehbare L\"osung. Insbesondere auf L2 und L3 sind mehrere Begr\"undungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den Begriffsapparat (Stakeholder-Matrix, KPI-Steckbrief, SOA, Workflow) sauber nutzen,
+  \item Annahmen explizit machen,
+  \item Zielkonflikte (Speed vs.\ Compliance, Standardisierung vs.\ Freiheit) benennen,
+  \item zu einer klar formulierten Entscheidung f\"uhren.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihre Argumentation ab \textendash{} ist das eine andere Annahme oder ein Denkfehler?
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Stakeholder-2$\times$2-Matrix und Einbindungsstufen}{\nivLi}{8\,min}
+
+\ytquery{Stakeholder Analyse Matrix Einfluss Interesse Power Grid Mendelow}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}|X|X|X@{}}
+\toprule
+\textbf{Quadrant} & \textbf{Beschreibung} & \textbf{Stufe} & \textbf{Beispiel} \\
+\midrule
+Einfluss hoch / Interesse hoch & ``Key Players'' \textendash{} kann das Vorhaben beschleunigen oder kippen, ist aktiv betroffen. & \emph{Mitentscheiden} (oder \emph{Verantworten}) & CIO, Process Owner, F\&E-Leitung. \\
+\midrule
+Einfluss hoch / Interesse niedrig & ``Schl\"afer'' \textendash{} kann blockieren, ist aber heute nicht aktiv. & \emph{Konsultieren} mit gezielten Updates. & Vorstand, Compliance-Lead, Konzern-IT. \\
+\midrule
+Einfluss niedrig / Interesse hoch & ``Mitwirkende'' \textendash{} stark interessiert, kann Detailarbeit gestalten. & \emph{Konsultieren} / \emph{Mitentscheiden im Detail}. & Key-User, Power-User im Fachbereich. \\
+\midrule
+Einfluss niedrig / Interesse niedrig & ``Beobachter'' \textendash{} weder Macht noch starke Betroffenheit. & \emph{Informieren} per Standard-Updates. & Nebenbereiche, Bereiche au{\ss}erhalb Scope. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\emph{Merkregel:} Die Achsen \emph{Einfluss} und \emph{Interesse} steuern den Aufwand. Wer beide hoch hat, geh\"ort an den Tisch. Wer keines hat, geh\"ort in den Newsletter. Achten Sie besonders auf die ``Schl\"afer'' \textendash{} sie werden gerne unterm Radar gehalten und kippen Projekte sp\"at.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{KPI-Steckbrief \textendash{} Pflichtfelder}{\nivLi}{8\,min}
+
+\ytquery{KPI Steckbrief Template Manipulationsrisiko Goodhart Effekt Leading Lagging}
+
+\begin{loesungbox}
+\textbf{Pflichtfelder eines KPI-Steckbriefs:}
+
+\begin{enumerate}
+  \item \emph{Name} \textendash{} eindeutig, sprechend (``Lead Time Idee\,\textrightarrow{}\,Freigabe''). Verhindert Verwechslung.
+  \item \emph{Definition / Formel} \textendash{} eindeutige Berechnung (``Median Timestamp Freigabe minus Timestamp Idee-Eingang''). Verhindert Definitions-Drift.
+  \item \emph{Datenquelle} \textendash{} \emph{wo} kommen die Daten her (Ticketing, ERP, manuell)? Macht Pr\"ufbarkeit m\"oglich.
+  \item \emph{Messfrequenz} \textendash{} wie oft wird berechnet (w\"ochentlich, monatlich)? Steuert Aufwand und Aktualit\"at.
+  \item \emph{Owner} \textendash{} \emph{wer} verantwortet die KPI (Definition + Pflege + Interpretation)?
+  \item \emph{Ziel- / Schwellwert} \textendash{} ab wann ``gr\"un'', ab wann ``rot''? Erm\"oglicht Steuerung.
+  \item \emph{Gew\"unschtes Verhalten} \textendash{} welches Handeln \emph{soll} die KPI ausl\"osen? (Sonst wird sie zur Tapete.)
+  \item \emph{Manipulationsrisiko} \textendash{} wie k\"onnte sie ``gegamed'' werden? Verpflichtet zum Gegen-Design.
+  \item \emph{Gegenkennzahl} (optional, aber empfohlen) \textendash{} koppelt KPI an Qualit\"at oder Risiko.
+\end{enumerate}
+
+\smallskip
+\textbf{Goodhart-Effekt:}
+\emph{``When a measure becomes a target, it ceases to be a good measure.''} Sobald eine Kennzahl zum Belohnungs- oder Sanktionsma{\ss}stab wird, beginnen Akteure die Kennzahl zu optimieren \textendash{} nicht das urspr\"ungliche Anliegen.
+
+\smallskip
+\emph{Beispiel:} ``Anzahl geschlossener Tickets'' wird als KPI eingef\"uhrt. Ergebnis: Tickets werden in mehrere kleine Tickets aufgespalten oder vorzeitig geschlossen (``Folge-Ticket angelegt''). Die KPI sieht gut aus, die Servicequalit\"at f\"ur den Kunden sinkt. Gegenma{\ss}nahme: koppeln mit ``First-Contact-Resolution-Rate'' und ``Customer-Satisfaction-Score''.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{SOA: Orchestrierung vs.\ Choreographie}{\nivLi}{10\,min}
+
+\ytquery{SOA Orchestration vs Choreography Service Boundaries Cohesion Coupling}
+
+\begin{loesungbox}
+\textbf{1. Service-Definition:}\\
+Ein \emph{Service} ist eine klar abgegrenzte, fachlich oder technisch eigenst\"andige F\"ahigkeit \textendash{} z.\,B.\ ``Kundenstammdaten pr\"ufen''. Servicegrenzen werden durch \fachbegriff{hohe Kohäsion} (alles, was zusammen geh\"ort, ist drin) und \fachbegriff{geringe Kopplung} (Service ist unabh\"angig von Internas anderer Services) bestimmt. Ein Service hat einen klaren Vertrag (Input / Output) und ist im Idealfall wiederverwendbar.
+
+\smallskip
+\textbf{2. Orchestrierung vs.\ Choreographie:}
+\begin{itemize}
+  \item \emph{Orchestrierung:} Ein zentraler Prozess (z.\,B.\ BPMS-Engine) ruft Services in einer geplanten Reihenfolge auf. ``Der Dirigent steuert das Orchester.''
+  \item \emph{Choreographie:} Services tauschen Events aus und reagieren selbst\"andig auf Signale. ``Die T\"anzer kennen ihre Rollen \textendash{} es gibt keinen Dirigenten.''
+\end{itemize}
+
+\smallskip
+\textbf{3. Wann was?}
+\begin{itemize}
+  \item \emph{Orchestrierung} \textrightarrow{} regulierte Prozesse mit Pflicht-Reihenfolge (z.\,B.\ Kreditfreigabe: KYC \textrightarrow{} Bonit\"at \textrightarrow{} Risiko \textrightarrow{} Entscheidung). Vorteil: vollst\"andige Nachvollziehbarkeit, klarer Audit Trail.
+  \item \emph{Choreographie} \textrightarrow{} skalierende, lose gekoppelte Plattformen (z.\,B.\ E-Commerce: Bestellung \"ostlich, Lager ostlich, Versand ostlich \textendash{} jeder reagiert auf Events). Vorteil: Resilienz, horizontale Skalierung.
+\end{itemize}
+
+\smallskip
+\textbf{Vergleichstabelle:}
+\begin{tabularx}{\linewidth}{@{}p{3.2cm}|X|X@{}}
+\toprule
+\textbf{Aspekt} & \textbf{Orchestrierung} & \textbf{Choreographie} \\
+\midrule
+Steuerung      & zentral (Engine) & dezentral (Events) \\
+\midrule
+Kopplung       & enger an Engine  & loser, eventbasiert \\
+\midrule
+Skalierung     & begrenzt durch Engine & horizontal pro Service \\
+\midrule
+Typischer Einsatz & regulierte Prozesse, Compliance & skalierende Plattformen, IoT, E-Commerce \\
+\bottomrule
+\end{tabularx}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Stakeholder-Map \emph{Idee~\textrightarrow~Freigabe}}{\nivLii}{25\,min}
+
+\ytquery{Stakeholder Map Innovation Prozess Workflow F\&E Vertrieb Compliance Konflikt}
+
+\begin{loesungbox}
+\textbf{1. 10+ Stakeholder:}
+\begin{itemize}
+  \item Intern: F\&E-Leitung, Produktmanagement (PM), Qualit\"atsmanagement (QM), Operations/Produktion, Einkauf, Vertrieb/Key Account, IT/Enterprise Architecture, Finance/Controlling, Compliance/Datenschutz, Change-Manager / Betriebsrat.
+  \item Extern: \emph{Schl\"usselkunde}, \emph{Auditor}.
+\end{itemize}
+
+\smallskip
+\textbf{2. 2$\times$2-Matrix (Auswahl):}
+\begin{itemize}
+  \item \emph{Einfluss hoch / Interesse hoch:} F\&E-Leitung, PM, QM, IT.
+  \item \emph{Einfluss hoch / Interesse niedrig:} Compliance, Vorstand, Schl\"usselkunde.
+  \item \emph{Einfluss niedrig / Interesse hoch:} Einkauf, Operations, Power-User F\&E.
+  \item \emph{Einfluss niedrig / Interesse niedrig:} Auditor (heute nicht aktiv, aber sp\"ater zentral).
+\end{itemize}
+
+\smallskip
+\textbf{3. Drei Zielkonflikte + Moderationsfragen:}
+\begin{enumerate}
+  \item \emph{Speed (Vertrieb) vs.\ Compliance (QM):} \emph{``Woran w\"urden wir erkennen, dass ein Gate funktioniert \textendash{} ohne den Durchlauf zu verdoppeln?''}
+  \item \emph{Standardisierung (PM) vs.\ Innovationsfreiheit (F\&E):} \emph{``Welche drei Standards sind zwingend, welche drei sind verhandelbar?''}
+  \item \emph{Transparenz (Management) vs.\ Angst vor Messung (Teams):} \emph{``Wie messen wir Prozess-Performance, ohne Einzelpersonen zu sanktionieren?''}
+\end{enumerate}
+
+\smallskip
+\textbf{4. Zwei Governance-Entscheidungen:}
+\begin{itemize}
+  \item Prozess-/KPI-\"Anderungen werden vom \emph{Process Owner} (Bereichsleiter Produktentwicklung) \emph{angesto{\ss}en} und vom \emph{CPO / Approval Board} (PM + QM + IT-Vertretung) freigegeben.
+  \item Workflow-Owner = \emph{PMO} \textendash{} verantwortet Lifecycle, Versionierung, Rollout.
+\end{itemize}
+
+\smallskip
+\textbf{Einbindungsplan (Top-5):}
+\begin{itemize}
+  \item \emph{F\&E-Leitung:} Mitentscheiden \"uber Gate-Design (kein ``Bürokratie-Monster''); 1$\times$/Woche Steuerkreis.
+  \item \emph{PM:} Verantworten der Roadmap; 1$\times$/Woche Sprint Review.
+  \item \emph{QM:} Mitentscheiden bei Akzeptanzkriterien; in jedes Gate eingebunden.
+  \item \emph{IT:} Mitentscheiden bei Architektur / Integration; ein dedizierter Slot im Steuerkreis.
+  \item \emph{Schl\"usselkunde (extern):} Konsultieren \"uber Lieferqualit\"at; quartalsweise Statusabgleich.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{KPI-Design unter Unsicherheit}{\nivLii}{22\,min}
+
+\ytquery{KPI Design Innovation Prozess Lead Time Rework Gate Pass Rate Steckbrief}
+
+\begin{loesungbox}
+\textbf{1. Vier KPIs:}
+
+\begin{tabularx}{\linewidth}{@{}p{4.4cm}lX@{}}
+\toprule
+\textbf{KPI} & \textbf{Typ} & \textbf{Formel / Quelle} \\
+\midrule
+Lead Time Idee\,\textrightarrow{}\,Freigabe & Speed & Median(Timestamp Freigabe $-$ Timestamp Idee), Ticketing. \\
+Anteil Ideen mit Business Case & Speed/Quality & \#Ideen mit BC / \#Ideen gesamt; PM-Backlog. \\
+Gate-Pass-Rate (First Pass) & Quality & \#Gates beim 1.\ Lauf bestanden / \#Gates gesamt; QM-Log. \\
+Rework-Rate Prototyp & Quality & \#Prototypen mit $\geq$\,1 Nachbesserung / \#Prototypen; F\&E. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Zwei vollst\"andige Steckbriefe:}
+
+\smallskip
+\textbf{Steckbrief A \textendash{} Lead Time Idee\,\textrightarrow{}\,Freigabe:}
+\begin{itemize}
+  \item Definition: Median(Timestamp Gate-Freigabe minus Timestamp Idee-Eingang).
+  \item Quelle: Ticketing-System; Frequenz: w\"ochentlich.
+  \item Owner: PMO. Ziel: $-20\,\%$ in 10 Wochen (Baseline aus aktuellem Median).
+  \item Gew\"unschtes Verhalten: Engp\"asse schneller erkennen, Backlog priorisieren.
+  \item Manipulationsrisiko: Tickets vorzeitig schlie{\ss}en. Gegenma{\ss}nahme: Kopplung mit \emph{Gate-Pass-Rate} und \emph{Rework-Rate}.
+\end{itemize}
+
+\smallskip
+\textbf{Steckbrief B \textendash{} Gate-Pass-Rate:}
+\begin{itemize}
+  \item Definition: \#Gates beim 1.\ Lauf bestanden / \#Gates gesamt $\times$ 100\,\%.
+  \item Quelle: QM-Log; Frequenz: monatlich.
+  \item Owner: QM-Lead. Ziel: $\geq 65\,\%$ stabil.
+  \item Gew\"unschtes Verhalten: bessere Vorbereitung der Gates (DoR).
+  \item Manipulationsrisiko: Gates ``leichter'' machen. Gegenma{\ss}nahme: Kopplung mit \emph{Kundenfeedback-Score} und externer Audit-Stichprobe.
+\end{itemize}
+
+\smallskip
+\textbf{3. KPI-Kopplung (Goodhart-Schutz):}\\
+\emph{``Lead Time darf sich nur dann verbessern, wenn die Rework-Rate stabil oder f\"allt.''} Wer Tickets vorzeitig schlie{\ss}t, erzeugt sp\"ater Nacharbeit \textendash{} die Kopplung macht Manipulation sichtbar.
+
+\smallskip
+\textbf{4. Entscheidung unter Unsicherheit:}\\
+\emph{Wir f\"uhren ``Kosten pro freigegebenem Konzept'' noch nicht ein.} Begr\"undung: Kostendaten sind \"uber drei Systeme verteilt, das Risiko von Definitions-Streit \"ubersteigt den Steuerungs-Nutzen. Wir warten, bis Lead Time und Quality stabil sind \textendash{} dann kommt Kosten als dritte Achse dazu.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{Servicegrenzen schneiden \textendash{} f\"unf SOA-Kandidaten}{\nivLii}{20\,min}
+
+\ytquery{SOA Service Boundaries Kohaesion Kopplung Wiederverwendung Beispiel}
+
+\begin{loesungbox}
+\textbf{1. F\"unf Service-Kandidaten:}
+
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}XXl@{}}
+\toprule
+\textbf{Service} & \textbf{Input} & \textbf{Output} & \textbf{Owner} \\
+\midrule
+Idee erfassen           & Idee, Kunde, Nutzen-Hypothese & Idea-ID, Status & PM \\
+Business Case bewerten  & Nutzen, Kosten, Risiko        & Score, Entscheidung & Finance/PM \\
+Prototyp planen         & Anforderungen, Akzeptanzkriterien & Plan, SLA & F\&E/Operations \\
+Qualit\"atsnachweis erzeugen & Testresultate, Soll-Kriterien & Evidence-Paket & QM \\
+Freigabe orchestrieren  & Evidence + Score              & Freigabe/Reject + Begr\"undung & Governance Board \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Kohäsion und Kopplung:}
+\begin{itemize}
+  \item \emph{Idee erfassen} \textendash{} hohe Kohäsion (nur Erfassen), geringe Kopplung (kein externer State).
+  \item \emph{Business Case bewerten} \textendash{} hohe Kohäsion (Score-Logik), Kopplung an Idea-ID notwendig, aber lose.
+  \item \emph{Prototyp planen} \textendash{} hohe Kohäsion (Planung), Kopplung an ``Business-Case-Score'' \"uber den Input-Vertrag.
+  \item \emph{Qualit\"atsnachweis erzeugen} \textendash{} hohe Kohäsion (Evidence), geringe Kopplung (eigenst\"andig).
+  \item \emph{Freigabe orchestrieren} \textendash{} aggregiert; bewusst h\"oherer Kopplungsgrad als Steuerungsschicht.
+\end{itemize}
+
+\smallskip
+\textbf{3. Wiederverwendbar:}
+\emph{Business Case bewerten} \textendash{} l\"asst sich auch f\"ur Investitionsentscheidungen au{\ss}erhalb der Innovationsfreigabe einsetzen (z.\,B.\ Anlagen, externe Auftr\"age). Verlangt nur generischen Input (Nutzen, Kosten, Risiko).
+
+\smallskip
+\textbf{4. Over-Engineering:}
+W\"are man versucht gewesen, \emph{``Idee einreichen''} \emph{und} \emph{``Idee erfassen''} als zwei Services zu schneiden, w\"are das Over-Engineering \textendash{} ``Einreichen'' ist ein UI-Schritt der Activity, kein eigener Service.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{Workflow-Orchestrierung}{\nivLii}{25\,min}
+
+\ytquery{Workflow Engine Tasks SLA Eskalation Audit Trail BPMS Beispiel}
+
+\begin{loesungbox}
+\textbf{1. Workflow-Logik (Textform):}
+
+\smallskip
+\textbf{Start} \emph{Idee eingereicht}.
+\begin{itemize}
+  \item Task (PM): \emph{Vollst\"andigkeit pr\"ufen}. \fachbegriff{SLA:} 24\,h.
+  \item \textbf{XOR} \emph{vollst\"andig?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} Task (PM): \emph{R\"uckfrage an Einreicher} (\fachbegriff{SLA:} 48\,h) \textrightarrow{} zur\"uck zu Pr\"ufen.
+    \item Ja \textrightarrow{} weiter.
+  \end{itemize}
+  \item Task (Finance/PM): \emph{Business Case Score berechnen}.
+  \item \textbf{XOR} \emph{Score $\geq$ Schwelle?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} \emph{In Backlog parken}, End.
+    \item Ja \textrightarrow{} weiter.
+  \end{itemize}
+  \item Task (F\&E): \emph{Prototyp planen} (\fachbegriff{SLA:} 5\,Tage).
+  \item Task (QM): \emph{Testplan definieren}.
+  \item Task (F\&E): \emph{Prototyp bauen}.
+  \item Task (QM): \emph{Test durchf\"uhren}.
+  \item \textbf{XOR} \emph{Test bestanden?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} Task (F\&E): \emph{Nacharbeit} \textrightarrow{} zur\"uck zu Test (max.\ 2 Schleifen, dann \fachbegriff{Eskalation} an Governance Board).
+    \item Ja \textrightarrow{} Task (Governance Board): \emph{Freigabe erteilen}.
+  \end{itemize}
+\end{itemize}
+\textbf{End} \emph{freigegeben}.
+
+\smallskip
+\textbf{2. Audit-Trail-Anforderung:} Pro Task wird protokolliert: \emph{Case-ID, Task-Name, Owner-User-ID, Timestamp Start, Timestamp Ende, Ergebnis (OK/Nachbesserung), Begr\"undung bei Abweichung, Anhang (Evidence-Dokument-ID)}.
+
+\smallskip
+\textbf{3. Faustregel:}\\
+Ein Workflow-System lohnt sich, sobald \emph{(a)} der Prozess wiederkehrend $>$\,50$\times$/Jahr l\"auft, \emph{(b)} es echte SLAs gibt, deren Verletzung kostet, und \emph{(c)} der Audit Trail nicht ``optional'' ist. F\"ur seltene, gut dokumentierte Prozesse reicht oft eine Checkliste in Excel plus eine geteilte Ablage.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{Goodhart-Falle erkennen}{\nivLii}{18\,min}
+
+\ytquery{Goodhart Law KPI Manipulation Gegenmassnahmen Anti Gaming Process}
+
+\begin{loesungbox}
+\textbf{A \textendash{} Lead Time:} \emph{Muster:} ``Scope-Verschiebung'' (Tickets in Folge-Tickets splitten).\\
+\emph{Schaden:} Kundenwert sinkt, Berichtswelt sieht gut aus.\\
+\emph{Gegenma{\ss}nahme:} Kopplung mit \emph{Rework-Rate} und \emph{First-Contact-Resolution}; Audit-Stichprobe auf Folge-Tickets in 30\,Tagen.
+
+\smallskip
+\textbf{B \textendash{} Gate-Pass-Rate:} \emph{Muster:} ``Schwellenwert-Schleichen''.\\
+\emph{Schaden:} Qualit\"atsgates verlieren ihre Schutzwirkung, Sp\"atfehler steigen.\\
+\emph{Gegenma{\ss}nahme:} Schwellen werden au{\ss}erhalb des Boards gepflegt (CPO + QM); Definitions-Change verlangt Change-Request mit Begr\"undung.
+
+\smallskip
+\textbf{C \textendash{} Kundenfeedback-Score:} \emph{Muster:} ``Verhaltens-/Antwortkopie'' (Belohnung f\"ur positives Feedback).\\
+\emph{Schaden:} KPI wird zu PR-Instrument, echte Schmerzpunkte werden unsichtbar.\\
+\emph{Gegenma{\ss}nahme:} Zus\"atzlich \emph{NPS-Detraktoren} (kritische Antworten) messen; anonymisierte Befragung durch externen Provider; \emph{Anreiz entkoppelt} von Befragungsergebnis.
+
+\smallskip
+\textbf{D \textendash{} Anteil Ideen mit Business Case:} \emph{Muster:} ``Pflichterf\"ullung statt Wirkung''.\\
+\emph{Schaden:} Dokumentations-Overhead ohne Steuerungsnutzen.\\
+\emph{Gegenma{\ss}nahme:} Definition sch\"arfen \textendash{} ``Business Case mit Score $>$ 50\,\% in vier Dimensionen''. Stichprobe + Plausibilit\"atspr\"ufung durch Finance.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{AeroTech Components}}{\nivLiii}{45\,min}
+
+\ytquery{Workflow gesteuerte Innovationsfreigabe Stakeholder KPI SOA Roadmap Mittelstand}
+
+\begin{loesungbox}
+\textbf{1. Stakeholder-Top-8:} F\&E-Leitung, PM, QM, Operations, Einkauf, Vertrieb/Key Account, IT/Enterprise Architecture, Finance/Controlling (plus extern: Schl\"usselkunde, Auditor).
+
+\smallskip
+\textbf{Stopper-Stakeholder:} IT (Kapazit\"at/Integrationen) und F\&E-Leitung (Innovationsfreiheit). Einbindungsstrategie: \emph{Mitentscheiden} fr\"uh \textendash{} IT bei Architektur, F\&E-Leitung bei Gate-Design.
+
+\smallskip
+\textbf{2. KPI-Set:}
+\begin{enumerate}
+  \item \emph{Lead Time Idee\,\textrightarrow{}\,Freigabe} (Speed, Lagging).
+  \item \emph{Rework-Rate Prototyp} (Quality).
+  \item \emph{Gate-Pass-Rate (First Pass)} (Quality).
+  \item \emph{Anteil Ideen mit Business Case} (Steuerungsqualit\"at, Leading).
+  \item \emph{Kundenfeedback-Score nach Pilot} (Outcome).
+  \item \emph{Kosten pro freigegebenem Konzept} (Wirtschaftlichkeit, eingef\"uhrt in Phase 2).
+\end{enumerate}
+Steckbriefe Lead Time + Gate-Pass-Rate siehe Aufgabe 5.
+
+\smallskip
+\textbf{3. F\"unf Service-Kandidaten:} siehe Aufgabe 6.
+
+\smallskip
+\textbf{4. Workflow-Skizze:} siehe Aufgabe 7.
+
+\smallskip
+\textbf{5. Zwei Ma{\ss}nahmen in 10 Wochen:}
+\begin{enumerate}
+  \item \emph{Minimum-Workflow im bestehenden Ticketing} mit Regeln, SLAs, Eskalation \textendash{} ohne neues Tool. \emph{Impact:} sofortige Sichtbarkeit + Verantwortung. \emph{Risiko:} IT muss Ticketing leicht erweitern. \emph{Aufwand:} 1 PMO + 0,5 IT.
+  \item \emph{KPI-Minimum + Datenpflichtfelder} (zwei Felder erg\"anzen, z.\,B.\ ``Gate-Status'' und ``Schleifen-Z\"ahler''). \emph{Impact:} Steuerbarkeit der drei Schl\"ussel-KPIs. \emph{Risiko:} Initiale Datenqualit\"at. \emph{Aufwand:} 0,5 PMO, 2 Wochen.
+\end{enumerate}
+
+\smallskip
+\textbf{Governance-Mini:} CPO als Lenkungs\-funktion; Process Owner = Head of Product Development; Tool-Owner = PMO; QM-Lead = Gate-Owner.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Stopper-Stakeholder einbinden}{\nivLiii}{25\,min}
+
+\ytquery{Stakeholder Management Stopper Widerstand Change Resistance Eskalation}
+
+\begin{loesungbox}
+\textbf{1. Merkmale eines Stopper-Stakeholders:}
+\begin{enumerate}
+  \item Verf\"ugt \"uber \emph{strukturellen Veto-Punkt} (Genehmigung, Ressource, Schl\"ussel-System).
+  \item Hat \emph{historische} Bedenken aus fr\"uheren Vorhaben \textendash{} Misstrauen statt sachlicher Kritik.
+  \item Spricht eher in \emph{Risiken} als in \emph{Beitrag} \textendash{} oder verschwindet rituell aus Terminen.
+\end{enumerate}
+
+\smallskip
+\textbf{2. Einbindungsstrategien:}
+
+\smallskip
+\emph{IT (Kapazit\"at):} Modus \emph{Mitentscheiden}.
+\begin{itemize}
+  \item Erste Ma{\ss}nahme (Wo 1\,--\,2): IT-Lead als feste Steuerkreis-Stimme; Tool-Anforderungen \emph{gemeinsam} schreiben (\"Anderungen am ERP/Ticketing).
+  \item Fr\"uhwarnsignal: IT-Lead schickt 2$\times$ in Folge eine Vertretung ohne Mandat \textrightarrow{} sofortige Eskalation an CIO.
+\end{itemize}
+
+\smallskip
+\emph{F\&E-Leitung (Innovationsfreiheit):} Modus \emph{Mitentscheiden} bei Gate-Design.
+\begin{itemize}
+  \item Erste Ma{\ss}nahme: F\&E-Lead schreibt mit QM zusammen die \emph{Gate-Kriterien} (kein Diktat von au{\ss}en).
+  \item Fr\"uhwarnsignal: F\&E publiziert \emph{intern} ein eigenes ``Schatten-Verfahren'' \textrightarrow{} sofortiger 1:1-Termin mit CPO.
+\end{itemize}
+
+\smallskip
+\textbf{3. Laut vs.\ leise:}\\
+Der \emph{stille Verweigerer} ist gef\"ahrlicher. Der laute Kritiker macht Probleme sichtbar und damit verhandelbar. Der stille Verweigerer nickt im Meeting und ignoriert die Beschl\"usse danach \textendash{} Probleme werden sp\"at sichtbar, wenn der Rollout schon l\"auft. Faustregel: ``Wer im Steuerkreis nichts sagt, ist nicht einverstanden, sondern nicht eingebunden.''
+
+\smallskip
+\textbf{4. Faustregel:}\\
+Eskalieren, sobald ein Stopper-Stakeholder \emph{zum dritten Mal} dasselbe Veto-Muster zeigt (z.\,B.\ Termin\-versch\"arfungen ohne Begr\"undung, fehlende Beistellung) \textendash{} oder sobald sein Veto ein anderes Top-3-Risiko verst\"arkt.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Digitales Prozess-Steuerungssystem}{\nivLiii}{45\,min}
+
+\ytquery{Process Steuerung Architecture KPI Governance RACI Workflow Operating Model CPO}
+
+\begin{loesungbox}
+\textbf{1. Steuerungsarchitektur:} Die Modelle/Workflows sollen f\"unf Entscheidungstypen unterst\"utzen \textendash{} \emph{Priorisierung} (welche Prozesse zuerst harmonisieren), \emph{Gate-Freigabe}, \emph{Risiko-Steuerung}, \emph{Ressourcen-Allokation}, \emph{Compliance-Nachweise}.
+
+\smallskip
+\textbf{2. KPI-Policy:}
+\begin{itemize}
+  \item \emph{Klassifikation:} Outcome / Output / Prozess / Risiko. Pro Klasse h\"ochstens \emph{drei Executive-KPIs}.
+  \item \emph{Definitions-Standard:} Steckbrief mit 9 Pflichtfeldern.
+  \item \emph{Owner:} jede KPI hat genau einen Owner (kein RACI mit ``allen'').
+  \item \emph{Review:} quartalsweise Definition-Review, j\"ahrliche Zielsetzung.
+  \item \emph{Goodhart-Schutz:} jede Speed-KPI hat eine \emph{Quality-Gegenkennzahl}; jede Quality-KPI hat eine \emph{Compliance-Gegenkennzahl}.
+\end{itemize}
+
+\smallskip
+\textbf{3. Stakeholder-Governance (RACI-Kurz):}
+\begin{itemize}
+  \item KPI-\"Anderungen: R = Owner, A = CPO, C = Fachbereich + Audit, I = Vorstand.
+  \item Workflow-\"Anderungen: R = Modeler, A = Process Owner, C = IT, I = Compliance.
+  \item Service-Katalog: R = Architect, A = Enterprise Architect, C = Owner, I = Audit.
+\end{itemize}
+Eskalation: Owner \textrightarrow{} CPO \textrightarrow{} Vorstand bei Zielkonflikt Speed/Compliance.
+
+\smallskip
+\textbf{4. SOA / Service-Katalog-Minimum:}
+\begin{itemize}
+  \item Kriterien: hohe Kohäsion, geringe Kopplung, Wiederverwendung $\geq$ 2 Prozesse, klarer Owner.
+  \item Naming: Verb + Objekt (``Business Case bewerten'').
+  \item Vertrag: Input / Output, Fehlerf\"alle, Auth, Versionierung.
+  \item Integrationsprinzip: API-First mit klaren Events f\"ur Status\-wechsel.
+\end{itemize}
+
+\smallskip
+\textbf{5. Workflow-Betriebsmodell:}
+\begin{itemize}
+  \item SLAs als \emph{Pflichtfeld} pro Task.
+  \item Eskalation: nach 1$\times$ SLA-Bruch automatisch Lead-Notif; nach 2$\times$ \textrightarrow{} Process Owner.
+  \item Audit Trail: 7\,Jahre (Audit-relevante Prozesse), sonst 2\,Jahre.
+  \item Monitoring: w\"ochentliches Dashboard f\"ur CPO + Process Owner.
+  \item ``Definition of Done'' f\"ur Workflow-\"Anderungen: Test, Review, Dokumentation, Schulung.
+\end{itemize}
+
+\smallskip
+\textbf{6. 12-Wochen-Roadmap:}
+\begin{itemize}
+  \item Wo 1\,--\,2: Policy-Entwurf, Pilotprozess festlegen, Stakeholder-Mapping.
+  \item Wo 3\,--\,5: Tool-Setup im bestehenden Ticketing, Eventlog-Felder.
+  \item Wo 6\,--\,8: Pilot l\"auft, w\"ochentliche Reviews.
+  \item Wo 9\,--\,10: KPIs schart sich ein, Goodhart-Stichproben.
+  \item Wo 11\,--\,12: Lessons Learned + Rollout f\"ur Welle 2.
+\end{itemize}
+
+\smallskip
+\textbf{7. Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Pilotprozess = ``Idee \textrightarrow{} Freigabe''} (statt P2P). Begr\"undung: hoher Schmerz, sichtbarer Kundennutzen. Verworfen: P2P (zu starke IT-Abh\"angigkeit). \emph{Fr\"uhwarnsignal:} Wenn nach 6 Wochen kein Gate sauber durchgelaufen ist \textrightarrow{} Pilot wechseln.
+  \item \emph{Drei Executive-KPIs} = Lead Time + Gate-Pass-Rate + Customer-Feedback-Score. \emph{Trade-off:} Wirtschaftlichkeit (Kosten) bewusst nicht Executive in Phase 1. \emph{Manipulationsschutz:} Lead Time gekoppelt an Rework-Rate, Gate-Pass-Rate gekoppelt an externe Audit-Stichprobe.
+\end{enumerate}
+
+\smallskip
+\textbf{8. Anschluss an Strategie:}
+\begin{enumerate}
+  \item \emph{Compliance:} sichtbare Prozesse + Audit Trail = bestandene Audits.
+  \item \emph{Time-to-Market:} klare Owner reduzieren Eskalations\-schleifen.
+  \item \emph{Skalierbarkeit:} bei Wachstum / Zukauf ist der Standard das Fundament \textendash{} sonst wird jede Erweiterung zur Neukonstruktion.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Wenn Ihre eigene L\"osung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder einen anderen Modellzweck angelegt?}
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie Ihre L\"osungen in die Coaching-Sitzung mit. Im Fokus: Welche Stopper-Stakeholder haben Sie identifiziert? Welche Goodhart-Kopplungen haben Sie eingebaut? Welche Entscheidung w\"urden Sie heute treffen \textendash{} trotz Datenl\"ucken?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 3 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

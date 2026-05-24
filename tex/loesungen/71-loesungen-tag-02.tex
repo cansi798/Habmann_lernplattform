@@ -1,0 +1,727 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 2 - Loesungsheft
+% UML, VSM & Process Mining als Dreiklang aus Struktur, Wertfluss und Datenrealitaet
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 2}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}UML \textperiodcentered{} VSM \textperiodcentered{} Process Mining}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 1 \textperiodcentered{} TAG 2 VON 3 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 29.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 2\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} UML, VSM\\und Process Mining im Dreiklang.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 2}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterl\"osungen sind \emph{eine} m\"ogliche, didaktisch nachvollziehbare L\"osung. Insbesondere auf L2 und L3 sind mehrere Begr\"undungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den Methodenapparat (UML, VSM, Event-Log-Logik) sauber nutzen,
+  \item Annahmen explizit machen, statt sie zu verschleiern,
+  \item Zielkonflikte (z.\,B.\ Speed vs.\ Compliance, Daten vs.\ Modell) benennen, statt sie wegzudefinieren,
+  \item zu einer klar formulierten Entscheidung f\"uhren \textendash{} nicht blo{\ss} zu einer Beschreibung.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihre Argumentation ab? Ist die Abweichung eine andere Annahme \textendash{} oder ein Denkfehler? Genau dort entsteht der Lerneffekt.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Drei Methoden \textendash{} drei Perspektiven}{\nivLi}{8\,min}
+
+\ytquery{UML Use Case Activity Diagram VSM Process Mining Vergleich Zweck}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{3.0cm}|X|X|X@{}}
+\toprule
+\textbf{Methode} & \textbf{Hauptzweck} & \textbf{Output} & \textbf{Zentrale Frage} \\
+\midrule
+UML Use Case  & Scope und Akteure kl\"aren; Verantwortungen sichtbar machen. & Use-Case-Diagramm (Akteure + Use Cases + Beziehungen). & \emph{Wer will was?} \\
+\midrule
+UML Activity  & Ablauf und Entscheidungen je Rolle (Swimlanes) modellieren. & Activity-Diagramm mit Entscheidungen, Swimlanes. & \emph{Wie l\"auft es ab?} \\
+\midrule
+VSM           & End-to-End-Wertfluss + Verschwendung sichtbar machen. & Value Stream Map mit BT/WT, Wert/Nicht-Wert, Engpass. & \emph{Wo geht Wert verloren?} \\
+\midrule
+Process Mining & Ist-Prozess aus Eventlogs ableiten; Varianten \& Abweichungen sehen. & Discovery-Graph, Variantentabelle, Conformance-Report. & \emph{Was passiert wirklich?} \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Schlusssatz:} F\"ur die Frage \emph{``Wo gehen unsere Durchlaufzeiten verloren?''} ist \fachbegriff{VSM} der prim\"are Hebel \textendash{} es trennt explizit Bearbeitungszeit von Wartezeit. Process Mining \emph{best\"atigt} und \emph{quantifiziert} das Ergebnis aus den Daten; UML w\"are dort sekund\"ar.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{VSM-Symbolik und Wertschöpfung}{\nivLi}{8\,min}
+
+\ytquery{Value Stream Mapping VSM Symbole Verschwendung Lean Bearbeitungszeit Wartezeit}
+
+\begin{loesungbox}
+\textbf{Definitionen + Kategorie:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{4.0cm}Xc@{}}
+\toprule
+\textbf{Begriff} & \textbf{Definition} & \textbf{Kategorie} \\
+\midrule
+Bearbeitungszeit (BT) & Zeit, in der aktiv am Vorgang gearbeitet wird. & meist VA \\
+Wartezeit (WT)        & Zeit, in der der Vorgang liegt, ohne Bearbeitung. & NVA \\
+WIP                   & Anzahl der Vorg\"ange ``in Arbeit'' an einem Schritt. & Indikator (NVA wenn hoch) \\
+Durchlaufzeit (DLZ)   & Gesamtzeit Start bis Ende (BT + WT $\cdot$ alle Schritte). & Ergebnisgr\"o{\ss}e \\
+Engpass               & Schritt mit l\"angster Bearbeitungs- oder Wartezeit; begrenzt den Durchsatz. & meist NVA-Treiber \\
+Informationsfluss     & Welche Daten/Signale steuern den Prozess (oft Pfeil oben). & NNVA \\
+Materialfluss         & Was \emph{flie{\ss}t} physisch oder digital (Ware, Vorgang). & VA, wenn am Output \\
+Queue / Warteschlange & Anzahl wartender Vorg\"ange vor einem Schritt. & NVA-Indikator \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Beispiele:}
+\begin{itemize}
+  \item \emph{NNVA (notwendig, aber nicht wertsch\"opfend):} Qualit\"atspr\"ufung in einer regulierten Branche \textendash{} der Kunde zahlt nicht direkt daf\"ur, aber ohne sie ist Lieferung unzul\"assig.
+  \item \emph{NVA (Verschwendung):} Mehrfache R\"uckfrage wegen fehlender Pflichtfelder \textendash{} reines Suchen, Warten, Erneut-Erfassen ohne neuen Wert.
+\end{itemize}
+
+\emph{Merkregel:} Wertsch\"opfend ist nur, wof\"ur der Kunde bezahlen w\"urde \textendash{} alles andere ist NNVA (regulatorisch / qualit\"atssichernd) oder NVA (Verschwendung).
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{Event Log lesen \textendash{} Pflichtfelder und Stolpersteine}{\nivLi}{10\,min}
+
+\ytquery{Process Mining Event Log Case ID Timestamp Activity Discovery Datenqualitaet}
+
+\begin{loesungbox}
+\textbf{1. Pflichtfelder:}
+\begin{itemize}
+  \item \fachbegriff{Case ID} \textendash{} die Vorgangs- bzw.\ Bestellnummer. Beispiel: \emph{Case A / B / C}.
+  \item \fachbegriff{Aktivit\"at} \textendash{} der ausgef\"uhrte Schritt. Beispiel: \emph{Angaben\_pr\"ufen}, \emph{Versand}.
+  \item \fachbegriff{Timestamp} \textendash{} der Zeitstempel. Beispiel: \emph{09:00, 09:05}.
+\end{itemize}
+\emph{Optional, aber sehr n\"utzlich:} Ressource (wer hat es getan), Kosten, Standort, Kanal.
+
+\smallskip
+\textbf{2. Zwei Prozessvarianten:}
+\begin{itemize}
+  \item \emph{Variante 1 (Happy Path):} \emph{Case B} \textendash{} Bestellung \textrightarrow{} Pr\"ufen \textrightarrow{} Zahlung \textrightarrow{} Kommissionieren \textrightarrow{} Versand. Linearer, kurzer Pfad.
+  \item \emph{Variante 2 (Nachfrage- bzw.\ Nachschub-Pfad):} \emph{Case A} mit Nachfrage-Schleife (Angaben unvollst\"andig) bzw.\ \emph{Case C} mit Warten\_auf\_Nachschub (Lager nicht verf\"ugbar).
+\end{itemize}
+
+\smallskip
+\textbf{3. Wahrscheinlichster Engpass:}
+\emph{Warten auf Nachschub} (Case C) und \emph{Nachfrage-Schleife} (Case A) \textendash{} jeweils Wartezeiten in Stunden bis Tagen. Im Vergleich zur Bearbeitungszeit (Minuten) dominieren beide klar die Durchlaufzeit. Faustregel: Schauen Sie zuerst auf die gr\"o{\ss}ten Zeitspr\"unge zwischen aufeinander folgenden Timestamps.
+
+\smallskip
+\textbf{4. Stolpersteine:}
+\begin{enumerate}
+  \item \emph{Falsche Case ID:} Zwei verschiedene Vorg\"ange teilen sich aus Versehen eine ID \textrightarrow{} Discovery erfindet einen Pfad, den es gar nicht gibt.
+  \item \emph{Zeitstempel-Probleme:} Activity B startet \emph{vor} Activity A \textendash{} entweder Datenfehler oder die Schritte laufen parallel und das Log spiegelt das nicht. Erkennen: $\Delta t < 0$ oder unplausible Reihenfolge.
+  \item \emph{Inkonsistente Aktivit\"atsnamen:} \emph{``Angaben pr\"ufen''} vs.\ \emph{``Angaben\_pr\"ufen''} vs.\ \emph{``Pr\"ufung''} \textrightarrow{} Discovery zeigt drei Schritte, wo nur einer ist. Erkennen: Vergleich der Aktivit\"atsliste mit der Fachseite.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{\emph{RetailNova} \textendash{} VSM aus Alltagstext}{\nivLii}{25\,min}
+
+\ytquery{Value Stream Mapping E2E Online Shop Bestellung Bearbeitungszeit Wartezeit Engpass}
+
+\begin{loesungbox}
+\textbf{1. Scope:} \emph{Start:} Kunde l\"ost Bestellung aus. \emph{Ende:} Ware ist beim Kunden bzw.\ Retoure ist erstattet. Retoure wird als \emph{Nebenpfad} mitmodelliert.
+
+\smallskip
+\textbf{2. VSM-Schritte (10 Hauptschritte + 1 Nebenpfad):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}clXcc@{}}
+\toprule
+\# & \textbf{Schritt} & \textbf{Beschreibung} & \textbf{Kategorie} & \textbf{BT / WT} \\
+\midrule
+1  & Bestellung erfassen          & Webshop \"ubernimmt Daten.                  & NNVA & 1 min / 0 \\
+2  & Angaben pr\"ufen             & Daten vollst\"andig?                        & NNVA & 5 min / 2\,h \\
+3  & R\"uckfrage Kundendaten      & Schleife bei Unvollst\"andigkeit.            & NVA  & 10 min / 4\,h \\
+4  & Zahlung pr\"ufen             & PSP-Antwort.                                & NNVA & 1 min / 5 min \\
+5  & Lagerverf\"ugbarkeit pr\"ufen & Auf Nachschub warten m\"oglich.             & NNVA & 1 min / bis 2\,T \\
+6  & Kommissionieren              & Pickprozess.                                & VA   & 10 min / 1\,h \\
+7  & Verpacken                    & Karton, Label.                              & VA   & 5 min / 0 \\
+8  & Versand \"ubergeben          & DHL/UPS-\"Ubergabe.                         & NNVA & 5 min / 12\,h \\
+9  & Adress\"anderung (Nebenpfad) & Kunde ruft an.                              & NVA  & 5 min / 0 \\
+10 & Retoure pr\"ufen             & Eingang Lager.                              & NNVA & 10 min / 2\,T \\
+11 & Erstattung anlegen           & PSP-R\"uckbuchung.                          & NNVA & 5 min / 1\,T \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Engpasshypothese:} \emph{Warten auf Nachschub} (bis 2 Tage WT) und \emph{R\"uckfrage Kundendaten} (4\,h WT) \textendash{} hier liegt die Durchlaufzeit, nicht in der Bearbeitung.
+
+\smallskip
+\textbf{4. F\"unf Stichpunkte:}
+\begin{itemize}
+  \item Top-3 Verschwendungen: R\"uckfrage-Schleife, Warten auf Nachschub, Retoure-Lagerstaus.
+  \item Gr\"o{\ss}ter Engpass: Lagerverf\"ugbarkeit (Nachschub) \textendash{} dominiert WT.
+  \item Offene Frage an den Fachbereich: \emph{Warum entstehen R\"uckfragen \textendash{} fehlt das Pflichtfeld oder die UX-Pflicht?}
+  \item Datenvorschlag: Pflichtfeld \emph{Lagerstatus} in Echtzeit ins Webshop-Frontend.
+  \item Quick-Win: Pre-Order-Logik f\"ur kritische SKUs (Verbindlichkeit ohne Wartepfad).
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{Datenblick \textendash{} Process-Mining-Logik aus Eventlog}{\nivLii}{20\,min}
+
+\ytquery{Process Mining Discovery Variants Bottleneck Eventlog Analyse Beispiel}
+
+\begin{loesungbox}
+\textbf{1. Zwei Prozessvarianten:}
+\begin{itemize}
+  \item \emph{Variante A \textendash{} Nachfrage-Schleife:} Case A. Pfad: Pr\"ufen \textrightarrow{} Nachfragen \textrightarrow{} Vollst\"andig \textrightarrow{} Zahlung \textrightarrow{} Versand. Kennzeichen: Schleife auf \emph{Angaben\_pr\"ufen}, $\Delta t \approx 90$\,min.
+  \item \emph{Variante B \textendash{} Happy Path:} Case B. Pfad: Pr\"ufen \textrightarrow{} Zahlung \textrightarrow{} Kommissionieren \textrightarrow{} Versand. Komplettzeit $\approx 3\,$h\,45\,min.
+  \item \emph{Variante C (Bonus) \textendash{} Nachschub-Warten:} Case C. Pfad mit \emph{Warten\_auf\_Nachschub} und Pause von 2 Tagen vor Kommissionierung.
+\end{itemize}
+
+\smallskip
+\textbf{2. Engpass (ausschlie{\ss}lich anhand der Zeiten):}\\
+\emph{Warten\_auf\_Nachschub} bei Case C dominiert \textendash{} 2 Tage L\"ucke zwischen 08:26 und Folgeschritt. Selbst die Nachfrage-Schleife (90\,min) verblasst dagegen. Begr\"undung: Die l\"angste Latenz im Log markiert den Engpass; alles andere ist Hintergrundrauschen.
+
+\smallskip
+\textbf{3. Drei Hypothesen f\"ur Abweichungen:}
+\begin{enumerate}
+  \item \emph{Datenqualit\"at:} Fehlende Pflichtfelder im Webshop-Formular (Folge: R\"uckfragen).
+  \item \emph{Bestandslage:} Lagerbestand wird zu sp\"at aktualisiert, Bestellung wird angenommen \emph{obwohl} Lager leer.
+  \item \emph{Kundeninteraktion:} Telefonische Adress\"anderungen unterbrechen den Standardprozess und werden nicht im Log gef\"uhrt.
+\end{enumerate}
+
+\smallskip
+\textbf{4. Zwei fehlende Datenfelder:}
+\begin{itemize}
+  \item \fachbegriff{Ressource} \textendash{} \emph{Wer} hat die Aktivit\"at ausgef\"uhrt? Erlaubt Engpassanalyse pro Person/Team.
+  \item \fachbegriff{Lagerstatus / Grundcode} \textendash{} \emph{Warum} Nachschub gewartet wurde (Lieferanten-Verzug, Out-of-Stock, Forecast-Fehler).
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{UML Use Case \textendash{} \emph{CloudWorks B2B} Onboarding}{\nivLii}{22\,min}
+
+\ytquery{UML Use Case Diagram Beispiel Customer Onboarding Akteure SaaS}
+
+\begin{loesungbox}
+\textbf{1. Use-Case-Set (Textform; Diagramm mit 6 Akteuren, 8 Use Cases):}
+
+\smallskip
+\textbf{System:} \emph{CloudWorks Onboarding-Plattform}.\\
+\textbf{Akteure:} Kunde \textperiodcentered{} Sales \textperiodcentered{} Onboarding-Team \textperiodcentered{} IT \textperiodcentered{} Compliance \textperiodcentered{} Support.
+
+\smallskip
+\textbf{Use Cases + initiierende Akteure:}
+\begin{enumerate}
+  \item \emph{Account anlegen} \textendash{} Sales (initiiert), Onboarding (f\"uhrt aus).
+  \item \emph{Vertrags-/Scope-Check} \textendash{} Sales + Compliance.
+  \item \emph{Zug\"ange vergeben} \textendash{} IT (f\"uhrt aus), Onboarding (initiiert).
+  \item \emph{Datenimport} \textendash{} Kunde liefert, IT importiert.
+  \item \emph{Security / Compliance-Check} \textendash{} Compliance.
+  \item \emph{Kunden-Training} \textendash{} Onboarding f\"uhrt mit Kunde durch.
+  \item \emph{Go-Live-Freigabe} \textendash{} Onboarding + Compliance.
+  \item \emph{Hypercare starten} \textendash{} Support \"ubernimmt von Onboarding.
+\end{enumerate}
+
+\smallskip
+\textbf{2. Beziehungen:}
+\begin{itemize}
+  \item Sales \textrightarrow{} \emph{Account anlegen}, \emph{Vertrags-/Scope-Check}.
+  \item Onboarding-Team \textrightarrow{} \emph{Datenimport koordinieren}, \emph{Kunden-Training}, \emph{Go-Live-Freigabe}.
+  \item IT \textrightarrow{} \emph{Zug\"ange vergeben}, \emph{Datenimport (technisch)}.
+  \item Compliance \textrightarrow{} \emph{Security-Check}, \emph{Vertrags-Check}, \emph{Go-Live-Freigabe}.
+  \item Support \textrightarrow{} \emph{Hypercare starten}.
+\end{itemize}
+
+\smallskip
+\textbf{3. Out-of-Scope (6 Wochen):}
+\begin{itemize}
+  \item \emph{Migration historischer Daten} \textendash{} hoher Aufwand, nicht in 6\,Wochen mit 60\,k umsetzbar.
+  \item \emph{Custom-Integrationen je Kunde} \textendash{} z\"ahlt zum erweiterten Hypercare, nicht zum MVP-Onboarding.
+\end{itemize}
+
+\smallskip
+\textbf{4. Zentrale Verantwortung pro Akteur:}
+\begin{itemize}
+  \item \emph{Kunde:} liefert vollst\"andige Stammdaten.
+  \item \emph{Sales:} \"ubergibt sauberes Briefing (``Definition of Ready'').
+  \item \emph{Onboarding:} steuert E2E-Durchlauf bis Go-Live.
+  \item \emph{IT:} stellt Zug\"ange und Datenimport in SLA bereit.
+  \item \emph{Compliance:} Gate-Entscheidung Security-/Vertrags-Check.
+  \item \emph{Support:} \"Ubernahme im Hypercare, nicht vorher.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{UML Activity \textendash{} Kernablauf mit Swimlanes}{\nivLii}{25\,min}
+
+\ytquery{UML Activity Diagram Swimlanes Beispiel Onboarding Entscheidung Eskalation}
+
+\begin{loesungbox}
+\textbf{Soll-Logik (textuell):}
+
+\smallskip
+\textbf{Swimlanes:} \emph{Sales} \textperiodcentered{} \emph{Onboarding} \textperiodcentered{} \emph{IT} \textperiodcentered{} \emph{Compliance}.
+
+\smallskip
+\textbf{Start} (Sales): \emph{Onboarding-Briefing \"ubergeben}.
+\begin{itemize}
+  \item Activity (Onboarding): \emph{Kundendaten konsolidieren}.
+  \item \textbf{XOR}: \emph{Kundendaten vollst\"andig?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} Activity (Onboarding): \emph{Daten nachfordern} \textrightarrow{} zur\"uck zu \emph{Daten konsolidieren} (max.\ 1 Schleife).
+    \item Ja \textrightarrow{} weiter.
+  \end{itemize}
+  \item Activity (IT): \emph{Account provisionieren}.
+  \item \textbf{XOR}: \emph{Provisioning abgeschlossen?}
+  \begin{itemize}
+    \item Nein nach 48\,h \textrightarrow{} \emph{Eskalation an IT-Lead} (Timer-Trigger).
+    \item Ja \textrightarrow{} weiter.
+  \end{itemize}
+  \item Activity (Compliance): \emph{Security-/Compliance-Check}.
+  \item \textbf{XOR}: \emph{Security Check bestanden?}
+  \begin{itemize}
+    \item Nein \textrightarrow{} Activity (IT/Onboarding): \emph{Korrekturen umsetzen} \textrightarrow{} zur\"uck zum Check.
+    \item Ja \textrightarrow{} Activity (Onboarding): \emph{Kunden-Training durchf\"uhren} \textrightarrow{} Activity (Onboarding): \emph{Go-Live-Freigabe}.
+  \end{itemize}
+\end{itemize}
+\textbf{Ende:} \emph{Go-Live abgeschlossen}; \"Ubergang zu Hypercare (Support).
+
+\smallskip
+\textbf{Modellzweck:} ``Operatives Steuerungsmodell f\"ur den Onboarding-Lead \textendash{} klare Verantwortung pro Lane und ein Eskalations\-trigger nach 48\,h.''
+
+\smallskip
+\textbf{Drei Annahmen:}
+\begin{enumerate}
+  \item Daten\-nachforderung darf nur \emph{einmal} pro Vorgang laufen; danach Eskalation an Sales.
+  \item Provisioning ist technisch automatisierbar, sobald die Pflichtfelder geliefert sind.
+  \item Compliance kann innerhalb von 24\,h reagieren, sobald die Pakete vorliegen.
+\end{enumerate}
+
+\smallskip
+\textbf{Zwei Fragen an den Fachbereich:}
+\begin{enumerate}
+  \item Welche \emph{Pflichtfelder} sind im Briefing tats\"achlich nicht verhandelbar?
+  \item Welcher Compliance-Check ist \emph{vorab} parallelisierbar (vor Provisioning), welcher zwingend sequentiell?
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{Goldene Klammer \textendash{} drei Sichten auf eine Story}{\nivLii}{22\,min}
+
+\ytquery{End to End Process Methodik UML VSM Process Mining Triangulation Onboarding}
+
+\begin{loesungbox}
+\textbf{1. UML-Sicht (Struktur):}
+Die unscharfe Verantwortung liegt bei \emph{Sales \textrightarrow{} Onboarding}: 40\,\% R\"uckspr\"unge wegen ``fehlender Kundendaten'' bedeuten, dass die \emph{\"Ubergabe} keine sauberen Pflichtfelder erzwingt. Im Activity-Diagramm muss eine Swimlane ``Sales'' eine Aktivit\"at \emph{``Definition of Ready abnehmen''} bekommen, mit einer Entscheidung \emph{``DoR erf\"ullt?''}. Heute ist diese Verantwortung verteilt \textendash{} sie muss \emph{eindeutig} bei Sales liegen.
+
+\smallskip
+\textbf{2. VSM-Sicht (Wertfluss):}
+Der dominante Engpass ist nicht die 40\,\%-Quote allein, sondern die \emph{absolute Wartezeit}: 25\,\% der F\"alle warten \emph{$>$\,5 Tage} auf IT-Provisioning. R\"uckspr\"unge kosten Stunden, Provisioning-Wartezeit kostet Tage. Damit dominiert \emph{IT-Provisioning} die Durchlaufzeit \textendash{} hier sitzt der gr\"o{\ss}te Hebel.
+
+\smallskip
+\textbf{3. Process-Mining-Sicht (Datenrealit\"at):}
+\emph{Best\"atigt:} Die VSM-Hypothese ``IT-Wartezeit dominiert'' wird durch die 25-\%-Quote gest\"utzt. \emph{Widerlegt} oder zumindest \emph{relativiert:} Die UML-Hypothese ``Onboarding ist der Engpass'' \textendash{} die Daten zeigen, dass das Onboarding-Team \emph{wartet}, nicht \emph{arbeitet}. 15\,\% Support-Eskalationen vor Go-Live sind ein Sp\"atsignal: das Modell muss eine Support-Lane oder zumindest einen Eskalations-Trigger sichtbar einbauen.
+
+\smallskip
+\textbf{Entscheidung:}\\
+Wir greifen zuerst beim \fachbegriff{IT-Provisioning} ein \textendash{} weil dort der gr\"o{\ss}te Zeitanteil verloren geht und eine SLA-Eskalationsregel \emph{ohne neues Tooling} umsetzbar ist (48-h-Trigger, Standard\-pakete f\"ur Zug\"ange). Die Daten-R\"uckspr\"unge werden in Phase 2 \"uber eine Definition of Ready adressiert \textendash{} der Hebel ist kleiner, das Ergebnis aber nachhaltiger.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{CloudWorks B2B}}{\nivLiii}{45\,min}
+
+\ytquery{Customer Onboarding SaaS Operating Model VSM UML Process Mining Fallstudie}
+
+\begin{loesungbox}
+\textbf{1. Use-Case-Set:} Account anlegen \textperiodcentered{} Vertrags-/Scope-Check \textperiodcentered{} Zug\"ange vergeben \textperiodcentered{} Datenimport \textperiodcentered{} Security/Compliance-Check \textperiodcentered{} Kunden-Training \textperiodcentered{} Go-Live-Freigabe \textperiodcentered{} Hypercare starten.
+
+\smallskip
+\textbf{2. Activity-Kernlogik (textform):}\\
+\emph{Start} \textrightarrow{} Sales \"ubergibt Onboarding-Briefing \textrightarrow{} \textbf{XOR} ``Kundendaten vollst\"andig?'' (Nein \textrightarrow{} Daten nachfordern \textrightarrow{} zur\"uck; max.\ 1 Schleife) / (Ja \textrightarrow{} IT provisioniert) \textrightarrow{} \textbf{XOR} ``Provisioning abgeschlossen?'' (Nein nach 48\,h \textrightarrow{} Eskalation) \textrightarrow{} Compliance-Check \textrightarrow{} \textbf{XOR} ``Bestanden?'' (Nein \textrightarrow{} Korrekturen) \textrightarrow{} Training \textrightarrow{} Go-Live-Freigabe \textrightarrow{} \emph{Ende}.
+
+\smallskip
+\textbf{3. VSM (E2E, 10 Schritte):}\\
+Briefing \textrightarrow{} Daten konsolidieren (NNVA, 1\,h BT / 4\,h WT) \textrightarrow{} R\"uckfrage (NVA, 30\,min / 1\,T) \textrightarrow{} Provisioning (NNVA, 30\,min / 5\,T \textendash{} \fachbegriff{Engpass}) \textrightarrow{} Konfiguration (VA, 4\,h / 0) \textrightarrow{} Security-Check (NNVA, 2\,h / 1\,T) \textrightarrow{} Korrekturen (NVA, 2\,h / 1\,T) \textrightarrow{} Training (VA, 4\,h / 0) \textrightarrow{} Go-Live-Freigabe (NNVA, 30\,min / 1\,T) \textrightarrow{} Hypercare (VA, n.\,d.).
+
+\smallskip
+\textbf{4. Process-Mining-Hypothesen:}
+\begin{enumerate}
+  \item Die 25\,\% Provisioning-Wartezeit korrelieren mit \emph{Kundengr\"o{\ss}e} (gr\"o{\ss}ere Kunden brauchen mehr Standard\-pakete) \textendash{} Hypothese pr\"ufen, sobald Kunden-Tier im Log.
+  \item Die 40\,\% R\"uckspr\"unge konzentrieren sich auf \emph{wenige Sales-Mitarbeitende} \textendash{} Coaching-Hebel, kein Tool-Problem.
+\end{enumerate}
+
+\smallskip
+\textbf{5. Zwei Ma{\ss}nahmen in 6 Wochen:}
+\begin{enumerate}
+  \item \fachbegriff{Definition of Ready (DoR)} f\"ur Onboarding: Pflichtfelder + \"Ubergabeformat. \emph{Impact:} reduziert R\"uckspr\"unge sofort. \emph{Risiko:} Sales-Widerstand. \emph{Aufwand:} 1\,Person, 2\,Wochen.
+  \item \fachbegriff{SLA-Eskalationsregel} f\"ur Provisioning (48\,h-Trigger) + 3 Standard\-pakete f\"ur Zug\"ange. \emph{Impact:} reduziert Wartezeit drastisch. \emph{Risiko:} IT-Kapazit\"atsspitzen. \emph{Aufwand:} 1\,Person IT + 0,5\,Person PMO, 3\,Wochen.
+\end{enumerate}
+\emph{Beide ohne neues Tool umsetzbar} \textendash{} passt in 60-k-Budget.
+
+\smallskip
+\textbf{6. Governance-Mini:}
+\begin{itemize}
+  \item Onboarding-Checkliste: Owner = Head of Onboarding.
+  \item IT-SLA: Owner = IT Operations Lead.
+  \item Compliance-Gate: Owner = Compliance Officer.
+  \item KPIs: \emph{Durchlaufzeit} (Median), \emph{R\"ucksprung-Rate} (\% F\"alle mit Datenr\"ucksprung), \emph{Eskalationsquote} (\% F\"alle mit 48-h-Trigger).
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Methodenauswahl \textendash{} Wann was?}{\nivLiii}{30\,min}
+
+\ytquery{Methodenauswahl Process Mining VSM UML Reifegrad Operating Model Entscheidung}
+
+\begin{loesungbox}
+\textbf{1. Methodenlandkarte:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}p{2.4cm}XXXX@{}}
+\toprule
+\textbf{Methode} & \textbf{Zweck} & \textbf{Zielgruppe} & \textbf{Output} & \textbf{Qualit\"ats\-schwelle} \\
+\midrule
+UML Use Case   & Scope und Akteure kl\"aren. & Sales, Produkt, Fachbereich. & Use-Case-Diagramm. & 6\,--\,8 Use Cases, alle Akteure benannt. \\
+\midrule
+UML Activity   & Ablauf, Entscheidungen, Rollen. & Onboarding-Lead, Operations. & Activity-Diagramm mit Swimlanes. & 2\,--\,3 Swimlanes, $\geq$\,2 Entscheidungen. \\
+\midrule
+VSM            & Wertfluss + Verschwendung. & Operations, COO. & E2E-VSM mit BT/WT, Engpass. & 8\,--\,12 Schritte, Engpass markiert. \\
+\midrule
+Process Mining & Ist-Prozess + Varianten aus Daten. & Data/Process Owner, Audit. & Discovery-Graph, Variantentabelle. & Mind.\ 3 Pflichtfelder im Log, plausible Varianten. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Warum kombinieren?}
+Jede Methode hat einen blinden Fleck: UML zeigt Verantwortung, aber \emph{nicht} Zeit; VSM zeigt Wertfluss, aber \emph{nicht} Varianten\-vielfalt; Process Mining zeigt Daten, aber \emph{nicht} Intentionen. Die ``goldene Klammer'' bedeutet: eine Story, drei Perspektiven. Eine einzige Methode l\"asst Sie systematisch dort blind, wo Sie am wenigsten erwarten \textendash{} besonders bei der \"Ubergabe zwischen Rollen, an Systemgrenzen und in Ausnahmef\"allen.
+
+\smallskip
+\textbf{3. Annahmen:}
+\begin{itemize}
+  \item \emph{Akzeptabel:} (a) Sch\"atzungen f\"ur BT/WT in VSM (Gr\"o{\ss}enordnung gen\"ugt). (b) Aktivit\"atsnamen werden normiert. (c) Erster Discovery-Lauf ohne Ressource-Feld.
+  \item \emph{Risikorelevant (dokumentationspflichtig):} (a) Wir lassen 10\,\% Cases mit unsauberen Case-IDs aus der Analyse weg. (b) Wir setzen ``Provisioning bestanden'' = Timestamp \emph{Account aktiv}, obwohl das nur ein Proxy ist.
+\end{itemize}
+
+\smallskip
+\textbf{4. Faustregel:}
+Process Mining lohnt sich ab dem Reifegrad, in dem \emph{(a)} ein zentrales System mindestens 80\,\% der Aktivit\"aten loggt, \emph{(b)} Case-IDs konsistent vergeben werden und \emph{(c)} die Organisation Abweichungen als \emph{Signal} und nicht als ``Schuldzuweisung'' interpretiert. Vorher: VSM + UML, plus eine manuelle Stichprobe.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} E2E-Operating Model}{\nivLiii}{45\,min}
+
+\ytquery{E2E Operating Model Process Mining Governance Decision Architecture Roadmap}
+
+\begin{loesungbox}
+\emph{Musterl\"osung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind m\"oglich.}
+
+\smallskip
+\textbf{1. Methodenlandkarte:} siehe Aufgabe 10 (UML / BPMN / EPC / VSM / Mining). Erg\"anzung: \emph{BPMN} f\"ur ausf\"uhrbare Prozesse, \emph{EPC} f\"ur Management-\"Ubersicht in ARIS-Welt.
+
+\smallskip
+\textbf{2. Daten-Minimum (Eventlog):}
+\begin{itemize}
+  \item Pflichtfelder: \emph{Case ID}, \emph{Aktivit\"at}, \emph{Timestamp}, \emph{Ressource}, \emph{Standort}.
+  \item Verantwortliche: Data Steward je Quellsystem (CRM, Ticketing, ERP).
+  \item Datenquellenstrategie: \emph{primary first} \textendash{} CRM als Master f\"ur Case-IDs; weitere Quellen \"uber konsistenten Customer-Key joinen.
+\end{itemize}
+
+\smallskip
+\textbf{3. Governance:}
+\begin{itemize}
+  \item \emph{Process Owner} (Fachbereich) \textendash{} Accountable f\"ur Prozess + Modell.
+  \item \emph{Modeler} (BPM-Team) \textendash{} Responsible f\"ur UML/BPMN/VSM-Artefakte.
+  \item \emph{Data Steward} \textendash{} Responsible f\"ur Log-Qualit\"at je System.
+  \item \emph{Reviewer} (Quality) \textendash{} Vier-Augen-Pr\"ufung.
+  \item Review-Zyklus: monatliches Process Board; Eskalation an CTO bei Zielkonflikten Speed vs.\ Compliance.
+\end{itemize}
+
+\smallskip
+\textbf{4. Entscheidungsarchitektur \textendash{} Top-5 Entscheidungen:}
+\begin{enumerate}
+  \item \emph{Priorisierung:} Welche Prozesse zuerst harmonisieren (Volumen $\times$ Schmerz)?
+  \item \emph{Gate-Freigabe:} Wer entscheidet \"uber Prozess-/Workflow-\"Anderungen?
+  \item \emph{Automatisierungs\-kandidaten:} Welche Prozesse sind reif f\"ur BPMS/RPA?
+  \item \emph{Compliance-Risiken:} Wo m\"ussen Steuerungs\-punkte sitzen?
+  \item \emph{Kapazit\"aten:} Welche Engp\"asse (Person, System) limitieren das Wachstum?
+\end{enumerate}
+
+\smallskip
+\textbf{5. Roadmap (10 Wochen):}
+\begin{itemize}
+  \item \emph{Wo 1\,--\,2:} Methodenlandkarte + Pilotprozess (\emph{Customer Onboarding}) festlegen.
+  \item \emph{Wo 3\,--\,5:} Use-Case + Activity + VSM des Piloten; Eventlog-Spezifikation.
+  \item \emph{Wo 6\,--\,8:} Erster Discovery-Lauf; KPI-Set verproben (DLZ, R\"uckspr\"unge, Varianten).
+  \item \emph{Wo 9\,--\,10:} Governance Board konstituieren, Lessons Learned, Rollout-Plan f\"ur den n\"achsten Prozess.
+\end{itemize}
+
+\smallskip
+\textbf{6. Zwei Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Pilotprozess = Onboarding} (statt z.\,B.\ Procure-to-Pay). Annahme: hohe Sichtbarkeit + Kunden-Impact. Verworfen: P2P (gro{\ss}e IT-Abh\"angigkeit). \emph{Fr\"uhwarnsignal:} Wenn nach 6 Wochen weniger als 5 Cases sauber durchanalysiert sind \textrightarrow{} Pilot wechseln oder Scope verkleinern.
+  \item \emph{Minimal-Standard = nur 3 Pflichtfelder im Log} (statt 8). Annahme: Akzeptanz vor Vollst\"andigkeit. Verworfen: ``Full-Schema'' (bremst Quellsysteme). \emph{Fr\"uhwarnsignal:} Wenn Conformance-Aussagen wegen fehlender Felder unbegr\"undbar werden \textrightarrow{} 2 Felder nachziehen.
+\end{enumerate}
+
+\smallskip
+\textbf{7. Top-5 Risiken:}
+\begin{itemize}
+  \item Akzeptanz im Fachbereich \textrightarrow{} Key-User fr\"uh einbeziehen.
+  \item Datenqualit\"at \textrightarrow{} Data-Quality-Checks im ETL erzwingen.
+  \item \"Ubermodellierung \textrightarrow{} ``Modell folgt Zweck''-Pflicht.
+  \item Tool-Lock-in \textrightarrow{} XML-Export als Auswahl\-kriterium.
+  \item Reorganisation \textrightarrow{} Rollen an Funktion, nicht an Personen koppeln.
+\end{itemize}
+
+\smallskip
+\textbf{8. Anschluss an Strategie:}
+\begin{enumerate}
+  \item \emph{Compliance:} sichtbare Prozesse reduzieren Audit-Findings.
+  \item \emph{Time-to-Market:} klare Eigent\"umerschaft verk\"urzt Eskalationen.
+  \item \emph{Skalierbarkeit:} ein gemeinsames Daten- und Modellverst\"andnis macht Wachstum (neue Standorte, Zuk\"aufe) \"uberhaupt erst beherrschbar.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Wenn Ihre eigene L\"osung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder einen anderen Modellzweck angelegt?} Beides ist legitim, solange die Logik nachvollziehbar bleibt.
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie Ihre eigenen L\"osungen in die Coaching-Sitzung mit. Im Fokus stehen drei Fragen: Welche Annahmen haben Sie gemacht? Welche Zielkonflikte (Speed vs.\ Compliance, Modell vs.\ Daten) haben Sie sichtbar gemacht? Welche Entscheidung haben Sie getroffen \textendash{} und w\"urden Sie auch verantworten, wenn sich die Datenlage \"andert?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 2 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

@@ -1,0 +1,578 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 8 - Loesungsheft
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 8}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Predictive \textperiodcentered{} DWH \textperiodcentered{} BI}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 3 \textperiodcentered{} TAG 8 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 9.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 8\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen \textendash{} Enhancement,\\Predictive, Real-time \& BI.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 8}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Heute steht der Senior-Reflex im Vordergrund: \emph{Predictive ohne Handlungsplan ist wertlos}. Alert \textrightarrow{} Owner \textrightarrow{} Playbook. Und: \emph{Baseline vor ML} \textendash{} einfache Regeln zuerst.
+
+\begin{infobox}[Nutzung im Coaching]
+Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Habe ich die Baseline-Regel ernsthaft als Alternative gepr\"uft? (2) Hat jeder Alert einen Owner und ein Playbook? (3) Habe ich Drift-Monitoring eingebaut?
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{ML-Typen im Prozesskontext}{\nivLi}{8\,min}
+
+\ytquery{Machine Learning Process Mining Classification Regression Clustering Anomaly}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{3.0cm}|X|X|X@{}}
+\toprule
+\textbf{Typ} & \textbf{Use Case} & \textbf{Datenminimum} & \textbf{Grenzen} \\
+\midrule
+Klassifikation & ``Eskalation ja/nein?''         & gelabelte F\"alle (positive + negative) & Datenqualit\"at; Label-Bias. \\
+\midrule
+Regression     & Restlaufzeit prognostizieren    & numerische Zielgr\"o{\ss}e + Historie       & Extreme; Trendbrueche. \\
+\midrule
+Clustering     & Falltypen erkennen              & repr\"asentative Stichprobe         & Cluster-Interpretation; Drift. \\
+\midrule
+Anomalie       & ungew\"ohnliche Pfade           & ausreichend ``normale'' Cases     & False Positives; Erkl\"arbarkeit. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\emph{Allgemeine Grenzen:} Konzeptdrift (Welt \"andert sich), Fehlanreize (Modell triggert Verhalten), Erkl\"arbarkeit (Black-Box vs.\ Audit), und nicht zuletzt: Datenqualit\"at als Grundproblem.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{ETL-Pipeline}{\nivLi}{8\,min}
+
+\ytquery{ETL Pipeline Process Data Staging Mapping Join Data Quality DWH}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{2.4cm}XX@{}}
+\toprule
+\textbf{Schritt} & \textbf{Was passiert?} & \textbf{Stolperstein} \\
+\midrule
+Quelle         & CRM/ERP/Tickets exportieren. & Schnittstellen-\"Anderung ohne Notice. \\
+Staging        & Rohdaten unver\"andert ablegen. & Disk-Volumen, Aufbewahrungsfristen. \\
+Mapping        & Aktivit\"aten / Status normalisieren. & Inkonsistente Synonyme \"ubersehen. \\
+Join           & \"uber Case-ID / Korrelations\-schl\"ussel. & ID-Kollisionen, missende Joins. \\
+Quality Checks & Pflichtfelder, Zeit, Dubletten. & Checks zu lasch (laufen alle durch). \\
+DWH            & Faktentabelle Events + Dimensionen. & Modell zu eng (sp\"atere KPIs unm\"oglich). \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Meiste Arbeit:} Mapping + Quality Checks (oft 60\,\% des Aufwands). \textbf{Gr\"o{\ss}ter Wert:} Stabilit\"at + Konsistenz im DWH \textendash{} alles dr\"uber baut darauf auf.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{BI-Dashboard}{\nivLi}{10\,min}
+
+\ytquery{BI Dashboard Best Practice Executive KPI Drilldown Alert Tableau Power BI}
+
+\begin{loesungbox}
+\textbf{Drei Prinzipien:}
+\begin{enumerate}
+  \item \emph{Wenige Executive-KPIs:} max.\ 4\,--\,6, sonst \"uberfordert. Anti-Muster (``zuviel''): Kennzahlen-Tapete, niemand handelt.
+  \item \emph{Drilldown:} ein Klick auf KPI zeigt Ursache. Anti-Muster (``zuwenig''): KPI als Standalone-Zahl, Fragen offen.
+  \item \emph{Alarme:} Schwellenwert + Owner + n\"achster Schritt. Anti-Muster (``zuwenig''): Anzeige ohne Handlungsaufforderung.
+\end{enumerate}
+
+\smallskip
+\textbf{Mini-Layout ``Incident Operations'':}
+\begin{enumerate}
+  \item \emph{Exec KPI 1:} SLA-Einhaltungsquote (Trend 30\,T).
+  \item \emph{Exec KPI 2:} Mean Time to Resolution.
+  \item \emph{Prozess-KPI 3:} Top-10 Risikotickets (Drilldown).
+  \item \emph{Prozess-KPI 4:} Reassignment-Quote pro Service.
+  \item \emph{Risk/Compliance:} Anzahl audit-relevanter Incidents.
+  \item \emph{Alert:} Live-Liste der Tickets mit Risk-Score $>$\,0,8 (Owner sichtbar).
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Predictive Use Case Canvas (zwei Use Cases)}{\nivLii}{25\,min}
+
+\ytquery{Predictive Process Analytics Use Case Canvas SLA Risk Rework Baseline}
+
+\begin{loesungbox}
+\textbf{Use Case A \textendash{} SLA-Risiko fr\"uh erkennen:}
+\begin{itemize}
+  \item Zielentscheidung: Ressourcen umschichten bevor SLA bricht.
+  \item Prognose: Wahrscheinlichkeit SLA-Breach in n\"achsten 4\,h.
+  \item Handlung: Duty Manager bekommt Top-10-Liste, Triage 15\,Min, Ressourcen-Shift.
+  \item Datenminimum: Priorit\"at, Ticket-Alter, Queue, Reassignments, Service.
+  \item Risiko/Compliance: keine Bias gegen Service-A/B; Audit-Log aller Alerts.
+  \item Erfolg: SLA-Breach-Quote sinkt um 20\,\% in 8\,Wochen.
+\end{itemize}
+
+\smallskip
+\textbf{Use Case B \textendash{} Rework / Fehler fr\"uh erkennen:}
+\begin{itemize}
+  \item Zielentscheidung: Coaching f\"ur Team / DoR sch\"arfen.
+  \item Prognose: Wahrscheinlichkeit Rework $>$\,1 Schleife.
+  \item Handlung: Team-Lead bekommt Liste; Coaching-Session.
+  \item Datenminimum: Auftragstyp, Bearbeiter, Eingangs-Kanal, Datenvollst\"andigkeit, fr\"uhere Rework-Quote.
+  \item Risiko/Compliance: keine Sanktion einzelner MA, nur Team-Coaching; Audit-Log.
+  \item Erfolg: Rework-Quote sinkt um 15\,\%.
+\end{itemize}
+
+\smallskip
+\textbf{Baseline-Heuristiken:}
+\begin{itemize}
+  \item A: ``Ticket-Alter $>$\,70\,\% SLA \textrightarrow{} Risiko hoch''.
+  \item B: ``$\geq$\,2 fehlende Pflichtfelder bei Eingang \textrightarrow{} Rework-Risiko hoch''.
+\end{itemize}
+
+\smallskip
+\textbf{Fehlende Daten pragmatisch erfassen:}\\
+\emph{Bearbeiter-ID bei Telefon-Tickets} fehlt h\"aufig. \emph{Pragmatischer Weg:} Pflichtfeld im Ticket-Tool, Default ``unknown'' nur f\"ur 3 Wochen, dann verpflichtend.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{ETL \& Dashboard in 30 Minuten}{\nivLii}{25\,min}
+
+\ytquery{ETL Pipeline 6 Steps Data Quality Checks BI Dashboard Anti Gaming}
+
+\begin{loesungbox}
+\textbf{ETL-Pipeline (6 Schritte):}\\
+1.\ CRM/Ticketing/ERP exportieren \textrightarrow{} 2.\ Staging-Schicht \textrightarrow{} 3.\ Aktivit\"atsname-Mapping (40\,Synonyme \textrightarrow{} 12\,Standards) \textrightarrow{} 4.\ Join \"uber Customer-Key + Order-ID \textrightarrow{} 5.\ Quality Checks (s.\,u.) \textrightarrow{} 6.\ DWH ``Faktentabelle Events'' + Dim (Service, Kunde, Zeit, Ressource).
+
+\smallskip
+\textbf{F\"unf Datenqualit\"ats-Checks:}
+\begin{enumerate}
+  \item Fehlende Case-ID (\texttt{NULL}).
+  \item Zeitstempel r\"uckw\"arts ($\Delta t < 0$).
+  \item Unbekannte Aktivit\"at (nicht im Mapping).
+  \item Dublette (gleiche Case-ID + Aktivit\"at + Timestamp $\pm$ 1\,s).
+  \item Leeres Pflichtfeld (Owner-ID).
+\end{enumerate}
+
+\smallskip
+\textbf{BI-Dashboard mit 6 Kacheln:}
+\begin{enumerate}
+  \item Exec: SLA-Einhaltung 30\,T-Trend.
+  \item Exec: MTTR (mean time to resolution).
+  \item Prozess: Reassignment-Rate pro Service.
+  \item Prozess: Top-10 Risikotickets.
+  \item Risk: Anzahl audit-relevanter Incidents.
+  \item Alert: Live-Risikoliste mit Owner + ``Next Best Action''.
+\end{enumerate}
+
+\smallskip
+\textbf{Anti-Gaming-Entscheidung:}\\
+\emph{``Anzahl gel\"oster Tickets pro MA pro Tag''} f\"uhren wir nicht ein. Begr\"undung: belohnt Splitting; KPI besser \"uber Service-Level (Team-Performance), nicht Individuum.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{Baseline-Regel vor ML}{\nivLii}{18\,min}
+
+\ytquery{Baseline Heuristic vs Machine Learning When Simpler is Better Process}
+
+\begin{loesungbox}
+\textbf{1. Baseline-Regel ``SLA-Breach in 4\,h'':}\\
+\emph{Risk = hoch wenn Ticket-Alter $>$\,70\,\% der SLA-Zeit \emph{oder} (Reassignments $\geq$ 2 \emph{und} Ticket-Alter $>$\,50\,\% SLA).}
+
+\smallskip
+\textbf{2. Messbarkeit:}
+\begin{itemize}
+  \item KPI A: \emph{Precision} (von den Alerts \textendash{} wie viele waren echte Breaches?).
+  \item KPI B: \emph{Recall} (von den echten Breaches \textendash{} wie viele wurden alarmiert?).
+\end{itemize}
+Vergleich vor Baseline (``manuell'') vs.\ mit Baseline vs.\ sp\"ater ML.
+
+\smallskip
+\textbf{3. Wann lohnt ML?}
+\begin{itemize}
+  \item Baseline-Precision dauerhaft $<$\,60\,\% (zu viele False Positives).
+  \item Baseline-Recall $<$\,70\,\% (zu viele verpasste).
+  \item Datenvolumen + Features ausreichend f\"ur Training, und der Aufwand f\"ur MLOps lohnt sich (Monitoring, Drift).
+\end{itemize}
+
+\smallskip
+\textbf{4. Anti-Muster: Baseline besser als ML?}\\
+Bei \emph{regulierten Prozessen} (Pharma, Finance) ist eine Regel auditierbar und stabil \textendash{} ein ML-Modell muss erkl\"arbar gemacht werden und ist drift-anf\"allig. F\"ur sehr seltene Ereignisse (kleines Label-Volumen) liefert ML wenig Mehrwert.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{Alert-Playbook}{\nivLii}{20\,min}
+
+\ytquery{Alert Playbook Process Mining MLOps Drift Detection Alarm Fatigue}
+
+\begin{loesungbox}
+\textbf{1. Alert-Playbook ``SLA-Risiko'':}
+
+\begin{tabularx}{\linewidth}{@{}p{2.4cm}|X|l|X@{}}
+\toprule
+\textbf{Stufe} & \textbf{Owner} & \textbf{Handlung} & \textbf{Eskalation/Doc} \\
+\midrule
+Risk 0,5\,--\,0,7 & Team-Lead & Pr\"ufen + ggf.\ Reassign & Im Ticket vermerken. \\
+Risk 0,7\,--\,0,85 & Duty Manager & Fast Triage 15\,Min + Ressourcen-Shift & Wenn nicht gel\"ost: Eskalation an SDM. \\
+Risk $>$\,0,85 & Service Delivery Manager & Sofortma{\ss}nahme + Kundeninfo & Post-Review verpflichtend. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Alarmm\"udigkeit verhindern:}
+\begin{itemize}
+  \item \emph{Schwellen} dynamisch je Service.
+  \item \emph{Eskalations\-pfad}: nicht jeder Alert geht an alle \textendash{} nur Stufe drei trifft den SDM.
+  \item \emph{Feedback-Schleife}: jede Woche werden 5 Alerts manuell \"uberpr\"uft (``war Alert n\"utzlich?''), Schwellen werden danach justiert.
+\end{itemize}
+
+\smallskip
+\textbf{3. Drift-Monitoring:}
+\begin{itemize}
+  \item \emph{Data Drift}: Feature-Verteilung verschiebt sich (z.\,B.\ ``Ticket-Alter''-Median +30\,\%) \textrightarrow{} Pr\"ufung Quellsystem.
+  \item \emph{Concept Drift}: Precision/Recall sinken bei stabiler Feature-Verteilung \textrightarrow{} Welt hat sich ge\"andert; Retraining oder Regel-Update.
+\end{itemize}
+
+\smallskip
+\textbf{4. Faustregel:} Ein Predictive-System ist \emph{produktiv}, sobald (a) die Quote ``Alerts mit dokumentierter Handlung'' $>$\,80\,\% liegt, (b) Drift-Monitoring l\"auft, (c) ein dedizierter Owner pro Modell vorhanden ist.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{False Positive vs.\ False Negative}{\nivLii}{18\,min}
+
+\ytquery{False Positive vs False Negative Cost Sensitive ML Process Mining Threshold}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{2.4cm}XXl@{}}
+\toprule
+\textbf{Use Case} & \textbf{False Positive} & \textbf{False Negative} & \textbf{Teurer} \\
+\midrule
+SLA-Breach    & Alarm ohne Breach (Team gestresst, Kunden unsicher). & Verpasster Breach (Vertragsstrafe, Kunde unzufrieden). & FN $\gg$ FP \\
+\midrule
+Maverick Buying & Buchung verz\"ogert (Reklamation Einkauf). & Compliance-Versto{\ss} (Bu{\ss}geld). & FN $\gg$ FP \\
+\midrule
+Kunde springt ab & Unn\"otiger Anruf (Aufwand Customer Success). & Kunde springt wirklich ab (Umsatz verloren). & FN $>$ FP \\
+\midrule
+Versand-Verz\"ogerung & Vorwarnung ohne Realit\"at (Kunde irritiert). & Tats\"achliche Verz\"ogerung (Kunde sauer + Storno). & FN $>$ FP \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Konsequenz f\"ur den Schwellenwert:}\\
+Wenn \emph{False Negative} teurer ist, w\"ahlt man \emph{niedrige Schwelle} (sensitiv) \textendash{} lieber ein paar Fehlalarme als verpasste F\"alle. Konkret f\"ur SLA: Risk-Schwelle 0,5\,--\,0,6 statt 0,8.
+
+\emph{Caveat:} Zu niedrige Schwelle erzeugt Alarmm\"udigkeit \textendash{} dann kehrt sich das Problem um. Schwelle wird daher iterativ gegen das Alarmm\"udigkeits-Signal justiert.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{FinServe IT Operations}}{\nivLiii}{45\,min}
+
+\ytquery{SLA Predictive Incident Management Features ETL Dashboard Real Time}
+
+\begin{loesungbox}
+\textbf{1. Predictive Use Case:} ``Wahrscheinlichkeit SLA-Breach in n\"achsten 4\,h''.
+
+\smallskip
+\textbf{2. Features (10):} Priority, Ticket Age, Queue, Reassignments, Service, Category, Open Incidents per Service, Time since last update, Shift, Customer Tier.
+
+\smallskip
+\textbf{3. Label-Definition:} \emph{SLA-Breach} = Ticket nicht gel\"ost vor SLA-Zeit. \emph{Fehlende Labels} (Tickets noch offen): Proxy-Regel ``Ticket-Age $>$\,70\,\% SLA'' f\"ur Training.
+
+\smallskip
+\textbf{4. ETL-Pipeline:} Ticketing-Extract \textrightarrow{} Staging \textrightarrow{} Mapping (Service/Kategorie) \textrightarrow{} Join Monitoring-Signals \textrightarrow{} Quality Checks (Case-ID, Timestamps, Dubletten) \textrightarrow{} DWH ``Events'' + ``Ticket Facts''. \emph{Case-ID-Strategie:} Ticket-ID als Master; bei zusammengef\"uhrten Tickets parent-child-Relation im DWH abbilden.
+
+\smallskip
+\textbf{5. Dashboard:}
+\begin{itemize}
+  \item SLA-Risk Heatmap (Service $\times$ Queue).
+  \item Top-10 Risikotickets.
+  \item Trend Breach-Rate (4\,W).
+  \item Avg.\ Resolution Time.
+  \item Reassignments pro Service.
+  \item Alert-Log mit Owner.
+\end{itemize}
+
+\smallskip
+\textbf{Playbook:} Risk $>$\,0,8 \textrightarrow{} Duty Manager notified \textrightarrow{} Fast Triage 15\,Min \textrightarrow{} Ressourcen umschichten \textrightarrow{} Dokumentation im Ticket \textrightarrow{} Post-Review bei wiederkehrenden Mustern.
+
+\smallskip
+\textbf{6. MVP-Entscheidung:} \emph{Weglassen:} (a) Monitoring-Join (eigener Stream zu fragil), (b) Customer-Tier (Datenschutz-Pr\"ufung l\"auft). \emph{Kompensieren:} manuelle ``Service Impact''-Kennzeichnung im Ticket; Service-Tier statt Kunde-Tier.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Modell-Governance}{\nivLiii}{25\,min}
+
+\ytquery{MLOps Model Governance Drift Detection Explainability XAI Fairness Bias}
+
+\begin{loesungbox}
+\textbf{1. ML Product Owner (SLA-Modell):}
+\begin{itemize}
+  \item Aufgaben: Use Case definieren, Modell-Lifecycle (Train/Retrain/Decom), Monitoring, Stakeholder-Kommunikation.
+  \item Mandat: darf Schwellen anpassen, darf Modell still legen.
+  \item Eskalation: Owner \textrightarrow{} Head of Process Excellence \textrightarrow{} CDO bei Auswirkungen auf Compliance / mehrere Bereiche.
+\end{itemize}
+
+\smallskip
+\textbf{2. Drift-Typen:}
+\begin{itemize}
+  \item \emph{Data Drift:} Feature-Verteilung verschiebt sich (z.\,B.\ neue Service-Kategorie). Messen: KL-Divergenz / PSI pro Feature.
+  \item \emph{Concept Drift:} Beziehung Feature\,\textrightarrow{}\,Label \"andert sich. Messen: Precision/Recall sinkt bei stabiler Feature-Verteilung.
+\end{itemize}
+
+\smallskip
+\textbf{3. Erkl\"arbarkeit:}
+\begin{itemize}
+  \item \emph{Feature Importance} (global): welche Features tragen am meisten?
+  \item \emph{SHAP-Werte} (lokal): warum hat \emph{dieses} Ticket Risk 0,87? (Top-3 Treiber visualisieren.)
+\end{itemize}
+F\"ur Duty Manager: lokale Erkl\"arung pro Alert (``Risiko wegen: hohe Reassignments, Queue lang, Tageszeit'').
+
+\smallskip
+\textbf{4. Fairness / Bias:}\\
+Modell k\"onnte Service-A systematisch hochstufen, weil dort historisch viele Breaches waren. Folge: Service-A wird ``\"uberbetreut'', Service-B unter. \emph{Gegenma{\ss}nahme:} Service-stratifizierte Performance-Reports; bei systematischem Bias Re-Training mit Sampling-Strategie.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Process Intelligence Platform}{\nivLiii}{45\,min}
+
+\ytquery{Process Intelligence Platform Decision Architecture CDO Real Time Predictive}
+
+\begin{loesungbox}
+\textbf{1. Top-10 Entscheidungen:}\\
+Priorisierung Use Cases \textperiodcentered{} SLA-Steuerung \textperiodcentered{} Kapazit\"aten \textperiodcentered{} Risiko (Compliance) \textperiodcentered{} Automatisierung \textperiodcentered{} Investitionen \textperiodcentered{} Pricing \textperiodcentered{} Workforce \textperiodcentered{} Audit-Befragung \textperiodcentered{} Vorstands-Reporting.
+
+\smallskip
+\textbf{2. Data Product Design:}
+\begin{itemize}
+  \item Event-Log-Standard: 5 Pflicht + 5 Optional-Felder.
+  \item Case-ID-Strategie: Master-System + UUID.
+  \item Datenmodell: Faktentabelle Events + Dim (Zeit, Kunde, Produkt, Standort, Ressource).
+  \item DQ-SLAs: Vollst\"andigkeit $\geq$\,95\,\%, Aktualit\"at $\leq$\,4\,h.
+  \item Ownership: Data Owner pro Quellsystem.
+\end{itemize}
+
+\smallskip
+\textbf{3. Analytics Portfolio:} Value/Risk/Effort-Matrix, Baseline-First-Policy, MLOps mit Drift-Monitoring, Erkl\"arbarkeit per default.
+
+\smallskip
+\textbf{4. Real-time Operating Model:}
+\begin{itemize}
+  \item Alerting Governance: pro Use Case ein Playbook.
+  \item Eskalations\-logik: Team-Lead \textrightarrow{} Duty Manager \textrightarrow{} SDM.
+  \item Audit Trail: jeder Alert + Handlung dokumentiert, 7\,Jahre.
+  \item Human-in-the-loop: bei kritischen Entscheidungen (z.\,B.\ Compliance) immer Mensch.
+\end{itemize}
+
+\smallskip
+\textbf{5. BI \& KPI Governance:} Definition-Tag, monatlicher Review, Anti-Gaming-Kopplungen (siehe Tag 7).
+
+\smallskip
+\textbf{6. Roadmap (20\,W):}
+\begin{itemize}
+  \item Wo 1\,--\,8 (MVP): 1 Use Case (SLA), DWH-Grundger\"ust, 1 Dashboard, Baseline-Regel produktiv.
+  \item Wo 9\,--\,16 (Scale): 2 weitere Use Cases, ML-Modell f\"ur SLA, Drift-Monitoring.
+  \item Wo 17\,--\,20 (Sustain): Governance Board, Erkl\"arbarkeits-Layer, Audit-Vorbereitung.
+\end{itemize}
+
+\smallskip
+\textbf{7. Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{3 Use Cases zuerst:} SLA-Breach, Rework-Risiko, Maverick Buying. Verworfen: ``Vorhersage Kundenabsprung'' (Datenschutz-Aufwand zu hoch). Fr\"uhwarnsignal: wenn nach 8\,W kein Use Case in Produktion \textrightarrow{} Scope auf 1 Use Case reduzieren.
+  \item \emph{Executive-KPIs:} SLA-Einhaltung + MTTR + Audit-Findings. \emph{Guardrails:} keine Pro-Mitarbeiter-Metriken; Definition-Tag; Anti-Gaming \"uber gekoppelte Kennzahlen.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Heute pr\"ufen Sie: Hat jede Prognose einen Handlungsplan? Ist die Baseline ernsthaft als Alternative gepr\"uft? Habe ich Drift-Monitoring eingebaut?
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie ins Coaching: Welche \emph{eine} Baseline-Regel w\"urden Sie morgen aktivieren? Welcher Alert h\"atte heute einen Owner? Welche Erkl\"arung w\"urden Sie dem CFO geben, wenn das Modell drei Wochen lang ``schweigt''?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 8 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

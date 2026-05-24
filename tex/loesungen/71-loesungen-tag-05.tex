@@ -1,0 +1,592 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 5 - Loesungsheft
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+}
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{157,74,26}
+\definecolor{lpAccentLight}{RGB}{246,228,212}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable, colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterl\"osung]{%
+  enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder,
+  boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}L\"osungsheft \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 5}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Visio/Lucidchart \textperiodcentered{} EA \textperiodcentered{} MDA}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}L\"OSUNGSHEFT \textperiodcentered{} MODUL 2 \textperiodcentered{} TAG 5 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 3.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}L\"osungsheft\\Tag 5\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterl\"osungen \textendash{} Visio/Lucidchart,\\EA-Rahmen und MDA-Steuerungslogik.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterl\"osungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterl\"osungen sind Diskussionsbasis,\\nicht die einzige korrekte L\"osung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 5}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterl\"osungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterl\"osungen sind \emph{eine} m\"ogliche, didaktisch nachvollziehbare L\"osung. Auf L2/L3 sind mehrere Begr\"undungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den Begriffsapparat (Capability, Prozess, CIM/PIM/PSM, Modelling Charter) sauber nutzen,
+  \item Annahmen explizit machen,
+  \item Zielkonflikte (Standardisierung vs.\ Freiheit, Standard- vs.\ f\"oderiertes Tool) benennen,
+  \item zu einer klar formulierten Entscheidung f\"uhren.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihre Argumentation ab \textendash{} ist das eine andere Annahme oder ein Denkfehler?
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Visio/Lucidchart als Enterprise-Werkzeug}{\nivLi}{8\,min}
+
+\ytquery{Lucidchart Visio Enterprise Kollaboration Shape Library Vergleich}
+
+\begin{loesungbox}
+\textbf{Vier Enterprise-Capabilities:}
+
+\begin{enumerate}
+  \item \emph{Kollaboration} \textendash{} gleichzeitige Bearbeitung, Kommentare, Review-Tracking. \emph{Anti-Muster ohne:} ``E-Mail-Ping-Pong mit Anh\"angen'' \textendash{} niemand wei{\ss}, welche Version aktuell ist.
+  \item \emph{Standards} \textendash{} Templates, Shapesets, Naming-Konventionen, Modellhierarchie, ``Definition of Done''. \emph{Anti-Muster:} ``Jeder modelliert anders'' \textendash{} Vergleichbarkeit verloren.
+  \item \emph{Freigaben} \textendash{} Draft / Review / Approved, \"Anderungs\-antr\"age, Rollen. \emph{Anti-Muster:} ``\"Anderungen passieren irgendwie'' \textendash{} keine Audit-F\"ahigkeit.
+  \item \emph{Single Source of Truth} \textendash{} Verlinkung zu Policies, Arbeitsanweisungen, KPIs, Risiken. \emph{Anti-Muster:} ``Modelle leben isoliert'' \textendash{} Compliance-Kette bricht.
+\end{enumerate}
+
+\smallskip
+\emph{Merksatz:} Das Tool ist nicht das Differenzial. Die \emph{Disziplin}, mit der die vier Capabilities eingesetzt werden, ist es.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{Enterprise Architecture \textendash{} f\"unf Sichten}{\nivLi}{10\,min}
+
+\ytquery{Enterprise Architecture Capability Map Sichten TOGAF ArchiMate Beispiel}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}|X|X|X@{}}
+\toprule
+\textbf{Sicht} & \textbf{Was zeigt sie?} & \textbf{Zielgruppe} & \textbf{L\"ost\ldots} \\
+\midrule
+Capability Map & ``Was k\"onnen wir?'' \textendash{} F\"ahigkeiten, unabh\"angig von Prozess/Tool. & Vorstand, Strategie. & Priorisierung: wo investieren? \\
+\midrule
+Prozesslandkarte & ``Wie arbeiten wir?'' \textendash{} E2E-Prozesse, hierarchisch. & CPO, Process Owner. & Steuerung: wo Engpass? \\
+\midrule
+Applikations\-landschaft & ``Womit arbeiten wir?'' \textendash{} Systeme + Owner. & CIO, IT. & Konsolidierung: wo Redundanz? \\
+\midrule
+Datenobjekt-\"Ubersicht & Welche Daten\-objekte (Kunde, Vertrag\ldots), System of Record? & CDO, Data Steward. & Datenqualit\"at + Compliance. \\
+\midrule
+Schnittstellen-/Integrations-Map & Wer redet mit wem (API, Event, Datei)? & EA, Integration Lead. & Architekturpfad: Risiken / Br\"uche. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\emph{Zusammenspiel:} Capability Map zeigt \emph{Sollst\"arke}, Prozesslandkarte zeigt \emph{Ablauf}, Applikations\-landschaft zeigt \emph{Realit\"at}. Drei Sichten = drei Hebel.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{MDA \textendash{} CIM / PIM / PSM}{\nivLi}{8\,min}
+
+\ytquery{Model Driven Architecture MDA CIM PIM PSM Beispiel OMG}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}p{2.0cm}|X|X@{}}
+\toprule
+\textbf{Ebene} & \textbf{Geh\"ort hinein} & \textbf{Geh\"ort \emph{nicht} hinein} \\
+\midrule
+\textbf{CIM} (Business-Ebene) & Ziele, Begriffe (Glossar), Stakeholder, Prozesse, Datenobjekte (logisch). Owner: Fachbereich / CPO. & Technologien, APIs, Datenbanken, Plattform-Namen. \\
+\midrule
+\textbf{PIM} (logisch) & Services (logisch), Schnittstellen-Vertr\"age, Fehlerf\"alle, Datenstr\"ome. Owner: Enterprise Architect. & Konkrete Produkte / Anbieter / Deployment-Topologie. \\
+\midrule
+\textbf{PSM} (technisch) & Konkrete Plattform, APIs, Deployments, Secrets, Sicherheits-Implementierung. Owner: IT-Team / Architecture. & Business-Begriffe (sollten l\"angst in CIM stehen). \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Warum Verantwortungs-Trennung?} Wer \emph{auf CIM-Ebene} sagt ``Kunde in 24\,h aktiv'', sagt eine Business-Anforderung \textendash{} und der Fachbereich tr\"agt die Verantwortung. Wer \emph{auf PSM-Ebene} sagt ``\"uber unseren IAM-Provider in 30\,Sekunden zu provisionieren'', tr\"agt die technische Verantwortung. Vermischen f\"uhrt dazu, dass Fachbereich technische Designs vorgibt und Technik Business-Ziele neu interpretiert \textendash{} beides ist Fehler.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Modelling Charter in 45 Minuten}{\nivLii}{25\,min}
+
+\ytquery{Modelling Charter Process Standards Naming Convention BPM Governance}
+
+\begin{loesungbox}
+\textbf{1. F\"unf nicht verhandelbare Standards:}
+\begin{enumerate}
+  \item \emph{Naming} (Verb + Objekt; Prozessname ``X-to-Y''). \emph{Sanktion:} Modell bleibt in Draft.
+  \item \emph{Start / Ende explizit modelliert}. \emph{Sanktion:} Review-Abweisung.
+  \item \emph{Rollen sichtbar} (Lanes / Swimlanes / Org-Annotation). \emph{Sanktion:} Approval-Block.
+  \item \emph{Status / Version im Metadaten-Header}. \emph{Sanktion:} Modell nicht recherchierbar im Repository.
+  \item \emph{Owner benannt (Rolle, nicht Person)}. \emph{Sanktion:} kein Lifecycle-\"Ubergang.
+\end{enumerate}
+
+\smallskip
+\textbf{2. Drei Freiheitsgrade:}
+\begin{itemize}
+  \item \emph{Detailtiefe} \textendash{} je nach Modellzweck (Management-\"Ubersicht vs.\ Ausf\"uhrung).
+  \item \emph{Notation f\"ur \"Ubersichten} \textendash{} EPC, Capability Map, Wertstromskizze nach Wahl.
+  \item \emph{Lokale Varianten als Attribute} \textendash{} Standort darf Sonderpfade pflegen, sofern dokumentiert.
+\end{itemize}
+
+\smallskip
+\textbf{3. Freigabeprozess:}\\
+Draft (Modeler) \textrightarrow{} Review (BPM-Lead) \textrightarrow{} Approved (Process Owner). R\"uckkante: Review \textrightarrow{} Draft bei Mangel. Retired bei Ablauf G\"ultigkeit.
+
+\smallskip
+\textbf{4. Entscheidung unter Unsicherheit:}
+\begin{itemize}
+  \item \emph{In 2 Wochen:} f\"unf Standards verabschieden, Vorlagen-Set publizieren, ein Pilot-Bereich startet.
+  \item \emph{In 3 Monaten:} Tool-Migration, RACI-Rollout, KPI-Set live.
+\end{itemize}
+Begr\"undung: Quick Wins zuerst, Tool-Migration ben\"otigt Vorbereitung; Akzeptanz-Risiko sinkt, wenn die Charter sichtbar wirkt, bevor Tools wechseln.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{Capability Map ``Digital Customer Onboarding''}{\nivLii}{22\,min}
+
+\ytquery{Capability Map Customer Onboarding Enterprise Architecture Hebel}
+
+\begin{loesungbox}
+\textbf{Capability Map (10 Capabilities, in 3 Cluster):}
+
+\smallskip
+\emph{Cluster ``Kunden-Identit\"at \& Vertrag''}: Kunde identifizieren \textperiodcentered{} Identit\"at pr\"ufen \textperiodcentered{} Vertrag erstellen \textperiodcentered{} Vertrag pr\"ufen.\\
+\emph{Cluster ``Zugang \& Konto''}: Konto anlegen \textperiodcentered{} Zugang provisionieren \textperiodcentered{} Rollen vergeben.\\
+\emph{Cluster ``Compliance \& Aktivierung''}: KYC/Compliance-Check \textperiodcentered{} Aktivierung \textperiodcentered{} Hypercare starten.
+
+\smallskip
+\textbf{Top-3 mit h\"ochstem Hebel:}
+\begin{itemize}
+  \item \emph{Identit\"atspr\"ufung} \textendash{} dominiert sowohl DLZ als auch Compliance.
+  \item \emph{Zugang provisionieren} \textendash{} dominiert die Durchlaufzeit (typischer Engpass).
+  \item \emph{KYC/Compliance-Check} \textendash{} hohes Risiko bei Fehlern.
+\end{itemize}
+
+\smallskip
+\textbf{E2E-Prozesslandkarte (vereinfacht):}\\
+Lead $\to$ Vertrag $\to$ KYC $\to$ Provisionierung $\to$ Aktivierung $\to$ Hypercare $\to$ Bestandsf\"uhrung.
+
+\smallskip
+\textbf{Capability-Zuordnung:} Identit\"at pr\"ufen \& KYC bei \emph{Vertrag}; Provisionierung bei \emph{Provisionierung}; Rollen vergeben bei \emph{Aktivierung}.
+
+\smallskip
+\textbf{Drei kritische Datenobjekte:} \emph{Kunde}, \emph{Vertrag}, \emph{Identit\"atsnachweis}.
+
+\smallskip
+\textbf{Zwei Risiken:}
+\begin{itemize}
+  \item \emph{Datenqualit\"at:} Adress-/Personendaten unstet \textrightarrow{} R\"uckspr\"unge.
+  \item \emph{Datenschutz:} KYC-Dokumente m\"ussen revisionssicher gespeichert sein \textendash{} DSGVO + L\"oschpflicht.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{MDA-Pfad f\"ur eine priorisierte Capability}{\nivLii}{25\,min}
+
+\ytquery{MDA CIM PIM PSM Beispiel Identity Service Onboarding Capability}
+
+\begin{loesungbox}
+\textbf{Capability: \emph{Identit\"atspr\"ufung}.}
+
+\smallskip
+\textbf{1. CIM:}
+\begin{itemize}
+  \item \emph{Business-Ziel:} ``Kunde ist in 24\,h identifiziert, validiert und Konto aktivierbar.''
+  \item \emph{Prozess-Scope:} Vertrags\-eingang \textrightarrow{} Identit\"atsnachweis \textrightarrow{} Konto\-anlage.
+  \item \emph{Datenobjekt Kunde \textendash{} Pflichtfelder:} Name, Geburtsdatum, Anschrift, Identit\"atsnachweis-ID, Status.
+\end{itemize}
+
+\smallskip
+\textbf{2. PIM:}
+\begin{itemize}
+  \item Service \emph{VerifyIdentity}: Input = Kundendaten + Nachweis; Output = Result (verified / failed) + Fehlerkategorie.
+  \item Service \emph{CreateAccount}: Input = verifizierte Kundendaten; Output = Account-ID.
+  \item Service \emph{AssignRoles}: Input = Account-ID + Tarif; Output = Rollen-Set.
+\end{itemize}
+\emph{Datenfluss:} Verify $\to$ Create $\to$ Assign; Fehlerf\"alle: \emph{fehlende Dokumente} (R\"uckfrage), \emph{Identit\"at nicht verifizierbar} (manueller Pfad).
+
+\smallskip
+\textbf{3. PSM:}
+\begin{itemize}
+  \item \emph{IAM-Plattform} (bestehend): provisioniert Konto.
+  \item \emph{Identity-Provider}: externe Schnittstelle (z.\,B.\ Video-Ident-Anbieter).
+  \item \emph{Workflow-Engine}: orchestriert die Sequenz.
+  \item \emph{Audit-Logging Pflicht}: jeder Schritt protokolliert mit Zeitstempel + Ergebnis.
+\end{itemize}
+
+\smallskip
+\textbf{Schlusssatz:} Das Business-Ziel ``24\,h Identifizierung'' ist auf CIM-Ebene \emph{nicht verhandelbar} \textendash{} es ist der \emph{Erfolgsbegriff}. Welcher konkrete Identit\"atsanbieter (Video-Ident, eID, Foto-Upload) eingesetzt wird, darf auf PSM-Ebene noch ge\"andert werden \textendash{} solange das CIM-Ziel erreicht bleibt.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{Naming \& Konvention}{\nivLii}{15\,min}
+
+\ytquery{Naming Convention BPM Files Best Practice Versioning Process Model}
+
+\begin{loesungbox}
+\begin{tabularx}{\linewidth}{@{}cp{4.0cm}lX@{}}
+\toprule
+ & \textbf{Original} & \textbf{Bewertung} & \textbf{Korrektur + Begr\"undung} \\
+\midrule
+A & \texttt{O2C\_final\_v3\_neu.vsdx} & schlecht & \texttt{O2C\_v1.3\_Draft\_DE}. ``final'' und ``neu'' sind Antimuster; Status geh\"ort in Metadaten. \\
+B & \texttt{Bestellung} & schlecht & \texttt{Bestellung-erfassen\_v1.0\_Approved}. Substantiv ohne Verb, ohne Version. \\
+C & \texttt{Order-to-Cash} & gut & passt; ggf.\ Version + Status erg\"anzen. \\
+D & \texttt{ProcRevAB\_Hoehl\_2025.vsdx} & schlecht & \texttt{P2P-Review-Audit\_v2.0\_2025\_Approved}. Pers\"onlicher Marker entfernen. \\
+E & \texttt{Rechnung erstellen v1.0 - Draft - DE} & gut & passt; ggf.\ Trennzeichen vereinheitlichen. \\
+F & \texttt{Onboarding (cleaner version - DO NOT DELETE)} & schlecht & \texttt{Onboarding\_v2.1\_Approved}. ``DO NOT DELETE'' ist ein Lifecycle-Signal, geh\"ort in Status. \\
+G & \texttt{P2P Subprozess - QA - 2026-06-02} & mittel & \texttt{P2P-Subprozess-QA\_v1.0\_Approved\_2026-06-02}. Status fehlt. \\
+H & \texttt{Untitled Diagram (37)} & schlecht & sofort umbenennen oder l\"oschen; ``Untitled'' kommt nicht in Approved. \\
+\bottomrule
+\end{tabularx}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{KPI-Set f\"ur Modellqualit\"at}{\nivLii}{18\,min}
+
+\ytquery{KPI Modellqualitaet Process Repository Goodhart Compliance Steuerung}
+
+\begin{loesungbox}
+\textbf{Vier KPIs:}
+
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}llX@{}}
+\toprule
+\textbf{KPI} & \textbf{Typ} & \textbf{Frequenz} & \textbf{Owner + Formel} \\
+\midrule
+Lead Time Idee~\textrightarrow{}~Approved-Modell & Outcome (Speed) & monatlich & BPM-Lead; Median (Approval - Draft). \\
+Anteil Approved-Modelle mit aktuellem Review & Outcome (Akt.) & quartalsweise & Process Owner; Approved-Modelle mit Review < 12\,Mon / Approved-Modelle gesamt. \\
+Audit-Findings zu Prozess-Dokumentation & Risk/Compliance & j\"ahrlich & Audit-Lead; Anzahl Findings. \\
+Quote nicht konformer Modelle (GoM-Check) & Risk/Compliance & monatlich & BPM-Lead; nicht-konform / gesamt. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Manipulationsrisiken:}
+\begin{itemize}
+  \item \emph{Lead Time:} Modelle zu fr\"uh approved (oberfl\"achlicher Review). \emph{Schutz:} Stichproben-Audit auf Modell-Qualit\"at.
+  \item \emph{Anteil aktueller Reviews:} Reviews pro forma (``Datum gesetzt, Inhalt nicht gepr\"uft''). \emph{Schutz:} Stichprobe + Review-Protokoll-Pflicht.
+  \item \emph{Audit-Findings:} ``Nichts berichten'' (Findings nicht eskalieren). \emph{Schutz:} externe Audit-Stichprobe.
+  \item \emph{Konformit\"ats-Quote:} Definition aufweichen. \emph{Schutz:} GoM-Definition zentral pflegen.
+\end{itemize}
+
+\smallskip
+\textbf{Kopplung:} Lead Time \emph{darf nicht} verbessert werden, wenn die Konformit\"ats-Quote sinkt \textendash{} sonst ``Schnellschuss-Approvals''.
+
+\smallskip
+\textbf{Nicht eingef\"uhrt:} \emph{``Anzahl Modelle pro Modeler''} \textendash{} f\"ordert Quantit\"at \"uber Qualit\"at und ist klassisches Anti-Pattern; wird durch Lead Time + Konformit\"ats-Quote bereits abgedeckt.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie \emph{RetailGroup Europe}}{\nivLiii}{45\,min}
+
+\ytquery{Enterprise Model Governance Capability Map MDA Roadmap Retail Audit}
+
+\begin{loesungbox}
+\textbf{1. Modelling Charter:} 5 Standards (Naming, Owner, Status, Rollen, Start/Ende), 3 Freiheitsgrade (Detailtiefe, lokale Varianten, Visual-Style innerhalb Template), Freigabefluss Draft\,/\,Review\,/\,Approved (siehe Aufgabe 4).
+
+\smallskip
+\textbf{2. Capability Map (10\,--\,12):} Kunde verstehen \textperiodcentered{} Filialbetrieb \textperiodcentered{} Online-Shop \textperiodcentered{} Sortimentssteuerung \textperiodcentered{} Lieferung \& Retouren \textperiodcentered{} Zahlungsabwicklung \textperiodcentered{} Identit\"at \& Konto \textperiodcentered{} Compliance \textperiodcentered{} Personal \textperiodcentered{} IT-Plattformen.\\
+\emph{Priorit\"aten:} \emph{Identit\"at \& Konto} (Onboarding) und \emph{Compliance} (Audit in 10\,W).
+
+\smallskip
+\textbf{3. MDA-Pfad f\"ur \emph{Identit\"at \& Konto}:} siehe Aufgabe 6 \textendash{} CIM ``Kunde in 24\,h aktiv'', PIM 3 Services, PSM via bestehendes IAM + Workflow-Engine.
+
+\smallskip
+\textbf{4. Vier KPIs:}
+\begin{enumerate}
+  \item \emph{Lead Time Onboarding} (Outcome / Speed): Median Start\,\textrightarrow{}\,Aktiv. Owner: COO.
+  \item \emph{First-Pass-Yield Onboarding} (Outcome / Quality): \% F\"alle ohne R\"ucksprung. Owner: Onboarding-Lead.
+  \item \emph{Compliance-Findings} (Risk): Anzahl pro Quartal. Owner: Compliance-Lead.
+  \item \emph{Rework-Rate} (Risk / Quality): \% F\"alle mit Nacharbeit. Owner: QM-Lead.
+\end{enumerate}
+
+\smallskip
+\textbf{5. Management\-entscheidung:}
+\begin{itemize}
+  \item \emph{Quick Wins Wochen 1\,--\,4:} (a) Modelling Charter publizieren (5 Standards), (b) Capability Map konsolidieren, mit Auditor abstimmen.
+  \item \emph{Strukturell Wochen 5\,--\,10:} (c) MDA-Pfad ``Identit\"at'' bis PIM dokumentiert, (d) ein Pilot-Bereich auf das Tool migriert.
+\end{itemize}
+
+Begr\"undung: Quick Wins reduzieren \emph{Audit-Risiko sofort} (Charter + Capability Map = nachvollziehbare Struktur); strukturelle Ma{\ss}nahmen zeigen \emph{Steuerungs\-f\"ahigkeit} im Pilotbereich. Beide ohne neues Tool m\"oglich, passen in 100\,k-Budget.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Tool-Strategie}{\nivLiii}{25\,min}
+
+\ytquery{BPM Tool Strategy Standard vs Federated Visio Lucidchart Enterprise Decision}
+
+\begin{loesungbox}
+\textbf{1. Trade-off-Matrix:}
+
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}|X|X@{}}
+\toprule
+\textbf{Dimension} & \textbf{Standardtool} & \textbf{F\"oderiert} \\
+\midrule
+Kollaboration   & hoch (alle im selben Tool) & mittel (Inter-Tool-\"Ubersetzung n\"otig) \\
+\midrule
+Vergleichbarkeit & sehr hoch (1 Schema) & gering (Konvertierungsverlust) \\
+\midrule
+Akzeptanz       & mittel (Tool wird ``vorgeschrieben'') & hoch (Teams behalten Gewohnheiten) \\
+\midrule
+Migrations\-aufwand & hoch (alle Modelle umziehen) & gering (status quo plus Charter) \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Entscheidung:} \emph{Standardtool} \textendash{} aber mit Migrations-Welle.\\
+Begr\"undung: Vergleichbarkeit + Audit-F\"ahigkeit \"uberwiegen den Akzeptanz-Schmerz. F\"oderiert spart kurzfristig Aufwand, kostet aber dauerhaft (Konvertierungsverluste, Inkonsistenzen, doppelte Pflege). Akzeptanz kann durch Pilot-Bereiche + Coaching gesch\"utzt werden.
+
+\smallskip
+\textbf{3. Bewusst hingenommenes Risiko:} \emph{Akzeptanzproblem in den ersten 3 Monaten} \textendash{} Power-User m\"ussen umlernen. \emph{Fr\"uhwarnsignal:} Wenn nach 6 Wochen weniger als 30\,\% der priorisierten Modelle migriert sind \textrightarrow{} Coach-Intensit\"at verdoppeln, Coaching-Mittel umschichten.
+
+\smallskip
+\textbf{4. Migrationspfad (drei unumgehbare Schritte):}
+\begin{enumerate}
+  \item \emph{Tool-Anforderungs-Check} (BPMN-Export-F\"ahigkeit, Rollenmodell, Audit-Log) bestanden.
+  \item \emph{Pilot-Bereich migriert} (1 Bereich, 10 Kernmodelle, sauber).
+  \item \emph{Trainings-Curriculum} (Level 1\,--\,3) etabliert; nur dann Welle 2.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Enterprise Modelling Operating Model}{\nivLiii}{45\,min}
+
+\ytquery{Enterprise Modelling Operating Model EA MDA Governance Rollout CEA}
+
+\begin{loesungbox}
+\textbf{1. Top-8 Entscheidungen:}
+\begin{enumerate}
+  \item Priorisierung der zu modellierenden Capabilities/Prozesse.
+  \item Standardisierung (Naming, Charter, Templates).
+  \item Investitionen (Tool, Schulungen, externer Coach).
+  \item Risiken (Compliance, Audit-Findings).
+  \item Schnittstellen (API-Standards, Integration).
+  \item Tool-Strategie (Standard vs.\ f\"oderiert).
+  \item Variantenstrategie (Attribute vs.\ Subprozesse).
+  \item Reporting (KPI-Set, Reviews).
+\end{enumerate}
+
+\smallskip
+\textbf{2. Modelling Charter v2:} 5 nicht verhandelbare Standards + 3 Freiheitsgrade + Lifecycle + KPI-Set (siehe Aufgabe 8). Erg\"anzung: \emph{Approval-Signatur ist Pflicht}; \emph{Modelle ohne Owner kommen nicht aus Draft}.
+
+\smallskip
+\textbf{3. EA-Minimum Viable Architecture:}
+\begin{itemize}
+  \item Capability Map (10\,--\,12) konsolidiert.
+  \item Prozesslandkarte (5 Kernprozesse) verkn\"upft mit Capabilities.
+  \item Applikations-/Datenobjekt-Minimum: 5 zentrale Applikationen, 5 zentrale Datenobjekte, jeweils mit \emph{Data Owner}.
+\end{itemize}
+
+\smallskip
+\textbf{4. MDA-Guardrails:}
+\begin{itemize}
+  \item CIM ist \emph{verbindlich} f\"ur Ziele, Begriffe, Datenpflichtfelder.
+  \item PIM darf Services / Schnittstellen / Fehlerf\"alle definieren, aber \emph{keine} Plattform-Wahl treffen.
+  \item PSM ist iterativ \"anderbar, solange CIM-Ziele erreicht bleiben.
+  \item Review-Gate: jede neue Capability durchl\"auft CIM-Review (Fachbereich) bevor PIM beginnt.
+\end{itemize}
+
+\smallskip
+\textbf{5. Rollout \& Enablement:}
+\begin{itemize}
+  \item Welle 1 (Pilot, Wo 1\,--\,4): 1 Bereich, 10 Modelle, ein MDA-Pfad.
+  \item Welle 2 (Scale, Wo 5\,--\,8): 3 Bereiche, Tool-Migration startet.
+  \item Welle 3 (Sustain, Wo 9\,--\,12): KPI-Reviews monatlich, Governance Board konstituiert.
+  \item Trainings: L1 (Lesen), L2 (Modellieren), L3 (Architektur \& Entscheidungen).
+  \item Akzeptanzstrategie: Power-User als Multiplikatoren; Pilot-Erfolg sichtbar machen.
+\end{itemize}
+
+\smallskip
+\textbf{6. Zwei Entscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Tool-Strategie:} Standardtool mit Migrations-Welle (siehe Aufgabe 10). \emph{Risiko:} Akzeptanz; \emph{Fr\"uhwarnsignal:} $<$\,30\,\% Migrationsfortschritt nach 6\,W.
+  \item \emph{Governance-Strenge:} \emph{Minimal-mit-Z\"ahnen} \textendash{} 5 nicht verhandelbare Standards, aber sonst pragmatisch. \emph{Akzeptanzplan:} Charter zusammen mit Power-Usern formulieren. \emph{Trigger zum Nachsch\"arfen:} $\geq 3$ Audit-Findings zu Prozess-Dokumentation in 6\,Monaten.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterl\"osungen sind eine Diskussionsbasis. Pr\"ufen Sie Ihre eigene L\"osung kritisch: Habe ich Capability und Prozess sauber unterschieden? Habe ich Entscheidungs-Verantwortung zwischen Fachbereich (CIM) und IT (PSM) klar getrennt?
+
+\medskip
+\begin{infobox}[N\"achster Schritt]
+Bringen Sie Ihre L\"osung ins Coaching mit: Welche zwei Standards sind in Ihrer Realit\"at \emph{unverhandelbar}? Welche Capability ist Ihr Hebel? Welche MDA-Trennung haben Sie real durchgesetzt?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 5 \textperiodcentered{} L\"osungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
