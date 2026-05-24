@@ -1,0 +1,701 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 11 - Lehrskript
+% RPA als Steuerungs- und Risikohebel
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 11}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}RPA \textperiodcentered{} Attended \textperiodcentered{} Unattended}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 5 \textperiodcentered{} TAG 11 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 12.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}RPA als\\Steuerungs-\\\& Risikohebel\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Plattformüberblick, Attended vs.\ Unattended --\\verantwortete Automation unter Unsicherheit.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 11 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Robotic Process Automation (RPA) ist heute eines der häufigsten Werkzeuge zur Effizienzsteigerung in Verwaltungs- und Servicebereichen -- und gleichzeitig eine der häufigsten Quellen für Schatten-IT, Compliance-Vorfälle und unkontrollierte Skalierung. Heute lernen Sie, RPA als \emph{Steuerungs- und Risikohebel} zu denken: einzuordnen, was sich für Automation eignet, die richtige Form (attended oder unattended) bewusst zu wählen und Entscheidungen unter Zielkonflikten verantwortungsfähig zu treffen.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item RPA-Eignungskriterien benennen: regelbasiert, stabiler Prozess, klarer Input/Output, hohes Volumen, geringe Ausnahmen.
+  \item Plattformüberblick einordnen: Studio/Designer, Orchestrierung, Queues, Credentials, Monitoring -- toolneutral.
+  \item Unterschied attended vs.\ unattended verstehen: Betriebsmodell, Skalierungs- und Governance-Konsequenzen.
+  \item Nutzen und Risiken von RPA aus Senior-Brille einordnen: Schatten-IT, Credential-Risiko, fragile UI-Automation, Audit Trail.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Aus einer Use-Case-Liste die Eignung mit Scoring 1--5 bewerten und priorisieren.
+  \item Eine Stufenstrategie attended $\to$ unattended entwerfen, inkl.\ Readiness-KPIs.
+  \item Einen Bot-Flow mit Validierung, Verarbeitung, Logging und Exception Queue konzipieren.
+  \item Audit-Trail-Minimum und KPI-Set (Produktivität, Qualität, Risiko) auf einen Fall anwenden.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Ein RPA-Portfolio mit Kriterien Value/Risk/Effort und Kill Criteria steuern.
+  \item Governance leicht, aber verbindlich verankern (Bot Owner, Process Owner, Security, Operations).
+  \item Security- und Compliance-Guardrails (Least Privilege, SoD, Vault) als Pflichtprogramm setzen.
+  \item Entscheidungen unter Unsicherheit (welche Use Cases zuerst, Unattended-Grenze) mit Frühwarnsignalen verankern.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+RPA ist kein Klick-Roboter, sondern ein \emph{privilegierter Mitarbeiter}, der im Sekundentakt entscheidet und bucht. Wer ihn ohne Governance und ohne Audit Trail laufen lässt, gibt einer Software die Vollmachten eines Sachbearbeiters -- ohne den menschlichen Bremshebel. Verantwortbare Automation heißt: Eignung prüfen, kontrolliert scheitern, transparent skalieren. \quelle{vgl.\ van der Aalst et al., 2018; Willcocks et al., 2017}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Warum RPA mehr ist als Klick-Magie}
+
+In vielen Organisationen begann RPA als Selbsthilfe-Werkzeug einzelner Fachbereiche: ``Wir haben hier dreihundert Rechnungen pro Tag und drei Mitarbeitende, die nichts anderes tun als Kopieren aus E-Mail in ERP. Können wir das automatisieren?'' Die Antwort eines RPA-Tools lautet typischerweise: ``Ja, in zwei Wochen.'' Was als pragmatische Antwort beginnt, kann zu einer schwer beherrschbaren Plattform mit hunderten Bots, instabilen Portalen und unklaren Verantwortlichkeiten heranwachsen. \quelle{Willcocks et al., 2017}
+
+Die Frage ist daher nicht: \emph{Können wir RPA?} Sondern: \emph{Können wir RPA verantworten?}
+
+\subsection{Wofür RPA geeignet ist -- und wofür nicht}
+
+RPA arbeitet typischerweise an der Benutzeroberfläche oder über strukturierte Schnittstellen. Es kopiert, klickt, liest -- so wie ein Mensch es täte, nur schneller und fehlerärmer (in stabilen Fällen). Die typischen Eignungskriterien: \quelle{Scheppler \& Weber, 2020}
+
+\begin{itemize}
+  \item \textbf{Regelbasiert.} Es gibt klare Wenn-dann-Regeln, keine Ermessensentscheidungen.
+  \item \textbf{Stabile UI / stabile Schnittstellen.} Das Zielsystem ändert sich selten. Jede UI-Änderung kann den Bot brechen.
+  \item \textbf{Klarer Input und Output.} Der Bot weiß, was hereinkommt, und was er produzieren soll.
+  \item \textbf{Hohes Volumen.} Lohnt sich erst ab einer relevanten Stückzahl. Drei Vorgänge pro Monat sind kein RPA-Kandidat.
+  \item \textbf{Wenige Ausnahmen.} Wenn jeder fünfte Fall anders ist, wird der Bot zur Sammelstelle für Sonderlocken.
+\end{itemize}
+
+Weniger geeignet sind Prozesse mit häufigen UI-Änderungen, vielen Sonderfällen, unklaren Regeln und hohem Interpretationsanteil. Hier hilft RPA allenfalls in Kombination mit AI-Komponenten (Document Understanding, Klassifikation) -- aber das ist eine andere Disziplin, mit anderen Risiken.
+
+\subsection{RPA im BPM-Lifecycle}
+
+RPA steht nicht neben BPM, sondern \emph{in} ihm. Im klassischen Lifecycle (Discovery -- Analyse -- Design -- Automation -- Monitoring -- Optimization) ist RPA eine Automatisierungs-Option neben Workflow-Engines, ERP-Custom-Code oder API-Integration. Die Wahl hängt vom Reifegrad des Prozesses ab: \quelle{Dumas et al., 2018, Kap.~10}
+
+\begin{itemize}
+  \item Unausgereifter, dokumentationsarmer Prozess $\to$ erst klären, dann automatisieren.
+  \item Stabiler Prozess, stabile Systeme, API verfügbar $\to$ eher API-Integration.
+  \item Stabiler Prozess, Legacy-System ohne API, hohes Volumen $\to$ klassischer RPA-Fall.
+\end{itemize}
+
+\subsection{Die Versuchung des schnellen Erfolgs}
+
+RPA hat eine besondere Versuchung: \emph{schnelle Erfolge}. Ein Pilot ist in zwei bis vier Wochen lauffähig, der ROI scheint klar, das Management ist beeindruckt. Das ist der Punkt, an dem Disziplin am wichtigsten ist -- denn der zweite, dritte und zehnte Bot bringt die Skalierungsprobleme: \quelle{Smeets et al., 2019}
+
+\begin{itemize}
+  \item \textbf{Schatten-IT.} Fachbereiche bauen ohne IT-Beteiligung. Niemand kennt den Bestand, niemand wartet, niemand hat Backups.
+  \item \textbf{Fragile UI-Automation.} Ein UI-Update legt zehn Bots gleichzeitig lahm.
+  \item \textbf{Credential-Risiko.} Bots brauchen Zugänge. Wenn die nicht zentral verwaltet sind, entstehen sicherheitsrelevante Lücken.
+  \item \textbf{Fehlbuchungen im großen Maßstab.} Ein Bot, der einmal falsch programmiert ist, macht denselben Fehler tausendmal -- in einer Geschwindigkeit, in der kein Mensch eingreifen kann.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{R-S-V-A}]
+Vier Eignungskriterien für RPA, in Reihenfolge prüfen:\\[2pt]
+\textbf{R}egelbasiert -- klare Wenn-dann-Logik?\\
+\textbf{S}tabil -- ändert sich UI/Prozess selten?\\
+\textbf{V}olumen -- relevante Stückzahl pro Monat?\\
+\textbf{A}usnahmen -- niedrige Quote (idealerweise $<$10\,\%)?\\[2pt]
+\emph{Wenn auch nur eine Antwort ``nein'' ist, lohnt sich die Eignung noch nicht.}
+\end{eselsbox}
+
+% --- 2. PLATTFORM-UEBERBLICK ---------------------------------------------
+\section{Plattformüberblick: Studio, Orchestrierung, Run}
+
+RPA-Plattformen haben unterschiedliche Hersteller, aber sehr ähnliche Architekturen. Wer eine Plattform versteht, versteht sie alle -- die Begriffe variieren, die Konzepte sind nahezu gleich. \quelle{Lacity \& Willcocks, 2018}
+
+\subsection{Studio / Designer: das Werkzeug zum Bauen}
+
+Im \fachbegriff{Studio} (oder Designer) wird die Bot-Logik gebaut. Typische Bausteine: \emph{Workflows} (eine Folge von Schritten), \emph{Activities} oder \emph{Actions} (einzelne Tätigkeiten wie ``E-Mail lesen'', ``Excel öffnen'', ``Daten in Maske eintragen''), \emph{Variablen}, \emph{Bedingungen}, \emph{Schleifen}. Wer schon einmal Workflow-Tools wie Camunda oder Power Automate genutzt hat, findet sich schnell zurecht.
+
+Wichtige Disziplinen im Studio:
+
+\begin{itemize}
+  \item \fachbegriff{Naming Convention.} Activities, Workflows und Variablen folgen klaren Benennungsregeln. Sonst wird ein Bot mit 200 Schritten unwartbar.
+  \item \fachbegriff{Modularisierung.} Wiederkehrende Bausteine als Sub-Workflows. Wer alle Aktivitäten in einen Workflow packt, baut den klassischen ``Spaghetti-Bot''.
+  \item \fachbegriff{Fehlerbehandlung.} Try/Catch um kritische Schritte, mit definierter Fehlerklasse.
+  \item \fachbegriff{Konfiguration extern.} Hostnames, Pfade, Schwellenwerte nicht im Code, sondern in einer Konfigurationsdatei oder im Orchestrator.
+\end{itemize}
+
+\subsection{Orchestrierung: das Kontrollzentrum}
+
+Der \fachbegriff{Orchestrator} (oder Control Room, Management Console) ist das Herz der Plattform. Er übernimmt: \quelle{Smeets et al., 2019}
+
+\begin{itemize}
+  \item \fachbegriff{Planung.} Welcher Bot läuft wann, auf welcher Maschine, mit welchem Zeitplan?
+  \item \fachbegriff{Queues.} Eingangs- und Ausgangswarteschlangen mit Items, Status, Priorität.
+  \item \fachbegriff{Credentials.} Zentral verwaltete Zugangsdaten. Bots greifen über Tokens darauf zu, nie über fest codierte Passwörter.
+  \item \fachbegriff{Monitoring.} Status der Bots, Fehlerraten, Durchsatz, Alerts.
+  \item \fachbegriff{Logs.} Was hat der Bot wann getan, mit welchem Input, mit welchem Output, mit welchem Fehler?
+\end{itemize}
+
+\subsection{Run-Umgebung: wo der Bot lebt}
+
+Der eigentliche Ausführungsknoten -- in attended Fällen am Mitarbeiterarbeitsplatz, in unattended Fällen auf einer Server- oder Cloud-VM. Drei Aspekte: \quelle{Scheppler \& Weber, 2020}
+
+\begin{itemize}
+  \item \textbf{Isolierung.} Jeder Bot läuft in einer isolierten Umgebung, damit ein abgestürzter Bot nicht andere mitreißt.
+  \item \textbf{Ressourcen.} CPU, RAM, ggf.\ Bildschirmauflösung (wenn UI-Automation). Spielt mehr Bot-Volumen gegen Hardware-Kosten aus.
+  \item \textbf{Verfügbarkeit.} Was passiert, wenn die Maschine ausfällt? Failover, Standby, oder akzeptiertes Risiko?
+\end{itemize}
+
+\subsection{Low-Code vs.\ Enterprise}
+
+Auf dem Markt gibt es zwei Pole: Low-Code-/No-Code-Plattformen (oft auch Citizen Developer ansprechend) und Enterprise-Plattformen mit umfassender Governance. Beide haben ihre Berechtigung -- aber sie skalieren unterschiedlich:
+
+\begin{itemize}
+  \item \textbf{Low-Code.} Schnell, niedrige Einstiegshürde, gut für Pilotierung und kleinere Use Cases. Risiko: ohne Standards entsteht Wildwuchs.
+  \item \textbf{Enterprise.} Höhere Einstiegshürde, dafür Governance, Audit, Skalierung mitgedacht. Risiko: bürokratisch, langsam, ohne Buy-in nicht akzeptiert.
+\end{itemize}
+
+% --- 3. ATTENDED VS UNATTENDED -------------------------------------------
+\section{Attended vs.\ Unattended: zwei Welten, eine Entscheidung}
+
+Die wichtigste strategische Entscheidung beim RPA-Einsatz ist die Wahl zwischen \emph{attended} und \emph{unattended} -- oder einer abgestuften Kombination. Sie betrifft Betriebsmodell, Governance, Skalierbarkeit und Risiko.
+
+\subsection{Attended: Assistent am Arbeitsplatz}
+
+Ein \fachbegriff{attended Bot} läuft am Arbeitsplatz eines Mitarbeitenden. Der Mitarbeitende triggert ihn (per Klick oder Hotkey), überwacht ihn, greift bei Problemen ein. Typische Anwendungen: Teilschritt-Assistenz (``Bitte fülle diese fünf Felder im ERP automatisch aus''), Datenkonsolidierung, repetitive Klick-Strecken.
+
+\begin{itemize}
+  \item \textbf{Vorteile.} Geringeres Betriebsrisiko, niedrige Governance-Hürde, schnelle Lernkurve, Akzeptanz im Team (``der Bot hilft mir, ersetzt mich nicht'').
+  \item \textbf{Nachteile.} Begrenzte Skalierung, abhängig von Anwesenheit, schwer auditierbar (es gibt nicht immer einen zentralen Log-Pfad).
+\end{itemize}
+
+\subsection{Unattended: serverseitig, vollautomatisch}
+
+Ein \fachbegriff{unattended Bot} läuft serverseitig (oder in der Cloud), ohne menschliche Anwesenheit. Er wird über Zeitpläne oder Queues angestoßen, arbeitet im Schichtbetrieb (auch 24/7), und meldet Ergebnisse über das Orchestrator-System zurück. \quelle{Lacity \& Willcocks, 2018}
+
+\begin{itemize}
+  \item \textbf{Vorteile.} Hohe Skalierung, kontinuierlicher Betrieb, klar auditierbar (alle Aktionen im zentralen Log), entkoppelt vom Arbeitsplatz.
+  \item \textbf{Nachteile.} Höhere Anforderungen an Governance, Security, Exception Handling, Monitoring. Höhere initiale Kosten.
+\end{itemize}
+
+\subsection{Hybride und Stufenstrategien}
+
+In der Praxis ist die richtige Antwort selten ``alles attended'' oder ``alles unattended'', sondern eine \emph{Stufenstrategie}: \quelle{Smeets et al., 2019}
+
+\begin{itemize}
+  \item \textbf{Stufe 1.} Attended-Pilot in einem Bereich. Lernkurve aufbauen, Akzeptanz testen, erste Stabilität messen.
+  \item \textbf{Stufe 2.} Wenn KPIs (Stabilität, Ausnahmequote) erreicht sind: Übergang in unattended für skalierbare Use Cases, parallel attended für interaktive Hilfen.
+  \item \textbf{Stufe 3.} Wenn die Plattform reif ist: Portfolio-Steuerung, CoE-Strukturen, Self-Service für Fachbereiche unter klaren Leitplanken.
+\end{itemize}
+
+\begin{merkbox}[Stufenentscheidung -- die wichtigste Frage]
+\emph{``Wie können wir attended starten, dass uns der spätere Wechsel zu unattended nicht noch einmal alles neu kostet?''} Diese Frage am Anfang spart Monate Re-Engineering. Standards für Logging, Konfiguration und Exception Handling müssen attended schon so sein, wie sie unattended sein werden.
+\end{merkbox}
+
+\subsection{Entscheidungsfaktoren}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXX@{}}
+\toprule
+Faktor & Attended & Unattended \\
+\midrule
+Prozessstabilität & mittel reicht & hoch nötig \\
+Volumen & klein bis mittel & mittel bis sehr hoch \\
+Verfügbarkeitsanspruch & Bürozeiten & 24/7 möglich \\
+Audit-Relevanz & gering bis mittel & hoch (zentrale Logs) \\
+Governance-Reife & niedrig reicht & muss vorhanden sein \\
+Akzeptanz im Team & oft hoch & oft Skepsis \\
+Skalierung & begrenzt & sehr gut \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Die Faustregel: \emph{Attended startet schneller, unattended skaliert besser.} Wer beides will, plant von Anfang an die Stufenstrategie ein.
+
+% --- 4. NUTZEN UND RISIKEN -----------------------------------------------
+\section{Nutzen und Risiken aus Senior-Brille}
+
+RPA-Initiativen scheitern selten an der Technik. Sie scheitern an unterschätzten Nebenwirkungen. Wer RPA verantworten will, muss Nutzen und Risiken bewusst abwägen.
+
+\subsection{Der Nutzen -- und seine Grenzen}
+
+\begin{itemize}
+  \item \textbf{Zeitgewinn.} Sachbearbeitende verlagern Zeit von repetitiver Erfassung zu Bearbeitungs- und Entscheidungsaufgaben. Achtung: Zeit \emph{verlagert} sich, sie wird nicht von selbst frei -- ohne Rollen-Anpassung wird sie ``versickert''.
+  \item \textbf{Fehlerreduktion.} Bots tippen nicht falsch, sie vergessen kein Pflichtfeld. Vorausgesetzt, sie wurden korrekt gebaut.
+  \item \textbf{SLA-Stabilität.} Durchsatz wird vorhersagbar, Spitzen werden ausgeglichen.
+  \item \textbf{Audit Trail.} Wenn richtig gebaut, dokumentiert der Bot lückenlos, was er getan hat -- besser als jeder manuelle Vorgang.
+\end{itemize}
+
+\subsection{Die Risiken -- und ihre wirksamen Gegenmittel}
+
+\begin{itemize}
+  \item \fachbegriff{Schatten-IT.} Bots entstehen ohne IT-Beteiligung, ohne Backup, ohne Wartungsplan. Gegenmittel: Intake-Funnel mit Pflicht-Anmeldung, Inventur, Sunset-Plan.
+  \item \fachbegriff{Credential-Risiko.} Bots brauchen Zugänge. Ohne Vault landen Passwörter in Skripten oder unverschlüsselten Konfigurationen. Gegenmittel: zentraler Credential Vault, getrennte Bot-Accounts, Least Privilege.
+  \item \fachbegriff{Fragile UI-Automation.} Eine kleine UI-Änderung legt einen Bot lahm. Gegenmittel: stabile Selektoren, Monitoring auf UI-Änderungen, Test-Bots mit Smoke-Tests vor Releases der Zielsysteme.
+  \item \fachbegriff{Fehlbuchungen.} Ein Programmierfehler erzeugt tausend falsche Buchungen, bevor jemand es bemerkt. Gegenmittel: Plausibilitätsgrenzen, Schwellenwerte, manuelle Freigabe ab Betrag X, Sampling-Kontrollen.
+\end{itemize}
+
+\subsection{Risiko-Heuristik: wo droht der größte Schaden?}
+
+Eine Senior-Frage vor jedem Bot: \emph{``Was passiert, wenn dieser Bot zehntausend Mal das Falsche tut?''} Drei Schadensdimensionen:
+
+\begin{itemize}
+  \item \textbf{Finanziell.} Fehlbuchungen, Doppelzahlungen, falsche Gutschriften.
+  \item \textbf{Compliance.} Verstöße gegen Datenschutz, Steuerrecht, regulatorische Vorgaben.
+  \item \textbf{Reputation.} Kunden bemerken Fehler, Medien greifen es auf, Vertrauen erodiert.
+\end{itemize}
+
+Die Antwort darauf ist nicht ``vorsichtiger programmieren'', sondern \emph{Guardrails einbauen}: harte Limits, Plausibilitätsgrenzen, manuelle Freigaben bei sensiblen Operationen, kontinuierliches Monitoring. \quelle{Syed et al., 2020}
+
+% --- 5. ENTSCHEIDUNG UNTER UNSICHERHEIT ----------------------------------
+\section{Entscheidung unter Unsicherheit -- Daniel Kahneman trifft RPA}
+
+Die meisten RPA-Entscheidungen werden unter Unsicherheit getroffen: das genaue Volumen ist nicht bekannt, die Stabilität des Portals ist unklar, die zukünftige UI-Änderungsrate ist Spekulation. Hier hilft die Heuristik aus der Entscheidungsforschung. \quelle{Kahneman, 2011}
+
+\subsection{System 1 vs.\ System 2}
+
+Daniel Kahneman unterscheidet zwei Denksysteme: \emph{System 1} (schnell, intuitiv, mustergeleitet) und \emph{System 2} (langsam, analytisch, anstrengend). In RPA-Entscheidungen ist System 1 die Quelle der typischen Fehler:
+
+\begin{itemize}
+  \item ``Wir haben das doch schon einmal automatisiert, das geht hier auch.'' (Verfügbarkeits-Heuristik)
+  \item ``Der Use Case sieht einfach aus, wir starten unattended.'' (Optimismus-Bias)
+  \item ``Wenn 200 Bots laufen, müssen ja auch 2.000 laufen.'' (Linearitäts-Annahme)
+\end{itemize}
+
+System-2-Disziplin bedeutet: Annahmen explizit machen, Frühwarnsignale definieren, schlechte Alternativen ausschließen, bewusst Schritt für Schritt skalieren.
+
+\subsection{Vier Disziplinen verantworteter Entscheidung}
+
+\begin{enumerate}
+  \item \textbf{Annahmen sichtbar machen.} ``Wir nehmen an, dass das Portal in den nächsten 6 Monaten nicht geändert wird'' -- explizit, mit Verfallsdatum.
+  \item \textbf{Verworfene Alternativen dokumentieren.} Was haben wir nicht gewählt, und warum nicht? Eine Entscheidung ohne verworfene Alternative ist meist eine Behauptung.
+  \item \textbf{Frühwarnsignale definieren.} Welche Messgröße sagt uns, dass wir nachsteuern müssen? Ausnahmequote, UI-Änderungsrate, Fehlbuchungsrate.
+  \item \textbf{Kill Criteria akzeptieren.} Ab welchem Punkt stoppen wir den Bot? Nicht ``nie'' -- sondern bei klar definierten Schwellen.
+\end{enumerate}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{A-V-F-K}]
+Vier Disziplinen bei jeder RPA-Entscheidung unter Unsicherheit:\\[2pt]
+\textbf{A}nnahmen sichtbar (mit Verfallsdatum)\\
+\textbf{V}erworfene Alternativen begründen\\
+\textbf{F}rühwarnsignale benennen\\
+\textbf{K}ill Criteria vereinbaren\\[2pt]
+\emph{``A-V-F-K'' verhindert, dass aus einer Wette eine Behauptung wird.}
+\end{eselsbox}
+
+% --- 6. FALLSTUDIE NORDTRADE ---------------------------------------------
+\section{Fallstudie: NordTrade GmbH -- Rechnungsverarbeitung}
+
+\emph{NordTrade GmbH} ist ein mittelgroßer Großhändler. Im Buchhaltungsbereich kommen täglich rund 250 Eingangsrechnungen aus E-Mail oder PDF-Portalen herein. Die manuelle Erfassung erzeugt Fehler und Rückfragen. Der CFO will 30\,\% Zeitersparnis in 8 Wochen. Der Auditor fordert Nachvollziehbarkeit.
+
+Restriktionen: 8 Wochen, Budget 80\,k EUR, die UI eines Portals ändert sich gelegentlich, 12\,\% Ausnahmen (fehlende Daten), Zielkonflikt Speed vs.\ Auditfähigkeit.
+
+\subsection{Automationsform: attended starten, unattended planen}
+
+Die gemeinsame Empfehlung von CFO und Compliance: \emph{attended starten}. Begründung:
+
+\begin{itemize}
+  \item Das Portal ist nicht vollständig stabil -- ein attended Bot ermöglicht es, UI-Fehler in den ersten Wochen zu beobachten und zu beheben, ohne dass Buchungen aus dem Ruder laufen.
+  \item Der Lernfortschritt des Teams ist höher: Mitarbeitende sehen, was der Bot tut, gewinnen Vertrauen, melden Verbesserungen zurück.
+  \item Nach 6--10 Wochen, bei stabilen KPIs (Exception Rate $\leq$ 10\,\%, UI-Änderungsrate niedrig, Fehlbuchungsrate $<$ 0,1\,\%), Übergang in unattended.
+\end{itemize}
+
+Der Übergang ist nicht ``eine Entscheidung später'', sondern bereits jetzt eingeplant -- inkl.\ Logging-Standards, Konfigurations-Trennung und Exception-Code-Schema.
+
+\subsection{Bot-Flow}
+
+\begin{enumerate}
+  \item \textbf{Eingang.} Rechnung empfangen (E-Mail oder Portal-Download).
+  \item \textbf{Daten extrahieren.} Invoice-Nr, Betrag, Lieferant, Datum, ggf.\ Kostenstelle.
+  \item \textbf{Validierung.} Pflichtfelder, Plausibilität (Betrag $>$ 0, Datum aktuell, Lieferant bekannt).
+  \item \textbf{ERP-Maske öffnen.} Im SAP/ERP die Buchungsmaske aufrufen.
+  \item \textbf{Daten eintragen.} Felder befüllen, Konsistenzprüfung.
+  \item \textbf{Buchung vorbereiten.} Buchungssatz erzeugen, aber \emph{nicht final speichern, wenn Betrag über Freigabeschwelle}.
+  \item \textbf{Rückmeldung.} Status an Buchhaltung (E-Mail, Ticket, Statusfeld).
+  \item \textbf{Log schreiben.} Audit-Trail-Eintrag mit allen relevanten Feldern.
+  \item \textbf{Ende oder Exception Queue.} Bei Fehler $\to$ Exception Queue mit Code und Eskalations-Information.
+\end{enumerate}
+
+\subsection{Exception-Kategorien und Owner}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXX@{}}
+\toprule
+Code & Beschreibung & Owner / SLA \\
+\midrule
+MissingCostCenter & Kostenstelle fehlt im Rechnungsdokument & Buchhaltung / 4\,h \\
+UnknownVendor & Lieferant nicht im Stammdatenregister & Stammdaten-Team / 24\,h \\
+DuplicateInvoice & Rechnungsnummer bereits gebucht & Buchhaltung / 2\,h \\
+PortalUnreachable & Portal nicht erreichbar & IT / 1\,h \\
+ValidationFail & Pflichtfeldverletzung & Buchhaltung / 4\,h \\
+ApprovalRequired & Betrag über Freigabeschwelle (z.\,B.\ 10.000\,EUR) & Vorgesetzter / 1\,Werktag \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Audit Trail -- Mindestfelder}
+
+Jeder Bot-Schritt erzeugt einen Audit-Eintrag mit folgenden Pflichtfeldern:
+
+\begin{itemize}
+  \item Bot-ID + Version (welcher Bot in welcher Version lief)
+  \item Zeitstempel (mit Zeitzone)
+  \item Quelle (Mail-ID oder Portal-Download-Referenz)
+  \item Rechnungs-ID (Case-Korrelation)
+  \item Felder vor / nach (was wurde gelesen, was wurde geschrieben)
+  \item Ergebnisstatus (erfolgreich, in Queue, Exception)
+  \item Exception-Code (falls relevant)
+  \item Manuelle Übernahme (ja/nein, mit Bearbeiter-ID)
+\end{itemize}
+
+\subsection{KPI-Set für 8 Wochen}
+
+\begin{itemize}
+  \item \textbf{Durchsatz pro Tag.} Ziel +30\,\% gegenüber Baseline.
+  \item \textbf{Fehlerquote.} Ziel $-$50\,\% gegenüber Baseline.
+  \item \textbf{Exception Rate.} Ziel $\leq$ 10\,\% nach Stabilisierung (Woche 4 ff.).
+  \item \textbf{Rollback-/Correction-Quote.} Wieviele Buchungen mussten manuell korrigiert werden? Ziel $<$ 0,5\,\%.
+\end{itemize}
+
+\subsection{Frühwarnsignale für den Übergang attended $\to$ unattended}
+
+\begin{itemize}
+  \item Exception Rate steigt über 15\,\% $\to$ Übergang verzögern.
+  \item Portal-UI-Änderungen $>$ 1 pro Monat $\to$ Stabilität testen.
+  \item Korrekturen $>$ 1\,\% der Buchungen $\to$ Validierung verschärfen.
+  \item Auditor meldet Lücken im Audit Trail $\to$ Logs erweitern, dann erst weiter.
+\end{itemize}
+
+% --- 7. COACHING ---------------------------------------------------------
+\section{Coaching: RPA als verantwortete Produktivität}
+
+Der Sprung von ``RPA als Klick-Magie'' zu ``RPA als verantwortete Produktivität'' ist primär ein Denksprung, nicht ein Tooling-Sprung.
+
+\subsection{Der Automation Candidate Funnel}
+
+Wer RPA verantwortet, baut keine einzelnen Bots, sondern eine Pipeline. Vier Stufen:
+
+\begin{enumerate}
+  \item \textbf{Ideen.} Vorschläge aus den Fachbereichen, ungefiltert. ``Wir haben hier auch was Repetitives.''
+  \item \textbf{Eignungs-Check.} Bewertung gegen Eignungskriterien (regelbasiert, stabil, Volumen, Ausnahmen). Mindestens 50\,\% der Ideen scheiden hier aus.
+  \item \textbf{PoC / Pilot.} Kleiner, kontrollierter Test. Verifikation der Eignung in der Realität.
+  \item \textbf{Betrieb.} Nur Use Cases, die PoC bestanden haben und ein klares Operating-Modell haben, gehen in Produktion.
+\end{enumerate}
+
+\subsection{Ausnahmebehandlung als Kern}
+
+In jedem RPA-Projekt gilt: \emph{die Ausnahmebehandlung entscheidet über ROI}. Wenn 12\,\% der Vorgänge Ausnahmen sind und jede Ausnahme manuelle Bearbeitung kostet, kippt die Wirtschaftlichkeit schnell. Drei Disziplinen:
+
+\begin{itemize}
+  \item \textbf{Klassifizieren.} Jede Exception hat einen klaren Code. ``Sonstiger Fehler'' ist keine Klasse, sondern eine Bankrotterklärung.
+  \item \textbf{Routen.} Jede Klasse hat einen Owner und eine SLA. Niemand wartet, weil ``IT vielleicht zuständig'' ist.
+  \item \textbf{Lernen.} Exception-Daten werden regelmäßig analysiert. Wiederkehrende Ausnahmen werden entweder im Bot behandelt oder am Quellprozess gefixt.
+\end{itemize}
+
+\subsection{Senior-Reflexionsfragen}
+
+\begin{itemize}
+  \item Wo entsteht der größte Schaden bei Fehlautomation -- finanziell, Compliance, Reputation? Welcher Guardrail verhindert ihn zuverlässig?
+  \item Welche Entscheidung ist irreversibel oder teuer (Zugriffskonzept, Orchestrierung, Betriebsmodell)? Wer darf sie treffen?
+  \item Was muss als Guardrail in \emph{jedem} Bot-Design stehen, ohne Ausnahme? (Logging-Minimum, Plausibilitätsgrenzen, Stop-Conditions.)
+\end{itemize}
+
+% --- 8. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: RPA als Portfolio}
+
+Auf Wissens-Ebene ist RPA ein Werkzeug. Auf Anwendungs-Ebene ist es eine Sammlung von Bots. Auf Management-Ebene ist es ein \emph{Portfolio mit Lifecycle}.
+
+\subsection{Automation Funnel und Portfolio-Steuerung}
+
+Ein RPA-Portfolio braucht Kriterien zur Steuerung -- nicht nach Bauchgefühl, sondern nach Scoring:
+
+\begin{itemize}
+  \item \textbf{Value.} Zeitgewinn, Fehlerreduktion, SLA-Stabilität. Quantifiziert pro Use Case.
+  \item \textbf{Risk.} Schadenspotential bei Fehlautomation, Compliance-Relevanz, Reputations-Risiko.
+  \item \textbf{Effort.} Bauaufwand, laufende Wartung, Schulungsbedarf.
+\end{itemize}
+
+Ein Use Case wird priorisiert, wenn er einen hohen Wert bei akzeptablem Risiko und vertretbarem Aufwand verspricht. Use Cases mit hohem Risiko und niedrigem Wert sind keine Kandidaten -- auch wenn sie ``automatisierbar'' wären.
+
+\subsection{Kill Criteria}
+
+Wer ein Portfolio steuert, muss auch Bots \emph{abschalten} können. Drei typische Kill Criteria:
+
+\begin{itemize}
+  \item \textbf{Stabilität.} Bot fällt häufiger aus, als die manuelle Bearbeitung Zeit gespart hat.
+  \item \textbf{Compliance.} Audit-Findings, die nicht in der Zeit der laufenden Wartung behebbar sind.
+  \item \textbf{Strategischer Wechsel.} Das Zielsystem wird abgelöst -- Bot retten oder Bot retiren?
+\end{itemize}
+
+\subsection{Governance und Rollen}
+
+Eine pragmatische Rollenverteilung für ein wachsendes RPA-Programm: \quelle{vgl.\ PMI, 2021}
+
+\begin{itemize}
+  \item \fachbegriff{Bot Owner.} Verantwortet den einzelnen Bot in Build und Run. Fachlich und technisch zuständig.
+  \item \fachbegriff{Process Owner.} Fachlicher Eigentümer des Prozesses, in dem der Bot arbeitet. Definiert Anforderungen, akzeptiert Outputs.
+  \item \fachbegriff{Security Owner.} Definiert Baselines (Credentials, Vault, SoD, Logging) und prüft Ausnahmen.
+  \item \fachbegriff{Operations / Run.} Betreibt die Plattform (Orchestrator, Server, Updates), reagiert auf Incidents.
+  \item \fachbegriff{Change Advisory (light).} Kleines Gremium, das nur teure und sensible Bot-Änderungen reviewt.
+\end{itemize}
+
+\subsection{Top-Entscheidungen eines RPA-Operating-Modells}
+
+\begin{enumerate}
+  \item Welche 5 Use Cases werden zuerst angegangen?
+  \item Wo ist die Unattended-Grenze (welche Eignungs-Schwellen, welche Plattform-Reife)?
+  \item Welche Security-Baselines sind nicht verhandelbar?
+  \item Wie wird das Audit-Trail-Format vereinheitlicht?
+  \item Wie wird die Ausnahmebehandlung organisiert (CoE oder lokal)?
+  \item Wer entscheidet über das Retirement eines Bots?
+\end{enumerate}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 11]
+RPA wird wirksam, wenn die Organisation gleichzeitig \emph{Bot-Disziplin} und \emph{Portfolio-Steuerung} beherrscht. Ein einzelner Bot ist ein technisches Detail. Ein Portfolio von hundert Bots ist eine \textbf{Verantwortungsarchitektur} -- und braucht Governance, die nicht bremst, sondern befähigt.
+\end{merkbox}
+
+% --- 9. TAKE-AWAYS -------------------------------------------------------
+\section{Take-aways aus Tag 11}
+
+\begin{enumerate}
+  \item \textbf{RPA-Eignung in vier Kriterien}: Regelbasiert, Stabil, Volumen, niedrige Ausnahmen.
+  \item \textbf{Plattform-Architektur}: Studio (bauen), Orchestrator (steuern), Run-Umgebung (ausführen). Toolneutrale Begriffe.
+  \item \textbf{Attended startet schneller, unattended skaliert besser.} Eine Stufenstrategie ist meist die Antwort.
+  \item \textbf{Risiken sind asymmetrisch}: ein Bot, einmal falsch gebaut, macht denselben Fehler tausendmal.
+  \item \textbf{Ausnahmebehandlung entscheidet ROI.} Klassifizieren, routen, lernen.
+  \item \textbf{Audit Trail ist Pflicht}, nicht Kür. Wer ohne baut, hat keine Compliance-Antwort.
+  \item \textbf{Entscheidungen unter Unsicherheit}: A-V-F-K -- Annahmen, Verworfene Alternativen, Frühwarnsignale, Kill Criteria.
+  \item \textbf{RPA ist ein Portfolio}, kein einzelner Bot. Steuerung mit Value/Risk/Effort, klaren Kill Criteria, lean Governance.
+\end{enumerate}
+
+% --- 10. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Dumas, M., La Rosa, M., Mendling, J., \& Reijers, H.\,A. (2018).] \emph{Fundamentals of business process management} (2nd ed.). Springer. \href{https://doi.org/10.1007/978-3-662-56509-4}{https://doi.org/10.1007/978-3-662-56509-4}
+  \item[Kahneman, D. (2011).] \emph{Thinking, fast and slow.} Farrar, Straus and Giroux.
+  \item[Lacity, M., \& Willcocks, L.\,P. (2018).] \emph{Robotic process and cognitive automation: The next phase.} SB Publishing.
+  \item[Project Management Institute. (2021).] \emph{A guide to the Project Management Body of Knowledge (PMBOK\textregistered{} Guide)} (7th ed.). Project Management Institute.
+  \item[Scheppler, B., \& Weber, C. (2020).] Robotic Process Automation. \emph{Informatik-Spektrum, 43}(2), 152--156. \href{https://doi.org/10.1007/s00287-020-01263-6}{https://doi.org/10.1007/s00287-020-01263-6}
+  \item[Smeets, M., Erhard, R., \& Kaußler, T. (2019).] \emph{Robotic Process Automation (RPA) in der Finanzwirtschaft: Technologie -- Implementierung -- Erfolgsfaktoren.} Springer Gabler. \href{https://doi.org/10.1007/978-3-658-26564-2}{https://doi.org/10.1007/978-3-658-26564-2}
+  \item[Syed, R., Suriadi, S., Adams, M., Bandara, W., Leemans, S.\,J.\,J., Ouyang, C., ter Hofstede, A.\,H.\,M., van de Weerd, I., Wynn, M.\,T., \& Reijers, H.\,A. (2020).] Robotic process automation: Contemporary themes and challenges. \emph{Computers in Industry, 115}, 103162. \href{https://doi.org/10.1016/j.compind.2019.103162}{https://doi.org/10.1016/j.compind.2019.103162}
+  \item[van der Aalst, W.\,M.\,P., Bichler, M., \& Heinzl, A. (2018).] Robotic process automation. \emph{Business \& Information Systems Engineering, 60}(4), 269--272. \href{https://doi.org/10.1007/s12599-018-0542-4}{https://doi.org/10.1007/s12599-018-0542-4}
+  \item[Willcocks, L.\,P., Lacity, M., \& Craig, A. (2017).] Robotic process automation: Strategic transformation lever for global business services? \emph{Journal of Information Technology Teaching Cases, 7}(1), 17--28. \href{https://doi.org/10.1057/s41266-016-0016-9}{https://doi.org/10.1057/s41266-016-0016-9}
+\end{description}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Attended Bot] RPA-Bot, der am Arbeitsplatz eines Mitarbeitenden läuft; vom Mitarbeitenden getriggert und überwacht. Geeignet für Assistenz und Teilschritte.
+  \item[Audit Trail] Lückenlose Aufzeichnung aller Bot-Aktionen mit Bot-ID, Version, Quelle, Aktion, Ergebnis, Bearbeiter und Begründung. Pflicht für regulierte Prozesse.
+  \item[Automation Funnel] Trichterförmiger Auswahlprozess: Ideen $\to$ Eignungs-Check $\to$ PoC $\to$ Pilot $\to$ Betrieb. Filtert ungeeignete Use Cases früh aus.
+  \item[Bot Owner] Verantwortlich für einen einzelnen Bot in Build und Run. Fachlich und technisch zuständig.
+  \item[Citizen Developer] Fachbereichsperson, die mit Low-Code-Werkzeugen Automation baut. Effizient mit Standards, gefährlich ohne.
+  \item[Credential Vault] Zentrales System zur sicheren Verwaltung von Zugangsdaten. Bots greifen über Tokens darauf zu, keine Passwörter im Code.
+  \item[Exception Queue] Warteschlange für Vorgänge, die der Bot nicht verarbeiten konnte. Wird nach Code/Owner/SLA bearbeitet.
+  \item[Idempotenz] Eigenschaft: mehrfache Ausführung erzeugt dasselbe Ergebnis wie eine einzige. In RPA wichtig bei Retries und Wiederanlaufen.
+  \item[Kill Criteria] Vorab definierte Schwellen, ab denen ein Bot abgeschaltet wird (z.\,B.\ Exception Rate, Fehlbuchungsquote).
+  \item[Least Privilege] Sicherheitsprinzip: Ein Bot bekommt nur die Rechte, die er für seine Aufgabe braucht -- nicht mehr.
+  \item[Orchestrator] Zentrales Steuerungs- und Monitoring-System einer RPA-Plattform. Verwaltet Bots, Queues, Credentials, Logs.
+  \item[Process Owner] Fachlicher Eigentümer des Prozesses, in dem der Bot arbeitet. Definiert Anforderungen, akzeptiert Outputs.
+  \item[RPA] \emph{Robotic Process Automation.} Software, die UI-basierte oder schnittstellenbasierte Aufgaben wie ein menschlicher Anwender ausführt. \quelle{van der Aalst et al., 2018}
+  \item[Run-Umgebung] Ausführungsknoten eines Bots -- Arbeitsplatz (attended) oder Server/VM (unattended). Mit Isolation, Ressourcen, Verfügbarkeit.
+  \item[Schatten-IT] IT-Lösungen, die ohne offizielle Freigabe oder Inventur in Fachbereichen entstehen. Häufiges Risiko bei unkontrollierter RPA-Einführung.
+  \item[Segregation of Duties (SoD)] Regel: kritische Aktionen werden nicht von einer Person (oder einem Bot) allein ausgeführt. ``Anlegen'' und ``Freigeben'' getrennt.
+  \item[Studio / Designer] Werkzeug zum Bauen von Bots. Enthält Workflows, Activities, Variablen, Bedingungen.
+  \item[Unattended Bot] RPA-Bot, der serverseitig vollautomatisch läuft, ohne menschliche Anwesenheit. Höhere Skalierung, höhere Governance-Anforderungen.
+  \item[Workflow (in RPA)] Zusammenhängende Folge von Activities innerhalb eines Bots. Bausteine: Sequenzen, Verzweigungen, Schleifen.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 11 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

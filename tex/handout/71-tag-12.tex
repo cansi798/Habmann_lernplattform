@@ -1,0 +1,765 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 12 - Lehrskript
+% RPA skalieren ohne Kontrollverlust
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 12}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Governance \textperiodcentered{} Audit \textperiodcentered{} Security}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 5 \textperiodcentered{} TAG 12 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 15.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}RPA skalieren\\ohne\\Kontrollverlust\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Governance, Audit Trail, Exceptions, Security by Design --\\und Change Management als Verantwortungsarchitektur.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 12 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Tag 11 hat gezeigt, dass RPA als Steuerungshebel verstanden werden muss. Heute geht es darum, ein wachsendes RPA-Portfolio \emph{auditfähig und sicher zu skalieren}: Governance leicht, aber verbindlich, Audit Trail als Standard, Exception Handling als Disziplin, Security by Design als Pflicht und Change Management als Teil des Designs -- nicht als Nachtrag.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Bot-Lifecycle und Governance-Bausteine kennen: Idea $\to$ Assessment $\to$ Design $\to$ Build $\to$ Test $\to$ Deploy $\to$ Run $\to$ Improve $\to$ Retire.
+  \item Rollen und Rollenträger im RPA-Operating-Modell unterscheiden (Process Owner, Bot Owner, Developer, Reviewer, Security, Operations, Change).
+  \item Audit-Trail-Anforderungen verstehen: Traceability, Aufbewahrung, Access-Kontrolle, Beweisführung.
+  \item Exception-Klassen (Business, System, Data, Security) und Security-by-Design-Prinzipien (Least Privilege, SoD, Vault) einordnen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Ein ``Minimum Viable Governance''-Modell entwerfen (Rollen, Lifecycle, Freigaben, Standards).
+  \item Audit-Trail-Standard inkl.\ Aufbewahrung und Access-Regeln festlegen.
+  \item Exception-Codes und 5 Exception-Playbooks (Eskalation, Owner, SLA) ableiten.
+  \item Security-Guardrails (Account-/Credential-Konzept, SoD, Logging-Integrität) anwenden.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Risk Appetite definieren und Bots in Low/Medium/High Risk klassifizieren.
+  \item CoE vs.\ Föderation als bewusste Entscheidung treffen, mit Frühwarnsignalen.
+  \item Fast-Track-Grenzen und Stop-Conditions verankern.
+  \item Change Management von Beginn an im Operating Model verankern (Akzeptanz, Rollenwandel, Kommunikation).
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+RPA skaliert dort, wo Governance \emph{leicht} und Disziplin \emph{konsequent} ist. Hundert Bots ohne Audit Trail sind ein Compliance-Albtraum -- hundert Bots mit überreguliertem Prozess sind ein Innovationsfriedhof. Senior-Verantwortung heißt: das Gleichgewicht aus Geschwindigkeit und Nachweisbarkeit explizit zu entscheiden, nicht zu hoffen, dass es entsteht. \quelle{vgl.\ ISACA, 2018; Smeets et al., 2019}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Warum Skalierung neue Probleme erzeugt}
+
+Wer in einem Pilot fünf Bots betreibt, kennt jeden mit Namen. Wer in der Skalierung 80 Bots betreibt, kennt nur noch die, die ärgerlich sind. Diese qualitative Veränderung ist der eigentliche Skalierungssprung -- nicht die Anzahl. Mit jeder Vervielfachung der Bots wachsen drei Klassen von Risiken nicht linear, sondern überproportional: Governance, Audit und Security.
+
+\subsection{Drei typische Skalierungs-Pathologien}
+
+\begin{enumerate}
+  \item \fachbegriff{Wildwuchs.} Jeder baut, wie er will. Naming-Konventionen variieren, Logging ist unterschiedlich, Exception-Codes existieren in zehn Varianten. Eine zentrale Auswertung wird unmöglich.
+  \item \fachbegriff{Compliance-Schock.} Der Auditor entdeckt im Audit-Sampling Bots ohne Logging, ohne Versionierung, mit shared Credentials. Folge: Stoppanordnung, Sonderprüfung, Reputationsschaden.
+  \item \fachbegriff{Operationaler Stillstand.} Ein Portal-Update legt 15 Bots gleichzeitig lahm, niemand weiß, welche prioritär sind, alle Owner werden gleichzeitig kontaktiert. Reibung, Eskalationen, Vertrauensverlust.
+\end{enumerate}
+
+\subsection{Was Governance leisten muss}
+
+Governance ist nicht ``Bürokratie für Auditoren'', sondern eine Sammlung von Mechanismen, die Skalierung möglich machen: \quelle{ISACA, 2018}
+
+\begin{itemize}
+  \item \textbf{Vergleichbarkeit.} Bots werden so gebaut, dass sie sich vergleichen lassen (Naming, Logging, Versionierung).
+  \item \textbf{Auffindbarkeit.} Wer welchen Bot wann gebaut hat, ist im zentralen Inventar nachvollziehbar.
+  \item \textbf{Steuerbarkeit.} Bots können kontrolliert pausiert, neu deployed, abgeschaltet werden -- ohne dass es von der Erinnerung einzelner Personen abhängt.
+  \item \textbf{Lernfähigkeit.} Aus Incidents und Findings entstehen Verbesserungen des Standards -- nicht nur Reparaturen einzelner Bots.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{V-A-S-L}]
+Was eine Governance für skalierendes RPA leisten muss:\\[2pt]
+\textbf{V}ergleichbarkeit (einheitliche Standards)\\
+\textbf{A}uffindbarkeit (zentrales Inventar)\\
+\textbf{S}teuerbarkeit (kontrollierte Lifecycle-Operationen)\\
+\textbf{L}ernfähigkeit (Standards entwickeln sich weiter)\\[2pt]
+\emph{Wer V-A-S-L verfehlt, hat keine Governance -- nur Dokumente.}
+\end{eselsbox}
+
+% --- 2. BOT-LIFECYCLE -----------------------------------------------------
+\section{Bot-Lifecycle: vom Vorschlag bis zum Retirement}
+
+Jeder Bot durchläuft idealerweise einen klar definierten Lifecycle. Wer den Lifecycle überspringt oder verkürzt, holt sich später Probleme in Geschwindigkeit, Qualität oder Compliance. \quelle{Smeets et al., 2019, Kap.~4}
+
+\subsection{Die neun Phasen}
+
+\begin{enumerate}
+  \item \fachbegriff{Idea.} Eine Idee aus dem Fachbereich. Noch ungeprüft.
+  \item \fachbegriff{Assessment.} Eignung (Regelbasiert? Stabil? Volumen? Ausnahmen?) und Risikoklasse (Low/Medium/High) werden bestimmt.
+  \item \fachbegriff{Design.} Anforderungen, Bot-Flow, Exception-Strategie, Logging-Konzept, Security-Anforderungen werden festgelegt.
+  \item \fachbegriff{Build.} Entwicklung im Studio, gegen Standards.
+  \item \fachbegriff{Test.} Unit, Integration, UAT (User Acceptance Test) mit den Fachbereichen.
+  \item \fachbegriff{Deploy.} Übergabe in die produktive Orchestrierung, mit Smoke Tests.
+  \item \fachbegriff{Run.} Laufender Betrieb mit Monitoring, Exception Handling, regelmäßigem Health-Check.
+  \item \fachbegriff{Improve.} Verbesserungen aufgrund von Incidents, Exceptions, neuer Anforderungen.
+  \item \fachbegriff{Retire.} Geplante Abschaltung mit Daten-Archivierung, Übergangs-Plan, Dokumentation.
+\end{enumerate}
+
+\subsection{Lebenszyklus-Disziplin in der Praxis}
+
+In gewachsenen Programmen sind oft die ersten und letzten Phasen schwach: Idea wird ohne Assessment direkt gebaut (``ich kenne den Prozess''), und Retire wird vergessen, sodass alte Bots Zombies werden -- niemand betreibt sie aktiv, aber sie laufen und konsumieren Credentials und Logs.
+
+Drei Disziplinen:
+
+\begin{itemize}
+  \item \textbf{Intake-Pflicht.} Keine Entwicklung ohne Assessment-Eintrag. Auch wenn der Use Case ``offensichtlich'' wirkt -- Assessment kostet 15 Minuten, spart später Tage.
+  \item \textbf{Run-Hygiene.} Mindestens quartalsweise Review pro Bot: läuft er noch? wird er noch genutzt? sind die SLAs erfüllt? hat sich das Zielsystem geändert?
+  \item \textbf{Retire-Konsequenz.} Ein Bot, der nicht mehr gebraucht wird, wird abgeschaltet. Nicht ``vielleicht später nochmal'' -- mit Dokumentation und Daten-Archivierung.
+\end{itemize}
+
+% --- 3. ROLLEN -----------------------------------------------------------
+\section{Rollen und RACI in einem RPA-Operating-Modell}
+
+Ein wachsendes Programm braucht klare Rollen. Sechs Kernrollen reichen für die meisten Organisationen: \quelle{PMI, 2021}
+
+\subsection{Die sechs Kernrollen}
+
+\begin{itemize}
+  \item \fachbegriff{Process Owner.} Fachlicher Eigentümer des Prozesses, in dem der Bot arbeitet. Definiert Anforderungen, akzeptiert Outputs, verantwortet fachliche Korrektheit.
+  \item \fachbegriff{Bot Owner.} Verantwortet einen konkreten Bot in Build und Run. Eine Person, nicht ein Verteiler.
+  \item \fachbegriff{Developer.} Baut den Bot im Studio, gegen Standards.
+  \item \fachbegriff{Reviewer / QA.} Prüft Bot gegen Naming, Tests, Logging, Security-Baselines vor Deployment.
+  \item \fachbegriff{Security Owner.} Definiert Baselines (Credentials, Vault, Logging, SoD) und prüft Ausnahmen.
+  \item \fachbegriff{Operations / Run.} Betreibt die Plattform (Orchestrator, Server, Updates), reagiert auf Incidents, verantwortet MTTR.
+\end{itemize}
+
+\subsection{RACI für eine Bot-Änderung}
+
+\begin{tabularx}{\linewidth}{@{}l X X X X X X@{}}
+\toprule
+& \textbf{P.\,Owner} & \textbf{Bot Owner} & \textbf{Dev} & \textbf{QA} & \textbf{Sec} & \textbf{Ops} \\
+\midrule
+Anforderung & A & R & C & I & I & I \\
+Design (Low Risk) & C & R/A & C & I & I & I \\
+Design (High Risk) & C & R & C & A & A & I \\
+Build & I & A & R & I & I & I \\
+Review / QA & I & C & C & R/A & C & I \\
+Deploy & I & A & C & I & I & R \\
+Run / Monitoring & I & A & I & I & I & R \\
+Retire & A & R & C & I & C & C \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Die Matrix zeigt: Low-Risk-Bots brauchen wenig Approval, High-Risk-Bots brauchen mehr -- das ist \emph{Risk-based Releases} in der RACI-Praxis.
+
+\subsection{Fast Track für kleine Bots}
+
+Nicht jeder Bot braucht das volle Programm. Wer das nicht differenziert, erstickt an seinem eigenen Prozess. Ein \fachbegriff{Fast Track} für Low-Risk-Bots ist legitim, wenn:
+
+\begin{itemize}
+  \item Das Risiko klar als Low klassifiziert ist (keine sensiblen Daten, keine finanziellen Buchungen, kein Compliance-Bezug).
+  \item Mindestens eine QA-Prüfung erfolgt (Tests grün, Logging vorhanden).
+  \item Der Bot Owner verbindlich benannt ist.
+  \item Im Incident-Fall klare Eskalation existiert.
+\end{itemize}
+
+\begin{merkbox}[Fast Track $\neq$ no Track]
+Ein Fast Track ist keine Erlaubnis, alles wegzulassen -- sondern eine Reduktion der Reviews. Das Logging-Minimum, der Bot Owner und die Tests sind nicht verhandelbar. Wer Fast Track als ``schnell und schmutzig'' liest, baut sich seine eigenen Audit-Findings.
+\end{merkbox}
+
+% --- 4. AUDIT TRAIL ------------------------------------------------------
+\section{Audit Trail Management: Beweisführung im Sekundentakt}
+
+Ein Bot, der hundert Buchungen pro Stunde macht, erzeugt potenziell hundert prüfungsrelevante Ereignisse pro Stunde. Wenn diese nicht systematisch dokumentiert sind, wird jede Audit-Anfrage zur Suchaktion. \quelle{ISACA, 2018}
+
+\subsection{Was ein Audit Trail beantworten muss}
+
+Der \emph{klassische W-Fragen-Katalog} der Audit-Disziplin:
+
+\begin{itemize}
+  \item \textbf{Wer?} Welcher Bot in welcher Version? Welcher menschliche Beteiligte bei manueller Übernahme?
+  \item \textbf{Was?} Welche Aktion wurde ausgeführt? Welche Daten gelesen, welche geschrieben?
+  \item \textbf{Wann?} Mit präzisem Zeitstempel inklusive Zeitzone.
+  \item \textbf{Womit?} Welche Quelle (Mail-ID, Portal-Datei, Eingangs-Queue)?
+  \item \textbf{Ergebnis?} Erfolgreich, in Queue, Exception (welcher Code)?
+  \item \textbf{Begründung?} Bei Ausnahmen und manuellen Eingriffen: Warum?
+\end{itemize}
+
+\subsection{Traceability über Systemgrenzen}
+
+Ein Bot bewegt sich häufig durch mehrere Systeme. Eine \fachbegriff{Korrelations-ID} (Case-ID, Vorgangs-ID) verbindet alle Spuren des gleichen Vorgangs. Ohne sie bleiben Logs Inseln, mit ihr entsteht eine durchgängige Spur.
+
+Drei Schichten:
+
+\begin{itemize}
+  \item \textbf{Bot-Log.} Was hat der Bot intern getan?
+  \item \textbf{Zielsystem-Log.} Welche Aktionen wurden in ERP/CRM/Portal ausgeführt? Idealerweise mit derselben Korrelations-ID.
+  \item \textbf{Orchestrator-Log.} Welche Bots, welche Maschinen, welche Queues -- übergreifend.
+\end{itemize}
+
+\subsection{Aufbewahrung und Access}
+
+\begin{itemize}
+  \item \textbf{Aufbewahrungsdauer.} Je nach Regulatorik -- typischerweise 2 bis 10 Jahre. Steuerrelevante Buchungen oft 10 Jahre, allgemeine IT-Logs eher 6--24 Monate.
+  \item \textbf{Speicherort.} Zentral, mit Backup, mit Manipulationsschutz (idealerweise append-only oder mit kryptographischer Signatur).
+  \item \textbf{Access-Kontrolle.} Wer darf Logs einsehen? Role-based: Bot Owner sieht ``seine'' Logs, Auditor sieht alle aggregiert, Security sieht relevante Security-Events.
+  \item \textbf{Exportfähigkeit.} Für Audits muss eine kontrollierte Extraktion möglich sein -- maschinenlesbar, mit definiertem Schema.
+\end{itemize}
+
+\begin{merkbox}[Append-only als Schutzprinzip]
+Ein Audit Trail, der nachträglich geändert werden kann, ist keiner. Das Prinzip \emph{Append-only} (Einträge können hinzugefügt, aber nicht geändert oder gelöscht werden) ist der einzige verlässliche Schutz gegen Manipulation -- ob versehentlich oder vorsätzlich.
+\end{merkbox}
+
+% --- 5. EXCEPTION HANDLING -----------------------------------------------
+\section{Exception Handling: kontrolliert scheitern}
+
+Ein Bot, der nicht weiß, was er bei Fehlern tun soll, ist ein Bot, der gefährlich ist. Eine systematische Exception-Strategie ist die Grundlage skalierender RPA. \quelle{Smeets et al., 2019, Kap.~6}
+
+\subsection{Drei Exception-Klassen}
+
+\begin{itemize}
+  \item \fachbegriff{Business Exception.} Fachlich begründete Ausnahme: ``ApprovalRequired'', ``DuplicateInvoice'', ``ContractExpired''. Erfordert fachliche Bearbeitung.
+  \item \fachbegriff{System Exception.} Technische Ausnahme: ``ERPDown'', ``Timeout'', ``ConnectionLost''. Erfordert Retry-Strategie oder Eskalation an IT.
+  \item \fachbegriff{Data Exception.} Datenqualitätsausnahme: ``MissingCostCenter'', ``InvalidIBAN'', ``UnknownVendor''. Erfordert Datenkorrektur an der Quelle oder im Bot.
+\end{itemize}
+
+\subsection{Das ``Fail-safe''-Prinzip}
+
+Ein guter Bot scheitert \emph{kontrolliert}: er bricht ab, schreibt einen Eintrag in die Exception Queue, dokumentiert den Code, übergibt an die zuständige Rolle -- und lässt nicht halbfertige Zustände im Zielsystem zurück.
+
+Drei Regeln:
+
+\begin{enumerate}
+  \item \textbf{Transactional.} Wenn der Bot eine ``Anlage'' und eine ``Freigabe'' macht: entweder beide oder keine. Halbe Vorgänge sind die teuersten Bugs.
+  \item \textbf{Logged.} Jede Exception erzeugt einen Eintrag mit Code, Kontext und Bot-Version. Ohne Log ist sie nicht analysierbar.
+  \item \textbf{Routed.} Jede Exception-Klasse hat einen vorab definierten Owner und SLA. Niemand wartet, weil ``vielleicht IT'' zuständig sei.
+\end{enumerate}
+
+\subsection{Exception-Playbooks}
+
+Ein \fachbegriff{Playbook} ist eine kurze Handlungsanweisung für eine Exception-Klasse:
+
+\begin{itemize}
+  \item \textbf{Trigger.} Wann wird das Playbook aufgerufen?
+  \item \textbf{Diagnose.} Welche Information benötigt der Bearbeiter sofort?
+  \item \textbf{Aktionen.} Erste, zweite, dritte Handlungsoption.
+  \item \textbf{Eskalation.} Wann an wen, mit welchen Informationen?
+  \item \textbf{Schließung.} Wie wird der Vorgang final dokumentiert und in den Bot-Lauf zurückgegeben?
+\end{itemize}
+
+Beispielhaftes Playbook für ``ERPDown'':
+
+\begin{enumerate}
+  \item Retry 3 Mal mit exponentiellem Backoff (1\,min, 5\,min, 15\,min).
+  \item Wenn weiterhin Fehler: Ticket an IT mit Bot-ID, Vorgangsanzahl in Queue, Zeitstempel.
+  \item Eskalation nach 2 Stunden ohne IT-Response an IT-Lead.
+  \item Bei Wiederverfügbarkeit: Queue automatisch abarbeiten, Statusmeldung an Bot Owner.
+\end{enumerate}
+
+\subsection{Exception-KPIs}
+
+\begin{itemize}
+  \item \fachbegriff{Exception Rate.} Anteil Vorgänge mit Exception. Zielmarke häufig $\leq$ 10--12\,\% nach Stabilisierung.
+  \item \fachbegriff{MTTR pro Exception.} Wie lange dauert die Bearbeitung im Schnitt? Niedrige MTTR bedeutet eingespielte Playbooks.
+  \item \fachbegriff{Recurrence Rate.} Anteil wiederkehrender Exceptions. Hohe Quote = strukturelles Problem, niedrige Quote = Einzelfälle.
+\end{itemize}
+
+% --- 6. SECURITY BY DESIGN -----------------------------------------------
+\section{Security by Design: der Bot als privilegierter Mitarbeiter}
+
+Ein RPA-Bot ist nicht ``nur eine Software'' -- er hat Zugriff auf Systeme, kann Daten lesen, kann Transaktionen auslösen. Aus Sicherheitssicht ist er ein \emph{privilegierter Mitarbeiter}. Was für menschliche Privilegien gilt, gilt auch für Bots. \quelle{Saltzer \& Schroeder, 1975; ISO/IEC, 2022}
+
+\subsection{Die Grundprinzipien (Saltzer \& Schroeder, 1975)}
+
+Die 1975 von Saltzer und Schroeder formulierten Prinzipien sind heute immer noch das Fundament: \quelle{Saltzer \& Schroeder, 1975}
+
+\begin{itemize}
+  \item \fachbegriff{Least Privilege.} Der Bot hat nur die Rechte, die er für seine Aufgabe braucht -- nicht mehr.
+  \item \fachbegriff{Economy of Mechanism.} Das Sicherheitsdesign ist so einfach wie möglich -- komplexes Design erzeugt schwer zu prüfende Lücken.
+  \item \fachbegriff{Fail-safe Defaults.} Im Zweifelsfall verweigert das System Zugriff, statt ihn zu erlauben.
+  \item \fachbegriff{Complete Mediation.} Jeder Zugriff wird geprüft, nicht nur der erste.
+  \item \fachbegriff{Separation of Privilege.} Sensible Operationen verlangen mehrere unabhängige Bedingungen.
+\end{itemize}
+
+\subsection{Account- und Credential-Konzept}
+
+\begin{itemize}
+  \item \textbf{Eigene Bot-Accounts.} Bots dürfen nicht unter Mitarbeiter-Accounts laufen. Sonst ist im Audit unklar, wer was getan hat.
+  \item \textbf{Vault-Pflicht.} Passwörter, API-Keys, Zertifikate werden in einem Credential Vault gespeichert. Bots holen Tokens, nie Klartext-Passwörter.
+  \item \textbf{Least Privilege.} Wenn ein Bot nur lesen muss, bekommt er nur Leserechte. Nicht der ``Standard-Account mit allem''.
+  \item \textbf{Rotations-Disziplin.} Passwörter werden regelmäßig rotiert -- automatisiert, nicht händisch.
+\end{itemize}
+
+\subsection{Segregation of Duties (SoD)}
+
+Eine klassische Sicherheitsregel: kritische Aktionen werden nicht von einer Person (oder einem Bot) allein durchgeführt. ``Anlegen'' und ``Freigeben'' bleiben getrennt. Wer dieses Prinzip im manuellen Prozess hat, darf es im automatisierten nicht aufgeben -- nur weil ``der Bot ja zuverlässig ist''. \quelle{ISACA, 2018}
+
+\subsection{Logging-Integrität}
+
+Logs, die von dem Bot manipulierbar sind, dessen Aktionen sie protokollieren, sind kein Audit Trail. Drei Maßnahmen:
+
+\begin{itemize}
+  \item \textbf{Append-only.} Logs werden geschrieben, nicht geändert.
+  \item \textbf{Separater Account.} Der Bot-Account hat keine Schreibrechte auf den Log-Speicher; der Logging-Service hat sie.
+  \item \textbf{Kryptographische Signatur.} Bei sensitiven Logs werden Einträge signiert; eine nachträgliche Änderung wäre erkennbar.
+\end{itemize}
+
+% --- 7. CHANGE MANAGEMENT ------------------------------------------------
+\section{Change Management: vom Erfassen zum Entscheiden}
+
+Wer RPA einführt, ändert nicht ``nur Tools''. Mitarbeitende, die früher manuell Rechnungen erfasst haben, müssen heute Exceptions bearbeiten und Bots überwachen. Das ist eine andere Tätigkeit -- und sie wird nicht von selbst gut, wenn niemand sie unterstützt. \quelle{Kotter, 1996}
+
+\subsection{Der Rollenwandel}
+
+Vor RPA: ``Ich erfasse Rechnungen.'' Nach RPA: ``Ich überwache Bots, bearbeite Ausnahmen und entscheide, wenn etwas nicht passt.''
+
+Das ist eine \emph{kognitiv anspruchsvollere} Tätigkeit. Sie verlangt:
+
+\begin{itemize}
+  \item Verständnis des Gesamtprozesses (nicht nur des eigenen Schrittes).
+  \item Entscheidungsfähigkeit unter Zeitdruck.
+  \item Vertrauen in das eigene Urteil bei Ausnahmen.
+  \item Bereitschaft, Verbesserungsvorschläge zu machen.
+\end{itemize}
+
+\subsection{Kotter's 8 Steps -- kompakt}
+
+John P.\ Kotter hat 1996 ein Modell für Change-Initiativen formuliert, das heute Standard ist. Übertragen auf RPA: \quelle{Kotter, 1996}
+
+\begin{enumerate}
+  \item \textbf{Sense of Urgency.} Warum ist Veränderung jetzt nötig? Konkret, glaubwürdig.
+  \item \textbf{Guiding Coalition.} Wer treibt es? Eine kleine Gruppe mit Mandat und Energie.
+  \item \textbf{Vision.} Wie sieht der Endzustand aus? Ein Satz, der zieht.
+  \item \textbf{Communicate.} Häufig, in mehreren Kanälen, vor allem in den ersten Wochen.
+  \item \textbf{Empower.} Hindernisse beseitigen, Trainings anbieten, Entscheidungsbefugnis geben.
+  \item \textbf{Quick Wins.} Erste Erfolge sichtbar machen, früh und ehrlich.
+  \item \textbf{Sustain Acceleration.} Nicht nach den ersten Erfolgen aufhören -- weiter ausrollen, weiter verbessern.
+  \item \textbf{Institutionalize.} Standards, Routinen, KPIs verankern, dass es nicht ``wegbricht'' wenn der Sponsor wechselt.
+\end{enumerate}
+
+\subsection{Akzeptanz: Transparenz, Nutzen, Würde}
+
+Drei Botschaften, die in jeder RPA-Einführung explizit kommuniziert werden müssen:
+
+\begin{itemize}
+  \item \textbf{Transparenz.} Was tut der Bot, was nicht? Welche Daten sieht er? Wer prüft ihn?
+  \item \textbf{Nutzen.} Was bringt der Bot \emph{mir} als Mitarbeitendem -- nicht nur dem Unternehmen?
+  \item \textbf{Würde.} Der Bot nimmt repetitive Aufgaben, nicht ``meinen Wert''. Das muss gezeigt werden, nicht nur gesagt.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{T-N-W}]
+Drei Botschaften, die jede RPA-Einführung tragen müssen:\\[2pt]
+\textbf{T}ransparenz -- was tut der Bot, was nicht?\\
+\textbf{N}utzen -- was bringt er \emph{mir}?\\
+\textbf{W}ürde -- Bots nehmen Aufgaben, nicht Wert.\\[2pt]
+\emph{Ohne T-N-W bleibt jede Schulung Theaterdonner.}
+\end{eselsbox}
+
+% --- 8. FALLSTUDIE PHARMADISTRIB -----------------------------------------
+\section{Fallstudie: PharmaDistrib -- RPA im regulierten Umfeld}
+
+\emph{PharmaDistrib} ist ein pharmazeutischer Distributor. Das Unternehmen ist auditkritisch und steht unter strenger regulatorischer Aufsicht. RPA soll in Finance und Supply Chain ausgerollt werden: 10 Bots in 3 Monaten. Restriktionen: 10 Wochen bis zum Audit-Sampling, Budget 160\,k EUR, begrenzte Security-Kapazität, Datenklassifikation teilweise unklar.
+
+\subsection{Minimum Viable Governance}
+
+Risk-based Releases:
+
+\begin{itemize}
+  \item \textbf{Low-Risk-Bots} (keine sensitiven Daten, keine Buchungen): 1 Gate (QA grün) plus Bot-Owner-Approval.
+  \item \textbf{Medium-Risk} (Daten ohne Personenbezug, kleine Buchungen): 2 Gates (QA + Process Owner).
+  \item \textbf{High-Risk} (Pflichtige Buchungen, sensitive Daten): 3 Gates (QA + Security Owner + Process Owner).
+\end{itemize}
+
+Die RACI ist verbindlich; ein Bot ohne benannten Bot Owner darf nicht in Produktion.
+
+\subsection{Audit Trail Standard}
+
+Pflichtfelder pro Eintrag:
+
+\begin{itemize}
+  \item Bot-ID + Version
+  \item Eingang-Referenz (Mail-ID, Dokument-ID, Vorgangs-ID)
+  \item Aktion (z.\,B.\ ``Buchung Lieferanten-Rechnung X''),
+  \item Ergebnisstatus (success, queued, exception),
+  \item Exception-Code (falls relevant),
+  \item Bearbeiter bei manueller Übernahme (User-ID),
+  \item Reason (bei Ausnahme / Override),
+  \item Ticket-ID (wenn aus Exception ein Ticket geworden ist).
+\end{itemize}
+
+Logs werden \emph{zentral, append-only}, mit \emph{Role-Based-Access} verwaltet. Aufbewahrung 5 Jahre (regulatorisch). Exportfähigkeit für Audit-Sampling ist vorgesehen.
+
+\subsection{Exception-Architektur}
+
+Codes:
+
+\begin{itemize}
+  \item \textbf{Data.} MissingCostCenter, UnknownVendor, InvalidIBAN.
+  \item \textbf{Business.} ApprovalRequired, DuplicateInvoice, ContractExpired.
+  \item \textbf{System.} ERPDown, Timeout, ConnectionLost.
+  \item \textbf{Security.} AuthFail, UnauthorizedField, VaultUnreachable.
+\end{itemize}
+
+Playbooks definieren Owner und SLA. Beispiel: ``ERPDown $\to$ Retry $3\times$ $\to$ Ticket an IT $\to$ Eskalation nach 2\,h''. KPIs: Exception Rate $\leq$ 12\,\% nach Stabilisierung; MTTR pro Exception $<$ 4\,h.
+
+\subsection{Security-Guardrails}
+
+\begin{itemize}
+  \item Bot-Accounts getrennt, mit Least Privilege.
+  \item Credentials im Vault, nie in Skripten oder Konfigurationen.
+  \item SoD: Bot darf eine Anlage durchführen, aber keine Freigabe; Freigabe bleibt menschliche Entscheidung.
+  \item Logging append-only, mit separater Storage-Identity.
+  \item Quartalsweise Security-Review für High-Risk-Bots.
+\end{itemize}
+
+\subsection{Change-Paket}
+
+Kommunikationsbotschaft: ``Bots übernehmen Routine, Menschen übernehmen Entscheidungen und Exceptions.'' Trainingspfad: zweistufig -- Operator-Schulung (Exception-Bearbeitung, Playbook-Anwendung) und Owner-Schulung (Monitoring, KPI-Lesen, Verbesserung). Champions-Netzwerk: pro Bereich eine Person mit erweitertem Training, die im Alltag Fragen beantwortet. Feedbackkanal: monatlicher Pulse-Survey + offene Q\&A.
+
+\subsection{Frühwarnsignale}
+
+\begin{itemize}
+  \item Exception Rate steigt über 18\,\% in einer Woche $\to$ Bot pausieren, Ursache analysieren.
+  \item UI-Änderungen $>$ 1 pro Monat im selben Portal $\to$ Stabilität testen, ggf.\ API suchen.
+  \item Audit-Findings im internen Sampling $\to$ sofortiges Review-Gate verschärfen.
+  \item Anstieg ``manuelle Übernahme''-Quote $\to$ Anzeichen, dass Vertrauen erodiert oder Datenqualität sinkt.
+\end{itemize}
+
+% --- 9. COACHING ---------------------------------------------------------
+\section{Coaching: Governance als Enablement}
+
+Der häufige Fehler reifer Programme: Governance wird zum Selbstzweck. Reviews dauern länger als der Bau, Standards werden detaillierter, jede Ausnahme braucht ein Komitee. Folge: die Fachbereiche \emph{umgehen} die Governance -- Schatten-Bots entstehen, das Vertrauen sinkt.
+
+Senior-Disziplin: Governance als \emph{Enablement} verstehen.
+
+\subsection{Drei Regeln einer leichten Governance}
+
+\begin{enumerate}
+  \item \textbf{Wenige Regeln, klar formuliert.} Lieber zehn Regeln, die jeder kennt, als hundert, die niemand findet.
+  \item \textbf{Risk-based.} Low-Risk schnell, High-Risk gründlich -- nicht alles gleich behandeln.
+  \item \textbf{Messbar.} Jede Regel hat eine Messgröße. Was nicht gemessen wird, wird nicht eingehalten.
+\end{enumerate}
+
+\subsection{Audit Trail als Lernquelle}
+
+Ein gutes Audit-Trail ist nicht nur Compliance-Nachweis -- es ist Debugging, Performance-Analyse und Verbesserungsquelle. Drei Anwendungen:
+
+\begin{itemize}
+  \item \textbf{Debugging.} Bei einem Vorfall lässt sich Schritt für Schritt rekonstruieren, was passiert ist.
+  \item \textbf{Performance.} Welche Schritte dauern am längsten? Wo sammeln sich Vorgänge in Queues?
+  \item \textbf{Lernen.} Welche Exception-Klassen treten am häufigsten auf? Wo lohnt sich Investition in Robustheit?
+\end{itemize}
+
+\subsection{Senior-Reflexionsfragen}
+
+\begin{itemize}
+  \item Welche 3 Guardrails verhindern ``große Schäden'' bei RPA am zuverlässigsten?
+  \item Wo ist der Governance-Engpass (Security, QA, Fachfreigabe) -- und wie wird er entlastet, ohne Standards aufzuweichen?
+  \item Wie wird Verantwortlichkeit sichtbar, ohne Angstkultur zu erzeugen?
+\end{itemize}
+
+% --- 10. MANAGEMENT-PERSPEKTIVE ------------------------------------------
+\section{Management-Perspektive: CoE vs.\ Föderation}
+
+Eine zentrale strategische Frage in skalierender RPA: \emph{CoE oder Föderation?}
+
+\subsection{CoE -- zentrales Center of Excellence}
+
+Ein \fachbegriff{Center of Excellence} ist ein dedizierter Bereich, der alle Bots zentral baut und betreibt. \quelle{Lacity \& Willcocks, 2018}
+
+\begin{itemize}
+  \item \textbf{Vorteile.} Klare Standards, einheitliche Qualität, gebündeltes Wissen, leichter Audit.
+  \item \textbf{Nachteile.} Engpass, Distanz zur Fachseite, langsame Iteration, ``Wir und die''-Dynamik.
+\end{itemize}
+
+\subsection{Föderation -- Bots in den Fachbereichen}
+
+Föderation bedeutet, dass Fachbereiche selbst Bots bauen (Citizen Developer) und betreiben, unter dezentralem Eigentum.
+
+\begin{itemize}
+  \item \textbf{Vorteile.} Nähe zur Fachseite, schnelle Iteration, hohe Akzeptanz, lokale Verantwortung.
+  \item \textbf{Nachteile.} Standardrisiko, Compliance-Risiko, Wartungs-Patchwork, Skalierbarkeitsprobleme.
+\end{itemize}
+
+\subsection{Hybrides Modell -- pragmatisch und häufig}
+
+In der Praxis ist die Antwort meist ein Hybridmodell: ein CoE setzt Standards, liefert Templates und QA, während dezentrale Teams bauen und betreiben. \emph{Standards zentral, Bauen lokal, Audit zentral.}
+
+Entscheidungs-Kriterien:
+
+\begin{itemize}
+  \item Reifegrad der Organisation: Anfangs eher zentral, später föderiert.
+  \item Regulatorischer Druck: Hoch reguliert tendiert zu CoE.
+  \item Organisationskultur: Stark autonome Bereiche zu Föderation.
+  \item Plattformreife: Reife Plattform mit Templates erlaubt mehr Föderation.
+\end{itemize}
+
+\subsection{Risk Appetite definieren}
+
+Eine Senior-Entscheidung: \emph{Wie viel Risiko ist akzeptabel?} Drei Dimensionen:
+
+\begin{itemize}
+  \item \textbf{Compliance Risk.} Welche Findings sind tolerabel, welche nicht?
+  \item \textbf{Operational Risk.} Wie häufig dürfen Bots ausfallen, bevor das Geschäft leidet?
+  \item \textbf{Reputational Risk.} Welche Fehler dürfen \emph{nie} öffentlich werden?
+\end{itemize}
+
+Diese Entscheidungen sind nicht delegierbar -- sie gehören in das Steering-Komitee, ins Risk Office, in die Geschäftsführung.
+
+\begin{merkbox}[Schluss-Merksatz für Tag 12]
+RPA-Skalierung ist eine \textbf{Verantwortungsarchitektur}, keine Tool-Frage. Governance leicht, Audit Trail verbindlich, Security by Design, Change als Teil des Designs -- vier Disziplinen, die zusammen ein wachsendes Programm tragen. Wer eine fortlässt, baut sich ein Schatten-Programm neben dem offiziellen.
+\end{merkbox}
+
+% --- 11. TAKE-AWAYS ------------------------------------------------------
+\section{Take-aways aus Tag 12}
+
+\begin{enumerate}
+  \item \textbf{Bot-Lifecycle in 9 Phasen}: Idea $\to$ Assessment $\to$ Design $\to$ Build $\to$ Test $\to$ Deploy $\to$ Run $\to$ Improve $\to$ Retire.
+  \item \textbf{Sechs Kernrollen}: Process Owner, Bot Owner, Developer, Reviewer/QA, Security, Operations.
+  \item \textbf{Risk-based Releases}: Low-Risk schnell (1 Gate), High-Risk gründlich (3 Gates).
+  \item \textbf{Audit Trail beantwortet die W-Fragen} und ist append-only, mit Aufbewahrung nach Regulatorik.
+  \item \textbf{Exception in drei Klassen}: Business, System, Data. Plus Security als vierte für sensible Bereiche.
+  \item \textbf{Security by Design}: Least Privilege, Vault, SoD, Logging-Integrität.
+  \item \textbf{Change Management nicht nachher}: Transparenz, Nutzen, Würde von Tag 1 an.
+  \item \textbf{CoE vs.\ Föderation}: Hybrid ist meist die Antwort -- Standards zentral, Bauen lokal.
+\end{enumerate}
+
+% --- 12. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[International Organization for Standardization. (2022).] \emph{Information security, cybersecurity and privacy protection -- Information security management systems -- Requirements} (ISO/IEC 27001:2022). ISO.
+  \item[ISACA. (2018).] \emph{COBIT 2019 framework: Governance and management objectives.} ISACA.
+  \item[Kotter, J.\,P. (1996).] \emph{Leading change.} Harvard Business School Press.
+  \item[Lacity, M., \& Willcocks, L.\,P. (2018).] \emph{Robotic process and cognitive automation: The next phase.} SB Publishing.
+  \item[Project Management Institute. (2021).] \emph{A guide to the Project Management Body of Knowledge (PMBOK\textregistered{} Guide)} (7th ed.). Project Management Institute.
+  \item[Saltzer, J.\,H., \& Schroeder, M.\,D. (1975).] The protection of information in computer systems. \emph{Proceedings of the IEEE, 63}(9), 1278--1308. \href{https://doi.org/10.1109/PROC.1975.9939}{https://doi.org/10.1109/PROC.1975.9939}
+  \item[Smeets, M., Erhard, R., \& Kaußler, T. (2019).] \emph{Robotic Process Automation (RPA) in der Finanzwirtschaft: Technologie -- Implementierung -- Erfolgsfaktoren.} Springer Gabler. \href{https://doi.org/10.1007/978-3-658-26564-2}{https://doi.org/10.1007/978-3-658-26564-2}
+  \item[Willcocks, L.\,P., Lacity, M., \& Craig, A. (2017).] Robotic process automation: Strategic transformation lever for global business services? \emph{Journal of Information Technology Teaching Cases, 7}(1), 17--28. \href{https://doi.org/10.1057/s41266-016-0016-9}{https://doi.org/10.1057/s41266-016-0016-9}
+\end{description}
+
+% --- 13. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Append-only] Log-Eigenschaft: Einträge können hinzugefügt, aber nicht geändert oder gelöscht werden. Schutz gegen Manipulation.
+  \item[Audit Trail] Lückenlose Aufzeichnung von Bot-Aktionen mit Bot-ID, Version, Aktion, Ergebnis, Begründung. Standard in regulierten Prozessen.
+  \item[Bot Lifecycle] Neunphasiger Zyklus: Idea, Assessment, Design, Build, Test, Deploy, Run, Improve, Retire.
+  \item[Business Exception] Fachlich begründete Ausnahme (z.\,B.\ ApprovalRequired, DuplicateInvoice). Erfordert fachliche Bearbeitung.
+  \item[Center of Excellence (CoE)] Zentraler Bereich, der RPA-Standards setzt und ggf.\ Bots zentral baut und betreibt.
+  \item[Change Advisory] Leichtgewichtiges Gremium, das teure oder sensible Bot-Änderungen reviewt.
+  \item[Credential Vault] Zentrales System für Zugangsdaten. Bots holen Tokens, nie Klartext-Passwörter.
+  \item[Data Exception] Datenqualitätsausnahme (z.\,B.\ MissingCostCenter, InvalidIBAN). Erfordert Korrektur an der Quelle oder im Bot.
+  \item[Exception Playbook] Handlungsanweisung für eine Exception-Klasse: Trigger, Diagnose, Aktionen, Eskalation, Schließung.
+  \item[Fail-safe Defaults] Sicherheits-Grundsatz: im Zweifel wird Zugriff verweigert. \quelle{Saltzer \& Schroeder, 1975}
+  \item[Fast Track] Reduzierter Review-Pfad für Low-Risk-Bots. Reduktion der Reviews, nicht der Pflichtstandards.
+  \item[Föderation] Dezentrales RPA-Modell: Fachbereiche bauen und betreiben Bots in eigener Verantwortung.
+  \item[Governance (RPA)] Mechanismen zur Steuerung wachsender Bot-Portfolios: Vergleichbarkeit, Auffindbarkeit, Steuerbarkeit, Lernfähigkeit.
+  \item[Least Privilege] Sicherheitsprinzip: Ein Bot bekommt nur die Rechte, die er für seine Aufgabe braucht.
+  \item[Logging-Integrität] Schutz von Logs vor nachträglicher Manipulation: append-only, separater Schreib-Account, ggf.\ Signatur.
+  \item[Minimum Viable Governance] Kleinstmögliche Sammlung verbindlicher Regeln: Rollen, Gates, Standards, Monitoring, Incidents.
+  \item[Risk-based Releases] Differenzierte Freigabewege je nach Bot-Risikoklasse (Low/Medium/High).
+  \item[Segregation of Duties (SoD)] Trennung sensibler Tätigkeiten: ``Anlegen'' und ``Freigeben'' nicht durch eine Instanz.
+  \item[System Exception] Technische Ausnahme (z.\,B.\ ERPDown, Timeout). Erfordert Retry oder IT-Eskalation.
+  \item[Traceability] Durchgängige Nachverfolgbarkeit eines Vorgangs über alle Systeme, typischerweise über eine Korrelations-ID.
+  \item[W-Fragen-Katalog] Audit-Standardfragen: Wer? Was? Wann? Womit? Ergebnis? Begründung?
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 12 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

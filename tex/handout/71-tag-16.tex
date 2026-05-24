@@ -1,0 +1,690 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 16 - Lehrskript
+% EU-Taxonomie & CSRD als Prozess-, Daten- und Kontrollarchitektur
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 16}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}CSRD \textperiodcentered{} EU-Taxonomie \textperiodcentered{} Controls}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 8 \textperiodcentered{} TAG 16 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 19.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Regulatorik\\in Steuerung\\übersetzen\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}EU-Taxonomie und CSRD als Prozess-, Daten- und Kontrollarchitektur --\\auditfähig und integriert in Transformation.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 16 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Der letzte Kurstag schließt den Bogen: Regulatorik wie EU-Taxonomie und CSRD sind heute keine Reporting-Übung, sondern eine \emph{Prozess-, Daten- und Kontrollarchitektur}. Wer diese als Steuerungssystem versteht, integriert Compliance in die Transformation -- und macht aus dem Pflichtprogramm einen wirksamen Hebel für Datenqualität, Governance und Glaubwürdigkeit.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item EU-Taxonomie und CSRD als Datenbedarfe, Nachweise, Kontrollen und Verantwortlichkeiten verstehen -- nicht als Dokumentenpflicht.
+  \item Governance- und Kontrollkonzepte einordnen: Policies, Controls, Audit-Readiness.
+  \item Reportingprozess in 7 Schritten kennen: Plan -- Collect -- Validate -- Consolidate -- Approve -- Report -- Assure.
+  \item Risiken erkennen: uneinheitliche Definitionen, Dateninseln, Schätzungen ohne Transparenz, fehlende Verantwortliche.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Einen End-to-End-Reportingprozess mit Rollen und Schnittstellen modellieren.
+  \item Acht Controls entlang des Prozesses definieren (Vollständigkeit, Plausibilität, Freigabe, Version, Zugriff, Ausnahme).
+  \item Ein Evidence Pack pro KPI strukturieren (Quelle, Berechnung, Freigabe, Änderungen, Ausnahmen).
+  \item KPIs mit Anti-Gaming-Kopplung und Datenqualitätslabels designen.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Top-12-Entscheidungen einer ESG-Governance treffen (Systemgrenzen, Dictionary, Labels, Controls, Tooling, Cadence).
+  \item Datenlücken im Dry Run transparent akzeptieren und mit Verbesserungsplan kompensieren.
+  \item Transparenzentscheidungen (welche KPI bei Qualität C veröffentlicht?) bewusst treffen.
+  \item Integration in Transformation sichern (Workflows, Process Intelligence, Green IT, Vendor).
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+EU-Taxonomie und CSRD sind keine ``Reporting-Projekte''. Sie sind \emph{Betriebssysteme} für Daten, Kontrollen und Entscheidungen -- mit dem zentralen Maßstab \emph{auditfähig}. Wer sie als Tabellen-Übung behandelt, baut Folien für die nächste Krise. Wer sie als Architektur baut, bekommt ein System, das gleichzeitig Compliance liefert und Steuerung ermöglicht. \quelle{vgl.\ EFRAG, 2023; European Commission, 2020}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Vom Pflichtbericht zur Steuerungsarchitektur}
+
+EU-Taxonomie und CSRD haben in den letzten Jahren die Regulatorik-Landschaft im Bereich Nachhaltigkeit grundlegend verändert. Was als Reporting-Pflicht für börsennotierte Unternehmen begann, weitet sich auf große mittelständische Unternehmen, deren Lieferketten und schließlich die gesamte Wirtschaft aus.
+
+Die typische erste Reaktion: ``Wir müssen ein Reporting bauen.'' Die typische zweite, nach einigen Monaten: ``Wir müssen die Daten erst beschaffen, dann reporten.'' Die typische dritte, nach noch mehr Monaten: ``Wir müssen das in unsere Prozesse einbauen, sonst läuft das nie sauber.''
+
+Die direkte Antwort spart Jahre: ESG-Reporting funktioniert nur, wenn es \emph{vom ersten Tag an als Architektur} verstanden wird.
+
+\subsection{Drei typische Fehler}
+
+\begin{enumerate}
+  \item \fachbegriff{Dokumenten-Sicht statt Prozess-Sicht.} Excel-Dateien zwischen Werken, Einkauf und Finance herum-geschoben. Definitionen variieren, Zahlen widersprechen sich.
+  \item \fachbegriff{Dateninseln ohne Transparenz.} Energieverbrauch im FM-System, Emissionsfaktoren im Excel, Lieferkette im Procurement-Tool. Niemand kann aggregieren.
+  \item \fachbegriff{Schätzungen ohne Kennzeichnung.} Eine Zahl im Report wirkt präzise, ist aber aus Bauchwerten oder Branchen-Mitteln abgeleitet. Greenwashing-Risiko.
+\end{enumerate}
+
+\subsection{Was Regulatorik wirklich verlangt}
+
+\begin{itemize}
+  \item Klar definierte \fachbegriff{KPIs} mit \emph{Systemgrenzen}.
+  \item \fachbegriff{Datenpipelines} von Quelle bis Report mit Validierung und Versionierung.
+  \item \fachbegriff{Controls} (Plausibilität, Vollständigkeit, Freigabe).
+  \item \fachbegriff{Evidence} (Nachweise zu Quelle, Berechnung, Freigabe).
+  \item \fachbegriff{Governance} (Rollen, Entscheidungswege, Reviewzyklen).
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{K-D-C-E-G}]
+Fünf Bausteine einer ESG-Governance:\\[2pt]
+\textbf{K}PIs (mit Systemgrenze)\\
+\textbf{D}atenpipelines (Quelle bis Report)\\
+\textbf{C}ontrols (Prüfungen entlang des Prozesses)\\
+\textbf{E}vidence (Nachweise je KPI)\\
+\textbf{G}overnance (Rollen, Entscheidungen, Reviews)\\[2pt]
+\emph{K-D-C-E-G ist die Kurzformel für ``auditfähig''.}
+\end{eselsbox}
+
+% --- 2. EU-TAXONOMIE & CSRD ----------------------------------------------
+\section{EU-Taxonomie und CSRD: das Mindset}
+
+\subsection{EU-Taxonomie -- Klassifikation nachhaltiger Aktivitäten}
+
+Die \fachbegriff{EU-Taxonomie} ist eine Klassifikation, die wirtschaftliche Aktivitäten danach beurteilt, ob sie zu sechs Umweltzielen wesentlich beitragen (Klimaschutz, Anpassung, Wasser, Kreislaufwirtschaft, Verschmutzung, Biodiversität) und gleichzeitig \emph{keine erhebliche Beeinträchtigung} anderer Ziele bewirken. \quelle{European Commission, 2020}
+
+Für Unternehmen bedeutet das: bestimmte Kennzahlen (Anteil ``Taxonomie-fähiger'' Umsätze, CapEx, OpEx) müssen offengelegt werden. Das setzt eine systematische Erfassung der Aktivitäten und ihrer Klassifikation voraus.
+
+\subsection{CSRD -- Corporate Sustainability Reporting Directive}
+
+Die \fachbegriff{CSRD} verpflichtet Unternehmen ab einer bestimmten Größe (gestaffelt eingeführt) zur strukturierten Nachhaltigkeitsberichterstattung nach europäischen Standards (\fachbegriff{ESRS} -- European Sustainability Reporting Standards). Der Bericht ist Teil des Lageberichts und steht unter \fachbegriff{Limited Assurance} (perspektivisch Reasonable Assurance) -- d.\,h.\ wird durch externe Prüfer geprüft. \quelle{EFRAG, 2023}
+
+Drei Konsequenzen:
+
+\begin{itemize}
+  \item Daten müssen genauso belastbar sein wie Finanzdaten -- Prozesse, Controls, Audit Trail.
+  \item Definitions-Hoheit liegt nicht beim Unternehmen, sondern bei den Standards (ESRS).
+  \item Transformationspläne müssen offengelegt werden -- nicht nur Zustand, sondern Pfad.
+\end{itemize}
+
+\subsection{Doppelte Wesentlichkeit}
+
+Die CSRD verlangt eine \fachbegriff{doppelte Wesentlichkeitsanalyse} (\emph{Double Materiality}): \quelle{EFRAG, 2023}
+
+\begin{itemize}
+  \item \textbf{Impact Materiality.} Wie wirkt unser Unternehmen auf Umwelt und Gesellschaft?
+  \item \textbf{Financial Materiality.} Wie wirken Nachhaltigkeitsfaktoren auf unser Unternehmen (Risiken, Chancen)?
+\end{itemize}
+
+Beide Perspektiven müssen analysiert und dokumentiert sein. Das ist nicht trivial -- aber es ist die Grundlage aller weiteren Reporting-Pflichten.
+
+% --- 3. REPORTINGPROZESS -------------------------------------------------
+\section{Reportingprozess: Plan -- Collect -- Validate -- Consolidate -- Approve -- Report -- Assure}
+
+Ein belastbarer ESG-Reportingprozess hat sieben Schritte. Jeder Schritt hat eine Rolle und eine Kontrolle.
+
+\subsection{Die sieben Schritte}
+
+\begin{enumerate}
+  \item \fachbegriff{Plan.} KPI-Dictionary aktualisieren, Datenanforderungen an Owner kommunizieren, Cadence festlegen.
+  \item \fachbegriff{Collect.} Datenerfassung aus Quellen (IT, FM, Einkauf, HR, Finance). Mit Datenqualitätslabel.
+  \item \fachbegriff{Validate.} Plausibilitätschecks, Vollständigkeitsprüfung, Sondersignale (Anomalien) markieren.
+  \item \fachbegriff{Consolidate.} Aggregation auf Reporting-Ebenen (Werk, Bereich, Konzern).
+  \item \fachbegriff{Approve.} Freigabe durch Owner und Reporting Lead. Zwei-Augen-Prinzip.
+  \item \fachbegriff{Report.} Veröffentlichung im Lagebericht / Sustainability Statement / Dashboards.
+  \item \fachbegriff{Assure.} Interne und externe Assurance (Limited / Reasonable). Sampling, Walkthroughs, Findings.
+\end{enumerate}
+
+\subsection{KPI-Dictionary als Fundament}
+
+Ein \fachbegriff{KPI-Dictionary} ist die \emph{Single Source of Truth} für Definitionen. Pro KPI:
+
+\begin{itemize}
+  \item Name und ID.
+  \item Definition.
+  \item Systemgrenze (was ist drin, was draußen).
+  \item Berechnungsformel.
+  \item Datenquellen (Systeme, Owner).
+  \item Datenqualitätslabel (A/B/C).
+  \item Aktualisierungszyklus.
+  \item Owner (Daten / Reporting / Approval).
+\end{itemize}
+
+Ohne KPI-Dictionary entstehen ``schwebende'' Definitionen -- jedes Werk versteht den KPI etwas anders, der Konzernbericht summiert Äpfel und Birnen.
+
+\subsection{Annahmenregister}
+
+Wo Schätzungen nötig sind (oft in Scope 3, Lieferkette), wird ein \fachbegriff{Annahmenregister} geführt:
+
+\begin{itemize}
+  \item Welche Annahme wurde getroffen?
+  \item Auf welcher Grundlage?
+  \item Wer hat sie freigegeben?
+  \item Bis wann soll sie durch Messung ersetzt werden?
+\end{itemize}
+
+% --- 4. CONTROLS ---------------------------------------------------------
+\section{Controls: prüfen, was zählt}
+
+\fachbegriff{Controls} sind definierte Prüfungen entlang des Reportingprozesses. Sie sollten \emph{risikobasiert} sein -- nicht alles prüfen, sondern das Richtige. \quelle{ISACA, 2018}
+
+\subsection{Acht typische Controls}
+
+\begin{enumerate}
+  \item \textbf{Completeness-Check.} Alle Pflichtfelder gefüllt? Alle relevanten Werke / Quellen liefern?
+  \item \textbf{Plausibilitätsgrenzen.} Schwellenwerte für ``vermutlich falsch'' (z.\,B.\ Verbrauch $\pm$ 50\,\% gegen Vorjahr).
+  \item \textbf{Zwei-Augen-Freigabe.} Pro KPI Owner + Reporting Lead bestätigen.
+  \item \textbf{Änderungslog.} Wer hat was wann warum geändert?
+  \item \textbf{Zugriffskontrolle.} Wer darf welche Daten sehen / ändern?
+  \item \textbf{Ausnahmegenehmigung.} Wer darf von Standards abweichen, mit welcher Begründung?
+  \item \textbf{Reconciliation zu Finance.} ESG-Kennzahlen mit Bezug zu Finanzdaten (z.\,B.\ Umsatz-Anteile) müssen abgleichbar sein.
+  \item \textbf{Sampling-Review für Audit Readiness.} Stichprobenprüfung interner Art, simuliert das externe Audit.
+\end{enumerate}
+
+\subsection{Minimum Viable Controls vs.\ Overkill}
+
+Im \emph{Dry Run} ist es legitim, eine reduzierte Control-Menge zu fahren -- mit dokumentierter Begründung und Verbesserungsplan. Welche Controls bleiben Pflicht:
+
+\begin{itemize}
+  \item Completeness (sonst fehlt die Basis).
+  \item Plausibilität (sonst sind absurde Zahlen möglich).
+  \item Freigabe (sonst ist unklar, wer verantwortet).
+  \item Änderungslog (sonst ist nichts mehr nachvollziehbar).
+\end{itemize}
+
+\begin{merkbox}[Risk-based Controls]
+Ein Control-Set, das alles prüft, prüft nichts mehr richtig. Risk-based bedeutet: Controls werden dort verdichtet, wo das Risiko hoch ist (Materialitäts-relevante KPIs, sensible Bereiche). Wo das Risiko gering ist, reicht ein leichteres Set. Diese Differenzierung ist Senior-Disziplin, nicht ``Kontrollvermeidung''.
+\end{merkbox}
+
+% --- 5. EVIDENCE PACK ----------------------------------------------------
+\section{Evidence Pack: der Audit-Schlüssel}
+
+Ein \fachbegriff{Evidence Pack} ist die Sammlung aller Nachweise, die ein Auditor zu einem KPI sehen wollen wird. Es ist nicht ``für den Audit'', sondern \emph{für die laufende Steuerung} -- der Audit ist nur die regelmäßige externe Prüfung dieser Sammlung.
+
+\subsection{Sechs Pflicht-Artefakte je KPI}
+
+\begin{enumerate}
+  \item \textbf{Datenquelle.} Aus welchem System, welcher Export, welches Datum?
+  \item \textbf{Transformationslogik.} ETL-Schritte, Skripts, Berechnungsformeln.
+  \item \textbf{Berechnungsblatt / Script-Version.} Versionierte Berechnung, nachvollziehbar.
+  \item \textbf{Freigabeprotokoll.} Wer hat wann auf welcher Basis freigegeben?
+  \item \textbf{Ausnahmenregister.} Welche Abweichungen vom Standard, mit Begründung?
+  \item \textbf{Datenqualitätslabel + Change-Requests.} Aktuelles Label, geplante Verbesserungsschritte.
+\end{enumerate}
+
+\subsection{Versionierung}
+
+Jede Änderung (KPI-Definition, Datenquelle, Berechnung) erzeugt einen versionierten Eintrag. Auditoren wollen wissen: was war zum Reporting-Stichtag aktuell? Eine späte Korrektur ist erlaubt -- als nachvollziehbare Korrektur, nicht als ``stillschweigende Überschreibung''.
+
+\subsection{Access Control für Evidence}
+
+\begin{itemize}
+  \item \textbf{Read-only.} Auditoren und Reviewer.
+  \item \textbf{Append-only.} Daten-Lieferanten (sie schreiben Datensätze, ändern sie nicht).
+  \item \textbf{Edit (mit Log).} KPI-Owner für Korrekturen mit Begründung.
+  \item \textbf{Admin (selten).} Reporting Lead für strukturelle Änderungen.
+\end{itemize}
+
+% --- 6. KPI-DESIGN -------------------------------------------------------
+\section{KPI-Design mit Anti-Gaming und Datenqualität}
+
+Ein KPI ohne Anti-Gaming-Mechanik ist ein Anreiz zu Manipulation. Ein KPI ohne Datenqualitätslabel ist Greenwashing in Vorbereitung.
+
+\subsection{Sechs bis acht ESG-KPIs als Set}
+
+Beispielhaftes Set:
+
+\begin{enumerate}
+  \item \textbf{Energieverbrauch} (Klasse A/B/C nach Datenqualität).
+  \item \textbf{Emissionsintensität} (mit Systemgrenze: Scope 1/2/3).
+  \item \textbf{Anteil ``verifizierte Vendor-Daten''} (Lieferkette).
+  \item \textbf{Datenqualitätsindex} (Aggregat über alle KPIs).
+  \item \textbf{Control Pass Rate} (Anteil der Controls, die geprüft und bestanden wurden).
+  \item \textbf{Timeliness} (Reporting pünktlich?).
+  \item \textbf{Exception Rate} (Anteil KPIs mit Ausnahmen).
+  \item Optional: \textbf{Transformationsfortschritt} (Anteil erreichter Ziele in Pfad).
+\end{enumerate}
+
+\subsection{Anti-Gaming-Kopplungen}
+
+\begin{itemize}
+  \item Kostenreduktion gilt nur, wenn Datenqualitätslabel $\geq$ B und Control Pass Rate $\geq$ X.
+  \item Energie-Reduktion gilt nur, wenn Systemgrenze unverändert geblieben ist (sonst verschiebt sich der Erfolg in den ``draußen''-Bereich).
+  \item Vendor-Verifikation gilt nur mit aktuellem Audit-Datum.
+\end{itemize}
+
+\subsection{Datenqualitäts-Labels}
+
+\begin{itemize}
+  \item \textbf{A -- gemessen.} Direkte Messung mit dokumentiertem Mess-Setup.
+  \item \textbf{B -- berechnet.} Aus gemessenen Daten abgeleitet, mit dokumentierter Formel.
+  \item \textbf{C -- geschätzt.} Auf Basis von Annahmen, Branchen-Mitteln, Proxy-Daten.
+\end{itemize}
+
+Pflicht: Jeder veröffentlichte KPI trägt ein Label. C-Werte erhalten zusätzlich einen Verbesserungsplan.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{A-B-C}]
+Datenqualität auf einen Blick:\\[2pt]
+\textbf{A} = gemessen (am verlässlichsten)\\
+\textbf{B} = berechnet (aus A-Daten)\\
+\textbf{C} = geschätzt (transparent + Verbesserungsplan)\\[2pt]
+\emph{Eine Zahl ohne Label ist eine Behauptung. Eine Zahl mit Label ist Steuerungsinformation.}
+\end{eselsbox}
+
+% --- 7. FALLSTUDIE INDUSTRICO --------------------------------------------
+\section{Fallstudie: IndustriCo Europe -- CSRD-Readiness}
+
+\emph{IndustriCo Europe} betreibt mehrere Werke mit komplexer Lieferkette. ESG-Daten sind fragmentiert; einheitliche Definitionen fehlen. Reporting muss konsistent, nachvollziehbar und auditfähig werden. Gleichzeitig läuft ein Transformationsprogramm (Prozessdigitalisierung, Green IT, RPA).
+
+Restriktionen: 14 Wochen bis zur ersten internen Dry-Run-Abgabe, Budget 250\,k EUR, Datenlücken (Energie, Lieferkette), Zielkonflikt Transparenz vs.\ Aufwand, Risiko ``Greenwashing''.
+
+\subsection{Reportingprozess mit Rollen}
+
+\begin{itemize}
+  \item \textbf{Plan.} Reporting Lead + Process Owner aktualisieren KPI-Dictionary.
+  \item \textbf{Collect.} Owner pro KPI in IT, Werken, Einkauf, HR, Finance.
+  \item \textbf{Validate.} Datenteam mit Plausibilitäts-Tools.
+  \item \textbf{Consolidate.} Reporting Factory (kleines Team).
+  \item \textbf{Approve.} Owner + Reporting Lead (Zwei-Augen).
+  \item \textbf{Report.} Veröffentlichung im Lagebericht und auf interner Plattform.
+  \item \textbf{Assure.} Interne Sampling-Reviews, perspektivisch externe Limited Assurance.
+\end{itemize}
+
+\subsection{Acht Controls}
+
+\begin{enumerate}
+  \item Completeness-Check pro Werk.
+  \item Plausibilitätsgrenzen (Energie $\pm$ 30\,\% gegen Vorjahr).
+  \item Zwei-Augen-Freigabe je KPI.
+  \item Änderungslog mit Begründungspflicht.
+  \item Zugriffskontrolle role-based.
+  \item Ausnahmegenehmigung mit Verbesserungsplan.
+  \item Reconciliation gegen Finance-Daten (Umsatz, CapEx, OpEx).
+  \item Sampling-Review (10\,\% der KPIs zufällig prüfen).
+\end{enumerate}
+
+\subsection{Evidence Pack je KPI}
+
+\begin{itemize}
+  \item Datenquelle (System / Export).
+  \item Transformationslogik (ETL).
+  \item Berechnungsblatt mit Version.
+  \item Freigabeprotokoll.
+  \item Ausnahmenregister.
+  \item Datenqualitätslabel.
+  \item Change-Requests.
+\end{itemize}
+
+\subsection{KPI-Set mit Anti-Gaming}
+
+\begin{itemize}
+  \item Energieverbrauch (A/B/C-Label).
+  \item Emissionsintensität mit klarer Systemgrenze.
+  \item Anteil verifizierte Vendor-Daten.
+  \item Datenqualitätsindex.
+  \item Control Pass Rate.
+  \item Timeliness.
+  \item Exception Rate.
+\end{itemize}
+
+Kopplung: Kostenreduktion / CO\textsubscript{2}-KPI nur gültig bei Label $\geq$ B und Control Pass Rate $\geq$ X.
+
+\subsection{Integration in Transformation}
+
+\begin{itemize}
+  \item \textbf{DWH / ETL} für ESG-Events. Zentralisierung statt Excel-Inseln.
+  \item \textbf{Workflow-Freigaben} für KPI-Änderungen. Versionierung und Audit Trail.
+  \item \textbf{BI-Dashboards} mit eingebettetem Audit Trail.
+  \item \textbf{RPA} für die Datensammlung (mit Governance aus Tag 12).
+\end{itemize}
+
+\subsection{Datenlücken im Dry Run}
+
+\begin{itemize}
+  \item \textbf{Lieferkettendaten} zunächst geschätzt (Label C) + Transparenz + Verbesserungsplan. Guardrail: Schätzung muss dokumentierte Methodik und Freigabe besitzen.
+  \item \textbf{Energie in Außenstandorten}: Schätzung auf Basis Branchen-Mittel + Plan zur Messung in 6--12 Monaten.
+\end{itemize}
+
+% --- 8. COACHING ---------------------------------------------------------
+\section{Coaching: Compliance durch Entscheidungen, nicht durch Folien}
+
+Der häufigste Anti-Muster: Compliance als ``Erfüllen einer Vorgabe''. Die wirkungsvollere Haltung: Compliance als \emph{Entscheidungsarchitektur}.
+
+\subsection{Drei Disziplinen}
+
+\begin{enumerate}
+  \item \textbf{Single Source of Truth.} KPI-Dictionary mit Systemgrenzen und Annahmenregister. Wenn jemand fragt ``Was meinst du mit X?'', gibt es eine eindeutige Antwort.
+  \item \textbf{Risk-based Controls.} Materialität und Risiko bestimmen die Tiefe der Prüfung -- nicht ``alle gleich''.
+  \item \textbf{Audit-Readiness im Alltag.} Versionierung, Freigaben, Evidence Packs sind keine Audit-Vorbereitung, sondern Alltagspraxis.
+\end{enumerate}
+
+\subsection{Senior-Reflexionsfragen}
+
+\begin{itemize}
+  \item Welche 3 Entscheidungen sind nicht delegierbar (Risk Appetite, Systemgrenzen, Transparenzregeln)?
+  \item Wo entstehen die größten Reputationsrisiken -- und welche Controls verhindern sie?
+  \item Welche KPI führt zu falschem Verhalten -- und wie wird sie gegen Gaming gekoppelt?
+\end{itemize}
+
+\subsection{Anti-Greenwashing-Test}
+
+\begin{itemize}
+  \item \textbf{Systemgrenzen klar benannt?}
+  \item \textbf{Datenqualitätslabels sichtbar?}
+  \item \textbf{Annahmen dokumentiert?}
+  \item \textbf{Verbesserungsplan für C-Werte?}
+  \item \textbf{Reconciliation zu Finance möglich?}
+\end{itemize}
+
+\begin{merkbox}[Anti-Greenwashing-Prinzip]
+Die einfachste Anti-Greenwashing-Regel: \emph{Wenn ich diese Zahl nicht in einem Audit verteidigen könnte, veröffentliche ich sie nicht.} Wenn ich sie veröffentliche, aber sie ist nur geschätzt -- label sie. Wenn sie zu schwer messbar ist -- erkläre die Annahme. Transparenz ist die stärkste Verteidigung.
+\end{merkbox}
+
+% --- 9. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: ESG als Decision Architecture}
+
+Auf Wissens-Ebene ist CSRD eine Verordnung. Auf Anwendungs-Ebene ist sie ein Reportingprozess. Auf Management-Ebene ist sie eine \emph{Decision Architecture} -- eine Sammlung von Entscheidungen, die jetzt getroffen werden müssen, weil sie sonst implizit getroffen werden.
+
+\subsection{Top-12-Entscheidungen}
+
+\begin{enumerate}
+  \item Welche \textbf{Systemgrenzen} legen wir fest?
+  \item Wer ist \textbf{Owner des KPI-Dictionary}?
+  \item Welche \textbf{Datenqualitätslabels} verwenden wir, mit welcher Definition?
+  \item Welches \textbf{Control-Set} ist Pflicht, welches optional?
+  \item Welcher \textbf{Ausnahmeprozess} gilt?
+  \item Welche \textbf{Tooling-Architektur} (DWH / ETL / BI / Audit Trail)?
+  \item Welche \textbf{Reporting-Cadence} (monatlich, quartalsweise, jährlich)?
+  \item Wie wird \textbf{Audit-Readiness} im Alltag gehalten?
+  \item Welche \textbf{Vendor-Datenstrategie} verfolgen wir?
+  \item Welche \textbf{Kommunikations- und Transparenzregeln} gelten?
+  \item Welche \textbf{Priorisierung} (welcher KPI zuerst, welcher später)?
+  \item Welches \textbf{Budget und welche Ressourcen} stehen bereit?
+\end{enumerate}
+
+\subsection{Governance und Operating Model}
+
+\begin{itemize}
+  \item \fachbegriff{ESG Steering.} Senior-Gremium, das strategische Entscheidungen trifft.
+  \item \fachbegriff{Data Owners.} Pro Datendomäne (Energie, Personal, Lieferkette).
+  \item \fachbegriff{Control Owners.} Pro Control-Familie (Plausibilität, Zugriff, Freigabe).
+  \item \fachbegriff{Reporting Factory.} Operatives Team, das Konsolidierung und Reporting durchführt.
+  \item \fachbegriff{Eskalation.} Zu wem geht ein Konflikt, eine Ausnahme, eine Krisensituation?
+\end{itemize}
+
+\subsection{Roadmap-Logik}
+
+\begin{itemize}
+  \item \textbf{Dry Run (4--6 Wochen).} Erste Daten-Erfassung, Minimum Viable Controls, Lessons Learned.
+  \item \textbf{Stabilisierung (6--10 Wochen).} Lücken schließen, Controls erweitern, Tooling konsolidieren.
+  \item \textbf{Assurance Readiness (laufend).} Audit-Sampling, externe Limited Assurance.
+\end{itemize}
+
+\subsection{Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Transparenz vs.\ Aufwand.} Mehr Detail kostet mehr Pflege -- aber zu wenig Detail erhöht Audit-Risiko.
+  \item \textbf{Speed vs.\ Assurance.} Schnell veröffentlichen oder erst alle Controls grün?
+  \item \textbf{Materialität vs.\ Vollständigkeit.} Auf das Wesentliche fokussieren oder alles abdecken?
+\end{enumerate}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 16]
+EU-Taxonomie und CSRD sind nicht das Ende der Transformation -- sie sind ihre \textbf{Steuerungsschicht}. Wer Compliance als Architektur baut, gewinnt nebenbei: Datenqualität, Klarheit, Governance, Glaubwürdigkeit. Wer Compliance als Pflichtübung erlebt, baut Folien für die nächste Krise. Senior-Verantwortung heißt: nicht ``erfüllen'', sondern \emph{steuern}.
+\end{merkbox}
+
+% --- 10. TAKE-AWAYS ------------------------------------------------------
+\section{Take-aways aus Tag 16 (und dem Kurs)}
+
+\begin{enumerate}
+  \item \textbf{ESG ist Prozess, Daten, Controls -- nicht Dokument.} Wer Reporting als Tabellen-Übung baut, scheitert.
+  \item \textbf{KPI-Dictionary als Single Source of Truth.} Mit Systemgrenze, Owner, Datenqualitätslabel.
+  \item \textbf{Sieben-Schritt-Prozess}: Plan, Collect, Validate, Consolidate, Approve, Report, Assure.
+  \item \textbf{Risk-based Controls}: Minimum Viable Controls im Dry Run, Erweiterung im Scale.
+  \item \textbf{Evidence Pack je KPI}: Quelle, Berechnung, Freigabe, Änderungen, Ausnahmen, Datenqualitätslabel.
+  \item \textbf{Anti-Gaming-Kopplungen}: Kennzahlen koppeln, damit Manipulation an einer Stelle die andere verschlechtert.
+  \item \textbf{Doppelte Wesentlichkeit}: Impact und Financial Materiality beide analysieren.
+  \item \textbf{Compliance als Decision Architecture}, nicht als Erfüllungspflicht. So entsteht Wirkung, nicht nur ein Bericht.
+\end{enumerate}
+
+% --- 11. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[European Commission. (2020).] \emph{Regulation (EU) 2020/852 of the European Parliament and of the Council of 18 June 2020 on the establishment of a framework to facilitate sustainable investment (EU Taxonomy Regulation).} Official Journal of the European Union.
+  \item[European Commission. (2022).] \emph{Directive (EU) 2022/2464 amending Directive 2013/34/EU as regards corporate sustainability reporting (CSRD).} Official Journal of the European Union.
+  \item[European Financial Reporting Advisory Group (EFRAG). (2023).] \emph{European Sustainability Reporting Standards (ESRS) -- Set 1.} EFRAG.
+  \item[International Organization for Standardization. (2015).] \emph{Environmental management systems -- Requirements with guidance for use} (ISO 14001:2015). ISO.
+  \item[International Organization for Standardization. (2018).] \emph{Information technology -- Service management -- Part 1: Service management system requirements} (ISO/IEC 20000-1:2018). ISO.
+  \item[ISACA. (2018).] \emph{COBIT 2019 framework: Governance and management objectives.} ISACA.
+  \item[Project Management Institute. (2021).] \emph{A guide to the Project Management Body of Knowledge (PMBOK\textregistered{} Guide)} (7th ed.). Project Management Institute.
+  \item[Westerman, G., Bonnet, D., \& McAfee, A. (2014).] \emph{Leading digital: Turning technology into business transformation.} Harvard Business Review Press.
+\end{description}
+
+% --- 12. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Annahmenregister] Dokumentation aller Annahmen in KPI-Berechnungen (Grundlage, Freigeber, Verbesserungstermin).
+  \item[Anti-Gaming (KPI)] Designprinzip: KPIs koppeln, sodass Manipulation an einer Stelle eine andere verschlechtert.
+  \item[Assurance] Externe oder interne Prüfung der ESG-Berichterstattung. Limited Assurance (geringere Tiefe), Reasonable Assurance (höhere Tiefe).
+  \item[Audit-Readiness] Alltagszustand der Auditfähigkeit: aktuelle Evidence Packs, Versionierung, Freigaben, Reconciliation.
+  \item[Control] Definierte Prüfung im Reportingprozess (Vollständigkeit, Plausibilität, Freigabe).
+  \item[CSRD] \emph{Corporate Sustainability Reporting Directive.} EU-Richtlinie zur Nachhaltigkeitsberichterstattung. \quelle{European Commission, 2022}
+  \item[Datenqualitätslabel] A/B/C-Klassifikation der Datenqualität: A gemessen, B berechnet, C geschätzt.
+  \item[Decision Architecture (ESG)] Sammlung der nicht-delegierbaren ESG-Entscheidungen einer Organisation.
+  \item[Doppelte Wesentlichkeit] CSRD-Konzept: Impact (Wirkung auf Umwelt / Gesellschaft) und Financial Materiality (Wirkung auf Unternehmen). \quelle{EFRAG, 2023}
+  \item[ESRS] \emph{European Sustainability Reporting Standards.} Konkretisierende Standards zur CSRD. \quelle{EFRAG, 2023}
+  \item[EU-Taxonomie] Verordnung zur Klassifikation nachhaltiger wirtschaftlicher Aktivitäten gegen sechs Umweltziele. \quelle{European Commission, 2020}
+  \item[Evidence Pack] Sammlung der Nachweise je KPI: Quelle, Berechnung, Freigabe, Änderungen, Ausnahmen.
+  \item[KPI-Dictionary] Single Source of Truth für KPI-Definitionen mit Systemgrenze, Berechnung, Owner.
+  \item[Materialität] Bewertung der Relevanz eines Themas für Reporting und Steuerung. CSRD verlangt doppelte Materialität.
+  \item[Minimum Viable Controls] Kleinstes durchsetzbares Set an Controls; in Dry Runs zulässig, mit Verbesserungsplan.
+  \item[Reconciliation] Abgleich von ESG-Kennzahlen mit Finanzdaten (z.\,B.\ Umsatz, CapEx, OpEx).
+  \item[Reporting Factory] Operatives Team für Konsolidierung, Approval und Veröffentlichung der ESG-Daten.
+  \item[Risk Appetite] Maß an Risiko, das die Organisation bewusst akzeptiert. Nicht delegierbar.
+  \item[Scope 1 / 2 / 3] Klassifikation von Emissionen: direkt, eingekaufte Energie, Lieferkette und Nutzungsphase.
+  \item[Systemgrenze] Festlegung, was in einer Bilanz oder Kennzahl berücksichtigt wird. Greenwashing-Risiko bei zu enger Wahl.
+  \item[Timeliness] KPI-Eigenschaft: Reporting pünktlich abgeliefert?
+  \item[Walkthrough] Audit-Technik: Schritt-für-Schritt-Durchgang eines Prozesses mit den Verantwortlichen.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 16 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

@@ -1,0 +1,701 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 15 - Lehrskript
+% Nachhaltige Prozessveränderung führen
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 15}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Change \textperiodcentered{} Stakeholder \textperiodcentered{} Sustainment}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 7 \textperiodcentered{} TAG 15 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 18.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Prozess-\\veränderung\\nachhaltig führen\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Rollenklärung, Stakeholder, Widerstand produktiv machen --\\Befähigen und Verankern mit messbarer Wirksamkeit.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 15 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Prozessveränderungen scheitern selten an der Methode -- sie scheitern am Menschen, an unklaren Rollen und an fehlender Verankerung. Heute lernen Sie, Veränderungen \emph{nachhaltig zu führen}: Rollen klären, Stakeholder strukturiert einbinden, Widerstand als Information lesen, Befähigung gezielt ermöglichen und Wirkung messbar verankern. Aus ``Change als Projekt'' wird ``Change als Betriebssystem''.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Change-Leadership-Rollen kennen: Sponsor, Change Lead, Process Owner, Line Manager, Champions.
+  \item Erfolgsfaktoren benennen: klares ``Warum'', Beteiligung, Quick Wins, psychologische Sicherheit, sichtbare Führung.
+  \item Widerstand als Information verstehen: Interessen, Identität, Überlastung, Vertrauen -- nicht als ``Sturheit''.
+  \item Sustainment-Mechanik kennen: Routinen, KPIs, Reviews, Adoption-Messung.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Eine Change-Architektur entwerfen (Rollen, Entscheidungswege, Rituale).
+  \item Eine Stakeholderstrategie 2$\times$2 (Einfluss / Betroffenheit) mit Einbindungsstufen erstellen.
+  \item Ein Kommunikationspaket mit Kernbotschaften und Feedback-Mechanismen formulieren.
+  \item Ein Sustainment-Design mit Outcome-, Prozess- und Adoption-KPIs verankern.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Transparenz-Regeln für KPIs entscheiden (was wird sichtbar, was nicht, warum).
+  \item Stopp- oder Schwenk-Kriterien für Change-Vorhaben festlegen.
+  \item WIP-Limits für Change-Portfolio definieren -- Überlastung vermeiden.
+  \item Trade-off-Protokolle führen (Speed vs.\ Compliance, Transparenz vs.\ Angst).
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Change ist nicht das, was im Folien-Plan steht -- Change ist das, was nach 6 Monaten noch gilt. Die Disziplin: nicht ``managen'', sondern \emph{führen}. Klare Rollen, ehrliche Kommunikation, Widerstand produktiv machen, befähigen, verankern. Wer das nicht durchhält, baut wiederholt dieselben Projekte ohne dauerhaften Effekt. \quelle{Kotter, 1996; Lewin, 1951; Schein, 2017}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Vom Projekt zum Betriebssystem}
+
+Eine Prozessveränderung verläuft selten linear. Sie hat Phasen, in denen alles möglich erscheint, und Phasen, in denen Widerstand und Müdigkeit das Tempo brechen. Diese Dynamik ist nicht ``Pech'' -- sie ist die Regel. Wer sie kennt, kann sie führen.
+
+\subsection{Drei klassische Modelle}
+
+\begin{enumerate}
+  \item \fachbegriff{Lewin (1951)}: \emph{Unfreeze -- Change -- Refreeze.} Das Modell hat sich gehalten, weil es eine wichtige Wahrheit fasst: Veränderung beginnt mit Auftauen alter Muster und endet mit Verankern der neuen. Ohne Refreeze ist alles temporär. \quelle{Lewin, 1951}
+  \item \fachbegriff{Kotter (1996)}: \emph{Acht Schritte} (Sense of Urgency $\to$ Coalition $\to$ Vision $\to$ Communicate $\to$ Empower $\to$ Quick Wins $\to$ Sustain $\to$ Institutionalize). Pragmatischer Leitfaden, der in vielen Organisationen Sprache schafft. \quelle{Kotter, 1996}
+  \item \fachbegriff{Schein -- Kulturmodell}: drei Schichten: \emph{Artefakte} (sichtbar), \emph{Werte} (kommuniziert), \emph{Grundannahmen} (unbewusst). Nachhaltige Veränderung greift in die zweite und dritte Schicht ein, nicht nur in die erste. \quelle{Schein, 2017}
+\end{enumerate}
+
+\subsection{Change als Betriebssystem, nicht als Projekt}
+
+Ein Projekt hat ein Start- und ein Enddatum. Ein Betriebssystem läuft. Drei Indikatoren, dass Change zum Betriebssystem geworden ist:
+
+\begin{itemize}
+  \item Es gibt klare Rollen für Sustainment (nicht nur für die Einführung).
+  \item Es gibt Routinen (Standups, Reviews, Improvement Boards), die nach dem ``Go-Live'' weiterlaufen.
+  \item Es gibt KPIs, die kontinuierlich gemessen werden -- nicht nur in der Projektphase.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{U-C-R}]
+Lewin in drei Buchstaben:\\[2pt]
+\textbf{U}nfreeze -- alte Muster auftauen, Dringlichkeit schaffen\\
+\textbf{C}hange -- neue Praktiken einführen, lernen lassen\\
+\textbf{R}efreeze -- verankern, sodass es nicht zurückkippt\\[2pt]
+\emph{Wer das Refreeze auslässt, beginnt das Projekt in 12 Monaten von vorn.}
+\end{eselsbox}
+
+% --- 2. ROLLEN -----------------------------------------------------------
+\section{Change-Leadership-Rollen: wer macht was?}
+
+In jedem Change-Vorhaben treten dieselben Rollen auf -- mit unterschiedlichen Verantwortungen. Klare Rollen sind die Basis für alles Weitere.
+
+\subsection{Die fünf Kernrollen}
+
+\begin{itemize}
+  \item \fachbegriff{Sponsor.} Gibt Richtung, Ressourcen, schützt die Veränderung gegen Widerstände auf höherer Ebene, entscheidet bei Konflikten. Ohne Sponsor stirbt der Change beim ersten ernsten Widerstand.
+  \item \fachbegriff{Change Lead.} Orchestriert Kommunikation, Stakeholder, Enablement und Messung. Häufige Aufgabe: Übersetzer zwischen Sponsor, Process Owner, Linie und Champions.
+  \item \fachbegriff{Process Owner.} Fachliche Verantwortung. Setzt Standards, definiert KPIs, sichert das Sustainment im Alltag.
+  \item \fachbegriff{Line Manager.} Übersetzt die Veränderung in den Alltag des Teams. Entfernt Hindernisse, führt über Verhalten, gibt Feedback.
+  \item \fachbegriff{Champions / Multiplikatoren.} Mitarbeitende mit Nähe zur Praxis, informellem Vertrauen, Bereitschaft, Verbesserungen zu testen und Feedback zu sammeln.
+\end{itemize}
+
+\subsection{Rollen-Verantwortungen je drei Punkten}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Rolle & Drei Kernverantwortungen \\
+\midrule
+Sponsor & Ressourcen sichern; bei Konflikten entscheiden; Veränderung schützen \\
+Change Lead & Stakeholder orchestrieren; Kommunikation gestalten; Wirkung messen \\
+Process Owner & Standards setzen; KPIs definieren; Sustainment sichern \\
+Line Manager & Hindernisse entfernen; Verhalten coachen; Feedback einsammeln \\
+Champions & Verbesserung testen; Feedback bündeln; Vertrauen brücken \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Risikoliste typischer Change-Vorhaben}
+
+\begin{itemize}
+  \item Akzeptanzproblem -- ``Wieder ein Projekt''.
+  \item Überlastung -- parallele Initiativen verdrängen einander.
+  \item Zielkonflikt -- Speed vs.\ Compliance, Transparenz vs.\ Autonomie.
+  \item Fehlende Daten -- Baseline unklar, Wirkung kaum messbar.
+  \item Schattenprozesse -- offizieller Prozess wird umgangen.
+  \item Fehlende Sponsor-Klarheit -- niemand entscheidet bei Konflikten.
+  \item Trainings ohne Praxisbezug -- Wissen ohne Verhaltenstransfer.
+  \item Mitarbeiterverlust -- Schlüsselpersonen verlassen das Unternehmen.
+\end{itemize}
+
+\subsection{Risiko-Hypothesen testen}
+
+Senior-Disziplin: nicht alle Risiken werden ``vermieden'', manche werden \emph{getestet}. In den ersten zwei Wochen werden zwei Hypothesen aktiv überprüft -- mit Mini-Experimenten:
+
+\begin{itemize}
+  \item Hypothese 1: ``Operations hat keine Zeit für Schulungen.'' Test: Erste Pilot-Schulung von 30 Minuten anbieten, Teilnahmequote messen.
+  \item Hypothese 2: ``Fachbereich fürchtet KPI-Kontrolle.'' Test: Workshop zu KPI-Designprinzipien ($\to$ ``für Lernen, nicht für Bestrafung''), Feedback einholen.
+\end{itemize}
+
+% --- 3. STAKEHOLDER ------------------------------------------------------
+\section{Stakeholder-Strategie: wer wird wie eingebunden?}
+
+Eine gute Stakeholderstrategie unterscheidet sich von einer schlechten in einem Punkt: sie macht aus Stakeholdern \emph{Beteiligte}, nicht ``Betroffene''. Wer als Beteiligter angesprochen wird, hat eine Bringschuld; wer als Betroffener behandelt wird, eine Holschuld nach Information.
+
+\subsection{Die 2$\times$2-Matrix: Einfluss vs.\ Betroffenheit}
+
+Eine pragmatische Stakeholder-Klassifikation:
+
+\begin{tabularx}{\linewidth}{@{}l XX@{}}
+\toprule
+& \textbf{Niedrige Betroffenheit} & \textbf{Hohe Betroffenheit} \\
+\midrule
+\textbf{Hoher Einfluss} & Konsultieren & Mitentscheiden \\
+\textbf{Niedriger Einfluss} & Informieren & Verantworten \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+Die vier Einbindungsstufen:
+
+\begin{itemize}
+  \item \fachbegriff{Informieren.} Status, Termine, Auswirkungen werden mitgeteilt. Ein Kanal genügt, Frequenz angemessen.
+  \item \fachbegriff{Konsultieren.} Vor Entscheidungen werden diese Stakeholder gefragt. Nicht stimmberechtigt, aber stimmhabend.
+  \item \fachbegriff{Mitentscheiden.} Stakeholder ist Teil der Entscheidung. Voting oder Konsens je nach Thema.
+  \item \fachbegriff{Verantworten.} Stakeholder trägt die Konsequenz; ist Teil von Design und Umsetzung.
+\end{itemize}
+
+\subsection{Acht typische Stakeholder in Prozessveränderungen}
+
+\begin{itemize}
+  \item Operations (Tagesbetrieb).
+  \item Fachbereiche (fachliche Verantwortung).
+  \item IT (technische Umsetzung).
+  \item Compliance (regulatorische Anforderungen).
+  \item Controlling (KPI-Logik, Wirtschaftlichkeit).
+  \item Customer Service (Kundensicht).
+  \item Betriebsrat (Mitbestimmung, wenn relevant).
+  \item Key Customer (externe Wirkung).
+\end{itemize}
+
+\subsection{Drei klassische Blockaden}
+
+\begin{itemize}
+  \item \textbf{Team A (Operations).} ``Schon wieder ein Projekt, wir haben keine Zeit.'' Antwort: WIP-Limit für Change, Entlastung sichtbar machen, Quick Wins zuerst.
+  \item \textbf{Team B (Fachbereich).} ``KPI-Steuerung = Kontrolle, wir verlieren Autonomie.'' Antwort: Designprinzipien transparent machen, KPIs für Lernen statt Bestrafung, Beteiligung am KPI-Design.
+  \item \textbf{Team C (IT).} ``Ohne klare Anforderungen wird das nichts.'' Antwort: gemeinsame Klärung der Datenquellen, frühe Architektur-Skizze, IT als Mitentscheider.
+\end{itemize}
+
+\begin{merkbox}[Widerstand als Information]
+Widerstand ist selten ``Sturheit''. Er ist meistens \emph{Information}: über Interessen, Identität, Überlastung, fehlendes Vertrauen, ungelöste Trade-offs. Die Disziplin: zuhören, bevor man überzeugt. Eine Veränderung, die alle Argumente versteht und keines übergeht, ist robuster als eine, die ``durchgedrückt'' wird.
+\end{merkbox}
+
+% --- 4. KOMMUNIKATION ----------------------------------------------------
+\section{Kommunikationsarchitektur: Botschaft, Kanal, Feedback}
+
+Eine Kommunikationsstrategie ist nicht ``viele E-Mails'', sondern eine \emph{Architektur} aus Zielgruppe, Botschaft, Kanal, Frequenz, Feedback. \quelle{Kotter, 1996, Kap.~6}
+
+\subsection{Drei Botschaftstypen}
+
+\begin{enumerate}
+  \item \fachbegriff{Was?} Was ändert sich konkret? Welche Prozesse, welche Werkzeuge, welche Termine?
+  \item \fachbegriff{Warum?} Warum jetzt, warum so? Was passiert, wenn wir nicht verändern? Das ``Sense of Urgency'' nach Kotter.
+  \item \fachbegriff{Was ändert sich für mich?} Die individuelle Sicht. Ohne diese Antwort bleibt jede Botschaft abstrakt.
+\end{enumerate}
+
+\subsection{Kanal-Mix}
+
+Ein Kanal reicht selten. Pragmatischer Mix:
+
+\begin{itemize}
+  \item \textbf{Sponsor-Kommunikation} -- bei Meilensteinen, in eigener Sprache.
+  \item \textbf{Town Hall} -- Q\&A live, mit dem Mut, schwierige Fragen zu beantworten.
+  \item \textbf{Team-Meetings} -- Line Manager übersetzen für ihren Bereich.
+  \item \textbf{Schriftliche Kanäle} -- Newsletter, FAQ, Intranet-Seite mit aktuellem Stand.
+  \item \textbf{Feedback-Kanäle} -- Pulse Survey, anonymes Signal, offene Sprechstunde.
+\end{itemize}
+
+\subsection{Feedback-Mechanismen}
+
+Kommunikation ohne Feedback ist eine Predigt. Drei Mechanismen:
+
+\begin{itemize}
+  \item \textbf{Pulse Survey} (kurz, häufig). 3--5 Fragen, monatlich.
+  \item \textbf{Anonymes Signal} (z.\,B.\ ein einfaches Formular für ``Sorgen / Hindernisse''). Vertrauliche Rückläufe.
+  \item \textbf{Offene Q\&A} (Sprechstunde, Town Hall). Live, mit Bereitschaft, ``Ich weiß es nicht'' zu sagen.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{W-W-M}]
+Drei Kernbotschaften, die in jedem Change-Vorhaben beantwortet sein müssen:\\[2pt]
+\textbf{W}as ändert sich konkret?\\
+\textbf{W}arum jetzt, warum so?\\
+\textbf{M}ich -- was ändert sich für mich?\\[2pt]
+\emph{Wer die dritte Frage übergeht, redet an den Menschen vorbei.}
+\end{eselsbox}
+
+% --- 5. SUSTAINMENT ------------------------------------------------------
+\section{Sustainment: Verankern statt verpuffen}
+
+Die meisten Veränderungen scheitern nicht am Start, sondern am Sustainment. Nach den ersten Erfolgen bricht die Aufmerksamkeit ab, neue Themen drängen sich vor, alte Muster kehren zurück.
+
+\subsection{Vier Säulen des Sustainments}
+
+\begin{enumerate}
+  \item \fachbegriff{Standards.} Was ist die neue ``Definition of Done''? Was wird wie protokolliert?
+  \item \fachbegriff{Routinen.} Regelmäßige Rituale (Weekly Standup, Monthly Improvement Board) tragen die Veränderung über Zeit.
+  \item \fachbegriff{Messung.} KPIs werden kontinuierlich erhoben; Abweichungen werden besprochen.
+  \item \fachbegriff{Coaching.} Line Manager und Champions coachen weiter; nicht ``Schulung am Anfang, dann fertig''.
+\end{enumerate}
+
+\subsection{Fünf-Dimensions-KPIs}
+
+Wirksamkeit lässt sich in fünf Dimensionen messen:
+
+\begin{itemize}
+  \item \fachbegriff{Outcome.} Hat sich das Geschäftsergebnis verbessert? (Kunde, Qualität, Kosten.)
+  \item \fachbegriff{Prozess.} DLZ kürzer, Rework geringer, SLA-Quote besser?
+  \item \fachbegriff{Adoption.} Wieviele Fälle laufen im neuen Prozess? Wieviele umgehen ihn?
+  \item \fachbegriff{Capability.} Wie viele Mitarbeitende haben Training und Coaching abgeschlossen?
+  \item \fachbegriff{Culture.} Psychologische Sicherheit, Ownership, Lernbereitschaft (Pulse Survey).
+\end{itemize}
+
+\subsection{Definition of Done für Prozessänderungen}
+
+Eine pragmatische DoD:
+
+\begin{itemize}
+  \item Modell aktuell und freigegeben.
+  \item Owner benannt und akzeptiert.
+  \item KPIs adjustiert, im Dashboard sichtbar.
+  \item Training durchgeführt für relevante Rollen.
+  \item Monitoring aktiv.
+  \item Erste Iteration der Improvement-Schleife durchlaufen.
+\end{itemize}
+
+\subsection{Anti-Gaming bei KPIs}
+
+KPIs ohne Schutz vor Manipulation erzeugen oft das Gegenteil dessen, was sie messen sollen:
+
+\begin{itemize}
+  \item KPI ``Tickets pro Stunde'' $\to$ Anreiz, Tickets zu splitten.
+  \item KPI ``First-Time-Right'' $\to$ Anreiz, schwierige Fälle zu vermeiden.
+  \item KPI ``Antwortzeit'' $\to$ Anreiz, leere Antworten zu senden.
+\end{itemize}
+
+Schutz: KPIs koppeln (z.\,B.\ ``Tickets pro Stunde'' nur gültig, wenn Reklamationsquote unter X bleibt). Und: KPI-Transparenz \emph{auf Team-Ebene}, nicht auf Personen-Ebene -- außer bei begründetem Einzelfall.
+
+\begin{merkbox}[KPIs für Lernen, nicht für Bestrafung]
+Die wichtigste Designentscheidung in KPI-Systemen: was tun wir, wenn ein KPI nicht erreicht wird? Wenn die Antwort ``Konsequenz für die Person'' ist, wird der KPI manipuliert. Wenn die Antwort ``Lernen, was hindert'' ist, wird er ein Steuerungsinstrument. Diese Entscheidung muss vor der KPI-Einführung gefallen sein.
+\end{merkbox}
+
+% --- 6. FALLSTUDIE SERVICECO ---------------------------------------------
+\section{Fallstudie: ServiceCo -- E2E-Prozessveränderung}
+
+\emph{ServiceCo} hat mehrere Standorte und führt einen workflowgestützten End-to-End-Prozess inkl.\ KPI-Dashboard und Abweichungsmanagement ein. Ziel: $-$25\,\% Durchlaufzeit, $-$30\,\% Rework in 12 Wochen.
+
+Restriktionen: Zeitdruck, parallele Projekte, unvollständige Daten, Widerstand gegen KPI-Transparenz, Budget begrenzt.
+
+\subsection{Change-Architektur}
+
+\begin{itemize}
+  \item \textbf{Sponsor.} Bereichsleiter Operations. Entscheidet Zielkonflikte und Ressourcen.
+  \item \textbf{Process Owner.} Senior aus Operations. Accountable für Standards und KPIs.
+  \item \textbf{Change Lead.} Interne Beraterin. Orchestriert Kommunikation und Enablement.
+  \item \textbf{Line Manager.} An jedem Standort, führen Verhalten.
+  \item \textbf{Champions.} 2--3 pro Standort, sammeln Feedback und testen Verbesserungen.
+\end{itemize}
+
+Rituale:
+
+\begin{itemize}
+  \item \textbf{Weekly Process Standup} (30\,min). Standort-Lead + Champions. Kennzahlen, Hindernisse.
+  \item \textbf{Monthly Improvement Board} (60\,min). Standort-übergreifend. Trade-offs, Standardanpassungen.
+  \item \textbf{Quarterly Review} (je nach Kontext). Sponsor + Process Owner + ggf.\ Compliance.
+\end{itemize}
+
+\subsection{Stakeholderstrategie}
+
+\begin{itemize}
+  \item Operations: Verantworten (Tagesbetrieb).
+  \item Fachbereich: Mitentscheiden (KPI-Design).
+  \item IT: Mitentscheiden (Controls, Datenfluss).
+  \item Compliance: Mitentscheiden (Audit-Anforderungen).
+  \item Controlling: Konsultieren (KPI-Logik).
+  \item Customer Service: Konsultieren (Sicht des Kunden).
+  \item Betriebsrat: Konsultieren / Mitentscheiden (Datenschutz, Personenbezug).
+  \item Key Customer: Informieren (Veränderungen im Service).
+\end{itemize}
+
+\subsection{Kommunikationspaket}
+
+\begin{itemize}
+  \item \textbf{Kick-off-Botschaft.} ``Wir reduzieren Rework, schützen Qualität, geben Teams Klarheit. KPIs sind zur Verbesserung, nicht zur Bestrafung.''
+  \item \textbf{Drei Kernbotschaften.} (1) Was sich konkret ändert; (2) Warum jetzt; (3) Was sich für mich ändert (rollenspezifisch).
+  \item \textbf{Zwei Kanäle.} Town Hall am Anfang + monatlicher Newsletter mit Fortschritt.
+  \item \textbf{Feedback.} Offene Q\&A + anonymer Pulse Survey monatlich.
+\end{itemize}
+
+\subsection{Sustainment-Design}
+
+\begin{itemize}
+  \item \textbf{KPI-Set.}
+    \begin{itemize}
+      \item Outcome: SLA-Quote, Kundenzufriedenheit.
+      \item Prozess: DLZ, Rework.
+      \item Adoption: Anteil Fälle im Workflow, Exception-Rate.
+      \item Capability: Trainingsabschluss, Coaching-Check.
+    \end{itemize}
+  \item \textbf{Review-Board.} Monthly Improvement Board, mit Protokoll und Aktionen.
+  \item \textbf{Trainings- und Coaching-Plan.} Drei Stufen: Operator-Schulung, Champion-Workshop, Coaching für Line Manager.
+  \item \textbf{Definition of Done.} Modell aktuell, Owner benannt, KPIs angepasst, Training durchgeführt, Monitoring aktiv.
+\end{itemize}
+
+\subsection{Entscheidungen unter Unsicherheit}
+
+\begin{enumerate}
+  \item \textbf{Speed vs.\ Compliance.} MVP mit Ausnahmeprozess + Audit Trail; nicht ``erst alle Kontrollen perfekt, dann starten''.
+  \item \textbf{Transparenz-Regel.} Team-Performance sichtbar; individuelle Personenmetriken nur bei begründetem Incident-Case (Guardrail).
+\end{enumerate}
+
+Trade-off-Protokoll: jede dieser Entscheidungen wird im Improvement Board protokolliert -- inklusive verworfener Alternativen und Frühwarnsignal (``Wenn KPI-Akzeptanz unter X fällt, reviewen wir die Transparenz-Regel.'').
+
+% --- 7. COACHING ---------------------------------------------------------
+\section{Coaching: Führung = Verhalten, Entscheidungen, Schutz}
+
+Change-Leadership ist nicht ``mehr Folien''. Es ist eine Kombination aus drei Disziplinen:
+
+\subsection{Verhalten}
+
+\begin{itemize}
+  \item Vorleben statt verkünden. Ein Sponsor, der die neuen Routinen ignoriert, hebelt sie sofort aus.
+  \item Sichtbar in den Rituals. Erscheinen, fragen, zuhören.
+  \item ``Was tust du ab morgen anders?'' -- die Frage, die Verhaltenstransfer sichert.
+\end{itemize}
+
+\subsection{Entscheidungen}
+
+\begin{itemize}
+  \item Zielkonflikte explizit entscheiden. Niemand kann gleichzeitig Speed, Qualität, Compliance und niedrige Kosten optimieren.
+  \item Klare Stop-Bedingungen. Wann wird ein Change-Vorhaben gestoppt oder neu geschnitten?
+  \item Trade-off-Protokoll. Jede schwierige Entscheidung mit verworfenen Alternativen und Frühwarnsignal.
+\end{itemize}
+
+\subsection{Schutz}
+
+\begin{itemize}
+  \item Teams vor parallelen Initiativen schützen (WIP-Limit für Change).
+  \item Psychologische Sicherheit -- wer Fehler meldet, wird nicht bestraft.
+  \item Ressourcen sichern, wenn der Sponsor an anderer Stelle reduzieren will.
+\end{itemize}
+
+\subsection{Coaching-Interventionen}
+
+\begin{itemize}
+  \item \textbf{Aktives Zuhören.} ``Was genau bereitet Ihnen Sorge?''
+  \item \textbf{Reframing.} ``Sehe ich richtig, dass Sie auf ein Risiko hinweisen -- nämlich X?''
+  \item \textbf{Konfliktmoderation.} Trade-offs sichtbar machen statt zu schlichten.
+  \item \textbf{Commitment.} ``Was tun Sie ab morgen anders?''
+\end{itemize}
+
+% --- 8. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: Change als Lernsystem}
+
+Auf Wissens-Ebene ist Change ein Modell. Auf Anwendungs-Ebene ist es ein Projekt. Auf Management-Ebene ist es ein \emph{Lernsystem} -- mit Portfolio, Cadence, Feedback und Korrektur.
+
+\subsection{Top-10-Change-Entscheidungen}
+
+\begin{enumerate}
+  \item Welche Initiativen werden parallel zugelassen (WIP-Limit)?
+  \item Welche Ressourcen sind reserviert (Sponsor-Disziplin)?
+  \item Welche KPI-Transparenz wird zugelassen (Team / Person)?
+  \item Welcher Ausnahmeprozess gilt?
+  \item Welche Eskalationspfade existieren?
+  \item Welche Kommunikationsregeln (Frequenz, Kanäle)?
+  \item Welche Trainings-Investitionen sind verbindlich?
+  \item Welche Stopp-Kriterien werden definiert?
+  \item Welche Rituale sind verbindlich (Standup, Improvement Board)?
+  \item Welche Sustainment-DoD gilt?
+\end{enumerate}
+
+\subsection{Portfolio-Steuerung für Change}
+
+\begin{itemize}
+  \item \textbf{WIP-Limit.} Eine Organisation hält eine bestimmte Zahl gleichzeitiger Veränderungen aus. Wer mehr startet, riskiert, dass alle scheitern.
+  \item \textbf{Priorisierung.} Welche Initiativen sind ``must do'', welche ``nice to do''?
+  \item \textbf{Entlastungs-Mechanismus.} Wenn eine neue Initiative startet, was wird parallel pausiert?
+\end{itemize}
+
+\subsection{Truth Signals}
+
+Wie erkennt man, ob eine Veränderung wirklich angekommen ist -- nicht nur ``offiziell läuft''?
+
+\begin{itemize}
+  \item \textbf{Adoption-Rate.} Wieviele Fälle laufen tatsächlich im neuen Prozess?
+  \item \textbf{Schattenprozess-Indikatoren.} Werden Workarounds (Excel, Mail) immer noch genutzt?
+  \item \textbf{Pulse Survey.} Wie schätzen Mitarbeitende selbst den Stand ein?
+  \item \textbf{Outcome-Verbesserung.} Hat sich das gemessene Geschäftsergebnis bewegt?
+\end{itemize}
+
+\subsection{Risikomodell}
+
+\begin{itemize}
+  \item \textbf{Widerstandstypen.} Identität, Überlastung, Vertrauen, Interessen.
+  \item \textbf{Überlastungsindikatoren.} Krankenstand, Pulse Survey, sinkende Adoption-Rate.
+  \item \textbf{KPI-Gaming-Erkennung.} Plötzliche, unplausible Verbesserung; Diskrepanz zwischen KPI und Kundenfeedback.
+  \item \textbf{Schatten-Prozesse.} Anstieg von Workarounds, sinkende Workflow-Quote.
+\end{itemize}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 15]
+Change ist ein \textbf{Lernsystem}: klare Rollen, ehrliche Kommunikation, ehrliche Messung, Widerstand als Information, kontinuierliche Verbesserung. Wer Change ``managen'' will wie ein Projekt, baut wiederkehrende Initiativen ohne Verankerung. Wer Change \emph{führt} wie ein Betriebssystem, schafft eine Organisation, die sich verändern \emph{kann}.
+\end{merkbox}
+
+% --- 9. TAKE-AWAYS -------------------------------------------------------
+\section{Take-aways aus Tag 15}
+
+\begin{enumerate}
+  \item \textbf{Lewin, Kotter, Schein} sind die drei Grundmodelle -- Unfreeze/Change/Refreeze, 8 Steps, Kulturmodell.
+  \item \textbf{Fünf Kernrollen} klären: Sponsor, Change Lead, Process Owner, Line Manager, Champions.
+  \item \textbf{Widerstand ist Information}, keine Sturheit. Erst zuhören, dann gestalten.
+  \item \textbf{Stakeholder 2$\times$2}: Informieren / Konsultieren / Mitentscheiden / Verantworten.
+  \item \textbf{Drei Kernbotschaften} pro Change-Vorhaben: Was, Warum, Was für mich.
+  \item \textbf{Sustainment in vier Säulen}: Standards, Routinen, Messung, Coaching.
+  \item \textbf{KPIs für Lernen, nicht für Bestrafung}; mit Kopplungen gegen Gaming.
+  \item \textbf{Change ist Lernsystem}, kein Projekt. WIP-Limits und Truth Signals als Steuerungsinstrumente.
+\end{enumerate}
+
+% --- 10. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Edmondson, A.\,C. (1999).] Psychological safety and learning behavior in work teams. \emph{Administrative Science Quarterly, 44}(2), 350--383. \href{https://doi.org/10.2307/2666999}{https://doi.org/10.2307/2666999}
+  \item[Kotter, J.\,P. (1996).] \emph{Leading change.} Harvard Business School Press.
+  \item[Kotter, J.\,P. (2012).] \emph{Leading change: With a new preface.} Harvard Business Review Press.
+  \item[Lewin, K. (1951).] \emph{Field theory in social science: Selected theoretical papers.} Harper \& Row.
+  \item[Project Management Institute. (2021).] \emph{A guide to the Project Management Body of Knowledge (PMBOK\textregistered{} Guide)} (7th ed.). Project Management Institute.
+  \item[Rogers, E.\,M. (2003).] \emph{Diffusion of innovations} (5th ed.). Free Press.
+  \item[Schein, E.\,H. (2017).] \emph{Organizational culture and leadership} (5th ed.). Jossey-Bass.
+  \item[Westerman, G., Bonnet, D., \& McAfee, A. (2014).] \emph{Leading digital: Turning technology into business transformation.} Harvard Business Review Press.
+\end{description}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Adoption-Rate] Anteil der Fälle, die tatsächlich im neuen Prozess laufen. Truth-Signal-Indikator.
+  \item[Anti-Gaming (KPI)] Designprinzip: KPIs koppeln, sodass Manipulation an einer Stelle eine andere verschlechtert.
+  \item[Champion] Mitarbeitender mit Nähe zur Praxis und informellem Vertrauen, der Verbesserungen testet und Feedback sammelt.
+  \item[Change Lead] Person, die Kommunikation, Stakeholder und Enablement in einer Veränderung orchestriert.
+  \item[Change-Architektur] Sammlung der Rollen, Entscheidungswege und Rituale einer Veränderung.
+  \item[Definition of Done (Change)] Pragmatische Kriterienliste, wann eine Prozessänderung wirklich abgeschlossen ist.
+  \item[Improvement Board] Regelmäßiges Gremium (z.\,B.\ monatlich), das Trade-offs und Standardanpassungen entscheidet.
+  \item[Kotter (8 Steps)] Modell zur Führung von Veränderungen in acht Phasen. \quelle{Kotter, 1996}
+  \item[Lewin (Unfreeze/Change/Refreeze)] Dreischrittmodell der Veränderung. \quelle{Lewin, 1951}
+  \item[Line Manager] Führungskraft, die die Veränderung in den Alltag des Teams übersetzt.
+  \item[Process Owner] Fachliche Verantwortung für Standards, KPIs und Sustainment.
+  \item[Pulse Survey] Kurze, häufige Befragung zu Stand und Stimmung; 3--5 Fragen, monatlich.
+  \item[Psychologische Sicherheit] Klima, in dem Mitarbeitende Risiken eingehen und Fehler melden können, ohne bestraft zu werden. \quelle{Edmondson, 1999}
+  \item[Refreeze] Verankerung neuer Praktiken (Standards, Routinen, KPIs), sodass Rückfall verhindert wird.
+  \item[Rituale] Verbindliche, wiederkehrende Termine wie Standup, Review, Improvement Board.
+  \item[Schein-Kulturmodell] Dreischicht-Modell der Organisationskultur: Artefakte, Werte, Grundannahmen. \quelle{Schein, 2017}
+  \item[Sponsor] Senior-Führungskraft, die Richtung, Ressourcen und Schutz für eine Veränderung sichert.
+  \item[Sustainment] Mechanismen, die eine Veränderung über Zeit verankern: Standards, Routinen, Messung, Coaching.
+  \item[Trade-off-Protokoll] Dokumentation einer Entscheidung mit verworfenen Alternativen und Frühwarnsignal.
+  \item[Truth Signal] Indikator, der zeigt, ob eine Veränderung wirklich angekommen ist (Adoption, Outcome, Pulse, Schattenprozess).
+  \item[WIP-Limit (Change)] Obergrenze paralleler Change-Initiativen; verhindert Überlastung.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 15 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

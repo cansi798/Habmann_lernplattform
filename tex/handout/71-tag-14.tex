@@ -1,0 +1,676 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 14 - Lehrskript
+% Green IT als Managementsystem
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 14}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Green IT \textperiodcentered{} CO\textsubscript{2} \textperiodcentered{} SSD \textperiodcentered{} E-Waste}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 6 \textperiodcentered{} TAG 14 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 17.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Green IT als\\Management-\\system\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}CO\textsubscript{2}-Messung, Sustainable Software, E-Waste, Vendor-Bewertung --\\im Service-Lifecycle und auditfähig nach ISO-14001-Logik.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 14 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Tag 13 hat das Service-Portfolio etabliert. Heute integrieren wir \emph{Green IT} als Managementsystem in den Service-Lifecycle: CO\textsubscript{2}- und Footprint-Messung, Sustainable Software Development, E-Waste-Management und Lieferantenbewertung. Das Ziel ist nicht ``ein bisschen grüner'', sondern ein auditfähiges System nach ISO-14001-Logik -- mit klaren Aspekten, Zielen, Programmen, Messungen, Korrektur und Verbesserung.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Carbon-Footprint-Messung verstehen: Aktivitäten $\to$ Verbrauch $\to$ Emissionsfaktoren $\to$ CO\textsubscript{2}e; Systemgrenzen und Datenqualität.
+  \item Sustainable Software Development (SSD) Hebel kennen: Effizienz, Architektur (Caching, Asynchronität), Betrieb (Off-Hours, Performance Budgets).
+  \item Electronic Waste Management einordnen: Beschaffung, Nutzung, Reparatur, Wiederverwendung, Recycling, Nachweis.
+  \item Vendor Sustainability Assessment: Scorecard mit Umweltpolitik, CO\textsubscript{2}-Reporting, Kreislaufwirtschaft, Subunternehmern.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Einen Messplan für CO\textsubscript{2} und Energieverbrauch eines Services erstellen.
+  \item Eine Vendor-Scorecard mit klaren Bewertungskriterien und Mindestanforderungen anwenden.
+  \item Einen E-Waste-Standardprozess mit Nachweisartefakten und Verantwortlichkeiten konzipieren.
+  \item SSD-Guardrails (Performance Budget, Data Budget, Release Gates) für zwei Service-Klassen definieren.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item ISO-14001-orientiertes Green-IT-Operating-Model mit Aspekten, Zielen, Programmen entwerfen.
+  \item Trade-offs Performance / Cost / CO\textsubscript{2} explizit entscheiden und dokumentieren.
+  \item Datenqualität dokumentieren (gemessen vs.\ geschätzt, A/B/C-Labels) und Verbesserungspfade definieren.
+  \item Greenwashing erkennen und durch Transparenzregeln verhindern.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Green IT wird nur wirksam, wenn sie im \emph{Lifecycle} eingebaut ist -- nicht als zusätzliche Kampagne. ISO-14001-Logik (Aspekte $\to$ Ziele $\to$ Programme $\to$ Messung $\to$ Korrektur $\to$ Verbesserung) gibt den Rahmen, in dem Messbarkeit der Moral vorangeht. Ohne Metriken werden Diskussionen politisch und wirkungslos. \quelle{ISO/IEC, 2015; Murugesan, 2008}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Warum Green IT ein Managementsystem braucht}
+
+In vielen Organisationen läuft Green IT als Sammlung isolierter Initiativen: Hier ein Pilot zur Cloud-Effizienz, dort ein Vendor-Scoring-Workshop, anderswo eine Aktion zur E-Waste-Sammlung. Was fehlt, ist die \emph{Integration in das Service-Management}.
+
+Folge: Erfolge sind episodisch, Daten sind inkonsistent, Vergleichbarkeit fehlt. Wenn der Vorstand fragt ``Wie steht's mit Nachhaltigkeit?'', gibt es Antworten -- aber keine belastbare Datenlage.
+
+\subsection{ISO-14001-Logik in vier Schritten}
+
+\fachbegriff{ISO 14001} ist der internationale Standard für Umweltmanagementsysteme. Die zentrale Logik ist ein \emph{Plan-Do-Check-Act}-Zyklus, übertragen auf Umweltthemen: \quelle{ISO/IEC, 2015}
+
+\begin{enumerate}
+  \item \fachbegriff{Aspekte identifizieren.} Welche Umweltaspekte hat die IT? Energie, Hardware, Daten, Lieferkette, Entsorgung.
+  \item \fachbegriff{Ziele setzen.} Konkret und messbar pro Aspekt.
+  \item \fachbegriff{Programme aufsetzen.} Wer macht was bis wann, mit welchem Budget?
+  \item \fachbegriff{Messung und Korrektur.} Regelmäßiges Messen, Abweichungen analysieren, Programm anpassen.
+\end{enumerate}
+
+\subsection{Vom Projekt zum System}
+
+Der Unterschied zwischen Projekt und Managementsystem: ein Projekt endet, ein System lebt. Drei Indikatoren, dass Green IT zum System geworden ist:
+
+\begin{itemize}
+  \item Es gibt eine Person, die ``führt'' -- nicht zusätzlich, sondern als Teil ihrer Rolle.
+  \item Es gibt eine Datengrundlage, die quartalsweise aktualisiert wird.
+  \item Es gibt eine Review-Kadenz, die unabhängig vom Vorstandsinteresse läuft.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{A-Z-P-M}]
+ISO-14001-Logik für Green IT:\\[2pt]
+\textbf{A}spekte (was wirkt auf die Umwelt?)\\
+\textbf{Z}iele (messbar pro Aspekt)\\
+\textbf{P}rogramme (Maßnahmen mit Owner)\\
+\textbf{M}essung + Korrektur (PDCA-Zyklus)\\[2pt]
+\emph{Ohne A-Z-P-M bleibt Green IT eine PR-Kampagne.}
+\end{eselsbox}
+
+% --- 2. CARBON FOOTPRINT -------------------------------------------------
+\section{Carbon Footprint Measurement: messen, was wirklich zählt}
+
+Eine CO\textsubscript{2}-Bilanz für IT ist nicht trivial. Sie verlangt Systemgrenzen, Berechnungsmodelle, Datenqualitätsbewertung und Transparenz. \quelle{ITU-T L.1410, 2014; Schmidt et al., 2010}
+
+\subsection{Die Messlogik}
+
+\emph{Aktivität} (z.\,B.\ 1.000 CPU-Stunden) $\to$ \emph{Energie-/Ressourcenverbrauch} (kWh) $\to$ \emph{Emissionsfaktor} (kg CO\textsubscript{2}e pro kWh) $\to$ \emph{CO\textsubscript{2}e}.
+
+Drei Quellklassen:
+
+\begin{itemize}
+  \item \fachbegriff{Rechenzentrum / Cloud.} Compute, Storage, Netzwerk; gemessen oder über Hyperscaler-Reporting.
+  \item \fachbegriff{Endgeräte.} Laptops, Mobilgeräte, Bildschirme; teils gemessen, teils über Durchschnittswerte.
+  \item \fachbegriff{Lieferkette / Vendor.} Hardware-Herstellung, Software-Lizenzen mit eigenem Footprint.
+\end{itemize}
+
+\subsection{Systemgrenzen festlegen}
+
+Wichtigste Disziplin: \emph{Was ist drin, was ist draußen?} Häufige Fehlerquellen:
+
+\begin{itemize}
+  \item Mitarbeiter-Pendelweg zur IT zugerechnet? In der Regel nicht.
+  \item Cloud-Verbrauch über alle Regionen, oder nur EU? Muss benannt sein.
+  \item Schatten-IT (selbst-deployed SaaS)? Schwer messbar, aber zu erwähnen.
+  \item Hardware bei Mitarbeitenden im Homeoffice? Strom dort wird selten messbar.
+\end{itemize}
+
+\subsection{Datenqualität dokumentieren}
+
+Nicht jeder Datenpunkt ist gleich verlässlich. Übliche A/B/C-Klassifikation:
+
+\begin{itemize}
+  \item \fachbegriff{A -- gemessen.} Direkte Messung (Cloud-Bills, RZ-Strommessung).
+  \item \fachbegriff{B -- abgeleitet.} Aus gemessenen Daten berechnet (z.\,B.\ Cloud-Spend $\times$ Emissionsfaktor).
+  \item \fachbegriff{C -- geschätzt.} Pauschalwerte, Branchen-Mittel, Annahmen.
+\end{itemize}
+
+Der zentrale Punkt: Schätzungen sind \emph{erlaubt}, aber müssen \emph{gekennzeichnet} sein. Eine ``präzise'' Zahl, die in Wahrheit Schätzung ist, ist Greenwashing.
+
+\begin{merkbox}[Datenqualität sichtbar machen]
+Eine Green-IT-Kennzahl ohne Datenqualitätslabel ist eine Behauptung. Die Disziplin: jede Zahl bekommt ein A/B/C-Label. Ein Verbesserungsplan zeigt, wie C-Werte zu B oder A werden. Transparenz ersetzt nicht Genauigkeit -- aber sie macht den Status sichtbar.
+\end{merkbox}
+
+% --- 3. SUSTAINABLE SOFTWARE ---------------------------------------------
+\section{Sustainable Software Development: Effizienz als Qualitätsmerkmal}
+
+Software-Effizienz ist lange ein Nischenthema gewesen. Mit wachsender Cloud-Last und Klimadiskussion wird sie zum Qualitätsmerkmal -- so wie Security in den 2000er Jahren ein Qualitätsmerkmal wurde. \quelle{Murugesan, 2008}
+
+\subsection{Drei Hebel-Ebenen}
+
+\begin{enumerate}
+  \item \fachbegriff{Effizienz im Code.} Weniger Rechenzeit, weniger Speicher, weniger Datenbewegung. Algorithmen-Wahl, Datenstrukturen, Indizes.
+  \item \fachbegriff{Architektur.} Caching (statt jedes Mal neu rechnen), Asynchronität (statt synchron warten), Batch (statt jedes Event einzeln), ressourcenbewusste Defaults.
+  \item \fachbegriff{Betrieb.} Skalierung nach Bedarf (statt Maximum dauerhaft), Off-Hours-Abschaltung, Performance Budgets, Monitoring.
+\end{enumerate}
+
+\subsection{Performance Budget}
+
+Ein \fachbegriff{Performance Budget} ist eine vorab definierte Obergrenze für eine Performance-Metrik. Beispiele:
+
+\begin{itemize}
+  \item Antwortzeit $\leq$ 300\,ms (P99).
+  \item Payload $\leq$ 200\,KB pro Response.
+  \item CPU-Verbrauch $\leq$ X CPU-Sekunden pro 1.000 Requests.
+\end{itemize}
+
+Wenn ein Release das Budget überschreitet, wird es \emph{nicht} ausgeliefert -- oder es braucht eine bewusste Ausnahmeentscheidung mit Begründung. Das ist ein einfacher, aber wirksamer Mechanismus, um schleichende Verschlechterung zu vermeiden.
+
+\subsection{SSD-Guardrails für zwei Service-Klassen}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXX@{}}
+\toprule
+& \textbf{Kritisch} & \textbf{Normal} \\
+\midrule
+Performance Budget & verpflichtend, Release-blockierend & vorhanden, mit Ausnahmeprozess \\
+Data Budget & verpflichtend (max.\ Payload, max.\ DB-Calls) & empfohlen \\
+Profiling vor Release & verpflichtend & bei Major Releases \\
+Off-Hours-Standard & nur bei klar definierten Wartungsfenstern & Standard, sofern Service erlaubt \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent \quelle{vgl.\ Murugesan, 2008}
+
+\subsection{Greenwashing-Risiken im SSD}
+
+\begin{itemize}
+  \item \textbf{``Green by guesswork''.} Behauptung von Effizienz ohne Messung.
+  \item \textbf{Verlagerung statt Reduktion.} Mehr Effizienz im Compute, aber dafür mehr Datentransfer -- gesamt nichts gewonnen.
+  \item \textbf{Marketing-driven.} Schöne KPIs für die Außenkommunikation, ohne Verankerung im Engineering.
+\end{itemize}
+
+% --- 4. E-WASTE ----------------------------------------------------------
+\section{Electronic Waste Management: Lifecycle der Hardware}
+
+Hardware hat einen Lifecycle: Beschaffung, Nutzung, Wartung, Wiederverwendung, Recycling. In jedem Schritt entstehen Umwelt- und Compliance-Aspekte. Wer Geräte einfach ``ausmustert'', riskiert nicht nur Müllberge, sondern auch Datenschutzverstöße.
+
+\subsection{Der Lifecycle-Standard}
+
+\begin{enumerate}
+  \item \fachbegriff{Beschaffung.} Auswahl mit Nachhaltigkeitskriterien (Effizienzklasse, Reparierbarkeit, Rücknahme).
+  \item \fachbegriff{Nutzung.} Aktive Geräte mit Inventar, Updates, Sicherheit.
+  \item \fachbegriff{Wartung / Reparatur.} Verlängerung der Nutzungsdauer durch Reparatur statt Tausch.
+  \item \fachbegriff{Wiederverwendung / Refurbish.} Funktionsfähige Geräte intern oder extern weitervermitteln.
+  \item \fachbegriff{Recycling / Entsorgung.} Sichere, zertifizierte Entsorgung mit Nachweis.
+\end{enumerate}
+
+\subsection{Datenlöschung als Pflicht}
+
+Vor jeder Weitergabe (intern, extern, Recycling) müssen Daten sicher gelöscht werden:
+
+\begin{itemize}
+  \item \textbf{Standard-Löschung} reicht oft nicht -- Daten können wiederhergestellt werden.
+  \item \textbf{Mehrfaches Überschreiben} oder \textbf{kryptographische Löschung} (Verschlüsselungs-Key zerstört) sind heute Standards.
+  \item \textbf{Nachweis} (Löschprotokoll) ist Pflicht -- Auditor und Datenschutz verlangen ihn.
+\end{itemize}
+
+\subsection{Nachweisartefakte}
+
+Für jede ausgemusterte Hardware:
+
+\begin{itemize}
+  \item Asset-ID, Modell, Seriennummer.
+  \item Letzter Nutzer (für Datenklassifikation).
+  \item Datum der Außerbetriebnahme.
+  \item Löschprotokoll (Methode, Datum, Verantwortlicher).
+  \item Übergabe (an wen, mit Quittung).
+  \item Entsorgungs- oder Refurbish-Zertifikat.
+\end{itemize}
+
+\subsection{Owner-Klärung}
+
+\begin{itemize}
+  \item \fachbegriff{IT Asset Manager.} Führt das Asset-Register, ordnet die Weiterverwendung.
+  \item \fachbegriff{Security} (für Löschprotokolle).
+  \item \fachbegriff{Procurement} (für Rücknahme-Verträge).
+  \item \fachbegriff{Sustainability} (für Reporting / Quotenmessung).
+\end{itemize}
+
+% --- 5. VENDOR SUSTAINABILITY --------------------------------------------
+\section{Vendor Sustainability Assessment: Lieferkette als Hebel}
+
+Ein großer Teil des Footprints einer IT-Organisation steckt in der \emph{Lieferkette} -- Hardware-Herstellung, Cloud-Anbieter, SaaS-Provider, Service-Partner. Wer diese Dimension nicht steuert, übersieht oft die Mehrheit des eigenen Footprints.
+
+\subsection{Die Scorecard}
+
+Eine pragmatische Vendor-Scorecard mit 1--5-Bewertungen:
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+\toprule
+Kriterium & Frage \\
+\midrule
+Umweltpolitik & Existiert eine dokumentierte Umweltpolitik mit Zielen? \\
+CO\textsubscript{2}-Reporting & Veröffentlicht der Vendor Scope-1/2/3-Emissionen? \\
+Energieeffizienz & Welche Effizienzklassen / Zertifikate weist Hardware aus? \\
+Kreislaufwirtschaft & Rücknahmeprogramm? Refurbish? Recycling-Quote? \\
+Subunternehmer & Welche Subunternehmer; wie wird deren Footprint mitgeführt? \\
+Nachweise / Zertifikate & ISO 14001? ISO 50001? Branchenzertifikate? \\
+Transparenz & Auditrecht? Reporting-Frequenz? Klarheit der Daten? \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Vertragsklauseln}
+
+Eine Vendor-Strategie wird wirksam in Verträgen. Sinnvolle Klauseln:
+
+\begin{itemize}
+  \item Jährliches Reporting der relevanten Footprint-Kennzahlen.
+  \item Auditrecht (in einem definierten Rahmen).
+  \item Rücknahme-Verpflichtung für Hardware.
+  \item Transparenz über Subunternehmer für sensible Komponenten.
+  \item Exit-Strategie für den Fall, dass Mindeststandards nicht eingehalten werden.
+\end{itemize}
+
+\subsection{Transfer in den Service-Lifecycle}
+
+Vendor-Kriterien müssen an drei Stellen verankert sein:
+
+\begin{itemize}
+  \item \textbf{Service Design / Transition.} Bei Beschaffung und Onboarding eines neuen Vendors.
+  \item \textbf{Operation.} KPIs werden jährlich erhoben und bewertet.
+  \item \textbf{Improvement.} Bei Verschlechterung des Scores wird der Vendor zur Verbesserung aufgefordert; bleibt sie aus, Eskalation oder Exit.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{S-T-V}]
+Drei Anker für Vendor Sustainability:\\[2pt]
+\textbf{S}corecard -- mit klaren Kriterien.\\
+\textbf{T}ransparenz -- Reporting + Auditrecht.\\
+\textbf{V}ertrag -- Klauseln statt nur Versprechen.\\[2pt]
+\emph{Ohne S-T-V ist Vendor Sustainability Wunschdenken.}
+\end{eselsbox}
+
+% --- 6. FALLSTUDIE TELEDATA ----------------------------------------------
+\section{Fallstudie: TeleData Services -- Green IT im Service-Lifecycle}
+
+\emph{TeleData Services} betreibt viele digitale Services mit hohem Gerätebestand. Cloud-Last wächst stark. Green-IT-Initiativen waren bisher isoliert: kein einheitlicher Messstandard, Vendor-Claims widersprüchlich, E-Waste-Prozess uneinheitlich. Ziel: in 4 Monaten ein auditfähiges Green-IT-Programm, das im Service-Lifecycle verankert ist.
+
+Restriktionen: Budget 180\,k EUR, Datenlücken (Cloud-Verbrauch), Widerstand (``Zusatzarbeit''), Vendor-Transparenz unterschiedlich, Zielkonflikt Performance vs.\ Kosten vs.\ CO\textsubscript{2}.
+
+\subsection{Fünf Environmental Aspects}
+
+\begin{enumerate}
+  \item \textbf{Energie Betrieb.} Strom in RZ und Cloud.
+  \item \textbf{Hardware-Lifecycle.} Beschaffung, Nutzung, Refurbish, Recycling.
+  \item \textbf{Datentransfer / Storage.} Netzwerk- und Storage-Energie.
+  \item \textbf{Lieferkette.} Cloud-Provider, Hardware-Hersteller, SaaS.
+  \item \textbf{E-Waste / Entsorgung.} Endgeräte, RZ-Hardware, Mobilgeräte.
+\end{enumerate}
+
+\subsection{Mess- und Reporting-Standard}
+
+\begin{itemize}
+  \item Pro Service: kWh (Compute), Storage-GB, Requests/Tag, Antwortzeit, Off-Hours-Quote.
+  \item Pro Gerät: Lebensdauer, Refurbish-Quote, Rücknahmequote.
+  \item Frequenz: monatlich auf Service-Ebene, quartalsweise aggregiert.
+  \item Datenqualitätslabels A/B/C dokumentiert.
+\end{itemize}
+
+\subsection{SSD-Guardrails}
+
+Für \textbf{kritische Services}:
+
+\begin{itemize}
+  \item Performance Budget Antwortzeit (P99 $\leq$ 500\,ms).
+  \item Data Budget (max.\ Payload pro Response).
+  \item Profiling vor Release verpflichtend.
+  \item Ausnahmeprozess mit Begründung und Verbesserungsplan.
+\end{itemize}
+
+Für \textbf{normale Services}: empfohlen statt verpflichtend; Profiling bei Major Releases.
+
+\subsection{E-Waste Standardprozess}
+
+\begin{enumerate}
+  \item Asset wird im Register markiert (``Außerbetriebnahme'').
+  \item Datenlöschung gemäß Standard, mit Protokoll.
+  \item Refurbish-Prüfung: kann das Gerät weiterverwendet werden (intern oder extern)?
+  \item Rücknahme an Partner mit Zertifikat.
+  \item Eintrag im Nachweisarchiv.
+\end{enumerate}
+
+Owner: IT Asset Manager + Security für Löschprotokolle.
+
+\subsection{Vendor Scorecard und Klauseln}
+
+Für die wichtigsten 10 Vendoren wird eine jährliche Bewertung durchgeführt. Bestehende Verträge werden bei Verlängerung um Reporting- und Auditrecht-Klauseln ergänzt. Neue Verträge enthalten sie als Standard.
+
+\subsection{Quick Wins und Aufgeschobenes}
+
+\begin{itemize}
+  \item \textbf{Sofortstart (4 Wochen).} Messplan MVP + Non-Prod Off-Hours + E-Waste-Standardisierung Pilot.
+  \item \textbf{Aufschub.} Vendor-Recontracting / Deep Audits (erfordern Rechts-Reviews und Vertragsverhandlungen).
+\end{itemize}
+
+% --- 7. COACHING ---------------------------------------------------------
+\section{Coaching: Green IT als Lifecycle-Disziplin}
+
+Der Sprung zur wirksamen Green IT ist nicht primär technisch, sondern organisatorisch: \emph{wer verantwortet die Aspekte über die Lifecycle-Phasen?}
+
+\subsection{Drei Disziplinen}
+
+\begin{enumerate}
+  \item \textbf{Messbarkeit vor Moral.} Ohne Baseline keine Diskussion. Erst messen, dann gewichten.
+  \item \textbf{Efficiency als Qualitätsmerkmal.} Wie Security in den 2000ern: aus Goodwill wurde Pflicht. Bei SSD jetzt derselbe Pfad.
+  \item \textbf{Procurement als Umweltakteur.} Einkauf entscheidet über große Footprint-Anteile, nicht ``nur Preis''. Service Owner müssen Kriterien mitverantworten.
+\end{enumerate}
+
+\subsection{Greenwashing-Risiken}
+
+\begin{itemize}
+  \item Schöne Zahlen ohne Datenqualitätslabel.
+  \item Systemgrenzen so gewählt, dass nichts Schwieriges drin ist.
+  \item Vendor-Claims ohne Audit.
+  \item Reporting-Kampagne ohne dauerhaftes Programm.
+\end{itemize}
+
+\subsection{Senior-Reflexionsfragen}
+
+\begin{itemize}
+  \item Welche 3 Maßnahmen haben hohen Effekt bei geringem Risiko (``low regret'')?
+  \item Wo droht Greenwashing -- und welche Transparenzregel verhindert es?
+  \item Welche Governance-Regel ist zwingend, damit Vendor-Angaben belastbar sind?
+\end{itemize}
+
+% --- 8. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: ISO-14001-orientiertes Operating Model}
+
+Auf Wissens-Ebene sind Aspekte und Metriken eine Liste. Auf Anwendungs-Ebene ist Green IT ein laufender Prozess. Auf Management-Ebene ist es ein \emph{Operating Model} mit klaren Rollen, Datenqualität und Entscheidungs-Logik.
+
+\subsection{Top-10-Entscheidungen}
+
+\begin{enumerate}
+  \item Welche \textbf{Systemgrenzen} legen wir fest?
+  \item Welcher \textbf{Messstandard} ist verbindlich?
+  \item Welche \textbf{KPI-Ziele} setzen wir?
+  \item Welche \textbf{SSD-Gates} sind Pflicht?
+  \item Wie funktioniert der \textbf{Ausnahmeprozess}?
+  \item Welche \textbf{Vendor-Kriterien} sind Mindeststandard?
+  \item Welche \textbf{E-Waste-Policy} gilt?
+  \item Wer verantwortet \textbf{Reporting} und Rollen?
+  \item Welche \textbf{Investitionsprioritäten} (Hardware-Refresh, Software-Effizienz, Vendor-Wechsel)?
+  \item Welche \textbf{Review-Zyklen} sind verbindlich?
+\end{enumerate}
+
+\subsection{Mess- und Data-Quality-Framework}
+
+\begin{itemize}
+  \item Jeder KPI hat einen Owner und ein Datenqualitätslabel.
+  \item Qualitätschecks (Vollständigkeit, Plausibilität) sind dokumentiert.
+  \item Verbesserungspläne (von C zu B zu A) sind benannt mit Verantwortlichen.
+  \item Transparenzregeln (Anti-Greenwashing) sind explizit (z.\,B.\ ``keine ungelabelten Zahlen im Reporting'').
+\end{itemize}
+
+\subsection{Trade-offs explizit entscheiden}
+
+\begin{enumerate}
+  \item \textbf{Performance vs.\ Cost vs.\ CO\textsubscript{2}.} Häufige Trias. Wenn beide ersten optimiert werden, leidet meist der dritte.
+  \item \textbf{Speed vs.\ Vendor-Sorgfalt.} Schnelle Beschaffung vs.\ saubere Lieferantenbewertung.
+  \item \textbf{Transparenz vs.\ Vergleichbarkeit.} Datenqualitätslabel sind ehrlich, aber lassen sich nicht so leicht aggregieren.
+\end{enumerate}
+
+\subsection{Roadmap-Logik}
+
+\begin{itemize}
+  \item \textbf{MVP (8 Wochen).} Messplan, Quick Wins, Vendor-Scorecard-Entwurf.
+  \item \textbf{Scale (12 Wochen).} Roll-out aller fünf Aspekte, SSD-Gates aktiv, E-Waste-Standardprozess produktiv.
+  \item \textbf{Sustain (laufend).} Quartals-Reviews, Improvements, Vendor-Recontracting.
+\end{itemize}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 14]
+Green IT ist ein \textbf{Managementsystem}, nicht eine Kampagne. ISO-14001-Logik (Aspekte $\to$ Ziele $\to$ Programme $\to$ Messung $\to$ Korrektur $\to$ Verbesserung) gibt den Rahmen. Wirksam wird sie, wenn sie im Service-Lifecycle verankert ist -- mit klaren Owners, dokumentierter Datenqualität und transparenten Trade-offs.
+\end{merkbox}
+
+% --- 9. TAKE-AWAYS -------------------------------------------------------
+\section{Take-aways aus Tag 14}
+
+\begin{enumerate}
+  \item \textbf{ISO-14001-Logik in vier Schritten}: Aspekte, Ziele, Programme, Messung+Korrektur.
+  \item \textbf{Carbon Footprint mit Systemgrenze und Datenqualität.} A/B/C-Labels sind Pflicht.
+  \item \textbf{SSD hat drei Hebel}: Code, Architektur, Betrieb.
+  \item \textbf{Performance Budget} ist die einfachste, wirksamste SSD-Disziplin.
+  \item \textbf{E-Waste-Lifecycle vollständig denken}: Beschaffung bis Recycling, mit Nachweisartefakten.
+  \item \textbf{Vendor-Scorecard + Vertragsklauseln} statt PR-Versprechen.
+  \item \textbf{Greenwashing erkennen}: ungelabelte Zahlen, schmale Systemgrenzen, Reporting ohne Programm.
+  \item \textbf{Green IT als Operating Model}, das im Service-Lifecycle verankert ist.
+\end{enumerate}
+
+% --- 10. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Cabinet Office. (2019).] \emph{ITIL 4 foundation.} TSO (The Stationery Office).
+  \item[International Organization for Standardization. (2015).] \emph{Environmental management systems -- Requirements with guidance for use} (ISO 14001:2015). ISO.
+  \item[International Telecommunication Union. (2014).] \emph{Methodology for environmental life cycle assessments of information and communication technology goods, networks and services} (ITU-T L.1410). ITU.
+  \item[Murugesan, S. (2008).] Harnessing green IT: Principles and practices. \emph{IT Professional, 10}(1), 24--33. \href{https://doi.org/10.1109/MITP.2008.10}{https://doi.org/10.1109/MITP.2008.10}
+  \item[Newman, S. (2021).] \emph{Building microservices: Designing fine-grained systems} (2nd ed.). O'Reilly.
+  \item[Project Management Institute. (2021).] \emph{A guide to the Project Management Body of Knowledge (PMBOK\textregistered{} Guide)} (7th ed.). Project Management Institute.
+  \item[Schmidt, N.-H., Schmidtchen, R., Erek, K., Kolbe, L.\,M., \& Zarnekow, R. (2010).] Influence of green IT on consumers' buying behavior of personal computers. \emph{AMCIS 2010 Proceedings.}
+  \item[Westerman, G., Bonnet, D., \& McAfee, A. (2014).] \emph{Leading digital: Turning technology into business transformation.} Harvard Business Review Press.
+\end{description}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[A/B/C-Label (Datenqualität)] Klassifikation der Datenqualität: A gemessen, B abgeleitet, C geschätzt. Pflicht in transparentem Green-IT-Reporting.
+  \item[Carbon Footprint] Summe der CO\textsubscript{2}-äquivalenten Emissionen, die einer Aktivität, einem Produkt oder einer Organisation zuzurechnen sind.
+  \item[CO\textsubscript{2}e] Kohlendioxid-Äquivalent. Vereinheitlichte Einheit für die Wirkung verschiedener Treibhausgase.
+  \item[Data Budget] Vorab definierte Obergrenze für Datenmenge oder -bewegung pro Vorgang. SSD-Disziplin.
+  \item[Datenlöschung (sichere)] Verfahren zur unwiderruflichen Entfernung von Daten von Speichermedien (Überschreiben, kryptographische Löschung).
+  \item[E-Waste] Elektronischer Abfall. Hardware am Ende ihrer Nutzungsdauer. Lifecycle: Außerbetriebnahme, Löschung, Refurbish, Recycling.
+  \item[Emissionsfaktor] Faktor, der Aktivitäts- oder Energieverbrauch in CO\textsubscript{2}e umrechnet (z.\,B.\ kg CO\textsubscript{2}e pro kWh).
+  \item[Environmental Aspect] Bereich, in dem eine Organisation auf die Umwelt einwirkt. In ISO 14001 zentral: Energie, Material, Lieferkette, Entsorgung.
+  \item[Greenwashing] Vortäuschen von Nachhaltigkeit ohne substanzielle Wirkung. In KPIs erkennbar durch ungelabelte Zahlen, enge Systemgrenzen, fehlende Programme.
+  \item[ISO 14001] Internationaler Standard für Umweltmanagementsysteme. PDCA-Logik (Plan-Do-Check-Act).
+  \item[Lifecycle (Hardware)] Phasen einer Hardware: Beschaffung, Nutzung, Wartung, Refurbish, Recycling.
+  \item[Performance Budget] Vorab definierte Obergrenze für Performance-Metrik (z.\,B.\ Antwortzeit). SSD-Disziplin.
+  \item[PUE] \emph{Power Usage Effectiveness.} Effizienz-Indikator für Rechenzentren.
+  \item[Refurbish] Aufbereitung gebrauchter Hardware zur weiteren Nutzung. Verlängert den Lifecycle.
+  \item[Scope 1 / 2 / 3] Klassifikation von Emissionen: Scope 1 direkt, Scope 2 eingekaufte Energie, Scope 3 Lieferkette und Nutzungsphase.
+  \item[SSD (Sustainable Software Development)] Disziplin der ressourcen- und energieeffizienten Software-Entwicklung.
+  \item[Systemgrenze] Festlegung, was in einer Bilanz oder Messung berücksichtigt wird und was nicht. Zentrale Quelle von Greenwashing-Risiken.
+  \item[Vendor Sustainability] Bewertung der Lieferanten nach Umweltkriterien. Scorecard, Vertragsklauseln, Auditrecht.
+  \item[Workload-Shift] Verlegung von Lasten in Zeitfenster mit günstigerem Strommix.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 14 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

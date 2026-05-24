@@ -1,0 +1,782 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 10 - Lehrskript
+% Microservices, Kubernetes, TDD/DevOps, Operating Model
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 10}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Microservices \textperiodcentered{} Kubernetes \textperiodcentered{} DevOps}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 4 \textperiodcentered{} TAG 10 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 11.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Microservices,\\Kubernetes\\\& DevOps\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Skalierbare digitale Prozessarchitektur bauen --\\von Servicegrenzen zu einem belastbaren Operating Model.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 10 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Am Ende dieses Tages verstehen Sie, warum eine skalierbare digitale Prozessarchitektur nicht aus Werkzeugen, sondern aus \emph{Entscheidungen} besteht. Sie können Servicegrenzen entlang fachlicher Capabilities ziehen, ein Kubernetes-Betriebskonzept skizzieren, eine Teststrategie nach TDD-Prinzipien aufstellen und ein Operating Model entwerfen, das Ownership und Governance leichtgewichtig, aber verbindlich verankert. Drei Stufen -- Wissen, Anwendung, Management -- bauen aufeinander auf.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Microservices-Grundlogik kennen: unabhängige Deployments, Servicegrenzen entlang Capabilities, API/Event-Integration, Idempotenz.
+  \item Container und Kubernetes konzeptionell einordnen: Deploy, Skalierung, Self-Healing, Rollback, Service-Discovery, Konfiguration/Secrets.
+  \item TDD-Zyklus (Red-Green-Refactor) und Testpyramide (Unit, Integration, End-to-End) als Qualitätsarchitektur verstehen.
+  \item DevOps-Praktiken und Operating-Model-Bausteine (Produktteams, Plattformteam, Security, Architektur-Governance) einordnen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Einen Monolithen entlang Capabilities in fünf bis acht Service-Kandidaten zerlegen und Steckbriefe formulieren.
+  \item Einen Release-Flow mit zwei Quality Gates definieren und eine Testpyramide pro Service dimensionieren.
+  \item Ein Kubernetes-Betriebskonzept (Rollout/Rollback, Autoscaling, Monitoring/Alerting) auf einen Fallprozess anwenden.
+  \item Ein Operating Model entwerfen, das Produktteams, Plattformteam und Security in einer RACI darstellt.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Top-10-Entscheidungen für eine skalierbare Plattform priorisieren (Servicegrenzen, Datenhoheit, SLOs, Standards).
+  \item Zielkonflikte Speed vs.\ Safety, Autonomie vs.\ Standardisierung, Innovation vs.\ Audit transparent entscheiden.
+  \item Reliability- und Risiko-Architektur (SLOs, Error Budgets, Change Failure Rate, MTTR) als Steuerungsinstrument nutzen.
+  \item Entscheidungen unter Unsicherheit mit Frühwarnsignalen absichern statt sie zu vermeiden.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Microservices sind kein \emph{Technologiethema}, sondern eine \emph{Organisationsentscheidung}. Kubernetes löst die Skalierung -- aber nur, wenn die Organisation Skalierung verantworten kann. Wer die Plattform baut, ohne das Operating Model zu klären, baut ein leistungsfähigeres Chaos. \quelle{vgl.\ Newman, 2021, Kap.~1; Skelton \& Pais, 2019}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG / MOTIVATION --------------------------------------------
+\section{Einstieg: Warum klassische Architektur an Grenzen stößt}
+
+Die meisten gewachsenen Unternehmen kennen die gleiche Situation: ein monolithisches Kernsystem, das vor zehn bis fünfzehn Jahren begonnen wurde, mittlerweile alle Geschäftsprozesse trägt, und in jedem Release alle Bereiche gleichzeitig betrifft. Die Release-Zyklen sind lang (sechs bis acht Wochen sind keine Seltenheit), die Tests aufwendig, die Schmerzgrenze der Beteiligten hoch. Jedes neue Feature trägt das Risiko, etwas anderes zu beschädigen -- weshalb Vorsicht zur Tugend wird und Innovation zur Ausnahme. \quelle{vgl.\ Newman, 2021, Kap.~1}
+
+In dieser Situation klingt die Antwort einfach: \emph{Microservices.} Wir zerlegen den Monolithen in kleine, eigenständige Dienste, deployen jeden für sich, skalieren punktgenau und befreien die Teams. Die Realität ist nüchterner. Ein schlecht geschnittener Microservice ist kein Fortschritt, sondern eine teurere Form desselben Problems -- nur in mehreren Repositories und mit zusätzlichen Schnittstellenkosten.
+
+\subsection{Die drei Schmerzpunkte des Monolithen}
+
+\begin{enumerate}
+  \item \fachbegriff{Kopplung im Code.} Eine Änderung in einem Modul zwingt zur Vollregression. Tests sind teuer, Deployments selten, Eingriffsrisiko hoch.
+  \item \fachbegriff{Kopplung im Datenmodell.} Ein zentrales Schema, das alle Bereiche teilen. Schemaänderungen erfordern Verhandlungen mit allen Anrainern.
+  \item \fachbegriff{Kopplung in der Organisation.} Ein Release bedeutet ein Synchronisationsfenster für alle Teams -- mit Steuerungsaufwand, der mit der Größe quadratisch wächst.
+\end{enumerate}
+
+\subsection{Warum Microservices keine Silberkugel sind}
+
+Microservices versprechen Entkopplung -- liefern sie aber nur dann, wenn die Servicegrenzen \emph{entlang fachlicher Capabilities} verlaufen, nicht entlang technischer Schichten oder Datenbanktabellen. Ein typischer Anti-Schnitt: ``Datenbank-Service'', ``UI-Service'', ``Logik-Service''. Drei Services, dieselbe Kopplung -- nur jetzt über Netzwerkgrenzen, mit Latenz und neuen Fehlerklassen. \quelle{Newman, 2021, Kap.~3; Evans, 2003}
+
+Ein guter Servicegrenzen-Schnitt hingegen folgt der Frage: \emph{Was ist eine eigenständige Geschäftsfähigkeit?} ``Order'', ``Inventory'', ``Shipping'', ``Billing'' sind Capabilities -- sie haben eigene Daten, eigene Entscheidungen, eigene Owner. Wenn eine Capability sich ändert, ändert sich \emph{ein} Service, nicht das halbe Unternehmen.
+
+\subsection{Was ``skalierbar'' wirklich bedeutet}
+
+Skalierbarkeit hat drei Dimensionen, die oft verwechselt werden:
+
+\begin{itemize}
+  \item \fachbegriff{Last-Skalierung.} Der Service verträgt zehntausend statt hundert Requests pro Sekunde. Eher ein Plattformthema (Kubernetes, Autoscaling).
+  \item \fachbegriff{Team-Skalierung.} Mehr Teams können parallel an unterschiedlichen Services arbeiten, ohne sich gegenseitig zu blockieren. Eher ein Architekturthema (Servicegrenzen).
+  \item \fachbegriff{Entscheidungs-Skalierung.} Die Organisation kann hundert Entscheidungen pro Woche treffen, ohne im Architekturboard zu ersticken. Eher ein Governance-Thema (Leitplanken, Autonomie).
+\end{itemize}
+
+Eine Plattform ist erst dann skalierbar, wenn alle drei Dimensionen funktionieren. Wer nur Last skaliert, baut leistungsfähige Engpässe. Wer nur Teams skaliert, produziert Architekturchaos. Wer nur Entscheidungen skaliert, riskiert Inkonsistenz.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{L-T-E}]
+\textbf{L-T-E} -- die drei Skalierungsdimensionen einer Prozessplattform:\\[2pt]
+\textbf{L}ast -- mehr Volumen ohne Performance-Bruch?\\
+\textbf{T}eams -- mehr parallele Arbeit ohne Blockaden?\\
+\textbf{E}ntscheidungen -- mehr lokale Autonomie ohne Inkonsistenz?\\[2pt]
+\emph{Wer nur eine Dimension skaliert, baut Engpässe an den anderen.}
+\end{eselsbox}
+
+% --- 2. MICROSERVICES ----------------------------------------------------
+\section{Microservices: Servicegrenzen als Architekturentscheidung}
+
+Die zentrale Frage bei Microservices ist nicht ``wie klein'' -- sondern ``wie geschnitten''. Servicegröße ist eine Folge, nicht das Ziel. Das Ziel ist Entkopplung entlang sinnvoller Grenzen.
+
+\subsection{Capabilities statt Schichten}
+
+Eine \fachbegriff{Geschäftsfähigkeit} (Business Capability) ist eine eigenständige Leistung, die das Unternehmen erbringt -- etwa ``Bestellung annehmen'', ``Bonität prüfen'', ``Versand auslösen''. Sie ist sprachlich klar abgrenzbar, hat einen typischen Input und Output, und sie hat einen verantwortlichen Owner. \quelle{Newman, 2021, Kap.~3}
+
+Ein \fachbegriff{Bounded Context} im Sinne von Eric Evans ist die sprachlich abgegrenzte Zone, in der ein bestimmtes Modell konsistent gilt. ``Kunde'' bedeutet im Vertrieb etwas anderes als im Mahnwesen -- und das ist kein Problem, sondern eine notwendige Klärung. Die Servicegrenze verläuft an der Grenze des Bounded Context, nicht innerhalb. \quelle{Evans, 2003, Kap.~14}
+
+\subsection{Die Servicekarte: ein Steckbrief je Service}
+
+Für jeden Service-Kandidaten lohnt sich vor dem ersten Codezeilen ein Steckbrief mit fünf Feldern:
+
+\begin{itemize}
+  \item \textbf{Zweck.} Eine Capability in einem Satz. Wenn der Satz drei Konjunktionen enthält, ist es vermutlich kein Service, sondern eine Sammlung.
+  \item \textbf{Input.} Welche Daten kommen herein? Welche Trigger? Welche Verträge mit anderen Services?
+  \item \textbf{Output.} Welche Daten gehen heraus? Welche Ereignisse erzeugt der Service?
+  \item \textbf{Owner.} Wer verantwortet diesen Service in Run und Build? Eine Person, kein Team-Mailverteiler.
+  \item \textbf{Kritischster Fehlerfall.} Was passiert, wenn der Service ausfällt? Welcher Geschäftsschaden droht? Welche Eskalation?
+\end{itemize}
+
+\subsection{Integration: API und Event}
+
+Microservices kommunizieren typischerweise über zwei Muster: \fachbegriff{synchrone APIs} (oft HTTP/REST oder gRPC) und \fachbegriff{asynchrone Events} (Message Bus, Event Stream). Beide haben Stärken und Schwächen: \quelle{Richardson, 2018, Kap.~3}
+
+\begin{itemize}
+  \item \textbf{APIs} sind einfach zu verstehen, gut testbar und liefern sofortige Antworten. Schwäche: ein Aufruf-Stack koppelt Services in Verfügbarkeit und Latenz. Wenn drei Services synchron aufgerufen werden, ist die Gesamtverfügbarkeit das Produkt der einzelnen.
+  \item \textbf{Events} entkoppeln stärker -- Sender und Empfänger müssen nicht gleichzeitig verfügbar sein. Schwäche: höhere Komplexität, Reihenfolgeprobleme, Duplikate möglich -- weshalb \fachbegriff{Idempotenz} (ein Aufruf mehrfach ausführbar ohne Schaden) Pflicht wird.
+\end{itemize}
+
+\begin{merkbox}[Idempotenz als Pflichtdisziplin]
+In verteilten Systemen werden Nachrichten verloren, dupliziert oder neu zugestellt. Jeder Service muss damit umgehen können -- entweder fachlich (eine Bestellung mit gleicher ID wird nicht doppelt angelegt) oder technisch (Deduplizierung über Idempotency-Keys). Ohne Idempotenz wird jede Skalierung früher oder später zu einem Datenintegritätsproblem. \quelle{Richardson, 2018, Kap.~3}
+\end{merkbox}
+
+\subsection{Versionierung von Schnittstellen}
+
+Ein Service-Vertrag ist eine Verbindlichkeit. Wer ihn bricht, bricht die Verträge aller Konsumenten -- mit unvorhersehbaren Effekten. Drei Disziplinen:
+
+\begin{enumerate}
+  \item \textbf{Semantische Versionierung.} Major-Versionen für Breaking Changes, Minor für additive Erweiterungen, Patch für interne Fixes. Konsumenten wissen, was sie erwartet.
+  \item \textbf{Tolerant Reader.} Konsumenten lesen nur die Felder, die sie brauchen, und ignorieren unbekannte Felder. So bricht ein zusätzliches Feld niemanden.
+  \item \textbf{Deprecation-Pfade.} Eine alte Version wird nicht abgeschaltet, sondern markiert. Sechs Monate Übergangszeit sind eher die Untergrenze, nicht die Obergrenze.
+\end{enumerate}
+
+\subsection{Risiken: was Microservices kosten}
+
+Wer Microservices einführt, übernimmt eine Liste von Folgekosten, die in der Tool-Werbung selten ehrlich genannt werden:
+
+\begin{itemize}
+  \item \textbf{Verteilte Fehler.} Ein Service-Ausfall propagiert sich durch das Netz. Ohne Resilienz-Patterns (Timeouts, Circuit Breaker, Retries mit Backoff) wird ein lokales Problem zum globalen Ausfall.
+  \item \textbf{Observability-Pflicht.} Logs, Metriken und Traces müssen über Servicegrenzen hinweg korreliert werden. Ohne Standard wird Debugging zur Detektivarbeit.
+  \item \textbf{Daten-Konsistenz.} Statt einer ACID-Transaktion gibt es \fachbegriff{eventuelle Konsistenz} -- Daten sind nicht überall sofort gleich. Das ist beherrschbar, aber nicht selbstverständlich.
+  \item \textbf{Organisationskosten.} Mehr Services bedeuten mehr Verträge, mehr Schnittstellen, mehr Koordination. Wer 50 Services für 5 Teams baut, hat ein Problem.
+\end{itemize}
+
+% --- 3. KUBERNETES -------------------------------------------------------
+\section{Container und Kubernetes: Orchestrierung als Plattform}
+
+Container sind nicht ``Mini-VMs''. Sie sind ein \emph{Packaging-Format}: eine Anwendung plus all ihre Abhängigkeiten in einem reproduzierbaren Artefakt. Was auf dem Laptop läuft, läuft im Cluster -- weil der Container die Umgebung mitbringt. Das löst eine alte Klage (``Bei mir läuft's'') und macht Deployment zur wiederholbaren Prozedur. \quelle{Burns et al., 2022, Kap.~1}
+
+\subsection{Kubernetes als Orchestrierung}
+
+\fachbegriff{Kubernetes} ist die heutige Standard-Antwort auf die Frage: \emph{Wie betreibt man hunderte Container, die auf Dutzenden Maschinen laufen, ohne den Verstand zu verlieren?} Kubernetes übernimmt die Aufgaben, die früher manuell oder mit Skripten erledigt wurden:
+
+\begin{itemize}
+  \item \fachbegriff{Deployment.} Welche Container laufen in welcher Version, auf welcher Maschine?
+  \item \fachbegriff{Skalierung.} Bei Last steigt die Anzahl der Instanzen, bei Ruhe sinkt sie -- auf Regeln basierend.
+  \item \fachbegriff{Self-Healing.} Stirbt ein Container, wird er neu gestartet. Stirbt eine Maschine, werden ihre Container woanders neu gestartet.
+  \item \fachbegriff{Rollback.} Eine fehlerhafte Version wird in Minuten zurückgenommen.
+  \item \fachbegriff{Service-Discovery.} Services finden einander über logische Namen, nicht über IP-Adressen.
+\end{itemize}
+
+\subsection{Konfiguration und Secrets}
+
+Eine Anwendung sollte ihre Konfiguration nicht im Code tragen, sondern als externe Eingabe bekommen. Kubernetes unterscheidet:
+
+\begin{itemize}
+  \item \textbf{ConfigMaps} -- nicht-sensitive Konfiguration (Hostnames, Feature-Flags, Sprache).
+  \item \textbf{Secrets} -- sensitive Werte (Passwörter, API-Keys, Zertifikate). In der Praxis nie unverschlüsselt im Cluster, sondern aus einem \fachbegriff{Vault} (HashiCorp Vault, AWS Secrets Manager o.\,ä.) bezogen.
+\end{itemize}
+
+\subsection{Ressourcen-Limits und Quality of Service}
+
+Jeder Container kann mit \fachbegriff{Requests} (was er garantiert bekommt) und \fachbegriff{Limits} (was er maximal bekommen darf) konfiguriert werden. Wer das überspringt, riskiert zwei Klassen von Ausfällen:
+
+\begin{itemize}
+  \item Ein Container greift sich die ganze Maschine, andere verhungern. (Kein Limit.)
+  \item Eine Maschine ist überbucht, alle Container leiden bei Lastspitzen. (Kein Request.)
+\end{itemize}
+
+\subsection{Rollout-Strategien: Blue/Green, Canary, Rolling}
+
+Wer wöchentlich oder gar mehrmals täglich produziert, braucht Rollout-Strategien, die das Risiko schon im Deployment begrenzen:
+
+\begin{itemize}
+  \item \fachbegriff{Rolling Update.} Die Instanzen werden nach und nach ersetzt. Einfach, aber während des Rollouts läuft Old und New gleichzeitig -- das muss der Service vertragen.
+  \item \fachbegriff{Blue/Green.} Zwei vollständige Umgebungen, Umschalten per Routing. Höhere Infrastruktur-Kosten, aber sofortiges Rollback per Switch.
+  \item \fachbegriff{Canary.} Eine kleine Prozentzahl der Nutzer bekommt die neue Version, wird beobachtet, bei grünem Licht wird ausgerollt. Differenziertes Risiko-Management.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{B-C-R}]
+Drei Rollout-Strategien für skalierende Plattformen:\\[2pt]
+\textbf{B}lue/Green -- ``zweite Umgebung daneben, dann umschalten''\\
+\textbf{C}anary -- ``erst 5\,\%, dann 25\,\%, dann alle''\\
+\textbf{R}olling -- ``alte und neue Version parallel, schrittweise tauschen''\\[2pt]
+\emph{Kein Standard ist überall richtig. Risiko-Klasse + Rollback-Anforderung entscheiden.}
+\end{eselsbox}
+
+\subsection{Observability als Pflichtprogramm}
+
+Eine verteilte Plattform ohne Observability ist ein Blindflug. Drei Säulen: \quelle{Burns et al., 2022, Kap.~16; Kim et al., 2016, Teil~II}
+
+\begin{itemize}
+  \item \fachbegriff{Logs.} Strukturierte, korrelierte Events. Zentral abgelegt, durchsuchbar, mit Korrelations-IDs über Servicegrenzen.
+  \item \fachbegriff{Metriken.} Zeitliche Aggregationen: Antwortzeit, Fehlerrate, Auslastung, Queue-Länge. Anhand SLIs (Service Level Indicators) gemessen, gegen SLOs verglichen.
+  \item \fachbegriff{Traces.} Der Pfad einer Anfrage durch mehrere Services. Ohne Tracing ist verteiltes Debugging Detektivarbeit.
+\end{itemize}
+
+% --- 4. TDD / TESTSTRATEGIE ----------------------------------------------
+\section{TDD und Teststrategie: Qualität als Architektur}
+
+Tests sind nicht etwas, das man ``nachher'' macht. Sie sind Teil des Architekturwerks. Eine skalierbare Plattform braucht ein Test-System, das sich selbst skaliert -- sprich: Tests, die schnell laufen, wenig kosten und trotzdem belastbar sind.
+
+\subsection{TDD: Red-Green-Refactor}
+
+\fachbegriff{Test-Driven Development} (TDD) folgt einem strikten Zyklus: \emph{Red} (schreibe einen Test, der scheitert), \emph{Green} (schreibe den minimalen Code, damit der Test besteht), \emph{Refactor} (verbessere die Struktur, ohne Verhalten zu ändern). \quelle{Beck, 2002}
+
+Was TDD nicht ist: eine Garantie für Bugfreiheit. Was es ist: eine Disziplin, die zwingt, vor dem Code über das gewünschte Verhalten nachzudenken -- und die ein \emph{Sicherheitsnetz aus Tests} entstehen lässt, das Refactoring überhaupt erst ermöglicht.
+
+\subsection{Die Testpyramide}
+
+Nicht alle Tests sind gleich. Die \fachbegriff{Testpyramide} ordnet sie nach Geschwindigkeit, Kosten und Verlässlichkeit:
+
+\begin{itemize}
+  \item \textbf{Unit-Tests} (Basis): viele, sehr schnell, isolieren einzelne Funktionen. Hunderte bis Tausende pro Service.
+  \item \textbf{Integrationstests} (Mitte): weniger, prüfen Service-Grenzen und externe Abhängigkeiten (DB, andere Services). Dutzende bis hundert pro Service.
+  \item \textbf{End-to-End-Tests} (Spitze): wenige, prüfen den Geschäftsfluss über mehrere Services. Eine Handvoll, weil teuer und fragil.
+\end{itemize}
+
+Der häufige Fehler: eine \emph{umgekehrte Pyramide} mit vielen E2E-Tests, wenig Unit-Tests. Sie ist fragil, langsam und liefert vage Fehlermeldungen. Wer in der Pyramide investiert, investiert von unten.
+
+\subsection{Quality Gates}
+
+Ein \fachbegriff{Quality Gate} ist eine harte Bedingung, die erfüllt sein muss, bevor ein Release in die nächste Stufe geht. Drei häufige Gates: \quelle{Forsgren et al., 2018, Kap.~3}
+
+\begin{itemize}
+  \item \textbf{Tests grün.} Alle Tests passieren. Keine Ausnahme.
+  \item \textbf{Static Checks.} Linting, Type-Checks, Style. Keine kosmetische Spielerei -- diese Werkzeuge fangen ganze Klassen von Bugs ab.
+  \item \textbf{Security Checks.} Abhängigkeiten ohne bekannte Sicherheitslücken, keine Secrets im Code, Container ohne kritische CVEs.
+\end{itemize}
+
+\begin{merkbox}[Gate-Disziplin]
+Ein Quality Gate, das in Krisen ``mal weggelassen'' wird, ist kein Gate -- es ist eine Empfehlung. Gates müssen \emph{automatisch} sein und in der Pipeline durchsetzen, nicht von Menschen prüfen. Sonst wird in Stresssituationen ihre Existenz zur Belastung statt zum Schutz.
+\end{merkbox}
+
+\subsection{Deployment-Pipeline}
+
+Eine moderne Deployment-Pipeline hat typischerweise diese Stationen:
+
+\begin{enumerate}
+  \item \textbf{Commit} -- Code wird gepusht, Build startet.
+  \item \textbf{Build} -- Container-Image wird erzeugt, signiert, registriert.
+  \item \textbf{Unit-Tests + Static Checks} -- innerhalb Minuten.
+  \item \textbf{Security Scan} -- Abhängigkeiten, Container, Konfiguration.
+  \item \textbf{Integrationstests} -- gegen Mock- oder Sandbox-Services.
+  \item \textbf{Deploy in Staging} -- automatisches Hochfahren in einer produktionsähnlichen Umgebung.
+  \item \textbf{Smoke Tests / Canary} -- minimale E2E-Prüfungen.
+  \item \textbf{Deploy in Produktion} -- mit definierter Rollout-Strategie.
+\end{enumerate}
+
+\subsection{DORA-Metriken}
+
+Die \fachbegriff{DORA-Metriken} sind heute die Standard-Messung für DevOps-Performance: \quelle{Forsgren et al., 2018, Kap.~2}
+
+\begin{itemize}
+  \item \fachbegriff{Lead Time for Changes} -- wie lange von Commit bis Produktion?
+  \item \fachbegriff{Deployment Frequency} -- wie oft wird in Produktion deployed?
+  \item \fachbegriff{Change Failure Rate} -- welcher Anteil der Releases verursacht einen Incident?
+  \item \fachbegriff{Mean Time to Recover (MTTR)} -- wie lange dauert es, bis nach einem Incident wieder Normalbetrieb herrscht?
+\end{itemize}
+
+Diese vier Metriken sind eng korreliert: leistungsfähige Teams haben \emph{kürzere} Lead Times, \emph{häufigere} Deployments, \emph{niedrigere} Failure Rates und \emph{kürzere} MTTRs. Sie ersetzen klassische Aktivitätsmessungen (``wie viele Bugs in der Story?'') durch Outcome-Messungen.
+
+% --- 5. DEVOPS / OPERATING MODEL ------------------------------------------
+\section{DevOps und Operating Model: Wer baut, wer betreibt?}
+
+DevOps ist keine Tool-Kategorie, sondern eine \emph{Arbeitsweise}: Entwicklung und Betrieb arbeiten als ein System, nicht als zwei verfeindete Abteilungen. Das berühmte Prinzip ``\emph{You build it, you run it}'' (Werner Vogels) sagt es kurz: wer baut, verantwortet auch den Betrieb. \quelle{Kim et al., 2016, Kap.~1}
+
+\subsection{Three Ways}
+
+Gene Kim formuliert die DevOps-Bewegung als ``Three Ways'': \quelle{Kim et al., 2016, Einleitung}
+
+\begin{enumerate}
+  \item \textbf{Flow.} Schneller, kontinuierlicher Wertfluss von der Idee bis zum Kunden. Engpässe sichtbar machen, Batches verkleinern, Automatisierung erhöhen.
+  \item \textbf{Feedback.} Schnelle, kurze Feedback-Schleifen aus dem Betrieb zurück in die Entwicklung -- damit Fehler nicht zur teuren Spätentdeckung werden.
+  \item \textbf{Continuous Learning.} Eine Kultur, die Experimente erlaubt und Fehler als Lernchance nutzt -- inklusive blame-freier Postmortems.
+\end{enumerate}
+
+\subsection{Team Topologies: vier Team-Typen}
+
+Matthew Skelton und Manuel Pais haben mit \emph{Team Topologies} eine pragmatische Sprache für Team-Strukturen in skalierten Organisationen geprägt. Vier Team-Typen genügen: \quelle{Skelton \& Pais, 2019}
+
+\begin{itemize}
+  \item \fachbegriff{Stream-aligned Team.} Verantwortet einen kontinuierlichen Wertstrom (z.\,B.\ einen Geschäftsprozess oder eine Produkt-Linie). Build \emph{und} Run für ihren Bereich.
+  \item \fachbegriff{Platform Team.} Stellt eine interne Plattform bereit (CI/CD, Observability, Kubernetes-Standards), die Stream-aligned Teams produktiver macht.
+  \item \fachbegriff{Enabling Team.} Hilft anderen Teams kurzfristig, neue Fähigkeiten aufzubauen (etwa Cloud-Migration, Security-Praktiken).
+  \item \fachbegriff{Complicated Subsystem Team.} Spezialteam für hochkomplexe Subsysteme, die nicht jedes Stream-Team beherrschen kann (z.\,B.\ Machine-Learning-Plattform).
+\end{itemize}
+
+\subsection{Operating-Model-Bausteine}
+
+Ein Operating Model beantwortet drei Fragen: \emph{Wer macht was? Wer entscheidet was? Wie wird zusammengearbeitet?} Vier Bausteine:
+
+\begin{enumerate}
+  \item \textbf{Produktteams (Stream-aligned).} Besitzen Services end-to-end -- Build, Run, Monitor, Improve.
+  \item \textbf{Plattformteam.} Liefert Standards und Werkzeuge: CI/CD-Templates, Observability-Baseline, Kubernetes-Basis, Security-Defaults.
+  \item \textbf{Security/Compliance.} Definiert Baselines und prüft Ausnahmen. Nicht für jeden Schritt einzeln, sondern über Policies.
+  \item \textbf{Architektur-Governance.} Ein leichtgewichtiges Gremium, das nur teure und irreversible Entscheidungen trifft (Servicegrenzen, Datenhoheit, Plattform-Wahl).
+\end{enumerate}
+
+\subsection{RACI für Schnittstellenänderungen}
+
+Eine RACI-Matrix für Schnittstellenänderungen in einer Microservice-Plattform sieht oft so aus:
+
+\begin{tabularx}{\linewidth}{@{}l X X X X@{}}
+\toprule
+& \textbf{Stream-Team} & \textbf{Plattform} & \textbf{Security} & \textbf{Architektur} \\
+\midrule
+Service-interne Änderung & R/A & I & C/I & I \\
+API-Versions-Bump (additiv) & R/A & I & I & I \\
+Breaking Change einer API & R & C & C & A \\
+Neuer Service & R & C & C & A \\
+Servicegrenzen-Verschiebung & C & C & I & R/A \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Drei Regeln dieser Matrix: lokale Entscheidungen bleiben lokal; geteilte Verträge brauchen Konsens; teure Entscheidungen brauchen das Board. \quelle{vgl.\ PMI, 2021}
+
+% --- 6. SLOS / ERROR BUDGETS ---------------------------------------------
+\section{Reliability: SLOs, Error Budgets und Risiko-Architektur}
+
+Verlässlichkeit ist keine binäre Eigenschaft (``läuft / läuft nicht''), sondern ein numerisches Ziel. Das Site-Reliability-Engineering-Vokabular ist heute Standard für die Messung. \quelle{Forsgren et al., 2018, Kap.~5}
+
+\subsection{SLI, SLO, SLA}
+
+Drei Begriffe, die oft verwechselt werden:
+
+\begin{itemize}
+  \item \fachbegriff{SLI} (\emph{Service Level Indicator}) -- die konkrete Messgröße. Beispiel: ``Anteil HTTP-Requests mit Statuscode 2xx und Latenz $<$ 300\,ms''.
+  \item \fachbegriff{SLO} (\emph{Service Level Objective}) -- das Ziel für den SLI. Beispiel: ``99,9\,\% über 30 Tage''.
+  \item \fachbegriff{SLA} (\emph{Service Level Agreement}) -- die vertragliche Zusage, oft mit Strafzahlungen. Beispiel: ``Bei weniger als 99,5\,\% gibt's eine Rückerstattung''.
+\end{itemize}
+
+Faustregel: \emph{SLA $\leq$ SLO $\leq$ SLI-Realität}. Der SLO ist enger als der SLA (Pufferspielraum) und realistisch durch die SLI-Messung abgedeckt.
+
+\subsection{Error Budget}
+
+Ein \fachbegriff{Error Budget} ist das Komplement zum SLO. Bei 99,9\,\% Verfügbarkeit darf der Service in 30 Tagen für etwa 43 Minuten ausfallen -- das ist das Budget. Solange das Budget nicht verbraucht ist, darf das Team Risiken eingehen (neue Features, Experimente). Wenn das Budget verbraucht ist, wird priorisiert auf Stabilisierung umgeschaltet.
+
+Das Schöne an Error Budgets: sie eliminieren die endlose Diskussion ``Speed vs.\ Safety''. Es gibt eine Regel -- und die Regel entscheidet.
+
+\subsection{Change Failure Rate und MTTR}
+
+Diese zwei DORA-Metriken (siehe oben) sind die wichtigsten Risiko-Indikatoren:
+
+\begin{itemize}
+  \item \textbf{Change Failure Rate.} Anteil der Releases, die einen Incident verursachen. Niedrige Failure Rate (z.\,B.\ unter 15\,\%) ist ein Indikator für eine reife Pipeline. Hohe Rate (über 30\,\%) deutet auf zu wenig Tests, schwache Gates oder fehlende Canary-Strategien.
+  \item \textbf{MTTR.} Wie lange dauert es, einen Incident zu beheben? Eine niedrige MTTR (Minuten bis wenige Stunden) ist oft wichtiger als eine niedrige Fehlerrate -- weil sie zeigt, dass die Organisation Probleme schnell behandelt.
+\end{itemize}
+
+\begin{merkbox}[Reliability als Architektur]
+Reliability entsteht nicht aus \emph{Vorsicht}, sondern aus \emph{Architektur}: gute Servicegrenzen, automatisierte Tests, klare SLOs, schnelle Rollbacks, geübte Incident-Prozesse. Wer Reliability als ``mehr aufpassen'' versteht, baut Bürokratie. Wer sie als ``schnellere Erholung'' versteht, baut Resilienz.
+\end{merkbox}
+
+% --- 7. FALLSTUDIE INSUREFAST --------------------------------------------
+\section{Fallstudie: InsureFast vom Monolithen zur Plattform}
+
+\emph{InsureFast} ist eine mittelgroße Versicherung. Der digitale Abschluss und die Schadenmeldung laufen heute auf einem zehn Jahre alten Monolithen. Release-Zyklus: 6--8 Wochen. Probleme: häufige Produktionsausfälle, der Prozess ``Schaden melden'' bricht bei Lastspitzen ein, das Audit fordert Nachvollziehbarkeit (wer hat wann was entschieden). Restriktionen: 12 Wochen bis zum Saison-Peak, Budget 220\,k EUR, Legacy-Datenbank, Security-Anforderungen, unklare Lastprofile.
+
+\subsection{Service-Schnitt entlang der Prozesskette}
+
+Die Prozesskette ``Schaden melden $\to$ prüfen $\to$ entscheiden $\to$ auszahlen'' zerfällt in sieben Service-Kandidaten:
+
+\begin{enumerate}
+  \item \textbf{Claim Intake} -- Annahme der Schadenmeldung (Web, App, Hotline). Hohe Lastvarianz.
+  \item \textbf{Policy / Customer} -- Stamm- und Vertragsdaten. Liest bei vielen Schritten.
+  \item \textbf{Fraud Check} -- Betrugsfrüherkennung. Externe Modelle, hohe Compute-Last.
+  \item \textbf{Claim Assessment} -- fachliche Schadenbewertung. Menschen + Tools.
+  \item \textbf{Payout} -- Auszahlung. Audit-kritisch, irreversibel.
+  \item \textbf{Notifications} -- Mail, Push, SMS. Hohe Frequenz, niedriges Risiko.
+  \item \textbf{Document Management} -- Anhänge, Korrespondenz, Archiv.
+\end{enumerate}
+
+\subsection{Kubernetes-Betriebskonzept}
+
+\begin{itemize}
+  \item \textbf{Rollout.} Für Notifications und Document Management: Rolling Update. Für Payout und Claim Assessment: Canary mit 5\,\% / 25\,\% / 100\,\%.
+  \item \textbf{Skalierung.} CPU-basiert für die meisten Services. Claim Intake zusätzlich queue-basiert (wartet die Eingangs-Queue?).
+  \item \textbf{Ressourcen.} Limits gesetzt, Requests aus Last-Profilen abgeleitet. Reserve für Saison-Peak vordefiniert (Cluster-Autoscaler).
+  \item \textbf{Observability.} Zentrale Logs, Metriken pro Service, verteiltes Tracing über Claim-IDs.
+  \item \textbf{Rollback.} Pflichtkriterium: innerhalb 10 Minuten möglich, automatisiert getestet.
+\end{itemize}
+
+\subsection{Teststrategie und Quality Gates}
+
+\begin{itemize}
+  \item \textbf{Unit-Tests.} TDD für Kernlogik in Fraud Check und Claim Assessment.
+  \item \textbf{Integrationstests.} Für jede Service-API gegen Mock-Konsumenten.
+  \item \textbf{End-to-End.} Nur zwei kritische Pfade: ``Happy Path'' (Schaden gemeldet $\to$ ausgezahlt) und ``Fraud Flag'' (Schaden gemeldet $\to$ angehalten zur Prüfung).
+  \item \textbf{Gates.} (1) Alle Tests grün, (2) Security/Dependency-Check ok, plus Smoke Test nach Deployment.
+\end{itemize}
+
+\subsection{Operating Model}
+
+\begin{itemize}
+  \item Produktteams besitzen Services (Build + Run): Team ``Claim'' für Intake/Assessment, Team ``Risk'' für Fraud Check, Team ``Pay'' für Payout, Team ``Communication'' für Notifications/Documents.
+  \item Plattformteam liefert CI/CD-Templates, Observability-Standard und Kubernetes-Baseline.
+  \item Security/Compliance definiert Baselines (Datenschutz, Audit Trail, Verschlüsselung) und prüft Ausnahmen.
+  \item Architekturboard tagt monatlich -- nur für teure Entscheidungen (Servicegrenzen, Datenhoheit, Plattform-Wechsel).
+\end{itemize}
+
+\subsection{Entscheidungen unter Unsicherheit}
+
+Zwei kritische Entscheidungen werden bewusst getroffen:
+
+\begin{enumerate}
+  \item \textbf{Datenstrategie.} Statt Big-Bang-Migration bleibt die Legacy-DB zunächst bestehen. Ein \fachbegriff{Anti-Corruption Layer} kapselt sie. Frühwarnsignal: Wenn Integrationsfehler oder Lead Time steigen, wird priorisiert auf Eigenschemata umgestellt.
+  \item \textbf{Release-Frequenz.} Wöchentliche Releases für nicht-kritische Services (Notifications, Documents), zweiwöchentlich für Kern (Payout, Claim Assessment). Frühwarnsignal: Steigt die Change Failure Rate über 15\,\%, wird die Frequenz reduziert und an der Pipeline gearbeitet.
+\end{enumerate}
+
+% --- 8. COACHING ---------------------------------------------------------
+\section{Coaching: Von ``Technik'' zu Verantwortungsfähigkeit}
+
+Der Sprung vom Tag 1 zum Tag 10 ist nicht primär ein technischer, sondern ein Rollenwechsel: vom Modellierer zum Architekten, vom Architekten zum verantwortlichen Entscheider. Drei Coaching-Dimensionen helfen, diesen Sprung bewusst zu machen.
+
+\subsection{Welche Entscheidung ist teuer zu ändern?}
+
+In jedem Projekt gibt es Entscheidungen mit unterschiedlicher Reversibilität. Bezos hat das in seinem ``Two-Way / One-Way Door''-Bild populär gemacht: \emph{Two-Way-Door}-Entscheidungen sind reversibel, \emph{One-Way-Door}-Entscheidungen sind teuer oder unmöglich rückgängig zu machen.
+
+In einer Plattform-Architektur sind klassische One-Way-Door-Entscheidungen: Servicegrenzen (schwer rückgängig), Datenhoheit (sehr schwer rückgängig), Deployment-Standard (mittel-schwer), Plattform-Wahl (sehr schwer). Diese Entscheidungen verdienen ein dediziertes Architekturboard. Alles andere sollte lokal entscheidbar sein.
+
+\subsection{Wo braucht es Leitplanken, wo Autonomie?}
+
+Die Polarität ``Standardisierung vs.\ Autonomie'' ist kein Gegensatz, sondern eine Justierung. Eine bewährte Heuristik:
+
+\begin{itemize}
+  \item \textbf{Standardisiert} (Plattform liefert): CI/CD-Pipeline-Schema, Observability-Format, Sicherheits-Baselines, Identity, Logging-Schema.
+  \item \textbf{Autonom} (Team entscheidet): Datenbankwahl innerhalb genehmigter Optionen, Sprache/Framework innerhalb genehmigter Optionen, Service-internes Design, Test-Tools, Code-Stil.
+  \item \textbf{Mit Board} (Architektur entscheidet): Servicegrenzen, Datenhoheit, neue Plattform-Optionen, Breaking Changes geteilter Verträge.
+\end{itemize}
+
+\subsection{Risiko transparent statt versteckt}
+
+Senior-Architekten zeichnen sich nicht durch \emph{weniger} Risiko aus, sondern durch \emph{transparenteres} Risiko. Das heißt konkret:
+
+\begin{itemize}
+  \item Annahmen werden dokumentiert -- nicht als Schwäche-Eingeständnis, sondern als Steuerungsinformation.
+  \item Frühwarnsignale werden vor dem Risiko-Eintritt definiert, nicht erst nach dem Vorfall.
+  \item Eskalations-Pfade sind benannt, bevor die Eskalation nötig wird.
+  \item ``Wir wissen es nicht'' wird als legitime Antwort akzeptiert -- mit klarem ``und so finden wir es heraus''.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{R-S-E}]
+Drei Disziplinen der Senior-Architektur:\\[2pt]
+\textbf{R}eversibilität -- ist diese Entscheidung One-Way oder Two-Way?\\
+\textbf{S}tandard vs.\ Autonomie -- gehört das in die Plattform oder ins Team?\\
+\textbf{E}xplizit -- ist das Risiko benannt, oder versteckt es sich in Annahmen?\\[2pt]
+\emph{Drei Fragen vor jeder Architekturentscheidung.}
+\end{eselsbox}
+
+% --- 9. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: Plattform als Entscheidungsarchitektur}
+
+Auf Wissens-Ebene ist eine Plattform eine Sammlung technischer Komponenten. Auf Anwendungs-Ebene ist sie ein laufendes System. Auf Management-Ebene ist sie eine \emph{Entscheidungsarchitektur}: Wer darf was entscheiden? Welche Standards sind verbindlich? Welche Risiken werden bewusst eingegangen?
+
+\subsection{Top-10-Entscheidungen einer Plattform}
+
+\begin{enumerate}
+  \item \textbf{Servicegrenzen.} Welche Capabilities erhalten eigene Services?
+  \item \textbf{Datenhoheit.} Welcher Service besitzt welche Daten? Wer darf lesen, wer schreiben?
+  \item \textbf{API- und Event-Standards.} Welche Schnittstellenformate sind verbindlich (REST, gRPC, AsyncAPI)?
+  \item \textbf{SLO-Klassen.} Welche Services brauchen 99,9\,\%, welche 99,99\,\%, welche reichen mit 99,5\,\%?
+  \item \textbf{Release-Policy.} Wer darf wie oft deployen? Gibt es Freeze-Fenster?
+  \item \textbf{Security-Baselines.} Verschlüsselung, Identity, Logging, Vulnerability-Management.
+  \item \textbf{Observability-Standard.} Welche Logs, Metriken, Traces sind Pflicht?
+  \item \textbf{Incident-Governance.} Wer ist On-Call? Wie wird eskaliert? Wer schreibt das Postmortem?
+  \item \textbf{Ausnahmeprozess.} Wer darf vom Standard abweichen? Mit welcher Begründung? Mit welchem Review?
+  \item \textbf{Toolchain-Standardisierung.} CI/CD, Image-Registry, IaC-Werkzeug, Konfigurations-Management.
+\end{enumerate}
+
+\subsection{Zwei zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Speed vs.\ Safety.} Wöchentlich deployen heißt mehr Risiko -- oder mehr Disziplin? Beides. Die Antwort liegt in \emph{Error Budgets}: solange das Budget reicht, gilt Speed; wenn es leer ist, gilt Safety. Diese Regel ersetzt endlose Verhandlungen.
+  \item \textbf{Autonomie vs.\ Konsistenz.} Wenn jedes Team alles selbst entscheidet, wird die Plattform inkohärent. Wenn alles zentral entschieden wird, gibt es keine Autonomie mehr. Antwort: starke Standards an wenigen Stellen (Pflicht), schwache Standards (Defaults) an vielen Stellen.
+\end{enumerate}
+
+\subsection{Architekturprinzipien (maximal acht)}
+
+Eine Plattform braucht einen kleinen Satz Architekturprinzipien -- nicht zwanzig. Beispielhaft:
+
+\begin{enumerate}
+  \item \textbf{Capability over Layer.} Services entlang Capabilities, nicht entlang Schichten.
+  \item \textbf{Owner per Service.} Jeder Service hat genau einen verantwortlichen Owner.
+  \item \textbf{API als Vertrag.} Schnittstellen sind versioniert, Breaking Changes brauchen Übergangszeit.
+  \item \textbf{Observability ist Pflicht.} Kein Service ohne Logs, Metriken, Traces.
+  \item \textbf{Rollback in 10 Minuten.} Jedes Release ist ohne Datenmigration zurücknehmbar.
+  \item \textbf{Security by Default.} Verschlüsselt, authentifiziert, getrennt -- ohne dass Teams es einfordern müssen.
+  \item \textbf{Idempotenz.} Nachrichten dürfen mehrfach zugestellt werden, ohne Schaden zu erzeugen.
+  \item \textbf{Document the Why.} Architekturentscheidungen werden begründet, nicht nur protokolliert (z.\,B.\ als ADR -- Architecture Decision Record).
+\end{enumerate}
+
+\subsection{Risiken bei Plattform-Initiativen}
+
+\begin{itemize}
+  \item \textbf{Microservices-Spaghetti.} Zu viele Services, zu viele Abhängigkeiten, niemand versteht das Ganze.
+  \item \textbf{Goldenes Plattformteam.} Die Plattform wird zum Selbstzweck, Stream-Teams nutzen sie nicht.
+  \item \textbf{Audit-Lücke.} Die alten Compliance-Pfade greifen nicht mehr, die neuen sind nicht definiert.
+  \item \textbf{Reife-Spreizung.} Manche Teams sind weit, andere kaum gestartet -- die Plattform droht zu zerfasern.
+  \item \textbf{Tool-Falle.} Diskussionen drehen sich um das Werkzeug statt um das Operating Model.
+\end{itemize}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 10]
+Eine skalierbare digitale Prozessarchitektur ist eine \textbf{Verantwortungsarchitektur} in technischer Verpackung. Kubernetes, TDD und Microservices sind Werkzeuge. Wirksam werden sie nur durch klare Ownership, leichtgewichtige Governance und ein Operating Model, das im Incident-Fall ohne Diskussion funktioniert.
+\end{merkbox}
+
+% --- 10. TAKE-AWAYS ------------------------------------------------------
+\section{Take-aways aus Tag 10}
+
+\begin{enumerate}
+  \item \textbf{Servicegrenzen entlang Capabilities, nicht Schichten.} Sonst sind Microservices eine teurere Form desselben Problems.
+  \item \textbf{Skalierung hat drei Dimensionen}: Last, Teams, Entscheidungen. Wer eine vergisst, baut Engpässe.
+  \item \textbf{Kubernetes löst Orchestrierung, nicht Organisation.} Ein verteiltes System verlangt Observability, Rollback-Disziplin und Ressourcen-Limits.
+  \item \textbf{TDD und Testpyramide bauen Sicherheit ein.} Viele Unit-Tests, weniger Integration, wenige End-to-End.
+  \item \textbf{DORA-Metriken statt Aktivitätsmessung.} Lead Time, Deployment Frequency, Change Failure Rate, MTTR.
+  \item \textbf{Operating Model in vier Bausteinen}: Produktteams, Plattform, Security, Architektur-Governance.
+  \item \textbf{SLOs und Error Budgets entscheiden Speed vs.\ Safety} -- statt endlose Verhandlungen.
+  \item \textbf{Architekturprinzipien (max.\ 8)} statt zwanzig Seiten Policy. Klar, durchsetzbar, begründet.
+\end{enumerate}
+
+% --- 11. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Beck, K. (2002).] \emph{Test driven development: By example.} Addison-Wesley.
+  \item[Burns, B., Villalba, E., Strebel, D., \& Evenson, L. (2022).] \emph{Kubernetes: Up and running -- Dive into the future of infrastructure} (3rd ed.). O'Reilly.
+  \item[Evans, E. (2003).] \emph{Domain-driven design: Tackling complexity in the heart of software.} Addison-Wesley.
+  \item[Forsgren, N., Humble, J., \& Kim, G. (2018).] \emph{Accelerate: The science of lean software and DevOps -- Building and scaling high performing technology organizations.} IT Revolution Press.
+  \item[Kim, G., Humble, J., Debois, P., \& Willis, J. (2016).] \emph{The DevOps handbook: How to create world-class agility, reliability, and security in technology organizations.} IT Revolution Press.
+  \item[Newman, S. (2021).] \emph{Building microservices: Designing fine-grained systems} (2nd ed.). O'Reilly.
+  \item[Project Management Institute. (2021).] \emph{A guide to the Project Management Body of Knowledge (PMBOK\textregistered{} Guide)} (7th ed.). Project Management Institute.
+  \item[Richardson, C. (2018).] \emph{Microservices patterns: With examples in Java.} Manning.
+  \item[Skelton, M., \& Pais, M. (2019).] \emph{Team topologies: Organizing business and technology teams for fast flow.} IT Revolution Press.
+\end{description}
+
+% --- 12. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Anti-Corruption Layer] Eine Kapselungsschicht zwischen neuem Service und Legacy-System, die das alte Datenmodell vor dem neuen abschirmt. Verlangsamt Big-Bang-Risiken.
+  \item[API] \emph{Application Programming Interface.} Vertraglich definierte Schnittstelle eines Services. Versionierung und tolerantes Lesen vermeiden Brüche.
+  \item[Blue/Green Deployment] Rollout-Strategie mit zwei parallelen Umgebungen; Umschalten per Routing. Schnelles Rollback, höhere Infrastruktur-Kosten.
+  \item[Bounded Context] Sprachlich und modellmäßig abgegrenzte Zone in DDD. Servicegrenzen verlaufen an den Grenzen des Bounded Context. \quelle{Evans, 2003}
+  \item[Canary Release] Rollout-Strategie, bei der zuerst ein kleiner Prozentsatz der Nutzer die neue Version bekommt. Erlaubt differenziertes Risiko-Management.
+  \item[Capability] Geschäftsfähigkeit; eine eigenständige Leistung der Organisation, mit klarem Input, Output und Owner.
+  \item[Change Failure Rate] DORA-Metrik: Anteil der Releases, die einen Incident verursachen. Wichtiger Risiko-Indikator.
+  \item[Container] Reproduzierbares Packaging-Format: Anwendung plus Abhängigkeiten in einem Artefakt.
+  \item[DevOps] Arbeitsweise, die Entwicklung und Betrieb als ein System versteht (``You build it, you run it''). \quelle{Kim et al., 2016}
+  \item[DORA-Metriken] Vier Kennzahlen für DevOps-Performance: Lead Time, Deployment Frequency, Change Failure Rate, MTTR. \quelle{Forsgren et al., 2018}
+  \item[Error Budget] Komplement zum SLO; erlaubte Ausfallzeit pro Periode. Steuerungsmechanismus zwischen Speed und Safety.
+  \item[Idempotenz] Eigenschaft eines Aufrufs: mehrfache Ausführung erzeugt dasselbe Ergebnis wie eine einfache Ausführung. Pflicht in verteilten Systemen.
+  \item[Kubernetes] Container-Orchestrierungs-Plattform: Deploy, Skalierung, Self-Healing, Rollback, Service-Discovery.
+  \item[Microservice] Eigenständig deploybarer Service entlang einer Capability. Eigene Daten, eigene Owner.
+  \item[MTTR] \emph{Mean Time to Recover.} Mittlere Zeit von Incident-Eintritt bis Normalbetrieb. Misst Resilienz.
+  \item[Observability] Fähigkeit, den Zustand eines Systems von außen zu erkennen. Drei Säulen: Logs, Metriken, Traces.
+  \item[Operating Model] Wer macht was, wer entscheidet was, wie wird zusammengearbeitet? Verbindet Architektur, Organisation und Governance.
+  \item[Plattformteam] Internes Team, das eine Plattform für Stream-aligned Teams bereitstellt (CI/CD, Observability, Kubernetes-Basis). \quelle{Skelton \& Pais, 2019}
+  \item[Quality Gate] Harte Bedingung in der Pipeline (z.\,B.\ Tests grün, Security ok), die erfüllt sein muss, bevor das Release weitergeht.
+  \item[Rollback] Rücknahme eines Releases auf eine vorherige Version. Pflichtkriterium: schnell und automatisierbar.
+  \item[Service Discovery] Mechanismus, mit dem Services einander über logische Namen statt IP-Adressen finden.
+  \item[SLO] \emph{Service Level Objective.} Ziel für einen SLI, z.\,B.\ 99,9\,\% Verfügbarkeit über 30 Tage.
+  \item[Stream-aligned Team] Team, das einen Wertstrom end-to-end verantwortet (Build und Run). \quelle{Skelton \& Pais, 2019}
+  \item[TDD] \emph{Test-Driven Development.} Zyklus Red-Green-Refactor: erst Test, dann Code, dann Verbesserung. \quelle{Beck, 2002}
+  \item[Testpyramide] Strukturprinzip: viele Unit-Tests, weniger Integration, wenige End-to-End. Schnell, robust, kostengünstig.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 10 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

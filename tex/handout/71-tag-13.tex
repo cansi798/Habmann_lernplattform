@@ -1,0 +1,615 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 71 (Dig 42) - Tag 13 - Lehrskript
+% Nachhaltige IT-Services: Service-Portfolio + Kapazitätssteuerung
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{kurs71}{HTML}{9D4A1A}
+\definecolor{lpAccent}{HTML}{9D4A1A}
+\definecolor{lpAccentLight}{RGB}{248,232,218}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 71 \textperiodcentered{} Tag 13}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Service-Portfolio \textperiodcentered{} Capacity \textperiodcentered{} Sustainable IT}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 6 \textperiodcentered{} TAG 13 VON 16 \textperiodcentered{} KURS 71 (Dig 42) \textperiodcentered{} 16.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Nachhaltige\\IT-Services\\steuerbar machen\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Service-Portfolio, Kapazitätssteuerung, Rightsizing --\\auditfähig und entscheidungsorientiert.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 13 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Nachhaltigkeit in der IT ist kein ``Nebenprojekt'' für Marketing-Folien, sondern ein \emph{Steuerungssystem}: Welche Services laufen wie, welche Kapazität verbrauchen sie, welche Wirkung erzielen sie, und wo lohnt sich Optimierung? Heute lernen Sie, ein Service-Portfolio nach ITIL-4-Logik aufzubauen, Kapazität und Rightsizing als Managemententscheidung zu führen und Nachhaltigkeit als integralen Teil der IT-Service-Governance zu verankern.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item ITIL-4-orientiertes Service Portfolio kennen: Pipeline, Live, Retired -- inkl.\ Owner, Kosten, Risiko, Nutzen, Nachhaltigkeit.
+  \item Kapazitäts- und Rightsizing-Begriffe verstehen (Compute, Storage, Netzwerk, People), SLO-konformes Vorgehen.
+  \item Energieeffizienz-Hebel in Rechenzentren konzeptionell einordnen (Konsolidierung, Virtualisierung, Idle-Abschaltung, Standort/Strommix).
+  \item ISO-20000-nahe Nachweislogik als Prinzip kennen: Rollen, Prozesse, Messgrößen, Reviews, dokumentierte Entscheidungen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Ein Service-Portfolio-Canvas für 8 Services erstellen mit Scoring (Wert, Risiko, Kosten, Nachhaltigkeit, Aufwand).
+  \item Einen Rightsizing-Plan in 2 Stufen entwerfen, mit Guardrails (Stop-/Rollback-Regeln) und Annahmen.
+  \item Ein Maßnahmenpaket aus 6 konkreten Schritten mit Owner und Monitoring formulieren.
+  \item KPIs koppeln: Kostenreduktion gilt nur, wenn SLO gehalten ist.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Top-10-Portfolio-Entscheidungen treffen (Invest/Halten/Optimieren/Retire) mit dokumentierter Begründung.
+  \item Zielkonflikte Verfügbarkeit vs.\ Kosten vs.\ Nachhaltigkeit transparent entscheiden.
+  \item Greenwashing-KPIs erkennen und durch Kopplungs- und Anti-Gaming-Mechanik vermeiden.
+  \item Risikoakzeptanz für SLO-Reserven und politische Widerstände bewusst kommunizieren.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Nachhaltige IT entsteht nicht aus Verzicht, sondern aus \emph{Messung und Entscheidung}. Ein Service, dessen Kosten, Wert, Risiko und Nachhaltigkeitswirkung nicht messbar sind, kann nicht gesteuert werden. ``Sustainable IT'' beginnt mit der Disziplin, alle vier Dimensionen sichtbar zu machen und in einem Portfolio-Board zu entscheiden. \quelle{vgl.\ Cabinet Office, 2019; Murugesan, 2008}
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Vom Asset-Inventar zum Service-Portfolio}
+
+In vielen Organisationen besteht die IT-Sicht aus zwei Listen: einer Hardware-Liste (Server, Storage, Netzwerk) und einer Anwendungs-Liste (Applikationen, Tools, Datenbanken). Was fehlt, ist die \emph{Service-Sicht}: Welche Leistungen bringt die IT den Geschäftsbereichen? Welche kosten was, welche tragen welchen Wert? \quelle{Cabinet Office, 2019}
+
+Ohne diese Sicht sind Entscheidungen wie ``20\,\% Kostenreduktion'' Spekulation -- weil niemand weiß, welcher Service welche Kosten verursacht und welchen Wert er trägt.
+
+\subsection{Was ein Service ist}
+
+Ein \fachbegriff{IT-Service} ist eine Leistung, die einem Geschäftsbereich (oder einem externen Kunden) einen Wert bietet, ohne dass er die zugrunde liegende Infrastruktur selbst betreibt oder versteht. \quelle{Cabinet Office, 2019}
+
+Beispiele:
+
+\begin{itemize}
+  \item \textbf{Patientenportal} -- Service für Patienten und behandelnde Ärzte.
+  \item \textbf{ERP-Service} -- Service für Finanzbuchhaltung und Einkauf.
+  \item \textbf{Reporting / DWH} -- Service für Controlling und Geschäftsführung.
+  \item \textbf{Mail / Collaboration} -- Service für alle Mitarbeitenden.
+  \item \textbf{Dev/Test-Umgebung} -- Service für Entwicklungs-Teams.
+\end{itemize}
+
+\subsection{Drei Portfolio-Kategorien (ITIL 4)}
+
+ITIL 4 unterscheidet drei Zustände im Service-Portfolio:
+
+\begin{itemize}
+  \item \fachbegriff{Pipeline.} Services, die geplant, aber noch nicht produktiv sind. Entscheidungen über Invest oder Verzicht.
+  \item \fachbegriff{Live (Catalogue).} Services, die produktiv laufen und an Kunden geliefert werden. Steuerung über Kosten, SLOs, Nutzung.
+  \item \fachbegriff{Retired.} Services, die abgeschaltet wurden. Daten archiviert, Daten gelöscht, Verträge beendet.
+\end{itemize}
+
+\subsection{Wert ist mehr als Geld}
+
+Ein häufiger Fehler: Wert nur monetär zu messen. Das funktioniert für direkten Umsatz, scheitert aber bei vielen IT-Services. Vier Wert-Dimensionen: \quelle{Cabinet Office, 2019}
+
+\begin{itemize}
+  \item \textbf{Kundennutzen.} Welche Geschäftsbereiche profitieren? Wie viel?
+  \item \textbf{Regulatorische Relevanz.} Brauchen wir den Service für Compliance, ohne ihn wäre ein Audit-Risiko?
+  \item \textbf{Resilienz.} Trägt der Service zur Stabilität bei -- z.\,B.\ Identity, Monitoring, Backup?
+  \item \textbf{Nachhaltigkeit.} Wie effizient ist der Service? Welche CO\textsubscript{2}-/Energiewirkung hat er?
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{K-R-R-N}]
+Vier Wert-Dimensionen eines IT-Services:\\[2pt]
+\textbf{K}undennutzen -- wer profitiert wie?\\
+\textbf{R}egulatorik -- ist er Pflicht?\\
+\textbf{R}esilienz -- trägt er Stabilität?\\
+\textbf{N}achhaltigkeit -- wie ist die Effizienz?\\[2pt]
+\emph{Wer nur monetär steuert, verliert die anderen drei aus dem Blick.}
+\end{eselsbox}
+
+% --- 2. CAPACITY ---------------------------------------------------------
+\section{Capacity Planning: Sicherheit durch Messung}
+
+\fachbegriff{Capacity} ist die Fähigkeit eines Services, eine erwartete Last zu tragen und vereinbarte SLOs zu erfüllen. Sie hat vier Dimensionen: \quelle{Cabinet Office, 2019}
+
+\begin{itemize}
+  \item \textbf{Compute.} CPU, GPU, Container-Slots. Pro Service-Komponente erfasst und überwacht.
+  \item \textbf{Storage.} Plattenplatz und I/O-Durchsatz. Mit Wachstumsprognose.
+  \item \textbf{Netzwerk.} Bandbreite, Latenz, Verbindungslimits.
+  \item \textbf{People / Skills.} Wie viele Operatoren mit welcher Qualifikation halten den Service am Laufen?
+\end{itemize}
+
+\subsection{Kapazitätssteuerung als Disziplin}
+
+In gewachsenen Umgebungen ist Kapazität meist ein \emph{ungeprüftes Maximum}: zu Beginn wurde reichlich provisioniert, später wurde dazugekauft -- aber selten reduziert. Folge: hohe Auslastungsspielräume, hohe Energie- und Lizenzkosten, niedrige Effizienz.
+
+Drei Prinzipien für gute Kapazitätssteuerung: \quelle{Murugesan, 2008}
+
+\begin{enumerate}
+  \item \textbf{Messen vor Schätzen.} Tatsächliche Auslastung wird kontinuierlich gemessen, nicht aus dem Bauch abgeleitet.
+  \item \textbf{Reserven explizit.} ``Wieviel Puffer für Peak?'' wird transparent festgelegt, nicht implizit großzügig gewählt.
+  \item \textbf{Anpassen kontinuierlich.} Quartalsweise Reviews; was nicht passt, wird justiert -- in beide Richtungen.
+\end{enumerate}
+
+\subsection{Rightsizing}
+
+\fachbegriff{Rightsizing} ist die bewusste Anpassung der Ressourcen an den tatsächlichen Bedarf. Das ist mehr als ``runterskalieren'' -- es ist eine Entscheidung mit Guardrails.
+
+Typisches Beispiel: Ein Service läuft auf 10 VMs mit CPU-Last 15--20\,\% Durchschnitt und RAM 35--40\,\%. Peak: CPU 60\,\% für 6 Stunden monatlich. SLO: Antwortzeit, keine Ausfälle. Ziel: 20\,\% Energiekosten senken, ohne SLO zu brechen.
+
+Optionen:
+
+\begin{itemize}
+  \item \textbf{VM-Anzahl reduzieren.} Statt 10 nur noch 7. Risiko: weniger Reserve bei Peak.
+  \item \textbf{Kleinere VM-Typen.} Statt 10 große VMs nur noch 10 mittlere. Risiko: weniger Headroom pro Instanz.
+  \item \textbf{Abschalten nachts / Wochenende.} Bei Services ohne 24/7-Bedarf große Wirkung.
+  \item \textbf{Autoscaling.} Last-basierte automatische Anpassung. Erfordert Konfiguration und Tests.
+\end{itemize}
+
+Ein Rightsizing-Plan in zwei Stufen ist eine bewährte Methode: zuerst Pilot in einem kleineren Bereich, mit definierten Stop-Regeln; dann ausrollen, wenn die Pilot-KPIs grün sind.
+
+\subsection{Guardrails: wann gestoppt wird}
+
+Ein guter Rightsizing-Plan definiert vorab, unter welchen Bedingungen er pausiert oder zurückgerollt wird:
+
+\begin{itemize}
+  \item Fehlerquote $>$ X\,\% über Y Minuten $\to$ Rollback.
+  \item Antwortzeit über Schwelle $>$ Y Minuten $\to$ Pause, Analyse.
+  \item CPU $>$ 85\,\% über 15 Minuten $\to$ Hoch-Skalierung, dann Untersuchung.
+  \item Eskalation aus Fachbereich $\to$ Sofort-Review.
+\end{itemize}
+
+\begin{merkbox}[Sicherheit durch Messung]
+``Wir reduzieren mal 30\,\% Compute'' ohne Messung ist Glücksspiel mit Geschäftsrisiko. \emph{Sicherheit durch Messung} bedeutet: erst Monitoring und SLOs etablieren, dann Reduktion. In der umgekehrten Reihenfolge sind Outages programmiert.
+\end{merkbox}
+
+% --- 3. ENERGIEEFFIZIENZ -------------------------------------------------
+\section{Energieeffizienz in Rechenzentren: konzeptionelle Hebel}
+
+Rechenzentren sind heute relevante Strom- und CO\textsubscript{2}-Verursacher. In Deutschland verbrauchen sie laut Branchenschätzungen einen niedrigen einstelligen Prozentsatz des gesamten Stromverbrauchs -- mit steigender Tendenz. Effizienzhebel sind daher nicht nur Kosten- sondern auch Nachhaltigkeitsthemen. \quelle{Murugesan, 2008; vgl.\ ITU-T L.1410}
+
+\subsection{Sechs konzeptionelle Hebel}
+
+\begin{enumerate}
+  \item \fachbegriff{Konsolidierung.} Viele unterausgelastete Server zu wenigen ausgelasteten zusammenführen. Reduziert Hardware und Stromverbrauch.
+  \item \fachbegriff{Virtualisierung und Container.} Mehrere Workloads pro Host, höhere Auslastung, weniger physische Hardware.
+  \item \fachbegriff{Idle abschalten.} Dev/Test-Umgebungen nachts und am Wochenende stoppen. Häufig 60--70\,\% Stromersparnis bei diesen Workloads.
+  \item \fachbegriff{Kühlung optimieren.} Höhere Raumtemperatur (bis 27\,\textdegree{}C statt 18\,\textdegree{}C), getrennte Warm-/Kaltgänge, freie Kühlung.
+  \item \fachbegriff{Effizienzklassen Hardware.} Neue Generationen bei gleicher Leistung deutlich effizienter -- bei Refresh berücksichtigen, nicht nur Preis.
+  \item \fachbegriff{Workload-Shift.} Lasten in Zeitfenster mit günstigem Strommix verlegen (Solarmittag, nachts mit Wind).
+\end{enumerate}
+
+\subsection{Prozessdisziplin als siebter Hebel}
+
+Oft wird der Faktor Mensch unterschätzt: Disziplin in Change- und Release-Prozessen, Reduktion von ``Zombie''-Services (laufen, aber niemand nutzt sie mehr), regelmäßige Reviews. Diese Maßnahmen kosten nichts an Hardware, aber erzeugen oft die größte Wirkung.
+
+\subsection{PUE als Standard-Kennzahl}
+
+\fachbegriff{PUE} (\emph{Power Usage Effectiveness}) ist die Standard-Kennzahl für Rechenzentrums-Effizienz: Verhältnis Gesamtstromverbrauch / IT-Stromverbrauch. Ein PUE von 2,0 bedeutet: Für jeden Kilowatt IT werden ein weiterer Kilowatt für Kühlung, Licht, USV etc.\ verbraucht. Moderne Rechenzentren liegen bei 1,2--1,4, Cloud-Hyperscaler bei 1,1.
+
+PUE ist eine \emph{Effizienz-Kennzahl}, keine \emph{Größen-Kennzahl}: ein RZ mit PUE 1,1 kann trotzdem mehr verbrauchen als eines mit PUE 2,0 -- wenn es zehnmal größer ist. Beide Größen sind nötig.
+
+% --- 4. NACHWEISLOGIK ----------------------------------------------------
+\section{ISO-20000-nahe Nachweislogik: kein Papier um des Papiers willen}
+
+\fachbegriff{ISO/IEC 20000} ist der internationale Standard für IT-Service-Management. Er fordert nicht ``Bürokratie'', sondern eine \emph{nachweisbare Steuerungslogik}. \quelle{ISO/IEC 20000-1}
+
+\subsection{Vier Säulen der Nachweisbarkeit}
+
+\begin{enumerate}
+  \item \fachbegriff{Klare Rollen.} Service Owner, Process Owner, Audit-Verantwortliche -- explizit benannt, nicht ``irgendwer aus der Abteilung''.
+  \item \fachbegriff{Definierte Prozesse.} Capacity Management, Service Level Management, Change Management, Incident Management. Mindestschritte dokumentiert.
+  \item \fachbegriff{Messgrößen.} Pro Service: SLOs, Kosten, Auslastung, Energieverbrauch (wo messbar). Mit Owner und Frequenz.
+  \item \fachbegriff{Reviews und Entscheidungsprotokolle.} Capacity Review Board zweiwöchentlich, Portfolio Board monatlich oder quartalsweise -- mit Protokoll.
+\end{enumerate}
+
+\subsection{Audit-Readiness im Alltag}
+
+Audit-Readiness ist kein Projekt vor dem Audit, sondern ein Alltagszustand:
+
+\begin{itemize}
+  \item Aktualisiertes Service-Portfolio mit Verantwortlichen.
+  \item Aktuelle KPI-Dashboards.
+  \item Protokollierte Capacity-Entscheidungen mit Begründung.
+  \item Dokumentierte Risikoakzeptanz für offene Punkte.
+  \item Change-Log für signifikante Service-Änderungen.
+\end{itemize}
+
+% --- 5. FALLSTUDIE EUROHEALTH --------------------------------------------
+\section{Fallstudie: EuroHealth Services -- Sustainable Service Portfolio}
+
+\emph{EuroHealth Services} betreibt kritische IT-Services (Patientenportal, ERP, Reporting, Dev/Test). Energiekosten steigen, Last wächst, ein einheitliches Service-Portfolio fehlt. Audit fordert nachvollziehbare Service-Management-Prozesse. Ziel: 15\,\% Energie- und Betriebskostenreduktion in 4 Monaten ohne SLO-Verletzung.
+
+Restriktionen: Budget 200\,k EUR, unsichere Lastprognosen, Fachbereiche wehren sich gegen ``Abschaltungen'', einige Monitoringdaten fehlen.
+
+\subsection{Service-Portfolio (Auszug)}
+
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lXXXX@{}}
+\toprule
+Service & Kritikalität & SLO & Hebel & Owner \\
+\midrule
+Patientenportal & hoch & 99,9\,\% & Rightsizing + Caching + Peak-Plan & Health-Apps-Lead \\
+ERP & hoch & 99,5\,\% & Konsolidierung, Wartungsfenster & ERP-Lead \\
+Reporting / DWH & mittel & 99,0\,\% & Batch-Fenster verschieben, Tiered Storage & BI-Lead \\
+Dev/Test & niedrig & 95,0\,\% & Konsequentes Off-Hours-Shutdown & Plattformbetrieb \\
+Mail / Collab & mittel & 99,5\,\% & Cloud-Anbindung optimieren & Workplace-Lead \\
+Backup & hoch & 99,9\,\% & Deduplizierung, Aufbewahrungspolicy & Backup-Lead \\
+Monitoring & hoch & 99,9\,\% & Retention reduzieren, Tiering & Operations-Lead \\
+Legacy-Anwendungen & niedrig & 90\,\% & Retire-Kandidaten & Service-Owner \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Scoring-Rahmen}
+
+Jeder Service wird auf einer 1--5-Skala bewertet in: \emph{Wert} (Kunde / Regulatorik), \emph{Risiko} (Sicherheit / Betrieb), \emph{Kosten / Verbrauch}, \emph{Nachhaltigkeitshebel}, \emph{Umsetzungsaufwand}. Priorität = hoher Hebel bei vertretbarem Risiko.
+
+\subsection{Maßnahmenpaket}
+
+\begin{enumerate}
+  \item \textbf{Abschaltpolitik für Non-Prod.} Owner: Plattformbetrieb. Guardrail: Notfall-On in $<$30\,min möglich. Geschätzte Wirkung: 15--20\,\% Energie auf Non-Prod-Workloads.
+  \item \textbf{Rightsizing Pilot für 2 Services} (Reporting + Mail). Owner: Service Owner. Guardrail: CPU $>$ 85\,\% oder Fehlerquote $\to$ Rollback.
+  \item \textbf{Capacity Review Board} zweiwöchentlich. Owner: ITSM Lead. Protokoll auditfähig.
+  \item \textbf{Standard-SLOs je Kritikalitätsklasse.} Owner: SRE / Operations. Einführung über 8 Wochen.
+  \item \textbf{Konsolidierung Zombie-Services.} Retire-Kandidaten identifizieren und in 12 Wochen abschalten.
+  \item \textbf{Energieeffizienz-Runbook.} Betriebsmaßnahmen (Kühlung, Hardware-Refresh als Konzept) + KPI-Tracking.
+\end{enumerate}
+
+\subsection{KPIs mit Kopplung}
+
+\begin{itemize}
+  \item \textbf{SLO-Verfügbarkeit} pro kritischem Service.
+  \item \textbf{Kosten pro Service / Monat.}
+  \item \textbf{Energieverbrauch pro Workload-Klasse} (konzeptionell, mit Schätzlogik).
+  \item \textbf{Non-Prod Off-Hours Compliance} (Anteil Stunden, in denen Non-Prod tatsächlich aus war).
+\end{itemize}
+
+\emph{Anti-Gaming-Kopplung:} Kostenreduktion gilt nur, wenn SLO-Verfügbarkeit gehalten ist. Wer Geld spart, indem er den Service crashen lässt, sammelt keine Punkte.
+
+\subsection{Entscheidungen unter Unsicherheit}
+
+\begin{itemize}
+  \item \textbf{Sofortstart} (4 Wochen): Non-Prod-Shutdown + Rightsizing-Pilot Reporting. Begründung: hoher Hebel, niedriges Risiko (rückrollbar), erste Erfolge möglich.
+  \item \textbf{Aufschub:} ERP-Konsolidierung. Begründung: hohes Risiko, mehr Vorarbeit nötig, Audit-Touch-Point.
+\end{itemize}
+
+% --- 6. COACHING ---------------------------------------------------------
+\section{Coaching: Nachhaltigkeit als Steuerungssystem}
+
+Der häufigste Fehler im Sustainable-IT-Bereich ist es, Nachhaltigkeit als ``Nebenthema'' zu behandeln -- eine Marketing-Initiative, eine Kampagne, ein einmaliges Projekt. Senior-Disziplin: Nachhaltigkeit wird zum Steuerungssystem, das in den IT-Service-Lifecycle eingebettet ist.
+
+\subsection{Drei Disziplinen}
+
+\begin{enumerate}
+  \item \textbf{Messbarkeit vor Moral.} Ohne Metriken werden Diskussionen politisch und wirkungslos. Erst eine Baseline schaffen, dann diskutieren.
+  \item \textbf{Auditierbarkeit der Entscheidungen.} Portfolio-Entscheidungen brauchen Datenbasis, Owner, Beschluss, Review-Zyklus.
+  \item \textbf{Trade-off-Logik.} Verfügbarkeit vs.\ Kosten vs.\ Nachhaltigkeit -- nicht ``alles gleichzeitig'', sondern bewusst gewichten, mit Begründung.
+\end{enumerate}
+
+\subsection{Low Regret Moves}
+
+Manche Maßnahmen sind ``low regret'': fast immer sinnvoll, geringes Risiko, hoher Nutzen. Diese werden zuerst gemacht:
+
+\begin{itemize}
+  \item Idle abschalten -- Non-Prod nachts.
+  \item Klare SLOs definieren -- ermöglicht alle weiteren Entscheidungen.
+  \item Standard-Runbooks -- ermöglicht Auditierbarkeit und Wiederholbarkeit.
+  \item Service-Inventur -- Voraussetzung für jede Portfolio-Steuerung.
+\end{itemize}
+
+\subsection{Senior-Reflexionsfragen}
+
+\begin{itemize}
+  \item Welche 3 Services dominieren Kosten oder Verbrauch -- und warum?
+  \item Welche Entscheidung ist irreversibel oder teuer (Standort, Plattformwechsel, Architekturpfad)?
+  \item Wie verhindert man Greenwashing-KPIs (schönes Reporting, keine Wirkung)?
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{M-A-T}]
+Drei Disziplinen einer Sustainable-IT-Steuerung:\\[2pt]
+\textbf{M}essbarkeit -- erst Baseline, dann Diskussion.\\
+\textbf{A}uditierbarkeit -- jede Entscheidung dokumentiert.\\
+\textbf{T}rade-off-Logik -- Konflikte bewusst entscheiden.\\[2pt]
+\emph{Ohne M-A-T wird ``nachhaltig'' eine Marketing-Vokabel.}
+\end{eselsbox}
+
+% --- 7. MANAGEMENT-PERSPEKTIVE -------------------------------------------
+\section{Management-Perspektive: Portfolio als Entscheidungsbetriebssystem}
+
+Auf Wissens-Ebene ist Service-Portfolio eine Tabelle. Auf Anwendungs-Ebene ist es ein Review-Prozess. Auf Management-Ebene ist es das \emph{Entscheidungsbetriebssystem} der IT-Organisation.
+
+\subsection{Top-10-Portfolio-Entscheidungen}
+
+\begin{enumerate}
+  \item Welche Services bleiben (Live), welche werden aufgebaut (Pipeline), welche eingestellt (Retired)?
+  \item Welche SLO-Klassen werden organisationsweit gesetzt (z.\,B.\ Kritikalitäts-Stufen mit jeweils standardisiertem SLO)?
+  \item Wie hoch sind die Kapazitätsreserven pro Klasse?
+  \item Welche Rightsizing-Policy gilt (Cycle, Owner, Stop-Bedingungen)?
+  \item Wie wird mit Non-Prod-Umgebungen verfahren (Standard-Abschaltung)?
+  \item Welche Services bekommen Invest, welche werden retired?
+  \item Welcher Ausnahmeprozess gilt (wer darf abweichen, wie wird es dokumentiert)?
+  \item Welche Monitoring-Standards sind verbindlich?
+  \item Welche Risikoakzeptanz wird formal dokumentiert?
+  \item Welcher Review-Zyklus gilt (Capacity wöchentlich, Portfolio monatlich, Strategie quartalsweise)?
+\end{enumerate}
+
+\subsection{Portfolio Governance}
+
+Eine pragmatische Rollenverteilung:
+
+\begin{itemize}
+  \item \fachbegriff{Portfolio Owner.} Verantwortet das Portfolio als Ganzes, führt das Portfolio Board.
+  \item \fachbegriff{Service Owner.} Verantwortet einen Service in Wert, Risiko, Kosten, Nachhaltigkeit.
+  \item \fachbegriff{FinOps / Controlling.} Sorgt für Kostentransparenz und Anti-Gaming-Mechaniken.
+  \item \fachbegriff{Operations.} Verantwortet Betriebsdaten, Auslastungsmetriken, Incident-Pflege.
+\end{itemize}
+
+\subsection{Anti-Gaming bei KPIs}
+
+KPIs ohne Anti-Gaming-Kopplung werden in stressigen Zeiten manipuliert -- bewusst oder unbewusst. Drei Beispiele für Kopplungen:
+
+\begin{itemize}
+  \item Kostenreduktion gilt nur, wenn SLO gehalten.
+  \item Off-Hours-Shutdown gilt nur, wenn Service rechtzeitig wieder verfügbar war.
+  \item Capacity-Reduktion gilt nur, wenn Peak-Tests in den letzten 30 Tagen bestanden wurden.
+\end{itemize}
+
+\subsection{Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Verfügbarkeit vs.\ Kosten.} Höhere SLOs kosten überproportional. Pro SLO-Klasse explizit entscheiden.
+  \item \textbf{Kosten vs.\ Nachhaltigkeit.} Manche effizienteste Hardware ist teurer in der Anschaffung. TCO über 5 Jahre rechnet sich, ist aber kurzfristig schmerzhaft.
+  \item \textbf{Innovation vs.\ Standardisierung.} Neue Workloads brauchen Spielraum, Standards bringen Effizienz. Ausnahmeprozess strukturiert.
+\end{enumerate}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 13]
+Ein Service-Portfolio ist eine \textbf{Entscheidungsarchitektur}: Es macht sichtbar, welche Services wir betreiben, mit welchem Wert, mit welchen Kosten, mit welcher Wirkung. Wer ohne Portfolio steuert, entscheidet im Nebel -- oder gar nicht. Sustainable IT ist nicht, was sie heißt, sondern was sie ist: gemessen, dokumentiert, kontinuierlich verbessert.
+\end{merkbox}
+
+% --- 8. TAKE-AWAYS -------------------------------------------------------
+\section{Take-aways aus Tag 13}
+
+\begin{enumerate}
+  \item \textbf{Service-Portfolio in drei Kategorien}: Pipeline, Live, Retired.
+  \item \textbf{Wert hat vier Dimensionen}: Kundennutzen, Regulatorik, Resilienz, Nachhaltigkeit.
+  \item \textbf{Capacity messen, dann reduzieren}, nicht umgekehrt.
+  \item \textbf{Rightsizing mit Guardrails} und Stop-Bedingungen, nicht Bauchgefühl.
+  \item \textbf{Energieeffizienz-Hebel}: Konsolidierung, Virtualisierung, Idle-Abschaltung, Kühlung, Hardware-Generation, Workload-Shift, Prozessdisziplin.
+  \item \textbf{ISO-20000-Logik}: Rollen, Prozesse, Messgrößen, Reviews -- keine Bürokratie um ihrer selbst willen.
+  \item \textbf{KPIs koppeln}: Kosten gilt nur bei gehaltenem SLO. Anti-Gaming als Designprinzip.
+  \item \textbf{Sustainable IT ist Steuerungssystem}, nicht Kampagne.
+\end{enumerate}
+
+% --- 9. LITERATUR --------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Cabinet Office. (2019).] \emph{ITIL 4 foundation.} TSO (The Stationery Office).
+  \item[International Organization for Standardization. (2018).] \emph{Information technology -- Service management -- Part 1: Service management system requirements} (ISO/IEC 20000-1:2018). ISO.
+  \item[International Telecommunication Union. (2014).] \emph{Methodology for environmental life cycle assessments of information and communication technology goods, networks and services} (ITU-T L.1410). ITU.
+  \item[Kaplan, R.\,S., \& Norton, D.\,P. (1996).] \emph{The balanced scorecard: Translating strategy into action.} Harvard Business School Press.
+  \item[Murugesan, S. (2008).] Harnessing green IT: Principles and practices. \emph{IT Professional, 10}(1), 24--33. \href{https://doi.org/10.1109/MITP.2008.10}{https://doi.org/10.1109/MITP.2008.10}
+  \item[Object Management Group. (2020).] \emph{Decision Model and Notation (DMN)} (Version 1.3). \href{https://www.omg.org/spec/DMN/1.3/}{https://www.omg.org/spec/DMN/1.3/}
+  \item[Project Management Institute. (2021).] \emph{A guide to the Project Management Body of Knowledge (PMBOK\textregistered{} Guide)} (7th ed.). Project Management Institute.
+  \item[Schmidt, N.-H., Schmidtchen, R., Erek, K., Kolbe, L.\,M., \& Zarnekow, R. (2010).] Influence of green IT on consumers' buying behavior of personal computers. \emph{AMCIS 2010 Proceedings.}
+\end{description}
+
+% --- 10. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Anti-Gaming-Kopplung] Verknüpfung von KPIs, sodass eine Kennzahl nur gilt, wenn eine andere nicht verletzt wurde (z.\,B.\ Kosten gilt nur bei gehaltenem SLO).
+  \item[Audit-Readiness] Alltagszustand der Nachweisbarkeit: Portfolio aktuell, KPIs vorhanden, Entscheidungen protokolliert.
+  \item[Capacity] Fähigkeit eines Services, erwartete Last zu tragen und SLOs zu erfüllen. Dimensionen: Compute, Storage, Netzwerk, People.
+  \item[Capacity Review Board] Regelmäßiges Gremium, das Kapazitätsentscheidungen trifft und protokolliert.
+  \item[FinOps] Disziplin, Cloud- und Infrastrukturkosten transparent und steuerbar zu machen. Kopplung an SLOs und Service-Wert.
+  \item[Idle-Abschaltung] Konsequente Stilllegung nicht genutzter Workloads (z.\,B.\ Non-Prod-Umgebungen nachts).
+  \item[ISO/IEC 20000] Internationaler Standard für IT-Service-Management. Fordert klare Rollen, Prozesse, Messgrößen, Reviews.
+  \item[ITIL 4] Service-Management-Rahmenwerk; definiert Service-Portfolio in Pipeline, Live, Retired. \quelle{Cabinet Office, 2019}
+  \item[KPI-Kopplung] Bewusste Verknüpfung mehrerer KPIs, um Gaming zu verhindern.
+  \item[Low Regret Move] Maßnahme mit geringem Risiko und hoher Wirkung; fast immer sinnvoll (z.\,B.\ Idle abschalten).
+  \item[Portfolio Owner] Verantwortlich für das Service-Portfolio als Ganzes; führt das Portfolio Board.
+  \item[PUE] \emph{Power Usage Effectiveness.} Verhältnis Gesamtstrom zu IT-Strom in einem Rechenzentrum. Effizienz-Indikator.
+  \item[Pipeline (Portfolio)] Services, die geplant, aber noch nicht produktiv sind. Entscheidung über Invest oder Verzicht.
+  \item[Retired (Portfolio)] Abgeschaltete Services. Daten archiviert, Verträge beendet.
+  \item[Rightsizing] Bewusste Anpassung der Ressourcen an den tatsächlichen Bedarf, mit Guardrails und Stop-Regeln.
+  \item[Service Owner] Verantwortlich für einen Service in Wert, Risiko, Kosten, Nachhaltigkeit.
+  \item[Service Portfolio] Strukturierte Sammlung aller IT-Services mit Eigenschaften (Owner, Kosten, Risiko, Nutzen, Nachhaltigkeit).
+  \item[SLO-Klasse] Standardisierte Verfügbarkeitsstufe (z.\,B.\ 99,0\,\% / 99,5\,\% / 99,9\,\%) je nach Kritikalität.
+  \item[Sustainable IT] IT-Steuerungssystem, das Nachhaltigkeit (Energie, CO\textsubscript{2}, Lebenszyklus) als integralen Wert führt.
+  \item[Workload-Shift] Verlegung von Lasten in Zeitfenster mit günstigerem Strommix.
+  \item[Zombie-Service] Service, der noch läuft, aber keinen Nutzer mehr hat. Kandidat für Retirement.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 71 (Dig 42) \textperiodcentered{} Tag 13 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
