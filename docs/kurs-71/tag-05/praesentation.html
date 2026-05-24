@@ -3,8 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lernplatt · Präsentation · Tag 5</title>
+  <title>Lernplatt · Präsentation · Tag 5 · Kurs 71</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-71); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-71-bg); border: 1.5px solid var(--kurs-71); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-71); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-71-bg); color: var(--kurs-71); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row .check { flex: 0 0 28px; height: 28px; border: 2px solid #2a8a2a; border-radius: 4px; display:inline-flex; align-items:center; justify-content:center; color:#2a8a2a; font-weight:700; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .diagram-box { background: #fff; border: 1.5px solid var(--color-line); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .diagram-box h3 { margin: 0 0 8px; font-size: 16px; color: var(--kurs-71); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,16 +45,308 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Von „Diagrammen“ zu Enterprise-Fähigkeit: Kollaboration & Standards (Visio/Lucidchart) + Architekturrahmen (EA) & MDA als Steuerungslogik</h2>
-      <p>Modul 2 · Tag 5</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 2 · Tag 5 von 16 · Kurs 71 (Dig 42) · 3. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:46px;line-height:1.05;color:var(--kurs-71);margin:0">EA · MDA · ArchiMate · Zachman</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Von „Diagrammen“ zur Enterprise-Fähigkeit – Architekturrahmen als Steuerungslogik fürs ganze Unternehmen.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Tool ist kein Strategie – Standards sind. EA priorisiert, MDA übersetzt.</span>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Lernziele · Tag 5</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>EA-Sichten: Capability, Prozess, Applikation, Daten</li>
+            <li>ArchiMate-Schichten: Business · Application · Tech</li>
+            <li>Zachman-Matrix (5W + How)</li>
+            <li>MDA: CIM → PIM → PSM</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Modelling Charter entwerfen</li>
+            <li>Capability Map mit Priorisierung</li>
+            <li>MDA-Pfad konkret durchziehen</li>
+            <li>Capabilities zu Prozessen mappen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Tool-Strategie: Standard vs. föderiert</li>
+            <li>Governance-Strenge entscheiden</li>
+            <li>EA als Priorisierungsmaschine</li>
+            <li>Data Ownership klären</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:20px">
+        EA übersetzt Geschäftsstrategie in Investitionen, Standards und Risiko – nicht in „mehr Diagramme“.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>EA · Vier Kern-Sichten</h2>
+      <p style="color:var(--color-muted)">Was können wir, wie arbeiten wir, womit, mit welchen Daten?</p>
+      <div class="grid-2x2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Capability Map</h3>
+          <p>„Was kann das Unternehmen?“ – stabile Fähigkeiten (z. B. „Kunde identifizieren“, „Vertrag prüfen“).</p>
+        </div>
+        <div class="merk-box">
+          <h3>Prozesslandkarte</h3>
+          <p>„Wie arbeiten wir?“ – Wertströme, Kernprozesse, Support-Prozesse.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Applikationslandschaft</h3>
+          <p>„Womit?“ – Systeme, Schnittstellen, Abhängigkeiten, Lifecycle.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Daten- &amp; Technologie-Sicht</h3>
+          <p>„Welche Daten / Technik?“ – Datenobjekte, Owner, Plattformen.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Capabilities sind stabil. Prozesse ändern sich. Applikationen ersetzt man. Daten überleben alles.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>ArchiMate · drei Schichten, viele Beziehungen</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+          <rect x="40" y="30" width="620" height="70" fill="#fff3d9" stroke="#c47612" stroke-width="2"/>
+          <text x="350" y="55" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">Business Layer</text>
+          <text x="350" y="76" text-anchor="middle" font-size="12" fill="#5a3a08">Akteur · Rolle · Prozess · Service · Capability</text>
+          <rect x="40" y="110" width="620" height="70" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="350" y="135" text-anchor="middle" font-size="14" font-weight="700" fill="#9d4a1a">Application Layer</text>
+          <text x="350" y="156" text-anchor="middle" font-size="12" fill="#5a3a08">Application Component · Service · Interface · Data Object</text>
+          <rect x="40" y="190" width="620" height="70" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="350" y="215" text-anchor="middle" font-size="14" font-weight="700" fill="#1b4d1b">Technology Layer</text>
+          <text x="350" y="236" text-anchor="middle" font-size="12" fill="#1b4d1b">Node · Device · Platform Service · Network</text>
+          <line x1="100" y1="100" x2="100" y2="110" stroke="#666" stroke-width="2"/>
+          <line x1="100" y1="180" x2="100" y2="190" stroke="#666" stroke-width="2"/>
+          <line x1="350" y1="100" x2="350" y2="110" stroke="#666" stroke-width="2"/>
+          <line x1="350" y1="180" x2="350" y2="190" stroke="#666" stroke-width="2"/>
+          <line x1="600" y1="100" x2="600" y2="110" stroke="#666" stroke-width="2"/>
+          <line x1="600" y1="180" x2="600" y2="190" stroke="#666" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        ArchiMate-Wert: Beziehungen zwischen Schichten <strong>explizit</strong> machen – Wirkung &amp; Abhängigkeit sichtbar.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Zachman · 5W + How als Matrix</h2>
+      <p style="color:var(--color-muted)">Vereinfachte Lesart: jede Zelle ein Modell, jede Spalte eine Frage, jede Zeile eine Perspektive.</p>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th></th><th>What (Daten)</th><th>How (Prozess)</th><th>Where (Netzwerk)</th><th>Who (Rolle)</th><th>When (Zeit)</th><th>Why (Motiv)</th></tr></thead>
+        <tbody>
+          <tr><th>Scope</th><td>Kerndaten</td><td>Wertströme</td><td>Standorte</td><td>Stakeholder</td><td>Zyklen</td><td>Strategie</td></tr>
+          <tr><th>Business</th><td>Geschäftsobjekte</td><td>Geschäftsprozesse</td><td>Org-Einheiten</td><td>Rollen/RACI</td><td>Events</td><td>Ziele/KPIs</td></tr>
+          <tr><th>System</th><td>Logisches Datenmodell</td><td>Aktivitäten/Services</td><td>Knoten</td><td>User</td><td>States</td><td>Rules</td></tr>
+          <tr><th>Technologie</th><td>physisches DB-Modell</td><td>System-Module</td><td>Hardware</td><td>Identitäten</td><td>Trigger</td><td>Constraints</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Praxisnutzen: <strong>Lücken sichtbar machen</strong>. Welche Zelle haben wir nicht? Welche brauchen wir wirklich?
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>MDA · CIM → PIM → PSM</h2>
+      <p style="color:var(--color-muted)">Drei Modelle, drei Verantwortungsbereiche – kein Modell soll alles können.</p>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 820 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar-mda" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <rect x="20" y="40" width="240" height="140" rx="10" fill="#fff3d9" stroke="#c47612" stroke-width="2"/>
+          <text x="140" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="#5a3a08">CIM</text>
+          <text x="140" y="88" text-anchor="middle" font-size="12" fill="#5a3a08">Computation Independent</text>
+          <text x="140" y="115" text-anchor="middle" font-size="12" fill="#222">Business-Sicht:</text>
+          <text x="140" y="133" text-anchor="middle" font-size="12" fill="#222">Ziele · Prozesse</text>
+          <text x="140" y="151" text-anchor="middle" font-size="12" fill="#222">Begriffe · Scope</text>
+          <text x="140" y="170" text-anchor="middle" font-size="11" font-weight="700" fill="#b04030">Owner: Business</text>
+          <rect x="290" y="40" width="240" height="140" rx="10" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="410" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="#9d4a1a">PIM</text>
+          <text x="410" y="88" text-anchor="middle" font-size="12" fill="#5a3a08">Platform Independent</text>
+          <text x="410" y="115" text-anchor="middle" font-size="12" fill="#222">Logische Sicht:</text>
+          <text x="410" y="133" text-anchor="middle" font-size="12" fill="#222">Services · Datenflüsse</text>
+          <text x="410" y="151" text-anchor="middle" font-size="12" fill="#222">Fehlerfälle · Schnittstellen</text>
+          <text x="410" y="170" text-anchor="middle" font-size="11" font-weight="700" fill="#b04030">Owner: Architekt</text>
+          <rect x="560" y="40" width="240" height="140" rx="10" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="680" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="#1b4d1b">PSM</text>
+          <text x="680" y="88" text-anchor="middle" font-size="12" fill="#1b4d1b">Platform Specific</text>
+          <text x="680" y="115" text-anchor="middle" font-size="12" fill="#222">Technische Sicht:</text>
+          <text x="680" y="133" text-anchor="middle" font-size="12" fill="#222">IAM · API · DB</text>
+          <text x="680" y="151" text-anchor="middle" font-size="12" fill="#222">Deployment · Security</text>
+          <text x="680" y="170" text-anchor="middle" font-size="11" font-weight="700" fill="#b04030">Owner: Engineering</text>
+          <line x1="260" y1="110" x2="290" y2="110" stroke="#9d4a1a" stroke-width="2.5" marker-end="url(#ar-mda)"/>
+          <line x1="530" y1="110" x2="560" y2="110" stroke="#9d4a1a" stroke-width="2.5" marker-end="url(#ar-mda)"/>
+          <text x="410" y="215" text-anchor="middle" font-size="13" fill="#666">Review-Gates an jeder Grenze – „dürfen wir wechseln?“</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Falle: Business denkt PSM („wir wollen Salesforce“). Erst CIM klären, sonst baut Technik am Business vorbei.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Modelling Charter · Standards + Freiheiten</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>5 nicht verhandelbare Standards</h3>
+          <ul>
+            <li>Naming: Verb + Objekt / Prozess = „X-to-Y“</li>
+            <li>Pflichtfelder: Owner, Status, Version, Gültigkeit</li>
+            <li>Start &amp; Ende immer modelliert</li>
+            <li>Rollen sichtbar (Lanes)</li>
+            <li>Änderungslog &amp; Review-Pflicht</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>3 Freiheitsgrade</h3>
+          <ul>
+            <li>Detailtiefe (so grob wie möglich, so fein wie nötig)</li>
+            <li>Visual-Style innerhalb des Templates</li>
+            <li>Lokale Varianten als Attribute, nicht als eigene Modelle</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Governance ist Produkt: Wer ist Product Owner des Modellierungs-Systems? Welche Release-Mechanik?
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Capability Map · Priorisierung mit Hebel</h2>
+      <p style="color:var(--color-muted)">Capabilities mit höchstem Wirkungshebel auf DLZ/Compliance werden zuerst digitalisiert.</p>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 820 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="780" height="40" fill="#fff3d9" stroke="#c47612" stroke-width="2"/>
+          <text x="410" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">Kunde gewinnen &amp; binden</text>
+          <rect x="20" y="80" width="190" height="100" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="115" y="100" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">Identifizieren</text>
+          <text x="115" y="125" text-anchor="middle" font-size="11" fill="#222">★ Priorität</text>
+          <text x="115" y="148" text-anchor="middle" font-size="11" fill="#222">Hebel DLZ + Compliance</text>
+          <rect x="220" y="80" width="190" height="100" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="315" y="100" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">Vertrag prüfen</text>
+          <text x="315" y="125" text-anchor="middle" font-size="11" fill="#222">Compliance hoch</text>
+          <rect x="420" y="80" width="190" height="100" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="515" y="100" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">Zugang/Account</text>
+          <text x="515" y="125" text-anchor="middle" font-size="11" fill="#222">★ Priorität</text>
+          <text x="515" y="148" text-anchor="middle" font-size="11" fill="#222">Hebel auf DLZ groß</text>
+          <rect x="620" y="80" width="180" height="100" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="710" y="100" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">Kunde betreuen</text>
+          <text x="710" y="125" text-anchor="middle" font-size="11" fill="#222">Hebel mittel</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:12px">
+        Senior-Frage: Welche zwei Capabilities verändern in 10 Wochen das Kundenerlebnis sichtbar?
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · RetailGroup Europe</h2>
+      <p style="color:var(--color-muted)">10 Wochen bis Audit-Vorbereitung, 100k Budget, zwei parallele IT-Projekte.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>MDA-Pfad „Identitätsprüfung“</h3>
+          <ul>
+            <li><strong>CIM:</strong> „Kunde in &lt; 24 h aktiv“ · Scope Onboarding E2E · Datenobjekt Kunde mit Pflichtfeldern</li>
+            <li><strong>PIM:</strong> Services „VerifyIdentity“, „CreateAccount“, „AssignRoles“ · Datenflüsse · Fehlerfälle</li>
+            <li><strong>PSM:</strong> bestehendes IAM + Workflow-Tool · Schnittstellen · Audit-Logging Pflicht</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>4 KPIs &amp; Owner</h3>
+          <ul>
+            <li>Lead Time Onboarding · Owner Onboarding-Lead</li>
+            <li>First-Pass-Yield · Owner Operations</li>
+            <li>Compliance-Findings · Owner CISO</li>
+            <li>Rework-Rate · Owner QM</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Kritisches Risiko: PIM ohne CIM bauen – dann „lieben“ alle das Modell, aber niemand entscheidet damit.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Coaching · von Diagrammen zu Steuerung</h2>
+      <div class="grid-2x2" style="margin-top:18px">
+        <div class="merk-box"><h3>Tool ≠ Strategie</h3><p>Visio/Lucidchart sind Enabler. Ohne Standards werden sie Zeichenprogramme.</p></div>
+        <div class="merk-box"><h3>EA priorisiert</h3><p>Capabilities heben Diskussionen von „Einzelprozess“ auf „Wertbeitrag“.</p></div>
+        <div class="merk-box"><h3>MDA-Grenze</h3><p>CIM (Business) entscheidet Ziele/Prozesse · PIM/PSM entscheidet Umsetzung. Bewusst trennen.</p></div>
+        <div class="merk-box"><h3>Reifegrad &amp; Akzeptanz</h3><p>Früh klein starten, aber Governance sauber setzen – sonst keine Vergleichbarkeit.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Management · zwei Pflicht-Entscheidungen</h2>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Tool-Strategie · Standard vs. Föderiert</h3>
+          <p style="font-size:14px"><strong>Standard:</strong> Vergleichbarkeit + Audit, aber lokale Reibung.</p>
+          <p style="font-size:14px"><strong>Föderiert:</strong> Akzeptanz hoch, Vergleichbarkeit schwer.</p>
+          <p style="font-size:13px;color:var(--color-muted);margin-top:6px">Frühwarnsignal: 3 Tool-Insellösungen in 6 Monaten → Re-Konsolidierung.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Governance-Strenge · Minimal vs. Streng</h3>
+          <p style="font-size:14px"><strong>Minimal:</strong> schnelle Akzeptanz, Risiko Inkonsistenz.</p>
+          <p style="font-size:14px"><strong>Streng:</strong> Audit-fit, aber Widerstand &amp; Schatten-IT.</p>
+          <p style="font-size:13px;color:var(--color-muted);margin-top:6px">Trigger zum Nachschärfen: Audit-Findings &gt; 5 oder Modell-Aktualität &lt; 60 %.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Senior-Brille: Verantwortung für <strong>Systemdesign</strong>, nicht nur für Einzeldiagramme.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Capabilities sind stabil, Prozesse ändern sich, Daten überleben alles.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">EA übersetzt Strategie in Investitionen, nicht in Diagramme.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">CIM klären, sonst baut Technik am Business vorbei.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">5 Standards + 3 Freiheiten = Charter, die Akzeptanz findet.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Governance ist ein Produkt – mit Owner, Release-Mechanik und Trigger.</span></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Weiterarbeiten · Tag 5</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout</h3>
+          <p style="font-size:14px">12 Sektionen mit Capability-Map-Beispiel, MDA-Pfad und Zachman-Anwendung.</p>
+          <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-05.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Lernpfad</h3>
+          <p style="font-size:14px">Videos zu ArchiMate, Zachman und Capability-Mapping plus Quiz.</p>
+          <p style="margin-top:10px"><a href="lernpfad.html" style="color:var(--kurs-71);font-weight:600">→ Lernpfad öffnen</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 6 (BPMS &amp; APIs).</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
 <script src="../../assets/progress.js"></script>
@@ -39,8 +355,6 @@
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 5, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

@@ -3,8 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lernplatt · Präsentation · Tag 7</title>
+  <title>Lernplatt · Präsentation · Tag 7 · Kurs 71</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-71); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-71-bg); border: 1.5px solid var(--kurs-71); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-71); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-71-bg); color: var(--kurs-71); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row .check { flex: 0 0 28px; height: 28px; border: 2px solid #2a8a2a; border-radius: 4px; display:inline-flex; align-items:center; justify-content:center; color:#2a8a2a; font-weight:700; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .diagram-box { background: #fff; border: 1.5px solid var(--color-line); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .diagram-box h3 { margin: 0 0 8px; font-size: 16px; color: var(--kurs-71); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,16 +45,282 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">„Daten werden zu Realität“: Event Logs → Ist-Prozess (Discovery) → Soll/Ist-Abgleich (Conformance) als Steuerungsinstrument</h2>
-      <p>Modul 3 · Tag 7</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 3 · Tag 7 von 16 · Kurs 71 (Dig 42) · 8. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0">Discovery &amp; Conformance</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Daten werden zu Realität – Event Logs zum Ist-Prozess, Soll/Ist-Abgleich als Steuerungsinstrument.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Abweichung ist Signal. Nicht immer Fehler. Manchmal Innovation. Oft Datenproblem.</span>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Lernziele · Tag 7</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Event Log Pflicht- &amp; Kürfelder</li>
+            <li>Discovery: Happy Path, Varianten, Schleifen</li>
+            <li>Conformance-Abweichungstypen</li>
+            <li>Compliance vs. operative Flexibilität</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Ist-Prozess aus Mini-Log ableiten</li>
+            <li>Abweichungen klassifizieren</li>
+            <li>Gegenmaßnahmen priorisieren</li>
+            <li>Guardrails für tolerierte Varianten</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Zero-Tolerance-Liste definieren</li>
+            <li>„False Compliance“ vermeiden</li>
+            <li>Data Owner &amp; Process Owner klären</li>
+            <li>Steuerungs- statt Reporting-Sicht</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:20px">
+        Discovery liefert Hypothesen, keine Wahrheit. Validierung mit Fachseite ist Pflicht.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Event Log · Pflicht- und Kürfelder</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th>Feld</th><th>Pflicht?</th><th>Zweck</th></tr></thead>
+        <tbody>
+          <tr><td>Case ID</td><td>Pflicht</td><td>Was gehört zu welchem Vorgang?</td></tr>
+          <tr><td>Aktivität</td><td>Pflicht</td><td>Welcher Schritt wurde ausgeführt?</td></tr>
+          <tr><td>Timestamp</td><td>Pflicht</td><td>Wann passierte er (ISO 8601, mit Zeitzone)?</td></tr>
+          <tr><td>Ressource</td><td>Kür</td><td>Wer/welches System – nötig für Bottleneck-Analyse pro Person/Team</td></tr>
+          <tr><td>Kosten</td><td>Kür</td><td>Aktivitätsbasierte Kostenanalyse</td></tr>
+          <tr><td>Kanal / Standort</td><td>Kür</td><td>Segmentierung für Varianten</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Stolpersteine: doppelte Events · Zeitzonen-Mix · falsche Case-ID-Strategie · unscharfe Aktivitätsbezeichnung.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Mini-Log · vier Cases im Vergleich</h2>
+      <p style="color:var(--color-muted)">Vier Bestellungen, vier Wege – nur einer ist „Happy Path“.</p>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th>Case</th><th>Pfad</th><th>Anmerkung</th></tr></thead>
+        <tbody>
+          <tr><td>101</td><td>Start → Prüfen → Angebot → Bestätigt → Auftrag → Versand → Rechnung → Ende</td><td>Happy Path</td></tr>
+          <tr><td>102</td><td>Start → Prüfen → Rückfrage → Prüfen → Angebot → Bestätigt → Auftrag → <strong>Rechnung → Versand</strong></td><td>Reihenfolge-Verstoß</td></tr>
+          <tr><td>103</td><td>Start → Prüfen → Angebot → Bestätigt → Auftrag → <strong>Versand → Versand</strong> → Rechnung</td><td>Doppelversand</td></tr>
+          <tr><td>104</td><td>Start → Prüfen → Angebot → Bestätigt → Auftrag → <strong>Storno</strong> → Ende</td><td>legitime Variante</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Variante = anderer Pfad. Schleife = wiederholte Aktivität. Abweichung ≠ Fehler – aber immer ein Signal.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Conformance · Abweichungstypen</h2>
+      <div class="grid-2x2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>1 · Fehlende Schritte</h3>
+          <p>Soll-Pflichtschritt im Log nicht vorhanden – z. B. „Wareneingang fehlt vor Rechnung“.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Zusätzliche Schritte</h3>
+          <p>Schritte ohne Soll-Pendant – z. B. „Sonderfreigabe“ als Umgehung des Standardpfads.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Falsche Reihenfolge</h3>
+          <p>Soll: A → B. Ist: B → A. Beispiel: „Rechnung vor Versand“.</p>
+        </div>
+        <div class="merk-box">
+          <h3>4 · Schleifen &amp; SLA-Verletzungen</h3>
+          <p>Rework-Schleifen, Eskalationen, Zeitüberschreitungen sichtbar im Log.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Klassifikation: <strong>Compliance-Risiko · Quality/Kosten · Legitime Variante · Datenproblem</strong>.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Discovery-Skizze · Happy Path + Varianten</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 920 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar-disc" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <circle cx="40" cy="110" r="18" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <rect x="80" y="92" width="100" height="36" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="130" y="114" text-anchor="middle" font-size="12" fill="#222">Prüfen</text>
+          <rect x="200" y="92" width="100" height="36" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="250" y="114" text-anchor="middle" font-size="12" fill="#222">Angebot</text>
+          <rect x="320" y="92" width="100" height="36" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="370" y="114" text-anchor="middle" font-size="12" fill="#222">Bestätigt</text>
+          <rect x="440" y="92" width="100" height="36" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="490" y="114" text-anchor="middle" font-size="12" fill="#222">Auftrag</text>
+          <rect x="560" y="92" width="100" height="36" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="610" y="114" text-anchor="middle" font-size="12" fill="#222">Versand</text>
+          <rect x="680" y="92" width="100" height="36" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="730" y="114" text-anchor="middle" font-size="12" fill="#222">Rechnung</text>
+          <circle cx="830" cy="110" r="18" fill="#fff" stroke="#9d4a1a" stroke-width="4"/>
+          <line x1="58" y1="110" x2="80" y2="110" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-disc)"/>
+          <line x1="180" y1="110" x2="200" y2="110" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-disc)"/>
+          <line x1="300" y1="110" x2="320" y2="110" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-disc)"/>
+          <line x1="420" y1="110" x2="440" y2="110" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-disc)"/>
+          <line x1="540" y1="110" x2="560" y2="110" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-disc)"/>
+          <line x1="660" y1="110" x2="680" y2="110" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-disc)"/>
+          <line x1="780" y1="110" x2="812" y2="110" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-disc)"/>
+          <polyline points="180,110 180,40 80,40 80,110" fill="none" stroke="#b04030" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar-disc)"/>
+          <text x="130" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#b04030">Rückfrage-Schleife (Case 102)</text>
+          <polyline points="610,128 610,180 680,180" fill="none" stroke="#b04030" stroke-width="2" stroke-dasharray="4 3"/>
+          <polyline points="680,180 680,128" fill="none" stroke="#b04030" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar-disc)"/>
+          <text x="650" y="200" font-size="11" font-weight="700" fill="#b04030">Reihenfolge-Verstoß (Case 102): Rechnung vor Versand</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Pfeile in Rot = Abweichungen. Dicke der Linie = Häufigkeit (in echten Tools sichtbar).
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Fitness · Maß für Modell-Realitäts-Passung</h2>
+      <p style="color:var(--color-muted)">Fitness 1.0 = jeder Log-Fall passt ins Soll. Fitness &lt; 1.0 = Abweichungen vorhanden.</p>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Hohe Fitness · &gt; 0,9</h3>
+          <p>Soll-Modell beschreibt Realität gut – Abweichungen Einzelfälle.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Mittel · 0,6 – 0,9</h3>
+          <p>Signifikante Varianten – Soll-Modell unvollständig oder Schatten-Prozesse.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Niedrig · &lt; 0,6</h3>
+          <p>Realität läuft anders – Modell neu denken, nicht „Compliance erzwingen“.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Falle: niedrige Fitness als Datenfehler abtun. Oft ist sie Realitäts-Signal, das gehört werden will.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · MedTech Procure-to-Pay</h2>
+      <p style="color:var(--color-muted)">6 Wochen bis Audit, 70k Budget. Unvollständige Logs (ERP + Mail).</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Soll-Modell P2P (grob)</h3>
+          <ul>
+            <li>Bedarf → Genehmigung → Bestellung → Lieferung</li>
+            <li>Wareneingang → Rechnung → 3-Way-Match</li>
+            <li>Freigabe → Zahlung → Archiv</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Ist-Hinweise</h3>
+          <ul>
+            <li>30 % Rechnungen vor Wareneingang</li>
+            <li>18 % Rechnungen ohne Kostenstelle</li>
+            <li>12 % Sonderfreigaben (Umgehung)</li>
+            <li>8 % Dubletten</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Top-3 Abweichungen: 3-Way-Match-Verstoß · fehlende KSt · Sonderfreigabe-Pattern.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Abweichungslandkarte · Top-3 mit Maßnahmen</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th>Abweichung</th><th>Risiko</th><th>Ursache (Hypothese)</th><th>Maßnahme</th><th>Owner</th></tr></thead>
+        <tbody>
+          <tr><td>Rechnung vor Wareneingang</td><td>3-Way-Match bricht</td><td>Dropship · Services · fehlende Buchung</td><td>Ausnahmeprozess + Pflichtkennzeichen + Nachbuchungs-SLA</td><td>Finance Ops</td></tr>
+          <tr><td>Fehlende Kostenstelle</td><td>Controlling · Compliance</td><td>Anforderungsformular schlecht</td><td>Pflichtfeld + Validierung + Rückgabe im Workflow</td><td>Einkauf</td></tr>
+          <tr><td>Sonderfreigaben</td><td>Umgehung Standard</td><td>Zeitdruck · keine klaren Schwellen</td><td>Schwellenwert + Eskalationsboard + Monitoring</td><td>Procurement Lead</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        6-Wochen-Plan: Pflichtfelder + Rückgabe · Ausnahmeprozess dokumentieren · Monitoring-Dashboard + wöchentliches Review.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Coaching · Abweichungen sind Signale</h2>
+      <div class="grid-2x2" style="margin-top:18px">
+        <div class="merk-box"><h3>Datenqualität vs. Realität</h3><p>Erst trennen, dann entscheiden – Datenfehler ist keine Prozessabweichung.</p></div>
+        <div class="merk-box"><h3>Discovery liefert Hypothesen</h3><p>Validierung mit Fachseite ist Pflicht. „Wir sehen X – stimmt das?“</p></div>
+        <div class="merk-box"><h3>Conformance braucht Regeln</h3><p>Muss · Kann · Ausnahme – klar definiert, schriftlich, mit Owner.</p></div>
+        <div class="merk-box"><h3>Maßnahmen als Experimente</h3><p>Impact messen, Rückbau möglich – nicht „Hau-drauf-Compliance“.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Management · drei Pflicht-Entscheidungen</h2>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Zero Tolerance</h3>
+          <p style="font-size:14px">Welche Abweichungen werden ab sofort nicht toleriert (Compliance, Sicherheit)?</p>
+        </div>
+        <div class="merk-box">
+          <h3>Akzeptierte Varianten</h3>
+          <p style="font-size:14px">Welche Varianten lassen wir bewusst zu – mit welcher Guardrail (Schwelle, Eskalation)?</p>
+        </div>
+        <div class="merk-box">
+          <h3>Daten-Lücken</h3>
+          <p style="font-size:14px">Welche Lücken akzeptieren wir temporär – und welche Kompensation (manuelle Kontrolle)?</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Senior-Brille: Conformance als verantwortete Steuerung – nicht als Reporting.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Abweichung ist Signal, nicht Fehler.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Discovery = Hypothesen, keine Wahrheit. Fachseite validiert.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Niedrige Fitness = Modell hinterfragen, nicht Realität.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Guardrail definieren statt Variante verbieten.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">False Compliance ist gefährlicher als sichtbare Abweichung.</span></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Weiterarbeiten · Tag 7</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout</h3>
+          <p style="font-size:14px">12 Sektionen mit Eventlog-Beispiel, Fitness-Berechnung und Abweichungs-Klassifikation.</p>
+          <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-07.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Lernpfad</h3>
+          <p style="font-size:14px">Videos zu Process Mining Tools (Celonis, Disco), Discovery- und Conformance-Algorithmen.</p>
+          <p style="margin-top:10px"><a href="lernpfad.html" style="color:var(--kurs-71);font-weight:600">→ Lernpfad öffnen</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 8 (Predictive &amp; BI).</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
 <script src="../../assets/progress.js"></script>
@@ -39,8 +329,6 @@
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 7, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

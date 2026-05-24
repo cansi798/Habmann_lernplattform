@@ -3,8 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lernplatt · Präsentation · Tag 8</title>
+  <title>Lernplatt · Präsentation · Tag 8 · Kurs 71</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-71); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-71-bg); border: 1.5px solid var(--kurs-71); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-71); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-71-bg); color: var(--kurs-71); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row .check { flex: 0 0 28px; height: 28px; border: 2px solid #2a8a2a; border-radius: 4px; display:inline-flex; align-items:center; justify-content:center; color:#2a8a2a; font-weight:700; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .diagram-box { background: #fff; border: 1.5px solid var(--color-line); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .diagram-box h3 { margin: 0 0 8px; font-size: 16px; color: var(--kurs-71); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,16 +46,284 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Vom „Ist verstehen“ zum „Zukunft steuern“: Enhancement + Predictive Analytics + Real-time Monitoring – abgesichert durch DWH/ETL & BI-Dashboards</h2>
-      <p>Modul 3 · Tag 8</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 3 · Tag 8 von 16 · Kurs 71 (Dig 42) · 9. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:44px;line-height:1.05;color:var(--kurs-71);margin:0">Enhancement · Predictive · BI</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Vom „Ist verstehen“ zum „Zukunft steuern“ – DWH/ETL und Dashboards als Frühwarnsystem.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Predictive ohne Playbook ist wertlos. Alert → Owner → Handlung.</span>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Lernziele · Tag 8</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Enhancement: Modell mit Zeiten/Kosten anreichern</li>
+            <li>ML-Typen im Prozess: Klassif. · Regression · Cluster · Anomalie</li>
+            <li>DWH/ETL für Prozessdaten</li>
+            <li>Real-time Monitoring &amp; Drift</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Predictive Use Case Canvas füllen</li>
+            <li>Baseline-Heuristik formulieren</li>
+            <li>ETL-Pipeline in 6 Schritten</li>
+            <li>BI-Dashboard mit 6 Kacheln</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>False Positive vs. False Negative bewerten</li>
+            <li>Anti-Gaming-Kopplungen</li>
+            <li>Alarmmüdigkeit verhindern</li>
+            <li>Modell-Governance &amp; Drift-Plan</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:20px">
+        Baseline vor ML – einfache Regeln liefern oft 60–80 % Nutzen und sind auditierbar.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>ML-Typen im Prozesskontext</h2>
+      <div class="grid-2x2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Klassifikation</h3>
+          <p><strong>Frage:</strong> Wird der Fall eskalieren (ja/nein)?</p>
+          <p style="font-size:13px;color:var(--color-muted)">SLA-Breach-Vorhersage, Rework-Risiko</p>
+        </div>
+        <div class="merk-box">
+          <h3>Regression</h3>
+          <p><strong>Frage:</strong> Wie lange dauert es noch / wie teuer?</p>
+          <p style="font-size:13px;color:var(--color-muted)">Restlaufzeit, Kostenprognose</p>
+        </div>
+        <div class="merk-box">
+          <h3>Clustering</h3>
+          <p><strong>Frage:</strong> Welche Falltypen gibt es?</p>
+          <p style="font-size:13px;color:var(--color-muted)">Komplizierte Fälle, Segmentierung</p>
+        </div>
+        <div class="merk-box">
+          <h3>Anomalieerkennung</h3>
+          <p><strong>Frage:</strong> Was ist ungewöhnlich?</p>
+          <p style="font-size:13px;color:var(--color-muted)">Manipulation, seltene Pfade, Fehler</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Grenzen: Datenqualität · Konzeptdrift · Erklärbarkeit · Fehlanreize (Gaming). Alle vier <strong>messen</strong>.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Predictive Use Case Canvas</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th style="width:30%">Feld</th><th>Beispiel „SLA-Risiko früh erkennen“</th></tr></thead>
+        <tbody>
+          <tr><th>1 · Zielentscheidung</th><td>Welches Ticket eskalieren wir, wer übernimmt?</td></tr>
+          <tr><th>2 · Prognose</th><td>Wahrscheinlichkeit SLA-Breach in den nächsten 4 h</td></tr>
+          <tr><th>3 · Handlung</th><td>Risk &gt; 0,8 → Duty Manager + Fast Triage 15 min</td></tr>
+          <tr><th>4 · Datenminimum</th><td>Priorität · Alter · Service · Reassignments · Queue</td></tr>
+          <tr><th>5 · Risiko / Compliance</th><td>Kein automatisches Schließen · Audit Log Pflicht</td></tr>
+          <tr><th>6 · Erfolgskriterium</th><td>–25 % SLA-Verletzungen · gleichbleibende NPS</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Baseline-Heuristik: „Ticket Age &gt; 70 % SLA &amp; Reassignments &gt; 2 → markieren“. Funktioniert ohne ML.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>ETL-Pipeline · 6 Schritte</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 880 180" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar-etl" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <rect x="20" y="60" width="120" height="60" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="80" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">1 · Quelle</text>
+          <text x="80" y="102" text-anchor="middle" font-size="11" fill="#555">CRM · Tickets · ERP</text>
+          <rect x="160" y="60" width="120" height="60" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="220" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">2 · Staging</text>
+          <text x="220" y="102" text-anchor="middle" font-size="11" fill="#555">Rohdaten ablegen</text>
+          <rect x="300" y="60" width="120" height="60" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="360" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">3 · Mapping</text>
+          <text x="360" y="102" text-anchor="middle" font-size="11" fill="#555">Aktivität · Zeit · KSt</text>
+          <rect x="440" y="60" width="120" height="60" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="500" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">4 · Join</text>
+          <text x="500" y="102" text-anchor="middle" font-size="11" fill="#555">Case ID konsolidieren</text>
+          <rect x="580" y="60" width="120" height="60" rx="6" fill="#fde2dc" stroke="#b04030" stroke-width="2"/>
+          <text x="640" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#b04030">5 · Quality</text>
+          <text x="640" y="102" text-anchor="middle" font-size="11" fill="#b04030">Checks &amp; Reject</text>
+          <rect x="720" y="60" width="140" height="60" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="790" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#1b4d1b">6 · DWH</text>
+          <text x="790" y="102" text-anchor="middle" font-size="11" fill="#1b4d1b">Facts + Dimensions</text>
+          <line x1="140" y1="90" x2="160" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-etl)"/>
+          <line x1="280" y1="90" x2="300" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-etl)"/>
+          <line x1="420" y1="90" x2="440" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-etl)"/>
+          <line x1="560" y1="90" x2="580" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-etl)"/>
+          <line x1="700" y1="90" x2="720" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-etl)"/>
+          <text x="80" y="155" font-size="11" fill="#666">Quellsysteme heterogen</text>
+          <text x="640" y="155" font-size="11" font-weight="700" fill="#b04030">Stop the line bei Quality-Fail</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        5 Pflicht-Checks: Case ID fehlt · Zeitstempel rückwärts · unbekannte Aktivität · Dublette · Mapping-Lücke.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>BI-Dashboard · sechs Kacheln</h2>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box"><h3>Exec KPI 1</h3><p style="font-size:13px">Lead Time vs. Ziel · Trend 8 Wochen</p></div>
+        <div class="merk-box"><h3>Exec KPI 2</h3><p style="font-size:13px">SLA-Einhaltung gesamt · Heatmap</p></div>
+        <div class="merk-box"><h3>Prozess-KPI A</h3><p style="font-size:13px">Top-10 Risikotickets jetzt</p></div>
+        <div class="merk-box"><h3>Prozess-KPI B</h3><p style="font-size:13px">Reassignments pro Service</p></div>
+        <div class="merk-box"><h3>Risiko / Compliance</h3><p style="font-size:13px">Anomalien · Audit-Findings · Sonderfreigaben</p></div>
+        <div class="merk-box" style="background:#fde2dc;border-color:#b04030"><h3 style="color:#b04030">Alert / Aktion</h3><p style="font-size:13px;color:#b04030">Offene Alerts · Owner · Playbook-Link</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Gutes Dashboard: Trend · Ziel · Drilldown · <strong>Next best action</strong> – nicht nur „pretty pictures“.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Anti-Gaming · Kopplung verhindert Fehlanreize</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th>KPI</th><th>Mögliches Gaming</th><th>Anti-Gaming-Kopplung</th></tr></thead>
+        <tbody>
+          <tr><td>SLA-Einhaltungsquote</td><td>schnell auf „erledigt“ setzen ohne Lösung</td><td>+ Re-Open-Rate &amp; Kundenzufriedenheit</td></tr>
+          <tr><td>Tickets / FTE / Tag</td><td>Tickets künstlich splitten</td><td>+ Bearbeitungszeit-Verteilung &amp; Rework-Rate</td></tr>
+          <tr><td>First-Pass-Yield</td><td>Komplexe Fälle vermeiden</td><td>+ Mix-Index (Komplexitäts-Anteil)</td></tr>
+          <tr><td>Lead Time</td><td>Tickets vor Eingangsbuchung „warm halten“</td><td>+ Eingangs-vs-Erstkontakt-Zeit</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Jede Executive-KPI braucht eine <strong>Gegen-KPI</strong>. Sonst optimiert die Organisation die falsche Richtung.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · FinServe SLA-Frühwarnsystem</h2>
+      <p style="color:var(--color-muted)">8 Wochen, 120k Budget. Labels (Breach) unvollständig. Misstrauen wegen „Überwachung“.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Features (Auswahl)</h3>
+          <ul>
+            <li>Priority · Ticket Age · Queue · Reassignments</li>
+            <li>Service · Category · Open Incidents per Service</li>
+            <li>Time since last update · Shift · Customer Tier</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Playbook</h3>
+          <ul>
+            <li>Risk &gt; 0,8 → Duty Manager notified</li>
+            <li>Fast Triage 15 min · Ressourcen umschichten</li>
+            <li>Dokumentation im Ticket Pflicht</li>
+            <li>Post-Review bei wiederkehrenden Mustern</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        MVP: Start ohne Monitoring-Join (nur Ticketing) · 6 Features · manuelle Service-Impact-Kennzeichnung.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Coaching · Predictive als Verantwortung</h2>
+      <div class="grid-2x2" style="margin-top:18px">
+        <div class="merk-box"><h3>Alert → Owner → Playbook</h3><p>Predictive ohne Handlungsplan ist wertlos. Jeder Alert braucht eine Adresse.</p></div>
+        <div class="merk-box"><h3>Baseline vor ML</h3><p>Einfache Regeln liefern 60–80 % Nutzen und sind auditierbar – das ist viel.</p></div>
+        <div class="merk-box"><h3>Datenethik &amp; Bias</h3><p>Erklärbarkeit, Zugriffe, Audit Trail – Modell ist Produkt mit Verantwortung.</p></div>
+        <div class="merk-box"><h3>Drift managen</h3><p>Modelle altern – Monitoring für Modell-Performance &amp; Datenverschiebung.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Drift &amp; Modell-Monitoring</h2>
+      <p style="color:var(--color-muted)">Modelle altern – das ist kein Versagen, das ist Realität. Pflichtprogramm fürs Operating Model.</p>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Data Drift</h3>
+          <p style="font-size:13px">Verteilung der Eingangsfeatures verschiebt sich – neue Kundengruppe, neuer Kanal.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Concept Drift</h3>
+          <p style="font-size:13px">Zusammenhang Feature → Label ändert sich – z. B. neuer Geschäftsprozess, neue Regulierung.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Performance Drift</h3>
+          <p style="font-size:13px">Accuracy / Recall sinkt – Modell trifft schlechtere Vorhersagen ohne offensichtlichen Grund.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Pflicht: Schwellen + Alarm + Retraining-Trigger. Modelle haben ein Verfallsdatum – plant es ein.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Management · drei Pflicht-Entscheidungen</h2>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>FP vs. FN</h3>
+          <p style="font-size:14px">Welche falsche Entscheidung kostet mehr (Eskalation ohne Grund vs. übersehener Breach)?</p>
+        </div>
+        <div class="merk-box">
+          <h3>Top-3 Use Cases</h3>
+          <p style="font-size:14px">Welche Use Cases zuerst – trotz Datenlücken? Frühwarnsignal definieren.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Executive Alerts</h3>
+          <p style="font-size:14px">Welche Alerts gehören aufs C-Level-Dashboard – und mit welcher Guardrail?</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Senior-Brille: Analytics ist Produkt – mit Product Owner, Release-Zyklus, Monitoring, Auditfähigkeit.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Baseline vor ML – einfache Regeln auditierbar &amp; oft wirksam.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Predictive braucht Alert → Owner → Playbook.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Jede KPI braucht eine Gegen-KPI gegen Gaming.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Drift &amp; Datenqualität sind Pflicht-Monitoring.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Analytics ist Produkt – Product Owner, Release-Zyklus, Audit.</span></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Weiterarbeiten · Tag 8</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout</h3>
+          <p style="font-size:14px">12 Sektionen mit Predictive Canvas, ETL-Pattern und Dashboard-Best-Practices.</p>
+          <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-08.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Lernpfad</h3>
+          <p style="font-size:14px">Videos zu ETL-Tools (dbt, Airflow), BI-Dashboards (Tableau, Power BI) und Drift Monitoring.</p>
+          <p style="margin-top:10px"><a href="lernpfad.html" style="color:var(--kurs-71);font-weight:600">→ Lernpfad öffnen</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 9 (Agile &amp; DevOps).</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
 <script src="../../assets/progress.js"></script>
@@ -39,8 +332,6 @@
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 8, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

@@ -3,8 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lernplatt · Präsentation · Tag 4</title>
+  <title>Lernplatt · Präsentation · Tag 4 · Kurs 71</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-71); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-71-bg); border: 1.5px solid var(--kurs-71); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-71); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-71-bg); color: var(--kurs-71); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row .check { flex: 0 0 28px; height: 28px; border: 2px solid #2a8a2a; border-radius: 4px; display:inline-flex; align-items:center; justify-content:center; color:#2a8a2a; font-weight:700; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .diagram-box { background: #fff; border: 1.5px solid var(--color-line); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .diagram-box h3 { margin: 0 0 8px; font-size: 16px; color: var(--kurs-71); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,16 +45,305 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Vom Prozessbild zum „steuerbaren System“: Repository (E2E, Governance, Kollaboration) → Execution-Modelle (Automatisierung, Workflows)</h2>
-      <p>Modul 2 · Tag 4</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 2 · Tag 4 von 16 · Kurs 71 (Dig 42) · 2. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0">Repository &amp; Execution</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Vom Prozessbild zum steuerbaren System – Single Source of Truth + Workflow-Engine (Camunda-Style).</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Repository steuert Transparenz. Execution steuert Durchlaufzeit. Beides braucht Owner.</span>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Lernziele · Tag 4</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Repository als Single Source of Truth</li>
+            <li>3 Ebenen: E2E → Subprozess → Artefakt</li>
+            <li>Business-BPMN vs. Execution-BPMN</li>
+            <li>User Task / Service Task / Events / Variablen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Repository-Struktur + Metadaten entwerfen</li>
+            <li>Freigabe-Workflow (Draft → Approved)</li>
+            <li>Automations-Slice schneiden</li>
+            <li>Minimum-Daten für Workflow definieren</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Variantenstrategie: Attribute vs. eigene Modelle</li>
+            <li>Governance vs. Overhead</li>
+            <li>Exception-Policy: MVP statt Perfektion</li>
+            <li>Irreversible Entscheidungen markieren</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:20px">
+        „Repository ohne Owner/Review = Ablage. Execution ohne SLA/Eskalation = Hoffnung.“
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Repository · drei Ebenen reichen für den Start</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg">
+          <rect x="40" y="30" width="200" height="60" rx="6" fill="#ffd9b0" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="140" y="55" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">Ebene 1 · Value Chain</text>
+          <text x="140" y="74" text-anchor="middle" font-size="11" fill="#5a3a08">Prozesslandkarte (z. B. Order-to-Cash)</text>
+          <line x1="140" y1="90" x2="140" y2="120" stroke="#9d4a1a" stroke-width="2"/>
+          <rect x="40" y="120" width="200" height="60" rx="6" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="140" y="145" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">Ebene 2 · Prozess / Subprozess</text>
+          <text x="140" y="164" text-anchor="middle" font-size="11" fill="#5a3a08">BPMN-Modell mit Lanes, KPIs, Risiken</text>
+          <line x1="140" y1="180" x2="140" y2="210" stroke="#9d4a1a" stroke-width="2"/>
+          <rect x="40" y="210" width="200" height="50" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="140" y="232" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">Ebene 3 · Artefakte</text>
+          <text x="140" y="250" text-anchor="middle" font-size="11" fill="#5a3a08">SOPs, Forms, Templates, Trainings</text>
+          <rect x="320" y="30" width="400" height="230" fill="#fff" stroke="#9d4a1a" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <text x="520" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#9d4a1a">Pflicht-Metadaten je Modell</text>
+          <text x="340" y="80" font-size="13" fill="#222">• Owner (Person/Rolle)</text>
+          <text x="340" y="105" font-size="13" fill="#222">• Status (Draft · Review · Approved · Retired)</text>
+          <text x="340" y="130" font-size="13" fill="#222">• Version + letzte Änderung</text>
+          <text x="340" y="155" font-size="13" fill="#222">• Gültigkeit (Standort, Produkt, Land)</text>
+          <text x="340" y="180" font-size="13" fill="#222">• Risikoklasse / Compliance-Bezug</text>
+          <text x="340" y="205" font-size="13" fill="#222">• Verlinkte KPIs &amp; Controls</text>
+          <text x="340" y="240" font-size="13" font-weight="700" fill="#b04030">Ohne Owner und Status: keine Steuerung möglich.</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:12px">
+        Variantenfrage: <strong>als Attribute</strong> (kleine Unterschiede) oder <strong>als separate Modelle</strong> (echte E2E-Abweichungen)?
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Freigabe-Workflow für Modelle</h2>
+      <p style="color:var(--color-muted)">Draft → Review → Approved → Retired – mit klaren Rollen.</p>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 820 130" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar-fw" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <rect x="20" y="40" width="140" height="50" rx="8" fill="#f0f0f0" stroke="#666" stroke-width="2"/>
+          <text x="90" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#222">Draft</text>
+          <text x="90" y="80" text-anchor="middle" font-size="11" fill="#555">Modeler arbeitet</text>
+          <rect x="200" y="40" width="140" height="50" rx="8" fill="#fff3d9" stroke="#c47612" stroke-width="2"/>
+          <text x="270" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">Review</text>
+          <text x="270" y="80" text-anchor="middle" font-size="11" fill="#5a3a08">2 Augen · Reviewer</text>
+          <rect x="380" y="40" width="140" height="50" rx="8" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="450" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#1b4d1b">Approved</text>
+          <text x="450" y="80" text-anchor="middle" font-size="11" fill="#1b4d1b">Owner zeichnet ab</text>
+          <rect x="560" y="40" width="140" height="50" rx="8" fill="#eee" stroke="#888" stroke-width="2"/>
+          <text x="630" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#444">Retired</text>
+          <text x="630" y="80" text-anchor="middle" font-size="11" fill="#444">archiviert, lesbar</text>
+          <line x1="160" y1="65" x2="200" y2="65" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-fw)"/>
+          <line x1="340" y1="65" x2="380" y2="65" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-fw)"/>
+          <line x1="520" y1="65" x2="560" y2="65" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-fw)"/>
+          <polyline points="270,90 270,110 100,110 100,90" fill="none" stroke="#9d4a1a" stroke-width="1.5" marker-end="url(#ar-fw)" stroke-dasharray="4 3"/>
+          <text x="180" y="125" font-size="11" fill="#666">Reject → zurück in Draft</text>
+        </svg>
+      </div>
+      <div class="grid-3" style="margin-top:14px">
+        <div class="merk-box"><h3>Modeler</h3><p>Erstellt &amp; pflegt. Versionierung. Keine Freigabe.</p></div>
+        <div class="merk-box"><h3>Reviewer</h3><p>Prüft Qualität &amp; Konsistenz. 4-Augen-Prinzip.</p></div>
+        <div class="merk-box"><h3>Owner</h3><p>Trägt Inhalt &amp; Wirkung. Genehmigt Approved.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Business-BPMN vs. Execution-BPMN</h2>
+      <p style="color:var(--color-muted)">Gleiches Werkzeug, zwei Detailgrade – zwei Verantwortungsbereiche.</p>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th style="width:22%">Aspekt</th><th>Business-BPMN</th><th>Execution-BPMN (Camunda)</th></tr></thead>
+        <tbody>
+          <tr><th>Zielgruppe</th><td>Fachbereich, Management</td><td>Entwicklung, Workflow-Engine</td></tr>
+          <tr><th>Detailtiefe</th><td>grob, Lanes &amp; Tasks reichen</td><td>präzise, jede Variable definiert</td></tr>
+          <tr><th>Tasks</th><td>„Rechnung prüfen“</td><td>User Task vs. Service Task</td></tr>
+          <tr><th>Events</th><td>„Erinnerung“</td><td>Timer / Message / Error / Escalation</td></tr>
+          <tr><th>Daten</th><td>im Kopf</td><td>Variablen, Schemas, APIs</td></tr>
+          <tr><th>Fehler</th><td>„Sonderfall“</td><td>Boundary Events, Compensation</td></tr>
+          <tr><th>Verbindlichkeit</th><td>Kommunikationsmodell</td><td>ausführbarer Vertrag</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Übergabeprinzip: erst <strong>automatisierbaren Slice isolieren</strong> – klarer Start/Ende, klare Daten, klare Fehlerfälle.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Execution-BPMN · Rechnungsfreigabe</h2>
+      <p style="color:var(--color-muted)">Mini-Camunda-Logik: User Task · Service Task · Timer · XOR.</p>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 920 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar-ex" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <circle cx="40" cy="130" r="20" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="40" y="170" text-anchor="middle" font-size="11" fill="#444">Rechnung</text>
+          <text x="40" y="184" text-anchor="middle" font-size="11" fill="#444">eingegangen</text>
+          <rect x="90" y="110" width="120" height="40" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="150" y="128" text-anchor="middle" font-size="11" fill="#222">Daten extrahieren</text>
+          <text x="150" y="143" text-anchor="middle" font-size="10" fill="#3a7a2a">Service Task</text>
+          <line x1="60" y1="130" x2="90" y2="130" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
+          <rect x="230" y="110" width="120" height="40" rx="6" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="290" y="128" text-anchor="middle" font-size="11" fill="#222">Erfassen prüfen</text>
+          <text x="290" y="143" text-anchor="middle" font-size="10" fill="#9d4a1a">User Task · Buchhaltung</text>
+          <line x1="210" y1="130" x2="230" y2="130" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
+          <polygon points="380,130 410,100 440,130 410,160" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="410" y="134" text-anchor="middle" font-size="14" fill="#9d4a1a">×</text>
+          <text x="410" y="88" text-anchor="middle" font-size="10" fill="#444">Betrag &gt; 5.000?</text>
+          <line x1="350" y1="130" x2="380" y2="130" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
+          <rect x="470" y="60" width="130" height="40" rx="6" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="535" y="78" text-anchor="middle" font-size="11" fill="#222">Freigabe Teamlead</text>
+          <text x="535" y="93" text-anchor="middle" font-size="10" fill="#9d4a1a">User Task · Timer 3d</text>
+          <polyline points="410,100 470,80" fill="none" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
+          <text x="430" y="75" font-size="11" fill="#666">ja</text>
+          <rect x="470" y="160" width="130" height="40" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="535" y="184" text-anchor="middle" font-size="11" fill="#222">direkt freigeben</text>
+          <polyline points="410,160 470,180" fill="none" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
+          <text x="430" y="180" font-size="11" fill="#666">nein</text>
+          <polygon points="620,130 650,100 680,130 650,160" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="650" y="134" text-anchor="middle" font-size="14" fill="#9d4a1a">+</text>
+          <polyline points="600,80 620,130" fill="none" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
+          <polyline points="600,180 620,130" fill="none" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
+          <rect x="710" y="110" width="130" height="40" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="775" y="128" text-anchor="middle" font-size="11" fill="#222">ERP buchen</text>
+          <text x="775" y="143" text-anchor="middle" font-size="10" fill="#3a7a2a">Service Task → ERP-API</text>
+          <line x1="680" y1="130" x2="710" y2="130" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
+          <circle cx="870" cy="130" r="18" fill="#fff" stroke="#9d4a1a" stroke-width="4"/>
+          <line x1="840" y1="130" x2="852" y2="130" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
+          <text x="535" y="115" text-anchor="middle" font-size="10" fill="#b04030">⏱ Timer-Boundary: Erinnerung +3d / Eskalation</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Service Tasks (grün) = automatisiert. User Tasks (orange) = Menschen. Timer/Boundary = Sicherheitsnetz.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Automations-Slice schneiden</h2>
+      <p style="color:var(--color-muted)">Drei Fragen, bevor man automatisiert.</p>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box"><h3>1 · Klarer Start &amp; Ende</h3><p>Was triggert den Slice? Wann ist er fertig? Beides ohne „kommt drauf an“.</p></div>
+        <div class="merk-box"><h3>2 · Klare Daten</h3><p>Welche Felder muss der Workflow zwingend kennen? (z. B. Betrag, KSt, Freigeber).</p></div>
+        <div class="merk-box"><h3>3 · Klare Fehlerfälle</h3><p>Was tun, wenn Daten fehlen, API hängt, Timeout passiert?</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Ausnahme-Politik MVP: 1–2 Sonderfälle <strong>bewusst draußen lassen</strong> – organisatorisch auffangen, später integrieren.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Repository vs. Execution · Steuerungs-Unterschied</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th>Dimension</th><th>Repository</th><th>Execution (BPMS)</th></tr></thead>
+        <tbody>
+          <tr><th>Hebel</th><td>Transparenz, Konsistenz, Audit</td><td>Durchlaufzeit, Qualität, Audit Trail</td></tr>
+          <tr><th>Wirkung</th><td>langsam, organisationsweit</td><td>schnell, prozessspezifisch</td></tr>
+          <tr><th>Risiko</th><td>tote Ablage ohne Owner</td><td>Engine ohne Modell = teurer Schrott</td></tr>
+          <tr><th>Owner</th><td>Process Owner</td><td>Automation Owner + IT</td></tr>
+          <tr><th>Investitionsschutz</th><td>Standards, Naming, Lifecycle</td><td>Versionierung, Migration, Rollback</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Senior-Brille: Beide Säulen <strong>parallel</strong> aufbauen – Repository ohne Execution = Papier, Execution ohne Repository = Insel.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · MediSupply Services</h2>
+      <p style="color:var(--color-muted)">8 Wochen, 90k Budget, mehrere Standorte mit Variantenwunsch, unklare ERP-Schnittstelle.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Pilot-Auswahl Begründung</h3>
+          <ul>
+            <li>Hoher Standardisierungs-Hebel</li>
+            <li>Audit-Relevanz nachweisbar</li>
+            <li>Eine ERP-Schnittstelle reicht für MVP</li>
+            <li>Subprozess automatisierbar in 8 Wochen</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Automations-Slice (Beispiel)</h3>
+          <ul>
+            <li>Start: Bestellung im Portal eingegangen</li>
+            <li>User Task „Plausibilität“ · Service Task „Bonitätscheck“</li>
+            <li>Eskalation nach 48h Inaktivität</li>
+            <li>Bewusst ausgespart: Sonderkonditionen → manuell</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        KPIs für Steuerung: Durchlaufzeit · Eskalationsquote · Rework. Je KPI ein Owner mit Eskalationspfad.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Coaching · Verantwortungsfähigkeit</h2>
+      <div class="grid-2x2" style="margin-top:18px">
+        <div class="merk-box"><h3>Repository ist Betriebssystem</h3><p>Ohne Owner/Review/Lifecycle wird es zur Ablage – nicht zur Steuerung.</p></div>
+        <div class="merk-box"><h3>Execution ist Vertrag</h3><p>Daten, Fehler, SLAs, Eskalation – wer trägt das Risiko falscher Automatisierung?</p></div>
+        <div class="merk-box"><h3>Saubere Übergabe</h3><p>Business-Sicht (verständlich) ↔ Execution-Sicht (präzise). Zwei Modelle, ein Auftrag.</p></div>
+        <div class="merk-box"><h3>MVP statt Perfektion</h3><p>Aber mit Frühwarnsignalen: Eskalationsquote, Rework, Audit-Findings.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Management · vier Zielkonflikte</h2>
+      <div class="grid-2x2" style="margin-top:16px">
+        <div class="merk-box"><h3>Standard ↔ Standortautonomie</h3><p style="font-size:14px">Guardrails statt Wildwuchs – aber wo darf lokal entschieden werden?</p></div>
+        <div class="merk-box"><h3>Repository-Tiefe ↔ Pflegeaufwand</h3><p style="font-size:14px">Vollständig ist nicht hilfreich – hilfreich ist nicht vollständig.</p></div>
+        <div class="merk-box"><h3>Automation ↔ Audit-Sicherheit</h3><p style="font-size:14px">Schnelle Automation kann Compliance untergraben – Boundary Events sind nicht optional.</p></div>
+        <div class="merk-box"><h3>Speed ↔ Reversibilität</h3><p style="font-size:14px">Welche Architektur-Entscheidung kostet uns in 6 Monaten am meisten beim Rollback?</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Irreversible Entscheidungen brauchen schriftliche Begründung + Frühwarnsignal.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Repository ohne Owner = Ablage. Execution ohne SLA = Hoffnung.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Drei Ebenen reichen für den Start: Value Chain → Prozess → Artefakt.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Business-BPMN ist Sprache. Execution-BPMN ist Vertrag.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Schnitt vor Implementierung: Start, Daten, Fehler klären.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">MVP statt Perfektion – mit Frühwarnsignal &amp; Rückbau-Plan.</span></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Weiterarbeiten · Tag 4</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout</h3>
+          <p style="font-size:14px">12 Sektionen mit Repository-Template, Metadaten-Beispiel und Camunda-Mini-Modell.</p>
+          <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-04.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Lernpfad</h3>
+          <p style="font-size:14px">Videos zu Camunda Modeler, User/Service Tasks und Repository-Best-Practices.</p>
+          <p style="margin-top:10px"><a href="lernpfad.html" style="color:var(--kurs-71);font-weight:600">→ Lernpfad öffnen</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 5 (EA &amp; MDA).</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
 <script src="../../assets/progress.js"></script>
@@ -39,8 +352,6 @@
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 4, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

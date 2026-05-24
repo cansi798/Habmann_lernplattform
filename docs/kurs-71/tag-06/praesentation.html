@@ -3,8 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lernplatt · Präsentation · Tag 6</title>
+  <title>Lernplatt · Präsentation · Tag 6 · Kurs 71</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-71); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-71-bg); border: 1.5px solid var(--kurs-71); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-71); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-71-bg); color: var(--kurs-71); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row .check { flex: 0 0 28px; height: 28px; border: 2px solid #2a8a2a; border-radius: 4px; display:inline-flex; align-items:center; justify-content:center; color:#2a8a2a; font-weight:700; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .diagram-box { background: #fff; border: 1.5px solid var(--color-line); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .diagram-box h3 { margin: 0 0 8px; font-size: 16px; color: var(--kurs-71); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,16 +46,276 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Von der Prozesslandkarte zur integrierten Ausführung: BPMS + APIs + Cloud-native Skalierung → E2E-Integration als Steuerungsarchitektur</h2>
-      <p>Modul 2 · Tag 6</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 2 · Tag 6 von 16 · Kurs 71 (Dig 42) · 5. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:46px;line-height:1.05;color:var(--kurs-71);margin:0">BPMS · APIs · Cloud-native</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Von der Prozesslandkarte zur integrierten Ausführung – Model → Run → Improve.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Plattform ist Steuerungssystem, nicht Tool-Stack.</span>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Lernziele · Tag 6</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>BPMS Closed Loop: Modell · Ausführen · Messen · Verbessern</li>
+            <li>API-Vertrag: Endpoint, I/O, Fehler, Auth, Versionierung</li>
+            <li>Sync vs. Async (Event/Message)</li>
+            <li>Cloud-native: stateless, Observability, Resilienz</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>BPMS-Blueprint zeichnen (Tasks/SLA/Eskalation)</li>
+            <li>API-Verträge ausfüllen (5+ Felder)</li>
+            <li>Sync/Async-Entscheidung begründen</li>
+            <li>MVP-Scope definieren</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>System of Record je Datenobjekt</li>
+            <li>Architekturpfad event vs. sync</li>
+            <li>Operating Model: zentral vs. dezentral</li>
+            <li>SLO &amp; Cost Awareness (FinOps light)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:20px">
+        Integrationsverantwortung statt Tool-Fetisch – „Minimum Viable Integration“ schlägt 10 halbgare.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>BPMS · Closed Loop</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar-cl" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <rect x="40" y="40" width="200" height="80" rx="8" fill="#fff3d9" stroke="#c47612" stroke-width="2"/>
+          <text x="140" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">1 · Modell</text>
+          <text x="140" y="88" text-anchor="middle" font-size="12" fill="#5a3a08">BPMN / VSM</text>
+          <text x="140" y="106" text-anchor="middle" font-size="12" fill="#5a3a08">Soll-Prozess</text>
+          <rect x="480" y="40" width="200" height="80" rx="8" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="580" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#9d4a1a">2 · Ausführen</text>
+          <text x="580" y="88" text-anchor="middle" font-size="12" fill="#222">Engine · Forms</text>
+          <text x="580" y="106" text-anchor="middle" font-size="12" fill="#222">Worklist · Rules</text>
+          <rect x="480" y="160" width="200" height="80" rx="8" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="580" y="188" text-anchor="middle" font-size="14" font-weight="700" fill="#1b4d1b">3 · Messen</text>
+          <text x="580" y="208" text-anchor="middle" font-size="12" fill="#222">KPIs · Mining</text>
+          <text x="580" y="226" text-anchor="middle" font-size="12" fill="#222">Audit Trail</text>
+          <rect x="40" y="160" width="200" height="80" rx="8" fill="#fde2dc" stroke="#b04030" stroke-width="2"/>
+          <text x="140" y="188" text-anchor="middle" font-size="14" font-weight="700" fill="#b04030">4 · Verbessern</text>
+          <text x="140" y="208" text-anchor="middle" font-size="12" fill="#222">Governance</text>
+          <text x="140" y="226" text-anchor="middle" font-size="12" fill="#222">Change · Lifecycle</text>
+          <line x1="240" y1="80" x2="480" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cl)"/>
+          <line x1="580" y1="120" x2="580" y2="160" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cl)"/>
+          <line x1="480" y1="200" x2="240" y2="200" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cl)"/>
+          <line x1="140" y1="160" x2="140" y2="120" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cl)"/>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Ohne Closed Loop bleibt jede BPMS-Investition Theorie – Messung &amp; Verbesserung sind keine Optionen.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>BPMS-Bausteine</h2>
+      <div class="grid-4" style="margin-top:16px">
+        <div class="merk-box"><h3>Engine</h3><p style="font-size:13px">Steuert Tokens, States, Variablen, Persistenz.</p></div>
+        <div class="merk-box"><h3>Worklist</h3><p style="font-size:13px">User Tasks, Queues, Assignment, Claim.</p></div>
+        <div class="merk-box"><h3>Rules</h3><p style="font-size:13px">DMN-Tabellen, Routing, Gateways.</p></div>
+        <div class="merk-box"><h3>Forms</h3><p style="font-size:13px">UI-Bausteine, Validierung, Datenbindung.</p></div>
+        <div class="merk-box"><h3>Monitoring</h3><p style="font-size:13px">Cockpit, Alerts, Heatmaps, Dashboards.</p></div>
+        <div class="merk-box"><h3>Audit Trail</h3><p style="font-size:13px">Wer hat wann was getan – revisionssicher.</p></div>
+        <div class="merk-box"><h3>Versionierung</h3><p style="font-size:13px">Migration laufender Instanzen, Rollback.</p></div>
+        <div class="merk-box"><h3>Integration</h3><p style="font-size:13px">REST/Events, Connectoren, Adapter.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>API-Vertrag · Pflichtfelder</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <tbody>
+          <tr><th style="width:24%">Name &amp; Zweck</th><td>z. B. <em>GetShipmentStatus</em> – aktuellen Status einer Sendung lesen</td></tr>
+          <tr><th>Endpoint</th><td>GET /api/v1/shipments/{id}/status</td></tr>
+          <tr><th>Input</th><td>shipment_id (string · required), correlation_id (string)</td></tr>
+          <tr><th>Output</th><td>status, eta, last_event_timestamp, source_system</td></tr>
+          <tr><th>Fehlercodes</th><td>404 NotFound · 408 Timeout · 401 Unauthorized · 429 RateLimit</td></tr>
+          <tr><th>Auth</th><td>OAuth2 Client Credentials · Scope „shipment.read“</td></tr>
+          <tr><th>SLA / Limits</th><td>p95 &lt; 300 ms · 100 RPS · Idempotenz via correlation_id</td></tr>
+          <tr><th>Versionierung</th><td>URI-Versioning v1, v2 parallel · Deprecation 6 Monate</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Eine API ist ein <strong>Vertrag</strong>. Wer ihn bricht, hat einen Vorfall, kein „Update“.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Sync vs. Async · Entscheidungs-Heuristik</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th>Aspekt</th><th>Sync API Call</th><th>Async Event / Message</th></tr></thead>
+        <tbody>
+          <tr><th>Latenz</th><td>antwortet sofort</td><td>kann Sekunden bis Minuten brauchen</td></tr>
+          <tr><th>Kopplung</th><td>eng – Aufrufer wartet</td><td>lose – Sender feuert &amp; vergisst</td></tr>
+          <tr><th>Fehler</th><td>direkt sichtbar</td><td>Dead-Letter-Queue, Retry-Policy</td></tr>
+          <tr><th>Skalierung</th><td>Aufrufer ist Engpass</td><td>Producer entkoppelt vom Consumer</td></tr>
+          <tr><th>Typischer Use Case</th><td>„Status lesen“, „Bonität prüfen“</td><td>„Bestellung angelegt“, „Schaden gemeldet“</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Faustregel: Lesen sync, Schreiben/Domain-Events async. Aber: Idempotenz &amp; Correlation-IDs immer.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Cloud-native · sechs Prinzipien</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box"><h3>Stateless</h3><p>Zustand in Datenbank/Stream, nicht im Prozess. Skaliert horizontal.</p></div>
+        <div class="merk-box"><h3>Containerisiert</h3><p>Immutable Images, reproduzierbare Deployments, Blue/Green oder Canary.</p></div>
+        <div class="merk-box"><h3>Observability</h3><p>Logs · Metrics · Traces – die drei Säulen jeder Diagnose.</p></div>
+        <div class="merk-box"><h3>Resilienz</h3><p>Retry · Circuit Breaker · Timeout · Bulkhead – Ausfälle eingrenzen.</p></div>
+        <div class="merk-box"><h3>Security by default</h3><p>Zero Trust · Secrets-Manager · IAM · Audit – kein Plain-Text-Passwort.</p></div>
+        <div class="merk-box"><h3>SLO / FinOps</h3><p>Service Level Objectives + Kostenbewusstsein – Performance hat einen Preis.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Cloud-native ohne Observability ist Blindflug. Skalierung ohne Resilienz ist <em>schneller</em> Ausfall.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>E2E-Methodenintegration</h2>
+      <p style="color:var(--color-muted)">Model → Run → Improve – aus vier Disziplinen, einem Operating Model.</p>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar-em" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <rect x="20" y="60" width="140" height="60" rx="6" fill="#fff3d9" stroke="#c47612" stroke-width="2"/>
+          <text x="90" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">BPMN/VSM</text>
+          <text x="90" y="103" text-anchor="middle" font-size="11" fill="#5a3a08">Soll-Modell</text>
+          <rect x="200" y="60" width="140" height="60" rx="6" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="270" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#9d4a1a">BPMS / API</text>
+          <text x="270" y="103" text-anchor="middle" font-size="11" fill="#222">Ausführung</text>
+          <rect x="380" y="60" width="140" height="60" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="450" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#1b4d1b">KPIs / Mining</text>
+          <text x="450" y="103" text-anchor="middle" font-size="11" fill="#222">Messung</text>
+          <rect x="560" y="60" width="180" height="60" rx="6" fill="#fde2dc" stroke="#b04030" stroke-width="2"/>
+          <text x="650" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#b04030">Governance / Board</text>
+          <text x="650" y="103" text-anchor="middle" font-size="11" fill="#222">Verbesserung</text>
+          <line x1="160" y1="90" x2="200" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-em)"/>
+          <line x1="340" y1="90" x2="380" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-em)"/>
+          <line x1="520" y1="90" x2="560" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-em)"/>
+          <polyline points="650,120 650,150 90,150 90,120" fill="none" stroke="#9d4a1a" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ar-em)"/>
+          <text x="370" y="170" text-anchor="middle" font-size="11" fill="#666">Monatliches Process Review Board</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Methoden allein automatisieren nicht – das Board entscheidet, ob aus Messung Verbesserung wird.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · EuroLogix Exception Handling</h2>
+      <p style="color:var(--color-muted)">Logistik, schwankende Peak-Lasten. 9 Wochen, 150k Budget. Legacy + Security.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>BPMS-Kern (Soll)</h3>
+          <ul>
+            <li>Start: ExceptionRaised Event aus TMS</li>
+            <li>Klassifizieren → XOR kritisch?</li>
+            <li>SLA Erstreaktion 2 h · Lösung 24 h</li>
+            <li>Eskalation nach 4 h an Duty Manager</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>3 Integrationen</h3>
+          <ul>
+            <li>Event ExceptionRaised (async) – CaseID, Severity</li>
+            <li>API GetShipmentStatus (sync) – Fallback: Cache</li>
+            <li>API NotifyCustomer (sync) + Event CustomerNotified</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        MVP: BPMS-Case Handling + 1 Event + 1 Status-API + SLA/Eskalation + Dashboard. Kein DWH-Rebuild.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Coaching · Integrationsverantwortung</h2>
+      <div class="grid-2x2" style="margin-top:18px">
+        <div class="merk-box"><h3>Prozessgrenzen = Machtgrenzen</h3><p>Was gehört in BPMS, was in Fachsysteme? Wer entscheidet?</p></div>
+        <div class="merk-box"><h3>API = Vertrag</h3><p>Wer verantwortet Stabilität, Versionierung, SLAs – und was kostet ein Bruch?</p></div>
+        <div class="merk-box"><h3>Cloud-native = Betriebsfähigkeit</h3><p>Skalierung ohne Observability ist Blindflug. Kosten haben einen Owner.</p></div>
+        <div class="merk-box"><h3>Minimum Viable Integration</h3><p>2 kritische Integrationen stabil &gt; 10 halbgare.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Management · Pflicht-Entscheidungen</h2>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Architekturpfad · Event-driven vs. Sync</h3>
+          <p style="font-size:14px">Event-driven entkoppelt &amp; skaliert. Sync ist debugbarer.</p>
+          <p style="font-size:13px;color:var(--color-muted);margin-top:6px">Frühwarnsignal: Dead-Letter-Queue &gt; 50/Tag → Designreview.</p>
+        </div>
+        <div class="merk-box">
+          <h3>MVP-Scope · welche 2 Integrationen zuerst</h3>
+          <p style="font-size:14px">Bewusst „Stop Doing“-Liste – nicht alles in Release 1.</p>
+          <p style="font-size:13px;color:var(--color-muted);margin-top:6px">Frühwarnsignal: Eskalationsquote steigt → Scope-Review.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Senior-Brille: Plattform ist Steuerungssystem für Entscheidungen – nicht nur Prozessautomatisierung.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">BPMS ohne Closed Loop ist Theater.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">API = Vertrag. Versionierung &amp; Idempotenz sind Pflicht.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Lesen sync, Schreiben async – mit Correlation-ID.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Cloud-native ohne Observability ist Blindflug.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">2 stabile Integrationen schlagen 10 halbgare.</span></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Weiterarbeiten · Tag 6</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout</h3>
+          <p style="font-size:14px">12 Sektionen mit BPMS-Blueprint, API-Vertragsvorlage und Cloud-native Checkliste.</p>
+          <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-06.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Lernpfad</h3>
+          <p style="font-size:14px">Videos zu BPMS-Architektur, REST/Events und Cloud-native Observability.</p>
+          <p style="margin-top:10px"><a href="lernpfad.html" style="color:var(--kurs-71);font-weight:600">→ Lernpfad öffnen</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 7 (Discovery &amp; Conformance).</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
 <script src="../../assets/progress.js"></script>
@@ -39,8 +324,6 @@
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 6, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

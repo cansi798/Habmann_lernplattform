@@ -3,8 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lernplatt · Präsentation · Tag 9</title>
+  <title>Lernplatt · Präsentation · Tag 9 · Kurs 71</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-71); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-71-bg); border: 1.5px solid var(--kurs-71); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-71); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-71-bg); color: var(--kurs-71); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row .check { flex: 0 0 28px; height: 28px; border: 2px solid #2a8a2a; border-radius: 4px; display:inline-flex; align-items:center; justify-content:center; color:#2a8a2a; font-weight:700; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .diagram-box { background: #fff; border: 1.5px solid var(--color-line); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .diagram-box h3 { margin: 0 0 8px; font-size: 16px; color: var(--kurs-71); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,16 +46,295 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Agile Delivery als Steuerungssystem: Scrum/Kanban für Prozess- & Produktlieferung + CI/IaC als „Beschleuniger“ für sichere Änderungen</h2>
-      <p>Modul 4 · Tag 9</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 4 · Tag 9 von 16 · Kurs 71 (Dig 42) · 10. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:44px;line-height:1.05;color:var(--kurs-71);margin:0">Scrum · Kanban · CI/CD · IaC</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Agile Delivery als Steuerungssystem – schnell &amp; sicher ändern, mit DORA-Kennzahlen statt Aktivismus.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Agile ≠ schneller Chaos. Verantwortung durch Flow &amp; Gates.</span>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Lernziele · Tag 9</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Scrum: Rollen, Events, Artefakte</li>
+            <li>Kanban: WIP-Limits, Flow, Pull</li>
+            <li>CI/CD Pipeline-Stufen &amp; Gates</li>
+            <li>IaC: versionierte Infrastruktur</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Scrum vs. Kanban begründet wählen</li>
+            <li>Sprint Goal &amp; DoD definieren</li>
+            <li>Pipeline mit 2 Gates entwerfen</li>
+            <li>IaC-Policy mit Review &amp; Audit</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>DORA-Kennzahlen verstehen &amp; entscheiden</li>
+            <li>Stop-the-line-Regeln</li>
+            <li>Standardisierung vs. Teamautonomie</li>
+            <li>Risiko bewusst zulassen (Canary, Toggle)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:20px">
+        Scrum/Kanban sind Steuerungssysteme – keine Meeting-Kalender.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Scrum vs. Kanban · Entscheidungshilfe</h2>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th>Aspekt</th><th>Scrum</th><th>Kanban</th></tr></thead>
+        <tbody>
+          <tr><th>Taktung</th><td>fixe Sprints (1–4 Wochen)</td><td>kontinuierlich, Pull-getrieben</td></tr>
+          <tr><th>Rollen</th><td>PO · SM · Developers</td><td>frei – aber Service-Klassen sinnvoll</td></tr>
+          <tr><th>Planung</th><td>Sprint Planning, Sprint Goal</td><td>Replenishment-Meeting</td></tr>
+          <tr><th>WIP-Steuerung</th><td>indirekt (Sprint Backlog)</td><td>explizite WIP-Limits</td></tr>
+          <tr><th>Geeignet für</th><td>Produktentwicklung, klare Reviews</td><td>Support, Incidents, wechselnde Prio</td></tr>
+          <tr><th>Risiko</th><td>Cargo Cult Scrum (Rituale ohne Outcome)</td><td>kein Backlog/Policies → Beliebigkeit</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Hybrid funktioniert: Scrum für Features (2-Wochen-Sprints) + Kanban-Lane für Incidents (WIP 2).
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Kanban-Board · WIP-Limit als Schutz</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 820 230" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="160" height="180" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="100" y="55" text-anchor="middle" font-size="14" font-weight="700" fill="#9d4a1a">Backlog</text>
+          <text x="100" y="72" text-anchor="middle" font-size="11" fill="#666">Pull-Quelle</text>
+          <rect x="200" y="30" width="180" height="180" fill="#fff3d9" stroke="#c47612" stroke-width="2"/>
+          <text x="290" y="55" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">In Arbeit</text>
+          <text x="290" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#b04030">WIP-Limit · 3</text>
+          <rect x="220" y="90" width="140" height="30" fill="#fff" stroke="#c47612"/>
+          <text x="290" y="110" text-anchor="middle" font-size="11" fill="#222">Story #A12 · Karl</text>
+          <rect x="220" y="125" width="140" height="30" fill="#fff" stroke="#c47612"/>
+          <text x="290" y="145" text-anchor="middle" font-size="11" fill="#222">Story #B07 · Maja</text>
+          <rect x="220" y="160" width="140" height="30" fill="#fff" stroke="#c47612"/>
+          <text x="290" y="180" text-anchor="middle" font-size="11" fill="#222">Bug #103 · Karl</text>
+          <rect x="400" y="30" width="180" height="180" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="490" y="55" text-anchor="middle" font-size="14" font-weight="700" fill="#9d4a1a">Review</text>
+          <text x="490" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#b04030">WIP-Limit · 2</text>
+          <rect x="420" y="90" width="140" height="30" fill="#fff" stroke="#9d4a1a"/>
+          <text x="490" y="110" text-anchor="middle" font-size="11" fill="#222">Story #A05</text>
+          <rect x="600" y="30" width="200" height="180" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="700" y="55" text-anchor="middle" font-size="14" font-weight="700" fill="#1b4d1b">Done</text>
+          <text x="700" y="72" text-anchor="middle" font-size="11" fill="#666">Lead/Cycle Time messen</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        WIP-Limit = Schutz für Qualität. Weniger Multitasking, kürzere Lead Times, ehrliche Engpässe.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>CI/CD-Pipeline · Stufen &amp; Gates</h2>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 880 160" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar-ci" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <rect x="20" y="60" width="100" height="50" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="70" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">Commit</text>
+          <text x="70" y="100" text-anchor="middle" font-size="11" fill="#555">Git PR</text>
+          <rect x="140" y="60" width="100" height="50" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="190" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">Build</text>
+          <text x="190" y="100" text-anchor="middle" font-size="11" fill="#555">Container</text>
+          <rect x="260" y="60" width="120" height="50" rx="6" fill="#fde2dc" stroke="#b04030" stroke-width="2"/>
+          <text x="320" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#b04030">Tests · Gate 1</text>
+          <text x="320" y="100" text-anchor="middle" font-size="11" fill="#b04030">Unit + Integration</text>
+          <rect x="400" y="60" width="120" height="50" rx="6" fill="#fde2dc" stroke="#b04030" stroke-width="2"/>
+          <text x="460" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#b04030">Security · Gate 2</text>
+          <text x="460" y="100" text-anchor="middle" font-size="11" fill="#b04030">SAST · SCA</text>
+          <rect x="540" y="60" width="100" height="50" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="590" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">Staging</text>
+          <text x="590" y="100" text-anchor="middle" font-size="11" fill="#555">Smoke Tests</text>
+          <rect x="660" y="60" width="100" height="50" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="710" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#1b4d1b">Prod</text>
+          <text x="710" y="100" text-anchor="middle" font-size="11" fill="#1b4d1b">Canary / Blue-Green</text>
+          <line x1="120" y1="85" x2="140" y2="85" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ci)"/>
+          <line x1="240" y1="85" x2="260" y2="85" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ci)"/>
+          <line x1="380" y1="85" x2="400" y2="85" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ci)"/>
+          <line x1="520" y1="85" x2="540" y2="85" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ci)"/>
+          <line x1="640" y1="85" x2="660" y2="85" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ci)"/>
+          <text x="320" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="#b04030">Stop-the-line bei rotem Gate</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Quality Gates sind nicht verhandelbar. Wer „durchwinkt“, übernimmt die Verantwortung – schriftlich.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>IaC · Infrastructure as Code</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Prinzipien</h3>
+          <ul>
+            <li>Infrastruktur als versionierter Code (Terraform · Ansible · Pulumi)</li>
+            <li>Änderungen nur via Merge Request &amp; Review</li>
+            <li>Secrets in Secrets-Manager – nie im Repo</li>
+            <li>Reproduzierbare Umgebungen (dev/stage/prod identisch)</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Governance</h3>
+          <ul>
+            <li>2-Augen-Prinzip auf jeden Apply</li>
+            <li>Audit Trail = Merge-Historie</li>
+            <li>Drift-Detection: was läuft &lt;-&gt; was sagt der Code?</li>
+            <li>Emergency-Change geregelt (Post-Hoc-Review)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Risiko unkontrollierter IaC: falsche Rechte oder Secrets sind <em>versioniert</em> – also dauerhaft auffindbar.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>DORA · vier Flow-Kennzahlen</h2>
+      <p style="color:var(--color-muted)">Forschung von Google – die einzigen Kennzahlen, die <em>nachweislich</em> mit Unternehmensperformance korrelieren.</p>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th>Kennzahl</th><th>Bedeutung</th><th>Elite-Niveau</th></tr></thead>
+        <tbody>
+          <tr><th>Lead Time for Changes</th><td>Commit → Prod</td><td>&lt; 1 Stunde</td></tr>
+          <tr><th>Deployment Frequency</th><td>wie oft deployed?</td><td>mehrmals pro Tag</td></tr>
+          <tr><th>Change Failure Rate</th><td>Deploys, die Incident verursachen</td><td>0 – 15 %</td></tr>
+          <tr><th>MTTR</th><td>Mean Time to Recovery</td><td>&lt; 1 Stunde</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Anti-Gaming: Lead Time + Change Failure Rate <strong>zusammen</strong> betrachten – sonst „schnell &amp; kaputt“.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Risiko bewusst zulassen · Canary, Toggle, Rollback</h2>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Canary Release</h3>
+          <p>Neue Version an 5–10 % der Nutzer · Metriken vergleichen · automatischer Stop bei Anomalie.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Feature Toggle</h3>
+          <p>Code im Prod, Feature deaktiviert. Aktivieren ohne Deploy. Kill-Switch in Sekunden.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Rollback-Plan</h3>
+          <p>Vor jedem Deploy: wie kommen wir zurück? Wer entscheidet? In welchem Zeitfenster?</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        MVP darf „dünn“ sein – wenn Schaden begrenzt &amp; Rückbau in &lt; 15 Min möglich ist.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · CityServices Genehmigung</h2>
+      <p style="color:var(--color-muted)">10 Wochen, 130k Budget. Compliance hoch · Releases selten und riskant.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Hybrid Operating Model</h3>
+          <ul>
+            <li>Scrum 2-Wochen-Sprints für Features</li>
+            <li>Kanban-Lane für Incidents (WIP 2)</li>
+            <li>Sprint Review mit Bürgervertretern</li>
+            <li>Retro mit Compliance-Beobachter</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>3 Releases in 12 Wochen</h3>
+          <ul>
+            <li><strong>MVP (1–4):</strong> digitaler Antrag + Status + 1 Genehmigungsweg</li>
+            <li><strong>Beta (5–8):</strong> Rollenmodell · SLA-Reminder · Audit Trail · 2. Weg</li>
+            <li><strong>Stabilisierung (9–12):</strong> Performance · Monitoring · KPIs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Fast vs. Safe: Speed bei Feature-Sonderfällen · Safety bei Security-Gates &amp; Rollback-Plan – schriftlich.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Coaching · Agile als Verantwortung</h2>
+      <div class="grid-2x2" style="margin-top:18px">
+        <div class="merk-box"><h3>Steuerungssysteme</h3><p>Scrum/Kanban sind Priorisierung, Transparenz, Abnahme – nicht Meeting-Kalender.</p></div>
+        <div class="merk-box"><h3>WIP-Limits</h3><p>Schutz für Qualität: weniger Multitasking, kürzere Lead Times.</p></div>
+        <div class="merk-box"><h3>Shift-left</h3><p>Tests &amp; Checks früh – kleine Releases, schnelle Rücknahme.</p></div>
+        <div class="merk-box"><h3>Ownership</h3><p>You build it, you run it. Wer deployt, trägt nachts den Pager.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Management · zwei Pflicht-Entscheidungen</h2>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>Release-Frequenz vs. Risiko</h3>
+          <p style="font-size:14px">Täglich deployen vs. zwei mal im Monat? Ziel klar formulieren.</p>
+          <p style="font-size:13px;color:var(--color-muted);margin-top:6px">Frühwarnsignal: Change Failure Rate &gt; 25 % → Tempo drosseln.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Standardisierung vs. Teamautonomie</h3>
+          <p style="font-size:14px">Zentral: Gates, Security, IaC-Standards. Dezentral: Backlog, Tech-Wahl.</p>
+          <p style="font-size:13px;color:var(--color-muted);margin-top:6px">Trigger zum Nachsteuern: 3 Tool-Insellösungen → Konsolidierung.</p>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Senior-Brille: Veränderung als gesteuertes System (Outcomes, Risiken, Ownership) – nicht als Taskliste.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Scrum/Kanban sind Steuerungssysteme, keine Meeting-Kalender.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">WIP-Limits sind Qualitäts-Schutz, nicht Bürokratie.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">CI/CD Gates sind nicht verhandelbar – wer durchwinkt, übernimmt Risiko.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">IaC: keine Hand-Changes in Prod – versionierte Infrastruktur.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">DORA: Lead Time + Change Failure Rate zusammen lesen.</span></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Weiterarbeiten · Tag 9</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout</h3>
+          <p style="font-size:14px">12 Sektionen mit Scrum-Events-Übersicht, Pipeline-Template, IaC-Beispiel und DORA-Benchmarks.</p>
+          <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-09.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Lernpfad</h3>
+          <p style="font-size:14px">Videos zu Scrum vs. Kanban, GitHub Actions, Terraform &amp; DORA Metrics.</p>
+          <p style="margin-top:10px"><a href="lernpfad.html" style="color:var(--kurs-71);font-weight:600">→ Lernpfad öffnen</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Modul 4 abgeschlossen – bis morgen Tag 10.</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
 <script src="../../assets/progress.js"></script>
@@ -39,8 +343,6 @@
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 9, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>

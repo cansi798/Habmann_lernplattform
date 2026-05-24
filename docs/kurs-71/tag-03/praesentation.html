@@ -3,8 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lernplatt · Präsentation · Tag 3</title>
+  <title>Lernplatt · Präsentation · Tag 3 · Kurs 71</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    #slides { position: relative; }
+    #slides .slide h2 { color: var(--kurs-71); margin-top: 0; }
+    #slides .slide h3 { color: var(--color-ink); }
+    #slides .slide ul, #slides .slide ol { margin: 8px 0; padding-left: 22px; }
+    #slides .slide li { margin: 4px 0; font-size: 17px; }
+    #slides .slide p { font-size: 17px; }
+    .merk-box { background: var(--kurs-71-bg); border: 1.5px solid var(--kurs-71); border-radius: var(--radius); padding: 14px 16px; }
+    .merk-box h3 { margin: 0 0 6px; color: var(--kurs-71); font-size: 17px; }
+    .merk-box p, .merk-box li { font-size: 15px; line-height: 1.45; }
+    .merk-box ul { margin: 0; padding-left: 18px; }
+    .accent-box { background: #fff3d9; border: 1.5px solid #c47612; border-radius: var(--radius); padding: 12px 14px; font-family: 'Caveat', cursive; font-size: 22px; color: #5a3a08; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .vs-table th, .vs-table td { border: 1px solid var(--color-line-dark); padding: 8px 10px; text-align: left; font-size: 15px; }
+    .vs-table th { background: var(--kurs-71-bg); color: var(--kurs-71); }
+    .takeaway-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .takeaway-row .check { flex: 0 0 28px; height: 28px; border: 2px solid #2a8a2a; border-radius: 4px; display:inline-flex; align-items:center; justify-content:center; color:#2a8a2a; font-weight:700; }
+    .takeaway-row .text { font-family: 'Caveat', cursive; font-size: 22px; color: var(--color-ink); }
+    .diagram-box { background: #fff; border: 1.5px solid var(--color-line); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .diagram-box h3 { margin: 0 0 8px; font-size: 16px; color: var(--kurs-71); }
+  </style>
 </head>
 <body>
 <script src="../../assets/auth.js"></script>
@@ -21,16 +46,320 @@
     </a>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:400px;background:#fff;border-radius:8px">
-    <div class="slide">
-      <h2 class="handwritten" style="font-size:36px">Vom Prozessbild zur Steuerung: Stakeholder → KPIs → Services → Workflow-Orchestrierung</h2>
-      <p>Modul 1 · Tag 3</p>
-      <p style="margin-top:32px;color:var(--color-muted)"><em>Wird automatisch generiert.</em></p>
-    </div>
-    <div class="slide" style="display:none">
-      <h2>Slide 2 — Platzhalter</h2>
-      <p>Inhalt folgt.</p>
-    </div>
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+
+    <section class="slide">
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
+      <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 1 · Tag 3 von 16 · Kurs 71 (Dig 42) · 1. Juni 2026</div>
+      <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0">Stakeholder · KPIs · Services · Workflows</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Vom Prozessbild zur Steuerungsarchitektur – wer entscheidet was, woran wir es messen, und wer es ausführt.</p>
+      <div style="margin-top:48px" class="accent-box">
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Modellieren ist nicht Steuerung. Steuerung ist Verantwortung × Messung × Ausführung.</span>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Lernziele · Tag 3</h2>
+      <p style="color:var(--color-muted)">Drei Stufen für die Brücke vom Prozess zur Steuerung.</p>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>L1 · Wissen</h3>
+          <ul>
+            <li>Stakeholder-Matrix (Einfluss × Interesse)</li>
+            <li>KPI-Ebenen Outcome/Output/Prozess/Risiko</li>
+            <li>SOA-Grenzen: Kohäsion, Kopplung, Vertrag</li>
+            <li>Workflow-Bausteine: SLA, Eskalation, Audit</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L2 · Anwendung</h3>
+          <ul>
+            <li>Stakeholder-Map mit Einbindungsstrategie</li>
+            <li>KPI-Steckbrief inkl. Manipulationsrisiko</li>
+            <li>Service-Kandidaten ableiten</li>
+            <li>Workflow-Skizze mit Gateways &amp; Eskalation</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>L3 · Management</h3>
+          <ul>
+            <li>Goodhart-Effekt verhindern</li>
+            <li>Stopper-Stakeholder erkennen</li>
+            <li>Governance &amp; Owner für KPIs/Services</li>
+            <li>Entscheidung unter Unsicherheit absichern</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:20px">
+        Steuerung braucht vier Säulen: Wer (Stakeholder), Was (KPIs), Wie (Services), Wann (Workflow).
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Stakeholder-Matrix · Einfluss × Interesse</h2>
+      <p style="color:var(--color-muted)">Nicht alle gleich behandeln – Stopper früh erkennen, Unterstützer aktivieren.</p>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
+          <line x1="60" y1="40" x2="60" y2="320" stroke="#333" stroke-width="2"/>
+          <line x1="60" y1="320" x2="680" y2="320" stroke="#333" stroke-width="2"/>
+          <text x="40" y="180" text-anchor="middle" font-size="13" font-weight="700" fill="#9d4a1a" transform="rotate(-90 40 180)">Einfluss</text>
+          <text x="370" y="350" text-anchor="middle" font-size="13" font-weight="700" fill="#9d4a1a">Interesse / Betroffenheit</text>
+          <line x1="60" y1="180" x2="680" y2="180" stroke="#bbb" stroke-dasharray="4 4"/>
+          <line x1="370" y1="40" x2="370" y2="320" stroke="#bbb" stroke-dasharray="4 4"/>
+          <rect x="60" y="40" width="310" height="140" fill="#fde2dc" opacity="0.4"/>
+          <rect x="370" y="40" width="310" height="140" fill="#ffd9b0" opacity="0.6"/>
+          <rect x="60" y="180" width="310" height="140" fill="#f0f0f0"/>
+          <rect x="370" y="180" width="310" height="140" fill="#dff0d4" opacity="0.5"/>
+          <text x="215" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#b04030">Zufrieden halten</text>
+          <text x="215" y="84" text-anchor="middle" font-size="11" fill="#222">(IT-Architektur, Finance)</text>
+          <text x="525" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#9d4a1a">Eng managen · Mitentscheiden</text>
+          <text x="525" y="84" text-anchor="middle" font-size="11" fill="#222">(F&amp;E-Leitung, IT, QM)</text>
+          <text x="215" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#666">Beobachten</text>
+          <text x="215" y="228" text-anchor="middle" font-size="11" fill="#222">(externe Auditor, Lieferant)</text>
+          <text x="525" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#3a7a2a">Informieren · Konsultieren</text>
+          <text x="525" y="228" text-anchor="middle" font-size="11" fill="#222">(Vertrieb, Operations, Support)</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Stopper-Stakeholder = hoher Einfluss + hohes Interesse + Skepsis. Früh „mitentscheiden“ lassen, sonst gescheitert.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Vier Einbindungsstufen</h2>
+      <p style="color:var(--color-muted)">Eine Stufe je Stakeholder – schriftlich, nicht implizit.</p>
+      <div class="grid-4" style="margin-top:16px">
+        <div class="merk-box"><h3>Informieren</h3><p style="font-size:13px">Newsletter, Statusbericht. Einbahnstraße.</p></div>
+        <div class="merk-box"><h3>Konsultieren</h3><p style="font-size:13px">Feedback einholen – nicht zwingend übernehmen.</p></div>
+        <div class="merk-box"><h3>Mitentscheiden</h3><p style="font-size:13px">Co-Designer, Veto möglich, Co-Sign auf Artefakte.</p></div>
+        <div class="merk-box"><h3>Verantworten</h3><p style="font-size:13px">Owner: trägt die Entscheidung und ihre Wirkung.</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Jede Eskalation findet ihre Wurzel in einer falschen Einbindungsstufe.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>KPI-Ebenen · vier Ebenen, ein System</h2>
+      <p style="color:var(--color-muted)">Mischt nicht Ebenen – sonst entstehen widersprüchliche Anreize.</p>
+      <table class="vs-table" style="margin-top:10px">
+        <thead>
+          <tr><th>Ebene</th><th>Frage</th><th>Beispiel</th><th>Typ</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Outcome</th><td>Welcher Kundennutzen?</td><td>NPS, Wiederkaufrate</td><td>Lagging</td></tr>
+          <tr><th>Output</th><td>Wie viel produzieren wir?</td><td>Anzahl freigegebener Konzepte</td><td>Lagging</td></tr>
+          <tr><th>Prozess</th><td>Wie schnell, sauber, wirtschaftlich?</td><td>Lead Time, Rework, Cost-per-Case</td><td>Leading + Lagging</td></tr>
+          <tr><th>Risiko / Compliance</th><td>Welche Fehler / Audit-Findings?</td><td>Sonderfreigaben, Findings, Fehlerquote</td><td>Leading</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Goodhart-Effekt: <em>„Wenn eine Kennzahl zum Ziel wird, hört sie auf, eine gute Kennzahl zu sein.“</em>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>KPI-Steckbrief · ein Beispiel</h2>
+      <p style="color:var(--color-muted)">Lead Time „Idee → Freigabe“ – mit Manipulationsschutz.</p>
+      <table class="vs-table" style="margin-top:10px">
+        <tbody>
+          <tr><th style="width:24%">Name</th><td>Lead Time Idee → Freigabe</td></tr>
+          <tr><th>Definition</th><td>Median(Timestamp Gate-Freigabe – Timestamp Idee-Eingang)</td></tr>
+          <tr><th>Datenquelle</th><td>Ticketing-System (Pflichtfelder), wöchentliche Aktualisierung</td></tr>
+          <tr><th>Frequenz</th><td>wöchentlich · Trend auf Quartalsebene</td></tr>
+          <tr><th>Owner</th><td>PMO · Eskalation an CDO</td></tr>
+          <tr><th>Ziel / Schwelle</th><td>–20 % in 10 Wochen · Schwelle 14 Tage Median</td></tr>
+          <tr><th>Manipulationsrisiko</th><td>„Schnell schließen ohne Qualität“ – Kopplung mit Gate-Pass-Rate &amp; Rework-Rate als Gegenmaßnahme</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Jede KPI braucht eine <strong>Gegen-KPI</strong>. Sonst optimiert das System die falsche Richtung.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>SOA · Service-Grenzen ziehen</h2>
+      <p style="color:var(--color-muted)">Service = klar abgegrenzte Fähigkeit, hohe Kohäsion, geringe Kopplung, klarer Vertrag.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Prinzipien</h3>
+          <ul>
+            <li><strong>Kohäsion:</strong> ein Service löst <em>eine</em> Aufgabe gut</li>
+            <li><strong>Kopplung:</strong> wenige, klare Verträge nach außen</li>
+            <li><strong>Wiederverwendung:</strong> mehrere Prozesse nutzen denselben Service</li>
+            <li><strong>Vertrag:</strong> Input / Output / Fehler / Owner</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>Beispiele AeroTech</h3>
+          <ul>
+            <li>Service „Idee erfassen“ → Idea-ID, Owner PM</li>
+            <li>Service „Business Case bewerten“ → Score, Finance</li>
+            <li>Service „Prototyp planen“ → Plan/SLA, F&amp;E</li>
+            <li>Service „Qualitätsnachweis erzeugen“ → Evidence, QM</li>
+            <li>Service „Freigabe orchestrieren“ → Freigabe, Board</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        <strong>Orchestrierung</strong> (Prozess steuert Services) vs. <strong>Choreographie</strong> (Services reagieren) – bewusst wählen.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Workflow · Soll-Logik AeroTech</h2>
+      <p style="color:var(--color-muted)">Ein Workflow ist ein Vertrag: Aufgaben, Rollen, Regeln, Eskalation, Audit Trail.</p>
+      <div class="diagram-box" style="margin-top:14px">
+        <svg width="100%" viewBox="0 0 920 230" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar-wf" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <circle cx="40" cy="115" r="18" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="40" y="148" text-anchor="middle" font-size="11" fill="#444">Idee</text>
+          <rect x="80" y="95" width="110" height="40" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="135" y="119" text-anchor="middle" font-size="12" fill="#222">Vollständigkeit</text>
+          <line x1="58" y1="115" x2="80" y2="115" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-wf)"/>
+          <polygon points="220,115 245,90 270,115 245,140" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="245" y="119" text-anchor="middle" font-size="14" fill="#9d4a1a">×</text>
+          <text x="245" y="80" text-anchor="middle" font-size="10" fill="#444">vollständig?</text>
+          <line x1="190" y1="115" x2="220" y2="115" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-wf)"/>
+          <rect x="295" y="95" width="110" height="40" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="350" y="119" text-anchor="middle" font-size="12" fill="#222">Business Case</text>
+          <line x1="270" y1="115" x2="295" y2="115" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-wf)"/>
+          <text x="282" y="108" font-size="11" fill="#666">ja</text>
+          <polyline points="245,90 245,40 350,40 350,95" fill="none" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-wf)"/>
+          <text x="260" y="60" font-size="11" fill="#666">nein · SLA 48h Rückfrage</text>
+          <polygon points="430,115 455,90 480,115 455,140" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="455" y="119" text-anchor="middle" font-size="14" fill="#9d4a1a">×</text>
+          <text x="455" y="80" text-anchor="middle" font-size="10" fill="#444">Score ≥ Schwelle?</text>
+          <line x1="405" y1="115" x2="430" y2="115" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-wf)"/>
+          <rect x="505" y="95" width="110" height="40" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="560" y="113" text-anchor="middle" font-size="12" fill="#222">Prototyp</text>
+          <text x="560" y="128" text-anchor="middle" font-size="11" fill="#555">F&amp;E · SLA 5d</text>
+          <line x1="480" y1="115" x2="505" y2="115" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-wf)"/>
+          <rect x="635" y="95" width="110" height="40" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="690" y="119" text-anchor="middle" font-size="12" fill="#222">Test &amp; QM</text>
+          <line x1="615" y1="115" x2="635" y2="115" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-wf)"/>
+          <rect x="770" y="95" width="100" height="40" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="820" y="119" text-anchor="middle" font-size="12" fill="#222">Freigabe</text>
+          <line x1="745" y1="115" x2="770" y2="115" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-wf)"/>
+          <circle cx="900" cy="115" r="18" fill="#fff" stroke="#9d4a1a" stroke-width="4"/>
+          <line x1="870" y1="115" x2="882" y2="115" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-wf)"/>
+          <text x="455" y="180" font-size="11" fill="#666">nein → Parken / Backlog</text>
+          <polyline points="455,140 455,200 800,200 800,135" fill="none" stroke="#9d4a1a" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="690" y="195" font-size="11" fill="#b04030">Eskalation nach 2 Rework-Schleifen</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:18px">
+        Eskalation ist nicht Notfall – sie ist <strong>geplante Sicherheitslogik</strong>.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Orchestrierung vs. Choreographie</h2>
+      <p style="color:var(--color-muted)">Zwei Architekturmuster, zwei Verantwortungsmodelle.</p>
+      <table class="vs-table" style="margin-top:10px">
+        <thead><tr><th>Aspekt</th><th>Orchestrierung</th><th>Choreographie</th></tr></thead>
+        <tbody>
+          <tr><th>Steuerung</th><td>Zentraler Dirigent (Workflow-Engine)</td><td>Services reagieren autonom auf Events</td></tr>
+          <tr><th>Komplexität</th><td>Komplex zentral, einfach lokal</td><td>Lokal einfach, global schwer zu durchschauen</td></tr>
+          <tr><th>Änderung</th><td>Eine Stelle, ein Deploy</td><td>Mehrere Services synchron ändern</td></tr>
+          <tr><th>Sichtbarkeit</th><td>Audit Trail zentral verfügbar</td><td>Verteilte Logs / Tracing nötig</td></tr>
+          <tr><th>Empfehlung</th><td>Geschäftsprozesse mit klarer Folge</td><td>Lose gekoppelte, event-getriebene Domänen</td></tr>
+        </tbody>
+      </table>
+      <div class="accent-box" style="margin-top:14px">
+        Falle: „Microservices = Choreographie“. Nein. Microservices können auch orchestriert werden.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Fallstudie · AeroTech Components</h2>
+      <p style="color:var(--color-muted)">Chaotische Priorisierung, Kunden drohen mit Wechsel. 10 Wochen, 120k Budget.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Restriktionen</h3>
+          <ul>
+            <li>Speed vs. Compliance · Standard vs. Innovationsfreiheit</li>
+            <li>Zeitstempel aus Ticketing vorhanden – Qualitätsdaten verteilt</li>
+            <li>IT-Kapazität unklar · Stopper: IT und F&amp;E-Leitung</li>
+          </ul>
+        </div>
+        <div class="merk-box">
+          <h3>6 KPIs (Auswahl)</h3>
+          <ul>
+            <li>Lead Time Idee → Freigabe (Speed)</li>
+            <li>Rework-Rate Prototyp (Quality)</li>
+            <li>Gate-Pass-Rate erster Durchlauf (Quality)</li>
+            <li>Anteil Ideen mit Business Case (Steuerung)</li>
+            <li>Kundenfeedback-Score nach Pilot (Outcome)</li>
+            <li>Kosten pro freigegebenem Konzept (Wirtschaftlichkeit)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Zwei 10-Wochen-Maßnahmen (Senior-Empfehlung):
+        1) Minimum-Workflow im Ticketing · 2) KPI-Minimum + Datenpflichtfelder.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Coaching · von Tool zu Steuerung</h2>
+      <div class="grid-2x2" style="margin-top:18px">
+        <div class="merk-box"><h3>KPI-Hygiene</h3><p>Welches Verhalten erzeugt unsere Metrik – ist es das gewünschte?</p></div>
+        <div class="merk-box"><h3>Konfliktkompetenz</h3><p>Interessen sichtbar machen statt „wegmoderieren“. Konflikte sind Information.</p></div>
+        <div class="merk-box"><h3>Governance</h3><p>Owner, Freigaben, Eskalation – wer trägt die Entscheidung wirklich?</p></div>
+        <div class="merk-box"><h3>Unsicherheit</h3><p>Annahmen + Frühwarnsignale dokumentieren. „Wenn X eintritt, ändern wir Y.“</p></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Management · vier Zielkonflikte</h2>
+      <p style="color:var(--color-muted)">Senior-Brille: bewusst entscheiden, schriftlich, mit Owner.</p>
+      <div class="grid-2x2" style="margin-top:16px">
+        <div class="merk-box"><h3>Speed ↔ Compliance</h3><p style="font-size:14px">Welche Gates sind Pflicht (Recht/Risiko), welche nur Politik?</p></div>
+        <div class="merk-box"><h3>Standard ↔ Innovation</h3><p style="font-size:14px">Standardisierung erzeugt Vergleichbarkeit – und Bürokratiegefühl.</p></div>
+        <div class="merk-box"><h3>Messung ↔ Vertrauen</h3><p style="font-size:14px">Transparenz vs. Angst vor Überwachung. Wer misst, muss erklären können, wozu.</p></div>
+        <div class="merk-box"><h3>Zentral ↔ Dezentral</h3><p style="font-size:14px">Welche Entscheidung gehört zur Plattform, welche ins Team?</p></div>
+      </div>
+      <div class="accent-box" style="margin-top:14px">
+        Stopper-Stakeholder = höchster Hebel + höchstes Risiko. Früh mitentscheiden – nicht informieren.
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Take-aways · fünf Merksätze</h2>
+      <div style="margin-top:18px">
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Erst Stakeholder klären, dann KPI definieren.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Jede KPI braucht eine Gegen-KPI gegen Goodhart-Effekt.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Service-Grenzen sind Verantwortungsgrenzen.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">SLA + Eskalation = geplante Sicherheitslogik, kein Notfall.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Annahmen + Frühwarnsignale dokumentieren – bewusst entscheiden.</span></div>
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Weiterarbeiten · Tag 3</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="merk-box">
+          <h3>Handout</h3>
+          <p style="font-size:14px">12 Sektionen mit Stakeholder-Map-Template, KPI-Steckbrief und Service-Katalog-Beispielen.</p>
+          <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-03.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
+        </div>
+        <div class="merk-box">
+          <h3>Lernpfad &amp; Quiz</h3>
+          <p style="font-size:14px">Videos zu Stakeholder-Matrix, KPI-Design, SOA-Grundlagen und Workflow-Engines.</p>
+          <p style="margin-top:10px"><a href="lernpfad.html" style="color:var(--kurs-71);font-weight:600">→ Lernpfad öffnen</a></p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center">
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 4 (Repository &amp; Execution).</p>
+        <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
+      </div>
+    </section>
+
   </div>
 </main>
 <script src="../../assets/progress.js"></script>
@@ -39,8 +368,6 @@
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 3, "praesentation");
 </script>
-
 <script src="../../assets/app.js"></script>
-
 </body>
 </html>
