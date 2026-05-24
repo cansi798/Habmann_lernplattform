@@ -9,6 +9,34 @@ async function loadPfad(jsonPath) {
   return r.json();
 }
 
+function pfadShuffleArr(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pfadShuffleChoiceTask(task) {
+  // Only shuffle for single/multi; leaves text, lueckentext, zuordnung as-is.
+  if (task.typ !== 'single' && task.typ !== 'multi') return task;
+  if (!Array.isArray(task.optionen) || task.optionen.length < 2) return task;
+  const withIdx = task.optionen.map((opt, i) => ({ opt, origIdx: i }));
+  const shuffled = pfadShuffleArr(withIdx);
+  const newOpts = shuffled.map(x => x.opt);
+  const mapNewToOld = shuffled.map(x => x.origIdx);
+  // For single: korrekt is int → find new position
+  // For multi: korrekt is array of ints → remap each
+  let newKorrekt;
+  if (task.typ === 'multi' && Array.isArray(task.korrekt)) {
+    newKorrekt = task.korrekt.map(oldIdx => mapNewToOld.indexOf(oldIdx)).sort((a, b) => a - b);
+  } else {
+    newKorrekt = mapNewToOld.indexOf(task.korrekt);
+  }
+  return { ...task, optionen: newOpts, korrekt: newKorrekt };
+}
+
 class PfadSession {
   constructor(data, container) {
     this.kursId = data.kurs_id;
@@ -23,14 +51,16 @@ class PfadSession {
     clear(this.container);
     if (this.current >= this.steps.length) return this.renderDone();
     const step = this.steps[this.current];
+    // Shuffle options at render time so the correct answer isn't always in the same position.
+    this.activeTask = pfadShuffleChoiceTask(step.aufgabe);
     this.container.append(
       el('h2', {}, this.title),
       this.renderProgress(),
       el('h3', {}, `Schritt ${step.nr}: ${step.titel}`),
       step.typ === 'video' ? this.renderVideo(step) : this.renderText(step),
-      this.renderTask(step.aufgabe),
+      this.renderTask(this.activeTask),
     );
-    this.bindTask(step.aufgabe);
+    this.bindTask(this.activeTask);
   }
 
   renderProgress() {
@@ -264,8 +294,8 @@ class PfadSession {
   evaluate() {
     if (this.evaluated) return;
     this.evaluated = true;
-    const step = this.steps[this.current];
-    const task = step.aufgabe;
+    // Use the active (possibly-shuffled) task so korrekt indices match the rendered options.
+    const task = this.activeTask || this.steps[this.current].aufgabe;
 
     if (task.typ === 'text') return this.evaluateText(task);
     if (task.typ === 'lueckentext') return this.evaluateLueckentext(task);
