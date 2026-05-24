@@ -1,0 +1,711 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 9 - Loesungsheft
+% Performance-Marketing: Anzeigen, Conversion & Landing Pages
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{merkbox}[1][Managementhinweis]{enhanced, breakable, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAmberBorder, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 9}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Performance-Marketing}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 5 \textperiodcentered{} TAG 9 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 10.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 9\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Performance-\\Marketing im Vertrieb.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 9}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Eine mögliche Lösung. Mehrere Begründungswege sind legitim, solange sie:
+
+\begin{itemize}
+  \item den Begriffsapparat von Tag 9 nutzen (Funnel, KPIs, Anzeigenkanäle, Landing Page),
+  \item Annahmen sichtbar machen,
+  \item Zielkonflikte (Leadmenge vs.\ Leadqualität, Kosten vs.\ Conversion) benennen,
+  \item zu einer klaren Investitionsentscheidung führen.
+\end{itemize}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Reichweite \textendash{} Traffic \textendash{} Leads \textendash{} Conversion \textendash{} Umsatz}{\nivLi}{6\,min}
+
+\ytquery{Performance Marketing Funnel Reichweite Traffic Lead Conversion Umsatz}
+
+\begin{loesungbox}
+\textbf{1. Definitionen:}
+\begin{itemize}
+  \item \emph{Reichweite:} Wie viele Menschen werden potenziell erreicht (Impressionen).
+  \item \emph{Traffic:} Wie viele tatsächlich auf eine Landing Page kommen (Klicks).
+  \item \emph{Leads:} Wie viele Kontaktinformationen hinterlassen (Formular).
+  \item \emph{Conversion:} Wie viele dieser Leads tatsächlich zum Geschäft werden (SQL, Angebot, Abschluss).
+  \item \emph{Umsatz:} Wirtschaftliches Endergebnis nach allen Stufen.
+\end{itemize}
+
+\textbf{2. Gemessen vs.\ messen müssen:}
+Im Mittelstand wird am häufigsten auf der Ebene \emph{Reichweite / Traffic / Leads} gemessen \textendash{} weil sie operativ sichtbar und im Marketing-Tool reportiert sind. Gemessen werden müsste primär auf \emph{Conversion und Umsatz / Deckungsbeitrag} \textendash{} weil nur diese Ebenen wirtschaftliche Wirkung zeigen.
+
+\textbf{3. Warum Reichweite in B2B nicht funktioniert:}
+B2B-Märkte sind klein und spezifisch. Eine ``Reichweiten''-Optimierung erreicht eine breite, undefinierte Masse \textendash{} davon ist nur ein Bruchteil im richtigen Buying Center, mit echtem Bedarf, in der richtigen Phase. Streuverluste sind in B2B oft 95\,\%+. Wer auf Reichweite optimiert, kauft Aktivität ohne Vertriebsrelevanz.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Reichweite ist eine B2C-KPI. Im B2B führt sie zu Leadmüll.} Die einzige akzeptable Reichweiten-Verwendung in B2B ist als \emph{Frühindikator für Markenwirkung} \textendash{} nicht als Erfolgsmaß einer Kampagne.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Zehn Performance-Marketing-KPIs}{\nivLi}{8\,min}
+
+\ytquery{Performance Marketing KPI CPC CPL CAC ROAS Conversion Funnel}
+
+\begin{loesungbox}
+\textbf{1. KPI-Zuordnung zu Funnel-Ebenen:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Ebene} & \textbf{KPI} \\
+\midrule
+Anzeige                & Impressionen, Klickrate, CPC \\
+\midrule
+Klick / Landing        & Conversion Rate (Landing Page) \\
+\midrule
+Lead                   & CPL, Leadqualität \\
+\midrule
+Vertrieb               & Abschlussquote, CAC \\
+\midrule
+Wirtschaftlichkeit     & ROAS, Deckungsbeitrag pro Kampagne \\
+\bottomrule
+\end{tabularx}
+
+\textbf{2. Wichtigster Frühindikator:}
+\emph{Leadqualität} (typischerweise gemessen als \%-Anteil MQL\,$\rightarrow$\,SQL). Sie ist der einzige Frühindikator, der noch \emph{vor} Abschluss zeigt, ob eine Kampagne wirtschaftlich werden kann. Hohe Lead-Mengen mit niedriger Qualität sind eine teure Sackgasse, die Wochen später als schlechter ROAS sichtbar wird.
+
+\textbf{3. Am häufigsten nicht berichtet:}
+\emph{Deckungsbeitrag pro Kampagnenquelle}. Wird selten berichtet, weil er Marketing- und Controlling-Daten verbinden muss \textendash{} und das ist organisatorisch unbequem. Folge: Kampagnen, die viele Leads bringen, aber wirtschaftlich Verluste produzieren, laufen monatelang weiter, weil sie ``erfolgreich'' aussehen.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Deckungsbeitrag pro Kampagnenquelle ist die wichtigste KPI, die kein Mittelständler berichtet.} Wer diese Zahl monatlich auf den Tisch legt, verändert das Anreizsystem von Marketing strukturell.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Anzeigenkanäle nach Suchintention}{\nivLi}{6\,min}
+
+\ytquery{Performance Marketing Google Ads LinkedIn Suchintention Kaufabsicht B2B}
+
+\begin{loesungbox}
+\textbf{1. Zuordnung:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Stufe} & \textbf{Kanal} \\
+\midrule
+Problemrecherche    & Display, LinkedIn (Content), Meta (Interessen), Plattformanzeigen, Partnerkampagnen \\
+\midrule
+Lösungsvergleich    & Google Ads (informative Keywords), LinkedIn Ads (Whitepaper, Webinar), Retargeting \\
+\midrule
+Kaufabsicht         & Google Ads (kaufnahe Keywords), Retargeting, Plattformanzeigen \\
+\bottomrule
+\end{tabularx}
+
+\textbf{2. Konkrete Kaufabsicht \textendash{} wirksamster Kanal:}
+\emph{Google Ads für kaufnahe Keywords} (``Cybersecurity Beratung Mittelstand'', ``ERP-System B2B kaufen''). Diese Suchen entstehen, wenn ein konkreter Bedarf da ist \textendash{} der Klick führt zu hoher Wahrscheinlichkeit der Conversion, weil die Suchintention bereits Kaufabsicht enthält.
+
+\textbf{3. Für B2B-Buying-Center-Ansprache:}
+\emph{LinkedIn Ads} (Targeting nach Funktion, Branche, Unternehmensgröße) und \emph{Partnerkampagnen} (Co-Marketing mit Branchenpartnern, die das Buying Center bereits kennen). Beide ermöglichen präzise Ansprache der relevanten Rollen (Initiator, Influencer, Decider), die im Buying Center entscheiden.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{SolarOffice GmbH \textendash{} Performance-Marketing-Funnel}{\nivLii}{25\,min}
+
+\ytquery{Performance Marketing B2B PV Solar Gewerbe Zielgruppe Funnel Kampagne}
+
+\begin{loesungbox}
+\textbf{1. Vertriebsziel:}
+SolarOffice will in 6\,Monaten 80 qualifizierte Beratungstermine generieren, aus denen mindestens 20 Aufträge entstehen sollen. Ziel ist \emph{nicht} ``mehr Leads'', sondern \emph{Wachstum der Pipeline mit Konversionsfähigkeit} \textendash{} bei begrenzter Vertriebskapazität.
+
+\textbf{2. Drei Zielgruppen:}
+\begin{itemize}
+  \item Eigentümer / GF mittelständischer Produktionsbetriebe mit hohem Stromverbrauch.
+  \item Immobilieneigentümer / Hausverwaltungen von Gewerbeimmobilien.
+  \item Logistik- und Lagerbetriebe mit großen Dachflächen.
+\end{itemize}
+
+\textbf{3. Drei Kundenprobleme für Anzeigen:}
+\begin{itemize}
+  \item ``Energiekosten verdoppeln sich \textendash{} Sie suchen Planungssicherheit für die nächsten 10\,Jahre.''
+  \item ``Sie wollen Fördermittel nutzen, aber haben keine Zeit, sich durch Formulare zu kämpfen.''
+  \item ``Sie wollen Nachhaltigkeit zeigen \textendash{} mit klar berechneter Wirtschaftlichkeit, nicht mit Greenwashing.''
+\end{itemize}
+
+\textbf{4. Funnel (5 Stufen):}
+\begin{enumerate}
+  \item LinkedIn-/Google-Anzeige mit Problem-Ansprache.
+  \item Landing Page mit Energiekosten-Rechner und Beispielprojekten.
+  \item Whitepaper-Download oder Beratungstermin-Anfrage (Formular).
+  \item Innendienst kontaktiert qualifizierten Lead innerhalb 24\,h.
+  \item Beratungstermin Vor-Ort oder Video.
+\end{enumerate}
+
+\textbf{5. Drei Kennzahlen (nicht Klicks):}
+\begin{itemize}
+  \item Beratungstermine geliefert (Hauptziel-KPI).
+  \item Konversion Anfrage $\rightarrow$ Beratungstermin (Lead-Qualität).
+  \item Kosten pro Beratungstermin (CPL auf Vertriebs-Ebene).
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{SolarOffice \textendash{} Kanäle \& Landing Page}{\nivLii}{30\,min}
+
+\ytquery{Performance Marketing Landing Page B2B Solar Gewerbe Google LinkedIn}
+
+\begin{loesungbox}
+\textbf{1. Kanalbewertung:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lccccc@{}}
+\toprule
+& \textbf{Ziel-G.} & \textbf{Risiko} & \textbf{Lead-Q.} & \textbf{Geschw.} \\
+\midrule
+A: Google Ads (Suchanfragen)    & 5 & 3 & 4 & 5 \\
+B: LinkedIn Ads                  & 5 & 3 & 5 & 4 \\
+C: Display                       & 2 & 5 & 1 & 5 \\
+D: Retargeting                   & 4 & 2 & 4 & 4 \\
+E: Plattform-/Energieportale    & 4 & 3 & 4 & 3 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\emph{Risiko: 5\,=\,hoch, 1\,=\,niedrig.}
+
+\textbf{2. Drei Kanäle:} \textbf{A} (Google Ads), \textbf{B} (LinkedIn Ads), \textbf{D} (Retargeting). \emph{Bewusst nicht:} Display (Streuverluste) und Plattform-Portale in Phase 1 (erst nach Lerneffekt).
+
+\textbf{3. Fünf Schwächen der Landing Page:}
+\begin{itemize}
+  \item Überschrift ist generisch (``Willkommen bei SolarOffice'') \textendash{} kein Problembezug.
+  \item Keine Zielgruppenansprache für Gewerbekunden.
+  \item Formular mit 12 Pflichtfeldern \textendash{} massive Abbruchquelle.
+  \item Keine Beispielrechnung / kein konkreter Mehrwert.
+  \item Keine Referenzen oder Vertrauenselemente.
+  \item CTA ``Absenden'' ist nichts-sagend, lädt nicht zur Aktion ein.
+\end{itemize}
+
+\textbf{4. Fünf konkrete Verbesserungen:}
+\begin{itemize}
+  \item Überschrift: ``Photovoltaik für Ihr Gewerbe \textendash{} 30\,\% niedrigere Energiekosten in 12\,Monaten.''
+  \item Zielgruppenansprache: ``Für Geschäftsführer und Eigentümer von Produktions-, Lager- und Gewerbeimmobilien.''
+  \item Formular auf 4 Felder reduzieren (Name, Firma, Stromverbrauch / Dachfläche, Telefon).
+  \item Beispielrechnung: ``2.000\,m\textsuperscript{2} Dach, 1\,Mio.\ kWh/Jahr Verbrauch $\rightarrow$ ca.\ 180.000\,\euro{} Einsparung in 10\,Jahren.''
+  \item 3 Referenz-Kundenlogos + 1 Case-Quote: ``Wir haben in 2\,Jahren 320.000\,\euro{} eingespart''.
+  \item CTA: ``Kostenlose Wirtschaftlichkeitsanalyse für Ihr Gewerbeobjekt anfragen''.
+\end{itemize}
+
+\textbf{5. Budget zuerst Anzeigen oder Landing Page?}
+\textbf{Zuerst Landing Page} (mind.\ 60\,\% der ersten 10.000\,\euro). Begründung: Eine gute Anzeige mit schlechter Landing Page verbrennt Klick-Geld. Eine schlechte Anzeige mit guter Landing Page ist immerhin reparabel. Conversion-Hub muss stehen, bevor Klick-Volumen aufgebaut wird.
+
+\begin{merkbox}[Managementhinweis]
+\emph{60\,\% der typischen B2B-Mittelstands-Performance-Budgets sollten in die Landing Page fließen \textendash{} 40\,\% in die Anzeigen.} In der Praxis ist das Verhältnis meist umgekehrt \textendash{} und das ist die häufigste Ursache schwacher Performance.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Elemente einer wirksamen Landing Page}{\nivLii}{15\,min}
+
+\ytquery{Landing Page B2B Überschrift Nutzenversprechen Vertrauen Conversion}
+
+\begin{loesungbox}
+\textbf{1. Acht Elemente und ihre Rolle:}
+\begin{itemize}
+  \item \emph{Klare Überschrift:} liefert in 3\,Sek.\ Antwort auf ``Bin ich hier richtig?''.
+  \item \emph{Nutzenversprechen:} klärt sofort, was der Besucher konkret gewinnt.
+  \item \emph{Zielgruppenansprache:} signalisiert ``wir verstehen Ihre Situation''.
+  \item \emph{Vertrauenselemente / Referenzen:} reduzieren wahrgenommenes Risiko (Sterne, Logos, Zitate).
+  \item \emph{Formular:} so kurz wie möglich, nur Pflichtfelder.
+  \item \emph{CTA:} klar, handlungsorientiert, nicht ``Absenden''.
+  \item \emph{Visuelle Führung:} Blick lenkt automatisch zum CTA / wichtigen Inhalten.
+  \item \emph{Mobile Nutzbarkeit:} 60\,\%+ B2B-Recherche im Mobil \textendash{} ohne mobile Optimierung verloren.
+\end{itemize}
+
+\textbf{2. Schwach im Mittelstand:}
+\emph{Nutzenversprechen} (oft generisch, keine konkrete Zahl/Aussage) und \emph{Vertrauenselemente} (Referenzen fehlen oder sind zu allgemein gehalten).
+
+\textbf{3. Überschrift + Nutzenversprechen für SolarOffice:}
+``\emph{Photovoltaik für Ihr Gewerbe \textendash{} 30\,\% niedrigere Energiekosten in den nächsten 10\,Jahren.} Wir berechnen Wirtschaftlichkeit, Fördermittel und Umsetzungsplan transparent \textendash{} damit Sie wissen, ob sich PV für Ihr Objekt lohnt \textendash{} bevor Sie investieren.''
+
+\textbf{4. Drei Vertrauenselemente im B2B-Gewerbe:}
+\begin{itemize}
+  \item Konkrete Kunden-Logos aus dem Zielsegment (vergleichbare Größe, Branche).
+  \item Zertifikate, Auszeichnungen, Branchenmitgliedschaften.
+  \item Konkrete Fallstudie mit Zahlen (\emph{nicht}: ``zufriedene Kunden seit 20\,Jahren'').
+\end{itemize}
+
+\begin{merkbox}[Lessons Learned]
+\emph{Vertrauen wird im B2B durch \emph{Zahlen}, nicht durch \emph{Adjektive} gestärkt.} ``Hochwertig'' überzeugt niemanden; ``320.000\,\euro{} Einsparung in 2\,Jahren'' schon.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{DataSecure Solutions \textendash{} Kampagnenstrategie}{\nivLii}{30\,min}
+
+\ytquery{Cybersecurity B2B Performance Marketing LinkedIn Webinar Landing Page Demo}
+
+\begin{loesungbox}
+\textbf{1. Zielgruppenanalyse:}
+\begin{itemize}
+  \item \emph{IT-Leiter:} suchen fachliche Sicherheit, technische Passung, Integrationsfähigkeit.
+  \item \emph{GF:} achten auf Risiko, Kosten, Haftung, Geschäftskontinuität.
+  \item \emph{Datenschutz / Compliance:} brauchen Nachweise, Prozesse, Auditfähigkeit.
+  \item Buying Center mehrstufig $\rightarrow$ Kampagnen müssen unterschiedliche Informationsbedürfnisse bedienen.
+\end{itemize}
+
+\textbf{2. Anzeigenplanung 6 Monate:}
+\begin{itemize}
+  \item Google Ads für akute Nachfrage (Monat 1\,--\,6).
+  \item LinkedIn Ads für gezielte Buying-Center-Ansprache (Monat 1\,--\,6, Hauptkanal).
+  \item Webinar als Vertrauens- und Qualifikationskanal (alle 6\,--\,8 Wochen).
+  \item Retargeting für Webinar-Teilnehmer + Website-Besucher (Monat 2\,--\,6).
+  \item \emph{Bewusst nicht:} breite Display-Kampagne.
+\end{itemize}
+
+\textbf{3. Priorisierung:}
+\begin{itemize}
+  \item Priorität 1: \textbf{LinkedIn Ads + Whitepaper} (höchste Leadqualität).
+  \item Priorität 2: \textbf{Webinar-Kampagne} (Vertrauensaufbau, fachliche Tiefe).
+  \item Priorität 3: \textbf{Google Ads} (kaufnahe Suchen).
+  \item Priorität 4: \textbf{Retargeting} (Vertiefung von bestehenden Kontakten).
+  \item \emph{Nein:} Display \textendash{} Streuverluste, schwache Leadqualität, hoher Budget-Verbrauch ohne Conversion.
+\end{itemize}
+
+\textbf{4. Landing-Page-Struktur:}
+\begin{itemize}
+  \item Überschrift mit Problembezug: ``Cyberrisiken im Mittelstand erkennen und gezielt reduzieren''.
+  \item Kurzes Nutzenversprechen für Entscheider.
+  \item Zielgruppenspezifische Abschnitte (IT / GF / Compliance).
+  \item Vertrauenselemente: Referenzen, Zertifizierungen (ISO-27001 etc.), Kundenstimmen.
+  \item Kurzer Beratungs-/Demo-Prozess (3 Schritte).
+  \item CTA: ``Kostenlosen Sicherheitscheck anfragen'' oder ``Demo-Termin vereinbaren''.
+  \item Formular mit wenigen Pflichtfeldern + optionale Bedarfsabfrage.
+  \item FAQ zu Aufwand, Datenschutz, Ablauf, Kostenrahmen.
+\end{itemize}
+
+\textbf{5. Conversion-Ziele + KPIs:}
+\begin{itemize}
+  \item Klickrate je Kanal/Zielgruppe.
+  \item Conversion Rate Landing Page (Ziel: $\geq$\,4\,\%).
+  \item Kosten pro Lead (CPL).
+  \item Anteil qualifizierter Leads ($\geq$\,40\,\%).
+  \item Kosten pro qualifiziertem Lead (CPL-Q).
+  \item Demo-Rate ($\geq$\,30\,\% der SQL).
+  \item Angebots- und Abschlussquote.
+  \item CAC; Deckungsbeitrag je Kampagnenquelle.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Funnel-Verluste analysieren}{\nivLii}{20\,min}
+
+\ytquery{Performance Marketing Funnel Conversion Verluste Optimierung B2B}
+
+\begin{loesungbox}
+\textbf{1. Drei größte Conversion-Verluste:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXc@{}}
+\toprule
+\textbf{Übergang} & \textbf{Conversion} & \textbf{Absolut} \\
+\midrule
+Klicks $\rightarrow$ Landing Page-Besuche (22.000 von 24.000) & 91,7\,\% & \textendash{}2.000 (Tracking) \\
+\midrule
+Landing Page $\rightarrow$ Formular-Aufruf (4.400 von 22.000) & 20\,\% & \textendash{}17.600 \\
+\midrule
+Formular-Aufruf $\rightarrow$ Absendung (880 von 4.400)     & 20\,\% & \textendash{}3.520 \\
+\midrule
+MQL $\rightarrow$ SAL (132 von 660)                        & 20\,\% & \textendash{}528 \\
+\midrule
+SAL $\rightarrow$ SQL (79 von 132)                         & 60\,\% & \textendash{}53 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Hauptverluste:} (a)~Landing Page $\rightarrow$ Formular-Aufruf (\textendash{}17.600 absolut, 80\,\% Verlust), (b)~Formular-Aufruf $\rightarrow$ Absendung (\textendash{}3.520, 80\,\% Verlust), (c)~MQL $\rightarrow$ SAL (\textendash{}528, 80\,\% Verlust).
+
+\textbf{2. Verantwortlichkeiten:}
+\begin{itemize}
+  \item \emph{Landing Page $\rightarrow$ Formular:} primär \textbf{Landing-Page-Problem} (Nutzenversprechen unklar, Vertrauen schwach, Pfad nicht klar).
+  \item \emph{Formular-Aufruf $\rightarrow$ Absendung:} \textbf{Formular-Problem} (zu viele Felder, zu komplex, kein klarer CTA).
+  \item \emph{MQL $\rightarrow$ SAL:} \textbf{Lead-Qualifizierungs-/Anzeigen-Problem} (Anzeigen ziehen falsche Personen an; Lead-Definition zu lax).
+\end{itemize}
+
+\textbf{3. Kosten pro SQL bei 75.000\,\euro{} Budget:}
+75.000\,\euro{} : 79 SQL = \textbf{949\,\euro{} pro SQL}. Wenn ein Abschluss durchschnittlich 50.000\,\euro{} Investitionssumme bringt (B2B-typisch für Cybersecurity), ist das wirtschaftlich vertretbar \textendash{} bei 6 Abschlüssen aus 79 SQL ergibt das einen CAC von 12.500\,\euro.
+
+\textbf{4. Drei Optimierungsmaßnahmen:}
+\begin{itemize}
+  \item \emph{Landing Page $\rightarrow$ Formular:} Sichtbares Nutzenversprechen, klare CTA-Buttons mehrfach, stärkere Vertrauenselemente (Logos, Zitate, Zahlen). Hypothese: Conversion auf 30\,\%+.
+  \item \emph{Formular-Aufruf $\rightarrow$ Absendung:} Felder von 12 auf 4 reduzieren, klarer CTA (``Demo-Termin in 5\,Min.\ vereinbaren''), Trust-Hinweis (``DSGVO-konform''). Hypothese: Conversion auf 35\,\%+.
+  \item \emph{MQL $\rightarrow$ SAL:} Lead-Definition schärfen (Pflichtfeld ``Unternehmensgröße'', ``Rolle''), Anzeigen-Targeting verfeinern, Lead Scoring einführen. Hypothese: Conversion auf 35\,\%+.
+\end{itemize}
+
+\begin{merkbox}[Managementhinweis]
+\emph{Funnel-Engpässe gewinnen Sie immer am untersten Verlust-Knoten.} Wer mehr Anzeigen-Budget einsetzt, ohne den größten Verlust zu fixen, multipliziert nur das Problem.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{DataSecure Solutions \textendash{} 6-Monats-Kampagnenentscheidung}{\nivLiii}{45\,min}
+
+\ytquery{DataSecure Performance Marketing CRO Budget Kanal Lead Qualifizierung Senior}
+
+\begin{loesungbox}
+\textbf{1. Priorisierte Kanalentscheidung (4 Kanäle):}
+\textbf{LinkedIn Ads + Whitepaper}, \textbf{Webinar-Kampagne}, \textbf{Google Ads (kaufnahe Keywords)}, \textbf{Retargeting}. \emph{Bewusst nicht: breite Display-Kampagne.}
+
+\textbf{2. Budgetverteilung (150.000\,\euro):}
+\begin{itemize}
+  \item 45.000\,\euro{} \textendash{} LinkedIn Ads (Hauptkanal).
+  \item 30.000\,\euro{} \textendash{} Google Ads (kaufnahe).
+  \item 25.000\,\euro{} \textendash{} Webinar-Konzept, Bewerbung, Durchführung (3\,--\,4 Webinare).
+  \item 20.000\,\euro{} \textendash{} Landing Page, Tracking, Conversion-Optimierung.
+  \item 15.000\,\euro{} \textendash{} Whitepaper, Fachcontent, Referenzen.
+  \item 10.000\,\euro{} \textendash{} Retargeting.
+  \item 5.000\,\euro{} \textendash{} A/B-Tests + Reporting-Setup.
+\end{itemize}
+
+\textbf{3. Lead-Qualifizierungs-Logik:}
+\begin{itemize}
+  \item \emph{MQL:} Profilpassung (Branche, Unternehmensgröße, Rolle); Beispiel: IT-Leiter oder GF eines Unternehmens 100\,--\,1.000 MA.
+  \item \emph{SAL:} Innendienst hat innerhalb von 2\,Werktagen Erstkontakt + Bedarf bestätigt.
+  \item \emph{SQL:} Bedarf + Budget + Zeitfenster + Entscheider identifiziert.
+  \item \emph{SLA:} MQL $\rightarrow$ Innendienst innerhalb 24\,h; SAL $\rightarrow$ Außendienst innerhalb 5\,Werktagen.
+\end{itemize}
+
+\textbf{4. Sechs KPIs entlang Funnel:}
+\begin{itemize}
+  \item Klickrate je Kanal.
+  \item Conversion Rate Landing Page.
+  \item CPL.
+  \item Anteil qualifizierter Leads (\%).
+  \item Kosten pro SQL.
+  \item ROAS / Deckungsbeitrag pro Kampagnenquelle.
+\end{itemize}
+
+\textbf{5. Roadmap (3 Phasen je 2 Monate):}
+\begin{itemize}
+  \item \emph{Monat 1\,--\,2 \textendash{} Foundation:} Landing Page optimiert, Tracking-Setup, erste LinkedIn-Tests, Google-Setup, 1 Webinar.
+  \item \emph{Monat 3\,--\,4 \textendash{} Skalierung:} erfolgreiche Kanäle skalieren, 2 weitere Webinare, Lead-Scoring live, A/B-Optimierung Landing Page.
+  \item \emph{Monat 5\,--\,6 \textendash{} Optimierung:} Retargeting voll im Einsatz, Bottlenecks beseitigt, Skalierungsentscheidung für Folgejahr vorbereiten.
+\end{itemize}
+
+\textbf{6. Entscheidung gegen reichweitenstarken Kanal:}
+DataSecure verzichtet bewusst auf \emph{breite Display-Kampagnen}, obwohl sie kurzfristig die meiste Reichweite und die niedrigsten CPCs liefern würden. Senior-Level-Begründung: (a)~Vertriebsteam ist mit 8 Personen begrenzt \textendash{} jeder unqualifizierte Kontakt blockiert Zeit für qualifizierte Gespräche. (b)~Cybersecurity ist Vertrauenssache \textendash{} eine billige Display-Anzeige beschädigt die Premium-Beratungs-Positionierung. (c)~Die zu erwartende Conversion ist so niedrig, dass der nominale CPC zwar günstig wirkt, der tatsächliche Cost per SQL aber das Doppelte / Dreifache der LinkedIn-Kosten beträgt.
+
+\textbf{7. Entscheidung unter Unsicherheit:}
+Investition von 25.000\,\euro{} in Webinare \emph{ohne} klaren ROI-Beweis. Annahme: \emph{Webinare sind für vertrauenssensible B2B-Themen ein überlegener Lead-Qualifikationskanal, weil sie fachliche Tiefe demonstrieren und Buying-Center-Teilnehmer parallel mitnehmen.} Lernindikator: Webinar-Lead-Qualität (Anteil SQL) $\geq$\,40\,\% bis Monat 4. Wenn nicht: Re-Allokation zu LinkedIn + Google.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Performance-Marketing-Erfolg im B2B wird nicht in CPC gemessen, sondern in Cost per SQL.} CPC-Optimierung führt im B2B fast immer zu Lead-Müll. Senior-Level-Disziplin: \emph{lieber teurere Klicks, die zu qualifizierten Leads werden, als billige Klicks, die den Vertrieb mit Lead-Müll überlasten.}
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Leadmenge vs.\ Leadqualität}{\nivLiii}{30\,min}
+
+\ytquery{Lead Menge Qualität Performance Marketing CAC ROAS Konflikt B2B}
+
+\begin{loesungbox}
+\textbf{1. Konflikt aus Marketing-Sicht:}
+Der Performance-Marketing-Manager wird typischerweise an \emph{Lead-Menge und CPL} gemessen. Optimiert er auf diese KPIs, schaltet er Anzeigen mit weiter Zielgruppendefinition, einfachen Lead-Magneten und niedrigschwelligen Formularen. Resultat: viele Leads, niedrige CPL \textendash{} und ein frustrierter Vertrieb, weil 80\,\% der Leads ohne Bedarf sind. Optimiert er auf Qualität, sinkt die Lead-Menge, der CPL steigt \textendash{} und sein Reporting sieht ``schlechter'' aus. Strukturproblem: Anreiz steht gegen Wirkung.
+
+\textbf{2. Gemeinsame Erfolgs-KPI:}
+\emph{Cost per SQL} und \emph{Deckungsbeitrag pro Kampagnenquelle}. Beide verbinden Marketing-Output (Lead-Volumen + Lead-Qualifikation) und Vertriebs-Erfolg (Abschlussquote). Marketing kann nicht mehr durch ``mehr Leads'' glänzen, weil schlechte Leads nicht zu SQL werden. Vertrieb kann nicht ``schlechte Leads schuld'' sagen, weil ihre Conversion in der KPI sichtbar ist.
+
+\textbf{3. Anreizgestaltung:}
+\begin{itemize}
+  \item Marketing-Boni teilweise an Anzahl SQL (nicht MQL) koppeln.
+  \item Quartalsweise Marketing-Review mit Vertriebsleitung zur SQL-Qualität.
+  \item Gemeinsames Dashboard, das Marketing- und Vertriebs-Daten verbindet.
+\end{itemize}
+
+\textbf{4. Lead-Müll-Entlarvung:}
+\emph{Anteil MQL, die zu SQL werden.} Bei Kampagnen mit Lead-Müll fällt dieser Anteil auf $<$\,15\,\%. Bei sauberer Kampagne liegt er bei 25\,--\,40\,\%. Diese Zahl ist innerhalb von Wochen sichtbar und entlarvt sofort.
+
+\textbf{5. Kanal-Anfälligkeit:}
+\begin{itemize}
+  \item \emph{Anfällig für Müll:} Display, breite Meta Ads, generische Plattform-Anzeigen mit nicht-zielgerichteten Lead-Magneten.
+  \item \emph{Gut für Qualität:} LinkedIn (Targeting nach Rolle), Webinare (selbst-qualifizierender Effekt), Google Ads (kaufnahe), Partnerkampagnen (vertrauensvorqualifiziert).
+\end{itemize}
+
+\begin{merkbox}[Lessons Learned]
+\emph{Anreize formen Verhalten. Wer Marketing auf Lead-Menge incentiviert, bekommt Lead-Menge \textendash{} mit allem, was das im B2B bedeutet.} Strukturelle Lösung: KPI-System ändern, nicht ``mehr Workshops''.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Performance-Marketing-Architektur}{\nivLiii}{45\,min}
+
+\ytquery{Performance Marketing Architektur B2B CRO Conversion Lead Qualität Governance}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen möglich.}
+
+\smallskip
+\textbf{1. Zielbild:}
+Das Unternehmen betreibt in 12\,Monaten eine steuerbare Performance-Marketing-Architektur, die monatlich planbare qualifizierte Leads liefert. Cost per SQL ist die zentrale Steuerungs-KPI. Marketing und Vertrieb arbeiten mit gemeinsamen KPIs. Mindestens 35\,\% des Pipeline-Wertes stammt aus digitalen Quellen. ROAS $\geq$\,3.
+
+\textbf{2. Zielgruppen- und Buying-Center-Analyse:}
+\begin{itemize}
+  \item \emph{Initiator + User} (Fachverantwortliche): inhaltliche Tiefe wichtig.
+  \item \emph{Influencer} (interne/externe Berater): Whitepaper, Webinare.
+  \item \emph{Decider} (GF/CFO): ROI, Risiko, Skalierungsfähigkeit.
+  \item \emph{Buyer} (Einkauf): Konditionen, Vergleichbarkeit.
+\end{itemize}
+
+\textbf{3. Kampagnenstrategie:}
+\begin{itemize}
+  \item Hauptkanal: LinkedIn Ads (Targeting nach Rolle).
+  \item Sekundär: Webinare (Vertrauensaufbau).
+  \item Tertiär: Google Ads (kaufnahe Suchen).
+  \item Retargeting: Vertiefung bestehender Kontakte.
+  \item \emph{Bewusst nicht:} Display, breite Meta Ads.
+\end{itemize}
+
+\textbf{4. Botschaftenlogik je Zielgruppe und Funnel-Phase:}
+\begin{itemize}
+  \item \emph{Problem (Top of Funnel):} Initiator-Schmerz, ``Sind Sie überhaupt sicher?''.
+  \item \emph{Lösung (Middle):} Whitepaper, Fallstudien, Webinare.
+  \item \emph{Entscheidung (Bottom):} ROI-Rechner, Demo, Referenzen.
+\end{itemize}
+
+\textbf{5. Landing-Page-Architektur:}
+\begin{itemize}
+  \item Pro Kampagne dedizierte Landing Page.
+  \item Klare Überschrift mit Problembezug.
+  \item Zielgruppen-Differenzierung (sichtbar).
+  \item Vertrauenselemente (Logos, Zitate, Zahlen).
+  \item Kurzes Formular (4\,--\,5 Felder).
+  \item Klare CTA-Hierarchie.
+  \item Mobile-first-Design.
+  \item FAQ + Tracking + A/B-Tests.
+\end{itemize}
+
+\textbf{6. Leadqualifizierungs-Logik:}
+\begin{itemize}
+  \item MQL: Profilpassung.
+  \item SAL: Innendienst-Kontakt erfolgreich, Bedarf bestätigt (binnen 24\,h).
+  \item SQL: BANT-Kriterien erfüllt (Budget, Authority, Need, Timeline).
+  \item Übergaberegeln im CRM dokumentiert.
+\end{itemize}
+
+\textbf{7. KPI-Architektur:}
+\begin{itemize}
+  \item Anzeige: Klickrate, CPC.
+  \item Landing: Conversion Rate.
+  \item Lead: CPL, Anteil MQL\,$\rightarrow$\,SQL.
+  \item Vertrieb: Abschlussquote, CAC.
+  \item Wirtschaftlichkeit: ROAS, Deckungsbeitrag pro Kampagne.
+\end{itemize}
+
+\textbf{8. Budget-Logik (Testen / Skalieren / Stoppen / Optimieren):}
+\begin{itemize}
+  \item \emph{Test-Budget:} max.\ 10\,\% pro neuem Kanal/Format, 4\,Wochen.
+  \item \emph{Skalieren:} bei Cost per SQL unter Zielwert + qualitativen Vertriebs-Feedback.
+  \item \emph{Stoppen:} bei Cost per SQL 2x Zielwert nach 4\,Wochen \textendash{} kein ``mal sehen ob es besser wird''.
+  \item \emph{Optimieren:} A/B-Tests laufen kontinuierlich, mindestens 2 pro Monat.
+\end{itemize}
+
+\textbf{9. Governance:}
+\begin{itemize}
+  \item CRO: Strategie, Budget, Konfliktlösung.
+  \item Head of Performance Marketing: operative Steuerung.
+  \item Vertriebsleitung: Lead-Übernahme, SLA, Feedback.
+  \item Controlling: Audit ROAS, Deckungsbeitrag.
+  \item Monatlicher Performance-Marketing-Review-Kreis (CRO, Marketing, Vertrieb, Controlling).
+\end{itemize}
+
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Marketing-Anreize teilweise an Cost per SQL koppeln} \textendash{} ohne Beweis, dass das funktioniert. Annahme: Anreiz formt Verhalten besser als Workshops.
+  \item \emph{Investition in Webinare} trotz höherer Stückkosten. Annahme: Webinar-Leads konvertieren langfristig signifikant besser.
+  \item \emph{Verzicht auf Display} trotz kurzfristigem Reichweiten-Potenzial. Annahme: Lead-Qualität ist im B2B wertvoller als Reichweite.
+\end{enumerate}
+
+\textbf{Zusatz \textendash{} Verzicht auf reichweitenstarken Kanal:}
+Bewusster Verzicht auf eine breite Meta-Display-Kampagne, die kurzfristig 2.000+ Leads für 30.000\,\euro{} liefern würde. Aus Senior-Level-Sicht: Diese 2.000 Leads würden den Vertrieb mit 8 Personen überlasten, davon wären nur 20\,--\,40 ernsthaft \textendash{} und der CRO würde sich monatelang mit Vertriebskonflikten beschäftigen. Stattdessen: 30.000\,\euro{} in LinkedIn + Webinar, die 150 hochqualifizierte Leads liefern.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Performance-Marketing-Architektur ist eine Investitionsentscheidung, keine Werbeplanung.} Wer sie als Werbung versteht, optimiert auf Klicks. Wer sie als Investition versteht, optimiert auf Pipeline und Deckungsbeitrag \textendash{} und kann jede Kampagne der GF gegenüber wirtschaftlich verantworten.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Diskussionsbasis. Vergleichen Sie Ihre Annahmen, Ihre Zielkonflikte und Ihre Entscheidungen.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Coaching-Frage: Welche Kampagne hätten Sie kurzfristig gerne gestartet \textendash{} und welche Argumente sprechen dauerhaft gegen sie, auch wenn das Quartals-Lead-Ziel sie nahelegt?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 9 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

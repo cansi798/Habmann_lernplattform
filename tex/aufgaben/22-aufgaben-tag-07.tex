@@ -1,0 +1,501 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 7 - Aufgabenheft
+% Plattform-SEO, Content, Retention & Bewertungsmanagement
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{enhanced, breakable, colback=white, colframe=lpGray, boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 7}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Plattform-SEO, Retention \& Bewertungen}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\newcommand{\antwortlinien}[1]{\par\vspace{6pt}\foreach \x in {1,...,#1}{\noindent\makebox[\linewidth]{\dotfill}\\[6pt]}}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 4 \textperiodcentered{} TAG 7 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 8.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 7\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Plattform-SEO, Content,\\Retention \& Bewertungsmanagement\\\textendash{} elf Aufgaben auf drei Niveaus.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Tag 7 eröffnet Modul 4: \emph{Plattform-Verkauf meistern}. Sie verschieben den Fokus von Strategie und Architektur auf die operative Verkaufsoptimierung \emph{innerhalb} digitaler Plattformen. Drei Hebel stehen heute im Mittelpunkt: \fachbegriff{Plattform-SEO} (Sichtbarkeit), \fachbegriff{Retention \& Wiederkauf} (Kundenbindung), \fachbegriff{Bewertungsmanagement} (Vertrauen).
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Ranking-Faktoren, Keyword-Arten, Content-Elemente, Bewertungsmanagement-Logik.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} CleanPro Supplies und ToolMaster Pro als Cases.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Plattform-Performance-Architektur als Verbindung aus SEO, Content, Retention, Marge.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Plattform-SEO ist nicht ``mehr Keywords''. Es ist die Verbindung aus \emph{Sichtbarkeit, Vertrauen und Kaufentscheidung} \textendash{} und wenn falsche Sichtbarkeit erzeugt wird (z.\,B.\ Preis-Keywords bei Premium-Produkten), wirkt das Ergebnis später als negative Bewertungslawine zurück.
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Ranking-Faktoren auf Plattformen}{\nivLi}{6\,min}
+
+\noindent Aus dem Lehrskript Tag 7: typische Ranking-Faktoren auf Plattformen: \emph{Suchbegriff-Relevanz \textperiodcentered{} Produkttitel \textperiodcentered{} Produktbeschreibung \textperiodcentered{} Kategorie \textperiodcentered{} Bilder \textperiodcentered{} Lieferfähigkeit \textperiodcentered{} Klickrate \textperiodcentered{} Conversion Rate \textperiodcentered{} Retourenquote \textperiodcentered{} Bewertungen \textperiodcentered{} Verkäuferperformance}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Ordnen Sie jeden Faktor einer dieser zwei Kategorien zu:
+  \begin{itemize}
+    \item \emph{Content-Faktoren} (vom Anbieter direkt gestaltbar)
+    \item \emph{Performance-Faktoren} (entstehen erst durch Kundenverhalten)
+  \end{itemize}
+  \item Welcher Faktor wirkt sowohl auf Sichtbarkeit \emph{als auch} auf Vertrauen?
+  \item Welche zwei Faktoren werden im Mittelstand häufig vernachlässigt?
+\end{enumerate}
+
+\ytquery{Plattform SEO Ranking Faktoren Conversion Bewertung Produkttitel}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Fünf Keyword-Arten unterscheiden}{\nivLi}{6\,min}
+
+\noindent Aus dem Lehrskript: \emph{Hauptkeywords \textperiodcentered{} Nebenkeywords \textperiodcentered{} Long-Tail-Keywords \textperiodcentered{} problemorientierte Keywords \textperiodcentered{} kaufnahe Keywords}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Definieren Sie jede Keyword-Art in einem Halbsatz mit Beispiel.
+  \item Welche Keyword-Art hat typischerweise das \emph{höchste Suchvolumen, aber niedrigste Conversion}? Welche das \emph{niedrigste Suchvolumen, aber höchste Conversion}?
+  \item Welche zwei Keyword-Arten sind für ein erklärungsbedürftiges B2B-Produkt besonders wichtig?
+\end{enumerate}
+
+\ytquery{Keyword Arten Hauptkeyword Long Tail kaufnah problemorientiert SEO}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Sichtbarkeit \textendash{} Klicks \textendash{} Conversion \textendash{} Profitabilität}{\nivLi}{8\,min}
+
+\noindent Aus dem Lehrskript: Plattform-SEO ist nicht gleichbedeutend mit reiner Sichtbarkeit. Vier Ebenen müssen differenziert werden: \emph{Sichtbarkeit \textperiodcentered{} Klicks \textperiodcentered{} Conversion \textperiodcentered{} Profitabilität}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Beschreiben Sie jede der vier Ebenen in einem Halbsatz.
+  \item Erklären Sie in 2\,--\,3 Sätzen: Warum kann mehr Sichtbarkeit \emph{weniger} Profitabilität bedeuten?
+  \item Welche Kennzahl trennt sauber zwischen ``Klicks'' und ``Conversion''?
+  \item Welche Kennzahl trennt zwischen ``Conversion'' und ``Profitabilität''?
+\end{enumerate}
+
+\ytquery{Plattform SEO Sichtbarkeit Klicks Conversion Profitabilität KPI}
+
+\antwortlinien{12}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{CleanPro Supplies \textendash{} Plattformangebot analysieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+``CleanPro Supplies'' verkauft professionelle Reinigungsgeräte und Zubehör über einen B2B-Marktplatz. Produkte qualitativ hochwertig, werden aber kaum gefunden. Wettbewerber mit günstigeren Produkten ranken besser.
+
+\smallskip
+\textbf{Beispielprodukt: Industrieller Nass-Trockensauger}
+\begin{itemize}
+  \item Aktueller Titel: ``Sauger Modell X200''.
+  \item Aktuelle Beschreibung: ``Leistungsstarker Sauger für verschiedene Anwendungen. Gute Qualität. Für Gewerbe geeignet.''
+  \item Zielgruppe: Gebäudereinigungen, Werkstätten, Handwerk, Facility-Management.
+  \item Stärken: hohe Saugleistung, robustes Gehäuse, lange Lebensdauer, Ersatzteile verfügbar.
+  \item Schwächen: höherer Preis als Wettbewerb.
+  \item Bewertungen: wenige (18), überwiegend positiv (4,6 Sterne).
+  \item Bilder: nur ein Produktfoto.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie mindestens \textbf{fünf Schwächen} des aktuellen Plattformangebots.
+  \item Formulieren Sie \textbf{drei mögliche Suchbegriffe}, die professionelle Kunden tatsächlich verwenden.
+  \item Entwickeln Sie einen \textbf{verbesserten Produkttitel} (max.\ 150\,Zeichen, B2B-tauglich).
+  \item Beschreiben Sie \textbf{drei Inhalte}, die in der Produktbeschreibung ergänzt werden müssen.
+  \item Benennen Sie \textbf{zwei Maßnahmen}, um Vertrauen und Kaufbereitschaft zu erhöhen.
+\end{enumerate}
+
+\ytquery{B2B Marktplatz SEO Industriesauger Produkttitel Beschreibung Optimierung}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{CleanPro \textendash{} Keyword- und Bewertungsstrategie}{\nivLii}{30\,min}
+
+\begin{infobox}[Keyword-Analyse + Bewertungssituation]
+\textbf{Fünf Suchbegriffe (Analyse):}
+\begin{itemize}
+  \item ``Industriesauger nass trocken'' \textendash{} hohes Suchvolumen, hoher Wettbewerb.
+  \item ``gewerblicher Nass Trockensauger'' \textendash{} mittleres Suchvolumen, gute Zielgruppenpassung.
+  \item ``robuster Sauger Werkstatt'' \textendash{} mittel, hoher Praxisbezug.
+  \item ``Profi Reinigungssauger langlebig'' \textendash{} geringer, hochwertige Positionierung.
+  \item ``billiger Industriesauger'' \textendash{} hohes Volumen, geringe Markenpassung.
+\end{itemize}
+
+\smallskip
+\textbf{Bewertungssituation:}
+\begin{itemize}
+  \item Wettbewerber: 200\,--\,600 Bewertungen \textendash{} CleanPro: 18.
+  \item Durchschnitt 4,6 Sterne.
+  \item Negativ: Lieferzeit, fehlende Ersatzteilliste.
+  \item Kundenservice antwortet bisher nicht öffentlich auf Bewertungen.
+\end{itemize}
+
+\smallskip
+\textbf{Rahmen:} 15.000\,\euro{} Optimierungsbudget, 3\,Monate.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Priorisieren Sie die Keywords nach Zielgruppenpassung, Wettbewerb, Markenwirkung. Welche \emph{vier von fünf} kommen in die Strategie? Welches wird verworfen?
+  \item Entscheiden Sie, welche Keywords in \emph{Titel}, welche in \emph{Beschreibung}, welche in \emph{FAQ} eingesetzt werden.
+  \item Entwickeln Sie \textbf{drei Content-Maßnahmen} zur Verbesserung der Conversion.
+  \item Entwickeln Sie \textbf{drei Maßnahmen} zur Verbesserung des Bewertungsmanagements.
+  \item Begründen Sie, ob das Keyword ``billiger Industriesauger'' verwendet werden sollte (in 3\,Sätzen).
+\end{enumerate}
+
+\ytquery{Marktplatz SEO Keyword Strategie B2B Bewertungsmanagement Premium}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Bewertungsmanagement als Frühwarnsystem}{\nivLii}{20\,min}
+
+\noindent Bewertungen werden im Mittelstand häufig als \emph{Verkaufssignal} betrachtet. Tatsächlich sind sie auch ein \emph{Frühwarnsystem} \textendash{} sie zeigen Prozess-, Logistik-, Produkt- und Service-Probleme an, lange bevor diese in operativen KPIs sichtbar werden.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 3\,Sätzen, was Bewertungen als \emph{Lernsystem} im Plattformkontext leisten.
+  \item Klassifizieren Sie diese vier Bewertungsthemen nach \emph{operativ / strategisch}:
+  \begin{itemize}
+    \item ``Lieferung dauerte 14\,Tage statt 5.''
+    \item ``Beschreibung passte nicht zum Produkt.''
+    \item ``Service hat sich nicht gemeldet.''
+    \item ``Produkt fühlt sich nicht hochwertig genug an.''
+  \end{itemize}
+  \item Welche \textbf{drei Bewertungs-KPIs} müssen monatlich in einem Plattform-Dashboard erscheinen?
+  \item Wie sollte man auf eine \emph{1-Stern-Bewertung} öffentlich antworten? Formulieren Sie eine Vorlage (4\,--\,5 Sätze).
+\end{enumerate}
+
+\ytquery{Bewertungsmanagement B2B Plattform 1 Stern Antwort Frühwarnsystem}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{ToolMaster Pro \textendash{} Plattform-Performance optimieren}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: ToolMaster Pro]
+``ToolMaster Pro'' verkauft hochwertige Elektrowerkzeuge und Zubehör über mehrere digitale Plattformen. Positionierung: Qualitätsanbieter für Handwerk, Werkstätten, Industrie. Trotz guter Qualität \textbf{sinkt} der Plattformumsatz \textendash{} günstigere Wettbewerber sind sichtbarer, haben mehr Bewertungen.
+
+\smallskip
+\textbf{Rahmen:} 2,8\,Mio.\,\euro{} Plattformumsatz/Jahr \textperiodcentered{} 24\,\% Marge \textperiodcentered{} Bewertungs-Schnitt 4,3 \textperiodcentered{} Kritik: Lieferverzögerungen, unklare Kompatibilität, fehlende Anwendungshinweise \textperiodcentered{} 90.000\,\euro{} Budget für 6 Monate.
+
+\smallskip
+\textbf{Produktbereich Fokus: Akkuschrauber + Zubehörsets}
+\begin{itemize}
+  \item Produkttitel: technisch, nicht suchorientiert.
+  \item Beschreibungen: Funktionen ohne Kundennutzen.
+  \item Bilder: Produkte, keine Anwendungssituationen.
+  \item FAQ fehlt.
+  \item Zubehörkompatibilität unklar.
+  \item Bewertungen nicht systematisch ausgewertet.
+  \item Wiederkäufe nicht aktiv angestoßen.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie in 4\,--\,5 Punkten die \textbf{Ursachen} für schwache Performance.
+  \item Entwickeln Sie eine \textbf{Keyword-Strategie} (Haupt-, Long-Tail-, problemorientierte) für die Produktgruppe.
+  \item Optimieren Sie beispielhaft einen \textbf{Produkttitel} und skizzieren Sie die Struktur einer \textbf{Produktbeschreibung}.
+  \item Entwickeln Sie \textbf{drei Content-Maßnahmen} zur Verbesserung von Vertrauen und Conversion.
+  \item Entwickeln Sie \textbf{drei Maßnahmen} für Kundenretention und Wiederkauf.
+\end{enumerate}
+
+\ytquery{ToolMaster B2B Plattform SEO Akkuschrauber Bewertungsmanagement Retention}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Retention-Logik bei Verbrauchs- und Zubehörprodukten}{\nivLii}{15\,min}
+
+\noindent Im B2B-Plattformgeschäft macht der \emph{Wiederkauf} oft den profitablen Teil des Geschäfts aus. Verbrauchs-, Ersatz- und Zubehörprodukte haben höhere Wiederkaufraten und meist bessere Margen als Erstkauf-Geräte.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 3\,Sätzen, warum Retention im B2B-Plattformkontext oft profitabler ist als Neukundengewinnung.
+  \item Entwickeln Sie für ToolMaster Pro \textbf{drei Wiederkauf-Trigger}: Welcher Mechanismus stößt einen Wiederkauf an?
+  \item Welche zwei Plattformfunktionen würden helfen, Wiederkauf zu fördern (Bundle, automatischer Nachbestellungs-Trigger, Verbrauchsmaterial-Abo, Kundenportal)?
+  \item Welche Kennzahl misst Retention sinnvoll auf Plattformebene?
+\end{enumerate}
+
+\ytquery{B2B Plattform Retention Wiederkauf Verbrauchsmaterial Bundle CLV}
+
+\antwortlinien{14}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{ToolMaster Pro \textendash{} 6-Monats-Optimierungsentscheidung}{\nivLiii}{45\,min}
+
+\noindent Sie sind \emph{Chief Revenue Officer / Head of Marketplace} bei ToolMaster Pro. 90.000\,\euro{} Budget, 6\,Monate, Ziel: Sichtbarkeit + Conversion + Bewertungsqualität ohne Markenverwässerung.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Treffen Sie eine \textbf{Optimierungsentscheidung} in 4 Hebeln (z.\,B.\ Keywords/Content, Bilder/Videos, FAQ/Kompatibilität, Bewertungsmanagement, Retention/Bundle).
+  \item Verteilen Sie das Budget von 90.000\,\euro{} auf die Hebel.
+  \item Entwickeln Sie ein \textbf{Bewertungsmanagement-System}: Wer wertet aus, wer antwortet, in welcher Zeit, welche Eskalationsstufen?
+  \item Treffen Sie eine Entscheidung gegen \emph{aggressive Preissenkung}, obwohl der Plattform-Algorithmus das belohnen würde. Begründen Sie in 4\,--\,5 Sätzen aus Senior-Level-Perspektive.
+  \item Definieren Sie \textbf{vier KPIs}, die monatlich im Plattform-Dashboard berichtet werden.
+  \item Treffen Sie mindestens eine Entscheidung unter Unsicherheit \textendash{} mit klarer Annahme und Lernindikator.
+\end{enumerate}
+
+\ytquery{Plattform Performance B2B Senior CRO Bewertungsmanagement Budget Marge}
+
+\antwortlinien{32}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Sichtbarkeit kaufen \textendash{} aber welche?}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Plattformen bieten verschiedene Möglichkeiten, Sichtbarkeit zu steigern: organisches Ranking (Content, Bewertungen), Premium-Listing, Plattform-Werbung (Sponsored Products), Sale-Aktionen, Algorithmus-konformes Verhalten (kurze Lieferzeit, niedrige Retourenquote).
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Klassifizieren Sie die fünf Sichtbarkeitshebel nach \emph{aufbauend} (langfristiger Wert) vs.\ \emph{kaufend} (kurzfristiger Effekt).
+  \item Welche zwei Hebel sind für eine \emph{Qualitätsmarke} (wie ToolMaster) strategisch wertvoller \textendash{} und warum?
+  \item Welche zwei Hebel sind kurzfristig wirksam, aber strategisch riskant?
+  \item Schreiben Sie eine Faustregel: Wann sollte man Sichtbarkeit \emph{kaufen} \textendash{} und wann \emph{aufbauen}?
+  \item Welche ``falsche'' Sichtbarkeit (z.\,B.\ über Preis-Keywords) wirkt sich später als Reputationsproblem aus?
+\end{enumerate}
+
+\ytquery{Plattform Sichtbarkeit Sponsored Products Premium Listing Marke Strategie}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Plattform-Performance-Architektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Revenue Officer / Head of Marketplace.
+
+\smallskip
+\textbf{Ausgangslage:} Mittelständisches Unternehmen verkauft auf mehreren Plattformen. Umsätze wachsen, Profitabilität schwankt. Wettbewerber erhöhen Preisdruck. Plattformalgorithmen ändern sich regelmäßig. Bewertungen beeinflussen Sichtbarkeit zunehmend.
+
+\smallskip
+\textbf{Erwartung GF:} Plattform-Performance-Architektur, die Wachstum, Marge, Kundenzufriedenheit, Reputation und Positionierung verbindet.
+
+\smallskip
+\textbf{Rahmen:} Budget begrenzt \textperiodcentered{} aggressiver Preiswettbewerb \textperiodcentered{} Plattformregeln ändern sich \textperiodcentered{} Produktdatenqualität uneinheitlich \textperiodcentered{} Bewertungen nicht systematisch ausgewertet \textperiodcentered{} Marketing/Produktmgmt/Service nicht integriert.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item \textbf{Zielbild} der Plattform-Performance für 12\,--\,18\,Monate (5\,Sätze).
+  \item \textbf{Segmentierung} der Plattformkunden + Suchintentionen.
+  \item Eine \textbf{Keyword-Architektur}: Haupt-, Long-Tail-, bewusst ausgeschlossene Keywords.
+  \item Eine \textbf{Content-Architektur} für Titel, Beschreibung, Bilder, Videos, FAQ, Vergleichsinhalte.
+  \item Eine \textbf{Retention-Logik}: Wiederkauf, Zubehör, Bundles, Service, Bestandskundenpflege.
+  \item Ein \textbf{Bewertungsmanagement-System} (Analyse, Reaktion, Eskalation, Lernschleifen).
+  \item Eine \textbf{KPI-Struktur} (Sichtbarkeit, Klickrate, Conversion, Bewertungsqualität, Wiederkauf, Marge, Kundenzufriedenheit).
+  \item Eine \textbf{Governance-Struktur} (Vertrieb, Marketing, Produktmanagement, Service, Management).
+  \item Eine \textbf{Risikoanalyse} (Preisdruck, falsche Kundenerwartung, schlechte Bewertungen, Plattformabhängigkeit, Margenverlust).
+  \item \textbf{Drei Managemententscheidungen} unter Unsicherheit.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens eine bewusste Entscheidung gegen kurzfristige Reichweitensteigerung, wenn Marke, Marge oder Bewertungsqualität gefährdet würden.
+
+\ytquery{Plattform Performance Architektur B2B CRO Bewertungsmanagement Marge}
+
+\antwortlinien{40}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 7}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Plattform-SEO als Verbindung aus Sichtbarkeit, Vertrauen und Conversion verstehen.
+  \item Fünf Keyword-Arten unterscheiden und strategisch einsetzen.
+  \item Produkttitel, Beschreibungen und FAQs für Plattformverkauf optimieren.
+  \item Bewertungsmanagement als Frühwarnsystem nutzen, nicht nur als Reaktionsmechanismus.
+  \item Retention- und Wiederkauflogik in die Plattformstrategie integrieren.
+  \item Eine Plattform-Performance-Architektur als Zusammenspiel von SEO, Content, Retention und Marge denken.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 7 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

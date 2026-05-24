@@ -1,0 +1,658 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 2 - Aufgabenheft
+% Plattform-Implementierung, KPIs & strategische Weiterentwicklung
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+% Niveau-Farben
+\definecolor{lpL1}{RGB}{34,120,72}      % L1 = gruen (reproduktion)
+\definecolor{lpL2}{RGB}{22,90,140}      % L2 = blau (anwendung)
+\definecolor{lpL3}{RGB}{170,42,52}      % L3 = rot (management)
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+% Info-Box (blau-weiss) fuer Hinweise/Aufgabenstellung-Rahmen
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Antwort-Bereich: leerer Kasten mit Punktlinien
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 2}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Plattform-Implementierung \& KPIs}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+% Niveau-Badge: \niveau{L1}, \niveau{L2}, \niveau{L3}
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+% Zeit-Hinweis
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+% Aufgaben-Kopf: Nr + Titel + Badges + Zeit
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+% YouTube-Suchquery (kompakt rendern)
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% Linierter Antwort-Bereich mit gepunkteten Linien
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 1 \textperiodcentered{} TAG 2 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 29.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 2\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Plattform-Implementierung, KPIs\\\& strategische Weiterentwicklung\\\textendash{} elf Aufgaben auf drei Niveaus.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- ANLEITUNG -----------------------------------------------------------
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enthält elf Aufgaben zu Tag 2 \textendash{} Plattform-Implementierung, KPI-Steuerung und strategische Weiterentwicklung. Tag 2 baut auf Tag 1 auf: dort wurde die \emph{Auswahl} einer Plattformstrategie geübt, heute geht es um die \emph{Umsetzung, Steuerung und Optimierung}.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Implementierungsphasen, KPI-Logik und Zukunftstrends reproduzieren. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Transfer auf SmartOffice24, BauTech Connect und konkrete Plattform-Cases. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Entscheidungsarchitektur, Verantwortung, Plattformsteuerung bis 2030. 30\,--\,45 Minuten.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterlösungen finden Sie im separaten \emph{Lösungsheft Tag 2}. Versuchen Sie jede Aufgabe zuerst eigenständig \textendash{} der Mehrwert entsteht in der eigenen Argumentation, nicht im Abschreiben.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Auswahl \textendash{} Implementierung \textendash{} Optimierung}{\nivLi}{6\,min}
+
+\noindent Drei Begriffe werden im Plattformkontext häufig vermischt: \emph{Plattformauswahl}, \emph{Plattformimplementierung} und \emph{Plattformoptimierung}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Definieren Sie jeden der drei Begriffe in \emph{einem} Satz.
+  \item Schreiben Sie zu jedem Begriff einen typischen Stolperstein, an dem Mittelständler häufig scheitern.
+  \item Ergänzen Sie einen Schlusssatz: Warum ist es entscheidend, diese drei Phasen sauber zu trennen?
+\end{enumerate}
+
+\ytquery{Plattformauswahl Plattformimplementierung Plattformoptimierung Unterschied}
+
+\antwortlinien{8}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Sechs Phasen einer Plattformimplementierung}{\nivLi}{8\,min}
+
+\noindent Eine geordnete Plattformimplementierung umfasst typischerweise sechs Phasen: \emph{Zielbild \textperiodcentered{} Pilotierung \textperiodcentered{} Rollout \textperiodcentered{} Betrieb \textperiodcentered{} Skalierung \textperiodcentered{} Optimierung}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Ordnen Sie die folgenden sechs Tätigkeiten der jeweils passenden Phase zu:
+  \begin{itemize}
+    \item Kennzahlen für Sichtbarkeit, Conversion und Wiederkauf auswerten und Anpassungen testen.
+    \item Mit drei Pilotkunden und einem reduzierten Sortiment den Plattformprozess validieren.
+    \item Die strategische Zielsetzung formulieren: \emph{Welchen Kundenproblem löst die Plattform und welche Rolle nimmt sie im Vertrieb ein?}
+    \item Stabile Servicelevel sichern: Antwortzeiten, Reklamationen, Verfügbarkeit, CRM-Pflege.
+    \item Auf weitere Regionen, Sortimente oder Marktseiten ausweiten.
+    \item Vom Pilot in den breiten Marktstart überführen \textendash{} inklusive Schulungen und Rollenklärung.
+  \end{itemize}
+  \item Benennen Sie für \emph{jede} Phase eine typische Verantwortlichkeit (Vertrieb, Marketing, IT, Kundenservice, Geschäftsführung).
+\end{enumerate}
+
+\ytquery{Plattformimplementierung Phasen Zielbild Pilot Rollout Betrieb Skalierung}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Plattform-KPIs sauber unterscheiden}{\nivLi}{8\,min}
+
+\noindent Im Plattformbetrieb werden oft zu viele Kennzahlen gleichzeitig betrachtet \textendash{} und am Ende steuert niemand mit ihnen. Üblich sind unter anderem: \emph{Reichweite \textperiodcentered{} Traffic \textperiodcentered{} Leads \textperiodcentered{} Conversion Rate \textperiodcentered{} Kundenakquisitionskosten (CAC) \textperiodcentered{} Wiederkaufrate \textperiodcentered{} Warenkorbwert \textperiodcentered{} Churn Rate \textperiodcentered{} Customer Lifetime Value (CLV) \textperiodcentered{} Plattformkosten \textperiodcentered{} Deckungsbeitrag}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Ordnen Sie jede der elf Kennzahlen \emph{einer} dieser drei Kategorien zu:
+  \begin{itemize}
+    \item \emph{Sichtbarkeitskennzahl} (zeigt, ob die Plattform überhaupt gefunden wird)
+    \item \emph{Conversion-/Aktivierungskennzahl} (zeigt, ob aus Sichtbarkeit Geschäft wird)
+    \item \emph{Wirtschaftlichkeitskennzahl} (zeigt, ob das Geschäft profitabel und nachhaltig ist)
+  \end{itemize}
+  \item Benennen Sie für jede der drei Kategorien eine Kennzahl, die ein \emph{operativer Plattformmanager} täglich braucht \textendash{} und eine, die im \emph{Management-Board} berichtet werden muss.
+\end{enumerate}
+
+\ytquery{Plattform KPIs Conversion CAC CLV Wiederkaufrate Deckungsbeitrag}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{SmartOffice24 \textendash{} Implementierung in drei Phasen}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``SmartOffice24'' verkauft hochwertige Bürotechnik an kleine und mittlere Unternehmen. Bisheriger Vertrieb: Außendienst und Telefon. Die Geschäftsleitung hat entschieden, künftig zusätzlich über einen eigenen B2B-Webshop und einen externen B2B-Marktplatz zu verkaufen.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Der Webshop soll in 6 Monaten starten.
+  \item Der Marktplatz soll bereits in 3 Monaten erste Verkäufe ermöglichen.
+  \item Produktdaten sind unvollständig.
+  \item Das Vertriebsteam ist skeptisch.
+  \item Marketing hat wenig Erfahrung mit Plattformen.
+  \item IT-Ressourcen sind begrenzt.
+  \item Budget: 80.000\,\euro{} für die erste Umsetzungsphase.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Gliedern Sie die Implementierung in \textbf{drei sinnvolle Phasen} mit klaren Meilensteinen über die ersten 6 Monate. Begründen Sie, warum diese Reihenfolge sinnvoll ist.
+  \item Benennen Sie mindestens \textbf{fünf Aufgaben}, die \emph{vor} dem Plattformstart erledigt werden müssen.
+  \item Ordnen Sie jede Aufgabe genau einem Bereich zu: \emph{Vertrieb \textperiodcentered{} Marketing \textperiodcentered{} IT \textperiodcentered{} Kundenservice \textperiodcentered{} Management}.
+  \item Identifizieren Sie \textbf{drei Risiken}, die den Start gefährden, und je eine Gegenmaßnahme.
+  \item Treffen Sie eine Entscheidung: Sollte der Marktplatz wirklich \emph{vor} dem Webshop live gehen \textendash{} oder ist die Reihenfolge falsch? Begründen Sie in 3\,--\,4 Sätzen.
+\end{enumerate}
+
+\ytquery{B2B Webshop Marktplatz Implementierung Mittelstand Phasen Risiken}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{SmartOffice24 \textendash{} Plattformkennzahlen interpretieren}{\nivLii}{30\,min}
+
+\begin{infobox}[Kennzahlen nach 3 Monaten Plattformbetrieb]
+\textbf{B2B-Webshop:}
+\begin{itemize}
+  \item 12.000 Besucher \textperiodcentered{} 480 registrierte Nutzer \textperiodcentered{} 120 Bestellungen
+  \item Durchschnittlicher Bestellwert: 420\,\euro
+  \item Conversion Rate: 1,0\,\%
+  \item Auffällig: viele Abbrüche im Checkout
+\end{itemize}
+
+\textbf{Externer B2B-Marktplatz:}
+\begin{itemize}
+  \item 35.000 Produktaufrufe \textperiodcentered{} 300 Bestellungen
+  \item Durchschnittlicher Bestellwert: 190\,\euro
+  \item Hoher Preisdruck
+  \item Geringer Zugriff auf Kundendaten
+\end{itemize}
+
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Geschäftsführung erwartet schnelles Wachstum.
+  \item Vertrieb möchte hochwertige Kundenbeziehungen schützen.
+  \item Marketing fordert mehr Budget für Anzeigen.
+  \item IT weist auf technische Begrenzungen im Webshop hin.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie \textbf{Stärken und Schwächen} beider Plattformkanäle (jeweils 2\,--\,3 Punkte).
+  \item Benennen Sie \textbf{drei mögliche Ursachen} für die niedrige Conversion Rate im Webshop.
+  \item Entwickeln Sie \textbf{drei Optimierungsmaßnahmen} für den Webshop \textendash{} priorisiert nach Wirkung und Umsetzbarkeit.
+  \item Entwickeln Sie \textbf{zwei Maßnahmen} zur besseren Steuerung des Marktplatzgeschäfts (Sortiment, Marge, Daten).
+  \item Entscheiden Sie, wohin das nächste Budget fließen soll \textendash{} Webshop, Marktplatz oder Marketing \textendash{} und begründen Sie in 3\,Sätzen. Welche \emph{Annahme} steckt in Ihrer Entscheidung?
+\end{enumerate}
+
+\ytquery{Plattform KPI Optimierung Conversion Checkout Marktplatz Steuerung}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Sechs Erfolgsfaktoren \textendash{} Selbst-Check}{\nivLii}{20\,min}
+
+\begin{infobox}[Sechs Erfolgsfaktoren der Plattformimplementierung]
+Aus dem Lehrskript Tag 2:
+\begin{itemize}
+  \item \textbf{Klare Zielsetzung} (welches Kundenproblem, welche Rolle im Vertrieb?)
+  \item \textbf{Datenqualität} (Produktdaten, Kundendaten, CRM)
+  \item \textbf{Kundennutzen} (Bedienbarkeit, Verfügbarkeit, Service)
+  \item \textbf{Technische Stabilität} (Checkout, Schnittstellen, Performance)
+  \item \textbf{Prozessklarheit} (Verantwortlichkeiten, Übergaben)
+  \item \textbf{Akzeptanz im Vertrieb} (kein Schattenwettbewerb zum Außendienst)
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Stellen Sie sich vor, Sie sind interne:r Berater:in bei SmartOffice24.
+
+\begin{enumerate}
+  \item Bewerten Sie jeden der sechs Erfolgsfaktoren mit einer Schulnote (1 = stark, 6 = ungenügend) basierend auf den Informationen aus Aufgabe 4/5. Wo der Fall keine Information enthält: machen Sie eine \emph{begründete} Annahme.
+  \item Identifizieren Sie die \emph{zwei schwächsten} Faktoren \textendash{} hier liegt der größte Hebel.
+  \item Entwickeln Sie für diese zwei Faktoren je \textbf{eine konkrete Maßnahme} in den nächsten 90\,Tagen.
+  \item Schreiben Sie einen Schlusssatz: Welcher Erfolgsfaktor wird in Mittelstandsprojekten \emph{systematisch} unterschätzt \textendash{} und warum?
+\end{enumerate}
+
+\ytquery{Plattform Erfolgsfaktoren Datenqualität Vertriebsakzeptanz B2B Implementierung}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{BauTech Connect \textendash{} drei Kanäle, ein Engpass}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: BauTech Connect]
+``BauTech Connect'' ist ein mittelständischer Anbieter technischer Komponenten für Handwerksbetriebe, Bauunternehmen und Facility-Management-Dienstleister. Vor sechs Monaten wurde eine Plattformstrategie aus drei Bausteinen gestartet: \emph{eigener B2B-Shop}, \emph{zwei externe Marktplatzlistungen}, \emph{erste digitale Marketingkampagnen}.
+
+\smallskip
+\textbf{Aktuelle Kennzahlen (6 Monate):}
+\begin{itemize}
+  \item \emph{Eigener B2B-Shop:} 50.000 Besucher \textperiodcentered{} 2.200 registrierte Kunden \textperiodcentered{} 620 Bestellungen \textperiodcentered{} Warenkorb 760\,\euro{} \textperiodcentered{} CR 1{,}24\,\% \textperiodcentered{} Wiederkaufrate 18\,\% \textperiodcentered{} hoher Anteil erklärungsbedürftiger Produkte.
+  \item \emph{Externe Marktplätze:} 180.000 Produktaufrufe \textperiodcentered{} 1.900 Bestellungen \textperiodcentered{} Warenkorb 230\,\euro{} \textperiodcentered{} starker Preisvergleich \textperiodcentered{} kaum Datenzugang \textperiodcentered{} niedrigere Marge.
+  \item \emph{Digitale Kampagnen:} hoher Traffic, viele unqualifizierte Leads, Vertrieb beklagt geringe Abschlusswahrscheinlichkeit.
+\end{itemize}
+
+\smallskip
+\textbf{Rahmenbedingungen:} 32\,Mio.\,\euro{} Jahresumsatz \textperiodcentered{} 1,4\,Mio.\,\euro{} Plattformumsatz bisher \textperiodcentered{} 300.000\,\euro{} Optimierungsbudget \textperiodcentered{} 9\,Monate \textperiodcentered{} Produktdatenqualität uneinheitlich \textperiodcentered{} CRM nur teilweise angebunden.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie die drei Bereiche (\emph{Shop}, \emph{Marktplätze}, \emph{Kampagnen}) anhand von \textbf{vier Kriterien}: Wachstum, Marge, strategische Kontrolle, Datenqualität. Skala 1\,--\,5.
+  \item Identifizieren Sie die drei \textbf{größten Engpässe} in der Implementierung. Wo liegen sie wirklich \textendash{} bei Technik, Daten, Prozessen oder Rollen?
+  \item Schlagen Sie eine \textbf{priorisierte Optimierungsroadmap} für 9\,Monate vor (3 Phasen je 3\,Monate).
+  \item Begründen Sie, welche Aktivität bewusst \emph{nicht} ausgebaut wird.
+\end{enumerate}
+
+\ytquery{BauTech B2B Shop Marktplatz Kampagne Plattform Engpass Optimierung Roadmap}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Vier Zukunftstrends \textendash{} konkret übersetzen}{\nivLii}{20\,min}
+
+\begin{infobox}[Vier Zukunftstrends im Plattformvertrieb]
+\begin{enumerate}
+  \item KI-gestützte Plattformsteuerung und automatisierte Vertriebsprozesse
+  \item Personalisierung von Angeboten, Preisen und Kundenerlebnissen
+  \item Datenbasierte Entscheidungsmodelle (statt Bauchgefühl) im digitalen Vertrieb
+  \item Stärkere Bedeutung von Ökosystemen, Partnernetzwerken und Plattform-Governance
+\end{enumerate}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Übersetzen Sie diese vier Trends von der ``Modeschlagworte''-Ebene auf die Ebene konkreter Vertriebsentscheidungen.
+
+\begin{enumerate}
+  \item Wählen Sie für jeden Trend \emph{einen} konkreten Anwendungsfall, der innerhalb von 12 Monaten bei BauTech Connect umsetzbar wäre.
+  \item Bewerten Sie für jeden Anwendungsfall: \emph{Wer entscheidet?} \textendash{} \emph{Was kostet es ungefähr?} \textendash{} \emph{Wann wird Wirkung sichtbar?}
+  \item Welcher Trend ist aus Ihrer Sicht \emph{überschätzt}, welcher \emph{unterschätzt}? Begründen Sie kurz.
+  \item Formulieren Sie eine Faustregel (1\,--\,2 Sätze): Wann sollte ein Mittelständler einen Plattformtrend aktiv adoptieren \textendash{} und wann lieber abwarten?
+\end{enumerate}
+
+\ytquery{KI Plattform Vertrieb Personalisierung Datenmodell Ökosystem Trend B2B}
+
+\antwortlinien{16}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{BauTech Connect \textendash{} 9-Monats-Optimierungsentscheidung}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie: BauTech Connect (Fortsetzung)]
+Ausgangslage wie in Aufgabe 7. Zusätzlich:
+\begin{itemize}
+  \item Die Geschäftsführung erwartet \textbf{eine klare Empfehlung} zur Weiterentwicklung der Plattformstrategie.
+  \item Das Optimierungsbudget von \textbf{300.000\,\euro} ist für die nächsten 9 Monate verfügbar.
+  \item Vertrieb, Marketing und IT bewerten den Erfolg unterschiedlich \textendash{} es gibt keine gemeinsamen KPIs.
+  \item Kundenservice meldet zunehmend Rückfragen zu digitalen Bestellungen.
+  \item Der Vertrieb befürchtet, dass Bestandskunden zunehmend nur noch Preise vergleichen.
+\end{itemize}
+
+\smallskip
+\textbf{Verfügbare Hebel:}
+\begin{itemize}
+  \item Produktdaten und Shop-Optimierung
+  \item CRM- und Datenarchitektur (Anbindung, Lead Scoring)
+  \item Kampagnen (Zielsegmente, Performance, Bewertung)
+  \item Marktplatzsteuerung (Sortiment, Marge, Steuerung)
+  \item Personalisierung, Wiederkauflogik, Management-Dashboard
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Treffen Sie als \emph{Chief Digital Sales Officer} eine \textbf{priorisierte Optimierungsentscheidung} für die nächsten 9 Monate. Strukturieren Sie sie in drei Phasen (Monat 1\,--\,3, 4\,--\,6, 7\,--\,9).
+  \item Verteilen Sie das Budget von \textbf{300.000\,\euro} auf maximal fünf Hebel. Begründen Sie jede Budgetlinie.
+  \item Wählen Sie \textbf{einen Zukunftstrend} aus Aufgabe 8 und erklären Sie, wie er in die Roadmap eingebaut wird (oder \emph{warum} er bewusst herausgehalten wird).
+  \item Beschreiben Sie, wie sich die \textbf{Rollen} von Außendienst, Innendienst, Marketing und Kundenservice im Lauf der 9 Monate verändern.
+  \item Treffen Sie \emph{mindestens eine Entscheidung unter Unsicherheit} \textendash{} und benennen Sie ausdrücklich die Annahme, die dafür stimmen muss.
+  \item Definieren Sie \textbf{drei Management-KPIs}, die nach 9 Monaten zwingend im Geschäftsführungs-Meeting berichtet werden sollen.
+\end{enumerate}
+
+\ytquery{Plattform Optimierungsroadmap Budget Mittelstand CDSO Entscheidung 9 Monate}
+
+\antwortlinien{32}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Zielkonflikt \textendash{} Reichweite versus Plattformkontrolle}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Im BauTech-Fall (Aufgabe 7/9) liegt ein klassischer Zielkonflikt offen: Die externen Marktplätze liefern \emph{Volumen} (1.900 Bestellungen in 6 Monaten), schwächen aber \emph{Marge}, \emph{Kundendatenzugang} und \emph{Differenzierung}. Der eigene B2B-Shop liefert geringere Reichweite, aber höheren Warenkorb, bessere Daten und größere strategische Kontrolle.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in eigenen Worten den Zielkonflikt zwischen \emph{kurzfristiger Reichweite} und \emph{langfristiger Plattformkontrolle} (3\,--\,4 Sätze).
+  \item Entwickeln Sie eine \textbf{Entscheidungsregel}, wann ein Mittelständler aktiv auf einem externen Marktplatz präsent sein \emph{soll} \textendash{} und wann er ihn verlassen (oder gar nicht erst betreten) sollte. Nutzen Sie dafür mindestens drei Kriterien.
+  \item Wählen Sie \emph{ein konkretes Sortimentssegment} bei BauTech (z.\,B.\ Standard-Verbindungsmittel, Premium-Werkzeuge, Spezialkomponenten) und entscheiden Sie für dieses Segment: Marktplatz \emph{ja} oder \emph{nein}? Begründen Sie.
+  \item Formulieren Sie eine Faustregel (1\,--\,2 Sätze): Welche Mindestbedingung muss ein eigener Direktkanal erfüllen, bevor man externe Marktplätze überhaupt aufbaut?
+\end{enumerate}
+
+\ytquery{Marktplatz Eigenkanal Reichweite Marge Plattformkontrolle B2B Entscheidung}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Plattformarchitektur 2030}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Digital Sales Officer (oder Plattformstrategie-Architekt:in) eines mittelständischen B2B-Unternehmens.
+
+\smallskip
+\textbf{Ausgangslage:} Erste Plattformaktivitäten sind aufgebaut: eigener Webshop, externe Marktplatzlistungen, digitale Kampagnen, einfaches CRM. Es gibt Wachstum \emph{und} Probleme: steigender Preisdruck, unklare Datenverantwortung, parallele Prozesse, zunehmende Abhängigkeit von externen Plattformen.
+
+\smallskip
+Die Geschäftsführung fordert eine Plattformstrategie 2030, die Wachstum ermöglicht und gleichzeitig Kundenschnittstelle, Datenhoheit, Marge und Markenpositionierung sichert.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Budget begrenzt.
+  \item Digitale Wettbewerber wachsen schneller.
+  \item Interne Datenqualität unzureichend.
+  \item Vertrieb, Marketing und IT verfolgen teilweise unterschiedliche Ziele.
+  \item Kundenerwartungen: schneller, personalisierter, digitaler.
+  \item KI, Automatisierung und Plattformökosysteme entwickeln sich dynamisch.
+  \item Regulatorische Anforderungen an Daten und faire Plattformpraktiken nehmen zu.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strategische \emph{Entscheidungsarchitektur} \textendash{} keine reine Maßnahmenliste \textendash{} für die Implementierung, Optimierung und Weiterentwicklung der Plattformstrategie bis 2030. Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item Ein \textbf{Zielbild für 2030} (4\,--\,5 Sätze).
+  \item Eine \textbf{Bewertung der bestehenden Plattformkanäle} nach Wachstum, Marge, Datenzugang, Kundenbindung und strategischer Kontrolle.
+  \item Eine \textbf{Entscheidung}, welche Plattformaktivitäten ausgebaut, optimiert, begrenzt oder beendet werden.
+  \item Eine \textbf{KPI-Architektur} für die Managementsteuerung (operative KPIs vs.\ Management-KPIs).
+  \item Eine \textbf{Governance-Struktur} mit klaren Verantwortlichkeiten zwischen Vertrieb, Marketing, IT, Datenmanagement und Geschäftsführung.
+  \item Eine \textbf{Roadmap} (12 / 24 / 36+\,Monate).
+  \item Eine \textbf{Einschätzung relevanter Zukunftstrends} und deren strategischer Bedeutung.
+  \item Eine \textbf{Risikoarchitektur} zu Plattformabhängigkeit, Datenverlust, Preisdruck, technischer Komplexität, organisatorischer Überforderung.
+  \item \textbf{Drei Managemententscheidungen unter Unsicherheit} \textendash{} jeweils mit der Annahme, die stimmen muss.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens \emph{eine Entscheidung, bei der Sie kurzfristiges Wachstum bewusst zugunsten langfristiger strategischer Kontrolle begrenzen}. Begründen Sie aus Senior-Level-Perspektive.
+
+\ytquery{Plattformstrategie 2030 Mittelstand Architektur Governance KPI Zukunftstrends}
+
+\antwortlinien{38}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 2}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Plattformauswahl, -implementierung und -optimierung sauber abgrenzen.
+  \item Die sechs Phasen einer Plattformimplementierung benennen und auf SmartOffice24 anwenden.
+  \item Plattform-KPIs nach Sichtbarkeit, Conversion und Wirtschaftlichkeit unterscheiden.
+  \item Zielkonflikte zwischen Reichweite, Marge, Kontrolle und Datenzugang bewerten.
+  \item Zukunftstrends (KI, Personalisierung, Ökosysteme) in konkrete Vertriebsentscheidungen übersetzen.
+  \item Eine 9-Monats-Optimierungsroadmap mit Budgetlogik formulieren.
+  \item Eine Plattformarchitektur 2030 als Entscheidungsarchitektur denken \textendash{} nicht als Maßnahmenliste.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 2 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

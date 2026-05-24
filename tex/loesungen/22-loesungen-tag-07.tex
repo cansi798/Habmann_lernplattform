@@ -1,0 +1,648 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 7 - Loesungsheft
+% Plattform-SEO, Content, Retention & Bewertungsmanagement
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{merkbox}[1][Managementhinweis]{enhanced, breakable, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAmberBorder, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 7}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Plattform-SEO, Retention \& Bewertungen}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 4 \textperiodcentered{} TAG 7 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 8.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 7\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Plattform-SEO,\\Retention \& Bewertungsmanagement.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 7}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Eine mögliche Lösung. Mehrere Begründungswege sind legitim, solange sie:
+
+\begin{itemize}
+  \item den Begriffsapparat von Tag 7 nutzen (Ranking-Faktoren, Keyword-Arten, Bewertungsmanagement, Retention),
+  \item Annahmen sichtbar machen,
+  \item Zielkonflikte (Sichtbarkeit vs.\ Marke, Klicks vs.\ Marge) benennen,
+  \item zu einer klaren Entscheidung führen.
+\end{itemize}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Ranking-Faktoren auf Plattformen}{\nivLi}{6\,min}
+
+\ytquery{Plattform SEO Ranking Faktoren Conversion Bewertung Produkttitel}
+
+\begin{loesungbox}
+\textbf{1. Zuordnung:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Kategorie} & \textbf{Faktor} \\
+\midrule
+Content-Faktoren                & Suchbegriff-Relevanz, Produkttitel, Beschreibung, Kategorie, Bilder \\
+\midrule
+Performance-Faktoren            & Lieferfähigkeit, Klickrate, Conversion Rate, Retourenquote, Bewertungen, Verkäuferperformance \\
+\bottomrule
+\end{tabularx}
+
+\textbf{2. Wirkt auf Sichtbarkeit \emph{und} Vertrauen:}
+\emph{Bewertungen.} Sie sind im Algorithmus ein Ranking-Signal und beim Kunden ein Vertrauenssignal. Bewertungen verbessern beides gleichzeitig \textendash{} aber schlechte Bewertungen schädigen auch beides gleichzeitig.
+
+\textbf{3. Häufig vernachlässigt im Mittelstand:}
+\emph{Bilder} (Anbieter nutzen meist nur ein Produktfoto, keine Anwendungssituationen) und \emph{Retourenquote} (wird oft nicht aktiv gesteuert, ist aber für viele Plattform-Algorithmen ein zentrales Verkäufer-Performance-Signal).
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Fünf Keyword-Arten unterscheiden}{\nivLi}{6\,min}
+
+\ytquery{Keyword Arten Hauptkeyword Long Tail kaufnah problemorientiert SEO}
+
+\begin{loesungbox}
+\textbf{1. Definitionen:}
+\begin{itemize}
+  \item \emph{Hauptkeyword:} kurzes, generisches Suchwort mit hohem Volumen. Beispiel: ``Akkuschrauber''.
+  \item \emph{Nebenkeyword:} sekundärer, oft verwandter Begriff. Beispiel: ``Bohrschrauber''.
+  \item \emph{Long-Tail-Keyword:} mehrteilig, spezifisch. Beispiel: ``Akkuschrauber mit zwei Akkus für Handwerk''.
+  \item \emph{Problemorientiert:} beschreibt ein Kundenproblem. Beispiel: ``Akkuschrauber für Dauereinsatz lange Akkulaufzeit''.
+  \item \emph{Kaufnah:} hohe Kaufabsicht im Suchbegriff. Beispiel: ``Akkuschrauber Profi 18V Set kaufen''.
+\end{itemize}
+
+\textbf{2. Volumen vs.\ Conversion:}
+\begin{itemize}
+  \item Höchstes Volumen, niedrigste Conversion: \emph{Hauptkeyword} (zu unspezifisch).
+  \item Niedrigstes Volumen, höchste Conversion: \emph{Kaufnah} oder spezielles \emph{Long-Tail} (hohe Kaufabsicht, geringe Streuverluste).
+\end{itemize}
+
+\textbf{3. Wichtig für erklärungsbedürftige B2B-Produkte:}
+\emph{Problemorientierte Keywords} (treffen den echten Bedarf) und \emph{Long-Tail-Keywords} (treffen die spezifische Anwendung). Hauptkeywords liefern dort Streuverluste, weil B2B-Kunden präziser suchen.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Sichtbarkeit \textendash{} Klicks \textendash{} Conversion \textendash{} Profitabilität}{\nivLi}{8\,min}
+
+\ytquery{Plattform SEO Sichtbarkeit Klicks Conversion Profitabilität KPI}
+
+\begin{loesungbox}
+\textbf{1. Vier Ebenen:}
+\begin{itemize}
+  \item \emph{Sichtbarkeit:} Wie oft taucht das Produkt in Suchergebnissen / Kategorien auf (Impressionen, Ranking-Position).
+  \item \emph{Klicks:} Wie viele Nutzer klicken auf das Produkt (Klickrate).
+  \item \emph{Conversion:} Wie viele Klicker:innen kaufen (Conversion Rate).
+  \item \emph{Profitabilität:} Wie viel Deckungsbeitrag pro Verkauf nach Plattformgebühren und Logistik.
+\end{itemize}
+
+\textbf{2. Warum mehr Sichtbarkeit weniger Profitabilität bedeuten kann:}
+Wenn Sichtbarkeit über \emph{falsche} Keywords erzeugt wird (z.\,B.\ ``billig''), kommen falsche Kunden mit falschen Erwartungen. Klickrate steigt, aber Conversion sinkt, Retourenquote steigt, Bewertungen verschlechtern sich. Das Plattform-Ranking sinkt langfristig \textendash{} obwohl es kurzfristig durch mehr Aktivität gestiegen ist.
+
+\textbf{3. Trennkennzahlen:}
+\begin{itemize}
+  \item Klicks vs.\ Conversion: \emph{Conversion Rate} (wie viele Klicker:innen kaufen).
+  \item Conversion vs.\ Profitabilität: \emph{Deckungsbeitrag pro Verkauf} (Marge nach allen Plattformkosten).
+\end{itemize}
+
+\begin{merkbox}[Managementhinweis]
+\emph{Plattform-SEO darf nie auf nur einer Ebene optimiert werden.} Wer nur Sichtbarkeit optimiert, kauft Klicks. Wer nur Klicks optimiert, kauft Conversion. Wer nur Conversion optimiert, kauft Marge. Die Architektur muss alle vier Ebenen ins Verhältnis setzen.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{CleanPro Supplies \textendash{} Plattformangebot analysieren}{\nivLii}{25\,min}
+
+\ytquery{B2B Marktplatz SEO Industriesauger Produkttitel Beschreibung Optimierung}
+
+\begin{loesungbox}
+\textbf{1. Fünf Schwächen:}
+\begin{itemize}
+  \item Produkttitel ``Sauger Modell X200'' enthält keine relevanten Suchbegriffe (``industriell'', ``nass'', ``trocken'', ``gewerblich'').
+  \item Beschreibung ist generisch (``gute Qualität''), kein Nutzenversprechen, keine Zielgruppe.
+  \item Nur ein Produktfoto \textendash{} keine Anwendungssituationen.
+  \item Keine Kompatibilitäts- / Zubehörhinweise.
+  \item Wenige Bewertungen (18) im Vergleich zum Wettbewerb \textendash{} schwaches Vertrauenssignal.
+  \item Keine FAQ.
+  \item Keine sichtbaren Differenzierungsmerkmale (Lebensdauer, Saugleistung, Ersatzteilverfügbarkeit).
+\end{itemize}
+
+\textbf{2. Drei Suchbegriffe:}
+\begin{itemize}
+  \item ``Industriesauger nass trocken gewerblich''.
+  \item ``Nass-Trockensauger Werkstatt langlebig''.
+  \item ``Gewerbesauger Ersatzteile verfügbar''.
+\end{itemize}
+
+\textbf{3. Verbesserter Produkttitel:}
+``Industrieller Nass-Trockensauger für Gewerbe \& Werkstatt \textendash{} robust, langlebig, mit verfügbaren Ersatzteilen (Modell X200, 1.600\,W)''. Begründung: enthält Hauptkeyword + Zielgruppe + Differenzierung + technische Information.
+
+\textbf{4. Drei Inhalte in der Beschreibung:}
+\begin{itemize}
+  \item \emph{Anwendungsfälle:} ``für Gebäudereinigung, Werkstätten, Handwerk, Facility-Management'' \textendash{} signalisiert Zielgruppen-Fit.
+  \item \emph{Technische Spezifikationen:} Saugleistung, Behältergröße, Stromaufnahme, Schlauchlänge, Filter.
+  \item \emph{Differenzierung:} ``Lebensdauer 5+\,Jahre, Ersatzteile garantiert für 10\,Jahre verfügbar, robustes Edelstahlgehäuse'' \textendash{} adressiert den Premium-Charakter.
+\end{itemize}
+
+\textbf{5. Zwei Vertrauensmaßnahmen:}
+\begin{itemize}
+  \item Strukturiertes Bewertungsmanagement (aktiv um Bewertungen bitten, alle Bewertungen öffentlich beantworten).
+  \item Anwendungsbilder (Sauger in echten Einsatzumgebungen \textendash{} Werkstatt, Baustelle, Gewerbe).
+\end{itemize}
+
+\begin{merkbox}[Managementhinweis]
+\emph{Premiumprodukte gewinnen nicht über Preis, sondern über Sichtbarkeit der Differenzierung.} Wenn die Plattform-Liste fünf Sauger zeigt und nur einer die Lebensdauer und Ersatzteilverfügbarkeit nennt, gewinnt dieser \textendash{} selbst wenn er teurer ist.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{CleanPro \textendash{} Keyword- und Bewertungsstrategie}{\nivLii}{30\,min}
+
+\ytquery{Marktplatz SEO Keyword Strategie B2B Bewertungsmanagement Premium}
+
+\begin{loesungbox}
+\textbf{1. Keyword-Priorisierung:}
+\begin{itemize}
+  \item \emph{Priorität 1:} ``gewerblicher Nass Trockensauger'' (mittel/Volumen, gute Zielgruppe).
+  \item \emph{Priorität 2:} ``Industriesauger nass trocken'' (hohes Volumen, hoher Wettbewerb, aber zur Marke passend).
+  \item \emph{Priorität 3:} ``robuster Sauger Werkstatt'' (hoher Praxisbezug).
+  \item \emph{Priorität 4:} ``Profi Reinigungssauger langlebig'' (Premium-Positionierung).
+  \item \emph{Verworfen:} ``billiger Industriesauger'' \textendash{} markenwidrig, falsche Kundenerwartung.
+\end{itemize}
+
+\textbf{2. Verteilung Titel / Beschreibung / FAQ:}
+\begin{itemize}
+  \item \emph{Titel:} ``Industriesauger nass trocken'' + ``gewerblich'' (Hauptkeyword + Qualifier).
+  \item \emph{Beschreibung:} alle vier priorisierten Keywords natürlich integriert; problemorientierte Phrasen (``für Dauereinsatz'', ``für Werkstatt'').
+  \item \emph{FAQ:} ``Ist der Sauger für Wasser geeignet?'', ``Wie lange hält der Filter?'', ``Welche Ersatzteile sind verfügbar?''.
+\end{itemize}
+
+\textbf{3. Drei Content-Maßnahmen für Conversion:}
+\begin{itemize}
+  \item Vergleichstabelle mit zwei Alternativ-Modellen (zeigt die eigene Stärke ohne Aggression).
+  \item Anwendungsbilder in mindestens drei Umgebungen (Werkstatt, Baustelle, Gewerbe).
+  \item Detaillierte Ersatzteilliste mit Verfügbarkeitsgarantie.
+\end{itemize}
+
+\textbf{4. Drei Maßnahmen Bewertungsmanagement:}
+\begin{itemize}
+  \item Wöchentliche Auswertung neuer Bewertungen mit Themen-Clusterung (Lieferzeit, Produkt, Service).
+  \item Antwort innerhalb 48\,h auf jede Bewertung (auch positive).
+  \item Strukturierte Bitte um Bewertung 14\,--\,21\,Tage nach Erhalt (E-Mail, nicht Spam-aggressiv).
+\end{itemize}
+
+\textbf{5. ``Billiger Industriesauger'' \textendash{} ja oder nein?}
+\textbf{Nein.} Dieses Keyword erzeugt zwar Sichtbarkeit, aber falsche Kundenerwartung. Kunden, die ``billig'' suchen und ein 600-\euro-Premium-Modell finden, fühlen sich getäuscht $\rightarrow$ schlechte Bewertungen, höhere Retourenquote, schlechteres Plattform-Ranking. Markenwirkung sinkt langfristig. Das vermeintliche Sichtbarkeitsgeschenk ist ein Reputationsproblem.
+
+\begin{merkbox}[Lessons Learned]
+\emph{Sichtbarkeit über falsche Keywords ist ein Boomerang.} Die schnellen Klicks entwickeln sich in den folgenden Monaten zu schlechten Bewertungen und zu sinkender Algorithmus-Performance. Faustregel: \emph{Wenn eine Keyword-Auswahl falsche Kundenerwartung erzeugt, ist sie strategisch falsch \textendash{} auch wenn sie kurzfristig Klicks bringt.}
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Bewertungsmanagement als Frühwarnsystem}{\nivLii}{20\,min}
+
+\ytquery{Bewertungsmanagement B2B Plattform 1 Stern Antwort Frühwarnsystem}
+
+\begin{loesungbox}
+\textbf{1. Bewertungen als Lernsystem:}
+Bewertungen liefern strukturierte Rückmeldung von echten Kunden \emph{nach} der Kaufentscheidung. Sie zeigen Lücken in Produktbeschreibung, Logistik, Service, Erwartungsmanagement und Produktqualität. Wer Bewertungen systematisch auswertet, kann Probleme identifizieren, bevor sie sich im Umsatz niederschlagen \textendash{} Bewertungen sind also nicht nur ein Verkaufssignal, sondern auch ein Frühwarnsystem für die Organisation.
+
+\textbf{2. Klassifizierung der vier Bewertungsthemen:}
+\begin{itemize}
+  \item ``Lieferung 14 statt 5 Tage'' \textendash{} \emph{operativ} (Logistik / Lieferanten).
+  \item ``Beschreibung passte nicht'' \textendash{} \emph{operativ} (Content-Pflege), aber Hinweis auf strategisches Problem (\emph{wir wecken falsche Erwartungen}).
+  \item ``Service hat sich nicht gemeldet'' \textendash{} \emph{operativ} (Service-SLA).
+  \item ``Produkt fühlt sich nicht hochwertig an'' \textendash{} \emph{strategisch}, weil es die Markenpositionierung trifft.
+\end{itemize}
+
+\textbf{3. Drei Plattform-Dashboard-KPIs:}
+\begin{itemize}
+  \item Bewertungsdurchschnitt (Trend über Monate).
+  \item Anteil 1-2-Stern-Bewertungen (Frühwarnsignal).
+  \item Hauptkritikpunkte (Top-3 Themen-Cluster).
+\end{itemize}
+
+\textbf{4. Antwort auf 1-Stern-Bewertung (Vorlage):}
+``Sehr geehrte:r [Name], vielen Dank, dass Sie uns Ihre Erfahrung mitteilen. Es tut uns leid, dass [konkrete Kritik aufgreifen]. Wir haben Ihren Fall an unseren Service weitergeleitet \textendash{} bitte melden Sie sich unter [Kontakt], damit wir [konkrete Lösung] anbieten können. Ihre Rückmeldung hilft uns, [Prozess / Produkt] zu verbessern. \\ Mit freundlichen Grüßen, [Name], CleanPro Supplies.''
+
+\begin{merkbox}[Lessons Learned]
+\emph{Eine professionell beantwortete 1-Stern-Bewertung wirkt oft stärker als eine unbeantwortete 5-Stern-Bewertung.} Andere Kunden lesen die Antworten und beurteilen daran die Service-Kultur des Anbieters.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{ToolMaster Pro \textendash{} Plattform-Performance optimieren}{\nivLii}{30\,min}
+
+\ytquery{ToolMaster B2B Plattform SEO Akkuschrauber Bewertungsmanagement Retention}
+
+\begin{loesungbox}
+\textbf{1. Ursachenanalyse:}
+\begin{itemize}
+  \item Produkte qualitativ stark, aber Nutzen auf der Plattform nicht sichtbar.
+  \item Technische Produkttitel greifen nicht die Suchlogik der Kunden auf.
+  \item Fehlende Kompatibilitätsinformationen erzeugen Unsicherheit + negative Bewertungen.
+  \item Bilder + Beschreibungen unterstützen Kaufentscheidung nicht.
+  \item Bewertungsmanagement reaktiv oder fehlt.
+  \item Wiederkaufpotenziale bei Zubehör werden nicht genutzt.
+\end{itemize}
+
+\textbf{2. Keyword-Strategie für Akkuschrauber + Zubehör:}
+\begin{itemize}
+  \item \emph{Haupt:} ``Profi Akkuschrauber'', ``Akkuschrauber Handwerk'', ``Akkuschrauber Werkstatt''.
+  \item \emph{Long-Tail:} ``Akkuschrauber mit Ersatzakku für Handwerker'', ``robuster Akkuschrauber für Montage'', ``Akkuschrauber Zubehör Set kompatibel''.
+  \item \emph{Problemorientiert:} ``Akkuschrauber für Dauereinsatz'', ``Akkuschrauber mit langer Akkulaufzeit''.
+  \item \emph{Bewusst nicht:} ``billig'', ``Schnäppchen'' \textendash{} markenwidrig.
+\end{itemize}
+
+\textbf{3. Optimierter Titel + Beschreibung-Struktur:}
+\begin{itemize}
+  \item \emph{Titel (vorher):} ``Akkuschrauber TX 18V Set''.
+  \item \emph{Titel (nachher):} ``Profi Akkuschrauber 18V Set für Handwerk \& Montage \textendash{} mit 2 Akkus, Schnellladegerät und robustem Transportkoffer''.
+  \item \emph{Beschreibung-Struktur:} Kurz-Nutzeneinstieg $\rightarrow$ Hauptvorteile (Leistung, Akkulaufzeit, Robustheit) $\rightarrow$ Technische Daten $\rightarrow$ Kompatibilität (Akkus, Bits, Zubehör) $\rightarrow$ Anwendungsfälle $\rightarrow$ Lieferumfang $\rightarrow$ FAQ.
+\end{itemize}
+
+\textbf{4. Drei Content-Maßnahmen für Vertrauen \& Conversion:}
+\begin{itemize}
+  \item Anwendungsbilder mit Kontext (Montage, Innenausbau, Werkstatt).
+  \item Vergleichstabelle Basis-/Profi-/Zubehör-Set.
+  \item Downloadbare Kompatibilitätsliste für Bits, Akkus, Zubehör.
+\end{itemize}
+
+\textbf{5. Drei Retention-Maßnahmen:}
+\begin{itemize}
+  \item Zubehörsets + Ersatzakkus als strukturierte Folgeangebote.
+  \item Bundle-Angebote für professionelle Anwender (Akkuschrauber + 2 Akkus + Koffer + Zubehörset).
+  \item Nachkaufimpulse über E-Mail (sofern Kundendaten verfügbar) oder Plattform-Empfehlungslogik.
+\end{itemize}
+
+\begin{merkbox}[Managementhinweis]
+\emph{Zubehör- und Ersatzteile sind im B2B-Plattformgeschäft oft das Margen-Reservoir.} Wer nur das Hauptgerät optimiert, lässt 30\,--\,50\,\% des CLV liegen. Bundle-Logik schützt zusätzlich vor Preisvergleich.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Retention-Logik bei Verbrauchs- und Zubehörprodukten}{\nivLii}{15\,min}
+
+\ytquery{B2B Plattform Retention Wiederkauf Verbrauchsmaterial Bundle CLV}
+
+\begin{loesungbox}
+\textbf{1. Warum Retention oft profitabler ist:}
+Neukundengewinnung im Plattformkontext kostet pro qualifizierten Kunden 50\,--\,200\,\euro{} CAC (Sichtbarkeit, Werbung, Plattformgebühren). Bestandskunden haben einen niedrigeren CAC-Anteil pro Wiederkauf, höhere Conversion-Raten und weniger Retouren. Verbrauchs- und Zubehörprodukte werden zudem häufiger gekauft \textendash{} höhere Frequenz, planbare Umsätze.
+
+\textbf{2. Drei Wiederkauf-Trigger für ToolMaster:}
+\begin{itemize}
+  \item \emph{Zeitbasiert:} 6\,Monate nach Erstkauf eines Akkuschraubers $\rightarrow$ Erinnerung an Ersatzakkus / Verschleißteile.
+  \item \emph{Verbrauchsbasiert:} bei bekanntem Verbrauchsmuster (z.\,B.\ Bits-Set alle 4\,Monate) automatische Empfehlung.
+  \item \emph{Anlassbasiert:} neue Produktversion / Zubehör-Erweiterung $\rightarrow$ gezielte E-Mail an Bestandskunden.
+\end{itemize}
+
+\textbf{3. Zwei Plattformfunktionen:}
+\emph{Bundle-Logik} (z.\,B.\ Akkuschrauber + 2 Akkus + Werkzeugkoffer in einem Listing) und \emph{Verbrauchsmaterial-Subscription} (falls Plattform es unterstützt, z.\,B.\ ``Save \& Subscribe'' bei Amazon Business). Beide reduzieren Preisvergleich und schützen Marge.
+
+\textbf{4. Retention-Kennzahl:}
+\emph{Wiederkaufrate innerhalb 12\,Monaten} (Anteil der Kunden, die innerhalb eines Jahres nach Erstkauf erneut bei uns kaufen). Sekundär: durchschnittlicher \emph{Customer Lifetime Value} nach 24\,Monaten.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{ToolMaster Pro \textendash{} 6-Monats-Optimierungsentscheidung}{\nivLiii}{45\,min}
+
+\ytquery{Plattform Performance B2B Senior CRO Bewertungsmanagement Budget Marge}
+
+\begin{loesungbox}
+\textbf{1. Vier Hebel:}
+\textbf{Keywords + Content} (Titel, Beschreibung, FAQ), \textbf{Bilder + Anwendungsvideos}, \textbf{Bewertungsmanagement + Retention-Logik}, \textbf{Bundle- und Wiederkauf-Mechaniken}.
+
+\textbf{2. Budgetverteilung (90.000\,\euro):}
+\begin{itemize}
+  \item 25.000\,\euro{} \textendash{} Keyword-Analyse + Content-Optimierung (Titel, Beschreibung, FAQ).
+  \item 20.000\,\euro{} \textendash{} Bilder + Anwendungsvideos + Vergleichstabellen.
+  \item 15.000\,\euro{} \textendash{} FAQ + Kompatibilitätsdaten + Produktdaten-Qualität.
+  \item 15.000\,\euro{} \textendash{} Bewertungsmanagement (Prozess, Reporting, Antwortressourcen).
+  \item 10.000\,\euro{} \textendash{} Bundle- und Retention-Mechaniken.
+  \item 5.000\,\euro{} \textendash{} Tests, KPI-Setup, A/B-Auswertungen.
+\end{itemize}
+
+\textbf{3. Bewertungsmanagement-System:}
+\begin{itemize}
+  \item \emph{Wer wertet aus:} Kundenservice + Produktmanagement gemeinsam, wöchentlich.
+  \item \emph{Wer antwortet:} Kundenservice innerhalb 48\,h auf jede Bewertung.
+  \item \emph{Eskalation:} bei wiederkehrender Kritik (3+ Bewertungen zum gleichen Thema) $\rightarrow$ Eskalation an Produktmanagement (Stufe 1), Vertriebsleitung (Stufe 2), GF (Stufe 3 bei kritischen Themen).
+  \item \emph{Lernschleife:} Monatlich Bewertungs-Review-Meeting; Top-3 Themen werden zu Verbesserungsmaßnahmen.
+\end{itemize}
+
+\textbf{4. Entscheidung gegen Preissenkung:}
+ToolMaster Pro verzichtet bewusst auf aggressive Preissenkungen, obwohl der Plattform-Algorithmus niedrige Preise belohnt. Aus Senior-Level-Perspektive: Die Marge (24\,\%) ist die Voraussetzung für Service, Qualität und Markenpflege. Eine 10\,\%-Preissenkung würde die Marge auf 14\,\% drücken \textendash{} und damit weder Service noch Qualitätserhalt finanzieren. Stattdessen wird in Sichtbarkeit der \emph{Qualitätsunterschiede} investiert (Content, Bilder, Bewertungen). Eine reaktive Preisstrategie wäre der erste Schritt in eine strukturelle Margenerosion, aus der sich ein Anbieter selten erholt.
+
+\textbf{5. Vier KPIs:}
+\begin{itemize}
+  \item Conversion Rate (vs.\ Vorperiode).
+  \item Bewertungsdurchschnitt + Anteil neuer 4-5-Stern-Bewertungen.
+  \item Wiederkaufrate (12-Monats-Sicht) bei Bestandskunden.
+  \item Deckungsbeitrag pro Plattform-Listing (nach Plattformgebühr).
+\end{itemize}
+
+\textbf{6. Entscheidung unter Unsicherheit:}
+Investition von 20.000\,\euro{} in Anwendungsbilder und kurze Videos \emph{ohne} klaren ROI-Beweis. Annahme: \emph{Kunden, die Produkte in Anwendungssituationen sehen, kaufen mit höherer Wahrscheinlichkeit und mit weniger Retouren}. Lernindikator: nach 90\,Tagen testbarer Effekt auf Conversion Rate und Retourenquote bei 5 Pilot-Listings. Wenn keine Verbesserung $\geq$\,15\,\%: Re-Allokation in FAQ und Kompatibilitätsdaten.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Sichtbarkeit kann man kaufen \textendash{} Vertrauen muss man aufbauen.} Wer im Plattformkontext nur Sichtbarkeit kauft, optimiert Quartalszahlen. Wer Vertrauen aufbaut (Bewertungen, Service, Kompatibilität), schafft strukturellen Wettbewerbsvorteil.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Sichtbarkeit kaufen \textendash{} aber welche?}{\nivLiii}{30\,min}
+
+\ytquery{Plattform Sichtbarkeit Sponsored Products Premium Listing Marke Strategie}
+
+\begin{loesungbox}
+\textbf{1. Klassifizierung:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Typ} & \textbf{Hebel} \\
+\midrule
+Aufbauend (langfristiger Wert)  & Organisches Ranking (Content, Bewertungen) \textperiodcentered{} Algorithmus-konformes Verhalten (Lieferzeit, Retourenquote) \\
+\midrule
+Kaufend (kurzfristiger Effekt)  & Premium-Listing \textperiodcentered{} Plattform-Werbung (Sponsored) \textperiodcentered{} Sale-Aktionen \\
+\bottomrule
+\end{tabularx}
+
+\textbf{2. Für eine Qualitätsmarke strategisch wertvoller:}
+\emph{Organisches Ranking} (Content + Bewertungen) und \emph{algorithmus-konformes Verhalten} (kurze Lieferzeit, niedrige Retourenquote). Beide bauen \emph{strukturelle} Sichtbarkeit auf, die nicht erodieren, wenn das Werbebudget gekürzt wird. Sie verstärken die Markenwahrnehmung; Premium-Listing und Sponsored Ads dagegen können sogar Marke beschädigen, wenn sie zu offensichtlich als ``gekaufte'' Sichtbarkeit wahrgenommen werden.
+
+\textbf{3. Kurzfristig wirksam, strategisch riskant:}
+\emph{Sale-Aktionen} (trainieren Kunden auf Rabatte und beschädigen Marken-Anker) und \emph{Premium-Listing} (kann als Manipulation des Bewertungssystems wahrgenommen werden \textendash{} und wird bei nachlassender Performance vom Algorithmus selbst zurückgenommen).
+
+\textbf{4. Faustregel:}
+\emph{Sichtbarkeit kaufen ist akzeptabel, um eine bereits aufgebaute Position zu verstärken \textendash{} aber nicht, um eine schwache Position zu kompensieren.} Wer auf gekaufter Sichtbarkeit aufbaut, ohne organische Substanz, baut auf Sand: Sobald die Werbung gestoppt wird, fällt das Listing unter den Tisch.
+
+\textbf{5. Falsche Sichtbarkeit als späteres Reputationsproblem:}
+Beispiel: Premium-Akkuschrauber für 449\,\euro{} wird über Keyword ``billiger Akkuschrauber'' beworben. Klickrate steigt kurzfristig (Sichtbarkeit). Kunden klicken, sehen den Preis, sind enttäuscht, viele kaufen nicht $\rightarrow$ Klickrate ohne Conversion lässt das Listing im Algorithmus abrutschen. Wenige, die kaufen, fühlen sich getäuscht $\rightarrow$ schlechte Bewertungen. Die Sichtbarkeit von gestern wird das Reputationsproblem von morgen.
+
+\begin{merkbox}[Lessons Learned]
+\emph{Plattform-Sichtbarkeit ist ein Geld-Marker, der die Substanz nicht ersetzt.} Wer organische Substanz hat (Content, Bewertungen, Reaktionszeit), darf Sichtbarkeit kaufen, um sie zu verstärken. Wer keine Substanz hat, kauft sich nur in die Sichtbarkeit eines schwachen Listings hinein \textendash{} und produziert Folgekosten.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Plattform-Performance-Architektur}{\nivLiii}{45\,min}
+
+\ytquery{Plattform Performance Architektur B2B CRO Bewertungsmanagement Marge}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen möglich.}
+
+\smallskip
+\textbf{1. Zielbild 12\,--\,18\,Monate:}
+Das Unternehmen ist auf den priorisierten Plattformen als \emph{Qualitätsanbieter mit klarer Differenzierung} sichtbar, hat einen Bewertungsdurchschnitt $\geq$\,4,6 und mindestens dreimal so viele Bewertungen wie heute. Conversion Rate steigt um 30\,\%, Wiederkaufrate verdoppelt sich, Deckungsbeitrag pro Listing bleibt $\geq$\,18\,\%. Keine reaktiven Preisaktionen.
+
+\textbf{2. Segmentierung Plattformkunden + Suchintentionen:}
+\begin{itemize}
+  \item Professionelle Anwender (Handwerk, Werkstatt) \textendash{} Suchintention: Qualität + Verlässlichkeit.
+  \item Industrieller Bedarf \textendash{} Suchintention: Spezifikationen + Service.
+  \item Wiederkaufkunden \textendash{} Suchintention: Ersatzteile + Kompatibilität.
+\end{itemize}
+
+\textbf{3. Keyword-Architektur:}
+\begin{itemize}
+  \item \emph{Hauptkeywords:} ``Profi [Produkt]'', ``[Produkt] für Handwerk''.
+  \item \emph{Long-Tail:} produkt- und anwendungs-spezifische Kombinationen.
+  \item \emph{Problemorientiert:} ``für Dauereinsatz'', ``mit langer Lebensdauer''.
+  \item \emph{Bewusst ausgeschlossen:} ``billig'', ``Schnäppchen'', generische Wettbewerber-Vergleichs-Keywords.
+\end{itemize}
+
+\textbf{4. Content-Architektur:}
+\begin{itemize}
+  \item Titel: $\leq$\,150\,Zeichen, Hauptkeyword + Differenzierung.
+  \item Beschreibung: Nutzeneinstieg $\rightarrow$ Vorteile $\rightarrow$ Spezifikationen $\rightarrow$ Kompatibilität $\rightarrow$ Anwendungen $\rightarrow$ Lieferumfang.
+  \item Bilder: mind.\ 5 (Produkt + Anwendungen + Detail + Zubehör + Vergleich).
+  \item Video: 30\,--\,60\,Sek.\ Anwendungsvideo (wenn Plattform unterstützt).
+  \item FAQ: mind.\ 5 Antworten (Kompatibilität, Ersatzteile, Garantie, Service, Lieferung).
+  \item Vergleichstabelle: zwei Alternativ-Modelle (z.\,B.\ Basis vs.\ Profi vs.\ Industrie).
+\end{itemize}
+
+\textbf{5. Retention-Logik:}
+\begin{itemize}
+  \item Wiederkauf-Trigger zeitbasiert + verbrauchsbasiert.
+  \item Bundle-Angebote zur Vergleichbarkeitsreduktion.
+  \item Verbrauchsmaterial-Subscription (sofern Plattform unterstützt).
+  \item Bestandskunden-Pflege über E-Mail (wo Daten verfügbar) + Plattform-Empfehlungen.
+\end{itemize}
+
+\textbf{6. Bewertungsmanagement-System:}
+\begin{itemize}
+  \item Wöchentliche Auswertung; Themen-Clusterung.
+  \item Antwort auf jede Bewertung in 48\,h.
+  \item Eskalation: 3+ ähnliche Kritiken $\rightarrow$ Produktmanagement.
+  \item Lernschleife: monatliches Review; Top-Themen werden Verbesserungs-Tickets.
+  \item Aktive (regelkonforme) Bewertungs-Anfrage 14\,--\,21\,Tage nach Lieferung.
+\end{itemize}
+
+\textbf{7. KPI-Struktur:}
+\begin{itemize}
+  \item Operativ: Sichtbarkeit pro Listing, Klickrate, Conversion Rate, Retourenquote.
+  \item Management: Bewertungsdurchschnitt, Anzahl neuer Bewertungen, Wiederkaufrate, Deckungsbeitrag.
+  \item Strategisch: Marktanteil Qualitätssegment, CLV, Anteil organische vs.\ gekaufte Sichtbarkeit.
+\end{itemize}
+
+\textbf{8. Governance:}
+\begin{itemize}
+  \item CRO: Strategie + Budget.
+  \item Head of Marketplace: operative Steuerung pro Plattform.
+  \item Marketing: Content + Bilder.
+  \item Produktmanagement: Spezifikationen + Vergleichsinhalte.
+  \item Kundenservice: Bewertungsmanagement.
+  \item Monatlicher Steuerungskreis Plattform-Performance.
+\end{itemize}
+
+\textbf{9. Risikoanalyse:}
+\begin{itemize}
+  \item Preisdruck $\rightarrow$ Bundle, Service-Mehrwert, Qualitätssichtbarkeit.
+  \item Falsche Kundenerwartung $\rightarrow$ keine Preis-Keywords, klare Beschreibung.
+  \item Schlechte Bewertungen $\rightarrow$ Bewertungsmanagement + Frühwarnsystem.
+  \item Plattformabhängigkeit $\rightarrow$ Multi-Plattform-Präsenz + eigener Direktkanal.
+  \item Margenverlust $\rightarrow$ Deckungsbeitrag-KPI als Steuerungs-KPI, nicht nur Umsatz.
+\end{itemize}
+
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item Investition in Content/Bilder \emph{vor} sichtbarem Conversion-Effekt. Annahme: Kunden im Premium-Segment werten Content höher als Preis. Wenn falsch: Re-Allokation in Bewertungsmanagement.
+  \item Verzicht auf Sponsored-Ads-Kampagne, obwohl der Plattform-Algorithmus sie belohnen würde. Annahme: organische Substanz schlägt gekaufte Sichtbarkeit langfristig.
+  \item Bundle-Logik als Schutz vor Preisvergleich \emph{bevor} Bundle-Akzeptanz nachgewiesen ist. Annahme: B2B-Kunden honorieren Komplettlösungen.
+\end{enumerate}
+
+\textbf{Zusatz \textendash{} Verzicht auf kurzfristige Reichweite:}
+Bewusster Verzicht auf eine 30-Tage-Rabattaktion über alle Plattformen. Aus Senior-Level-Sicht: Eine Rabattaktion zerstört den Preisanker für Bestandskunden, signalisiert ``hier wird man billig'' und führt zu Folge-Aktionen, weil das Listing ohne Rabatt schlechter performt. Stattdessen wird das Budget in Content und Bewertungen investiert.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Plattform-Performance ist eine Verteidigung gegen den Preisdruck-Algorithmus.} Wer dem Algorithmus folgt (``mehr Sichtbarkeit, niedrigere Preise''), wird zum Commodity-Anbieter. Wer ihm widersteht (Qualität sichtbar machen), bleibt eine Marke.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Diskussionsbasis. Vergleichen Sie Ihre Annahmen, Ihre Zielkonflikte und Ihre Entscheidungen.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Coaching-Frage: Welche Keyword-/Content-/Bewertungs-Entscheidung haben Sie aus Markenüberlegung getroffen \textendash{} und würden Sie diese auch dann verteidigen, wenn der Plattform-Algorithmus Ihr Listing kurzfristig schlechter rankt?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 7 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

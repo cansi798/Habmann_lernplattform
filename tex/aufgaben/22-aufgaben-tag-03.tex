@@ -1,0 +1,612 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 3 - Aufgabenheft
+% Plattform-Geschaeftsmodelle, Netzwerkeffekte & Launch-Strategien
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 3}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Plattform-Geschäftsmodelle}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 2 \textperiodcentered{} TAG 3 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 1.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 3\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Plattform-Geschäftsmodelle,\\Netzwerkeffekte \& Launch-Strategien\\\textendash{} elf Aufgaben auf drei Niveaus.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- ANLEITUNG -----------------------------------------------------------
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Tag 3 markiert den Übergang vom \emph{Plattformnutzer} zum \emph{Plattformgestalter}: Sie verlassen die Sicht des Anbieters, der eine Plattform \emph{nutzt}, und nehmen die Sicht des Architekten ein, der eine Plattform \emph{baut}. Drei Begriffe stehen heute im Mittelpunkt: \fachbegriff{Plattform-Geschäftsmodell}, \fachbegriff{Netzwerkeffekte} und \fachbegriff{Launch-Strategie}.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Akteursgruppen, Plattformtypen, Netzwerkeffekt-Logik reproduzieren.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} CraftConnect und MachineHub als Plattform-Cases gestalten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Ökosystemdesign, Launch unter Unsicherheit, Plattform-Geschäftsmodellarchitektur.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Plattformen sind keine besseren Online-Shops. Sie sind \emph{Mehrseitige Märkte}, in denen Wert nicht durch Verkauf, sondern durch \emph{Vermittlung} entsteht. Diese Verschiebung verändert alles \textendash{} von Erlöslogik bis Governance.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Lineares vs.\ Plattform-Geschäftsmodell}{\nivLi}{6\,min}
+
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Definieren Sie in \emph{einem} Satz:
+  \begin{itemize}
+    \item Lineares Geschäftsmodell
+    \item Plattform-Geschäftsmodell
+  \end{itemize}
+  \item Nennen Sie für beide ein konkretes Unternehmens-Beispiel \textendash{} jeweils aus dem B2B-Bereich.
+  \item Schreiben Sie einen dritten Satz: Was ist der \emph{entscheidende} Unterschied in der Wertschöpfungslogik?
+  \item Ein viertes Beispiel: Nennen Sie ein Unternehmen, das beide Logiken parallel betreibt (z.\,B.\ Amazon, Apple). Wie sind sie verbunden?
+\end{enumerate}
+
+\ytquery{lineares Geschäftsmodell Plattform Geschäftsmodell Unterschied Wertschöpfung}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Sechs Plattformakteure benennen}{\nivLi}{6\,min}
+
+\noindent Plattformen sind keine bilateralen Beziehungen \emph{Verkäufer\,$\leftrightarrow$\,Kunde}, sondern Ökosysteme mit mehreren Akteursgruppen. Üblich sind: \emph{Anbieter \textperiodcentered{} Nachfrager \textperiodcentered{} Plattformbetreiber \textperiodcentered{} Zahlungsdienstleister \textperiodcentered{} Datenpartner \textperiodcentered{} Service-/Logistikanbieter}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Beschreiben Sie jede der sechs Rollen in \emph{einem} Satz.
+  \item Zeichnen Sie (verbal) das Akteursgefüge bei \emph{Amazon Marketplace}: Wer ist Anbieter, Nachfrager, Betreiber, Zahlungsdienstleister, Datenpartner, Logistikanbieter?
+  \item Welche Akteursgruppe wird in der Diskussion über Plattformen am häufigsten \emph{vergessen} \textendash{} und warum ist das ein strategisches Risiko?
+\end{enumerate}
+
+\ytquery{Plattform Akteursgruppen Marktplatz Betreiber Anbieter Nachfrager Daten}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Direkte vs.\ indirekte Netzwerkeffekte \textendash{} Erinnerung und Erweiterung}{\nivLi}{8\,min}
+
+\noindent An Tag 1 wurden direkte und indirekte Netzwerkeffekte bereits eingeführt. Heute geht es um die \emph{kritische Masse} und das \emph{Henne-Ei-Problem}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Definieren Sie in jeweils \emph{einem} Satz:
+  \begin{itemize}
+    \item Direkter Netzwerkeffekt
+    \item Indirekter Netzwerkeffekt
+    \item Kritische Masse
+    \item Henne-Ei-Problem
+  \end{itemize}
+  \item Lesen Sie die folgenden drei Szenarien und benennen Sie für jedes, welcher Effekt (direkt / indirekt / beides) wirkt:
+  \begin{itemize}
+    \item Eine B2B-Marktplatzplattform für Ersatzteile gewinnt 50 zusätzliche Anbieter \textendash{} und die Nachfrage steigt.
+    \item Eine fachliche Slack-Community für CFOs wächst um 200 Mitglieder, und jedes einzelne Mitglied erlebt mehr Nutzen.
+    \item LinkedIn fügt Recruiting-Tools hinzu: Mehr Recruiter führen zu mehr Bewerber-Reaktionen.
+  \end{itemize}
+  \item Schreiben Sie einen Schlusssatz: Welcher Effekt ist schwerer aufzubauen, welcher ist nach Erreichen der kritischen Masse stärker geschützt?
+\end{enumerate}
+
+\ytquery{Netzwerkeffekt direkt indirekt kritische Masse Henne Ei Problem Plattform}
+
+\antwortlinien{10}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{CraftConnect \textendash{} Geschäftsmodell strukturieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``CraftConnect'' möchte eine digitale Plattform aufbauen, über die kleine Handwerksbetriebe kurzfristig Aufträge von Privatkunden und Hausverwaltungen erhalten können. Bisher finden Kunden Handwerker über Empfehlungen, lokale Suchmaschinen oder einzelne Webseiten. Viele Handwerker haben volle Auftragsbücher, aber Probleme mit Planung, Leerlaufzeiten und Neukundenqualität.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Kundenseite: Privatkunden und Hausverwaltungen suchen geprüfte Handwerker.
+  \item Anbieterseite: Handwerksbetriebe suchen planbare, passende Aufträge.
+  \item Plattformbetreiber will Vertrauen, Vergleichbarkeit und Terminverfügbarkeit schaffen.
+  \item Startbudget ist begrenzt.
+  \item Beide Seiten kennen die Plattform noch nicht.
+  \item Qualität und Zuverlässigkeit sind kritisch (Empfehlungsgeschäft, Schadensrisiko).
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie die \textbf{beteiligten Akteursgruppen}.
+  \item Beschreiben Sie für \emph{jede} Akteursgruppe das \textbf{Nutzenversprechen} in 1\,--\,2 Sätzen.
+  \item Erklären Sie in 3\,--\,4 Sätzen, worin das \textbf{Plattform-Geschäftsmodell} von CraftConnect besteht \textendash{} und wodurch es sich von einer reinen Lead-Vermittlungs-Website (z.\,B.\ ``Branchenbuch online'') unterscheidet.
+  \item Unterscheiden Sie: Welche \emph{Leistungen erbringt die Plattform selbst}, welche \emph{erbringen die Anbieter}?
+  \item Entwickeln Sie \textbf{drei mögliche Erlösquellen} für den Plattformbetreiber. Bewerten Sie für jede Erlösquelle: \emph{Akzeptanz Anbieterseite}, \emph{Akzeptanz Nachfragerseite}, \emph{Skalierbarkeit}.
+  \item Benennen Sie \textbf{drei Risiken} für den Plattformstart.
+\end{enumerate}
+
+\ytquery{Plattform Geschäftsmodell Handwerker Vermittlung Nutzenversprechen Erlöslogik}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{CraftConnect \textendash{} Henne-Ei-Launch entscheiden}{\nivLii}{30\,min}
+
+\begin{infobox}[Ausgangsproblem]
+Die Plattform kann nur funktionieren, wenn genügend Handwerker \emph{und} genügend Kunden teilnehmen. Handwerker melden sich aber nur an, wenn sie echte Aufträge erwarten. Kunden nutzen die Plattform nur, wenn genügend passende Handwerker verfügbar sind.
+
+\smallskip
+\textbf{Zusätzliche Informationen:}
+\begin{itemize}
+  \item In der Startregion gibt es 1.200 relevante Handwerksbetriebe.
+  \item Die Plattform kann zu Beginn nur \emph{eine} Stadt bedienen.
+  \item Besonders hohe Nachfrage besteht bei Sanitär, Elektro und Renovierung.
+  \item Kunden erwarten schnelle Antwortzeiten und transparente Bewertungen.
+  \item Handwerker wollen \emph{keine} unqualifizierten Anfragen.
+  \item Das Budget reicht nicht für einen deutschlandweiten Launch.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie das Henne-Ei-Problem konkret für CraftConnect (3\,--\,4 Sätze).
+  \item Identifizieren Sie \textbf{direkte und indirekte Netzwerkeffekte}: Wer profitiert von wem? Welche Effekte sind \emph{stark}, welche \emph{schwach}?
+  \item Treffen Sie die \textbf{Marktseiten-Entscheidung}: Handwerker zuerst aufbauen, Kunden zuerst aufbauen, oder beide parallel? Begründen Sie in 3\,Sätzen.
+  \item Entwickeln Sie einen \textbf{realistischen Launch-Ansatz für die ersten 6 Monate} \textendash{} inklusive Anreizen für die zuerst gewonnene Seite.
+  \item Legen Sie \textbf{drei Kennzahlen} fest, mit denen der Launch-Erfolg gemessen wird (nicht: Registrierungen).
+  \item Entscheiden Sie: Soll CraftConnect \emph{breit} starten (alle Gewerke) oder \emph{schmal} (nur Sanitär + Elektro)? Was ist Ihre Annahme dahinter?
+\end{enumerate}
+
+\ytquery{Plattform Launch Henne Ei Marktseite Anreiz B2B kritische Masse Handwerker}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Sechs Plattformtypen \textendash{} CraftConnect einordnen}{\nivLii}{15\,min}
+
+\noindent\textbf{Sechs Plattformtypen} aus dem Lehrskript Tag 3: \emph{Marktplatz \textperiodcentered{} Vermittlungsplattform \textperiodcentered{} Serviceplattform \textperiodcentered{} Datenplattform \textperiodcentered{} Content-Plattform \textperiodcentered{} Ökosystemplattform}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Ordnen Sie CraftConnect dem passenden Plattformtyp zu. Falls mehrere passen: Welcher ist der \emph{dominante} Typ, welche sind sekundär?
+  \item Begründen Sie Ihre Wahl mit drei Kriterien (Wertschöpfungsart, Erlöslogik, Kundenproblem).
+  \item Wie würde sich CraftConnect verändern, wenn es sich in 3\,Jahren zu einer \emph{Ökosystemplattform} weiterentwickelt (z.\,B.\ Versicherung, Materialeinkauf, Buchhaltung)? Beschreiben Sie zwei strategische Konsequenzen.
+  \item Vergleichen Sie CraftConnect mit zwei realen Plattformen Ihrer Wahl (z.\,B.\ MyHammer, Helpling, TaskRabbit, ProvenExpert, Listando). Welcher Typ \textendash{} und warum?
+\end{enumerate}
+
+\ytquery{Plattformtypen Vermittlungsplattform Serviceplattform Ökosystem Handwerk}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{MachineHub \textendash{} Plattform-Potenzialbewertung}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: MachineHub]
+``MachineHub'' ist ein mittelständisches Unternehmen, das bisher Ersatzteile für Industriemaschinen direkt an Produktionsbetriebe verkauft. Die Geschäftsführung erkennt, dass Kunden zunehmend digitale Beschaffung, schnelle Verfügbarkeit und Servicebündel erwarten. Gleichzeitig gibt es viele kleinere Wartungsdienstleister mit freien Kapazitäten, die schwer sichtbar sind.
+
+\smallskip
+Das Unternehmen prüft den Aufbau einer Plattform, auf der Produktionsbetriebe Ersatzteile bestellen \emph{und} geprüfte Wartungsdienstleister buchen können. Ziel: nicht nur Produkte verkaufen, sondern ein digitales Ökosystem rund um \emph{Ersatzteile, Wartung und Maschinenverfügbarkeit} aufbauen.
+
+\smallskip
+\textbf{Rahmenbedingungen:} 45\,Mio.\,\euro{} Jahresumsatz \textperiodcentered{} 1.800 Produktionsbetriebe als Bestandskunden \textperiodcentered{} 400 potentielle Wartungspartner \textperiodcentered{} 500.000\,\euro{} Startbudget \textperiodcentered{} 9\,Monate für Pilotstart \textperiodcentered{} IT teilweise veraltet \textperiodcentered{} Vertrieb befürchtet Kontrollverlust.
+
+\smallskip
+\textbf{Strategische Optionen:}
+\begin{itemize}
+  \item \textbf{A:} Reiner Ersatzteil-Marktplatz.
+  \item \textbf{B:} Plattform für Ersatzteile \emph{plus} Wartungsdienstleister.
+  \item \textbf{C:} Geschlossenes Kundenportal nur für Bestandskunden.
+  \item \textbf{D:} Offenes Ökosystem mit Partnern, Datenservices und Servicepaketen.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beurteilen Sie in 3\,--\,4 Sätzen: \emph{Sollte MachineHub überhaupt ein Plattform-Geschäftsmodell entwickeln \textendash{} oder besser beim klassischen Direktvertrieb bleiben?}
+  \item Identifizieren Sie die relevanten \textbf{Plattformakteure} (mindestens 5) und deren Nutzenversprechen.
+  \item Beschreiben Sie zwei \textbf{direkte} und zwei \textbf{indirekte} Netzwerkeffekte, die wirken könnten \textendash{} positiv und negativ.
+  \item Bewerten Sie die vier Optionen A--D nach: Wachstum, Risiko, Komplexität, Kundennutzen, Datenzugang, Skalierbarkeit (Skala 1\,--\,5).
+  \item Wählen Sie eine \textbf{Launch-Option} und begründen Sie in 3\,--\,4 Sätzen.
+\end{enumerate}
+
+\ytquery{B2B Plattform Ersatzteile Wartung Ökosystem Industrie MachineHub Launch}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Sechs Launch-Strategien einordnen}{\nivLii}{15\,min}
+
+\noindent Aus dem Lehrskript Tag 3 \textendash{} sechs typische Launch-Ansätze:
+
+\medskip
+\begin{itemize}
+  \item \emph{Nischenstart} (klein, fokussiert, lernorientiert)
+  \item \emph{Pilotmarkt} (eine Stadt/Region, dann Skalierung)
+  \item \emph{Angebotsseite zuerst} (Anbieter gezielt aufgebaut)
+  \item \emph{Nachfrageseite zuerst} (Nachfrage erzeugt Sog auf Anbieter)
+  \item \emph{Kuratierter Start} (handverlesene Teilnehmer, Qualitätsfokus)
+  \item \emph{Partnerschaftsstart} (Kooperationen mit bestehenden Akteuren)
+\end{itemize}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Ordnen Sie für \textbf{CraftConnect} und \textbf{MachineHub} jeweils die \emph{ein bis zwei} passendsten Launch-Strategien zu. Begründen Sie kurz.
+  \item Welche Strategie wäre für eine \emph{Spotify-für-Hörbücher}-Plattform (zwei Marktseiten: Verlage und Hörer) am sinnvollsten? Begründen Sie.
+  \item Welche Launch-Strategie wird im B2B-Mittelstand am häufigsten \emph{überschätzt}, welche \emph{unterschätzt}?
+\end{enumerate}
+
+\ytquery{Plattform Launch Strategie Nischenstart Pilotmarkt Angebotsseite Partner}
+
+\antwortlinien{14}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{MachineHub \textendash{} 9-Monats-Launch-Architektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fortsetzung MachineHub]
+Vier strategische Optionen: \textbf{A}~Reiner Ersatzteil-Marktplatz \textperiodcentered{} \textbf{B}~Ersatzteile \emph{plus} Wartungsdienstleister \textperiodcentered{} \textbf{C}~Geschlossenes Kundenportal nur für Bestandskunden \textperiodcentered{} \textbf{D}~Offenes Ökosystem mit Partnern und Datenservices.
+
+\smallskip
+Sie sind Chief Platform Officer und müssen der Geschäftsführung in 6 Wochen eine entscheidungsreife Empfehlung vorlegen. Es geht nicht nur um die Option, sondern um die \emph{Launch-Architektur}.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Treffen Sie die \textbf{Optionsentscheidung} (A, B, C oder D \textendash{} oder Kombination). Begründen Sie in 5\,--\,7 Sätzen aus Senior-Level-Perspektive: \emph{Welche Kombination aus Kundennutzen, Netzwerkeffekt-Potential und Risiko ergibt die robusteste Plattform?}
+  \item Entwickeln Sie eine \textbf{Akteurslandkarte} (mindestens 6 Akteure) mit \emph{Nutzenversprechen je Akteur} und \emph{Zugangskriterien} (Wer darf teilnehmen, wer nicht).
+  \item Entscheiden Sie, welche \textbf{Marktseite zuerst} aufgebaut wird. Welche Anreize / Incentives motivieren die zuerst gewonnene Seite, mitzumachen, solange die andere Seite noch fehlt?
+  \item Entwerfen Sie einen \textbf{Launch-Plan für 9 Monate} in drei Phasen (Monat 1\,--\,3 / 4\,--\,6 / 7\,--\,9) mit:
+  \begin{itemize}
+    \item Konkreten Meilensteinen pro Phase
+    \item Budgetverteilung (gesamt: 500.000\,\euro)
+    \item Verantwortlichkeiten (MachineHub-intern + extern)
+  \end{itemize}
+  \item Entwickeln Sie eine \textbf{Governance-Logik} \textendash{} Regeln für Qualität, Zugang, Bewertungen, Konfliktlösung. Mindestens 5 Regeln.
+  \item Treffen Sie \emph{mindestens eine Entscheidung unter Unsicherheit}. Welche Annahme \emph{muss} dafür stimmen? Wie wird diese Annahme früh überprüft (Lernindikator)?
+  \item Welcher Risikomarker (KPI) führt zum \textbf{Stopp oder Pivot} der Plattform?
+\end{enumerate}
+
+\ytquery{Plattform Launch Architektur Industrie B2B Akteurslandkarte Governance}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Negative Netzwerkeffekte \textendash{} Plattformrisiko}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Netzwerkeffekte wirken nicht nur in eine Richtung. \emph{Negative Netzwerkeffekte} entstehen, wenn ein Wachstumsschub die Qualität der Plattform \emph{verschlechtert}: zu viele schlechte Anbieter senken das Vertrauen, zu viele unqualifizierte Anfragen frustrieren die Anbieterseite, zu viel Volumen überlastet Support und Logistik.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Definieren Sie ``negativer Netzwerkeffekt'' in eigenen Worten (2\,--\,3 Sätze).
+  \item Benennen Sie für \textbf{CraftConnect} drei konkrete Szenarien, in denen ein negativer Netzwerkeffekt entstehen könnte. Wo \emph{kippt} die Dynamik?
+  \item Entwickeln Sie für jedes Szenario eine \textbf{präventive Governance-Regel}, die den negativen Effekt verhindert.
+  \item Diskutieren Sie: Wann ist es \emph{strategisch klüger}, das Wachstum bewusst zu \textbf{bremsen}, um Qualität und Vertrauen zu schützen? Schreiben Sie eine Faustregel.
+  \item Wählen Sie ein bekanntes Plattform-Beispiel (Uber, Airbnb, Yelp, Booking, Etsy, TaskRabbit), bei dem negative Netzwerkeffekte sichtbar geworden sind. Was hat die Plattform \emph{nicht} rechtzeitig getan?
+\end{enumerate}
+
+\ytquery{negative Netzwerkeffekte Plattform Qualitätsverlust Vertrauen Governance}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Plattform-Geschäftsmodellarchitektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Platform Officer eines mittelständischen Unternehmens, das sich vom klassischen Produktanbieter zum Betreiber eines digitalen Plattform-Ökosystems weiterentwickeln möchte.
+
+\smallskip
+\textbf{Ausgangslage:} Das Unternehmen verfügt über starke Fachkompetenz, einen bestehenden Kundenstamm, gute Marktkenntnis \textendash{} hat aber wenig Erfahrung im Betrieb mehrseitiger Plattformmodelle. Die Geschäftsführung erwartet ein skalierbares Geschäftsmodell, das neue Umsatzquellen erschließt, Kundenbindung stärkt und Partner in ein digitales Ökosystem einbindet.
+
+\smallskip
+\textbf{Risiken:} hohe Anfangsinvestitionen, unklare Nachfrage, fehlende kritische Masse, mögliche Qualitätsprobleme, Widerstand im Vertrieb, Plattform-Kannibalisierung des Kerngeschäfts, regulatorische Anforderungen.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strategische \emph{Entscheidungsarchitektur} \textendash{} keine Plattformidee, sondern ein belastbares Plattform-Geschäftsmodell. Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item Eine klare Beschreibung des \textbf{geplanten Plattform-Geschäftsmodells} (5\,--\,7 Sätze).
+  \item Eine \textbf{Abgrenzung zum bisherigen linearen Geschäftsmodell}: Was ändert sich strukturell?
+  \item Eine \textbf{Akteurslandkarte} des Plattform-Ökosystems (mindestens 6 Akteure).
+  \item Ein \textbf{Nutzenversprechen für jede relevante Marktseite} \textendash{} kein generisches ``mehr Effizienz'', sondern konkret.
+  \item Eine \textbf{Analyse direkter und indirekter Netzwerkeffekte} \textendash{} positive \emph{und} negative.
+  \item Eine \textbf{Entscheidung}, welche Marktseite zuerst aufgebaut wird, mit konkreter Anreizlogik.
+  \item Einen \textbf{fokussierten Launch-Ansatz für die ersten 12 Monate} (Nischenstart oder Pilotmarkt; nicht beides).
+  \item Eine \textbf{Governance-Logik} mit Regeln für Qualität, Zugang, Daten, Verantwortung (mindestens 5 Regeln).
+  \item Eine \textbf{Risikoanalyse} zu kritischer Masse, Vertrauen, Plattformmissbrauch, Partnerabhängigkeit, interner Akzeptanz, Kannibalisierung Kerngeschäft.
+  \item \textbf{Drei Managemententscheidungen unter Unsicherheit} \textendash{} jeweils mit der Annahme, die stimmen muss.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens \emph{eine bewusste Entscheidung gegen schnelles Wachstum}, wenn dadurch Qualität, Vertrauen oder strategische Kontrolle gefährdet wären. Begründen Sie aus Senior-Level-Perspektive.
+
+\ytquery{Plattform Geschäftsmodell Architektur Mittelstand Ökosystem Launch Governance}
+
+\antwortlinien{40}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 3}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Lineares vs.\ Plattform-Geschäftsmodell sauber abgrenzen.
+  \item Sechs Plattformakteure benennen und auf konkrete Plattformen anwenden.
+  \item Direkte / indirekte / negative Netzwerkeffekte erkennen und steuern.
+  \item Das Henne-Ei-Problem analysieren und eine Marktseiten-Entscheidung treffen.
+  \item Sechs Launch-Strategien einordnen und einen Launch-Plan entwickeln.
+  \item Ein Plattform-Geschäftsmodell als Akteurslandkarte, Nutzenversprechen und Governance gestalten.
+  \item Eine Plattform-Architektur als Entscheidungsarchitektur denken.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 3 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

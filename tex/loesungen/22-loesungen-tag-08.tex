@@ -1,0 +1,654 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 8 - Loesungsheft
+% Dynamische Preisstrategien & Performance-Monitoring auf Plattformen
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{merkbox}[1][Managementhinweis]{enhanced, breakable, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAmberBorder, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 8}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Dynamische Preise \& Plattform-Performance}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 4 \textperiodcentered{} TAG 8 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 9.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 8\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Dynamische\\Preisstrategien \& Performance.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 8}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Eine mögliche Lösung. Mehrere Begründungswege sind legitim, solange sie:
+
+\begin{itemize}
+  \item den Begriffsapparat von Tag 8 nutzen (Preisstrategien, Marktanalyse-Felder, Performance-KPIs),
+  \item Annahmen sichtbar machen,
+  \item Zielkonflikte (Marge vs.\ Sichtbarkeit, kurzfristiger Umsatz vs.\ langfristige Marke) benennen,
+  \item zu klaren Entscheidungen kommen.
+\end{itemize}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Statisch \textendash{} aktionsbasiert \textendash{} dynamisch}{\nivLi}{6\,min}
+
+\ytquery{statische aktionsbasierte dynamische Preisstrategie Plattform Unterschied}
+
+\begin{loesungbox}
+\textbf{1. Definitionen:}
+\begin{itemize}
+  \item \emph{Statische Preisgestaltung:} Preis wird einmal festgelegt und bleibt über lange Zeit unverändert. Reaktionen auf Marktveränderungen nur sporadisch.
+  \item \emph{Aktionsbasierte Preisgestaltung:} Preis ist im Normalfall stabil, wird aber durch gezielte, zeitlich begrenzte Aktionen reduziert (Black Friday, Saisonschlussverkauf).
+  \item \emph{Dynamische Preisstrategie:} Preis wird kontinuierlich an interne (Lager, Marge, Lieferfähigkeit) und externe Faktoren (Wettbewerb, Nachfrage) angepasst \textendash{} regelbasiert, häufig algorithmisch.
+\end{itemize}
+
+\textbf{2. Beispiele:}
+\begin{itemize}
+  \item Statisch: traditioneller B2B-Maschinenhersteller mit Preisliste 1x/Jahr.
+  \item Aktionsbasiert: Mittelständischer Online-Shop mit Sommer- und Winteraktionen.
+  \item Dynamisch: Amazon Marketplace, wo Repricing-Tools Wettbewerber-Preise minütlich tracken.
+\end{itemize}
+
+\textbf{3. Im B2B-Mittelstand dominant und Problem:}
+Im Mittelstand dominiert noch \emph{statische} Preisgestaltung (Preisliste, jährliche Anpassung). Strategisches Problem: Im Plattformkontext, wo Wettbewerber-Preise täglich sichtbar sind, wirkt eine statische Preisliste wie ein leerer Stuhl im laufenden Spiel \textendash{} die Position wird Tag für Tag schlechter, ohne dass jemand reagiert.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Acht Preisstrategien einordnen}{\nivLi}{8\,min}
+
+\ytquery{Preisstrategie Premium Penetration Wettbewerb Bundle Mengenrabatt Wert}
+
+\begin{loesungbox}
+\textbf{1. Definitionen:}
+\begin{itemize}
+  \item \emph{Premiumpreis:} bewusst hoher Preis, signalisiert Qualität (Apple, Bose).
+  \item \emph{Wettbewerbsparität:} eigener Preis liegt sehr nah am Marktführer (Coca-Cola vs.\ Pepsi).
+  \item \emph{Penetrationspreis:} niedriger Einstiegspreis zur Marktdurchdringung (neue Streaming-Dienste).
+  \item \emph{Bündelpreise:} mehrere Produkte zusammen günstiger als einzeln (Software-Suites).
+  \item \emph{Mengenrabatte:} höhere Stückzahl = niedrigerer Stückpreis (B2B-Standard).
+  \item \emph{Zeitlich begrenzte Aktionen:} Sonderpreise für definierten Zeitraum.
+  \item \emph{Wertorientierte Preise:} Preis basiert auf Kundennutzen, nicht auf Kosten oder Wettbewerb.
+  \item \emph{Differenzierte Preise nach Produktsegmenten:} unterschiedliche Logik für Premium / Standard / Verbrauchsmaterial.
+\end{itemize}
+
+\textbf{2. Passung:}
+\begin{itemize}
+  \item Premium-Marke: \emph{Premiumpreis} + \emph{wertorientierte Preise}.
+  \item Penetration neuer Markt: \emph{Penetrationspreis} + zeitlich begrenzte Aktionen.
+  \item Ersatzteilgeschäft: \emph{stabile Preise} + Mengenrabatte für Großkunden.
+\end{itemize}
+
+\textbf{3. Instinktiv falsch im Mittelstand:}
+\emph{Penetrationspreis} wird häufig falsch eingesetzt: Mittelständler senken Preise dauerhaft, um in den Plattformrankings zu erscheinen \textendash{} ohne klare Exit-Strategie. Folge: Sie können die Preise nie wieder erhöhen, weil Kunden den niedrigen Preis als ``normal'' verankert haben. Penetration ist nur dann sinnvoll, wenn ein klares Zeitfenster und eine Pricing-Power-Story für danach existiert.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Pricing ist Verhaltenssteuerung der eigenen Kunden.} Wer Kunden auf Rabatte trainiert, wird sie ohne Rabatte verlieren \textendash{} oder erst dann wieder gewinnen, wenn er sie noch stärker rabattiert.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Acht Einflussfaktoren dynamischer Preise}{\nivLi}{6\,min}
+
+\ytquery{dynamische Preise Einflussfaktoren Wettbewerb Nachfrage Marge Marktanalyse}
+
+\begin{loesungbox}
+\textbf{1. Zuordnung intern/extern:}
+\begin{itemize}
+  \item \emph{Intern:} Lagerbestand, Lieferfähigkeit, Marge, Plattformgebühren, Conversion Rate (eigene).
+  \item \emph{Extern:} Wettbewerbspreise, Nachfrage, Saisonalität, Bewertungen.
+\end{itemize}
+
+\emph{Anmerkung:} ``Bewertungen'' können auch intern interpretiert werden (eigene Service-Qualität führt zu Bewertungen).
+
+\textbf{2. In naiven Strategien ignoriert:}
+\emph{Marge} und \emph{Plattformgebühren}. Naive Strategien optimieren auf den \emph{Verkaufspreis} und vergessen, dass nach Plattformprovisionen (8\,--\,15\,\%), Versand, Retourenrückstellungen und Zahlungsgebühren oft nur Bruchteile bleiben. Schaden: ``erfolgreiche'' Verkäufe sind in Wahrheit Verlustgeschäft \textendash{} und werden so lange nicht erkannt, bis das Quartal abgerechnet ist.
+
+\textbf{3. Wann nicht auf Wettbewerber-Preis reagieren:}
+\begin{itemize}
+  \item Wenn der Wettbewerber eine andere Marktposition hat (Premium reagiert nicht auf Budget).
+  \item Wenn die eigene Marge unter die Mindestschwelle fällt.
+  \item Wenn der Wettbewerber-Preis wahrscheinlich nicht dauerhaft ist (Ausverkauf, Lagerräumung).
+  \item Wenn eine Preissenkung den Marken-Anker beschädigen würde.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{HomeTech Pro \textendash{} Marktposition analysieren}{\nivLii}{25\,min}
+
+\ytquery{B2B Plattform Preisentscheidung Marktposition Premium Wettbewerb HomeTech}
+
+\begin{loesungbox}
+\textbf{1. Marktposition:}
+HomeTech Pro liegt im \emph{oberen Mid-Tier} bzw.\ \emph{unteren Premium}-Bereich \textendash{} 149\,\euro{} zwischen Wettbewerber A (119, Mid-Tier) und Wettbewerber C (169, Premium). Wettbewerber B (89) ist Budget. HomeTech ist nicht klar Premium positioniert (zu wenig Bewertungen, weniger Sichtbarkeit als A) und nicht Budget. Damit liegt es in der \emph{strategisch schwierigsten} Position: ``zu teuer für Preis-Suchende, zu unsichtbar für Qualitäts-Suchende''.
+
+\textbf{2. Fehlende Informationen:}
+\begin{itemize}
+  \item Kosten- und Margenstruktur pro Produkt.
+  \item Käufer-Personas und ihr Kaufmotiv (Preis vs.\ Energieeinsparung vs.\ App-Bedienung).
+  \item Conversion-Raten der Wettbewerber-Listings.
+  \item Preiselastizität (was passiert, wenn 149 $\rightarrow$ 139 oder 129).
+  \item Bundle-Potenzial (Thermostat + Sensoren + Service).
+  \item Kundenservicekosten (was kostet ein Support-Fall?).
+\end{itemize}
+
+\textbf{3. Drei Preisstrategien:}
+\begin{itemize}
+  \item \emph{A \textendash{} Preisstabil + Sichtbarkeitsausbau:} 149\,\euro{} bleiben, Investition in Bewertungen, Content, Bilder. Marge bleibt, Marke stärker.
+  \item \emph{B \textendash{} Moderate Anpassung (139\,\euro):} kleinere Senkung, getestet auf Pilotperiode 4\,Wochen. Risiko: Anker rutscht.
+  \item \emph{C \textendash{} Bundle / Wertorientiert:} Thermostat + 2 Sensoren + 1\,Jahr Premium-Support für 199\,\euro{} \textendash{} Vergleichbarkeit reduziert.
+\end{itemize}
+
+\textbf{4. Chancen / Risiken:}
+\begin{itemize}
+  \item A: Chance: Marke wächst, Marge bleibt. Risiko: kurzfristig keine CR-Steigerung.
+  \item B: Chance: kurzfristige Conversion-Steigerung. Risiko: Anker rutscht, Wettbewerber A senkt nach (Preiskrieg).
+  \item C: Chance: Margenstabil + Differenzierung. Risiko: Komplexität, höherer Konfiguratoraufwand.
+\end{itemize}
+
+\textbf{5. Erste Empfehlung:}
+HomeTech Pro startet mit Strategie A (preisstabil) und C (Bundle) parallel. Annahme: \emph{Die schwache Sichtbarkeit ist primär ein Content-/Bewertungsproblem, kein Preisproblem.} Wenn diese Annahme falsch ist, kann nach 90\,Tagen Strategie B als Test eingeführt werden \textendash{} aber nicht als Erstreaktion.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Die ``zwischen-zwei-Stühlen''-Position ist die teuerste.} Wer im Mid-Tier feststeckt, verliert sowohl Volumen (zu teuer) als auch Marge (zu wenig Premium-Sichtbarkeit). Lösung: \emph{Positionierung wählen}, nicht im Mittelmaß optimieren.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{HomeTech \textendash{} Performance-Kennzahlen interpretieren}{\nivLii}{30\,min}
+
+\ytquery{Plattform Preis Test Marge Conversion B2B Smart Thermostat Wettbewerb}
+
+\begin{loesungbox}
+\textbf{1. Diagnose:}
+Das Problem ist primär ein \emph{Sichtbarkeits- und Content-Problem}, kein reines Preisproblem. Klickrate 3,2\,\% ist ordentlich, aber Conversion Rate 1,1\,\% ist zu niedrig. Die Frage ``Rechnet sich der höhere Preis?'' zeigt, dass Kunden den \emph{Wert} nicht erkennen \textendash{} also fehlen klare Nutzenargumente, Energieeinspar-Rechnungen, Vergleichstabellen. Eine reine Preissenkung würde ``Klick und kauf'' zwar steigern \textendash{} aber den Wert nicht klar machen.
+
+\textbf{2. Zwei Preisexperimente (mit Marge $\geq$\,25\,\%):}
+\begin{itemize}
+  \item \emph{Experiment 1:} 149\,\euro{} stabil, aber zeitlich begrenztes \emph{Bundle} (Thermostat + 1\,Jahr Premium-Support) für 159\,\euro{}. Zielsetzung: Margen-Optimierung statt Preissenkung. Hypothese: Bundle-Konvertierung $\geq$\,15\,\%.
+  \item \emph{Experiment 2:} \emph{139\,\euro-Test} für 4\,Wochen mit klarer Kommunikation (``zur Markteinführung''). Hypothese: Conversion auf 1,5\,\%. Wenn Erfolg: \emph{nicht} dauerhaft umsetzen \textendash{} sonst rutscht Anker.
+\end{itemize}
+
+\textbf{3. Zwei ergänzende Nicht-Preis-Maßnahmen:}
+\begin{itemize}
+  \item Energieeinspar-Rechner: ``Sparen Sie 280\,\euro/Jahr bei einer 80-qm-Wohnung'' \textendash{} klares Nutzenargument gegen die ``rechnet-sich-das?''-Frage.
+  \item Bewertungsmanagement: aktive (regelkonforme) Bewertungsanfrage, Antwort auf jede Bewertung, Anwendungsstories.
+\end{itemize}
+
+\textbf{4. Fünf KPIs:}
+\begin{itemize}
+  \item Conversion Rate (Ziel: 1,7\,\%).
+  \item Deckungsbeitrag pro Verkauf (Marge $\geq$\,25\,\%).
+  \item Retourenquote (Ziel: $<$\,5\,\%).
+  \item Bewertungsdurchschnitt (Ziel: $\geq$\,4,6).
+  \item Anteil Bundle-Verkäufe an Gesamtverkäufen.
+\end{itemize}
+
+\textbf{5. Aggressive Senkung auf 119\,\euro{}?}
+\textbf{Nein.} Das würde Marge auf $\sim$\,22\,\% drücken (unter Mindestschwelle), Wettbewerber A vermutlich zu weiterer Senkung provozieren, und den Marken-Anker beschädigen. Selbst wenn die Conversion-Rate kurzfristig steigt, ist das Pricing-Modell langfristig nicht haltbar. Stattdessen: Sichtbarkeit und Wertargumentation verbessern, mit gezielten Bundle-Experimenten.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Wenn die Kundenfrage ``rechnet sich der höhere Preis?'' häufig auftaucht, ist das eine \emph{Content}-Aufgabe, kein Preis-Problem.} Wer auf diese Frage mit Preissenkung antwortet, bestätigt, dass der Preis tatsächlich nicht gerechtfertigt war \textendash{} und verliert die Argumentation langfristig.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Marktanalyse-Logik \textendash{} sieben Felder}{\nivLii}{20\,min}
+
+\ytquery{Marktanalyse Plattform Wettbewerb Preis Sortiment Bewertung Sichtbarkeit B2B}
+
+\begin{loesungbox}
+\textbf{1. Sieben Felder + Frage:}
+\begin{itemize}
+  \item \emph{Wettbewerberbeobachtung:} Wer sind die drei stärksten Wettbewerber pro Sortiment?
+  \item \emph{Preisbandbreiten:} Wo bewegen sich Preise (Min, Median, Max)?
+  \item \emph{Sortimentsvergleich:} Was bieten Wettbewerber an, was wir nicht (und umgekehrt)?
+  \item \emph{Nachfrageentwicklung:} wachsende / stagnierende / sinkende Suchvolumina?
+  \item \emph{Bewertungslage:} Wie bewertet der Markt? Welche Themen?
+  \item \emph{Sichtbarkeit:} Wer rankt wo, mit welchen Keywords?
+  \item \emph{Lieferfähigkeit:} Wer kann liefern, wer nicht?
+\end{itemize}
+
+\textbf{2. Kaum systematisch beobachtet:}
+\emph{Lieferfähigkeit} und \emph{Sortimentsvergleich}. Lieferfähigkeit wird im Mittelstand selten systematisch getrackt \textendash{} obwohl sie ein Plattform-Ranking-Faktor ist. Sortimentsvergleich wird oft punktuell gemacht (für Einzelprodukt), aber selten als laufendes Monitoring.
+
+\textbf{3. Marktanalyse-Setup HomeTech Pro:}
+\begin{itemize}
+  \item Wettbewerber + Preise: wöchentlich automatisch tracken (Repricing-Tool oder externes Monitoring).
+  \item Bewertungen Wettbewerb: zweiwöchentlich Themen-Cluster.
+  \item Nachfrageentwicklung: monatlich Suchvolumen-Trends.
+  \item Sortimentsvergleich: quartalsweise Lücken-Analyse.
+  \item Lieferfähigkeit Wettbewerb: stichprobenartig.
+\end{itemize}
+
+\textbf{4. Verantwortliche Rolle:}
+\emph{Pricing/Marktanalyse-Funktion}, angesiedelt beim Head of Marketplace oder als Stabsstelle im CRO-Bereich. Wichtig: \emph{nicht} im Marketing (zu sehr Sichtbarkeitsfokus), \emph{nicht} in IT (zu sehr Tool-Fokus). Die Rolle braucht Pricing- und Marktverständnis.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{KitchenPro Direct \textendash{} Preisarchitektur}{\nivLii}{30\,min}
+
+\ytquery{Preisarchitektur Plattform B2B Premium Bundle Ersatzteil Wettbewerb Marge}
+
+\begin{loesungbox}
+\textbf{1. Bewertung der Produktgruppen (1\,--\,5):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lccccc@{}}
+\toprule
+& \textbf{Elast.} & \textbf{Marge} & \textbf{Wettb.} & \textbf{Kundenbind.} & \textbf{Strat.} \\
+\midrule
+A: Premium-Maschinen   & 2 & 5 & 3 & 4 & 5 \\
+B: Standardzubehör     & 5 & 3 & 5 & 3 & 3 \\
+C: Ersatzteile         & 2 & 4 & 2 & 5 & 4 \\
+D: Bundles             & 3 & 4 & 2 & 4 & 5 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Differenzierte Preisstrategie:}
+\begin{itemize}
+  \item \emph{A Premium-Maschinen:} Preisstabil, wertorientiert, keine Rabatte. Bewertungs- und Servicekommunikation statt Preisangleichung.
+  \item \emph{B Standardzubehör:} Dynamisch, zeitlich begrenzte Aktionen, Mindestmarge eingehalten. Hier ist Preisreaktion legitim.
+  \item \emph{C Ersatzteile:} Stabile Preise, kommuniziert über Verfügbarkeit und schnelle Lieferung. Mengenrabatt für Großabnehmer.
+  \item \emph{D Bundles:} Aktiv ausbauen, weil Vergleichbarkeit reduziert. Wertorientierte Preisbildung.
+\end{itemize}
+
+\textbf{3. Rabattaktionen \textendash{} ja/nein:}
+\begin{itemize}
+  \item A: \textbf{Nein.} Rabatte beschädigen die Premium-Positionierung; Marge ist Voraussetzung für Service- und Marken-Investitionen.
+  \item B: \textbf{Ja \textendash{} gezielt.} Aktionen, wenn Wettbewerb aktiv ist; Mindestmarge eingehalten; zeitlich klar begrenzt.
+  \item C: \textbf{Nein.} Ersatzteile sind preisunelastisch \textendash{} der Kunde braucht das passende Teil, nicht das günstigste. Rabatte verschenken Marge.
+  \item D: \textbf{Nein als Rabatt.} Bundles sind selbst die ``Aktion'' \textendash{} sie reduzieren Vergleichbarkeit und bieten Mehrwert ohne expliziten Rabatt.
+\end{itemize}
+
+\textbf{4. Reservoire:}
+\begin{itemize}
+  \item \emph{Margenreservoir:} A (Premium).
+  \item \emph{Volumenreservoir:} B (Standardzubehör).
+  \item \emph{Bindungsreservoir:} C (Ersatzteile, weil hohe Wiederkaufrate).
+  \item \emph{Differenzierungsreservoir:} D (Bundles als Vergleichsschutz).
+\end{itemize}
+
+\begin{merkbox}[Managementhinweis]
+\emph{Es gibt keine ``richtige'' Preisstrategie für die ganze Marke.} Premium-Maschinen brauchen Stabilität, Standardzubehör braucht Dynamik, Ersatzteile brauchen Verfügbarkeitskommunikation. Wer alles mit derselben Logik bepreist, optimiert nichts.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Bundles als Verteidigung gegen Preisvergleich}{\nivLii}{15\,min}
+
+\ytquery{Bundle Strategie Plattform B2B Premium Preisvergleich Marge Kannibalisierung}
+
+\begin{loesungbox}
+\textbf{1. Bundle-Logik:}
+Ein Bundle kombiniert ein Hauptprodukt mit komplementären Produkten (Zubehör, Service, Garantie) zu einem Gesamtpaket. Der Kunde vergleicht das Bundle nicht mehr mit einem Einzelprodukt eines Wettbewerbers, weil die Komponenten unterschiedlich sind \textendash{} der direkte Preisvergleich wird strukturell schwierig. Das Bundle schafft \emph{wahrgenommenen Mehrwert} und schützt gleichzeitig den Preisanker des Hauptprodukts.
+
+\textbf{2. Drei Bundle-Vorschläge für KitchenPro Direct:}
+\begin{itemize}
+  \item \emph{Premium-Bundle:} Küchenmaschine + 5 Aufsätze + 2-Jahres-Garantie-Verlängerung + Vor-Ort-Service.
+  \item \emph{Profi-Bundle (Gastro):} Maschine + Ersatzteil-Paket (häufig verschleißende Teile) + Wartungsvertrag.
+  \item \emph{Service-Fokus-Bundle:} Maschine + 1\,Jahr Premium-Support + Schulungsvideo + Online-Rezeptdatenbank.
+\end{itemize}
+
+\textbf{3. Risiken:}
+\begin{itemize}
+  \item \emph{Kannibalisierung:} Bestandskunden, die einzeln gekauft hätten, kaufen jetzt Bundle und reduzieren effektiven Stückumsatz pro Produkt.
+  \item \emph{Komplexität:} mehr SKUs, mehr Logistik, mehr Variantenmanagement.
+  \item \emph{Lagerhaltung:} Bundle-Komponenten müssen immer verfügbar sein, sonst entstehen Lieferengpässe für das Bundle als Ganzes.
+  \item \emph{Marketing-Komplexität:} Listings, Bilder, Beschreibungen für jedes Bundle.
+\end{itemize}
+
+\textbf{4. Margen-KPI für Bundles:}
+\emph{Deckungsbeitrag des Bundles vs.\ Summe der Einzel-Deckungsbeiträge bei Standalone-Verkauf.} Wenn das Bundle DB unter Einzelverkauf liegt, ist das Bundle kannibalisierend, nicht differenzierend.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{KitchenPro Direct \textendash{} 6-Monats-Entscheidung}{\nivLiii}{45\,min}
+
+\ytquery{Plattform Preisstrategie KitchenPro Premium Bundle Monitoring CRO Senior}
+
+\begin{loesungbox}
+\textbf{1. Differenzierte Preisstrategie A--D:} wie in Aufgabe 7 vertieft \textendash{} Premium stabil, Standardzubehör dynamisch, Ersatzteile stabil, Bundles aktiv ausbauen.
+
+\textbf{2. Budgetverteilung (120.000\,\euro):}
+\begin{itemize}
+  \item 30.000\,\euro{} \textendash{} Preis- und Wettbewerbsmonitoring (Tool + Auswertung).
+  \item 25.000\,\euro{} \textendash{} Content-Optimierung Premium-Produkte (Anwendungsstories, Vergleichstabellen).
+  \item 20.000\,\euro{} \textendash{} Bundle-Konzeption, Tests, Listing-Anpassungen.
+  \item 20.000\,\euro{} \textendash{} gezielte Aktions- und Preisexperimente im Zubehörbereich.
+  \item 15.000\,\euro{} \textendash{} Performance-Dashboard und KPI-Reporting.
+  \item 10.000\,\euro{} \textendash{} Bewertungs- und Retourenanalyse.
+\end{itemize}
+
+\textbf{3. Performance-Monitoring-Architektur (KPIs auf 4 Ebenen):}
+\begin{itemize}
+  \item \emph{Sichtbarkeit:} Ranking-Position pro Listing, Impressionen.
+  \item \emph{Klicks:} Klickrate je Produkt + Wettbewerbsabstand.
+  \item \emph{Conversion:} Conversion Rate, Warenkorbwert, Bundle-Anteil.
+  \item \emph{Profitabilität:} Deckungsbeitrag je Produktgruppe, Aktionsrentabilität (nicht Aktionsumsatz), Marge nach Plattformgebühr.
+\end{itemize}
+
+\textbf{4. Entscheidung gegen aggressive Preisaktion bei Premium:}
+KitchenPro Direct verzichtet auf Rabatte für Premium-Küchenmaschinen, obwohl der Plattform-Algorithmus rabattierte Listings besser ranken würde. Senior-Level-Begründung: Premium-Maschinen tragen 60\,\%+ des Deckungsbeitrags. Eine Rabattaktion würde (a)~den Preisanker dauerhaft beschädigen, (b)~Bestandskunden auf zukünftige Rabatte trainieren, (c)~die Marken-Positionierung im Vergleich zu echten Premium-Wettbewerbern verwässern. Der kurzfristige Conversion-Anstieg würde mit langfristigem Marken- und Margenverlust bezahlt. Stattdessen: Sichtbarkeit über Content, Bewertungen und Bundle-Logik.
+
+\textbf{5. Entscheidung unter Unsicherheit:}
+Investition von 20.000\,\euro{} in Bundle-Konzeption, obwohl Bundle-Akzeptanz im Premium-Gastro-Segment nicht klar belegt ist. Annahme: \emph{Gastro-Kunden bevorzugen ein einziges Bundle mit Garantie + Service über Einzelteilkauf, weil Verlässlichkeit höher gewichtet wird als Preis.} Lernindikator: Bundle-Anteil an A-Verkäufen $\geq$\,20\,\% bis Monat 4. Wenn nicht: Bundle-Variante anpassen oder reduzieren.
+
+\textbf{6. Was \emph{nicht} automatisiert werden darf:}
+\begin{itemize}
+  \item Preise für Premium-Produktgruppe A.
+  \item Aktionen, die über die Mindestmarge gehen würden.
+  \item Preisänderungen $>$\,5\,\% pro Tag.
+  \item Reaktionen auf neue Wettbewerber-Eintritte (kontextuelle Entscheidung).
+\end{itemize}
+
+\emph{Erlaubt zu automatisieren:} Wettbewerbsmonitoring, Lagerbestands-basierte Aktivierung von Aktionen im Standardzubehör, Listing-Optimierung (A/B-Tests Titel).
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Dynamische Preisstrategie heißt nicht, jedem Wettbewerberpreis zu folgen. Sie heißt, eine eigene Preisarchitektur konsequent zu verteidigen \textendash{} und dort dynamisch zu sein, wo es strategisch sinnvoll ist.}
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Preis-Governance \textendash{} wann darf der Algorithmus entscheiden?}{\nivLiii}{30\,min}
+
+\ytquery{Preis Algorithmus Repricing Governance Marge Plattform B2B Senior}
+
+\begin{loesungbox}
+\textbf{1. Risiko des unbegrenzten Repricing:}
+Ein Repricing-Algorithmus, der \emph{ausschließlich} auf Wettbewerber-Preise reagiert, gerät leicht in eine Abwärtsspirale: Wettbewerber senkt, Algorithmus senkt nach, Wettbewerber senkt erneut. Innerhalb von Wochen entstehen \emph{strukturelle Margenverluste} \textendash{} oft, ohne dass die Geschäftsführung es bemerkt, weil das Tool ``erfolgreich'' arbeitet (mehr Sichtbarkeit, mehr Klicks). Erst im Quartalsbericht wird sichtbar, dass DB pro Verkauf gesunken ist.
+
+\textbf{2. Leitplanken:}
+\begin{itemize}
+  \item \emph{Mindestmarge-Sperre:} Algorithmus darf nicht unter definierte Marge fallen \textendash{} hartes Limit, nicht überschreibbar.
+  \item \emph{Maximale Tagesänderung:} z.\,B.\ max.\ 5\,\% pro Tag.
+  \item \emph{Premium-Sortiment-Ausschluss:} bestimmte SKUs sind nicht im Algorithmus.
+  \item \emph{Anker-Schutz:} kein Preis unter den höchsten Verkaufspreis der letzten 90\,Tage minus X\,\%.
+  \item \emph{Eskalation:} größere Anpassungen $>$\,10\,\% brauchen manuelle Freigabe.
+  \item \emph{Aktions-Tageslimit:} max.\ Y Aktionen pro Quartal pro Produktgruppe.
+\end{itemize}
+
+\textbf{3. Immer manuell:}
+\begin{itemize}
+  \item Premium-Sortiment.
+  \item Markteintritt eines neuen Wettbewerbers (kontextuell bewerten).
+  \item Erste Reaktion auf ``Black Friday''-artige Ereignisse.
+  \item Listingen mit besonderer Marken-/Reputationsbedeutung.
+\end{itemize}
+
+\textbf{4. Preis-Governance-Prozess mit Eskalation:}
+\begin{itemize}
+  \item \emph{Stufe 1 (Pricing Manager):} kleine Anpassungen Standardzubehör im Algorithmus-Rahmen, max.\ 5\,\%.
+  \item \emph{Stufe 2 (Head of Marketplace):} Anpassungen 5\,--\,10\,\%, neue Aktionen, Bundle-Änderungen.
+  \item \emph{Stufe 3 (CRO):} größere Anpassungen, neue Pricing-Logiken, Premium-Sortiment.
+  \item \emph{Stufe 4 (GF / Vorstand):} strategische Repositionierung, Multi-Plattform-Pricing-Architektur.
+\end{itemize}
+
+\textbf{5. Audit-KPI:}
+\emph{Deckungsbeitrag pro Produktgruppe vor und nach Algorithmus-Anpassung.} Wenn der DB sinkt, obwohl ``erfolgreich'' optimiert wurde, ist der Algorithmus nicht ausgerichtet. Diese Zahl muss in jedem Pricing-Audit stehen.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Pricing-Algorithmen sind nicht intelligent \textendash{} sie sind regelbasiert.} Wenn die Regeln nur ``Wettbewerber-Preis'' sind, optimieren sie zur strukturellen Marge nach unten. Die Verantwortung des CRO ist nicht das Tool, sondern \emph{die Regeln, mit denen das Tool arbeitet}.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Integrierte Plattform-Verkaufs- und Preisarchitektur}{\nivLiii}{45\,min}
+
+\ytquery{Preisarchitektur Plattform B2B Pricing Performance Governance CRO Senior}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen möglich.}
+
+\smallskip
+\textbf{1. Zielbild:}
+Das Unternehmen betreibt in 12\,Monaten eine differenzierte Preisarchitektur, die je nach Produktgruppe stabile oder dynamische Logiken anwendet. Marge bleibt $\geq$\,25\,\% pro Plattform. Keine reaktiven Preissenkungen auf Wettbewerber-Bewegungen ohne Marge-Check. Bundle-Anteil $\geq$\,25\,\% am Plattformumsatz. KPI-Steuerung über Deckungsbeitrag, nicht über Umsatz.
+
+\textbf{2. Segmentierung Produktgruppen:}
+\begin{itemize}
+  \item \emph{Premium} (hohe Marge, starke Marke, hohe strategische Bedeutung).
+  \item \emph{Standard} (mittlere Marge, hoher Wettbewerb, Volumenträger).
+  \item \emph{Verbrauch/Ersatzteile} (mittlere Marge, hohe Wiederkaufrate, geringe Elastizität).
+  \item \emph{Bundles} (kreierte Marge, Differenzierungsträger).
+\end{itemize}
+
+\textbf{3. Dynamische Preisarchitektur \textendash{} Regeln und Grenzen:}
+\begin{itemize}
+  \item Premium: keine dynamische Anpassung; jährliche Review im CRO-Board.
+  \item Standard: dynamische Anpassung im Algorithmus, Mindestmarge 22\,\%, max.\ 5\,\% Änderung/Tag.
+  \item Verbrauch/Ersatzteile: stabile Preise, Mengenrabatt für Großkunden ($>$\,X Einheiten).
+  \item Bundles: wertorientiert konfiguriert, quartalsweise Review.
+\end{itemize}
+
+\textbf{4. Marktanalyse-Logik:}
+\begin{itemize}
+  \item Wöchentlich: Wettbewerber-Preise (Standard + Premium).
+  \item Zweiwöchentlich: Bewertungen Wettbewerb + Themen-Cluster.
+  \item Monatlich: Suchvolumen-Entwicklung, Sortimentslücken, Sichtbarkeitsanalyse.
+  \item Quartalsweise: strategische Markt-Review (Vorstand).
+\end{itemize}
+
+\textbf{5. Entscheidung pro Gruppe:}
+\begin{itemize}
+  \item Premium: stabil + Content-Investition.
+  \item Standard: dynamisch + gelegentliche Aktionen.
+  \item Verbrauch/Ersatzteile: stabil, Verfügbarkeitskommunikation.
+  \item Bundles: ausbauen, mind.\ 3 Bundle-Typen pro Premium-Gerät.
+\end{itemize}
+
+\textbf{6. Performance-Monitoring-Architektur:}
+\begin{itemize}
+  \item \emph{Operativ:} Klickrate, Conversion Rate, Retourenquote, Aktionsrentabilität je Produktgruppe.
+  \item \emph{Strategisch:} Deckungsbeitrag je Gruppe, Wiederkaufrate, Marken-Anker-Position (Preisbandbreite), Bundle-Anteil.
+\end{itemize}
+
+\textbf{7. Governance:}
+\begin{itemize}
+  \item CRO: Strategie + Mindestmarge + Premium-Pricing.
+  \item Pricing Manager: dynamische Standard-Anpassungen + Aktionen.
+  \item Head of Marketplace: Plattform-Operative + Bundle-Konzept.
+  \item Controlling: Audit von Margen, Aktionen, Deckungsbeitrag.
+  \item Produktmanagement: Bundle-Komposition + Sortimentslogik.
+  \item GF: strategische Repositionierung.
+  \item Monatlicher Pricing-Review-Kreis.
+\end{itemize}
+
+\textbf{8. Risikoanalyse:}
+\begin{itemize}
+  \item Preiskrieg $\rightarrow$ Mindestmarge-Sperre, keine Reaktion bei Premium.
+  \item Margenverlust $\rightarrow$ DB-Audit jeden Monat, Algorithmus-Kontrolle.
+  \item Falsche Kundenerwartung $\rightarrow$ keine Preis-Keywords, klare Anker-Kommunikation.
+  \item Markenverwässerung $\rightarrow$ Premium-Sortiment ausgeschlossen von Aktionen.
+  \item Plattformabhängigkeit $\rightarrow$ Multi-Plattform-Logik + Direktkanal.
+\end{itemize}
+
+\textbf{9. Roadmap (12\,Monate):}
+\begin{itemize}
+  \item Monat 1\,--\,3: Pricing-Architektur definieren, Algorithmus-Regeln festlegen, Mindestmargen pro Gruppe.
+  \item Monat 4\,--\,6: Monitoring-Dashboard live, Bundle-Pilots, erste Tests.
+  \item Monat 7\,--\,9: Optimierung, Bundle-Skalierung, Aktionsrentabilitäts-Auswertung.
+  \item Monat 10\,--\,12: strategische Repositionierung Premium / Re-Allokation.
+\end{itemize}
+
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Keine Reaktion auf Wettbewerber-A-Preissenkungen bei Premium.} Annahme: Premium-Kunden reagieren auf Marke und Service, nicht primär auf Preis.
+  \item \emph{Investition in Bundle-Konzept trotz nicht belegter Akzeptanz.} Annahme: Bundles reduzieren Vergleichbarkeit langfristig signifikant.
+  \item \emph{Auswahl der Pricing-Plattform-Tools (Repricing) vor klarem ROI-Beweis.} Annahme: Monitoring + Algorithmus + Governance liefern positiven DB-Effekt $\geq$\,18\,\% pro Standardartikel.
+\end{enumerate}
+
+\textbf{Zusatz \textendash{} kurzfristige Umsatzsteigerung abgelehnt:}
+Bewusster Verzicht auf eine plattformweite ``Black Friday-Premium-Aktion'' (\textendash 20\,\% auf alle Premium-Maschinen). Aus Senior-Level-Sicht: Eine solche Aktion würde 30\,\% Quartalsumsatz-Boost erzeugen \textendash{} aber den Premium-Anker dauerhaft beschädigen, Bestandskunden frustrieren, die zum Vollpreis gekauft haben, und in den Folgequartalen mehr Rabatt-Erwartung erzeugen. Stattdessen: Bundle-Aktion ohne Preissenkung (``mit jeder Maschine: 2-Jahres-Garantie geschenkt'') \textendash{} liefert Mehrwert ohne Anker-Schaden.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Pricing ist Verteidigung der Margenstruktur, nicht Reaktion auf Sichtbarkeit.} Wer Pricing dem Plattform-Algorithmus überlässt, gibt strukturell Marge ab. Wer eine Architektur baut, definiert die Spielregeln, nach denen der Algorithmus arbeiten darf.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Diskussionsbasis. Vergleichen Sie Ihre Annahmen und Zielkonflikte.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Coaching-Frage: Welche Preissenkung hätten Sie kurzfristig gerne gemacht \textendash{} und welche Argumente sprechen dauerhaft gegen sie, auch wenn das Quartal sie nahelegt?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 8 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

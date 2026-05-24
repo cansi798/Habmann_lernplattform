@@ -1,0 +1,875 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 2 - Loesungsheft
+% Plattform-Implementierung, KPIs & strategische Weiterentwicklung
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Musterloesungs-Box: gruen-weiss
+\newtcolorbox{loesungbox}[1][Musterlösung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Merk-Box: amber fuer Managementhinweise / Lessons Learned
+\newtcolorbox{merkbox}[1][Managementhinweis]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberBorder, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 2}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Plattform-Implementierung \& KPIs}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 1 \textperiodcentered{} TAG 2 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 29.\,Mai 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 2\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Plattform-\\Implementierung, KPIs \& Steuerung.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis,\\nicht die einzige korrekte Lösung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 2}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- Anleitung -----------------------------------------------------------
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterlösungen sind \emph{eine} mögliche, didaktisch nachvollziehbare Lösung \textendash{} sie sind nicht die einzig richtige. Insbesondere auf L2 und L3 sind mehrere Begründungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den Begriffsapparat aus Tag 1 und Tag 2 sauber nutzen (sechs Implementierungsphasen, KPI-Kategorien, Erfolgsfaktoren),
+  \item Annahmen explizit machen, statt sie zu verschleiern,
+  \item Zielkonflikte (Reichweite vs.\ Kontrolle, Wachstum vs.\ Marge) benennen, statt sie wegzudefinieren,
+  \item zu einer klar formulierten Entscheidung führen \textendash{} nicht bloß zu einer Beschreibung.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterlösung. Wo weicht Ihre Argumentation ab? Ist die Abweichung eine andere Annahme \textendash{} oder ein Denkfehler? Genau dort entsteht der Lerneffekt.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 LOESUNGEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Auswahl \textendash{} Implementierung \textendash{} Optimierung}{\nivLi}{6\,min}
+
+\noindent Drei Begriffe werden im Plattformkontext häufig vermischt: \emph{Plattformauswahl}, \emph{Plattformimplementierung} und \emph{Plattformoptimierung}.
+
+\ytquery{Plattformauswahl Plattformimplementierung Plattformoptimierung Unterschied}
+
+\begin{loesungbox}
+\textbf{1. Definitionen:}
+\begin{itemize}
+  \item \textbf{Plattformauswahl} ist die strategische Entscheidung, \emph{welche} Plattform (eigener Webshop, Marktplatz, LinkedIn, Branchenportal, Ökosystem) zur Zielgruppe, zum Produkt und zur Positionierung passt.
+  \item \textbf{Plattformimplementierung} ist die operative Umsetzung der gewählten Plattform: Phasen, Rollen, Prozesse, Daten, Technik und Vertriebsakzeptanz \textendash{} also alles, was zwischen Entscheidung und stabilem Betrieb liegt.
+  \item \textbf{Plattformoptimierung} ist die fortlaufende Steuerung im laufenden Betrieb: KPIs auswerten, Conversion verbessern, Sortimente steuern, Sichtbarkeit erhöhen, Wirtschaftlichkeit absichern.
+\end{itemize}
+
+\textbf{2. Typische Stolpersteine:}
+\begin{itemize}
+  \item \emph{Auswahl:} Plattform wird gewählt, weil ``alle das machen'' \textendash{} ohne Zielgruppen-Fit-Check und ohne Annahmen.
+  \item \emph{Implementierung:} Plattform geht live, bevor Produktdaten, CRM-Anbindung und Vertriebsrollen geklärt sind.
+  \item \emph{Optimierung:} Es wird nur Reichweite optimiert, nicht Marge und Wiederkauf \textendash{} die Plattform wächst und wird unprofitabel.
+\end{itemize}
+
+\textbf{3. Warum die Trennung entscheidend ist:}
+Wer die drei Phasen vermischt, trifft Entscheidungen mit den falschen Kriterien. Eine \emph{Auswahl}-Entscheidung braucht strategische Kriterien, eine \emph{Implementierungs}-Entscheidung braucht operative Klarheit, eine \emph{Optimierungs}-Entscheidung braucht Datenbasis. Vermischung führt entweder zu hektischem Aktionismus oder zu vermeintlich rationalen, aber strategisch leeren Optimierungen.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Sechs Phasen einer Plattformimplementierung}{\nivLi}{8\,min}
+
+\ytquery{Plattformimplementierung Phasen Zielbild Pilot Rollout Betrieb Skalierung}
+
+\begin{loesungbox}
+\textbf{1. Zuordnung der Tätigkeiten zu den sechs Phasen:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Phase} & \textbf{Tätigkeit} \\
+\midrule
+Zielbild       & Strategische Zielsetzung formulieren: Welches Kundenproblem, welche Rolle im Vertrieb? \\
+\midrule
+Pilotierung    & Mit drei Pilotkunden und reduziertem Sortiment den Plattformprozess validieren. \\
+\midrule
+Rollout        & Vom Pilot in den breiten Marktstart überführen \textendash{} inkl.\ Schulungen und Rollenklärung. \\
+\midrule
+Betrieb        & Stabile Servicelevel sichern: Antwortzeiten, Reklamationen, Verfügbarkeit, CRM-Pflege. \\
+\midrule
+Skalierung     & Auf weitere Regionen, Sortimente oder Marktseiten ausweiten. \\
+\midrule
+Optimierung    & KPIs (Sichtbarkeit, Conversion, Wiederkauf) auswerten und Anpassungen testen. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Typische Verantwortlichkeiten:}
+\begin{itemize}
+  \item \emph{Zielbild:} Geschäftsführung gemeinsam mit Vertriebsleitung.
+  \item \emph{Pilotierung:} Vertrieb + IT, sekundär Marketing.
+  \item \emph{Rollout:} Vertriebsleitung + Marketing + Schulungsverantwortliche.
+  \item \emph{Betrieb:} Kundenservice + IT + Innendienst.
+  \item \emph{Skalierung:} Vertriebsleitung + Geschäftsführung + Marketing.
+  \item \emph{Optimierung:} cross-funktional \textendash{} idealerweise mit einem Plattform-Steuerungskreis aus Vertrieb, Marketing, IT, Kundenservice und Datenmanagement.
+\end{itemize}
+
+\begin{merkbox}[Managementhinweis]
+Die häufigste Schwäche im Mittelstand: \emph{Pilotierung} wird übersprungen. Dann zeigt sich erst nach Rollout, dass Produktdaten fehlen, der Checkout buggt oder der Vertrieb die Plattform sabotiert. Eine Pilotphase mit 3\,--\,5 echten Kunden kostet 6\,--\,8 Wochen \textendash{} spart aber 6\,--\,8 Monate Nacharbeit.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Plattform-KPIs sauber unterscheiden}{\nivLi}{8\,min}
+
+\ytquery{Plattform KPIs Conversion CAC CLV Wiederkaufrate Deckungsbeitrag}
+
+\begin{loesungbox}
+\textbf{1. Zuordnung der elf Kennzahlen:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Kategorie} & \textbf{Kennzahlen} \\
+\midrule
+Sichtbarkeit                 & Reichweite, Traffic \\
+\midrule
+Conversion / Aktivierung     & Leads, Conversion Rate, Wiederkaufrate, Warenkorbwert, Churn Rate \\
+\midrule
+Wirtschaftlichkeit           & CAC, CLV, Plattformkosten, Deckungsbeitrag \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\emph{Hinweis:} ``Wiederkaufrate'' und ``Churn Rate'' lassen sich legitim auch zur Wirtschaftlichkeit zuordnen. Entscheidend ist, dass die Zuordnung begründet wird. Wenn Wiederkaufrate strategisch als Kundenbindungssignal interpretiert wird, ist sie Conversion; wenn sie als Hebel für CLV gerechnet wird, ist sie Wirtschaftlichkeit.
+
+\smallskip
+\textbf{2. Wer braucht welche Kennzahl?}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+& \textbf{Operativ (täglich)} & \textbf{Management-Board} \\
+\midrule
+Sichtbarkeit       & Traffic, Klickrate    & Reichweite vs.\ Wettbewerb \\
+\midrule
+Conversion         & Conversion Rate, Leads & Wiederkaufrate, Warenkorbwert \\
+\midrule
+Wirtschaftlichkeit & Plattformkosten        & CAC, CLV, Deckungsbeitrag \\
+\bottomrule
+\end{tabularx}
+
+\begin{merkbox}[Managementhinweis]
+Ein häufiger Fehler: Management-Boards diskutieren Klicks und Conversion Rates, während CAC, CLV und Deckungsbeitrag fehlen. Folge: Die Plattform wächst und wird unrentabel \textendash{} und niemand sieht es früh genug. Faustregel: \emph{Keine Plattformentscheidung über 50.000\,\euro{} ohne ausgewiesenen Deckungsbeitrag pro Kanal.}
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2 LOESUNGEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{SmartOffice24 \textendash{} Implementierung in drei Phasen}{\nivLii}{25\,min}
+
+\ytquery{B2B Webshop Marktplatz Implementierung Mittelstand Phasen Risiken}
+
+\begin{loesungbox}
+\textbf{1. Drei Phasen über 6 Monate:}
+
+\smallskip
+\emph{Phase 1 (Monat 1\,--\,2) \textendash{} Grundlagen \& Pilotvorbereitung:}
+\begin{itemize}
+  \item Produktdaten konsolidieren (Stammdaten, Bilder, Beschreibungen, Preise, Lagerstatus).
+  \item Rollen klären: Wer ist für Marktplatzlistung, Webshop, Reklamationen verantwortlich?
+  \item Vertriebsteam einbinden: Workshop, Bedenken aufnehmen, gemeinsame KPIs vereinbaren.
+\end{itemize}
+
+\emph{Phase 2 (Monat 3) \textendash{} Marktplatz live, Pilot:}
+\begin{itemize}
+  \item Marktplatz mit reduziertem Sortiment (10\,--\,20 Standardprodukte) starten.
+  \item Erste Bestellungen abwickeln, Logistik testen, Reklamationsprozesse validieren.
+\end{itemize}
+
+\emph{Phase 3 (Monat 4\,--\,6) \textendash{} Webshop-Launch \& Verzahnung:}
+\begin{itemize}
+  \item Webshop live mit Beratungstermin-Funktion und Konfigurator.
+  \item Marktplatz-Erkenntnisse (Bestseller, Margenproblemen) in Webshop-Sortimentslogik übersetzen.
+  \item Gemeinsame Dashboard-Logik für Vertrieb + Marketing einführen.
+\end{itemize}
+
+\smallskip
+\textbf{Begründung der Reihenfolge:} Der Marktplatz geht früher live, weil er weniger eigene Infrastruktur erfordert und schnelle Markttests erlaubt. Der Webshop kommt später, weil er die strategische Kundenschnittstelle ist und höhere technische Sorgfalt verlangt. Reihenfolge: \emph{schnelles Lernen $\rightarrow$ strategische Substanz}.
+
+\smallskip
+\textbf{2. Mindestens fünf Aufgaben vor Plattformstart:}
+\begin{itemize}
+  \item Produktdaten bereinigen und vereinheitlichen.
+  \item Logistik- und Retourenprozess für Plattformbestellungen definieren.
+  \item Kundenservice-Skills für digitale Kanäle aufbauen (Chat, Ticket, E-Mail).
+  \item CRM-Felder und Lead-Status für digitale Quellen anlegen.
+  \item Bewertungs- und Reklamationsmanagement vereinbaren (Wer antwortet binnen 24\,h?).
+  \item Schulung des Vertriebsteams: Wie wird mit Leads aus Webshop / Marktplatz umgegangen?
+\end{itemize}
+
+\textbf{3. Zuordnung zu Bereichen:}
+\begin{itemize}
+  \item \emph{Vertrieb:} Lead-Übergabeprozess, Schulung, Akzeptanz.
+  \item \emph{Marketing:} Produktbeschreibungen, SEO, Bewertungen, erste Kampagnen.
+  \item \emph{IT:} Schnittstellen ERP\,$\leftrightarrow$\,Webshop, Daten-Pipelines, Performance.
+  \item \emph{Kundenservice:} Reklamationsprozesse, Antwortzeiten, Bewertungsantworten.
+  \item \emph{Management:} Ziel, Budget, Rollen, gemeinsame KPIs.
+\end{itemize}
+
+\textbf{4. Drei Risiken + Gegenmaßnahmen:}
+\begin{itemize}
+  \item \emph{Risiko:} Unvollständige Produktdaten führen zu schlechten Listings. \emph{Gegenmaßnahme:} 4\,Wochen Daten-Sprint vor Marktplatz-Start, mit klarem Zuständigen.
+  \item \emph{Risiko:} Vertriebsteam sabotiert digitale Leads. \emph{Gegenmaßnahme:} Provisionsmodell anpassen, sodass Außendienst auch von digitalen Leads profitiert.
+  \item \emph{Risiko:} IT-Engpass führt zu Verzögerung. \emph{Gegenmaßnahme:} Externe Dienstleister:in für Schnittstellen, klare Priorisierung der MVP-Funktionen.
+\end{itemize}
+
+\textbf{5. Reihenfolge Marktplatz vs.\ Webshop:}
+Die geplante Reihenfolge (Marktplatz vor Webshop) ist verteidigbar, \emph{wenn} der Marktplatz als kontrollierter Lern-Sandkasten verstanden wird \textendash{} nicht als langfristiger Hauptkanal. Risiko: Der Marktplatz wird zum Hauptumsatzkanal, bevor der Webshop überhaupt live ist, und SmartOffice24 verliert dauerhaft Kundendaten und Marge. Empfehlung: \emph{Marktplatz nur mit Standardsortiment, Webshop muss spätestens Monat 6 strategische Priorität haben.}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{SmartOffice24 \textendash{} Plattformkennzahlen interpretieren}{\nivLii}{30\,min}
+
+\ytquery{Plattform KPI Optimierung Conversion Checkout Marktplatz Steuerung}
+
+\begin{loesungbox}
+\textbf{1. Stärken und Schwächen je Kanal:}
+
+\smallskip
+\emph{B2B-Webshop:}
+\begin{itemize}
+  \item Stärken: hoher Warenkorb (420\,\euro), Datenkontrolle, eigene Markenwelt, 480 registrierte Nutzer als Basis für Wiederkauf.
+  \item Schwächen: Conversion Rate von 1,0\,\% ist unter B2B-Standard, viele Checkout-Abbrüche $\rightarrow$ Vertrauensproblem, Komplexitätsproblem oder Zahlungsproblem.
+\end{itemize}
+
+\emph{Externer Marktplatz:}
+\begin{itemize}
+  \item Stärken: hohe Sichtbarkeit (35.000 Aufrufe), schneller Marktzugang, 300 Bestellungen ohne eigenen Aufwand für Reichweite.
+  \item Schwächen: niedriger Warenkorb (190\,\euro $\rightarrow$ unter der Hälfte des Webshops), Preisdruck, kein Datenzugang, keine Markenwirkung.
+\end{itemize}
+
+\textbf{2. Drei Ursachen für niedrige Webshop-Conversion:}
+\begin{itemize}
+  \item \emph{Checkout-Komplexität:} Zu viele Pflichtfelder, B2B-Optionen unklar (Rechnungskauf, Abteilung, Bestellfreigabe), keine Gast-Bestellung.
+  \item \emph{Vertrauensdefizit:} Wenig Bewertungen, keine Referenzkunden sichtbar, Lieferzeiten nicht transparent.
+  \item \emph{Falsches Traffic-Mix:} Besucher kommen über Werbung mit falschen Erwartungen (z.\,B.\ B2C-Look statt B2B-Konditionen).
+\end{itemize}
+
+\textbf{3. Drei Optimierungsmaßnahmen für den Webshop (priorisiert):}
+\begin{itemize}
+  \item \emph{Priorität 1 (sofort):} Checkout-Funnel analysieren und vereinfachen \textendash{} Pflichtfelder reduzieren, Rechnungskauf-Option prominent, Bestätigungsmail mit klarer Lieferzeit. Erwartung: CR-Anstieg von 1,0 auf 1,4\,--\,1,8\,\%.
+  \item \emph{Priorität 2 (Monat 1\,--\,2):} Vertrauenselemente einbauen \textendash{} Bewertungen, Logos zufriedener Kunden, Servicepaketinformationen, Reklamationsquote transparent.
+  \item \emph{Priorität 3 (Monat 2\,--\,3):} Re-Targeting für abgebrochene Warenkörbe und E-Mail-Nurturing für die 480 registrierten Nutzer.
+\end{itemize}
+
+\textbf{4. Zwei Maßnahmen zur Marktplatzsteuerung:}
+\begin{itemize}
+  \item \emph{Sortimentssteuerung nach Marge:} Nur Standardprodukte mit ausreichender Marge auf dem Marktplatz lassen; Premium- und beratungsintensive Produkte zurückziehen und auf Webshop konzentrieren.
+  \item \emph{Lead-Rückgewinnung:} Über Verpackungsbeilagen oder Service-QR-Codes versuchen, Marktplatz-Käufer in den eigenen Direktkanal zu ziehen (Wartung, Folgekauf, Newsletter).
+\end{itemize}
+
+\textbf{5. Budgetentscheidung mit Annahme:}
+Das nächste Budget fließt primär in den \emph{Webshop} (Checkout, Vertrauen, CRM), sekundär in fokussiertes \emph{Marketing} für genau dieselbe Webshop-Logik. Annahme dahinter: \emph{Eine Erhöhung der Webshop-Conversion von 1,0 auf 1,8\,\% bringt mehr Deckungsbeitrag als zusätzlicher Marktplatz-Traffic mit niedrigem Warenkorb und Preisdruck.} Wenn diese Annahme falsch ist (z.\,B.\ Webshop-Zielgruppe ist klein), muss die Entscheidung nach 90 Tagen überprüft werden.
+
+\begin{merkbox}[Lessons Learned]
+\emph{Reichweite ohne Marge ist eine Falle.} Der Marktplatz liefert 2,5x so viele Bestellungen wie der Webshop \textendash{} aber nur 0,55x den Bestellwert. Wer auf Bestell-\emph{Anzahl} optimiert, wandert in den Preiskampf. Wer auf \emph{Deckungsbeitrag pro Kanal} steuert, schützt die Marge.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Sechs Erfolgsfaktoren \textendash{} Selbst-Check}{\nivLii}{20\,min}
+
+\ytquery{Plattform Erfolgsfaktoren Datenqualität Vertriebsakzeptanz B2B Implementierung}
+
+\begin{loesungbox}
+\textbf{1. Bewertung der sechs Erfolgsfaktoren bei SmartOffice24} (Schulnote, mit Annahme wo nötig):
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lcX@{}}
+\toprule
+\textbf{Faktor} & \textbf{Note} & \textbf{Annahme/Begründung} \\
+\midrule
+Klare Zielsetzung      & 3 & Webshop \emph{und} Marktplatz parallel \textendash{} aber unklar, welcher die strategische Rolle übernimmt. \\
+\midrule
+Datenqualität          & 5 & Produktdaten unvollständig (laut Fall) \textendash{} kritischer Engpass. \\
+\midrule
+Kundennutzen           & 3 & Produkte sind hochwertig, aber Checkout-Abbrüche zeigen, dass das digitale Erlebnis unklar ist. \\
+\midrule
+Technische Stabilität  & 4 & IT-Ressourcen begrenzt; Risiko für Schnittstellen und Performance. \\
+\midrule
+Prozessklarheit        & 4 & Rollen zwischen Vertrieb, Marketing, IT, Kundenservice noch nicht definiert. \\
+\midrule
+Akzeptanz Vertrieb     & 5 & Vertrieb ist skeptisch \textendash{} ohne Akzeptanz scheitert die Implementierung im Tagesgeschäft. \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Zwei schwächste Faktoren:} \emph{Datenqualität} und \emph{Akzeptanz im Vertrieb}.
+
+\smallskip
+\textbf{3. Maßnahmen für die nächsten 90 Tage:}
+\begin{itemize}
+  \item \emph{Datenqualität:} 4-Wochen-Daten-Sprint mit klar zugewiesener Verantwortung. 200 Top-Produkte vollständig (Bilder, Beschreibung, Maße, Lieferzeit, Bewertungen). Datenqualitäts-KPI: Anteil ``vollständig'' im Produktstamm $>$\,95\,\% bis Tag 60.
+  \item \emph{Vertriebsakzeptanz:} Drei Maßnahmen kombiniert: (a)~Provisionsmodell anpassen (digitale Leads zählen mit), (b)~zwei Vertriebs-Champions als interne Botschafter benennen, (c)~monatliches Format ``Plattform-Insights'' mit echten Storys über erfolgreiche digitale Abschlüsse.
+\end{itemize}
+
+\textbf{4. Welcher Erfolgsfaktor wird systematisch unterschätzt?}
+\emph{Akzeptanz im Vertrieb.} Plattformprojekte werden im Mittelstand fast immer als ``Marketing-'' oder ``IT-Projekt'' aufgesetzt. Der Vertrieb wird informiert, statt eingebunden \textendash{} und sabotiert dann (oft unbewusst) digitale Leads, weil das Provisionsmodell den Außendienst weiterhin auf persönlich vereinbarten Aufträgen belohnt. Die Plattform liefert dann scheinbar ``schlechte'' Leads, aber das Problem liegt nicht in den Leads, sondern im Anreizsystem.
+
+\begin{merkbox}[Lessons Learned]
+\emph{Datenqualität und Vertriebsakzeptanz sind die zwei stillen Erfolgsfaktoren.} Sichtbarkeit und Conversion-Optimierung werden in jedem Projekt diskutiert; Datenqualität und Vertriebsakzeptanz werden in keinem Steuerungskreis berichtet. Genau deshalb scheitern Plattformprojekte typischerweise dort \textendash{} und nicht an Technik.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{BauTech Connect \textendash{} drei Kanäle, ein Engpass}{\nivLii}{30\,min}
+
+\ytquery{BauTech B2B Shop Marktplatz Kampagne Plattform Engpass Optimierung Roadmap}
+
+\begin{loesungbox}
+\textbf{1. Bewertung (1\,--\,5):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lcccc@{}}
+\toprule
+\textbf{Bereich} & \textbf{Wachstum} & \textbf{Marge} & \textbf{Strat.\ Kontrolle} & \textbf{Datenqualität} \\
+\midrule
+B2B-Shop                & 2 & 4 & 5 & 4 \\
+\midrule
+Externe Marktplätze     & 5 & 2 & 1 & 1 \\
+\midrule
+Digitale Kampagnen      & 3 & 2 & 3 & 2 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Interpretation:} Externe Marktplätze sind heute der Wachstumstreiber, aber strategisch der schwächste Kanal. Der eigene B2B-Shop hat strategische Substanz, aber zu wenig Reichweite. Die digitalen Kampagnen sind aktuell ein \emph{Lead-Generator ohne Qualifizierung}.
+
+\smallskip
+\textbf{2. Drei größte Engpässe:}
+\begin{itemize}
+  \item \emph{Datenqualität:} Produktdaten uneinheitlich \textendash{} blockiert Shop-Conversion und Marktplatzlistung.
+  \item \emph{CRM-Anbindung:} Nur teilweise vorhanden \textendash{} digitale Leads werden nicht systematisch nachverfolgt, Vertrieb kann nicht steuern.
+  \item \emph{Rollen \& gemeinsame KPIs:} Vertrieb misst Umsatz, Marketing misst Traffic, IT misst Stabilität. Es gibt keine geteilte Erfolgssicht.
+\end{itemize}
+
+\textbf{3. Optimierungsroadmap 9 Monate:}
+
+\emph{Monat 1\,--\,3 \textendash{} Daten \& Prozessbasis:}
+\begin{itemize}
+  \item Produktdaten bereinigen und priorisierte Produktgruppen optimieren.
+  \item Checkout-Prozess und Angebotsanfrage verbessern.
+  \item Gemeinsame KPIs für Vertrieb, Marketing und Plattformmanagement definieren.
+\end{itemize}
+
+\emph{Monat 4\,--\,6 \textendash{} CRM \& Qualität:}
+\begin{itemize}
+  \item CRM-Anbindung verbessern, Lead Scoring einführen.
+  \item Kampagnen auf hochwertige Zielsegmente fokussieren statt auf reine Reichweite.
+  \item Marktplatzsortiment nach Marge und strategischer Bedeutung steuern (Standardprodukte ja, Premium nein).
+\end{itemize}
+
+\emph{Monat 7\,--\,9 \textendash{} Personalisierung \& Steuerung:}
+\begin{itemize}
+  \item Personalisierte Produktempfehlungen testen.
+  \item Wiederkauflogik und automatisierte Nachbestellimpulse einführen.
+  \item Management-Dashboard zur Plattformsteuerung etablieren.
+\end{itemize}
+
+\textbf{4. Was wird bewusst nicht ausgebaut:}
+Die \emph{breiten digitalen Kampagnen} werden \emph{nicht} skaliert, sondern radikal fokussiert. Begründung: Mehr Traffic bei gleichbleibend schlechter Leadqualifizierung verschärft das Vertriebs-Marketing-Spannungsfeld und brennt Budget. Lead-Qualität schlägt Lead-Menge.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Optimierung ist eine Sequenz, kein Bündel.} Wer im Monat 1 gleichzeitig Daten bereinigt, CRM anbindet, Sortiment steuert und Personalisierung pilotiert, optimiert nichts \textendash{} sondern fragmentiert die Organisation. Faustregel: maximal \emph{zwei strategische Hebel parallel}, alles andere ist Folgewirkung.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Vier Zukunftstrends \textendash{} konkret übersetzen}{\nivLii}{20\,min}
+
+\ytquery{KI Plattform Vertrieb Personalisierung Datenmodell Ökosystem Trend B2B}
+
+\begin{loesungbox}
+\textbf{1.\,--\,2. Trends, Anwendungsfälle und Bewertung:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXXX@{}}
+\toprule
+\textbf{Trend} & \textbf{Anwendungsfall bei BauTech} & \textbf{Wer entscheidet / Kosten} & \textbf{Wirkung sichtbar} \\
+\midrule
+KI-Plattformsteuerung    & Automatische Sortimentsoptimierung auf Marktplätzen (Preise, Sichtbarkeit, Tagessteuerung) & CDSO + IT \textperiodcentered{} 40\,--\,80\,k\,\euro & 6\,--\,9 Monate \\
+\midrule
+Personalisierung         & Nachbestell-Empfehlungen im Webshop für Bestandskunden nach Wartungszyklus & Vertriebsleitung \textperiodcentered{} 30\,--\,60\,k\,\euro & 3\,--\,6 Monate \\
+\midrule
+Datenbasierte Entsch.    & Management-Dashboard mit DB pro Kanal, Wiederkaufrate, CAC & GF + Controlling \textperiodcentered{} 20\,--\,40\,k\,\euro & 3 Monate \\
+\midrule
+Ökosysteme/Partner       & Pilotpartnerschaft mit zwei Großhandelsketten als Vertriebsökosystem & GF + Vertrieb \textperiodcentered{} 60\,--\,120\,k\,\euro & 12+ Monate \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Überschätzt vs.\ unterschätzt:}
+\begin{itemize}
+  \item \emph{Überschätzt} ist aktuell ``KI-Plattformsteuerung''. Ohne saubere Daten und CRM-Anbindung erzeugt KI nur teure Empfehlungen, die niemand operationalisiert.
+  \item \emph{Unterschätzt} ist ``Datenbasierte Entscheidungsmodelle''. Sie ist die unspektakulärste, aber wirksamste Investition \textendash{} weil sie alle anderen Trends erst messbar macht.
+\end{itemize}
+
+\textbf{4. Faustregel:}
+Ein Mittelständler sollte einen Plattformtrend adoptieren, wenn (a)~die Datenbasis stabil ist, (b)~mindestens \emph{ein} konkreter Anwendungsfall mit messbarer Wirtschaftlichkeit identifizierbar ist und (c)~die Verantwortung im operativen Team verankert werden kann. Andernfalls: abwarten, weiter beobachten, mit kleinem Pilotbudget testen.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Trends sind keine Strategie.} Wer einen Trend ohne Anwendungsfall adoptiert, kauft Beratungsfolien. Wer einen Trend mit klarem Anwendungsfall und Verantwortung adoptiert, baut Wettbewerbsvorsprung. Der Unterschied ist nicht im Trend, sondern in der Organisation.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3 LOESUNGEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{BauTech Connect \textendash{} 9-Monats-Optimierungsentscheidung}{\nivLiii}{45\,min}
+
+\ytquery{Plattform Optimierungsroadmap Budget Mittelstand CDSO Entscheidung 9 Monate}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Verteilungen sind möglich, solange die Logik konsistent ist.}
+
+\smallskip
+\textbf{1. Priorisierte Optimierungsentscheidung \textendash{} drei Phasen:}
+
+\emph{Phase 1 (Monat 1\,--\,3) \textendash{} Datenqualität, Checkout, gemeinsame KPIs:}
+\begin{itemize}
+  \item Produktdaten bereinigen, priorisierte Produktgruppen optimieren.
+  \item Checkout-Funnel im Webshop systematisch analysieren und vereinfachen.
+  \item Gemeinsame KPIs definieren: Conversion Rate, Wiederkaufrate, DB pro Kanal, Lead-Qualität.
+  \item Vertriebs-Marketing-Steuerungskreis (monatlich) etablieren.
+\end{itemize}
+
+\emph{Phase 2 (Monat 4\,--\,6) \textendash{} CRM-Anbindung, Leadqualifizierung, Marktplatzsteuerung:}
+\begin{itemize}
+  \item CRM mit Webshop und Marktplatz verbinden \textendash{} jeder Lead landet im System.
+  \item Lead Scoring für digitale Anfragen einführen.
+  \item Marktplatzsortiment auf Standardprodukte mit ausreichender Marge fokussieren.
+  \item Kampagnen auf hochwertige Zielsegmente verengen.
+\end{itemize}
+
+\emph{Phase 3 (Monat 7\,--\,9) \textendash{} Personalisierung, Wiederkauf, Dashboard:}
+\begin{itemize}
+  \item Personalisierte Produktempfehlungen testen (Top-30 Wiederkaufprodukte).
+  \item Automatisierte Nachbestellimpulse für Bestandskunden.
+  \item Management-Dashboard live, monatliches Steuerungsmeeting verbindlich.
+\end{itemize}
+
+\textbf{2. Budgetverteilung (300.000\,\euro):}
+\begin{itemize}
+  \item 120.000\,\euro{} \textendash{} Produktdaten, Shop-Optimierung, technische Verbesserungen.
+  \item 80.000\,\euro{} \textendash{} CRM-Integration und Lead Scoring.
+  \item 60.000\,\euro{} \textendash{} fokussierte Performance-Kampagnen auf strategische Zielsegmente.
+  \item 40.000\,\euro{} \textendash{} Marktplatzsteuerung, Reporting, Sortimentsoptimierung, Dashboard.
+\end{itemize}
+
+\textbf{3. Zukunftstrend in der Roadmap:}
+\emph{KI-gestützte Personalisierung} wird ab Phase 3 für die Top-30 Wiederkaufprodukte pilotiert (Empfehlungen, Nachbestellimpulse). Begründung: Die zugrunde liegenden Wartungs- und Wiederkaufzyklen sind im B2B-Geschäft besonders strukturiert \textendash{} dort entsteht echter wirtschaftlicher Mehrwert. \emph{Bewusst nicht aufgenommen:} KI-Preissteuerung im Premium-Sortiment \textendash{} weil dort Margenführung und Markenkommunikation wichtiger sind als algorithmische Reaktion.
+
+\textbf{4. Rollenveränderung:}
+\begin{itemize}
+  \item \emph{Außendienst:} fokussiert auf Schlüsselkunden und erklärungsbedürftige Komponenten \textendash{} weniger Routine, mehr Beratungstiefe.
+  \item \emph{Innendienst:} übernimmt Lead-Qualifizierung, digitale Angebotsverfolgung und Webshop-Backend.
+  \item \emph{Marketing:} wird zum Lead-Generator mit Verantwortung für Lead-Qualität (nicht nur Reichweite).
+  \item \emph{Kundenservice:} übernimmt Bewertungsmanagement, Reklamationen und ersten Lead-Kontakt aus dem Webshop.
+\end{itemize}
+
+\textbf{5. Entscheidung unter Unsicherheit:}
+Trotz unklarer Akzeptanz der Personalisierung bei B2B-Kunden wird die Personalisierungs-Pilotphase priorisiert. Annahme: \emph{Im B2B-Wartungs- und Wiederkaufgeschäft ist die Akzeptanz hoch, weil Personalisierung als Service erlebt wird (\,``Sie brauchen Filter X in 6 Wochen wieder''), nicht als Werbung.} Wenn diese Annahme falsch ist, wird die Pilotphase nach 90 Tagen ohne Folge-Investition beendet.
+
+\textbf{6. Drei Management-KPIs nach 9 Monaten:}
+\begin{itemize}
+  \item \emph{Deckungsbeitrag pro Kanal} \textendash{} zeigt, ob Wachstum auch profitabel ist.
+  \item \emph{Wiederkaufrate im Webshop} \textendash{} zeigt, ob die strategische Kundenbindung funktioniert.
+  \item \emph{Anteil qualifizierter Leads aus digitalen Kampagnen} \textendash{} zeigt, ob Marketing und Vertrieb konvergieren.
+\end{itemize}
+
+\begin{merkbox}[Managementhinweis]
+\emph{Die schwierigste Entscheidung in dieser Phase ist nicht, was gemacht wird \textendash{} sondern was nicht gemacht wird.} Die Aufgabe verlangt fünf Hebel über 9 Monate. Wer sieben verteilt, wird sechs nicht abschließen. Senior-Level-Disziplin heißt: \emph{Fokus erzwingen, auch wenn Marketing und IT mehr wünschen.}
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Zielkonflikt \textendash{} Reichweite versus Plattformkontrolle}{\nivLiii}{30\,min}
+
+\ytquery{Marktplatz Eigenkanal Reichweite Marge Plattformkontrolle B2B Entscheidung}
+
+\begin{loesungbox}
+\textbf{1. Zielkonflikt:}
+Externe Marktplätze maximieren \emph{Reichweite}: schneller Marktzugang, hohe Sichtbarkeit, niedrige Markteintrittsschwelle. Sie minimieren aber gleichzeitig \emph{Plattformkontrolle}: Daten gehen an den Plattformbetreiber, Marge sinkt durch Provisionen und Preisvergleich, Marke wird austauschbar. Der eigene Kanal liefert das Gegenteil \textendash{} weniger Reichweite, aber volle Kontrolle über Daten, Marge und Marke. Der Zielkonflikt ist nicht ``richtig oder falsch'', sondern \emph{wie viel Reichweite man bereit ist, gegen wie viel Kontrolle zu tauschen} \textendash{} und für welche Sortimente.
+
+\smallskip
+\textbf{2. Entscheidungsregel \textendash{} drei Kriterien:}
+\begin{itemize}
+  \item \emph{Kriterium 1 \textendash{} Sortimentscharakter:} Ist das Produkt standardisiert und über Preis vergleichbar? $\rightarrow$ Marktplatz akzeptabel. Ist es erklärungsbedürftig oder beratungsintensiv? $\rightarrow$ Marktplatz schwächt die Positionierung.
+  \item \emph{Kriterium 2 \textendash{} Margenstruktur:} Lässt die Marge nach Plattformprovision (typisch 8\,--\,20\,\%) noch einen gesunden Deckungsbeitrag zu? Wenn nein, ist Marktplatz nicht skalierbar.
+  \item \emph{Kriterium 3 \textendash{} Direktkanal-Reife:} Existiert ein eigener Direktkanal, der Marktplatzkunden mittelfristig in den Direktkanal überführen kann (Wartung, Service, Folgekauf)? Wenn nein, ist der Marktplatz ein Datenleck.
+\end{itemize}
+
+\textbf{3. Beispiel BauTech \textendash{} ein Sortimentssegment:}
+\emph{Standard-Verbindungsmittel (Schrauben, Anker, Dübel):} \textbf{Marktplatz ja.} Standardisiert, vergleichbar, niedriger Beratungsbedarf, hohe Stückzahlen. Die Marge ist durch Volumen tragfähig, die Marke nicht direkt gefährdet (Schrauben sind ohnehin austauschbar).
+
+\smallskip
+\emph{Premium-Werkzeuge (markenspezifisch, beratungsintensiv):} \textbf{Marktplatz nein.} Der Marktplatz erzwingt Preisvergleich mit Wettbewerbern \textendash{} und damit Markenerosion. Hier ist der eigene Direktkanal mit Beratung und Konfigurator richtig.
+
+\smallskip
+\emph{Spezialkomponenten (Projektgeschäft):} \textbf{Marktplatz nein \textendash{} aber LinkedIn ja.} Projektgeschäft braucht Beziehung und Buying-Center-Logik. Hier ist Reichweite über Fach-Communities und LinkedIn wichtiger als Marktplatz-Listing.
+
+\textbf{4. Faustregel:}
+Ein eigener Direktkanal muss vor dem Marktplatz erfüllen: \emph{stabile Lieferfähigkeit, sauberer Checkout, CRM-Anbindung, klare Bestandskundenpflege}. Sonst wird der Marktplatz der einzige funktionierende Kanal \textendash{} und der Anbieter verliert dauerhaft die Kundenbeziehung.
+
+\begin{merkbox}[Lessons Learned]
+\emph{Der Marktplatz ist nicht der Feind \textendash{} aber er ist auch nicht der Freund.} Er ist ein Werkzeug, das nur dann nützt, wenn man sich seiner Kosten (Provision, Daten, Marke) bewusst ist und ihn aktiv nach Sortimentsklassen steuert. Wer ihn ``einfach mal probiert'', zahlt den Lernkurven-Preis später in Marge und Kundenbindung.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Plattformarchitektur 2030}{\nivLiii}{45\,min}
+
+\ytquery{Plattformstrategie 2030 Mittelstand Architektur Governance KPI Zukunftstrends}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind möglich, solange sie als Architektur (nicht als Liste) gedacht sind.}
+
+\smallskip
+\textbf{1. Zielbild 2030:}
+Bis 2030 betreibt das Unternehmen eine zweigeteilte Plattformarchitektur: einen eigenen Direktkanal (Webshop + Kundenportal) als strategischen Kernkanal, der mindestens 50\,\% des Neukundenumsatzes und 70\,\% des Wiederkaufumsatzes trägt, und ein begrenztes Plattformportfolio (max.\ zwei externe Plattformen), das selektiv für Standardprodukte und Reichweite genutzt wird \textendash{} jeweils mit Umsatz-Cap. Die Marke bleibt klar als Qualitäts- und Beratungsanbieter positioniert. Kundendaten und CRM liegen vollständig im eigenen System; KI-gestützte Steuerung wird ergänzend, nicht ersetzend, eingesetzt.
+
+\smallskip
+\textbf{2. Bewertung bestehender Kanäle:}
+\begin{itemize}
+  \item \emph{Eigener Webshop} \textendash{} Wachstum schwach, Marge gut, Datenzugang exzellent, Kontrolle hoch. $\rightarrow$ ausbauen.
+  \item \emph{Externe Marktplätze} \textendash{} Wachstum hoch, Marge schwach, Datenzugang gering, Kontrolle gering. $\rightarrow$ \emph{begrenzen} und nach Sortiment steuern.
+  \item \emph{Digitale Kampagnen} \textendash{} Wachstum mittel, Marge schwach (durch Streuverluste), Datenzugang mittel, Kontrolle mittel. $\rightarrow$ \emph{fokussieren} statt skalieren.
+  \item \emph{CRM} \textendash{} Datenqualität schwach. $\rightarrow$ \emph{strategische Investition}.
+\end{itemize}
+
+\textbf{3. Entscheidung \textendash{} ausbauen / optimieren / begrenzen / beenden:}
+\begin{itemize}
+  \item \emph{Ausbauen:} Webshop, Kundenportal, CRM-Konsolidierung, Datenplattform.
+  \item \emph{Optimieren:} Kampagnen (Fokus auf hochwertige Zielsegmente).
+  \item \emph{Begrenzen:} externe Marktplätze (Umsatz-Cap 25\,\% je Plattform).
+  \item \emph{Beenden:} pauschale Bewerbung der Marktplätze in Eigenmarketing \textendash{} stattdessen Webshop priorisieren.
+\end{itemize}
+
+\textbf{4. KPI-Architektur (operativ vs.\ Management):}
+\begin{itemize}
+  \item \emph{Operativ:} Traffic, Klickrate, Conversion Rate, Lead-Anzahl, Lead-Status, Reaktionszeit, Bewertungen.
+  \item \emph{Management:} Deckungsbeitrag pro Kanal, Wiederkaufrate, CAC vs.\ CLV, Anteil qualifizierter Leads, Daten-Vollständigkeit im CRM, Risikomarker je Plattform (Umsatzanteil).
+\end{itemize}
+
+\textbf{5. Governance:}
+\begin{itemize}
+  \item \emph{CDSO / Vertriebsleitung:} entscheidet über Plattformportfolio, Caps, neue Kanäle.
+  \item \emph{Leiter:in Digital Sales:} verantwortet operative Plattformsteuerung, Performance-Marketing, KPI-Reporting.
+  \item \emph{IT / Datenmanagement:} verantwortet CRM und Datenarchitektur \textendash{} ein System der Wahrheit.
+  \item \emph{Marketing:} verantwortet Lead-Qualität, Content, Markenführung.
+  \item \emph{Kundenservice:} verantwortet Bewertungsmanagement, Reklamationen, digitalen Erstkontakt.
+\end{itemize}
+
+\textbf{6. Roadmap:}
+\begin{itemize}
+  \item \emph{12 Monate:} Daten \& CRM konsolidieren, Webshop optimieren, Lead-Scoring live, KPI-Set verbindlich, gemeinsame Steuerungskreise etabliert.
+  \item \emph{24 Monate:} Kundenportal launchen, Personalisierung skalieren, Marktplatz-Sortiment optimiert, Dashboard im Management-Board verbindlich.
+  \item \emph{36+\,Monate:} datengetriebene Vertriebssteuerung, partnernetzwerk-fähig (Ökosystempilot), KI-gestützte Personalisierung im Bestandsgeschäft.
+\end{itemize}
+
+\textbf{7. Zukunftstrends mit strategischer Bedeutung:}
+\begin{itemize}
+  \item \emph{KI \& Personalisierung:} hoch relevant für Bestandsgeschäft, Wiederkauf, Sortimentssteuerung.
+  \item \emph{Datenbasierte Entscheidungen:} relevant für \emph{jede} Plattformentscheidung \textendash{} Voraussetzung, kein Add-on.
+  \item \emph{Ökosysteme \& Partner:} relevant für 2028+; nicht für 2026/27 \textendash{} zuerst eigene Datenhoheit absichern.
+  \item \emph{Regulatorik (DSA, DMA, Datenhoheit):} muss in jeder Plattformentscheidung berücksichtigt werden.
+\end{itemize}
+
+\textbf{8. Risikoarchitektur:}
+\begin{itemize}
+  \item \emph{Plattformabhängigkeit:} mitigiert durch Umsatz-Caps und parallele Direktkanal-Stärke.
+  \item \emph{Datenverlust:} mitigiert durch eigene CRM-/Datenarchitektur.
+  \item \emph{Preisdruck:} mitigiert durch Sortimentstrennung (Standard auf Marktplatz, Premium im Direktkanal).
+  \item \emph{Technische Komplexität:} mitigiert durch MVP-Logik, klare Schnittstellenarchitektur, ausgewählte externe Verstärkung.
+  \item \emph{Organisatorische Überforderung:} mitigiert durch Phasen-Rollout, Schulungen, Steuerungskreise.
+\end{itemize}
+
+\textbf{9. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Kundenportal-Aufbau vor klarem Akzeptanznachweis.} Annahme: Bestandskunden im Wartungsgeschäft werden ein gut gestaltetes Portal aktiv nutzen. Wenn falsch: Pilot mit 30 Kunden begrenzt, Reissleine nach 90 Tagen.
+  \item \emph{Umsatz-Cap von 25\,\% pro Plattform vor erstem Lock-in.} Annahme: Lock-in ist später dreimal so teuer wie proaktive Begrenzung. Wenn falsch: Cap kostet kurzfristig Umsatz, sichert aber langfristig Marge.
+  \item \emph{Verzicht auf einen scheinbar attraktiven Drittmarktplatz.} Annahme: Reichweite-Gewinn rechtfertigt die Marken- und Margenrisiken nicht. Wenn falsch: Verlust einer Wachstumsoption, aber Schutz von Positionierung und CAC.
+\end{enumerate}
+
+\textbf{Zusatz \textendash{} Entscheidung gegen Wachstum zugunsten Kontrolle:}
+Bewusster Verzicht auf eine dritte externe Plattform (z.\,B.\ einen generischen B2B-Massen-Marktplatz), die kurzfristig 200.000\,--\,400.000\,\euro{} zusätzlichen Umsatz bringen würde. Aus Senior-Level-Sicht: Drei externe Plattformen führen zu Lock-in-Risiko, Marken-Verwässerung und Datenfragmentierung. Der Verzicht ist eine \emph{aktive Investition in Kontrolle}, nicht eine passive Vorsicht.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Eine Plattformarchitektur 2030 ist keine Plattformliste mit Daten dazu \textendash{} sie ist eine Entscheidung darüber, wer die Kundenbeziehung besitzt.} Wer das nicht klärt, wird in fünf Jahren feststellen, dass die wertvollsten Kundendaten beim Plattformbetreiber liegen, nicht im eigenen CRM. Architektur heißt: \emph{Eigentum klären, bevor man wächst.}
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterlösungen sind eine Diskussionsbasis. Wenn Ihre eigene Lösung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder einen anderen Maßstab angelegt?} Beides ist legitim, solange die Logik nachvollziehbar bleibt.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Bringen Sie Ihre eigenen Lösungen in die Coaching-Sitzung mit. Im Fokus stehen drei Fragen: Welche Annahmen haben Sie gemacht? Welche Zielkonflikte haben Sie sichtbar gemacht? Welche Entscheidung haben Sie getroffen \textendash{} und würden Sie auch verantworten, wenn sich der Markt anders entwickelt als angenommen?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 2 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

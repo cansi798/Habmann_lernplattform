@@ -1,0 +1,669 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 5 - Loesungsheft
+% Digitale Vertriebsstrategie, Kundenfokus & Kanalwahl
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{merkbox}[1][Managementhinweis]{enhanced, breakable, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAmberBorder, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 5}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Digitale Vertriebsstrategie \& Kanäle}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 3 \textperiodcentered{} TAG 5 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 3.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 5\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Digitale\\Vertriebsstrategie \& Kanäle.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis,\\nicht die einzige korrekte Lösung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 5}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Eine mögliche Lösung. Mehrere Begründungswege sind legitim, solange sie:
+
+\begin{itemize}
+  \item den Begriffsapparat von Tag 5 nutzen (Customer Journey, Touchpoints, Buying Center, Bewertungskriterien),
+  \item Annahmen sichtbar machen,
+  \item Zielkonflikte (Reichweite vs.\ Leadqualität, Marke vs.\ Wachstum) benennen,
+  \item zu einer klaren Entscheidung führen.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterlösung.
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Produktorientiert vs.\ kundenzentriert}{\nivLi}{6\,min}
+
+\ytquery{produktorientierter Vertrieb kundenzentriert B2B Unterschied}
+
+\begin{loesungbox}
+\textbf{1. Definitionen:}
+\begin{itemize}
+  \item \textbf{Produktorientierter Vertrieb} stellt das Produkt und seine Eigenschaften in den Mittelpunkt: Was kann es? Welche Spezifikationen? Welche Wettbewerbsmerkmale?
+  \item \textbf{Kundenzentrierter Vertrieb} stellt das Kundenproblem in den Mittelpunkt: Welche Situation hat der Kunde? Welches Ziel will er erreichen? Welche Hürden hat er? Das Produkt ist ein \emph{Mittel} zur Problemlösung, nicht das Subjekt.
+\end{itemize}
+
+\textbf{2. Drei beobachtbare Unterschiede:}
+\begin{itemize}
+  \item \emph{Erstgespräch:} produktorientiert beginnt mit ``unser Produkt kann X'' \textendash{} kundenzentriert mit ``welche Situation haben Sie?''.
+  \item \emph{Angebot:} produktorientiert führt Spezifikationen auf \textendash{} kundenzentriert zeigt, wie das Produkt das Kundenproblem löst.
+  \item \emph{Reporting:} produktorientiert zählt Angebote/Demos \textendash{} kundenzentriert misst gelöste Kundenprobleme und Wiederkauf.
+\end{itemize}
+
+\textbf{3. Dominanz und Risiko:}
+Im B2B-Mittelstand dominiert noch immer der \emph{produktorientierte} Vertrieb \textendash{} historisch gewachsen aus ingenieurgeprägten Unternehmen. Risiko: Im digitalen Zeitalter recherchieren Kunden 60\,--\,80\,\% der Kaufentscheidung \emph{vor} dem ersten Anbieterkontakt. Wer in dieser Phase nicht kundenzentriert sichtbar ist (Antworten auf Kundenfragen, nicht Produktbroschüren), wird im Vergleich nicht mitgezählt.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Customer Journey \textendash{} sieben Phasen}{\nivLi}{8\,min}
+
+\ytquery{Customer Journey B2B Phasen Awareness Consideration Decision Retention}
+
+\begin{loesungbox}
+\textbf{1. Sieben Phasen \textendash{} aus Kundensicht:}
+\begin{itemize}
+  \item \emph{Aufmerksamkeit:} ``Ich habe ein Problem oder eine Chance entdeckt.''
+  \item \emph{Informationssuche:} ``Wer löst das? Wie? Womit?''
+  \item \emph{Vergleich:} ``Welche Lösungen stehen zur Auswahl, wo liegen die Unterschiede?''
+  \item \emph{Entscheidung:} ``Welches passt zu uns? Was ist das Risiko? Was kostet es wirklich?''
+  \item \emph{Kauf:} ``Wie schließen wir verbindlich ab, mit welchen Bedingungen?''
+  \item \emph{Nutzung:} ``Bekommen wir, was wir gekauft haben? Werden wir gut betreut?''
+  \item \emph{Wiederkauf / Empfehlung:} ``Tun wir das wieder \textendash{} und empfehlen wir es weiter?''
+\end{itemize}
+
+\textbf{2. Vernachlässigte Phasen:}
+\emph{Informationssuche} und \emph{Wiederkauf / Empfehlung}. Klassischer Vertrieb fokussiert sich auf Entscheidung und Kauf \textendash{} also auf den 20-\%-Anteil der Journey, in dem der Außendienst sichtbar ist. Vor dem Erstkontakt (Informationssuche) und nach dem Kauf (Wiederkauf) wird systematisch zu wenig investiert.
+
+\textbf{3. Wo wird im digitalen B2B entschieden?}
+In der \emph{Vergleichsphase}. Wenn ein Anbieter dort nicht sichtbar oder nicht überzeugend dargestellt ist, schafft er es oft gar nicht in die Entscheidungs-Phase, in der der Außendienst aktiv wird. Studien sprechen von 60\,--\,80\,\% Vor-Recherche.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Zehn digitale Kanäle zuordnen}{\nivLi}{8\,min}
+
+\ytquery{B2B digitale Kanäle Customer Journey LinkedIn Webinar SEO Vergleich}
+
+\begin{loesungbox}
+\textbf{1. Kanal\,$\rightarrow$\,Journey-Phase (Schwerpunkt):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Kanal} & \textbf{Wirksamster Schwerpunkt} \\
+\midrule
+Eigener Webshop                   & Kauf + Wiederkauf \\
+Website mit Leadgenerierung       & Informationssuche + Vergleich \\
+SEO / SEA                         & Aufmerksamkeit + Informationssuche \\
+LinkedIn Social Selling           & Aufmerksamkeit + Vergleich (B2B) \\
+E-Mail-Marketing / Automation     & Nutzung + Wiederkauf \\
+Plattformen / Marktplätze         & Vergleich + Kauf (Standardprodukte) \\
+Vergleichsportale                 & Vergleich \\
+Partner-/Affiliate-Kanäle         & Aufmerksamkeit + Empfehlung \\
+Webinare / Content                & Informationssuche + Vergleich \\
+Kundenportale / Self-Service      & Nutzung + Wiederkauf \\
+\bottomrule
+\end{tabularx}
+
+\textbf{2. Besonders wertvoll für erklärungsbedürftige B2B-Produkte:}
+\emph{Webinare} und \emph{LinkedIn Social Selling}. Webinare bauen Vertrauen und Kompetenz auf, ohne aggressive Verkaufslogik. LinkedIn ermöglicht zielgruppengenaue Ansprache mit fachlichem Content auf Entscheider:innen-Ebene.
+
+\textbf{3. Im B2B häufig überschätzt:}
+\emph{Display-Anzeigen / Banner-Werbung} (zu hohe Streuverluste) und \emph{Vergleichsportale} (im B2B fehlen oft die spezifischen Kriterien, und Markenpositionierung leidet). Beide sind im B2C wirksam, im B2B selten.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{ErgoWork \textendash{} Customer Journey \& Touchpoints}{\nivLii}{25\,min}
+
+\ytquery{B2B Customer Journey Mittelstand Bürostühle Touchpoints Awareness Consideration}
+
+\begin{loesungbox}
+\textbf{1. Drei Kundengruppen:}
+\begin{itemize}
+  \item \emph{Unternehmen 50\,--\,200 Mitarbeitende \textendash{} HR / Office-Management} (Frau, 35\,--\,50, Verantwortung für Mitarbeitendengesundheit, will Standards setzen).
+  \item \emph{Selbstständige / Homeoffice-Nutzer} (Wissensarbeiter:in, 30\,--\,55, ergonomie-bewusst, kauft individuell).
+  \item \emph{Öffentliche Einrichtungen} (Beschaffung, 45\,--\,60, formale Auswahlverfahren, Förderkonformität).
+\end{itemize}
+
+\textbf{2. Drei Bedürfnisse je Gruppe:}
+\begin{itemize}
+  \item \emph{Unternehmen:} Mitarbeitendengesundheit nachweisbar verbessern, planbare Budgets, geringer Beschaffungsaufwand.
+  \item \emph{Selbstständige:} klare Empfehlung, kurzer Entscheidungsweg, schnelle Lieferung.
+  \item \emph{Öffentliche:} Vergaberecht, Förderfähigkeit, Lieferantenrahmenverträge.
+\end{itemize}
+
+\textbf{3. Customer Journey \textendash{} Unternehmen 50\,--\,200 MA:}
+\begin{enumerate}
+  \item \emph{Aufmerksamkeit:} Mitarbeitende klagen über Rückenschmerzen / GF kündigt neues Office-Konzept an. Suche: ``ergonomisches Büro Konzept Mittelstand''.
+  \item \emph{Informationssuche:} Recherche zu Anbietern, Studien, Fördermöglichkeiten. Erstkontakt mit Website / LinkedIn-Beitrag von ErgoWork.
+  \item \emph{Vergleich:} Drei Anbieter angefragt; Konfigurator/Beratungstermin getestet.
+  \item \emph{Entscheidung:} Beratungstermin mit ErgoWork; Probestühle erhalten; Angebot mit transparenter Logik.
+  \item \emph{Wiederkauf:} ein Jahr später Erweiterung um 12 neue Mitarbeitende; einfache Nachbestellung im Kundenportal.
+\end{enumerate}
+
+\textbf{4. Fünf digitale Touchpoints:}
+\begin{itemize}
+  \item Google-Suche / SEO-Inhalt zu ``ergonomisches Büro''.
+  \item LinkedIn-Beitrag mit Case Study.
+  \item Website mit Konfigurator und Beratungstermin-Buchung.
+  \item Newsletter / E-Mail-Nurturing nach Whitepaper-Download.
+  \item Kundenportal für Nachbestellung.
+\end{itemize}
+
+\textbf{5. Zuerst arbeiten:}
+\emph{Website mit Beratungstermin-Funktion} und \emph{LinkedIn-Präsenz}. Begründung aus Kundensicht: Die Vergleichs-Phase ist im B2B-Mittelstand die kritische \textendash{} dort treffen Kunden die Anbieter-Wahl, lange bevor sie anrufen.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Die wichtigste Customer-Journey-Investition ist selten die mit dem höchsten Marketingbudget.} Sie ist die, die in der Vergleichsphase \emph{Vertrauen} schafft \textendash{} typischerweise Landingpage + ein qualitätsstarker Beratungstermin-Prozess.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{ErgoWork \textendash{} sechs Kanaloptionen priorisieren}{\nivLii}{30\,min}
+
+\ytquery{B2B Kanal Priorisierung Mittelstand Webinar LinkedIn Webshop Marktplatz}
+
+\begin{loesungbox}
+\textbf{1. Bewertung (1\,--\,5):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lcccccc@{}}
+\toprule
+& \textbf{Ziel-G.} & \textbf{Aufw.} & \textbf{Kost.} & \textbf{Daten} & \textbf{Berat.} & \textbf{Marke} \\
+\midrule
+A: Webshop+Konfig.   & 4 & 4 & 4 & 5 & 3 & 5 \\
+B: Website+Beratung & 5 & 3 & 3 & 5 & 5 & 5 \\
+C: LinkedIn Ads      & 5 & 3 & 4 & 4 & 4 & 4 \\
+D: Amazon/Marktpl.   & 2 & 2 & 3 & 1 & 1 & 2 \\
+E: Webinare          & 4 & 4 & 4 & 4 & 5 & 5 \\
+F: E-Mail Bestand    & 5 & 2 & 1 & 5 & 4 & 4 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\emph{Aufwand/Kosten: 1=niedrig, 5=hoch; übrige Kriterien: 1=schwach, 5=stark.}
+
+\textbf{2. Priorisierung:}
+\begin{itemize}
+  \item \emph{Sofort starten:} B (Website+Beratung), F (E-Mail Bestand), C (LinkedIn Ads).
+  \item \emph{Später prüfen:} E (Webinare \textendash{} ab Monat 4), A (Webshop \textendash{} ab Monat 6).
+  \item \emph{Zunächst nicht:} D (Marktplatz).
+\end{itemize}
+
+\textbf{3. Drei Kanäle der ersten Phase:}
+\textbf{B + F + C.} Website-Beratungsanfrage als zentraler Conversion-Hub; LinkedIn-Ads für Reichweite und qualifizierte Leads; E-Mail-Reaktivierung der Bestandskunden für Wiederkauf-Umsatz. Diese drei Kanäle nutzen ErgoWorks bestehende Stärke (Beratung, Markenpositionierung) und brauchen kein neues operatives Modell.
+
+\textbf{4. Kanal mit hoher Reichweite \emph{nicht}:}
+\textbf{Amazon Business / Marktplatz (D)} wird bewusst nicht priorisiert. Begründung: erklärungsbedürftiges Produkt + Beratungslogik passen nicht zur Marktplatzlogik. Hohe Reichweite kommt mit Preisvergleich und Markenverwässerung \textendash{} im Premium-Segment ein strategischer Schaden.
+
+\textbf{5. Managementempfehlung:}
+ErgoWork investiert in den ersten 6\,Monaten in B + F + C als Kombination, die Conversion-Hub (Website), Reichweite (LinkedIn) und Bestandskunden-Aktivierung (E-Mail) abdeckt. Webinare und Webshop kommen in Phase 2. Marktplätze bleiben optional für ausgewählte Standardprodukte \textendash{} aber nie als Hauptkanal.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Die häufigste Fehlentscheidung im Mittelstand: alle sechs Kanäle parallel.} Das verbrennt Budget, überfordert das Team und verhindert echtes Lernen pro Kanal. Drei Kanäle, drei klare Lernzyklen \textendash{} das ist der Königsweg.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Bewertungskriterien für digitale Kanäle}{\nivLii}{15\,min}
+
+\ytquery{B2B digitale Kanäle Bewertungskriterien Zielgruppe Marke Datenzugang}
+
+\begin{loesungbox}
+\textbf{1. Drei wichtigste Kriterien im B2B-Mittelstand:}
+\begin{itemize}
+  \item \emph{Zielgruppenpassung:} Reichweite ohne Passung ist wertlos.
+  \item \emph{Beratungsfähigkeit:} im B2B fast immer entscheidend, weil Produkte erklärungsbedürftig sind.
+  \item \emph{Datenzugang:} ohne eigene Kundendaten gibt es keine Wiederkauflogik, keine Personalisierung, keine CLV-Steigerung.
+\end{itemize}
+
+\textbf{2. Strategisch wichtig, aber oft vergessen:}
+\emph{Abhängigkeit von Drittplattformen} und \emph{Markenwirkung}. Beide werden in operativen Diskussionen über Kosten und Reichweite überlagert \textendash{} sind aber langfristig die Faktoren, an denen sich Marktposition entscheidet.
+
+\textbf{3. Gewichtung für ErgoWork:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lc@{}}
+\toprule
+\textbf{Kriterium} & \textbf{Gewicht} \\
+\midrule
+Zielgruppenpassung           & 5 \\
+Beratungsfähigkeit           & 5 \\
+Datenzugang                  & 4 \\
+Markenwirkung                & 4 \\
+Conversion-Potenzial         & 4 \\
+Kontrollgrad                 & 4 \\
+Kosten                       & 3 \\
+Reichweite                   & 3 \\
+Skalierbarkeit               & 3 \\
+Abhängigkeit Drittplattform  & 4 (negativ) \\
+\bottomrule
+\end{tabularx}
+
+\textbf{4. B2C-Unterschied:}
+\emph{Reichweite} ist im B2C oft das wichtigste Kriterium (große Märkte, kurze Entscheidungswege). Im B2B ist Reichweite oft \emph{zweitrangig} \textendash{} entscheidend sind Passung und Beratungsfähigkeit. Eine 5\,\%-Conversion bei 100 passgenauen Leads schlägt eine 0,5\,\%-Conversion bei 5.000 unpassenden Leads.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{GreenTech Systems \textendash{} Kanalstrategie}{\nivLii}{30\,min}
+
+\ytquery{GreenTech B2B Heizung Gebäudetechnik Kanal SEO LinkedIn Webinar Partner}
+
+\begin{loesungbox}
+\textbf{1. Zielgruppenanalyse:}
+\begin{itemize}
+  \item \emph{Immobilienverwalter:} brauchen belastbare Informationen zu Kosten, Einsparpotenzial, Betriebssicherheit, Fördermöglichkeiten.
+  \item \emph{Gewerbebetriebe:} achten auf Wirtschaftlichkeit, Ausfallrisiken, Umsetzungsdauer.
+  \item \emph{Architekten / Energieberater:} Multiplikatoren \textendash{} beeinflussen Kaufentscheidungen früh.
+  \item \emph{Öffentliche Auftraggeber:} Transparenz, Nachweise, formale Entscheidungssicherheit.
+\end{itemize}
+
+\textbf{2. Customer Journey (Hausverwaltung, 80 Wohnungen):}
+\begin{itemize}
+  \item Aufmerksamkeit: steigende Energiekosten / gesetzliche Anforderungen.
+  \item Informationssuche: Recherche zu Lösungen, Förderungen, Anbietern.
+  \item Vergleich: Machbarkeit, Referenzen, Wirtschaftlichkeit.
+  \item Kontakt: Beratung, Erstgespräch, Datenaufnahme.
+  \item Entscheidung: Angebot, interne Freigabe, Budgetprüfung.
+  \item Umsetzung: Projektplanung, Installation, Service.
+  \item Nachkauf: Wartung, Erweiterung, Empfehlung.
+\end{itemize}
+
+\textbf{3. Kanalbewertung (zusammengefasst):}
+\begin{itemize}
+  \item \emph{A SEO-Website:} sehr hoch (Vertrauen + Leadgenerierung + Sichtbarkeit).
+  \item \emph{B Google Ads:} sinnvoll für konkrete Nachfrage; braucht saubere Landingpage.
+  \item \emph{C LinkedIn:} stark für Entscheideransprache.
+  \item \emph{D Webinare:} sehr stark für erklärungsbedürftige Themen + Leadqualifikation.
+  \item \emph{E Partnerkanal (Energieberater, Architekten):} extrem wichtig \textendash{} sie sind frühe Multiplikatoren.
+  \item \emph{F Angebotskonfigurator:} attraktiv, aber erst sinnvoll bei stabilen Inhalten und Prozessen.
+  \item \emph{G Allgemeine Portale:} kritisch \textendash{} Preisvergleich, schwache Markendifferenzierung.
+\end{itemize}
+
+\textbf{4. Priorisierung (max.\ 4 Kanäle):}
+\begin{itemize}
+  \item Priorität 1: \textbf{A} SEO-Website mit Fachinhalten.
+  \item Priorität 2: \textbf{D} Webinare zur Leadqualifikation.
+  \item Priorität 3: \textbf{C} LinkedIn-Kampagnen für strategische Zielgruppen.
+  \item Priorität 4: \textbf{E} Partnerkanal mit Energieberatern und Architekten.
+\end{itemize}
+
+\textbf{5. Bewusst nicht:}
+\textbf{G} (allgemeine Portale, weil Preisvergleich erzwungen wird) und \textbf{F} (Konfigurator, zurückgestellt bis Inhalte, Prozesse und Datenstrukturen stabil sind).
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Persona \& Buying Center}{\nivLii}{20\,min}
+
+\ytquery{B2B Buying Center Persona Initiator Decider Influencer Gatekeeper}
+
+\begin{loesungbox}
+\textbf{1. Buying-Center-Personas für GreenTech (Bürogebäude-Sanierung):}
+\begin{itemize}
+  \item \emph{Initiator:} Facility Manager (45, will reduzierte Energiekosten).
+  \item \emph{User:} Mitarbeitende (Komfort, Klima).
+  \item \emph{Influencer:} Energieberater / Architekt (extern, technische Empfehlung).
+  \item \emph{Decider:} CFO oder Geschäftsführung (Investitionsentscheidung).
+  \item \emph{Buyer:} Einkauf (Vergabe, Vertrag, Konditionen).
+  \item \emph{Gatekeeper:} Assistenz GF, eventuell Einkaufsleitung.
+\end{itemize}
+
+\textbf{2. Drei wichtigste Personas im digitalen Kontext:}
+\emph{Influencer (Energieberater / Architekt)}, \emph{Decider (CFO)} und \emph{Initiator (Facility Manager)}. User werden nicht digital aktiv erreicht; Buyer und Gatekeeper werden über andere Wege adressiert.
+
+\textbf{3. Botschaft + Kanal je Persona:}
+\begin{itemize}
+  \item \emph{Energieberater / Architekt:} Fachartikel, Whitepaper, Webinare zu technischen Details + ROI-Berechnungen. Kanal: LinkedIn, Fach-Newsletter, Partnerprogramm.
+  \item \emph{CFO:} ROI-Case, Förderlogik, Risikomanagement, Referenzen. Kanal: LinkedIn-Lead-Ads, gezielte Whitepaper.
+  \item \emph{Facility Manager:} praktische Anleitungen, Best Practices, Servicelevel. Kanal: SEO-Inhalte, Newsletter, Webinare.
+\end{itemize}
+
+\textbf{4. Häufig übersehene Rolle:}
+\emph{Influencer (Energieberater, Architekt)}. Im B2B-Sanierungsmarkt werden 50\,--\,70\,\% der Anbieterwahl bereits in der frühen Architekt:innen-Phase vorentschieden. Wer hier nicht sichtbar ist, kommt in viele Vergleichslisten gar nicht hinein \textendash{} unabhängig davon, wie gut das eigene Marketing gegenüber dem CFO ist.
+
+\begin{merkbox}[Lessons Learned]
+\emph{Im B2B verkaufen Sie nie an eine Person, sondern an ein Buying Center.} Wer nur den Decider adressiert, übersieht die Personen, die die Vorentscheidungen treffen.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{GreenTech Systems \textendash{} 12-Monats-Kanalentscheidung}{\nivLiii}{45\,min}
+
+\ytquery{GreenTech CRO Kanalstrategie Budget Roadmap Leadqualifizierung Mittelstand}
+
+\begin{loesungbox}
+\textbf{1. Priorisierte Kanalentscheidung:}
+Vier Kanäle: \textbf{A} SEO-Website mit Fachinhalten, \textbf{D} Webinare, \textbf{C} LinkedIn-Kampagnen, \textbf{E} Partnerkanal. Begründung aus Senior-Level-Perspektive: GreenTech verkauft erklärungsbedürftige Lösungen an ein Buying Center, in dem Influencer früh entscheiden. SEO und Webinare adressieren die Informationssuche-/Vergleichsphase, LinkedIn die Decider-Ansprache, der Partnerkanal die kritischen Influencer (Energieberater, Architekten). Reichweitenkanäle wie allgemeine Portale werden bewusst nicht priorisiert, weil sie Preisvergleich erzwingen und die Qualitätsmarke beschädigen würden. Konfigurator wird zurückgestellt, bis Inhalte und Daten stabil sind.
+
+\textbf{2. Budgetverteilung (180.000\,\euro):}
+\begin{itemize}
+  \item 50.000\,\euro{} \textendash{} SEO-Website (Inhalte, technische Optimierung, Landingpages).
+  \item 35.000\,\euro{} \textendash{} Webinare (Konzept, Durchführung, Bewerbung).
+  \item 35.000\,\euro{} \textendash{} LinkedIn-Kampagnen (Targeting, Whitepaper, Ads).
+  \item 25.000\,\euro{} \textendash{} Partnerprogramm (Energieberater, Architekten: Provisionsmodell, Schulungen).
+  \item 15.000\,\euro{} \textendash{} CRM- / Lead-Scoring-Integration.
+  \item 10.000\,\euro{} \textendash{} Vertriebsschulung digitale Leads + Tracking.
+  \item 10.000\,\euro{} \textendash{} Tests, Optimierung, Reporting.
+\end{itemize}
+
+\textbf{3. Roadmap (3 Phasen):}
+
+\emph{Monat 1\,--\,3:} Zielgruppen + Kernbotschaften schärfen \textperiodcentered{} Website-Struktur \& Leadpfade \textperiodcentered{} Fachinhalte zu Energieeinsparung, Förderung, Referenzen.
+
+\emph{Monat 4\,--\,6:} SEO-Inhalte live \textperiodcentered{} erste Webinare \textperiodcentered{} LinkedIn-Zielgruppen-Tests \textperiodcentered{} Leadqualifizierung mit Vertrieb abstimmen.
+
+\emph{Monat 7\,--\,12:} Kampagnen optimieren \textperiodcentered{} Partnerprogramm aktiv \textperiodcentered{} CRM-Prozess verbessern \textperiodcentered{} Konfigurator-Entscheidung vorbereiten \textperiodcentered{} Skalierungsentscheidung für erfolgreiche Kanäle.
+
+\textbf{4. Lead-Qualifizierungs-Logik:}
+\begin{itemize}
+  \item \emph{Marketing-Qualified Lead (MQL):} Lead mit Profilpassung (Zielsegment, Rolle, Postleitzahl).
+  \item \emph{Sales-Accepted Lead (SAL):} Vertrieb akzeptiert nach Anruf / Erstkontakt; Bedarf bestätigt.
+  \item \emph{Sales-Qualified Lead (SQL):} Bedarf, Budget, Zeitfenster, Entscheider identifiziert.
+  \item \emph{Übergaberegel:} MQL wird innerhalb von 2 Werktagen vom Innendienst kontaktiert; bei SAL übernimmt Außendienst innerhalb von 5 Werktagen.
+\end{itemize}
+
+\textbf{5. Rollenveränderung in 12\,Monaten:}
+\begin{itemize}
+  \item \emph{Außendienst:} fokussiert auf SQL und Bestandskunden mit hohem Projektpotenzial; weniger Kaltakquise.
+  \item \emph{Innendienst:} übernimmt Erstkontakt mit digitalen Leads, Bedarfsanalyse, Übergabe an Außendienst.
+  \item \emph{Marketing:} verantwortet Lead-Qualität (nicht nur -Menge), Content-Pipeline, Webinare, Partnerkanal-Steuerung.
+\end{itemize}
+
+\textbf{6. Entscheidung gegen Reichweite:}
+Bewusste Ablehnung der allgemeinen Gebäudetechnik-Portale (Option G). Begründung: Sie senken die Markenpositionierung von ``Qualitätsanbieter'' auf ``vergleichbarer Anbieter unter vielen''. Im erklärungsbedürftigen Premium-Segment ist Markenposition wertvoller als Reichweite, die nur über Preisvergleich kommt.
+
+\textbf{7. Drei Management-KPIs:}
+\begin{itemize}
+  \item Anzahl SQL pro Monat (nicht: MQL allein \textendash{} damit wird Lead-Müll verhindert).
+  \item Conversion-Rate SQL\,$\rightarrow$\,Angebot\,$\rightarrow$\,Auftrag (Vertriebsproduktivität).
+  \item Kosten pro SQL (CAC \textendash{} schützt vor unrentabler Skalierung).
+\end{itemize}
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Die wichtigste Lead-KPI ist nicht ``Leadmenge'', sondern ``Vertriebspassung''.} Ein MQL, der zu keinem SQL wird, ist Kosten ohne Wirkung. Wer Marketing weiterhin auf MQL allein misst, belohnt strukturell schlechte Leads.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Reichweite vs.\ Leadqualität}{\nivLiii}{30\,min}
+
+\ytquery{Marketing Vertrieb Lead Konflikt SLA Qualität Quantität Mittelstand}
+
+\begin{loesungbox}
+\textbf{1. Konflikt:}
+Marketing misst Reichweite und Leadanzahl, Vertrieb misst Abschlüsse. Marketing freut sich über 500 Leads / Monat; Vertrieb sieht, dass nur 30 davon ernsthaft kaufabsichtig sind. Schuldzuweisung wird zur Routine: ``Marketing liefert Müll'', ``Vertrieb kümmert sich nicht''. Strukturell gleiche KPIs gibt es nicht \textendash{} also reden sie aneinander vorbei.
+
+\textbf{2. Gemeinsame KPI-Logik:}
+Zentrale KPI sollte sein: \emph{SQL pro Quartal $\rightarrow$ Auftragspipeline} (gemeinsam berichtet). Sekundär: \emph{Conversion MQL\,$\rightarrow$\,SQL} (Verantwortung Marketing) und \emph{Conversion SQL\,$\rightarrow$\,Auftrag} (Verantwortung Vertrieb). Beide Teams werden nicht auf isolierte Eigen-KPIs gemessen, sondern auf den Übergang an ihrer gemeinsamen Schnittstelle (MQL\,$\rightarrow$\,SQL).
+
+\textbf{3. Zwei strukturelle Maßnahmen:}
+\begin{itemize}
+  \item \emph{Lead-SLA:} Marketing definiert MQL nach klaren Kriterien (Zielsegment, Funktionsrolle, sichtbarer Bedarf), Vertrieb verpflichtet sich zur Reaktion in 2 Werktagen. Wer den SLA nicht erfüllt, ist im Reporting markiert.
+  \item \emph{Provisionsanteil für Marketing:} Performance-Boni der Marketingleitung sind teilweise an die SQL\,$\rightarrow$\,Auftrag-Konversion gebunden, nicht nur an Lead-Menge. Das ändert Anreize strukturell.
+\end{itemize}
+
+\textbf{4. Häufig falsche Annahme:}
+``\emph{Wenn Marketing und Vertrieb sich besser absprechen, lösen sich die Probleme.}'' Falsch \textendash{} Absprachen lösen Anreizprobleme nicht. Solange Marketing auf Menge und Vertrieb auf Abschlüsse gemessen wird, entstehen die Konflikte strukturell neu \textendash{} unabhängig von Goodwill.
+
+\textbf{5. Strukturelle Trennkennzahl:}
+\emph{Conversion-Rate MQL\,$\rightarrow$\,SQL}. Diese eine Zahl zeigt sofort, ob Marketing \emph{passende} Leads liefert. Eine Conversion von 5\,\% ist Lead-Müll, eine von 30\,\% ist starke Qualität. Über diese Zahl lässt sich die Diskussion entpolitisieren.
+
+\begin{merkbox}[Lessons Learned]
+\emph{Konflikte zwischen Marketing und Vertrieb sind in 80\,\% der Fälle Anreizprobleme, nicht Personenprobleme.} Wer das Anreizsystem repariert, repariert das Verhalten. Wer ``mehr Workshops'' macht, repariert nichts.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Kundenzentrierte Vertriebsarchitektur}{\nivLiii}{45\,min}
+
+\ytquery{digitale Vertriebsarchitektur CRO Kanal Budget Roadmap Mittelstand kundenzentriert}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen möglich.}
+
+\smallskip
+\textbf{1. Zielsetzung:}
+Das Unternehmen baut in 18\,Monaten eine digitale Vertriebsarchitektur auf, die jährlich 300+ qualifizierte Leads generiert, die Bestandskundenbindung über ein Kundenportal stärkt und die Marke als hochwertigen Beratungsanbieter positioniert. Mindestens 35\,\% des Neugeschäfts kommt aus digitalen Quellen, ohne dass die Marge unter den heutigen Wert sinkt.
+
+\textbf{2. Kundengruppen:}
+\begin{itemize}
+  \item Geschäftsführung mittelständischer Unternehmen.
+  \item Fachverantwortliche / Buying Center Influencer.
+  \item Bestandskunden mit Wiederkauf-/Wartungsbedarf.
+  \item (optional) Großkundensegment Premium.
+\end{itemize}
+
+\textbf{3. Customer Journey (digital + persönlich):}
+Aufmerksamkeit (SEO, LinkedIn) $\rightarrow$ Informationssuche (Whitepaper, Webinar) $\rightarrow$ Vergleich (Landingpage, Referenzen) $\rightarrow$ Entscheidung (Beratungstermin, Außendienst) $\rightarrow$ Kauf $\rightarrow$ Nutzung (Kundenportal, Service) $\rightarrow$ Wiederkauf (E-Mail-Automation, Innendienst).
+
+\textbf{4. Kanalbewertung (max.\ 6 Kanäle):}
+\begin{itemize}
+  \item Website mit Beratungstermin + Konfigurator (zentral).
+  \item LinkedIn-Selling + Ads (Reichweite).
+  \item Webinare + Content (Leadqualifikation).
+  \item E-Mail-Marketing / Automation (Nurturing, Wiederkauf).
+  \item Partner-/Multiplikator-Kanal (Influencer im Buying Center).
+  \item Kundenportal (Bestandskunden, Wiederkauf).
+\end{itemize}
+
+\textbf{5. Entscheidungslogik:}
+\begin{itemize}
+  \item \emph{Priorität 1:} Website + LinkedIn + Webinare (sofort, in den ersten 6\,Monaten).
+  \item \emph{Priorität 2:} E-Mail-Automation + Partner-Kanal (Monat 4\,--\,9).
+  \item \emph{Priorität 3:} Kundenportal (Monat 9\,--\,15).
+  \item \emph{Ausgeschlossen:} allgemeine Vergleichsportale, generische Marktplätze \textendash{} weil sie Preisvergleich erzwingen.
+\end{itemize}
+
+\textbf{6. Begründung zur Marke:}
+Alle gewählten Kanäle erlauben \emph{kontrollierte Markenkommunikation}: Inhalte, Tonalität, Bewertungen, Servicekultur bleiben unter eigener Regie. Marktplätze wären strukturell markenschädlich.
+
+\textbf{7. Daten- und Leadlogik:}
+\begin{itemize}
+  \item CRM ist zentrales Steuerungssystem.
+  \item Pflichtfelder bei Lead-Erfassung: Segment, Rolle, Quelle, Bedarfstyp, Zeitfenster.
+  \item Lead-Scoring nach diesen Feldern und Aktivität (Whitepaper-Download, Webinar-Teilnahme).
+  \item Übergabe MQL\,$\rightarrow$\,SQL nach klar definierten Kriterien.
+\end{itemize}
+
+\textbf{8. Governance:}
+\begin{itemize}
+  \item CRO verantwortet die digitale Vertriebsarchitektur.
+  \item Leiter:in Digital Sales steuert Kanäle und KPIs.
+  \item Vertriebsleitung verantwortet SQL\,$\rightarrow$\,Auftrag-Konversion.
+  \item Marketing verantwortet MQL-Qualität und Content-Pipeline.
+  \item IT/Daten verantwortet CRM, Tracking, Reporting.
+  \item Monatlicher Steuerungskreis mit klaren KPI-Reviews.
+\end{itemize}
+
+\textbf{9. Roadmap (12\,--\,18 Monate):}
+\begin{itemize}
+  \item Monat 1\,--\,3: Foundation (Strategie, KPIs, CRM, erste Inhalte).
+  \item Monat 4\,--\,6: Launch (Website, LinkedIn, erste Webinare).
+  \item Monat 7\,--\,9: Optimierung + Partnerkanal + E-Mail-Automation.
+  \item Monat 10\,--\,12: Skalierung erfolgreicher Kanäle, Lead-Qualifizierung verfeinern.
+  \item Monat 13\,--\,18: Kundenportal-Pilot, Datenarchitektur, Senior-Level-Review.
+\end{itemize}
+
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Investition in CRM-Konsolidierung trotz unklarer Nutzeradoption durch Vertrieb.} Annahme: ohne ein CRM-System der Wahrheit skaliert nichts. Wenn falsch: CRM-Investition ohne Wirkung, aber Voraussetzung bleibt richtig.
+  \item \emph{Partnerprovisionsmodell für Influencer (Energieberater) trotz unklarer Skalierbarkeit.} Annahme: 1\,$\in$ in Influencer ist effektiver als 1\,$\in$ in Endkunden-Werbung. Wenn falsch: Provision kostet Marge ohne ausreichende Conversion.
+  \item \emph{Verzicht auf Display-Reichweite.} Annahme: B2B-Kunden recherchieren gezielt, nicht zufällig. Wenn falsch: verschenkte Reichweite, aber Markenschutz erhalten.
+\end{enumerate}
+
+\textbf{Zusatz \textendash{} Verzicht auf reichweitenstarken Kanal:}
+Bewusster Verzicht auf einen massiven Display-Kampagnen-Ansatz. Aus Senior-Level-Sicht: Display erzeugt Aufmerksamkeit, aber kaum qualifizierte Leads in einem erklärungsbedürftigen Premium-Segment. Stattdessen wird das Geld in Webinare und Partnerprogramme investiert \textendash{} weniger Reichweite, deutlich höhere Conversion.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Eine kundenzentrierte Vertriebsarchitektur entscheidet sich nicht im Kanalmix, sondern in der Bereitschaft, die richtigen Kanäle aus den falschen Gründen abzulehnen.} Wer einen Kanal aus Markenüberlegungen ablehnt, schützt langfristige Marge \textendash{} auch wenn das Quartalsreporting kurzfristig anders aussieht.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterlösungen sind eine Diskussionsbasis. Wenn Ihre Lösung anders aussieht, fragen Sie nach Annahmen und Zielkonflikten.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Im Coaching: Welche Kanalentscheidung haben Sie aus Marken- oder Beratungsgründen gegen Reichweite getroffen \textendash{} und würden Sie diese Entscheidung auch dann verteidigen, wenn ein:e Vertriebsleiter:in sagt: ``Aber wir brauchen mehr Leads, jetzt!''?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 5 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

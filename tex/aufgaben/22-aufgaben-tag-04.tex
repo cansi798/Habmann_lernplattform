@@ -1,0 +1,521 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 4 - Aufgabenheft
+% Plattform-Skalierung, Monetarisierung & Governance
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{enhanced, breakable, colback=white, colframe=lpGray, boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 4}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Skalierung, Monetarisierung \& Governance}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\newcommand{\antwortlinien}[1]{\par\vspace{6pt}\foreach \x in {1,...,#1}{\noindent\makebox[\linewidth]{\dotfill}\\[6pt]}}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 2 \textperiodcentered{} TAG 4 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 2.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 4\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Plattform-Skalierung,\\Monetarisierung \& Governance\\\textendash{} elf Aufgaben auf drei Niveaus.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Tag 4 betrachtet die drei Phasen \emph{nach} dem Plattform-Launch: \fachbegriff{Skalierung} (wie wächst die Plattform kontrolliert?), \fachbegriff{Monetarisierung} (wie wird sie wirtschaftlich tragfähig?) und \fachbegriff{Governance} (wie schützt sie Qualität, Vertrauen und faire Teilnahmebedingungen?). Drei Begriffe, die sich gegenseitig stützen oder gegeneinander wirken \textendash{} je nachdem, wie sie gestaltet werden.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Skalierungsdimensionen, Monetarisierungsmodelle, Governance-Instrumente reproduzieren.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} ServiceMatch und HealthCare Connect als Cases bearbeiten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Skalierungstempo, Monetarisierungsarchitektur, Governance unter Wachstumsdruck.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Schnelles Wachstum ist im Plattformkontext nicht automatisch Erfolg. Plattformen scheitern selten an zu wenig Wachstum \textendash{} sie scheitern an Wachstum, das ihre Qualität, ihr Vertrauen oder ihre wirtschaftliche Tragfähigkeit überholt.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Wachstum \textendash{} Skalierung \textendash{} profitable Skalierung}{\nivLi}{6\,min}
+
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Definieren Sie in jeweils \emph{einem} Satz:
+  \begin{itemize}
+    \item Wachstum
+    \item Skalierung
+    \item Profitable Skalierung
+  \end{itemize}
+  \item Geben Sie für jeden Begriff ein konkretes Plattform-Beispiel.
+  \item Schließen Sie mit einem Satz: Warum ist es ein Kategorienfehler, ``Wachstum'' und ``Skalierung'' im Plattformkontext synonym zu verwenden?
+\end{enumerate}
+
+\ytquery{Plattform Wachstum Skalierung profitable Skalierung Unterschied}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Skalierungsdimensionen benennen}{\nivLi}{8\,min}
+
+\noindent Eine Plattform kann in mehreren Dimensionen skalieren. Aus dem Lehrskript Tag 4: \emph{Nutzerwachstum \textperiodcentered{} Anbieterwachstum \textperiodcentered{} geografische Expansion \textperiodcentered{} Sortimentsausbau \textperiodcentered{} Partnernetzwerke \textperiodcentered{} Automatisierung \textperiodcentered{} Datenintegration}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Beschreiben Sie jede der sieben Dimensionen in einem Halbsatz.
+  \item Welche Voraussetzungen müssen erfüllt sein, bevor eine Dimension skaliert werden darf? (Liste mit 4\,--\,5 Punkten)
+  \item Welche zwei Dimensionen sind aus Ihrer Sicht die \emph{stillen Skalierungstreiber} \textendash{} unsichtbar im Marketing-Reporting, aber entscheidend für Wirtschaftlichkeit?
+\end{enumerate}
+
+\ytquery{Plattform Skalierung Dimensionen Nutzer Anbieter geografisch Partner Daten}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Monetarisierungsmodelle unterscheiden}{\nivLi}{8\,min}
+
+\noindent Aus dem Lehrskript Tag 4: \emph{Provision \textperiodcentered{} Transaktionsgebühr \textperiodcentered{} Abonnement \textperiodcentered{} Freemium \textperiodcentered{} Listing-Gebühr \textperiodcentered{} Premium-Platzierung \textperiodcentered{} Werbung \textperiodcentered{} Datenservices \textperiodcentered{} Servicepakete \textperiodcentered{} Partnergebühren}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Ordnen Sie jedes der zehn Modelle einer dieser drei Kategorien zu:
+  \begin{itemize}
+    \item \emph{erfolgsabhängig} (zahlt nur bei Transaktion)
+    \item \emph{vorgelagert} (zahlt unabhängig vom Erfolg)
+    \item \emph{wertbasiert} (zahlt für zusätzlichen Wert)
+  \end{itemize}
+  \item Welche zwei Modelle eignen sich besonders gut für die \emph{Aufbauphase} einer Plattform? Welche für die \emph{Reifephase}?
+  \item Welches Modell ist ``faires'' Modell und welches Modell sieht zwar fair aus, ist es aber häufig nicht?
+\end{enumerate}
+
+\ytquery{Plattform Monetarisierung Provision Abonnement Freemium Listing Premium Vergleich}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{ServiceMatch \textendash{} Skalierungsfähigkeit prüfen}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+``ServiceMatch'' betreibt eine regionale Plattform, über die Unternehmen kurzfristig geprüfte IT-Dienstleister für Support, Systemwartung und Cloud-Migration buchen können. Nach einem erfolgreichen Pilotprojekt in einer Stadt möchte die Geschäftsführung in drei weitere Regionen expandieren.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Aktuell 120 registrierte IT-Dienstleister.
+  \item 650 registrierte Unternehmenskunden.
+  \item Monatlich 300 Serviceanfragen.
+  \item Kundenzufriedenheit hoch \textendash{} aber Supportaufwand steigt.
+  \item Qualität der Dienstleister ist unterschiedlich.
+  \item Bisher keine automatisierte Prüfung neuer Anbieter.
+  \item Plattformteam: 8 Personen.
+  \item Budget für Expansion: 180.000\,\euro.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie mindestens \textbf{fünf Voraussetzungen}, die vor einer Skalierung erfüllt sein sollten. Bewerten Sie jeweils: \emph{erfüllt / teilweise erfüllt / nicht erfüllt} (mit Begründung).
+  \item Identifizieren Sie \textbf{drei Risiken}, wenn ServiceMatch zu schnell in drei Regionen gleichzeitig expandiert.
+  \item Treffen Sie die \textbf{strategische Entscheidung}: Sollten zuerst mehr Kunden, mehr Dienstleister oder bessere Prozesse aufgebaut werden? Wählen Sie eine Priorität, nicht ``alles parallel''.
+  \item Entwickeln Sie \textbf{drei konkrete Maßnahmen}, um die Plattform skalierungsfähiger zu machen.
+  \item Formulieren Sie eine Empfehlung: \emph{sofort skalieren / verzögert skalieren / begrenzt skalieren}. Begründen Sie in 3\,Sätzen.
+\end{enumerate}
+
+\ytquery{Plattform Skalierungsfähigkeit Voraussetzungen IT Dienstleister Mittelstand}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{ServiceMatch \textendash{} Monetarisierung \& Governance}{\nivLii}{30\,min}
+
+\begin{infobox}[Aktuelle Situation]
+Die Plattform ist für Kunden kostenlos. Dienstleister zahlen 49\,\euro{} pro Monat Grundgebühr. Die Geschäftsführung möchte profitabler werden \textendash{} fürchtet aber, dass höhere Gebühren Dienstleister abschrecken.
+
+\smallskip
+\textbf{Mögliche Monetarisierungsmodelle:}
+\begin{itemize}
+  \item \textbf{A:} Monatliches Abonnement für Dienstleister
+  \item \textbf{B:} Provision pro vermitteltem Auftrag (10\,--\,15\,\%)
+  \item \textbf{C:} Premium-Platzierung gegen Zusatzgebühr
+  \item \textbf{D:} Servicepakete für Unternehmenskunden mit garantierter Reaktionszeit
+  \item \textbf{E:} Freemium-Modell mit kostenlosen Basis- und kostenpflichtigen Zusatzfunktionen
+\end{itemize}
+
+\smallskip
+\textbf{Governance-Probleme:}
+\begin{itemize}
+  \item Einige Dienstleister reagieren zu langsam.
+  \item Kunden bewerten uneinheitlich.
+  \item Premium-Platzierungen könnten als unfair wahrgenommen werden.
+  \item Schlechte Anbieter gefährden das Vertrauen in die Plattform.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie die fünf Monetarisierungsmodelle nach \textbf{Umsatzpotenzial \textperiodcentered{} Akzeptanz \textperiodcentered{} Fairness \textperiodcentered{} Risiko \textperiodcentered{} Skalierbarkeit} (Skala 1\,--\,5).
+  \item Wählen Sie maximal \textbf{zwei} Monetarisierungsmodelle, die kombiniert eingeführt werden.
+  \item Begründen Sie, welches Modell \emph{aktuell nicht} eingeführt werden sollte.
+  \item Entwickeln Sie \textbf{fünf Governance-Regeln} zur Sicherung von Qualität, Vertrauen und Fairness.
+  \item Formulieren Sie eine Faustregel (1\,--\,2 Sätze): Wann ist Premium-Platzierung als Monetarisierungsmodell \emph{vertretbar} \textendash{} und wann zerstört sie das Plattformvertrauen?
+\end{enumerate}
+
+\ytquery{Plattform Monetarisierung Governance Provision Premium Servicepaket Mittelstand}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Wettbewerbsvorteile in Plattformökosystemen}{\nivLii}{20\,min}
+
+\noindent Aus dem Lehrskript Tag 4 \textendash{} nachhaltige Wettbewerbsvorteile in Plattformökosystemen: \emph{Vertrauen \textperiodcentered{} Datenvorsprung \textperiodcentered{} starke Netzwerkeffekte \textperiodcentered{} hohe Wechselkosten \textperiodcentered{} Ökosystembindung \textperiodcentered{} Markenreputation \textperiodcentered{} Prozessintegration \textperiodcentered{} exklusive Partnerzugänge}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Wählen Sie \textbf{drei} dieser Wettbewerbsvorteile aus und erläutern Sie jeweils in 1\,--\,2 Sätzen, \emph{wie eine Plattform sie aktiv aufbauen kann}.
+  \item Wählen Sie ein bekanntes Plattform-Beispiel (Salesforce, Booking.com, Shopify, Amazon Marketplace, Airbnb). Beschreiben Sie, welche zwei Wettbewerbsvorteile dort \emph{besonders stark} sind.
+  \item Für ServiceMatch: Welche drei Wettbewerbsvorteile sind in den nächsten 24\,Monaten realistisch aufbaubar \textendash{} welche nicht?
+  \item Formulieren Sie einen Satz: Welcher Wettbewerbsvorteil ist am \emph{langsamsten} aufzubauen, aber am stabilsten, wenn er einmal etabliert ist?
+\end{enumerate}
+
+\ytquery{Plattform Wettbewerbsvorteil Vertrauen Daten Wechselkosten Markenreputation}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{HealthCare Connect \textendash{} Skalierungsbewertung}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: HealthCare Connect]
+``HealthCare Connect'' ist eine digitale Plattform, die \emph{Pflegeeinrichtungen}, \emph{ambulante Dienste} und \emph{qualifizierte Pflegefachkräfte} verbindet. Pflegeeinrichtungen nutzen die Plattform, um kurzfristig Personalengpässe zu überbrücken; Pflegefachkräfte finden flexible Einsätze.
+
+\smallskip
+\textbf{Aktuelle Kennzahlen:}
+\begin{itemize}
+  \item 1.800 registrierte Pflegefachkräfte
+  \item 420 registrierte Pflegeeinrichtungen
+  \item Monatlich 2.400 Einsatzanfragen
+  \item Vermittlungsquote: 58\,\%
+  \item Beschwerden über unzuverlässige Rückmeldungen nehmen zu.
+  \item Qualitätsprüfung neuer Pflegekräfte erfolgt \emph{manuell}.
+  \item Supportteam ist bereits ausgelastet.
+\end{itemize}
+
+\smallskip
+\textbf{Rahmenbedingungen:} 750.000\,\euro{} Skalierungsbudget \textperiodcentered{} 12\,Monate \textperiodcentered{} GF erwartet Markteintritt in 5 weitere Regionen.
+
+\smallskip
+\textbf{Skalierungsoptionen:}
+\begin{itemize}
+  \item \textbf{A:} Schnelle Expansion in 5 Regionen mit starkem Marketingbudget.
+  \item \textbf{B:} Schrittweise Expansion in 2 Regionen mit Fokus auf Qualität und Prozesse.
+  \item \textbf{C:} Ausbau zur Premium-Plattform mit geprüften Fachkräften und Servicegarantie.
+  \item \textbf{D:} Kooperation mit Pflegeverbänden und Bildungsträgern als Partnernetzwerk.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die aktuelle Skalierungsfähigkeit (3\,--\,4 Punkte).
+  \item Bewerten Sie die vier Skalierungsoptionen nach: \emph{Wachstum \textperiodcentered{} Risiko \textperiodcentered{} Qualität \textperiodcentered{} Profitabilität \textperiodcentered{} Umsetzbarkeit} (Skala 1\,--\,5).
+  \item Wählen Sie eine \textbf{Kombination aus maximal zwei Optionen}, begründen Sie.
+  \item Identifizieren Sie die zwei größten \textbf{Engpässe}, die vor der Skalierung gelöst werden müssen.
+\end{enumerate}
+
+\ytquery{HealthCare Pflege Plattform Skalierung Qualität Expansion Mittelstand}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Vier Governance-Instrumente konkret}{\nivLii}{20\,min}
+
+\noindent\textbf{Vier Governance-Instrumente} aus dem Lehrskript Tag 4: \emph{Teilnahmebedingungen \textperiodcentered{} Qualitätsstandards \textperiodcentered{} Bewertungslogik / Ranking-Regeln \textperiodcentered{} Eskalations- / Sanktionsprozesse}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Für \textbf{HealthCare Connect}:
+
+\begin{enumerate}
+  \item Formulieren Sie für jedes der vier Instrumente \emph{eine konkrete Regel} \textendash{} kein abstraktes Prinzip, sondern eine umsetzbare Vorschrift.
+  \item Begründen Sie für jede Regel: Welches Risiko (z.\,B.\ negativer Netzwerkeffekt, Vertrauensverlust) verhindert sie?
+  \item Welche Regel würde im realen Plattformbetrieb am häufigsten \emph{umgangen} \textendash{} und wie verhindern Sie das?
+\end{enumerate}
+
+\ytquery{Plattform Governance Regeln Qualität Bewertung Sanktion Eskalation}
+
+\antwortlinien{16}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{HealthCare Connect \textendash{} 12-Monats-Skalierungsentscheidung}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fortsetzung HealthCare Connect]
+Sie sind \emph{Chief Platform Officer}. Sie haben 750.000\,\euro{} und 12\,Monate. Geschäftsführung erwartet eine entscheidungsreife Roadmap, die Wachstum, Profitabilität und Qualität gleichzeitig sichert. Investoren fragen nach klaren KPIs. Pflegeverbände beobachten kritisch.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Treffen Sie eine \textbf{Skalierungsentscheidung} (Option A--D oder Kombination). Begründen Sie in 5\,--\,7 Sätzen aus Senior-Level-Perspektive.
+  \item Wählen Sie ein \textbf{Monetarisierungsmodell oder eine Kombination aus max.\ zwei Modellen} (Provision je Vermittlung, Servicepakete, Premium-Sichtbarkeit, Abo). Begründen Sie unter Berücksichtigung der Pflegebranche-Sensibilität.
+  \item Entwickeln Sie \textbf{Governance-Regeln} für Qualität, Zugang, Bewertungen, Sanktionen, Konfliktlösung (mindestens 6 Regeln).
+  \item Verteilen Sie das Budget von \textbf{750.000\,\euro} auf maximal 5 Hebel.
+  \item Treffen Sie eine \textbf{Entscheidung gegen} eine offensichtliche Wachstumsoption \textendash{} aus Qualitäts-, Vertrauens- oder Stabilitätsgründen.
+  \item Treffen Sie mindestens \textbf{eine Entscheidung unter Unsicherheit} und benennen Sie die Annahme, die stimmen muss.
+  \item Definieren Sie \textbf{drei Management-KPIs}, die monatlich im Geschäftsführungs-Meeting berichtet werden \textendash{} \emph{und drei KPIs, die bewusst nicht berichtet werden} (mit Begründung).
+\end{enumerate}
+
+\ytquery{HealthCare Connect Skalierung Pflege Plattform CPO Governance Budget}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Monetarisierung als Verhaltenssteuerung}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Monetarisierungsmodelle sind nicht nur Erlösquellen, sondern \emph{Verhaltenssteuerungs-Werkzeuge}. Jedes Modell ändert die Anreize \textendash{} und damit das Verhalten \textendash{} der Plattformteilnehmer. Beispiele: Provision belohnt Abschlüsse (nicht: schnelle Antworten). Abo belohnt Treue (nicht: Aktivität). Premium-Platzierung belohnt Zahlung (nicht: Qualität).
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie für jedes der folgenden vier Modelle, \emph{welches Anbieterverhalten} es belohnt \textendash{} und \emph{welches Verhalten} es unbeabsichtigt unterdrückt:
+  \begin{itemize}
+    \item Provision je Auftrag
+    \item Monatliches Abonnement
+    \item Premium-Platzierung
+    \item Servicepakete mit garantierter Reaktionszeit
+  \end{itemize}
+  \item Welche Kombination aus zwei Modellen erzeugt im B2B-Plattform-Kontext die \emph{robustesten} Anreize? Begründen Sie.
+  \item Welche Kombination führt fast immer zu Problemen \textendash{} weil die Anreize sich \emph{widersprechen}? Geben Sie ein Beispiel.
+  \item Formulieren Sie eine Faustregel (1\,--\,2 Sätze): Welches Prinzip muss bei jeder Monetarisierungsentscheidung geprüft werden?
+\end{enumerate}
+
+\ytquery{Plattform Monetarisierung Anreiz Verhalten Provision Abo Premium}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Skalierungs-, Monetarisierungs- und Governance-Architektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Platform Officer / Chief Revenue Officer eines Plattformunternehmens, das den Markteintritt erfolgreich geschafft hat. Erste Netzwerkeffekte sind sichtbar, Nutzerzahlen steigen, Investoren fordern Skalierung.
+
+\smallskip
+\textbf{Probleme:} Qualitätsunterschiede zwischen Anbietern, steigende Supportkosten, unklare Verantwortlichkeiten, Preisdruck, Fairness-Beschwerden, unausgereifte Monetarisierung. Wettbewerber expandiert aggressiv. Plattformteilnehmer reagieren sensibel auf Gebührenänderungen. Zu schnelle Expansion gefährdet Qualität \textendash{} zu langsame kostet Marktchancen.
+
+\smallskip
+\textbf{Aufgabe der Geschäftsführung:} Belastbare Entscheidungsarchitektur für die nächsten 3 Jahre \textendash{} profitabel skalieren, Vertrauen und Qualität bewahren, strategische Kontrolle nicht verlieren.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strategische Entscheidungsarchitektur. Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item Ein \textbf{Zielbild für die Plattform in 3 Jahren} (5\,--\,7 Sätze).
+  \item Eine \textbf{Bewertung der aktuellen Skalierungsfähigkeit}.
+  \item Eine Entscheidung zur \textbf{Expansionsgeschwindigkeit}: schnell / schrittweise / selektiv.
+  \item Eine \textbf{Monetarisierungsarchitektur} mit max.\ 3 Erlöslogiken (mit Phasen-Logik).
+  \item Eine \textbf{Governance-Architektur} für Zugang, Qualität, Sichtbarkeit, Daten, Sanktionen, Konfliktlösung.
+  \item Eine \textbf{KPI-Struktur} (Wachstum, Profitabilität, Vertrauen, Qualität).
+  \item Eine \textbf{Risikoanalyse} (negative Netzwerkeffekte, Plattformmissbrauch, Reputationsverlust, Preisdruck, Teilnehmerabwanderung).
+  \item Eine \textbf{Investitions-Priorisierung} für die nächsten 12\,Monate.
+  \item \textbf{Drei Managemententscheidungen unter Unsicherheit}.
+  \item Eine \textbf{Entscheidung, auf welche Wachstumsoption bewusst verzichtet wird}.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Begründen Sie eine Entscheidung, bei der \emph{kurzfristige Umsatzziele zugunsten langfristiger Plattformstabilität zurückgestellt} werden.
+
+\ytquery{Plattform Skalierung Monetarisierung Governance Architektur CPO 3 Jahre}
+
+\antwortlinien{40}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 4}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Wachstum, Skalierung und profitable Skalierung sauber abgrenzen.
+  \item Sieben Skalierungsdimensionen benennen und Voraussetzungen prüfen.
+  \item Zehn Monetarisierungsmodelle nach Erfolgsabhängigkeit und Phase einordnen.
+  \item Vier Governance-Instrumente konkret formulieren.
+  \item Skalierungs- und Monetarisierungsentscheidungen unter Wachstumsdruck treffen.
+  \item Eine Plattform-Architektur als robustes Wettbewerbsvorteils-System gestalten.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 4 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

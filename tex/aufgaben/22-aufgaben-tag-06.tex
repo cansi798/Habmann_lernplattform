@@ -1,0 +1,488 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 6 - Aufgabenheft
+% Omnichannel-Strategie & Operationalisierung digitaler Vertriebsstrategien
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{enhanced, breakable, colback=white, colframe=lpGray, boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 6}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Omnichannel \& Operationalisierung}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\newcommand{\antwortlinien}[1]{\par\vspace{6pt}\foreach \x in {1,...,#1}{\noindent\makebox[\linewidth]{\dotfill}\\[6pt]}}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 3 \textperiodcentered{} TAG 6 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 5.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 6\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Omnichannel-Strategie \& Operationalisierung\\digitaler Vertriebsstrategien\\\textendash{} elf Aufgaben auf drei Niveaus.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Tag 6 geht von der Kanalentscheidung (Tag 5) zur \emph{Operationalisierung}: Wie werden mehrere Kanäle so verbunden, dass Kunden ein konsistentes Erlebnis haben \textendash{} und Vertrieb, Marketing, IT, Kundenservice koordiniert arbeiten? Drei Begriffe zentral: \fachbegriff{Omnichannel} (Integration), \fachbegriff{Operationalisierung} (Prozesse, Daten, Verantwortung), \fachbegriff{KPI-Steuerung}.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Multi-/Cross-/Omnichannel unterscheiden, Brüche erkennen, KPIs einordnen.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} FitOffice Solutions und IndustrialPro Services als Cases.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Vertriebsarchitektur als integriertes Betriebssystem.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Omnichannel bedeutet nicht ``überall präsent''. Es bedeutet \emph{konsistente Information, Preise, Ansprechpartner und Datenflüsse über alle Berührungspunkte hinweg}. Mehr Kanäle ohne Integration produzieren mehr Probleme, nicht mehr Umsatz.
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Single \textendash{} Multi \textendash{} Cross \textendash{} Omnichannel}{\nivLi}{6\,min}
+
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Definieren Sie in einem Satz: \emph{Single Channel \textperiodcentered{} Multichannel \textperiodcentered{} Cross-Channel \textperiodcentered{} Omnichannel}.
+  \item Geben Sie für jeden Begriff ein konkretes Beispiel aus dem B2B-Mittelstand.
+  \item Welcher Begriff wird in Marketingfolien am häufigsten falsch verwendet \textendash{} und was wird dann eigentlich gemeint?
+\end{enumerate}
+
+\ytquery{Single Multi Cross Omnichannel B2B Unterschied Definition}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Fünf typische Omnichannel-Brüche}{\nivLi}{6\,min}
+
+\noindent Aus dem Lehrskript Tag 6 \textendash{} typische Brüche in Omnichannel-Systemen: \emph{doppelte Datenerfassung \textperiodcentered{} unklare Zuständigkeiten \textperiodcentered{} widersprüchliche Informationen \textperiodcentered{} Medienbrüche \textperiodcentered{} fehlende Leadübergabe}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Beschreiben Sie jeden Bruch in einem Halbsatz mit konkretem Beispiel.
+  \item Welcher Bruch ist für den \emph{Kunden} am ärgerlichsten? Welcher ist für das \emph{Unternehmen} am teuersten?
+  \item Schreiben Sie zu jedem Bruch eine \emph{Sofort-Maßnahme}, die ihn reduziert (1 Satz).
+\end{enumerate}
+
+\ytquery{Omnichannel Brüche B2B Datenerfassung Leadübergabe Medienbruch}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Acht Operations-KPIs unterscheiden}{\nivLi}{8\,min}
+
+\noindent Aus dem Lehrskript Tag 6: \emph{Leadqualität \textperiodcentered{} Conversion Rate \textperiodcentered{} Kosten pro Lead \textperiodcentered{} Abschlussquote \textperiodcentered{} Reaktionszeit \textperiodcentered{} CLV \textperiodcentered{} Wiederkaufrate \textperiodcentered{} Kanalbeitrag \textperiodcentered{} Umsatz pro Kanal \textperiodcentered{} Kundenzufriedenheit}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Ordnen Sie jede der zehn KPIs einer Kategorie zu:
+  \begin{itemize}
+    \item \emph{operative Steuerung} (täglich/wöchentlich)
+    \item \emph{Management-Steuerung} (monatlich/quartalsweise)
+    \item \emph{strategische Steuerung} (jährlich)
+  \end{itemize}
+  \item Welche zwei KPIs sind besonders gut geeignet als \emph{gemeinsame KPIs} für Marketing \emph{und} Vertrieb?
+  \item Welche KPI wird im Mittelstand oft \emph{nicht} berichtet \textendash{} obwohl sie strategisch entscheidend ist?
+\end{enumerate}
+
+\ytquery{B2B Vertrieb KPI Conversion CAC CLV Reaktionszeit Wiederkaufrate}
+
+\antwortlinien{12}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{FitOffice Solutions \textendash{} Brüche erkennen \& priorisieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+``FitOffice Solutions'' verkauft digitale Arbeitsplatzlösungen, Softwarelizenzen und Beratungsleistungen an mittelständische Unternehmen. Kunden kommen über Website, LinkedIn, Empfehlungen, Webinare, Außendienst.
+
+\smallskip
+\textbf{Aktuelle Situation:}
+\begin{itemize}
+  \item Website-Anfragen werden per E-Mail an den Vertrieb weitergeleitet.
+  \item Webinar-Teilnehmende werden nicht systematisch nachverfolgt.
+  \item Außendienst kennt digitale Kampagnen oft nicht.
+  \item Marketing misst Klicks und Anmeldungen, Vertrieb misst Abschlüsse.
+  \item Kundendaten in Excel, CRM und E-Mail-Postfächern verteilt.
+  \item Kunden erhalten je nach Kanal unterschiedliche Informationen.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie mindestens \textbf{fünf Brüche} im aktuellen Vertriebsprozess.
+  \item Ordnen Sie jeden Bruch einem Bereich zu: \emph{Kunde / Prozess / Daten / Verantwortung / Kanal}.
+  \item Beschreiben Sie für jeden Bruch \textbf{eine konkrete Auswirkung} auf Kundenerlebnis oder Vertriebserfolg.
+  \item Entwickeln Sie \textbf{drei einfache Maßnahmen}, um Kanalübergänge zu verbessern.
+  \item Entscheiden Sie: Welcher Bruch sollte \emph{zuerst} repariert werden? Begründen Sie in 3\,Sätzen.
+\end{enumerate}
+
+\ytquery{Omnichannel Mittelstand Bruch Vertriebsprozess CRM Lead Übergabe}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{FitOffice \textendash{} sieben Maßnahmen priorisieren}{\nivLii}{30\,min}
+
+\begin{infobox}[Sieben Maßnahmen + Rahmen]
+\begin{itemize}
+  \item \textbf{A:} CRM-System bereinigen und verbindlich nutzen.
+  \item \textbf{B:} Lead Scoring für digitale Anfragen einführen.
+  \item \textbf{C:} Website mit klaren Beratungs- und Demo-Anfragen überarbeiten.
+  \item \textbf{D:} Webinar-Prozess mit automatischer Nachverfolgung aufbauen.
+  \item \textbf{E:} LinkedIn-Kampagnen für Entscheider starten.
+  \item \textbf{F:} Kundenportal für Bestandskunden entwickeln.
+  \item \textbf{G:} Gemeinsame KPIs für Marketing und Vertrieb definieren.
+\end{itemize}
+
+\smallskip
+\textbf{Rahmen:} 120.000\,\euro{} für 12\,Monate \textperiodcentered{} Vertrieb stark ausgelastet \textperiodcentered{} Marketing 2 Personen \textperiodcentered{} IT begrenzt unterstützbar \textperiodcentered{} GF erwartet nach 6\,Monaten messbare Ergebnisse.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie die Maßnahmen nach \textbf{Wirkung \textperiodcentered{} Aufwand \textperiodcentered{} Kosten \textperiodcentered{} Geschwindigkeit \textperiodcentered{} strategische Bedeutung}.
+  \item Priorisieren Sie in drei Kategorien: \emph{sofort starten / später / zunächst nicht verfolgen}.
+  \item Entwickeln Sie eine einfache \textbf{12-Monats-Roadmap}.
+  \item Legen Sie \textbf{fünf KPIs} fest.
+  \item Treffen Sie eine Entscheidung, welche Maßnahme trotz Attraktivität \emph{zurückgestellt} wird.
+\end{enumerate}
+
+\ytquery{Mittelstand Vertrieb Operationalisierung CRM Lead Scoring Roadmap KPI}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Sechs Rollen in einer integrierten Vertriebsarchitektur}{\nivLii}{15\,min}
+
+\noindent Aus dem Lehrskript Tag 6: typische Rollen in einer Omnichannel-Architektur: \emph{Vertrieb \textperiodcentered{} Marketing \textperiodcentered{} IT \textperiodcentered{} Kundenservice \textperiodcentered{} Datenmanagement \textperiodcentered{} Management}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie für jede Rolle die \emph{Hauptverantwortung} in einer Omnichannel-Architektur.
+  \item Identifizieren Sie für jede Rolle einen typischen \emph{Reibungspunkt} mit einer anderen Rolle.
+  \item Welche Rolle wird im Mittelstand oft \emph{nicht eigenständig besetzt} \textendash{} und welche Folgen hat das?
+  \item Wie könnte ein cross-funktionaler ``Steuerungskreis Digital Sales'' organisatorisch aussehen (Mitglieder, Frequenz, Entscheidungsrechte)?
+\end{enumerate}
+
+\ytquery{B2B Mittelstand Rollen Vertrieb Marketing IT Kundenservice Steuerung}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{IndustrialPro Services \textendash{} Omnichannel-Architektur}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: IndustrialPro Services]
+``IndustrialPro Services'' bietet Wartungs-, Reparatur- und Modernisierungsleistungen für Produktionsanlagen. Starke Außendienstorganisation, langjährige Kundenbeziehungen. Kunden erwarten zunehmend: online informieren, Serviceanfragen digital stellen, Termine schneller buchen, Angebote transparenter vergleichen.
+
+\smallskip
+\textbf{Bestand:} Website, LinkedIn-Kampagnen, CRM, Newsletter, Pilot Kundenportal. \emph{Aber}: nicht miteinander verbunden, Zuständigkeiten unklar, digitale Leads nicht konsequent bearbeitet.
+
+\smallskip
+\textbf{Rahmen:} 38\,Mio.\,\euro{} Umsatz \textperiodcentered{} Vertrieb 18 \textperiodcentered{} Marketing 3 \textperiodcentered{} Kundenservice 12 \textperiodcentered{} CRM nur teilweise genutzt \textperiodcentered{} 250.000\,\euro{} für 12\,Monate \textperiodcentered{} Ziel: 300 qualifizierte digitale Leads, bessere Bestandskundenbindung.
+
+\smallskip
+\textbf{Mögliche Maßnahmen:}
+\begin{itemize}
+  \item \textbf{A:} CRM-Pflichtprozess für alle digitalen Leads.
+  \item \textbf{B:} Lead Scoring + klare Übergaberegeln.
+  \item \textbf{C:} Website-Relaunch mit Serviceanfrage / Beratungstermin.
+  \item \textbf{D:} Automatisierte E-Mail-Strecken nach Webinar / Download.
+  \item \textbf{E:} Kundenportal für Wartungsverträge und Servicehistorie.
+  \item \textbf{F:} Gemeinsames Vertriebs- und Marketing-Dashboard.
+  \item \textbf{G:} Schulung des Außendienstes für digitale Leadbearbeitung.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die \textbf{Omnichannel-Schwächen} in 4\,--\,5 Punkten.
+  \item Beschreiben Sie eine \textbf{ideale Customer Journey} für einen digitalen Service-Lead.
+  \item Bewerten Sie die sieben Maßnahmen nach Kundennutzen, Umsetzbarkeit, Kosten, Datenwirkung, Vertriebswirkung, strategischer Bedeutung.
+  \item Priorisieren Sie die wichtigsten Maßnahmen für 12\,Monate.
+  \item Entwickeln Sie eine \textbf{Omnichannel-Roadmap} mit Verantwortlichkeiten.
+\end{enumerate}
+
+\ytquery{IndustrialPro Wartung Omnichannel B2B Customer Journey Lead Scoring CRM}
+
+\antwortlinien{24}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Datenarchitektur \& Single Source of Truth}{\nivLii}{20\,min}
+
+\noindent Eine Omnichannel-Strategie funktioniert nur, wenn Kundendaten in einem System der Wahrheit zusammenfließen (Single Source of Truth, SSoT). Aktuell typisch im Mittelstand: Daten verteilt in CRM, Excel, E-Mail-Postfächern, Marketing-Tools, Webshop-Backend.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 3\,--\,4 Punkten, warum verteilte Kundendaten ein \emph{strategisches} (nicht nur operatives) Problem sind.
+  \item Welche fünf Felder müssen \emph{zwingend} in einem zentralen CRM erfasst werden, um Omnichannel zu ermöglichen?
+  \item Wer entscheidet im Mittelstand typischerweise über die Datenarchitektur \textendash{} und warum ist das oft die \emph{falsche} Person?
+  \item Skizzieren Sie einen einfachen ``Datenfluss'' für einen digitalen Lead: Website-Anfrage $\rightarrow$ CRM $\rightarrow$ Lead Scoring $\rightarrow$ Vertriebsübergabe.
+\end{enumerate}
+
+\ytquery{B2B CRM Datenarchitektur Single Source of Truth Vertrieb Marketing}
+
+\antwortlinien{16}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{IndustrialPro \textendash{} 12-Monats-Omnichannel-Entscheidung}{\nivLiii}{45\,min}
+
+\noindent Sie sind \emph{Chief Revenue Officer} bei IndustrialPro Services. 250.000\,\euro{} Budget, 12\,Monate, Ziel: 300 qualifizierte Leads, bessere Bestandskundenbindung, kürzere Reaktionszeiten. Geschäftsführung erwartet Prioritäten und messbare Fortschritte.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Treffen Sie eine \textbf{priorisierte Maßnahmenentscheidung} (max.\ 5 aus A--G). Begründen Sie in 5\,--\,7 Sätzen aus Senior-Level-Perspektive: \emph{Warum diese Reihenfolge, warum diese Hebel?}
+  \item Verteilen Sie das Budget von 250.000\,\euro{} auf die gewählten Maßnahmen plus übergeordnete Posten.
+  \item Entwickeln Sie eine \textbf{12-Monats-Roadmap} in vier Phasen (3\,Monate je Phase) mit Meilensteinen.
+  \item Definieren Sie \textbf{sieben KPIs} entlang des Funnels (von Anfrage bis Wiederkauf).
+  \item Beschreiben Sie die \textbf{Governance-Struktur}: Wer entscheidet was, in welchem Rhythmus?
+  \item Treffen Sie eine \textbf{Entscheidung gegen} eine technisch attraktive Maßnahme, weil die Organisation noch nicht bereit ist.
+  \item Treffen Sie \textbf{mindestens eine Entscheidung unter Unsicherheit} mit klarer Annahme.
+\end{enumerate}
+
+\ytquery{Omnichannel B2B CRO Vertriebsarchitektur Roadmap Budget IndustrialPro}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Operationalisierung als Organisationsentwicklung}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Omnichannel-Operationalisierung ist nicht primär ein IT- oder Marketing-Projekt \textendash{} es ist eine \emph{Organisationsentwicklungsaufgabe}. Wer Tools einkauft, ohne Rollen, Prozesse, Anreize und gemeinsame KPIs anzupassen, bekommt am Ende teuere Tools und dieselben Probleme wie vorher.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 3\,--\,4 Sätzen, warum Omnichannel ohne Organisationsentwicklung scheitert.
+  \item Nennen Sie drei \emph{typische Anti-Pattern}, die im Mittelstand bei Omnichannel-Projekten auftauchen (z.\,B.\ ``Wir kaufen uns ein neues CRM'').
+  \item Entwickeln Sie ein \textbf{Organisationsentwicklungs-Konzept} für IndustrialPro: Rollen, Anreize, gemeinsame KPIs, Steuerungskreise, Kompetenzaufbau.
+  \item Welche Maßnahme ist die \emph{wirksamste Einzelmaßnahme}, um Marketing-Vertrieb-Integration zu erzwingen \textendash{} und warum?
+  \item Formulieren Sie eine Faustregel: Wann ist ein Omnichannel-Projekt aus organisatorischer Sicht ``startbereit''?
+\end{enumerate}
+
+\ytquery{Omnichannel B2B Organisation Vertrieb Marketing Integration KPI Anreiz}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Omnichannel-Vertriebsarchitektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Revenue Officer / Digital Sales Architect.
+
+\smallskip
+\textbf{Ausgangslage:} Unternehmen will digitale Vertriebsstrategie nicht länger als Sammlung einzelner Maßnahmen betreiben. Es existieren Website, Social Media, E-Mail, CRM, Außendienst, Kundenservice, erste Plattformaktivitäten. Kanäle nicht integriert. Kunden erleben unterschiedliche Informationen. Digitale Leads werden nicht konsequent verfolgt. Management entscheidet auf unvollständigen Daten.
+
+\smallskip
+\textbf{Erwartung:} belastbare Omnichannel-Architektur, die Kundenerlebnis, Vertriebseffizienz, Datenqualität und Wachstum verbindet.
+
+\smallskip
+\textbf{Rahmen:} Budget begrenzt \textperiodcentered{} Wettbewerbsdruck \textperiodcentered{} Vertrieb teilweise skeptisch \textperiodcentered{} Marketing/Vertrieb unterschiedliche KPIs \textperiodcentered{} CRM-Datenqualität schwach \textperiodcentered{} zu viele parallele Initiativen würden überfordern.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item \textbf{Zielbild} der Omnichannel-Architektur (5\,Sätze).
+  \item Eine \textbf{Customer Journey} mit digitalen + persönlichen Kontaktpunkten.
+  \item Eine \textbf{Analyse der aktuellen Kanalbrüche und Prozessrisiken}.
+  \item Eine \textbf{Priorisierung} der wichtigsten Kanäle und Übergabepunkte.
+  \item Eine \textbf{Prozessarchitektur} (Lead $\rightarrow$ Qualifizierung $\rightarrow$ Übergabe $\rightarrow$ Nachverfolgung $\rightarrow$ Abschluss).
+  \item Eine \textbf{Datenarchitektur} (CRM, Leadstatus, Kundendaten, Reporting).
+  \item Eine \textbf{Governance-Struktur} mit Entscheidungsrechten.
+  \item Eine \textbf{KPI-Architektur} (operativ + strategisch).
+  \item Eine \textbf{Roadmap} für 12\,--\,18 Monate.
+  \item \textbf{Drei Managemententscheidungen} unter Unsicherheit.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens eine bewusste Entscheidung gegen eine zusätzliche digitale Initiative, wenn diese attraktiv wirkt, aber die Organisation überfordern würde.
+
+\ytquery{Omnichannel B2B Vertriebsarchitektur CRM Daten Governance KPI Roadmap}
+
+\antwortlinien{40}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 6}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Single / Multi / Cross / Omnichannel sauber unterscheiden.
+  \item Typische Omnichannel-Brüche erkennen und priorisieren.
+  \item Eine ideale Customer Journey für einen Service-Lead skizzieren.
+  \item Sieben digitale Maßnahmen unter Budget- und Ressourcenrestriktionen priorisieren.
+  \item Datenarchitektur als strategisches \textendash{} nicht nur IT-technisches \textendash{} Thema bewerten.
+  \item Omnichannel als Organisationsentwicklungsaufgabe denken.
+  \item Eine Vertriebsarchitektur als steuerbares Betriebssystem entwerfen.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 6 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

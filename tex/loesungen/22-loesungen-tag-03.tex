@@ -1,0 +1,788 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 3 - Loesungsheft
+% Plattform-Geschaeftsmodelle, Netzwerkeffekte & Launch-Strategien
+%
+% Self-contained xelatex source.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight, colframe=lpAccent,
+  boxrule=0.6pt, arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{%
+  enhanced, breakable,
+  colback=lpGreenLight, colframe=lpGreenBorder,
+  boxrule=0.6pt, arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Managementhinweis]{%
+  enhanced, breakable,
+  colback=lpAmberLight, colframe=lpAmberBorder,
+  boxrule=0.6pt, arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white}, coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberBorder, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 3}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Plattform-Geschäftsmodelle}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 2 \textperiodcentered{} TAG 3 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 1.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 3\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Plattform-\\Geschäftsmodelle \& Netzwerkeffekte.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis,\\nicht die einzige korrekte Lösung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 3}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterlösungen sind \emph{eine} mögliche Lösung. Insbesondere auf L2 und L3 sind mehrere Begründungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den Begriffsapparat von Tag 3 sauber nutzen (lineares vs.\ Plattform-Geschäftsmodell, Akteursgruppen, direkte/indirekte/negative Netzwerkeffekte, Launch-Strategien),
+  \item Annahmen sichtbar machen,
+  \item Zielkonflikte (Wachstum vs.\ Qualität, Schnelligkeit vs.\ Vertrauen) benennen,
+  \item zu einer klaren Entscheidung führen.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterlösung. Wo weicht Ihre Argumentation ab? Ist die Abweichung eine andere Annahme \textendash{} oder ein Denkfehler? Genau dort entsteht der Lerneffekt.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 LOESUNGEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Lineares vs.\ Plattform-Geschäftsmodell}{\nivLi}{6\,min}
+
+\ytquery{lineares Geschäftsmodell Plattform Geschäftsmodell Unterschied Wertschöpfung}
+
+\begin{loesungbox}
+\textbf{1. Definitionen:}
+\begin{itemize}
+  \item \textbf{Lineares Geschäftsmodell:} Wert wird in einer linearen Kette erzeugt \textendash{} der Anbieter beschafft, produziert, vermarktet und verkauft an den Kunden; Wert fließt in eine Richtung.
+  \item \textbf{Plattform-Geschäftsmodell:} Der Betreiber schafft Wert durch \emph{Vermittlung zwischen zwei oder mehr Marktseiten} \textendash{} er produziert kein eigenes Kernangebot, sondern ermöglicht Interaktion, Transaktion und Vertrauen.
+\end{itemize}
+
+\textbf{2. B2B-Beispiele:}
+\begin{itemize}
+  \item Linear: ein Maschinenbauer wie \emph{Trumpf}, der Werkzeugmaschinen produziert und über Außendienst verkauft.
+  \item Plattform: \emph{Salesforce AppExchange}, das Anbietern und Kunden im Salesforce-Ökosystem einen Software-Marktplatz bietet.
+\end{itemize}
+
+\textbf{3. Entscheidender Unterschied in der Wertschöpfungslogik:}
+Linear schafft Wert durch \emph{Produktion und Distribution}; die Plattform schafft Wert durch \emph{Reduzieren von Suchkosten, Vertrauen und Transaktionsfriktion zwischen Akteuren, die sich sonst nicht finden würden}. Die Plattform ``besitzt'' den Wert nicht, sondern ermöglicht ihn.
+
+\textbf{4. Hybrid \textendash{} beide Logiken parallel:}
+\emph{Amazon} kombiniert beide: ``Amazon Retail'' (linear, Amazon kauft und verkauft selbst) und ``Amazon Marketplace'' (Plattform, Dritte verkaufen auf der Infrastruktur). Verbindung: Lineares Geschäft schafft Vertrauen, Verfügbarkeit und Logistik-Standard; Plattform liefert Sortimentsbreite ohne Kapitalbindung. Risiko des Hybrids: interner Zielkonflikt, wenn Marketplace-Anbieter mit Amazon-eigenen Produkten konkurrieren.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Hybridmodelle sind die häufigste Fehlerquelle.} Viele B2B-Mittelständler glauben, sie ``machen jetzt auch Plattform'' und betreiben in Wahrheit nur einen besseren Online-Shop. Plattform-Logik beginnt erst dort, wo Sie als Betreiber nicht selbst verkaufen, sondern Vermittlung organisieren \textendash{} mit Regeln, Daten und Erlösen aus der Vermittlung.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Sechs Plattformakteure benennen}{\nivLi}{6\,min}
+
+\ytquery{Plattform Akteursgruppen Marktplatz Betreiber Anbieter Nachfrager Daten}
+
+\begin{loesungbox}
+\textbf{1. Sechs Rollen:}
+\begin{itemize}
+  \item \emph{Anbieter:} stellen das Kernangebot bereit (Produkt, Service, Inhalt).
+  \item \emph{Nachfrager:} suchen, vergleichen, kaufen, nutzen.
+  \item \emph{Plattformbetreiber:} stellt Infrastruktur, Regeln, Bewertungslogik und Schnittstellen.
+  \item \emph{Zahlungsdienstleister:} ermöglicht sichere Abwicklung der Transaktion.
+  \item \emph{Datenpartner:} liefert oder konsumiert Daten (Bewertungen, Profile, Analysen, externe APIs).
+  \item \emph{Service-/Logistikanbieter:} übernimmt physische oder operative Erfüllung (Versand, Installation, Wartung).
+\end{itemize}
+
+\textbf{2. Amazon Marketplace \textendash{} Akteursgefüge:}
+\begin{itemize}
+  \item \emph{Anbieter:} Marketplace-Verkäufer (KMU bis Markenartikler).
+  \item \emph{Nachfrager:} B2C- und B2B-Käufer.
+  \item \emph{Betreiber:} Amazon Inc.
+  \item \emph{Zahlungsdienstleister:} Amazon Pay; im Hintergrund Bankenpartner.
+  \item \emph{Datenpartner:} Bewertungsdaten, Käuferdaten, Suchdaten \textendash{} liegt bei Amazon (kritisch für Anbieter).
+  \item \emph{Service-/Logistikanbieter:} Amazon FBA (Fulfillment by Amazon) oder externe Logistikpartner.
+\end{itemize}
+
+\textbf{3. Welche Akteursgruppe wird vergessen?}
+\emph{Datenpartner und Datenrechte.} In den meisten Mittelstandsprojekten wird über Anbieter, Kunden und Technik gesprochen \textendash{} aber nicht darüber, \emph{wem die Daten gehören}, die in der Plattform entstehen (Käuferverhalten, Bewertungen, Preisreaktionen). Strategisches Risiko: Der Plattformbetreiber wächst, der Anbieter verliert genau die Daten, die für sein langfristiges Geschäft entscheidend wären (Wiederkauf-Trigger, Personalisierung, Kundenwert).
+
+\begin{merkbox}[Managementhinweis]
+\emph{Wenn Sie eine Plattform planen, definieren Sie zuerst die Datenrechte \textendash{} dann die Erlösmodelle.} Datenrechte sind später kaum noch verhandelbar.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Direkte vs.\ indirekte Netzwerkeffekte}{\nivLi}{8\,min}
+
+\ytquery{Netzwerkeffekt direkt indirekt kritische Masse Henne Ei Problem Plattform}
+
+\begin{loesungbox}
+\textbf{1. Definitionen:}
+\begin{itemize}
+  \item \emph{Direkter Netzwerkeffekt:} Der Nutzen steigt für die Mitglieder \emph{derselben} Gruppe, wenn diese Gruppe wächst (z.\,B.\ WhatsApp, LinkedIn unter Berufstätigen).
+  \item \emph{Indirekter Netzwerkeffekt:} Der Nutzen steigt für eine \emph{andere} Marktseite, wenn die eigene wächst (Anbieter\,$\rightarrow$\,Nachfrager und umgekehrt).
+  \item \emph{Kritische Masse:} Mindestgröße einer Marktseite, ab der die Plattform für die andere Seite \emph{verlässlich nützlich} ist und die Wachstumsdynamik selbsttragend wird.
+  \item \emph{Henne-Ei-Problem:} Anbieter und Nachfrager warten gegenseitig aufeinander \textendash{} ohne Nachfrage keine Anbieter, ohne Anbieter keine Nachfrage. Die Plattform muss diesen Anfangs-Knoten aktiv lösen.
+\end{itemize}
+
+\textbf{2. Drei Szenarien:}
+\begin{itemize}
+  \item \emph{B2B-Marktplatzplattform für Ersatzteile, 50 neue Anbieter $\rightarrow$ Nachfrage steigt:} indirekter Netzwerkeffekt.
+  \item \emph{Slack-Community für CFOs, 200 neue Mitglieder $\rightarrow$ jeder erlebt mehr Nutzen:} direkter Netzwerkeffekt.
+  \item \emph{LinkedIn Recruiting-Tools, mehr Recruiter $\rightarrow$ mehr Bewerber-Reaktionen:} indirekter Netzwerkeffekt (zwei unterschiedliche Marktseiten).
+\end{itemize}
+
+\textbf{3. Welcher Effekt ist stärker geschützt?}
+\emph{Direkter} Netzwerkeffekt ist langfristig stärker geschützt, weil er sich \emph{innerhalb} einer Nutzergruppe selbst stabilisiert (z.\,B.\ jede:r meiner Kontakte ist auf WhatsApp $\rightarrow$ ich kann nicht zu einem leeren Konkurrenten wechseln). \emph{Indirekter} Effekt ist schwerer aufzubauen (Henne-Ei), aber leichter zu unterminieren (eine Marktseite kann abwandern, wenn die andere ihre Erwartungen nicht erfüllt). Faustregel: Direkte Effekte produzieren \emph{Stickiness}, indirekte Effekte produzieren \emph{Marktdominanz}.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2 LOESUNGEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{CraftConnect \textendash{} Geschäftsmodell strukturieren}{\nivLii}{25\,min}
+
+\ytquery{Plattform Geschäftsmodell Handwerker Vermittlung Nutzenversprechen Erlöslogik}
+
+\begin{loesungbox}
+\textbf{1. Akteursgruppen:}
+\begin{itemize}
+  \item Privatkunden und Hausverwaltungen (Nachfrager).
+  \item Handwerksbetriebe (Anbieter).
+  \item CraftConnect (Plattformbetreiber).
+  \item Zahlungsdienstleister (Stripe, Klarna o.\,Ä.).
+  \item Versicherungs-/Bonitätspartner (Bonitätsprüfung Handwerker, Schadensversicherung).
+  \item Bewertungs-/Vertrauenspartner (z.\,B.\ TÜV-Siegel, Innungs-Zertifikate).
+\end{itemize}
+
+\textbf{2. Nutzenversprechen je Akteur:}
+\begin{itemize}
+  \item \emph{Privatkunden / Hausverwaltungen:} schneller Zugang zu \emph{geprüften} Handwerkern mit verbindlichen Terminen und transparenten Bewertungen \textendash{} weniger Suchaufwand, weniger Unsicherheit.
+  \item \emph{Handwerksbetriebe:} planbare, qualifizierte Aufträge \emph{ohne} Akquise-Aufwand; Leerlauf reduzieren; klare Kundenkommunikation.
+  \item \emph{CraftConnect:} Marge aus erfolgreicher Vermittlung, langfristig Daten- und Ökosystem-Hebel.
+  \item \emph{Zahlungsdienstleister:} Transaktionsvolumen.
+  \item \emph{Versicherungs-/Bonitätspartner:} Distributionskanal für Versicherungsprodukte; Risikoreduktion für die Plattform.
+  \item \emph{Bewertungs-/Vertrauenspartner:} Sichtbarkeit ihrer Siegel; Validierungsfunktion.
+\end{itemize}
+
+\textbf{3. Plattform-Geschäftsmodell vs.\ Lead-Vermittlungs-Website:}
+Eine reine Lead-Vermittlungs-Website (Branchenbuch online) verkauft \emph{Leads ohne Folgeverantwortung}: Kunde sucht, Anbieter zahlt für Anfrage, danach endet die Beziehung. CraftConnect dagegen baut ein \emph{steuerbares Ökosystem}: standardisierter Anfrageprozess, Terminkalender-Integration, Bewertungssystem als Vertrauensmechanismus, Zahlungsabwicklung und Qualitätsregeln. Die Plattform \emph{verantwortet} die Beziehungsqualität \textendash{} und kann genau deshalb Provisionen statt Lead-Gebühren verlangen.
+
+\textbf{4. Eigen- vs.\ Anbieterleistung:}
+\begin{itemize}
+  \item \emph{Plattform selbst:} Matching, Terminkoordination, Bewertungssystem, Identitäts-/Bonitätsprüfung der Anbieter, Zahlungsabwicklung, Kundensupport.
+  \item \emph{Anbieter:} eigentliche Handwerkerleistung, Material, Garantie, Vor-Ort-Service.
+\end{itemize}
+
+\textbf{5. Drei Erlösquellen \textendash{} bewertet:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXcc@{}}
+\toprule
+\textbf{Erlösquelle} & \textbf{Charakteristik} & \textbf{Akzeptanz Anb./Nachfr.} & \textbf{Skalierbarkeit} \\
+\midrule
+Vermittlungsprovision je Auftrag (10\,--\,15\,\%) & erfolgsabhängig, fair wahrgenommen & hoch / hoch & hoch \\
+\midrule
+Monatliches Anbieter-Abo & planbar für Plattform, aber Risiko für ungenutzte Slots & niedrig / neutral & mittel \\
+\midrule
+Premium-Sichtbarkeit & zusätzlich, optional & mittel / neutral, Fairness-Risiko & mittel \\
+\bottomrule
+\end{tabularx}
+
+\textbf{6. Drei Risiken:}
+\begin{itemize}
+  \item \emph{Schlechte Anbieter} senken Vertrauen \textendash{} negative Netzwerkeffekte.
+  \item \emph{Unqualifizierte Anfragen} überlasten Handwerker \textendash{} Anbieter wandern ab.
+  \item \emph{Direktabschluss am System vorbei}: Kunde und Handwerker tauschen nach erstem Kontakt Telefonnummern aus und meiden die Plattform-Provision (Plattform-Bypass).
+\end{itemize}
+
+\begin{merkbox}[Managementhinweis]
+\emph{Provisionsmodelle wirken nur, wenn die Plattform die laufende Wertschöpfung verteidigt \textendash{} nicht nur den ersten Kontakt.} Termin- und Zahlungslogik in der Plattform halten ist der wichtigste Anti-Bypass-Hebel.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{CraftConnect \textendash{} Henne-Ei-Launch entscheiden}{\nivLii}{30\,min}
+
+\ytquery{Plattform Launch Henne Ei Marktseite Anreiz B2B kritische Masse Handwerker}
+
+\begin{loesungbox}
+\textbf{1. Henne-Ei-Problem konkret:}
+Wenn CraftConnect mit leerer Anbieterliste startet, finden Kunden keine Handwerker und verlassen die Plattform. Sind keine Kunden da, melden sich keine Handwerker an \textendash{} sie nutzen lieber ihre bewährten Empfehlungs- und Stammkundenkanäle. Das Problem ist nicht ``schlechter'' Werbung, sondern eine \emph{strukturelle Nutzlosigkeit der Plattform}, solange eine der beiden Seiten leer ist.
+
+\textbf{2. Netzwerkeffekte \textendash{} stark / schwach:}
+\begin{itemize}
+  \item \emph{Indirekt, stark:} mehr geprüfte Handwerker $\rightarrow$ schnellere Verfügbarkeit für Kunden $\rightarrow$ mehr Kunden.
+  \item \emph{Indirekt, stark:} mehr aktive Kunden $\rightarrow$ mehr Aufträge $\rightarrow$ Handwerker bleiben aktiv.
+  \item \emph{Direkt, mittelstark:} mehr Bewertungen / mehr Kunden auf einer Seite erhöhen Vertrauen aller Akteure.
+  \item \emph{Direkt, schwach:} Handwerker untereinander \textendash{} sie konkurrieren, der direkte Effekt ist begrenzt.
+\end{itemize}
+
+\textbf{3. Marktseiten-Entscheidung:}
+\emph{Handwerker zuerst aufbauen \textendash{} aber kuratiert.} Es werden 30\,--\,60 geprüfte Handwerksbetriebe pro Pilotstadt aktiv gewonnen (Identität, Bonität, Innungsmitgliedschaft, Referenzen). Erst danach wird die Kundenseite skaliert. Begründung: Wenn ein:e Kund:in einmal eine schlechte Erfahrung macht, ist der Kunde verloren \textendash{} aber wenn Handwerker eine Zeit lang wenige Anfragen bekommen, lassen sie sich mit klaren Anreizen halten (kein Listing-Beitrag in den ersten 6 Monaten, Premium-Slot kostenlos, persönliche Plattform-Betreuung).
+
+\textbf{4. Launch-Plan 6 Monate:}
+\begin{itemize}
+  \item \emph{Monat 1\,--\,2:} 30\,--\,60 Handwerker pro Pilotstadt persönlich gewinnen; Plattform-Onboarding (Profil, Verfügbarkeit, Bewertungs-Setup).
+  \item \emph{Monat 3:} \emph{geschlossener Soft-Launch} mit 200 ausgewählten Kunden (z.\,B.\ Hausverwaltungen). Anreiz: Garantie auf 48-h-Antwortzeit, sonst Gutschein.
+  \item \emph{Monat 4:} Offene Beta in der Pilotstadt; Bewertungssystem aktivieren; Bonus-Programm für die ersten 100 erfolgreich abgeschlossenen Aufträge.
+  \item \emph{Monat 5\,--\,6:} Marketing in der Pilotstadt; gleichzeitig weitere Handwerker onboarden, um Angebotsdichte zu sichern.
+\end{itemize}
+
+\textbf{5. Drei Kennzahlen für Launch-Erfolg:}
+\begin{itemize}
+  \item \emph{Verfügbare Handwerker pro Gewerk und Postleitzahl} (Angebotsdichte \textendash{} Voraussetzung für Kundennutzen).
+  \item \emph{Antwortzeit auf Kundenanfragen} (Servicelevel \textendash{} Vertrauensindikator).
+  \item \emph{Abschlussquote} aus Anfragen $\rightarrow$ realisierte Aufträge (echte Plattformleistung, nicht nur Sichtbarkeit).
+\end{itemize}
+
+\textbf{6. Breit oder schmal starten?}
+\emph{Schmal \textendash{} nur Sanitär und Elektro.} Annahme: Diese beiden Gewerke haben hohe Notfall-Nachfrage und klare Bedarfsdefinition. Das reduziert Matching-Komplexität, erhöht Conversion und schafft schneller kritische Masse pro Gewerk. \emph{Wenn die Annahme falsch ist} (z.\,B.\ Nachfrage über mehrere Gewerke verstreut), wird ab Monat 6 ein drittes Gewerk dazugenommen.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Fokus ist die wichtigste Plattform-Entscheidung im ersten Jahr.} Plattformen, die alle Gewerke gleichzeitig starten, scheitern fast immer an unzureichender Angebotsdichte. Lieber in zwei Gewerken sichtbar exzellent als in acht mittelmäßig.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Sechs Plattformtypen \textendash{} CraftConnect einordnen}{\nivLii}{15\,min}
+
+\ytquery{Plattformtypen Vermittlungsplattform Serviceplattform Ökosystem Handwerk}
+
+\begin{loesungbox}
+\textbf{1. Plattformtyp \textendash{} dominant und sekundär:}
+\emph{Dominant: Vermittlungsplattform.} CraftConnect vermittelt zwischen zwei Marktseiten (Auftraggeber\,$\leftrightarrow$\,Handwerker) und produziert weder eigene Dienstleistungen noch eigene Inhalte. \emph{Sekundär: Serviceplattform-Anteile} (Bewertungs- und Zahlungsservices). \emph{Nicht: Marktplatz} im klassischen Sinn (es geht nicht um Produkte, sondern um Dienstleistungen mit Terminkoordination), \emph{nicht: Content-Plattform} (Inhalte sind sekundär).
+
+\textbf{2. Begründung mit drei Kriterien:}
+\begin{itemize}
+  \item \emph{Wertschöpfungsart:} Vermittlung von Dienstleistung und Termin, nicht von Ware.
+  \item \emph{Erlöslogik:} Provision je abgeschlossener Vermittlung passt zur Vermittlungslogik.
+  \item \emph{Kundenproblem:} Suchaufwand und Vertrauensaufbau \textendash{} klassische Probleme, die Vermittlungsplattformen lösen.
+\end{itemize}
+
+\textbf{3. Entwicklung zur Ökosystemplattform in 3 Jahren \textendash{} zwei strategische Konsequenzen:}
+\begin{itemize}
+  \item \emph{Erweiterung des Akteurskreises:} Versicherer, Materiallieferanten, Buchhaltungstools werden integriert. Das erfordert API-Architektur, klare Datenrechte und Partner-Governance \textendash{} ein qualitativ anderes Betriebsmodell als bei einer reinen Vermittlungsplattform.
+  \item \emph{Verändertes Geschäftsmodell:} Erlöse kommen nicht mehr nur aus Vermittlungsprovision, sondern aus Partner-Anteilen, Datendiensten und Premium-Funktionen. Das bedeutet: andere KPIs, anderes Investitionsprofil, anderes Risikoportfolio.
+\end{itemize}
+
+\textbf{4. Vergleich mit realen Plattformen:}
+\begin{itemize}
+  \item \emph{MyHammer:} Vermittlungsplattform mit Lead-Gebühren-Logik (Anbieter zahlt pro Anfrage). Schwächer als ein erfolgsabhängiges Modell, weil Lead-Müll-Risiko.
+  \item \emph{Helpling:} Vermittlungsplattform mit \emph{starker} Plattformkontrolle (Preise, Zahlungsabwicklung). Näher an CraftConnect-Logik.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{MachineHub \textendash{} Plattform-Potenzialbewertung}{\nivLii}{30\,min}
+
+\ytquery{B2B Plattform Ersatzteile Wartung Ökosystem Industrie MachineHub Launch}
+
+\begin{loesungbox}
+\textbf{1. Plattform ja oder nein?}
+\emph{Ja \textendash{} aber fokussiert.} MachineHub verfügt über Kundenzugang, Produktkompetenz und einen Markt mit klar definiertem Problem (schnelle Ersatzteilverfügbarkeit + zuverlässige Wartung). Eine reine Ersatzteilplattform wäre leicht kopierbar und führt zu Preisvergleich. Die Verbindung Ersatzteile + Wartung erzeugt ein \emph{schwerer kopierbares Nutzenversprechen} und nutzt indirekte Netzwerkeffekte. Ohne Plattform riskiert MachineHub mittelfristig, dass digital-affinere Wettbewerber das Servicegeschäft übernehmen und MachineHub auf reine Teilelogistik reduzieren.
+
+\textbf{2. Plattformakteure und Nutzenversprechen:}
+\begin{itemize}
+  \item \emph{Produktionsbetriebe:} schnelle Ersatzteilversorgung, geprüfte Dienstleister, geringere Ausfallzeiten, ein Ansprechpartner.
+  \item \emph{Wartungsdienstleister:} bessere Auslastung, planbare Aufträge, neue Kunden ohne Akquise.
+  \item \emph{MachineHub als Betreiber:} Kundendaten, wiederkehrende Umsätze, Ökosystemkontrolle, Differenzierung im Markt.
+  \item \emph{Eigener Vertrieb:} bessere Kundeninformationen, neue Beratungsanlässe, kein ``Kanal-Verlust''.
+  \item \emph{Externe Partner (Logistik, Versicherung):} Zugang zu industriellen Kunden.
+  \item \emph{Datenplattformen (z.\,B.\ Maschinenhersteller-APIs):} Verbindung von Maschinenstatus, Wartungshistorie und Ersatzteilbedarf.
+\end{itemize}
+
+\textbf{3. Netzwerkeffekte:}
+\begin{itemize}
+  \item \emph{Direkt, positiv:} mehr Produktionsbetriebe in der Plattform $\rightarrow$ höhere Bedeutung als Branchen-Standard, mehr Erfahrungsaustausch / Best Practices.
+  \item \emph{Direkt, negativ (zu vermeiden):} Wenn zu viele Produktionsbetriebe ähnliche Engpässe haben (z.\,B.\ Filterkartuschen knapp), entsteht Konkurrenz zwischen Nachfragern statt Verbund.
+  \item \emph{Indirekt, positiv:} mehr Wartungsdienstleister $\rightarrow$ schnellere Reaktion $\rightarrow$ attraktiver für Produktionsbetriebe.
+  \item \emph{Indirekt, negativ:} schlechte Wartungsdienstleister beschädigen das Vertrauen aller Beteiligten.
+\end{itemize}
+
+\textbf{4. Bewertung der vier Optionen:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lcccccc@{}}
+\toprule
+\textbf{Option} & \textbf{Wachstum} & \textbf{Risiko} & \textbf{Komplex.} & \textbf{Kunden-N.} & \textbf{Datenzug.} & \textbf{Skalierb.} \\
+\midrule
+A: Reine Ersatzteil-Plattform & 3 & 2 & 2 & 3 & 4 & 3 \\
+\midrule
+B: Ersatzteile + Wartung      & 4 & 3 & 3 & 5 & 5 & 4 \\
+\midrule
+C: Geschlossenes Portal       & 2 & 1 & 2 & 3 & 5 & 2 \\
+\midrule
+D: Offenes Ökosystem          & 5 & 5 & 5 & 5 & 5 & 5 \\
+\bottomrule
+\end{tabularx}
+
+\textbf{5. Launch-Empfehlung:}
+\emph{Option B als fokussierter Pilot, mit Tür offen für Option D.} Reine Ersatzteilplattform (A) ist zu leicht kopierbar; geschlossenes Portal (C) verschenkt das Plattformpotential; offenes Ökosystem (D) ist für den Start überkomplex. Option B kombiniert Differenzierung (Verbindung Ersatzteile + Service), kontrollierten Pilot (Bestandskunden + 20\,--\,30 geprüfte Wartungspartner) und Skalierungspfad in Richtung Ökosystem.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Beim Launch ist Komplexität der größte Feind.} Option D wäre langfristig strategisch attraktiv \textendash{} aber wer mit Option D startet, baut keine Plattform, sondern eine Pressemitteilung. Pilot mit Option B; Pivot nach 12\,--\,18 Monaten Richtung D, sobald Datenarchitektur, Partner-Governance und Vertrieb stabil sind.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Sechs Launch-Strategien einordnen}{\nivLii}{15\,min}
+
+\ytquery{Plattform Launch Strategie Nischenstart Pilotmarkt Angebotsseite Partner}
+
+\begin{loesungbox}
+\textbf{1. CraftConnect und MachineHub:}
+\begin{itemize}
+  \item \emph{CraftConnect:} \textbf{Pilotmarkt + Angebotsseite zuerst.} Eine Stadt, zwei Gewerke; Handwerker als zuerst gewonnene Seite, mit Incentives. Begründung: Vertrauen und Verfügbarkeit lassen sich nur lokal aufbauen.
+  \item \emph{MachineHub:} \textbf{Kuratierter Start + Partnerschaftsstart.} 20\,--\,30 geprüfte Wartungspartner und 50\,--\,100 Bestandskunden im Pilot. Begründung: Industriekunden erwarten Qualität, keine offene Beta-Logik.
+\end{itemize}
+
+\textbf{2. Spotify-für-Hörbücher \textendash{} zwei Marktseiten Verlage und Hörer:}
+\emph{Partnerschaftsstart + Nachfrageseite zuerst.} Ein bis zwei große Verlage als Lighthouse-Partner mit exklusiven Titeln gewinnen, damit Hörer einen Grund haben, sich anzumelden. Die kritische Masse auf Hörerseite überzeugt dann mittlere und kleine Verlage. Reiner Nischenstart ohne große Verlage scheitert, weil Hörer ein Mindestkatalog erwarten.
+
+\textbf{3. Im B2B-Mittelstand:}
+\begin{itemize}
+  \item \emph{Überschätzt:} ``Angebotsseite zuerst'' wird oft falsch verstanden \textendash{} viele bauen einfach so viele Anbieter wie möglich auf und vergessen die Anbieterqualität. Das produziert leere oder schwache Anbieterlisten.
+  \item \emph{Unterschätzt:} ``Kuratierter Start'' \textendash{} im Mittelstand ist Vertrauen der wichtigste Hebel; eine handverlesene Pilotgruppe schafft mehr nachhaltigen Wert als breite Anbieter-Akquise.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3 LOESUNGEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{MachineHub \textendash{} 9-Monats-Launch-Architektur}{\nivLiii}{45\,min}
+
+\ytquery{Plattform Launch Architektur Industrie B2B Akteurslandkarte Governance}
+
+\begin{loesungbox}
+\textbf{1. Optionsentscheidung:}
+\emph{Option B als fokussierter Pilot, mit explizitem Entwicklungspfad in Richtung D ab Monat 12.} Begründung: Option B kombiniert die schwer kopierbare Verbindung von Ersatzteilen und Wartung mit kontrollierbarer Pilotgröße. Sie nutzt indirekte Netzwerkeffekte zwischen zwei klar abgegrenzten Marktseiten und schützt sich gleichzeitig vor offener Ökosystem-Komplexität. Option A wäre eine reine Preisplattform, Option C verschenkt die Plattformlogik, Option D ist im Start ein Überforderungsrisiko. Robustheit entsteht aus Fokus, nicht aus Optionsbreite.
+
+\textbf{2. Akteurslandkarte mit Nutzen und Zugang:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+\textbf{Akteur} & \textbf{Nutzen} & \textbf{Zugangskriterien} \\
+\midrule
+Produktionsbetriebe        & Verfügbarkeit, Ausfallreduktion, ein Ansprechpartner & Bestandskunden im Pilot, später offen \\
+\midrule
+Wartungsdienstleister      & Auslastung, planbare Aufträge                        & Zertifizierung, Referenzen, SLA-Commitment \\
+\midrule
+MachineHub als Betreiber   & Daten, Marge, Ökosystem-Kontrolle                    & \textendash{} \\
+\midrule
+Maschinenhersteller (Datenpartner) & API-Zugang zu Maschinenstatus                & Datenaustauschvertrag, Datenschutz-Compliance \\
+\midrule
+Logistikpartner            & Volumen, Routenoptimierung                            & Lieferzeit-SLA, Tracking \\
+\midrule
+Versicherer (optional)     & Distributionskanal für Ausfallversicherung           & Aktuarielle Validierung, Komplianz \\
+\bottomrule
+\end{tabularx}
+
+\textbf{3. Marktseite zuerst + Anreize:}
+\emph{Wartungsdienstleister zuerst.} Anreize:
+\begin{itemize}
+  \item Keine Listing-Gebühr in den ersten 12 Monaten.
+  \item Garantierte Mindestauftragsanzahl im Pilot (durch MachineHub-eigene Kundenbasis abgesichert).
+  \item Direkte Plattform-Betreuung (statt Self-Service).
+  \item Bonus für die ersten 50 abgewickelten Aufträge.
+\end{itemize}
+
+\textbf{4. Launch-Plan 9 Monate, 500.000\,\euro:}
+
+\emph{Phase 1 (Monat 1\,--\,3) \textendash{} Setup, 180.000\,\euro:}
+\begin{itemize}
+  \item Zielsegment und Pilotregion definieren.
+  \item Kritische Ersatzteilgruppen identifizieren.
+  \item Qualitätskriterien für Wartungspartner; 20\,--\,30 Partner gewinnen.
+  \item Plattform-MVP entwerfen.
+\end{itemize}
+
+\emph{Phase 2 (Monat 4\,--\,6) \textendash{} MVP-Launch, 200.000\,\euro:}
+\begin{itemize}
+  \item Plattform-MVP mit Ersatzteilbestellung und Serviceanfrage live.
+  \item Erste Bestandskunden onboarden (50\,--\,100).
+  \item Servicelevel und Bewertungslogik testen.
+\end{itemize}
+
+\emph{Phase 3 (Monat 7\,--\,9) \textendash{} Pilotauswertung und Vorbereitung Skalierung, 120.000\,\euro:}
+\begin{itemize}
+  \item Pilot auswerten, wiederkehrende Kundenprozesse optimieren.
+  \item Entscheidung über Skalierung auf weitere Regionen.
+  \item Vorbereitung Datenarchitektur in Richtung Ökosystem.
+\end{itemize}
+
+\textbf{5. Governance-Logik (5 Regeln):}
+\begin{itemize}
+  \item \emph{Zugangskontrolle Wartungsdienstleister:} Zertifizierung, Referenzen, Mindest-SLA (Reaktionszeit 24\,h).
+  \item \emph{Sichtbarkeitsalgorithmus:} bewertungs- und SLA-basiert, nicht zahlbar.
+  \item \emph{Eskalationspfad bei Schlecht-Leistung:} drei Stufen \textendash{} Warnung, Sichtbarkeitsreduktion, Plattformausschluss.
+  \item \emph{Bewertungsregeln:} nur nach abgeschlossenem Auftrag, ein Partner kann eine Antwort hinterlassen.
+  \item \emph{Datenrechte:} MachineHub besitzt die Vermittlungsdaten; Partner sehen Aggregate; keine Datenweitergabe an Dritte ohne Vertrag.
+\end{itemize}
+
+\textbf{6. Entscheidung unter Unsicherheit:}
+Trotz nicht abgesicherter Akzeptanz wird in den \emph{kombinierten} Plattform-Ansatz (Ersatzteile + Wartung) investiert statt in eine reine Ersatzteilplattform. Annahme: \emph{Produktionsbetriebe schätzen ``ein Ansprechpartner für beide Themen'' höher ein als minimal niedrigere Ersatzteilpreise.} Lernindikator (Monat 6): Anteil der Anfragen, die sowohl Teile als auch Service bündeln. Ist dieser Anteil unter 30\,\%, wird die Plattform Richtung A oder C re-strukturiert.
+
+\textbf{7. Stopp-/Pivot-Marker:}
+\emph{Wenn nach 9 Monaten die Vermittlungsquote (Anfrage $\rightarrow$ erfolgreich abgeschlossener Service-Auftrag) unter 35\,\% bleibt}, ist die Plattformlogik strukturell schwach \textendash{} dann Pivot zu Option C (geschlossenes Bestandskundenportal) oder Stopp.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Plattform-Launch ist nicht ein Marketingproblem, sondern ein Risikomanagement-Problem.} Wer ohne Stopp-Marker startet, kann nicht aufhören, weil ``schon so viel investiert'' wurde. Wer mit klaren Lernindikatoren startet, kann Misserfolg kontrolliert beenden \textendash{} und das macht die Plattform tatsächlich finanzierbar.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Negative Netzwerkeffekte}{\nivLiii}{30\,min}
+
+\ytquery{negative Netzwerkeffekte Plattform Qualitätsverlust Vertrauen Governance}
+
+\begin{loesungbox}
+\textbf{1. Definition:}
+Negative Netzwerkeffekte entstehen, wenn der \emph{Wachstumsschub einer Plattform die Nutzererfahrung verschlechtert} \textendash{} z.\,B.\ weil Qualität, Reaktionszeit oder Fairness sinken, sobald mehr Akteure beteiligt sind. Sie sind das Gegenmittel zum positiven Wachstum: Sie können eine Plattform genauso schnell entwerten wie positive Netzwerkeffekte sie aufgebaut haben.
+
+\textbf{2. Drei Szenarien bei CraftConnect:}
+\begin{itemize}
+  \item \emph{Szenario 1 \textendash{} Zu viele schlechte Handwerker:} Wachstum auf Anbieterseite ohne Qualitätskontrolle. Kunden erleben mehr Enttäuschungen, schreiben negative Bewertungen, vertrauen der Plattform nicht mehr. \emph{Kippunkt:} Wenn die durchschnittliche Bewertung unter 4,0 fällt \emph{oder} die Beschwerdequote über 5\,\% pro Monat steigt.
+  \item \emph{Szenario 2 \textendash{} Zu viele unqualifizierte Anfragen:} Wachstum auf Kundenseite ohne Vorqualifizierung. Handwerker bekommen drei Anfragen, von denen zwei reine Preisvergleich-Anfragen sind. Sie kündigen die Plattform. \emph{Kippunkt:} Wenn die Conversion-Rate Anfrage\,$\rightarrow$\,Auftrag unter 15\,\% sinkt.
+  \item \emph{Szenario 3 \textendash{} Direkter Konkurrenzeffekt:} Wenn zu viele Handwerker eines Gewerks in einer kleinen Stadt sind, sinkt der Auftrags-Anteil pro Anbieter. Anbieter wechseln zu Wettbewerbern. \emph{Kippunkt:} Wenn die durchschnittliche Auftragsanzahl pro Anbieter unter 2 / Monat fällt.
+\end{itemize}
+
+\textbf{3. Präventive Governance-Regeln:}
+\begin{itemize}
+  \item \emph{Gegen Szenario 1:} Qualitätsschwelle für Aufnahme (Innungsmitgliedschaft + Bonitätscheck), Bewertung wirkt auf Sichtbarkeit, dreistufiges Eskalationsverfahren bei schlechten Bewertungen.
+  \item \emph{Gegen Szenario 2:} Vorqualifizierung der Anfrage (Mindestbudget angeben, Bedarfstyp wählen). ``Anonyme Preisvergleichs-Anfragen'' deaktivieren.
+  \item \emph{Gegen Szenario 3:} Anbieter-Dichte pro Gewerk und Postleitzahl steuern; bei Übersättigung neue Anbieter zunächst auf Warteliste setzen.
+\end{itemize}
+
+\textbf{4. Wann Wachstum bremsen?}
+\emph{Faustregel:} Solange die Plattform die positive Lernkurve auf beiden Marktseiten halten kann, ist Wachstum gut. Sobald eine Schlüsselkennzahl (Conversion-Rate, Bewertung, Reaktionszeit) abkippt, ist es \emph{strategisch klüger, Wachstum zu drosseln} und die Qualität wiederherzustellen. Wachstum bei sinkender Qualität ist kein Wachstum, sondern beschleunigter Vertrauensverlust.
+
+\textbf{5. Reales Beispiel \textendash{} Uber:}
+Uber hat in den frühen Jahren in vielen Städten Fahrer ohne ausreichende Hintergrundprüfung onboardet, um schnell kritische Masse zu erreichen. Folge: Sicherheitsvorfälle, Reputationsschaden, Regulierungsdruck, langfristige Kosten für Compliance-Aufbau. Was Uber \emph{nicht} rechtzeitig getan hat: Qualitätskontrolle und Governance vor Wachstum priorisieren. Die ``Move fast and break things''-Logik passt nicht zu Plattformen mit Sicherheitsrelevanz.
+
+\begin{merkbox}[Lessons Learned]
+\emph{Vertrauen ist die fragilste Ressource einer Plattform.} Sie braucht Jahre, um aufgebaut zu werden, und Wochen, um zerstört zu werden. Negative Netzwerkeffekte sind nicht ein Nebenrisiko \textendash{} sie sind das zentrale Plattform-Risiko.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Plattform-Geschäftsmodellarchitektur}{\nivLiii}{45\,min}
+
+\ytquery{Plattform Geschäftsmodell Architektur Mittelstand Ökosystem Launch Governance}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind möglich, solange sie als belastbares Geschäftsmodell gedacht sind.}
+
+\smallskip
+\textbf{1. Geplantes Plattform-Geschäftsmodell:}
+Das Unternehmen baut eine fokussierte B2B-Vermittlungsplattform mit Service-Anteilen, die zwei klar abgegrenzte Marktseiten (Bestandskunden + Servicepartner) miteinander verbindet. Das Kerngeschäft (Produkte) bleibt erhalten und liefert die Pilotbasis. Die Plattform generiert ergänzende Erlöse aus erfolgsabhängiger Vermittlung und Service-Bundles. Die Plattform ist kein Marketingvehikel, sondern eine eigenständige Profitcenter-Architektur mit eigener Steuerung. Ziel: 15\,--\,25\,\% des Konzernumsatzes über die Plattform in 5 Jahren \textendash{} ohne das Kerngeschäft zu kannibalisieren.
+
+\textbf{2. Abgrenzung zum linearen Modell:}
+\begin{itemize}
+  \item \emph{Linear:} Wertschöpfung in einer Kette (Beschaffung $\rightarrow$ Produktion $\rightarrow$ Vertrieb $\rightarrow$ Kunde). Erlöse aus eigener Produktmarge.
+  \item \emph{Plattform:} Wertschöpfung durch Vermittlung zwischen Marktseiten. Erlöse aus Vermittlung, Daten, Service.
+  \item \emph{Strukturell anders:} Investitionsprofil (vorab hoch, Erlöse später), Risiken (kritische Masse), Governance (Regeln statt Befehle).
+\end{itemize}
+
+\textbf{3. Akteurslandkarte (6 Akteure):}
+Bestandskunden \textperiodcentered{} Servicepartner \textperiodcentered{} Plattformbetreiber \textperiodcentered{} Datenpartner (Maschinen-/Produkt-APIs) \textperiodcentered{} Logistik-/Zahlungsdienstleister \textperiodcentered{} externe Berater/Trainer im Servicebereich.
+
+\textbf{4. Nutzenversprechen je Marktseite (konkret):}
+\begin{itemize}
+  \item \emph{Bestandskunden:} ``Ein Kontakt für Produkt + Service + Wartung. SLA 24\,h. Servicehistorie und Wartungsplan auf einem Dashboard.''
+  \item \emph{Servicepartner:} ``Planbare Aufträge, klare Bezahlung in 14\,Tagen, kein Akquisitionsaufwand. Bessere Auslastung über strukturierte Buchungslogik.''
+  \item \emph{Datenpartner:} ``Zugang zu industriellen Servicemustern, klar definierte Datenrechte.''
+\end{itemize}
+
+\textbf{5. Netzwerkeffekte (positiv und negativ):}
+\begin{itemize}
+  \item \emph{Indirekt positiv:} mehr Partner $\rightarrow$ schnellere Reaktion $\rightarrow$ mehr Kunden $\rightarrow$ mehr Aufträge $\rightarrow$ mehr Partner.
+  \item \emph{Direkt positiv (schwach):} Kunden bilden über die Plattform fachlichen Austausch (Best-Practice-Bibliothek).
+  \item \emph{Indirekt negativ:} Schlechte Partner senken Vertrauen aller.
+  \item \emph{Direkt negativ:} Zu viele Partner pro Region $\rightarrow$ Konkurrenz innerhalb der Anbieterseite $\rightarrow$ Abwanderung.
+\end{itemize}
+
+\textbf{6. Marktseite zuerst:}
+\emph{Servicepartner zuerst}, mit folgenden Anreizen: 12\,Monate keine Listing-Gebühr, garantierte Mindestauftragsanzahl, persönliche Plattform-Betreuung, Bonus für die ersten 50 Aufträge.
+
+\textbf{7. Launch-Ansatz (Pilotmarkt + Kuratierter Start, 12 Monate):}
+\begin{itemize}
+  \item \emph{Monat 1\,--\,3:} 20\,--\,30 Servicepartner gewinnen, Plattform-MVP definieren, Pilotkunden vorbereiten.
+  \item \emph{Monat 4\,--\,6:} MVP live, 50\,--\,100 Pilotkunden onboarden, SLA und Bewertungslogik testen.
+  \item \emph{Monat 7\,--\,9:} Erweiterung auf zweite Region, erste Datenpartner integrieren.
+  \item \emph{Monat 10\,--\,12:} Skalierungsentscheidung; Vorbereitung Datenarchitektur für Ökosystempfad.
+\end{itemize}
+
+\textbf{8. Governance (5 Regeln):}
+\begin{itemize}
+  \item Zugangskriterien für Partner (Zertifizierung, Referenzen, SLA-Commitment).
+  \item Sichtbarkeit basiert auf Bewertung + SLA-Erfüllung; nicht kaufbar.
+  \item Eskalationspfad bei Schlecht-Leistung (Warnung $\rightarrow$ Sichtbarkeitsreduktion $\rightarrow$ Ausschluss).
+  \item Bewertungsregeln (nur nach abgeschlossenem Auftrag, eine Partnerantwort möglich).
+  \item Datenrechte (Plattform besitzt Vermittlungsdaten; Aggregate für Partner; keine Weitergabe an Dritte).
+\end{itemize}
+
+\textbf{9. Risikoanalyse:}
+\begin{itemize}
+  \item \emph{Kritische Masse:} mitigiert durch kuratierten Start in einer Region.
+  \item \emph{Vertrauen:} mitigiert durch Zugangskontrolle und SLA.
+  \item \emph{Plattformmissbrauch (Bypass):} mitigiert durch Plattform-Bezahlung und Wartungs-Dokumentation als Pflicht.
+  \item \emph{Partnerabhängigkeit:} mitigiert durch Mindestanzahl Partner pro Region (no single point of failure).
+  \item \emph{Interne Akzeptanz:} mitigiert durch Provisionsmodell-Anpassung; Plattform als ergänzender Profitcenter, nicht als Konkurrenz zum Außendienst.
+  \item \emph{Kannibalisierung Kerngeschäft:} mitigiert durch klare Trennung der Sortimente und Kundensegmente.
+\end{itemize}
+
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Plattform als eigenständiges Profitcenter mit eigenem CEO.} Annahme: Plattform-Logik scheitert in linearen Organisationsstrukturen, weil sie andere KPIs braucht. Wenn falsch: Doppelstrukturen kosten Geld.
+  \item \emph{Servicepartner zuerst, Bestandskunden später.} Annahme: Partnerkapazität ist der Engpass, nicht Kundennachfrage. Wenn falsch: zu viele Partner ohne Aufträge $\rightarrow$ Abwanderung.
+  \item \emph{Verzicht auf offenes Ökosystem im Start.} Annahme: Komplexität tötet Plattformen im ersten Jahr. Wenn falsch: Wettbewerber kommt mit offenem Modell vor uns in den Markt.
+\end{enumerate}
+
+\textbf{Zusatz \textendash{} Bewusst gegen schnelles Wachstum:}
+Bewusster Verzicht auf eine breit angelegte Marketingoffensive in Monat 3 zur Kundengewinnung. Stattdessen: handverlesene Pilotkunden in zwei Regionen. Begründung: Schnelles Kundenwachstum vor stabiler Partnerseite führt zu unbedienter Nachfrage, schlechten Bewertungen, beschleunigtem Vertrauensverlust. Die ``Vorsicht'' ist eine \emph{aktive Investition in Qualität} \textendash{} der teuerste Plattformfehler ist, kritische Masse zu früh anzustreben.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Plattformstrategie ist eine Disziplin des Verzichts.} Erfolg entsteht aus dem, was man bewusst \emph{nicht} macht: nicht alle Märkte gleichzeitig, nicht alle Akteure gleichzeitig, nicht alle Erlösmodelle gleichzeitig. Der wichtigste Test einer guten Plattformstrategie: Lassen sich drei ``klar nein''-Entscheidungen benennen?
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterlösungen sind eine Diskussionsbasis. Wenn Ihre eigene Lösung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder einen anderen Maßstab angelegt?}
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Bringen Sie Ihre eigenen Lösungen in die Coaching-Sitzung mit. Im Fokus stehen drei Fragen: Welche Annahmen haben Sie gemacht? Welche Zielkonflikte haben Sie sichtbar gemacht? Welche Entscheidung haben Sie getroffen \textendash{} und würden Sie auch verantworten, wenn sich der Markt anders entwickelt als angenommen?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 3 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

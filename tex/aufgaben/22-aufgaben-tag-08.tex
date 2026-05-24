@@ -1,0 +1,475 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 8 - Aufgabenheft
+% Dynamische Preisstrategien & Performance-Monitoring auf Plattformen
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{enhanced, breakable, colback=white, colframe=lpGray, boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 8}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Dynamische Preise \& Plattform-Performance}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\newcommand{\antwortlinien}[1]{\par\vspace{6pt}\foreach \x in {1,...,#1}{\noindent\makebox[\linewidth]{\dotfill}\\[6pt]}}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 4 \textperiodcentered{} TAG 8 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 9.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 8\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Dynamische Preisstrategien,\\Marktanalyse \& Performance-Monitoring\\\textendash{} elf Aufgaben auf drei Niveaus.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Tag 8 fokussiert die \emph{strategische Steuerung von Preisen, Marktinformationen und Plattformperformance}. Dynamische Preise sind heute keine reine Rabattlogik, sondern ein Managementinstrument zur Steuerung von Nachfrage, Marge, Wettbewerb, Sichtbarkeit und Kundenwert.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Preisstrategien, Einflussfaktoren, KPIs.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} HomeTech Pro und KitchenPro Direct als Cases.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Preisarchitektur als integrierte Verkaufsentscheidung.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Dynamisch heißt nicht ``billiger jeden Tag''. Dynamisch heißt: \emph{differenziert nach Produkt, Phase, Nachfrage, Wettbewerb}. Wer dynamisch nur als Rabatt versteht, verliert Marge \textendash{} dauerhaft.
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Statisch \textendash{} aktionsbasiert \textendash{} dynamisch}{\nivLi}{6\,min}
+
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Definieren Sie in einem Satz: \emph{statische Preisgestaltung \textperiodcentered{} aktionsbasierte Preisgestaltung \textperiodcentered{} dynamische Preisstrategie}.
+  \item Geben Sie für jede ein Plattform-Beispiel.
+  \item Welche ist im B2B-Mittelstand heute noch dominant \textendash{} und warum ist das ein strategisches Problem?
+\end{enumerate}
+
+\ytquery{statische aktionsbasierte dynamische Preisstrategie Plattform Unterschied}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Acht Preisstrategien einordnen}{\nivLi}{8\,min}
+
+\noindent Acht Preisstrategien aus dem Lehrskript Tag 8: \emph{Premiumpreis \textperiodcentered{} Wettbewerbsparität \textperiodcentered{} Penetrationspreis \textperiodcentered{} Bündelpreise \textperiodcentered{} Mengenrabatte \textperiodcentered{} zeitlich begrenzte Aktionen \textperiodcentered{} wertorientierte Preise \textperiodcentered{} differenzierte Preise nach Produktsegmenten}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Definieren Sie jede in einem Halbsatz mit Beispiel.
+  \item Welche Strategie eignet sich für eine \emph{Premium-Marke}, welche für einen \emph{Penetrationsversuch in neuen Markt}, welche für \emph{Ersatzteilgeschäft}?
+  \item Welche Strategie wird im Mittelstand häufig \emph{instinktiv falsch} eingesetzt \textendash{} und welche Folge hat das?
+\end{enumerate}
+
+\ytquery{Preisstrategie Premium Penetration Wettbewerb Bundle Mengenrabatt Wert}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Acht Einflussfaktoren dynamischer Preise}{\nivLi}{6\,min}
+
+\noindent Aus dem Lehrskript: dynamische Preise reagieren auf \emph{Wettbewerbspreise \textperiodcentered{} Nachfrage \textperiodcentered{} Lagerbestand \textperiodcentered{} Saisonalität \textperiodcentered{} Lieferfähigkeit \textperiodcentered{} Marge \textperiodcentered{} Plattformgebühren \textperiodcentered{} Bewertungen \textperiodcentered{} Conversion Rate}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Welche der neun Faktoren sind \emph{intern} (Anbieter-kontrolliert), welche \emph{extern}?
+  \item Welche zwei Faktoren werden in einer naiven dynamischen Preisstrategie typischerweise \emph{ignoriert} \textendash{} und welcher Schaden entsteht?
+  \item Wann sollte ein Anbieter auf einen Wettbewerber-Preis \emph{nicht} reagieren?
+\end{enumerate}
+
+\ytquery{dynamische Preise Einflussfaktoren Wettbewerb Nachfrage Marge Marktanalyse}
+
+\antwortlinien{12}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{HomeTech Pro \textendash{} Marktposition analysieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``HomeTech Pro'' verkauft smarte Thermostate und Energiesteuerungssysteme. Produkte hochwertig, aber teurer als Wettbewerb.
+
+\smallskip
+\textbf{Marktbild:}
+\begin{itemize}
+  \item Eigenes Produkt: Smart Thermostat Pro \textendash{} 149\,\euro.
+  \item Wettbewerber A: ähnlich, 119\,\euro, viele Bewertungen.
+  \item Wettbewerber B: einfacher, 89\,\euro, hohe Sichtbarkeit.
+  \item Wettbewerber C: Premium, 169\,\euro, starke Marke.
+  \item Eigene Bewertung: 4,5 / 85 Bewertungen.
+  \item Stärken: Energieeinsparung, App, Design, Support.
+  \item Schwäche: geringere Sichtbarkeit als A und B.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Ordnen Sie die \textbf{Marktposition} von HomeTech Pro im Vergleich zu A/B/C ein (qualitativ: Premium, Mid-Tier, Budget?).
+  \item Benennen Sie mindestens \textbf{fünf Informationen}, die für eine fundierte Preisentscheidung \emph{fehlen}.
+  \item Entwickeln Sie \textbf{drei mögliche Preisstrategien} (preisstabil, moderat senken, Bundle/wertorientiert).
+  \item Beschreiben Sie für jede Strategie \textbf{Chancen und Risiken}.
+  \item Formulieren Sie eine erste Empfehlung (3\,Sätze), trotz unvollständiger Datenlage \textendash{} und benennen Sie die Annahme.
+\end{enumerate}
+
+\ytquery{B2B Plattform Preisentscheidung Marktposition Premium Wettbewerb HomeTech}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{HomeTech \textendash{} Performance-Kennzahlen interpretieren}{\nivLii}{30\,min}
+
+\begin{infobox}[Kennzahlen letzte 8 Wochen]
+\begin{itemize}
+  \item Produktaufrufe: 42.000.
+  \item Klickrate: 3,2\,\%.
+  \item Conversion Rate: 1,1\,\%.
+  \item Durchschnittlicher Warenkorb: 163\,\euro.
+  \item Marge pro Gerät: 32\,\%.
+  \item Retourenquote: 4\,\%.
+  \item Häufige Kundenfrage: ``Rechnet sich der höhere Preis?''.
+  \item Wettbewerber A senkt regelmäßig am Wochenende den Preis.
+  \item Wettbewerber B gewinnt über niedrigen Preis, hat aber schlechtere Bewertungen.
+\end{itemize}
+
+\smallskip
+\textbf{Rahmen:} Mindestmarge $\geq$\,25\,\% \textperiodcentered{} Marke hochwertig \textperiodcentered{} Ziel: CR von 1,1 auf 1,7\,\% in 3 Monaten \textperiodcentered{} 20.000\,\euro{} Test-Budget.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie in 3\,Sätzen: Ist das aktuelle Problem primär ein \textbf{Preisproblem}, ein \textbf{Contentproblem} oder ein \textbf{Sichtbarkeitsproblem}? Begründen Sie mit den Daten.
+  \item Entwickeln Sie \textbf{zwei Preisexperimente}, die die Mindestmarge respektieren.
+  \item Entwickeln Sie \textbf{zwei ergänzende Maßnahmen außerhalb des Preises} zur Conversion-Steigerung.
+  \item Legen Sie \textbf{fünf KPIs} fest, mit denen die Preisstrategie überwacht wird.
+  \item Entscheiden Sie, ob eine aggressive Preissenkung (z.\,B.\ auf 119\,\euro{} = Wettbewerber-A-Niveau) sinnvoll wäre. Begründen Sie in 3\,Sätzen.
+\end{enumerate}
+
+\ytquery{Plattform Preis Test Marge Conversion B2B Smart Thermostat Wettbewerb}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Marktanalyse-Logik \textendash{} sieben Felder}{\nivLii}{20\,min}
+
+\noindent Aus dem Lehrskript Tag 8: Marktanalyse im Plattformverkauf umfasst sieben Felder: \emph{Wettbewerberbeobachtung \textperiodcentered{} Preisbandbreiten \textperiodcentered{} Sortimentsvergleich \textperiodcentered{} Nachfrageentwicklung \textperiodcentered{} Bewertungslage \textperiodcentered{} Sichtbarkeit \textperiodcentered{} Lieferfähigkeit}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Beschreiben Sie jedes Feld in einem Halbsatz: Welche Frage beantwortet es?
+  \item Welche zwei Felder werden im Mittelstand kaum systematisch beobachtet?
+  \item Entwickeln Sie für HomeTech Pro ein einfaches \textbf{Marktanalyse-Setup} (was wird wie oft beobachtet, welche Tools?).
+  \item Welche Verantwortlichkeit gehört in eine Marktanalyse-Rolle (CRO, Marketing, Vertrieb, Pricing)?
+\end{enumerate}
+
+\ytquery{Marktanalyse Plattform Wettbewerb Preis Sortiment Bewertung Sichtbarkeit B2B}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{KitchenPro Direct \textendash{} Preisarchitektur für vier Produktgruppen}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: KitchenPro Direct]
+``KitchenPro Direct'' verkauft hochwertige Küchengeräte für professionelle Gastronomie und ambitionierte Privatkunden über eigene Kanäle + Plattformen. Druck durch günstigere Wettbewerber mit Rabattaktionen. Eigene Stärke: Qualität, Bewertungen, treue Bestandskunden.
+
+\smallskip
+\textbf{Rahmen:} 6,5\,Mio.\,\euro{} Plattformumsatz \textperiodcentered{} 29\,\% Marge \textperiodcentered{} Zielmarge $\geq$\,25\,\% \textperiodcentered{} Bewertungs-Schnitt 4,6 \textperiodcentered{} CR sinkt von 2,4 auf 1,8\,\% \textperiodcentered{} Retourenquote 3,5\,\% stabil \textperiodcentered{} 120.000\,\euro{} für 6\,Monate.
+
+\smallskip
+\textbf{Produktgruppen:}
+\begin{itemize}
+  \item \textbf{A:} Premium-Küchenmaschinen \textendash{} hohe Marge, starke Marke.
+  \item \textbf{B:} Standardzubehör \textendash{} hoher Wettbewerbsdruck.
+  \item \textbf{C:} Ersatzteile \textendash{} hohe Wiederkaufrate.
+  \item \textbf{D:} Bundles aus Gerät + Zubehör + Servicepaket.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie die vier Produktgruppen nach: \emph{Preiselastizität \textperiodcentered{} Marge \textperiodcentered{} Wettbewerbsdruck \textperiodcentered{} Kundenbindung \textperiodcentered{} strategische Bedeutung} (Skala 1\,--\,5).
+  \item Entwickeln Sie eine \textbf{differenzierte Preisstrategie} für jede Gruppe: stabil halten, dynamisch anpassen, gebündelt, premium-positioniert?
+  \item Entscheiden Sie für jede Gruppe: \emph{Rabattaktionen ja oder nein}, mit Begründung.
+  \item Welche Gruppe ist das \textbf{Margenreservoir}, welche das \textbf{Volumenreservoir}, welche das \textbf{Bindungsreservoir}?
+\end{enumerate}
+
+\ytquery{Preisarchitektur Plattform B2B Premium Bundle Ersatzteil Wettbewerb Marge}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Bundles als Verteidigung gegen Preisvergleich}{\nivLii}{15\,min}
+
+\noindent Bundle-Angebote (Gerät + Zubehör + Service) reduzieren die Vergleichbarkeit auf Plattformen \textendash{} weil das Bundle als Ganzes nicht direkt mit einem Konkurrentenangebot vergleichbar ist. Sie sind eines der wirksamsten Werkzeuge gegen reinen Preisdruck im Premium-Segment.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 3\,Sätzen die \emph{Logik} eines Bundles: warum reduziert es Preisvergleich?
+  \item Entwickeln Sie für KitchenPro Direct \textbf{drei Bundle-Vorschläge} (Premium, Mid-Tier, Service-Fokus). Welche Komponenten?
+  \item Welche Risiken birgt eine Bundle-Strategie (Kannibalisierung, Komplexität, Lagerhaltung)?
+  \item Welche Kennzahl misst Bundle-Erfolg \emph{aus Margensicht} (nicht Umsatzsicht)?
+\end{enumerate}
+
+\ytquery{Bundle Strategie Plattform B2B Premium Preisvergleich Marge Kannibalisierung}
+
+\antwortlinien{14}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{KitchenPro Direct \textendash{} 6-Monats-Preis-/Performance-Entscheidung}{\nivLiii}{45\,min}
+
+\noindent Sie sind \emph{Chief Revenue Officer / Pricing Manager} bei KitchenPro Direct. 120.000\,\euro{} Budget, 6\,Monate, Ziel: Umsatz steigern, Marge schützen, kein Preiskampf.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Treffen Sie die \textbf{differenzierte Preisstrategie} für jede der vier Produktgruppen (A--D).
+  \item Verteilen Sie das Budget von 120.000\,\euro{} auf: Preis-/Wettbewerbsmonitoring, Content, Bundle-Konzept, Aktions-Experimente, Dashboard/KPI, Bewertungen.
+  \item Entwickeln Sie eine \textbf{Performance-Monitoring-Architektur} mit KPIs entlang aller vier Ebenen (Sichtbarkeit, Klicks, Conversion, Profitabilität).
+  \item Treffen Sie eine \textbf{Entscheidung gegen aggressive Preisaktion} für Premium-Küchenmaschinen \textendash{} mit Senior-Level-Begründung.
+  \item Treffen Sie mindestens \textbf{eine Entscheidung unter Unsicherheit} mit klarer Annahme und Lernindikator.
+  \item Welche Pricing-Regel sollte \emph{nicht automatisiert} werden? Welche darf?
+\end{enumerate}
+
+\ytquery{Plattform Preisstrategie KitchenPro Premium Bundle Monitoring CRO Senior}
+
+\antwortlinien{34}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Preis-Governance \textendash{} wann darf der Algorithmus entscheiden?}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Moderne Plattformen erlauben automatisierte Repricing-Tools, die Preise minütlich an Wettbewerber-Bewegungen anpassen. Die Versuchung im Mittelstand: ``alles automatisieren''. Das Risiko: \emph{strukturelle Margenerosion} ohne, dass die Geschäftsführung es merkt \textendash{} weil der Algorithmus sich von einem Wettbewerber zum nächsten ``nach unten'' anpasst.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie das Risiko des unbegrenzten Repricing-Algorithmus in 3\,--\,4 Sätzen.
+  \item Welche \textbf{Leitplanken} muss ein verantwortungsvolles automatisches Pricing haben? (mindestens 4)
+  \item Welche Pricing-Entscheidungen müssen \emph{immer manuell} bleiben?
+  \item Entwickeln Sie einen \textbf{Preis-Governance-Prozess} mit Entscheidungsrechten je Eskalationsstufe (z.\,B.\ kleine Anpassung: Pricing Manager, größere: CRO, Premium-Sortiment: GF).
+  \item Welche Kennzahl muss in jedem Pricing-Algorithmus-Audit überprüft werden?
+\end{enumerate}
+
+\ytquery{Preis Algorithmus Repricing Governance Marge Plattform B2B Senior}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Integrierte Plattform-Verkaufs- und Preisarchitektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Revenue Officer / Pricing Manager / Head of Marketplace.
+
+\smallskip
+\textbf{Ausgangslage:} Unternehmen verkauft auf mehreren Plattformen. Umsatz wächst, Margen unter Druck. Wettbewerber verändern Preise schnell. Algorithmen belohnen Sichtbarkeit + Conversion. Marketing fordert mehr Aktionen, Vertrieb fordert Preisstabilität, Controlling fordert Margenschutz, GF fordert Wachstum.
+
+\smallskip
+\textbf{Erwartung:} integrierte Plattform-Verkaufsstrategie, die Preislogik, Marktanalyse, Performance-Monitoring, Content, Bewertung, Retention und Managementsteuerung verbindet.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item \textbf{Zielbild} für Plattformverkauf, Preispositionierung, Profitabilität (5\,Sätze).
+  \item \textbf{Segmentierung} der Produktgruppen nach strategischer Rolle, Marge, Wettbewerb, Kundenbindung.
+  \item Eine \textbf{dynamische Preisarchitektur} mit klaren Regeln, Grenzen, Entscheidungskompetenzen.
+  \item Eine \textbf{Marktanalyse-Logik} für Wettbewerb, Nachfrage, Bewertungen, Sichtbarkeit, Sortiment.
+  \item Eine \textbf{Entscheidung}, welche Gruppen rabattiert, stabil, gebündelt, premium positioniert werden.
+  \item Eine \textbf{Performance-Monitoring-Architektur} mit operativen und strategischen KPIs.
+  \item Eine \textbf{Governance-Struktur} (Pricing, Vertrieb, Marketing, Controlling, Produktmanagement, GF).
+  \item Eine \textbf{Risikoanalyse} (Preiskrieg, Margenverlust, falsche Kundenerwartung, Markenverwässerung, Plattformabhängigkeit).
+  \item Eine \textbf{Roadmap} für 12\,Monate.
+  \item \textbf{Drei Managemententscheidungen} unter Unsicherheit.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens eine bewusste Entscheidung gegen eine kurzfristige Umsatzsteigerung, wenn diese langfristig Marge, Marke oder Kundenvertrauen gefährden würde.
+
+\ytquery{Preisarchitektur Plattform B2B Pricing Performance Governance CRO Senior}
+
+\antwortlinien{38}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 8}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Statische / aktionsbasierte / dynamische Preisstrategie sauber unterscheiden.
+  \item Acht Preisstrategien nach Phase und Produktrolle einsetzen.
+  \item Marktanalyse als systematisches, nicht ad-hoc-Vorgehen organisieren.
+  \item Differenzierte Preisstrategien nach Produktgruppen entwickeln.
+  \item Bundles als Verteidigung gegen Preisvergleich strategisch einsetzen.
+  \item Preis-Governance gegen unkontrollierte Repricing-Algorithmen aufbauen.
+  \item Eine integrierte Plattform-Verkaufsarchitektur als Senior-Level-Entscheidungsrahmen denken.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 8 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

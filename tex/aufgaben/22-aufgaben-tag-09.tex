@@ -1,0 +1,512 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 9 - Aufgabenheft
+% Performance-Marketing: Anzeigen, Conversion & Landing Pages
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{enhanced, breakable, colback=white, colframe=lpGray, boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 9}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Performance-Marketing}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\newcommand{\antwortlinien}[1]{\par\vspace{6pt}\foreach \x in {1,...,#1}{\noindent\makebox[\linewidth]{\dotfill}\\[6pt]}}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 5 \textperiodcentered{} TAG 9 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 10.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 9\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Performance-Marketing:\\Anzeigen, Conversion \& Landing Pages\\\textendash{} elf Aufgaben auf drei Niveaus.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Tag 9 eröffnet Modul 5 \textendash{} \emph{Performance-Marketing als messbarer Vertriebshebel}. Anzeigen sind nicht isolierte Werbemaßnahme, sondern Teil eines Vertriebssystems aus Zielgruppenanalyse, Kampagnenplanung, Landing Pages, Conversion-Optimierung und Ergebnissteuerung. Drei Begriffe heute: \fachbegriff{Funnel}, \fachbegriff{Landing Page} und \fachbegriff{Leadqualität}.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Funnel-Logik, KPIs, Anzeigenkanäle, Landing-Page-Elemente.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} SolarOffice GmbH und DataSecure Solutions als Cases.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Performance-Marketing-Architektur als Investitionsentscheidung.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Performance-Marketing endet nicht bei Klicks. Es endet beim \emph{Vertriebsergebnis} \textendash{} Pipeline, Umsatz, Deckungsbeitrag. Wer Performance-Marketing nur auf Kosten pro Klick optimiert, kauft Aktivität, nicht Wirkung.
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Reichweite \textendash{} Traffic \textendash{} Leads \textendash{} Conversion \textendash{} Umsatz}{\nivLi}{6\,min}
+
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Definieren Sie in einem Satz: \emph{Reichweite \textperiodcentered{} Traffic \textperiodcentered{} Leads \textperiodcentered{} Conversion \textperiodcentered{} Umsatz}.
+  \item Auf welcher Ebene wird Performance-Marketing im Mittelstand am häufigsten \emph{gemessen} \textendash{} und auf welcher Ebene müsste es eigentlich gemessen werden?
+  \item Warum führt eine reine ``Reichweite''-Optimierung in B2B fast immer zu schlechten Ergebnissen?
+\end{enumerate}
+
+\ytquery{Performance Marketing Funnel Reichweite Traffic Lead Conversion Umsatz}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Zehn Performance-Marketing-KPIs}{\nivLi}{8\,min}
+
+\noindent Aus dem Lehrskript Tag 9: \emph{Impressionen \textperiodcentered{} Klickrate \textperiodcentered{} Kosten pro Klick (CPC) \textperiodcentered{} Conversion Rate \textperiodcentered{} Kosten pro Lead (CPL) \textperiodcentered{} Leadqualität \textperiodcentered{} Abschlussquote \textperiodcentered{} Customer Acquisition Cost (CAC) \textperiodcentered{} Return on Ad Spend (ROAS) \textperiodcentered{} Deckungsbeitrag pro Kampagnenquelle}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Ordnen Sie jede KPI einer Ebene zu: \emph{Anzeige \textperiodcentered{} Klick/Landing \textperiodcentered{} Lead \textperiodcentered{} Vertrieb \textperiodcentered{} Wirtschaftlichkeit}.
+  \item Welche KPI ist der \emph{strategisch wichtigste Frühindikator} für die Wirtschaftlichkeit einer Kampagne?
+  \item Welche KPI wird im Mittelstand am häufigsten \emph{nicht berichtet} \textendash{} und welche Folgen hat das?
+\end{enumerate}
+
+\ytquery{Performance Marketing KPI CPC CPL CAC ROAS Conversion Funnel}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Anzeigenkanäle nach Suchintention}{\nivLi}{6\,min}
+
+\noindent Suchintentionen werden typischerweise in drei Stufen unterteilt: \emph{Problemrecherche \textperiodcentered{} Lösungsvergleich \textperiodcentered{} konkrete Kaufabsicht}. Anzeigenkanäle bedienen unterschiedliche Stufen.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Ordnen Sie diese Kanäle den drei Stufen zu (Mehrfachzuordnung möglich): \emph{Google Ads (Suchanfragen) \textperiodcentered{} LinkedIn Ads (Targeting nach Rolle) \textperiodcentered{} Meta Ads (Interessen) \textperiodcentered{} Display-Anzeigen \textperiodcentered{} Retargeting \textperiodcentered{} Plattformanzeigen \textperiodcentered{} Partnerkampagnen}.
+  \item Welcher Kanal ist für die Phase \emph{konkrete Kaufabsicht} typischerweise am wirksamsten?
+  \item Welche zwei Kanäle sind im B2B-Mittelstand für \emph{Buying-Center-Ansprache} besonders relevant?
+\end{enumerate}
+
+\ytquery{Performance Marketing Google Ads LinkedIn Suchintention Kaufabsicht B2B}
+
+\antwortlinien{12}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{SolarOffice GmbH \textendash{} Performance-Marketing-Funnel}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+``SolarOffice GmbH'' verkauft Photovoltaiklösungen für Gewerbeimmobilien. Anfragen entstehen bisher über Empfehlungen und regionale Messen. Die Geschäftsführung möchte über digitale Anzeigen \emph{mehr qualifizierte Beratungstermine} gewinnen.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Zielgruppe: Eigentümer und Geschäftsführer kleiner und mittlerer Unternehmen.
+  \item Produkt: erklärungsbedürftig, Investitionssumme oft $>$\,50.000\,\euro.
+  \item Kaufmotiv: Energiekosten senken, Nachhaltigkeit, Fördermöglichkeiten.
+  \item Verkaufszyklus: Wochen bis Monate.
+  \item Vertriebsteam begrenzt, will keine unqualifizierten Anfragen.
+  \item Budget erste Kampagne: 25.000\,\euro.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie das \textbf{übergeordnete Vertriebsziel} der Kampagne in 2 Sätzen (nicht ``mehr Leads'').
+  \item Benennen Sie mindestens \textbf{drei mögliche Zielgruppen} (z.\,B.\ produzierendes Gewerbe, Immobilieneigentümer, Logistikbetriebe).
+  \item Formulieren Sie \textbf{drei Kundenprobleme}, die in Anzeigen angesprochen werden könnten.
+  \item Skizzieren Sie einen einfachen \textbf{Funnel} von der Anzeige bis zum Beratungstermin (5\,Stufen).
+  \item Legen Sie \textbf{drei Kennzahlen} fest, mit denen der Kampagnenerfolg gemessen wird \textendash{} nicht ``Klicks''.
+\end{enumerate}
+
+\ytquery{Performance Marketing B2B PV Solar Gewerbe Zielgruppe Funnel Kampagne}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{SolarOffice \textendash{} Anzeigenkanäle \& Landing Page}{\nivLii}{30\,min}
+
+\begin{infobox}[Anzeigenkanäle + Landing-Page-Zustand]
+\textbf{Anzeigenkanäle:}
+\begin{itemize}
+  \item \textbf{A:} Google Ads für ``Photovoltaik Gewerbe Kosten''.
+  \item \textbf{B:} LinkedIn Ads für Geschäftsführer und Immobilienverantwortliche.
+  \item \textbf{C:} Display-Anzeigen auf allgemeinen Nachrichtenseiten.
+  \item \textbf{D:} Retargeting für Websitebesucher.
+  \item \textbf{E:} Plattformanzeigen auf Energie-/Nachhaltigkeitsportalen.
+\end{itemize}
+
+\smallskip
+\textbf{Aktuelle Landing Page:}
+\begin{itemize}
+  \item Überschrift: ``Willkommen bei SolarOffice''.
+  \item Viele allgemeine Informationen zum Unternehmen.
+  \item Kein klarer Einstieg für Gewerbekunden.
+  \item Formular mit 12 Pflichtfeldern.
+  \item Keine Beispielrechnung. Keine Referenzen.
+  \item CTA: ``Absenden''.
+\end{itemize}
+
+\smallskip
+\textbf{Rahmen:} 80 qualifizierte Beratungstermine in 6\,Monaten \textperiodcentered{} max.\ 20 neue Leads pro Woche bearbeitbar \textperiodcentered{} erste Ergebnisse nach 8\,Wochen \textperiodcentered{} Marke seriös und beratungsorientiert.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie die 5 Anzeigenkanäle nach \emph{Zielgruppenpassung, Kostenrisiko, Leadqualität, Geschwindigkeit}.
+  \item Wählen Sie max.\ \textbf{drei Kanäle} für die erste Kampagnenphase.
+  \item Benennen Sie \textbf{fünf Schwächen} der aktuellen Landing Page.
+  \item Entwickeln Sie \textbf{fünf konkrete Verbesserungen} für die Landing Page.
+  \item Entscheiden Sie: Mehr Budget zuerst in Anzeigen oder in Landing Page? Begründen Sie in 3\,Sätzen.
+\end{enumerate}
+
+\ytquery{Performance Marketing Landing Page B2B Solar Gewerbe Google LinkedIn}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Elemente einer wirksamen Landing Page}{\nivLii}{15\,min}
+
+\noindent Aus dem Lehrskript: Elemente einer wirksamen Landing Page: \emph{klare Überschrift \textperiodcentered{} Nutzenversprechen \textperiodcentered{} Zielgruppenansprache \textperiodcentered{} Vertrauenselemente / Referenzen \textperiodcentered{} Formular \textperiodcentered{} CTA \textperiodcentered{} visuelle Führung \textperiodcentered{} mobile Nutzbarkeit}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie für \emph{jedes Element} in einem Halbsatz: Welche Rolle spielt es für die Conversion?
+  \item Welche zwei Elemente werden im Mittelstand am häufigsten \emph{schwach} umgesetzt?
+  \item Formulieren Sie für SolarOffice eine \textbf{starke Überschrift} und ein \textbf{Nutzenversprechen} (jeweils max.\ 2 Sätze).
+  \item Welche \textbf{drei Vertrauenselemente} sind im B2B-Gewerbekundengeschäft besonders wirksam?
+\end{enumerate}
+
+\ytquery{Landing Page B2B Überschrift Nutzenversprechen Vertrauen Conversion}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{DataSecure Solutions \textendash{} Performance-Marketing-Kampagne}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: DataSecure Solutions]
+``DataSecure Solutions'' ist mittelständischer Anbieter von Cybersecurity-Lösungen für Unternehmen mit 100\,--\,1.000 Mitarbeitenden. Vertrieb bisher über Empfehlungen, Messen, Netzwerke. Markt wettbewerbsintensiver $\rightarrow$ digitale Leads gewünscht.
+
+\smallskip
+\textbf{Herausforderung:} Nicht möglichst viele Leads, sondern \emph{Entscheider mit echtem Bedarf}. Cybersecurity-Lösungen erklärungsbedürftig, vertrauenssensibel, oft mit mehreren Entscheidern.
+
+\smallskip
+\textbf{Rahmen:} 16\,Mio.\,\euro{} Umsatz \textperiodcentered{} Vertrieb 8 / Marketing 2 \textperiodcentered{} 150.000\,\euro{} für 6\,Monate \textperiodcentered{} Ziel: 180 qualifizierte Leads, 60 Demo-Termine, 20 Angebote \textperiodcentered{} Zielgruppen: IT-Leiter, GF, Datenschutz, Compliance \textperiodcentered{} Verkaufszyklus 3\,--\,6\,Monate \textperiodcentered{} Website bisher conversion-schwach.
+
+\smallskip
+\textbf{Kampagnenansätze:}
+\begin{itemize}
+  \item \textbf{A:} Google Ads für akute Suchanfragen ``Cybersecurity Beratung Mittelstand''.
+  \item \textbf{B:} LinkedIn Ads mit Whitepaper für IT-Leiter und GF.
+  \item \textbf{C:} Webinar-Kampagne ``Cyberrisiken im Mittelstand reduzieren''.
+  \item \textbf{D:} Retargeting für Websitebesucher.
+  \item \textbf{E:} Display-Kampagne mit breiter Reichweite.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die \textbf{Zielgruppen + Informationsbedürfnisse} \textendash{} 4 Punkte.
+  \item Entwickeln Sie eine \textbf{strategische Anzeigenplanung für 6 Monate}.
+  \item Priorisieren Sie die Kampagnenansätze nach: Zielgruppenpassung, Leadqualität, Kosten, Geschwindigkeit, Vertriebswirkung.
+  \item Entwickeln Sie eine \textbf{Landing Page Struktur} für eine Demo-Anfrage.
+  \item Definieren Sie \textbf{Conversion-Ziele + KPIs} entlang des Funnels.
+\end{enumerate}
+
+\ytquery{Cybersecurity B2B Performance Marketing LinkedIn Webinar Landing Page Demo}
+
+\antwortlinien{24}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Funnel-Verluste analysieren}{\nivLii}{20\,min}
+
+\noindent Beispielzahlen einer 30-Tage-Kampagne (fiktiv für eine B2B-Kampagne):
+
+\medskip
+\noindent\textbf{Funnel-Daten:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lc@{}}
+\toprule
+\textbf{Stufe} & \textbf{Anzahl} \\
+\midrule
+Impressionen        & 800.000 \\
+Klicks              & 24.000 (3\,\% Klickrate) \\
+Landing-Page-Besuche & 22.000 (Tracking-Abweichung) \\
+Formular-Aufrufe    & 4.400 (20\,\%) \\
+Formular-Absendungen & 880 (20\,\%) \\
+Marketing-Qualified Leads & 660 (75\,\%) \\
+Sales-Accepted Leads & 132 (20\,\%) \\
+Sales-Qualified Leads & 79 (60\,\%) \\
+Angebote            & 32 (40\,\%) \\
+Abschlüsse          & 6 (19\,\%) \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Identifizieren Sie die \textbf{drei größten Conversion-Verluste} im Funnel \textendash{} \emph{absolut} und \emph{prozentual} betrachtet.
+  \item Welcher Verlust ist primär ein \emph{Anzeigen}-Problem, welcher ein \emph{Landing-Page}-Problem, welcher ein \emph{Vertriebs}-Problem?
+  \item Berechnen Sie \emph{Kosten pro SQL} bei einem Budget von 75.000\,\euro.
+  \item Entwickeln Sie für jeden der drei Verluste eine \emph{konkrete Optimierungsmaßnahme}.
+\end{enumerate}
+
+\ytquery{Performance Marketing Funnel Conversion Verluste Optimierung B2B}
+
+\antwortlinien{18}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{DataSecure Solutions \textendash{} 6-Monats-Kampagnenentscheidung}{\nivLiii}{45\,min}
+
+\noindent Sie sind \emph{Chief Revenue Officer} bei DataSecure Solutions. 150.000\,\euro{} Budget, 6\,Monate, Ziel: 180 qualifizierte Leads, 60 Demos, 20 Angebote.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Treffen Sie eine \textbf{priorisierte Kanalentscheidung} (max.\ 4 Kanäle aus A--E + Retargeting).
+  \item Verteilen Sie das Budget von 150.000\,\euro{} auf Kanäle, Landing Page, Content, Tracking, Tests.
+  \item Entwickeln Sie eine \textbf{Lead-Qualifizierungslogik} (MQL/SAL/SQL Definitionen + Übergaberegeln + SLA).
+  \item Definieren Sie \textbf{sechs KPIs} entlang des Funnels (von Klick bis Umsatz).
+  \item Beschreiben Sie die \textbf{Roadmap} in drei Phasen (jeweils 2\,Monate).
+  \item Treffen Sie eine \textbf{Entscheidung gegen} einen reichweitenstarken Kanal \textendash{} aus Lead-Qualitäts- oder Vertriebskapazitätsgründen.
+  \item Treffen Sie mindestens eine Entscheidung unter Unsicherheit mit klarer Annahme und Lernindikator.
+\end{enumerate}
+
+\ytquery{DataSecure Performance Marketing CRO Budget Kanal Lead Qualifizierung Senior}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Leadmenge vs.\ Leadqualität}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Performance-Marketing-Reports zeigen typischerweise \emph{Leadmenge} (``500 Leads generiert!''). Der Vertrieb sieht aber, dass nur 40 davon ernsthafte Interessenten sind. Wo soll Marketing seinen Erfolg messen?
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 3\,--\,4 Sätzen den Konflikt zwischen ``Leadmenge'' und ``Leadqualität'' aus Sicht eines Performance-Marketing-Managers.
+  \item Entwickeln Sie eine \textbf{gemeinsame Erfolgs-KPI} für Marketing und Vertrieb, die strukturell beide Seiten ausrichtet.
+  \item Welche Anreizgestaltung würde Performance-Marketing strukturell auf \emph{Qualität} statt Menge ausrichten?
+  \item Welche Kennzahl entlarvt sofort eine ``Lead-Müll-Kampagne''?
+  \item Welche Kanäle sind besonders anfällig für ``Lead-Müll'' \textendash{} und welche besonders gut für Qualität?
+\end{enumerate}
+
+\ytquery{Lead Menge Qualität Performance Marketing CAC ROAS Konflikt B2B}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Performance-Marketing-Architektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Revenue Officer / Head of Performance Marketing.
+
+\smallskip
+\textbf{Ausgangslage:} Mittelständisches B2B-Unternehmen will digitale Leadgenerierung professionalisieren. Anzeigen wurden bereits geschaltet, jedoch ohne klare Zielgruppenlogik, ohne systematische Landing-Page-Optimierung und ohne einheitliche Leadqualitäts-Bewertung. Marketing berichtet Klicks und Leads, Vertrieb bewertet Gespräche und Abschlüsse, Controlling betrachtet Kosten. Eine gemeinsame Performance-Architektur fehlt.
+
+\smallskip
+\textbf{Erwartung GF:} steuerbares System, das qualifizierte Nachfrage erzeugt, Vertriebskapazitäten sinnvoll nutzt und Marketingbudgets wirtschaftlich rechtfertigt.
+
+\smallskip
+\textbf{Rahmen:} Budget begrenzt \textperiodcentered{} Wettbewerbsdruck \textperiodcentered{} Vertriebskapazität begrenzt \textperiodcentered{} Zielgruppendaten unvollständig \textperiodcentered{} Marketing/Vertrieb mit anderen KPIs \textperiodcentered{} Landing Pages bisher schwach \textperiodcentered{} GF erwartet Entscheidungen trotz unsicherer Datenlage.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item \textbf{Zielbild} der Performance-Marketing-Architektur (5\,Sätze).
+  \item Eine \textbf{Zielgruppen- und Buying-Center-Analyse}.
+  \item Eine \textbf{Kampagnenstrategie} mit priorisierten Anzeigenkanälen.
+  \item Eine \textbf{Botschaftenlogik} je Zielgruppe und Funnel-Phase.
+  \item Eine \textbf{Landing-Page-Architektur} für qualifizierte Conversion.
+  \item Eine \textbf{Leadqualifizierungs-Logik} (MQL/SAL/SQL-Definitionen, Übergaberegeln, SLA).
+  \item Eine \textbf{KPI-Architektur} von Anzeige bis Umsatz.
+  \item Eine \textbf{Budget-Logik} (Testen, Skalieren, Stoppen, Optimieren).
+  \item Eine \textbf{Governance-Struktur} (Marketing, Vertrieb, Controlling, GF).
+  \item \textbf{Drei Managemententscheidungen} unter Unsicherheit.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens eine bewusste Entscheidung gegen einen Kanal / eine Kampagne, die viele Leads verspricht, aber voraussichtlich geringe Leadqualität, hohe Vertriebslast oder schlechte Wirtschaftlichkeit erzeugt.
+
+\ytquery{Performance Marketing Architektur B2B CRO Conversion Lead Qualität Governance}
+
+\antwortlinien{40}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben \textendash{} und damit Tag 9 des Kurses 22 \textendash{} abgeschlossen.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Performance-Marketing als Vertriebsprozess statt als Werbemaßnahme verstehen.
+  \item Reichweite / Traffic / Leads / Conversion / Umsatz als Funnel-Logik trennen.
+  \item Zehn KPIs entlang des Funnels einordnen und priorisieren.
+  \item Anzeigenkanäle nach Suchintention und Zielgruppe einsetzen.
+  \item Eine wirksame Landing Page strukturieren und Schwächen erkennen.
+  \item Den strukturellen Konflikt Leadmenge vs.\ Leadqualität mit gemeinsamen KPIs adressieren.
+  \item Eine Performance-Marketing-Architektur als Investitionsentscheidung denken.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 9 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

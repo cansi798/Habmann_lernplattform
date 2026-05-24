@@ -1,0 +1,480 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 5 - Aufgabenheft
+% Digitale Vertriebsstrategie, Kundenfokus & Kanalwahl
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{enhanced, breakable, colback=white, colframe=lpGray, boxrule=0.4pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 5}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Digitale Vertriebsstrategie \& Kanäle}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\newcommand{\antwortlinien}[1]{\par\vspace{6pt}\foreach \x in {1,...,#1}{\noindent\makebox[\linewidth]{\dotfill}\\[6pt]}}
+\usepackage{pgffor}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 3 \textperiodcentered{} TAG 5 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 3.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 5\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Digitale Vertriebsstrategie,\\Kundenfokus \& Kanalwahl\\\textendash{} elf Aufgaben auf drei Niveaus.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Tag 5 eröffnet Modul 3 und schaltet die Perspektive: weg vom Plattformbetreiber, hin zum \emph{Anbieter, der eine kundenzentrierte digitale Vertriebsstrategie} entwickelt. Drei Begriffe stehen heute zentral: \fachbegriff{Kundenzentrierung}, \fachbegriff{Customer Journey} und \fachbegriff{Kanalwahl}.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Produktorientiert vs.\ kundenzentriert, Customer Journey, digitale Touchpoints, Kanaltypen, Bewertungskriterien.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} ErgoWork und GreenTech Systems als Cases bearbeiten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Kanalwahl als Architekturentscheidung, Senior-Level-Verzicht, Vertriebsarchitektur 12\,--\,18\,Monate.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Eine digitale Vertriebsstrategie beginnt nicht bei Tools, sondern bei \emph{Kundenbedürfnissen}. Wer mit der Kanalwahl startet, ist schon eine Etappe zu weit. Wer Customer Journey, Kundenbedürfnis und Buying Center klar hat, bekommt die Kanalwahl fast automatisch geliefert.
+\end{infobox}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Produktorientiert vs.\ kundenzentriert}{\nivLi}{6\,min}
+
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Definieren Sie ``produktorientierten'' und ``kundenzentrierten'' Vertrieb in jeweils einem Satz.
+  \item Beschreiben Sie drei beobachtbare Unterschiede in der täglichen Arbeit eines Vertriebsteams: produktorientiert vs.\ kundenzentriert (Listenform, je ein Halbsatz).
+  \item Welcher Vertriebsansatz dominiert im B2B-Mittelstand heute noch \textendash{} und warum ist das ein strategisches Risiko?
+\end{enumerate}
+
+\ytquery{produktorientierter Vertrieb kundenzentriert B2B Unterschied}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Customer Journey \textendash{} sieben Phasen}{\nivLi}{8\,min}
+
+\noindent Aus dem Lehrskript Tag 5 \textendash{} die Customer Journey im B2B-Kontext: \emph{Aufmerksamkeit \textperiodcentered{} Informationssuche \textperiodcentered{} Vergleich \textperiodcentered{} Entscheidung \textperiodcentered{} Kauf \textperiodcentered{} Nutzung \textperiodcentered{} Wiederkauf / Empfehlung}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Beschreiben Sie jede Phase in einem Halbsatz aus \emph{Kunden-Perspektive} (nicht aus Anbieter-Perspektive).
+  \item Welche zwei Phasen werden im klassischen Vertrieb am häufigsten \emph{vernachlässigt}? Begründen Sie.
+  \item In welcher Phase wird die Mehrheit der digitalen B2B-Käufe heute schon \emph{vor} dem ersten Anbieterkontakt entschieden?
+\end{enumerate}
+
+\ytquery{Customer Journey B2B Phasen Awareness Consideration Decision Retention}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Zehn digitale Kanäle zuordnen}{\nivLi}{8\,min}
+
+\noindent Aus dem Lehrskript Tag 5 \textendash{} typische digitale Vertriebskanäle: \emph{Eigener Webshop \textperiodcentered{} Unternehmenswebsite mit Leadgenerierung \textperiodcentered{} SEO / SEA \textperiodcentered{} LinkedIn Social Selling \textperiodcentered{} E-Mail-Marketing / Marketing Automation \textperiodcentered{} Plattformen / Marktplätze \textperiodcentered{} Vergleichsportale \textperiodcentered{} Partner-/Affiliate-Kanäle \textperiodcentered{} Webinare / digitale Events / Content-Vertrieb \textperiodcentered{} Kundenportale / Self-Service}.
+
+\medskip
+\noindent\textbf{Aufgabe:}
+
+\begin{enumerate}
+  \item Ordnen Sie jedem Kanal die \emph{Phase} aus Aufgabe 2 zu, in der er am wirksamsten ist (Aufmerksamkeit / Vergleich / Entscheidung / Nutzung / Wiederkauf).
+  \item Welche zwei Kanäle sind für \emph{erklärungsbedürftige} B2B-Produkte besonders wertvoll \textendash{} und warum?
+  \item Welche zwei Kanäle sind im B2B-Kontext häufig \emph{überschätzt}?
+\end{enumerate}
+
+\ytquery{B2B digitale Kanäle Customer Journey LinkedIn Webinar SEO Vergleich}
+
+\antwortlinien{14}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{ErgoWork GmbH \textendash{} Customer Journey \& erste Touchpoints}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``ErgoWork GmbH'' verkauft ergonomische Arbeitsplatzlösungen an Unternehmen, Selbstständige und öffentliche Einrichtungen. Bisher: Außendienst, Empfehlungen, gelegentliche Messekontakte. Die Geschäftsführung möchte den digitalen Vertrieb ausbauen, ist aber unsicher, welche Kanäle zur Zielgruppe passen.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Produkte hochwertig, teils erklärungsbedürftig.
+  \item Zielgruppen: Unternehmen, Homeoffice-Nutzer, öffentliche Einrichtungen.
+  \item B2B-Kaufentscheidungen dauern mehrere Wochen.
+  \item Kunden informieren sich zunehmend online.
+  \item Bisherige Website: digitale Broschüre, kein Leadprozess.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie die \textbf{wichtigsten Kundengruppen} (3\,--\,4) und differenzieren Sie nach \emph{Rolle} (Einkauf, Office-Management, Geschäftsführung, IT) und \emph{Kontext}.
+  \item Benennen Sie für jede Kundengruppe \textbf{drei mögliche Bedürfnisse} vor dem Kauf.
+  \item Skizzieren Sie eine \textbf{Customer Journey} in 5 Phasen für die Kundengruppe ``Unternehmen mit 50\,--\,200 Mitarbeitenden, Bedarf: neue ergonomische Bürostühle und Tische''.
+  \item Identifizieren Sie mindestens \textbf{fünf digitale Touchpoints}, an denen ErgoWork Kunden erreichen könnte.
+  \item Entscheiden Sie: An welchen \textbf{zwei Touchpoints} sollte ErgoWork zuerst arbeiten? Begründen Sie aus Kundensicht.
+\end{enumerate}
+
+\ytquery{B2B Customer Journey Mittelstand Bürostühle Touchpoints Awareness Consideration}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{ErgoWork \textendash{} sechs Kanaloptionen priorisieren}{\nivLii}{30\,min}
+
+\begin{infobox}[Kanaloptionen]
+\begin{itemize}
+  \item \textbf{A:} Eigener Webshop mit Konfigurator
+  \item \textbf{B:} Website mit Beratungsanfrage und Download-Ratgeber
+  \item \textbf{C:} LinkedIn-Kampagnen für B2B-Leads
+  \item \textbf{D:} Amazon / Marktplatz für Standardprodukte
+  \item \textbf{E:} Webinare für Unternehmen ``Gesundes Arbeiten''
+  \item \textbf{F:} E-Mail-Kampagnen für Bestandskunden und Interessenten
+\end{itemize}
+
+\smallskip
+\textbf{Rahmen:} 60.000\,\euro{} für die erste Phase \textperiodcentered{} kleines internes Team + externe Agentur \textperiodcentered{} Ziel: \emph{qualifizierte Leads}, nicht Reichweite \textperiodcentered{} Marke hochwertig und beratungsorientiert \textperiodcentered{} erste Ergebnisse in 6 Monaten erwartet.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie jeden Kanal nach \textbf{6 Kriterien}: Zielgruppenpassung \textperiodcentered{} Aufwand \textperiodcentered{} Kosten \textperiodcentered{} Datenzugang \textperiodcentered{} Beratungsfähigkeit \textperiodcentered{} Markenwirkung. Skala 1\,--\,5.
+  \item Sortieren Sie in drei Kategorien: \emph{sofort starten / später prüfen / zunächst nicht}.
+  \item Wählen Sie maximal \textbf{drei Kanäle} für die erste Phase.
+  \item Begründen Sie, warum mindestens \emph{ein Kanal mit hoher Reichweite} bewusst \emph{nicht} priorisiert wird.
+  \item Formulieren Sie eine \textbf{Managementempfehlung} (3\,Sätze).
+\end{enumerate}
+
+\ytquery{B2B Kanal Priorisierung Mittelstand Webinar LinkedIn Webshop Marktplatz}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Bewertungskriterien für digitale Kanäle}{\nivLii}{15\,min}
+
+\noindent Aus dem Lehrskript Tag 5: zehn typische Bewertungskriterien für digitale Vertriebskanäle: \emph{Zielgruppenpassung \textperiodcentered{} Reichweite \textperiodcentered{} Kosten \textperiodcentered{} Kontrollgrad \textperiodcentered{} Datenzugang \textperiodcentered{} Conversion-Potenzial \textperiodcentered{} Beratungsfähigkeit \textperiodcentered{} Markenwirkung \textperiodcentered{} Skalierbarkeit \textperiodcentered{} Abhängigkeit von Drittplattformen}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Wählen Sie drei der zehn Kriterien aus, die im B2B-Mittelstand \emph{am wichtigsten} sind. Begründen Sie.
+  \item Welche zwei Kriterien werden in operativen Diskussionen oft vergessen \textendash{} sind aber strategisch entscheidend?
+  \item Wie würden Sie die zehn Kriterien gewichten, wenn Sie eine Kanalwahl für ErgoWork machen? (Skala: Gewichtungsfaktor 1\,--\,5)
+  \item Welches Kriterium ist im \emph{B2C}-Vertrieb anders zu bewerten als im B2B-Vertrieb? Wo liegt der Unterschied?
+\end{enumerate}
+
+\ytquery{B2B digitale Kanäle Bewertungskriterien Zielgruppe Marke Datenzugang}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{GreenTech Systems \textendash{} kundenzentrierte Kanalstrategie}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: GreenTech Systems]
+``GreenTech Systems'' ist ein mittelständischer Anbieter energieeffizienter Heizungs- und Gebäudetechniklösungen für Gewerbeimmobilien. Vertrieb bisher: persönliche Beratung, Fachmessen, regionale Partner, Empfehlungen.
+
+\smallskip
+\textbf{Marktveränderung:} Kunden informieren sich früher online, vergleichen Anbieter digital, erwarten transparente Informationen zu Kosten, Förderung, Energieeinsparung und Umsetzung.
+
+\smallskip
+\textbf{Rahmen:} 24\,Mio.\,\euro{} Umsatz \textperiodcentered{} Zielgruppen: Immobilienverwalter, Gewerbebetriebe, Architekten, Energieberater, öffentliche Auftraggeber \textperiodcentered{} Verkaufszyklen 3\,--\,9\,Monate \textperiodcentered{} digitales Marketing schwach \textperiodcentered{} Vertriebsteam 10 Personen \textperiodcentered{} Budget 12\,Monate: 180.000\,\euro{} \textperiodcentered{} Ziel: 250 qualifizierte Leads.
+
+\smallskip
+\textbf{Mögliche Kanäle:}
+\begin{itemize}
+  \item \textbf{A:} SEO-Website mit Fachinhalten und Leadformularen
+  \item \textbf{B:} Google Ads für konkrete Suchanfragen
+  \item \textbf{C:} LinkedIn-Kampagnen
+  \item \textbf{D:} Webinare und digitale Fachveranstaltungen
+  \item \textbf{E:} Partnerkanal über Energieberater und Architekten
+  \item \textbf{F:} Digitaler Angebotskonfigurator
+  \item \textbf{G:} Listung auf allgemeinen Handwerker- oder Gebäudetechnikportalen
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die \textbf{Zielgruppen} und deren digitale Informationsbedürfnisse.
+  \item Skizzieren Sie eine \textbf{Customer Journey} für eine gewerbliche Kaufentscheidung (z.\,B.\ Hausverwaltung mit 80 Wohnungen).
+  \item Bewerten Sie die sieben Kanäle nach: Zielgruppenpassung \textperiodcentered{} Leadqualität \textperiodcentered{} Kosten \textperiodcentered{} Umsetzungsaufwand \textperiodcentered{} Datenzugang \textperiodcentered{} Beratungsfähigkeit \textperiodcentered{} Markenwirkung \textperiodcentered{} Skalierbarkeit.
+  \item Priorisieren Sie maximal \textbf{vier Kanäle} für die ersten 12\,Monate.
+  \item Entscheiden Sie, welche Kanäle \emph{bewusst nicht} verfolgt werden.
+\end{enumerate}
+
+\ytquery{GreenTech B2B Heizung Gebäudetechnik Kanal SEO LinkedIn Webinar Partner}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Persona \& Buying Center}{\nivLii}{20\,min}
+
+\noindent Im B2B-Vertrieb gibt es selten ``einen Entscheider'', sondern ein \emph{Buying Center} mit unterschiedlichen Rollen: \emph{Initiator \textperiodcentered{} User \textperiodcentered{} Influencer \textperiodcentered{} Decider \textperiodcentered{} Buyer \textperiodcentered{} Gatekeeper}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Für GreenTech Systems, Beispiel-Projekt: \emph{Sanierung eines Bürogebäudes mit 5.000\,qm}.
+
+\begin{enumerate}
+  \item Identifizieren Sie für jede Buying-Center-Rolle eine \textbf{realistische Persona} (Position, Alter, Hauptmotiv).
+  \item Welche \emph{drei Personas} sind im digitalen Kontext am wichtigsten zu erreichen?
+  \item Für jede der drei: Welche \textbf{Botschaft} und welcher \textbf{Kanal} passen?
+  \item Welche Rolle wird im klassischen Vertrieb häufig \emph{übersehen} \textendash{} und führt deshalb zu verlorenen Abschlüssen?
+\end{enumerate}
+
+\ytquery{B2B Buying Center Persona Initiator Decider Influencer Gatekeeper}
+
+\antwortlinien{16}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{GreenTech Systems \textendash{} 12-Monats-Kanalentscheidung}{\nivLiii}{45\,min}
+
+\noindent Sie sind \emph{Chief Revenue Officer} bei GreenTech Systems. Sie haben 180.000\,\euro{} Budget für 12\,Monate, Ziel: 250 qualifizierte Leads + höhere Sichtbarkeit. Geschäftsführung erwartet eine entscheidungsreife Roadmap.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Treffen Sie eine \textbf{priorisierte Kanalentscheidung} (max.\ 4 Kanäle aus Aufgabe 7). Begründen Sie in 5\,--\,7 Sätzen aus Senior-Level-Perspektive.
+  \item Verteilen Sie das Budget von 180.000\,\euro{} auf die Kanäle plus übergeordnete Maßnahmen (Tracking, Content, Schulung).
+  \item Entwickeln Sie eine \textbf{Roadmap in drei Phasen} (Monat 1\,--\,3 / 4\,--\,6 / 7\,--\,12) mit Meilensteinen.
+  \item Beschreiben Sie eine \textbf{Lead-Qualifizierungs-Logik}: Wie wird aus einem digitalen Lead ein \emph{vertriebsreifer} Lead? Wer übernimmt wann?
+  \item Wie verändern sich die \textbf{Rollen} von Außendienst, Innendienst und Marketing in 12\,Monaten?
+  \item Treffen Sie \textbf{mindestens eine Entscheidung gegen} einen reichweitenstarken Kanal \textendash{} mit Begründung aus Markenpositionierung und Beratungslogik.
+  \item Definieren Sie \textbf{drei Management-KPIs}, die monatlich berichtet werden.
+\end{enumerate}
+
+\ytquery{GreenTech CRO Kanalstrategie Budget Roadmap Leadqualifizierung Mittelstand}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Reichweite vs.\ Leadqualität \textendash{} der ewige Konflikt}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Marketing wird typischerweise an \emph{Reichweite und Leadanzahl} gemessen, Vertrieb an \emph{Abschlüssen und Umsatz}. Daraus entsteht in fast jedem B2B-Unternehmen derselbe Konflikt: Marketing liefert ``viele Leads'', Vertrieb sagt ``schlechte Leads''.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie den Konflikt in eigenen Worten (3\,Sätze).
+  \item Entwickeln Sie eine \textbf{gemeinsame KPI-Logik}, die Marketing und Vertrieb \emph{strukturell} ausrichtet \textendash{} nicht nur ``schöner reden''.
+  \item Schlagen Sie zwei \textbf{strukturelle Maßnahmen} vor, die den Konflikt reduzieren (z.\,B.\ Provisionsmodell, gemeinsames Dashboard, Lead-SLA).
+  \item Welche Annahme über Vertriebs-Marketing-Zusammenarbeit ist in der Praxis fast immer falsch?
+  \item Welche Kennzahl trennt im B2B \emph{strukturell} \,``Leadmenge'' von ``Leadqualität''?
+\end{enumerate}
+
+\ytquery{Marketing Vertrieb Lead Konflikt SLA Qualität Quantität Mittelstand}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Kundenzentrierte Vertriebsarchitektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Revenue Officer / Leiter:in Digitale Vertriebsstrategie.
+
+\smallskip
+\textbf{Ausgangslage:} Mittelständisches Unternehmen mit erklärungsbedürftigen Produkten. Persönlicher Vertrieb dominant, digitale Sichtbarkeit gering, Kundendaten verteilt, Marketing-Vertrieb-Integration schwach, keine Kanalstrategie. GF erwartet digitale Vertriebsarchitektur, die neue Kunden gewinnt, Bestandskundenbeziehungen stärkt und die hochwertige Marktposition nicht gefährdet.
+
+\smallskip
+\textbf{Spannungsfelder:} Budget begrenzt \textperiodcentered{} Vertrieb möchte qualifizierte Leads \textperiodcentered{} Marketing möchte Reichweite \textperiodcentered{} IT begrenzt unterstützbar \textperiodcentered{} Kunden wollen digital, aber auch beratungsorientiert.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strategische Entscheidungsarchitektur. Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item \textbf{Zielsetzung} der digitalen Vertriebsstrategie (5\,Sätze).
+  \item \textbf{Segmentierung} der wichtigsten Kundengruppen (3\,--\,5).
+  \item Eine \textbf{Customer Journey} mit digitalen und persönlichen Touchpoints.
+  \item Eine \textbf{Kanalbewertung} mit max.\ 6 Kanälen.
+  \item Eine \textbf{Entscheidung}, welche Kanäle priorisiert / später / ausgeschlossen werden.
+  \item Eine \textbf{Begründung}, wie die gewählten Kanäle zur \textbf{Markenpositionierung} passen.
+  \item Eine \textbf{Daten- und Leadlogik}: Welche Kundendaten, wie Leadqualifizierung.
+  \item Eine \textbf{Governance-Struktur} zwischen Vertrieb, Marketing, IT, Management.
+  \item Eine \textbf{Roadmap} für 12\,--\,18\,Monate.
+  \item \textbf{Drei Managemententscheidungen} unter Unsicherheit.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens eine bewusste Entscheidung gegen einen reichweitenstarken digitalen Kanal, wenn dieser nicht zur Zielgruppe, Beratungslogik oder Markenpositionierung passt.
+
+\ytquery{digitale Vertriebsarchitektur CRO Kanal Budget Roadmap Mittelstand kundenzentriert}
+
+\antwortlinien{38}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 5}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Produktorientierten vs.\ kundenzentrierten Vertrieb sauber abgrenzen.
+  \item Eine Customer Journey in sieben Phasen aus Kundensicht beschreiben.
+  \item Zehn digitale Vertriebskanäle nach Journey-Phase und Zielgruppe einordnen.
+  \item Buying-Center-Logik in B2B-Vertriebsentscheidungen anwenden.
+  \item Eine Kanalpriorisierung unter Budget- und Markenrestriktionen begründen.
+  \item Den strukturellen Vertriebs-Marketing-Konflikt durch gemeinsame KPIs adressieren.
+  \item Eine kundenzentrierte Vertriebsarchitektur als Entscheidungsarchitektur denken.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 5 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

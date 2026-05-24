@@ -1,0 +1,691 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 6 - Loesungsheft
+% Omnichannel-Strategie & Operationalisierung digitaler Vertriebsstrategien
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
+  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
+    \setmainfont{TeX Gyre Schola}}}
+\IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
+    \setsansfont{TeX Gyre Heros}}}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{enhanced, breakable, colback=lpAccentLight, colframe=lpAccent, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{enhanced, breakable, colback=lpGreenLight, colframe=lpGreenBorder, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\newtcolorbox{merkbox}[1][Managementhinweis]{enhanced, breakable, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.6pt, arc=2pt, left=10pt,right=10pt,top=8pt,bottom=8pt, fonttitle=\sffamily\bfseries\color{white}, coltitle=white, title={#1}, attach boxed title to top left={xshift=8pt,yshift=-8pt}, boxed title style={size=small, colback=lpAmberBorder, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt}, top=14pt}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 6}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Omnichannel \& Operationalisierung}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\bfseries\color{lpAccent}}{\thesection.}{0.6em}{#1}[{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]{\sffamily\large\bfseries\color{lpInk}}{\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{\tcbox[on line, colback=#1, colframe=#1, coltext=white, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\bfseries\footnotesize #2}}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{\tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk, boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt, nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}}
+
+\newcommand{\aufgabenkopf}[4]{\par\vspace{6pt}\noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par\vspace{2pt}\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par\vspace{4pt}\noindent #3 \hfill \zeit{#4}\par\vspace{6pt}}
+
+\newcommand{\ytquery}[1]{\par\vspace{4pt}\noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 3 \textperiodcentered{} TAG 6 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 5.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 6\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Omnichannel-\\Strategie \& Operationalisierung.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis,\\nicht die einzige korrekte Lösung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 6}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Eine mögliche Lösung. Mehrere Begründungswege sind legitim, solange sie:
+
+\begin{itemize}
+  \item den Begriffsapparat von Tag 6 nutzen (Omnichannel, Brüche, KPIs, Datenarchitektur, Operationalisierung),
+  \item Annahmen sichtbar machen,
+  \item Zielkonflikte (Tool vs.\ Organisation, Effizienz vs.\ Vollständigkeit) benennen,
+  \item zu einer klaren Priorisierungsentscheidung führen.
+\end{itemize}
+
+\clearpage
+
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Single \textendash{} Multi \textendash{} Cross \textendash{} Omnichannel}{\nivLi}{6\,min}
+
+\ytquery{Single Multi Cross Omnichannel B2B Unterschied Definition}
+
+\begin{loesungbox}
+\textbf{1. Definitionen:}
+\begin{itemize}
+  \item \emph{Single Channel:} Kunde wird über genau \emph{einen} Kanal angesprochen \textendash{} z.\,B.\ ausschließlich Außendienst.
+  \item \emph{Multichannel:} mehrere unabhängig betriebene Kanäle. Kunde sieht jeden Kanal isoliert; Kanäle wissen nichts voneinander.
+  \item \emph{Cross-Channel:} Kanäle reichen \emph{Informationen} aneinander weiter (z.\,B.\ Webformular leitet an Vertrieb), aber Erlebnis ist noch nicht durchgängig konsistent.
+  \item \emph{Omnichannel:} integriertes Kundenerlebnis. Konsistente Informationen, Preise, Ansprechpartner, Daten über alle Berührungspunkte hinweg.
+\end{itemize}
+
+\textbf{2. B2B-Beispiele:}
+\begin{itemize}
+  \item Single: traditioneller Maschinenbauer mit reinem Außendienstvertrieb.
+  \item Multi: Mittelständler mit Website, LinkedIn und Außendienst, aber keine Verbindung zwischen ihnen.
+  \item Cross: Website-Anfrage geht per E-Mail an Vertrieb, der die Anfrage manuell ins CRM kopiert.
+  \item Omni: Lead über Webinar $\rightarrow$ automatisch in CRM $\rightarrow$ Lead-Score $\rightarrow$ Innendienst kontaktiert binnen 2\,Tagen $\rightarrow$ Außendienst sieht komplette Historie.
+\end{itemize}
+
+\textbf{3. Falsch verwendet:}
+``Omnichannel'' wird in Marketingfolien am häufigsten falsch verwendet \textendash{} meist ist tatsächlich nur \emph{Multichannel} gemeint (``wir sind auf allen Kanälen präsent''). Echte Omnichannel-Integration erfordert technische, organisatorische und datenseitige Integration, die im Mittelstand selten erreicht wird.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Fünf typische Omnichannel-Brüche}{\nivLi}{6\,min}
+
+\ytquery{Omnichannel Brüche B2B Datenerfassung Leadübergabe Medienbruch}
+
+\begin{loesungbox}
+\textbf{1. Brüche + Beispiel:}
+\begin{itemize}
+  \item \emph{Doppelte Datenerfassung:} Kunde gibt Daten auf Website ein, der Außendienst fragt im Erstgespräch alles nochmal ab.
+  \item \emph{Unklare Zuständigkeiten:} Webinar-Teilnehmende werden weder vom Marketing noch vom Vertrieb nachverfolgt.
+  \item \emph{Widersprüchliche Informationen:} Website nennt 4 Wochen Lieferzeit, Vertrieb sagt 8 Wochen.
+  \item \emph{Medienbrüche:} Anfrage per E-Mail $\rightarrow$ Vertrieb antwortet, übergibt aber nicht ins CRM.
+  \item \emph{Fehlende Leadübergabe:} Marketing erfasst Lead, Vertrieb erfährt nichts oder erst Tage später.
+\end{itemize}
+
+\textbf{2. Schmerz \& Kosten:}
+Für den \emph{Kunden} am ärgerlichsten: \emph{widersprüchliche Informationen}. Sie zerstören Vertrauen sofort. Für das \emph{Unternehmen} am teuersten: \emph{fehlende Leadübergabe}, weil daraus direkt verlorener Umsatz entsteht (kalter Lead nach 5 Tagen ist meist verloren).
+
+\textbf{3. Sofort-Maßnahmen:}
+\begin{itemize}
+  \item Doppel-Erfassung: Vertrieb sieht Web-Daten vor dem Erstgespräch.
+  \item Zuständigkeit: ein:e Eigentümer:in pro Kanal benennen.
+  \item Widersprüche: zentrale ``Source of Truth''-Datenbank für Preise und Lieferzeit.
+  \item Medienbrüche: CRM-Pflichtprozess für jede digitale Anfrage.
+  \item Leadübergabe: Lead-SLA mit Reaktionszeit, automatischer Eskalation.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Acht Operations-KPIs unterscheiden}{\nivLi}{8\,min}
+
+\ytquery{B2B Vertrieb KPI Conversion CAC CLV Reaktionszeit Wiederkaufrate}
+
+\begin{loesungbox}
+\textbf{1. KPI-Zuordnung:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Steuerungsebene} & \textbf{KPI} \\
+\midrule
+Operativ                & Reaktionszeit, Conversion Rate, Kosten pro Lead, Umsatz pro Kanal \\
+\midrule
+Management              & Leadqualität, Abschlussquote, Wiederkaufrate, Kundenzufriedenheit, Kanalbeitrag \\
+\midrule
+Strategisch             & CLV, CAC vs.\ CLV-Verhältnis \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Gemeinsame KPIs Marketing + Vertrieb:}
+\emph{Leadqualität} (Conversion MQL\,$\rightarrow$\,SQL) und \emph{Abschlussquote} (SQL\,$\rightarrow$\,Auftrag). Beide verbinden Marketing-Output und Vertriebs-Erfolg und können nicht von einer Seite allein optimiert werden.
+
+\textbf{3. Im Mittelstand selten berichtet:}
+\emph{Reaktionszeit auf digitale Anfragen}. Sie ist die wichtigste Frühwarn-KPI \textendash{} wenn sie kippt, kippen Vertrauen und Conversion innerhalb weniger Wochen. Wird selten gemessen, weil Verantwortung zwischen Marketing, Innendienst und Vertrieb diffus ist.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Reaktionszeit ist die unterschätzteste KPI im B2B.} Sie wird selten berichtet, aber 5-Minuten-Reaktion vs.\ 2-Tage-Reaktion verändert die Abschlusswahrscheinlichkeit um Faktor 3\,--\,7.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{FitOffice Solutions \textendash{} Brüche erkennen}{\nivLii}{25\,min}
+
+\ytquery{Omnichannel Mittelstand Bruch Vertriebsprozess CRM Lead Übergabe}
+
+\begin{loesungbox}
+\textbf{1. \& 2. Brüche + Zuordnung + Auswirkung:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+\textbf{Bruch} & \textbf{Bereich} & \textbf{Auswirkung} \\
+\midrule
+Website-Anfragen per E-Mail an Vertrieb         & Prozess + Daten   & Anfragen verloren / vergessen / nicht messbar \\
+\midrule
+Webinar-Teilnehmende nicht systematisch verfolgt & Verantwortung    & Hochwertige Leads gehen verloren \\
+\midrule
+Außendienst kennt Kampagnen oft nicht           & Kommunikation     & Lead-Gespräche ohne Kontext, schlechtere Conversion \\
+\midrule
+Marketing misst Klicks, Vertrieb Abschlüsse     & Verantwortung    & Konflikt, kein gemeinsames Ziel \\
+\midrule
+Kundendaten in Excel/CRM/E-Mail verteilt        & Daten            & Keine Einheitssicht; widersprüchliche Kommunikation \\
+\midrule
+Unterschiedliche Informationen je Kanal         & Kunde            & Vertrauensverlust, Verwirrung \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Drei Sofort-Maßnahmen:}
+\begin{itemize}
+  \item \emph{CRM-Pflichtprozess:} jede Website-/Webinar-/LinkedIn-Anfrage wird automatisch im CRM erfasst, mit Quelle, Status und Verantwortlichkeit.
+  \item \emph{Webinar-Nachverfolgung:} 24\,h nach Webinar erhält jeder Teilnehmer eine personalisierte Folge-Mail; SAL-Übergabe an Vertrieb nach Lead-Score.
+  \item \emph{Briefing Außendienst:} wöchentliches 30-Min-Update über laufende Kampagnen und ihre Botschaften.
+\end{itemize}
+
+\textbf{4. Welcher zuerst?}
+\emph{CRM-Pflichtprozess.} Ohne ein zentrales System ist keine andere Maßnahme messbar oder skalierbar \textendash{} alle anderen Brüche sind \emph{Folgen} dieses einen. Wer Webinar-Nachverfolgung oder Lead Scoring ohne sauberes CRM einführt, baut auf Sand.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{FitOffice \textendash{} sieben Maßnahmen priorisieren}{\nivLii}{30\,min}
+
+\ytquery{Mittelstand Vertrieb Operationalisierung CRM Lead Scoring Roadmap KPI}
+
+\begin{loesungbox}
+\textbf{1. Bewertung (1\,--\,5, 5\,=\,stärkster Wert):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lccccc@{}}
+\toprule
+& \textbf{Wirk.} & \textbf{Aufw.} & \textbf{Kost.} & \textbf{Geschw.} & \textbf{Strat.} \\
+\midrule
+A: CRM bereinigen        & 5 & 3 & 3 & 3 & 5 \\
+B: Lead Scoring          & 4 & 3 & 3 & 4 & 4 \\
+C: Website-Anfragen      & 4 & 3 & 4 & 4 & 4 \\
+D: Webinar-Nachverfolg.  & 4 & 2 & 2 & 5 & 3 \\
+E: LinkedIn-Kampagnen    & 3 & 3 & 3 & 4 & 3 \\
+F: Kundenportal          & 3 & 5 & 5 & 1 & 4 \\
+G: Gemeinsame KPIs       & 5 & 1 & 1 & 5 & 5 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Priorisierung:}
+\begin{itemize}
+  \item \emph{Sofort starten:} G (gemeinsame KPIs \textendash{} kostet nichts, wirkt sofort), A (CRM bereinigen), D (Webinar-Nachverfolgung).
+  \item \emph{Später:} B (Lead Scoring nach A), C (Website-Anfragen optimieren), E (LinkedIn).
+  \item \emph{Zunächst nicht:} F (Kundenportal \textendash{} zu komplex, falsches Zeitfenster).
+\end{itemize}
+
+\textbf{3. 12-Monats-Roadmap:}
+\begin{itemize}
+  \item \emph{Monat 1\,--\,2:} G + A (gemeinsame KPIs, CRM-Datenqualität).
+  \item \emph{Monat 3\,--\,4:} D (Webinar-Nachverfolgung), B (Lead Scoring Pilot).
+  \item \emph{Monat 5\,--\,7:} C (Website-Relaunch mit klaren Anfragepfaden).
+  \item \emph{Monat 8\,--\,10:} E (LinkedIn-Kampagnen skalieren).
+  \item \emph{Monat 11\,--\,12:} Pilot Kundenportal vorbereiten (nicht starten).
+\end{itemize}
+
+\textbf{4. Fünf KPIs:}
+\begin{itemize}
+  \item Reaktionszeit auf digitale Anfragen (Stunden).
+  \item Conversion MQL\,$\rightarrow$\,SQL (\%).
+  \item Conversion SQL\,$\rightarrow$\,Auftrag (\%).
+  \item Anteil CRM-vollständiger Leads (\%).
+  \item Kosten pro SQL (\euro).
+\end{itemize}
+
+\textbf{5. Zurückgestellt:}
+\emph{Kundenportal (F)}. Trotz strategischer Attraktivität wird es im ersten Jahr nicht gebaut. Ohne CRM-Qualität, klare Verantwortlichkeiten und Datenarchitektur wird ein Portal zur teuren Insellösung mit unklarem Nutzen. Erst Fundament bauen.
+
+\begin{merkbox}[Managementhinweis]
+\emph{Maßnahme G (gemeinsame KPIs) kostet nichts und ist die wirksamste Einzelmaßnahme.} Trotzdem wird sie in 80\,\% der Mittelstandsprojekte zuletzt umgesetzt \textendash{} weil sie politisch unangenehm ist. Sie muss zuerst kommen, weil alle anderen Maßnahmen ohne sie ins Leere laufen.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Sechs Rollen in einer integrierten Vertriebsarchitektur}{\nivLii}{15\,min}
+
+\ytquery{B2B Mittelstand Rollen Vertrieb Marketing IT Kundenservice Steuerung}
+
+\begin{loesungbox}
+\textbf{1. Hauptverantwortungen:}
+\begin{itemize}
+  \item \emph{Vertrieb:} SQL\,$\rightarrow$\,Auftrag, Bestandskundenpflege, Schlüsselkundengeschäft.
+  \item \emph{Marketing:} MQL-Generierung, Content, Markenpositionierung, Kampagnen.
+  \item \emph{IT:} CRM, Schnittstellen, Performance, Tracking.
+  \item \emph{Kundenservice:} Erstkontakt, Reklamationen, Bestandskundenkommunikation.
+  \item \emph{Datenmanagement:} Datenarchitektur, Reporting, Datenqualität.
+  \item \emph{Management:} Strategie, KPI-Zielsetzung, Budget, Konfliktlösung.
+\end{itemize}
+
+\textbf{2. Reibungspunkte:}
+\begin{itemize}
+  \item Vertrieb $\leftrightarrow$ Marketing: Lead-Qualität.
+  \item Marketing $\leftrightarrow$ IT: Tracking, Marketing-Tech-Stack.
+  \item IT $\leftrightarrow$ Datenmanagement: wer entscheidet über Datenmodelle.
+  \item Kundenservice $\leftrightarrow$ Vertrieb: Wo endet Service, wo beginnt Upsell?
+  \item Management $\leftrightarrow$ Vertrieb: Quartalsziele vs.\ langfristige Strategie.
+\end{itemize}
+
+\textbf{3. Nicht eigenständig im Mittelstand:}
+\emph{Datenmanagement}. Wird oft als Teilaufgabe der IT oder des Marketings behandelt. Folge: keine durchgängige Datenarchitektur, jedes Tool baut sein eigenes Modell, Reports widersprechen sich. Eigentumsfrage bleibt strukturell ungelöst.
+
+\textbf{4. Steuerungskreis Digital Sales:}
+\begin{itemize}
+  \item \emph{Mitglieder:} CRO/Vertriebsleitung, Marketingleitung, IT-/Datenleitung, Kundenservice-Leitung.
+  \item \emph{Frequenz:} monatlich 90\,Min., quartalsweise strategisch 4\,h.
+  \item \emph{Entscheidungsrechte:} Budgetverteilung digitale Vertriebsmaßnahmen, KPI-Definitionen, Lead-Übergabe-Regeln, Konfliktlösung an Marketing/Vertrieb-Schnittstelle.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{IndustrialPro Services \textendash{} Omnichannel-Architektur}{\nivLii}{30\,min}
+
+\ytquery{IndustrialPro Wartung Omnichannel B2B Customer Journey Lead Scoring CRM}
+
+\begin{loesungbox}
+\textbf{1. Omnichannel-Schwächen:}
+\begin{itemize}
+  \item Bestehende Kanäle isoliert \textendash{} keine integrierte Strategie.
+  \item Hauptproblem ist nicht Kanalpräsenz, sondern Prozess- und Datenintegration.
+  \item CRM nicht als zentrale Steuerung genutzt.
+  \item Marketing, Vertrieb, Kundenservice mit verschiedenen Zielgrößen.
+  \item Kunden erleben Medienbrüche und uneinheitliche Kommunikation.
+\end{itemize}
+
+\textbf{2. Ideale Customer Journey für Service-Lead:}
+Kunde erkennt Wartungs-/Modernisierungsbedarf $\rightarrow$ recherchiert online (Referenzen, Reaktionszeiten) $\rightarrow$ stellt Serviceanfrage über Website oder Kundenportal $\rightarrow$ Anfrage automatisch ins CRM erfasst und qualifiziert $\rightarrow$ Lead Scoring entscheidet: Vertrieb / Kundenservice / Außendienst $\rightarrow$ Rückmeldung innerhalb definierter Zeit $\rightarrow$ Angebot/Termin dokumentiert $\rightarrow$ nach Abschluss in Wartungs-/Folgeprozess überführt.
+
+\textbf{3. Maßnahmenbewertung (zusammengefasst):}
+\begin{itemize}
+  \item \emph{A CRM-Pflichtprozess:} höchste Priorität \textendash{} ohne CRM keine Steuerung.
+  \item \emph{B Lead Scoring + Übergaberegeln:} sehr wichtig.
+  \item \emph{C Website-Relaunch:} wichtig, fokussiert auf klare Leadpfade.
+  \item \emph{D E-Mail-Strecken:} sinnvoll nach sauberer Datenbasis.
+  \item \emph{E Kundenportal:} strategisch wertvoll, aber komplex \textendash{} als Pilot starten.
+  \item \emph{F Dashboard:} wichtig für gemeinsame Führungssicht.
+  \item \emph{G Außendienst-Schulung:} notwendig für Akzeptanz.
+\end{itemize}
+
+\textbf{4. Priorisierung:}
+\begin{itemize}
+  \item Priorität 1: A (CRM-Pflichtprozess + Datenqualität).
+  \item Priorität 2: B (Lead Scoring + Übergaberegeln).
+  \item Priorität 3: C (Website mit digitalen Anfragewegen).
+  \item Priorität 4: F (gemeinsames Dashboard).
+  \item Priorität 5: G (Außendienst-Schulung).
+  \item E (Kundenportal) als \emph{Pilot} mit Bestandskunden, nicht als Großprojekt.
+\end{itemize}
+
+\textbf{5. Roadmap mit Verantwortlichkeiten:}
+\begin{itemize}
+  \item \emph{Monat 1\,--\,3:} A + Lead-Status-Definition (CRO + IT).
+  \item \emph{Monat 4\,--\,6:} B + Übergaberegeln (CRO + Marketingleitung).
+  \item \emph{Monat 7\,--\,9:} C + F (Marketing + IT).
+  \item \emph{Monat 10\,--\,12:} G + E-Pilot (Vertriebsleitung + Service).
+\end{itemize}
+
+\begin{merkbox}[Managementhinweis]
+\emph{Omnichannel beginnt bei Daten und Prozessen, nicht bei Tools.} Wer mit einem teuren Marketing-Tool startet, ohne CRM-Pflichtprozess und Übergaberegeln zu klären, hat nach 12\,Monaten teure Tools und dieselben Brüche.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Datenarchitektur \& Single Source of Truth}{\nivLii}{20\,min}
+
+\ytquery{B2B CRM Datenarchitektur Single Source of Truth Vertrieb Marketing}
+
+\begin{loesungbox}
+\textbf{1. Warum verteilte Daten strategisch problematisch sind:}
+\begin{itemize}
+  \item \emph{Widersprüche:} jede Quelle ``hat recht'' \textendash{} Reports erzeugen Misstrauen.
+  \item \emph{Skalierbarkeit:} ohne SSoT skaliert keine Personalisierung, kein Lead Scoring, keine Wiederkauflogik.
+  \item \emph{Lock-in:} Daten in verteilten Systemen sind faktisch \emph{nicht mehr eigen} \textendash{} sie liegen bei Tool-Anbietern.
+  \item \emph{Vertrieb-Marketing-Konflikt:} ohne SSoT bleibt der Lead-Streit politisch.
+\end{itemize}
+
+\textbf{2. Fünf Pflicht-CRM-Felder:}
+\begin{itemize}
+  \item Kunden-ID + Status (Lead, MQL, SAL, SQL, Bestand).
+  \item Quelle (Webinar, LinkedIn, Empfehlung, etc.).
+  \item Letzter Kontakt + Verantwortliche:r.
+  \item Bedarfstyp und Zeitfenster (geschätzt).
+  \item Kommunikationshistorie (alle Berührungspunkte).
+\end{itemize}
+
+\textbf{3. Wer entscheidet \textendash{} und warum oft falsch:}
+Im Mittelstand entscheidet typischerweise die \emph{IT-Leitung} über Datenarchitektur. Das ist oft die falsche Person, weil die Architektur-Frage primär \emph{geschäftlich} ist (welche Daten brauchen wir, warum?), nicht technisch. Die Entscheidung sollte beim CRO oder einer Daten-/Customer-Insights-Funktion liegen, die IT als Umsetzer einbindet.
+
+\textbf{4. Datenfluss digitaler Lead:}
+Website-Formular ausgefüllt $\rightarrow$ \emph{automatisch} ins CRM (kein E-Mail-Detour) $\rightarrow$ Lead-Score berechnet (basiert auf Pflicht-Feldern + Aktivitätsdaten) $\rightarrow$ bei Score $\geq$\,X: Push an Innendienst (24\,h-SLA) $\rightarrow$ Innendienst qualifiziert, ändert Status auf SAL/SQL $\rightarrow$ bei SQL: Übergabe an Außendienst (5\,Werktage-SLA) $\rightarrow$ jeder Schritt im CRM dokumentiert.
+
+\begin{merkbox}[Lessons Learned]
+\emph{Datenarchitektur ist eine Geschäftsentscheidung, keine IT-Entscheidung.} Wer sie der IT überlässt, bekommt eine technisch saubere, aber geschäftlich wertlose Architektur.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{IndustrialPro \textendash{} 12-Monats-Omnichannel-Entscheidung}{\nivLiii}{45\,min}
+
+\ytquery{Omnichannel B2B CRO Vertriebsarchitektur Roadmap Budget IndustrialPro}
+
+\begin{loesungbox}
+\textbf{1. Priorisierte Maßnahmenentscheidung (5 Hebel):}
+\textbf{A} CRM-Pflichtprozess, \textbf{B} Lead Scoring + Übergaberegeln, \textbf{C} Website-Relaunch, \textbf{F} gemeinsames Dashboard, \textbf{G} Außendienst-Schulung. Begründung: Diese fünf Maßnahmen bilden zusammen ein \emph{Vertriebsbetriebssystem}. CRM (A) ist die Datenbasis; B definiert die Übergabe; C macht die Website zum Conversion-Hub; F gibt die gemeinsame Führungssicht; G sichert die Vertriebs-Akzeptanz. Maßnahme D (E-Mail) wird zurückgestellt, weil sie ohne saubere Datenbasis Lead-Müll skaliert. Maßnahme E (Kundenportal) wird zum Pilot mit 30 Bestandskunden, nicht zum Großprojekt.
+
+\textbf{2. Budget (250.000\,\euro):}
+\begin{itemize}
+  \item 70.000\,\euro{} \textendash{} CRM-Konsolidierung (A): Datenbereinigung, Pflichtfelder, automatische Lead-Erfassung.
+  \item 40.000\,\euro{} \textendash{} Lead Scoring + Übergaberegeln (B).
+  \item 60.000\,\euro{} \textendash{} Website-Relaunch (C): Serviceanfrage, Beratungstermin, Referenzen.
+  \item 30.000\,\euro{} \textendash{} Dashboard (F).
+  \item 20.000\,\euro{} \textendash{} Außendienst-Schulung (G).
+  \item 15.000\,\euro{} \textendash{} Pilot Kundenportal mit 30 Wartungsvertrags-Kunden.
+  \item 15.000\,\euro{} \textendash{} Tests, KPI-Setup, externe Verstärkung.
+\end{itemize}
+
+\textbf{3. 12-Monats-Roadmap in 4 Phasen:}
+
+\emph{Monat 1\,--\,3:} CRM-Pflichtfelder definiert, gemeinsame KPIs zwischen Marketing/Vertrieb/Service vereinbart, Lead-SLA festgelegt.
+
+\emph{Monat 4\,--\,6:} Lead Scoring eingeführt, Website-Anfrageprozesse verbessert, Außendienst-Schulungen durchgeführt.
+
+\emph{Monat 7\,--\,9:} Dashboard live, E-Mail-Nurturing pilotiert (intern, ohne Außenwirkung), erste Auswertung Lead-Qualität.
+
+\emph{Monat 10\,--\,12:} Kundenportal-Pilot mit 30 Bestandskunden, Prozessoptimierung, Skalierungsentscheidung für Kundenportal.
+
+\textbf{4. Sieben KPIs entlang Funnel:}
+\begin{itemize}
+  \item Anzahl digitaler Leads (Reichweite).
+  \item Reaktionszeit auf digitale Anfrage (h).
+  \item Conversion MQL\,$\rightarrow$\,SQL (\%).
+  \item Conversion SQL\,$\rightarrow$\,Angebot (\%).
+  \item Abschlussquote digitaler Leads (\%).
+  \item Anteil CRM-vollständiger Leads (\%).
+  \item Kosten pro qualifiziertem Lead (\euro).
+\end{itemize}
+
+\textbf{5. Governance:}
+\begin{itemize}
+  \item CRO entscheidet über digitale Vertriebsstrategie, Budget, Konflikte.
+  \item Monatlicher Steuerungskreis ``Digital Sales'' (CRO, Marketingleitung, Vertriebsleitung, IT, Kundenservice).
+  \item Quartalsweiser Strategie-Review (Vorstand).
+  \item Wöchentliche operative Stand-ups (Marketing + Vertrieb).
+\end{itemize}
+
+\textbf{6. Entscheidung gegen attraktive Maßnahme:}
+\emph{Kundenportal nicht als Großprojekt im Jahr 1.} Trotz strategischer Bedeutung und Investorenpush wird das Kundenportal nur als Pilot mit 30 Wartungsvertrags-Kunden umgesetzt. Begründung: ohne stabile CRM-Prozesse, klare Verantwortlichkeiten und Datenqualität würde das Portal zusätzliche Komplexität erzeugen \textendash{} und scheitern. Der Pilot testet Kundennutzen und Prozessfähigkeit kontrolliert.
+
+\textbf{7. Entscheidung unter Unsicherheit:}
+Investition von 60.000\,\euro{} in Website-Relaunch \emph{vor} klarem Beweis, dass digitale Anfragen die Hauptquelle für Servicegeschäft werden. Annahme: \emph{Die Customer Journey für Service-Leads beginnt online; Anbieter ohne digitale Anfragepfade fallen aus dem Vergleich.} Lernindikator: digital generierte Service-Anfragen $\geq$\,80 pro Monat bis Monat 9. Wenn nicht: Re-Allokation in andere Hebel.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Operationalisierung ist Sequenz-Disziplin, nicht Maßnahmenbreite.} Wer fünf Hebel in 12\,Monaten konsequent umsetzt, gewinnt; wer zehn parallel startet, verliert. Senior-Level-Disziplin heißt: \emph{aktiv etwas nicht zu machen.}
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Operationalisierung als Organisationsentwicklung}{\nivLiii}{30\,min}
+
+\ytquery{Omnichannel B2B Organisation Vertrieb Marketing Integration KPI Anreiz}
+
+\begin{loesungbox}
+\textbf{1. Warum Omnichannel ohne Organisationsentwicklung scheitert:}
+Omnichannel ist primär ein \emph{Schnittstellen-} und \emph{Anreizproblem}. Tools können Daten verbinden, aber nicht Menschen mit unterschiedlichen Zielen. Solange Marketing auf Reichweite, Vertrieb auf Abschlüsse, Kundenservice auf Tickets gemessen wird, bauen die drei systematisch \emph{gegen} Omnichannel-Logik. Ohne Anreiz-, Rollen- und KPI-Anpassung produzieren Tools nur teurer dokumentierte Brüche.
+
+\textbf{2. Drei Anti-Pattern:}
+\begin{itemize}
+  \item \emph{``Wir kaufen ein neues CRM.''} Neues System, alte Datenchaos, alte Anreize. Effekt: 6\,Monate Migration, alle Probleme zurück.
+  \item \emph{``Marketing macht jetzt Lead Gen, Vertrieb macht Abschlüsse.''} Saubere Trennung klingt logisch, ignoriert aber die Übergabe \textendash{} dort liegt der Engpass.
+  \item \emph{``Wir schulen den Außendienst auf digitale Tools.''} Schulung ohne Anreizanpassung verändert kein Verhalten. Außendienst macht weiter, was provisioniert wird.
+\end{itemize}
+
+\textbf{3. Organisationsentwicklungs-Konzept IndustrialPro:}
+\begin{itemize}
+  \item \emph{Rollen:} CRO als digitales Vertriebsleitungs-Mandat; Innendienst als Lead-Qualifizierungsfunktion; Marketing mit Lead-Qualitäts-Verantwortung.
+  \item \emph{Anreize:} Provisionsmodell Außendienst um Anteil ``digitaler Lead-Conversion'' ergänzen. Marketing-Boni teilweise an SQL-Quote koppeln.
+  \item \emph{Gemeinsame KPIs:} MQL\,$\rightarrow$\,SQL-Conversion (Marketing + Vertrieb), SQL\,$\rightarrow$\,Auftrag (Vertrieb).
+  \item \emph{Steuerungskreise:} wöchentlich operativ, monatlich CRO-Level, quartalsweise Vorstand.
+  \item \emph{Kompetenzaufbau:} digitale Verkaufstechnik für Außendienst, Lead-Coaching für Innendienst, Data Literacy für Marketing.
+\end{itemize}
+
+\textbf{4. Wirksamste Einzelmaßnahme:}
+\emph{Provisionsmodell-Anpassung beim Außendienst.} Solange der Außendienst nicht von digitalen Leads profitiert, sabotiert er sie strukturell. Eine Provisionsanpassung verändert Verhalten in Wochen \textendash{} während Schulungen Monate brauchen und nur teilweise wirken.
+
+\textbf{5. Faustregel \textendash{} startbereit:}
+Ein Omnichannel-Projekt ist organisatorisch startbereit, wenn (a)~gemeinsame KPIs definiert sind, (b)~das Provisionsmodell die Anreize ausgerichtet hat, und (c)~ein:e Eigentümer:in der Customer Journey benannt ist. Ohne diese drei ist jeder weitere Schritt vorzeitig.
+
+\begin{merkbox}[Lessons Learned]
+\emph{Tools verändern keine Organisation. Anreize tun es.} Wer Omnichannel ohne Anreizdiskussion startet, hat in 12\,Monaten teuere Tools und alte Konflikte.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Omnichannel-Vertriebsarchitektur}{\nivLiii}{45\,min}
+
+\ytquery{Omnichannel B2B Vertriebsarchitektur CRM Daten Governance KPI Roadmap}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen möglich.}
+
+\smallskip
+\textbf{1. Zielbild:}
+Das Unternehmen betreibt in 18\,Monaten eine integrierte Omnichannel-Architektur, in der jede Kundenanfrage \textendash{} digital oder persönlich \textendash{} in einem System der Wahrheit landet, klar zugeordnet wird und mit definierten Reaktionszeiten bearbeitet wird. Marketing und Vertrieb arbeiten mit gemeinsamen KPIs; Kunden erleben konsistente Information über alle Kanäle. Kunden-Daten gehören dem Unternehmen, nicht den Tool-Anbietern. Reaktionszeit auf digitale Anfragen $<$\,4\,h, Conversion MQL\,$\rightarrow$\,SQL $>$\,25\,\%.
+
+\textbf{2. Customer Journey:}
+Aufmerksamkeit (LinkedIn, SEO, Empfehlung) $\rightarrow$ Informationssuche (Website, Whitepaper, Webinar) $\rightarrow$ Vergleich (Beratungstermin / Konfigurator) $\rightarrow$ Entscheidung (Außendienst + Angebot) $\rightarrow$ Kauf (CRM-dokumentiert) $\rightarrow$ Nutzung (Kundenportal / Service) $\rightarrow$ Wiederkauf (E-Mail-Automation + Innendienst).
+
+\textbf{3. Kanalbrüche und Prozessrisiken (Analyse):}
+\begin{itemize}
+  \item Daten verteilt $\rightarrow$ keine SSoT.
+  \item Lead-Übergabe undefiniert $\rightarrow$ kalte Leads.
+  \item Marketing/Vertrieb mit verschiedenen KPIs.
+  \item Außendienst nicht in digitale Kampagnen eingebunden.
+  \item Kundenservice ohne CRM-Anbindung.
+\end{itemize}
+
+\textbf{4. Priorisierung Kanäle und Übergaben:}
+\begin{itemize}
+  \item Website mit Conversion-Logik (Hub).
+  \item LinkedIn-Selling (Reichweite).
+  \item Webinare (Leadqualifikation).
+  \item Außendienst (Schlüsselkunden).
+  \item Innendienst als Lead-Qualifizierer (zentrale Übergabestelle).
+  \item Kundenportal (Bestandskunden, Pilot).
+\end{itemize}
+
+\textbf{5. Prozessarchitektur:}
+\begin{itemize}
+  \item Lead-Aufnahme: jede Anfrage automatisch ins CRM.
+  \item Qualifizierung: Lead-Scoring nach Pflichtfeldern + Aktivität.
+  \item Übergabe: Innendienst (MQL\,$\rightarrow$\,SAL, 24\,h), Außendienst (SAL\,$\rightarrow$\,SQL, 5\,Werktage).
+  \item Nachverfolgung: alle Touchpoints im CRM dokumentiert.
+  \item Abschluss: Auftragsdaten + Wiederkauf-Trigger gesetzt.
+\end{itemize}
+
+\textbf{6. Datenarchitektur:}
+\begin{itemize}
+  \item CRM als SSoT.
+  \item Pflichtfelder: ID, Quelle, Status, Verantwortliche:r, Bedarfstyp, Zeitfenster, Kommunikationshistorie.
+  \item Lead-Score, MQL/SAL/SQL/Bestandsstatus.
+  \item Reporting: gemeinsames Dashboard für Marketing, Vertrieb, Kundenservice.
+\end{itemize}
+
+\textbf{7. Governance:}
+\begin{itemize}
+  \item CRO: Strategie + Budget.
+  \item Marketingleitung: Lead-Qualität, Content.
+  \item Vertriebsleitung: SQL\,$\rightarrow$\,Auftrag.
+  \item IT/Daten: Architektur, Tracking, Reporting.
+  \item Kundenservice: Erstkontakt, Reklamationen, Bestandskommunikation.
+  \item Monatlicher Steuerungskreis als Entscheidungsorgan.
+\end{itemize}
+
+\textbf{8. KPI-Architektur:}
+\begin{itemize}
+  \item \emph{Operativ:} Reaktionszeit, Lead-Anzahl pro Quelle, CRM-Vollständigkeit.
+  \item \emph{Management:} MQL\,$\rightarrow$\,SQL-Conversion, SQL\,$\rightarrow$\,Auftrag, Kosten pro SQL.
+  \item \emph{Strategisch:} CLV, CAC vs.\ CLV, Anteil digitaler Neukunden.
+\end{itemize}
+
+\textbf{9. Roadmap 12\,--\,18 Monate:}
+\begin{itemize}
+  \item Monat 1\,--\,3: Gemeinsame KPIs, CRM-Pflichtfelder, Lead-SLA, Provisionsmodell anpassen.
+  \item Monat 4\,--\,6: Lead Scoring + Website-Relaunch + Außendienst-Schulung.
+  \item Monat 7\,--\,9: Dashboard, E-Mail-Automation, erste Auswertung.
+  \item Monat 10\,--\,12: Kundenportal-Pilot mit 30 Kunden.
+  \item Monat 13\,--\,18: Skalierung erfolgreicher Hebel, Datenarchitektur erweitern, Bestandskunden-Wiederkauf-Logik.
+\end{itemize}
+
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{Provisionsmodell anpassen vor klarem Pilotnachweis.} Annahme: ohne Anreizanpassung kein Verhaltenswandel.
+  \item \emph{Investition in CRM-Datenqualität vor sichtbarem ROI.} Annahme: ohne SSoT skaliert keine andere Maßnahme.
+  \item \emph{Verzicht auf Kundenportal-Großprojekt im Jahr 1.} Annahme: ohne Fundament wird das Portal teuer und wirkungslos.
+\end{enumerate}
+
+\textbf{Zusatz \textendash{} Verzicht auf attraktive Initiative:}
+Bewusster Verzicht auf eine zusätzliche Marketing-Automation-Suite, die Marketing im Jahr 1 eingeführt sehen möchte. Aus Senior-Level-Sicht: ohne saubere Datenbasis und gemeinsame KPIs erzeugt mehr Automation nur schneller Lead-Müll. Die ``verlorene'' Reichweite ist eine \emph{Investition in spätere Skalierbarkeit}.
+
+\begin{merkbox}[Senior-Level-Hinweis]
+\emph{Eine Omnichannel-Architektur ist Organisationsdesign \textendash{} nicht IT-Auswahl.} Wer Tools wählt, bevor Anreize und Rollen geklärt sind, kauft Software, nicht Wirkung.
+\end{merkbox}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterlösungen sind eine Diskussionsbasis.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Im Coaching: Welche Anti-Pattern (``wir kaufen ein neues CRM'', ``wir schulen den Außendienst'') haben Sie in Ihrer Organisation schon erlebt \textendash{} und welche Anreizanpassung würde sie strukturell verhindern?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 6 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
