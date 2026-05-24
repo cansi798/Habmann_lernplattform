@@ -1,0 +1,907 @@
+{
+  "kurs_id": "22_Bo_143",
+  "tag_nr": 2,
+  "erstellt_am": "2026-05-24",
+  "fragen": [
+    {
+      "id": "q01",
+      "frage": "Was ist der erste Schritt einer seriösen Plattformimplementierung?",
+      "optionen": [
+        "Die technische Plattform einkaufen",
+        "Das Zielbild klären — Zweck, Zielgruppe, Erfolgskriterien",
+        "Mit Marketing-Kampagnen starten",
+        "Vertriebsmitarbeiter umschulen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vor jeder Aktivität steht das Zielbild: Was wollen wir mit der Plattform erreichen, für wen, mit welchen Trade-offs? Ohne Zielbild wird die ganze Initiative zum Aktivismus ohne Steuerungsanker.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Implementierungsphasen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Implementierungsphasen"
+    },
+    {
+      "id": "q02",
+      "frage": "Welche sechs Phasen umfasst eine Plattformimplementierung?",
+      "optionen": [
+        "Planung, Test, Live, Verkauf, Wartung, Abschluss",
+        "Zielbild, Pilotierung, Rollout, Betrieb, Skalierung, Optimierung",
+        "Idee, Konzept, Design, Bau, Verkauf, Service",
+        "Anforderung, Spezifikation, Code, Test, Deployment, Hypercare"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die sechs Phasen sind Zielbild, Pilotierung, Rollout, Betrieb, Skalierung und Optimierung. Betrieb und Optimierung haben kein Enddatum — sie sind Dauerzustände. Wer Phasen überspringt, zahlt später dafür.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Implementierungsphasen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Implementierungsphasen"
+    },
+    {
+      "id": "q03",
+      "frage": "Was ist die typische Dauer einer Plattform-Pilotierung?",
+      "optionen": [
+        "1–2 Wochen",
+        "6–12 Wochen",
+        "12–18 Monate",
+        "Pilotierung sollte vermieden werden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Pilotierung sollte bewusst kurz sein (6–12 Wochen), um schnell aus realem Marktfeedback zu lernen. Längere Pilotphasen führen oft dazu, dass Erkenntnisse zu spät kommen — und die Marktrealität sich inzwischen verändert hat.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Pilotierung",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Implementierungsphasen"
+    },
+    {
+      "id": "q04",
+      "frage": "Wofür steht die Abkürzung CLV im Plattform-Kontext?",
+      "optionen": [
+        "Customer Loyalty Volume",
+        "Customer Lifetime Value",
+        "Channel Lead Validation",
+        "Conversion Limit Value"
+      ],
+      "korrekt": 1,
+      "erklaerung": "CLV steht für Customer Lifetime Value — den erwarteten Deckungsbeitrag eines Kunden über die gesamte Geschäftsbeziehung. Eine der zentralen Steuerungsgrößen für jede Plattformstrategie.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KPI-Grundlagen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q05",
+      "frage": "Wofür steht die Abkürzung CAC im Plattform-Kontext?",
+      "optionen": [
+        "Customer Acquisition Cost",
+        "Channel Activity Cluster",
+        "Conversion Accuracy Control",
+        "Customer Activation Channel"
+      ],
+      "korrekt": 0,
+      "erklaerung": "CAC steht für Customer Acquisition Cost — die Marketing- und Vertriebskosten pro Neukunde. Vergleichsgröße zum CLV, um die langfristige Profitabilität zu bewerten.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KPI-Grundlagen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q06",
+      "frage": "Was bedeutet eine Conversion Rate (CVR) im Plattformgeschäft?",
+      "optionen": [
+        "Die Anzahl der Mitarbeitenden pro Bestellung",
+        "Der Anteil der Besucher, die zu Käufern werden",
+        "Die Differenz zwischen Einkaufs- und Verkaufspreis",
+        "Die Geschwindigkeit der Datenkonvertierung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Conversion Rate misst, welcher Anteil der Besucher tatsächlich kauft (oder ein anderes definiertes Conversion-Ziel erreicht). Eine zentrale Optimierungs-KPI.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KPIs",
+      "schwierigkeit": "leicht",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q07",
+      "frage": "Welche Faustregel gilt für ein tragfähiges Verhältnis von CLV zu CAC?",
+      "optionen": [
+        "CLV/CAC sollte mindestens 0,5 betragen",
+        "CLV/CAC sollte mindestens 1 betragen",
+        "CLV/CAC sollte mindestens 3 betragen",
+        "CLV/CAC ist irrelevant"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Die Faustregel: CLV/CAC ≥ 3 ist langfristig tragfähig. Bei CLV/CAC < 1 zahlt die Plattform mehr für die Kundenakquise, als der Kunde später einbringt — direkter Verlust.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · CLV/CAC",
+      "schwierigkeit": "leicht",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q08",
+      "frage": "Was ist eine ‚Vanity Metric‘?",
+      "optionen": [
+        "Eine besonders aussagekräftige Kennzahl",
+        "Eine Kennzahl, die beeindruckend aussieht, aber keine Entscheidungs­relevanz hat",
+        "Eine Kennzahl mit hoher Datenqualität",
+        "Eine streng wissenschaftliche Kennzahl"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vanity Metrics sehen gut aus (z. B. ‚500.000 Besucher‘), führen aber zu keiner konkreten Steuerungsentscheidung. Der ‚Und-dann?‘-Test entlarvt sie: Würde sich an unseren Entscheidungen etwas ändern, wenn diese Zahl sich verdoppelt oder halbiert?",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KPIs",
+      "schwierigkeit": "leicht",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q09",
+      "frage": "Was bedeutet ‚Build, Measure, Learn‘ in der Lean-Startup-Methode?",
+      "optionen": [
+        "Drei Abteilungen im Unternehmen",
+        "Der iterative Zyklus von Produkt-Bau, Messung und Lernen aus Marktfeedback",
+        "Drei Software-Releases pro Jahr",
+        "Drei verschiedene Geschäftsmodelle"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Build-Measure-Learn ist der Kern der Lean-Startup-Methode: Minimum Viable Product bauen, am Markt messen, daraus lernen — und entscheiden, ob man weitermacht (persevere), die Richtung ändert (pivot) oder abbricht (stop).",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Lean Startup",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Optimierung"
+    },
+    {
+      "id": "q10",
+      "frage": "Was ist die Hauptaussage des Plattform-Verlust-Tests?",
+      "optionen": [
+        "Plattformen können nie verloren werden",
+        "Eine reife Plattformstrategie überlebt den Verlust ihres wichtigsten Plattform-Kanals",
+        "Verluste sollten ignoriert werden",
+        "Plattformen sollten alle drei Jahre neu aufgebaut werden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wenn der wichtigste Plattform-Kanal ausfällt, sollte das wehtun, aber nicht existenz­bedrohend sein. Wer übermäßig auf einen Kanal konzentriert ist, hat ein strategisches Risiko, kein Optimierungs-Erfolg.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Risiko-Management",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Strategische Risiken"
+    },
+    {
+      "id": "q11",
+      "frage": "Was bedeutet ‚Plattform-Lock-in‘?",
+      "optionen": [
+        "Die Plattform schließt nachts ihre Server",
+        "Strategische Bindung an eine Plattform, die einen Ausstieg kostspielig oder unmöglich macht",
+        "Eine Sicherheitsfunktion gegen Hackerangriffe",
+        "Eine vertragliche Pause zwischen Vertragsverhandlungen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Lock-in entsteht durch tiefe Integration: technische Schnittstellen, Datenabhängigkeit, Prozessintegration, hohe Umsatzanteile. Je tiefer, desto teurer wäre ein Ausstieg.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Strategische Risiken",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Strategische Risiken"
+    },
+    {
+      "id": "q12",
+      "frage": "Welche der folgenden ist ein Erfolgsfaktor einer Plattform-Implementierung?",
+      "optionen": [
+        "Möglichst viele Marketing-Kampagnen gleichzeitig",
+        "Datenqualität — Produkt-, Kunden- und Transaktionsdaten müssen ordentlich sein",
+        "Maximale Sortimentsbreite vom ersten Tag an",
+        "Verzicht auf KPIs"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenqualität ist einer der sechs zentralen Erfolgsfaktoren (neben Zielsetzung, Kundennutzen, technische Stabilität, Prozessklarheit, Akzeptanz im Vertrieb). Schlechte Daten erzeugen schlechte Empfehlungen, schlechte Reports, schlechte Entscheidungen.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Erfolgsfaktoren",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Erfolgsfaktoren"
+    },
+    {
+      "id": "q13",
+      "frage": "Welche Funktionen sind die zentralen Schnittstellen einer Plattformstrategie?",
+      "optionen": [
+        "Nur IT und Marketing",
+        "Vertrieb, Marketing, IT, Kundenservice und Management",
+        "Nur Vertrieb und Geschäftsleitung",
+        "Nur Marketing und externe Agenturen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Plattform berührt fast alle Funktionen. Ohne gemeinsame KPIs und Routinen entstehen Silos: Vertrieb, Marketing, IT, Service und Management müssen koordiniert agieren.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Schnittstellen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Schnittstellen"
+    },
+    {
+      "id": "q14",
+      "frage": "Welche der folgenden Trends ist eine wichtige Zukunftsentwicklung im Plattform-Vertrieb?",
+      "optionen": [
+        "Rückkehr zum reinen Telefonvertrieb",
+        "KI-gestützte Personalisierung und Plattformsteuerung",
+        "Verzicht auf alle Plattformen",
+        "Vollständige Konzentration auf einen externen Marktplatz"
+      ],
+      "korrekt": 1,
+      "erklaerung": "KI-gestützte Personalisierung und automatisierte Plattformsteuerung sind zentrale Trends 2026. Plattformen mit guter Datenqualität entwickeln dadurch einen nachhaltigen Wettbewerbsvorteil.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Zukunftstrends",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Zukunftstrends"
+    },
+    {
+      "id": "q15",
+      "frage": "Was meint ‚Datenhoheit‘ im Plattform-Kontext?",
+      "optionen": [
+        "Wer die Server physisch besitzt",
+        "Strategische Kontrolle über Kundendaten — wer hat Zugriff, zu welchen Bedingungen",
+        "Wer das CRM-System eingekauft hat",
+        "Die Speichergröße der Datenbank"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenhoheit beschreibt die strategische Frage, wer welche Kundendaten in welchen Qualität sieht. Wer Daten an externe Plattformen abgibt, verliert langfristig Steuerungs- und Verhandlungs­macht.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Datenhoheit",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Strategische Risiken"
+    },
+    {
+      "id": "q16",
+      "frage": "Was ist das Hauptziel eines A/B-Tests?",
+      "optionen": [
+        "Möglichst viele Varianten gleichzeitig testen",
+        "Eine kontrollierte Wirkungs-Messung mit nur einer geänderten Variable pro Test",
+        "Die Vermeidung jeglicher Messung",
+        "Die schnelle Skalierung ohne Testen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "A/B-Tests müssen diszipliniert sein: nur eine geänderte Variable, vorab definierte Erfolgs-Hypothese, ausreichende Stichproben­größe und Signifikanz. Sonst werden Korrelationen mit Kausalitäten verwechselt.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · A/B-Tests",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Optimierung"
+    },
+    {
+      "id": "q17",
+      "frage": "Was bedeutet ‚Wiederkaufrate‘?",
+      "optionen": [
+        "Der Anteil der Erstkäufer im Sortiment",
+        "Der Anteil der Kunden, die innerhalb einer Periode erneut kaufen",
+        "Die Rendite einer Plattform",
+        "Die Geschwindigkeit der Lieferung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Wiederkaufrate misst die Bindung der Kunden an die Plattform — wie viele Erstkäufer werden zu Stammkunden? Eine zentrale Lifetime-KPI.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KPIs",
+      "schwierigkeit": "leicht",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q18",
+      "frage": "Was ist die Hauptidee des Übergangs von Pilot zu Rollout?",
+      "optionen": [
+        "Was im Pilot funktioniert hat, muss bewusst in den vollen Scope überführt werden",
+        "Pilot und Rollout sind dasselbe",
+        "Der Rollout sollte zufällig erfolgen",
+        "Nach dem Pilot wird das Projekt beendet"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Der Übergang vom Pilot zum Rollout ist kritisch: Das Konzept muss skaliert werden, weil Volumen und Varianz steigen. Was im kleinen Rahmen funktioniert hat, muss nicht automatisch im vollen Scope tragen.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Phasenübergang",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Implementierungsphasen"
+    },
+    {
+      "id": "q19",
+      "frage": "Was bedeutet die Pivot-Entscheidung in der Lean-Startup-Methode?",
+      "optionen": [
+        "Das Produkt unverändert weiter ausrollen",
+        "Die strategische Richtung auf Basis der Lerneindrücke ändern",
+        "Das Projekt sofort beenden",
+        "Mehr Werbebudget bereitstellen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Nach einem Build-Measure-Learn-Zyklus stehen drei Optionen: persevere (weitermachen wie geplant), pivot (Richtung ändern) oder stop (abbrechen). Pivot ist die Richtungs­änderung auf Basis empirischer Erkenntnisse.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Lean Startup",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Optimierung"
+    },
+    {
+      "id": "q20",
+      "frage": "Was umfasst ein gutes Plattform-Onboarding?",
+      "optionen": [
+        "Nur die Produkte einstellen",
+        "Sechs Bereiche: Produkte, Inhalte, Prozesse, Nutzer, Partner und interne Rollen",
+        "Nur die technische IT-Einrichtung",
+        "Nur die Marketing-Kampagnen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Plattform-Onboarding ist mehr als Produkte einstellen. Es umfasst Produkte, Inhalte, Prozesse, Nutzer, Partner und interne Rollen. Wer eine Säule vernachlässigt — meist die ‚weichen‘ wie Inhalte oder Rollen — bezahlt später dafür.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Plattform-Onboarding",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Plattform-Onboarding"
+    },
+    {
+      "id": "q21",
+      "frage": "Warum ist das Zielbild einer Plattformstrategie ohne explizite Trade-offs unzureichend?",
+      "optionen": [
+        "Weil Trade-offs zwangsläufig zu Konflikten führen",
+        "Weil ein Zielbild ohne Trade-offs zu Wunschdenken wird und die spätere Steuerung erschwert",
+        "Weil Trade-offs nur in Großkonzernen relevant sind",
+        "Weil Trade-offs immer im Nachgang definiert werden sollten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ohne explizite Trade-offs (‚Wachstum vs. Kontrolle‘, ‚Reichweite vs. Marge‘) wird das Zielbild idealistisch und unrealistisch. Klare Trade-offs sind das Markenzeichen reifer Plattformstrategien.",
+      "quelle": "Tag 2 · UE 4 Coaching · Zielbild",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Zielbild"
+    },
+    {
+      "id": "q22",
+      "frage": "Was ist der zentrale Vorteil eines kleinen, kontrollierten Plattform-Pilots gegenüber einem großen ‚Big-Bang-Rollout‘?",
+      "optionen": [
+        "Geringere Kosten beim ersten Versuch",
+        "Schnelleres Lernen aus realem Marktfeedback bei begrenztem Risiko",
+        "Mehr Werbung möglich",
+        "Garantierte Vermeidung jeglicher Fehlentscheidungen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Pilot erlaubt es, in kurzer Zeit reale Marktreaktionen zu lernen, ohne das ganze Geschäft zu riskieren. Big-Bang-Rollouts verlieren oft Monate Planungszeit, bevor sie merken, dass eine Annahme falsch war.",
+      "quelle": "Tag 2 · UE 4 Coaching · Pilotierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Implementierungsphasen"
+    },
+    {
+      "id": "q23",
+      "frage": "Welcher KPI-Cluster misst, was nach dem Erstkauf passiert?",
+      "optionen": [
+        "Reichweite",
+        "Conversion",
+        "Lifetime",
+        "Operating Cost"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Der Lifetime-Cluster (Wiederkaufrate, CLV, Churn Rate, CLV/CAC) misst die langfristige Plattform-Bindung. Reichweite und Conversion sind die Cluster für die Akquisitions- und Abschlussphase.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KPI-Cluster",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q24",
+      "frage": "Was bedeutet das Konzept ‚schwächste Säule entscheidet‘ in der Plattform-Implementierung?",
+      "optionen": [
+        "Die schwächste Säule ist irrelevant",
+        "Sechs Erfolgsfaktoren wirken verkettet — die schwächste Säule bestimmt die tatsächliche Tragfähigkeit",
+        "Die schwächste Säule sollte einfach ignoriert werden",
+        "Die schwächste Säule sollte die meisten Investitionen erhalten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die sechs Erfolgsfaktoren (Ziel, Daten, Kundennutzen, Technik, Prozesse, Akzeptanz) wirken nicht einzeln. Selbst die beste Technik scheitert ohne Akzeptanz im Vertrieb. Die schwächste Säule definiert das tatsächliche Niveau.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Erfolgsfaktoren",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Erfolgsfaktoren"
+    },
+    {
+      "id": "q25",
+      "frage": "Wie sieht eine wirksame Optimierungs-Routine in Plattform-Teams typischerweise aus?",
+      "optionen": [
+        "Einmal pro Jahr Strategiesitzung",
+        "Wöchentliche Kadenz: Montag analysieren, Dienstag–Donnerstag testen, Freitag dokumentieren und planen",
+        "Optimierungen werden nur bei Krisen vorgenommen",
+        "Optimierung erfolgt im Drei-Jahres-Zyklus"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ohne wöchentliche Kadenz versanden Optimierungen im Tagesgeschäft. Eine klare Routine mit definierten Zeitfenstern für Analyse, Test und Dokumentation ist die Grundlage kontinuierlicher Verbesserung.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Optimierungs-Routine",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Optimierung"
+    },
+    {
+      "id": "q26",
+      "frage": "Welcher Conversion-Hebel hat in der Praxis oft 20–40 % Wirkung?",
+      "optionen": [
+        "Mehr Werbebudget",
+        "Checkout-Optimierung (weniger Schritte, Vertrauenselemente)",
+        "Neuer Markenname",
+        "Mehr Sortimentstiefe"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Checkout-Optimierung wirkt direkt am letzten, kritischsten Schritt vor dem Kauf. Wenn dort Reibung reduziert wird (weniger Felder, klare Vertrauenssignale, einfache Zahlung), springen oft 20–40 % mehr Kunden zum Abschluss.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Optimierungs-Hebel",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Optimierung"
+    },
+    {
+      "id": "q27",
+      "frage": "Was ist der typische Vertriebs-Akzeptanz-Konflikt bei Plattform-Einführungen?",
+      "optionen": [
+        "Vertrieb will mehr Marketingbudget",
+        "Vertriebsmitarbeiter sehen Plattformen als Bedrohung — ‚mein Kunde wird zum Online-Kunden, verlier ich Provision?‘",
+        "Vertrieb will keine technischen Schulungen",
+        "Vertrieb will mehr Urlaub"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die häufigste Akzeptanzhürde ist nicht IT, sondern Vertrieb. Lösungshebel: Provisions-Logik anpassen, Vertrieb als Wissensträger einbinden, klare Segmentierung Online/Persönlich nach Kundenprofil.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Akzeptanz Vertrieb",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Schnittstellen"
+    },
+    {
+      "id": "q28",
+      "frage": "Welche Konsequenz hat eine externe Plattform-Listung in der Regel für die Marge?",
+      "optionen": [
+        "Marge steigt automatisch",
+        "Marge sinkt typischerweise durch Provisionen und Preisvergleich",
+        "Marge bleibt unverändert",
+        "Marge wird nicht messbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Externe Plattformen erheben Provisionen (5–30 %) und erzeugen direkten Preisvergleich mit Wettbewerbern. Beides drückt die Marge — oft systematisch. Die Plattform liefert Reichweite, aber zu Lasten der Margen­kontrolle.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Marktplatzmarge",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Strategische Risiken"
+    },
+    {
+      "id": "q29",
+      "frage": "Welche Aussage über den ‚Und-dann?‘-Test bei KPIs ist korrekt?",
+      "optionen": [
+        "Er testet die technische Verfügbarkeit eines Dashboards",
+        "Er prüft, ob aus einer KPI eine konkrete Entscheidung folgen würde — sonst ist es eine Vanity Metric",
+        "Er misst die Daten-Latenz",
+        "Er ist nur für strategische KPIs anwendbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Test: Würde sich eine Entscheidung anders treffen, wenn diese Kennzahl sich verdoppeln oder halbieren würde? Wenn die Antwort ‚keine‘ ist, ist es eine Vanity Metric — sieht beeindruckend aus, hat aber keinen Steuerungswert.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KPI-Test",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q30",
+      "frage": "Welche der drei KPI-Ebenen wird typischerweise im Aufsichtsrat oder Vorstand quartalsweise berichtet?",
+      "optionen": [
+        "Operative KPIs (Traffic, Bestellungen)",
+        "Steuerungs-KPIs (Conversion Rate, CAC)",
+        "Strategische KPIs (CLV/CAC, Umsatzanteil pro Kanal, Plattform-Konzentration)",
+        "Reine Statistik-KPIs ohne Steuerungsbezug"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Strategische KPIs gehören in das oberste Steuerungsorgan. Operative KPIs sind für das Tagesgeschäft im Plattform-Team, Steuerungs-KPIs für die monatliche Geschäftsleitungs-Runde.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KPI-Hierarchie",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q31",
+      "frage": "Welche der folgenden Trends ist im Plattform-Vertrieb für die nächsten Jahre besonders relevant?",
+      "optionen": [
+        "Rückkehr zum Fax",
+        "Zunehmende Bedeutung von Plattform-Ökosystemen mit Drittanbietern",
+        "Verzicht auf jegliche digitale Kanäle",
+        "Komplette Aufgabe von KPIs"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Plattformen wachsen zu Ökosystemen — mit Drittanbietern, integrierten Diensten und gemeinsamen Standards. Wer als B2B-Anbieter erfolgreich sein will, muss strategisch entscheiden: Teilnehmer oder eigener Ökosystem-Architekt.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Ökosysteme",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Zukunftstrends"
+    },
+    {
+      "id": "q32",
+      "frage": "Welche Aussage über regulatorische Trends im Plattform-Vertrieb (Stand 2026) ist korrekt?",
+      "optionen": [
+        "Es gibt keinerlei regulatorische Entwicklungen",
+        "EU-Plattform-Gesetzgebung (Digital Markets Act, Digital Services Act) und Datenschutz prägen die strategische Landschaft",
+        "Regulierung betrifft nur B2C, nicht B2B",
+        "Datenhoheit ist regulatorisch unwichtig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "EU-DMA und DSA, Datenschutz-Verschärfungen und Wettbewerbs-Auflagen verändern die strategische Landschaft. Datenhoheit wird zur strategischen Frage — nicht zur IT-Frage.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Regulatorik",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Zukunftstrends"
+    },
+    {
+      "id": "q33",
+      "frage": "Wie unterscheidet sich der Übergang von Rollout zu Betrieb von einem schlecht gemanagten Projekt?",
+      "optionen": [
+        "Es macht keinen Unterschied",
+        "Verantwortlichkeiten müssen klar von Projekt-Teams an operative Verantwortliche übergeben werden, mit Routinen, Eskalationspfaden und Service-Level-Vorgaben",
+        "Der Rollout sollte gar nicht beendet werden",
+        "Betrieb ist nur dann sinnvoll, wenn ein neues Projekt startet"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ohne strukturierten Übergang bleibt eine Plattform ‚im Projektmodus‘ — niemand weiß, wer dauerhaft verantwortet, wer eskaliert, wer reagiert. Klare Rollen, Routinen und SLAs sind die Voraussetzung für stabilen Betrieb.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Phasenübergang",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Implementierungsphasen"
+    },
+    {
+      "id": "q34",
+      "frage": "Wann sollte Skalierung einer Plattform-Initiative starten?",
+      "optionen": [
+        "Bereits während der Pilotierung",
+        "Erst wenn der Betrieb stabil ist — sonst werden die Probleme nur größer",
+        "Sofort nach dem ersten Verkauf",
+        "Nie — Skalierung ist riskant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Skalierung vor stabilem Betrieb multipliziert ungelöste Probleme statt sie zu lösen. Die Reihenfolge Pilot → Rollout → stabiler Betrieb → Skalierung ist nicht zufällig, sondern hat eine logische Begründung.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Skalierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Implementierungsphasen"
+    },
+    {
+      "id": "q35",
+      "frage": "Welche Aussage zu personalisierten Plattform-Erlebnissen 2026 trifft zu?",
+      "optionen": [
+        "Personalisierung ist ein ‚nice-to-have‘ und kann verzögert werden",
+        "Transparente Personalisierung schlägt heimliche Personalisierung beim Kundenvertrauen",
+        "Personalisierung verschlechtert die Kunden-Erfahrung",
+        "Personalisierung ist nur in B2C relevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Was 2015 ‚nice-to-have‘ war, ist 2026 Kundenerwartung. Transparenz schlägt Heimlichkeit: ‚Diese Empfehlung basiert auf Ihrer letzten Bestellung‘ baut Vertrauen, heimliche Personalisierung zerstört es.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Personalisierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Zukunftstrends"
+    },
+    {
+      "id": "q36",
+      "frage": "Wie wird Plattform-Lock-in am wirksamsten reduziert?",
+      "optionen": [
+        "Höhere Investitionen in die wichtigste Plattform",
+        "Mindestens einen eigenen Direktkanal stark halten, Multi-Plattform-Strategie, Datenexport-Klauseln",
+        "Konzentration auf nur einen externen Marktplatz",
+        "Verzicht auf jegliche Plattform-Nutzung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Drei Hebel zur Lock-in-Reduktion: eigener Direktkanal mit Datenhoheit, Multi-Plattform-Strategie (kein Kanal > 30 % Umsatzanteil), vertragliche Absicherung. Konzentration auf eine Plattform verstärkt Lock-in, kompletter Verzicht ist meist unwirtschaftlich.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Lock-in-Management",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Strategische Risiken"
+    },
+    {
+      "id": "q37",
+      "frage": "Welcher Unterschied besteht zwischen operativen und strategischen KPIs?",
+      "optionen": [
+        "Es gibt keinen Unterschied",
+        "Operative KPIs werden täglich/wöchentlich vom Team genutzt; strategische KPIs werden quartalsweise im Top-Management besprochen",
+        "Operative KPIs sind wichtiger",
+        "Strategische KPIs sind veraltet"
+      ],
+      "korrekt": 1,
+      "erklaerung": "KPI-Hierarchie ist entscheidend: operative KPIs (Traffic, Bestellungen) wirken im Tagesgeschäft, Steuerungs-KPIs (CAC, Warenkorb) im monatlichen Rhythmus, strategische KPIs (CLV/CAC, Konzentration) im quartalsweisen Steuerungs-Rhythmus.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KPI-Hierarchie",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q38",
+      "frage": "Was ist die ‚goldene Klammer‘ bei der Plattform-Implementierung in den Funktionen?",
+      "optionen": [
+        "Eine gold lackierte Klammer im Logo",
+        "Gemeinsame KPIs zwischen Vertrieb, Marketing, IT, Service und Management",
+        "Eine separate Plattform-Abteilung ohne Schnittstellen",
+        "Komplette Trennung der Funktionen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wenn jede Funktion eigene KPIs verfolgt, entstehen Silos und Konflikte. Gemeinsame KPIs erzwingen abgestimmtes Handeln und machen Trade-offs transparent.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Schnittstellen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Schnittstellen"
+    },
+    {
+      "id": "q39",
+      "frage": "Welche Plattformhandlung birgt das größte Lock-in-Risiko?",
+      "optionen": [
+        "Die Plattform nur als zusätzlichen Kanal nutzen, neben einem eigenen Direktkanal",
+        "Mehr als zwei Drittel des Neugeschäfts über einen einzigen Plattform-Anbieter laufen lassen",
+        "Multi-Plattform-Strategie verfolgen",
+        "Vertragliche Datenexport-Klauseln einsetzen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Konzentrations-Lock-in entsteht durch hohen Umsatzanteil bei einem Plattform-Anbieter. Wenn die Plattform Konditionen verschärft, gibt es kaum Verhandlungs-Macht — die Existenz hängt am Wohlwollen des Plattform-Betreibers.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Lock-in-Risiko",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Strategische Risiken"
+    },
+    {
+      "id": "q40",
+      "frage": "Was bedeutet ‚Hyper-Personalisierung‘ im modernen B2B-Vertrieb?",
+      "optionen": [
+        "Ein Marketing-Buzzword ohne Substanz",
+        "Tiefe Individualisierung der Ansprache auf Basis öffentlicher Daten, Verhalten und KI-gestützter Analyse — auch im B2B-Kontext",
+        "Personalisierung nur für Top-Kunden",
+        "Persönliche Briefe per Hand"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Hyper-Personalisierung nutzt KI, öffentliche Daten (Geschäftsberichte, LinkedIn) und Verhaltensanalyse, um Ansprache in einer Tiefe zu individualisieren, die manuell nicht skalierbar wäre. Auch im B2B-Kontext zunehmend Realität.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Personalisierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Zukunftstrends"
+    },
+    {
+      "id": "q41",
+      "frage": "Welche Antwort beschreibt die strategische Bedeutung der Datenhoheit am besten?",
+      "optionen": [
+        "Reine IT-Frage",
+        "Strategische Voraussetzung für eigene Steuerung, Personalisierung, Verhandlungsmacht und Resilienz gegenüber Plattform-Veränderungen",
+        "Eher unwichtig im Plattform-Geschäft",
+        "Nur für sehr große Unternehmen relevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenhoheit ist die strategische Basis für nahezu alle wichtigen Plattform-Entscheidungen. Wer Daten an externe Plattformen abgibt, verliert nicht nur Sichtbarkeit, sondern auch Verhandlungs-Macht und Personalisierungs-Potenzial.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Datenhoheit",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Strategische Risiken"
+    },
+    {
+      "id": "q42",
+      "frage": "Was bedeutet eine erfolgreiche Plattform-Optimierungs-Routine in einem Wort?",
+      "optionen": [
+        "Aktivismus",
+        "Routine (also Wiederholung mit fester Kadenz und definierten Schritten)",
+        "Improvisation",
+        "Beobachtung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Plattformoptimierung lebt von Routine — vorhersagbare Wiederholung der Schritte messen, analysieren, priorisieren, testen, anpassen — typischerweise mit wöchentlicher Kadenz.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Optimierungs-Routine",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Optimierung"
+    },
+    {
+      "id": "q43",
+      "frage": "Wann lohnt sich die Investition in einen eigenen Direktkanal trotz externer Plattformen?",
+      "optionen": [
+        "Nie",
+        "Wenn strategische Kontrolle, Datenzugang, Kundenbindung und Marken-Positionierung als strategisch relevant gelten",
+        "Nur wenn die Geschäftsleitung es will",
+        "Nur als Pflichtprogramm für Konzerne"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eigener Direktkanal ist die strategische Versicherung gegen Plattform-Risiken. Er sichert Daten, Kundenbindung, Marken-Steuerung und Verhandlungs-Macht — auch wenn er kurzfristig weniger Reichweite hat.",
+      "quelle": "Tag 2 · UE 4 Coaching · Strategie",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Strategische Risiken"
+    },
+    {
+      "id": "q44",
+      "frage": "Was beschreibt der Begriff ‚Plattform-Architektur 2030‘?",
+      "optionen": [
+        "Eine bestimmte Software-Plattform aus der Zukunft",
+        "Ein typisches Mischmodell aus Direktkanal, kontrollierten Marktplätzen und Ökosystemen mit klarer strategischer Aufteilung",
+        "Verzicht auf alle Plattformen",
+        "Reine Spekulation ohne praktischen Wert"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Reife B2B-Plattform-Strategien 2030 setzen auf ein Mischmodell: 40–60 % eigener Direktkanal, 20–40 % kontrollierte Marktplätze, 10–30 % Ökosysteme/Partner. Diese Trennung reduziert Lock-in und schafft Verhandlungs-Macht.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Plattform-Architektur",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Plattform-Architektur"
+    },
+    {
+      "id": "q45",
+      "frage": "Welche der folgenden Verschiebungen ist KEINE typische Falle beim KPI-Einsatz?",
+      "optionen": [
+        "Vanity Metrics als Steuerungs-Basis",
+        "KPI-Reports ohne Adressaten — niemand schaut hin",
+        "KPI-Hierarchie nach Zielgruppe und Frequenz",
+        "Falsche Fokussierung auf Reichweite ohne Conversion-Bezug"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Eine KPI-Hierarchie nach Zielgruppe und Frequenz ist genau die richtige Praxis (operativ täglich, Steuerung monatlich, strategisch quartalsweise). Die anderen drei sind klassische KPI-Fallen.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KPI-Fallen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPIs"
+    },
+    {
+      "id": "q46",
+      "frage": "Im BauTech-Connect-Beispiel: Warum wird der eigene B2B-Shop trotz aktuell geringerer Bestellzahlen priorisiert?",
+      "optionen": [
+        "Weil er schöner aussieht",
+        "Weil er Datenhoheit, höhere Warenkörbe, Kundenbindung und strategische Kontrolle ermöglicht — langfristige Hebel",
+        "Weil die Geschäftsführung Marktplätze nicht mag",
+        "Weil Marktplätze kostenlos sind"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Bestellzahl alleine ist eine kurzfristige Sicht. Strategisch entscheidet, was langfristig trägt: Daten, Bindung, Kontrolle, Marge. Der eigene Shop liefert das, Marktplätze tendenziell nicht.",
+      "quelle": "Tag 2 · UE 5 Fallstudie · Strategische Entscheidung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Plattform-Architektur"
+    },
+    {
+      "id": "q47",
+      "frage": "Welche risiko-relevante Annahme wurde in der BauTech-Connect-Fallstudie zur Maßnahme ‚Produktdaten verbessern‘ getroffen?",
+      "optionen": [
+        "Die IT-Abteilung wird mitziehen",
+        "Die Verbesserung führt zu einer Conversion-Steigerung; falls CVR nicht von 1,24 % auf mindestens 1,8 % steigt, ist die Annahme widerlegt — Frühwarnsignal",
+        "Die Lieferanten werden zustimmen",
+        "Es gibt keine Annahmen — alles ist sicher"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die zentrale Annahme: bessere Produktdaten führen zu höherer CVR. Falls dies nach 3 Monaten nicht eintritt, ist die Annahme widerlegt und die Strategie muss angepasst werden. Frühwarnsignale machen Annahmen handlungsfähig.",
+      "quelle": "Tag 2 · UE 5 Fallstudie · Annahmen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q48",
+      "frage": "Wie kann die Akzeptanz im Vertrieb bei einer Plattform-Einführung am besten gesichert werden?",
+      "optionen": [
+        "Durch reine Anordnung von oben",
+        "Provisions-Logik anpassen + Vertrieb als Wissensträger einbinden + klare Segmentierung Online/Persönlich",
+        "Durch Schulungen ohne strategische Integration",
+        "Durch Verzicht auf den Vertrieb"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Drei wirksame Hebel: faire Provisions-Logik (verhindert ‚ich verliere meinen Kunden‘-Gefühl), Vertrieb als Wissensträger einbinden, klare Segmentierung welcher Kunde wie bedient wird. Anordnung von oben funktioniert selten.",
+      "quelle": "Tag 2 · UE 4 Coaching · Vertriebsakzeptanz",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Schnittstellen"
+    },
+    {
+      "id": "q49",
+      "frage": "Welche der folgenden Maßnahmen erhöht die Lock-in-Reife einer Plattformstrategie am wirksamsten?",
+      "optionen": [
+        "Sofortige vollständige Migration auf eine einzige Plattform",
+        "Aufbau und aktive Stärkung mindestens eines eigenen Direktkanals mit vollständiger Datenhoheit",
+        "Verzicht auf jeglichen externen Marktplatz",
+        "Vertragliche Sperren gegen Plattform-Wechsel"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Lock-in-Reife heißt: ein Plattform-Verlust wäre schmerzhaft, aber nicht existenz­bedrohend. Eigener Direktkanal mit Datenhoheit ist der strukturell wichtigste Hebel. Komplette Plattform-Vermeidung ist meist wirtschaftlich unklug, vertragliche Sperren sind eher Symbolpolitik.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Risiko-Architektur",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Strategische Risiken"
+    },
+    {
+      "id": "q50",
+      "frage": "Was ist die zentrale Senior-Disziplin beim Plattform-Architekten im Gegensatz zum Operator?",
+      "optionen": [
+        "Mehr operative KPIs überwachen",
+        "Bewusste Entscheidung über die Plattform-Landschaft mit Mut zur Reduktion einzelner Plattform-Engagements — auch wenn sie kurzfristig Umsatz bringen",
+        "Mehr Tools einkaufen",
+        "Weniger mit dem Vertrieb sprechen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Architekten denken in Jahren, nicht Wochen. Die Senior-Disziplin: Mut, strategisch unpassende Plattformen zu reduzieren, eigene Kanäle zu stärken, KPIs zu ändern wenn sie irreführen. Operator-Themen bleiben wichtig, sind aber nicht die Architekten-Rolle.",
+      "quelle": "Tag 2 · UE 4 Coaching · Senior-Shift",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q51",
+      "frage": "Wie sollte eine sinnvolle Budgetverteilung in einer Plattform-Optimierungsphase typischerweise aussehen?",
+      "optionen": [
+        "100 % in Werbung",
+        "Mehrere Schwerpunkte: Grundsteine (Daten, Shop), Skalierungs-Enabler (CRM, Lead-Scoring), Wachstum (Kampagnen) und Steuerung (Reporting/Marktplatzsteuerung)",
+        "Alles in ein neues Tool",
+        "100 % in externe Plattformen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine ausgewogene Budgetverteilung deckt die ganze Wertschöpfungskette ab: Fundament (Daten, Shop), Enabler (CRM, Lead-Scoring), Wachstum (Performance-Kampagnen) und Steuerung (Reporting, Sortiments-Optimierung). Reine Fokussierung auf eine Säule ist meist ineffizient.",
+      "quelle": "Tag 2 · UE 5 Fallstudie · Budgetverteilung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Plattform-Architektur"
+    },
+    {
+      "id": "q52",
+      "frage": "Welche Anti-Patterns sind typische Management-Fehler in Plattform-Initiativen?",
+      "optionen": [
+        "‚Wir gehen digital – alles andere ergibt sich‘ (Zielbild fehlt)",
+        "‚Reichweite ist das Wichtigste‘ (Vanity Metric als Leitstern)",
+        "‚Wir kaufen die teure Plattform-Software ein‘ (Tool-Liebe ohne Strategie)",
+        "‚Datenhoheit ist eine IT-Frage‘ (strategische Bedeutung verkannt)"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Alle vier Aussagen beschreiben typische Anti-Patterns. Bei dieser Frage wurde gezielt nach der ersten, klassischen Falle gefragt: ohne Zielbild kein Aktivismus-Stopper. Tatsächlich sind alle vier Optionen Fehler — in einer Multi-Choice-Variante wären alle korrekt.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Anti-Patterns",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Häufige Fehler"
+    },
+    {
+      "id": "q53",
+      "frage": "Was unterscheidet die Rolle ‚Operator‘ von ‚Architekt‘ in der Plattform-Verantwortung?",
+      "optionen": [
+        "Es macht keinen Unterschied",
+        "Operator fokussiert auf Tagesgeschäft und KPI-Erreichung (Wochen, Monate). Architekt fokussiert auf strategische Konsistenz und Plattform-Landschaft (Quartale, Jahre)",
+        "Operator ist wichtiger",
+        "Architekt ist nur in Beratungsfirmen relevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Beide Rollen sind unverzichtbar, aber unterscheiden sich in Zeithorizont, Fokus und Erfolgsmaßstab. Architekten-Aufgaben in operativer Hektik führen zu Schein-Strategien — operative Themen aus Architektur-Sicht zu detail-fernen Vorgaben.",
+      "quelle": "Tag 2 · UE 4 Coaching · Operator vs. Architekt",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q54",
+      "frage": "Welche Aussage über KI in der Plattform-Steuerung ist besonders zukunftsweisend?",
+      "optionen": [
+        "KI ist ein Marketing-Buzzword ohne Substanz",
+        "KI erzeugt einen selbstverstärkenden Vorteil: mehr Daten → besseres Training → mehr Daten — Plattformen mit guter Datenqualität gewinnen langfristig",
+        "KI ersetzt menschliches Plattform-Management",
+        "KI ist nur für B2C relevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der ‚Daten-Vorteil-Kreislauf‘ ist die zentrale strategische Implikation: Plattformen mit besserer Datenqualität trainieren bessere KI, die wiederum mehr/bessere Daten generiert. Plattformen mit schlechter Datenbasis geraten in einen Nachteil-Kreislauf.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · KI-Strategie",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Zukunftstrends"
+    },
+    {
+      "id": "q55",
+      "frage": "Welche Mindest-Anforderung sollte ein Zielbild 2030 einer Plattformstrategie erfüllen?",
+      "optionen": [
+        "Möglichst vage formuliert sein",
+        "Konkret in Zielsetzung, klar in Trade-offs, robust gegenüber Unsicherheit, beobachtbar (KPIs), politisch tragfähig",
+        "Nur die Geschäftsleitung darf es kennen",
+        "Es sollte sich monatlich ändern"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein wirksames Zielbild 2030 ist konkret, mit expliziten Trade-offs, robust auch bei Unsicherheit, messbar über KPIs und politisch tragfähig im Stakeholderkreis. Vage Zielbilder sind weder steuerbar noch zurechenbar.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Zielbild",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Plattform-Architektur"
+    },
+    {
+      "id": "q56",
+      "frage": "Welche Aussage zum klassischen Zielkonflikt ‚Wachstum vs. Kontrolle‘ trifft zu?",
+      "optionen": [
+        "Beide voll zu haben ist standardmäßig möglich",
+        "Wachstum kommt am leichtesten über externe Plattformen — Kontrolle am leichtesten über eigene Kanäle. Beides voll zu haben kostet überdurchschnittlich viel",
+        "Wachstum schließt Kontrolle aus",
+        "Kontrolle ist unwichtig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Klassischer Trade-off der Plattformstrategie. Reife Unternehmen entscheiden bewusst, wo sie den Kompromiss machen — kein blindes ‚wir wollen alles‘. Strategie heißt: was lassen wir bewusst weg?",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Zielkonflikte",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q57",
+      "frage": "Welche typische Frage stellt sich vor einer größeren Plattform-Investition als Risiko-Check?",
+      "optionen": [
+        "Wie viele Mitarbeiter haben wir?",
+        "Was passiert, wenn diese Plattform morgen die Konditionen einseitig verschlechtert oder uns rauswirft?",
+        "Wann ist die nächste Werbekampagne?",
+        "Welche Farbe hat das neue Logo?"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der zentrale Risiko-Check: Was wäre die Konsequenz eines Plattform-Verlusts? Wenn die Antwort ‚existenzbedrohend‘ ist, ist das Risiko nicht ausreichend gemanagt. Reife Plattformstrategien überleben den Verlust eines wichtigen Kanals.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Risikofrage",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Strategische Risiken"
+    },
+    {
+      "id": "q58",
+      "frage": "Welche Investition wird in der BauTech-Connect-Fallstudie als ‚Fundament‘ in den ersten 3 Monaten priorisiert?",
+      "optionen": [
+        "Komplette Reorganisation der Geschäftsleitung",
+        "Produktdaten bereinigen, Checkout optimieren, gemeinsame KPIs vereinbaren",
+        "Sofortige Personalisierung mit KI",
+        "Alle Kampagnen stoppen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vor jeder Skalierung muss das Fundament stehen: saubere Daten, optimierte Conversion-Punkte, abgestimmte KPIs. Ohne dieses Fundament werden Investitionen in spätere Phasen wirkungslos verpuffen.",
+      "quelle": "Tag 2 · UE 5 Fallstudie · Roadmap",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Plattform-Architektur"
+    },
+    {
+      "id": "q59",
+      "frage": "Welche Botschaft würden Sie dem Vorstand in 90 Sekunden zur Plattformstrategie 2030 vermitteln?",
+      "optionen": [
+        "‚Wir kaufen die teuerste Plattform-Software ein.‘",
+        "‚Mischmodell: 40–60 % Direktkanal, 20–40 % kontrollierte Marktplätze, 10–30 % Ökosysteme. Datenhoheit ist strategisch. Pilot mit messbarer Wirkung.‘",
+        "‚Reichweite ist alles, Marge ist sekundär.‘",
+        "‚Wir machen einfach weiter wie bisher.‘"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vorstands-Empfehlung: klare strategische Linie (Mischmodell), explizite strategische Säulen (Datenhoheit), pragmatischer erster Schritt (Pilot mit messbarer Wirkung). Diese drei Elemente überzeugen — Tool-Liebe, Reichweiten-Mantras und ‚weiter wie bisher‘ nicht.",
+      "quelle": "Tag 2 · UE 7 Feedback · 90-Sekunden-Empfehlung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q60",
+      "frage": "Welche Aussage über reife Plattform-Strategien 2030 stimmt am besten?",
+      "optionen": [
+        "Sie konzentrieren sich auf eine einzige Plattform",
+        "Sie sind Mischmodelle aus Direktkanal, kontrollierten Marktplätzen und Ökosystemen — bewusst entschieden, mit klaren Trade-offs",
+        "Sie maximieren Reichweite ohne Rücksicht auf Marge",
+        "Sie verzichten auf KPIs"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Reife Plattform-Strategien sind Mischmodelle mit drei strategischen Säulen (Direkt, Marktplatz, Ökosystem), bewusst entschiedenen Trade-offs (Wachstum vs. Kontrolle), klaren KPIs und Datenhoheit als strategischer Voraussetzung. Konzentration und Reichweiten-Maximierung sind klassische Fallen.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Plattform-Architektur",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Plattform-Architektur"
+    }
+  ]
+}

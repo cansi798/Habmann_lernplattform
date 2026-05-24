@@ -1,0 +1,907 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 2,
+  "erstellt_am": "2026-05-24",
+  "fragen": [
+    {
+      "id": "q01",
+      "frage": "Wofür steht die Abkürzung UML?",
+      "optionen": [
+        "Universal Modeling Language",
+        "Unified Modeling Language",
+        "User Mapping Logic",
+        "Unified Method Library"
+      ],
+      "korrekt": 1,
+      "erklaerung": "UML steht für ‚Unified Modeling Language‘. Es ist ein OMG-Standard mit 14 Diagrammtypen für die objektorientierte und prozessbezogene Modellierung. Aktuell in Version 2.5.1.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · UML-Grundlagen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "UML Grundlagen"
+    },
+    {
+      "id": "q02",
+      "frage": "Welche zwei UML-Diagrammtypen decken die meisten Geschäftsprozess-Fragen ab?",
+      "optionen": [
+        "Klassendiagramm und Sequenzdiagramm",
+        "Use Case Diagram und Activity Diagram",
+        "Zustandsdiagramm und Komponentendiagramm",
+        "Verteilungsdiagramm und Objektdiagramm"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Für Geschäftsprozesse genügen meist zwei Diagrammtypen: Use Case Diagram (Scope und Akteure) und Activity Diagram (Ablauf). Die anderen 12 Diagrammtypen sind eher für Software-Architektur und Detailmodellierung relevant.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · UML in der Praxis",
+      "schwierigkeit": "leicht",
+      "thema_tag": "UML Grundlagen"
+    },
+    {
+      "id": "q03",
+      "frage": "Was beantwortet ein Use Case Diagram primär?",
+      "optionen": [
+        "Wie lange die einzelnen Schritte dauern",
+        "Wer sind die Akteure, was sind ihre Ziele, wo verläuft die Systemgrenze",
+        "In welcher Reihenfolge die Aktivitäten ausgeführt werden",
+        "Welche Datenobjekte zwischen Systemen ausgetauscht werden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Use Case Diagrams zeigen Akteure (Rollen), ihre Ziele (Use Cases) und die Systemgrenze. Zeiten gehören in VSM, Ablauflogik in Activity Diagrams, Datenflüsse in andere UML-Diagrammtypen.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Use Case Diagram",
+      "schwierigkeit": "leicht",
+      "thema_tag": "UML Use Case"
+    },
+    {
+      "id": "q04",
+      "frage": "Was ist ein Akteur in einem UML Use Case Diagram?",
+      "optionen": [
+        "Eine konkrete Person mit Namen",
+        "Eine Rolle, die mit dem System interagiert und außerhalb der Systemgrenze liegt",
+        "Eine Aktivität, die ausgeführt wird",
+        "Ein Daten-Eintrag im System"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Akteur ist eine Rolle (z. B. ‚Kunde‘, ‚Sachbearbeiter‘, ‚externes System‘), die mit dem System interagiert und außerhalb der Systemgrenze steht. Konkrete Personen werden nicht modelliert — wenn Frau Meier morgen geht, bleibt die Rolle ‚Kunde‘ bestehen.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · UML-Akteure",
+      "schwierigkeit": "leicht",
+      "thema_tag": "UML Use Case"
+    },
+    {
+      "id": "q05",
+      "frage": "Was zeigt ein UML Activity Diagram?",
+      "optionen": [
+        "Den Ablauf einer Aktivität mit Schritten, Entscheidungen und Verantwortlichkeiten",
+        "Die statische Struktur einer Software",
+        "Die Datenfelder einer Datenbank",
+        "Die Kostenstellen einer Organisation"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Activity Diagrams zeigen Abläufe — mit Startknoten, Aktionen, Entscheidungsknoten, Parallelisierungen und Endknoten. Sie sind funktional ähnlich zu BPMN-Diagrammen, nur mit anderen Symbolen.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Activity Diagram",
+      "schwierigkeit": "leicht",
+      "thema_tag": "UML Activity"
+    },
+    {
+      "id": "q06",
+      "frage": "Wofür stehen Swimlanes in einem UML Activity Diagram?",
+      "optionen": [
+        "Für zeitliche Phasen",
+        "Für Verantwortungsbereiche (Rollen oder Organisationseinheiten)",
+        "Für parallele Pfade nach einem AND-Knoten",
+        "Für optionale Schleifen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Swimlanes sind das UML-Äquivalent zu Pools/Lanes in BPMN — vertikale oder horizontale Bereiche, denen Aktivitäten je nach Verantwortungsbereich (Rolle, Abteilung) zugeordnet werden.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Swimlanes",
+      "schwierigkeit": "leicht",
+      "thema_tag": "UML Activity"
+    },
+    {
+      "id": "q07",
+      "frage": "Wofür steht VSM in der Lean-/Prozess-Methodik?",
+      "optionen": [
+        "Visual Strategy Method",
+        "Value Stream Mapping",
+        "Variant Selection Matrix",
+        "Verified Standard Model"
+      ],
+      "korrekt": 1,
+      "erklaerung": "VSM steht für ‚Value Stream Mapping‘ — auf Deutsch ‚Wertstromanalyse‘. Die Methode wurde von Rother & Shook 1999 in ‚Learning to See‘ aus der Toyota-Welt für die breite Anwendung dokumentiert.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · VSM-Grundlagen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "VSM Grundlagen"
+    },
+    {
+      "id": "q08",
+      "frage": "Was misst die Bearbeitungszeit (BT) in einer VSM?",
+      "optionen": [
+        "Die Gesamtdauer vom Start bis zum Ende",
+        "Die Zeit, in der aktiv am Vorgang gearbeitet wird",
+        "Die Zeit, in der der Vorgang in einer Warteschlange liegt",
+        "Die durchschnittliche Pause zwischen Arbeitsschritten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Bearbeitungszeit ist die Zeit der tatsächlichen Bearbeitung — z. B. ‚Bestellung prüfen: 4 Minuten‘. Die Gesamtdauer ist die Durchlaufzeit (DLZ), die Wartezeit (WT) ist die Zeit in der Warteschlange.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · VSM-Zeiten",
+      "schwierigkeit": "leicht",
+      "thema_tag": "VSM Zeiten"
+    },
+    {
+      "id": "q09",
+      "frage": "Was misst die Wartezeit (WT) in einer VSM?",
+      "optionen": [
+        "Die Zeit der aktiven Bearbeitung",
+        "Die Zeit, in der der Vorgang in einer Warteschlange auf den nächsten Schritt wartet",
+        "Die Zeit für die Schichtübergabe",
+        "Die Pause zwischen zwei Aufträgen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wartezeit (WT) ist die Zeit, in der der Vorgang in einer Warteschlange liegt und nicht aktiv bearbeitet wird. Sie ist meist ein Vielfaches der Bearbeitungszeit und damit der größte Hebel für Optimierung.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · VSM-Zeiten",
+      "schwierigkeit": "leicht",
+      "thema_tag": "VSM Zeiten"
+    },
+    {
+      "id": "q10",
+      "frage": "Wie ist die Durchlaufzeit (DLZ) in einer VSM definiert?",
+      "optionen": [
+        "Nur die Summe der Bearbeitungszeiten",
+        "Nur die Summe der Wartezeiten",
+        "Die Summe aus allen Bearbeitungszeiten und allen Wartezeiten — von Start bis Ende",
+        "Die längste einzelne Bearbeitungszeit im Prozess"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Die Durchlaufzeit (DLZ) ist die Gesamtdauer vom ersten bis zum letzten Schritt — Summe aller BT plus Summe aller WT. In Wissensprozessen dominiert dabei fast immer die WT.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · VSM-Zeiten",
+      "schwierigkeit": "leicht",
+      "thema_tag": "VSM Zeiten"
+    },
+    {
+      "id": "q11",
+      "frage": "Wie nennt man im Lean-Kontext Verschwendung?",
+      "optionen": [
+        "Muda",
+        "Kaizen",
+        "Gemba",
+        "Poka-Yoke"
+      ],
+      "korrekt": 0,
+      "erklaerung": "‚Muda‘ ist der japanische Begriff für Verschwendung — also Aktivitäten ohne Wertbeitrag. Kaizen bedeutet ‚kontinuierliche Verbesserung‘, Gemba ‚der Ort des Geschehens‘, Poka-Yoke ‚Fehlervermeidung‘.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Lean-Begriffe",
+      "schwierigkeit": "leicht",
+      "thema_tag": "VSM Wertschöpfung"
+    },
+    {
+      "id": "q12",
+      "frage": "Welche Aktivität ist im VSM-Sinne wertschöpfend?",
+      "optionen": [
+        "Eine Bestellung in der Warteschlange liegen lassen",
+        "Eine Bestellung erneut prüfen, weil die erste Prüfung unvollständig war",
+        "Ware tatsächlich verpacken und versenden",
+        "Eine Datei archivieren, um Compliance zu erfüllen"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Verpacken und Versenden ist eine Tätigkeit, für die der Kunde bezahlt — also wertschöpfend (VA). Warten ist Verschwendung, Nacharbeit ist Verschwendung, Archivieren ist notwendig, aber nicht wertschöpfend (NNVA).",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Wertschöpfungs-Klassifikation",
+      "schwierigkeit": "leicht",
+      "thema_tag": "VSM Wertschöpfung"
+    },
+    {
+      "id": "q13",
+      "frage": "Wofür steht der Begriff ‚Event Log‘ im Process Mining?",
+      "optionen": [
+        "Ein Tagebuch des Modellierers über Ereignisse im Projekt",
+        "Eine Tabelle mit Einträgen pro Prozessschritt — mindestens Case ID, Aktivität, Zeitstempel",
+        "Eine Liste aller Fehlermeldungen im IT-System",
+        "Ein Backup-Protokoll der Datenbank"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Event Log ist die Datenbasis für Process Mining: eine Tabelle, in der jeder ausgeführte Prozessschritt protokolliert wird. Minimum sind drei Felder pro Eintrag: Case ID (welcher Vorgang), Aktivität (welcher Schritt), Zeitstempel (wann).",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Process Mining",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Event Log"
+    },
+    {
+      "id": "q14",
+      "frage": "Was ist eine Case ID im Event Log?",
+      "optionen": [
+        "Die Mitarbeiter-ID des Bearbeiters",
+        "Eine eindeutige Kennung eines konkreten Vorgangs (z. B. einer Bestellung)",
+        "Die Versionsnummer des Process-Mining-Tools",
+        "Der Name des Prozesses"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Case ID ist die eindeutige Kennung eines Vorgangs — z. B. ‚Bestellung B-2026-1234‘. Sie verbindet alle Events, die zu demselben Vorgang gehören, miteinander. Ohne Case ID kein Process Mining.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Event Log",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Event Log"
+    },
+    {
+      "id": "q15",
+      "frage": "Welche drei Disziplinen kennt das Process Mining?",
+      "optionen": [
+        "Modellieren, Testen, Deployen",
+        "Discovery, Conformance, Enhancement",
+        "Plan, Do, Check, Act",
+        "Sense, Make, Decide"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Process Mining wird in Discovery (Ist-Prozess aus Logs rekonstruieren), Conformance Checking (Soll mit Ist vergleichen) und Enhancement (Modell anreichern, z. B. mit Zeiten und Frequenzen) unterteilt.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Process-Mining-Disziplinen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Process Mining Grundlagen"
+    },
+    {
+      "id": "q16",
+      "frage": "Was leistet die Process-Mining-Disziplin ‚Discovery‘?",
+      "optionen": [
+        "Sie vergleicht ein bestehendes Modell mit dem Ist-Log",
+        "Sie rekonstruiert ein Prozessmodell aus den Event Logs ohne vorheriges Modell",
+        "Sie reichert ein vorhandenes Modell um Zeitinformationen an",
+        "Sie sucht nach Sicherheitslücken im System"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Discovery erzeugt aus den Event Logs ein Prozessmodell — automatisch, ohne dass jemand vorher modelliert haben muss. Conformance Checking dagegen vergleicht Soll mit Ist, Enhancement reichert ein bestehendes Modell an.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Discovery",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q17",
+      "frage": "Was leistet die Process-Mining-Disziplin ‚Conformance Checking‘?",
+      "optionen": [
+        "Erstellt ein Prozessmodell aus Logs",
+        "Vergleicht ein Soll-Modell mit dem Ist-Log und misst Abweichungen",
+        "Optimiert das Modell automatisch",
+        "Berechnet die Kosten pro Vorgang"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Conformance Checking nimmt ein bestehendes Soll-Modell (z. B. BPMN) und prüft gegen den Event Log: Welche Schritte wurden ausgelassen? Welche kamen zusätzlich vor? Welche Reihenfolgen wurden verletzt?",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Conformance",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q18",
+      "frage": "Welche Methode beantwortet die Frage ‚Wer will was und wo verläuft der Scope?‘",
+      "optionen": [
+        "VSM",
+        "UML Use Case Diagram",
+        "Process Mining (Discovery)",
+        "BPMN-Gateway-Analyse"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Genau diese Frage ist die Kernfrage des Use Case Diagrams: Akteure, ihre Ziele, die Systemgrenze. VSM beantwortet ‚wo geht Zeit verloren‘, Process Mining ‚was passiert wirklich‘.",
+      "quelle": "Tag 2 · UE 4 Coaching · Methodenauswahl",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Methodenauswahl"
+    },
+    {
+      "id": "q19",
+      "frage": "Welche Methode beantwortet die Frage ‚Wo geht in diesem Prozess Zeit verloren?‘",
+      "optionen": [
+        "UML Klassendiagramm",
+        "VSM (Value Stream Mapping)",
+        "ER-Modell",
+        "UML Sequenzdiagramm"
+      ],
+      "korrekt": 1,
+      "erklaerung": "VSM ist die spezialisierte Methode, um Wartezeiten und Engpässe sichtbar zu machen. UML- und ER-Diagramme zeigen Struktur, nicht Zeit/Fluss.",
+      "quelle": "Tag 2 · UE 4 Coaching · Methodenauswahl",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Methodenauswahl"
+    },
+    {
+      "id": "q20",
+      "frage": "Welche Methode beantwortet die Frage ‚Was passiert in unseren IT-Systemen tatsächlich?‘",
+      "optionen": [
+        "UML Use Case Diagram",
+        "VSM",
+        "Process Mining",
+        "Brainstorming-Workshop"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Process Mining beantwortet diese Frage aus Daten — durch Analyse der Event Logs. UML zeigt das Soll, VSM zeigt den geplanten Wertstrom, ein Workshop zeigt Meinungen, aber keine Realität.",
+      "quelle": "Tag 2 · UE 4 Coaching · Methodenauswahl",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Methodenauswahl"
+    },
+    {
+      "id": "q21",
+      "frage": "Warum ist die Wartezeit in den meisten Wertströmen ein größerer Optimierungshebel als die Bearbeitungszeit?",
+      "optionen": [
+        "Weil Bearbeitungszeit gar nicht messbar ist",
+        "Weil WT in den meisten Prozessen ein Vielfaches der BT beträgt — Optimierungen dort wirken stärker auf die Durchlaufzeit",
+        "Weil WT immer gleich Null ist",
+        "Weil BT nicht beeinflussbar ist"
+      ],
+      "korrekt": 1,
+      "erklaerung": "In Wissensprozessen sind oft 95 % oder mehr der Durchlaufzeit reine Wartezeit. Wer dort 30 % einspart, hat einen viel größeren Effekt als wer die ohnehin kurze Bearbeitungszeit um 30 % verkürzt.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · VSM-Optimierungslogik",
+      "schwierigkeit": "mittel",
+      "thema_tag": "VSM Zeiten"
+    },
+    {
+      "id": "q22",
+      "frage": "Was ist eine ‚notwendige, aber nicht wertschöpfende‘ Aktivität (NNVA)?",
+      "optionen": [
+        "Eine Aktivität, die ohne Bedarf eingefügt wurde und gestrichen werden sollte",
+        "Eine Aktivität, die regulatorisch oder organisatorisch unverzichtbar ist, aber dem Kunden keinen Wert bringt",
+        "Eine Aktivität, die der Kunde direkt bezahlt",
+        "Eine Aktivität, die in einem fremden System ausgeführt wird"
+      ],
+      "korrekt": 1,
+      "erklaerung": "NNVA-Aktivitäten sind notwendig (z. B. wegen Compliance, Audit, internen Vorgaben), aber der Kunde würde sie nicht bezahlen, wenn er die Wahl hätte. Beispiel: ‚Vorgang archivieren‘.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Wertschöpfungs-Klassifikation",
+      "schwierigkeit": "mittel",
+      "thema_tag": "VSM Wertschöpfung"
+    },
+    {
+      "id": "q23",
+      "frage": "Welche Verschwendungsart aus der klassischen Lean-Liste betrifft ‚Vorgänge, die zu lange in einer Warteschlange liegen‘?",
+      "optionen": [
+        "Überproduktion",
+        "Wartezeit",
+        "Transport",
+        "Überbearbeitung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wartezeit ist eine der sieben klassischen Verschwendungsarten und in Wissensprozessen meist die dominante. Sie betrifft Vorgänge, die in WIP-Queues stehen, ohne aktiv bearbeitet zu werden.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Verschwendung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "VSM Wertschöpfung"
+    },
+    {
+      "id": "q24",
+      "frage": "Wo liegt typischerweise ein Engpass in einem Wertstrom?",
+      "optionen": [
+        "Beim Schritt mit der höchsten BT",
+        "Beim Schritt, vor dem sich WIP staut und die Wartezeit am höchsten ist",
+        "Beim ersten Schritt des Prozesses",
+        "Bei der Übergabe an das letzte System"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Engpass-Indikatoren sind aufgestautes WIP und überdurchschnittliche Wartezeiten. Ein Schritt mit hoher BT ist noch kein Engpass, solange nachfolgende Schritte schritthalten können.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Engpass-Diagnose",
+      "schwierigkeit": "mittel",
+      "thema_tag": "VSM Grundlagen"
+    },
+    {
+      "id": "q25",
+      "frage": "Welches Symbol wird in einer VSM typischerweise für Warteschlangen / WIP verwendet?",
+      "optionen": [
+        "Ein Kreis",
+        "Ein Dreieck (oft mit dem Schriftzug ‚WIP‘)",
+        "Eine Raute",
+        "Ein Sechseck"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Dreieck-Symbole (manchmal mit ‚WIP‘ beschriftet) markieren in VSMs Warteschlangen zwischen Prozessschritten. Sie sind oft der wichtigste visuelle Hinweis auf Engpässe und Verschwendungspotenzial.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · VSM-Symbole",
+      "schwierigkeit": "mittel",
+      "thema_tag": "VSM Grundlagen"
+    },
+    {
+      "id": "q26",
+      "frage": "Welche Voraussetzung ist für Process Mining zwingend notwendig?",
+      "optionen": [
+        "Die Mitarbeitenden müssen Process-Mining-Schulungen absolviert haben",
+        "Die Prozessschritte müssen digital protokolliert sein (Event Logs mit Case ID, Aktivität, Zeitstempel)",
+        "Es muss vorher ein BPMN-Modell existieren",
+        "Es muss eine Cloud-Plattform verwendet werden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Process Mining braucht digitale Spuren. Ohne Logs (mit den drei Pflichtfeldern) gibt es nichts zu analysieren. BPMN-Modelle sind optional (nur für Conformance Checking nötig), Schulungen helfen, sind aber keine technische Voraussetzung.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Process-Mining-Voraussetzungen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Process Mining Grundlagen"
+    },
+    {
+      "id": "q27",
+      "frage": "Welcher Aspekt ist beim Aufbau eines Event Logs in der Praxis häufig die größte Hürde?",
+      "optionen": [
+        "Die Wahl der Programmiersprache",
+        "Die eindeutige Konstruktion der Case ID über mehrere Quellsysteme hinweg",
+        "Die Farbgestaltung des Discovery-Outputs",
+        "Die Auswahl des Process-Mining-Vendors"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Case ID muss vorgangsbezogen sein und über alle relevanten Systeme hinweg konsistent. In der Praxis hat derselbe Vorgang oft in CRM, ERP und Ticket-System unterschiedliche IDs — die Mapping-Logik zu definieren ist meist die größte Datenqualitäts-Baustelle.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Datenqualität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Event Log"
+    },
+    {
+      "id": "q28",
+      "frage": "Welches der folgenden Felder ist ein optionales (aber nützliches) Event-Log-Feld?",
+      "optionen": [
+        "Case ID",
+        "Aktivität",
+        "Zeitstempel",
+        "Ressource (wer/was hat den Schritt ausgeführt)"
+      ],
+      "korrekt": 3,
+      "erklaerung": "Ressource ist optional, aber wertvoll: Sie erlaubt z. B. die Analyse, ob bestimmte Rollen oder Systeme Engpässe verursachen. Die anderen drei (Case ID, Aktivität, Zeitstempel) sind das Pflicht-Minimum.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Event Log",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Event Log"
+    },
+    {
+      "id": "q29",
+      "frage": "Was leistet die Process-Mining-Disziplin ‚Enhancement‘?",
+      "optionen": [
+        "Sie erstellt ein neues Modell von Grund auf",
+        "Sie reichert ein vorhandenes Modell um Zeitinformationen, Frequenzen und Engpässe an",
+        "Sie löscht veraltete Logs",
+        "Sie übersetzt das Modell in eine andere Sprache"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Enhancement nimmt ein bestehendes Modell und reichert es an: mit Häufigkeiten (wie oft wird ein Pfad genommen?), Zeiten (wo dauert es wie lange?) und Ressourcen (wer macht was?). Discovery erstellt das Modell, Conformance prüft Abweichungen.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Enhancement",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Enhancement"
+    },
+    {
+      "id": "q30",
+      "frage": "Welche Aussage über die UML-Notation insgesamt ist korrekt?",
+      "optionen": [
+        "UML hat genau drei Diagrammtypen",
+        "UML hat 14 Diagrammtypen, in Geschäftsprozessen werden aber meist nur zwei davon genutzt",
+        "UML hat keine Standardisierung",
+        "UML ist veraltet und wird heute nicht mehr verwendet"
+      ],
+      "korrekt": 1,
+      "erklaerung": "UML ist ein OMG-Standard mit 14 Diagrammtypen in Version 2.5.1. Für Geschäftsprozesse genügen meist Use Case und Activity. Mehr Diagrammtypen einzusetzen, ist oft Übermodellierung.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · UML-Diagrammtypen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "UML Grundlagen"
+    },
+    {
+      "id": "q31",
+      "frage": "Wie verhalten sich UML Activity Diagram und BPMN zueinander?",
+      "optionen": [
+        "Sie sind identisch — nur die Bezeichnung unterscheidet sich",
+        "Sie sind funktional sehr ähnlich; BPMN ist eher Business-orientiert und ausführbar, UML Activity ist Teil eines Software-Modellierungs-Kontexts",
+        "BPMN ist eine Untermenge von UML",
+        "Sie können nicht beide gleichzeitig im selben Projekt eingesetzt werden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Beide zeigen Abläufe mit ähnlicher Logik (Start, Aktion, Entscheidung, Parallelisierung, Swimlane), unterscheiden sich aber in Schwerpunkt: BPMN ist business-orientiert und executable, UML Activity ist Teil eines umfassenden Software-Modellierungs-Kontexts.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · UML vs. BPMN",
+      "schwierigkeit": "mittel",
+      "thema_tag": "UML Activity"
+    },
+    {
+      "id": "q32",
+      "frage": "Was zeigt die Symbol-Kombination ‚Strichmännchen + Ellipse + Rechteck‘ in UML?",
+      "optionen": [
+        "Activity Diagram",
+        "Use Case Diagram (Akteur + Use Case + Systemgrenze)",
+        "Sequence Diagram",
+        "State Machine Diagram"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Im Use Case Diagram stehen Strichmännchen für Akteure (Rollen außerhalb des Systems), Ellipsen für Use Cases (Ziele) und Rechtecke für die Systemgrenze. Diese Symbolkombination ist charakteristisch.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · UML-Symbole",
+      "schwierigkeit": "mittel",
+      "thema_tag": "UML Use Case"
+    },
+    {
+      "id": "q33",
+      "frage": "Welche Aussage über den Methodendreiklang UML/VSM/Process Mining trifft zu?",
+      "optionen": [
+        "Eine Methode reicht — die anderen sind redundant",
+        "Jede Methode beantwortet eine andere Frage; im Zusammenspiel decken sie Struktur, Fluss und Datenrealität ab",
+        "Die drei Methoden widersprechen sich grundsätzlich",
+        "Alle drei zeigen exakt dasselbe, nur in unterschiedlicher Notation"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die drei Methoden sind komplementär: UML zeigt Struktur (Wer? Was?), VSM zeigt Fluss (Wo geht Zeit verloren?), Process Mining zeigt Datenrealität (Was passiert wirklich?). Erst die Kombination zeigt das Gesamtbild.",
+      "quelle": "Tag 2 · UE 4 Coaching · Methodendreiklang",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Methodendreiklang"
+    },
+    {
+      "id": "q34",
+      "frage": "Welche Methode ist am besten geeignet, um zu prüfen, ob ein bestehendes Soll-Modell mit der gelebten Realität übereinstimmt?",
+      "optionen": [
+        "UML Use Case Diagram",
+        "VSM",
+        "Process Mining (Conformance Checking)",
+        "Workshop mit Stakeholdern"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Conformance Checking ist genau dafür gemacht: ein Soll-Modell gegen den realen Event Log halten und messen, wo Abweichungen liegen. UML und VSM zeigen Soll oder geplanten Fluss, Workshops zeigen Meinungen.",
+      "quelle": "Tag 2 · UE 4 Coaching · Methodenauswahl",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Methodenauswahl"
+    },
+    {
+      "id": "q35",
+      "frage": "Welche Methode ist sinnvoll, wenn (noch) keine guten Logs vorhanden sind, aber Verantwortung und Wertfluss geklärt werden sollen?",
+      "optionen": [
+        "Process Mining",
+        "UML Use Case + VSM",
+        "Keine Methode hilft ohne Logs",
+        "Reine Mitarbeiter-Interviews"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ohne Logs kein Process Mining. UML klärt Scope und Verantwortung, VSM zeigt Wartezeiten und Engpasshypothesen. Daraus ergibt sich auch, wo das Sammeln von Daten lohnt — als Vorbereitung auf späteres Process Mining.",
+      "quelle": "Tag 2 · UE 4 Coaching · Methodenauswahl",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Methodenauswahl"
+    },
+    {
+      "id": "q36",
+      "frage": "Was sollte vor der Anwendung einer Modellierungs- oder Mining-Methode geklärt werden?",
+      "optionen": [
+        "Die Farbpalette des Tools",
+        "Welche Entscheidung soll die Analyse stützen — Methodenwahl folgt Entscheidungs­bedarf, nicht umgekehrt",
+        "Die Zertifizierung der beteiligten Mitarbeiter",
+        "Der Vendor des Tools"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Methoden sollten entscheidungsgetrieben gewählt werden: Welche Entscheidung soll mit dem Ergebnis besser werden? Wenn das unklar ist, wird auch die beste Methode zur Verschwendung — Werkzeug ohne Zweck.",
+      "quelle": "Tag 2 · UE 4 Coaching · Senior-Shift",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Methodenauswahl"
+    },
+    {
+      "id": "q37",
+      "frage": "Welche Aussage über Qualität bei VSM ist korrekt?",
+      "optionen": [
+        "Geschätzte Zeiten dürfen nicht verwendet werden",
+        "Geschätzte Zeiten sind in Ordnung, müssen aber klar als Schätzung markiert sein",
+        "Eine VSM ohne Engpass-Hypothese ist vollständig",
+        "Wertschöpfungs-Klassifikationen sind optional"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Geschätzte BT/WT sind in der Praxis fast immer notwendig und akzeptabel — aber Transparenz ist Pflicht (‚geschätzt -- nicht gemessen‘). Eine VSM ohne Engpass-Hypothese ist verdächtig — meist Hinweis auf zu grob aufgenommene Daten.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · VSM-Qualität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Methodenqualität"
+    },
+    {
+      "id": "q38",
+      "frage": "Welche Aussage über Process-Mining-Qualität ist korrekt?",
+      "optionen": [
+        "Datenquellen und Filter müssen dokumentiert werden",
+        "Variantenanalyse ist optional",
+        "Interpretierbarkeit ist nur für Management-Reports relevant",
+        "Process Mining liefert immer eindeutige Aussagen"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Dokumentation von Datenquellen, Filtern, Case-ID-Konstruktion und ausgeschlossenen Events ist Pflicht — sonst können Befunde später nicht überprüft werden. Variantenanalyse und Interpretierbarkeit sind ebenfalls wichtig; Process Mining liefert keinesfalls immer eindeutige Aussagen.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Process-Mining-Qualität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Methodenqualität"
+    },
+    {
+      "id": "q39",
+      "frage": "Wie verhält sich eine ‚risiko-relevante Annahme‘ von einer ‚akzeptablen Annahme‘?",
+      "optionen": [
+        "Beide sind gleichwertig",
+        "Risiko-relevante Annahmen würden die Schlussfolgerung umdrehen, falls sie falsch sind — sie brauchen ein Frühwarnsignal",
+        "Akzeptable Annahmen müssen jeden Tag überprüft werden",
+        "Risiko-relevante Annahmen dürfen nicht dokumentiert werden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Akzeptable Annahmen ändern das Ergebnis qualitativ nicht, wenn sie falsch sind. Risiko-relevante Annahmen tun das — sie brauchen einen vorab definierten Trigger (Frühwarnsignal), der anzeigt, dass die Annahme nicht trägt.",
+      "quelle": "Tag 2 · UE 4 Coaching · Annahmen unter Unsicherheit",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q40",
+      "frage": "Welcher Zielkonflikt taucht in fast jedem Prozess-Verbesserungsprojekt auf?",
+      "optionen": [
+        "Symbolfarbe vs. Schriftgröße",
+        "Speed vs. Quality (bzw. Quality vs. Cost, Compliance vs. Pragmatik)",
+        "Hardware vs. Software",
+        "On-Premises vs. Cloud"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Klassische Trade-offs sind Speed vs. Quality, Quality vs. Cost, Compliance vs. Pragmatik, Standardisierung vs. Kundenindividualität. Senior-Coaching macht sie transparent — nicht alle Konflikte sind ‚lösbar‘, aber alle sind entscheidbar.",
+      "quelle": "Tag 2 · UE 4 Coaching · Zielkonflikte",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q41",
+      "frage": "Was ist die typische Falle bei ‚Methodengetriebenheit‘ statt ‚Entscheidungsgetriebenheit‘?",
+      "optionen": [
+        "Es entstehen schöne, aber nutzlose Artefakte ohne klaren Bezug zu einer konkreten Entscheidung",
+        "Methoden werden vermieden",
+        "Mitarbeitende werden überqualifiziert",
+        "Die Hardware-Kosten steigen"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Wer Methoden anwendet, ohne klar zu sagen, welche Entscheidung das Ergebnis stützen soll, produziert Artefakte für die Schublade. ‚Wir machen Process Mining‘ ist kein Ziel — ‚Wir wollen wissen, wo Eskalationen entstehen‘ ist eines.",
+      "quelle": "Tag 2 · UE 4 Coaching · Falle Tool-Liebe",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q42",
+      "frage": "Wie unterscheiden sich UML-Use-Case-Diagramme und UML-Activity-Diagramme in ihrer typischen Verwendung?",
+      "optionen": [
+        "Use Case zeigt Akteure und Scope, Activity zeigt Ablauf und Verantwortung",
+        "Use Case zeigt Datenbanken, Activity zeigt Klassen",
+        "Sie sind identisch, nur die Symbole unterscheiden sich",
+        "Activity wird nur in Software-Projekten verwendet"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Use Case Diagrams beantworten ‚Wer will was und wo verläuft der Scope?‘. Activity Diagrams beantworten ‚Wie läuft es ab, wer ist verantwortlich?‘. Beide sind komplementär — Use Case definiert das Was, Activity das Wie.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · UML-Praxis",
+      "schwierigkeit": "mittel",
+      "thema_tag": "UML Grundlagen"
+    },
+    {
+      "id": "q43",
+      "frage": "Welcher der folgenden Schritte ist im Sinne von VSM klare ‚Verschwendung (Muda)‘?",
+      "optionen": [
+        "Eine Tätigkeit, für die der Kunde bezahlt",
+        "Eine Tätigkeit, die wegen Compliance notwendig ist",
+        "Eine Nacharbeit, die nur entstand, weil ein vorheriger Schritt unvollständig war",
+        "Eine Tätigkeit, die der Kunde mit Wartezeit toleriert"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Nacharbeit / Fehler-Korrekturen sind eine der sieben klassischen Verschwendungsarten — sie entstehen nicht aus Wertschöpfung, sondern aus mangelnder Qualität vorangegangener Schritte.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Muda",
+      "schwierigkeit": "mittel",
+      "thema_tag": "VSM Wertschöpfung"
+    },
+    {
+      "id": "q44",
+      "frage": "Welche Aussage über Discovery in Process Mining ist korrekt?",
+      "optionen": [
+        "Es ist ein manueller Modellierungsworkshop mit Stakeholdern",
+        "Algorithmen rekonstruieren aus dem Event Log das tatsächliche Ist-Prozessmodell, oft mit Varianten",
+        "Es benötigt zwingend ein vorhandenes Soll-Modell",
+        "Es ersetzt Conformance Checking und Enhancement"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Discovery-Algorithmen lesen Event Logs ein und erzeugen ein Prozessmodell — typischerweise mit mehreren Varianten, von Hauptpfaden bis Ausreißern. Workshops sind nicht nötig, ein Soll-Modell auch nicht (das wäre Conformance).",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Discovery",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q45",
+      "frage": "Wann ist eine Variante im Event Log ein Hinweis auf einen ‚systematischen‘ Befund — nicht nur einen Ausreißer?",
+      "optionen": [
+        "Wenn sie nur 1 Mal vorkommt",
+        "Wenn sie eine signifikante Häufigkeit oder ein konsistentes Muster über Cases hinweg zeigt",
+        "Wenn sie von einem bestimmten Mitarbeiter durchgeführt wird",
+        "Wenn sie zu einem Audit-Befund passt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Process Mining unterscheidet Long-Tail-Ausreißer (selten, oft Ausnahmebehandlung) von systematischen Varianten (häufig oder konsistent muster­bildend). Letztere lohnen Untersuchung, erstere meist nicht.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Varianten",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q46",
+      "frage": "Bei welchem Customer-Onboarding-Befund würde der Dreiklang UML/VSM/Process Mining Ihnen am ehesten zeigen, dass das Problem NICHT ‚IT ist langsam‘ ist?",
+      "optionen": [
+        "VSM zeigt einen einzigen Engpass bei IT-Provisioning",
+        "Process Mining zeigt 40 % Rücksprünge wegen fehlender Kundendaten — die Wartezeit bei IT entsteht erst, weil Daten nachgefordert werden müssen",
+        "UML Use Case zeigt nur einen Akteur",
+        "Es gibt keine Swimlanes"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Erst die Process-Mining-Sicht macht sichtbar, dass die IT-Wartezeit nicht autonom ist, sondern Folge fehlender Kundendaten. Wer nur VSM betrachtet, sieht den Engpass, aber nicht die Ursache. Der Dreiklang trennt Symptom von Ursache.",
+      "quelle": "Tag 2 · UE 5 Fallstudie · Customer Onboarding",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Methodendreiklang"
+    },
+    {
+      "id": "q47",
+      "frage": "Welche zwei Maßnahmen liefern bei begrenztem Budget (60 k €) und 6 Wochen Zeitdruck den größten Hebel im CloudWorks-Onboarding-Beispiel?",
+      "optionen": [
+        "Vollständige Tool-Einführung plus externes Beraterteam",
+        "Definition of Ready für Onboarding (Checkliste + Pflichtfelder) plus SLA-Eskalationsregel beim Provisioning",
+        "Komplette Reorganisation der IT-Abteilung",
+        "Massentraining aller Mitarbeitenden in UML"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Definition of Ready greift ursächlich (verhindert unvollständige Briefings), die SLA-Eskalation greift strukturell (ändert die Spielregel beim Engpass). Beides ist in 6 Wochen ohne Tooling-Investition umsetzbar — der robusteste Hebel unter den Restriktionen.",
+      "quelle": "Tag 2 · UE 5 Fallstudie · Maßnahmen unter Restriktionen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q48",
+      "frage": "Wozu dient eine ‚Methodenlandkarte‘ in einer Governance-Struktur?",
+      "optionen": [
+        "Sie listet alle in der Organisation verwendeten Tools",
+        "Sie regelt, wann welche Methode genutzt werden soll — Zweck, Zielgruppe, Output, Qualitätsschwelle",
+        "Sie zeigt die geografische Verteilung der Standorte",
+        "Sie ersetzt die Modellierungs-Policy"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Methodenlandkarte ist ein einseitiges Dokument, das pro Methode Zweck, Zielgruppe, Output und Qualitätsschwelle festhält. Sie schafft Konsistenz in der Methodenwahl und Grundlage für Reviews — und ersetzt nicht die Modellierungs-Policy, sondern ergänzt sie.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Governance",
+      "schwierigkeit": "schwer",
+      "thema_tag": "E2E Operating Model"
+    },
+    {
+      "id": "q49",
+      "frage": "Was ist die typische Hauptbaustelle in der Praxis, bevor Process Mining überhaupt sinnvoll funktioniert?",
+      "optionen": [
+        "Auswahl des passenden Vendors",
+        "Datenqualität — insbesondere konsistente Case ID über Systeme hinweg, vollständige Aktivität, korrekte Zeitstempel",
+        "Schulung des Vorstands",
+        "Branding des Process-Mining-Projekts"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die meisten Process-Mining-Initiativen scheitern an Datenqualität — nicht an der Methode oder dem Tool. Eine eindeutige Case ID, vollständige Activity-Felder und konsistente Zeitstempel sind die Grundlage. Vendor-Wahl und Branding sind sekundär.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Daten-Minimum",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q50",
+      "frage": "Welche Rolle im E2E Operating Model trägt fachlich Verantwortung für den End-to-End-Prozess?",
+      "optionen": [
+        "Process Owner",
+        "Modeler",
+        "Data Steward",
+        "Reviewer"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Der Process Owner trägt die fachliche End-to-End-Verantwortung — von Zielzustand bis Wirksamkeit. Modeler erstellen Modelle, Data Stewards verantworten Datenqualität, Reviewer prüfen gegen die Methodenlandkarte.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Rollen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q51",
+      "frage": "Welche Rolle ist verantwortlich für die Qualität und Konsistenz der Event-Log-Daten?",
+      "optionen": [
+        "Process Owner",
+        "Modeler",
+        "Data Steward",
+        "Approver"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Der Data Steward verantwortet die Datenqualität: Definition der Pflichtfelder, Konstruktion der Case ID, Plausibilität der Zeitstempel. Ohne diese Rolle bleibt Process Mining datenqualitäts-getrieben Glücksspiel.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Rollen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance"
+    },
+    {
+      "id": "q52",
+      "frage": "Welche der folgenden Entscheidungstypen lässt sich durch den Dreiklang UML/VSM/Process Mining besonders gut fundieren?",
+      "optionen": [
+        "Wahl der Bürofarbe",
+        "Identifikation lohnender Automatisierungs-Kandidaten (hohe Frequenz, geringe Varianz, klare Regel)",
+        "Festlegung der Urlaubsplanung",
+        "Auswahl des Catering-Anbieters"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Automatisierungs-Kandidaten sind Schritte mit hoher Log-Frequenz, geringer Varianz im Process-Mining-Output und klar regulierbarer Logik im Modell. Der Dreiklang liefert genau diese Indikatoren.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Entscheidungsarchitektur",
+      "schwierigkeit": "schwer",
+      "thema_tag": "E2E Operating Model"
+    },
+    {
+      "id": "q53",
+      "frage": "Was ist ein ‚Frühwarnsignal‘ im Kontext einer risiko-relevanten Annahme?",
+      "optionen": [
+        "Ein zusätzlicher Audit-Termin",
+        "Ein vorab definierter Trigger, dessen Eintritt anzeigt, dass die Annahme nicht (mehr) trägt — Anlass zum Nachsteuern",
+        "Eine Strafe für falsche Annahmen",
+        "Eine Versicherung gegen Projektrisiken"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Frühwarnsignale machen Annahmen unter Unsicherheit operabel: Wenn Indikator X eine bestimmte Schwelle überschreitet, ist die Annahme widerlegt und das Vorgehen wird angepasst. Ohne Frühwarnsignal verharrt man stillschweigend in einer überholten Annahme.",
+      "quelle": "Tag 2 · UE 4 Coaching · Entscheiden unter Unsicherheit",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q54",
+      "frage": "Was ist die ‚goldene Klammer‘ des Methodendreiklangs?",
+      "optionen": [
+        "Ein neuer Diagrammtyp, der die drei Methoden ersetzt",
+        "Eine Person oder ein Team, das UML, VSM und Process Mining für denselben Prozess zusammenführt und integriert betrachtet",
+        "Die Software-Plattform aller drei Tools",
+        "Die Farbe Gold in Diagrammen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die goldene Klammer entsteht durch Integration — wenn dieselbe Person oder dasselbe Team alle drei Sichten zusammenführt. Werden die Methoden auf verschiedene Beteiligte aufgeteilt, entstehen drei isolierte Berichte ohne integrierte Schlussfolgerung.",
+      "quelle": "Tag 2 · UE 4 Coaching · Methodendreiklang",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Methodendreiklang"
+    },
+    {
+      "id": "q55",
+      "frage": "Welche Aussage zur typischen Reihenfolge bei der Anwendung des Dreiklangs ist sinnvoll?",
+      "optionen": [
+        "Alle drei Methoden gleichzeitig starten und in Parallel-Workshops bearbeiten",
+        "Eine Methode zuerst vollständig — mit klarer Aussage — dann gezielt ergänzen, je nach offenen Fragen",
+        "Mit Process Mining anfangen, weil es am wenigsten Aufwand ist",
+        "UML erst zum Schluss machen, um nicht voreingenommen zu sein"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Methodendisziplin: erst eine Methode vollständig mit klarer Aussage — dann gezielt ergänzen, je nach offenen Fragen. Alles parallel führt zu drei halbgaren Artefakten, mit Process Mining anzufangen ist oft unmöglich (Datenqualität).",
+      "quelle": "Tag 2 · UE 4 Coaching · Methoden­disziplin",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Methodenauswahl"
+    },
+    {
+      "id": "q56",
+      "frage": "Welche Aussage über Process Mining vs. klassische Modellierung ist korrekt?",
+      "optionen": [
+        "Process Mining macht Modellierung überflüssig",
+        "Process Mining ergänzt Modellierung: Modelle zeigen das Soll, Process Mining zeigt das Ist — Conformance verbindet beides",
+        "Modellierung macht Process Mining überflüssig",
+        "Beide Methoden produzieren identische Ergebnisse"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Modelle (BPMN/UML) zeigen, wie es sein soll. Process Mining zeigt, wie es ist. Conformance Checking misst die Differenz und ist damit das Bindeglied. Eine Methode ersetzt die andere nicht.",
+      "quelle": "Tag 2 · UE 1 Wissensvermittlung · Soll vs. Ist",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q57",
+      "frage": "Welche Aussage über die Roadmap zur Einführung des Dreiklangs in 10 Wochen ist realistisch?",
+      "optionen": [
+        "Alle 32 Prozesse der Organisation gleichzeitig aufnehmen",
+        "Ein Pilotprozess mit allen drei Sichten, Wirkungs-Kennzahlen definieren, dann Methodenlandkarte und Governance verabschieden",
+        "Erst alle Tools einkaufen, dann mit Prozessen anfangen",
+        "Mit UML alle 32 Prozesse skizzieren, bevor Wertstrom oder Mining beginnt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Realistisch ist ein Pilotprozess mit allen drei Sichten, klare Wirkungs-Kennzahlen, dann erst die Verallgemeinerung in Methodenlandkarte und Governance. Alles auf einmal überfordert, Tool-First ohne Inhalt scheitert.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Roadmap",
+      "schwierigkeit": "schwer",
+      "thema_tag": "E2E Operating Model"
+    },
+    {
+      "id": "q58",
+      "frage": "Welcher der folgenden Schritte ist im Customer-Onboarding-Beispiel der vermutliche Engpass laut VSM?",
+      "optionen": [
+        "Sales-Briefing",
+        "IT-Provisioning (5--8 Tage Wartezeit, oft länger)",
+        "Vertrags-Check",
+        "Kunden-Training"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Im Beispiel dominiert die Wartezeit beim IT-Provisioning — mehrere Tage, oft länger. Die anderen Schritte haben deutlich kürzere Wartezeit. Wichtig: Engpass ist Symptom, die Ursache muss durch Process Mining geprüft werden.",
+      "quelle": "Tag 2 · UE 5 Fallstudie · Engpass-Hypothese",
+      "schwierigkeit": "schwer",
+      "thema_tag": "VSM Grundlagen"
+    },
+    {
+      "id": "q59",
+      "frage": "Welche Empfehlung würden Sie geben, wenn ein Fachbereich ‚alle drei Methoden für alle Prozesse‘ einführen will?",
+      "optionen": [
+        "Sofort umsetzen — mehr ist mehr",
+        "Pilot mit einem Prozess, vollständige Anwendung, messbare Wirkung — danach gezielt ausweiten, niemals flächendeckend ohne Belastbarkeitsnachweis",
+        "Ablehnen, weil drei Methoden zu viel sind",
+        "Stattdessen nur Process Mining nutzen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die senior-taugliche Empfehlung: Pilot, Vollständigkeit, messbare Wirkung — dann gezielte Ausweitung. Flächendeckende ‚alle Methoden für alle Prozesse‘-Initiativen erzeugen Übermodellierung, Akzeptanzprobleme und untragbaren Pflegeaufwand.",
+      "quelle": "Tag 2 · UE 8 Transferprojekt · Senior-Empfehlung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q60",
+      "frage": "Sie sollen dem Vorstand in 90 Sekunden den Nutzen des Methodendreiklangs erklären. Welche Linie überzeugt am ehesten?",
+      "optionen": [
+        "‚Wir kaufen die teuersten Tools und schulen alle Mitarbeitenden.‘",
+        "‚Drei Linsen für denselben Prozess — Struktur, Fluss, Daten — geben ein Gesamtbild, das eine einzelne Sicht nie liefert. Pilot mit einem Prozess, messbare Wirkung in 10 Wochen.‘",
+        "‚Wir modellieren erst einmal alles, dann sehen wir weiter.‘",
+        "‚Process Mining ist eine reine IT-Aufgabe, nicht relevant für den Vorstand.‘"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Vorstands-tauglich: klare Linie (drei Linsen, ein Bild), klarer Hebel (Pilot mit messbarer Wirkung), überschaubarer Zeitrahmen (10 Wochen). Tool-First ist Werkzeugaktivismus, ‚alles modellieren‘ ist Übermodellierung, ‚nicht relevant‘ unterschätzt die Steuerungslogik.",
+      "quelle": "Tag 2 · UE 7 Feedback · 90-Sekunden-Empfehlung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    }
+  ]
+}
