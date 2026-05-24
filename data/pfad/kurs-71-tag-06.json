@@ -1,0 +1,149 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 6,
+  "titel": "BPMS, APIs und Cloud-native Skalierung: E2E-Integration als Steuerungsarchitektur",
+  "erstellt_am": "2026-05-24",
+  "schritte": [
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "BPMS verstehen: Modellieren, Ausführen, Überwachen, Optimieren",
+      "youtube_id": "",
+      "youtube_query": "business process management system bpms closed loop deutsch erklärt",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Was ist die ‚Closed-Loop‘-Idee eines BPMS?",
+        "typ": "single",
+        "optionen": [
+          "Ein geschlossenes Buchungssystem mit verschlüsselten Daten",
+          "Ein Kreislauf aus Modellieren → Ausführen → Überwachen → Optimieren, in dem Erkenntnisse direkt ins Modell zurückfließen",
+          "Eine reine Reporting-Funktion ohne Steuerungseingriffe",
+          "Ein UI-Konzept für mobile BPMS-Apps"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Der Closed Loop ist der Kern eines BPMS: das Modell wird ausgeführt, das Monitoring liefert Daten, und diese Daten fließen in die nächste Modelliterationsrunde. Reine Reportings oder UI-Konzepte beschreiben höchstens Bausteine, nicht das Steuerungsprinzip — die Geschlossenheit zwischen Soll und Ist ist der eigentliche Mehrwert."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "API als Vertrag: Endpoint, Input, Fehler, Auth, Versionierung",
+      "inhalt": "Eine API ist mehr als ein technischer Endpunkt — sie ist ein Vertrag zwischen zwei Systemen mit klaren Zusagen und klaren Haftungsgrenzen. Sieben Bestandteile gehören in jeden API-Vertrag: ‚Endpoint‘ (URL/Pfad), ‚Input-Felder‘ (Pflicht/Optional, Format, Wertebereich), ‚Output-Felder‘ (Antwortstruktur und Statuscodes), ‚Fehlercodes‘ (welche Fehler werden wie zurückgegeben), ‚Authentifizierung‘ (Wer darf zugreifen), ‚Rate Limits‘ (wie viele Aufrufe pro Zeit) und ‚Versionierung‘ (wie werden Änderungen kompatibel ausgerollt). Wer eine API ohne diese Sieben anbietet, schiebt das Risiko auf den Konsumenten und produziert Schatten-Integration. Senior-Pointe: API-Verträge sind keine Tech-Kosmetik, sondern definieren Verantwortung — wer ist accountable für Stabilität, SLAs und Versionswechsel? In Konzernen ist das oft eine eigene API-Owner-Rolle, kein Nebenjob.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Bestandteile gehören in einen tragfähigen API-Vertrag?",
+        "typ": "multi",
+        "optionen": [
+          "Endpoint und Input-/Output-Definition",
+          "Fehlercodes und definierte Fehlerfälle",
+          "Authentifizierung und Autorisierung",
+          "Lieblings-IDE des Entwicklers",
+          "Versionierungsstrategie"
+        ],
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Endpoint, Input/Output, Fehlerfälle, Auth und Versionierung sind klassische Pflicht-Bestandteile eines API-Vertrags. Die persönliche IDE-Wahl der Entwickler:innen ist für den Konsumenten der API vollkommen irrelevant und gehört nicht in den Vertrag."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "Sync API vs. Async Event: wann welches Integrationsmuster?",
+      "youtube_id": "",
+      "youtube_query": "synchrone asynchrone integration api event driven architecture deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Wann ist eine asynchrone Event-basierte Integration einer synchronen API typischerweise überlegen?",
+        "typ": "single",
+        "optionen": [
+          "Wenn die aufrufende Komponente sofort auf eine Antwort warten muss",
+          "Wenn Last stark schwankt, viele Konsumenten reagieren sollen und Entkopplung sowie Robustheit wichtiger sind als Geschwindigkeit der Einzelantwort",
+          "Wenn keine Logs gewünscht sind",
+          "Wenn nur ein einziges System angesprochen wird"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Async/Event-Integration ist besonders stark bei schwankender Last, mehreren interessierten Konsumenten und der Anforderung, Systeme zu entkoppeln (ein Konsument darf ausfallen, ohne den Produzenten zu blockieren). Sync passt besser, wenn unmittelbar eine Antwort gebraucht wird (z. B. ‚Verfügbarkeit prüfen‘) — Logs sind in beiden Fällen Pflicht, und der Single-Konsument-Fall ist nicht das entscheidende Kriterium."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "Cloud-native: Skalierung, Resilienz, Observability als Betriebsfähigkeit",
+      "inhalt": "‚Cloud-native‘ ist kein Architektur-Label, sondern eine Betriebsfähigkeit. Vier Prinzipien tragen die Last: ‚Stateless Services‘ (Zustand wird nicht im Service, sondern in externer Speicherung gehalten — so können Instanzen jederzeit hochgefahren oder weggenommen werden), ‚Horizontale Skalierung‘ (mehr Last bedeutet mehr Instanzen, nicht größere Server), ‚Container‘ als Verpackung mit klaren Ressourcenlimits, und vor allem ‚Observability‘ (Logs, Metriken, Traces). Ohne Observability ist horizontale Skalierung Blindflug — keine Instanz weiß, wie es den anderen geht. Dazu kommen Betriebsanforderungen: SLAs/SLOs (welches Niveau ist verbindlich), Resilienzmuster wie Circuit Breaker und Retries mit Idempotenz, Deployment-Disziplin via CI/CD, und Security-Defaults bis hin zu Zero Trust. Die Senior-Pointe: ‚Cloud-native‘ erkauft Skalierbarkeit nur dann, wenn die Organisation die Betriebsdisziplin mitliefert.",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Aussagen zu Cloud-native Betrieb sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "Stateless Services erleichtern horizontale Skalierung und Self-Healing",
+          "Observability (Logs, Metrics, Traces) ist Pflicht, nicht Kür",
+          "Horizontale Skalierung bedeutet, einzelne Server immer größer zu dimensionieren",
+          "Idempotenz erlaubt sicheres Retry bei Timeouts und Doppelnachrichten",
+          "Resilienzmuster wie Circuit Breaker sind unnötig, wenn ‚alles läuft‘"
+        ],
+        "korrekt": [0, 1, 3],
+        "erklaerung": "Stateless + horizontale Skalierung + Observability + Idempotenz sind ein zusammenhängendes Cloud-native-Paket. Vertikale Skalierung (größere Server) widerspricht dem Cloud-native-Prinzip, und Circuit Breaker sind gerade für den Fall da, dass ‚nicht alles läuft‘ — sie als unnötig zu bezeichnen ist eine teure Annahme."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "API Governance und API Lifecycle für E2E-Integration",
+      "youtube_id": "",
+      "youtube_query": "api governance lifecycle versioning enterprise integration deutsch",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Warum ist API-Versionierung in Konzernen kein technisches Detail, sondern eine Governance-Frage?",
+        "typ": "single",
+        "optionen": [
+          "Weil Versionsnummern die Marketing-Wirkung erhöhen",
+          "Weil Breaking Changes ohne Versionierung dutzende Konsumenten gleichzeitig brechen und damit Ownership, SLA und Vertrauen kollabieren",
+          "Weil Versionierung die API langsamer macht",
+          "Weil Versionierung nur bei externen APIs relevant ist"
+        ],
+        "korrekt": 1,
+        "erklaerung": "API-Versionierung ist eine Governance-Disziplin, weil ohne sie ein einziger Breaking Change zahlreiche Konsumenten reißen kann — und damit die Vertragslogik der API in sich zusammenbricht. Marketing, Performance und externe Sichtbarkeit sind sekundäre Aspekte: der Kern ist Verantwortbarkeit gegenüber den Konsumenten."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "Minimum Viable Integration: 2 Integrationen stabil schlagen 10 halbgar",
+      "inhalt": "‚E2E-Integration‘ klingt nach großer Architektur, scheitert in der Praxis aber oft an Wunschdenken: zehn Integrationen werden begonnen, keine fertig stabilisiert, das Projekt fährt gegen die Wand. Die Senior-Disziplin heißt ‚Minimum Viable Integration‘: lieber zwei kritische Integrationen sauber bauen (klarer Vertrag, Fehlerstrategie, Monitoring, Owner) als zehn halbgar. Das setzt zwei harte Entscheidungen voraus: welcher Use Case rechtfertigt eine echte Integration (Volumen, Compliance, Customer Impact) — und welche Integration darf bewusst noch nicht entstehen (mit klar dokumentierter ‚Stop Doing‘-Begründung). Wichtig: was nicht gebaut wird, braucht trotzdem einen organisatorischen Fallback, sonst entstehen Schattenprozesse. Die ehrlichste Frage in einer Architekturrunde ist nicht ‚was bauen wir?‘, sondern ‚was bauen wir bewusst nicht — und wie fangen wir das auf?‘.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Prinzipien einer ‚Minimum Viable Integration‘ sind sinnvoll?",
+        "typ": "multi",
+        "optionen": [
+          "Lieber wenige Integrationen stabil als viele halbgar",
+          "Explizite ‚Stop Doing‘-Liste mit organisatorischem Fallback",
+          "Möglichst alle Integrationen gleichzeitig starten, um keine Stakeholder zu enttäuschen",
+          "Pro Integration Vertrag, Fehlerstrategie, Monitoring, Owner verbindlich",
+          "Verzicht auf Monitoring im MVP, um schneller zu liefern"
+        ],
+        "korrekt": [0, 1, 3],
+        "erklaerung": "Wenige stabile Integrationen mit Vertrag, Fehlerstrategie, Monitoring und Owner sind die Essenz von MVI; eine explizite ‚Stop Doing‘-Liste schützt vor Wunschdenken. Alle gleichzeitig zu starten erzeugt das Halbgar-Problem; Monitoring im MVP einzusparen ist genau die teure Abkürzung, die später als Audit-Finding zurückkommt."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "Operating Model: Plattform-Team, API-Owner, SLOs — wer ist accountable?",
+      "youtube_id": "",
+      "youtube_query": "platform engineering team topology api owner slo deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche Rollen sollten in einem reifen E2E-Integrations-Operating-Model klar besetzt sein?",
+        "typ": "multi",
+        "optionen": [
+          "Plattform-Team mit Verantwortung für Standards, CI/CD-Templates und Observability-Baseline",
+          "API-Owner pro API (Vertrag, Versionierung, Stabilität, Konsumenten-Support)",
+          "SLO-Verantwortliche, die das Niveau von Verfügbarkeit und Latenz definieren",
+          "Eine Person, die alles macht, um Schnittstellen zu sparen",
+          "Security/Compliance-Rolle, die Baselines setzt und Ausnahmen prüft"
+        ],
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Plattform-Team, API-Owner, SLO-Verantwortliche und Security/Compliance sind die klassischen vier Rollen für ein tragfähiges Operating Model — jede mit eigener Accountability. Die ‚Eine-Person-für-alles‘-Lösung erzeugt einen Single Point of Failure und macht Ausfälle und Audits zur Glückssache."
+      }
+    }
+  ]
+}

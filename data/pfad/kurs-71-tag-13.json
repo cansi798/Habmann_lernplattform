@@ -1,0 +1,149 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 13,
+  "titel": "Nachhaltige IT-Services: Service-Portfolio, Capacity Planning und Rightsizing",
+  "erstellt_am": "2026-05-24",
+  "schritte": [
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "ITIL-4-Service-Portfolio: Pipeline, Live, Retired",
+      "youtube_id": "",
+      "youtube_query": "itil 4 service portfolio management pipeline live retired deutsch",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche drei Hauptzustände kennt ein ITIL-4-konformes Service-Portfolio?",
+        "typ": "single",
+        "optionen": [
+          "Aktiv, Inaktiv, Geheim",
+          "Pipeline (geplant/im Bau), Live (im Betrieb), Retired (ausgemustert)",
+          "Wichtig, Unwichtig, Egal",
+          "Cloud, Onpremise, Hybrid"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Pipeline, Live, Retired ist die klassische ITIL-Strukturierung — sie macht den gesamten Lebenszyklus inklusive geplanter und stillgelegter Services sichtbar und steuerbar. Alternative Kategorisierungen (aktiv/inaktiv, wichtig/unwichtig, Bereitstellungsformen) sind keine Lifecycle-Sicht."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "Wert ist mehr als Geld: Kunde, Resilienz, Compliance, Nachhaltigkeit",
+      "inhalt": "In klassischen Service-Portfolios wird ‚Wert‘ häufig auf monetäre Größen reduziert — was den Blick auf strukturelle Wertbeiträge verstellt. Vier Dimensionen sollten gleichberechtigt mitlaufen. ‚Kundennutzen‘ ist der direkte Beitrag zur Kunden-Experience oder zum Umsatz — ein Patientenportal ist hier offensichtlich kritisch. ‚Regulatorische Relevanz‘ misst, wie sehr der Service zur Erfüllung verbindlicher Pflichten beiträgt — ein Reporting-Service kann monetär klein, regulatorisch aber unverzichtbar sein. ‚Resilienz‘ bewertet, wie sehr der Service zur Stabilität anderer Services beiträgt — ein zentraler Authentifizierungsdienst hat hohe Resilienz-Bedeutung, auch wenn sein eigener Umsatz null ist. ‚Nachhaltigkeit‘ schließlich erfasst Energieverbrauch, Hardware-Bedarf und Vendor-Footprint. Wer Portfolio-Entscheidungen ausschließlich nach Kosten trifft, optimiert kurzfristig und legt langfristig die falschen Services still. Senior-Pointe: die Mehrdimensionalität des Wertbegriffs muss im Scoring-Modell explizit auftauchen, sonst wird sie in der Praxis ignoriert.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Wertdimensionen gehören in ein mehrdimensionales Service-Portfolio-Scoring?",
+        "typ": "multi",
+        "optionen": [
+          "Kundennutzen",
+          "Regulatorische Relevanz",
+          "Resilienzbeitrag zu anderen Services",
+          "Beliebtheit beim CTO",
+          "Nachhaltigkeitswirkung (Energie, Hardware, Vendor)"
+        ],
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Kundennutzen, Regulatorik, Resilienz und Nachhaltigkeit bilden ein robustes mehrdimensionales Scoring. Persönliche Vorlieben einzelner Führungskräfte sind weder objektiv noch nachvollziehbar — sie gehören in keine Portfolio-Methodik."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "Capacity Planning und Rightsizing: Sicherheit durch Messung",
+      "youtube_id": "",
+      "youtube_query": "capacity planning rightsizing it slo monitoring deutsch tutorial",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Was ist die grundlegende Voraussetzung für seriöses Rightsizing?",
+        "typ": "single",
+        "optionen": [
+          "Eine Excel-Liste der gewünschten Einsparungen",
+          "Verlässliches Monitoring der realen Auslastung über einen ausreichenden Zeitraum sowie definierte SLOs als Guardrails",
+          "Eine Anweisung des CFO, 20% einzusparen",
+          "Ein Zufallsentscheid"
+        ],
+        "korrekt": 1,
+        "erklaerung": "‚Sicherheit durch Messung‘ ist der Kern: ohne reale Auslastungsdaten und definierte SLOs ist jede Rightsizing-Entscheidung Glücksspiel. CFO-Vorgaben, Excel-Wünsche oder Zufallsentscheide ersetzen kein Monitoring — sie produzieren SLO-Verletzungen und teure Rollbacks."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "Low-Regret Moves: was fast immer hilft",
+      "inhalt": "In jeder Capacity-/Sustainability-Diskussion lohnt es sich, mit ‚Low-Regret Moves‘ zu starten — Maßnahmen, die unter fast allen plausiblen Zukunftsszenarien sinnvoll sind. Drei klassische Beispiele: ‚Non-Prod Off-Hours Shutdown‘ — Entwicklungs- und Testumgebungen müssen nachts und am Wochenende nicht laufen, was häufig 30–60% Verbrauch dieser Umgebungen einspart, ohne Produktivbetrieb zu gefährden. ‚Zombie-Services Retire‘ — Dienste, die niemand mehr nutzt, kosten Geld und Energie; ein Portfolio-Review identifiziert sie und legt sie kontrolliert still. ‚Standard-SLOs je Kritikalitätsklasse‘ — wenn jeder Service ‚99,99%‘ verlangt, ohne dass die Kritikalität es rechtfertigt, wird unnötig viel Redundanz gebaut; klare Klassen mit Standard-SLOs (z. B. 99/99,5/99,9/99,99) ermöglichen passgenaues Rightsizing. Gemeinsam sind diese Maßnahmen risikoarm, schnell umsetzbar und sofort messbar — und sie schaffen Vertrauen für die anspruchsvolleren Schritte.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche der folgenden sind klassische ‚Low-Regret Moves‘ im IT-Service-Portfolio?",
+        "typ": "multi",
+        "optionen": [
+          "Off-Hours Shutdown von Non-Prod-Umgebungen",
+          "Retire von Services ohne aktive Nutzer:innen",
+          "Sofortiges Abschalten aller Produktivsysteme zum Energiesparen",
+          "Differenzierte Standard-SLOs je Kritikalitätsklasse",
+          "Verzicht auf jedes Monitoring, um Strom zu sparen"
+        ],
+        "korrekt": [0, 1, 3],
+        "erklaerung": "Off-Hours Shutdown, Retire ungenutzter Services und differenzierte SLOs sind risikoarme, schnell wirksame Maßnahmen. Produktivsysteme abzuschalten und Monitoring einzusparen sind Hochrisiko-Pseudoeinsparungen, die Compliance, Verfügbarkeit und Lernfähigkeit zerstören."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "Energy Efficient Data Centers: Hebel und ihre Wirkung",
+      "youtube_id": "",
+      "youtube_query": "rechenzentrum energieeffizienz pue konsolidierung deutsch",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Hebel haben in modernen Rechenzentren typischerweise die größte Energiewirkung?",
+        "typ": "single",
+        "optionen": [
+          "Die Wandfarbe der Server-Racks",
+          "Konsolidierung/Virtualisierung, Abschalten Idle-Workloads, Kühlung optimieren, hardwareseitige Effizienzklassen",
+          "Mehr Bildschirme im Operations-Bereich",
+          "Längere Mittagspausen der Administrator:innen"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Konsolidierung/Virtualisierung, Abschalten von Idle-Workloads, Kühlungsoptimierung und Hardware-Effizienzklassen sind die nachgewiesen wirkungsvollsten Hebel — sie verändern den realen Energieverbrauch substanziell. Wandfarben, Monitor-Anzahl und Pausenlogistik sind keine ernsthaften Steuerungsinstrumente."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "Anti-Greenwashing-Kopplung: Kostenreduktion gilt nur bei gehaltenem SLO",
+      "inhalt": "Eine der mächtigsten Schutzmaßnahmen gegen Greenwashing-KPIs ist die explizite Kopplung. ‚Kostenreduktion gilt nur dann als Erfolg, wenn das SLO gehalten wurde.‘ Ohne diese Kopplung passiert in der Praxis regelmäßig folgendes: ein Team senkt die Compute-Kosten um 30%, indem es Redundanzen entfernt — und produziert kurz darauf eine SLO-Verletzung, die teurer ist als die Ersparnis. Die Kopplung kann technisch über mehrere KPIs erfolgen: Reportings zeigen ‚Kostenreduktion‘ und ‚SLO-Quote‘ nebeneinander, und der ‚Erfolg‘ wird als logische UND-Bedingung definiert. Analog: ‚Energieeinsparung gilt nur, wenn Datenqualität ≥B und Control Pass Rate ≥X.‘ Diese Kopplungslogik macht aus weichen Nachhaltigkeitszielen harte Steuerungsgrößen — und verhindert, dass Pseudo-Erfolge gefeiert werden. Senior-Pointe: ohne Kopplung folgt die Organisation der naturgesetzlichen Goodhart-Logik und manipuliert die Kennzahl, nicht das gemeinte Verhalten.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Aussagen zur Anti-Greenwashing-Kopplung sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "Kostenreduktion wird nur als Erfolg gewertet, wenn das SLO gleichzeitig eingehalten wurde",
+          "Eine alleinige Cost-KPI ohne Kopplung schützt zuverlässig vor Goodhart-Effekten",
+          "Energieeinsparung kann an Datenqualität und Control Pass Rate gekoppelt werden",
+          "Reportings sollten gekoppelte KPIs nebeneinander darstellen",
+          "Kopplungen sind unnötig, wenn die Mitarbeitenden ‚gute Absichten‘ haben"
+        ],
+        "korrekt": [0, 2, 3],
+        "erklaerung": "Logische UND-Bedingungen, klare Kopplung mit Datenqualität/Controls und kombinierte Darstellung sind die wirksamen Mechanismen. Eine isolierte Cost-KPI ist genau das, wovor Goodhart warnt; ‚gute Absichten‘ ersetzen kein KPI-Design — das ist eine der teuersten Annahmen in Sustainability-Programmen."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "Sustainable IT Governance: Portfolio Board und auditfähige Entscheidungen",
+      "youtube_id": "",
+      "youtube_query": "sustainable it portfolio board governance auditfähige entscheidung deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche Bausteine kennzeichnen eine auditfähige Sustainable-IT-Governance?",
+        "typ": "multi",
+        "optionen": [
+          "Ein regelmäßig tagendes Portfolio Board mit klaren Entscheidungsbefugnissen",
+          "Entscheidungsprotokolle mit Kriterien, Datenbasis und Begründung",
+          "Klare Owner für Service, Kapazität, Kosten und Nachhaltigkeit",
+          "Mündliche Vereinbarungen ohne Dokumentation",
+          "Review-Zyklen mit klar definierter Cadence"
+        ],
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Board, Entscheidungsprotokolle, klare Owner und Review-Cadence sind die Auditfähigkeits-Bausteine. Mündliche Vereinbarungen mögen vertrauensvoll wirken, sind aber genau das Gegenteil von auditfähig — und führen regelmäßig zu Findings und Reputationsproblemen."
+      }
+    }
+  ]
+}

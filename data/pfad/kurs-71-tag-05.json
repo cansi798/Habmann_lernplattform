@@ -1,0 +1,149 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 5,
+  "titel": "Enterprise-Modellierung: Standards, Capability Maps und MDA als Steuerungslogik",
+  "erstellt_am": "2026-05-24",
+  "schritte": [
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "Von Visio-Diagrammen zur kollaborativen Enterprise-Modellierung",
+      "youtube_id": "",
+      "youtube_query": "lucidchart visio enterprise modellierung kollaboration deutsch tutorial",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Was unterscheidet eine Enterprise-Modellierungsplattform (z. B. Lucidchart, Signavio) primär von Einzeldateien in Visio?",
+        "typ": "single",
+        "optionen": [
+          "Sie ist immer kostenlos",
+          "Sie ermöglicht gleichzeitige Kollaboration, Versionsstände, Review-Workflows und einheitliche Templates",
+          "Sie zwingt die Nutzer:innen zu festen Symbolen",
+          "Sie ersetzt jede Form von Governance"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Der zentrale Unterschied ist die geteilte Kollaboration mit Kommentaren, Versionen und Review-Workflows sowie unternehmensweiten Templates — das macht aus Einzeldateien eine Single Source of Truth. Kostenlos sind diese Tools meist nicht, sie zwingen nicht zu Symbolen (das tun Standards), und sie ersetzen keine Governance — sie ermöglichen sie."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "Modelling Charter: nicht verhandelbare Standards und bewusste Freiheitsgrade",
+      "inhalt": "Eine Modelling Charter ist das einseitige Dokument, das Klarheit in eine heterogene Modellierungslandschaft bringt. Sie definiert zuerst die ‚nicht verhandelbaren‘ Standards: einheitliche Benennungsregeln (Verb + Objekt), Mindestmetadaten (Owner, Status, Version, Gültigkeit), klare Start- und Endereignisse, sichtbare Rollen über Lanes/Swimlanes und ein verpflichtendes Änderungslog. Genauso wichtig sind die bewussten ‚Freiheitsgrade‘: Detailtiefe je nach Zielgruppe, lokale Varianten als Attribute, visuelle Gestaltung innerhalb des Templates. Ohne diese Balance entstehen entweder Modell-Wildwuchs (zu viele Freiheiten) oder Akzeptanzprobleme (zu enge Regeln). Der Freigabeprozess Draft → Review → Approved → Retired mit klaren Rollen (Modeler, Reviewer, Owner) bildet das Rückgrat. Senior-Erkenntnis: Standards sollten gerade so streng sein, dass Vergleichbarkeit gelingt — gerade so frei, dass Teams sie auch leben.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Elemente sind typischer Bestandteil einer wirksamen Modelling Charter?",
+        "typ": "multi",
+        "optionen": [
+          "Verbindliche Benennungsregel (z. B. Verb + Objekt)",
+          "Mindestmetadaten (Owner, Status, Version)",
+          "Eine vollständige Liste aller jemals erstellten Modelle",
+          "Freigabeprozess Draft → Review → Approved → Retired mit Rollen",
+          "Bewusste Freiheitsgrade (Detailtiefe, visuelle Gestaltung)"
+        ],
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Benennungsregeln, Mindestmetadaten, Freigabeprozess und definierte Freiheitsgrade sind das Rückgrat einer Charter. Eine Modell-Volltext-Liste gehört in das Repository/Tool selbst, nicht in die Charter — sie würde sie inhaltlich überfrachten und schnell veralten."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "Enterprise Architecture und Capability Maps verstehen",
+      "youtube_id": "",
+      "youtube_query": "enterprise architecture capability map einfach erklärt deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Was beantwortet eine Capability Map primär?",
+        "typ": "single",
+        "optionen": [
+          "Welche Mitarbeitenden in welchem Team arbeiten",
+          "Was eine Organisation fachlich tun kann (Fähigkeiten) — unabhängig von Prozess, Software oder Organisation",
+          "Wie Server und Netzwerke verbunden sind",
+          "Wie hoch der Umsatz im letzten Quartal war"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Eine Capability Map beschreibt Fähigkeiten (z. B. ‚Kunde identifizieren‘, ‚Vertrag prüfen‘) und ist bewusst toolneutral, prozessneutral und organisationsneutral — sie ist die stabile Achse, gegen die Prozesse, Applikationen und Daten verortet werden. Mitarbeitende, Netzwerke und Finanzkennzahlen sind andere Sichten der Enterprise Architecture, aber nicht Capability."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "MDA: CIM, PIM, PSM und die Verantwortungsgrenze zwischen Business und IT",
+      "inhalt": "Model-Driven Architecture (MDA) ist mehr als ein theoretisches Modell — es ist eine Verantwortungsgrenze. Das ‚CIM‘ (Computation Independent Model) beschreibt die Geschäftssicht: Ziele, Begriffe, Prozesse, Pflichtdaten. Hier entscheidet das Business, nicht die IT. Das ‚PIM‘ (Platform Independent Model) übersetzt diese Geschäftslogik in eine logische Service- und Datensicht, ohne sich auf eine konkrete Plattform festzulegen — hier entstehen Schnittstellen, Datenobjekte und Fehlerfälle. Das ‚PSM‘ (Platform Specific Model) ist schließlich die konkrete Umsetzung auf einer Zielplattform mit ihren Eigenheiten (z. B. SAP, Salesforce, eine eigene Microservice-Plattform). Die Senior-Pointe: wenn das CIM unvollständig ist, baut die IT zwangsläufig ‚am Business vorbei‘, weil sie Annahmen treffen muss. Wenn umgekehrt das Business ins PSM hineinregiert, wird Architektur zur Politik. Die saubere Trennung — was ist Business-Entscheidung, was Implementierungsdetail — ist eine der wichtigsten Senior-Disziplinen.",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Aussagen zu CIM, PIM und PSM sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "Im CIM werden Geschäftsziele, Begriffe und Pflichtdaten festgelegt",
+          "Das PIM legt sich bewusst noch nicht auf eine konkrete Plattform fest",
+          "Das PSM beschreibt die konkrete plattformspezifische Umsetzung",
+          "CIM und PSM sind Synonyme und können vertauscht werden",
+          "MDA ist nur ein theoretisches Konzept ohne Verantwortungsabgrenzung"
+        ],
+        "korrekt": [0, 1, 2],
+        "erklaerung": "CIM, PIM und PSM bilden eine klare Abstraktionskaskade vom Business zur Plattform, jede mit eigener Verantwortung. CIM und PSM sind das Gegenteil — Geschäftssicht versus Plattformsicht — und keinesfalls austauschbar. MDA dient in der Praxis genau dazu, Business- von Implementierungsentscheidungen sauber zu trennen."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "Capability vs. Prozess vs. Applikation — die EA-Sichten richtig nutzen",
+      "youtube_id": "",
+      "youtube_query": "capability process application data ea sichten unterschied deutsch",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Worin liegt der wichtigste Unterschied zwischen einer Capability und einem Prozess?",
+        "typ": "single",
+        "optionen": [
+          "Eine Capability beschreibt Was wir können, ein Prozess Wie wir es tun",
+          "Beide bedeuten dasselbe, nur mit anderen Worten",
+          "Eine Capability ist immer technisch, ein Prozess immer organisatorisch",
+          "Capability gilt nur für IT, Prozess nur fürs Business"
+        ],
+        "korrekt": 0,
+        "erklaerung": "Capability = Fähigkeit (Was können wir?), Prozess = Ablauf (Wie tun wir es?). Diese Trennung ist kein Wortspiel: eine Fähigkeit (‚Kunde identifizieren‘) kann durch unterschiedliche Prozesse realisiert werden — und der Prozess ändert sich öfter als die Fähigkeit. Diese Stabilität macht Capabilities zur Priorisierungsachse."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "Toolstrategie: Standardtool vs. föderierter Ansatz",
+      "inhalt": "Die Frage ‚ein zentrales Modellierungstool oder mehrere?‘ ist keine Tooldebatte, sondern eine Organisationsfrage. Ein ‚Standardtool für alle‘ erzwingt Vergleichbarkeit, vereinfacht Audit und reduziert Lizenzchaos — kostet aber Akzeptanz, wenn Teams sich gegängelt fühlen, und hat einen Single Point of Failure beim Hersteller. Der ‚föderierte‘ Ansatz lässt Bereichen ihre Werkzeuge, definiert aber unternehmensweit Standards (Notation, Metadaten, Austauschformate) — er erhöht Akzeptanz, erfordert aber strenge Governance und Exportwege. Beide Wege sind legitim, beide haben Frühwarnsignale: beim Standardtool steigt Shadow-Tooling (Excel-Workarounds), beim föderierten Ansatz divergieren Naming und Metadaten. Eine Senior-Entscheidung balanciert Reifegrad der Organisation, Audit-Druck und Akzeptanz-Risiko — und dokumentiert die Wahl mit einem expliziten Trigger zum Nachsteuern.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welches Frühwarnsignal spricht typischerweise gegen die aktuell gewählte Toolstrategie?",
+        "typ": "multi",
+        "optionen": [
+          "Bei Standardtool-Strategie: Zunahme von Shadow-Tooling (Excel/Workarounds)",
+          "Bei föderierter Strategie: Naming und Metadaten divergieren zwischen Bereichen",
+          "Bei Standardtool-Strategie: Tool wird im Marktführer-Quadranten genannt",
+          "Bei föderierter Strategie: alle Teams nutzen freiwillig dieselbe Notation",
+          "Wenn Audit-Findings zu Modellinkonsistenz steigen — unabhängig von der Strategie"
+        ],
+        "korrekt": [0, 1, 4],
+        "erklaerung": "Steigendes Shadow-Tooling (1) und divergierendes Naming (2) sind klassische Warnsignale, dass die jeweilige Strategie ihre Schwächen ausspielt. Wachsende Audit-Findings (5) sind in beiden Modellen ein objektiver Trigger zum Nachschärfen. Marktquadranten und freiwillige Konvergenz sind keine Warnsignale, sondern positive bzw. neutrale Indikatoren."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "Governance als Produkt: wer ist Product Owner des Modellierungssystems?",
+      "youtube_id": "",
+      "youtube_query": "governance als produkt product owner modellierung enterprise architecture",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche Aussagen über ‚Governance als Produkt‘ sind zutreffend?",
+        "typ": "multi",
+        "optionen": [
+          "Es gibt eine Person/Rolle (z. B. Head of Enterprise Architecture), die Product Owner für das Modellierungssystem ist",
+          "Standards werden in Releases weiterentwickelt — nicht einmalig ‚fertig erlassen‘",
+          "Governance braucht eigene KPIs (z. B. Modellqualität, Reviewdauer, Adoption)",
+          "Governance ist ein einmaliges Projekt mit klarem Enddatum",
+          "Akzeptanz und Enablement sind Teil der Produktverantwortung"
+        ],
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Wirksame Governance hat einen verantwortlichen Product Owner, entwickelt sich iterativ in Releases und wird über eigene KPIs gesteuert; Akzeptanz und Enablement gehören untrennbar dazu. Falsch ist die Vorstellung von Governance als einmaliges Projekt — das führt zur erstarrten Policy, die niemand mehr lebt."
+      }
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 9,
+  "titel": "Agile Delivery, CI und Infrastructure as Code als Steuerungssystem",
+  "erstellt_am": "2026-05-24",
+  "schritte": [
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "Scrum vs. Kanban: Wann welches Framework?",
+      "youtube_id": "",
+      "youtube_query": "scrum kanban unterschied wann welches framework deutsch erklärt",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Wann ist Kanban tendenziell die bessere Wahl als Scrum?",
+        "typ": "single",
+        "optionen": [
+          "Wenn man möglichst viele Meetings haben möchte",
+          "Wenn die Arbeit kontinuierlich anfällt, Prioritäten häufig wechseln und ein hoher Support-/Incident-Anteil existiert",
+          "Wenn man auf Outcomes verzichten will",
+          "Wenn das Team Scrum noch nie gehört hat"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Kanban passt besser zu kontinuierlicher Arbeit mit wechselnden Prioritäten und Support-Anteilen — die Pull-Logik und WIP-Limits stabilisieren Flow. Scrum mit seinen festen Sprints ist eher für Produktentwicklung mit klar formbarem Backlog gedacht. Meeting-Anzahl, Outcome-Verzicht und Unkenntnis sind keine Auswahlkriterien."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "WIP-Limits: warum Begrenzung Qualität schützt",
+      "inhalt": "Eines der mächtigsten Steuerungsinstrumente in Kanban (und in jeder Form agiler Lieferung) ist das Work-in-Progress-Limit. Die Idee ist kontraintuitiv: weniger gleichzeitig in Arbeit zu nehmen erhöht den Durchsatz. Der Grund: Multitasking erzeugt Kontextwechsel, jeder Kontextwechsel kostet 10–30 Minuten Rüstzeit, und je mehr offene Arbeit, desto höher die Wartezeit jedes einzelnen Vorgangs. Ein WIP-Limit von zwei pro Spalte zwingt das Team, Vorgänge fertig zu machen, bevor neue gestartet werden — und macht Engpässe sofort sichtbar (wenn die Spalte ‚Test‘ blockiert, kann die Spalte ‚Dev‘ nicht weiterziehen). Senior-Pointe: WIP-Limits sind kein Bürokratieinstrument, sondern Qualitätsschutz. Sie führen unweigerlich zu unangenehmen Gesprächen über Priorisierung — und genau das ist ihre eigentliche Wirkung.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Warum erhöhen WIP-Limits typischerweise den Durchsatz und die Qualität?",
+        "typ": "multi",
+        "optionen": [
+          "Weniger Kontextwechsel pro Person und damit kürzere Lead Times",
+          "Engpässe werden sofort sichtbar und können adressiert werden",
+          "Mehr offene Vorgänge bedeuten automatisch mehr fertige Vorgänge",
+          "Priorisierungsentscheidungen werden erzwungen statt verschoben",
+          "WIP-Limits sind nur kosmetische Visualisierung"
+        ],
+        "korrekt": [0, 1, 3],
+        "erklaerung": "Weniger Multitasking, sichtbare Engpässe und erzwungene Priorisierung sind die Kernmechanismen. Mehr offene Vorgänge erhöhen Wartezeiten und Fehlerquoten, nicht den Durchsatz — und WIP-Limits sind weit mehr als Kosmetik: sie sind eines der wenigen Werkzeuge, das systembedingten Druck zu Outcome erzeugt."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "CI-Pipeline und Quality Gates: schnelle und sichere Änderungen",
+      "youtube_id": "",
+      "youtube_query": "continuous integration pipeline quality gates deutsch tutorial",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche Stufen umfasst eine typische CI-Pipeline?",
+        "typ": "single",
+        "optionen": [
+          "Nur Build und Deploy",
+          "Commit → Build → automatisierte Tests → Security/Quality Checks → Deploy (Staging/Prod)",
+          "Nur eine grafische Oberfläche zum Anzeigen von Logs",
+          "Eine Stufe, die alles auf einmal macht"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Eine seriöse Pipeline kettet Commit, Build, Tests, Security/Quality Checks und Deploy — jede Stufe ist ein Gate, das Fehler früh fängt. Eine reduzierte Sicht (‚nur Build und Deploy‘, ‚alles in einer Stufe‘) verzichtet auf Schutzmechanismen und produziert teure Defekte in Produktion."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "Infrastructure as Code: reproduzierbar, reviewbar, auditfähig",
+      "inhalt": "Infrastructure as Code (IaC) bedeutet, dass Server, Netzwerke, Datenbanken und Berechtigungen nicht mehr ‚per Klick‘ erzeugt werden, sondern als versionierter Code definiert sind — Terraform, CloudFormation oder Ansible sind die bekanntesten Werkzeuge. Drei Vorteile machen IaC zur Pflicht in Konzernumgebungen: ‚Reproduzierbarkeit‘ (eine Umgebung kann jederzeit gleich aufgebaut werden, was Disaster Recovery dramatisch verbessert), ‚Reviewbarkeit‘ (Änderungen laufen durch Pull Requests, sind diskutierbar und nachvollziehbar) und ‚Auditfähigkeit‘ (die Merge-Historie ist der Audit Trail: wer hat wann was geändert, und wer hat freigegeben). Risiken bleiben: falsche Rechte und Secrets im Repository sind klassische Anfängerfehler — Secrets gehören in einen Vault, nie in den Code. Senior-Pointe: IaC ist nicht primär ein Effizienztool, sondern ein Kontrolltool. Es verlagert die Diskussion von ‚wer hat das wann angeklickt?‘ zu ‚wer hat den Pull Request freigegeben?‘.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Aussagen über Infrastructure as Code (IaC) sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "IaC erlaubt reproduzierbares Aufsetzen von Umgebungen",
+          "Änderungen sollten über Pull Requests mit Review erfolgen",
+          "Secrets dürfen im IaC-Repository gespeichert werden, solange ein Passwort gesetzt ist",
+          "Die Merge-Historie kann als Audit Trail dienen",
+          "IaC verschiebt die Steuerung vom Klick zur Code-Review"
+        ],
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Reproduzierbarkeit, Review-Workflow, Audit-Historie und die Verlagerung der Steuerung sind die Hauptvorteile. Secrets ins Repo zu legen — egal ob mit Passwort — ist ein klassischer Sicherheitsfehler und führt regelmäßig zu Datenpannen; Secrets gehören in einen Vault."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "DORA-Metriken: Lead Time, Deployment Frequency, Change Failure Rate, MTTR",
+      "youtube_id": "",
+      "youtube_query": "dora metrics lead time deployment frequency change failure rate deutsch",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Was misst die Kennzahl ‚Change Failure Rate‘?",
+        "typ": "single",
+        "optionen": [
+          "Wie oft Mitarbeitende die Kantine wechseln",
+          "Den Anteil von Releases, die in Produktion zu einem Fehler/Rollback/Hotfix geführt haben",
+          "Wie schnell Anforderungen geliefert werden",
+          "Wie hoch die Cloud-Kosten pro Monat sind"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Change Failure Rate ist eine der vier DORA-Metriken und misst, wie viele Releases zu Produktionsproblemen führen — eine zentrale Kopplungs-KPI gegen das ‚schnell und kaputt‘. Sie ist nicht mit Lead Time oder Kosten zu verwechseln und hat nichts mit HR oder Finanzen zu tun."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "‚Stop-the-line‘-Regeln und Anti-Gaming bei DORA-Metriken",
+      "inhalt": "DORA-Metriken (Lead Time, Deployment Frequency, Change Failure Rate, MTTR) sind sehr mächtig — und genau deshalb anfällig für Goodhart-Effekte. Wenn ‚Deployment Frequency‘ zum Ziel wird, releasen Teams sinnlose Mikroänderungen, um die Zahl zu treiben. Wenn ‚Change Failure Rate‘ zum Ziel wird, werden Incidents nicht mehr als Failures markiert. Der Schutz heißt Kopplung: ‚Deployment Frequency‘ wird nur gemeinsam mit ‚Change Failure Rate‘ bewertet — schneller releasen darf nicht heißen, dass mehr kaputtgeht. Eine zweite Schutzschicht sind ‚Stop-the-line‘-Regeln: bestimmte Bedingungen führen automatisch zum Release-Stopp, unabhängig von Zeitdruck (z. B. failende Security-Tests, fehlende Smoke-Tests in Produktion, kritische Open Incidents). Senior-Pointe: Kennzahlen ohne Kopplung und ohne Stop-Regeln führen verlässlich zu Reportingschönheit und Operations-Druck — die beiden zusammen aber zu echter Verbesserung.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Maßnahmen schützen DORA-Metriken vor Goodhart/Gaming?",
+        "typ": "multi",
+        "optionen": [
+          "Kopplung von Deployment Frequency an Change Failure Rate",
+          "Definierte ‚Stop-the-line‘-Regeln, die Releases automatisch stoppen",
+          "Möglichst weiche Definitionen, damit Teams die Zahlen besser erreichen",
+          "Sichtbare Trends und Diskussion statt Bestrafung",
+          "Veröffentlichung der Kennzahlen als individuelle Personenbewertung"
+        ],
+        "korrekt": [0, 1, 3],
+        "erklaerung": "Kopplung, Stop-Regeln und ein Lernfokus statt Schuldzuweisung sichern DORA-Metriken gegen Manipulation. Weiche Definitionen erodieren Aussagekraft, und individuelle Personenbewertung erzeugt Angstkultur und massives Gaming — beides untergräbt genau das Outcome, das man messen wollte."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "Agile Governance und Risikoakzeptanz: wer entscheidet was?",
+      "youtube_id": "",
+      "youtube_query": "agile governance risiko akzeptanz operating model release deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche Aussagen zu Agile Governance sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "Sicherheits-/Compliance-Baselines werden zentral definiert, Team-Backlog dezentral",
+          "Risikoakzeptanzregeln sollten dokumentiert sein (wer darf welches Risiko eingehen)",
+          "Agile bedeutet, dass jedes Team unabhängig alle Entscheidungen treffen darf",
+          "Quality Gates sind nur ‚nice to have‘",
+          "Emergency Changes (Hotfixes) brauchen einen geregelten Ausnahmeprozess"
+        ],
+        "korrekt": [0, 1, 4],
+        "erklaerung": "Eine reife Agile Governance trennt zentrale Baselines (Security, Compliance, Plattformstandards) von dezentralen Entscheidungen (Team-Backlog) und regelt Risikoakzeptanz sowie Emergency Changes explizit. ‚Jedes Team entscheidet alles‘ erzeugt Konzernchaos; Quality Gates ohne Verbindlichkeit verfallen zu Marketing — beide Aussagen sind falsch."
+      }
+    }
+  ]
+}

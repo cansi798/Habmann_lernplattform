@@ -1,0 +1,148 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 10,
+  "titel": "Microservices, Kubernetes, TDD und DevOps als skalierbare Prozessarchitektur",
+  "erstellt_am": "2026-05-24",
+  "schritte": [
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "Microservices: Warum, wann und mit welchen Grenzen?",
+      "youtube_id": "",
+      "youtube_query": "microservices vorteile risiken servicegrenzen capabilities deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Wonach sollten Servicegrenzen bei Microservices primär gezogen werden?",
+        "typ": "single",
+        "optionen": [
+          "Entlang von Datenbanktabellen",
+          "Entlang fachlicher Geschäftsfähigkeiten (Capabilities) mit klarem Owner",
+          "Entlang von Server-IP-Adressen",
+          "Entlang der Anzahl der Entwickler:innen pro Team"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Servicegrenzen sollten entlang von Geschäftsfähigkeiten geschnitten werden, weil sich Capabilities langsamer ändern als Tabellen oder Teamzuschnitte und einen klaren Owner haben. Schnitte entlang Datenbanktabellen erzeugen verteilte Joins und Kopplung, IP-basierte Schnitte sind betrieblich unsinnig, und Teamgrößen sind veränderlich."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "Idempotenz, Versionierung und verteilte Fehler: das Microservices-Trio",
+      "inhalt": "Microservices erkaufen Skalierung und unabhängige Deployments mit drei neuen Disziplinen, die in Monolithen kaum existierten. Erstens ‚Idempotenz‘: Aufrufe können fehlschlagen, wiederholt werden, doppelt eintreffen — jeder Service muss garantieren, dass dieselbe Anfrage mehrfach ausgeführt nicht zu Doppelbuchungen führt. Praktisch: Operations bekommen eine Idempotency-Key, der Service merkt sich verarbeitete Keys. Zweitens ‚Versionierung‘: APIs zwischen Services ändern sich, aber Konsumenten dürfen nicht brechen — also gibt es bewusste Versionierung (v1, v2) mit Migrationsfristen. Drittens ‚Verteilte Fehler‘: ein Service kann antworten ‚habe gespeichert‘ und dennoch nichts gespeichert haben, weil die Antwort verloren ging — Distributed-Systems-Realität. Antworten: Circuit Breaker, Timeouts, Dead-Letter-Queues, Observability. Senior-Pointe: Wer Microservices baut, ohne diese drei Disziplinen bewusst zu adressieren, baut keinen verteilten Service, sondern verteilten Schaden.",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche drei Disziplinen sind in Microservices-Architekturen unverzichtbar?",
+        "typ": "multi",
+        "optionen": [
+          "Idempotenz von Operationen",
+          "Bewusste API-Versionierung zwischen Services",
+          "Behandlung verteilter Fehler (Timeouts, Circuit Breaker, Retries)",
+          "Möglichst viele Service-Versionen parallel zu betreiben",
+          "Verzicht auf Observability, um Komplexität zu reduzieren"
+        ],
+        "korrekt": [0, 1, 2],
+        "erklaerung": "Idempotenz, Versionierung und Umgang mit verteilten Fehlern sind das unverhandelbare Trio. ‚Möglichst viele Versionen parallel‘ erzeugt Wartungsschulden, und der Verzicht auf Observability macht aus Microservices ein Blindflugsystem mit teuren Incidents."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "Container und Kubernetes: Orchestrierung von Microservices",
+      "youtube_id": "",
+      "youtube_query": "kubernetes einfach erklärt orchestrierung container deutsch tutorial",
+      "dauer_min": 9,
+      "aufgabe": {
+        "frage": "Was macht Kubernetes im Wesentlichen?",
+        "typ": "single",
+        "optionen": [
+          "Es ist eine grafische Bildbearbeitung",
+          "Es orchestriert Container — Deployment, Skalierung, Self-Healing, Service Discovery und Rollbacks",
+          "Es ersetzt jede Form von Monitoring",
+          "Es ist ausschließlich ein Tool für Frontend-Entwicklung"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Kubernetes ist eine Orchestrierungsplattform für Container, die Deployment, Skalierung, Selbstheilung, Service Discovery und Rollbacks automatisiert. Es ist keine Bildbearbeitung, ersetzt kein Monitoring (Observability bleibt notwendig) und ist auch nicht auf Frontend-Entwicklung beschränkt."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "Testpyramide: viele Unit-Tests, wenige End-to-End-Tests",
+      "inhalt": "Die Testpyramide ist eines der robustesten Konzepte der Qualitätssicherung und gerade in Microservices-Architekturen entscheidend. Die Basis bilden ‚Unit Tests‘: viele, schnell laufende Tests, die einzelne Funktionen oder Klassen prüfen — sie sind die Versicherung gegen Regressionen und der Motor von TDD (Red-Green-Refactor). In der Mitte stehen ‚Integration Tests‘: weniger als Unit-Tests, dafür prüfen sie das Zusammenspiel mehrerer Komponenten oder die Schnittstelle eines Services. Ganz oben — und bewusst wenige — kommen ‚End-to-End-Tests‘: sie prüfen einen kompletten Geschäftsfluss über mehrere Services hinweg, sind aber teuer in Pflege und fragil bei UI-Änderungen. Eine umgekehrte Pyramide (viele E2E, wenige Units) ist ein klassisches Anti-Pattern und produziert lange Pipelines mit niedriger Aussagekraft. Senior-Pointe: Tests sind Entscheidungsinstrumente — ‚wie sicher sind wir?‘ wird messbar, und damit verhandelbar.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Verteilung entspricht der klassischen Testpyramide?",
+        "typ": "single",
+        "optionen": [
+          "Viele E2E-Tests, wenige Unit-Tests",
+          "Viele Unit-Tests, weniger Integrationstests, wenige E2E-Tests",
+          "Ausschließlich manuelle Tests",
+          "Gleich viele Tests jeder Stufe"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Die Pyramide steht klassisch auf einer breiten Basis schneller, billiger Unit-Tests; darüber liegen weniger Integrationstests und nur eine schmale Spitze E2E-Tests. Umgekehrte Pyramiden (viel E2E) sind teuer und fragil; rein manuelle Tests skalieren nicht; gleiche Verteilung ignoriert die unterschiedlichen Kosten und Aussagekräfte der Stufen."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "Blue/Green und Canary Deployments: Rollouts mit Sicherheitsnetz",
+      "youtube_id": "",
+      "youtube_query": "blue green canary deployment rollout strategie deutsch erklärt",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Was ist ein ‚Canary Deployment‘?",
+        "typ": "single",
+        "optionen": [
+          "Ein Deployment, bei dem die neue Version nur für einen kleinen Prozentsatz der User aktiviert wird, um Probleme früh zu erkennen",
+          "Ein Deployment, das den ganzen Service auf einmal austauscht",
+          "Ein farblich markiertes Deployment-Skript",
+          "Ein Deployment, das nur am Wochenende läuft"
+        ],
+        "korrekt": 0,
+        "erklaerung": "Canary heißt: nur ein kleiner Anteil der Nutzer:innen erhält die neue Version, Probleme werden früh erkannt, und im Notfall wird zurückgerollt — bevor 100% betroffen sind. Big-Bang-Releases sind genau das Gegenteil, Farben und Wochenendzeiten beschreiben das Konzept nicht."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "‚You build it, you run it‘ — und seine sinnvollen Grenzen",
+      "inhalt": "‚You build it, you run it‘ ist die DevOps-Kurzformel: das Team, das einen Service baut, betreibt ihn auch — inklusive Pager-Duty im Incident-Fall. Das Prinzip erzeugt Lernschleifen, weil schlechte Code-Qualität direkt den eigenen Schlaf kostet, und reduziert Hand-offs, weil ‚Über-den-Zaun-werfen‘ an einen separaten Betrieb wegfällt. In der Praxis ist die volle Reinform aber nur in wenigen Unternehmen tragfähig. Realistischer ist eine abgestufte Ownership: das Produktteam ist Build- und Standardbetrieb verantwortlich, ein Plattformteam liefert Standards (CI/CD-Templates, Observability-Baseline, Kubernetes-Basis), und Security/Compliance setzt Baselines und prüft Ausnahmen. Diese Abstufung schützt Teams vor Überlastung und sichert konsistente Sicherheits- und Audit-Standards. Senior-Pointe: ‚Ownership‘ ist kein Slogan, sondern muss in RACI, Eskalationspfaden und Bereitschaftsmodellen konkret stehen — sonst ist ‚You build it, you run it‘ nur eine schöne Wandtattoo-Phrase.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Aussagen zu ‚You build it, you run it‘ sind in der Praxis tragfähig?",
+        "typ": "multi",
+        "optionen": [
+          "Das Produktteam übernimmt Build und Standardbetrieb seines Services",
+          "Ein Plattformteam liefert Standards (CI/CD, Observability) zentral",
+          "Security/Compliance setzt Baselines und prüft Ausnahmen",
+          "Das Produktteam ist allein für alle Sicherheitsentscheidungen verantwortlich",
+          "RACI- und Eskalationspfade können entfallen, weil ‚das Team alles macht‘"
+        ],
+        "korrekt": [0, 1, 2],
+        "erklaerung": "Abgestufte Ownership (Produktteam + Plattform + Security/Compliance) ist die realistische Umsetzung. ‚Allein für alle Sicherheitsentscheidungen‘ überfordert Teams und gefährdet Compliance, und der Verzicht auf RACI/Eskalationspfade führt im Incident-Fall zu Diskussionen statt Handlung."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "Architekturgovernance: leichte Prinzipien, harte Standards",
+      "youtube_id": "",
+      "youtube_query": "architecture governance principles standards review board deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche Bausteine kennzeichnen eine wirksame, aber leichtgewichtige Architekturgovernance?",
+        "typ": "multi",
+        "optionen": [
+          "Maximal 8 klare Architekturprinzipien, die jeder kennt",
+          "Standards für Schnittstellen, Logging, Security-Baselines",
+          "Architekturreview nur für teure/irreversible Entscheidungen",
+          "Genehmigungspflicht für jeden einzelnen Code-Commit",
+          "Dokumentiertes Portfolio bewusst eingegangener Risiken"
+        ],
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Wenige klare Prinzipien, harte Schnittstellen-Standards, gezielte Reviews und ein offenes Risikoportfolio machen Governance wirksam. Commit-by-Commit-Genehmigung verwandelt Architektur in Bürokratie, blockiert Lieferfähigkeit und produziert in der Praxis Umgehungen statt Compliance."
+      }
+    }
+  ]
+}

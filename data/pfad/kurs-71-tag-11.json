@@ -1,0 +1,149 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 11,
+  "titel": "RPA als Steuerungs- und Risikohebel: Plattformen, attended vs. unattended, Eignung",
+  "erstellt_am": "2026-05-24",
+  "schritte": [
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "RPA verstehen: wofür geeignet, wofür nicht",
+      "youtube_id": "",
+      "youtube_query": "robotic process automation rpa einfach erklärt deutsch use cases",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welcher Prozess ist typischerweise besonders gut für RPA geeignet?",
+        "typ": "single",
+        "optionen": [
+          "Eine kreative Designentscheidung mit hohem Interpretationsanteil",
+          "Eine regelbasierte, repetitive Tätigkeit mit stabilem UI, hohem Volumen und wenigen Ausnahmen",
+          "Eine strategische Vorstandsentscheidung",
+          "Ein Prozess, der täglich seine Schritte ändert"
+        ],
+        "korrekt": 1,
+        "erklaerung": "RPA glänzt bei regelbasiert, repetitiv, stabiles UI, hohes Volumen, wenige Ausnahmen. Kreative oder strategische Entscheidungen und Prozesse mit ständig wechselnden Schritten sind klassische Anti-Use-Cases — dort produziert RPA fragile Bots und teure Folgekosten."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "Eignungs-Score: fünf Fragen vor jeder RPA-Investition",
+      "inhalt": "Bevor ein einziger Bot gebaut wird, lohnt sich ein nüchterner Eignungs-Score auf einer Skala von 1 bis 5 — denn schlechte RPA-Kandidaten sind in der Praxis teurer als ihre manuelle Variante. Fünf Fragen entscheiden. Erstens: ‚Stabilität‘ — ändert sich das UI oder die Logik selten oder häufig? Zweitens: ‚Regelbasiertheit‘ — sind die Schritte und Entscheidungen klar beschreibbar oder gibt es viel Interpretationsanteil? Drittens: ‚Volumen‘ — gibt es genug Fälle pro Tag, dass die Automatisierung sich rechnet? Viertens: ‚Ausnahmequote‘ — wie hoch ist der Anteil an Sonderfällen, der nicht automatisierbar ist? Fünftens: ‚Audit-Relevanz‘ — wie hoch sind die Anforderungen an Nachweisbarkeit, Logging und SoD? Ein Kandidat mit drei niedrigen Werten ist meistens ein Kandidat fürs Backlog-Archiv, nicht für den nächsten Sprint. Senior-Verantwortung heißt, ‚Nein‘ zu schlechten Use Cases zu sagen — auch wenn der Fachbereich drängt.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Faktoren erhöhen den Eignungs-Score eines RPA-Use-Cases?",
+        "typ": "multi",
+        "optionen": [
+          "Stabiles UI/Logik",
+          "Hohes Volumen wiederkehrender Fälle",
+          "Niedrige Ausnahmequote",
+          "Hoher Interpretations- und Ermessensanteil",
+          "Klare regelbasierte Schritte"
+        ],
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Stabilität, Volumen, niedrige Ausnahmequote und klare Regeln sind klassische RPA-Pluspunkte. Hoher Interpretationsanteil ist im Gegenteil ein Warnsignal — solche Use Cases gehören eher in eine Workflow-Engine mit menschlichen Entscheidungspunkten oder in eine KI-gestützte Lösung mit Human-in-the-loop."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "Attended vs. unattended Automation: Entscheidung unter Zielkonflikten",
+      "youtube_id": "",
+      "youtube_query": "attended unattended rpa unterschied entscheidung deutsch",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Worin liegt der Hauptunterschied zwischen attended und unattended Automation?",
+        "typ": "single",
+        "optionen": [
+          "Attended ist immer billiger",
+          "Attended läuft am Arbeitsplatz unter User-Aufsicht (Assistenz), unattended läuft serverseitig vollautomatisch über Queues/Pläne",
+          "Unattended ist ein Marketing-Begriff ohne technischen Unterschied",
+          "Attended benötigt mehr Hardware als unattended"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Der entscheidende Unterschied ist die Betriebsumgebung: attended unter User-Kontrolle am Arbeitsplatz, unattended serverseitig vollautomatisch. Kosten und Hardware-Bedarf sind sekundär, und beide Begriffe haben technische Substanz. Für die Entscheidung sind Reife, Skalierungsziel und Risiko entscheidend."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "Stufenplan: attended starten, später skalieren",
+      "inhalt": "In der Praxis bewährt sich häufig ein zweistufiger Ansatz. ‚Release 1 (attended)‘: Der Bot läuft am Arbeitsplatz, ein/eine Mitarbeitende:r überwacht und greift bei Ausnahmen ein. Vorteile: geringeres Change-Risiko, schnelle Lernkurve, niedrige Anforderungen an Governance. Nachteil: begrenzte Skalierung. ‚Release 2 (unattended)‘: Stabilisierte Prozesse werden serverseitig automatisiert, mit Queues, Scheduling, Monitoring und vollwertigem Audit Trail. Vorausgesetzt sind dann reife Exception-Behandlung, Credential-Vault, SoD und ein Operations-Team. Zwei Readiness-KPIs entscheiden über den Übergang: ‚Ausnahmequote‘ unter einer definierten Schwelle (z. B. ≤10%) und ‚UI-Änderungsrate‘ stabil über einen Beobachtungszeitraum. Wer ohne diese Readiness in unattended geht, erlebt regelmäßig Bot-Stürze, falsche Buchungen im großen Maßstab und unangenehme Audit-Findings. Senior-Pointe: die Stufenentscheidung ist eine Risiko-Entscheidung, keine Tool-Entscheidung.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Readiness-Indikatoren rechtfertigen den Übergang von attended zu unattended?",
+        "typ": "multi",
+        "optionen": [
+          "Ausnahmequote unter einer definierten Schwelle (z. B. ≤10%)",
+          "Stabile UI-Änderungsrate über einen Beobachtungszeitraum",
+          "Druck der Fachseite, möglichst schnell zu skalieren",
+          "Funktionierende Exception-Behandlung mit definierten Owner/Playbooks",
+          "Etablierter Credential-Vault und SoD"
+        ],
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Niedrige Ausnahmequote, stabile UI, reife Exception-Behandlung und Security-Grundlagen sind sachliche Readiness-Indikatoren. Reiner Druck der Fachseite ist genau das, wogegen die Readiness-Logik schützen soll — er ersetzt keine Reife und führt regelmäßig zu kostspieligen Rollbacks."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "RPA-Plattformüberblick: Studio, Orchestrierung, Queues, Logs",
+      "youtube_id": "",
+      "youtube_query": "rpa plattform überblick studio orchestrator queues deutsch tutorial",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Komponente ist Pflicht in einer Enterprise-RPA-Plattform?",
+        "typ": "single",
+        "optionen": [
+          "Eine Suite aus Studio/Designer, Orchestrierung mit Queues/Scheduling, zentrales Logging und Credential-/Secret-Management",
+          "Ein reines Excel-Makro",
+          "Eine grafische Notizfunktion ohne Logs",
+          "Ein nur einmal jährlich eingeschalteter Server"
+        ],
+        "korrekt": 0,
+        "erklaerung": "Eine professionelle Plattform braucht alle vier Bausteine: Studio/Designer (Bauen), Orchestrierung mit Queues/Scheduling (Betreiben), zentrales Logging (Audit/Debug) und Credential-Management (Security). Excel-Makros sind nicht Enterprise-fähig, und Komponenten ohne Logs oder mit seltener Verfügbarkeit untergraben Auditfähigkeit."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "Exception Handling: business, system, data — und ‚fail safe‘ als Designprinzip",
+      "inhalt": "Ein guter Bot scheitert kontrolliert. Drei Exception-Typen sind zu unterscheiden. ‚Business Exceptions‘ sind fachlich vorgesehene Sonderfälle — eine Rechnung über einer Freigabeschwelle, ein unbekannter Lieferant, eine Dublette. Die Behandlung gehört in eine Exception Queue, die ein/eine Mitarbeitende:r mit klarem SLA abarbeitet. ‚System Exceptions‘ sind technische Ausfälle — ERP nicht erreichbar, Authentifizierung fehlgeschlagen, Timeout. Hier helfen Retry-Strategien und Eskalation an IT-Operations. ‚Data Exceptions‘ sind Qualitätsprobleme — fehlende Pflichtfelder, inkonsistente Formate. Behandlung: Rückgabe an die Anforderungsstelle mit konkreter Fehlermeldung. Über allen drei steht das Prinzip ‚fail safe‘: der Bot bricht nie heimlich ab, sondern erzeugt immer ein dokumentiertes Arbeitspaket mit Owner und Status. Senior-Pointe: gute RPA-Programme messen nicht nur Durchsatz, sondern Exception Rate, Rework-Quote und MTTR — sonst tarnen sie sich erfolgreich, während die Folgekosten in der Buchhaltung anfallen.",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Aussagen über RPA Exception Handling sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "Business Exceptions landen in einer Queue mit menschlichem Bearbeiter und SLA",
+          "System Exceptions können mit Retry-Strategien und Eskalation behandelt werden",
+          "‚Fail safe‘ bedeutet, dass der Bot bei Problemen heimlich abbricht und nichts dokumentiert",
+          "Data Exceptions sollten mit konkreter Fehlermeldung an die Anforderungsstelle zurückgegeben werden",
+          "Exception Rate ist eine sinnvolle Steuerungs-KPI für RPA-Programme"
+        ],
+        "korrekt": [0, 1, 3, 4],
+        "erklaerung": "Business in Queue, System mit Retry, Data zurück zur Quelle und Exception Rate als Steuerungs-KPI bilden ein konsistentes Exception-Design. ‚Heimlich abbrechen‘ ist das Gegenteil von ‚fail safe‘ — es verbirgt Probleme, untergräbt Audit und vergrößert Folgekosten."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "RPA Operating Model: Bot Owner, Process Owner, Security",
+      "youtube_id": "",
+      "youtube_query": "rpa operating model bot owner process owner security governance deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche Rollen sind in einem reifen RPA-Operating-Model unverzichtbar?",
+        "typ": "multi",
+        "optionen": [
+          "Bot Owner — accountable für Run und Monitoring",
+          "Process Owner — fachlich accountable für den automatisierten Prozess",
+          "Security Owner — Credential-Vault, SoD, Logging-Integrität",
+          "Operations/Run — operative Überwachung und Incident-Bearbeitung",
+          "Eine einzige Person, die alle Rollen gleichzeitig hält"
+        ],
+        "korrekt": [0, 1, 2, 3],
+        "erklaerung": "Bot Owner, Process Owner, Security und Operations sind die vier zwingenden Rollen — sie verteilen Accountability für Betrieb, Fachlichkeit, Sicherheit und Incident-Handling. Eine Einzelperson für alles erzeugt einen Single Point of Failure und macht Audits/Incident Response zur Glückssache."
+      }
+    }
+  ]
+}

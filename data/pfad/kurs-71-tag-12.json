@@ -1,0 +1,149 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 12,
+  "titel": "RPA skalieren: Governance, Audit Trail, Exceptions, Security by Design und Change",
+  "erstellt_am": "2026-05-24",
+  "schritte": [
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "RPA Lifecycle und Bot Governance: Idee bis Retire",
+      "youtube_id": "",
+      "youtube_query": "rpa bot lifecycle governance assessment build deploy retire deutsch",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Phasen kennzeichnen einen vollständigen Bot Lifecycle?",
+        "typ": "single",
+        "optionen": [
+          "Build und Deploy reichen aus",
+          "Idea → Assessment → Design → Build → Test → Deploy → Run → Improve → Retire",
+          "Build → Deploy → Vergessen",
+          "Nur Test → Deploy"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Ein professioneller Lifecycle deckt Bewertung, Design, Build, Test, Deployment, Betrieb, Verbesserung und kontrolliertes Stilllegen ab — nur so entsteht ein nachhaltiges Bot-Portfolio. Reduzierte Sichten (nur Build/Deploy) erzeugen ‚Zombie-Bots‘ und unkontrollierten Wildwuchs."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "Risk-based Releases: nicht jeder Bot braucht drei Gates",
+      "inhalt": "Eine der teuersten Fehleinrichtungen in RPA-Programmen ist eine einheitliche Bürokratie für alle Bots — drei Gates, vier Reviews, sechs Wochen Wartezeit für jeden Kleinkram. Genauso teuer ist das Gegenteil: jeder Bot in der gleichen ‚Fast Lane‘, egal ob er Zugangsdaten ändert oder nur eine Datei kopiert. Die Antwort heißt ‚Risk-based Releases‘. Bots werden in drei Klassen klassifiziert. ‚Low Risk‘ (kleine Datenübernahmen ohne Buchung): ein einziges QA-Gate, schneller Release. ‚Medium Risk‘ (Buchungen unter Schwellen, ohne Zugriff auf PII): QA + Process Owner Freigabe. ‚High Risk‘ (Buchungen über Schwellen, Zugriff auf PII oder Finanzsysteme): QA + Security + Process Owner + dokumentierte Risikoakzeptanz. Die Klassifikation muss vorab definiert und konsistent angewendet werden — wer dort improvisiert, bekommt entweder Audit-Findings oder Akzeptanzprobleme. Senior-Pointe: Governance ist Enablement, wenn sie ‚richtige Strenge‘ wählt — nicht ‚maximale Strenge‘.",
+      "dauer_min": 6,
+      "aufgabe": {
+        "frage": "Welche Aussagen über Risk-based Releases im RPA sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "Bots werden in Risikoklassen (z. B. Low/Medium/High) eingeteilt",
+          "Hochriskante Bots benötigen Security + Process Owner Freigabe und dokumentierte Risikoakzeptanz",
+          "Alle Bots durchlaufen denselben aufwendigen Freigabeprozess",
+          "Low-Risk Bots dürfen einen schnelleren Release-Pfad nehmen",
+          "Risikoklassifikation kann situativ jeden Tag neu interpretiert werden"
+        ],
+        "korrekt": [0, 1, 3],
+        "erklaerung": "Risikoklassen, abgestufte Gates und eine schnellere Lane für Low-Risk bilden den Kern eines Risk-based-Modells. Einheitliche Schwere für alle Bots produziert Bürokratie, situative Tagesinterpretation der Klassifikation öffnet Tür und Tor für Inkonsistenz und Audit-Findings."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "Audit Trail Management: Wer, Was, Wann, Womit, Ergebnis",
+      "youtube_id": "",
+      "youtube_query": "audit trail rpa logging compliance traceability deutsch",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Felder gehören in einen vollständigen RPA-Audit-Trail-Datensatz?",
+        "typ": "single",
+        "optionen": [
+          "Nur den Bot-Namen",
+          "Bot-ID/Version, Timestamp, Input-Referenz, Aktion, Ergebnisstatus, Exception-Code und Bearbeiter",
+          "Nur ‚OK‘ oder ‚Fehler‘",
+          "Eine vom Bot selbst gewählte Beschreibung"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Audit-Trail-Datensätze müssen Wer/Was/Wann/Womit/Ergebnis vollständig dokumentieren — Bot-Version, Timestamp, Input-Referenz, Aktion, Status, Exception, Bearbeiter. Reduktion auf Namen oder OK/Fehler macht spätere Nachverfolgung unmöglich, und vom Bot selbst gewählte Texte sind nicht standardisiert auditierbar."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "Security by Design: Bot ist ein privilegierter Mitarbeiter",
+      "inhalt": "Ein Bot mit Zugang zu Buchhaltungssystemen und Stammdaten ist faktisch ein privilegierter Mitarbeiter — und muss so behandelt werden. ‚Least Privilege‘ bedeutet, dass der Bot nur die Rechte hat, die er für seine konkrete Aufgabe braucht — nicht das Admin-Konto seiner Bauenden. ‚Getrennte Bot-Accounts‘ verhindern, dass Bots unter Mitarbeitenden-Identitäten agieren, was Audit-Trails unsauber macht und SoD aushebelt. ‚Credential Vault‘ heißt: Passwörter und Schlüssel liegen in einem zentralen, auditierten Tresor, niemals im Code, niemals in Klartext-Konfigurationen. ‚Segregation of Duties (SoD)‘ verbietet bestimmte Kombinationen: ein Bot darf zum Beispiel nicht gleichzeitig eine Anforderung erstellen und sie freigeben — auch wenn er technisch könnte, denn diese SoD-Regel existiert aus Compliance-Gründen. ‚Logging Integrity‘ bedeutet, dass Logs append-only sind: einmal geschrieben, nicht änderbar. Wer diese fünf Punkte ignoriert, baut keinen produktiven Bot, sondern eine Compliance-Bombe mit Zeitzünder.",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Security-by-Design-Prinzipien sind für RPA verbindlich?",
+        "typ": "multi",
+        "optionen": [
+          "Least Privilege für Bot-Accounts",
+          "Credential Vault statt Passwörter im Code",
+          "Segregation of Duties auch für Bots",
+          "Append-only Logs (Logging Integrity)",
+          "Bot nutzt das Admin-Konto des/der Bauenden, um Zeit zu sparen"
+        ],
+        "korrekt": [0, 1, 2, 3],
+        "erklaerung": "Least Privilege, Vault, SoD und Logging Integrity sind die vier Grundprinzipien — sie sind kein Optional, sondern Compliance-Pflicht. Das Admin-Konto der Bauenden zu nutzen verstößt gegen praktisch jede Sicherheits- und Audit-Anforderung und ist einer der häufigsten Anfängerfehler."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "Exception Codes und Playbooks: kontrolliertes Scheitern in der Skalierung",
+      "youtube_id": "",
+      "youtube_query": "rpa exception code playbook handling deutsch tutorial",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Warum sind standardisierte Exception Codes in der RPA-Skalierung so wertvoll?",
+        "typ": "single",
+        "optionen": [
+          "Sie sehen schöner in Reports aus",
+          "Sie ermöglichen aggregierte Steuerung (z. B. ‚alle ERPDown-Fälle heute‘), automatische Eskalation und Lernschleifen über Ursachen",
+          "Sie machen die Bot-Entwicklung schneller",
+          "Sie sind eine reine ISO-Vorgabe ohne praktischen Nutzen"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Codes erlauben Aggregation, Automatisierung der Eskalation und systematisches Lernen über Ursachen — drei Kerninstrumente jeder reifen Skalierung. Ästhetik, Build-Geschwindigkeit oder ISO-Pflicht sind nicht der Kern; der Wert entsteht durch Steuerbarkeit und Lernschleifen."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "CoE versus föderiert: zwei Operating-Model-Pfade",
+      "inhalt": "In der Skalierung von RPA gibt es zwei dominante Operating-Model-Pfade. Ein ‚Center of Excellence (CoE)‘ zentralisiert Bauen, Betrieb und Standards in einer Einheit — Vorteile: konsistente Qualität, klare Standards, einfaches Audit. Nachteil: Engpass, weil alle Fachbereiche um Kapazität konkurrieren, und Distanz zu den Fachprozessen. ‚Föderiert‘ bedeutet, dass Fachbereiche eigene RPA-Kapazität aufbauen, oft mit Low-Code-Tools, und das CoE nur Standards und Plattform stellt. Vorteile: Skalierbarkeit, Nähe zur Fachseite. Nachteil: Risiko von ‚Shadow Bots‘ ohne Audit Trail, inkonsistente Qualität, höherer Governance-Aufwand. Ein dritter Weg ‚hybrid‘ verbindet beides: CoE für hochriskante Bots und Plattform, föderierte Teams für Low-Risk-Use-Cases mit klaren Guardrails. Senior-Pointe: die Wahl ist keine Tool-, sondern eine Risikoentscheidung. Frühwarnsignale für eine falsche Wahl: bei CoE wachsende Schatten-Bots, bei föderiertem Modell steigende Incident-Rate und Audit-Findings.",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Aussagen zu CoE vs. föderiertem RPA-Modell sind korrekt?",
+        "typ": "multi",
+        "optionen": [
+          "CoE zentralisiert Bau und Standards in einer Einheit",
+          "Föderierte Modelle sind näher an Fachprozessen, brauchen aber strengere Guardrails gegen Shadow Bots",
+          "Hybride Modelle können CoE für High-Risk und föderiert für Low-Risk kombinieren",
+          "Die Wahl ist primär eine technische Tool-Entscheidung",
+          "Wachsende Shadow Bots sind ein Frühwarnsignal für einen zu engen CoE"
+        ],
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Zentralisierung, Nähe zur Fachseite mit Guardrails, hybride Modelle und Shadow Bots als Frühwarnsignal sind realistische Beschreibungen. Die Wahl ist primär eine Risiko- und Organisationsfrage, nicht eine Tool-Entscheidung — Tools sind sekundär gegenüber Verantwortlichkeit und Skalierungslogik."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "Change Management: vom Erfassen zum Überwachen und Entscheiden",
+      "youtube_id": "",
+      "youtube_query": "change management rpa rollenwandel kommunikation deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche Aussagen zu Change Management bei RPA-Einführung sind tragfähig?",
+        "typ": "multi",
+        "optionen": [
+          "Die Rolle der Mitarbeitenden verschiebt sich von Erfassen hin zu Überwachen, Entscheiden, Exceptions bearbeiten",
+          "Eine ehrliche Kommunikation (‚Bot nimmt Aufgaben, nicht Würde‘) ist wirksamer als Beschönigung",
+          "Trainings und Coachingpfade gehören zum Rollout, nicht erst danach",
+          "Change Management kann nach dem Go-Live noch nachgeholt werden, ohne Akzeptanzkosten",
+          "Champions/Multiplikatoren beschleunigen Adoption durch Nähe zur Praxis"
+        ],
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Rollenwandel, ehrliche Kommunikation, Training während des Rollouts und Champions sind die vier wirksamsten Bausteine. Nachträgliches Change Management ist regelmäßig der teuerste Pfad: Akzeptanzschäden, Schattenprozesse und sinkende Adoption sind die Folge."
+      }
+    }
+  ]
+}

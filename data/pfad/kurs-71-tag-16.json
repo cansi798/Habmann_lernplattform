@@ -1,0 +1,149 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 16,
+  "titel": "EU-Taxonomie und CSRD als Prozess-, Daten- und Kontrollarchitektur",
+  "erstellt_am": "2026-05-24",
+  "schritte": [
+    {
+      "nr": 1,
+      "typ": "video",
+      "titel": "EU-Taxonomie und CSRD im Prozesskontext verstehen",
+      "youtube_id": "",
+      "youtube_query": "eu taxonomie csrd unternehmen reporting prozess deutsch erklärt",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Was ist die zentrale Pointe der CSRD aus Prozesssicht?",
+        "typ": "single",
+        "optionen": [
+          "Sie verlangt nur ein paar zusätzliche Folien im Geschäftsbericht",
+          "Sie erzeugt Datenbedarfe, Nachweise, Kontrollen und Verantwortlichkeiten quer durch IT, Finance, Einkauf, Werke und HR",
+          "Sie betrifft ausschließlich die Marketing-Abteilung",
+          "Sie hat keine prozessualen Konsequenzen"
+        ],
+        "korrekt": 1,
+        "erklaerung": "CSRD ist im Kern kein Reporting-Projekt, sondern erzwingt Daten, Nachweise, Controls und Verantwortlichkeiten quer durch die Organisation. Wer sie als Folien-Update versteht, unterschätzt Aufwand und Risiko massiv und produziert verlässlich Audit-Findings."
+      }
+    },
+    {
+      "nr": 2,
+      "typ": "text",
+      "titel": "End-to-End-Reportingprozess: Plan, Collect, Validate, Consolidate, Approve, Report, Assure",
+      "inhalt": "Ein auditfähiger ESG-Reportingprozess hat sieben klar getrennte Phasen. ‚Plan‘ legt fest, welche KPIs für welchen Zeitraum benötigt werden, und aktualisiert das KPI-Dictionary. ‚Collect‘ holt die Daten aus den Quellsystemen (ERP, CRM, Facility, Einkauf, HR) — die Owner pro Datenquelle müssen klar benannt sein. ‚Validate‘ prüft Vollständigkeit und Plausibilität, markiert Datenqualität (A/B/C) und meldet Abweichungen zurück. ‚Consolidate‘ aggregiert die Daten zu Berichts-KPIs, dokumentiert die Berechnungsmethodik und versioniert Skripte/Spreadsheets. ‚Approve‘ ist die Zwei-Augen-Freigabe durch Owner und Reporting Lead — mit Audit Trail. ‚Report‘ veröffentlicht die Werte intern und extern. ‚Assure‘ schließlich ist die externe oder interne Prüfungslogik (z. B. eingeschränkte oder hinreichende Sicherheit gemäß CSRD). Jede Phase hat eigene Controls, Rollen und Evidence-Artefakte. Die Senior-Pointe: wer Phasen mischt oder Schritte überspringt, baut Compliance-Theater statt Compliance-System.",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Phasen gehören in einen vollständigen ESG-Reportingprozess?",
+        "typ": "multi",
+        "optionen": [
+          "Plan (KPI-Dictionary, Datenanforderungen)",
+          "Collect, Validate, Consolidate, Approve, Report",
+          "Assure (Prüfung durch interne/externe Instanz)",
+          "Improvise (ad hoc Sammeln am letzten Tag)",
+          "Lessons Learned und Korrekturmaßnahmen für die nächste Periode"
+        ],
+        "korrekt": [0, 1, 2, 4],
+        "erklaerung": "Plan, Collect-Validate-Consolidate-Approve-Report, Assure und Lessons Learned bilden den vollständigen Zyklus. ‚Improvise‘ ist genau die Methode, gegen die ein strukturierter Prozess entstanden ist — sie produziert Datenqualitäts- und Audit-Risiken in jeder Periode neu."
+      }
+    },
+    {
+      "nr": 3,
+      "typ": "video",
+      "titel": "Minimum Viable Controls: nicht alles prüfen, sondern das Richtige",
+      "youtube_id": "",
+      "youtube_query": "minimum viable controls risk based esg compliance deutsch",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Was unterscheidet ‚Minimum Viable Controls‘ von einer unstrukturierten Kontrolllandschaft?",
+        "typ": "single",
+        "optionen": [
+          "Sie kontrolliert weniger und ist deshalb riskanter",
+          "Sie wählt risikobasiert die Controls, die maximalen Schutz pro Aufwand bieten — und priorisiert Compliance-kritische Bereiche",
+          "Sie verzichtet auf jede Form von Audit Trail",
+          "Sie ist nur eine Marketingbezeichnung"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Minimum Viable Controls sind eine risikobasierte Auswahl mit hohem Wirkungsgrad pro Aufwand — sie fokussieren auf compliance-kritische Bereiche statt alles flächendeckend zu prüfen. Reduktion ohne Risikobasis ist gefährlich; Verzicht auf Audit Trail unterläuft die Logik komplett."
+      }
+    },
+    {
+      "nr": 4,
+      "typ": "text",
+      "titel": "Evidence Pack: was ein Auditor pro KPI sehen muss",
+      "inhalt": "Auditfähigkeit entsteht nicht erst am Tag der Prüfung — sie entsteht im Alltag durch konsistente Evidence Packs pro KPI. Sechs Artefakte gehören zur Pflichtausstattung. ‚Quellbeleg‘ — wo kommt die Zahl her, welcher Export, welcher System-Snapshot, mit welchem Zeitstempel. ‚Transformationslogik‘ — welche ETL-Schritte, welche Mapping-Regeln, welche Berechnungslogik, am besten als versioniertes Skript oder dokumentiertes Spreadsheet. ‚Freigabeprotokoll‘ — wer hat wann freigegeben, mit welcher Begründung. ‚Ausnahmenregister‘ — welche Abweichungen oder Schätzungen wurden vorgenommen, warum, mit welcher Methodik. ‚Datenqualitätslabel‘ — A/B/C inklusive Verbesserungsplan. ‚Change-Requests‘ — alle Änderungen an KPI-Definition, Berechnung oder Quellen mit Begründung und Genehmigung. Wer diese sechs Artefakte pro KPI standardisiert sammelt, verkürzt jeden Audit dramatisch und reduziert das Findings-Risiko. Senior-Pointe: ein Evidence Pack ist kein Aktendeckel, sondern eine lebende Datenstruktur — sie muss durchsuchbar, versionierbar und reproduzierbar sein.",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Artefakte gehören in ein vollständiges Evidence Pack für eine ESG-KPI?",
+        "typ": "multi",
+        "optionen": [
+          "Quellbeleg (System/Export, Zeitstempel)",
+          "Transformationslogik (versionierter Berechnungsweg)",
+          "Freigabeprotokoll und Ausnahmenregister",
+          "Datenqualitätslabel (A/B/C)",
+          "Mündliche Zusage der Datenowner als ausreichender Nachweis"
+        ],
+        "korrekt": [0, 1, 2, 3],
+        "erklaerung": "Quelle, Transformation, Freigabe, Ausnahmen und Datenqualitätslabel sind die fünf Pflichtartefakte. Mündliche Zusagen sind nicht auditierbar — sie sind das klassische Symptom unreifer ESG-Reportingprozesse und führen direkt zu kritischen Findings."
+      }
+    },
+    {
+      "nr": 5,
+      "typ": "video",
+      "titel": "Anti-Greenwashing-Kopplung: KPI-Validität an Datenqualität binden",
+      "youtube_id": "",
+      "youtube_query": "anti greenwashing kpi kopplung datenqualität csrd deutsch",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche Kopplungslogik schützt vor Greenwashing-KPIs am wirksamsten?",
+        "typ": "single",
+        "optionen": [
+          "KPI-Werte werden ungeprüft veröffentlicht, solange sie schön klingen",
+          "Eine KPI gilt nur dann als ‚gültig veröffentlicht‘, wenn Datenqualitätslabel ≥B und Control Pass Rate ≥X erfüllt sind",
+          "KPIs werden nur einmal alle 5 Jahre überprüft",
+          "Die Reporting-Abteilung definiert KPIs allein, ohne Owner"
+        ],
+        "korrekt": 1,
+        "erklaerung": "Die Kopplung an Datenqualität und Control Pass Rate macht KPI-Veröffentlichung zur überprüfbaren Disziplin und stoppt Pseudo-Erfolge. Ungeprüfte Veröffentlichung, seltenes Review und Owner-loses KPI-Design sind genau die Anti-Patterns, die zu Greenwashing-Vorwürfen führen."
+      }
+    },
+    {
+      "nr": 6,
+      "typ": "text",
+      "titel": "Risk Appetite und Transparenzregeln: nicht delegierbare Vorstandsentscheidungen",
+      "inhalt": "Im ESG-Bereich gibt es drei Entscheidungstypen, die nicht delegierbar sind und vom Vorstand selbst getroffen werden müssen. Erstens: ‚Risk Appetite‘ — welche Risiken (Reputation, regulatorisch, finanziell) ist die Organisation bereit zu tragen? Diese Entscheidung darf nicht in der Fachabteilung versanden, weil sie strategisch das Verhalten in allen Grenzfällen prägt. Zweitens: ‚Systemgrenzen‘ — was zählt zur Berichterstattung, was nicht? Hier prallen Aufwand, Aussagekraft und Konsistenz aufeinander; diese Entscheidung legt fest, ob das Reporting glaubwürdig ist. Drittens: ‚Transparenzregeln‘ — welche Werte werden auch dann veröffentlicht, wenn sie unbequem sind oder Datenqualität C tragen, mit welchen Erläuterungen? Die letzte Frage ist besonders heikel, weil Schweigen oft als Greenwashing gelesen wird, während ehrliche C-Werte mit Methodik gut kommunizierbar sind. Senior-Pointe: ein Vorstand, der diese drei Entscheidungen wegdelegiert, baut faktisch keine ESG-Compliance — er baut ein Risiko-Verteilungssystem, das sich beim ersten Audit-Sturm rächt.",
+      "dauer_min": 7,
+      "aufgabe": {
+        "frage": "Welche ESG-Entscheidungen sollten typischerweise auf Vorstandsebene getroffen werden — und nicht delegiert?",
+        "typ": "multi",
+        "optionen": [
+          "Risk Appetite (welche Risiken werden bewusst getragen)",
+          "Definition der Systemgrenzen für das Reporting",
+          "Auswahl der Excel-Schriftart im Bericht",
+          "Transparenzregeln (welche Werte werden mit welcher Methodik veröffentlicht)",
+          "Tägliches Anpassen einzelner KPI-Werte"
+        ],
+        "korrekt": [0, 1, 3],
+        "erklaerung": "Risk Appetite, Systemgrenzen und Transparenzregeln sind nicht delegierbare strategische Festlegungen mit Außenwirkung. Schriftartenwahl und tägliches KPI-Tuning sind operative Mikroaktivitäten — sie auf Vorstandsebene zu bringen wäre Mikromanagement und würde die wirklich wichtigen Entscheidungen verdrängen."
+      }
+    },
+    {
+      "nr": 7,
+      "typ": "video",
+      "titel": "Integration in Transformation: DWH/ETL, Workflow, BI, RPA als ESG-Bausteine",
+      "youtube_id": "",
+      "youtube_query": "esg integration transformation dwh etl workflow bi rpa deutsch",
+      "dauer_min": 8,
+      "aufgabe": {
+        "frage": "Welche Bausteine einer Transformationsarchitektur zahlen direkt auf ESG-Reportingfähigkeit ein?",
+        "typ": "multi",
+        "optionen": [
+          "DWH/ETL für strukturierte ESG-Datenerfassung",
+          "Workflow-Engines für KPI-Änderungen und Freigaben mit Audit Trail",
+          "BI-Dashboards mit Schwellen, Drilldown und Owner",
+          "RPA für standardisierte Datensammlung — mit klarer Governance",
+          "Eine Verzicht-Strategie: keine Tools, keine Daten, keine Compliance"
+        ],
+        "korrekt": [0, 1, 2, 3],
+        "erklaerung": "DWH/ETL, Workflow, BI und RPA sind direkte ESG-Enabler, wenn sie mit Governance gebaut werden. ‚Keine Tools‘ ist keine Strategie — CSRD-Pflichten existieren unabhängig davon, ob die Organisation auf sie vorbereitet ist; Nichtstun ist die teuerste Option."
+      }
+    }
+  ]
+}
