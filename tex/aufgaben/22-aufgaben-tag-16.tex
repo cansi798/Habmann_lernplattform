@@ -1,0 +1,618 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 16 - Aufgabenheft
+% Kartellrecht, fairer Wettbewerb & Krisenmanagement (Capstone)
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 16}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Kartellrecht \& Krisenmanagement}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 8 \textperiodcentered{} TAG 16 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 19.\,Juni 2026 \textperiodcentered{} CAPSTONE}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 16\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Kartellrecht, fairer Wettbewerb\\\& Krisenmanagement \textendash{}\\die Capstone-Aufgaben.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3 \textperiodcentered{} Capstone}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enthält elf Aufgaben zu Tag 16 \textendash{} der \emph{Capstone-Tag} des Kurses. Im Zentrum stehen Kartellrecht, fairer Wettbewerb in Plattformmärkten, Krisenmanagement und zukunftssichere Plattformstrategie.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} 30\,--\,45 Minuten.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Dies sind \emph{kein juristisches Gutachten}, sondern Managementtraining. Die Aufgaben dieses Tags fassen viele Themen der Vortage zusammen \textendash{} achten Sie auf Querverbindungen zu Plattform-Lock-in, Compliance-Architektur, Datenstrategie und Marktpositionierung.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Marktmacht und Kartellrecht in Plattformmärkten}{\nivLi}{8\,min}
+
+\noindent Definieren Sie in jeweils einem Satz die folgenden \textbf{vier Begriffe} im Plattformkontext:
+
+\begin{enumerate}
+  \item \textbf{Marktmacht in Plattformmärkten} (Quellen: Netzwerkeffekte, Datenvorsprung, Zugangskontrolle, Wechselkosten).
+  \item \textbf{Diskriminierungsfreier Zugang} (gleiche Behandlung vergleichbarer Anbieter).
+  \item \textbf{Preisparitätsklausel} (Anbieter darf woanders nicht günstiger sein).
+  \item \textbf{Selbstbevorzugung} (Plattform bevorzugt eigene Angebote gegenüber Drittanbietern).
+\end{enumerate}
+
+\noindent Ergänzen Sie einen Satz: Warum kann \emph{Größe allein} kartellrechtlich problematisch werden, sobald die Plattform für Anbieter zu einem \emph{Marktzugang ohne realistische Alternative} wird?
+
+\ytquery{Plattform Kartellrecht Marktmacht Selbstbevorzugung Preisparität Definition}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Fairness-Risiken erkennen}{\nivLi}{8\,min}
+
+\noindent Sechs typische Fairness-Risiken auf Plattformmärkten:
+
+\begin{enumerate}
+  \item \textbf{Bevorzugung eigener Angebote} (Plattform bietet selbst an, rankt sich oben).
+  \item \textbf{Intransparente Sperrungen} (Anbieter wird gesperrt, ohne klare Begründung).
+  \item \textbf{Unangemessene Gebühren} (sprunghafte oder versteckte Gebührenerhöhungen).
+  \item \textbf{Exklusive Bindungen} (Anbieter darf nicht auf anderen Plattformen verkaufen).
+  \item \textbf{Datenvorteile} (Plattform nutzt Anbieterdaten, um eigene Angebote zu entwickeln).
+  \item \textbf{Manipulation von Rankings oder Bewertungen} (intransparente Steuerung).
+\end{enumerate}
+
+\noindent Beschreiben Sie für jedes Risiko in einem Halbsatz: Welcher Stakeholder leidet primär? (Anbieter, Kunde, Wettbewerber, Aufsicht.)
+
+\ytquery{Plattform Fairness Risiko Selbstbevorzugung Sperrung Gebühr Daten Ranking}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Krisenarten und Resilienzfaktoren}{\nivLi}{8\,min}
+
+\noindent Acht Krisenarten, denen Plattformbetreiber begegnen können:
+
+\begin{enumerate}
+  \item Reputationskrise
+  \item Datenpanne
+  \item Bewertungsmanipulation
+  \item Anbieterprotest
+  \item Regulatorische Prüfung
+  \item Plattformausfall (technisch)
+  \item Preiskrieg
+  \item Abwanderung wichtiger Partner
+\end{enumerate}
+
+\noindent Ordnen Sie jede Krisenart einer Kategorie zu: \emph{technisch}, \emph{rechtlich-regulatorisch}, \emph{wirtschaftlich}, \emph{kommunikativ-reputativ}.
+
+\noindent Ergänzen Sie einen abschließenden Satz: Welche \emph{vier Resilienzfaktoren} reduzieren das Eskalationsrisiko, unabhängig von der Krisenart?
+
+\ytquery{Plattform Krise Reputation Datenpanne Anbieterprotest Resilienz Definition}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{SupplierGate \textendash{} Wettbewerbsrisiken erkennen}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``SupplierGate'' betreibt eine digitale B2B-Plattform, auf der Industriekunden Zulieferer für technische Komponenten finden. Anbieter listen Produkte, geben Angebote ab und buchen gegen Gebühr bessere Sichtbarkeit. Die Plattform wächst stark und hat in einigen Kategorien bereits eine sehr hohe Marktbedeutung.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Einige Anbieter beklagen, dass bezahlte Sichtbarkeit nicht klar gekennzeichnet ist.
+  \item Kleinere Anbieter fühlen sich gegenüber großen Anbietern benachteiligt.
+  \item Die Plattform plant, eigene Handelsmarken anzubieten.
+  \item Rankingfaktoren sind für Anbieter kaum nachvollziehbar.
+  \item Anbieter können bei Regelverstößen gesperrt werden, kennen aber den Beschwerdeprozess nicht.
+  \item Kunden verlassen sich stark auf Bewertungen und Empfehlungen der Plattform.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie mindestens \textbf{acht Wettbewerbs-, Fairness- oder Kartellrechtsrisiken}.
+  \item Ordnen Sie die Risiken den Bereichen \emph{Ranking} \textperiodcentered{} \emph{Gebühren} \textperiodcentered{} \emph{Zugang} \textperiodcentered{} \emph{Daten} \textperiodcentered{} \emph{Eigenangebote} \textperiodcentered{} \emph{Bewertungen} \textperiodcentered{} \emph{Sperrungen} zu.
+  \item Beschreiben Sie, welche \textbf{drei Risiken} besonders kritisch für \emph{Vertrauen und Marktposition} sind.
+  \item Entwickeln Sie \textbf{fünf Maßnahmen}, um fairen Wettbewerb auf der Plattform zu stärken.
+  \item Formulieren Sie eine Managementempfehlung, welche Maßnahmen \emph{vor} dem Ausbau eigener Handelsmarken umgesetzt werden müssen \textendash{} und warum die Reihenfolge wichtig ist.
+\end{enumerate}
+
+\ytquery{Plattform Marktmacht Fairness Eigenangebot bezahlte Sichtbarkeit Kartellrecht}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{SupplierGate \textendash{} Krisenszenario}{\nivLii}{25\,min}
+
+\begin{infobox}[Krisensituation]
+Mehrere Anbieter veröffentlichen \emph{öffentlich} Kritik an der Plattform. Sie behaupten, dass große Anbieter bevorzugt werden und bezahlte Sichtbarkeit faktisch zu besseren Rankings führe. Gleichzeitig berichten Kunden über widersprüchliche Produktbewertungen. Ein Branchenverband fordert Transparenz, und die Geschäftsführung befürchtet Reputationsschäden.
+
+\smallskip
+\textbf{Rahmen:}
+\begin{itemize}
+  \item Expansion in zwei weitere Märkte steht kurz bevor.
+  \item Umsatzwachstum ist hoch.
+  \item Medien und Partner beobachten die Situation.
+  \item Interne Rankingregeln sind technisch komplex.
+  \item Kein formales Krisenhandbuch vorhanden.
+  \item Budget für Sofortmaßnahmen: 150.000\,\euro.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie die Krise auf einer Skala 1\,--\,5 nach: \emph{Dringlichkeit}, \emph{Schadenspotenzial}, \emph{Steuerbarkeit}.
+  \item Benennen Sie die \textbf{wichtigsten Stakeholder}: Anbieter, Kunden, Partner, Management, Behörden, Öffentlichkeit. Welche Kommunikationsbotschaft pro Stakeholder?
+  \item Entwickeln Sie einen \textbf{Sofortmaßnahmenplan für die ersten 72 Stunden} (mindestens 6 Schritte mit Zuständigkeit).
+  \item Entwickeln Sie \textbf{drei mittelfristige Maßnahmen} zur Wiederherstellung von Vertrauen (über 3\,--\,6 Monate).
+  \item Entscheiden Sie, ob die Expansion \emph{fortgeführt}, \emph{verlangsamt} oder \emph{pausiert} werden sollte \textendash{} mit Begründung.
+\end{enumerate}
+
+\ytquery{Plattform Krise Anbieterprotest Kommunikation 72 Stunden Stakeholder}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Selbstbevorzugung \textendash{} darf die Plattform eigene Marken anbieten?}{\nivLii}{22\,min}
+
+\noindent\textbf{Ausgangslage:}
+``SupplierGate'' plant, eigene Handelsmarken auf der Plattform anzubieten. Damit konkurriert die Plattform mit ihren eigenen Anbietern. In der EU sind solche Modelle möglich, aber heikel (Gatekeeper-Regelungen, Selbstbevorzugung).
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie \textbf{drei Konstellationen}, in denen Eigenangebote auf einer Plattform \emph{unproblematisch} sind \textendash{} und drei, in denen sie \emph{kartellrechtlich riskant} werden.
+  \item Entwickeln Sie \textbf{vier Schutzmechanismen}, die ein Plattformbetreiber einrichten muss, bevor er eigene Angebote startet (z.\,B.\ klare Trennung Plattform / Eigenmarke, separater Datenzugang, identische Ranking-Regeln, externer Audit, Datenfirewalls).
+  \item Beschreiben Sie, welche \emph{Anreize} entstehen, dass Mitarbeitende mit Doppelrollen (Plattformsteuerung + Eigenmarke) Anbieterdaten missbrauchen \textendash{} und welche organisatorische Trennung das verhindert.
+  \item Formulieren Sie eine Faustregel: Wann darf eine Plattform eigene Marken anbieten \textendash{} und wann nicht?
+\end{enumerate}
+
+\ytquery{Plattform Selbstbevorzugung Eigenmarke Kartellrecht Gatekeeper Data Firewall}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Datenmacht und Daten-Governance}{\nivLii}{22\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Plattformen sammeln Anbieterdaten (Preise, Sortiment, Reaktionszeit), Kundendaten (Suchverhalten, Käufe, Bewertungen) und Transaktionsdaten. Diese Daten sind ein Wettbewerbsvorteil \textendash{} und gleichzeitig ein regulatorisches Risiko.
+
+\begin{enumerate}
+  \item Beschreiben Sie \textbf{drei Daten-Vorteile}, die ein Plattformbetreiber gegenüber einem einzelnen Anbieter hat \textendash{} und welche \emph{kartellrechtlichen Fragen} daraus entstehen können.
+  \item Entwickeln Sie eine \textbf{Daten-Governance} mit drei Ebenen:
+  \begin{itemize}
+    \item \emph{Ebene 1:} Welche Daten dürfen wofür genutzt werden (Plattformoperative, Anbieter-Reporting, Eigenangebot-Entwicklung, externe Datenservices)?
+    \item \emph{Ebene 2:} Welche Daten werden \emph{nicht} genutzt für eigene Angebote (z.\,B.\ aggregierte Anbieter-Preisdaten)?
+    \item \emph{Ebene 3:} Welche \emph{Transparenz} bekommen Anbieter darüber, wie ihre Daten verwendet werden?
+  \end{itemize}
+  \item Beschreiben Sie, wie eine \textbf{Datenfirewall} zwischen Plattformbereich und Eigenangebots-Bereich aussehen könnte (organisatorisch + technisch).
+  \item Formulieren Sie eine Faustregel: Wann ist Datenmacht ein legitimer Wettbewerbsvorteil \textendash{} und wann wird sie zum Kartellrechtsproblem?
+\end{enumerate}
+
+\ytquery{Plattform Datenmacht Daten Governance Kartellrecht Datenfirewall B2B}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Krisenkommunikation \textendash{} drei Szenarien}{\nivLii}{22\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Entwickeln Sie für drei Krisenszenarien eine \emph{erste Kommunikationsbotschaft} \textendash{} maximal 5 Sätze pro Szenario \textendash{} und benennen Sie das Krisenteam, das den Lead übernimmt.
+
+\begin{enumerate}
+  \item \textbf{Szenario A \textendash{} Datenpanne:} Eine Sicherheitslücke macht über 24 Stunden Kundendaten (Name, Firma, E-Mail) potenziell einsehbar. Es ist noch unklar, ob Daten abgeflossen sind.
+  \item \textbf{Szenario B \textendash{} Manipulationsverdacht Bewertungen:} Eine investigative Recherche eines Fachmediums behauptet, dass die Plattform Bewertungen systematisch geschönt hat.
+  \item \textbf{Szenario C \textendash{} Anbieterprotest:} 18 große Anbieter (zusammen 20\,\% Plattformumsatz) drohen mit kollektivem Rückzug, wenn die Plattform nicht binnen 30 Tagen die Ranking-Logik offenlegt.
+\end{enumerate}
+
+\noindent Für jedes Szenario:
+\begin{itemize}
+  \item Wer kommuniziert (CEO, CPO, Pressesprecher:in, Datenschutzbeauftragte:r)?
+  \item Welche \emph{drei Botschaften} müssen in der ersten Kommunikation enthalten sein?
+  \item Welche Aussage darf \emph{nicht} gemacht werden (Risiko: rechtlich, vertrauensschädigend)?
+\end{itemize}
+
+\ytquery{Krisenkommunikation Datenpanne Plattform Anbieterprotest Reputation Sprecher}
+
+\antwortlinien{22}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Fallstudie LogiTrade Hub \textendash{} Fairness, Wettbewerb, Krise}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie: LogiTrade Hub]
+``LogiTrade Hub'' ist eine digitale Plattform, die Verlader, Logistikdienstleister, Lagerflächenanbieter und Zusatzservices verbindet. Unternehmen stellen Transportaufträge ein, vergleichen Angebote, bewerten Dienstleister und buchen Zusatzleistungen. In bestimmten Segmenten ist die Plattform bereits ein zentraler Marktzugang.
+
+\smallskip
+\textbf{Spannungen:}
+\begin{itemize}
+  \item Kleinere Logistikdienstleister beklagen sinkende Sichtbarkeit.
+  \item Große Anbieter erhalten bessere Konditionen wegen Volumen.
+  \item Plattform plant eigene Logistikservices unter eigener Marke.
+  \item Wettbewerber, Partner und Verbände beobachten kritisch.
+\end{itemize}
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Plattformumsatz: 52\,Mio.\,\euro{} jährlich
+  \item 4.800 registrierte Logistikdienstleister \textperiodcentered{} 21.000 Unternehmenskunden
+  \item 65\,\% des Umsatzes mit Top-200 Anbietern (Konzentrationsrisiko)
+  \item Ranking: Preis, Verfügbarkeit, Bewertung, Reaktionszeit, bezahlte Sichtbarkeit
+  \item Bezahlte Sichtbarkeit wird unzureichend erklärt
+  \item Expansion in weitere Länder geplant
+  \item Budget Governance/Krise/Zukunft: 900.000\,\euro
+\end{itemize}
+
+\smallskip
+\textbf{Managementfragen:}
+\begin{itemize}
+  \item Eigene Services anbieten?
+  \item Wie wird fairer Wettbewerb gesichert?
+  \item Wie transparent muss die Ranking-Logik werden?
+  \item Wie werden Anbieterbeschwerden geregelt?
+  \item Expansion trotz Kritik fortführen?
+  \item Wie wird die Plattform langfristig resilient?
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die wichtigsten Wettbewerbs-, Fairness- und Krisenrisiken in 4\,--\,6 Punkten.
+  \item Entwickeln Sie eine \textbf{Fairness-Governance}: Regeln für Zugang, Sichtbarkeit, Ranking, Gebühren, Beschwerden, Sanktionen.
+  \item Entscheiden Sie, ob und unter welchen Bedingungen eigene Logistikservices eingeführt werden dürfen.
+  \item Entwickeln Sie eine \textbf{Krisenmanagement-Architektur}: Frühwarnindikatoren, Eskalationsstufen, Krisenteam, Kommunikationslogik, Nachbereitung.
+  \item Verteilen Sie das Budget (900.000\,\euro) auf: Fairness-Governance, Ranking-Transparenz, Bewertungsmanagement, Krisenfähigkeit, Daten-Governance, Zukunftsstrategie.
+  \item Treffen Sie eine \textbf{Expansionsentscheidung}: voll, schrittweise, pausiert \textendash{} mit Senior-Begründung.
+  \item Treffen Sie mindestens \emph{eine Entscheidung unter Unsicherheit} und begründen Sie diese aus Senior-Sicht.
+\end{enumerate}
+
+\ytquery{B2B Plattform Logistik Fairness Wettbewerb Krise Selbstbevorzugung Senior}
+
+\antwortlinien{38}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Zukunftssichere Plattformstrategie \textendash{} Resilienz vor Wachstum}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Eine zukunftssichere Plattformstrategie verbindet \emph{Wachstum}, \emph{Compliance}, \emph{Governance}, \emph{Datenstrategie}, \emph{Kundenvertrauen}, \emph{Partnerstabilität} und \emph{technische Anpassungsfähigkeit}. Im Senior-Management bedeutet das: \emph{nicht jede Wachstumsoption ist wertvoll}.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 3\,--\,4 Sätzen, was \emph{Resilienz} im Plattformkontext konkret bedeutet \textendash{} und nennen Sie \textbf{vier Resilienzfaktoren}, die sich aus dem Kursverlauf ergeben.
+  \item Wählen Sie ein \textbf{konkretes Plattformsegment} (B2B-Industrie, Pflege, Medizin, Logistik, Finanzen, Energie). Erläutern Sie:
+  \begin{itemize}
+    \item Welche \emph{drei Wachstumsoptionen} sind aktuell attraktiv?
+    \item Welche dieser Optionen würden Sie aus Senior-Sicht \emph{ablehnen}, weil sie Resilienz, Fairness oder Marktposition langfristig schwächen?
+    \item Welche \emph{Lernkultur} muss die Organisation entwickeln, damit Krisen \emph{produktiv} werden (Post-Mortems, Bias-Reviews, Audit-Folgemaßnahmen)?
+  \end{itemize}
+  \item Formulieren Sie eine \textbf{Faustregel}: Wann gewinnt eine Plattform durch \emph{Verzicht} mehr als durch \emph{Wachstum}?
+\end{enumerate}
+
+\ytquery{Plattform Resilienz Senior Strategie Wachstum Verzicht Lernkultur Zukunft}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Capstone \textendash{} Zukunftssichere Plattform-Entscheidungsarchitektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Platform Officer (oder Chief Risk Officer, Chief Compliance Officer, Head of Marketplace, Leiter:in Strategie, Krisenmanager:in, externe:r Plattformberater:in).
+
+\smallskip
+\textbf{Ausgangslage:} Ein wachsendes Plattformunternehmen hat eine starke Marktposition erreicht. Die Plattform vermittelt Anbieter, Kunden und Partner, steuert Sichtbarkeit über Rankinglogiken, verarbeitet wertvolle Daten und plant neue eigene Angebote. Regulatorische Aufmerksamkeit, Wettbewerbsdruck, Anbieterabhängigkeit und Reputationsrisiken steigen.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Budget begrenzt \textperiodcentered{} Marktinformationen unvollständig.
+  \item Wettbewerber agieren aggressiv.
+  \item Plattformteilnehmer reagieren sensibel auf Ranking, Gebühren, Sperrungen, Datenverwendung.
+  \item Eigene Angebote könnten Umsatzquellen schaffen, aber Interessenkonflikte auslösen.
+  \item Eine Krise könnte schnell öffentlich werden.
+  \item Regulatorische Anforderungen können sich verändern.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strategische \emph{Entscheidungsarchitektur} \textendash{} keine Maßnahmenliste \textendash{} für Kartellrechtsrisiken, fairen Wettbewerb, zukunftssichere Plattformstrategie und Krisenmanagement.
+
+\begin{enumerate}
+  \item \textbf{Zielbild} einer fairen, resilienten und zukunftssicheren Plattformstrategie (3\,--\,5 Sätze).
+  \item Analyse der Plattformmacht und möglicher Abhängigkeiten im Markt.
+  \item \textbf{Risiko-Register} zu Kartellrecht, Fairness, Ranking, Daten, Eigenangeboten, Gebühren, Sperrungen, Partnerabhängigkeit.
+  \item \textbf{Fairness-Governance} mit Regeln für Zugang, Sichtbarkeit, Ranking, Gebühren, Beschwerden, Sanktionen.
+  \item \textbf{Daten-Governance} zur verantwortlichen Nutzung von Anbieter-, Kunden- und Transaktionsdaten.
+  \item Entscheidung, ob und unter welchen Bedingungen eigene Angebote eingeführt werden dürfen.
+  \item \textbf{Krisenmanagement-Architektur}: Frühwarnindikatoren, Eskalationsstufen, Krisenteam, Kommunikationslogik, Nachbereitung.
+  \item \textbf{Zukunftsstrategie} für Resilienz, regulatorische Anpassungsfähigkeit, Wettbewerbsdifferenzierung, Stakeholdervertrauen.
+  \item \textbf{KPI-Struktur} für Fairness, Vertrauen, Beschwerden, Anbieter-/Kundenzufriedenheit, Compliance, Krisenfrüherkennung, Wachstum.
+  \item Drei \textbf{Managemententscheidungen unter Unsicherheit}.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens eine bewusste \emph{Entscheidung gegen} eine kurzfristig attraktive Wachstums-, Preis-, Daten- oder Eigenangebotsstrategie, wenn dadurch fairer Wettbewerb, Vertrauen oder Krisenresilienz gefährdet würden \textendash{} und begründen Sie aus Senior-Level-Perspektive.
+
+\ytquery{Chief Platform Officer Kartellrecht Zukunftsstrategie Krise Resilienz Capstone}
+
+\antwortlinien{40}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss \textendash{} Kursende}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben des Capstone-Tags bearbeitet \textendash{} und damit den Kurs ``Digitale Vertriebsstrategien und Plattformmodelle'' abgeschlossen. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 16}.
+
+\medskip
+\begin{infobox}[Was Sie über die 16 Tage aufgebaut haben]
+\begin{itemize}
+  \item Sie unterscheiden klassische, digitale und plattformbasierte Vertriebslogiken sauber.
+  \item Sie erkennen Netzwerkeffekte, Lock-in und Plattformrisiken in Ihrer Branche.
+  \item Sie entwerfen Multi-Channel-, Revenue- und Subscription-Architekturen.
+  \item Sie integrieren CRM, Automatisierung und KI verantwortlich in den Vertrieb.
+  \item Sie bauen Conversational-Commerce-Architekturen mit klaren Grenzen.
+  \item Sie steuern Plattformen rechtssicher und differenzieren sich über Vertrauen.
+  \item Sie verantworten Wachstumsentscheidungen, die auch in Krisen verteidigbar sind.
+\end{itemize}
+\end{infobox}
+
+\medskip
+\begin{infobox}[Capstone-Botschaft]
+Senior-Level-Verantwortung in Plattformmärkten heißt: \emph{Wachstum ist nicht die Antwort. Wachstum ist die Frage \textendash{} und die Antwort ist eine Entscheidungsarchitektur.}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 16 \textperiodcentered{} Capstone-Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

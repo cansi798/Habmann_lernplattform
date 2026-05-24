@@ -1,0 +1,677 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 11 - Loesungsheft
+% Mit Plattformen Geld verdienen: Modelle, Abo-Strategien & Partnernetzwerke
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 11}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Monetarisierung \& Subscription}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 6 \textperiodcentered{} TAG 11 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 12.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 11\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Monetarisierung,\\Subscription \& Partnernetzwerke.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis,\\nicht die einzige korrekte Lösung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 11}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterlösungen sind \emph{eine} mögliche Lösung \textendash{} sie sind nicht die einzig richtige. Auf L2 und L3 sind mehrere Begründungswege legitim, solange sie den Begriffsapparat sauber nutzen, Annahmen explizit machen und zu einer klaren Entscheidung führen.
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterlösung. Wo weicht Ihre Argumentation ab? Welche Annahmen unterscheiden sich?
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Plattform-Erlösmodelle benennen}{\nivLi}{8\,min}
+
+\ytquery{Plattform Erlösmodelle Provision Subscription Freemium Werbung Definition}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Provisions- / Transaktionsgebühr:} Plattform behält einen Prozentsatz jedes vermittelten Geschäfts (typisch 5\,--\,30\,\%) \textendash{} Anbieter zahlen erst, wenn sie verdienen.
+  \item \textbf{Listing-Gebühr:} fester Betrag pro eingestelltem Produkt, Inserat oder Profil \textendash{} unabhängig vom späteren Geschäftserfolg.
+  \item \textbf{Subscription / Abo:} wiederkehrender Betrag (monatlich/jährlich) für Zugang zu definiertem Leistungsumfang \textendash{} planbarer Umsatz für Plattform, planbare Kosten für Kunde.
+  \item \textbf{Freemium:} kostenlose Grundversion + zahlungspflichtige Premium-Funktionen \textendash{} senkt Eintrittsbarriere, monetarisiert nur den Kern der zahlungsbereiten Nutzer.
+  \item \textbf{Werbung / Premium-Platzierung:} Anbieter zahlen für Sichtbarkeit (Anzeigen, hervorgehobene Position, Sponsored Listings) \textendash{} klassischer Hebel reichweitenstarker Plattformen.
+  \item \textbf{Daten- / Servicegebühr:} bezahlte Zusatzdienste (Analytics, API-Zugriff, Verifikation, Service-Pakete) \textendash{} verkauft den Plattform-Datenwert als Service.
+\end{enumerate}
+
+\smallskip
+\textbf{Direkt vs.\ indirekt:} Direkte Monetarisierung zahlt der Plattform-Nutzer selbst (Abo, Provision); indirekte Monetarisierung wird von Dritten finanziert (Werbung, Datenservice, Partner) \textendash{} der Nutzer ``zahlt'' dann mit Aufmerksamkeit oder Daten.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{CLV, CAC, Churn \textendash{} drei Steuerungsgrößen}{\nivLi}{8\,min}
+
+\ytquery{CLV CAC Churn Subscription SaaS Erklärung Kennzahl}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Customer Lifetime Value (CLV):} der durchschnittliche wirtschaftliche Wert, den ein Kunde über die gesamte Vertragsdauer generiert (Umsatz oder Deckungsbeitrag). Steuert Investitionsentscheidungen: ``Wieviel darf Akquise kosten?''
+  \item \textbf{Customer Acquisition Cost (CAC):} durchschnittliche Marketing- und Vertriebskosten, einen \emph{neuen} Kunden zu gewinnen. Steuert Effizienz und Kanal-Portfolio.
+  \item \textbf{Churn-Rate:} Anteil der Kunden, die in einem Zeitraum abwandern (z.\,B.\ 4\,\%/Monat). Steuert Bindung, Servicequalität und Tier-Design.
+  \item \textbf{Faustregel:} CLV soll deutlich größer sein als CAC \textendash{} im Subscription-Geschäft gilt häufig $\text{CLV} \geq 3 \times \text{CAC}$ als gesund. Wer den Faktor 1 nicht erreicht, finanziert seine Akquise unwirtschaftlich.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{Subscription-Tiers benennen}{\nivLi}{8\,min}
+
+\ytquery{SaaS Subscription Tier Free Basic Professional Enterprise Pricing}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Free / Freemium} \textendash{} Zielgruppe: Erstinteressierte und Testnutzer. Merkmal: stark eingeschränkter Funktionsumfang, kein oder begrenzter Support, dient primär als Lead-Funnel.
+  \item \textbf{Basic} \textendash{} Zielgruppe: Einzelpersonen oder kleine Unternehmen mit klar definierten Grundbedarfen. Merkmal: voller Zugang zu Kernfunktionen, niedriger Festpreis, begrenzte Limits (Nutzer, Speicher, API-Aufrufe).
+  \item \textbf{Professional} \textendash{} Zielgruppe: KMU, Teams, professionelle Nutzer. Merkmal: erweiterte Funktionen, Automatisierungen, höhere Limits, Premium-Support, oft Reporting/Integrationen inklusive.
+  \item \textbf{Enterprise} \textendash{} Zielgruppe: große Organisationen, Konzerne, öffentliche Auftraggeber. Merkmal: SSO, dedizierter Account-Manager, SLAs, Rollen-/Rechte-Modelle, Audit/Compliance, individueller Preis, Vertragsfreiheit beim Datenstandort.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{Plattform-Erlösmodelle übertragen}{\nivLii}{25\,min}
+
+\ytquery{Plattform Geschäftsmodell Erlösmodell Marktplatz SaaS Community Beispiele}
+
+\begin{loesungbox}
+\textbf{Plattform A \textendash{} Industriemaschinen-Marktplatz}
+\begin{itemize}
+  \item \emph{Dominantes Modell:} Provision pro abgeschlossener Vermittlung (z.\,B.\ 3\,--\,6\,\% des Maschinenpreises).
+  \item \emph{Ergänzungen:} Listing-Gebühr für Premium-Sichtbarkeit; Bezahl-Service (Treuhand) als Vertrauenshebel.
+  \item \emph{Begründung:} Käufer und Verkäufer akzeptieren Erfolgsprovision, weil Wert direkt sichtbar ist; bei B2B-Industriegütern entsteht erst durch Vertrauensservice (Treuhand, Inspektion) die Abschlussbereitschaft.
+  \item \emph{Risiko:} Disintermediation \textendash{} Käufer und Verkäufer könnten nach erstem Kontakt direkt verhandeln und Plattform umgehen.
+\end{itemize}
+
+\textbf{Plattform B \textendash{} BauPlan Pro SaaS}
+\begin{itemize}
+  \item \emph{Dominantes Modell:} Subscription pro Nutzer/Monat in mehreren Tiers.
+  \item \emph{Ergänzungen:} Add-ons (Schnittstellen zu Buchhaltung, BIM), kostenpflichtige Schulungen.
+  \item \emph{Begründung:} Wiederkehrende Nutzung erfordert wiederkehrenden Preis; Bauunternehmen wollen kalkulierbare Kosten.
+  \item \emph{Risiko:} Churn bei kleinen Kunden in Krisenphasen (Baubranche zyklisch).
+\end{itemize}
+
+\textbf{Plattform C \textendash{} Steuerberater-Community}
+\begin{itemize}
+  \item \emph{Dominantes Modell:} Subscription (Premium-Mitgliedschaft mit erweitertem Zugriff auf Vorlagen, Forum-Bereiche, Stellenmarkt).
+  \item \emph{Ergänzungen:} Werbung / Premium-Platzierung für Software-Anbieter, Stellenanzeigen, Sponsored Webinare.
+  \item \emph{Begründung:} Community ist Vertrauens-Asset \textendash{} Werbung muss daher zurückhaltend und kontextrelevant sein, sonst Glaubwürdigkeit verloren. Subscription erlaubt kuratierten, hochwertigen Zugang.
+  \item \emph{Risiko:} zu aggressive Werbung kannibalisiert die Community-Qualität, was wiederum Abos kostet.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{Subscription-Architektur für ``BauPlan Pro''}{\nivLii}{30\,min}
+
+\ytquery{SaaS Subscription Tier Design Pricing Strategie B2B Beispiel}
+
+\begin{loesungbox}
+\textbf{Tier-Modell (Vorschlag):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXXl@{}}
+\toprule
+\textbf{Tier} & \textbf{Zielgruppe} & \textbf{Differenzierungsmerkmale} & \textbf{Preis} \\
+\midrule
+Solo & Einzelbauleiter & Projektkalkulation, Aufmaß, Stundenerfassung, 1 Nutzer, 5 aktive Projekte & 39\,\euro/User/Mon. \\
+\midrule
+Team & Kleine Baufirmen (5\,--\,20) & alles in Solo + Mehrnutzer-Verwaltung, Rollen, unbegrenzte Projekte, Standard-Reports & 79\,\euro/User/Mon. \\
+\midrule
+Pro & Mittelstand (20\,--\,200) & alles in Team + Schnittstellen (Buchhaltung, BIM), erweiterte Auswertungen, SSO, Priority-Support & 119\,\euro/User/Mon. \\
+\midrule
+Enterprise & Großkunden / Öffentliche Hand & alles in Pro + dedizierter Account-Manager, SLA, individuelle Schnittstellen, Audit/Compliance & individuell \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Begründung:}
+\begin{itemize}
+  \item \emph{Solo:} senkt Einstiegshürde (39 statt 79\,\euro) für Selbstständige, hält Bestandskunden in der Plattform.
+  \item \emph{Team:} entspricht dem aktuellen Preis (79\,\euro) und erweitert nur \emph{nach oben} mit Mehrnutzer-Logik.
+  \item \emph{Pro:} schöpft Zahlungsbereitschaft mittelständischer Bauunternehmen, die heute auf eigene Lösungen ausweichen.
+  \item \emph{Enterprise:} öffnet einen neuen Markt (öffentliche Auftraggeber), individuell verhandelt \textendash{} eigene Vertriebslogik.
+\end{itemize}
+
+\smallskip
+\textbf{Trennschärfe:}
+\begin{itemize}
+  \item Klare \emph{Funktionsmauern} (z.\,B.\ Schnittstellen ausschließlich ab Pro) verhindern, dass kleine Kunden teure Tiers brauchen.
+  \item \emph{Nutzerzahl} ist eine objektive Skalierungsgröße \textendash{} ein Großkunde rutscht automatisch in höhere Tiers.
+  \item Klare \emph{Migrationspfade} (Solo \textrightarrow{} Team kostet keinen Datenverlust, Team \textrightarrow{} Pro auf Knopfdruck) reduzieren Friktion.
+\end{itemize}
+
+\smallskip
+\textbf{ARPU-Effekt (qualitativ):}
+Bei 1.200 zahlenden Nutzern: heute 79\,\euro{} flat. Erwartung nach Migration: ca.\ 15\,\% Solo (39), 55\,\% Team (79), 25\,\% Pro (119), 5\,\% Enterprise ($> 200$). Daraus errechnet sich ein erwarteter ARPU um $\approx$ 88\,\euro/User/Monat \textendash{} also +11\,\% gegenüber heute, bei zugleich verbesserter Anbindung kleiner Selbstständiger und besserer Reichweite nach oben.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{Pricing-Logiken vergleichen}{\nivLii}{20\,min}
+
+\ytquery{Pricing Modelle SaaS Plattform nutzungsbasiert wertbasiert Seat License}
+
+\begin{loesungbox}
+\begin{itemize}
+  \item \textbf{Nutzungsbasiert} \textendash{} \emph{Beispiel:} AWS, Cloud-Anbieter, Zahlungsdienste (pro Transaktion).\\ \emph{Stärke:} Einstieg ohne Risiko, Skalierung mit Nutzung. \emph{Risiko:} unvorhersehbare Rechnungen, Kunde verlangt Caps.
+  \item \textbf{Wertbasiert} \textendash{} \emph{Beispiel:} Performance-Marketing-Agenturen (\% Mediabudget), KI-Anbieter (\% gesparter Kosten).\\ \emph{Stärke:} höchste Preisrealisation, wenn Wert nachweisbar. \emph{Risiko:} aufwändige Wertvermessung, Streit über Attribution.
+  \item \textbf{Rollenbasiert (Seat)} \textendash{} \emph{Beispiel:} Salesforce, HubSpot, Slack.\\ \emph{Stärke:} planbar, leicht verständlich, wächst mit Team. \emph{Risiko:} ``Seat-Sharing'' (zwei Personen ein Login), Stagnation in flachen Organisationen.
+  \item \textbf{Funktionsbasiert (Tier)} \textendash{} \emph{Beispiel:} Notion, Asana, viele B2B-SaaS.\\ \emph{Stärke:} klare Kommunikation, einfache Verkaufslogik, Cross-Sell durch Up-Tier. \emph{Risiko:} Tier-Falle \textendash{} Kunde bezahlt Funktionen, die er nicht nutzt, und wirft den Anbieter raus.
+  \item \textbf{Erfolgsbasiert} \textendash{} \emph{Beispiel:} Booking.com, Vermittlungsplattformen (Provision pro Buchung), Recruiting-Plattformen (Fee pro Hire).\\ \emph{Stärke:} hoher Anreiz für den Kunden, weil nur Erfolg kostet. \emph{Risiko:} Anbieter trägt Cashflow-Risiko, Anreiz für ``Off-Platform-Deals''.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{Partnernetzwerke und Affiliate-Programme}{\nivLii}{25\,min}
+
+\ytquery{B2B Partnernetzwerk Affiliate Programm strategische Allianz Plattform}
+
+\begin{loesungbox}
+\textbf{1. Bewertungsmatrix (Skala: niedrig / mittel / hoch):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXXXX@{}}
+\toprule
+\textbf{Option} & \textbf{Reichweite} & \textbf{Margenkosten} & \textbf{Kontrolle Kundenerlebnis} & \textbf{Skalierungsgeschwindigkeit} \\
+\midrule
+Affiliate-Programm & mittel & niedrig (nur erfolgsabhängig) & niedrig & hoch \\
+\midrule
+Implementierungs-Partner & mittel & mittel & mittel & mittel \\
+\midrule
+Technologie-Partner & mittel & niedrig & hoch & niedrig \\
+\midrule
+Allianz mit Energieversorgern & hoch & hoch (Marge geteilt) & niedrig\,--\,mittel & niedrig\,--\,mittel \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Priorisierung 12 Monate:}
+\emph{Implementierungs-Partner} (Beratungshäuser) und \emph{Technologie-Partner} (Hardware-Integration). Erstere bringen qualifizierte Nachfrage und stützen die Beratungsstärke, Letztere erhöhen den Lock-in und differenzieren von Wettbewerbern technisch.
+
+\smallskip
+\textbf{3. Tragende Vereinbarungen:}
+\begin{itemize}
+  \item \emph{Implementierungs-Partner:} Provisionssatz 15\,--\,20\,\% des Erstjahresumsatzes, danach abnehmend; verpflichtende Zertifizierung; Kundenschutz für 12 Monate; Plattform behält Vertragspartnerschaft mit Endkunden.
+  \item \emph{Technologie-Partner:} klare Datenrechte (Plattform behält Kundendaten), Co-Branding zulässig, API-Verträge mit SLA, Exklusivität nur gegen Garantieumsätze, keine Doppellistungen mit direkten Wettbewerbern in einer Vertikalen.
+\end{itemize}
+
+\smallskip
+\textbf{4. Faustregel:}
+Eine \emph{strategische Allianz} ist sinnvoll, wenn (a) der Partner Marktzugang bietet, den die Plattform allein nicht erreicht \emph{und} (b) der Mehrwert für Endkunden klar gemeinsam getragen wird. Ein \emph{Affiliate-Programm} ist sinnvoll, wenn (a) das Produkt selbsterklärend ist \emph{und} (b) niedrige Kontrollbedürfnisse über die Kundenansprache bestehen. Sobald Kundenerlebnis, Marke und Datenkontrolle strategisch sind, schlägt die Allianz das Affiliate \textendash{} bei höherem Preis.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{StreamNow Studios \textendash{} Subscription neu denken}{\nivLii}{25\,min}
+
+\ytquery{Streaming Subscription Tier Churn Reduktion Pricing Familienabo}
+
+\begin{loesungbox}
+\textbf{1. Analyse CLV/CAC/Churn:}
+Bei 12\,\% Monats-Churn liegt die durchschnittliche Verweildauer bei etwa 8,3 Monaten; bei 14,99\,\euro{} ARPU ergibt das einen CLV von ca.\ 125\,\euro. Bei einem CAC von 38\,\euro{} ist das CLV/CAC-Verhältnis $\approx 3,3$ \textendash{} formal gesund. Kritisch ist aber die hohe Churn-Rate, denn jede Erhöhung um einen Punkt schrumpft den CLV überproportional. Steuerungs-Hebel liegt klar in Churn-Reduktion, nicht in CAC-Senkung.
+
+\smallskip
+\textbf{2. Neues Tier-Modell:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXXl@{}}
+\toprule
+\textbf{Tier} & \textbf{Inhalte} & \textbf{Differenzierung} & \textbf{Preis} \\
+\midrule
+Light & 1 Themenbereich (z.\,B.\ Yoga \emph{oder} Fitness) & 1 Profil, Standard-Qualität, keine Downloads & 7,99\,\euro/Mon. \\
+\midrule
+Standard & alle Themenbereiche & 2 Profile, HD, Downloads & 12,99\,\euro/Mon. \\
+\midrule
+Premium & alles + Live-Klassen + Coaching-Slot & 4 Profile, 4K, exklusiver Content, 1 Coaching/Mon. & 19,99\,\euro/Mon. \\
+\midrule
+Familie & alle Themenbereiche & 6 Profile, Kinderprofil & 21,99\,\euro/Mon. \\
+\midrule
+Jahres-Abo & wie Standard & 10 Monate zum Preis von 12 & 129\,\euro/Jahr \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Drei Maßnahmen zur Churn-Reduktion:}
+\begin{itemize}
+  \item Jahres-Abo mit Rabatt (mathematisch CAC-Amortisation in den ersten Monaten gesichert).
+  \item Pause-Funktion bis 3 Monate \textendash{} reduziert Kündigungen um geschätzt 20\,--\,30\,\%.
+  \item Treue-/Punkteprogramm mit Coaching-Bonus nach 12\,Monaten \textendash{} bindet Kunden in der kritischen Phase 9\,--\,15 Monate.
+\end{itemize}
+
+\smallskip
+\textbf{4. ARPU- und CLV-Wirkung (qualitativ):}
+ARPU bleibt ungefähr stabil (Light senkt ihn, Premium/Familie heben ihn). Entscheidend ist der CLV: durch geschätzte Churn-Reduktion von 12 auf 8\,\%/Monat steigt die Verweildauer von 8,3 auf $\approx 12,5$ Monate \textendash{} CLV steigt damit von 125\,\euro{} auf ca.\ 165\,--\,180\,\euro, also +30\,--\,40\,\%.
+
+\smallskip
+\textbf{5. Schattenseite:}
+\emph{Light} könnte Bestandskunden zur Migration nach unten verleiten \textendash{} d.\,h.\ ein Teil der heutigen 14,99-\euro-Kunden wechselt in 7,99-\euro-Light. Diese ``Down-Tier-Wanderung'' kann ARPU temporär stark drücken, wenn keine Maßnahmen ergriffen werden. \emph{Gegenmittel:} Light bewusst eingeschränkt halten (nur 1 Themenbereich, kein Download); aktive Cross-Sell auf Standard mit Highlight-Content; Standard als Default-Empfehlung auf der Anmeldeseite.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Monetarisierungs-Entscheidung in der Wachstumsphase}{\nivLiii}{40\,min}
+
+\ytquery{Marktplatz Monetarisierung Provision Subscription Wachstum Profitabilität}
+
+\begin{loesungbox}
+\textbf{1. Analyse:}
+\begin{itemize}
+  \item CraftMarket hat Netzwerkeffekte (35\,k Handwerker, 480\,k Anfragen/Jahr) \textendash{} sie sind das wertvollste Asset, schwächere Monetarisierung darf sie nicht beschädigen.
+  \item Operatives Defizit + Investorenrunde + 24-Monats-Ziel = harter Profitabilitätspfad notwendig, aber jede Preiserhöhung kann zu Anbieterseiten-Abwanderung führen.
+  \item Konflikt: ``Profitabilität jetzt'' (harte Provision oder verpflichtendes Abo) gefährdet ``Wachstum schützen'' (Netzwerk wegnehmen, was es trägt).
+  \item Privatkunden sind heute kostenfrei \textendash{} jede Belastung dort ist plattformpolitisch riskant.
+  \item Die Plattform hat genug Daten, um schon heute zwischen ``aktiven Hochverdienern'' und ``Karteileichen'' zu differenzieren.
+\end{itemize}
+
+\smallskip
+\textbf{2. Bewertung der Optionen:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXXXXXX@{}}
+\toprule
+\textbf{Option} & \textbf{Akzeptanz HW} & \textbf{Akzeptanz Kunde} & \textbf{Netzwerkrisiko} & \textbf{Umsatz 24 Mon.} & \textbf{Skalierbarkeit} & \textbf{Steuerbarkeit} \\
+\midrule
+A: Provision 8\,\% & mittel\,--\,niedrig & hoch & hoch (Disintermediation) & hoch & hoch & mittel \\
+B: Subscription & mittel & hoch & mittel (Kleine kündigen) & mittel\,--\,hoch & hoch & hoch \\
+C: Lead-Verkauf & mittel & hoch & mittel (Kosten ohne Erfolg) & mittel & hoch & mittel \\
+D: Hybrid & hoch & hoch & niedrig\,--\,mittel & hoch & hoch & hoch \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{3. Entscheidung:}
+\emph{Option D \textendash{} Hybrid-Modell.}
+\begin{itemize}
+  \item Basis-Abo 29\,\euro{} schützt die Plattform vor Karteileichen und bindet aktiv den ``Mittelbau'' der Handwerker.
+  \item 4\,\% Provision (statt 8) reduziert Anreiz zur Disintermediation und ist im Wettbewerbskontext realistisch.
+  \item Premium-Sichtbarkeit als Add-on schöpft Zahlungsbereitschaft genau bei denen, die Aufträge verdienen wollen \textendash{} ohne den Rest zu belasten.
+  \item Privatkunden bleiben kostenfrei \textendash{} der Wert der Nachfrageseite wird nicht beschädigt.
+\end{itemize}
+
+\smallskip
+\textbf{4. Roll-out-Konzept:}
+\begin{itemize}
+  \item \emph{Monat 0\,--\,2:} Ankündigung mit 90-Tage-Frist, Sonderkondition für treue Bestands-Handwerker (3 Monate Abo frei).
+  \item \emph{Monat 1\,--\,3:} Premium-Sichtbarkeit zuerst als ``opt-in Beta'' \textendash{} schafft Erfahrungswerte und Cases.
+  \item \emph{Monat 3:} Provision 4\,\% wird scharf geschaltet, ausschließlich auf neu abgeschlossene Aufträge über die Plattform.
+  \item \emph{Eskalationspunkt:} Wenn Anbieter-Churn $> 12\,\%$ in einem Quartal, sofortige Anpassung der Provisionslogik (Stundungen, Staffelung nach Auftragsgröße).
+\end{itemize}
+
+\smallskip
+\textbf{5. Entscheidung unter Unsicherheit:}
+Die Höhe der Provision (4\,\% statt 8\,\%) wird gewählt, obwohl unklar ist, wie viel ``optimal abgeschöpft'' wird. \emph{Begründung:} In dieser Marktphase ist Netzwerkschutz wichtiger als kurzfristige Marge \textendash{} und die Provisionshöhe lässt sich später marginal anheben (z.\,B.\ auf 5\,\% in Jahr 3), wenn das Netzwerk stabil ist. Die Gegenrichtung \textendash{} hoch starten und später senken \textendash{} hätte einen viel höheren Vertrauensschaden.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Wachstum vs.\ Margenstabilität in Partnernetzwerken}{\nivLiii}{30\,min}
+
+\ytquery{Partner Conflict Reseller Direktvertrieb B2B Channel Management}
+
+\begin{loesungbox}
+\textbf{1. Wann wird ein Partnernetzwerk zum Risiko:}
+Ein Partnernetzwerk wird zum strategischen Risiko, sobald (a) ein einzelner Partner über 20\,\% des Umsatzes liefert, (b) Kundendaten überwiegend beim Partner liegen, (c) die Markenwahrnehmung am Endkunden mit dem Partner verschmilzt oder (d) die Konditionen zwischen Direkt- und Partnerkanal sich gegenseitig kannibalisieren. Sobald zwei dieser Schwellen gleichzeitig greifen, hat der Anbieter de facto den Direktzugang zu seinem eigenen Markt verloren.
+
+\smallskip
+\textbf{2. Branchenbeispiel: SaaS-Anbieter mit Systemintegratoren (z.\,B.\ ERP-Lösung im Mittelstand)}
+
+\smallskip
+\emph{Partnerstruktur:} Beratungshäuser implementieren die Software beim Endkunden, schulen, betreuen und verdienen sowohl an Beratungsstunden als auch an Provisionen aus Lizenzverträgen.
+
+\smallskip
+\emph{Typische Konflikte:}
+\begin{itemize}
+  \item Direktvertrieb des Herstellers ``klaut'' beim Partner Leads \textendash{} oder umgekehrt.
+  \item Endkunde fordert beim Hersteller Rabatt, der unterhalb der Partnerkondition liegt \textendash{} Partner fühlt sich übergangen.
+  \item Hersteller will Kundendaten direkt erhalten (Telemetrie, Nutzung) \textendash{} Partner sieht Eingriff in ``seinen'' Kunden.
+  \item Bei Eskalation: Partner ``verteidigt'' Kundenbasis vor Direktvertrieb, statt zu kooperieren.
+\end{itemize}
+
+\smallskip
+\emph{Realistische Gegenmaßnahmen:}
+\begin{itemize}
+  \item \emph{Provisionsstaffel} mit klarer Neuabschluss- vs.\ Bestandslogik (z.\,B.\ 15\,\% Erstjahr, 5\,\% danach).
+  \item \emph{Kundenschutz} mit Stichdatum: wer den Lead zuerst registriert, hält ihn 12\,Monate.
+  \item \emph{Direkte Premium-Angebote} (Enterprise-Tier, dedizierter Customer Success) ausschließlich beim Hersteller \textendash{} kein Wettbewerb im selben Segment.
+  \item \emph{Datenklausel:} Telemetriedaten gehören dem Hersteller, Beratungsdaten dem Partner \textendash{} ausdrücklich vertraglich.
+\end{itemize}
+
+\smallskip
+\textbf{3. Faustregel:}
+Eine Allianz ist strategisch tragbar, solange (a) der Partner einen Marktzugang liefert, den der Anbieter realistisch nicht selbst aufbauen kann, (b) der Hersteller die Endkundendatenkontrolle behält, (c) kein Partner über 25\,\% des Umsatzes hinauswächst, ohne durch alternative Kanäle balanciert zu werden. Sobald diese Bedingungen fallen, verkauft der Hersteller still seinen Marktanteil \textendash{} sichtbar wird das oft erst, wenn der Partner die Konditionen neu verhandelt.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Monetarisierungs-Architektur 2028}{\nivLiii}{45\,min}
+
+\ytquery{Plattform Monetarisierung Strategie 2028 CRO Subscription Partner CLV}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind möglich, solange sie als Architektur (nicht als Maßnahmenliste) gedacht sind.}
+
+\smallskip
+\textbf{1. Zielsetzung 2028:}
+Bis 2028 erzielt die Plattform 70\,\% des Umsatzes aus \emph{Subscription} als dominantem Modell, 20\,\% aus erfolgsabhängiger \emph{Provision} und maximal 10\,\% aus Werbung/Partnern. CLV liegt mindestens beim Vierfachen des CAC. Die Plattform behält die Vertragspartnerschaft mit Endkunden vollständig in eigener Hand; Partner sind Reichweiten-Hebel, kein Zwischenhändler.
+
+\smallskip
+\textbf{2. Segmentierung der Nutzerbasis:}
+\begin{itemize}
+  \item \emph{Hochwert-Power-Nutzer} \textendash{} hohe Nutzung, hohe Zahlungsbereitschaft. Tier Pro/Enterprise.
+  \item \emph{Mittelständische Stammnutzer} \textendash{} regelmäßig, stabile Zahlung. Tier Team.
+  \item \emph{Gelegenheits-Nutzer} \textendash{} unregelmäßig, niedrige Zahlungsbereitschaft. Light- oder Freemium-Tier mit Up-Sell-Pfad.
+  \item \emph{Strategische Großkunden} \textendash{} Verträge mit Individual-Konditionen, hoher Wertbeitrag.
+\end{itemize}
+
+\smallskip
+\textbf{3. Bewertete Erlösmodelle:}
+\begin{itemize}
+  \item Subscription \textrightarrow{} \textbf{strategischer Kernkanal} (planbar, skalierbar, steuerbar).
+  \item Provision \textrightarrow{} \textbf{ergänzendes Modell} für transaktionsorientierte Segmente.
+  \item Freemium \textrightarrow{} \textbf{Akquise-Funnel}, kein eigenständiger Umsatzkanal.
+  \item Werbung \textrightarrow{} \textbf{Begrenzt zulässig}, nur kontextrelevant, keine Datenweitergabe.
+  \item Verkauf von Nutzerdaten \textrightarrow{} \textbf{ausgeschlossen}.
+  \item Partner-Provisionen \textrightarrow{} \textbf{Begrenzt}, mit Umsatz-Cap je Partner.
+\end{itemize}
+
+\smallskip
+\textbf{4. Entscheidung:}
+\begin{itemize}
+  \item \emph{Selbst skalieren:} Subscription mit drei bis vier Tiers (siehe Aufgabe 5/8), Freemium als Funnel, Premium-Add-ons.
+  \item \emph{Begrenzt nutzen:} Provision für transaktionsorientierte Segmente, Werbung nur kontextuell.
+  \item \emph{Ablegen:} Datenverkauf, aggressive Affiliate-Programme ohne Zielgruppensteuerung, intransparente Partnerverträge mit Mindestabnahme.
+\end{itemize}
+
+\smallskip
+\textbf{5. CLV-Logik:}
+\begin{itemize}
+  \item Heutiger CLV soll bis 2028 um $\approx 60$\,\% steigen \textendash{} durch Churn-Reduktion und Tier-Migration nach oben.
+  \item Hebel: Onboarding-Qualität, Pause-Funktion, Treueprogramm, Cross-Sell von Add-ons in Jahr 2.
+  \item Steuerung über monatliche Kohorten-Auswertung (Anmelde-Monat $\rightarrow$ Verweildauer $\rightarrow$ ARPU-Entwicklung).
+\end{itemize}
+
+\smallskip
+\textbf{6. Pricing- und Tier-Architektur:}
+\begin{itemize}
+  \item Drei Tiers + Enterprise: Solo / Team / Pro / Enterprise.
+  \item Funktionsbasiert, aber mit klaren Limits (Nutzer, Projekte, Schnittstellen).
+  \item Add-ons als wertbasierte Module (Reporting, API-Quotas, Premium-Support).
+  \item Vertragsdauer: monatlich kündbar (Standard), Jahres-Abo mit 17\,\% Rabatt.
+\end{itemize}
+
+\smallskip
+\textbf{7. Partner-Architektur:}
+\begin{itemize}
+  \item Implementierungs-Partner (zertifiziert) bleiben \textendash{} mit klarem Kundenschutz und definiertem Margenkorridor.
+  \item Technologie-Partner werden ausgebaut, mit klaren Datenrechten.
+  \item Lose Affiliates ohne Performance werden ausgemustert.
+  \item Allianzen mit Branchenverbänden / großen Multiplikatoren werden gezielt aufgebaut.
+\end{itemize}
+
+\smallskip
+\textbf{8. Governance:}
+\begin{itemize}
+  \item \emph{CRO} entscheidet über Tier-Architektur, Pricing-Änderungen $> 5\,\%$, neue Erlösmodelle, Partner-Cap.
+  \item \emph{Head of Pricing} verantwortet Preis-Tests, Kohorten-Auswertung, Tier-Übergänge.
+  \item \emph{Head of Partnerships} verantwortet Partnerverträge, Zertifizierung, Konditionsabgleich.
+  \item \emph{Controlling} verantwortet CLV/CAC-Steuerung und vorzeitige Frühwarnsignale.
+  \item Monatliches Revenue-Council, quartalsweiser Bericht an Geschäftsführung.
+\end{itemize}
+
+\smallskip
+\textbf{9. Roadmap:}
+\begin{itemize}
+  \item \emph{0\,--\,12 Monate:} Tier-Modell überarbeiten und live, Partner-Konsolidierung, Datenarchitektur konsolidieren.
+  \item \emph{12\,--\,24 Monate:} CLV-Programm rollen (Churn-Maßnahmen, Treueprogramm), Add-on-Portfolio aufbauen, Enterprise-Vertrieb professionalisieren.
+  \item \emph{24\,--\,36 Monate:} internationale Skalierung des Tier-Modells, gezielte Partner-Allianzen in Branchen, Aufbau wertbasierter Premium-Komponenten.
+\end{itemize}
+
+\smallskip
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item Subscription als Dominanzmodell \emph{vor} dem Beweis, dass alle heutigen Nutzer migrieren \textendash{} weil Planbarkeit und Steuerbarkeit langfristig wichtiger sind als kurzfristige Umsatzschwankungen.
+  \item Datenverkauf ausschließen, \emph{obwohl} er kurzfristig sechsstellige Umsätze brächte \textendash{} weil Marken-Vertrauen die Grundlage aller anderen Erlösmodelle ist.
+  \item Umsatz-Cap je Partner auf 20\,\%, \emph{bevor} ein Partner diesen Wert erreicht \textendash{} weil der nachträgliche Eingriff strategisch und politisch fünfmal so teuer wäre.
+\end{enumerate}
+
+\smallskip
+\textbf{Zusatz \textendash{} Entscheidung gegen ein scheinbar profitables Erlösmodell:}
+Bewusst \emph{kein} aggressives Werbe- und Daten-Geschäft, obwohl Reichweite und Datenbestand das technisch erlauben würden. Aus Senior-Level-Perspektive: jede Form von Aufmerksamkeits-Vermarktung degradiert den Nutzer zum Produkt, beschädigt das Service-Versprechen und untergräbt die Subscription-Akzeptanz \textendash{} weil ein zahlender Kunde nicht gleichzeitig vermarktetes Werbe-Objekt sein darf. Die ``leicht zu verdienenden'' Werbeumsätze würden die viel größeren Subscription-Umsätze gefährden.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterlösungen sind eine Diskussionsbasis. Wenn Ihre eigene Lösung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder einen anderen Maßstab angelegt?}
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Bringen Sie Ihre eigenen Lösungen in die Coaching-Sitzung mit. Im Fokus stehen drei Fragen: Welche Annahmen haben Sie gemacht? Welche Zielkonflikte haben Sie sichtbar gemacht? Welche Entscheidung haben Sie getroffen \textendash{} und würden Sie auch verantworten, wenn sich der Markt anders entwickelt als angenommen?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 11 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

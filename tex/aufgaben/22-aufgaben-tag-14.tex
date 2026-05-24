@@ -1,0 +1,626 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 14 - Aufgabenheft
+% Chatbots, Conversational Commerce & digitale Vertriebstools
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 14}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Chatbots \& Conversational Commerce}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 7 \textperiodcentered{} TAG 14 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 17.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 14\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Chatbots, Conversational Commerce\\\& digitale Vertriebstools \textendash{}\\Kundeninteraktion verantwortlich\\automatisieren.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enthält elf Aufgaben zu Tag 14 \textendash{} \emph{Chatbots, Conversational Commerce und digitale Vertriebstools}. Im Mittelpunkt steht nicht die Technologie, sondern die Frage, wie automatisierte Kundeninteraktion Wert schafft, gemessen wird und verantwortlich begrenzt bleibt.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Kurze Reproduktion und Einordnung. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Transfer auf konkrete Vertriebs- und Servicesituationen. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Entscheidungsarchitektur und Verantwortung. 30\,--\,45 Minuten.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterlösungen finden Sie im separaten \emph{Lösungsheft Tag 14}. Beim Lesen lohnt es sich, an jeder Stelle die Frage zu stellen: \emph{Wo verbessert Automatisierung Kundennutzen \textendash{} und wo ersetzt sie ihn nur?}
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Chatbot-Typen und Conversational Commerce}{\nivLi}{8\,min}
+
+\noindent Definieren Sie in jeweils einem Satz:
+
+\begin{enumerate}
+  \item \textbf{Regelbasierter Chatbot} (Entscheidungsbaum, klar definierte Pfade).
+  \item \textbf{KI-gestützter Chatbot} (Sprachmodell, freie Eingaben, generative Antworten).
+  \item \textbf{Hybrider Bot-Mensch-Prozess} (Bot mit Eskalation an einen Menschen).
+  \item \textbf{Conversational Commerce} (vertriebsorientierte Kommunikation über Chat, Messenger, Portal).
+\end{enumerate}
+
+\noindent Ergänzen Sie einen abschließenden Satz: Welche \emph{drei} Faktoren entscheiden, welcher Typ in einer konkreten Vertriebssituation der richtige ist?
+
+\ytquery{Chatbot Typen regelbasiert KI hybrid Conversational Commerce Definition}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Einsatzfelder im B2B-Vertrieb}{\nivLi}{8\,min}
+
+\noindent Acht typische Einsatzfelder für Chatbots und Conversational-Commerce-Tools im B2B-Vertrieb:
+
+\begin{enumerate}
+  \item Erstinformation und FAQ
+  \item Leadqualifizierung
+  \item Produktberatung
+  \item Terminbuchung
+  \item Angebotsvorbereitung
+  \item Statusabfragen (Bestellung, Lieferung)
+  \item Nachbestellungen / Reorder
+  \item After-Sales-Service \& Reaktivierung
+\end{enumerate}
+
+\noindent Beschreiben Sie für jedes Einsatzfeld in einem Halbsatz: Welches \emph{Kundenproblem} wird gelöst? Welches \emph{Vertriebsproblem} wird gelöst?
+
+\ytquery{Chatbot B2B Vertrieb Einsatzfelder Leadqualifizierung FAQ Nachbestellung}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{ROI-Logik und KPIs}{\nivLi}{8\,min}
+
+\noindent Sechs typische KPIs für die Bewertung von Chatbots und digitalen Vertriebstools:
+
+\begin{enumerate}
+  \item \textbf{Bot-Nutzungsrate} (wie viele Besucher / Kunden nutzen den Bot?)
+  \item \textbf{Lösungsquote} (Anteil der Anfragen, die der Bot ohne Eskalation klärt)
+  \item \textbf{Eskalationsquote} (Anteil, der an Menschen übergeben wird)
+  \item \textbf{Leadqualifizierungsrate} (Anteil qualifizierter Leads aus Bot-Dialogen)
+  \item \textbf{Reaktionszeit} (durchschnittliche Antwortzeit)
+  \item \textbf{Kosten pro Kontakt} (vor / nach Bot-Einführung)
+\end{enumerate}
+
+\noindent Ergänzen Sie eine kompakte \emph{ROI-Formel} in einem Satz: Welche Kosten- und Nutzenkomponenten werden gegenübergestellt? Welche Vanity-Metrik würden Sie aus dieser Liste \emph{nicht} als Hauptindikator wählen \textendash{} und warum?
+
+\ytquery{Chatbot ROI KPI Bot Lösungsquote Eskalation Kosten pro Kontakt B2B}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{OfficeCloud Services \textendash{} Chatbot-Use-Cases}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``OfficeCloud Services'' verkauft cloudbasierte Arbeitsplatzlösungen an kleine und mittlere Unternehmen. Viele Websitebesucher informieren sich über Preise, Funktionen, Datenschutz, Einrichtungsaufwand und Beratungsmöglichkeiten. Das Vertriebsteam erhält täglich viele ähnliche Fragen per E-Mail und Telefon.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Websitebesucher stellen häufig Standardfragen.
+  \item Viele Interessenten sind noch nicht kaufbereit.
+  \item Vertriebsteam möchte mehr qualifizierte Beratungstermine.
+  \item Kunden erwarten schnelle Antworten.
+  \item Datenschutz und Datensicherheit sind wichtige Entscheidungskriterien.
+  \item Budget für einen ersten Chatbot-Piloten ist begrenzt.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie mindestens \textbf{fünf typische Kundenfragen}, die ein Chatbot beantworten könnte.
+  \item Unterscheiden Sie diese in \emph{einfache Informationsfragen} und \emph{vertriebsrelevante Qualifizierungsfragen}.
+  \item Beschreiben Sie, an welchen Punkten der Chatbot \textbf{an einen Menschen übergeben} sollte.
+  \item Entwickeln Sie einen einfachen Dialogablauf in 6\,--\,8 Schritten: vom Websitebesuch bis zur Terminbuchung.
+  \item Benennen Sie \textbf{drei Risiken}, die bei einem Chatbot-Einsatz entstehen könnten \textendash{} und einen Mitigation-Mechanismus je Risiko.
+\end{enumerate}
+
+\ytquery{B2B Chatbot Use Case Lead Qualifizierung Terminbuchung Dialogablauf}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{OfficeCloud Services \textendash{} Tool-Bewertung und ROI}{\nivLii}{30\,min}
+
+\begin{infobox}[Mögliche Tools]
+\textbf{A:} Website-Chatbot für FAQ und Leadqualifizierung.\\
+\textbf{B:} Terminbuchungstool mit Kalenderintegration.\\
+\textbf{C:} Automatisierte E-Mail-Strecke nach Chatbot-Kontakt.\\
+\textbf{D:} CRM-Integration zur Übergabe qualifizierter Leads.\\
+\textbf{E:} KI-basierte Produktempfehlungen im Chat.\\
+\textbf{F:} Dashboard zur Messung von Chatbot-Leads und Conversion.\\[4pt]
+\textbf{Rahmen:} Budget 65.000\,\euro{} / 6 Monate \textperiodcentered{} Vertriebsteam stark ausgelastet \textperiodcentered{} IT-Ressourcen begrenzt \textperiodcentered{} Geschäftsführung erwartet messbare Ergebnisse nach 3 Monaten \textperiodcentered{} Kunden dürfen nicht frustriert werden.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie jedes Tool in fünf Dimensionen (Skala 1\,--\,5): \emph{Kundennutzen}, \emph{Aufwand}, \emph{Kosten}, \emph{Datenabhängigkeit}, \emph{Vertriebswirkung}.
+  \item Priorisieren Sie die Tools in: \fachbegriff{sofort starten}, \fachbegriff{später testen}, \fachbegriff{zunächst nicht umsetzen}.
+  \item Entscheiden Sie, welcher Use Case für den \emph{ersten} Pilot am sinnvollsten ist.
+  \item Legen Sie \textbf{fünf KPIs} fest, an denen der Erfolg gemessen wird.
+  \item Formulieren Sie eine einfache \textbf{ROI-Logik}: Welche Kosten entstehen, welcher Nutzen soll messbar werden, ab wann ist der Pilot wirtschaftlich?
+\end{enumerate}
+
+\medskip
+\noindent\begin{tabularx}{\linewidth}{@{}l|c|c|c|c|c@{}}
+\toprule
+\textbf{Tool} & \textbf{Nutzen} & \textbf{Aufwand} & \textbf{Kosten} & \textbf{Daten} & \textbf{Vertrieb} \\
+\midrule
+A: FAQ-Bot          & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+B: Termin-Buchung   & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+C: E-Mail-Strecke   & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+D: CRM-Integration  & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+E: KI-Empfehlungen  & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+F: Dashboard        & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\bottomrule
+\end{tabularx}
+
+\ytquery{Chatbot Implementierung Pilot ROI KPI Tool Bewertung B2B}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Dialog-Design \textendash{} Übergaberegeln Bot \textrightarrow{} Mensch}{\nivLii}{20\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Entwerfen Sie eine \textbf{Eskalationslogik} für einen B2B-Chatbot. Beantworten Sie für die folgenden sechs Situationen:
+
+\begin{enumerate}
+  \item Kunde fragt dreimal hintereinander die gleiche Frage, weil die Antwort nicht passt.
+  \item Kunde tippt: ``Ich möchte mit einem Menschen sprechen''.
+  \item Kunde beschreibt einen Sonderfall, der nicht in den Standardpfaden vorgesehen ist.
+  \item Kunde erwähnt rechtliche oder Compliance-Themen (Datenschutz, Vertragsausstieg).
+  \item Kunde äußert Frust oder Beschwerde.
+  \item Kunde fragt nach einem konkreten Angebot $>$\,10.000\,\euro{}.
+\end{enumerate}
+
+\noindent Für jede Situation:
+\begin{itemize}
+  \item Eskalationsregel (z.\,B.\ ``nach 3 wiederholten Fragen'', ``bei Schlüsselwörtern wie \texttt{Beschwerde, Vertrag, Anwalt, Reklamation}'').
+  \item An wen wird übergeben (Innendienst, Vertrieb, Servicemanagement, Rechts-/Compliance)?
+  \item Welche Kontextinformation muss mit übergeben werden, damit der Mensch ohne Doppelfragen weiterhelfen kann?
+\end{itemize}
+
+\noindent Schließen Sie mit \emph{einem} Satz: Welche Eskalation darf der Bot \emph{nicht} verzögern?
+
+\ytquery{Chatbot Eskalation Bot zu Mensch Übergabe B2B Dialog Design Regeln}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{B2B Supply Solutions \textendash{} Use-Case-Priorisierung}{\nivLii}{22\,min}
+
+\begin{infobox}[Kontext]
+``B2B Supply Solutions'' verkauft technische Verbrauchsmaterialien, Ersatzteile und Servicepakete an mittelständische Industriekunden. Über Website, Kundenportal und E-Mail kommen monatlich ca.\ \textbf{4.000 Anfragen}, davon ca.\ \textbf{45\,\%} reine Standardinformationen (Verfügbarkeit, Lieferzeit, Preise, Kompatibilität).
+
+\smallskip
+\textbf{Ziele 9 Monate:} 25\,\% weniger Standardanfragen im Innendienst \textperiodcentered{} 20\,\% schnellere Reaktionszeit \textperiodcentered{} 15\,\% mehr qualifizierte digitale Leads. Budget: 220.000\,\euro.
+\end{infobox}
+
+\noindent\textbf{Mögliche Use Cases:}
+
+\begin{enumerate}
+  \item \textbf{FAQ-Chatbot} für Standardfragen.
+  \item \textbf{Produktverfügbarkeits- und Lieferzeit-Auskunft} (Integration ERP).
+  \item \textbf{Kompatibilitäts-Assistent} (Eingabe Maschinen-/Geräte-Modell).
+  \item \textbf{Nachbestellung über Chat} mit Login.
+  \item \textbf{Leadqualifizierung} für Großanfragen.
+  \item \textbf{Servicepaket-Empfehlung} bei wiederkehrenden Anfragen.
+\end{enumerate}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie jeden Use Case nach: \emph{Volumen / Häufigkeit}, \emph{Automatisierbarkeit (klar regelbasiert vs.\ erklärungsbedürftig)}, \emph{Datenabhängigkeit (ERP / CRM / Login)}, \emph{Kundennutzen}.
+  \item Wählen Sie \textbf{zwei Use Cases} für die ersten 3 Monate \textendash{} mit der besten Wirkung-zu-Aufwand-Bilanz.
+  \item Wählen Sie \textbf{einen Use Case}, den Sie bewusst \emph{nicht} im ersten Schritt umsetzen \textendash{} obwohl er attraktiv erscheint.
+  \item Begründen Sie das Schätzgerüst: Wenn 45\,\% der 4.000 Anfragen (\,= 1.800) automatisierbar sind und der Bot davon 60\,\% löst, entlastet das wie viele Innendienstkapazitäten pro Monat (Annahme: 12\,min pro Anfrage)?
+\end{enumerate}
+
+\ytquery{B2B Chatbot Use Case Priorisierung Industrie Ersatzteile Anfragen Innendienst}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Wenn der Bot der Marke schadet}{\nivLii}{20\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Diskutieren Sie drei realistische Szenarien, in denen ein Chatbot \emph{Schaden} anrichtet. Beschreiben Sie für jedes Szenario:
+
+\begin{enumerate}
+  \item \textbf{Szenario A:} Der Bot beantwortet eine Datenschutzfrage falsch (Verarbeitung von Kundendaten, EU-Speicherung).
+  \item \textbf{Szenario B:} Der Bot reagiert auf eine emotionale Reklamation mit einem höflichen Standardtext.
+  \item \textbf{Szenario C:} Der Bot empfiehlt KI-basiert ein Produkt, das das Unternehmen \emph{nicht} mehr im Sortiment hat.
+\end{enumerate}
+
+\noindent Für jedes Szenario:
+
+\begin{itemize}
+  \item Welcher konkrete Schaden entsteht (rechtlich, Reputation, Vertrieb, Compliance)?
+  \item Welche \emph{technische} Schutzmaßnahme verhindert das Szenario?
+  \item Welche \emph{organisatorische} Maßnahme (Verantwortlichkeit, Review-Prozess) muss zusätzlich greifen?
+\end{itemize}
+
+\noindent Schließen Sie mit einer Empfehlung: Welche \emph{drei Themen} sollten in einem Chatbot \emph{nie} automatisiert beantwortet werden \textendash{} sondern immer mit klarer Eskalation an einen Menschen?
+
+\ytquery{Chatbot Risiken Marke Datenschutz Reklamation Compliance B2B}
+
+\antwortlinien{20}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Fallstudie B2B Supply Solutions \textendash{} Conversational-Commerce-Architektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie: B2B Supply Solutions]
+``B2B Supply Solutions'' verkauft technische Verbrauchsmaterialien, Ersatzteile und Servicepakete. Anfragen kommen über Website, Kundenportal und E-Mail. Der Innendienst ist stark ausgelastet, viele Anfragen sind wiederkehrend.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Jahresumsatz: 42\,Mio.\,\euro
+  \item Innendienst: 16 Personen \textperiodcentered{} Außendienst: 12 \textperiodcentered{} Service: variabel
+  \item Websitebesuche pro Monat: 75.000 \textperiodcentered{} Portal-Nutzer: 8.500
+  \item Anfragen pro Monat: 4.000 (45\,\% Standardinfo)
+  \item Budget für 9 Monate: 220.000\,\euro
+  \item Ziele: 25\,\% weniger Standardanfragen im Innendienst, 20\,\% schnellere Reaktion, 15\,\% mehr qualifizierte digitale Leads.
+\end{itemize}
+
+\smallskip
+\textbf{Mögliche Use Cases:} FAQ-Chatbot \textperiodcentered{} Produktverfügbarkeit/Lieferzeit (ERP-integriert) \textperiodcentered{} Kompatibilitäts-Assistent \textperiodcentered{} Nachbestellung über Chat \textperiodcentered{} Leadqualifizierung Großanfragen \textperiodcentered{} Servicepaket-Empfehlung \textperiodcentered{} Reaktivierung Inaktive \textperiodcentered{} Statusabfragen.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die Vertriebs- und Servicesituation in 3\,--\,5 Punkten.
+  \item Identifizieren Sie die wichtigsten Engpässe und Hebel.
+  \item Bewerten Sie alle Use Cases nach: Wirkung \textperiodcentered{} Aufwand \textperiodcentered{} Datenreife \textperiodcentered{} Akzeptanz Kunden \textperiodcentered{} Akzeptanz Vertrieb/Innendienst \textperiodcentered{} ROI-Potenzial.
+  \item Entwickeln Sie eine \textbf{priorisierte 9-Monats-Roadmap} in drei Phasen (1\,--\,3, 4\,--\,6, 7\,--\,9).
+  \item Definieren Sie die \textbf{Übergabe- und Eskalationslogik} (Bot \textrightarrow{} Innendienst, Bot \textrightarrow{} Service, Bot \textrightarrow{} Außendienst).
+  \item Bauen Sie eine \textbf{KPI- und ROI-Architektur} auf (Nutzung, Lösungsquote, Eskalation, Conversion, Reaktionszeit, Kundenzufriedenheit, Kosten pro Kontakt, Umsatzbeitrag).
+  \item Verteilen Sie das Budget (220.000\,\euro) grob auf Ihre Maßnahmen.
+  \item Treffen Sie mindestens \emph{eine Entscheidung unter Unsicherheit} und begründen Sie diese aus Senior-Sicht.
+\end{enumerate}
+
+\ytquery{B2B Conversational Commerce Architektur Industriekunden Roadmap KPI ROI}
+
+\antwortlinien{34}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Grenzen der Automatisierung \textendash{} was bewusst menschlich bleibt}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Die wirtschaftlich verlockendste Frage ist: ``Wie viel mehr können wir automatisieren?'' Die strategisch relevante Frage ist: ``Welche Kundeninteraktion \emph{darf} nicht automatisiert werden \textendash{} weil Vertrauen, Differenzierung oder Reputation sonst gefährdet sind?''
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 3\,--\,4 Sätzen, warum \emph{Bot-Nutzungsrate} und \emph{Lösungsquote} allein keine ROI-Aussage liefern. Welche \emph{harten} und \emph{weichen} Kostenfaktoren gehören in eine seriöse ROI-Rechnung?
+  \item Wählen Sie \textbf{drei Kundenkontakte}, die in einem mittelständischen B2B-Unternehmen \emph{bewusst menschlich} bleiben sollten \textendash{} und erklären Sie pro Kontakt:
+  \begin{itemize}
+    \item Warum dürfen Automatisierung und KI hier nicht eingesetzt werden?
+    \item Welcher Markenschaden entsteht im \emph{worst case}, wenn doch automatisiert wird?
+    \item Welche Governance-Regel verhindert, dass spätere Effizienz-Initiativen diese Grenze überschreiben?
+  \end{itemize}
+  \item Formulieren Sie eine \textbf{Faustregel} (1\,--\,2 Sätze): Ab wann ist eine zusätzliche Automatisierung wirtschaftlich \emph{und} verantwortbar \textendash{} und ab wann wird sie eine Markenfalle?
+\end{enumerate}
+
+\ytquery{Automatisierung Grenzen B2B Vertrauen Marke menschlich Senior Management}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Conversational-Commerce-Architektur 12 Monate}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Revenue Officer (oder Digital Sales Architect, Leiter:in Vertriebstransformation, Conversational-Commerce-Manager:in, CRM- und Automation-Leiter:in, externe:r Berater:in).
+
+\smallskip
+\textbf{Ausgangslage:} Ein mittelständisches Unternehmen möchte Chatbots und digitale Vertriebstools einführen, um Kundeninteraktion zu automatisieren, den Vertrieb zu entlasten und digitale Leads zu qualifizieren. Es gibt Website, CRM, Kundenportal, E-Mail-Marketing und erste digitale Kampagnen. Kundenprozesse sind uneinheitlich, Standardfragen belasten den Innendienst, Lead-Übergaben sind nicht sauber, Managemententscheidungen beruhen auf unvollständigen Daten.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Budget begrenzt \textperiodcentered{} Zeitdruck durch digitale Wettbewerber.
+  \item Vertrieb und Service stark ausgelastet \textperiodcentered{} IT-Ressourcen begrenzt.
+  \item Datenqualität uneinheitlich.
+  \item Kunden erwarten schnelle Antworten, aber auch fachliche Sicherheit.
+  \item Datenschutz und Einwilligungen müssen berücksichtigt werden.
+  \item Geschäftsführung erwartet messbaren ROI \textendash{} bei unsicheren Annahmen.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strategische \emph{Entscheidungsarchitektur} \textendash{} keine Tool-Liste \textendash{} für Chatbots, Conversational Commerce und digitale Vertriebstools.
+
+\begin{enumerate}
+  \item \textbf{Zielbild} für automatisierte Kundeninteraktion im Vertrieb (3\,--\,5 Sätze).
+  \item Customer-Journey-Analyse mit geeigneten Automatisierungspunkten und bewusst menschlichen Momenten.
+  \item Priorisierung der Use Cases: FAQ, Leadqualifizierung, Terminbuchung, Produktberatung, Nachbestellung, Serviceanfragen, Reaktivierung.
+  \item \textbf{Entscheidung}, welche Use Cases automatisiert, pilotiert, später geprüft oder bewusst nicht automatisiert werden.
+  \item Prozessarchitektur mit \textbf{Übergaberegeln} an Vertrieb, Service, Innendienst, Management.
+  \item Daten- und Systemarchitektur (CRM, Website, Portal, E-Mail, Reporting).
+  \item \textbf{Governance-Struktur} für Bot-Inhalte, Datenschutz, Qualitätssicherung, Eskalation, Verantwortlichkeiten.
+  \item \textbf{KPI- und ROI-Architektur}: Nutzung, Lösungsquote, Leadqualität, Conversion, Prozessentlastung, Zufriedenheit, Umsatzbeitrag.
+  \item Roadmap für 12 Monate (Phasen).
+  \item Drei \textbf{Managemententscheidungen unter Unsicherheit}.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens eine bewusste \emph{Entscheidung gegen} eine attraktive Automatisierung \textendash{} weil Datenqualität, Kundenerlebnis, rechtliche Sicherheit oder Markenwirkung das nicht zulassen. Begründen Sie aus Senior-Level-Perspektive.
+
+\ytquery{Chief Revenue Officer Conversational Commerce Chatbot Architektur 12 Monate}
+
+\antwortlinien{38}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 14}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Chatbot-Typen und Conversational-Commerce-Einsatzfelder sauber abgrenzen.
+  \item KPIs und eine ROI-Logik für digitale Vertriebstools entwerfen.
+  \item Use Cases nach Wirkung und Datenreife priorisieren.
+  \item Eskalations- und Übergaberegeln zwischen Bot und Mensch designen.
+  \item Risiken für Marke und Compliance erkennen und mit Maßnahmen begegnen.
+  \item Eine Roadmap mit Pilot, Skalierung und bewussten Grenzen entwickeln.
+  \item Eine Entscheidungsarchitektur formulieren, die Effizienz, Kundennutzen, Datenschutz und Marke ausbalanciert.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 14 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

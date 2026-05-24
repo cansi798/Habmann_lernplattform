@@ -1,0 +1,600 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 11 - Aufgabenheft
+% Mit Plattformen Geld verdienen: Modelle, Abo-Strategien & Partnernetzwerke
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 11}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Monetarisierung \& Subscription}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 6 \textperiodcentered{} TAG 11 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 12.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 11\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Mit Plattformen Geld verdienen:\\Erlösmodelle, Subscription-Strategien\\\& Partnernetzwerke.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enthält elf Aufgaben zu Tag 11 \textendash{} \emph{Mit Plattformen Geld verdienen: Erlösmodelle, Subscription-Strategien und Partnernetzwerke}. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Kurze Reproduktion und Einordnung. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Transfer auf konkrete Plattformsituationen. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Entscheidungsarchitektur und Verantwortung. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enthält eine Niveau-Markierung, einen Zeit-Richtwert, den Aufgabentext, einen Antwort-Freiraum sowie eine \emph{YouTube-Suchquery} für vertiefendes Material.
+
+\begin{infobox}[Hinweis]
+Die Musterlösungen finden Sie im separaten \emph{Lösungsheft Tag 11}. Versuchen Sie jede Aufgabe zuerst eigenständig.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Plattform-Erlösmodelle benennen}{\nivLi}{8\,min}
+
+\noindent Definieren Sie in jeweils einem Satz die folgenden \textbf{sechs} typischen Plattform-Erlösmodelle:
+
+\begin{enumerate}
+  \item Provisions- oder Transaktionsgebühr
+  \item Listing-Gebühr
+  \item Subscription / Abo
+  \item Freemium
+  \item Werbung / Premium-Platzierung
+  \item Daten-/Servicegebühr
+\end{enumerate}
+
+\noindent Ergänzen Sie einen Satz, in dem Sie die Unterscheidung zwischen \emph{direkter} und \emph{indirekter} Monetarisierung auf den Punkt bringen.
+
+\ytquery{Plattform Erlösmodelle Provision Subscription Freemium Werbung Definition}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{CLV, CAC, Churn \textendash{} drei Steuerungsgrößen}{\nivLi}{8\,min}
+
+\noindent Erklären Sie kompakt:
+
+\begin{enumerate}
+  \item \textbf{Customer Lifetime Value (CLV)} \textendash{} was wird gemessen, wozu?
+  \item \textbf{Customer Acquisition Cost (CAC)} \textendash{} was wird gemessen, wozu?
+  \item \textbf{Churn-Rate} \textendash{} was wird gemessen, wozu?
+\end{enumerate}
+
+\noindent Ergänzen Sie einen vierten Satz: Welche Faustregel verbindet diese drei Größen (sinngemäß: ``CLV soll deutlich größer sein als $\ldots$'')?
+
+\ytquery{CLV CAC Churn Subscription SaaS Erklärung Kennzahl}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Subscription-Tiers benennen}{\nivLi}{8\,min}
+
+\noindent Vier typische Subscription-Tiers in SaaS- oder Plattform-Geschäften:
+
+\begin{enumerate}
+  \item Free / Freemium
+  \item Basic
+  \item Professional
+  \item Enterprise
+\end{enumerate}
+
+\noindent Beschreiben Sie für jeden Tier in einem Satz:
+
+\begin{itemize}
+  \item Welche Zielgruppe spricht der Tier an?
+  \item Welches typische Leistungsmerkmal kennzeichnet ihn (Zugang, Funktionen, Servicelevel, Daten, Sichtbarkeit, Support)?
+\end{itemize}
+
+\ytquery{SaaS Subscription Tier Free Basic Professional Enterprise Pricing}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{Plattform-Erlösmodelle übertragen}{\nivLii}{25\,min}
+
+\begin{infobox}[Drei Plattformen im Mittelstand]
+\textbf{Plattform A:} ein Online-Marktplatz für gebrauchte Industriemaschinen \textendash{} Käufer und Verkäufer treffen sich, Plattform vermittelt.
+
+\smallskip
+\textbf{Plattform B:} eine SaaS-Lösung für Bauunternehmen \textendash{} Projektkalkulation, Aufmaß, Stundenerfassung; Zielgruppe: Bauleiter und Geschäftsführung kleiner Bauunternehmen.
+
+\smallskip
+\textbf{Plattform C:} eine Community-Plattform für Steuerberater \textendash{} Wissensaustausch, Vorlagen, Vergleichsforen, Stellenmarkt.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie für jede Plattform ein passendes \emph{Erlösmodell-Bündel}. Pro Plattform:
+
+\begin{enumerate}
+  \item Wählen Sie \textbf{ein dominantes Erlösmodell} (Provision, Subscription, Freemium, Werbung, etc.).
+  \item Benennen Sie \textbf{ein bis zwei ergänzende Erlösquellen}.
+  \item Begründen Sie in 2\,--\,3 Sätzen, warum diese Kombination zum Plattformtyp und zur Zielgruppe passt.
+  \item Nennen Sie \textbf{ein typisches Risiko} dieses Erlösmodells.
+\end{enumerate}
+
+\ytquery{Plattform Geschäftsmodell Erlösmodell Marktplatz SaaS Community Beispiele}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Subscription-Architektur für eine SaaS-Plattform}{\nivLii}{30\,min}
+
+\begin{infobox}[Ausgangslage: ``BauPlan Pro'']
+``BauPlan Pro'' ist eine SaaS-Plattform für Bauunternehmen (siehe Plattform B aus Aufgabe 4). Bisher gibt es nur \emph{einen} Preis: 79\,\euro{} pro Nutzer und Monat. Die Geschäftsleitung möchte ein gestaffeltes Subscription-Modell einführen, um sowohl Einzelbauleiter als auch größere Bauunternehmen anzusprechen, ohne dass kleine Kunden abwandern.
+
+\smallskip
+\textbf{Rahmen:} 1.200 zahlende Nutzer \textperiodcentered{} ARPU 79\,\euro/Monat \textperiodcentered{} Churn 6\,\%/Jahr \textperiodcentered{} Zielsegmente: Einzelbauleiter, kleine Baufirmen (5\,--\,20 Mitarbeitende), mittelständische Bauunternehmen (20\,--\,200), öffentliche Auftraggeber.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Entwickeln Sie ein Subscription-Modell mit \textbf{drei oder vier Tiers}. Für jeden Tier:
+  \begin{itemize}
+    \item Name, Zielgruppe.
+    \item Funktionen / Leistungsumfang (mindestens vier Differenzierungsmerkmale).
+    \item Preis pro Nutzer/Monat (oder pro Unternehmen/Monat).
+  \end{itemize}
+  \item Begründen Sie für jeden Tier: Warum wird genau dieser Preis und genau dieser Leistungsumfang gewählt?
+  \item Beschreiben Sie, wie Sie verhindern, dass kleine Kunden in einen \emph{zu großen} Tier rutschen oder umgekehrt.
+  \item Schätzen Sie grob, wie sich der durchschnittliche Umsatz pro Kunde (ARPU) verändern könnte, wenn das Modell sauber eingeführt wird.
+\end{enumerate}
+
+\ytquery{SaaS Subscription Tier Design Pricing Strategie B2B Beispiel}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Pricing-Logiken vergleichen}{\nivLii}{20\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Fünf typische Pricing-Logiken in Plattform- und SaaS-Geschäften:
+
+\begin{itemize}
+  \item \emph{Nutzungsbasiert} (pro API-Aufruf, pro Transaktion, pro GB)
+  \item \emph{Wertbasiert} (Preis orientiert sich am Kundennutzen, z.\,B.\ Anteil der gesparten Kosten)
+  \item \emph{Rollenbasiert} (pro Nutzer / Seat, evtl.\ unterschiedliche Preise je Rolle)
+  \item \emph{Funktionsbasiert} (Basis vs.\ Pro vs.\ Enterprise mit jeweils anderen Features)
+  \item \emph{Erfolgsbasiert} (Provision oder Beteiligung am Geschäftserfolg des Kunden)
+\end{itemize}
+
+\noindent Für jede Pricing-Logik:
+
+\begin{enumerate}
+  \item Nennen Sie \textbf{ein konkretes Plattform-Beispiel} (real oder fiktiv), bei dem diese Logik dominiert.
+  \item Benennen Sie \textbf{eine Stärke} (warum sich der Kunde für diesen Preis ``einlogged'').
+  \item Benennen Sie \textbf{ein Risiko} aus Anbietersicht (Preisdruck, Volatilität, Akzeptanz, etc.).
+\end{enumerate}
+
+\ytquery{Pricing Modelle SaaS Plattform nutzungsbasiert wertbasiert Seat License}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Partnernetzwerke und Affiliate-Programme}{\nivLii}{25\,min}
+
+\begin{infobox}[Ausgangslage]
+Eine deutsche B2B-Plattform für \emph{Energiemanagement-Lösungen} (Audit-Software für Industrie und Gewerbe) möchte ein Partnernetzwerk aufbauen, um schneller in den Markt zu kommen. Optionen:
+
+\smallskip
+\begin{itemize}
+  \item \textbf{Affiliate-Programm:} freie Vermittler:innen bekommen Provision pro Abschluss.
+  \item \textbf{Implementierungspartner:} Beratungshäuser, die Kunden auf die Plattform aufsetzen \textendash{} mit Schulung, Zertifizierung und Marge.
+  \item \textbf{Technologie-Partner:} Hersteller von Hardware (Energiezähler, Sensoren) integrieren sich in die Plattform.
+  \item \textbf{Allianz mit Energieversorgern:} der Versorger bietet die Plattform seinen Geschäftskunden als Mehrwert an.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie jede der vier Partneroptionen anhand von \textbf{vier Kriterien}: Reichweite \textperiodcentered{} Margenkosten \textperiodcentered{} Kontrolle über das Kundenerlebnis \textperiodcentered{} Skalierungsgeschwindigkeit.
+  \item Priorisieren Sie \textbf{zwei Optionen} für die ersten 12 Monate.
+  \item Beschreiben Sie für die zwei priorisierten Optionen, welche Vereinbarungen wirtschaftlich tragen müssen (Provisionssatz, Lock-in, Kündigungsfristen, Datenrechte).
+  \item Formulieren Sie eine kurze \emph{Faustregel}: Wann ist eine strategische Allianz sinnvoller als ein Affiliate-Programm?
+\end{enumerate}
+
+\ytquery{B2B Partnernetzwerk Affiliate Programm strategische Allianz Plattform}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{StreamNow Studios \textendash{} Subscription neu denken}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+``StreamNow Studios'' ist eine deutsche Streaming-Plattform für Lern- und Sportinhalte für Erwachsene (Yoga, Fitness, Coaching). Bisheriges Modell: ein einziges Abo zu 14,99\,\euro/Monat \textendash{} alles inklusive. Die Geschäftsführung beobachtet eine hohe Churn-Rate (12\,\%/Monat) und sinkende Akzeptanz im Preisniveau.
+
+\smallskip
+\textbf{Rahmen:} 65.000 Abonnenten \textperiodcentered{} ARPU 14,99\,\euro \textperiodcentered{} Churn 12\,\%/Monat \textperiodcentered{} CAC 38\,\euro \textperiodcentered{} CLV aktuell ca.\ 125\,\euro \textperiodcentered{} Erste Tests mit Jahres-Abo (Rabatt) haben Churn um 4\,Punkte gesenkt, aber Cashflow verändert.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie das Verhältnis von CLV (125\,\euro), CAC (38\,\euro) und Churn (12\,\%/Monat) in 2\,--\,3 Sätzen. Was ist gesund, was kritisch?
+  \item Entwickeln Sie ein \textbf{neues Subscription-Modell} mit drei Tiers (Light / Standard / Premium) und einer Familienoption. Geben Sie für jeden Tier konkrete Preise und 2\,--\,3 Unterscheidungsmerkmale an.
+  \item Schlagen Sie \textbf{drei Maßnahmen zur Churn-Reduktion} vor (z.\,B.\ Jahres-Abo, Pause-Funktion, Treueprogramm).
+  \item Schätzen Sie qualitativ: Wie verändern sich ARPU und CLV, wenn das neue Modell eingeführt wird?
+  \item Identifizieren Sie eine \emph{Schattenseite} Ihres Vorschlags: Welche Kundengruppe könnte verlieren, was könnte sie auslösen?
+\end{enumerate}
+
+\ytquery{Streaming Subscription Tier Churn Reduktion Pricing Familienabo}
+
+\antwortlinien{22}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Monetarisierungs-Entscheidung in der Wachstumsphase}{\nivLiii}{40\,min}
+
+\begin{infobox}[Fallstudie: ``CraftMarket'']
+``CraftMarket'' ist eine Plattform, die Handwerksbetriebe mit Privatkunden zusammenbringt (Installation, Renovierung, Reparatur). Drei Jahre nach Gründung: 35.000 registrierte Handwerksbetriebe, 480.000 Privatkunden-Anfragen pro Jahr, starke Netzwerkeffekte aufgebaut, aber bislang erst \emph{schwache Monetarisierung} (kleine Listing-Gebühren, etwas Werbung).
+
+\smallskip
+\textbf{Rahmen:} 8\,Mio.\,\euro{} Jahresumsatz \textperiodcentered{} 4\,Mio.\,\euro{} operatives Defizit \textperiodcentered{} Investorenrunde steht bevor \textperiodcentered{} Kapitalgeber erwarten klaren Pfad zur Profitabilität in 24\,Monaten.
+
+\smallskip
+\textbf{Vier Monetarisierungs-Optionen:}
+\begin{itemize}
+  \item \textbf{A \textendash{} Provisions-Modell:} 8\,\% pro vermitteltem Auftrag.
+  \item \textbf{B \textendash{} Subscription für Handwerker:} 49\,/\,149\,/\,349\,\euro/Monat mit Sichtbarkeits- und Lead-Differenzierung.
+  \item \textbf{C \textendash{} Lead-Verkauf:} 8\,\euro{} pro qualifizierter Anfrage an den Handwerker, Privatkunden zahlen nichts.
+  \item \textbf{D \textendash{} Hybrid-Modell:} kleines Basis-Abo (29\,\euro) plus 4\,\% Provision auf Aufträge plus Premium-Sichtbarkeit als Add-on.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die Ausgangslage in 3\,--\,5 Punkten. Was steht auf dem Spiel \textendash{} und wo liegt der Konflikt zwischen ``Profitabilität jetzt'' und ``Wachstum schützen''?
+  \item Bewerten Sie die vier Optionen anhand von: \emph{Akzeptanz Handwerker} \textperiodcentered{} \emph{Akzeptanz Privatkunden} \textperiodcentered{} \emph{Risiko Netzwerkeffekt-Verlust} \textperiodcentered{} \emph{Umsatzpotenzial 24\,Mon.} \textperiodcentered{} \emph{Skalierbarkeit} \textperiodcentered{} \emph{Steuerbarkeit}.
+  \item Treffen Sie eine begründete \textbf{Entscheidung} für ein Modell (oder eine Kombination) und begründen Sie sie aus Senior-Level-Perspektive.
+  \item Beschreiben Sie ein \textbf{Roll-out-Konzept}: Wer wird wann eingeführt, welcher Pilot, welche Eskalationspunkte?
+  \item Treffen Sie \emph{mindestens eine Entscheidung unter Unsicherheit} und benennen Sie sie ausdrücklich.
+\end{enumerate}
+
+\ytquery{Marktplatz Monetarisierung Provision Subscription Wachstum Profitabilität}
+
+\antwortlinien{32}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Zielkonflikt: Wachstum vs.\ Margenstabilität in Partnernetzwerken}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Partnernetzwerke beschleunigen Wachstum \textendash{} aber sie verlangen einen Anteil der Marge. Sobald ein Partner mehr als 20\,\% des Geschäfts liefert, beginnt eine doppelte Abhängigkeit: \emph{wirtschaftliche} (kein Verzicht möglich) und \emph{strategische} (Partner kennt Kunden und Konditionen). Hinzu kommt der Konflikt mit dem \emph{Direktvertrieb}: warum soll ein Kunde direkt kaufen, wenn der Partner Rabatt verspricht?
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in eigenen Worten, ab \emph{wann} ein Partnernetzwerk zum strategischen Risiko wird (3\,--\,4 Sätze). Welche Schwellen sind kritisch \textendash{} Umsatzanteil, Datenkontrolle, Marken-Wahrnehmung, Konditionen?
+  \item Wählen Sie ein \textbf{konkretes Branchenbeispiel} (z.\,B.\ SaaS-Anbieter mit Systemintegratoren, Möbelhersteller mit Online-Händlern, Pharma mit Großhandel, Software mit Reseller-Netz). Erläutern Sie:
+  \begin{itemize}
+    \item Welche Partnerstruktur ist üblich?
+    \item Welche Konflikte zwischen Direkt- und Indirektvertrieb entstehen typischerweise?
+    \item Welche Gegenmaßnahmen sind realistisch (Provisionsstaffel, Kundenschutz, exklusive Direktangebote, Datenklauseln)?
+  \end{itemize}
+  \item Formulieren Sie eine \textbf{Faustregel}: Wann ist eine Allianz strategisch tragbar \textendash{} und wann verkauft man stillschweigend Marktanteil?
+\end{enumerate}
+
+\ytquery{Partner Conflict Reseller Direktvertrieb B2B Channel Management}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Monetarisierungs-Architektur 2028}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Revenue Officer \emph{oder} Geschäftsführer:in einer mittelständischen B2B-Plattform mit etablierter Nutzerbasis, aber unklarer Monetarisierungs-Architektur.
+
+\smallskip
+\textbf{Ausgangslage:} Die Plattform hat in den letzten Jahren stark wachsende Nutzerzahlen erreicht, aber mehrere parallel laufende Erlösmodelle (Werbung, kleine Subscription, gelegentliche Provisionen, Vertrag mit einem Partner) führen zu fragmentierten Erlösen und sinkender Steuerbarkeit. Bis 2028 soll die Plattform zu einer \emph{integrierten Monetarisierungs-Architektur} weiterentwickelt werden.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Wachsende, aber preissensible Nutzerbasis
+  \item Kapitalgeber erwarten Profitabilität und planbares Wachstum
+  \item Marktwettbewerb durch neue Plattformanbieter
+  \item Partnerlandschaft uneinheitlich, einige Verträge intransparent
+  \item Datenarchitektur teils gewachsen, teils inkonsistent
+  \item Geschäftsführung verlangt klares Bekenntnis: Subscription oder Provision dominiert?
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strukturierte \emph{Entscheidungsarchitektur} \textendash{} keine reine Maßnahmenliste \textendash{} für die Monetarisierung der Plattform bis 2028.
+
+\begin{enumerate}
+  \item Klare Zielsetzung für die Monetarisierungs-Architektur 2028 (3\,--\,5 Sätze).
+  \item Segmentierung der Nutzerbasis nach Zahlungsbereitschaft und Wertbeitrag.
+  \item Bewertung der möglichen Erlösmodelle (Provision, Subscription, Freemium, Werbung, Daten, Partner).
+  \item Entscheidung: welches \textbf{eine} Dominanzmodell, welche Ergänzungen, welche Erlösquellen werden \emph{abgelegt}?
+  \item Customer-Lifetime-Logik: wie soll der durchschnittliche Kundenwert über drei Jahre wachsen?
+  \item Pricing-Logik und Tier-Architektur.
+  \item Partner-Architektur: welche Partner braucht die Plattform 2028 \textendash{} und welche nicht mehr?
+  \item Governance: wer entscheidet künftig über Preise, Tiers, Partnerverträge, Konditionen?
+  \item Roadmap (0\,--\,12\,Mon., 12\,--\,24\,Mon., 24\,--\,36\,Mon.).
+  \item Drei Managemententscheidungen unter Unsicherheit.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens \emph{eine bewusste Entscheidung gegen} ein scheinbar profitables Erlösmodell (z.\,B.\ aggressive Werbung, Verkauf von Nutzerdaten, harte Provision in einer aufbauenden Marktseite) und begründen Sie diese aus Senior-Level-Perspektive.
+
+\ytquery{Plattform Monetarisierung Strategie 2028 CRO Subscription Partner CLV}
+
+\antwortlinien{36}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 11}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Die sechs typischen Plattform-Erlösmodelle benennen und unterscheiden.
+  \item CLV, CAC und Churn als zusammenhängendes Steuerungssystem lesen.
+  \item Eine Subscription-Architektur mit mehreren Tiers entwerfen und begründen.
+  \item Pricing-Logiken (nutzungs-, wert-, rollen-, funktions-, erfolgsbasiert) gegeneinander abwägen.
+  \item Partnernetzwerke nach Reichweite, Margenkosten und Kontrolle bewerten.
+  \item Eine Monetarisierungs-Entscheidung in der Wachstumsphase unter Spannung von Profitabilität und Netzwerkeffekt treffen.
+  \item Eine integrierte Monetarisierungs-Architektur formulieren und gegen leicht erscheinende Erlösoptionen abgrenzen.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 11 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

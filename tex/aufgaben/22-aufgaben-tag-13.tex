@@ -1,0 +1,619 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 13 - Aufgabenheft
+% Digitale Vertriebstransformation: CRM, Automatisierung & KI verantwortlich
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 13}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}CRM, Automatisierung \& KI}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 7 \textperiodcentered{} TAG 13 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 16.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 13\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vertrieb digital denken: CRM,\\Automatisierung und KI \textendash{}\\verantwortlich eingesetzt.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enthält elf Aufgaben zu Tag 13 \textendash{} \emph{Digitale Vertriebstransformation: CRM, Automatisierung und Künstliche Intelligenz}. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Kurze Reproduktion und Einordnung. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Transfer auf konkrete Vertriebsrealitäten. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Entscheidungsarchitektur und Verantwortung. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enthält eine Niveau-Markierung, einen Zeit-Richtwert, den Aufgabentext, einen Antwort-Freiraum sowie eine \emph{YouTube-Suchquery} für vertiefendes Material.
+
+\begin{infobox}[Hinweis]
+Die Musterlösungen finden Sie im separaten \emph{Lösungsheft Tag 13}. Versuchen Sie jede Aufgabe zuerst eigenständig. Achten Sie besonders darauf, was an digitalen Werkzeugen ein \emph{Verantwortungs}-Thema ist und was ein reines Toolthema.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Digitalisierung vs.\ Transformation}{\nivLi}{8\,min}
+
+\noindent Definieren Sie in jeweils einem Satz:
+
+\begin{enumerate}
+  \item \textbf{Digitalisierung einzelner Arbeitsschritte} im Vertrieb (z.\,B.\ E-Signatur, Online-Termin).
+  \item \textbf{Digitale Vertriebstransformation} als umfassende Veränderung von Prozessen, Rollen, Daten, Kundeninteraktion und Steuerung.
+\end{enumerate}
+
+\noindent Ergänzen Sie zwei weitere Sätze:
+
+\begin{itemize}
+  \item Warum ist die Einführung eines neuen Tools \emph{nicht} automatisch eine Transformation?
+  \item Welche \emph{drei} Faktoren entscheiden über Erfolg oder Scheitern einer Vertriebstransformation (Change, Daten, Führung, Akzeptanz, Prozesse \textendash{} wählen Sie aus)?
+\end{itemize}
+
+\ytquery{digitale Vertriebstransformation CRM Change Management Definition Erfolgsfaktoren}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{CRM-Prozesse und Verkaufsautomatisierung}{\nivLi}{8\,min}
+
+\noindent Beschreiben Sie kompakt sechs typische CRM-Prozesse, die durch Verkaufsautomatisierung unterstützt werden:
+
+\begin{enumerate}
+  \item Leadaufnahme und Qualifizierung
+  \item Angebotsprozess
+  \item Follow-up und Nachverfolgung
+  \item Bestandskundenpflege und Upselling
+  \item Reporting und Forecasting
+  \item Eskalations- und Pipeline-Benachrichtigungen
+\end{enumerate}
+
+\noindent Beschreiben Sie für jeden Prozess in einem Satz, \emph{was} sinnvollerweise automatisiert wird \textendash{} und \emph{was} bewusst menschlich bleiben muss.
+
+\ytquery{CRM Prozesse Verkaufsautomatisierung Lead Follow-up Forecasting Beispiele}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{KI im Vertrieb \textendash{} Anwendungen und Grenzen}{\nivLi}{8\,min}
+
+\noindent Vier typische KI-Anwendungsfelder im Vertrieb:
+
+\begin{enumerate}
+  \item \textbf{Lead Scoring} (Kaufwahrscheinlichkeit)
+  \item \textbf{Churn-Prognose} (Abwanderungsrisiko)
+  \item \textbf{Next Best Action} (Empfehlung der nächsten Vertriebsaktion)
+  \item \textbf{Predictive Forecasting} (Umsatzprognose)
+\end{enumerate}
+
+\noindent Beschreiben Sie für jedes Feld in einem Satz: Welche Daten werden benötigt, und welcher Nutzen entsteht? Ergänzen Sie einen abschließenden Satz: Welche \emph{drei} Grenzen muss man KI-Empfehlungen immer hinzuhalten (Datenqualität, Bias, Erklärbarkeit, Datenschutz, falsche Sicherheit, Verantwortung)?
+
+\ytquery{KI Vertrieb Lead Scoring Churn Next Best Action Predictive Forecasting Grenzen}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{TechLine Solutions \textendash{} Schwächen analysieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``TechLine Solutions'' verkauft IT-Dienstleistungen an mittelständische Unternehmen. Der Vertrieb arbeitet mit Excel-Listen, E-Mail-Postfächern und persönlichen Notizen. Einige Kundendaten liegen im CRM, dieses wird aber nicht konsequent genutzt.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Leads kommen über Website, Empfehlungen, Messen und LinkedIn.
+  \item Es gibt keine einheitliche Leadqualifizierung.
+  \item Angebote werden teilweise nicht nachverfolgt.
+  \item Geschäftsführung erhält ungenaue Umsatzprognosen.
+  \item Vertrieb beklagt administrative Belastung.
+  \item Marketing weiß nicht, welche Leads später zu Kunden werden.
+  \item Kunden erhalten manchmal verspätete Rückmeldungen.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie mindestens \textbf{fünf Schwächen} im aktuellen Vertriebsprozess.
+  \item Ordnen Sie jede Schwäche einem der Bereiche \emph{Daten} \textperiodcentered{} \emph{Prozess} \textperiodcentered{} \emph{Kunde} \textperiodcentered{} \emph{Steuerung} \textperiodcentered{} \emph{Organisation} zu.
+  \item Beschreiben Sie für drei dieser Schwächen die \emph{Folgen} für Vertriebserfolg und Kundenerlebnis.
+  \item Benennen Sie \textbf{drei Aufgaben}, die ein konsequent genutztes CRM-System spürbar verbessern könnte.
+  \item Formulieren Sie eine erste Empfehlung, \emph{welcher Prozess zuerst} digitalisiert oder standardisiert werden sollte \textendash{} und warum gerade dieser.
+\end{enumerate}
+
+\ytquery{B2B Vertriebsprozess Schwächen Excel CRM Mittelstand Digitalisierung Diagnose}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{TechLine Solutions \textendash{} Maßnahmen bewerten}{\nivLii}{30\,min}
+
+\begin{infobox}[Sieben mögliche Maßnahmen]
+\textbf{A:} CRM-Pflichtprozess für alle Leads einführen.\\
+\textbf{B:} Automatische Follow-up-Erinnerungen für offene Angebote.\\
+\textbf{C:} Lead Scoring nach Branche, Unternehmensgröße und Verhalten.\\
+\textbf{D:} KI-basierte Abschlusswahrscheinlichkeit für Opportunities testen.\\
+\textbf{E:} Automatische E-Mail-Strecken für frühe Interessenten.\\
+\textbf{F:} Vertriebsdashboard für Pipeline, Forecast und Aktivitäten.\\
+\textbf{G:} Automatische Gesprächszusammenfassungen nach Kundenterminen.\\[6pt]
+\textbf{Rahmen:} 90.000\,\euro{} für 6 Monate \textperiodcentered{} Vertriebsteam ist skeptisch gegenüber zusätzlicher Dokumentation \textperiodcentered{} Datenqualität uneinheitlich \textperiodcentered{} Geschäftsführung erwartet bessere Transparenz und schnellere Leadbearbeitung.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie jede Maßnahme in fünf Dimensionen (Skala 1\,--\,5): \emph{Wirkung}, \emph{Aufwand}, \emph{Datenabhängigkeit}, \emph{Akzeptanzrisiko}, \emph{Kundennutzen}.
+  \item Priorisieren Sie die Maßnahmen in drei Kategorien: \fachbegriff{sofort starten}, \fachbegriff{später testen}, \fachbegriff{zunächst nicht umsetzen}.
+  \item Entscheiden Sie, welche Automatisierung \emph{kurzfristig} den größten Nutzen bringt.
+  \item Begründen Sie, welche KI-Maßnahme bei der aktuellen Datenqualität \emph{noch nicht} sinnvoll ist.
+  \item Formulieren Sie eine Managementempfehlung für die ersten 6 Monate in 3\,--\,4 Sätzen.
+\end{enumerate}
+
+\medskip
+\noindent\begin{tabularx}{\linewidth}{@{}l|c|c|c|c|c@{}}
+\toprule
+\textbf{Maßnahme} & \textbf{Wirkung} & \textbf{Aufwand} & \textbf{Daten} & \textbf{Akzeptanz} & \textbf{Kundennutzen} \\
+\midrule
+A: CRM-Pflicht        & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+B: Follow-up-Erinn.   & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+C: Lead Scoring       & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+D: KI-Abschluss-Wkt.  & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+E: E-Mail-Strecken    & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+F: Dashboard          & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+G: KI-Zusammenfassung & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\bottomrule
+\end{tabularx}
+
+\ytquery{CRM Automatisierung Priorisierung Mittelstand Lead Scoring KI Bewertung}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Was bleibt menschlich \textendash{} was wird automatisiert?}{\nivLii}{20\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Ordnen Sie die folgenden zehn Vertriebsaufgaben in vier Kategorien: \fachbegriff{voll automatisieren}, \fachbegriff{teilautomatisieren (Mensch entscheidet)}, \fachbegriff{KI-unterstützen}, \fachbegriff{bewusst menschlich halten}.
+
+\begin{enumerate}
+  \item Erinnerung an offene Angebote nach 5 Tagen.
+  \item Erstangebot an einen Neukunden mit erklärungsbedürftigem Produkt.
+  \item Lead-Vorqualifizierung anhand Branche und Unternehmensgröße.
+  \item Vertragsverhandlung mit Schlüsselkunde.
+  \item Forecast-Schätzung der nächsten 3 Quartale.
+  \item Reklamationsbearbeitung mit emotionalem Kontext.
+  \item Newsletter-Versand mit segmentierten Inhalten.
+  \item Cross-Selling-Vorschlag für Bestandskunde.
+  \item Beendigung eines unprofitablen Kundenverhältnisses.
+  \item Datenpflege im CRM nach Kundengespräch.
+\end{enumerate}
+
+\noindent Begründen Sie für drei besonders schwierige Fälle: warum genau diese Kategorisierung?
+
+\ytquery{Vertrieb Automatisierung menschlich KI Aufgaben verteilen Verantwortung}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Datenqualität als Voraussetzung}{\nivLii}{22\,min}
+
+\begin{infobox}[Datenrealität ``TechLine Solutions'']
+Eine Stichprobe ergibt:
+\begin{itemize}
+  \item 42\,\% der Leads im CRM haben keinen vollständigen Ansprechpartner.
+  \item 38\,\% der Opportunities haben kein Erwartungs-Abschlussdatum.
+  \item 27\,\% der Datensätze sind Duplikate.
+  \item 19\,\% der Branchenfelder sind leer oder ``Sonstiges''.
+  \item Forecast-Abweichung gegenüber Ist liegt durchschnittlich bei 31\,\%.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Welche \emph{drei} Datenqualitäts-Probleme sind aus Senior-Sicht am gefährlichsten? Begründen Sie Ihre Auswahl.
+  \item Welche \emph{KI-Anwendung} würde durch diese Probleme \emph{besonders stark} verzerrt? Beschreiben Sie das Szenario in 2\,--\,3 Sätzen.
+  \item Entwickeln Sie \textbf{vier Pflichtregeln für Datenqualität} (Datenfelder, Validierung, Verantwortlichkeit, Zeitpunkt der Pflege).
+  \item Formulieren Sie eine Faustregel: \emph{Wann} darf eine KI-Empfehlung im Vertrieb verbindlich werden \textendash{} und wann bleibt sie ausschließlich Empfehlung?
+\end{enumerate}
+
+\ytquery{Datenqualität CRM KI Vertrieb Bias Garbage In Garbage Out Pflichtfelder}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Akzeptanz im Vertrieb \textendash{} Change-Hebel}{\nivLii}{20\,min}
+
+\noindent\textbf{Ausgangslage:} Das Vertriebsteam von ``TechLine Solutions'' empfindet das CRM bisher als Kontrolle, nicht als Hilfsmittel. Die Geschäftsführung möchte Pflichtfelder einführen und automatische Follow-up-Aufgaben aktivieren \textendash{} ohne dass es zu offenem Widerstand kommt.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie \textbf{drei typische Widerstände} im Vertrieb gegen CRM-Pflicht und Automatisierung (z.\,B.\ Kontrollangst, Aufwandsempfinden, Zeitknappheit, Tool-Misstrauen, Verlustaversion).
+  \item Entwickeln Sie \textbf{fünf konkrete Change-Hebel}, mit denen Akzeptanz gestärkt wird (z.\,B.\ ``Daten füllen, die mir helfen \textendash{} nicht die mich überwachen''; \emph{User-Champions}; sichtbare Quick-Wins; Belohnungslogik; vereinfachte Eingabe).
+  \item Begründen Sie, warum \emph{eine sichtbare Quick-Win-Story} in den ersten 30 Tagen häufig mehr Wirkung hat als jede Schulung.
+  \item Schließen Sie mit \emph{einem} Satz: Welche Rolle spielt die direkte Führungskraft \textendash{} und welche das Management?
+\end{enumerate}
+
+\ytquery{CRM Akzeptanz Vertrieb Change Management Widerstand Quick Win User Adoption}
+
+\antwortlinien{18}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Fallstudie MedTech Service GmbH \textendash{} 12-Monats-Roadmap}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie: MedTech Service GmbH]
+``MedTech Service GmbH'' verkauft Wartungsverträge, Ersatzteile und technische Serviceleistungen für medizinische Geräte an Kliniken, Labore und Arztzentren. Der Vertrieb ist stark beziehungsorientiert, aber wenig datenbasiert. Kundendaten liegen in verschiedenen Systemen, Follow-ups erfolgen uneinheitlich und Umsatzprognosen sind häufig ungenau.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Jahresumsatz: 28\,Mio.\,\euro
+  \item Vertriebsteam: 14 \textperiodcentered{} Marketing: 3 \textperiodcentered{} Kundenservice: 10
+  \item CRM vorhanden, aber nur teilweise genutzt; Datenqualität uneinheitlich.
+  \item Budget für 12 Monate: 280.000\,\euro
+  \item Ziel: 30\,\% schnellere Leadbearbeitung, bessere Forecastqualität, 15\,\% mehr Cross-Selling-Umsatz.
+\end{itemize}
+
+\smallskip
+\textbf{Maßnahmen:}
+\begin{itemize}
+  \item \textbf{A:} CRM-Datenmodell und Pflichtfelder vereinheitlichen.
+  \item \textbf{B:} Lead Scoring und Übergaberegeln Marketing \textrightarrow{} Vertrieb.
+  \item \textbf{C:} Automatische Follow-up-Aufgaben (Angebote, Serviceverlängerungen).
+  \item \textbf{D:} Vertriebsdashboard für Pipeline, Forecast, Reaktionszeit.
+  \item \textbf{E:} KI-Modell zur Cross-Selling-Potenzialerkennung.
+  \item \textbf{F:} Predictive Forecasting pilotieren.
+  \item \textbf{G:} Change-Programm für Vertrieb und Kundenservice.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die \emph{digitale Reife} des Vertriebs in 3\,--\,5 Punkten.
+  \item Identifizieren Sie die wichtigsten Prozess- und Datenprobleme.
+  \item Bewerten Sie die Maßnahmen A\,--\,G nach: Wirkung \textperiodcentered{} Aufwand \textperiodcentered{} Datenreife \textperiodcentered{} Akzeptanz \textperiodcentered{} Kundennutzen \textperiodcentered{} strategische Bedeutung.
+  \item Entwickeln Sie eine \textbf{priorisierte 12-Monats-Roadmap} in vier Phasen (1\,--\,3, 4\,--\,6, 7\,--\,9, 10\,--\,12).
+  \item Entscheiden Sie, welche \emph{Automatisierungen} sofort eingeführt werden sollten.
+  \item Entscheiden Sie, welche \emph{KI-Anwendungen} zunächst nur \emph{Pilot} sein dürfen \textendash{} und warum.
+  \item Legen Sie \textbf{8\,--\,10 zentrale KPIs} zur Erfolgsmessung fest.
+  \item Treffen Sie mindestens \emph{eine Entscheidung unter Unsicherheit} und begründen Sie diese aus Senior-Sicht.
+\end{enumerate}
+
+\ytquery{B2B Vertriebsdigitalisierung Mittelstand CRM KI Roadmap Senior Management}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{KI-Verantwortung \textendash{} Architektur statt Tooldenken}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent KI im Vertrieb verspricht Effizienz, kann aber Verantwortung verschieben oder verschleiern. Wer ist verantwortlich, wenn eine KI-Empfehlung systematisch falsche Cross-Selling-Vorschläge macht? Wer entscheidet, ob ein Lead ``automatisch verloren'' gilt? Wer prüft, dass Bias nicht zu Benachteiligung führt?
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 3\,--\,4 Sätzen, warum \emph{Erklärbarkeit} bei KI im Vertrieb wichtiger ist als \emph{maximale Vorhersagegenauigkeit}.
+  \item Wählen Sie ein \textbf{konkretes KI-Szenario} (z.\,B.\ Churn-Prognose, Lead Scoring, Predictive Forecasting, Next Best Action). Erläutern Sie:
+  \begin{itemize}
+    \item Welche \emph{Daten}-, \emph{Bias}- und \emph{Erklärbarkeits-Risiken} wirken konkret?
+    \item Welche \textbf{Verantwortungsstruktur} (CRO, Vertriebsleitung, Datenschutz, Modell-Owner, Daten-Owner) muss eingerichtet sein?
+    \item Welche \textbf{drei Governance-Regeln} sollte das Management vor dem Pilot festlegen?
+  \end{itemize}
+  \item Formulieren Sie eine \textbf{Faustregel}: Wann darf eine KI-Empfehlung \emph{automatisch handeln} \textendash{} und wann muss zwingend ein Mensch entscheiden?
+\end{enumerate}
+
+\ytquery{KI Vertrieb Verantwortung Erklärbarkeit Bias Governance B2B Senior Management}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Digitale Vertriebsarchitektur 24 Monate}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Revenue Officer (oder Digital Sales Architect, Leiter:in Vertriebstransformation, CRM-Manager:in, KI-Transformationsmanager:in, externe:r Berater:in).
+
+\smallskip
+\textbf{Ausgangslage:} Ein mittelständisches Unternehmen möchte den Vertrieb datenbasierter, effizienter und skalierbarer aufstellen. Es gibt digitale Kontaktpunkte, ein CRM, erste Marketing-Automation-Prozesse und Interesse an KI. Zugleich sind Datenqualität, Prozessdisziplin und Akzeptanz uneinheitlich.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Budget begrenzt \textperiodcentered{} Zeitdruck durch digitale Wettbewerber.
+  \item Vertriebsteam teilweise skeptisch.
+  \item Kundendaten in unterschiedlichen Systemen \textperiodcentered{} CRM unkonsequent genutzt.
+  \item KI-Erwartungen im Management hoch, Datenreife begrenzt.
+  \item Datenschutz, Transparenz und Akzeptanz müssen gewährleistet sein.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strategische \emph{Entscheidungsarchitektur} für digitale Vertriebstransformation, CRM, Verkaufsautomatisierung und KI-Einsatz \textendash{} keine Tool-Liste.
+
+\begin{enumerate}
+  \item \textbf{Zielbild} für den digital transformierten Vertrieb der nächsten 24 Monate (3\,--\,5 Sätze).
+  \item Analyse aktueller Vertriebsprozesse und Digitalisierungsbrüche.
+  \item \textbf{CRM-Architektur} mit Datenfeldern, Leadstatus, Opportunity-Stufen, Verantwortlichkeiten, Reportinglogik.
+  \item \textbf{Automatisierungsarchitektur} für Leadbearbeitung, Follow-ups, Angebote, Bestandskundenpflege, Eskalationen.
+  \item \textbf{KI-Architektur} mit Einsatzfeldern Lead Scoring, Churn-Risiko, Cross-Selling, Forecasting, Next Best Action.
+  \item Entscheidung, welche KI-Anwendungen \emph{sofort getestet}, \emph{später geprüft} oder \emph{bewusst zurückgestellt} werden.
+  \item \textbf{Datenqualitäts- und Governance-Struktur} für CRM, KI, Datenschutz, Entscheidungsverantwortung.
+  \item \textbf{Change-Management-Logik} zur Akzeptanz im Vertrieb.
+  \item \textbf{KPI-Struktur} für Effizienz, Datenqualität, Vertriebsleistung, Forecastqualität, Kundennutzen, KI-Wirkung.
+  \item Drei \textbf{Managemententscheidungen unter Unsicherheit}.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens eine bewusste \emph{Entscheidung gegen} eine attraktive KI- oder Automatisierungslösung, wenn Datenqualität, Akzeptanz, Kundennähe oder Entscheidungsverantwortung aktuell nicht ausreichend gesichert sind \textendash{} und begründen Sie aus Senior-Level-Perspektive.
+
+\ytquery{Chief Revenue Officer digitale Vertriebsarchitektur CRM KI 24 Monate Mittelstand}
+
+\antwortlinien{38}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 13}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Digitalisierung und Transformation sauber abgrenzen.
+  \item CRM-Prozesse und Verkaufsautomatisierung an konkreten Aufgaben anwenden.
+  \item KI-Anwendungen im Vertrieb nach Datenreife und Verantwortbarkeit einordnen.
+  \item Datenqualität als Voraussetzung für Automatisierung und KI verstehen.
+  \item Eine 12-Monats-Roadmap aus CRM, Automatisierung, KI und Change-Management entwickeln.
+  \item KI-Empfehlungen zwischen Vorschlag und automatischer Aktion verantwortlich unterscheiden.
+  \item Eine Entscheidungsarchitektur formulieren, die Effizienz, Kundennähe, Datenschutz und Akzeptanz ausbalanciert.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 13 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

@@ -1,0 +1,647 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 12 - Aufgabenheft
+% Revenue Streams optimieren, Multi-Channel skalieren, Wachstum steuern
+%
+% Self-contained xelatex source.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 12}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Revenue Streams \& Skalierung}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 6 \textperiodcentered{} TAG 12 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 15.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 12\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Revenue Streams optimieren,\\Multi-Channel skalieren,\\Wachstum verantwortlich steuern.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enthält elf Aufgaben zu Tag 12 \textendash{} \emph{Revenue Streams optimieren, Multi-Channel skalieren und Wachstum verantwortlich steuern}. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Kurze Reproduktion und Einordnung. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Transfer auf konkrete Plattformsituationen. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Entscheidungsarchitektur und Verantwortung. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enthält eine Niveau-Markierung, einen Zeit-Richtwert, den Aufgabentext, einen Antwort-Freiraum sowie eine \emph{YouTube-Suchquery} für vertiefendes Material.
+
+\begin{infobox}[Hinweis]
+Die Musterlösungen finden Sie im separaten \emph{Lösungsheft Tag 12}. Versuchen Sie jede Aufgabe zuerst eigenständig \textendash{} der Mehrwert entsteht in der eigenen Argumentation.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Revenue Streams einordnen}{\nivLi}{8\,min}
+
+\noindent Definieren Sie in jeweils einem Satz die drei Klassen von Revenue Streams, die wir in plattformbasierten Geschäftsmodellen unterscheiden:
+
+\begin{enumerate}
+  \item \textbf{Primäre Revenue Streams} (z.\,B.\ Provisionen, Transaktionsgebühren, Hauptabonnement)
+  \item \textbf{Sekundäre Revenue Streams} (z.\,B.\ Premium-Funktionen, Werbung, Upgrades, Add-ons)
+  \item \textbf{Strategische Revenue Streams} (z.\,B.\ Datenservices, Partnergebühren, Affiliate, Servicepakete)
+\end{enumerate}
+
+\noindent Ergänzen Sie einen vierten Satz: Warum ist es aus Steuerungssicht ein Unterschied, ob 95\,\% des Umsatzes über \emph{eine} Quelle oder über mehrere Streams zusammenkommen?
+
+\ytquery{Revenue Streams Plattform primär sekundär strategisch Diversifikation Definition}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Multi-Channel-Kanäle benennen}{\nivLi}{8\,min}
+
+\noindent Sechs typische Kanäle eines Multi-Channel-Ansatzes:
+
+\begin{enumerate}
+  \item Eigener Webshop
+  \item Marktplatz / Plattform
+  \item Partnervertrieb (Reseller, Wiederverkäufer)
+  \item Direktvertrieb (Außendienst, Innendienst)
+  \item Affiliate-Kanal
+  \item E-Mail-Strecken \& digitale Kampagnen
+\end{enumerate}
+
+\noindent Beschreiben Sie für jeden Kanal in einem Satz:
+
+\begin{itemize}
+  \item Welche Kundengruppe spricht er typischerweise an?
+  \item Welcher \emph{Hauptvorteil} und welches \emph{Hauptrisiko} kennzeichnen ihn (z.\,B.\ Reichweite vs.\ Abhängigkeit, Marge vs.\ Aufwand, Kontrolle vs.\ Geschwindigkeit)?
+\end{itemize}
+
+\ytquery{Multi-Channel Vertrieb Plattform Direktvertrieb Partner Affiliate Webshop}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{KPIs für Plattform-Wachstum}{\nivLi}{8\,min}
+
+\noindent Erläutern Sie kompakt sechs zentrale KPIs zur Steuerung plattformbasierter Wachstumsstrategien:
+
+\begin{enumerate}
+  \item \textbf{Conversion Rate}
+  \item \textbf{Customer Acquisition Cost (CAC)}
+  \item \textbf{Customer Lifetime Value (CLV)}
+  \item \textbf{Churn-Rate} bzw.\ \textbf{Net Revenue Retention}
+  \item \textbf{Wiederkaufrate}
+  \item \textbf{Deckungsbeitrag je Kanal}
+\end{enumerate}
+
+\noindent Ergänzen Sie einen abschließenden Satz: Welche KPI zeigt \emph{echtes} Wachstum und welche nur \emph{Aktivität}? Warum?
+
+\ytquery{Plattform KPIs Conversion CAC CLV Churn Net Revenue Retention Wachstum}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{LearnMarket Pro \textendash{} Revenue Streams analysieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``LearnMarket Pro'' betreibt eine Plattform für berufliche Weiterbildung. Unternehmen können dort digitale Kurse, Live-Trainings und Coaching-Angebote buchen. Trainer, Akademien und Beratungsunternehmen stellen ihre Angebote auf der Plattform ein.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Kundenseite: Unternehmen, Personalabteilungen, Führungskräfte.
+  \item Anbieterseite: Trainer, Akademien, Beratungen.
+  \item Aktuelle Einnahmequellen: 12\,\% Provision pro Buchung + kostenpflichtige Premium-Profile für Anbieter.
+  \item Viele Kunden buchen nur einmalig, einige Anbieter wünschen mehr Sichtbarkeit.
+  \item Große Unternehmen fragen nach Rahmenverträgen und Reporting.
+  \item Die Geschäftsführung möchte die Einnahmequellen verbreitern.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie mindestens \textbf{sechs mögliche Revenue Streams} für ``LearnMarket Pro''.
+  \item Ordnen Sie jede Einnahmequelle einer Marktseite zu: \emph{Kunde}, \emph{Anbieter} oder \emph{Partner}.
+  \item Beschreiben Sie für jede Einnahmequelle den möglichen \emph{Nutzen} und das \emph{Risiko} in jeweils einem Halbsatz.
+  \item Entscheiden Sie, welche Einnahmequelle kurzfristig (0\,--\,6 Monate) am einfachsten umsetzbar ist.
+  \item Entscheiden Sie, welche Einnahmequelle langfristig (24+ Monate) den größten \emph{strategischen} Wert haben könnte \textendash{} und begründen Sie den Unterschied.
+\end{enumerate}
+
+\ytquery{Plattform Revenue Streams Weiterbildung B2B Provision Subscription Reporting}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{LearnMarket Pro \textendash{} Multi-Channel und KPIs}{\nivLii}{30\,min}
+
+\begin{infobox}[Zusätzliche Informationen]
+\textbf{Plattformkennzahlen:}
+\begin{itemize}
+  \item Monatlicher Plattformumsatz: 420.000\,\euro
+  \item 70\,\% des Umsatzes über Einzelbuchungen
+  \item 20\,\% über Premium-Anbieterprofile
+  \item 10\,\% über Partnerempfehlungen
+  \item Conversion Rate von Besucher zu Buchung: 1{,}4\,\%
+  \item Wiederkaufrate nach 6 Monaten: 18\,\%
+\end{itemize}
+
+\smallskip
+\textbf{Mögliche Kanäle und Ansätze:}
+\begin{itemize}
+  \item \textbf{A:} Ausbau des eigenen Plattformvertriebs (SEO, Content, On-Site-Conversion).
+  \item \textbf{B:} Aufbau von HR-Partner-Netzwerken (Empfehlungsmodell, Provision).
+  \item \textbf{C:} Direktansprache von Großkunden über LinkedIn / Account-based Marketing.
+  \item \textbf{D:} E-Mail-Nurturing für Bestandskunden (Cross-Buchungen, Themenpfade).
+  \item \textbf{E:} Affiliate-Kooperation mit Berufsverbänden und Karrierenetzwerken.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie jeden Kanal A\,--\,E auf einer Skala 1\,--\,5 in \emph{vier} Dimensionen: \textbf{Wirkung auf Conversion}, \textbf{Wirkung auf Wiederkauf}, \textbf{Marge}, \textbf{Komplexität}.
+  \item Priorisieren Sie maximal \textbf{drei} Kanäle für die nächsten 6 Monate.
+  \item Definieren Sie \textbf{vier KPIs}, an denen Sie den Erfolg dieser Priorisierung messen würden.
+  \item Begründen Sie in 2\,--\,3 Sätzen: Wo wäre \emph{Conversion-Optimierung} wirtschaftlich wirkungsvoller als zusätzlicher Traffic?
+\end{enumerate}
+
+\medskip
+\noindent\begin{tabularx}{\linewidth}{@{}l|c|c|c|c@{}}
+\toprule
+\textbf{Kanal} & \textbf{Conversion} & \textbf{Wiederkauf} & \textbf{Marge} & \textbf{Komplexität} \\
+\midrule
+A: Plattformvertrieb  & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\midrule
+B: HR-Partner         & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\midrule
+C: LinkedIn / ABM     & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\midrule
+D: E-Mail-Nurturing   & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\midrule
+E: Affiliate-Verbände & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} & \rule{1.2em}{0.4pt} \\
+\bottomrule
+\end{tabularx}
+
+\ytquery{Multi-Channel KPIs Conversion Wiederkauf B2B Plattform Priorisierung}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Conversion-Funnel zerlegen}{\nivLii}{20\,min}
+
+\begin{infobox}[Funnel-Daten ``LearnMarket Pro'']
+Für ein durchschnittliches Quartal liegen folgende Daten vor:
+\begin{itemize}
+  \item Website-Besucher: 240.000
+  \item Seitenaufrufe Kursdetail: 96.000 (40\,\%)
+  \item Registrierte Interessenten: 14.400 (15\,\% von Kursdetail)
+  \item Abgesendete Anfragen / Buchungswarenkörbe: 4.800 (33\,\%)
+  \item Tatsächliche Buchungen: 3.360 (70\,\%)
+  \item Wiederkauf nach 6 Monaten: 605 (18\,\%)
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Identifizieren Sie den \textbf{größten Conversion-Engpass} im Funnel und begründen Sie Ihre Wahl quantitativ (auf Basis der \emph{absoluten} Verluste, nicht nur der Prozentwerte).
+  \item Schlagen Sie \textbf{drei konkrete Maßnahmen} vor, mit denen sich dieser Engpass adressieren ließe.
+  \item Schätzen Sie für eine Ihrer Maßnahmen: Wenn diese den Engpass um 20\,\% verbessert \textendash{} wie viele zusätzliche Buchungen pro Quartal kämen ungefähr zustande?
+  \item Welche \textbf{KPI} würden Sie installieren, um den Effekt sauber zu messen \textendash{} und welche \emph{Vanity-Metrik} würden Sie bewusst \emph{nicht} verwenden?
+\end{enumerate}
+
+\ytquery{Conversion Funnel Optimierung Engpass Plattform B2B Wachstum messen}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Kanalkonflikte und Kannibalisierung}{\nivLii}{22\,min}
+
+\begin{infobox}[Kontext]
+``LearnMarket Pro'' überlegt, parallel zum Plattformvertrieb eine eigene \emph{Direct-Sales-Einheit} für Großkunden aufzubauen \textendash{} mit individuellen Rahmenverträgen und niedrigeren Effektivpreisen ab 20.000\,\euro{} Jahresvolumen. Gleichzeitig laufen auf der Plattform öffentlich sichtbare Listenpreise.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Identifizieren Sie \textbf{drei konkrete Kanalkonflikte}, die zwischen Plattform-Listenpreis und Direct-Sales-Rahmenvertrag entstehen können.
+  \item Beschreiben Sie für jeden Konflikt einen \textbf{Stakeholder}, der diesen Konflikt zuerst spürt (Anbieter, Bestandskunde, Vertriebsteam, Partner, Affiliate).
+  \item Entwickeln Sie \textbf{drei Steuerungsmechanismen}, mit denen sich Kanalkonflikte begrenzen lassen (z.\,B.\ Volumenstaffeln, Kanal-Caps, Preislogik, Provisionsmodell, Kanal-Verantwortlichkeiten).
+  \item Formulieren Sie eine \textbf{Faustregel} in einem Satz: Wann ist Kannibalisierung akzeptabel \textendash{} und wann nicht?
+\end{enumerate}
+
+\ytquery{Kanalkonflikt Kannibalisierung Plattform Direct Sales Multi-Channel B2B}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Skalierung vs.\ Stabilisierung \textendash{} Streams einordnen}{\nivLii}{20\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Eine wachsende B2B-Plattform betreibt sechs Revenue Streams. Ordnen Sie jeden Stream in genau eine der vier Kategorien ein: \fachbegriff{skalieren}, \fachbegriff{stabilisieren}, \fachbegriff{testen} oder \fachbegriff{begrenzen}. Begründen Sie Ihre Wahl jeweils in 1\,--\,2 Sätzen.
+
+\medskip
+\noindent\textbf{Streams:}
+\begin{enumerate}
+  \item \textbf{Transaktionsprovision} (8\,\% je Buchung) \textendash{} 70\,\% des Umsatzes, stabil, sinkende Marge wegen Preiswettbewerb.
+  \item \textbf{Premium-Anbieterprofile} \textendash{} 15\,\% des Umsatzes, Anbieter beklagen unklaren Nutzen.
+  \item \textbf{Unternehmens-Abo mit Reporting} (neu) \textendash{} 50.000\,\euro{} Pilotumsatz, sehr hohe Marge, aber nur 3 Pilotkunden.
+  \item \textbf{Daten-/Benchmark-Service} (Idee) \textendash{} hoher strategischer Wert, Datenschutzrisiken noch ungeklärt.
+  \item \textbf{Affiliate-Netzwerk} \textendash{} 8\,\% des Umsatzes, wächst organisch, Partner werden zahlreicher und schwer zu steuern.
+  \item \textbf{Display-Werbung von Drittanbietern} \textendash{} 2\,\% des Umsatzes, niedrige Marge, gefährdet Nutzererlebnis.
+\end{enumerate}
+
+\noindent Schließen Sie mit \emph{einem} Vergleichssatz: Welcher Stream verdient die meiste Managementaufmerksamkeit in den nächsten 6 Monaten \textendash{} und warum?
+
+\ytquery{Revenue Streams skalieren stabilisieren begrenzen Plattform Portfolio Wachstum}
+
+\antwortlinien{16}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Fallstudie MarketSupply 360 \textendash{} 12-Monats-Architektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie: MarketSupply 360]
+``MarketSupply 360'' ist eine B2B-Plattform, auf der mittelständische Unternehmen industrielle Verbrauchsmaterialien, Ersatzteile und Serviceleistungen beschaffen. Anbieter zahlen aktuell eine Provision pro Transaktion. Zusätzlich gibt es erste Premium-Profile und vereinzelte Partnerumsätze durch Logistikdienstleister. Die Plattform wächst, aber die Profitabilität bleibt hinter den Erwartungen zurück.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Jahresumsatz über Plattform: 18\,Mio.\,\euro
+  \item Plattformprovision: durchschnittlich 8\,\%
+  \item Aktive Anbieter: 1.400 \textperiodcentered{} Aktive Kunden: 9.500
+  \item Conversion Rate: 1{,}9\,\% \textperiodcentered{} Wiederkauf nach 12 Mon.: 32\,\%
+  \item Durchschnittlicher Warenkorb: 620\,\euro
+  \item Sortimentsmix: 65\,\% Standardprodukte, 25\,\% Ersatzteile, 10\,\% Services
+  \item Budget für 12 Monate: 600.000\,\euro
+\end{itemize}
+
+\smallskip
+\textbf{Aktuelle Probleme:}
+\begin{itemize}
+  \item Starke Abhängigkeit von Transaktionsprovisionen.
+  \item Premium-Profile liefern wenig messbaren Mehrwert.
+  \item Kunden brechen häufig vor Anfrage oder Bestellung ab.
+  \item Anbieter beklagen unklare Sichtbarkeitslogik.
+  \item Partnerkanäle sind nicht systematisch aufgebaut.
+  \item Management erhält viele Kennzahlen, aber keine klare Entscheidungslogik.
+\end{itemize}
+
+\smallskip
+\textbf{Mögliche Ansätze:}
+\begin{itemize}
+  \item \textbf{A:} Unternehmensabo für Großkunden mit Reporting, Rahmenkonditionen, Priority-Support.
+  \item \textbf{B:} Conversion-Optimierungs-Programm (Funnel, Suche, Produktdaten, Checkout).
+  \item \textbf{C:} Partnernetzwerk mit Logistik- und Servicepartnern, neue Provisionslogik.
+  \item \textbf{D:} Daten- und Benchmark-Service für Einkäufer (Marktpreise, Verfügbarkeit, Lieferzeiten).
+  \item \textbf{E:} Affiliate-Modell mit Branchenmedien und Einkäuferportalen.
+  \item \textbf{F:} Display-Werbung / Sponsored Listings ausbauen.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die Profitabilitäts- und Wachstumssituation in 3\,--\,5 Punkten.
+  \item Bewerten Sie die Ansätze A\,--\,F nach: Umsatzpotenzial \textperiodcentered{} Marge \textperiodcentered{} CLV-Wirkung \textperiodcentered{} Risiko (Kannibalisierung, Anbieterakzeptanz, Datenschutz) \textperiodcentered{} Komplexität \textperiodcentered{} Strategischer Beitrag.
+  \item Entwickeln Sie eine \textbf{priorisierte 12-Monats-Architektur}: Welche Ansätze werden \emph{skaliert}, \emph{pilotiert}, \emph{stabilisiert}, \emph{zurückgestellt} oder \emph{beendet}?
+  \item Verteilen Sie das Budget von 600.000\,\euro{} grob auf Ihre priorisierten Maßnahmen.
+  \item Definieren Sie eine \textbf{KPI-Dashboard-Logik} mit maximal 6 KPIs, die das Management monatlich betrachten sollte.
+  \item Treffen Sie \emph{mindestens eine Entscheidung unter Unsicherheit} und begründen Sie diese ausdrücklich aus Senior-Level-Perspektive.
+\end{enumerate}
+
+\ytquery{B2B Plattform Revenue Streams Skalierung CRO Mittelstand Profitabilität}
+
+\antwortlinien{34}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Kanal-Caps und Diversifikationsgrenzen}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Multi-Channel-Diversifikation senkt Abhängigkeit \textendash{} erhöht aber Komplexität, Kannibalisierungsrisiko und Steuerungsaufwand. Senior-Management muss aktiv \emph{Grenzen} setzen: welcher Kanal darf wachsen, welcher nicht, wann ist \emph{Stoppen} besser als \emph{Skalieren}?
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in eigenen Worten (3\,--\,4 Sätze) drei \emph{Diversifikationsfallen}, in die wachsende Plattformen häufig laufen. Beispiele: Kanalproliferation ohne Marge, KPI-Inflation ohne Entscheidung, Partnerwildwuchs ohne Steuerung, Pricing-Inkonsistenz, Datenbrüche.
+  \item Wählen Sie ein \textbf{konkretes Plattformbeispiel} aus Ihrer Erfahrung oder Recherche (z.\,B.\ eine SaaS-Plattform, ein B2B-Marktplatz, ein Affiliate-getriebenes Reisemodell). Erläutern Sie:
+  \begin{itemize}
+    \item Welche Kanal-Caps wären sinnvoll (Umsatzanteil, Margenuntergrenze, Komplexitätsbudget)?
+    \item Welcher Stream sollte trotz Wachstumspotenzial bewusst \emph{begrenzt} werden \textendash{} und warum?
+    \item Welche Governance-Struktur (CRO, Plattformmanagement, Controlling, Partner Management) entscheidet darüber?
+  \end{itemize}
+  \item Formulieren Sie eine \textbf{Faustregel} (1\,--\,2 Sätze): Ab wann muss ein neuer Revenue Stream \emph{nicht} eingeführt werden, obwohl er Umsatz brächte?
+\end{enumerate}
+
+\ytquery{Plattform Diversifikation Kanal Cap Revenue Portfolio Senior Management Grenzen}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Revenue- und Performance-Architektur 24 Monate}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Revenue Officer (oder Chief Platform Officer, Leiter:in Monetarisierung, Growth Manager:in, Vertriebsarchitekt:in, externe:r Strategieberater:in) eines wachsenden Plattformunternehmens.
+
+\smallskip
+\textbf{Ausgangslage:} Mehrere Revenue Streams, verschiedene Vertriebskanäle und erste Partneransätze sind vorhanden. Umsätze steigen, aber die Komplexität wächst schneller: Einige Kanäle wachsen schnell bei niedriger Marge, andere sind profitabel, aber schwer skalierbar. Partner bringen Reichweite und Abhängigkeit. Die Conversion Rate ist ausbaufähig, die KPI-Landschaft ist unübersichtlich.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Budget begrenzt.
+  \item Marktinformationen unvollständig.
+  \item Wettbewerber wachsen aggressiv.
+  \item Einige Partner fordern exklusive Konditionen.
+  \item Vertrieb, Marketing, Produkt und Controlling bewerten Erfolg unterschiedlich.
+  \item Zu viele parallele Initiativen können die Organisation überfordern.
+  \item Geschäftsführung erwartet schnelle Ergebnisse \emph{und} nachhaltige Skalierung.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strukturierte \emph{Entscheidungsarchitektur} \textendash{} keine reine Maßnahmenliste \textendash{} für Revenue-Optimierung, Multi-Channel-Diversifikation, Performance-Analyse und Skalierung über die nächsten 24 Monate. Erarbeiten Sie schriftlich:
+
+\begin{enumerate}
+  \item Ein \textbf{Zielbild} für die Revenue-Architektur (3\,--\,5 Sätze): Umsatz, Margenziel, Diversifikationsgrad, Steuerbarkeit.
+  \item Übersicht bestehender und möglicher Revenue Streams.
+  \item Bewertung der Streams nach Umsatz, Marge, CLV, Risiko, Skalierbarkeit, Kundennutzen, Komplexität.
+  \item \textbf{Multi-Channel-Architektur} mit eigener Plattform, Partnerkanälen, Direktvertrieb, Affiliate und Kundenbindung.
+  \item \textbf{Entscheidung}, welche Ansätze \emph{skaliert}, \emph{getestet}, \emph{stabilisiert}, \emph{zurückgestellt} oder \emph{beendet} werden.
+  \item \textbf{Conversion-Optimierungslogik} entlang des gesamten Funnels (Sichtbarkeit \textrightarrow{} Klick \textrightarrow{} Anfrage \textrightarrow{} Kauf \textrightarrow{} Wiederkauf \textrightarrow{} Upgrade).
+  \item \textbf{KPI-Architektur} für Managemententscheidungen: Umsatz, Deckungsbeitrag, CLV, CAC, Churn, Conversion, Wiederkauf, Partnerbeitrag, Net Revenue Retention.
+  \item \textbf{Governance-Struktur} zwischen Vertrieb, Marketing, Plattformmanagement, Partner Management, Controlling, Geschäftsführung.
+  \item Risikoanalyse: Kannibalisierung, Kanalabhängigkeit, Margenverlust, Partnerkonflikte, Datenbrüche, organisatorische Überforderung.
+  \item Drei \textbf{Managemententscheidungen unter Unsicherheit}, die trotz unvollständiger Informationen verantwortet werden.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens \emph{eine bewusste Entscheidung gegen} eine attraktive Wachstumsoption \textendash{} weil sie kurzfristig Umsatz brächte, langfristig aber Marge, Steuerbarkeit, Kundennutzen oder strategische Unabhängigkeit gefährden würde. Begründen Sie diese Entscheidung aus Senior-Level-Perspektive.
+
+\ytquery{Chief Revenue Officer Architektur Plattform 24 Monate Senior Management Decision}
+
+\antwortlinien{38}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 12}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Primäre, sekundäre und strategische Revenue Streams unterscheiden.
+  \item Multi-Channel-Kanäle gegen ihre Risiken (Kannibalisierung, Komplexität, Abhängigkeit) abwägen.
+  \item KPI-Ketten von Sichtbarkeit über Conversion bis Net Revenue Retention aufbauen.
+  \item Conversion-Engpässe quantitativ identifizieren und gezielt adressieren.
+  \item Eine Revenue-Architektur entwerfen, in der Streams \emph{skaliert}, \emph{stabilisiert}, \emph{getestet} oder \emph{begrenzt} werden.
+  \item Kanal-Caps und Diversifikationsgrenzen aus Senior-Perspektive setzen.
+  \item Wachstum gegen Marge, Steuerbarkeit und Kundennutzen verantwortlich abwägen.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 12 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

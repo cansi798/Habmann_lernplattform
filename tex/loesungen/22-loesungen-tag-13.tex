@@ -1,0 +1,688 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 13 - Loesungsheft
+% Digitale Vertriebstransformation: CRM, Automatisierung & KI
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 13}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}CRM, Automatisierung \& KI}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 7 \textperiodcentered{} TAG 13 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 16.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 13\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen \textendash{} CRM,\\Automatisierung \& KI\\verantwortlich im Vertrieb.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis,\\nicht die einzige korrekte Lösung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 13}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterlösungen sind \emph{eine} mögliche Lösung. Auf L2 und L3 sind mehrere Begründungswege legitim, solange sie den Begriffsapparat sauber nutzen, Annahmen explizit machen und zu einer klaren Entscheidung führen. Bei KI-Themen ist die \emph{Verantwortungs}-Argumentation oft wichtiger als die Tool-Wahl.
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterlösung. Welche Annahmen unterscheiden sich? Wo haben Sie KI als Lösung gesehen, wo bewusst nicht?
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Digitalisierung vs.\ Transformation}{\nivLi}{8\,min}
+
+\ytquery{digitale Vertriebstransformation CRM Change Management Definition Erfolgsfaktoren}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Digitalisierung einzelner Arbeitsschritte} bedeutet, einen bestehenden manuellen Vorgang elektronisch abzubilden \textendash{} z.\,B.\ Papier-Auftrag wird PDF-Auftrag mit E-Signatur, ohne dass sich Prozesslogik, Rollen oder Steuerung verändern.
+  \item \textbf{Digitale Vertriebstransformation} bedeutet, dass Prozesse, Rollen, Daten, Kundeninteraktion und Steuerung systematisch neu gedacht werden \textendash{} mit Daten als Steuerungsgrundlage, klaren Verantwortlichkeiten und datenbasierten Entscheidungen.
+\end{enumerate}
+
+\smallskip
+\textbf{Tool-Einführung $\neq$ Transformation:} Ein neues Tool ohne Prozess-, Daten- und Verhaltensänderung erzeugt nur ``digitales Excel'' \textendash{} dieselbe Logik in moderner Oberfläche. Transformation entsteht erst, wenn das Tool eine \emph{andere} Arbeitsweise erzwingt und ermöglicht.
+
+\smallskip
+\textbf{Drei Erfolgsfaktoren:} (1) \emph{Datenqualität und Prozessdisziplin}, (2) \emph{Akzeptanz im Vertriebsteam}, (3) \emph{Führung und Governance} \textendash{} ohne diese drei wird jedes Tool zur Karteileiche.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{CRM-Prozesse und Verkaufsautomatisierung}{\nivLi}{8\,min}
+
+\ytquery{CRM Prozesse Verkaufsautomatisierung Lead Follow-up Forecasting Beispiele}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Leadaufnahme und Qualifizierung:} \emph{Automatisiert:} Eingangskanal, Branche/Volumen-Validierung, erste Punkteberechnung. \emph{Menschlich:} qualitative Einschätzung der Buying-Center-Situation und der Kaufmotivation.
+  \item \textbf{Angebotsprozess:} \emph{Automatisiert:} Standardvorlagen, Preislisten, Genehmigungsschleifen. \emph{Menschlich:} Beratung, Konfiguration komplexer Lösungen, Verhandlungslogik.
+  \item \textbf{Follow-up:} \emph{Automatisiert:} Erinnerungen, Status-Update-Anfragen, Reminder-E-Mails. \emph{Menschlich:} der inhaltliche Anruf, der bei einer ``hängenden'' Opportunity klärt, was wirklich fehlt.
+  \item \textbf{Bestandskundenpflege / Upselling:} \emph{Automatisiert:} Nutzungs-Trigger, Vertragsverlängerungs-Erinnerungen, Cross-Selling-Vorschläge. \emph{Menschlich:} strategische Account-Gespräche, Eskalationen bei Unzufriedenheit.
+  \item \textbf{Reporting und Forecasting:} \emph{Automatisiert:} Datenaggregation, Pipeline-Hochrechnungen, Dashboards. \emph{Menschlich:} Plausibilitätsprüfung, Annahmen-Diskussion, Forecast-Commitment.
+  \item \textbf{Eskalations- und Pipeline-Benachrichtigungen:} \emph{Automatisiert:} Schwellwert-Alarme (überfällige Tasks, stagnierende Opps). \emph{Menschlich:} die Entscheidung, was mit der Eskalation gemacht wird \textendash{} \emph{Eskalation ist Werkzeug, nicht Antwort}.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{KI im Vertrieb \textendash{} Anwendungen und Grenzen}{\nivLi}{8\,min}
+
+\ytquery{KI Vertrieb Lead Scoring Churn Next Best Action Predictive Forecasting Grenzen}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Lead Scoring:} Daten \textendash{} Branche, Unternehmensgröße, Verhaltenssignale (Webseitenbesuche, Downloads), historische Abschlussquoten. Nutzen \textendash{} Vertrieb priorisiert Leads mit hoher Kaufwahrscheinlichkeit zuerst, Marketing bekommt Feedback zur Leadqualität.
+  \item \textbf{Churn-Prognose:} Daten \textendash{} Nutzungsdaten, Supportkontakte, Vertragsdauer, Reaktionszeiten. Nutzen \textendash{} Bestandskundenbetreuung kann proaktiv eingreifen, bevor ein Kunde kündigt.
+  \item \textbf{Next Best Action:} Daten \textendash{} Kundenhistorie, Sortimentsdaten, Branchenmuster. Nutzen \textendash{} Vertrieb bekommt für jeden Kunden eine konkrete nächste Empfehlung (Cross-Sell, Termin, Reaktivierung).
+  \item \textbf{Predictive Forecasting:} Daten \textendash{} Pipeline-Stufen, historische Abschlussquoten, Saisonalitäten. Nutzen \textendash{} Management erhält verlässlichere Umsatzprognosen als bei Bauchgefühl-Forecasts.
+\end{enumerate}
+
+\smallskip
+\textbf{Drei Grenzen, die immer mitlaufen:}
+\begin{itemize}
+  \item \emph{Datenqualität:} Garbage in, garbage out \textendash{} bei lückenhaftem CRM lernt das Modell systematisch falsch.
+  \item \emph{Bias:} Modelle reproduzieren Muster der Vergangenheit \textendash{} eine bisherige Vernachlässigung bestimmter Branchen wird zur ``Lernregel''.
+  \item \emph{Erklärbarkeit und Verantwortung:} ``Das Modell hat das gesagt'' ist keine Entscheidung. Der Mensch trägt die Verantwortung, das Modell ist Werkzeug.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{TechLine Solutions \textendash{} Schwächen analysieren}{\nivLii}{25\,min}
+
+\ytquery{B2B Vertriebsprozess Schwächen Excel CRM Mittelstand Digitalisierung Diagnose}
+
+\begin{loesungbox}
+\textbf{1. Mindestens fünf Schwächen:}
+\begin{itemize}
+  \item Kundendaten verteilt in Excel, E-Mail-Postfächern und persönlichen Notizen.
+  \item Keine einheitliche Leadqualifizierung.
+  \item Angebote werden uneinheitlich nachverfolgt.
+  \item Forecast basiert auf Bauchgefühl, nicht auf Pipeline-Logik.
+  \item Hohe administrative Belastung der Vertriebsmitarbeitenden.
+  \item Kunden erhalten verspätete Rückmeldungen.
+  \item Marketing hat keine Rückkopplung über Leadqualität.
+\end{itemize}
+
+\textbf{2. Bereichszuordnung:}
+\begin{itemize}
+  \item \emph{Daten:} verteilte Kundendaten, fehlende Pflichtfelder, Marketing-Vertrieb-Lücke.
+  \item \emph{Prozess:} keine Leadqualifizierung, uneinheitliche Follow-ups.
+  \item \emph{Kunde:} verspätete Rückmeldungen.
+  \item \emph{Steuerung:} ungenaue Forecasts.
+  \item \emph{Organisation:} administrative Belastung, Tool-Skepsis.
+\end{itemize}
+
+\textbf{3. Folgen für drei Schwächen:}
+\begin{itemize}
+  \item \emph{Verteilte Daten:} Vertrieb hat kein 360°-Bild, Cross-Selling-Potenziale werden nicht erkannt, Kunde fragt sich, ``warum die nicht wissen, was ich letztes Jahr gekauft habe''.
+  \item \emph{Keine Leadqualifizierung:} Vertrieb verbringt Zeit mit unqualifizierten Leads, gute Leads werden zu langsam bearbeitet \textendash{} Conversion fällt, CAC steigt.
+  \item \emph{Ungenaue Forecasts:} Geschäftsführung kann nicht steuern (Kapazitäten, Beschaffung, Investitionen), Vertrauen zwischen Vertrieb und GF erodiert.
+\end{itemize}
+
+\textbf{4. Drei Aufgaben, die ein konsequent genutztes CRM verbessert:}
+\begin{itemize}
+  \item Einheitliche Lead- und Opportunity-Stati mit Pflichtfeldern und klaren Übergaberegeln.
+  \item Automatische Erinnerungen für offene Angebote und überfällige Aktivitäten.
+  \item Pipeline-basierter Forecast mit Wahrscheinlichkeiten je Stufe.
+\end{itemize}
+
+\textbf{5. Empfehlung \textendash{} welcher Prozess zuerst:}
+Die \emph{Leadqualifizierung} sollte zuerst standardisiert werden \textendash{} sie ist die einfachste Stelle, an der spürbare Quick Wins (schnellere Reaktion, bessere Lead-Verteilung) bei niedriger Datenanforderung entstehen. Sie schafft außerdem die Datenbasis, ohne die alle folgenden Maßnahmen (Lead Scoring, KI, Forecast) leerlaufen würden.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{TechLine Solutions \textendash{} Maßnahmen bewerten}{\nivLii}{30\,min}
+
+\ytquery{CRM Automatisierung Priorisierung Mittelstand Lead Scoring KI Bewertung}
+
+\begin{loesungbox}
+\textbf{1. Bewertungsmatrix (Skala 1\,--\,5):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lccccc@{}}
+\toprule
+\textbf{Maßnahme} & \textbf{Wirkung} & \textbf{Aufwand} & \textbf{Daten} & \textbf{Akzeptanz} & \textbf{Nutzen} \\
+\midrule
+A: CRM-Pflicht        & 4 & 3 & 5 & 4 & 4 \\
+B: Follow-up-Erinn.   & 5 & 2 & 2 & 2 & 5 \\
+C: Lead Scoring       & 4 & 3 & 4 & 3 & 4 \\
+D: KI-Abschluss-Wkt.  & 3 & 4 & 5 & 4 & 3 \\
+E: E-Mail-Strecken    & 3 & 2 & 3 & 2 & 3 \\
+F: Dashboard          & 4 & 3 & 4 & 2 & 4 \\
+G: KI-Zusammenfassung & 3 & 3 & 3 & 2 & 4 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+(Aufwand/Akzeptanzrisiko: 1 = niedrig/wenig, 5 = hoch/viel. Andere Bewertungen sind plausibel.)
+
+\smallskip
+\textbf{2. Priorisierung:}
+\begin{itemize}
+  \item \emph{Sofort starten:} A (CRM-Pflichtprozess), B (Follow-up-Erinnerungen), G (KI-Zusammenfassungen \textendash{} hilft dem Vertrieb \emph{direkt}, statt ihn zu kontrollieren).
+  \item \emph{Später testen:} C (Lead Scoring), F (Dashboard) \textendash{} nach 3\,--\,6 Monaten, wenn Datenqualität steht.
+  \item \emph{Zunächst nicht umsetzen:} D (KI-Abschlusswahrscheinlichkeit), E (E-Mail-Strecken in zu großem Umfang).
+\end{itemize}
+
+\textbf{3. Größter kurzfristiger Nutzen:} \emph{B \textendash{} automatische Follow-up-Erinnerungen}. Geringer Datenbedarf, sofortiger Effekt auf Abschlussquote und Reaktionszeit, vom Vertrieb leicht akzeptierbar (entlastet, statt zu kontrollieren).
+
+\smallskip
+\textbf{4. KI-Maßnahme bei aktueller Datenqualität \emph{noch nicht}:} \emph{D \textendash{} KI-basierte Abschlusswahrscheinlichkeit}. Bei uneinheitlicher Datenqualität würde das Modell systematisch verzerrte Empfehlungen liefern \textendash{} das gefährdet Akzeptanz und kann zu falscher Sicherheit führen.
+
+\smallskip
+\textbf{5. Managementempfehlung (3\,--\,4 Sätze):}
+In Monat 1\,--\,2 werden CRM-Pflichtfelder und Follow-up-Erinnerungen eingeführt, kombiniert mit einer KI-Gesprächszusammenfassung als sichtbarer Vertriebsentlastung. Ab Monat 3 startet Lead Scoring und das Dashboard mit standardisierten Daten. KI-Abschlusswahrscheinlichkeit wird erst nach 6 Monaten als Pilot getestet, wenn die Datenbasis belastbar ist. Damit folgt die Roadmap der Regel: \emph{Erst Prozessdisziplin und Datenqualität, dann KI.}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{Was bleibt menschlich \textendash{} was wird automatisiert?}{\nivLii}{20\,min}
+
+\ytquery{Vertrieb Automatisierung menschlich KI Aufgaben verteilen Verantwortung}
+
+\begin{loesungbox}
+\textbf{Kategorisierung:}
+\begin{enumerate}
+  \item Erinnerung an offene Angebote \textrightarrow{} \emph{voll automatisieren}.
+  \item Erstangebot Neukunde, erklärungsbedürftig \textrightarrow{} \emph{bewusst menschlich}.
+  \item Lead-Vorqualifizierung Branche/Größe \textrightarrow{} \emph{teilautomatisieren} (Mensch prüft Grenzfälle).
+  \item Vertragsverhandlung Schlüsselkunde \textrightarrow{} \emph{bewusst menschlich}.
+  \item Forecast-Schätzung 3 Quartale \textrightarrow{} \emph{KI-unterstützen} (Modell rechnet, Vertriebsleitung commitet).
+  \item Reklamation mit emotionalem Kontext \textrightarrow{} \emph{bewusst menschlich}.
+  \item Newsletter-Versand mit Segmentierung \textrightarrow{} \emph{voll automatisieren}.
+  \item Cross-Selling-Vorschlag Bestandskunde \textrightarrow{} \emph{KI-unterstützen}.
+  \item Beendigung unprofitablen Kundenverhältnisses \textrightarrow{} \emph{bewusst menschlich}.
+  \item CRM-Datenpflege nach Gespräch \textrightarrow{} \emph{teilautomatisieren} (Spracherkennung erfasst, Mensch bestätigt).
+\end{enumerate}
+
+\smallskip
+\textbf{Drei schwierige Fälle \textendash{} Begründung:}
+\begin{itemize}
+  \item \emph{Lead-Vorqualifizierung (3):} Branche / Größe sind regelhaft, aber Sondersituationen (Joint Venture, neuer Markteintritt) erfordern menschliches Augenmaß \textendash{} teilautomatisieren ist die ehrliche Antwort.
+  \item \emph{Cross-Selling-Vorschlag (8):} KI sieht statistische Muster, ein Mensch kennt Kontext (Beschwerde letzter Woche). KI \emph{schlägt vor}, Mensch \emph{entscheidet} \textendash{} sonst entstehen taktlose Verkaufsversuche.
+  \item \emph{Kundenbeendigung (9):} Wirtschaftlich kann die Entscheidung in Sekunden errechnet werden \textendash{} der Vorgang aber muss menschlich erklärt werden. Sonst zerstört man Reputation und mögliche zukünftige Beziehungen.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{Datenqualität als Voraussetzung}{\nivLii}{22\,min}
+
+\ytquery{Datenqualität CRM KI Vertrieb Bias Garbage In Garbage Out Pflichtfelder}
+
+\begin{loesungbox}
+\textbf{1. Drei gefährlichste Probleme:}
+\begin{itemize}
+  \item \emph{27\,\% Duplikate} \textendash{} jedes Reporting, jede Cross-Selling-Auswertung und jedes Lead Scoring wird systematisch verfälscht; zudem entstehen peinliche Mehrfachansprachen.
+  \item \emph{38\,\% Opportunities ohne Abschlussdatum} \textendash{} Forecast ist mathematisch nicht belastbar, Pipeline-Steuerung ist unmöglich.
+  \item \emph{31\,\% Forecast-Abweichung} \textendash{} Folge der Datenprobleme; das Management trifft Investitions- und Kapazitätsentscheidungen auf falscher Grundlage.
+\end{itemize}
+
+\textbf{2. KI-Anwendung, die besonders verzerrt würde:} \emph{Predictive Forecasting}. Bei 38\,\% leeren Abschlussdaten und 27\,\% Duplikaten würde das Modell systematisch entweder zu optimistisch (Duplikate zählen doppelt) oder zu pessimistisch (fehlende Daten = ignoriert) prognostizieren. Schlimmer als kein Forecasting wäre ein \emph{vermeintlich präzises}, das falsche Sicherheit erzeugt.
+
+\smallskip
+\textbf{3. Vier Pflichtregeln für Datenqualität:}
+\begin{itemize}
+  \item \emph{Pflichtfelder} bei Lead-Anlage (Branche, Größe, Ansprechpartner, Quelle) \textendash{} ohne diese kann keine Aktivität gestartet werden.
+  \item \emph{Duplikatsprüfung} bei Anlage (Name, E-Mail, Domain) automatisch.
+  \item \emph{Verantwortlichkeit:} Lead-Owner ist verantwortlich für Datenpflege; Service-Owner für Servicedaten \textendash{} mit Daten-Steward auf Abteilungsebene.
+  \item \emph{Zeitpunkt der Pflege:} Daten werden \emph{innerhalb von 24 Stunden} nach dem Kundenkontakt erfasst, nicht ``am Quartalsende für das Reporting''.
+\end{itemize}
+
+\textbf{4. Faustregel \textendash{} KI verbindlich oder beratend:}
+KI-Empfehlungen dürfen \emph{verbindlich} werden, wenn (a) das Modell erklärbar ist, (b) seine Trainingsdaten dokumentiert und aktuell sind, (c) die Empfehlung reversibel ist und (d) ein Mensch jederzeit eingreifen kann. Trifft auch nur eine Bedingung nicht zu, bleibt die KI \emph{ausschließlich Empfehlung} \textendash{} der Mensch entscheidet und verantwortet.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{Akzeptanz im Vertrieb \textendash{} Change-Hebel}{\nivLii}{20\,min}
+
+\ytquery{CRM Akzeptanz Vertrieb Change Management Widerstand Quick Win User Adoption}
+
+\begin{loesungbox}
+\textbf{1. Drei typische Widerstände:}
+\begin{itemize}
+  \item \emph{Kontrollangst:} ``Die GF schaut mir jetzt zu''.
+  \item \emph{Aufwandsempfinden:} ``Ich verkaufe weniger, weil ich tippe''.
+  \item \emph{Tool-Misstrauen:} ``Das nächste Tool, das wir wieder vergessen werden''.
+  \item (zusätzlich) \emph{Verlustaversion:} ``Mein persönliches Netzwerk gehört mir, nicht dem CRM''.
+\end{itemize}
+
+\textbf{2. Fünf Change-Hebel:}
+\begin{itemize}
+  \item \emph{Nutzen vor Pflicht:} CRM zeigt ``meine'' Liste mit überfälligen Aktivitäten, nicht ``die Liste, die GF kontrolliert''.
+  \item \emph{User-Champions:} respektierte Vertriebsmitarbeitende als interne Multiplikatoren, kein extern aufgesetzter Rollout.
+  \item \emph{Quick Wins sichtbar machen:} in 30 Tagen erkennbarer Effekt (mehr Termine, weniger Lost-Opps, schnellere Angebote).
+  \item \emph{Eingabe minimieren:} Sprachnotiz, Smartphone, Auto-Fill, KI-Zusammenfassung \textendash{} Tippen reduziert.
+  \item \emph{Anerkennung in der Linie:} direkte Führungskraft lobt CRM-Disziplin, GF zeigt CRM-Daten als Erfolgsgeschichte, nicht als Mahnung.
+\end{itemize}
+
+\textbf{3. Warum eine Quick-Win-Story stärker wirkt als Schulung:}
+Schulungen vermitteln ``wie'', Quick-Win-Storys vermitteln ``warum lohnt es sich''. Ein Vertriebsmitarbeiter, der durch ein automatisches Follow-up zwei verlorengeglaubte Opportunities zurückholt, erzählt das im Team \textendash{} und das ist überzeugender als zehn Workshops über Pflichtfelder.
+
+\smallskip
+\textbf{4. Rolle direkte Führungskraft vs.\ Management:}
+Die direkte Führungskraft entscheidet täglich, ob die Disziplin durchgesetzt wird (sie sieht die Daten, sie spricht mit ihren Leuten); das Management gibt Mandat, Ressourcen, Schutz vor Aushöhlung \textendash{} aber transformiert nicht selbst.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie MedTech Service GmbH \textendash{} 12-Monats-Roadmap}{\nivLiii}{45\,min}
+
+\ytquery{B2B Vertriebsdigitalisierung Mittelstand CRM KI Roadmap Senior Management}
+
+\begin{loesungbox}
+\textbf{1. Digitale Reife:}
+\begin{itemize}
+  \item CRM vorhanden, aber nicht als Steuerungszentrale genutzt \textendash{} ``Daten aber keine Disziplin''.
+  \item Beziehungsstärke ist Asset und Hindernis zugleich: Wissen ist personengebunden, nicht im System.
+  \item Servicedaten (ein wertvoller Vertriebshebel) fließen nicht zurück in Vertrieb.
+  \item Forecast basiert auf Bauchgefühl.
+  \item KI-Erwartungen hoch, Datenreife begrenzt \textendash{} typischer KI-Hype-Risiko-Profil.
+\end{itemize}
+
+\textbf{2. Wichtigste Prozess- und Datenprobleme:}
+\begin{itemize}
+  \item Uneinheitliche Erfassung von Leads und Opportunities.
+  \item Servicedaten und Vertriebsdaten in getrennten Welten.
+  \item Keine konsistente Übergabe Marketing \textrightarrow{} Vertrieb.
+  \item Forecast-Verbindlichkeit fehlt.
+\end{itemize}
+
+\textbf{3. Bewertung A\,--\,G (Kurzform):}
+\begin{itemize}
+  \item \emph{A \textendash{} Datenmodell/Pflichtfelder:} höchste Priorität, Basis für alles weitere.
+  \item \emph{B \textendash{} Lead Scoring/Übergaberegeln:} hoher Nutzen, mittlerer Aufwand.
+  \item \emph{C \textendash{} Follow-up-Automation:} sofort wirksam, Vertriebsentlastung, niedriger Aufwand.
+  \item \emph{D \textendash{} Dashboard:} wichtig, aber erst sinnvoll nach Datenstandards.
+  \item \emph{E \textendash{} KI Cross-Selling:} strategisch attraktiv, nur als Pilot mit ausgewählten Segmenten.
+  \item \emph{F \textendash{} Predictive Forecasting:} hängt an sauberer Pipeline-Historie.
+  \item \emph{G \textendash{} Change-Programm:} unverzichtbar \textendash{} ohne Akzeptanz scheitert die Roadmap.
+\end{itemize}
+
+\textbf{4. 12-Monats-Roadmap:}
+\begin{itemize}
+  \item \emph{Monat 1\,--\,3:} A (Datenmodell, Pflichtfelder), G (Change-Auftakt, User-Champions), Verantwortlichkeiten.
+  \item \emph{Monat 4\,--\,6:} B (Lead Scoring/Übergaberegeln), C (Follow-up-Automation), erste Dashboards (D, schlank).
+  \item \emph{Monat 7\,--\,9:} Servicedaten in CRM-Prozesse einbinden, E (Cross-Selling-Pilot) starten.
+  \item \emph{Monat 10\,--\,12:} F (Predictive Forecasting Pilot), Abgleich KI vs.\ Vertriebserfahrung, Skalierungsentscheidung vorbereiten.
+\end{itemize}
+
+\textbf{5. Sofort einzuführende Automatisierungen:}
+\begin{itemize}
+  \item Follow-up-Erinnerungen für offene Angebote.
+  \item Erinnerungen für Servicevertragsverlängerungen.
+  \item Automatische Aufgaben bei neuen qualifizierten Leads.
+  \item Benachrichtigungen bei überfälligen Vertriebsaktivitäten.
+  \item Einfache Nurturing-Strecken für noch nicht kaufbereite Leads.
+\end{itemize}
+
+\textbf{6. KI nur als Pilot \textendash{} und warum:}
+\begin{itemize}
+  \item Cross-Selling-Potenzialanalyse \textendash{} mit klar definierten Pilot-Kundensegmenten und Erklärbarkeit.
+  \item Abschlusswahrscheinlichkeit \textendash{} Empfehlung, keine automatische Aktion.
+  \item Predictive Forecasting \textendash{} parallel zur menschlichen Schätzung, mit Abweichungsanalyse.
+\end{itemize}
+KI-Empfehlungen dürfen zunächst nicht automatisch entscheiden, sondern müssen durch Vertrieb und Management bewertet werden.
+
+\smallskip
+\textbf{7. KPIs (8\,--\,10):}
+Reaktionszeit auf qualifizierte Leads \textperiodcentered{} Anteil vollständig gepflegter CRM-Datensätze \textperiodcentered{} Follow-up-Quote bei Angeboten \textperiodcentered{} Conversion Lead \textrightarrow{} Opportunity \textperiodcentered{} Abschlussquote nach Leadquelle \textperiodcentered{} Forecast-Abweichung \textperiodcentered{} Cross-Selling-Umsatz \textperiodcentered{} CRM-Nutzung Vertrieb \& Service \textperiodcentered{} Pipeline-Wert je Phase \textperiodcentered{} Kundenzufriedenheit nach digital unterstütztem Prozess.
+
+\smallskip
+\textbf{8. Entscheidung unter Unsicherheit:}
+\emph{Predictive Forecasting wird nicht sofort breit eingeführt}, obwohl es technisch verfügbar wäre. Begründung: aktuelle Datenqualität würde \emph{falsche Sicherheit} erzeugen \textendash{} ein vermeintlich präziser, in Wahrheit aber stark verzerrter Forecast schadet mehr als das aktuelle Bauchgefühl. Stattdessen wird zuerst Datenqualität, Pipeline-Disziplin und Forecastpraxis stabilisiert. KI kommt als Werkzeug, nicht als Autorität.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{KI-Verantwortung \textendash{} Architektur statt Tooldenken}{\nivLiii}{30\,min}
+
+\ytquery{KI Vertrieb Verantwortung Erklärbarkeit Bias Governance B2B Senior Management}
+
+\begin{loesungbox}
+\textbf{1. Erklärbarkeit vs.\ Genauigkeit:}
+Eine KI, die mit 92\,\% Genauigkeit \emph{ohne erklärbare Logik} entscheidet, ist im Vertrieb gefährlicher als eine mit 80\,\% Genauigkeit, deren Empfehlungslogik nachvollziehbar ist. Im ersten Fall trägt niemand die Verantwortung (``Modell hat das gesagt''), im zweiten kann der Vertriebler die Empfehlung prüfen, ergänzen oder ablehnen. Wer im B2B Empfehlungen nicht erklären kann, kann sie auch nicht verantworten \textendash{} und verliert das Vertrauen sowohl des Vertriebsteams als auch der Kunden.
+
+\smallskip
+\textbf{2. Konkretes Szenario: Lead Scoring}
+
+\smallskip
+\emph{Datenrisiken:} lückenhafte CRM-Felder verzerren Score, Branchencodierung uneinheitlich.\\
+\emph{Bias:} historisch wurden bestimmte Branchen weniger bearbeitet \textendash{} das Modell lernt ``schlechte Branche'', obwohl es ``unbearbeitet'' bedeutet (Survivor-Bias).\\
+\emph{Erklärbarkeit:} Vertrieb verlangt zu wissen, \emph{warum} ein Lead Score 32 statt 78 hat.
+
+\smallskip
+\emph{Verantwortungsstruktur:}
+\begin{itemize}
+  \item \emph{CRO} verantwortet, dass das Scoring zur Geschäftsstrategie passt.
+  \item \emph{Vertriebsleitung} verantwortet, dass Vertrieb das Scoring sinnvoll nutzt.
+  \item \emph{Datenschutzbeauftragte:r} prüft Datenbasis und Verarbeitung.
+  \item \emph{Modell-Owner} (Data Science) verantwortet Modellgüte, Bias-Monitoring, Erklärbarkeit.
+  \item \emph{Daten-Owner} verantwortet Datenqualität der Quellfelder.
+\end{itemize}
+
+\emph{Drei Governance-Regeln vor dem Pilot:}
+\begin{itemize}
+  \item Erklärbarkeit der Top-3-Faktoren je Score (kein Black-Box-Score ohne Begründung).
+  \item Quartalsweiser Bias-Check (z.\,B.\ Branchen-Verteilung, Größenklassen).
+  \item Override-Recht des Vertriebs mit Begründungspflicht; Override-Daten fließen ins Modell-Lernen zurück.
+\end{itemize}
+
+\textbf{3. Faustregel \textendash{} automatisch handeln vs.\ Mensch entscheidet:}
+KI darf \emph{automatisch handeln}, wenn die Entscheidung (a) reversibel, (b) regelhaft, (c) niedrigschwellig (geringe Auswirkung pro Einzelfall) und (d) durch eine erklärbare, gut überwachte Logik abgesichert ist (z.\,B.\ Verteilung von Standard-Leads an Vertriebsregionen, Newsletter-Segmentierung). Sobald die Entscheidung \emph{irreversibel}, \emph{einzelfallrelevant} oder \emph{kundennah} ist (Kündigung, Vertragsabschluss, Reklamationsbeendigung), muss zwingend ein Mensch entscheiden \textendash{} KI darf nur empfehlen.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Digitale Vertriebsarchitektur 24 Monate}{\nivLiii}{45\,min}
+
+\ytquery{Chief Revenue Officer digitale Vertriebsarchitektur CRM KI 24 Monate Mittelstand}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind legitim, wenn als Architektur konsistent.}
+
+\smallskip
+\textbf{1. Zielbild 24 Monate:}
+Der Vertrieb arbeitet auf einer einheitlichen CRM-Datenbasis, mit verbindlichen Lead- und Opportunity-Prozessen, definierten Automatisierungen für wiederkehrende Aufgaben und KI als unterstützende Empfehlungsinstanz für Lead Scoring, Cross-Selling und Forecast. Die Verantwortung für Kundenbeziehung, Vertragsabschluss und Reklamation bleibt beim Menschen. Datenqualität und Akzeptanz sind die Erfolgsmaßstäbe \textendash{} nicht der Tool-Mix.
+
+\smallskip
+\textbf{2. Analyse aktueller Vertriebsprozesse:} (vgl.\ Aufgabe 4/9) verteilte Daten, fehlende Qualifizierung, uneinheitliche Follow-ups, Bauchgefühl-Forecast.
+
+\smallskip
+\textbf{3. CRM-Architektur:}
+\begin{itemize}
+  \item \emph{Datenfelder:} Pflichtfelder bei Lead-Anlage, Branchen-Taxonomie, Ansprechpartner-Rolle, Buying-Center-Felder.
+  \item \emph{Leadstatus:} New \textrightarrow{} Qualified \textrightarrow{} Working \textrightarrow{} Disqualified.
+  \item \emph{Opportunity-Stufen:} Discovery \textrightarrow{} Proposal \textrightarrow{} Negotiation \textrightarrow{} Closed-Won/Lost \textendash{} mit definierten Wahrscheinlichkeiten.
+  \item \emph{Verantwortlichkeiten:} Lead-Owner, Opportunity-Owner, Daten-Steward.
+  \item \emph{Reportinglogik:} wöchentliches Pipeline-Review, monatlicher Forecast-Commit, quartalsweise Strategie-Review.
+\end{itemize}
+
+\textbf{4. Automatisierungsarchitektur:}
+\begin{itemize}
+  \item Leadbearbeitung: automatische Zuweisung nach Region/Segment, Erstkontakt-Trigger nach 24h.
+  \item Follow-ups: automatische Erinnerungen für offene Angebote nach 5/10/20 Tagen.
+  \item Angebote: standardisierte Vorlagen, Genehmigungs-Workflow ab definierten Schwellen.
+  \item Bestandskunden: Vertragsverlängerungs-Erinnerungen, Nutzungstrigger.
+  \item Eskalationen: überfällige Aufgaben, stagnierende Opps an Vertriebsleitung.
+\end{itemize}
+
+\textbf{5. KI-Architektur:}
+\begin{itemize}
+  \item Lead Scoring \textrightarrow{} produktiv ab Monat 9, mit Erklärbarkeit.
+  \item Churn-Risiko \textrightarrow{} Pilot ab Monat 12.
+  \item Cross-Selling \textrightarrow{} Pilot ab Monat 6, produktiv ab Monat 15.
+  \item Forecasting \textrightarrow{} Pilot ab Monat 12, produktiv erst nach Validierung.
+  \item Next Best Action \textrightarrow{} ab Monat 18, wenn andere Modelle stabil.
+\end{itemize}
+
+\textbf{6. Entscheidung KI-Einsatz:}
+\begin{itemize}
+  \item \emph{Sofort testen:} Cross-Selling-Empfehlung.
+  \item \emph{Später prüfen:} Predictive Forecasting, Next Best Action.
+  \item \emph{Bewusst zurückgestellt:} vollautomatische Lead-Vergabe, automatische Kündigungsentscheidung, Bot-Verhandlung.
+\end{itemize}
+
+\textbf{7. Datenqualität und Governance:}
+\begin{itemize}
+  \item Pflichtfelder, Duplikatsprüfung, 24h-Pflegeregel.
+  \item Daten-Steward je Bereich, Daten-Owner-Modell.
+  \item KI-Governance: Modell-Owner, Bias-Reviews, Erklärbarkeit, Override.
+  \item Datenschutz: Verarbeitungsverzeichnis, Rechtsgrundlagen je Use Case.
+\end{itemize}
+
+\textbf{8. Change-Management:}
+\begin{itemize}
+  \item User-Champions (4\,--\,6 angesehene Vertriebsmitarbeitende).
+  \item 30-/60-/90-Tage-Quick-Win-Storys.
+  \item Direkte Führungskraft als CRM-Coach (nicht als Kontrolleur).
+  \item KI-Empfehlungen werden in Vertriebstrainings erklärt, nicht aufgezwungen.
+\end{itemize}
+
+\textbf{9. KPI-Struktur:}
+\begin{itemize}
+  \item Effizienz: Reaktionszeit, Follow-up-Quote.
+  \item Datenqualität: Pflichtfeld-Vollständigkeit, Duplikatsrate.
+  \item Vertriebsleistung: Conversion, Wiederkauf, Net Revenue Retention.
+  \item Forecast: Abweichungsquote, Commitment-Treue.
+  \item Kundennutzen: NPS, Reaktionszufriedenheit.
+  \item KI-Wirkung: Override-Quote, Modell-Drift, Bias-Indikatoren.
+\end{itemize}
+
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item CRM-Pflichtprozess wird \emph{vor} dem ersten KPI-Beleg eingeführt \textendash{} weil ohne Datendisziplin keine spätere Maßnahme wirkt.
+  \item Cross-Selling-KI-Pilot \emph{vor} vollständiger Datenstandardisierung \textendash{} weil die Lerneffekte über Daten- und Akzeptanzrealität in 6 Monaten wertvoller sind als ein perfekter Datensatz in 12.
+  \item Verzicht auf Predictive Forecasting als Live-System bis Monat 12+ \textendash{} weil falsche Sicherheit gefährlicher ist als ehrliches Bauchgefühl.
+\end{enumerate}
+
+\smallskip
+\textbf{Zusatz \textendash{} Entscheidung gegen attraktive Lösung:} Bewusst kein \emph{vollautomatischer KI-Chatbot für die Reklamationsbearbeitung}. Aus Senior-Level-Perspektive: Reklamationen sind emotional, einzigartig und reputationskritisch. Eine KI mit 90\,\% Genauigkeit würde in den 10\,\% Fehlfällen den größten Markenschaden anrichten \textendash{} und genau dort, wo Vertrauen das Asset ist. Die ``attraktive'' Effizienz wäre hier eine strategische Falle.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterlösungen sind Diskussionsbasis. Vor allem die KI-Entscheidungen sind \emph{Annahme}-getrieben \textendash{} eine andere Datenreife, eine andere Akzeptanzlage oder ein anderes Risikoprofil führt zu Recht zu anderen Prioritäten. Was bleibt: KI ist Werkzeug, der Mensch verantwortet.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Im Coaching werden drei Fragen zentral sein: Wo haben Sie KI als Lösung gesehen, wo als Risiko? Welche Verantwortungsstruktur halten Sie für tragfähig? Welche Entscheidung würden Sie auch dann verantworten, wenn das Modell sich anders verhält als gedacht?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 13 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

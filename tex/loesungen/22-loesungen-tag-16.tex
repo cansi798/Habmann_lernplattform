@@ -1,0 +1,769 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 16 - Loesungsheft
+% Kartellrecht, fairer Wettbewerb & Krisenmanagement (Capstone)
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 16}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Kartellrecht \& Krisenmanagement}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 8 \textperiodcentered{} TAG 16 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 19.\,Juni 2026 \textperiodcentered{} CAPSTONE}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 16\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen \textendash{} Kartellrecht,\\fairer Wettbewerb \&\\Krisenmanagement.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Capstone \textperiodcentered{} kein juristisches Gutachten}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Managementtraining, kein Rechtsrat.\\Konkrete Fälle mit Fachjurist:innen klären.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 16}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterlösungen sind \emph{Managementtraining}, kein juristisches Gutachten. Auf L2 und L3 sind mehrere Begründungswege legitim, solange sie zwischen \emph{Wachstum}, \emph{Fairness}, \emph{Recht}, \emph{Krise} und \emph{Vertrauen} sauber abwägen.
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre Antwort \emph{vor} der Musterlösung. Diese Aufgaben bauen auf den vorigen Tagen auf \textendash{} achten Sie auf Querverbindungen, nicht auf isolierte Antworten.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Marktmacht und Kartellrecht in Plattformmärkten}{\nivLi}{8\,min}
+
+\ytquery{Plattform Kartellrecht Marktmacht Selbstbevorzugung Preisparität Definition}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Marktmacht in Plattformmärkten:} Stellung, in der eine Plattform die Bedingungen für Anbieter, Kunden und Wettbewerber maßgeblich gestalten kann \textendash{} entsteht durch Netzwerkeffekte, Datenvorsprung, Zugangskontrolle und hohe Wechselkosten.
+  \item \textbf{Diskriminierungsfreier Zugang:} Anbieter, die vergleichbar sind, dürfen nicht unterschiedlich behandelt werden \textendash{} insbesondere nicht durch versteckte Bevorzugung der Plattformfreunde oder eigener Marken.
+  \item \textbf{Preisparitätsklausel:} Vertragliche Verpflichtung an Anbieter, Produkte / Dienstleistungen \emph{nirgendwo anders günstiger} anzubieten \textendash{} kartellrechtlich heikel, weil sie Preiswettbewerb dämpft.
+  \item \textbf{Selbstbevorzugung:} Plattform bevorzugt eigene Angebote (Eigenmarken, eigene Logistik) gegenüber Drittanbietern bei Ranking, Sichtbarkeit oder Datenzugang \textendash{} klassisches Gatekeeper-Thema.
+\end{enumerate}
+
+\smallskip
+\textbf{Größe als Risiko:} Sobald eine Plattform für Anbieter zum faktischen Marktzugang ohne realistische Alternative wird, gilt sie als \emph{Gatekeeper}. Dann sind selbst marktwirtschaftlich übliche Verhaltensweisen (Preisanpassungen, Konditionen, Bevorzugung) kartellrechtlich kritisch \textendash{} weil die Anbieter nicht ausweichen können.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{Fairness-Risiken erkennen}{\nivLi}{8\,min}
+
+\ytquery{Plattform Fairness Risiko Selbstbevorzugung Sperrung Gebühr Daten Ranking}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Bevorzugung eigener Angebote} \textrightarrow{} primär Wettbewerber und Drittanbieter; sekundär Kunden, die schlechtere Alternativen nicht mehr sehen.
+  \item \textbf{Intransparente Sperrungen} \textrightarrow{} primär gesperrte Anbieter; sekundär andere Anbieter (Abschreckung); Aufsichten beobachten.
+  \item \textbf{Unangemessene Gebühren} \textrightarrow{} primär Anbieter, die hohe Provisionen tragen; sekundär Kunden über höhere Preise.
+  \item \textbf{Exklusive Bindungen} \textrightarrow{} primär Anbieter, denen Multi-Homing verwehrt wird; sekundär Wettbewerber, die kein Sortiment aufbauen können.
+  \item \textbf{Datenvorteile} \textrightarrow{} primär Drittanbieter, deren Daten in Eigenmarken-Entwicklung einfließen; sekundär Aufsichten und Branche.
+  \item \textbf{Manipulation von Rankings / Bewertungen} \textrightarrow{} primär Kunden (falsches Vertrauen); sekundär Anbieter (unfairer Wettbewerb), tertiär Marke der Plattform.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{Krisenarten und Resilienzfaktoren}{\nivLi}{8\,min}
+
+\ytquery{Plattform Krise Reputation Datenpanne Anbieterprotest Resilienz Definition}
+
+\begin{loesungbox}
+\textbf{Krisenarten \textrightarrow{} Kategorie:}
+\begin{enumerate}
+  \item Reputationskrise \textrightarrow{} \emph{kommunikativ-reputativ}.
+  \item Datenpanne \textrightarrow{} \emph{rechtlich-regulatorisch} (+ kommunikativ).
+  \item Bewertungsmanipulation \textrightarrow{} \emph{kommunikativ-reputativ} (+ rechtlich).
+  \item Anbieterprotest \textrightarrow{} \emph{wirtschaftlich} (+ kommunikativ).
+  \item Regulatorische Prüfung \textrightarrow{} \emph{rechtlich-regulatorisch}.
+  \item Plattformausfall \textrightarrow{} \emph{technisch} (+ kommunikativ).
+  \item Preiskrieg \textrightarrow{} \emph{wirtschaftlich}.
+  \item Abwanderung wichtiger Partner \textrightarrow{} \emph{wirtschaftlich} (+ reputativ).
+\end{enumerate}
+
+\smallskip
+\textbf{Vier Resilienzfaktoren:}
+\begin{itemize}
+  \item \emph{Transparente Governance} (Regeln, die im Krisenfall bestand haben).
+  \item \emph{Diversifizierte Partnerstruktur} (keine 30-\%-Abhängigkeit von wenigen Anbietern oder Kanälen).
+  \item \emph{Stabile Datenprozesse und Monitoring} (Frühwarnsystem).
+  \item \emph{Lernfähige Organisation mit Krisenhandbuch} (geübte Eskalationswege, Post-Mortems).
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{SupplierGate \textendash{} Wettbewerbsrisiken erkennen}{\nivLii}{25\,min}
+
+\ytquery{Plattform Marktmacht Fairness Eigenangebot bezahlte Sichtbarkeit Kartellrecht}
+
+\begin{loesungbox}
+\textbf{1. Mindestens acht Risiken:}
+\begin{itemize}
+  \item Bezahlte Sichtbarkeit ohne klare Kennzeichnung (Irreführung).
+  \item Bevorzugung großer Anbieter durch Algorithmus (Diskriminierung kleiner Anbieter).
+  \item Eigene Handelsmarken auf der Plattform (Selbstbevorzugungsrisiko).
+  \item Intransparente Rankingfaktoren (Fairness, P2B).
+  \item Unklare Sperrprozesse (kein Beschwerdeweg sichtbar).
+  \item Datenzugang zu Anbieterdaten ohne Schutzmechanismen (Kartellproblematik).
+  \item Manipulation oder ungewöhnliche Bewertungspraxis (Verbrauchertäuschung).
+  \item Marktmacht in einzelnen Produktkategorien (Gatekeeper-Eigenschaft).
+\end{itemize}
+
+\textbf{2. Zuordnung zu Bereichen:}
+\begin{itemize}
+  \item \emph{Ranking:} bezahlte Sichtbarkeit, intransparente Faktoren.
+  \item \emph{Gebühren:} sprunghafte oder intransparente Gebührenpolitik.
+  \item \emph{Zugang:} Sperrungen ohne klare Begründung.
+  \item \emph{Daten:} Anbieterdaten für Eigenmarken.
+  \item \emph{Eigenangebote:} Plattform-Marken-Bevorzugung.
+  \item \emph{Bewertungen:} Manipulation, Off-Topic.
+  \item \emph{Sperrungen:} Beschwerdeprozess unklar.
+\end{itemize}
+
+\textbf{3. Drei besonders kritische Risiken:}
+\begin{itemize}
+  \item \emph{Eigene Handelsmarken mit Algorithmusbevorzugung} \textendash{} klassisches Gatekeeper-Thema, kartellrechtlich angreifbar.
+  \item \emph{Intransparente Rankings ohne Beschwerdeweg} \textendash{} Anbieterprotest- und Reputationsrisiko.
+  \item \emph{Datenzugang ohne Trennung Plattform / Eigenmarken} \textendash{} sowohl rechtlich als auch reputativ höchst sensibel.
+\end{itemize}
+
+\textbf{4. Fünf Maßnahmen für fairen Wettbewerb:}
+\begin{itemize}
+  \item Veröffentlichung der Rankingfaktoren in nachvollziehbarer Reihenfolge.
+  \item Bezahlte Sichtbarkeit eindeutig kennzeichnen + Anteil im Top-Bereich begrenzen.
+  \item Klare Sperr- und Beschwerderegeln, im Anbieterportal sichtbar.
+  \item Daten-Firewall zwischen Plattformbereich und Eigenmarken-Bereich.
+  \item Externes Audit der Ranking- und Bewertungslogik.
+\end{itemize}
+
+\textbf{5. Managementempfehlung vor Ausbau Eigenmarken:}
+Die fünf Fairness-Maßnahmen müssen \emph{vor} dem Eigenmarken-Start umgesetzt werden \textendash{} \emph{nicht parallel}. Sobald Eigenmarken aktiv sind, ist jeder unklare Punkt im Ranking eine Selbstbevorzugungs-Vermutung. Reihenfolge: zuerst Governance \textendash{} dann Eigenmarken. Wer das umdreht, schreibt sich selbst in eine Kartelluntersuchung.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{SupplierGate \textendash{} Krisenszenario}{\nivLii}{25\,min}
+
+\ytquery{Plattform Krise Anbieterprotest Kommunikation 72 Stunden Stakeholder}
+
+\begin{loesungbox}
+\textbf{1. Bewertung der Krise:}
+\begin{itemize}
+  \item \emph{Dringlichkeit:} 5 (öffentliche Kritik, Medienaufmerksamkeit, Verband ist eingeschaltet).
+  \item \emph{Schadenspotenzial:} 4\,--\,5 (Reputationsverlust, Anbieterabwanderung, möglicher regulatorischer Aufschlag, Expansion gefährdet).
+  \item \emph{Steuerbarkeit:} 3 \textendash{} mit klarer Sofortkommunikation und Audit-Zusage steuerbar; ohne Plan kippt es.
+\end{itemize}
+
+\textbf{2. Stakeholder + Botschaft:}
+\begin{itemize}
+  \item \emph{Anbieter:} ``Wir nehmen die Kritik ernst, beauftragen ein externes Audit und führen einen Anbieter-Beirat ein.''
+  \item \emph{Kunden:} ``Unsere Plattform bleibt verlässlich; Bewertungen werden überprüft, Ranking transparent erläutert.''
+  \item \emph{Partner:} ``Wir geben einen Quartalsbericht zu Transparenzfortschritten.''
+  \item \emph{Management / Mitarbeitende:} ``Wir handeln entschlossen, ohne Schuldzuweisungen \textendash{} interne Disziplin ist jetzt entscheidend.''
+  \item \emph{Behörden / Verband:} ``Wir suchen aktiv den Dialog und legen Maßnahmenpaket vor.''
+  \item \emph{Öffentlichkeit:} ``Wir veröffentlichen Audit-Ergebnisse und konkrete Maßnahmen.''
+\end{itemize}
+
+\textbf{3. 72-Stunden-Sofortplan:}
+\begin{itemize}
+  \item \emph{Std.\ 0\,--\,4:} Krisenteam einberufen (CEO, CPO, Compliance, Kommunikation, Recht).
+  \item \emph{Std.\ 4\,--\,12:} Faktencheck \textendash{} Was stimmt an den Vorwürfen, was nicht?
+  \item \emph{Std.\ 12\,--\,24:} Erste Pressemitteilung mit Anerkennung, Sofortmaßnahmen, Audit-Zusage.
+  \item \emph{Std.\ 24\,--\,48:} Direkte Kontakte zu den lautstärksten Anbietern; Branchenverband eingebunden.
+  \item \emph{Std.\ 48\,--\,72:} Veröffentlichung Ranking-Faktoren in Erst-Version + Beschwerdeprozess; Einrichtung Anbieter-Beirat.
+  \item Verantwortlich für Externes: CEO + Kommunikation; für Anbieter: CPO + Anbietermanagement.
+\end{itemize}
+
+\textbf{4. Drei mittelfristige Maßnahmen (3\,--\,6 Mon.):}
+\begin{itemize}
+  \item Unabhängiges Audit der Ranking-Algorithmen + Veröffentlichung Audit-Bericht.
+  \item Einrichtung dauerhafter Anbieter-Beirat mit Beteiligung kleiner Anbieter.
+  \item Bewertungsmanagement modernisieren (verifizierter Kauf, Manipulationsmonitoring, Beschwerdeprozess).
+\end{itemize}
+
+\textbf{5. Expansion \textendash{} fortführen, verlangsamen oder pausieren?}
+\emph{Verlangsamen.} Vollständiges Pausieren wäre falsch, weil es eine Niederlage signalisiert; sofortiges Vollausrollen wäre fahrlässig, weil Vertrauen noch nicht wieder aufgebaut ist. Stattdessen: Pilotmarkt fortführen, Vollausbau erst nach Audit-Ergebnis und sichtbarer Governance-Verbesserung. So bleibt Wachstum sichtbar, ohne Reputationsrisiko zu vervielfachen.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{Selbstbevorzugung \textendash{} darf die Plattform eigene Marken anbieten?}{\nivLii}{22\,min}
+
+\ytquery{Plattform Selbstbevorzugung Eigenmarke Kartellrecht Gatekeeper Data Firewall}
+
+\begin{loesungbox}
+\textbf{1. Unproblematische vs.\ riskante Konstellationen:}
+
+\smallskip
+\emph{Unproblematisch:}
+\begin{itemize}
+  \item Marktanteil der Plattform niedrig, Anbieter haben echte Alternativen.
+  \item Eigenmarke wird im Ranking gleichbehandelt (keine Bevorzugung).
+  \item Klare organisatorische Trennung Plattformbetrieb / Eigenmarken-Geschäft.
+\end{itemize}
+
+\emph{Kartellrechtlich riskant:}
+\begin{itemize}
+  \item Plattform ist Gatekeeper im Segment (Marktzugang ohne Alternative).
+  \item Eigenmarke wird in Suche / Empfehlung bevorzugt platziert.
+  \item Plattform nutzt Anbieterdaten (Verkaufszahlen, Sortiment), um Eigenmarken-Strategie zu optimieren.
+\end{itemize}
+
+\textbf{2. Vier Schutzmechanismen:}
+\begin{itemize}
+  \item \emph{Klare organisatorische Trennung:} Eigenmarken-Geschäft als separate Einheit mit eigener Führung.
+  \item \emph{Datenfirewall:} Eigenmarken-Team hat \emph{keinen} Zugriff auf granulare Anbieterdaten; nur aggregierte Marktdaten erlaubt.
+  \item \emph{Identische Ranking-Regeln:} Eigenmarken erscheinen nach denselben Faktoren wie Drittanbieter, auditiert.
+  \item \emph{Externes Audit:} jährliche unabhängige Prüfung Eigenmarken-Verhalten, Bericht öffentlich.
+\end{itemize}
+
+\textbf{3. Anreize zum Datenmissbrauch und ihre Verhinderung:}
+Mitarbeitende mit Doppelrollen (Plattformsteuerung + Eigenmarken-Verantwortung) haben starken Anreiz, Anbieterdaten zu nutzen \textendash{} oft \emph{unbewusst} (``ich weiß ja eh schon''). Verhindert wird das nur durch \emph{strikte Trennung der Personen}, klare Zugriffsrechte und Audit-Trails \textendash{} nicht durch reine Schulung oder Selbstverpflichtung.
+
+\smallskip
+\textbf{4. Faustregel:}
+Eine Plattform darf eigene Marken anbieten, wenn (a) sie kein Gatekeeper im Segment ist \emph{oder} (b) sie eine glaubwürdig auditierte Trennung von Daten, Personal und Ranking-Logik hat. Trifft beides nicht zu, ist der Schritt strategisch und rechtlich gefährlich \textendash{} und der Schaden im Streitfall (Bußgeld, Reputationsverlust, Anbieterabwanderung) übersteigt typischerweise den Eigenmarken-Gewinn um ein Vielfaches.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{Datenmacht und Daten-Governance}{\nivLii}{22\,min}
+
+\ytquery{Plattform Datenmacht Daten Governance Kartellrecht Datenfirewall B2B}
+
+\begin{loesungbox}
+\textbf{1. Drei Datenvorteile und kartellrechtliche Fragen:}
+\begin{itemize}
+  \item \emph{Aggregierte Marktdaten:} Plattform sieht Preise, Verfügbarkeit, Reaktionszeiten aller Anbieter \textendash{} kann Trends früher erkennen als einzelne Anbieter. Frage: nutzt sie diese Daten für eigene Marken oder zur Diskriminierung?
+  \item \emph{Kundenverhaltensdaten:} Suchverhalten, Conversion, Bewertungen \textendash{} Plattform kann Eigenmarken passgenau entwickeln. Frage: ist das ein \emph{fairer} Wettbewerbsvorteil oder ein \emph{Datenraub}?
+  \item \emph{Performance-Daten der Anbieter:} Reaktionszeit, Beschwerden, Sperrhistorie \textendash{} Plattform kann selektiv Anbieter bevorzugen oder benachteiligen. Frage: nach welchen Kriterien, wer entscheidet, wer kontrolliert?
+\end{itemize}
+
+\textbf{2. Daten-Governance in drei Ebenen:}
+
+\smallskip
+\emph{Ebene 1 \textendash{} Erlaubte Nutzung:}
+\begin{itemize}
+  \item Plattformoperativ: alle Daten zulässig (Anbieter-Auswahl, Ranking, Suche).
+  \item Anbieter-Reporting: Anbieter sieht seine eigenen Performance-Daten + aggregierten Marktvergleich.
+  \item Externe Datenservices: nur anonymisierte / aggregierte Daten, mit Einwilligung.
+\end{itemize}
+
+\emph{Ebene 2 \textendash{} Verbotene Nutzung:}
+\begin{itemize}
+  \item Granulare Konkurrenzdaten für Eigenmarken-Entwicklung.
+  \item Verwendung von Bewertungsdetails zur Anbietersanktion außerhalb veröffentlichter Richtlinien.
+  \item Vermietung individualisierter Anbieterdaten an Dritte ohne explizite Einwilligung.
+\end{itemize}
+
+\emph{Ebene 3 \textendash{} Transparenz für Anbieter:}
+\begin{itemize}
+  \item Jeder Anbieter kann einsehen, welche Datenkategorien wie genutzt werden.
+  \item Jährlicher Transparenzbericht zur Datennutzung der Plattform.
+  \item Beschwerdeprozess bei vermutetem Missbrauch.
+\end{itemize}
+
+\textbf{3. Datenfirewall (organisatorisch + technisch):}
+\begin{itemize}
+  \item \emph{Organisatorisch:} Eigenmarken-Team als separate Einheit mit eigener Führung; keine Doppelrollen.
+  \item \emph{Technisch:} getrennte Zugriffsrechte im Data Warehouse; nur aggregierte Marktdaten freigegeben; alle Datenzugriffe geloggt; Audit-Trails.
+  \item \emph{Prozessual:} Daten-Owner genehmigt Zugriff je Use Case; jährliches Audit der Zugriffshistorie.
+\end{itemize}
+
+\textbf{4. Faustregel:}
+Datenmacht ist legitim, wenn sie \emph{für das Plattformgeschäft selbst} genutzt wird (Matching, Suche, Ranking, Sicherheit) \textendash{} und kartellrechtlich problematisch, wenn sie genutzt wird, um \emph{im selben Markt} mit Drittanbietern zu konkurrieren, ohne dass diese vergleichbaren Zugang hätten.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{Krisenkommunikation \textendash{} drei Szenarien}{\nivLii}{22\,min}
+
+\ytquery{Krisenkommunikation Datenpanne Plattform Anbieterprotest Reputation Sprecher}
+
+\begin{loesungbox}
+\textbf{Szenario A \textendash{} Datenpanne:}
+\emph{Sprecher:in:} CEO + Datenschutzbeauftragte:r. \emph{Drei Botschaften:}
+\begin{itemize}
+  \item Was passiert ist (Fakten, soweit gesichert).
+  \item Was sofort getan wurde (Lücke geschlossen, Aufsicht informiert).
+  \item Was Betroffene jetzt wissen / tun müssen.
+\end{itemize}
+\emph{Nicht sagen:} ``Wir wissen sicher, dass keine Daten abgeflossen sind'' \textendash{} solange das nicht forensisch belegt ist.
+
+\smallskip
+\emph{Erste Botschaft (max.\ 5 Sätze):} ``Am [Datum] haben wir eine Sicherheitslücke entdeckt, durch die Kundendaten (Name, Firma, E-Mail) über 24 Stunden potenziell einsehbar waren. Die Lücke wurde umgehend geschlossen und ist Gegenstand einer forensischen Analyse. Die zuständigen Aufsichtsbehörden wurden informiert. Wir kontaktieren betroffene Kunden direkt, sobald die Untersuchung Klarheit über den Datenabfluss liefert. Bis dahin empfehlen wir, Passwörter vorsorglich zu ändern.''
+
+\smallskip
+\textbf{Szenario B \textendash{} Manipulationsverdacht Bewertungen:}
+\emph{Sprecher:in:} CPO + Pressesprecher:in. \emph{Drei Botschaften:}
+\begin{itemize}
+  \item Anerkennung der Sorge.
+  \item Konkrete Faktenlage / Untersuchungsstand.
+  \item Geplante Sofortmaßnahmen + externes Audit.
+\end{itemize}
+\emph{Nicht sagen:} pauschale Dementis (``Es gab nie eine Schönung'') ohne saubere interne Untersuchung.
+
+\smallskip
+\emph{Erste Botschaft:} ``Die Recherche von [Medium] wirft ernste Fragen auf, die wir entsprechend ernst nehmen. Wir haben eine interne Untersuchung gestartet und ein externes Audit unserer Bewertungssysteme in Auftrag gegeben. Bis zum Audit-Ergebnis nehmen wir keine Änderungen an Einzelbewertungen vor, außer bei klaren Richtlinienverstößen. Die Ergebnisse veröffentlichen wir vollständig. Wir laden Anbieter, Kunden und das Medium ein, uns konkrete Verdachtsfälle zu nennen.''
+
+\smallskip
+\textbf{Szenario C \textendash{} Anbieterprotest:}
+\emph{Sprecher:in:} CEO + Anbietermanagement. \emph{Drei Botschaften:}
+\begin{itemize}
+  \item Wertschätzung für die Anbieter und Anerkennung der Sorge.
+  \item Klare Zusage: Ranking-Logik wird offengelegt + Anbieter-Beirat.
+  \item Zeitplan und Beteiligungsweg.
+\end{itemize}
+\emph{Nicht sagen:} ``Wer nicht zufrieden ist, kann gehen'' \textendash{} und auch keine Drohungen mit Sperrungen, das wäre Eskalation in die falsche Richtung.
+
+\smallskip
+\emph{Erste Botschaft:} ``Wir nehmen die Sorgen der 18 Anbieter ernst und sehen sie als Hinweis auf Verbesserungsbedarf in unserer Ranking-Kommunikation. Wir verpflichten uns, innerhalb von 30 Tagen die Hauptparameter unserer Ranking-Logik öffentlich darzulegen und einen Anbieter-Beirat einzurichten. Bis dahin treffen wir keine struktur-verändernden Maßnahmen ohne Anbieter-Konsultation. Wir laden alle 18 Anbieter sowie die Branchenverbände zu einem Workshop ein. Unser Ziel ist eine Plattform, die fair, transparent und kommerziell für alle Beteiligten erfolgreich bleibt.''
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie LogiTrade Hub \textendash{} Fairness, Wettbewerb, Krise}{\nivLiii}{45\,min}
+
+\ytquery{B2B Plattform Logistik Fairness Wettbewerb Krise Selbstbevorzugung Senior}
+
+\begin{loesungbox}
+\textbf{1. Wichtigste Risiken (4\,--\,6 Punkte):}
+\begin{itemize}
+  \item Konzentrationsrisiko: 65\,\% Umsatz mit Top-200 Anbietern \textendash{} Abhängigkeit groß.
+  \item Selbstbevorzugung durch eigene Logistikservices \textendash{} kartellrechtlich heikel, weil Plattform in einigen Segmenten Marktzugang dominiert.
+  \item Intransparente bezahlte Sichtbarkeit \textendash{} Vertrauensschaden, P2B-Konflikt.
+  \item Kleinere Logistikdienstleister verlieren Sichtbarkeit \textendash{} Anbieterprotestrisiko, Diversitätsverlust.
+  \item Daten-Asymmetrie zwischen Plattform und Anbietern \textendash{} Eigenangebote könnten Daten-Vorteile nutzen.
+  \item Expansion ohne Governance-Stabilisierung erhöht Risiko regulatorischer Aufmerksamkeit.
+\end{itemize}
+
+\textbf{2. Fairness-Governance:}
+\begin{itemize}
+  \item \emph{Zugang:} Onboarding mit klaren Mindeststandards (Identität, Versicherung, Compliance); diskriminierungsfreie Aufnahme.
+  \item \emph{Sichtbarkeit:} Ranking-Faktoren veröffentlicht; bezahlte Sichtbarkeit eindeutig gekennzeichnet; max.\ 20\,\% bezahlter Anteil in Top-10.
+  \item \emph{Ranking:} jährliche externe Audits, Beschwerdeprozess mit 10-Werktage-Antwort.
+  \item \emph{Gebühren:} Staffeln nur nach veröffentlichten Volumenstufen \textendash{} keine geheimen Sonderkonditionen.
+  \item \emph{Beschwerden:} dokumentierter Eingangs-, Bearbeitungs- und Eskalationsweg.
+  \item \emph{Sanktionen:} Stufenmodell (Verwarnung \textrightarrow{} Befristete Sichtbarkeitsbeschränkung \textrightarrow{} Sperrung), mit Beschwerderecht.
+\end{itemize}
+
+\textbf{3. Eigene Logistikservices?}
+\emph{Ja, aber nur unter strengen Bedingungen:}
+\begin{itemize}
+  \item Organisatorische Trennung Plattform vs.\ Eigen-Logistik.
+  \item Daten-Firewall (Eigen-Logistik bekommt nur aggregierte Marktdaten).
+  \item Identische Ranking-Regeln, externes Audit.
+  \item Klare Marken-Kennzeichnung ``Plattform-Eigenservice''.
+  \item Aufnahme erst nach mindestens 6 Monaten Fairness-Governance-Stabilisierung.
+\end{itemize}
+Wenn diese Bedingungen nicht erfüllt werden können, \emph{keine Eigenmarken}.
+
+\smallskip
+\textbf{4. Krisenmanagement-Architektur:}
+\begin{itemize}
+  \item \emph{Frühwarnindikatoren:} Anbieter-NPS sinkt, Beschwerden steigen, Medienerwähnungen mit kritischem Sentiment, Anbieter-Churn-Cluster.
+  \item \emph{Eskalationsstufen:} Stufe 1 (operative Team), Stufe 2 (Krisenstab), Stufe 3 (Geschäftsführung), Stufe 4 (Öffentlichkeit + Aufsicht).
+  \item \emph{Krisenteam:} CEO, CPO, CCO, Kommunikation, Recht, IT-Sicherheit.
+  \item \emph{Kommunikationslogik:} ein Sprecher / eine Sprecherin pro Krisenfall, abgestimmte Botschaften, klare Eskalationsfreigabe.
+  \item \emph{Nachbereitung:} Post-Mortem innerhalb 30 Tagen, Maßnahmenliste, Audit-Folgeprüfung.
+\end{itemize}
+
+\textbf{5. Budgetverteilung (900.000\,\euro):}
+\begin{itemize}
+  \item 180.000\,\euro{} \textendash{} Fairness-Governance (Ranking, Beschwerden, Audit).
+  \item 150.000\,\euro{} \textendash{} Ranking-Transparenz und Anbieter-Kommunikation.
+  \item 130.000\,\euro{} \textendash{} Bewertungsmanagement (Verifikation, Manipulationsmonitoring).
+  \item 150.000\,\euro{} \textendash{} Krisenfähigkeit (Krisenhandbuch, Übungen, externe Beratung).
+  \item 130.000\,\euro{} \textendash{} Daten-Governance und Datenfirewall (vor Eigenservices).
+  \item 100.000\,\euro{} \textendash{} Zukunftsstrategie / Resilienz (Diversifizierung Anbieter, Multi-Region-Logik).
+  \item 60.000\,\euro{} \textendash{} Schulungen, interne Compliance.
+\end{itemize}
+
+\textbf{6. Expansionsentscheidung:}
+\emph{Schrittweise, nach Governance-Stabilisierung.} Sofortexpansion in mehrere Länder bei gleichzeitiger Eigenservices-Einführung wäre eine \emph{strategische Überspannung} \textendash{} mehr Risikoflächen als Steuerungskapazität. Pilotmarkt + 6 Monate Fairness-Governance-Stabilisierung + danach Vollausbau.
+
+\smallskip
+\textbf{7. Entscheidung unter Unsicherheit:}
+\emph{Verzicht auf Eigenservices in den ersten 12 Monaten}, obwohl Umsatzpotenzial vorhanden wäre. Begründung: aktuelles Konzentrationsrisiko (65\,\% Umsatz Top-200) plus Anbieterspannungen würden Eigenservices in eine Selbstbevorzugungs-Vermutung treiben. Kosten der Verzögerung sind kalkulierbar; Kosten einer Kartelluntersuchung sind es nicht. \emph{Senior-Level-Logik: reversibel verlieren ist besser als irreversibel gewinnen.}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Zukunftssichere Plattformstrategie \textendash{} Resilienz vor Wachstum}{\nivLiii}{30\,min}
+
+\ytquery{Plattform Resilienz Senior Strategie Wachstum Verzicht Lernkultur Zukunft}
+
+\begin{loesungbox}
+\textbf{1. Resilienz im Plattformkontext (3\,--\,4 Sätze):}
+Resilienz bedeutet, dass die Plattform unter Wettbewerbsdruck, regulatorischer Unsicherheit und Krise \emph{handlungsfähig} bleibt \textendash{} ohne in Existenzgefahr zu geraten oder die Marktarchitektur zu zerstören. Sie ist kein Endzustand, sondern eine eingebaute Fähigkeit: \emph{Stabilität durch Vielfalt, Geschwindigkeit durch Vorbereitung, Vertrauen durch Verlässlichkeit}.
+
+\smallskip
+\textbf{Vier Resilienzfaktoren:}
+\begin{itemize}
+  \item Transparente Governance + dokumentierte Regeln.
+  \item Diversifizierte Partner- und Anbieterstruktur (keine 30+\,\%-Konzentration).
+  \item Stabile Datenprozesse + Frühwarnindikatoren.
+  \item Lernfähige Organisation mit Post-Mortem-Kultur.
+\end{itemize}
+
+\textbf{2. Konkretes Plattformsegment: B2B-Logistik}
+
+\smallskip
+\emph{Drei attraktive Wachstumsoptionen:}
+\begin{itemize}
+  \item Geografische Expansion in zwei weitere Länder.
+  \item Aufbau eigener Logistikservices unter Plattformmarke.
+  \item Aggressive Preispolitik gegen kleinere Wettbewerber.
+\end{itemize}
+
+\emph{Welche ich ablehnen würde:}
+\begin{itemize}
+  \item \emph{Aggressive Preispolitik:} würde Marge zerstören, Anbieter verärgern und in einem ohnehin margenarmen Geschäft die Plattformbasis schwächen.
+  \item \emph{Eigene Logistikservices vor Governance-Stabilisierung:} hohes Kartellrechtsrisiko, das mehrjähriges Bußgeldverfahren kosten könnte.
+\end{itemize}
+
+\emph{Lernkultur:}
+\begin{itemize}
+  \item Post-Mortems nach \emph{jedem} Krisenfall, mit Maßnahmenliste und Owner.
+  \item Bias-Reviews bei Ranking- und KI-Modellen quartalsweise.
+  \item Audit-Folgemaßnahmen mit klarer Verantwortung und Wiedervorlage.
+  \item Lernen über Bereichsgrenzen hinweg (Vertrieb, Service, Plattform, Compliance gemeinsam).
+\end{itemize}
+
+\textbf{3. Faustregel:}
+Eine Plattform gewinnt durch Verzicht mehr als durch Wachstum, wenn das Wachstum (a) Margen senkt, ohne CLV zu erhöhen, (b) die Marktarchitektur (eigene Glaubwürdigkeit) gefährdet, oder (c) Lock-in / Selbstbevorzugung erzeugt, der regulatorisch teuer wird. \emph{Senior-Level-Reife heißt: Verzichten ist auch eine Entscheidung \textendash{} und manchmal die wertvollste.}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Capstone \textendash{} Zukunftssichere Plattform-Entscheidungsarchitektur}{\nivLiii}{45\,min}
+
+\ytquery{Chief Platform Officer Kartellrecht Zukunftsstrategie Krise Resilienz Capstone}
+
+\begin{loesungbox}
+\emph{Musterlösung als Architektur. Andere Konfigurationen sind legitim, solange Wachstum, Recht, Fairness, Krise und Vertrauen ausbalanciert werden.}
+
+\smallskip
+\textbf{1. Zielbild:}
+In 18\,--\,24 Monaten ist die Plattform als faire, transparente, resiliente Marktinstanz positioniert \textendash{} mit veröffentlichten Ranking-Regeln, geprüften Anbietern, klaren Beschwerdewegen, einer Daten-Governance, die Eigenangebote nur unter Auflagen erlaubt, und einem geübten Krisenhandbuch. Wachstum wird nicht maximiert, sondern \emph{steuerbar} geführt.
+
+\smallskip
+\textbf{2. Plattformmacht und Abhängigkeiten:} Bestandsaufnahme \textendash{} Marktanteil pro Segment, Konzentration der Anbieter, Konzentration der Kunden, Substituierbarkeit für Anbieter, regulatorische Aufmerksamkeit, Wettbewerber-Schritte. Erkenntnis: in mindestens einem Segment ist die Plattform faktischer Gatekeeper.
+
+\smallskip
+\textbf{3. Risiko-Register:}
+\begin{itemize}
+  \item Kartellrecht / Marktmacht \textrightarrow{} Selbstbevorzugung, Preisparität, exklusive Bindungen, Datenvorteile.
+  \item Fairness \textrightarrow{} Ranking, Gebühren, Sperrungen, Bewertungen.
+  \item Daten \textrightarrow{} Verarbeitung, Datenfirewall, internationaler Transfer.
+  \item Eigenangebote \textrightarrow{} Interessenkonflikt, Datenmissbrauch.
+  \item Partnerabhängigkeit \textrightarrow{} 30+\,\%-Cluster meiden.
+  \item Krisenrisiken \textrightarrow{} Reputation, Datenpanne, Anbieterprotest, regulatorische Prüfung.
+\end{itemize}
+
+\textbf{4. Fairness-Governance:}
+\begin{itemize}
+  \item Veröffentlichte Ranking-Faktoren.
+  \item Bezahlte Sichtbarkeit eindeutig gekennzeichnet, max.\ 20\,\% in Top-10.
+  \item Sperrungen nur mit Begründung + Beschwerderecht; jährlicher Sperrbericht.
+  \item Gebührenstaffeln nach veröffentlichten Volumenstufen.
+  \item Externes Ranking-Audit jährlich.
+  \item Anbieter-Beirat mit kleinen und großen Anbietern.
+\end{itemize}
+
+\textbf{5. Daten-Governance:}
+\begin{itemize}
+  \item Drei-Ebenen-Modell (vgl.\ Aufgabe 7): operativ, Anbieter-Reporting, externe Services.
+  \item Datenfirewall organisatorisch + technisch zwischen Plattformbereich und Eigenangebots-Bereich.
+  \item Datenschutz-Verarbeitungsverzeichnis und jährlicher Transparenzbericht.
+  \item Audit-Trail aller Datenzugriffe.
+\end{itemize}
+
+\textbf{6. Eigene Angebote \textendash{} Bedingungen:}
+\begin{itemize}
+  \item Organisatorische Trennung mit eigener Führung.
+  \item Datenfirewall etabliert + auditiert.
+  \item Identische Ranking-Regeln, von externem Audit bestätigt.
+  \item Marke ``Plattform-Eigenangebot'' klar gekennzeichnet.
+  \item Erst nach 6+ Monaten stabiler Fairness-Governance.
+\end{itemize}
+
+\textbf{7. Krisenmanagement-Architektur:}
+\begin{itemize}
+  \item Frühwarnindikatoren: NPS, Beschwerdenzahl, Medien-Sentiment, Anbieter-Churn, IT-Sicherheits-Alarme, regulatorische Anfragen.
+  \item Eskalationsstufen 1\,--\,4 mit Verantwortlichen und Reaktionszeiten.
+  \item Krisenteam: CEO, CPO, CCO, Kommunikation, Recht, IT-Sicherheit.
+  \item Kommunikationslogik: ein:e Sprecher:in, abgestimmte Botschaften, klare Freigabewege.
+  \item Nachbereitung: Post-Mortem in 30 Tagen, Maßnahmen, Audit-Folge.
+  \item Übung: 1\,--\,2 simulierte Krisen pro Jahr (Datenpanne, Anbieterprotest).
+\end{itemize}
+
+\textbf{8. Zukunftsstrategie:}
+\begin{itemize}
+  \item \emph{Resilienz:} keine 30+\,\%-Konzentration auf Anbieter oder Kanal.
+  \item \emph{Regulatorische Anpassungsfähigkeit:} Compliance-Roadmap mit antizipierten Themen (DSA, DMA, branchenspezifische Vorgaben).
+  \item \emph{Wettbewerbsdifferenzierung:} Qualität, Vertrauen, Service \textendash{} nicht Preis.
+  \item \emph{Stakeholdervertrauen:} Beirat, Transparenzbericht, externes Audit.
+\end{itemize}
+
+\textbf{9. KPI-Struktur:}
+\begin{itemize}
+  \item Fairness: Beschwerdenzahl, Sperrungen mit Beschwerden, Audit-Score.
+  \item Vertrauen: Anbieter-NPS, Kunden-NPS, Medien-Sentiment.
+  \item Anbieter- und Kundenqualität: Verifikationsquote, Aktivität, Churn.
+  \item Compliance: Audit-Befunde, Verarbeitungsverzeichnis-Aktualität, Schulungsquote.
+  \item Krisenfrüherkennung: Anzahl Frühwarn-Trigger, Reaktionszeit.
+  \item Wachstum: Umsatz, GMV, neue Märkte \textendash{} jeweils gegen Compliance-Score gespiegelt.
+\end{itemize}
+
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item Eigene Angebote \emph{nicht} im ersten Jahr einführen \textendash{} obwohl sie Umsatzpotenzial bringen \textendash{} weil Governance-Stabilität wichtiger ist als kurzfristiger Umsatzschub.
+  \item Bezahlte Sichtbarkeit auf 20\,\% in Top-10 begrenzen \textendash{} obwohl Wegfall an Werbeumsatz spürbar wäre \textendash{} weil Glaubwürdigkeit des Rankings das Plattform-Asset ist.
+  \item Anbieter-Beirat mit echter Beteiligung einrichten \textendash{} obwohl er Wachstumsentscheidungen verlangsamt \textendash{} weil Vorab-Konflikte teurer sind als Vorab-Konsultationen.
+\end{enumerate}
+
+\smallskip
+\textbf{Zusatz \textendash{} Entscheidung gegen attraktive Wachstumsmaßnahme:} Bewusst \emph{kein Preiskrieg} gegen kleinere Wettbewerber, obwohl die Plattform-Marktposition das kurzfristig erlauben würde. Aus Senior-Sicht: ein Preiskrieg in einem ohnehin margenarmen Geschäft erodiert die eigene Substanz, schadet Anbietern (die Konditionsdruck spüren) und erzeugt regulatorische Aufmerksamkeit (Verdrängungspreise). Die ``attraktive'' Marktbereinigung wäre eine Selbstzerstörung des Geschäftsmodells und ein strategischer Pyrrhussieg.
+
+\smallskip
+\textbf{Capstone-Logik:} Senior-Level-Verantwortung in Plattformmärkten heißt: \emph{Wachstum ist nicht die Antwort. Wachstum ist die Frage \textendash{} und die Antwort ist eine Entscheidungsarchitektur, die auch in der Krise verteidigbar bleibt.}
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss \textendash{} Kursende}
+\thispagestyle{plain}
+
+\noindent Sie haben die elf Capstone-Musterlösungen durchgearbeitet \textendash{} und damit den Kurs ``Digitale Vertriebsstrategien und Plattformmodelle'' abgeschlossen. Die Musterlösungen sind Diskussionsbasis: Ihre eigene Antwort darf abweichen, sofern sie nachvollziehbar argumentiert und Zielkonflikte sichtbar macht.
+
+\medskip
+\begin{infobox}[Was Sie über die 16 Tage aufgebaut haben]
+\begin{itemize}
+  \item Sie verstehen Vertriebslogiken, Netzwerkeffekte, Lock-in und Plattformökonomie.
+  \item Sie können Multi-Channel-, Revenue- und Subscription-Architekturen entwerfen.
+  \item Sie integrieren CRM, Automatisierung und KI verantwortlich in den Vertrieb.
+  \item Sie bauen Conversational-Commerce-Architekturen mit klaren Grenzen.
+  \item Sie unterscheiden Compliance-Pflicht und Compliance-als-Wettbewerbsvorteil.
+  \item Sie analysieren Kartellrechtsrisiken und definieren Fairness-Governance.
+  \item Sie verantworten Wachstumsentscheidungen, die auch in der Krise verteidigbar sind.
+\end{itemize}
+\end{infobox}
+
+\medskip
+\begin{infobox}[Capstone-Botschaft]
+Senior-Level-Verantwortung bedeutet \emph{nicht}, jedes Wachstum mitzunehmen \textendash{} sondern eine \emph{Architektur} zu bauen, die in fünf Jahren noch verteidigbar ist. Manchmal ist der wertvollste Zug der \emph{Verzicht}.
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 16 \textperiodcentered{} Capstone-Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

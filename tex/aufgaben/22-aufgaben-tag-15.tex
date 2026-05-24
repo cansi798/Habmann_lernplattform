@@ -1,0 +1,619 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 15 - Aufgabenheft
+% Plattformen rechtssicher betreiben: Compliance & Risiko
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 15}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Compliance \& Risikosteuerung}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 8 \textperiodcentered{} TAG 15 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 18.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 15\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Plattformen rechtssicher betreiben \textendash{}\\Compliance, Risiko \&\\Wettbewerbsstrategien.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enthält elf Aufgaben zu Tag 15 \textendash{} \emph{Plattformen rechtssicher betreiben: Compliance, Risikobewertung und Wettbewerbsstrategien.} Im Mittelpunkt steht die Frage, wie Plattformbetreiber Marktorganisation, Datenverarbeitung und Vertrauen \emph{gleichzeitig} verantworten.
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} 30\,--\,45 Minuten.
+\end{itemize}
+
+\begin{infobox}[Hinweis]
+Die Musterlösungen finden Sie im separaten \emph{Lösungsheft Tag 15}. Diese Aufgaben sind \emph{kein juristisches Gutachten}, sondern Managementtraining: Sie sollen lernen, Risiken zu erkennen, Compliance-Architekturen zu entwerfen und strategisch zwischen Wachstum und Vertrauen abzuwägen.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Plattformrollen verstehen}{\nivLi}{8\,min}
+
+\noindent Definieren Sie in jeweils einem Satz die folgenden \textbf{fünf Rollen}, in denen ein Plattformbetreiber rechtlich und strategisch agieren kann:
+
+\begin{enumerate}
+  \item \textbf{Reiner Vermittler} (z.\,B.\ Eigentum/Vertrag liegt nicht beim Plattformbetreiber).
+  \item \textbf{Marktplatzbetreiber} (mit eigenen Regeln für Listing, Ranking, Bewertungen).
+  \item \textbf{Händler} (Plattform tritt selbst als Verkäufer auf).
+  \item \textbf{Dienstleister} (z.\,B.\ Zahlungsabwicklung, Logistik, Treuhand).
+  \item \textbf{Ökosystemmanager} (Regelsetzer für Drittanbieter, Datenverarbeiter, Vertrauensinstanz).
+\end{enumerate}
+
+\noindent Ergänzen Sie einen Satz: Warum kann eine unklare Rollenverteilung im Streitfall (Haftung, Datenverarbeitung) zu erheblichen Risiken führen?
+
+\ytquery{Plattform Rolle Vermittler Marktplatz Händler Ökosystem Definition Haftung}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{Risikofelder benennen}{\nivLi}{8\,min}
+
+\noindent Acht zentrale Risikofelder für Plattformbetreiber:
+
+\begin{enumerate}
+  \item Datenschutz und Datenverarbeitung
+  \item AGB und Vertragsgestaltung
+  \item Haftung für Inhalte und Angebote
+  \item Informationspflichten und Preisangaben
+  \item Wettbewerbsrecht
+  \item Plattformtransparenz (Rankings, bezahlte Sichtbarkeit)
+  \item Bewertungs- und Reputationsmanagement
+  \item Umgang mit Geschäftskunden (B2B-spezifische Pflichten)
+\end{enumerate}
+
+\noindent Beschreiben Sie für jedes Risikofeld in einem Halbsatz: \emph{Worauf} muss der Plattformbetreiber besonders achten?
+
+\ytquery{Plattform Risiko Datenschutz AGB Haftung Ranking Bewertung Wettbewerb}
+
+\antwortlinien{14}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{Compliance-Bausteine}{\nivLi}{8\,min}
+
+\noindent Sechs typische Bausteine eines Compliance-Managementsystems für Plattformbetreiber:
+
+\begin{enumerate}
+  \item Datenschutzkonzept und Verarbeitungsverzeichnis
+  \item Rollen- und Verantwortlichkeitsmodell (RACI)
+  \item AGB-Prüfung und Aktualisierung
+  \item Anbieter-Onboarding und Partnerprüfung
+  \item Beschwerde- und Eskalationsprozesse
+  \item Audit-Logik und Schulungen
+\end{enumerate}
+
+\noindent Beschreiben Sie für jeden Baustein in einem Satz: Welchen Zweck erfüllt er, und welches Risiko mindert er?
+
+\noindent Ergänzen Sie einen Satz: Welche \emph{drei} Bewertungsdimensionen bilden ein Risiko-Register typischerweise ab (Eintrittswahrscheinlichkeit, Schadenshöhe, Reputationswirkung, regulatorische Bedeutung, Steuerbarkeit)?
+
+\ytquery{Compliance Management Plattform AGB Datenschutz Audit Risiko Register}
+
+\antwortlinien{12}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{CareMarket Digital \textendash{} Plattformrisiken erkennen}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``CareMarket Digital'' betreibt eine Plattform, auf der Pflegeeinrichtungen kurzfristig externe Dienstleister für Reinigung, Fahrdienste, Betreuung und technische Services finden können. Anbieter erstellen Profile, Pflegeeinrichtungen stellen Anfragen, und die Plattform vermittelt passende Dienstleister.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Anbieter laden selbstständig Leistungsbeschreibungen und Preise hoch.
+  \item Pflegeeinrichtungen können Anbieter bewerten.
+  \item Die Plattform schlägt passende Anbieter automatisch vor.
+  \item Einige Anbieter werben mit unklaren Qualitätsversprechen.
+  \item Kundendaten und Anfragedaten werden gespeichert.
+  \item Die Plattform verdient an Vermittlungsgebühren.
+  \item Die Geschäftsführung möchte schnell in weitere Regionen expandieren.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Benennen Sie mindestens \textbf{acht mögliche Risiken} (rechtlich, organisatorisch oder reputationsbezogen).
+  \item Ordnen Sie jedes Risiko einem Bereich zu: \emph{Datenschutz} \textperiodcentered{} \emph{Vertrag} \textperiodcentered{} \emph{Haftung} \textperiodcentered{} \emph{Transparenz} \textperiodcentered{} \emph{Bewertung} \textperiodcentered{} \emph{Anbieterqualität} \textperiodcentered{} \emph{Wettbewerb}.
+  \item Beschreiben Sie, welche \textbf{drei Risiken} besonders kritisch für Vertrauen und Marktposition sind.
+  \item Entwickeln Sie \textbf{drei einfache Compliance-Maßnahmen}, die \emph{vor} einer Expansion eingeführt werden sollten.
+  \item Formulieren Sie eine Managementempfehlung: \emph{sofort expandieren}, \emph{begrenzt expandieren} oder \emph{zunächst Compliance verbessern} \textendash{} mit Begründung.
+\end{enumerate}
+
+\ytquery{Plattform Pflege Vermittlung Datenschutz Risiko Compliance Expansion}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{Wettbewerbspositionen \& Marktstrategie}{\nivLii}{25\,min}
+
+\begin{infobox}[Wettbewerbssituation ``CareMarket Digital'']
+\begin{itemize}
+  \item \textbf{Wettbewerber A} \textendash{} sehr günstige Vermittlungsgebühren, expandiert schnell, geringe Anbieterprüfung.
+  \item \textbf{Wettbewerber B} \textendash{} positioniert sich als Premiumplattform mit streng geprüften Anbietern.
+  \item \textbf{Wettbewerber C} \textendash{} regionaler Spezialist mit hoher Bekanntheit und lokalem Servicenetz.
+  \item ``CareMarket Digital'' hat gute Technologie, aber noch keine klare Marktpositionierung.
+\end{itemize}
+
+\smallskip
+\textbf{Mögliche Positionierungen:}
+\begin{itemize}
+  \item \textbf{A:} Preisgünstige Vermittlungsplattform.
+  \item \textbf{B:} Qualitäts- und Sicherheitsplattform (geprüfte Anbieter, Zertifikate).
+  \item \textbf{C:} Spezialisierungs- und Branchenplattform (Pflege-spezifische Compliance).
+  \item \textbf{D:} Service-/Daten-Plattform (Reporting, Analytics für Träger).
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie die vier Positionierungen A\,--\,D in jeweils zwei Dimensionen: \emph{kurzfristiges Wachstumspotenzial} und \emph{langfristige Differenzierung / Verteidigungsfähigkeit}.
+  \item Wählen Sie \textbf{eine} Positionierung für ``CareMarket Digital'' \textendash{} mit Blick auf das sensible Marktumfeld (Pflege).
+  \item Begründen Sie, welche Positionierung kurzfristig attraktiv, aber langfristig riskant wäre.
+  \item Formulieren Sie eine \textbf{Differenzierungsbotschaft} in drei Sätzen: Wie soll ``CareMarket Digital'' am Markt wahrgenommen werden?
+  \item Welche \textbf{drei Vertrauenselemente} müssen für diese Positionierung sichtbar sein?
+\end{enumerate}
+
+\ytquery{Plattform Pflege Positionierung Wettbewerb Qualität Differenzierung B2B}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Ranking-Transparenz und bezahlte Sichtbarkeit}{\nivLii}{22\,min}
+
+\begin{infobox}[Kontext]
+Auf ``CareMarket Digital'' werden Anbieter nach Relevanz, Bewertungen, Reaktionszeit \emph{und} bezahlter Sichtbarkeit gerankt. Die Kennzeichnung bezahlter Platzierungen ist heute klein und nur teilweise sichtbar. Anbieter beklagen sich, dass sie nicht wissen, woran sie sind.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 2\,--\,3 Sätzen, warum \emph{Ranking-Transparenz} für Plattformbetreiber sowohl eine \emph{rechtliche} als auch eine \emph{strategische} Pflicht ist (Stichworte: P2B-Verordnung-Gedanke, Vertrauen, Anbieterbindung).
+  \item Entwickeln Sie eine \textbf{transparente Ranking-Kommunikation}: Welche fünf Faktoren werden veröffentlicht, in welcher Reihenfolge, mit welcher Erklärung?
+  \item Definieren Sie die \textbf{Kennzeichnung bezahlter Sichtbarkeit}: Wie wird sie \emph{eindeutig} sichtbar? (Ort, Wording, Farbe / Symbol).
+  \item Beschreiben Sie einen einfachen \textbf{Beschwerdeprozess} für Anbieter, die das Ranking bestreiten: Eingangskanal, Bearbeitungsfrist, Eskalation.
+  \item Formulieren Sie eine Faustregel: Was darf bei der Ranking-Logik \emph{nicht} im Algorithmus versteckt sein?
+\end{enumerate}
+
+\ytquery{Plattform Ranking Transparenz bezahlte Sichtbarkeit P2B B2B Beschwerde}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{Bewertungs- und Vertrauensmanagement}{\nivLii}{22\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Bewertungen sind ein Kerntreiber des Plattformvertrauens \textendash{} und gleichzeitig ein Angriffspunkt (Fake-Bewertungen, Manipulation, ``Bewertungsbomben'' bei Konflikten).
+
+\begin{enumerate}
+  \item Beschreiben Sie \textbf{drei Arten von Bewertungsproblemen}, die ein Plattformbetreiber realistisch erleben wird (z.\,B.\ gefälschte Positivbewertungen, koordinierte Negativbewertungen, Bewertungen ohne Kaufkontext).
+  \item Entwickeln Sie \textbf{vier konkrete Schutzmechanismen} (z.\,B.\ Verifizierter Kauf erforderlich, Bewertungsfenster, Monitoring auf Muster, Beschwerdeprozess).
+  \item Beschreiben Sie, wie eine \textbf{Eskalationslogik} bei Bewertungsstreitigkeiten aussehen kann (Wer prüft? In welchem Zeitraum? Welche Sanktion bei Verstoß?).
+  \item Formulieren Sie eine Faustregel: Wann ist die Löschung einer Bewertung legitim \textendash{} und wann wirkt sie selbst als Vertrauensschaden?
+\end{enumerate}
+
+\ytquery{Plattform Bewertungen Fake Manipulation Reputation Vertrauen Schutz}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Risiko-Register erstellen}{\nivLii}{22\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Erstellen Sie ein einfaches \textbf{Risiko-Register} für ``CareMarket Digital'' mit \textbf{acht Risiken}. Für jedes Risiko bewerten Sie auf einer Skala 1\,--\,5:
+
+\begin{itemize}
+  \item \emph{Eintrittswahrscheinlichkeit} (1 = sehr unwahrscheinlich, 5 = sehr wahrscheinlich)
+  \item \emph{Auswirkung} (1 = gering, 5 = sehr hoch)
+  \item \emph{Steuerbarkeit} (1 = sehr schwer, 5 = gut steuerbar)
+\end{itemize}
+
+\noindent Für jedes Risiko: Benennen Sie zusätzlich \textbf{eine Mitigation-Maßnahme} und einen \textbf{Verantwortlichen} (Plattformmanagement, Compliance, IT, Anbieter Management, Geschäftsführung).
+
+\medskip
+\noindent\begin{tabularx}{\linewidth}{@{}l|c|c|c|X|l@{}}
+\toprule
+\textbf{Risiko} & \textbf{Wkt.} & \textbf{Ausw.} & \textbf{Steu.} & \textbf{Mitigation} & \textbf{Verantwortlich} \\
+\midrule
+\rule{6em}{0.4pt} & \rule{1em}{0.4pt} & \rule{1em}{0.4pt} & \rule{1em}{0.4pt} & \rule{8em}{0.4pt} & \rule{6em}{0.4pt} \\
+\midrule
+\rule{6em}{0.4pt} & \rule{1em}{0.4pt} & \rule{1em}{0.4pt} & \rule{1em}{0.4pt} & \rule{8em}{0.4pt} & \rule{6em}{0.4pt} \\
+\midrule
+\rule{6em}{0.4pt} & \rule{1em}{0.4pt} & \rule{1em}{0.4pt} & \rule{1em}{0.4pt} & \rule{8em}{0.4pt} & \rule{6em}{0.4pt} \\
+\midrule
+\rule{6em}{0.4pt} & \rule{1em}{0.4pt} & \rule{1em}{0.4pt} & \rule{1em}{0.4pt} & \rule{8em}{0.4pt} & \rule{6em}{0.4pt} \\
+\bottomrule
+\end{tabularx}
+
+\noindent (Erweitern Sie die Tabelle handschriftlich auf 8 Zeilen.)
+
+\noindent\textbf{Abschließend:} Welches \emph{eine} Risiko hat die höchste Kombination aus Auswirkung und Wahrscheinlichkeit \textendash{} und wie würden Sie dem Vorstand in einem Satz Vorrang erklären?
+
+\ytquery{Risiko Register Plattform Eintrittswahrscheinlichkeit Auswirkung Steuerbarkeit}
+
+\antwortlinien{14}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{Fallstudie TradeParts Europe \textendash{} Compliance \& Expansion}{\nivLiii}{45\,min}
+
+\begin{infobox}[Fallstudie: TradeParts Europe]
+``TradeParts Europe'' betreibt eine B2B-Plattform für Ersatzteile, technische Komponenten und Wartungsservices. Industriekunden vergleichen Anbieter, fragen Angebote an und buchen Services. Die Plattform ist in drei Ländern aktiv und plant Expansion in zwei weitere europäische Märkte.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Plattformumsatz: 24\,Mio.\,\euro{} jährlich
+  \item 2.300 Anbieter \textperiodcentered{} 18.000 Unternehmenskunden
+  \item Budget für Compliance, Governance, Positionierung: 650.000\,\euro
+  \item Markteintritt geplant innerhalb 12 Monaten
+  \item Ranking-Logik: Relevanz, Preis, Lieferfähigkeit, Bewertungen, bezahlte Sichtbarkeit
+  \item Produktdatenqualität uneinheitlich
+\end{itemize}
+
+\smallskip
+\textbf{Aktuelle Risiken:}
+\begin{itemize}
+  \item Unklare Vertragsrollen Plattform \textperiodcentered{} Anbieter \textperiodcentered{} Kunde.
+  \item Uneinheitliche AGB und Servicebedingungen.
+  \item Datenschutzfragen bei Kunden- und Transaktionsdaten.
+  \item Intransparente Ranking- und Sichtbarkeitslogik.
+  \item Manipulationsverdacht bei Bewertungen.
+  \item Qualitätsprobleme einzelner Anbieter.
+  \item Preisdruck durch Wettbewerber.
+  \item Austauschbarkeitsrisiko im Markt.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die wichtigsten \emph{rechtlichen}, \emph{organisatorischen} und \emph{wettbewerblichen} Risiken.
+  \item Entwickeln Sie ein \textbf{Risiko-Register} mit Bewertung nach Eintrittswahrscheinlichkeit, Auswirkung und Steuerbarkeit.
+  \item Leiten Sie zentrale \textbf{Compliance-Maßnahmen} für Plattformbetrieb und Expansion ab.
+  \item Entwickeln Sie eine \textbf{Wettbewerbs- und Marktpositionierungsstrategie}.
+  \item Entscheiden Sie, ob die Expansion \emph{sofort}, \emph{schrittweise} oder \emph{erst nach Governance-Stabilisierung} erfolgt \textendash{} mit Begründung.
+  \item Verteilen Sie das Budget (650.000\,\euro) auf: Compliance, Produktdatenqualität, Ranking-Transparenz, Bewertungsmanagement, Anbieterprüfung, Positionierung, Schulung.
+  \item Treffen Sie mindestens \emph{eine Entscheidung unter Unsicherheit} und begründen Sie diese aus Senior-Sicht.
+\end{enumerate}
+
+\ytquery{B2B Plattform Compliance Risiko Expansion Ranking AGB Senior Management}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Rechtssicherheit als Wettbewerbsvorteil}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Compliance wird häufig als Kostenfaktor wahrgenommen \textendash{} ``Bremse'' für Wachstum. Auf Plattformmärkten kann sie aber genauso ein \emph{Wettbewerbsvorteil} sein: transparente Regeln, geprüfte Anbieter und stabile Beschwerdewege schaffen Vertrauen, das Wettbewerber mit Lowest-Cost-Modellen nicht erreichen.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 3\,--\,4 Sätzen, in welchen \emph{drei Konstellationen} Compliance zu einem strategischen Wettbewerbsvorteil wird (z.\,B.\ regulierte Branchen, B2B-Großkunden mit Lieferkettenpflichten, sensible Daten, öffentliche Aufträge).
+  \item Wählen Sie ein \textbf{konkretes Branchenbeispiel} (Pflege-Plattform, Medizinprodukte, öffentliche Beschaffung, Finanzdienste, kritische Infrastruktur). Erläutern Sie:
+  \begin{itemize}
+    \item Welche \emph{drei Compliance-Bausteine} sind hier strategischer Hebel und nicht nur Pflicht?
+    \item Wie ließe sich daraus eine sichtbare \textbf{Vertrauensmarke} machen (Zertifikat, Audit, externes Siegel, transparenter Bericht)?
+    \item Welche \emph{Trade-offs} entstehen (Wachstumsgeschwindigkeit, Anbieterzahl, Margenstruktur)?
+  \end{itemize}
+  \item Formulieren Sie eine \textbf{Faustregel} (1\,--\,2 Sätze): Wann ist Compliance vor Wachstum die strategisch \emph{billigere} Entscheidung \textendash{} obwohl sie kurzfristig teurer scheint?
+\end{enumerate}
+
+\ytquery{Compliance Wettbewerbsvorteil Plattform Regulierung Vertrauen Senior Strategy}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} Rechtssichere Wettbewerbs- und Governance-Architektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Platform Officer (oder Chief Compliance Officer, Head of Marketplace, Leiter:in Strategie, Risiko- und Governance-Manager:in, externe:r Plattformberater:in).
+
+\smallskip
+\textbf{Ausgangslage:} Ein wachsendes Plattformunternehmen möchte seine Marktposition ausbauen und gleichzeitig rechtliche Risiken reduzieren. Die Plattform vermittelt Anbieter, Kunden und Partner, verarbeitet Nutzungs- und Transaktionsdaten, steuert Sichtbarkeit über Rankinglogiken und ermöglicht Bewertungen. Wachstum bringt neue Risiken: Anbieter fordern Transparenz, Kunden erwarten geprüfte Qualität, Wettbewerber greifen über Preis an, regulatorische Anforderungen werden komplexer.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Budget begrenzt \textperiodcentered{} Marktinformationen unvollständig.
+  \item Wettbewerber wachsen aggressiv.
+  \item Rechtliche Anforderungen pro Markt unterschiedlich.
+  \item Anbieter und Kunden reagieren sensibel auf Regeln, Gebühren, Rankings, Bewertungen.
+  \item Überregulierung kann Wachstum bremsen \textendash{} Unterregulierung gefährdet Vertrauen.
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strategische \emph{Entscheidungsarchitektur} \textendash{} keine Maßnahmenliste \textendash{} für Rechtssicherheit, Compliance, Risikosteuerung und Wettbewerbspositionierung.
+
+\begin{enumerate}
+  \item \textbf{Zielbild} einer rechtssicheren und wettbewerbsfähigen Plattformstrategie.
+  \item Analyse der Plattformrolle (Vermittler, Händler, Dienstleister, Datenverarbeiter, Ökosystem, Mischform).
+  \item \textbf{Risiko-Register} mit rechtlichen, organisatorischen, reputationsbezogenen und wettbewerblichen Risiken.
+  \item \textbf{Compliance-Architektur} mit Verantwortlichkeiten, Regeln, Kontrollen, Dokumentation, Eskalation.
+  \item \textbf{Governance-Struktur} für Anbieter-Onboarding, Produktdaten, Bewertungen, Ranking, Beschwerden, Sperrungen, Partner.
+  \item \textbf{Wettbewerbsstrategie} mit klarer Marktpositionierung und Differenzierungslogik.
+  \item Entscheidung, welche \emph{Wachstums- oder Expansionsoptionen} priorisiert, begrenzt oder zurückgestellt werden.
+  \item \textbf{KPI-Architektur} für Compliance, Vertrauen, Beschwerden, Bewertungsqualität, Anbieterqualität, Marktposition, Wachstum.
+  \item Roadmap für 12\,--\,18 Monate.
+  \item Drei \textbf{Managemententscheidungen unter Unsicherheit}.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens eine bewusste \emph{Entscheidung gegen} eine kurzfristig attraktive Wachstums-/Wettbewerbsmaßnahme, wenn Rechtssicherheit, Vertrauen oder Marktposition gefährdet würden \textendash{} und begründen Sie aus Senior-Sicht.
+
+\ytquery{Chief Platform Officer Compliance Governance Wettbewerb Plattform Senior Architektur}
+
+\antwortlinien{38}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 15}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Plattformrollen und ihre rechtlichen Implikationen sauber unterscheiden.
+  \item Risikofelder und Compliance-Bausteine systematisch einordnen.
+  \item Ein Risiko-Register als Steuerungsinstrument erstellen.
+  \item Ranking- und Bewertungsmanagement als Vertrauensaufgabe verstehen.
+  \item Compliance als Wettbewerbsvorteil argumentieren.
+  \item Eine Entscheidungsarchitektur entwickeln, die Wachstum, Recht und Vertrauen ausbalanciert.
+  \item Trade-offs zwischen Skalierung und Governance verantwortlich bewerten.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 15 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

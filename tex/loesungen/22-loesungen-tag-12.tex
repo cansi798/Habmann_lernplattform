@@ -1,0 +1,668 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 12 - Loesungsheft
+% Revenue Streams optimieren, Multi-Channel skalieren, Wachstum steuern
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 12}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Revenue Streams \& Skalierung}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 6 \textperiodcentered{} TAG 12 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 15.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 12\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Revenue Streams,\\Multi-Channel \& Skalierung.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis,\\nicht die einzige korrekte Lösung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 12}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterlösungen sind \emph{eine} mögliche Lösung \textendash{} sie sind nicht die einzig richtige. Auf L2 und L3 sind mehrere Begründungswege legitim, solange sie den Begriffsapparat sauber nutzen, Annahmen explizit machen und zu einer klaren Entscheidung führen.
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterlösung. Wo weicht Ihre Argumentation ab? Welche Annahmen unterscheiden sich \textendash{} und welche Zielkonflikte haben Sie sichtbar gemacht?
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Revenue Streams einordnen}{\nivLi}{8\,min}
+
+\ytquery{Revenue Streams Plattform primär sekundär strategisch Diversifikation Definition}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Primäre Revenue Streams} sind das wirtschaftliche Rückgrat des Geschäftsmodells \textendash{} sie tragen den größten Umsatzanteil und liefern den planbaren Cashflow, typischerweise Transaktionsprovisionen, Hauptabonnements oder Kernverkäufe.
+  \item \textbf{Sekundäre Revenue Streams} ergänzen den Kern und steigern den Wert pro Kunde \textendash{} Premium-Funktionen, Werbeplätze, Upgrades, Add-ons, bezahlte Sichtbarkeit; sie sind oft margenstark, aber abhängig von der Reichweite des Primärgeschäfts.
+  \item \textbf{Strategische Revenue Streams} sind solche, die heute noch klein sind, aber langfristig Differenzierung, Resilienz oder Wettbewerbsvorteil erzeugen \textendash{} z.\,B.\ Datenservices, Benchmark-Reports, exklusive Partnergebühren, Servicepakete oder Affiliate-Modelle.
+  \item \textbf{Unterschied 95\,\%-Quelle vs.\ diversifiziert:} Ein Single-Stream-Modell ist hochgradig effizient, aber fragil \textendash{} eine Konditionsverschlechterung oder ein Wettbewerberangriff trifft sofort. Diversifizierte Streams reduzieren Klumpenrisiko und ermöglichen \emph{Steuerung}, weil das Management einzelne Streams skalieren, stabilisieren oder begrenzen kann, ohne das Gesamtsystem zu gefährden.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{Multi-Channel-Kanäle benennen}{\nivLi}{8\,min}
+
+\ytquery{Multi-Channel Vertrieb Plattform Direktvertrieb Partner Affiliate Webshop}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Eigener Webshop:} bestehende Kunden und digital-affine Direktkäufer. \emph{Vorteil:} volle Kontrolle über Marke, Daten, Preis. \emph{Risiko:} Sichtbarkeit und Traffic müssen teuer aufgebaut werden.
+  \item \textbf{Marktplatz / Plattform:} preissensible Käufer, schnelles Marktzugang-Volumen. \emph{Vorteil:} sofortige Reichweite. \emph{Risiko:} Provisionsmarge, Preisvergleich, Lock-in, kein direkter Datenzugang.
+  \item \textbf{Partnervertrieb (Reseller):} Branchen mit Beratungstiefe, regional verankerte Käufer. \emph{Vorteil:} fremde Vertriebskraft, kein eigenes Außendienstgehalt. \emph{Risiko:} Provisionsverlust, Markenkontrolle eingeschränkt, Partnerkonflikte.
+  \item \textbf{Direktvertrieb (Außen-/Innendienst):} Großkunden, erklärungsbedürftige Produkte, Buying-Center mit Beratungsbedarf. \emph{Vorteil:} höchste Abschlussquote, beste Beziehungstiefe. \emph{Risiko:} hohe Fixkosten, schwer skalierbar.
+  \item \textbf{Affiliate-Kanal:} preissensible oder content-getriebene Käufer, die über Drittseiten kommen. \emph{Vorteil:} performanceabhängig, niedrige Vorlaufkosten. \emph{Risiko:} Qualität der Partner schwankt, Marken- und SEO-Risiken.
+  \item \textbf{E-Mail-Strecken \& digitale Kampagnen:} Bestandskunden, qualifizierte Leads. \emph{Vorteil:} sehr günstig pro Kontakt, planbar, datenreich. \emph{Risiko:} Reichweite begrenzt auf den eigenen Verteiler, Akzeptanzgrenzen (Frequenz, Relevanz).
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{KPIs für Plattform-Wachstum}{\nivLi}{8\,min}
+
+\ytquery{Plattform KPIs Conversion CAC CLV Churn Net Revenue Retention Wachstum}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Conversion Rate:} Anteil der Besucher / Leads, die zu zahlenden Kunden werden. Steuert die Wirksamkeit von Funnel, Produkt-Daten und Checkout \textendash{} und ist meist der wirtschaftlich wirkungsvollste Hebel.
+  \item \textbf{Customer Acquisition Cost (CAC):} durchschnittliche Marketing- und Vertriebskosten pro neugewonnenem Kunden. Steuert Effizienz und das Kanal-Portfolio.
+  \item \textbf{Customer Lifetime Value (CLV):} wirtschaftlicher Wert über die gesamte Kundenbeziehung. Steuert Investitionsentscheidungen: ``Wieviel darf Akquise kosten?''
+  \item \textbf{Churn-Rate / Net Revenue Retention (NRR):} Churn misst Abwanderung, NRR misst, ob der Umsatz mit Bestandskunden \emph{wächst} (Upgrades) oder \emph{schrumpft} (Downgrades, Kündigungen). NRR\,$>$\,100\,\% ist Goldstandard bei Subscription.
+  \item \textbf{Wiederkaufrate:} Anteil der Kunden, die innerhalb eines Zeitraums erneut bestellen. Steuert Servicequalität, Retention und Cross-Selling.
+  \item \textbf{Deckungsbeitrag je Kanal:} Umsatz minus variable Kanalkosten (Provisionen, Werbung, Affiliate-Gebühren). Zeigt, welcher Kanal \emph{Geld verdient}, nicht nur Umsatz macht.
+\end{enumerate}
+
+\smallskip
+\textbf{Echtes Wachstum vs.\ Aktivität:} \emph{Deckungsbeitrag je Kanal} und \emph{NRR} zeigen echtes wirtschaftliches Wachstum, weil sie Profitabilität und Bestandsentwicklung verbinden. Reine \emph{Trafficzahlen} oder \emph{Bot-Nutzungsrate} sind häufig Vanity-Metriken \textendash{} sie steigen, ohne dass Umsatz, Marge oder Kundenwert steigen.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{LearnMarket Pro \textendash{} Revenue Streams analysieren}{\nivLii}{25\,min}
+
+\ytquery{Plattform Revenue Streams Weiterbildung B2B Provision Subscription Reporting}
+
+\begin{loesungbox}
+\textbf{1. Sechs (oder mehr) Revenue Streams \textendash{} mögliche Liste:}
+\begin{itemize}
+  \item Provision pro Einzelbuchung (bestehend, 12\,\%).
+  \item Premium-Anbieterprofile (bestehend) \textendash{} Sichtbarkeit, Logo, erweiterte Profildaten.
+  \item Unternehmensabo / Enterprise-Lizenz für HR-Abteilungen (Reporting, Rahmenkonditionen, SSO).
+  \item Featured-Listings / Sponsored Sichtbarkeit für Anbieter (auktionsbasiert oder Festpreis).
+  \item Coaching-Pakete als Plattform-Eigenprodukt (kuratiert, höhere Marge, exklusiv).
+  \item Daten- und Benchmark-Reports für HR-Verantwortliche (Marktpreise, Trends).
+  \item Zertifizierungsgebühr für Anbieter (Qualitätssiegel + jährliche Verifikation).
+  \item Affiliate-Provision für Drittportale (Karrierenetzwerke, Berufsverbände).
+\end{itemize}
+
+\textbf{2. Marktseiten-Zuordnung:}
+\begin{itemize}
+  \item \emph{Kunde:} Unternehmensabo, Daten-/Benchmark-Reports.
+  \item \emph{Anbieter:} Provision, Premium-Profile, Featured-Listings, Zertifizierungsgebühr.
+  \item \emph{Partner:} Affiliate-Provision, Kooperationen mit Verbänden / Karrierenetzwerken.
+  \item \emph{Plattform-Eigenprodukt:} Coaching-Pakete (Sonderrolle).
+\end{itemize}
+
+\textbf{3. Nutzen \& Risiko (Halbsätze):}
+\begin{itemize}
+  \item \emph{Provision:} Nutzen \textendash{} skaliert mit Volumen. Risiko \textendash{} Margenabhängigkeit, Wettbewerb über Preis.
+  \item \emph{Premium-Profile:} Nutzen \textendash{} planbare Anbietererlöse. Risiko \textendash{} Unzufriedenheit, wenn Nutzen nicht messbar.
+  \item \emph{Unternehmensabo:} Nutzen \textendash{} planbar, hohe Marge, Bindung. Risiko \textendash{} lange Sales Cycles, hoher Onboarding-Aufwand.
+  \item \emph{Featured-Listings:} Nutzen \textendash{} hohe Marge, Anbieter-Interesse. Risiko \textendash{} Wahrnehmung der Plattform als ``Pay-to-win''.
+  \item \emph{Daten-/Benchmark-Reports:} Nutzen \textendash{} differenzierend, hochpreisig. Risiko \textendash{} Datenschutz, Vertrauen der Anbieter.
+  \item \emph{Coaching-Pakete:} Nutzen \textendash{} Marge, Markenstärke. Risiko \textendash{} Anbieter sehen die Plattform als Wettbewerber.
+\end{itemize}
+
+\textbf{4. Kurzfristig (0\,--\,6 Monate) am einfachsten:} \emph{Featured-Listings / Sponsored Sichtbarkeit für Anbieter} \textendash{} bestehende Infrastruktur, einfache Bepreisung, kein neuer Vertragsbeziehungstyp.
+
+\smallskip
+\textbf{5. Langfristig (24+ Monate) der größte strategische Wert:} \emph{Unternehmensabo mit Reporting} \textendash{} bindet Großkunden, schafft planbaren Umsatz, erzeugt Datentiefe, eröffnet Cross-Selling und schützt vor Provisionsdruck. Der Unterschied: Featured-Listings monetarisieren \emph{Heute}, Abos verändern die \emph{Architektur} der Plattform.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{LearnMarket Pro \textendash{} Multi-Channel und KPIs}{\nivLii}{30\,min}
+
+\ytquery{Multi-Channel KPIs Conversion Wiederkauf B2B Plattform Priorisierung}
+
+\begin{loesungbox}
+\textbf{1. Bewertungsmatrix (Skala 1\,--\,5):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lcccc@{}}
+\toprule
+\textbf{Kanal} & \textbf{Conversion} & \textbf{Wiederkauf} & \textbf{Marge} & \textbf{Komplexität} \\
+\midrule
+A: Plattformvertrieb  & 4 & 3 & 4 & 2 \\
+B: HR-Partner         & 3 & 4 & 3 & 4 \\
+C: LinkedIn / ABM     & 3 & 4 & 4 & 3 \\
+D: E-Mail-Nurturing   & 4 & 5 & 5 & 2 \\
+E: Affiliate-Verbände & 3 & 2 & 3 & 3 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+(Hinweis: Komplexität = 1 sehr gering, 5 sehr hoch. Andere plausible Bewertungen sind möglich.)
+
+\smallskip
+\textbf{2. Top-3-Priorisierung für 6 Monate:}
+\begin{itemize}
+  \item \emph{D: E-Mail-Nurturing} \textendash{} höchste Marge, beste Wiederkaufwirkung, niedrigste Komplexität.
+  \item \emph{A: Plattformvertrieb (Conversion-Optimierung)} \textendash{} größter Hebel auf Conversion bei kleinstem Risiko.
+  \item \emph{C: LinkedIn / ABM} \textendash{} schließt Lücke zu Großkunden mit Account-based-Logik, gute Marge.
+\end{itemize}
+
+\textbf{3. Vier KPIs für diese Priorisierung:}
+\begin{itemize}
+  \item \emph{On-Site-Conversion Rate} (Besucher \textrightarrow{} Buchung).
+  \item \emph{Wiederkaufrate nach 6 Monaten} (E-Mail-Nurturing-Wirkung).
+  \item \emph{Deckungsbeitrag je Kanal} (zeigt echte Profitabilität).
+  \item \emph{CAC pro Kanal} (vs.\ CLV \textendash{} steuert das Kanalportfolio).
+\end{itemize}
+
+\textbf{4. Conversion-Optimierung vs.\ neuer Traffic:}
+Bei einer Conversion Rate von 1{,}4\,\% bedeutet eine Verbesserung auf 1{,}7\,\% einen Effekt von \emph{+21\,\%} mehr Buchungen \textendash{} ohne einen Cent zusätzliches Marketing. Mehr Traffic einzukaufen, ohne den Funnel zu schließen, multipliziert dagegen einen Verlust: Jeder zusätzliche Besucher trägt den gleichen Verlust an Conversion-Lecks. Conversion-Optimierung ist deshalb fast immer der \emph{wirtschaftlichere} erste Hebel.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{Conversion-Funnel zerlegen}{\nivLii}{20\,min}
+
+\ytquery{Conversion Funnel Optimierung Engpass Plattform B2B Wachstum messen}
+
+\begin{loesungbox}
+\textbf{1. Größter Conversion-Engpass \textendash{} quantitative Analyse:}
+
+\smallskip
+Absolute Verluste je Funnel-Stufe:
+\begin{itemize}
+  \item Besucher \textrightarrow{} Kursdetail: 240.000 \textrightarrow{} 96.000 = Verlust 144.000 (60\,\%).
+  \item Kursdetail \textrightarrow{} registriert: 96.000 \textrightarrow{} 14.400 = Verlust 81.600 (85\,\%).
+  \item Registriert \textrightarrow{} Anfrage: 14.400 \textrightarrow{} 4.800 = Verlust 9.600 (67\,\%).
+  \item Anfrage \textrightarrow{} Buchung: 4.800 \textrightarrow{} 3.360 = Verlust 1.440 (30\,\%).
+  \item Buchung \textrightarrow{} Wiederkauf: 3.360 \textrightarrow{} 605 = Verlust 2.755 (82\,\%).
+\end{itemize}
+
+Der \emph{relative} Engpass ist \emph{Kursdetail \textrightarrow{} Registrierung} (nur 15\,\%), aber der \emph{absolute} Engpass mit der größten Hebelwirkung ist \emph{Besucher \textrightarrow{} Kursdetail} (144.000 Verluste \textendash{} Sichtbarkeits- und Suchproblem) bzw.\ \emph{Buchung \textrightarrow{} Wiederkauf} (Retention-Lücke). Für \emph{Buchungs}-Steigerung: Hebel \textbf{Kursdetail \textrightarrow{} Registrierung} liefert wirtschaftlich am meisten.
+
+\smallskip
+\textbf{2. Drei Maßnahmen für Kursdetail \textrightarrow{} Registrierung:}
+\begin{itemize}
+  \item Sichtbarer ``Anfrage starten ohne Login'' (Reibungsreduktion).
+  \item Konkrete Preis-, Dauer- und Trainer-Information auf einen Blick (keine versteckten Details).
+  \item Social Proof (Teilnehmerstimmen, Branchenlogos, Kursabschlüsse) prominent platziert.
+\end{itemize}
+
+\textbf{3. Wirkungsabschätzung:} Aktuell 14.400 Registrierungen aus 96.000 Kursdetails (15\,\%). Eine Verbesserung um 20\,\% bedeutet 18\,\% Conversion \textendash{} also 17.280 Registrierungen. Bei gleichbleibender Folge-Conversion (33\,\% Anfrage, 70\,\% Buchung) entstehen 17.280 \texttimes{} 0{,}33 \texttimes{} 0{,}70 = ca.\ \textbf{3.992 Buchungen pro Quartal} statt 3.360 \textendash{} also \emph{+632 Buchungen}.
+
+\smallskip
+\textbf{4. KPI vs.\ Vanity-Metrik:}
+\begin{itemize}
+  \item \emph{Installieren:} Mikro-Conversion ``Kursdetail \textrightarrow{} Registrierung'', pro Kurssegment, mit A/B-Test-Vergleich und Deckungsbeitragsbezug.
+  \item \emph{Bewusst nicht:} Reine Seitenaufrufzahlen oder ``Verweildauer'' \textendash{} sie sagen nichts über Buchung oder Marge.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{Kanalkonflikte und Kannibalisierung}{\nivLii}{22\,min}
+
+\ytquery{Kanalkonflikt Kannibalisierung Plattform Direct Sales Multi-Channel B2B}
+
+\begin{loesungbox}
+\textbf{1. Drei konkrete Kanalkonflikte:}
+\begin{itemize}
+  \item \emph{Preisinkonsistenz:} Plattformkunde sieht Listenpreis 100\,\euro, Direct-Sales-Kunde bekommt für 20.000\,\euro{} Jahresvolumen 75\,\euro{} pro Einheit \textendash{} öffentliche Sichtbarkeit erzeugt Vertrauensverlust.
+  \item \emph{Provisionsverlust für Anbieter:} Großkundengeschäft läuft am Anbieter vorbei, dieser verliert Provisionsbeteiligung oder bekommt schlechtere Konditionen.
+  \item \emph{Vertriebsteam vs.\ Plattform-Akquise:} interner Direct-Sales-Vertrieb und Plattform-Marketing kämpfen um dieselben Großkunden-Leads, Eskalationen entstehen.
+\end{itemize}
+
+\textbf{2. Stakeholder pro Konflikt:}
+\begin{itemize}
+  \item \emph{Preisinkonsistenz:} Bestandskunde (Mittelstand), der den Listenpreis zahlt.
+  \item \emph{Provisionsverlust:} Anbieter, der gegen die ``Plattform-Eigenkunden'' kein Geschäft mehr macht.
+  \item \emph{Lead-Kampf:} Vertriebsteam vs.\ Plattform-Marketing.
+\end{itemize}
+
+\textbf{3. Drei Steuerungsmechanismen:}
+\begin{itemize}
+  \item \emph{Volumenstaffel statt Sondervertrag:} Rabatte sind transparent ab definierten Schwellen \textendash{} keine ``geheimen'' Preise.
+  \item \emph{Kanal-Caps:} Direct-Sales-Anteil maximal 25\,\% des Plattformumsatzes, mit Quartalsmonitoring durch Controlling.
+  \item \emph{Klare Lead-Zuordnung:} Großkunden ab definierter Mitarbeiterzahl gehören zu Direct Sales, alle anderen zu Plattform-Marketing \textendash{} mit Konfliktklausel und Schiedsstelle (CRO).
+\end{itemize}
+
+\textbf{4. Faustregel:} Kannibalisierung ist akzeptabel, wenn der gewonnene Margenvorteil im neuen Kanal \emph{nachweisbar größer} ist als der Umsatzverlust im alten Kanal \emph{und} die Stakeholder (Anbieter, Bestandskunden, Vertriebsteam) den Mechanismus nachvollziehen können. Wenn beides nicht gilt, ist Kannibalisierung Selbstschaden.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{Skalierung vs.\ Stabilisierung \textendash{} Streams einordnen}{\nivLii}{20\,min}
+
+\ytquery{Revenue Streams skalieren stabilisieren begrenzen Plattform Portfolio Wachstum}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Transaktionsprovision \textrightarrow{} stabilisieren.} 70\,\% Umsatz und sinkende Marge \textendash{} weiter skalieren würde den Margenverfall beschleunigen. Stattdessen: Marge schützen (Sortimentsmix, Preisdifferenzierung), Anteil aktiv senken.
+  \item \textbf{Premium-Anbieterprofile \textrightarrow{} stabilisieren oder umbauen.} Anbieter beklagen unklaren Nutzen \textendash{} Risiko der Abwanderung. Entweder klar messbaren Nutzen liefern (Auswertung, Lead-Zahlen) oder umstellen auf nutzungsbasierte Featured-Listings.
+  \item \textbf{Unternehmens-Abo mit Reporting \textrightarrow{} skalieren.} Hohe Marge, klarer strategischer Wert; nur 3 Pilotkunden ist eine \emph{frühe} Phase, aber das Modell ist validiert. Hier muss aktiv investiert werden.
+  \item \textbf{Daten-/Benchmark-Service \textrightarrow{} testen.} Hoher strategischer Wert, aber Datenschutz ungeklärt. Erst Governance, dann begrenzter Pilot mit anonymisierten Daten und freiwilliger Anbieterzustimmung.
+  \item \textbf{Affiliate-Netzwerk \textrightarrow{} begrenzen.} Wächst organisch, aber schwer zu steuern \textendash{} ohne Governance entstehen Qualitätsrisiken (SEO, Markenbild). Cap setzen, Partner-Qualifizierung einführen.
+  \item \textbf{Display-Werbung Drittanbieter \textrightarrow{} beenden.} Niedrige Marge \emph{und} Schaden am Nutzererlebnis \textendash{} klassischer Stream, der mehr kostet als bringt.
+\end{enumerate}
+
+\smallskip
+\textbf{Größte Managementaufmerksamkeit:} Das \emph{Unternehmens-Abo} \textendash{} weil hier in 6 Monaten die Architektur der Plattform vom Provisionsmodell hin zur margenstärkeren Abo-Logik verschoben werden kann. Die anderen Streams sind taktisch; das Abo ist strategisch.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie MarketSupply 360 \textendash{} 12-Monats-Architektur}{\nivLiii}{45\,min}
+
+\ytquery{B2B Plattform Revenue Streams Skalierung CRO Mittelstand Profitabilität}
+
+\begin{loesungbox}
+\textbf{1. Profitabilitäts- und Wachstumsanalyse:}
+\begin{itemize}
+  \item Hohes Volumen, aber Konzentration auf Transaktionsprovision macht die Marge anfällig für Preiswettbewerb.
+  \item Conversion 1{,}9\,\% \textendash{} ein einziger Prozentpunkt Verbesserung würde den Umsatz um über 50\,\% heben.
+  \item Wiederkaufrate 32\,\% ist solide, aber kein Selbstläufer \textendash{} Bestandskundenbindung ist der nächste Hebel.
+  \item Anbieterzufriedenheit ist gefährdet (unklare Sichtbarkeit) \textendash{} ein Abwandern der Anbieterseite würde die Plattform direkt schwächen (Marktseiten-Logik).
+  \item Das Management hat KPI-Inflation, aber kein Entscheidungssystem.
+\end{itemize}
+
+\textbf{2. Bewertung der Ansätze A\,--\,F:}
+\begin{itemize}
+  \item \emph{A \textendash{} Unternehmensabo:} sehr hohes Umsatz- und Margenpotenzial, hoher CLV-Beitrag, mittlere Komplexität, niedriges Risiko \textendash{} strategischer Kernhebel.
+  \item \emph{B \textendash{} Conversion-Optimierung:} höchstes Hebel-Verhältnis (Wirkung / Aufwand), unmittelbar messbar, fast risikofrei.
+  \item \emph{C \textendash{} Partnernetzwerk Logistik:} mittleres Potenzial, mittlere Komplexität; Risiko: Abhängigkeit und Schnittstellenkonflikte.
+  \item \emph{D \textendash{} Daten-/Benchmark-Service:} hoher strategischer Wert, aber Datenschutz, Anbietervertrauen und Vertriebsfähigkeit zunächst zu klären.
+  \item \emph{E \textendash{} Affiliate-Modell:} mittleres Umsatzpotenzial, aber geringe Marge, hohe SEO-/Markenrisiken \textendash{} nur sehr selektiv.
+  \item \emph{F \textendash{} Display-Werbung:} schadet Nutzererlebnis und Marke mehr als sie bringt \textendash{} nicht weiterverfolgen.
+\end{itemize}
+
+\textbf{3. Priorisierte 12-Monats-Architektur:}
+\begin{itemize}
+  \item \emph{Skaliert:} A (Unternehmensabo) und B (Conversion-Optimierung).
+  \item \emph{Pilotiert:} C (Partnernetzwerk Logistik mit 5\,--\,8 Pilotpartnern), D (Daten-/Benchmark mit anonymisiertem Datensatz).
+  \item \emph{Stabilisiert:} Transaktionsprovision \textendash{} Marge schützen, Anteil mittel halten.
+  \item \emph{Zurückgestellt:} E (Affiliate) \textendash{} erst nach Governance.
+  \item \emph{Beendet:} F (Display-Werbung).
+\end{itemize}
+
+\textbf{4. Budgetverteilung (600.000\,\euro):}
+\begin{itemize}
+  \item 220.000\,\euro{} \textendash{} Unternehmensabo (Sales, Onboarding, Reporting-Funktion).
+  \item 160.000\,\euro{} \textendash{} Conversion-Optimierung (Funnel, Produktdaten, Checkout, A/B-Tests).
+  \item 90.000\,\euro{} \textendash{} Partnernetzwerk-Pilot Logistik.
+  \item 60.000\,\euro{} \textendash{} Daten-/Benchmark-Pilot (inkl.\ Datenschutz-Beratung).
+  \item 40.000\,\euro{} \textendash{} KPI-Dashboard und Controlling-Aufbau.
+  \item 30.000\,\euro{} \textendash{} Reserve für unvorhergesehene Pilot-Anpassungen.
+\end{itemize}
+
+\textbf{5. KPI-Dashboard (max.\ 6 KPIs):}
+\begin{itemize}
+  \item Deckungsbeitrag je Stream (monatlich).
+  \item Conversion Rate (mit Funnel-Drill-down).
+  \item CLV / CAC (gesamt und nach Segment).
+  \item Net Revenue Retention der Abokunden.
+  \item Anbieterzufriedenheit (NPS oder Score).
+  \item Plattformabhängigkeit Top-Anbieter (Cluster-Risiko-Kennzahl).
+\end{itemize}
+
+\textbf{6. Entscheidung unter Unsicherheit:}
+Trotz unklarer Akzeptanz und langer Sales Cycles wird das \emph{Unternehmensabo} bereits in Monat 1 priorisiert investiert, statt erst Validierung abzuwarten. Begründung: Die Plattform ist strukturell zu provisionsabhängig; jeder Quartal Verzug verstärkt die Margenerosion. Risiko-Mitigation: Pilot-Cohorts, klare Stop-Loss-Kriterien (z.\,B.\ ``in 4 Monaten 5 Abschlüsse, sonst Kurskorrektur''). \emph{Strategische Architekturentscheidungen werden nicht durch Sicherheit, sondern durch Plausibilität und reversible Risiken legitimiert.}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Kanal-Caps und Diversifikationsgrenzen}{\nivLiii}{30\,min}
+
+\ytquery{Plattform Diversifikation Kanal Cap Revenue Portfolio Senior Management Grenzen}
+
+\begin{loesungbox}
+\textbf{1. Drei Diversifikationsfallen:}
+\begin{itemize}
+  \item \emph{Kanalproliferation ohne Marge:} jedes Quartal ein neuer Kanal, weil ``Wettbewerber das auch machen'' \textendash{} die Organisation verliert Fokus, der Deckungsbeitrag verschlechtert sich, niemand hält ein Geschäft mehr durch.
+  \item \emph{KPI-Inflation ohne Entscheidung:} 40 Kennzahlen im Dashboard, aber keine Schwelle, ab der \emph{gehandelt} werden muss \textendash{} Management beobachtet und entscheidet nicht.
+  \item \emph{Partnerwildwuchs ohne Governance:} Affiliate- und Partnernetzwerke wachsen organisch, ohne Qualitäts-, Marken- oder SEO-Standards \textendash{} kurzfristig Umsatz, langfristig Marken- und Compliance-Risiken.
+\end{itemize}
+
+\textbf{2. Konkretes Plattformbeispiel \textendash{} z.\,B.\ B2B-Marktplatz für Werkzeuge/Industriebedarf:}
+
+\smallskip
+\emph{Sinnvolle Kanal-Caps:}
+\begin{itemize}
+  \item Kein einzelner Marktplatzkanal über \textbf{30\,\% des Umsatzes} \textendash{} schützt vor Lock-in.
+  \item Margenuntergrenze von \textbf{15\,\% Deckungsbeitrag} pro Kanal \textendash{} darunter ist der Kanal entweder margenneutral oder wird beendet.
+  \item Komplexitätsbudget: pro Geschäftsjahr maximal \emph{ein} neuer Kanal-Pilot \textendash{} sonst kippt die Organisation in Tool- und Prozesschaos.
+\end{itemize}
+
+\emph{Stream, der trotz Wachstumspotenzial begrenzt wird:} ein \emph{generischer Massen-Marktplatz} (z.\,B.\ Amazon Business). Begründung: Reichweite hoch, aber Preisvergleich erzwingt sinkende Marge, Kundendaten gehören dem Marktplatz, Markenraum verschwindet. Maximaler Anteil 10\,\% des Umsatzes \textendash{} und nur für ausgewählte Standardprodukte.
+
+\smallskip
+\emph{Governance:}
+\begin{itemize}
+  \item \emph{CRO} verantwortet das Kanalportfolio und Cap-Entscheidungen quartalsweise.
+  \item \emph{Plattformmanagement} betreibt die Plattform und liefert Kanal-Performance-Daten.
+  \item \emph{Controlling} prüft Marge je Kanal monatlich, eskaliert bei Cap-Überschreitung.
+  \item \emph{Partner Management} verantwortet Partnerportfolio, Qualität und Konfliktlösung.
+\end{itemize}
+
+\textbf{3. Faustregel:} Ein neuer Revenue Stream wird \emph{nicht} eingeführt, wenn er entweder (a) die Margenuntergrenze unterschreitet, oder (b) die Organisation nicht über freie Steuerungs- und Datenkapazität verfügt, oder (c) bestehende Kanäle stärker kannibalisieren würde, als er insgesamt erwirtschaftet. ``Umsatz darf nicht das einzige Kriterium sein, sonst wird die Plattform zur Patchworkdecke.''
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Revenue- und Performance-Architektur 24 Monate}{\nivLiii}{45\,min}
+
+\ytquery{Chief Revenue Officer Architektur Plattform 24 Monate Senior Management Decision}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind legitim, wenn sie als Architektur (nicht als Liste) konsistent argumentieren.}
+
+\smallskip
+\textbf{1. Zielbild Revenue-Architektur 24 Monate:}
+Die Plattform diversifiziert von einem Provisions-dominierten Modell zu einer dreigliedrigen Architektur \textendash{} Provision (Volumen, max.\ 50\,\% Umsatzanteil), Subscription (Großkundenabo, Ziel 25\,\%), Services/Daten (Premium, Reporting, Benchmark, Ziel 15\,\%) \textendash{} ergänzt durch begrenzte Partner- und Affiliate-Streams. Margenziel: Deckungsbeitrag pro Kanal mindestens 15\,\%, Net Revenue Retention der Abokunden $\geq$\,105\,\%, Anbieterabhängigkeit (Top 50) $\leq$\,40\,\% des Anbieterumsatzes.
+
+\smallskip
+\textbf{2. Bestehende und mögliche Streams:}
+\begin{itemize}
+  \item Bestand: Transaktionsprovision, Premium-Profile, Sponsored Listings.
+  \item Möglich: Unternehmensabo (Reporting, SSO, SLA), Daten-/Benchmark-Reports, Servicepakete (Onboarding, Schulung), Affiliate, Partnerprovisionen Logistik/Service, Whitelabel-Lösungen.
+\end{itemize}
+
+\textbf{3. Bewertung:} pro Stream mit Umsatzpotenzial, Marge, CLV-Beitrag, Risiko, Skalierbarkeit, Kundennutzen und Komplexität (vgl.\ Aufgabe 9). Hochgewichtet: Marge, CLV, Skalierbarkeit.
+
+\smallskip
+\textbf{4. Multi-Channel-Architektur:}
+\begin{itemize}
+  \item \emph{Kernkanal:} eigene Plattform mit Kundenportal und Login-Bereich.
+  \item \emph{Partnerkanal:} qualifizierte Logistik- und Servicepartner, kontrolliertes Onboarding.
+  \item \emph{Direktvertrieb:} Account Executives für Unternehmensabo und Großkundenbetreuung.
+  \item \emph{Affiliate:} max.\ 8\,\% Umsatzanteil, ausschließlich qualifizierte Branchenpartner.
+  \item \emph{Kundenbindung:} E-Mail-Nurturing, Wiederbestellprozesse, Cross-Selling-Engine.
+\end{itemize}
+
+\textbf{5. Entscheidung:}
+\begin{itemize}
+  \item \emph{Skaliert:} Unternehmensabo, Conversion-Optimierung, Servicepakete.
+  \item \emph{Getestet:} Daten-/Benchmark-Service (Pilot 9 Monate), Whitelabel (Konzeptphase).
+  \item \emph{Stabilisiert:} Transaktionsprovision (Margenschutz), Premium-Profile.
+  \item \emph{Zurückgestellt:} aggressive Affiliate-Skalierung, Display-Werbung.
+  \item \emph{Beendet:} Display-Werbung Drittanbieter, intransparente Sponsored-Logik.
+\end{itemize}
+
+\textbf{6. Conversion-Logik entlang des Funnels:}
+\begin{itemize}
+  \item \emph{Sichtbarkeit:} SEO, Content, gezielte Branchen-Kampagnen.
+  \item \emph{Klick:} überzeugende Landingpages, klarer Nutzen, Social Proof.
+  \item \emph{Anfrage / Konfiguration:} reibungsarme Konfiguratoren, Klartextpreise.
+  \item \emph{Kauf:} schneller Checkout, Pay-by-Invoice, klare Lieferzeit.
+  \item \emph{Wiederkauf:} Login-Bereich, Nachbestellung, automatische Erinnerungen.
+  \item \emph{Upgrade:} Tier-Upgrades durch echte Nutzungsgrenzen, klare Mehrwerte.
+\end{itemize}
+
+\textbf{7. KPI-Architektur:}
+\begin{itemize}
+  \item Pflicht im Boardmeeting: Umsatz, Deckungsbeitrag je Stream, CLV/CAC-Verhältnis, Conversion (mit Funnel-Drill-down), Net Revenue Retention.
+  \item Operativ: Churn, Wiederkaufrate, Partnerbeitrag, Anbieterzufriedenheit.
+  \item Strategisch: Marktanteil Kernsegment, Abhängigkeitskennzahlen (Top-Anbieter, Top-Kanäle).
+\end{itemize}
+
+\textbf{8. Governance:}
+\begin{itemize}
+  \item \emph{CRO:} Portfolio-Entscheidungen, Cap-Steuerung, Konfliktauflösung.
+  \item \emph{Plattformmanagement:} operatives Tagesgeschäft.
+  \item \emph{Partner Management:} Partnerqualität, Konfliktlösung.
+  \item \emph{Controlling:} Deckungsbeitrag, Cap-Monitoring.
+  \item \emph{Geschäftsführung:} Strategische Mid-Term-Reviews, Quartal.
+\end{itemize}
+
+\textbf{9. Risikoanalyse:}
+\begin{itemize}
+  \item Kannibalisierung \textrightarrow{} Kanal-Caps, Volumenstaffeln.
+  \item Kanalabhängigkeit \textrightarrow{} maximale Umsatzanteile.
+  \item Margenverlust \textrightarrow{} Deckungsbeitragsgrenze 15\,\%.
+  \item Partnerkonflikte \textrightarrow{} klare Verträge, Schiedslogik.
+  \item Datenbrüche \textrightarrow{} zentrale Datenarchitektur.
+  \item Organisatorische Überforderung \textrightarrow{} max.\ 1 neuer Kanal-Pilot pro Jahr.
+\end{itemize}
+
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item Unternehmensabo ohne validierte Akzeptanz priorisieren \textendash{} weil die Provisionsabhängigkeit strategisch größer schadet als ein Pilot-Misserfolg.
+  \item Kein aggressives Affiliate-Wachstum \textendash{} obwohl es schnellen Umsatz brächte, weil Qualitäts- und SEO-Risiken den Markenwert gefährden.
+  \item Kanal-Cap (30\,\%) auf jeden einzelnen Kanal \emph{vor} dem ersten Beweis einer Abhängigkeit \textendash{} weil nachträglicher Ausstieg dreimal so teuer wäre wie das proaktive Limit.
+\end{enumerate}
+
+\smallskip
+\textbf{Zusatz \textendash{} Entscheidung gegen attraktive Wachstumsoption:} Gegen aggressive \emph{Sponsored-Listing-Skalierung}, obwohl sie schnellen Anbieter-Cash brächte. Aus Senior-Level-Perspektive: Sponsored ohne klare Kennzeichnung und ohne Nutzen-Messung erzeugt Anbieter-Misstrauen, Kunden-Skepsis und langfristig kartellrechtliches Risiko (Bevorzugung). Die ``attraktive'' Option ist hier eine strategische Falle, die Vertrauen, Compliance und Markenkapital verbrennt.
+\end{loesungbox}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterlösungen sind Diskussionsbasis. Wenn Ihre eigene Lösung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder einen anderen Maßstab angelegt?} Beides ist legitim, solange die Logik nachvollziehbar bleibt.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Im Coaching geht es um drei Fragen: Welche Annahmen haben Sie gemacht? Welche Zielkonflikte sind sichtbar? Welche Entscheidung würden Sie auch verantworten, wenn der Markt anders reagiert als angenommen?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 12 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

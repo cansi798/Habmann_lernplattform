@@ -1,0 +1,720 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 14 - Loesungsheft
+% Chatbots, Conversational Commerce & digitale Vertriebstools
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+\usepackage{microtype}
+\linespread{1.15}
+
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 14}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Chatbots \& Conversational Commerce}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 7 \textperiodcentered{} TAG 14 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 17.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 14\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen \textendash{} Chatbots,\\Conversational Commerce\\\& digitale Vertriebstools.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis,\\nicht die einzige korrekte Lösung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 14}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterlösungen sind \emph{eine} mögliche Lösung. Auf L2 und L3 sind mehrere Begründungswege legitim, solange sie zwischen Kundennutzen, Datenrealität und Verantwortlichkeit sauber unterscheiden.
+
+\begin{infobox}[Nutzung im Coaching]
+Achten Sie auf den Unterschied zwischen ``Was ist möglich?'' und ``Was ist verantwortbar?'' \textendash{} im Conversational-Commerce-Kontext fallen beide Antworten oft auseinander.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+\aufgabenkopf{1}{Chatbot-Typen und Conversational Commerce}{\nivLi}{8\,min}
+
+\ytquery{Chatbot Typen regelbasiert KI hybrid Conversational Commerce Definition}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Regelbasierter Chatbot:} folgt einem klar definierten Entscheidungsbaum mit festen Antwortpfaden \textendash{} prognoseempfindlich, dafür kontrollierbar und transparent.
+  \item \textbf{KI-gestützter Chatbot:} nutzt Sprachmodelle, akzeptiert freie Eingaben und generiert Antworten dynamisch \textendash{} flexibel, aber schwerer zu kontrollieren (Halluzinationen, Bias).
+  \item \textbf{Hybrider Bot-Mensch-Prozess:} Bot bedient definierte Standardpfade und eskaliert bei Grenzfällen, Beschwerden oder Komplexität an einen Menschen \textendash{} aktuell die für B2B verbreitetste Form.
+  \item \textbf{Conversational Commerce:} vertriebsorientierte Kommunikation über Chat, Messenger, Kundenportal, Website oder Plattform mit dem Ziel, Information, Beratung, Lead-Qualifizierung und Transaktion über Dialog statt Formular zu führen.
+\end{enumerate}
+
+\smallskip
+\textbf{Drei Entscheidungsfaktoren:} \emph{Komplexität der Anfragen} (Standard vs.\ erklärungsbedürftig), \emph{Datenqualität und Trainingsbasis} (Regelpfade ausreichend? KI-Daten vorhanden?), \emph{Risiko falscher Antworten} (Compliance / Marke). Komplexe Anfragen mit hohem Risiko brauchen hybride Modelle, Standardanfragen können regelbasiert; reine KI-Bots ohne Eskalation sind selten verantwortbar.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{2}{Einsatzfelder im B2B-Vertrieb}{\nivLi}{8\,min}
+
+\ytquery{Chatbot B2B Vertrieb Einsatzfelder Leadqualifizierung FAQ Nachbestellung}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Erstinformation / FAQ:} Kunde \textendash{} schnelle Antwort auf wiederkehrende Fragen. Vertrieb \textendash{} Innendienst von Standardanfragen entlasten.
+  \item \textbf{Leadqualifizierung:} Kunde \textendash{} sofortige Antwort statt langer Rückrufschleife. Vertrieb \textendash{} qualifizierte Leads landen direkt im CRM mit Vorabinfos.
+  \item \textbf{Produktberatung:} Kunde \textendash{} gezielte Empfehlung statt Suchen im Katalog. Vertrieb \textendash{} entlastet Innendienst bei einfachen Fragen, bereitet komplexe Beratungen vor.
+  \item \textbf{Terminbuchung:} Kunde \textendash{} freier Termin ohne Telefon. Vertrieb \textendash{} Kalender füllt sich automatisch mit qualifizierten Gesprächen.
+  \item \textbf{Angebotsvorbereitung:} Kunde \textendash{} schneller Überblick über Preise und Pakete. Vertrieb \textendash{} Angebotsentwurf liegt fertig vor, wenn Vertriebler übernimmt.
+  \item \textbf{Statusabfragen:} Kunde \textendash{} Lieferstatus rund um die Uhr. Vertrieb / Service \textendash{} weniger Anfragen ``Wo ist meine Bestellung?''.
+  \item \textbf{Nachbestellung / Reorder:} Kunde \textendash{} einfache Wiederbestellung ohne erneutes Konfigurieren. Vertrieb \textendash{} stabile Wiederkaufrate, automatisierte Umsatzbasis.
+  \item \textbf{After-Sales \& Reaktivierung:} Kunde \textendash{} relevante Hinweise zu Wartung, Verbrauch, Updates. Vertrieb \textendash{} Reaktivierung inaktiver Kunden ohne manuelles Nachfassen.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{3}{ROI-Logik und KPIs}{\nivLi}{8\,min}
+
+\ytquery{Chatbot ROI KPI Bot Lösungsquote Eskalation Kosten pro Kontakt B2B}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Bot-Nutzungsrate:} Anteil der Besucher / Kunden, die den Bot tatsächlich verwenden \textendash{} Indikator für Akzeptanz.
+  \item \textbf{Lösungsquote:} Anteil der Anfragen, die der Bot \emph{vollständig} ohne Eskalation löst.
+  \item \textbf{Eskalationsquote:} Anteil der Dialoge, die an Menschen übergeben werden \textendash{} hoch = Bot ist nicht reif, sehr niedrig = Eskalation funktioniert nicht.
+  \item \textbf{Leadqualifizierungsrate:} Anteil der Bot-Dialoge, die in qualifizierten Leads enden (CRM-übergeben mit vollständigen Daten).
+  \item \textbf{Reaktionszeit:} Durchschnittliche Antwortzeit \textendash{} vor und nach Bot-Einführung.
+  \item \textbf{Kosten pro Kontakt:} Personalkosten + Tool-Kosten / Anzahl bearbeiteter Anfragen \textendash{} der wirtschaftliche Kernindikator.
+\end{enumerate}
+
+\smallskip
+\textbf{ROI-Formel:}
+$\text{ROI} = \frac{(\text{eingesparte Innendienstzeit} \times \text{Stundensatz}) + (\text{zusätzliche Leads} \times \text{Wert pro Lead}) - (\text{Tool-Kosten} + \text{Implementierung} + \text{Pflege})}{\text{Gesamtkosten}}$
+
+\smallskip
+\textbf{Vanity-Metrik \emph{nicht} als Hauptindikator:} \emph{Bot-Nutzungsrate}. Sie misst, ob Besucher den Bot ``anklicken'' \textendash{} nicht, ob er Wert schafft. Ein Bot mit 90\,\% Nutzungsrate und 30\,\% Lösungsquote frustriert mehr Kunden, als er hilft.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+\aufgabenkopf{4}{OfficeCloud Services \textendash{} Chatbot-Use-Cases}{\nivLii}{25\,min}
+
+\ytquery{B2B Chatbot Use Case Lead Qualifizierung Terminbuchung Dialogablauf}
+
+\begin{loesungbox}
+\textbf{1. Fünf typische Kundenfragen:}
+\begin{itemize}
+  \item ``Wo werden meine Daten gespeichert (EU, USA)?''
+  \item ``Wie lange dauert die Einrichtung?''
+  \item ``Was kostet die Lösung für 25 Arbeitsplätze?''
+  \item ``Welche Integration zu Office 365 / Google Workspace gibt es?''
+  \item ``Kann ich einen Beratungstermin vereinbaren?''
+  \item Zusätzlich: ``Welche Sicherheitsstandards (ISO, BSI, TISAX)?''
+\end{itemize}
+
+\textbf{2. Information vs.\ Qualifizierung:}
+\begin{itemize}
+  \item \emph{Information:} Datenspeicherort, Sicherheitsstandards, Integration, Einrichtungszeitraum.
+  \item \emph{Qualifizierung:} Anzahl Arbeitsplätze, Branche, gewünschter Startzeitpunkt, Entscheider-Rolle, Budget.
+\end{itemize}
+
+\textbf{3. Eskalation an Menschen:}
+\begin{itemize}
+  \item Konkrete Preisanfragen ab definierter Größe (z.\,B.\ $>$\,50 Arbeitsplätze).
+  \item Spezielle Compliance-/Datenschutzfragen (z.\,B.\ Auftragsverarbeitungsvertrag, Verarbeitung Gesundheitsdaten).
+  \item Sondersituationen (Migration aus Bestandssystem, individuelle Schnittstellen).
+  \item Bei Frustsignalen oder expliziter Bitte ``mit Mensch sprechen''.
+\end{itemize}
+
+\textbf{4. Dialogablauf (6\,--\,8 Schritte):}
+\begin{enumerate}
+  \item Begrüßung + offene Frage: ``Wobei kann ich Sie unterstützen?''
+  \item Schnellauswahl: Preise / Datenschutz / Integration / Termin.
+  \item Bei Preisen: Anzahl Arbeitsplätze, Branche, Region.
+  \item Bot zeigt Richtpreis-Spanne + Hinweis: ``Genaues Angebot vom Vertrieb''.
+  \item Bot fragt: ``Möchten Sie ein 20-Min.-Beratungsgespräch?''
+  \item Terminvorschläge aus Kalender, Kontaktdaten erfassen, DSGVO-Hinweis.
+  \item Bestätigungsmail + Vorbereitung-Material verschicken.
+  \item Lead-Übergabe an CRM mit allen erfassten Daten.
+\end{enumerate}
+
+\textbf{5. Drei Risiken + Mitigation:}
+\begin{itemize}
+  \item \emph{Falsche Datenschutzaussage} \textrightarrow{} regelbasierte, vorab freigegebene Antworttexte für Datenschutzthemen; keine generative Antwort.
+  \item \emph{Frustration durch wiederholte Standardantworten} \textrightarrow{} ``Mensch''-Button immer sichtbar; Auto-Eskalation nach 3 Wiederholungen.
+  \item \emph{Lead geht verloren / wird nicht ans CRM übergeben} \textrightarrow{} CRM-Pflichtintegration mit Logging und Fehlermeldung an Owner.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{5}{OfficeCloud Services \textendash{} Tool-Bewertung und ROI}{\nivLii}{30\,min}
+
+\ytquery{Chatbot Implementierung Pilot ROI KPI Tool Bewertung B2B}
+
+\begin{loesungbox}
+\textbf{1. Bewertungsmatrix (Skala 1\,--\,5):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lccccc@{}}
+\toprule
+\textbf{Tool} & \textbf{Nutzen} & \textbf{Aufwand} & \textbf{Kosten} & \textbf{Daten} & \textbf{Vertrieb} \\
+\midrule
+A: FAQ-Bot          & 4 & 2 & 2 & 2 & 4 \\
+B: Termin-Buchung   & 5 & 2 & 2 & 2 & 5 \\
+C: E-Mail-Strecke   & 3 & 2 & 2 & 3 & 3 \\
+D: CRM-Integration  & 4 & 3 & 3 & 4 & 5 \\
+E: KI-Empfehlungen  & 3 & 4 & 4 & 5 & 3 \\
+F: Dashboard        & 3 & 3 & 2 & 3 & 3 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+(Aufwand/Kosten/Daten: 1 niedrig, 5 hoch.)
+
+\smallskip
+\textbf{2. Priorisierung:}
+\begin{itemize}
+  \item \emph{Sofort starten:} A (FAQ-Bot), B (Terminbuchung), D (CRM-Integration).
+  \item \emph{Später testen:} C (E-Mail-Strecke), F (Dashboard) \textendash{} sobald Bot-Daten fließen.
+  \item \emph{Zunächst nicht umsetzen:} E (KI-Produktempfehlung) \textendash{} hohe Datenanforderung, hohe Halluzinationsgefahr für ein erklärungsbedürftiges B2B-Produkt.
+\end{itemize}
+
+\textbf{3. Erster Pilot:} \emph{Kombination A + B + D} \textendash{} FAQ-Bot mit Terminbuchung und CRM-Übergabe. Liefert messbare Wirkung (Entlastung Innendienst + qualifizierte Termine) bei begrenztem Risiko.
+
+\smallskip
+\textbf{4. Fünf KPIs:}
+\begin{itemize}
+  \item Lösungsquote (Bot-Fragen vollständig beantwortet, ohne Eskalation).
+  \item Qualifizierte Terminbuchungen pro Monat (über Bot vs.\ Status Quo).
+  \item Eskalationsquote (Eskalationen / Gesamtanfragen).
+  \item Reaktionszeit auf Standardfragen (vorher vs.\ nachher).
+  \item Kosten pro Kontakt (Personalstunden + Tool-Kosten / Anfragen).
+\end{itemize}
+
+\textbf{5. ROI-Logik:}
+\begin{itemize}
+  \item \emph{Kosten:} 65.000\,\euro{} über 6 Monate inkl.\ Implementierung, Lizenz, Inhalts-Aufbau.
+  \item \emph{Nutzen:} eingesparte Innendienstzeit (z.\,B.\ 3 Std./Tag, 60 Std./Monat $\times$ Stundensatz 55\,\euro{} = 3.300\,\euro/Mon.\ = 19.800\,\euro{}/6 Mon.) + zusätzliche qualifizierte Termine (z.\,B.\ 20/Monat, Conversion 25\,\%, Wert pro Auftrag 6.000\,\euro{} = 30.000\,\euro/Mon.).
+  \item \emph{Ab wann wirtschaftlich:} bereits ab Monat 3\,--\,4 amortisiert, wenn beide Effekte zusammen wirken \textendash{} unter konservativen Annahmen Monat 6.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{6}{Dialog-Design \textendash{} Übergaberegeln Bot \textrightarrow{} Mensch}{\nivLii}{20\,min}
+
+\ytquery{Chatbot Eskalation Bot zu Mensch Übergabe B2B Dialog Design Regeln}
+
+\begin{loesungbox}
+\textbf{Sechs Eskalationsregeln:}
+\begin{enumerate}
+  \item \emph{Dreimal gleiche Frage:} Auto-Eskalation an Innendienst nach 3 Wiederholungen ohne Lösung. Kontextübergabe: gesamter Dialogverlauf, erkannte Intention. \emph{Verzögerungsfrei.}
+  \item \emph{``Mensch''-Wunsch:} sofortige Eskalation, ohne Bot-Schleifen. Kontext: bereits erhobene Daten. \emph{Verzögerungsfrei.}
+  \item \emph{Sonderfall, nicht im Standardpfad:} Bot erkennt unbekanntes Intent-Cluster \textrightarrow{} Eskalation an Innendienst oder zuständigen Vertrieb. Kontext: Originaltext der Anfrage.
+  \item \emph{Rechtliche/Compliance-Schlüsselwörter:} (\texttt{Datenschutz, AGB, Vertragsausstieg, Kündigung, Anwalt, Reklamation}) \textrightarrow{} \emph{sofort} an Innendienst oder Compliance-Verantwortliche. Kontext: vollständiger Verlauf, plus Hinweis ``Compliance-relevant''.
+  \item \emph{Frustsignale:} (\texttt{ärgerlich, schlecht, geht nicht, dauert ewig, Frechheit}) \textrightarrow{} Eskalation an Servicemanagement mit Sentiment-Flag. Kontext: gesamter Verlauf, Bot-Antworten markiert.
+  \item \emph{Angebot $>$\,10.000\,\euro:} Eskalation an Außendienst oder Key-Account-Manager. Kontext: Volumen, Branche, Ansprechpartner, Wunschtermin.
+\end{enumerate}
+
+\smallskip
+\textbf{Nicht verzögern darf der Bot:} Eskalationen bei \emph{Compliance-Themen}, \emph{expliziten Beschwerden} und \emph{ausdrücklichem Wunsch nach Mensch}. Hier ist jede Bot-Schleife ein Verstoß gegen Kundennutzen und gegen Markenversprechen.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{7}{B2B Supply Solutions \textendash{} Use-Case-Priorisierung}{\nivLii}{22\,min}
+
+\ytquery{B2B Chatbot Use Case Priorisierung Industrie Ersatzteile Anfragen Innendienst}
+
+\begin{loesungbox}
+\textbf{1. Bewertungstabelle (qualitativ):}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXXXX@{}}
+\toprule
+\textbf{Use Case} & \textbf{Volumen} & \textbf{Automatisierbarkeit} & \textbf{Datenabhängigkeit} & \textbf{Nutzen} \\
+\midrule
+FAQ-Bot                & sehr hoch & sehr hoch (regelbasiert) & niedrig (Wissensbasis) & hoch (Entlastung) \\
+Verfügbarkeit/Liefer.  & hoch & hoch (ERP-Abfrage) & hoch (ERP-API) & sehr hoch \\
+Kompatibilitätsassist. & mittel & mittel & hoch (Produkt-DB) & hoch (Spezifisch) \\
+Nachbestellung Chat    & hoch (Bestand) & hoch (Login) & hoch (Konto-Login) & sehr hoch (Wiederkauf) \\
+Leadqualifizierung     & mittel & hoch & mittel (CRM-Übergabe) & hoch \\
+Service-Empfehlung     & mittel & mittel (KI) & sehr hoch & mittel \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{2. Zwei Use Cases erste 3 Monate:}
+\begin{itemize}
+  \item \emph{FAQ-Bot} (hohes Volumen, einfache Datenbasis, sofortige Wirkung).
+  \item \emph{Verfügbarkeit-/Lieferzeit-Auskunft} (sehr hohes Volumen, hoher Kundennutzen, ERP-Integration ist Mehraufwand, lohnt aber).
+\end{itemize}
+
+\textbf{3. Bewusst zurückgestellt:} \emph{Service-Empfehlung per KI} \textendash{} verlangt sehr saubere Daten und birgt das Risiko, falsche Pakete vorzuschlagen. Ohne validierte Datenbasis kein Pilot.
+
+\smallskip
+\textbf{4. Schätzgerüst:}
+\begin{itemize}
+  \item Automatisierbare Anfragen: 45\,\% von 4.000 = \textbf{1.800/Monat}.
+  \item Bot löst 60\,\% davon: \textbf{1.080 vollständig automatisiert}.
+  \item Einsparung Innendienst: 1.080 $\times$ 12 Min.\ = \textbf{12.960 Min.\ = 216 Std./Monat}.
+  \item Bei 160 Std./Vollzeit-Monat entspricht das \textbf{ca.\ 1{,}35 Vollzeitäquivalenten}.
+\end{itemize}
+
+Die Entlastung erlaubt Innendienst-Reallokation in Lead-Bearbeitung und Servicequalität \textendash{} keine Entlassungslogik, sondern Kapazitätsumlenkung.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{8}{Wenn der Bot der Marke schadet}{\nivLii}{20\,min}
+
+\ytquery{Chatbot Risiken Marke Datenschutz Reklamation Compliance B2B}
+
+\begin{loesungbox}
+\textbf{Szenario A \textendash{} falsche Datenschutzauskunft:}
+\begin{itemize}
+  \item \emph{Schaden:} Rechtliches Risiko (DSGVO-Verstoß durch Fehlinformation), Vertrauensverlust, mögliche Aufsichtsbehörde.
+  \item \emph{Technisch:} Datenschutz-Themen ausschließlich über regelbasierte, juristisch geprüfte Textbausteine \textendash{} keine generative KI-Antwort.
+  \item \emph{Organisatorisch:} Compliance-Owner für Bot-Inhalte; jeder Datenschutz-Antworttext wird halbjährlich auditiert.
+\end{itemize}
+
+\textbf{Szenario B \textendash{} Standardantwort auf Reklamation:}
+\begin{itemize}
+  \item \emph{Schaden:} Kunde fühlt sich abgewiesen; Eskalation in soziale Medien möglich; Reputationsverlust übersteigt schnell den Einzelfall.
+  \item \emph{Technisch:} Sentiment-Erkennung + Schlüsselwortliste \textrightarrow{} automatische Eskalation \emph{vor} dem Standardtext.
+  \item \emph{Organisatorisch:} Servicemanagement übernimmt Reklamationen, Service-Level (z.\,B.\ Rückruf innerhalb 2 Std.) ist verbindlich.
+\end{itemize}
+
+\textbf{Szenario C \textendash{} KI empfiehlt entfallenes Produkt:}
+\begin{itemize}
+  \item \emph{Schaden:} Vertriebsverlust, Kunde verliert Vertrauen in Bot, Außendienst muss korrigieren.
+  \item \emph{Technisch:} Produktempfehlungen ausschließlich aus aktuellem Produktkatalog (Live-Schnittstelle), keine generative Empfehlung ohne Bestandscheck.
+  \item \emph{Organisatorisch:} Produktmanagement aktualisiert Produktdaten verbindlich, Bot wird bei Sortimentsänderung automatisch synchronisiert; Bot-Owner verantwortet Live-Schnittstelle.
+\end{itemize}
+
+\smallskip
+\textbf{Drei Themen, die nie automatisiert beantwortet werden sollten:}
+\begin{itemize}
+  \item Rechtsverbindliche Datenschutz-/AGB-Aussagen.
+  \item Reklamationen mit emotionalem Kontext.
+  \item Vertragsbeendigung, Kündigung, Streitfälle.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+\aufgabenkopf{9}{Fallstudie B2B Supply Solutions \textendash{} Conversational-Commerce-Architektur}{\nivLiii}{45\,min}
+
+\ytquery{B2B Conversational Commerce Architektur Industriekunden Roadmap KPI ROI}
+
+\begin{loesungbox}
+\textbf{1. Analyse:}
+\begin{itemize}
+  \item Hoher Anfrageandrang, davon große Standard-Quote (1.800/Mon.) \textendash{} Effizienzpotenzial offensichtlich.
+  \item Innendienst ausgelastet, Außendienst fokussiert auf Komplexgeschäft.
+  \item Kundenportal vorhanden \textendash{} Login-basierte Nachbestellung naheliegend.
+  \item Reaktionszeit ist Wettbewerbsfaktor in der Industriebranche (Maschinenstillstand).
+  \item Risiko: falsche Bot-Antworten zu Kompatibilität oder Lieferzeit schädigen Vertrauen sofort.
+\end{itemize}
+
+\textbf{2. Engpässe und Hebel:}
+\begin{itemize}
+  \item Engpass: Standardanfragen blockieren Innendienstkapazität.
+  \item Hebel: ERP-Integration für Verfügbarkeit/Lieferzeit \textendash{} entlastet stark.
+  \item Hebel: Nachbestellung über Chat \textendash{} stabilisiert Wiederkauf.
+\end{itemize}
+
+\textbf{3. Use-Case-Bewertung:} (Skala 1\,--\,5 hoch = besser, Aufwand 1\,--\,5 = niedrig\,--\,hoch)
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXXXXXX@{}}
+\toprule
+\textbf{Use Case} & \textbf{Wirk.} & \textbf{Aufw.} & \textbf{Daten} & \textbf{Akz.\ K} & \textbf{Akz.\ V} & \textbf{ROI} \\
+\midrule
+FAQ                & 5 & 2 & 2 & 5 & 4 & 5 \\
+Verfügbarkeit ERP  & 5 & 4 & 5 & 5 & 5 & 5 \\
+Kompatibilität     & 4 & 4 & 4 & 4 & 4 & 4 \\
+Nachbestellung     & 5 & 3 & 4 & 5 & 5 & 5 \\
+Lead-Qualif.\ groß & 4 & 3 & 3 & 3 & 4 & 4 \\
+Service-Empfehlung & 3 & 4 & 5 & 3 & 3 & 3 \\
+Reaktivierung      & 3 & 3 & 3 & 3 & 4 & 3 \\
+Statusabfragen     & 4 & 2 & 3 & 5 & 4 & 4 \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{4. 9-Monats-Roadmap:}
+\begin{itemize}
+  \item \emph{Monat 1\,--\,3:} FAQ-Bot, Statusabfragen, Lead-Qualifizierung für Großanfragen, CRM-Übergabe; Governance und Eskalationsregeln aufsetzen.
+  \item \emph{Monat 4\,--\,6:} Verfügbarkeit/Lieferzeit (ERP-Integration), Nachbestellung über Chat (Login-Bereich), Kompatibilitäts-Assistent (Pilot).
+  \item \emph{Monat 7\,--\,9:} Service-Empfehlung (Pilot mit klarer Datenbasis), Reaktivierung Inaktive, Dashboard und ROI-Reporting konsolidieren.
+\end{itemize}
+
+\textbf{5. Übergabelogik:}
+\begin{itemize}
+  \item Innendienst: Standardanfragen, die Bot nicht löst; Großanfragen $<$\,definierter Schwelle.
+  \item Service / Außendienst: Großanfragen $>$\,Schwelle; Technische Sonderfälle; Reklamationen mit Geräte-Bezug.
+  \item Compliance / Rechtsabteilung: Datenschutz, Vertragsfragen, AGB.
+  \item Eskalation in $<$\,2 Std.\ während Bürozeit; außerhalb: Rückrufzusage mit klarem Slot.
+\end{itemize}
+
+\textbf{6. KPI- und ROI-Architektur:}
+\begin{itemize}
+  \item Bot-Lösungsquote (Ziel 60\,\%).
+  \item Eskalationsquote (Ziel 25\,--\,35\,\%).
+  \item Reaktionszeit auf Standardfragen.
+  \item Conversion Bot \textrightarrow{} Lead (Großanfragen).
+  \item Anzahl Nachbestellungen über Chat.
+  \item Kosten pro Kontakt (vorher / nachher).
+  \item Kundenzufriedenheit (NPS, Bot-Bewertung).
+  \item Umsatzbeitrag durch Nachbestellungen und Reaktivierung.
+\end{itemize}
+
+\textbf{7. Budgetverteilung (220.000\,\euro):}
+\begin{itemize}
+  \item 60.000\,\euro{} FAQ-Bot + Inhaltsaufbau + Statusabfragen.
+  \item 70.000\,\euro{} ERP-Integration (Verfügbarkeit/Lieferzeit, Nachbestellung).
+  \item 35.000\,\euro{} Lead-Qualifizierungs-Flow + CRM-Integration.
+  \item 25.000\,\euro{} Governance, Eskalationsdesign, Compliance-Review.
+  \item 15.000\,\euro{} Dashboard, KPI-Reporting.
+  \item 15.000\,\euro{} Schulung Innendienst und Service.
+\end{itemize}
+
+\textbf{8. Entscheidung unter Unsicherheit:}
+\emph{ERP-Integration in Monat 4\,--\,6 priorisieren}, obwohl IT-Ressourcen begrenzt sind und die Komplexität hoch ist. Begründung: Ohne Live-Daten zu Verfügbarkeit und Lieferzeit bleibt der Bot ein \emph{FAQ-Hilfsmittel} statt ein echtes Vertriebs-Tool. Risiko-Mitigation: IT-Ressourcen extern verstärken, klarer Cut-over-Plan, Stop-Loss bei verzögertem ERP-Anschluss (Backup: manuelle Lieferzeitschätzung mit Eskalation).
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{10}{Grenzen der Automatisierung \textendash{} was bewusst menschlich bleibt}{\nivLiii}{30\,min}
+
+\ytquery{Automatisierung Grenzen B2B Vertrauen Marke menschlich Senior Management}
+
+\begin{loesungbox}
+\textbf{1. Warum Nutzungsrate \& Lösungsquote allein nicht reichen:}
+Nutzungsrate misst Adoption, Lösungsquote misst Bot-Fähigkeit \textendash{} aber keine der beiden Kennzahlen sagt etwas über \emph{Kundenzufriedenheit}, \emph{Vertriebsbeitrag} oder \emph{Kosten} aus. Eine seriöse ROI-Rechnung verbindet \emph{harte} Faktoren (Tool-Kosten, Implementierung, eingesparte Personalstunden, zusätzlicher Umsatz aus qualifizierten Leads, Nachbestellumsatz) und \emph{weiche} Faktoren (Kundenzufriedenheit, Reaktionszeit, Markenwirkung, Mitarbeitendenentlastung). Wer nur die harten Faktoren misst, übersieht Markenschäden; wer nur die weichen misst, kann die Investition nicht rechtfertigen.
+
+\smallskip
+\textbf{2. Drei Kundenkontakte, die bewusst menschlich bleiben sollten:}
+
+\smallskip
+\emph{Kontakt 1: Erstgespräch zu erklärungsbedürftigem Neugeschäft (z.\,B.\ Komplexlösung über 25.000\,\euro)}
+\begin{itemize}
+  \item Warum nicht KI: Buying-Center-Logik, Vertrauensaufbau, individuelle Konfiguration \textendash{} ein Bot kann das nicht ersetzen.
+  \item Worst case: Kunde fühlt sich abgefertigt, Wettbewerber gewinnt das Geschäft.
+  \item Governance-Regel: ``Erstgespräche im Komplexgeschäft erfolgen immer durch Vertrieb \textendash{} Bot bereitet nur vor, übergibt sauber.''
+\end{itemize}
+
+\emph{Kontakt 2: Reklamation mit emotionalem Kontext}
+\begin{itemize}
+  \item Warum nicht KI: Emotion erfordert Mensch; Standardantworten verschlimmern die Lage.
+  \item Worst case: Kunde wechselt + verbreitet Frust öffentlich (Bewertungsportale, LinkedIn).
+  \item Governance-Regel: ``Reklamationen werden sentiment-basiert immer eskaliert; Bot darf nur erfassen, nicht antworten.''
+\end{itemize}
+
+\emph{Kontakt 3: Vertragsbeendigung / Kündigung}
+\begin{itemize}
+  \item Warum nicht KI: rechtliche Implikationen, hoher Lifetime-Value, hohe Wechselkosten \textendash{} verdient menschliche Aufmerksamkeit.
+  \item Worst case: Kunde wird ohne Gespräch verloren, mögliche Reaktivierung verbaut.
+  \item Governance-Regel: ``Kündigungen führen immer zu einem Mensch-Kontakt vor Bestätigung; KI-Vorhersage darf höchstens das Frühwarnsystem speisen.''
+\end{itemize}
+
+\textbf{3. Faustregel:} Eine zusätzliche Automatisierung ist wirtschaftlich \emph{und} verantwortbar, wenn (a) die Interaktion regelhaft und reversibel ist, (b) der Kundennutzen messbar steigt, und (c) ein dokumentierter Eskalationsweg existiert. Sobald eine dieser Bedingungen kippt, wird Automatisierung zur Markenfalle \textendash{} und Effizienz frisst Vertrauen.
+\end{loesungbox}
+
+\clearpage
+
+\aufgabenkopf{11}{Transferprojekt \textendash{} Conversational-Commerce-Architektur 12 Monate}{\nivLiii}{45\,min}
+
+\ytquery{Chief Revenue Officer Conversational Commerce Chatbot Architektur 12 Monate}
+
+\begin{loesungbox}
+\emph{Musterlösung als Architektur. Andere Konfigurationen sind legitim, solange Kundennutzen, Verantwortung und ROI verbunden bleiben.}
+
+\smallskip
+\textbf{1. Zielbild:}
+In 12 Monaten bedient die Plattform 60\,\% aller Standardanfragen automatisiert mit einer Lösungsquote $\geq$\,55\,\%, einer Eskalationsquote $\leq$\,35\,\% und einer NPS $\geq$\,40 für Bot-Interaktionen. Bot unterstützt Vertrieb und Innendienst \textendash{} ersetzt aber keine Kernkontakte (Komplexangebote, Reklamationen, Verträge). KI-Komponenten sind erklärbar, mit klarem Eskalationspfad zum Menschen.
+
+\smallskip
+\textbf{2. Customer-Journey-Analyse:}
+\begin{itemize}
+  \item \emph{Awareness:} Website-FAQ, Statusinfo, Erstkontakt-Bot. \emph{automatisiert}.
+  \item \emph{Consideration:} Produktinfo, Kompatibilität, Beratungstermin. \emph{teilautomatisiert}.
+  \item \emph{Decision:} Angebot, Beratung. \emph{Mensch zentriert}.
+  \item \emph{Retention:} Status, Nachbestellung. \emph{automatisiert}.
+  \item \emph{Advocacy:} Service-Erlebnisse, Empfehlungen. \emph{Mensch zentriert}.
+\end{itemize}
+
+\textbf{3. Use-Case-Priorisierung:} FAQ \textendash{} Termin \textendash{} Statusabfrage \textendash{} Verfügbarkeit/Lieferzeit \textendash{} Nachbestellung \textendash{} Leadqualifizierung \textendash{} Reaktivierung \textendash{} Produktberatung (last).
+
+\smallskip
+\textbf{4. Entscheidungen:}
+\begin{itemize}
+  \item \emph{Automatisiert (sofort):} FAQ, Terminbuchung, Statusabfragen.
+  \item \emph{Pilotiert:} Verfügbarkeit/Lieferzeit, Nachbestellung, Leadqualifizierung.
+  \item \emph{Später geprüft:} Produktberatung mit KI, Reaktivierung.
+  \item \emph{Bewusst nicht automatisiert:} Reklamationen, Verträge, Datenschutzauskünfte, Erstgespräche im Komplexgeschäft.
+\end{itemize}
+
+\textbf{5. Übergaberegeln:} klar definierte Schlüsselwörter, Sentiment-Trigger, Volumen-/Wert-Schwellen, ``Mensch''-Button immer sichtbar, Eskalation innerhalb 2 Std.\ während Bürozeit. Kontextübergabe mit Dialogprotokoll, erkannter Intention und Kundendaten.
+
+\smallskip
+\textbf{6. Daten- und Systemarchitektur:} CRM als zentrales System, ERP-Schnittstelle für Verfügbarkeit/Lieferzeit, Wissensbasis (versioniert), Website + Kundenportal als Frontend, E-Mail-Automation für Nurturing, Reporting-Layer für Dashboards.
+
+\smallskip
+\textbf{7. Governance:}
+\begin{itemize}
+  \item \emph{Bot-Owner} (Vertrieb / Marketing): inhaltliche Verantwortung.
+  \item \emph{Compliance-Owner}: Datenschutz, AGB, Rechtsthemen.
+  \item \emph{Daten-Owner}: Datenqualität in CRM und ERP.
+  \item \emph{IT/Plattform-Owner}: technische Pflege, Integrationen.
+  \item \emph{Eskalationsmanager}: Sammelt und analysiert Eskalationen, leitet Bot-Verbesserungen ab.
+  \item \emph{Quartalsweise Bot-Audit} (Inhalte, Antworten, Bias).
+\end{itemize}
+
+\textbf{8. KPI- und ROI-Architektur:}
+\begin{itemize}
+  \item Adoption: Nutzungsrate, Konversation pro Sitzung.
+  \item Leistung: Lösungsquote, Eskalationsquote, Reaktionszeit.
+  \item Lead-Qualität: Leadqualifizierungsrate, Conversion zu Termin / Auftrag.
+  \item Bestandskunde: Nachbestellrate über Chat, Reaktivierung Inaktiver.
+  \item Wirtschaftlich: Kosten pro Kontakt, eingesparte FTE-Stunden, Umsatzbeitrag.
+  \item Kundennutzen: Bot-NPS, Bewertungen, Beschwerdequote.
+\end{itemize}
+
+\textbf{9. 12-Monats-Roadmap:}
+\begin{itemize}
+  \item \emph{Monat 1\,--\,3:} FAQ-Bot, Statusabfragen, Terminbuchung, Governance.
+  \item \emph{Monat 4\,--\,6:} Verfügbarkeit/Lieferzeit (ERP), Nachbestellung, Leadqualifizierung.
+  \item \emph{Monat 7\,--\,9:} Reaktivierung Inaktiver, Kompatibilität, Audit + Optimierung.
+  \item \emph{Monat 10\,--\,12:} KI-Produktberatung als Pilot (begrenztes Segment), ROI-Konsolidierung, Skalierungsentscheidung.
+\end{itemize}
+
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item Reklamationen werden \emph{nicht} automatisiert \textendash{} obwohl es Volumen brächte, wäre der Markenschaden im Fehlerfall hoch.
+  \item ERP-Integration wird priorisiert \textendash{} obwohl IT-Ressourcen knapp sind, weil Live-Daten der Schlüssel zum Wertbeitrag sind.
+  \item Eskalationsquoten unter 20\,\% gelten als Warnsignal \textendash{} weil sie auf falsche Bot-Übernahme deuten, nicht auf Reife.
+\end{enumerate}
+
+\smallskip
+\textbf{Zusatz \textendash{} Entscheidung gegen attraktive Automatisierung:} Bewusst \emph{keine KI-Produktberatung für Komplexgeräte} im ersten Schritt. Aus Senior-Sicht: ein falscher Kompatibilitäts-Tipp kann teure Folgeschäden auslösen (Stillstand, Reklamation, Schadensersatz). Die ``attraktive'' Effizienz ist hier eine technische Schuld, die später Vertrauen kostet. Erst Live-Schnittstelle + Validierungsregeln, dann KI.
+\end{loesungbox}
+
+\clearpage
+
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterlösungen sind Diskussionsbasis. Bei Conversational Commerce ist es besonders wichtig, zwischen \emph{ist möglich} und \emph{ist verantwortbar} sauber zu trennen. Ihr eigener Maßstab darf strenger sein als die Musterlösung \textendash{} solange Sie ihn nachvollziehbar begründen.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Drei Fragen für das Coaching: Welche Automatisierung haben Sie bewusst weggelassen? Welche Eskalation würden Sie selbst entscheiden? Wie würden Sie der Geschäftsführung den Verzicht erklären \textendash{} obwohl der ROI verlockend wäre?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 14 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

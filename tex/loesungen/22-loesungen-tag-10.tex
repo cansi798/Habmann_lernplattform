@@ -1,0 +1,790 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 10 - Loesungsheft
+% Performance-Marketing im Vertrieb: Anzeigen, Conversion & E-Mail-Kampagnen
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+\definecolor{lpL1}{RGB}{34,120,72}
+\definecolor{lpL2}{RGB}{22,90,140}
+\definecolor{lpL3}{RGB}{170,42,52}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{loesungbox}[1][Musterlösung]{%
+  enhanced, breakable,
+  colback=lpGreenLight,
+  colframe=lpGreenBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGreenBorder, colframe=lpGreenBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lösungsheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 10}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}E-Mail \& Performance-Marketing}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}LÖSUNGSHEFT \textperiodcentered{} MODUL 5 \textperiodcentered{} TAG 10 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 11.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Lösungsheft\\Tag 10\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Musterlösungen zu den elf Aufgaben\\des Aufgabenhefts \textendash{} Performance-\\Marketing, E-Mail \& Conversion.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpGreen}Musterlösungen \textperiodcentered{} nicht die einzige Antwort}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Hinweis:}\\
+    {\sffamily\small\color{lpInk}Musterlösungen sind Diskussionsbasis,\\nicht die einzige korrekte Lösung.}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Aufgabenheft \& Lehrskript Tag 10}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,L1 \textperiodcentered{} 5\,L2 \textperiodcentered{} 3\,L3}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- Anleitung -----------------------------------------------------------
+\section*{Hinweise zu den Musterlösungen}
+\thispagestyle{plain}
+
+\noindent Die folgenden Musterlösungen sind \emph{eine} mögliche, didaktisch nachvollziehbare Lösung \textendash{} nicht die einzig richtige. Insbesondere auf L2 und L3 sind mehrere Begründungswege legitim, solange sie:
+
+\begin{itemize}
+  \item den im Lehrskript eingeführten Begriffsapparat (Nurturing, MQL/SQL, ROI, CAC) sauber nutzen,
+  \item Annahmen explizit machen, statt sie zu verschleiern,
+  \item Zielkonflikte benennen, statt sie wegzudefinieren,
+  \item zu einer klar formulierten Entscheidung führen \textendash{} nicht bloß zu einer Beschreibung.
+\end{itemize}
+
+\begin{infobox}[Nutzung im Coaching]
+Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterlösung. Wo weicht Ihre Argumentation ab? Ist die Abweichung eine andere Annahme \textendash{} oder ein Denkfehler? Genau dort entsteht der Lerneffekt.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Newsletter \textendash{} Kampagne \textendash{} Nurturing \textendash{} Vertriebsstrecke}{\nivLi}{8\,min}
+
+\noindent Definieren Sie in jeweils \emph{einem} Satz die vier Begriffe, die im professionellen E-Mail-Vertrieb häufig vermischt werden.
+
+\ytquery{Newsletter Lead Nurturing E-Mail Marketing Unterschied B2B Vertrieb}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Newsletter:} regelmäßig versandte E-Mail an eine breite Empfängerliste, primär zur Information und Markenpflege, ohne enge Verbindung zu einer einzelnen Vertriebs- oder Kaufphase.
+  \item \textbf{Kampagne:} thematisch und zeitlich begrenzte E-Mail-Aktion zu einem konkreten Anlass oder Angebot, mit definierter Zielgruppe, Zielzahl und Erfolgsmessung.
+  \item \textbf{Lead-Nurturing:} systematische, mehrstufige E-Mail-Kommunikation, die Interessenten entlang der Customer Journey gezielt zur Kaufbereitschaft entwickelt \textendash{} Inhalte und Timing folgen dem Reifegrad des Leads.
+  \item \textbf{Automatisierte Vertriebsstrecke:} regelbasierte, durch Verhalten ausgelöste E-Mail-Folge, die Lead-Nurturing technisch operationalisiert (Trigger, Bedingungen, Scoring, Übergabe an den Vertrieb).
+  \item \textbf{Unterscheidung Newsletter vs.\ Nurturing-Strecke:} Der Newsletter ist \emph{kanalzentriert} (an alle, gleicher Zeitpunkt, gleicher Inhalt), die Nurturing-Strecke ist \emph{leadzentriert} (richtige Person, richtige Phase, richtiger Inhalt). Aus Vertriebssicht ist nur die Nurturing-Strecke ein steuerbarer Pipeline-Hebel.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{E-Mail-Kennzahlen zuordnen}{\nivLi}{8\,min}
+
+\noindent Ordnen Sie jede Kennzahl einer der drei Kategorien zu: (A) Aktivitäts-, (B) Qualitäts-, (C) wirtschaftliche Steuerungskennzahl.
+
+\ytquery{E-Mail Marketing KPI Öffnungsrate Conversion Pipeline Beitrag ROI}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{Öffnungsrate \textrightarrow{} (A) Aktivitätskennzahl.} Misst, ob die Betreffzeile zog \textendash{} kein Beleg für Vertriebswirkung.
+  \item \textbf{Klickrate \textrightarrow{} (A) Aktivitätskennzahl.} Misst Interaktion mit dem Inhalt, aber nicht Kaufbereitschaft.
+  \item \textbf{Conversion Rate zu Beratungstermin \textrightarrow{} (C) Wirtschaftliche Steuerungskennzahl.} Direkter Indikator dafür, dass die Strecke Vertriebsanlässe erzeugt.
+  \item \textbf{Abmelderate \textrightarrow{} (B) Qualitätskennzahl.} Signal für Relevanz und Frequenz \textendash{} dauerhaft hohe Abmelderate beschädigt die Datenbasis.
+  \item \textbf{Anteil vertriebsqualifizierter Leads (SQL) \textrightarrow{} (B) Qualitätskennzahl} mit wirtschaftlicher Konsequenz. Trennt ``Aktivität'' von ``Pipeline''.
+  \item \textbf{Kosten pro qualifiziertem Lead \textrightarrow{} (C) Wirtschaftliche Steuerungskennzahl.} Erste echte ROI-Annäherung \textendash{} kombiniert Investition und Qualität.
+  \item \textbf{Deckungsbeitrag aus E-Mail-Kampagne \textrightarrow{} (C) Wirtschaftliche Steuerungskennzahl.} Die finale Managementgröße, weil sie Marketing-Wirkung in Ergebnis übersetzt.
+  \item \textbf{Bounce Rate \textrightarrow{} (B) Qualitätskennzahl.} Indikator für Datenhygiene, technische Hygiene und Listenpflege.
+\end{enumerate}
+
+\smallskip
+\emph{Hinweis:} Öffnungs- und Klickrate sind nicht ``schlecht'' \textendash{} sie sind operative Diagnosegrößen. Steuerung auf Senior-Level läuft jedoch über Conversion, SQL-Anteil und ROI.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{ROI, CAC und Conversion Rate auf den Punkt}{\nivLi}{8\,min}
+
+\noindent Erklären Sie ROI, CAC und Conversion Rate \textendash{} und ordnen Sie sie als Management- oder operative Steuerungskennzahl ein.
+
+\ytquery{ROI CAC Conversion Rate Definition Vertrieb Performance Marketing}
+
+\begin{loesungbox}
+\begin{enumerate}
+  \item \textbf{ROI (Return on Investment):} setzt den wirtschaftlichen Ertrag einer Maßnahme (Deckungsbeitrag, Umsatz) ins Verhältnis zur eingesetzten Investition \textendash{} sagt: ``Lohnt sich diese Aktivität insgesamt?''
+  \item \textbf{CAC (Customer Acquisition Cost):} durchschnittliche Kosten, einen \emph{neuen Kunden} zu gewinnen \textendash{} Summe aller Marketing- und Vertriebsausgaben geteilt durch Anzahl neu gewonnener Kunden.
+  \item \textbf{Conversion Rate (zu Beratungstermin):} Anteil der Kontakte, die einen definierten nächsten Schritt tun \textendash{} sagt nur etwas über die Schritt-Effizienz, nicht über Wirtschaftlichkeit. Im Gegensatz dazu misst die Klickrate nur die \emph{Interaktion}, die Conversion Rate misst den \emph{Funnel-Übergang}.
+  \item \textbf{Management vs.\ operativ:} \emph{ROI} ist die Management-Kennzahl (Geschäftsführung, CFO, CRO). \emph{CAC} steht zwischen operativ und strategisch \textendash{} er ist Steuerungsgröße für das Kanal-Portfolio. \emph{Conversion Rate} ist operativ \textendash{} sie steuert einzelne Kampagnen, Landingpages, E-Mail-Varianten.
+\end{enumerate}
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{CloudDesk Solutions \textendash{} Nurturing-Strecke ohne Vorwissen}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+CloudDesk Solutions (Dokumentenmanagement-Software, Mittelstand): Whitepaper-Download wird oft gemacht, Beratungstermine folgen selten. Bisher: nur automatische Danke-Mail.
+\end{infobox}
+
+\ytquery{Lead Nurturing E-Mail Strecke Whitepaper B2B Beratungstermin}
+
+\begin{loesungbox}
+\textbf{1. Problem im aktuellen Prozess:}
+Der Download liefert einen Lead-Datensatz \textendash{} aber zwischen Download und Beratungsanfrage liegt eine Lücke von Tagen bis Wochen, in der der Lead unbearbeitet bleibt. Die einzige Berührung ist eine Danke-Mail \textendash{} weder Vertrauensaufbau noch Argument für den nächsten Schritt. Das Resultat: hoher Aktivitätswert oben (Downloads), niedrige Conversion unten (Termine).
+
+\smallskip
+\textbf{2. Drei mögliche Gründe, warum Leads noch nicht buchen:}
+\begin{itemize}
+  \item \emph{Reifegrad:} Der Lead war auf der Suche nach Argumenten für seinen Chef, nicht nach einer Kaufentscheidung.
+  \item \emph{Fehlendes Vertrauen:} Eine Datei reicht nicht, um den Anbieter als Lösungspartner einzuordnen \textendash{} kein Case, keine Referenz, keine Konkretisierung.
+  \item \emph{Kein Anreiz für den Termin:} Der CTA ``Beratungstermin'' wirkt vertrieblich, nicht hilfreich \textendash{} es fehlt der Mehrwert für die ersten 15 Minuten.
+\end{itemize}
+
+\smallskip
+\textbf{3.+4. E-Mail-Strecke (vier E-Mails) mit Ziel, Inhalt, CTA:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXXX@{}}
+\toprule
+\textbf{E-Mail} & \textbf{Ziel} & \textbf{Inhalt} & \textbf{CTA} \\
+\midrule
+1 (Tag 0) & Erwartungsmanagement, Vertrauen & Danke + 3 Highlights aus dem Whitepaper + ``Was kommt als Nächstes?'' & Whitepaper sicher ablegen / weiterleiten \\
+\midrule
+2 (Tag 3) & Problembewusstsein vertiefen & Kurze Case-Story: typische Dokumenten-Engpässe im Mittelstand & ``Lesen Sie die Praxisgeschichte'' (Blog) \\
+\midrule
+3 (Tag 7) & Lösung konkretisieren, Vertrauen festigen & Kunden-Referenz: Vorher / Nachher Zahlen einer ähnlichen Firma & ``Demo-Video ansehen (4 Min.)'' \\
+\midrule
+4 (Tag 14) & Vertriebskontakt anbieten & ``15 Minuten Sparringsgespräch'' \textendash{} nicht ``Verkaufstermin'' & ``Termin direkt buchen'' \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{5. Übergabezeitpunkt an den Vertrieb:}
+Erst wenn (a) Rolle erkennbar passt (Geschäftsführung, IT-, kaufmännische Leitung), (b) mindestens zwei E-Mail-Interaktionen über Klick/Antwort vorliegen \emph{oder} ein expliziter Termin-Klick erfolgt ist, (c) Unternehmensgröße im Zielsegment liegt. \emph{Faustregel:} Vertrieb übernimmt erst beim Demo-Klick, Video-Ansehen über 60\,\% oder direkter Anfrage \textendash{} nicht beim Whitepaper-Download.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{E-Mail-Performance analysieren und optimieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Kennzahlen]
+1.200 Downloads, 62\,\% Öffnung Danke-Mail, 4\,\% Klick auf Beratung, 18 Termine (davon 7 qualifiziert), 3,8\,\% Abmeldung. Ziel: 40 qualifizierte Termine in 3 Monaten, Budget 18.000\,\euro, Vertriebskapazität max.\ 15 Termine/Woche.
+\end{infobox}
+
+\ytquery{E-Mail Kampagne Performance Analyse Optimierung Conversion B2B Lead}
+
+\begin{loesungbox}
+\textbf{1. Bewertung der aktuellen Kampagne:}
+\begin{itemize}
+  \item \emph{Gut:} Lead-Generierung funktioniert (1.200 Downloads), Öffnungsrate 62\,\% ist hoch \textendash{} Interesse ist da.
+  \item \emph{Mittelmäßig:} 4\,\% Klick auf Beratungslink ist niedrig, aber im B2B-Erstkontakt nicht ungewöhnlich.
+  \item \emph{Kritisch:} Nur 7 von 18 Terminen sind qualifiziert \textendash{} also nur 39\,\% \emph{wirtschaftlich verwertbar}. 11 ``Termine'' kosten Vertriebszeit ohne Gegenwert.
+  \item \emph{Verbesserungswürdig:} Abmelderate 3,8\,\% ist hoch \textendash{} Inhalt oder Frequenz ist nicht relevant genug.
+\end{itemize}
+
+\smallskip
+\textbf{2. Vier Schwachstellen im Nurturing-Prozess:}
+\begin{itemize}
+  \item Es gibt nur \emph{eine} Mail \textendash{} kein Nurturing, sondern ein Pulsschlag.
+  \item Keine Segmentierung nach Rolle, Unternehmensgröße oder Interesse \textendash{} ein Geschäftsführer und ein IT-Leiter brauchen unterschiedliche Inhalte.
+  \item Übergabe an den Vertrieb erfolgt zu früh \textendash{} jeder Termin-Klicker landet im Kalender, unabhängig vom Reifegrad.
+  \item Keine Re-Engagement-Logik für die 96\,\%, die nicht klicken \textendash{} sie verschwinden aus dem Funnel.
+\end{itemize}
+
+\smallskip
+\textbf{3. Drei Optimierungsmaßnahmen:}
+\begin{itemize}
+  \item \emph{Inhalte:} 4-stufige Nurturing-Strecke (siehe Aufgabe 4) statt einer Danke-Mail.
+  \item \emph{Segmentierung:} eine Variante für ``Geschäftsführung'' (ROI-Argumente), eine für ``IT-/kaufmännische Leitung'' (Integration, Datenschutz).
+  \item \emph{Übergabe-Logik:} Lead Scoring (Rolle + Interaktion) \textendash{} Termin-Buchung erfordert mindestens 2 Klicks oder einen Demo-Video-Aufruf, sonst läuft der Lead weiter im Nurturing.
+\end{itemize}
+
+\smallskip
+\textbf{4. Fünf KPIs für die neue Strecke:}
+\begin{itemize}
+  \item Conversion Rate zur Demo-Anfrage (operativ).
+  \item Anteil vertriebsqualifizierter Termine (Qualität).
+  \item Kosten pro qualifiziertem Termin (Wirtschaftlichkeit).
+  \item Reifegrad zum Termin-Zeitpunkt (Score 0\,--\,100).
+  \item Abmelderate je Variante (Listengesundheit).
+\end{itemize}
+
+\smallskip
+\textbf{5. Ist das Ziel realistisch?}
+40 qualifizierte Termine in 3 Monaten = ca.\ 13/Monat. Aktuell: 7 in einem Zyklus. Bei verdreifachter Datenbasis (bessere Re-Engagement-Strecke + zusätzliche Whitepaper-Downloads in 3 Monaten) und einer Verdopplung der \emph{Qualität} (Scoring statt jeder Klick) ist 40 \emph{ambitioniert, aber erreichbar} \textendash{} unter der Bedingung, dass das Vertriebsteam tatsächlich die strikte Übergabelogik akzeptiert. \emph{Risiko:} Wenn das Team nur Quantität sieht, wird Scoring umgangen und die Qualität bleibt bei 39\,\%. Empfehlung: Pilotphase 6 Wochen mit messbarem MQL/SQL-Check, dann Skalierung.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Segmentierung einer Kontaktbasis}{\nivLii}{20\,min}
+
+\noindent Entwickeln Sie eine Segmentierungslogik in vier Dimensionen.
+
+\ytquery{B2B E-Mail Segmentierung Rolle Branche Reifegrad CRM Nurturing}
+
+\begin{loesungbox}
+\emph{Beispielhafte Segmentierungslogik \textendash{} andere Dimensionen sind legitim, solange sie operativ trennbar sind.}
+
+\smallskip
+\textbf{Dimension 1 \textendash{} Rolle / Buying-Center:}
+\begin{itemize}
+  \item Segmente: Geschäftsführung \textperiodcentered{} IT-Leitung \textperiodcentered{} Fachbereichsleitung \textperiodcentered{} Einkauf.
+  \item Datenbedarf: Job-Titel-Feld im CRM, ggf.\ LinkedIn-Anreicherung.
+  \item Inhalte: GF \textrightarrow{} ROI/Strategie \textperiodcentered{} IT \textrightarrow{} Integration/Sicherheit \textperiodcentered{} Fachbereich \textrightarrow{} Anwendungsfall \textperiodcentered{} Einkauf \textrightarrow{} Vertragsmodelle/TCO.
+\end{itemize}
+
+\textbf{Dimension 2 \textendash{} Branche:}
+\begin{itemize}
+  \item Segmente: Logistik \textperiodcentered{} produzierendes Gewerbe \textperiodcentered{} Dienstleister \textperiodcentered{} öffentliche Hand \textperiodcentered{} Gesundheit.
+  \item Datenbedarf: Industriecode (NACE) oder manuelle Branchenkennzeichnung.
+  \item Inhalte: branchenspezifische Cases (Logistik-Case wirkt nicht in Gesundheit).
+\end{itemize}
+
+\textbf{Dimension 3 \textendash{} Interesse / Themenpräferenz:}
+\begin{itemize}
+  \item Segmente: Kostenreduktion \textperiodcentered{} Compliance/Sicherheit \textperiodcentered{} Wachstum/Skalierung \textperiodcentered{} Prozessautomatisierung.
+  \item Datenbedarf: Klick-Tracking auf Themenfelder, Whitepaper-Wahl, Webinar-Themen.
+  \item Inhalte: Sprache und Argumentationslinie auf das jeweilige ``Motiv'' zuschneiden.
+\end{itemize}
+
+\textbf{Dimension 4 \textendash{} Reifegrad / Kaufphase:}
+\begin{itemize}
+  \item Segmente: Informationsphase \textperiodcentered{} Vergleichsphase \textperiodcentered{} Entscheidungsphase \textperiodcentered{} Bestandskunde.
+  \item Datenbedarf: Lead-Score (Verhalten + Profil), Vertriebsfeedback.
+  \item Inhalte: Information \textrightarrow{} Fachimpuls \textperiodcentered{} Vergleich \textrightarrow{} Checkliste/Wettbewerbsmatrix \textperiodcentered{} Entscheidung \textrightarrow{} Demo/Referenz \textperiodcentered{} Bestand \textrightarrow{} Erweiterung/Upgrade.
+\end{itemize}
+
+\smallskip
+\textbf{Hypothese mit höchstem Hebel in 90 Tagen:} Das Segment ``IT- oder Fachbereichsleitung in der Vergleichsphase'' \textendash{} dort entscheidet sich die Shortlist, und genau hier liegen typischerweise die meisten Whitepaper- und Webinar-Leads ungenutzt im CRM. Eine gezielte Nurturing-Strecke ``Vergleichshilfe + Demo'' mit branchenpassendem Case erzeugt 90-Tage-Pipeline, ohne neue Lead-Quellen aufbauen zu müssen.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{EcoFleet Systems \textendash{} Nurturing- und KPI-Architektur}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: EcoFleet Systems]
+Fuhrparkoptimierungs-Software. 8.000 Kontakte, 2.500 davon Webinar-/Whitepaper-Leads. Budget 95.000\,\euro{} für 6\,Monate. Ziel: 300 QL, 90 Demos, 25 Angebote, 8 Abschlüsse.
+\end{infobox}
+
+\ytquery{EcoFleet B2B Lead Nurturing KPI Architektur MQL SQL Marketing Automation}
+
+\begin{loesungbox}
+\textbf{1. Drei wichtigste Schwächen:}
+\begin{itemize}
+  \item Generischer Versand an alle 8.000 Kontakte \textendash{} keine Segmentierung nach Rolle, Branche oder Interesse, dadurch Relevanzverlust und steigende Abmelderate.
+  \item Vertrieb erhält Leads zu früh \textendash{} keine MQL/SQL-Trennung, also Beladung mit unreifen Leads und Verzögerung bei den wirklich kaufbereiten.
+  \item Erfolgsmessung über Öffnungs-/Klickraten \textendash{} keine Verbindung zwischen E-Mail-Aktivität und Pipeline-Beitrag, also keine ROI-Aussage möglich.
+\end{itemize}
+
+\smallskip
+\textbf{2. Nurturing-Strecke (sechs Kontaktpunkte):}
+\begin{itemize}
+  \item \emph{E-Mail 1 (Tag 0):} Danke + Nutzenzusammenfassung des Whitepaper/Webinars.
+  \item \emph{E-Mail 2 (Tag 4):} Problemimpuls \textendash{} typische Kostentreiber im Fuhrpark (rollenspezifisch).
+  \item \emph{E-Mail 3 (Tag 10):} Praxisbeispiel \textendash{} Einsparpotenzial eines vergleichbaren Mittelstandsunternehmens.
+  \item \emph{E-Mail 4 (Tag 17):} Fachinhalt \textendash{} CO\textsubscript{2}-Reporting und regulatorische Anforderungen (für GF/Nachhaltigkeit).
+  \item \emph{E-Mail 5 (Tag 25):} Vergleichshilfe \textendash{} Checkliste für die Auswahl einer Fuhrparksoftware.
+  \item \emph{E-Mail 6 (Tag 35):} Einladung zur Demo oder Erstberatung mit konkretem Nutzenversprechen (``In 30 Min.\ Ihr Einsparpotenzial berechnen'').
+  \item \emph{E-Mail 7 optional (Tag 60):} Reaktivierung bei Inaktivität \textendash{} kurzer Entscheidungsleitfaden.
+\end{itemize}
+
+\smallskip
+\textbf{3. Lead-Qualifizierung:}
+\begin{itemize}
+  \item \emph{MQL (Marketing Qualified Lead):} Zielgruppen-Rolle erfüllt + mindestens ein fachliches Interesse erkennbar + Einwilligung vorhanden + mindestens eine Interaktion über die Danke-Mail hinaus.
+  \item \emph{SQL (Sales Qualified Lead):} konkrete Rolle im Buying-Center + erkennbarer Bedarf (z.\,B.\ Demo-Klick, Vergleich-Checkliste vollständig durchgegangen) + passende Unternehmensgröße + wiederholte Interaktion (Score $\geq 60$).
+  \item Vertrieb übernimmt \emph{erst} SQL \textendash{} MQL bleibt im Marketing.
+\end{itemize}
+
+\smallskip
+\textbf{4. KPI-Architektur (sechs Kennzahlen):}
+\begin{itemize}
+  \item Zustellrate (Datenqualität).
+  \item Klickrate je Segment (Relevanz).
+  \item Conversion Rate zu Demo (Funnel-Übergang).
+  \item Anteil SQL an MQL (Qualifizierungseffizienz).
+  \item Demo-zu-Angebot-Quote (Vertriebswirkung).
+  \item Deckungsbeitrag je Kampagnenstrecke (ROI).
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Budgetverteilung 95.000\,\euro{} \textendash{} mit Begründung}{\nivLii}{20\,min}
+
+\ytquery{Marketing Budget B2B Nurturing CRM Automation Content Verteilung}
+
+\begin{loesungbox}
+\textbf{Beispielhafte Budgetverteilung:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXl@{}}
+\toprule
+\textbf{Posten} & \textbf{Begründung} & \textbf{Betrag} \\
+\midrule
+Contententwicklung & Cases, Checklisten, Fachimpulse sind das ``Werkzeug'' jeder Nurturing-Strecke \textendash{} ohne Inhalt keine Conversion. & 25.000\,\euro \\
+\midrule
+Marketing-Automation und technische Einrichtung & Tool-Setup, Trigger-Logik, Templates \textendash{} ohne saubere Mechanik keine Skalierung. & 20.000\,\euro \\
+\midrule
+CRM-Datenbereinigung und Segmentierung & Ohne saubere Daten ist Segmentierung wertlos und Scoring falsch \textendash{} stille, aber kritische Investition. & 15.000\,\euro \\
+\midrule
+Landing Pages, Demo-Formulare, Conversion-Optimierung & Schnittstelle vom Klick zum Termin \textendash{} hier entscheidet sich die wirtschaftliche Wirkung. & 15.000\,\euro \\
+\midrule
+A/B-Tests & Geringes Stückbudget, hoher Lerneffekt \textendash{} senkt Risiko falscher Optimierungsentscheidungen. & 10.000\,\euro \\
+\midrule
+Reporting und ROI-Auswertung & Macht das System Senior-Level-fähig \textendash{} ohne sichtbares ROI keine Budgetabsicherung im nächsten Jahr. & 10.000\,\euro \\
+\midrule
+\textbf{Summe} & & \textbf{95.000\,\euro} \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{Empfehlung in drei Sätzen:}
+Die zwei wichtigsten Posten sind \emph{Contententwicklung} und \emph{CRM-Datenbereinigung} \textendash{} der eine entscheidet über Relevanz, der andere über Steuerbarkeit, beide gemeinsam über jeden weiteren Hebel. Reduziert werden würde am ehesten der A/B-Test-Posten \textendash{} weil A/B-Tests ohne ausreichendes Volumen ohnehin nur wenige Iterationen erlauben. Marketing-Automation und Reporting sind nicht-verhandelbar, weil sie das System überhaupt erst messbar machen.
+\end{loesungbox}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{EcoFleet \textendash{} Entscheidung unter Unsicherheit}{\nivLiii}{40\,min}
+
+\begin{infobox}[Rolle und Spannungsfeld]
+CRO von EcoFleet. Marketing will mehr Leads, Vertrieb will bessere Leads, Geschäftsführung will Zahlen. Entscheidung: Quantität zuerst oder Qualität zuerst?
+\end{infobox}
+
+\ytquery{Lead Qualität Quantität B2B Vertrieb CRO Entscheidung Pipeline Pilot}
+
+\begin{loesungbox}
+\textbf{1. Analyse des Spannungsfelds:}
+\begin{itemize}
+  \item \emph{Marketing} denkt in Reichweite, weil Wachstum sichtbarer ist als Effizienz. Annahme: ``Mehr Volumen wäscht den Trichter selbst.''
+  \item \emph{Vertrieb} denkt in Kapazität, weil unreife Leads echte Opportunitätskosten erzeugen. Annahme: ``Bestandsleads sind besser als ihr Ruf, wenn sie richtig bedient würden.''
+  \item \emph{Geschäftsführung} denkt in Abschlüssen, weil sie das Budget gegen einen wirtschaftlichen Beitrag rechtfertigen muss.
+  \item Hinter dem Konflikt steht ein Konstruktionsfehler: Es gibt keine gemeinsame Definition von ``Lead'' und keine gemeinsame Sicht auf den Pipeline-Beitrag.
+  \item Beide Seiten haben recht \textendash{} aber nur eine Reihenfolge ist wirtschaftlich.
+\end{itemize}
+
+\smallskip
+\textbf{2. Zwei strategische Optionen:}
+\begin{itemize}
+  \item \emph{Option A \textendash{} Quantität zuerst:} 60\,k\,\euro{} in neue Lead-Quellen (LinkedIn-Ads, zusätzliches Webinar, Whitepaper-Kampagne), 35\,k\,\euro{} in Tooling/Reporting. Bestandsdatenbank bleibt unverändert.
+  \item \emph{Option B \textendash{} Qualität zuerst:} 55\,k\,\euro{} in Segmentierung, CRM-Bereinigung, Nurturing-Inhalte, MQL/SQL-Definition für die 2.500 bestehenden Leads. 40\,k\,\euro{} in Tooling, Reporting, Landing Pages. Neue Lead-Quellen erst ab Monat 4 selektiv.
+\end{itemize}
+
+\smallskip
+\textbf{3. Bewertung beider Optionen:}
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+\textbf{Kriterium} & \textbf{A: Quantität} & \textbf{B: Qualität} \\
+\midrule
+Zielerreichung 300\,QL & wahrscheinlich (Volumen) & wahrscheinlich (Conversion-Hub) \\
+Risiko Vertriebskapazität & hoch \textendash{} mehr unreife Leads & niedrig \textendash{} weniger, aber bessere Leads \\
+ROI-Sichtbarkeit nach 6\,M.\ & mittel \textendash{} Aktivitäten messbar, Qualität unklar & hoch \textendash{} Pipeline-Beitrag je Segment isolierbar \\
+Datenkontrolle & gleich & deutlich besser \\
+Skalierbarkeit ab Monat 7 & ungerichtet \textendash{} mehr vom Gleichen & gerichtet \textendash{} man weiß, welcher Kanal welche Conversion liefert \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\textbf{4. Entscheidung und Budget:}
+\emph{Qualität zuerst, dann selektive Skalierung.}
+\begin{itemize}
+  \item 55\,k\,\euro{} Qualität: Segmentierung (15), Content (20), CRM-Hygiene (10), MQL/SQL-Definition + Schulung (10).
+  \item 25\,k\,\euro{} Tooling, Landing Pages, A/B-Tests.
+  \item 15\,k\,\euro{} Reporting und Pilot-Auswertung.
+  \item Erst ab Monat 4: bis zu 30\,k\,\euro{} (aus dem Folgebudget) gezielt in den \emph{einen} Kanal, der nach Pilot die beste SQL-Quote liefert.
+\end{itemize}
+
+\smallskip
+\textbf{5. Pilot-Logik (erste 8 Wochen):}
+\begin{itemize}
+  \item Zwei Pilot-Segmente: ``Fuhrparkleitung Logistik'' und ``GF Mittelstand Bau''.
+  \item Je 250 Leads aus dem Bestand bekommen die neue 6-stufige Nurturing-Strecke.
+  \item Steuergröße: SQL-Anteil und Demo-zu-Angebot-Quote.
+  \item Korrekturpunkt: Wenn nach 8 Wochen der SQL-Anteil nicht mindestens 12\,\% (gegen aktuell 39\,\% Qualität \emph{nach} Termin, was hier auf MQL-Stufe übersetzt $\approx$ 10\,--\,12\,\%) erreicht, wird die Inhalts-Logik nachjustiert \emph{vor} der Skalierung.
+\end{itemize}
+
+\smallskip
+\textbf{6. Entscheidung unter Unsicherheit:}
+Die Entscheidung ``Qualität zuerst'' wird getroffen, obwohl unklar ist, ob die 2.500 Bestandsleads tatsächlich noch entwickelbar sind \textendash{} oder ob sie inhaltlich bereits ``durchgespielt'' wurden. \emph{Begründung trotz Unsicherheit:}
+\begin{itemize}
+  \item Die Kosten dieser Entscheidung sind sichtbar (Investition in Inhalte, Hygiene), die Kosten der Gegenentscheidung (überlasteter Vertrieb, sinkende Abschlussquote, demotiviertes Team) wären verzögert sichtbar \textendash{} und teurer.
+  \item Wenn die Annahme falsch ist, lässt sich Qualität in 6 Wochen messen und korrigieren; eine falsche Quantitätsentscheidung lässt sich erst nach Monaten an der Abschlussquote ablesen.
+  \item Bei knapper Vertriebskapazität ist die Reihenfolge \emph{erst Qualität, dann Quantität} die einzige, die nicht durch Folgekosten gefährdet ist.
+\end{itemize}
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Zielkonflikt: Automatisierung vs.\ Personalisierung}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\ytquery{Marketing Automation Personalisierung B2B Grenzen Datenschutz DSGVO}
+
+\begin{loesungbox}
+\textbf{1. Wann kippt Automatisierung in Belästigung:}
+Automatisierung kippt typischerweise an drei Schwellen. \emph{Erstens}, wenn Frequenz ohne sichtbaren Nutzen steigt \textendash{} der Empfänger lernt, dass die Mails ``Rauschen'' sind. \emph{Zweitens}, wenn personalisierte Felder (Vorname, Firma) falsch oder offensichtlich automatisiert wirken \textendash{} Pseudo-Persönlichkeit beschädigt Vertrauen stärker als ein offen massenhafter Newsletter. \emph{Drittens}, wenn Verhalten zwar getrackt, aber nicht respektvoll verarbeitet wird \textendash{} etwa wenn ein Lead Verträge unterzeichnet hat und trotzdem weiter mit ``Erstkontakt''-Inhalten bespielt wird. Kritische Schwelle ist außerdem: Mehr als zwei E-Mails pro Woche ohne klaren Nutzen führen messbar zu Abmelderaten über 4\,\%.
+
+\smallskip
+\textbf{2. Konkretes B2B-Szenario:} SaaS-Anbieter mit 50.000 Kontakten und Bestandskunden.
+
+\smallskip
+\emph{Drei sinnvolle Automatisierungen:}
+\begin{itemize}
+  \item Trigger-basierte Welcome-Strecke nach Trial-Anmeldung \textendash{} hoher Mehrwert, klare Kundenerwartung.
+  \item Inaktivitäts-Reaktivierung (nach 90 Tagen ohne Login) mit konkretem Hilfsangebot \textendash{} der Kunde verliert sonst sowieso den Vertrag.
+  \item Vertragsverlängerungs-Strecke 60/30/14 Tage vor Ablauf \textendash{} Service-Charakter, nicht Vertriebsdruck.
+\end{itemize}
+
+\emph{Eine Automatisierung, die eine Grenze überschreitet:}
+\begin{itemize}
+  \item ``Automatisch jeden Lead, der dreimal die Pricing-Seite besucht hat, an einen Vertriebler übergeben mit Hinweis: \emph{Hat Kaufabsicht, sofort anrufen}.'' \textendash{} verletzt Datensensibilität, erzeugt Anrufdruck und beschädigt Vertrauen.
+\end{itemize}
+
+\emph{Drei realistische Personalisierungs-Hebel:}
+\begin{itemize}
+  \item Rollenbasierte Variante einer Mail (GF / IT / Fachbereich) statt 47 Mikro-Personalisierungen.
+  \item Branchenbasierter Case (ein einziger guter Case je Branche, sauber gepflegt) statt zehn halbgaren.
+  \item Reifegrad-basierter Tonfall (Information $\rightarrow$ Vergleich $\rightarrow$ Entscheidung) statt jeder Mail ein Verkaufsabschluss.
+\end{itemize}
+
+\emph{Konflikte:}
+\begin{itemize}
+  \item \emph{Datenschutz:} Verhaltensbasierte Personalisierung erfordert ausdrückliche Einwilligung; ohne sie ist Trigger-Logik rechtlich nicht haltbar.
+  \item \emph{Vertriebskapazität:} Personalisierung erzeugt mehr Konversation, die das Team binden kann \textendash{} ohne Kapazitätsplanung wird ``personalisiert'' zu ``unbeantwortet''.
+  \item \emph{Markenwahrnehmung:} Hochpersonalisierte Mails wirken in einigen Branchen (Industrie, Gesundheit) übergriffig \textendash{} dort ist nüchtern überpersönlich.
+\end{itemize}
+
+\smallskip
+\textbf{3. Faustregel:}
+Automatisierung ist wirtschaftlich begründet, solange sie (a) einen für den Empfänger \emph{nachvollziehbaren} Anlass hat \emph{und} (b) die Personalisierung an realen Daten und nicht an Pseudo-Variablen hängt. Sie beginnt Vertrauen zu zerstören, sobald der Empfänger den Eindruck hat, als ``Datensatz'' und nicht als Person behandelt zu werden \textendash{} und das ist meist deutlich \emph{vor} dem Punkt, an dem die Abmelderate auffällt.
+\end{loesungbox}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} E-Mail-, Nurturing- \& ROI-Architektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+CRO / Head of Marketing Automation / Leiter:in Digital Sales eines mittelständischen B2B-Unternehmens mit wachsender Kontaktdatenbank, ohne Nurturing-Architektur, ohne ROI-Messung, mit Spannungen zwischen Marketing und Vertrieb.
+\end{infobox}
+
+\ytquery{Marketing Automation Architektur Lead Nurturing ROI Governance CRO}
+
+\begin{loesungbox}
+\emph{Musterlösung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind möglich, solange sie als Architektur (nicht als Maßnahmenliste) gedacht sind.}
+
+\smallskip
+\textbf{1. Zielbild:}
+Bis Ende des Folgejahres ist E-Mail-Marketing kein Versandkanal mehr, sondern ein \emph{Pipeline-Steuerungssystem}. Jede Strecke ist segmentiert, jeder Lead hat einen Score, jeder Übergabepunkt an den Vertrieb ist definiert. Die Geschäftsführung bekommt monatlich einen ROI-Bericht je Kampagnenstrecke. Marketing wird an Pipeline-Beitrag (nicht an Versandzahlen) gemessen.
+
+\smallskip
+\textbf{2. Segmentierung der Kontaktbasis:}
+\begin{itemize}
+  \item \emph{Nach Rolle:} GF \textperiodcentered{} IT \textperiodcentered{} Fachbereich \textperiodcentered{} Einkauf.
+  \item \emph{Nach Branche:} drei bis fünf Kernbranchen, separate Inhalte je Branche.
+  \item \emph{Nach Interesse:} Kosten, Compliance, Wachstum, Automatisierung.
+  \item \emph{Nach Verhalten:} Whitepaper-Download, Webinar, Demo-Anfrage, Inaktivität.
+  \item \emph{Nach Reifegrad:} Information \textperiodcentered{} Vergleich \textperiodcentered{} Entscheidung \textperiodcentered{} Bestand.
+\end{itemize}
+
+\smallskip
+\textbf{3. Nurturing-Logik entlang der Customer Journey:}
+Erstkontakt (Danke + Erwartung) \textrightarrow{} Problembewusstsein (Impuls) \textrightarrow{} Lösungsvergleich (Case + Checkliste) \textrightarrow{} Entscheidung (Demo / Beratung) \textrightarrow{} Übergabe an Vertrieb \textrightarrow{} Onboarding \textrightarrow{} Bestandskunden-Strecke (Upsell, Reaktivierung).
+
+\smallskip
+\textbf{4. Inhaltsarchitektur:}
+\begin{itemize}
+  \item E-Mail-Typen: Welcome, Fachimpuls, Case, Webinar-Einladung, Vergleichshilfe, Demo-Einladung, Reaktivierung, Vertragsverlängerung, Upsell.
+  \item Trigger: Download, Webinar-Anmeldung, Websitebesuch ($\geq 3$ Mal), Inaktivität ($> 60$\,Tage), Demo-Klick, Angebotsablauf.
+  \item CTAs: ``Lesen Sie den Case'', ``Buchen Sie 15 Min.\ Sparring'', ``Vergleich starten'', ``Demo ansehen''.
+\end{itemize}
+
+\smallskip
+\textbf{5. Lead-Scoring und Übergabe:}
+\begin{itemize}
+  \item Profilscore (max.\ 40): Rolle, Unternehmensgröße, Branche.
+  \item Verhaltensscore (max.\ 60): Klicks, Demo-Klick, Downloads, Webinar-Teilnahme.
+  \item MQL ab Gesamtscore 40, SQL ab 70 \emph{oder} expliziter Termin-Klick mit passendem Profil.
+  \item Übergabe SQL an Vertrieb innerhalb von 24\,Stunden, mit kompaktem Lead-Briefing aus dem CRM.
+\end{itemize}
+
+\smallskip
+\textbf{6. Daten- und Datenschutzlogik:}
+\begin{itemize}
+  \item Single Opt-in für allgemeine Inhalte, Double Opt-in mit Zweck-Trennung für Verhaltensbasiertes.
+  \item CRM ist System of Truth \textendash{} alle Tools schreiben dorthin, nicht umgekehrt.
+  \item Datenhygiene-Routine: jährliche Bereinigung inaktiver Kontakte (kein Versand $> 12$\,Monate \textrightarrow{} aktive Reaktivierung oder Löschung).
+  \item DSGVO-Dokumentation: Einwilligungsbeleg, Speicherzweck, Speicherdauer, Auskunftsprozess sind formal definiert.
+\end{itemize}
+
+\smallskip
+\textbf{7. KPI-Architektur:}
+\begin{itemize}
+  \item \emph{Operativ:} Zustellrate, Bounce Rate, Öffnungs-/Klickrate je Segment.
+  \item \emph{Qualität:} MQL-Anteil, SQL-Anteil, Abmelderate, Reifegrad-Verteilung.
+  \item \emph{Wirtschaft:} CAC, Kosten je SQL, Demo-zu-Angebot-Quote, Abschluss-Quote, Umsatz und Deckungsbeitrag je Strecke.
+\end{itemize}
+
+\smallskip
+\textbf{8. ROI-Logik:}
+\begin{itemize}
+  \item ROI je Strecke = (Deckungsbeitrag aus SQL-generierten Abschlüssen $-$ Streckenkosten) / Streckenkosten.
+  \item Bewertung je Segment, je Kanalquelle, je Kampagnenstrecke \textendash{} keine ROI-Bewertung ohne Verbindung zum tatsächlichen Vertriebsergebnis.
+  \item Reporting-Rhythmus: monatlich operativ, quartalsweise auf Geschäftsleitungs-Ebene.
+\end{itemize}
+
+\smallskip
+\textbf{9. Governance:}
+\begin{itemize}
+  \item \emph{CRO} entscheidet über Kanal-Portfolio, MQL/SQL-Definition und Pipeline-Ziele.
+  \item \emph{Head of Marketing Automation} verantwortet operative Streckenplanung, Tool-Logik, Inhalte.
+  \item \emph{Vertriebsleitung} verantwortet Lead-Annahme, Feedback-Loop, SLA für Lead-Bearbeitung.
+  \item \emph{IT / Datenschutzbeauftragter} verantworten CRM, Einwilligung, Datenschutz-Compliance.
+  \item \emph{Controlling} verantwortet ROI-Logik und Kennzahlen-Definition.
+  \item Gemeinsames Forum: ``Revenue Council'' monatlich \textendash{} ein Beschluss je Quartal, keine Diskussionsrunde.
+\end{itemize}
+
+\smallskip
+\textbf{10. Drei Managemententscheidungen unter Unsicherheit:}
+\begin{enumerate}
+  \item \emph{MQL/SQL-Trennung wird verbindlich eingeführt, bevor das Vertriebsteam das Konzept akzeptiert.} Begründung: ohne Definition kein Score, ohne Score keine Steuerung; Akzeptanz folgt der Wirkung, nicht umgekehrt.
+  \item \emph{Erste 30\,\% des Budgets fließen in CRM-Datenqualität, nicht in neue Lead-Quellen.} Begründung: die Investition ist intern unsichtbar, aber jede weitere Maßnahme darauf angewiesen.
+  \item \emph{Reporting wird quartalsweise auf Geschäftsleitungs-Ebene gezogen, bevor die Zahlen ``schön'' sind.} Begründung: transparente schwache Zahlen sind besser als verzögerte gute \textendash{} Vertrauen in die Marketingsteuerung entsteht durch Konsequenz, nicht durch Kosmetik.
+\end{enumerate}
+
+\smallskip
+\textbf{Zusatz \textendash{} Entscheidung gegen mehr Kampagnenvolumen:}
+Bewusst \emph{nicht} eingeführt wird ein zusätzlicher monatlicher Massen-Newsletter an die gesamte Datenbank von 50.000+ Kontakten. Aus Senior-Level-Perspektive: jeder zusätzliche Versand ohne Reifegrad-Bezug schadet der Listengesundheit (Abmelderate, Bounce, Spam-Reputation), bindet Content-Kapazität ohne nachweisbaren Pipeline-Beitrag und belastet das Vertriebsteam mit unreifen Reaktionen. Stattdessen: gleicher Content-Aufwand fließt in zwei rollenbasierte Nurturing-Strecken \textendash{} weniger ``Versand'', mehr Wirkung.
+\end{loesungbox}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Die Musterlösungen sind eine Diskussionsbasis. Wenn Ihre eigene Lösung anders ist, fragen Sie: \emph{Habe ich andere Annahmen \textendash{} oder einen anderen Maßstab angelegt?} Beides ist legitim, solange die Logik nachvollziehbar bleibt.
+
+\medskip
+\begin{infobox}[Nächster Schritt]
+Bringen Sie Ihre eigenen Lösungen in die Coaching-Sitzung mit. Im Fokus stehen drei Fragen: Welche Annahmen haben Sie gemacht? Welche Zielkonflikte haben Sie sichtbar gemacht? Welche Entscheidung haben Sie getroffen \textendash{} und würden Sie auch verantworten, wenn sich der Markt anders entwickelt als angenommen?
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 10 \textperiodcentered{} Lösungsheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

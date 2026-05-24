@@ -1,0 +1,641 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 10 - Aufgabenheft
+% Performance-Marketing im Vertrieb: Anzeigen, Conversion & E-Mail-Kampagnen
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+\definecolor{lpGreen}{RGB}{34,120,72}
+\definecolor{lpGreenLight}{RGB}{222,238,228}
+\definecolor{lpGreenBorder}{RGB}{24,96,58}
+
+% Niveau-Farben
+\definecolor{lpL1}{RGB}{34,120,72}      % L1 = gruen (reproduktion)
+\definecolor{lpL2}{RGB}{22,90,140}      % L2 = blau (anwendung)
+\definecolor{lpL3}{RGB}{170,42,52}      % L3 = rot (management)
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+% Info-Box (blau-weiss) fuer Hinweise/Aufgabenstellung-Rahmen
+\newtcolorbox{infobox}[1][Hinweis]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% Antwort-Bereich: leerer Kasten mit Punktlinien
+\newtcolorbox{antwortbox}[1][Ihre Antwort]{%
+  enhanced, breakable,
+  colback=white,
+  colframe=lpGray,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpGray, colframe=lpGray, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Aufgabenheft \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 10}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}E-Mail \& Performance-Marketing}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+
+% Niveau-Badge
+\newcommand{\niveaubadge}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\bfseries\footnotesize #2}%
+}
+\newcommand{\nivLi}{\niveaubadge{lpL1}{L1\,\textbullet\,Wissen}}
+\newcommand{\nivLii}{\niveaubadge{lpL2}{L2\,\textbullet\,Anwendung}}
+\newcommand{\nivLiii}{\niveaubadge{lpL3}{L3\,\textbullet\,Management}}
+
+% Zeit-Hinweis
+\newcommand{\zeit}[1]{%
+  \tcbox[on line, colback=lpGrayLight, colframe=lpGrayLight, coltext=lpInk,
+         boxrule=0pt, arc=2pt, left=5pt,right=5pt,top=1pt,bottom=1pt,
+         nobeforeafter]{\sffamily\footnotesize\textbf{$\sim$\,#1}}%
+}
+
+% Aufgaben-Kopf
+\newcommand{\aufgabenkopf}[4]{%
+  \par\vspace{6pt}
+  \noindent{\sffamily\Large\bfseries\color{lpAccent}Aufgabe #1 \textendash{} #2}\par
+  \vspace{2pt}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\par
+  \vspace{4pt}
+  \noindent #3 \hfill \zeit{#4}\par
+  \vspace{6pt}
+}
+
+% YouTube-Suchquery
+\newcommand{\ytquery}[1]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+}
+
+% Linierter Antwort-Bereich
+\newcommand{\antwortlinien}[1]{%
+  \par\vspace{6pt}
+  \foreach \x in {1,...,#1}{%
+    \noindent\makebox[\linewidth]{\dotfill}\\[6pt]
+  }
+}
+\usepackage{pgffor}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}AUFGABENHEFT \textperiodcentered{} MODUL 5 \textperiodcentered{} TAG 10 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 11.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Aufgabenheft\\Tag 10\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Performance-Marketing im Vertrieb:\\E-Mail-Kampagnen, Conversion\\\& ROI -- elf Aufgaben auf drei Niveaus.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}11 Aufgaben \textperiodcentered{} L1 \textperiodcentered{} L2 \textperiodcentered{} L3}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Niveau-Mix:}\\
+    {\sffamily\small\color{lpInk}3\,\textsf{L1} \textperiodcentered{} 5\,\textsf{L2} \textperiodcentered{} 3\,\textsf{L3}}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitung:}\\
+    {\sffamily\small\color{lpInk}Selbstbearbeitung im Lernpfad}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Begleitend:}\\
+    {\sffamily\small\color{lpInk}Lehrskript \& Lösungsheft}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- ANLEITUNG -----------------------------------------------------------
+\section*{So arbeiten Sie mit diesem Heft}
+\thispagestyle{plain}
+
+\noindent Dieses Aufgabenheft enthält elf Aufgaben zu Tag 10 \textendash{} \emph{Performance-Marketing im Vertrieb: E-Mail-Kampagnen, Conversion \& ROI}. Die Aufgaben sind in drei Niveaus gegliedert:
+
+\begin{itemize}
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Kurze Reproduktion und Einordnung. 5\,--\,10 Minuten pro Aufgabe.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Transfer auf konkrete Vertriebssituationen. 15\,--\,30 Minuten.
+  \item \nivLiii{} \textendash{} \fachbegriff{Management.} Entscheidungsarchitektur und Verantwortung. 30\,--\,45 Minuten.
+\end{itemize}
+
+\noindent Jede Aufgabe enthält eine Niveau-Markierung, einen Zeit-Richtwert, den Aufgabentext (oft mit Kontext oder Fallbeschreibung), einen Antwort-Freiraum für Ihre Lösung sowie eine \emph{YouTube-Suchquery} für den begleitenden Lernpfad.
+
+\begin{infobox}[Hinweis]
+Die Musterlösungen finden Sie im separaten \emph{Lösungsheft Tag 10}. Versuchen Sie jede Aufgabe zuerst eigenständig \textendash{} der Mehrwert entsteht in der eigenen Argumentation, nicht im Abschreiben.
+\end{infobox}
+
+\clearpage
+
+% =========================================================================
+% L1 AUFGABEN
+% =========================================================================
+\section*{Niveau L1 \textendash{} Wissen \& Reproduktion}
+\addcontentsline{toc}{section}{L1 -- Wissen}
+
+% --- AUFGABE 1 -----------------------------------------------------------
+\aufgabenkopf{1}{Newsletter \textendash{} Kampagne \textendash{} Nurturing \textendash{} Vertriebsstrecke}{\nivLi}{8\,min}
+
+\noindent Definieren Sie in jeweils \emph{einem} Satz die vier Begriffe, die im professionellen E-Mail-Vertrieb häufig vermischt werden:
+
+\begin{enumerate}
+  \item Newsletter
+  \item Kampagne
+  \item Lead-Nurturing
+  \item Automatisierte Vertriebsstrecke
+\end{enumerate}
+
+\noindent Ergänzen Sie einen fünften Satz: Worin liegt der zentrale Unterschied zwischen einem \emph{Newsletter} und einer \emph{Nurturing-Strecke} aus Vertriebssicht?
+
+\ytquery{Newsletter Lead Nurturing E-Mail Marketing Unterschied B2B Vertrieb}
+
+\antwortlinien{10}
+
+\clearpage
+
+% --- AUFGABE 2 -----------------------------------------------------------
+\aufgabenkopf{2}{E-Mail-Kennzahlen zuordnen}{\nivLi}{8\,min}
+
+\noindent Ordnen Sie jede der folgenden Kennzahlen einer der drei Kategorien zu \textendash{} und schreiben Sie in einem Halbsatz, warum die Zuordnung sinnvoll ist:
+
+\medskip
+\noindent\textbf{Kategorien:} (A) Aktivitätskennzahl \textperiodcentered{} (B) Qualitätskennzahl \textperiodcentered{} (C) Wirtschaftliche Steuerungskennzahl.
+
+\medskip
+\noindent\textbf{Kennzahlen:}
+
+\begin{enumerate}
+  \item Öffnungsrate
+  \item Klickrate
+  \item Conversion Rate zu Beratungstermin
+  \item Abmelderate
+  \item Anteil vertriebsqualifizierter Leads
+  \item Kosten pro qualifiziertem Lead
+  \item Deckungsbeitrag aus E-Mail-Kampagne
+  \item Bounce Rate
+\end{enumerate}
+
+\ytquery{E-Mail Marketing KPI Öffnungsrate Conversion Pipeline Beitrag ROI}
+
+\antwortlinien{12}
+
+\clearpage
+
+% --- AUFGABE 3 -----------------------------------------------------------
+\aufgabenkopf{3}{ROI, CAC und Conversion Rate auf den Punkt}{\nivLi}{8\,min}
+
+\noindent Drei wirtschaftliche Kerngrößen werden im Performance-Marketing regelmäßig verwendet \textendash{} und ebenso regelmäßig verwechselt.
+
+\begin{enumerate}
+  \item Erklären Sie in \emph{einem} Satz, was der \emph{Return on Investment (ROI)} im Vertrieb misst.
+  \item Erklären Sie in \emph{einem} Satz, was \emph{Customer Acquisition Cost (CAC)} bedeutet.
+  \item Erklären Sie in \emph{einem} Satz, was eine \emph{Conversion Rate} zum Beratungstermin aussagt \textendash{} und worin sie sich von einer Klickrate unterscheidet.
+\end{enumerate}
+
+\noindent Ergänzen Sie einen vierten Satz: Welche dieser drei Kennzahlen ist am ehesten eine \emph{Managementkennzahl}, welche eher eine \emph{operative Steuerungskennzahl}?
+
+\ytquery{ROI CAC Conversion Rate Definition Vertrieb Performance Marketing}
+
+\antwortlinien{10}
+
+\clearpage
+
+% =========================================================================
+% L2 AUFGABEN
+% =========================================================================
+\section*{Niveau L2 \textendash{} Anwendung \& Transfer}
+\addcontentsline{toc}{section}{L2 -- Anwendung}
+
+% --- AUFGABE 4 -----------------------------------------------------------
+\aufgabenkopf{4}{CloudDesk Solutions \textendash{} Nurturing-Strecke ohne Vorwissen}{\nivLii}{25\,min}
+
+\begin{infobox}[Fallbeschreibung]
+\textbf{Unternehmen:} ``CloudDesk Solutions'' bietet eine Softwarelösung für digitales Dokumentenmanagement im Mittelstand an. Auf der Website können Interessenten ein Whitepaper herunterladen: ``5 Wege zu effizienteren Dokumentenprozessen''. Viele Personen laden das Whitepaper herunter, aber nur wenige buchen anschließend einen Beratungstermin.
+
+\smallskip
+\textbf{Gegeben:}
+\begin{itemize}
+  \item Zielgruppe: Geschäftsführer, IT-Leiter, kaufmännische Leiter
+  \item Produkt ist erklärungsbedürftig
+  \item Verkaufszyklus: 2 bis 4 Monate
+  \item Vertrieb möchte nur qualifizierte Leads erhalten
+  \item Marketing hat bisher nur eine automatische Danke-Mail eingerichtet
+  \item Ziel: mehr Beratungstermine aus bestehenden Whitepaper-Leads gewinnen
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in 2\,--\,3 Sätzen, welches Problem im aktuellen Prozess besteht.
+  \item Benennen Sie \textbf{drei mögliche Gründe}, warum Whitepaper-Leads noch keinen Beratungstermin buchen.
+  \item Entwickeln Sie eine einfache E-Mail-Strecke mit \textbf{mindestens vier E-Mails} nach dem Download.
+  \item Legen Sie für jede E-Mail \emph{Ziel}, \emph{Inhalt} und \emph{Call-to-Action} fest.
+  \item Entscheiden Sie, \emph{wann} ein Lead an den Vertrieb übergeben werden sollte.
+\end{enumerate}
+
+\ytquery{Lead Nurturing E-Mail Strecke Whitepaper B2B Beratungstermin}
+
+\antwortlinien{20}
+
+\clearpage
+
+% --- AUFGABE 5 -----------------------------------------------------------
+\aufgabenkopf{5}{E-Mail-Performance analysieren und optimieren}{\nivLii}{25\,min}
+
+\begin{infobox}[Kennzahlen der bisherigen Kampagne]
+\textbf{CloudDesk Solutions \textendash{} aktuelle Whitepaper-Kampagne:}
+\begin{itemize}
+  \item 1.200 Whitepaper-Downloads
+  \item Danke-Mail Öffnungsrate: 62\,\%
+  \item Klickrate auf Beratungslink: 4\,\%
+  \item Beratungstermine: 18
+  \item Davon qualifizierte Termine: 7
+  \item Abmelderate: 3,8\,\%
+  \item Vertrieb meldet: ``Viele Leads sind noch nicht entscheidungsbereit.''
+\end{itemize}
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Budget für Optimierung: 18.000\,\euro
+  \item Zeitraum: 3 Monate
+  \item Ziel: 40 qualifizierte Beratungstermine
+  \item Vertrieb kann maximal 15 neue Termine pro Woche bearbeiten
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Bewerten Sie die aktuelle Kampagne anhand der Kennzahlen \textendash{} was ist schon gut, was bleibt zurück?
+  \item Identifizieren Sie \textbf{mindestens vier Schwachstellen} im aktuellen Nurturing-Prozess.
+  \item Entwickeln Sie \textbf{drei Optimierungsmaßnahmen} für Inhalte, Timing oder Segmentierung.
+  \item Legen Sie \textbf{fünf KPIs} fest, mit denen die neue E-Mail-Strecke gesteuert werden soll.
+  \item Entscheiden Sie, ob das Ziel von 40 qualifizierten Beratungsterminen realistisch ist. Begründen Sie Ihre Einschätzung.
+\end{enumerate}
+
+\ytquery{E-Mail Kampagne Performance Analyse Optimierung Conversion B2B Lead}
+
+\antwortlinien{18}
+
+\clearpage
+
+% --- AUFGABE 6 -----------------------------------------------------------
+\aufgabenkopf{6}{Segmentierung einer Kontaktbasis}{\nivLii}{20\,min}
+
+\begin{infobox}[Ausgangslage]
+\textbf{Software-Anbieter mit 8.000 Kontakten:} Webinar-Teilnehmende, Whitepaper-Downloads, LinkedIn-Leads, Messekontakte, inaktive Altkontakte. Bisher erhalten \emph{alle} Kontakte denselben monatlichen Newsletter. Die Geschäftsführung fragt: ``Wie würden wir die Liste sinnvoll segmentieren \textendash{} und welche Daten brauchen wir dafür?''
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Entwickeln Sie eine Segmentierungslogik entlang \textbf{vier Dimensionen}. Für jede Dimension:
+
+\begin{itemize}
+  \item Konkrete Segmente (mindestens drei pro Dimension).
+  \item Welche Information aus dem CRM oder dem Tracking ist nötig?
+  \item Welcher Inhaltstyp passt zu welchem Segment?
+\end{itemize}
+
+\noindent Vorgeschlagene Dimensionen: \emph{Rolle / Buying-Center}, \emph{Branche}, \emph{Interesse / Themenpräferenz}, \emph{Reifegrad / Kaufphase}.
+
+\smallskip
+\noindent Formulieren Sie zum Schluss \emph{eine} Hypothese: Welches Segment hat den höchsten Hebel auf qualifizierte Vertriebsleads in den nächsten 90 Tagen?
+
+\ytquery{B2B E-Mail Segmentierung Rolle Branche Reifegrad CRM Nurturing}
+
+\antwortlinien{16}
+
+\clearpage
+
+% --- AUFGABE 7 -----------------------------------------------------------
+\aufgabenkopf{7}{EcoFleet Systems \textendash{} Nurturing- und KPI-Architektur}{\nivLii}{30\,min}
+
+\begin{infobox}[Fallstudie: EcoFleet Systems]
+``EcoFleet Systems'' bietet digitale Lösungen zur Fuhrparkoptimierung für mittelständische Unternehmen an. Die Software senkt Fahrzeugkosten, reduziert CO\textsubscript{2}-Emissionen und macht Wartungsprozesse transparenter. Bisher gewinnt das Unternehmen Leads über Webinare, Whitepaper, LinkedIn-Kampagnen und Messekontakte. Viele Kontakte zeigen Interesse, nur ein kleiner Teil entwickelt sich zur qualifizierten Verkaufschance.
+
+\smallskip
+\textbf{Rahmen:} 12\,Mio.\,\euro{} Jahresumsatz \textperiodcentered{} 7 Vertriebler \textperiodcentered{} 2 im Marketing \textperiodcentered{} 8.000 Kontakte (davon 2.500 Webinar-/Whitepaper-Leads) \textperiodcentered{} Auftragswert 38.000\,\euro/Jahr \textperiodcentered{} Verkaufszyklus 3\,--\,6 Monate \textperiodcentered{} Budget 95.000\,\euro{} für 6\,Monate \textperiodcentered{} Ziel: 300 qualifizierte Leads, 90 Demo-Termine, 25 Angebote, 8 Abschlüsse.
+
+\smallskip
+\textbf{Probleme:} alle Kontakte erhalten gleiche E-Mails, keine Segmentierung, Vertrieb erhält Leads zu früh, Bewertung läuft über Öffnungs-/Klickraten, CRM-Daten uneinheitlich, kein gemeinsames Lead-Verständnis.
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie die \textbf{drei wichtigsten Schwächen} des aktuellen E-Mail- und Leadprozesses.
+  \item Entwickeln Sie eine \textbf{Nurturing-Strecke mit mindestens sechs Kontaktpunkten} entlang der Customer Journey.
+  \item Definieren Sie, wann ein Lead \emph{marketingqualifiziert (MQL)} und wann \emph{vertriebsqualifiziert (SQL)} ist.
+  \item Bauen Sie eine \textbf{KPI-Architektur} von Zustellung bis Umsatz auf (mindestens sechs Kennzahlen).
+\end{enumerate}
+
+\ytquery{EcoFleet B2B Lead Nurturing KPI Architektur MQL SQL Marketing Automation}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 8 -----------------------------------------------------------
+\aufgabenkopf{8}{Budgetverteilung 95.000\,\euro{} \textendash{} mit Begründung}{\nivLii}{20\,min}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\noindent Bleiben Sie im EcoFleet-Szenario. Sie haben 95.000\,\euro{} für sechs Monate. Verteilen Sie das Budget auf die folgenden Posten \textendash{} und begründen Sie jede Zuteilung in einem Satz:
+
+\medskip
+\noindent\begin{tabularx}{\linewidth}{@{}lXl@{}}
+\toprule
+\textbf{Posten} & \textbf{Begründung in einem Satz} & \textbf{Betrag (\euro)} \\
+\midrule
+Contententwicklung (Cases, Checklisten, Fachbeiträge) & \rule{8em}{0.3pt} & \rule{3em}{0.3pt} \\
+\midrule
+Marketing-Automation und technische Einrichtung & \rule{8em}{0.3pt} & \rule{3em}{0.3pt} \\
+\midrule
+CRM-Datenbereinigung und Segmentierung & \rule{8em}{0.3pt} & \rule{3em}{0.3pt} \\
+\midrule
+Landing Pages, Demo-Formulare, Conversion-Optimierung & \rule{8em}{0.3pt} & \rule{3em}{0.3pt} \\
+\midrule
+A/B-Tests (Betreff, Inhalt, CTA, Timing) & \rule{8em}{0.3pt} & \rule{3em}{0.3pt} \\
+\midrule
+Reporting, Dashboards, ROI-Auswertung & \rule{8em}{0.3pt} & \rule{3em}{0.3pt} \\
+\midrule
+\textbf{Summe} & & \textbf{95.000} \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\noindent Schließen Sie mit einer \textbf{Empfehlung in drei Sätzen}: Welche zwei Posten sind aus Ihrer Sicht die wichtigsten \textendash{} und welcher Posten könnte am ehesten reduziert werden, falls das Budget gekürzt würde?
+
+\ytquery{Marketing Budget B2B Nurturing CRM Automation Content Verteilung}
+
+\antwortlinien{14}
+
+\clearpage
+
+% =========================================================================
+% L3 AUFGABEN
+% =========================================================================
+\section*{Niveau L3 \textendash{} Management \& Entscheidungsarchitektur}
+\addcontentsline{toc}{section}{L3 -- Management}
+
+% --- AUFGABE 9 -----------------------------------------------------------
+\aufgabenkopf{9}{EcoFleet \textendash{} Entscheidung unter Unsicherheit}{\nivLiii}{40\,min}
+
+\begin{infobox}[Rolle und Spannungsfeld]
+\textbf{Ihre Rolle:} Chief Revenue Officer von EcoFleet Systems (siehe Aufgabe 7).
+
+\smallskip
+\textbf{Spannungsfeld:} Marketing will mit dem 95.000-\euro{}-Budget primär \emph{mehr Leads} generieren (LinkedIn-Ads, Webinare, Whitepaper-Kampagnen). Vertrieb sagt: ``Wir haben schon zu viele unreife Leads \textendash{} schickt uns lieber weniger, aber bessere.'' Geschäftsführung will harte Zahlen: \emph{8 Abschlüsse, 300 qualifizierte Leads}.
+
+\smallskip
+\textbf{Sie müssen entscheiden:} Investieren Sie zuerst in \emph{Lead-Quantität} (mehr Kontakte aus neuen Kanälen) oder in \emph{Lead-Qualität} (Segmentierung, Datenqualität, Scoring, Nurturing-Inhalte für die 2.500 bestehenden Kontakte)?
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Analysieren Sie das Spannungsfeld in 3\,--\,5 Punkten. Welche Annahmen liegen hinter ``mehr Leads'' und welche hinter ``bessere Leads''?
+  \item Entwickeln Sie \textbf{zwei strategische Optionen} (A: Quantität zuerst, B: Qualität zuerst) und beschreiben Sie deren Investitionslogik.
+  \item Bewerten Sie beide Optionen anhand von: \emph{Wahrscheinlichkeit der Zielerreichung} \textperiodcentered{} \emph{Risiko für Vertriebskapazität} \textperiodcentered{} \emph{ROI-Sichtbarkeit nach 6 Monaten} \textperiodcentered{} \emph{Datenkontrolle} \textperiodcentered{} \emph{Skalierbarkeit ab Monat 7}.
+  \item Treffen Sie eine begründete \textbf{Entscheidung} und legen Sie die Budget-Aufteilung zwischen Quantität und Qualität fest.
+  \item Beschreiben Sie, welche \textbf{Pilot-Logik} Sie nutzen, um Ihre Entscheidung in den ersten 8 Wochen zu validieren \textendash{} und an welcher Kennzahl Sie sie ggf.\ korrigieren würden.
+  \item Formulieren Sie \emph{eine ausdrückliche Entscheidung unter Unsicherheit}: An welcher Stelle entscheiden Sie ohne ausreichende Datenlage \textendash{} und warum trotzdem so?
+\end{enumerate}
+
+\ytquery{Lead Qualität Quantität B2B Vertrieb CRO Entscheidung Pipeline Pilot}
+
+\antwortlinien{32}
+
+\clearpage
+
+% --- AUFGABE 10 ----------------------------------------------------------
+\aufgabenkopf{10}{Zielkonflikt: Automatisierung vs.\ Personalisierung}{\nivLiii}{30\,min}
+
+\noindent\textbf{Diskussionsaufgabe.}
+
+\noindent Im professionellen E-Mail-Vertrieb stehen \emph{Automatisierung} (Skalierung, Effizienz, Wirtschaftlichkeit) und \emph{Personalisierung} (Relevanz, Kundenerlebnis, Conversion) in einem dauerhaften Spannungsverhältnis. Datenschutz, Vertriebslast und Kundenwahrnehmung kommen hinzu.
+
+\medskip
+\noindent\textbf{Arbeitsauftrag:}
+
+\begin{enumerate}
+  \item Beschreiben Sie in eigenen Worten, ab \emph{wann} Automatisierung in der Kundenwahrnehmung kippt: vom hilfreichen Service zur ``Massen-Mail-Belästigung'' (3\,--\,4 Sätze). Was sind die kritischen Schwellen?
+  \item Wählen Sie ein \textbf{konkretes B2B-Szenario} (z.\,B.\ SaaS-Anbieter mit 50.000 Kontakten, Industriedienstleister mit Bestandskundenliste, mittelständischer Maschinenbauer mit Webinar-Leads). Erläutern Sie:
+  \begin{itemize}
+    \item Welche \emph{drei Automatisierungsmöglichkeiten} wären hier sinnvoll \textendash{} und welche eine Grenze überschreiten würde?
+    \item Welche \emph{drei Personalisierungs-Hebel} sind ohne überzogenen Aufwand realistisch?
+    \item Wo entstehen Konflikte mit Datenschutz, Einwilligung, Vertriebskapazität oder Markenwahrnehmung?
+  \end{itemize}
+  \item Formulieren Sie eine \textbf{Faustregel} (ein bis zwei Sätze): Wann ist Automatisierung wirtschaftlich begründet \textendash{} und wann beginnt sie, mehr Vertrauen zu zerstören als Umsatz zu erzeugen?
+\end{enumerate}
+
+\ytquery{Marketing Automation Personalisierung B2B Grenzen Datenschutz DSGVO}
+
+\antwortlinien{22}
+
+\clearpage
+
+% --- AUFGABE 11 ----------------------------------------------------------
+\aufgabenkopf{11}{Transferprojekt \textendash{} E-Mail-, Nurturing- \& ROI-Architektur}{\nivLiii}{45\,min}
+
+\begin{infobox}[Rolle und Ausgangslage]
+\textbf{Ihre Rolle:} Chief Revenue Officer \emph{oder} Head of Marketing Automation \emph{oder} Leiter:in Digital Sales eines mittelständischen B2B-Unternehmens.
+
+\smallskip
+\textbf{Ausgangslage:} Wachsende Kontaktdatenbank aus Webinaren, Whitepapers, Plattformkontakten, Messen, LinkedIn-Kampagnen und Bestandskunden. Kontakte werden unregelmäßig mit Newslettern bespielt. Keine Nurturing-Architektur, keine verbindliche Leadqualifizierung, keine belastbare ROI-Messung. Vertrieb beklagt unreife Leads, Marketing beklagt fehlendes Feedback, Geschäftsführung fordert wirtschaftliche Nachweise.
+
+\smallskip
+\textbf{Rahmenbedingungen:}
+\begin{itemize}
+  \item Budget begrenzt
+  \item Datenqualität uneinheitlich
+  \item Vertriebskapazität knapp
+  \item Kaufentscheidungen dauern mehrere Monate
+  \item Datenschutz und Einwilligungen zwingend zu beachten
+  \item Geschäftsführung erwartet belastbare ROI-Aussagen
+  \item Marketing und Vertrieb nutzen unterschiedliche Erfolgskennzahlen
+\end{itemize}
+\end{infobox}
+
+\noindent\textbf{Arbeitsauftrag:} Entwickeln Sie eine strukturierte \emph{Entscheidungsarchitektur} \textendash{} keine reine Maßnahmenliste \textendash{} für E-Mail-Marketing, Lead-Nurturing und ROI-Optimierung.
+
+\begin{enumerate}
+  \item Zielbild für die E-Mail- und Nurturing-Architektur (3\,--\,5 Sätze).
+  \item Segmentierung der Kontaktbasis nach Zielgruppe, Interesse, Kaufphase und Verhalten.
+  \item Nurturing-Logik entlang der Customer Journey (Erstkontakt bis Wiederansprache).
+  \item Inhaltsarchitektur: E-Mail-Typen, Themen, Trigger, Call-to-Actions.
+  \item Lead-Scoring- und Übergabelogik an den Vertrieb (MQL/SQL-Definition).
+  \item Daten- und Datenschutzlogik (Einwilligung, CRM, Aktualität, Qualität).
+  \item KPI-Architektur von Zustellung bis Umsatz und Deckungsbeitrag.
+  \item ROI-Logik zur Bewertung von Kampagnen, Segmenten und Vertriebsbeitrag.
+  \item Governance zwischen Marketing, Vertrieb, CRM, Datenschutz, Controlling, Geschäftsführung.
+  \item Drei Managemententscheidungen unter Unsicherheit.
+\end{enumerate}
+
+\noindent\textbf{Zusatzanforderung:} Treffen Sie mindestens \emph{eine bewusste Entscheidung gegen mehr Kampagnenvolumen}, wenn dadurch Leadqualität, Kundenerlebnis, Datenschutz, Vertriebskapazität oder Wirtschaftlichkeit gefährdet würden \textendash{} und begründen Sie diese aus Senior-Level-Perspektive.
+
+\ytquery{Marketing Automation Architektur Lead Nurturing ROI Governance CRO}
+
+\antwortlinien{36}
+
+\clearpage
+
+% --- Abschluss -----------------------------------------------------------
+\section*{Abschluss}
+\thispagestyle{plain}
+
+\noindent Sie haben alle elf Aufgaben bearbeitet. Vergleichen Sie nun Ihre Antworten mit dem \emph{Lösungsheft Tag 10}.
+
+\medskip
+\begin{infobox}[Was Sie jetzt können sollten]
+\begin{itemize}
+  \item Newsletter, Kampagne, Nurturing und automatisierte Vertriebsstrecke sauber abgrenzen.
+  \item E-Mail-Kennzahlen nach Aktivität, Qualität und wirtschaftlicher Wirkung sortieren.
+  \item Eine Nurturing-Strecke entlang der Customer Journey entwerfen.
+  \item Lead-Qualifizierung (MQL/SQL) verbindlich definieren.
+  \item Eine KPI- und ROI-Architektur aufbauen, die Marketing- und Vertriebslogik verbindet.
+  \item Entscheidungen unter Unsicherheit zwischen Lead-Quantität und Lead-Qualität verantworten.
+  \item Eine Architektur formulieren, in der Automatisierung, Personalisierung, Datenschutz und Wirtschaftlichkeit balanciert sind.
+\end{itemize}
+\end{infobox}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 10 \textperiodcentered{} Aufgabenheft \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
