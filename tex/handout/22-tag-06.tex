@@ -1,0 +1,618 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 6 - Lehrskript
+% Omnichannel-Strategien & Operationalisierung digitaler Vertriebsstrategien
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 6}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Omnichannel \& Operationalisierung}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 3 \textperiodcentered{} TAG 6 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 5.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Omnichannel\\\& Operationalisierung\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom Kanalmix zum digitalen Vertriebs­betriebssystem --\\Prozesse, Daten, Rollen, KPIs.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 6 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent An Tag~5 haben Sie eine kundenzentrierte Kanalstrategie abgeleitet. Heute geht es um die Umsetzungs- und Steuerungslogik: \emph{Wie wird aus einer Kanalstrategie ein steuerbares Omnichannel-System -- mit klaren Prozessen, sauberen Daten, definierten Rollen und gemeinsamen KPIs?}
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Omnichannel-Strategien verstehen und von Multichannel-Ansätzen unterscheiden.
+  \item Zusammenspiel von Online- und Offline-Kanälen einordnen.
+  \item Grundlagen der Operationalisierung digitaler Vertriebsstrategien kennen.
+  \item Rollen von Vertrieb, Marketing, IT, Kundenservice und Management verstehen.
+  \item Relevante KPIs für digitale Vertriebssteuerung benennen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Omnichannel-Ansätze auf konkrete Vertriebssituationen übertragen.
+  \item Kanalübergänge entlang der Customer Journey gestalten.
+  \item Prozesse, Verantwortlichkeiten und Datenflüsse strukturieren.
+  \item Digitale Vertriebsmaßnahmen priorisieren und in eine Roadmap überführen.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Omnichannel-Strategie als Führungs- und Architekturentscheidung bewerten.
+  \item Zielkonflikte zwischen Kundenerlebnis, Vertriebseffizienz, Kosten, Datenqualität und Organisationsfähigkeit managen.
+  \item Entscheidungen unter Unsicherheit, Budgetrestriktionen und Zeitdruck treffen.
+  \item Verantwortung für eine skalierbare digitale Vertriebsarchitektur übernehmen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Omnichannel bedeutet nicht ``\emph{überall sein}''. Es bedeutet, dass der Kunde an jedem Touchpoint dasselbe Unternehmen erlebt -- mit konsistenten Informationen, klaren Zuständigkeiten und ohne Medienbrüche. Wer das nicht operationalisiert, hat einen Kanalmix, kein Vertriebsbetriebssystem.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Vom Kanal zum Betriebssystem}
+
+In vielen Vertriebsorganisationen ist die folgende Situation Alltag: Es gibt eine Website, ein paar LinkedIn-Aktivitäten, ein CRM, einen Newsletter, einen Außendienst -- aber sie arbeiten kaum zusammen. Marketing misst Klicks, Vertrieb misst Abschlüsse, Kundenservice dokumentiert in Excel, Außendienst kennt die digitalen Kampagnen oft nicht. Das Ergebnis: Kunden erleben Brüche, Leads verfallen, das Management entscheidet auf Basis unvollständiger Daten. \quelle{vgl.\ Verhoef et al., 2015; Brynjolfsson et al., 2013}
+
+\subsection{Vier typische Lücken in der Umsetzung}
+
+\begin{enumerate}
+  \item \fachbegriff{Strategie ohne operative Übersetzung.} Eine Kanalentscheidung ist getroffen -- aber niemand weiß genau, wer was bis wann tut.
+  \item \fachbegriff{Prozesse ohne Datenbasis.} Es gibt Prozesse für Leadbearbeitung -- aber das CRM ist nicht verbindlich gepflegt, also fehlt die Steuerungsgrundlage.
+  \item \fachbegriff{KPIs ohne gemeinsame Sicht.} Marketing und Vertrieb berichten unterschiedliche Größen. Wer welche Verantwortung trägt, ist nicht klar.
+  \item \fachbegriff{Maßnahmen ohne Roadmap.} Initiativen werden parallel gestartet, ohne Priorisierung -- die Organisation wird überfordert, der Erfolg verteilt sich.
+\end{enumerate}
+
+\subsection{Was dieser Tag konkret leistet}
+
+Wir bauen das Omnichannel-Modell systematisch auf: Begriffsklärung (Sektion 2), Kanalübergänge entlang der Journey (Sektion 3), Operationalisierung in Prozesse und Rollen (Sektionen 4--5), KPI-Architektur (Sektion 6), Roadmap-Logik (Sektion 7) und Fallstudie ``IndustrialPro Services'' (Sektion 8). Sektion 9 behandelt die Management-Perspektive.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{S-P-D-R} -- vier Bausteine der Operationalisierung]
+Vier Buchstaben, vier Bausteine jeder Umsetzung:\\[2pt]
+\textbf{S}trategie -- klar formuliertes Zielbild.\\
+\textbf{P}rozesse -- definierter Ablauf für Lead, Übergabe, Nachverfolgung.\\
+\textbf{D}aten -- verbindliches CRM, klare Datenflüsse.\\
+\textbf{R}ollen -- wer entscheidet, wer berichtet, wer setzt um.\\[2pt]
+\emph{Wer ``S-P-D-R'' nicht beantworten kann, hat eine Initiative -- keine Operationalisierung.}
+\end{eselsbox}
+
+% --- 2. SINGLE / MULTI / CROSS / OMNI ------------------------------------
+\section{Single, Multi, Cross, Omni -- vier Stufen}
+
+Die Begriffe werden oft unscharf verwendet. Eine saubere Abgrenzung ist Voraussetzung, um zu bewerten, wo eine Organisation steht und wohin sie sich bewegen will. \quelle{Verhoef et al., 2015; Rigby, 2011}
+
+\subsection{Vier Stufen der Kanalintegration}
+
+\begin{enumerate}
+  \item \fachbegriff{Single Channel.} Ein Kanal, eine Logik. Klassisch: nur Außendienst, nur Webshop, nur Telefon. Robust, aber begrenzt.
+  \item \fachbegriff{Multichannel.} Mehrere Kanäle nebeneinander, jeweils isoliert betrieben. Webshop \emph{und} Außendienst, aber ohne Datenaustausch. Häufigster Zustand mittelständischer Organisationen.
+  \item \fachbegriff{Cross-Channel.} Kanäle sind teilweise verbunden -- Kunden können Kanäle wechseln, sehen aber noch Brüche. Z.\,B.\ Online-Kauf, aber Reklamation nur in der Filiale.
+  \item \fachbegriff{Omnichannel.} Kanäle sind \emph{integriert}, der Kunde erlebt ein einheitliches Unternehmen. Konsistente Informationen, Preise, Bestände, Daten, Ansprechpartner -- unabhängig vom Kanal.
+\end{enumerate}
+
+\subsection{Was ``integriert'' konkret bedeutet}
+
+Omnichannel ist mehr als ``alle Kanäle haben das gleiche Logo''. Integration bedeutet:
+
+\begin{itemize}
+  \item Der Kunde sieht überall konsistente Preise, Verfügbarkeiten und Lieferzeiten.
+  \item Der Anbieter sieht über alle Kanäle einen einheitlichen Kundendatensatz -- nicht fünf Insellösungen.
+  \item Eine Anfrage im Webchat ist im CRM sichtbar, wenn der Außendienst zum Termin geht.
+  \item Marketing-Kampagnen sind dem Vertrieb bekannt, bevor der Kunde anruft.
+  \item KPIs werden über Kanäle aggregiert betrachtet, nicht nur pro Kanal.
+\end{itemize}
+
+\begin{merkbox}[Omnichannel-Test]
+Drei Fragen, die ein Omnichannel-System bestehen muss:
+\begin{enumerate}
+  \item Erlebt der Kunde einen konsistenten Anbieter -- unabhängig vom Kanal?
+  \item Sehen wir intern \emph{einen} Kunden -- nicht fünf getrennte Datensätze?
+  \item Können Marketing, Vertrieb, Service und Management auf \emph{eine} Datenbasis blicken, wenn sie eine Entscheidung treffen?
+\end{enumerate}
+Wenn ein ``Nein'' dabei ist, sind wir noch Multi- oder Cross-Channel, nicht Omni.
+\end{merkbox}
+
+% --- 3. KANALUEBERGAENGE -------------------------------------------------
+\section{Kanalübergänge entlang der Customer Journey}
+
+Omnichannel wird im Alltag spürbar an den \fachbegriff{Übergängen}: vom Online-Lead zum Beratungsgespräch, vom Webinar zur Angebotsanfrage, vom Webshop zum Außendienst, vom Kundenportal zum Servicekontakt. Genau dort entstehen die meisten Brüche -- und dort liegen die größten Hebel.
+
+\subsection{Typische Übergänge}
+
+\begin{itemize}
+  \item \textbf{Lead-Übergänge.} Online-Anfrage \textrightarrow{} Vertrieb (Kontaktaufnahme innerhalb definierter Zeit).
+  \item \textbf{Beratungs-Übergänge.} Anfrage mit Beratungsbedarf \textrightarrow{} Außendienst oder spezialisierter Innendienst.
+  \item \textbf{Transaktions-Übergänge.} Angebot \textrightarrow{} Vertrag \textrightarrow{} Lieferung \textrightarrow{} Rechnung -- mit klarer Dokumentation im CRM.
+  \item \textbf{Service-Übergänge.} Bestandskunde mit Anliegen \textrightarrow{} Kundenservice, optional zurück zu Vertrieb (Upsell).
+  \item \textbf{Nachbestell-Übergänge.} Service \textrightarrow{} Vertrieb oder Self-Service-Portal, sobald Bedarf entsteht.
+\end{itemize}
+
+\subsection{Typische Brüche in der Praxis}
+
+\begin{itemize}
+  \item \textbf{Doppelte Datenerfassung.} Eine Anfrage wird in Web-Formular, E-Mail und CRM mehrfach erfasst -- mit Abweichungen.
+  \item \textbf{Unklare Zuständigkeiten.} Nach dem Webinar weiß niemand, wer welchen Teilnehmer kontaktiert.
+  \item \textbf{Widersprüchliche Informationen.} Website nennt Lieferzeit ``2 Wochen'', Außendienst sagt ``4 Wochen''.
+  \item \textbf{Medienbrüche.} Ein Vorgang springt zwischen E-Mail, CRM, Excel-Tabelle, Outlook-Kalender -- ohne dass irgendwo der vollständige Stand sichtbar wird.
+  \item \textbf{Fehlende Lead-Übergabe.} Marketing erzeugt einen Lead, aber niemand übernimmt ihn innerhalb von 24--48 Stunden -- der Kunde wendet sich an den Wettbewerber.
+\end{itemize}
+
+\quelle{vgl.\ Kannan \& Li, 2017}
+
+\subsection{Gestaltung guter Übergänge}
+
+Ein Übergang ist ``gut'' gestaltet, wenn drei Bedingungen erfüllt sind:
+
+\begin{enumerate}
+  \item \textbf{Trigger ist eindeutig.} Welcher Ereignistyp löst die Übergabe aus?
+  \item \textbf{Empfänger ist klar.} Wer übernimmt -- nicht eine Abteilung, sondern eine konkrete Rolle.
+  \item \textbf{Verbindlichkeit existiert.} Reaktionszeit ist definiert (z.\,B.\ ``erstkontakt innerhalb von 4 Arbeitsstunden'') und wird gemessen.
+\end{enumerate}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{T-E-V} -- drei Säulen jedes Übergangs]
+\textbf{T}rigger -- was löst aus?\\
+\textbf{E}mpfänger -- wer übernimmt?\\
+\textbf{V}erbindlichkeit -- bis wann, mit welcher Qualität?\\[2pt]
+\emph{Wenn ein Übergang nicht alle drei beantwortet, fällt er ins Loch zwischen den Abteilungen.}
+\end{eselsbox}
+
+% --- 4. PROZESSE FUER DEN DIGITALEN LEAD ---------------------------------
+\section{Prozessarchitektur für den digitalen Lead}
+
+Das wichtigste Einzelobjekt im digitalen Vertrieb ist der \fachbegriff{digitale Lead}: eine Interessensbekundung, die digital entsteht -- über Formular, Download, Webinar-Anmeldung, Chat, Demo-Anfrage. Wer den Umgang mit diesem Objekt nicht beherrscht, hat keinen funktionierenden digitalen Vertrieb. \quelle{Ellis \& Brown, 2017; Homburg, 2020}
+
+\subsection{Der Lead-Lifecycle in sechs Schritten}
+
+\begin{enumerate}
+  \item \fachbegriff{Aufnahme.} Lead entsteht über digitalen Touchpoint, wird automatisch ins CRM geschrieben.
+  \item \fachbegriff{Qualifizierung.} Lead Scoring oder manuelle Bewertung: Wie wahrscheinlich ist Kaufabsicht, Budget, Entscheidungsbefugnis?
+  \item \fachbegriff{Übergabe.} Qualifizierter Lead geht an die richtige Rolle (Innendienst, Außendienst, Service).
+  \item \fachbegriff{Nachverfolgung.} Erstkontakt innerhalb definierter Zeit, weitere Schritte dokumentiert.
+  \item \fachbegriff{Abschluss oder Verlust.} Lead wird zum Kunden -- oder als verloren markiert (mit Grund).
+  \item \fachbegriff{Auswertung.} Pro Kanal, Kampagne, Zielgruppe: wie hoch waren Conversion, Abschlussquote, Customer Acquisition Cost?
+\end{enumerate}
+
+\subsection{Lead Scoring -- knapp erklärt}
+
+\fachbegriff{Lead Scoring} ist die strukturierte Bewertung der Lead-Qualität anhand klar definierter Kriterien. Typisch:
+
+\begin{itemize}
+  \item \textbf{Demografie / Firmografie.} Passt die Person/Firma in die Zielgruppe? (Branche, Größe, Rolle).
+  \item \textbf{Verhalten.} Welche Interaktionen hat sie ausgelöst? (Mehrfache Website-Besuche, Whitepaper-Download, Webinar-Teilnahme).
+  \item \textbf{Bedarfssignale.} Konkrete Hinweise auf Kaufabsicht? (Demo-Anfrage, Preisseite besucht, Budget genannt).
+  \item \textbf{Zeit.} Wie aktuell sind die Signale?
+\end{itemize}
+
+Aus diesen Dimensionen wird ein Score gebildet (z.\,B.\ 0--100), der eine Übergabeschwelle hat (z.\,B.\ ``ab 60 Punkten geht der Lead an den Vertrieb''). \quelle{vgl.\ Ellis \& Brown, 2017}
+
+\subsection{Reaktionszeiten -- der unterschätzte Hebel}
+
+Empirisch ist gut belegt: die ersten Stunden entscheiden. Ein Lead, der innerhalb von 4 Stunden kontaktiert wird, hat eine deutlich höhere Conversion-Wahrscheinlichkeit als einer, der nach drei Tagen kontaktiert wird. Reaktionszeit ist daher kein operativer Detailparameter, sondern eine \emph{strategische} Größe.
+
+\begin{merkbox}[Lead-Prozess-Checkliste]
+\begin{itemize}
+  \item Jeder digitale Lead landet automatisch im CRM (kein E-Mail-Posteingang als Sammelstelle).
+  \item Jeder Lead wird innerhalb definierter Zeit qualifiziert (Lead Scoring oder manuelle Triage).
+  \item Jeder qualifizierte Lead hat einen Empfänger und eine maximale Reaktionszeit.
+  \item Jeder verlorene Lead hat einen Verlustgrund -- dokumentiert für die Auswertung.
+\end{itemize}
+\end{merkbox}
+
+% --- 5. ROLLEN, GOVERNANCE, ZUSAMMENARBEIT -------------------------------
+\section{Rollen, Governance, Zusammenarbeit}
+
+Omnichannel ist auch eine Organisationsfrage. Wenn Marketing, Vertrieb, Kundenservice und IT mit unterschiedlichen Zielen, KPIs und Tools arbeiten, hilft auch das beste CRM nicht. \quelle{Homburg, 2020}
+
+\subsection{Fünf Rollen, die zusammenspielen müssen}
+
+\begin{itemize}
+  \item \fachbegriff{Marketing.} Zuständig für Reichweite, Kampagnen, Content -- aber \emph{nicht} für Umsatz allein.
+  \item \fachbegriff{Vertrieb.} Zuständig für Abschluss, Kundenbeziehung -- aber \emph{nicht} losgelöst von der Leadqualität, die Marketing erzeugt.
+  \item \fachbegriff{Kundenservice.} Zuständig für Bestandskundenpflege und Reklamationen -- aber auch ein wichtiger Datenlieferant für Vertrieb und Marketing.
+  \item \fachbegriff{IT.} Zuständig für die technische Infrastruktur (CRM, Marketing Automation, Webshop, Schnittstellen) -- aber \emph{nicht} der Owner der Vertriebslogik.
+  \item \fachbegriff{Management.} Zuständig für Zielsystem, Governance, Investitionsentscheidungen -- mit Verantwortung für die Architektur als Ganzes.
+\end{itemize}
+
+\subsection{Gemeinsame Erfolgs-KPIs als Brücke}
+
+Ein bewährter Hebel: Marketing und Vertrieb teilen sich definierte gemeinsame KPIs (z.\,B.\ ``Anzahl qualifizierter Leads pro Monat'' und ``Conversion von Lead zu Angebot'' und ``Conversion von Angebot zu Abschluss''). Niemand kann allein erfolgreich sein -- beide tragen.
+
+\subsection{Governance-Themen, die geklärt sein müssen}
+
+\begin{itemize}
+  \item Wer ist Eigentümer des CRM-Datenmodells?
+  \item Welche Felder sind Pflicht, welche optional?
+  \item Wer definiert Lead Scoring und Übergabeschwelle?
+  \item Wer reagiert auf Beschwerden über Kanalübergänge?
+  \item Welche Entscheidungen darf Marketing alleine treffen, welche Vertrieb, welche nur das Management?
+\end{itemize}
+
+\begin{merkbox}[Governance-Test für Omnichannel]
+Wenn drei Personen aus drei Abteilungen die gleiche Frage zu einem Lead unterschiedlich beantworten, fehlt Governance. Wenn alle drei dasselbe sagen, funktioniert sie. Dieser Test ist primitiv -- und unbestechlich.
+\end{merkbox}
+
+% --- 6. KPI-ARCHITEKTUR -------------------------------------------------
+\section{KPI-Architektur für digitale Vertriebssteuerung}
+
+Eine Omnichannel-Architektur ist nur so gut wie ihre Steuerung. Ohne saubere KPIs entscheidet das Bauchgefühl -- und das ist im Mittelstand oft das Bauchgefühl jener Person, die am lautesten ihre Meinung vertritt. \quelle{Kaplan \& Norton, 1996; Ellis \& Brown, 2017}
+
+\subsection{Drei Ebenen von KPIs}
+
+\begin{enumerate}
+  \item \textbf{Operative KPIs.} Tages- und Wochengrößen für die Linie -- Reaktionszeit, Anzahl Leads, Klickrate, Bearbeitungsstatus.
+  \item \textbf{Taktische KPIs.} Monatliche Größen für die Bereichsleitung -- Conversion Rate, Kosten pro Lead, Abschlussquote, Anteil dokumentierter Leads.
+  \item \textbf{Strategische KPIs.} Quartals-/Jahresgrößen für die Geschäftsleitung -- Customer Acquisition Cost, Customer Lifetime Value, Kanalbeitrag, Marge nach Kanal.
+\end{enumerate}
+
+\subsection{Kern-KPIs für digitale Vertriebssteuerung}
+
+\begin{itemize}
+  \item \fachbegriff{Anzahl qualifizierter Leads.} Nur Leads, die den Scoring-Schwellenwert erreichen.
+  \item \fachbegriff{Reaktionszeit.} Zeit vom Lead-Eingang bis zum Erstkontakt durch Vertrieb.
+  \item \fachbegriff{Conversion Rate.} Anteil Leads, die zur nächsten Stufe wechseln (Anfrage \textrightarrow{} Angebot \textrightarrow{} Abschluss).
+  \item \fachbegriff{Kosten pro Lead (CPL).} Wie viel kostet ein qualifizierter Lead -- gesamt und pro Kanal?
+  \item \fachbegriff{Customer Acquisition Cost (CAC).} Wie viel kostet ein \emph{gewonnener Kunde}?
+  \item \fachbegriff{Customer Lifetime Value (CLV).} Wie viel Wert schafft ein Kunde über die gesamte Beziehung?
+  \item \fachbegriff{Abschlussquote.} Anteil qualifizierter Leads, die zum Abschluss werden.
+  \item \fachbegriff{Anteil vollständig dokumentierter Leads im CRM.} Steuerungsfähigkeit der Datenbasis.
+  \item \fachbegriff{Kundenzufriedenheit nach digitalem Kontakt.} Verbindendes Maß für Service \& Vertrieb.
+\end{itemize}
+
+\subsection{Falle: KPI-Theater}
+
+Eine häufige Falle: KPIs werden gemessen, aber niemand reagiert. Reports werden erstellt, aber nicht gelesen. \emph{KPI-Theater} ist gefährlich, weil es Steuerung simuliert, die nicht existiert. Eine sinnvolle Regel: Pro KPI gibt es eine Person, die entscheidet, was wann passiert, wenn der Wert kippt.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{L-R-C-K-K-A} -- sechs KPIs für die Linie]
+Sechs Buchstaben, sechs operativ-taktische KPIs:\\[2pt]
+\textbf{L}eads (qualifiziert)\\
+\textbf{R}eaktionszeit\\
+\textbf{C}onversion Rate\\
+\textbf{K}osten pro Lead\\
+\textbf{K}undenakquisitionskosten (CAC)\\
+\textbf{A}bschlussquote\\[2pt]
+\emph{Wer als Linienleitung diese sechs nicht wöchentlich auf dem Schreibtisch hat, steuert nicht.}
+\end{eselsbox}
+
+% --- 7. ROADMAP & PILOTLOGIK ---------------------------------------------
+\section{Roadmap, Pilotlogik, Rollout}
+
+Eine Omnichannel-Architektur entsteht nicht in einem ``Big Bang''. Sie wächst in Etappen -- über Pilot, Roll-out, Skalierung. Eine belastbare 12-Monats-Roadmap arbeitet typischerweise mit vier Quartalsschritten. \quelle{Rogers, 2016}
+
+\subsection{Quartalslogik einer 12-Monats-Roadmap}
+
+\begin{itemize}
+  \item \textbf{Quartal 1 (Fundament).} CRM-Datenmodell, Lead-Felder, Rollen, gemeinsame KPIs definieren. Reaktionszeiten festlegen. Datenqualität bereinigen.
+  \item \textbf{Quartal 2 (Pilot).} Lead Scoring einführen. Website-Anfrageprozesse verbessern. Schulung der beteiligten Rollen. Erste Übergaberegeln in einem Segment testen.
+  \item \textbf{Quartal 3 (Roll-out).} Erweiterung auf weitere Segmente. Gemeinsames Dashboard einführen. E-Mail-Nurturing aufbauen. Erste Auswertung der Leadqualität.
+  \item \textbf{Quartal 4 (Optimierung).} Komplexere Initiativen (z.\,B.\ Kundenportal-Pilot). Prozesse optimieren. Entscheidung über Skalierung der nächsten Stufe.
+\end{itemize}
+
+\subsection{Was \emph{nicht} ins Q1 gehört}
+
+\begin{itemize}
+  \item Neue Tool-Einführung, solange CRM-Datenqualität nicht steht.
+  \item Großprojekte wie Kundenportal-Vollausbau -- besser als Pilot mit klar abgegrenztem Bestandskunden-Segment.
+  \item Werbekampagnen mit großem Budget, solange Conversion-Pfade nicht stabil sind.
+\end{itemize}
+
+\subsection{Pilot statt Großprojekt}
+
+Wo immer möglich, gilt: \emph{Pilot vor Roll-out}. Ein klar abgegrenzter Pilot (z.\,B.\ Kundenportal für 50 Bestandskunden mit Wartungsverträgen) liefert in 3--6 Monaten belastbare Erkenntnisse -- mit deutlich geringerem Risiko als ein 18-Monats-Großprojekt für alle Kunden.
+
+\begin{merkbox}[Roadmap-Grundregel]
+Bauen Sie das Fundament, bevor Sie die Fenster putzen. Tool-Einführungen, neue Kampagnen oder Portale wirken erst, wenn Datenbasis, Rollen und KPIs stehen. Die häufigste Roadmap-Falle ist nicht ein fehlendes Tool, sondern ein fehlendes Fundament.
+\end{merkbox}
+
+% --- 8. FALLSTUDIE-LEITFADEN ---------------------------------------------
+\section{Fallstudie-Leitfaden: IndustrialPro Services}
+
+In den Unterrichtseinheiten 4--5 bearbeiten Sie die Fallstudie ``IndustrialPro Services'' -- ein mittelständisches Unternehmen für Wartung, Reparatur und Modernisierung von Produktionsanlagen mit 38\,Mio.\,EUR Umsatz, 18 Vertriebs-, 3 Marketing- und 12 Service-Mitarbeitenden.
+
+\subsection{Analytischer Aufbau}
+
+\begin{enumerate}
+  \item \textbf{Omnichannel-Schwächen identifizieren.} Welche Brüche existieren? Welche sind Daten-, welche Prozess-, welche Rollenprobleme?
+  \item \textbf{Ideale Customer Journey für einen digitalen Service-Lead.} Vom Erkennen des Bedarfs bis zur Vertragsverlängerung -- mit konkreten Touchpoints.
+  \item \textbf{Maßnahmen bewerten.} Welche der vorgeschlagenen Maßnahmen (CRM-Pflichtprozess, Lead Scoring, Website-Relaunch, E-Mail-Strecken, Kundenportal, Dashboard, Außendienst-Schulung) hat welche Priorität?
+  \item \textbf{Priorisierung für 12 Monate.} Maximal 5 Maßnahmen in Quartalslogik.
+  \item \textbf{Roadmap mit Verantwortlichkeiten.} Pro Maßnahme ein Eigentümer.
+  \item \textbf{KPIs definieren.} 5--7 KPIs, die die digitale Vertriebsstrategie steuern.
+  \item \textbf{Entscheidung unter Unsicherheit.} Welche attraktive Maßnahme wird trotz Verlockung \emph{nicht} sofort gewählt?
+\end{enumerate}
+
+\subsection{Erwartete Empfehlungsrichtung}
+
+In einer typischen Musterlösung wird der Schwerpunkt auf \emph{CRM-Pflichtprozess}, \emph{Lead Scoring \& Übergaberegeln}, \emph{Website-Optimierung}, \emph{gemeinsames Dashboard} und \emph{Außendienst-Schulung} gelegt. Das Kundenportal wird \emph{als Pilot} für eine kleine Bestandskundengruppe begonnen, nicht als Großprojekt für alle Kunden. Die Entscheidung unter Unsicherheit: ``Trotz Attraktivität rollen wir das Kundenportal nicht breit aus, weil ohne stabile CRM-Prozesse und Rollen die zusätzliche Komplexität die Organisation überfordern würde.''
+
+\begin{merkbox}[Argumentationsmuster für die Fallstudie]
+Eine gute Omnichannel-Roadmap enthält:
+\begin{enumerate}
+  \item \textbf{Was zuerst.} Fundament-Maßnahmen (Daten, Rollen, KPIs) in Quartal 1.
+  \item \textbf{Was als Pilot.} Komplexe Initiativen in begrenztem Segment.
+  \item \textbf{Was zurückgestellt.} Großprojekte, die ohne Fundament Komplexität ohne Wert erzeugen würden.
+  \item \textbf{Welche Verantwortung wo.} Pro Maßnahme ein Eigentümer, pro KPI ein Berichtender.
+  \item \textbf{Welche Annahme wir prüfen.} Welche Frühindikatoren signalisieren, dass die Strategie kippt?
+\end{enumerate}
+\end{merkbox}
+
+% --- 9. MANAGEMENT-PERSPEKTIVE ------------------------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Auf Wissens- und Anwendungsebene sieht eine gute Omnichannel-Strategie wie eine sauber priorisierte Roadmap aus. Auf Managementebene geht es um Zielkonflikte, die nicht ``gelöst'', sondern \emph{entschieden} werden müssen -- vor allem darüber, welche Initiativen man bewusst nicht startet. \quelle{vgl.\ Brynjolfsson et al., 2013; Rogers, 2016}
+
+\subsection{Fünf zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Kundenerlebnis vs.\ Vertriebseffizienz.} Mehr Touchpoints können das Kundenerlebnis verbessern -- bedeuten aber mehr Vertriebsaufwand pro Kunde.
+  \item \textbf{Geschwindigkeit vs.\ Datenqualität.} Initiativen schnell starten ist möglich, aber wenn die Datenbasis nicht stimmt, multipliziert man Brüche.
+  \item \textbf{Kosten vs.\ Organisationsfähigkeit.} Tools sind günstig, eine fähige Organisation ist teuer. Wer am Aufbau spart, bezahlt es später vielfach in Reibungsverlusten.
+  \item \textbf{Initiativen-Anzahl vs.\ Umsetzungstiefe.} Drei Initiativen ordentlich umgesetzt schlagen sieben halb umgesetzte.
+  \item \textbf{Marketing-Reichweite vs.\ Vertriebskapazität.} Mehr Leads erzeugen ist einfach -- mit ihnen sinnvoll umzugehen ist schwer. Wer den Vertrieb mit unqualifizierten Kontakten überflutet, verbrennt Kapazität.
+\end{enumerate}
+
+\subsection{Architekturentscheidung statt Tool-Auswahl}
+
+Omnichannel ist \emph{keine} Tool-Entscheidung. Sie ist eine Architekturentscheidung über Kundenschnittstellen, Daten, Prozesse und Rollen. Sie wird auf Senior-Level entschieden -- typischerweise durch CEO, Chief Revenue Officer oder Vertriebsleitung gemeinsam mit IT. Wer Omnichannel an die IT delegiert, baut ein Datensystem; wer an Marketing delegiert, baut eine Kampagnenmaschine. Beides ist zu wenig.
+
+\subsection{Senior-Level-Denken}
+
+Aus den Coaching-Themen (UE 4) und dem Feedback (UE 7) ergibt sich ein einfacher Test: Eine senior-level-fähige Omnichannel-Entscheidung lässt sich in einem Satz erklären, der eine bewusste Verzichts­entscheidung enthält und das Frühwarnsignal benennt. Beispiel: ``Wir starten zuerst CRM-Pflichtprozess und Lead Scoring, das Kundenportal nur als Pilot mit 50 Bestandskunden -- wenn die CRM-Dokumentationsquote nach 3 Monaten nicht über 80\,\% steigt, stoppen wir das Portal-Projekt.''
+
+\begin{eselsbox}[Eselsbrücke: \akzent{K-G-K-I-M}]
+Fünf Zielkonflikte, die auf Senior-Level entschieden werden:\\[2pt]
+\textbf{K}undenerlebnis vs.\ Vertriebseffizienz.\\
+\textbf{G}eschwindigkeit vs.\ Datenqualität.\\
+\textbf{K}osten vs.\ Organisationsfähigkeit.\\
+\textbf{I}nitiativen-Anzahl vs.\ Umsetzungstiefe.\\
+\textbf{M}arketing-Reichweite vs.\ Vertriebskapazität.\\[2pt]
+\emph{Fünf Konflikte, fünf bewusste Entscheidungen -- keiner davon hat eine ``optimale Lösung''.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 6]
+Omnichannel ist nicht der Maximalausbau aller Kanäle. Es ist die Disziplin, an jedem Touchpoint das gleiche Unternehmen erlebbar zu machen -- mit konsistenten Informationen, klaren Verantwortlichkeiten und einer Datenbasis, auf die alle blicken. \emph{Wer das nicht operationalisiert, hat einen Werbeauftritt -- kein Vertriebsbetriebssystem.}
+\end{merkbox}
+
+% --- 10. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Brynjolfsson, E., Hu, Y.\,J., \& Rahman, M.\,S. (2013).] Competing in the age of omnichannel retailing. \emph{MIT Sloan Management Review, 54}(4), 23--29.
+  \item[Ellis, S., \& Brown, M. (2017).] \emph{Hacking growth: How today's fastest-growing companies drive breakout success}. Crown Business.
+  \item[Homburg, C. (2020).] \emph{Marketingmanagement: Strategie -- Instrumente -- Umsetzung -- Unternehmensführung} (7.\ Aufl.). Springer Gabler.
+  \item[Kannan, P.\,K., \& Li, H. (2017).] Digital marketing: A framework, review and research agenda. \emph{International Journal of Research in Marketing, 34}(1), 22--45. \href{https://doi.org/10.1016/j.ijresmar.2016.11.006}{https://doi.org/10.1016/j.ijresmar.2016.11.006}
+  \item[Kaplan, R.\,S., \& Norton, D.\,P. (1996).] \emph{The balanced scorecard: Translating strategy into action}. Harvard Business School Press.
+  \item[Rigby, D. (2011).] The future of shopping. \emph{Harvard Business Review, 89}(12), 64--75.
+  \item[Rogers, D.\,L. (2016).] \emph{The digital transformation playbook: Rethink your business for the digital age}. Columbia Business School Publishing.
+  \item[Verhoef, P.\,C., Kannan, P.\,K., \& Inman, J.\,J. (2015).] From multi-channel retailing to omni-channel retailing. \emph{Journal of Retailing, 91}(2), 174--181. \href{https://doi.org/10.1016/j.jretai.2015.02.005}{https://doi.org/10.1016/j.jretai.2015.02.005}
+\end{description}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Abschlussquote] Anteil qualifizierter Leads, der zum Vertragsabschluss führt.
+  \item[CRM] Customer Relationship Management -- System zur strukturierten Erfassung und Steuerung von Kundenbeziehungen entlang des Lifecycles.
+  \item[Cross-Channel] Vertriebsansatz mit teilweise verbundenen Kanälen, in denen Kunden Kanäle wechseln können -- aber Brüche erleben.
+  \item[Customer Acquisition Cost (CAC)] Gesamtkosten, die anfallen, um einen neuen Kunden zu gewinnen.
+  \item[Customer Lifetime Value (CLV)] Erwarteter wirtschaftlicher Wert eines Kunden über die gesamte Beziehung.
+  \item[Customer Journey] Strukturierte Abfolge der Phasen, die ein Kunde durchläuft -- siehe Tag 5.
+  \item[Dashboard] Visuelle Aggregation der wichtigsten KPIs für eine Zielgruppe (Linie, Bereichsleitung, Management).
+  \item[Datenflüsse] Definierte Wege, auf denen Informationen zwischen Systemen, Rollen und Kanälen wandern.
+  \item[Konsistenz (Omnichannel)] Eigenschaft, dass Kunden über alle Kanäle dieselben Informationen, Preise, Verfügbarkeiten und Ansprechpartner erleben.
+  \item[KPI] Key Performance Indicator -- messbare Steuerungsgröße. Unterscheidung in operative, taktische und strategische KPIs.
+  \item[Lead] Interessensbekundung einer Person oder Organisation, die in einen Vertriebsprozess überführt werden kann.
+  \item[Lead Scoring] Strukturierte Bewertung der Lead-Qualität anhand definierter Kriterien (Demografie, Verhalten, Bedarfssignale, Aktualität).
+  \item[Marketing Automation] Software-Logik zur automatisierten, regelbasierten Ansprache von Interessenten und Bestandskunden.
+  \item[Medienbruch] Stelle in einem Prozess, an der ein Vorgang das Medium wechselt (z.\,B.\ E-Mail \textrightarrow{} Excel \textrightarrow{} CRM) -- typischer Verlustpunkt.
+  \item[Multichannel] Vertriebsansatz mit mehreren parallel betriebenen, kaum integrierten Kanälen.
+  \item[Omnichannel] Vertriebsansatz, in dem alle Kanäle integriert sind und Kunden überall ein konsistentes Unternehmen erleben.
+  \item[Operationalisierung] Übersetzung einer Strategie in Prozesse, Rollen, Daten, Werkzeuge und steuerbare KPIs.
+  \item[Reaktionszeit] Zeit vom Eingang eines Leads bis zum ersten Kontakt durch den Vertrieb.
+  \item[Roadmap] Geordneter, etappierter Umsetzungsplan über mehrere Quartale; trennt Fundament, Pilot, Roll-out, Optimierung.
+  \item[Rollen (Omnichannel)] Marketing, Vertrieb, Kundenservice, IT, Management -- mit klar definierten Verantwortlichkeiten.
+  \item[Single Channel] Vertrieb über einen einzigen Kanal (z.\,B.\ nur Außendienst).
+  \item[Touchpoint] Konkreter Berührungspunkt zwischen Kunde und Anbieter entlang der Journey.
+  \item[Übergabe (Lead)] Strukturierte Weiterleitung eines qualifizierten Leads an die nächste Rolle, mit definierter Reaktionszeit.
+  \item[Zielkonflikt (Omnichannel)] Spannungsfeld zwischen Kundenerlebnis, Geschwindigkeit, Kosten, Datenqualität, Organisationsfähigkeit und Vertriebskapazität.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 6 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

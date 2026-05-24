@@ -1,0 +1,634 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 8 - Lehrskript
+% Dynamische Preisstrategien & integrierte Plattform-Verkaufsarchitektur
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 8}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Dynamische Preise \& Performance}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 4 \textperiodcentered{} TAG 8 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 9.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Dynamische\\Preisstrategien\\\& Performance\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Preis als Steuerungsinstrument --\\Markt, Marge, Marke \& Monitoring\\differenziert führen.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 8 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent An Tag~7 haben Sie Sichtbarkeit, Content, Retention und Bewertungen als ein System verstanden. Heute ergänzt der Preis das Bild. \emph{Dynamische Preisstrategie} ist mehr als Rabattlogik -- sie ist ein zentrales Steuerungsinstrument für Marge, Conversion, Marktposition und Markenwirkung. Heute lernen Sie, Preise als Managementinstrument zu verwenden, ohne in einen Preiskrieg zu geraten.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundlagen dynamischer Preisstrategien verstehen.
+  \item Marktanalyse im Plattformverkauf einordnen.
+  \item Einfluss von Wettbewerb, Nachfrage, Verfügbarkeit, Marge und Plattformranking kennen.
+  \item Performance-Monitoring als Steuerungsinstrument verstehen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Preis- und Marktinformationen auswerten.
+  \item Dynamische Preisentscheidungen auf konkrete Plattformprodukte anwenden.
+  \item Zielkonflikte zwischen Umsatz, Marge, Sichtbarkeit und Markenpositionierung bewerten.
+  \item Plattformperformance anhand relevanter KPIs analysieren.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Preisstrategie als Teil einer integrierten Plattform-Verkaufsarchitektur gestalten.
+  \item Entscheidungen unter Unsicherheit, Wettbewerbsdruck und Margendruck treffen.
+  \item Verantwortung für Preis-Governance, Monitoring und strategische Steuerung übernehmen.
+  \item Plattform-Verkauf als Zusammenspiel aus Markt, Preis, Content, Sichtbarkeit, Reputation und Profitabilität steuern.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Dynamische Preisstrategie ist \emph{kein} Synonym für Rabattaktion. Sie ist die Disziplin, Preise nach Produktrolle, Marktphase, Wettbewerb, Nachfrage und Marge \emph{differenziert} zu führen -- und sie an einer expliziten Governance auszurichten. Wer Preise pauschal senkt, weil Wettbewerber senken, hat keine Strategie. Er hat einen Reflex.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Was dynamisch \emph{nicht} bedeutet}
+
+In vielen Organisationen wird ``dynamische Preisgestaltung'' synonym mit ``Rabatte bei Wettbewerbsdruck'' verwendet. Das ist eine Verkürzung -- und eine teure. Dynamische Preisstrategie umfasst alle Mechanismen, in denen Preise sich an Wettbewerbssituation, Nachfrage, Lagerbestand, Saisonalität, Lieferfähigkeit und Marge orientieren. Rabatte sind \emph{ein} Werkzeug davon, kein Synonym. \quelle{Simon \& Fassnacht, 2015; Nagle \& Müller, 2016}
+
+\subsection{Drei Stufen der Preissteuerung}
+
+\begin{enumerate}
+  \item \fachbegriff{Statische Preisgestaltung.} Preise werden einmal festgelegt und über lange Zeit gehalten. Robust, einfach -- und auf Marktplätzen meist nicht wettbewerbsfähig.
+  \item \fachbegriff{Aktionsbasierte Preisgestaltung.} Preise werden in zeitlich begrenzten Aktionen verändert (Weihnachten, Black Friday, Sortimentswechsel). Planbar, geübt -- aber wenig flexibel auf laufende Marktveränderungen.
+  \item \fachbegriff{Dynamische Preisstrategie.} Preise reagieren laufend (oder zumindest häufig) auf eine Mischung aus Wettbewerb, Nachfrage, Lager, Marge und Plattform-KPIs. Anspruchsvoll -- erfordert Governance, Daten und klare Grenzen.
+\end{enumerate}
+
+\subsection{Warum Plattformen dynamische Preise erzwingen}
+
+Auf Plattformen sind Preise transparent vergleichbar. Wettbewerber ändern Preise teils mehrfach pro Woche. Algorithmen bevorzugen wettbewerbsfähige Angebote in Sichtbarkeit und Buy-Box. Wer mit statischen Preisen arbeitet, verliert -- nicht weil das Produkt schlecht wäre, sondern weil das System ihn unterhalb der Wahrnehmungsschwelle drückt. \quelle{Chen et al., 2016; Deshpandé \& Hwang, 2018}
+
+\subsection{Warum dynamische Preise gefährlich werden können}
+
+Dynamik ohne Governance erzeugt typische Schäden:
+
+\begin{itemize}
+  \item \textbf{Preiskrieg.} Eine Senkung führt zur Gegensenkung, das nächste Mal noch tiefer, bis die Marge weg ist.
+  \item \textbf{Markenwahrnehmung.} Wer dauerhaft rabattiert, wird als ``Rabattmarke'' wahrgenommen -- nicht mehr als Qualitätsanbieter.
+  \item \textbf{Kundenerwartung.} Kunden warten auf den nächsten Rabatt; Vollpreisverkäufe werden seltener.
+  \item \textbf{Kannibalisierung.} Aktionen auf Standardprodukten ziehen Käufer von hochmargigen Premiumprodukten ab.
+  \item \textbf{Vertrauensverlust.} Wechselnde Preise wirken bei B2B-Kunden unseriös.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{P-N-L-S-M} -- fünf Einflussfaktoren dynamischer Preise]
+Fünf Buchstaben, fünf Einflüsse, die jede Preisentscheidung berücksichtigt:\\[2pt]
+\textbf{P}reise der Wettbewerber\\
+\textbf{N}achfrage \& Suchvolumen\\
+\textbf{L}agerbestand \& Lieferfähigkeit\\
+\textbf{S}aisonalität \& Plattformregeln\\
+\textbf{M}arge \& Plattformgebühren\\[2pt]
+\emph{Wer nur ``P'' beobachtet (Wettbewerber), reagiert. Wer alle fünf beobachtet, steuert.}
+\end{eselsbox}
+
+% --- 2. MARKTANALYSE IM PLATTFORMVERKAUF ---------------------------------
+\section{Marktanalyse im Plattformverkauf}
+
+Eine dynamische Preisstrategie ohne saubere Marktanalyse ist eine Bauchgefühlsentscheidung mit täglich neuer Begründung. Marktanalyse auf Plattformen umfasst sechs Dimensionen. \quelle{Simon \& Fassnacht, 2015; Porter, 1996}
+
+\subsection{Sechs Dimensionen der Marktanalyse}
+
+\begin{enumerate}
+  \item \fachbegriff{Wettbewerberbeobachtung.} Welche Anbieter konkurrieren um die gleichen Keywords und Produktkategorien? Wie ist ihre Sortimentstiefe, ihre Preislage?
+  \item \fachbegriff{Preisbandbreiten.} In welchem Korridor bewegen sich Wettbewerber? Wo liegt der ``Ankerpreis'' (Mittelwert)? Wo sind Premium-, wo Discount-Marken?
+  \item \fachbegriff{Sortimentsvergleich.} Welche Funktionen, welcher Lieferumfang, welche Garantien stehen hinter den Preisen?
+  \item \fachbegriff{Nachfrageentwicklung.} Wie verändern sich Suchvolumen, Klickrate, Conversion im Zeitverlauf?
+  \item \fachbegriff{Bewertungslage.} Wie schneiden Wettbewerber bei Bewertungen ab -- besser, schlechter, gleich? Wo gibt es Bewertungslücken, die uns Spielraum geben?
+  \item \fachbegriff{Sichtbarkeit.} Wer rangiert wo? Wer kauft sich nach oben, wer rankt organisch?
+\end{enumerate}
+
+\subsection{Marktanalyse als laufende Disziplin}
+
+Marktanalyse ist kein Einmalprojekt. Sie ist eine \emph{laufende Disziplin} mit Reporting-Rhythmus (täglich/wöchentlich/monatlich, je nach Volatilität). Im einfachsten Fall ist sie eine Excel-Tabelle mit den fünf wichtigsten Wettbewerbern; im komplexeren Fall ein automatisiertes Tool, das Preisdifferenzen und Sichtbarkeitsverschiebungen meldet.
+
+\subsection{Drei typische Anti-Muster}
+
+\begin{itemize}
+  \item \textbf{Nur den Marktführer beobachten.} Übersieht aggressive Newcomer und Nischenanbieter, die mit anderem Modell unterschneiden.
+  \item \textbf{Preis nur isoliert vergleichen.} Ein 89-EUR-Wettbewerber ist nicht zwingend günstiger, wenn unser Lieferumfang doppelt so groß ist. Erst Vergleich auf Funktionsachse macht Preise vergleichbar.
+  \item \textbf{Nachfrage ignorieren.} Wenn Suchvolumen für eine Kategorie sinkt, helfen Preissenkungen nicht -- der Markt wird kleiner, nicht der Anteil.
+\end{itemize}
+
+\begin{merkbox}[Marktanalyse-Faustregel]
+Vergleichen Sie nie Preis ohne Funktion. Vergleichen Sie nie Funktion ohne Bewertung. Vergleichen Sie nie Bewertung ohne Nachfrageentwicklung. Erst die Kombination aller drei Achsen ergibt eine belastbare Marktsicht.
+\end{merkbox}
+
+% --- 3. PREISSTRATEGIEN -------------------------------------------------
+\section{Preisstrategien auf Plattformen}
+
+Ein dynamisches Preissystem nutzt nicht eine, sondern eine \emph{Mischung} aus Strategien -- typischerweise differenziert nach Produktgruppe.
+
+\subsection{Acht Preisstrategien}
+
+\begin{enumerate}
+  \item \fachbegriff{Premiumpreis.} Bewusst über dem Marktdurchschnitt, gestützt durch Qualität, Service, Marke. Funktioniert nur, wenn der Mehrwert sichtbar ist.
+  \item \fachbegriff{Wettbewerbsparität.} Preis am Marktdurchschnitt ausgerichtet. Sicher, aber wenig differenzierend.
+  \item \fachbegriff{Penetrationspreis.} Bewusst unter dem Markt, um schnell Anteile zu gewinnen. Riskant -- erschwert späteres Anheben.
+  \item \fachbegriff{Bündelpreis.} Hauptprodukt + Zubehör + Service als Paket; reduziert Vergleichbarkeit, erhöht Warenkorbwert.
+  \item \fachbegriff{Mengenrabatt.} Skalierte Preise bei größeren Mengen; klassisch im B2B.
+  \item \fachbegriff{Zeitlich begrenzte Aktion.} Bewusst befristete Senkung; aktiviert Aufmerksamkeit ohne dauerhaften Preisanker.
+  \item \fachbegriff{Wertorientierter Preis.} Preis abgeleitet aus konkretem Kundennutzen (Einsparung, Umsatzwirkung). Im B2B besonders relevant.
+  \item \fachbegriff{Differenzierter Preis nach Produktsegmenten.} Premium-Produkte stabil, Standard-Produkte dynamisch, Ersatzteile preisrobust -- siehe Sektion 4.
+\end{enumerate}
+
+\subsection{Welche Strategie wann?}
+
+\begin{tabularx}{\linewidth}{@{}lXXX@{}}
+\toprule
+\textbf{Strategie} & \textbf{Wann passend} & \textbf{Risiko} & \textbf{KPI-Fokus} \\
+\midrule
+Premiumpreis & starke Marke, hoher Mehrwert & Sichtbarkeitsverlust & Marge, Bewertungsdurchschnitt \\
+Wettbewerbsparität & generische Produkte, Konsolidierung & Verlust Profil & Umsatz, Marktanteil \\
+Penetration & Markteintritt, neue Plattform & Margenverbrennung & Marktanteil, CAC \\
+Bündelpreis & Vergleichsdruck hoch, Cross-Sell möglich & Bundle-Komplexität & Warenkorbwert, Deckungsbeitrag \\
+Wertorientiert & B2B, klar quantifizierbarer Nutzen & Argumentationsaufwand & Marge, Lifetime Value \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Risiken dynamischer Preisgestaltung im Detail}
+
+\begin{itemize}
+  \item \textbf{Margenverlust.} Jede Preissenkung kostet -- pro Verkauf, multipliziert mit dem Volumen.
+  \item \textbf{Preiskrieg.} Spiralartige gegenseitige Senkungen, die niemand gewinnt.
+  \item \textbf{Markenwahrnehmung.} Permanent niedrige Preise senken die wahrgenommene Qualität.
+  \item \textbf{Kundenerwartung.} ``Bei Ihnen ist immer Rabatt'' -- Vollpreisverkäufe werden seltener.
+  \item \textbf{Kannibalisierung.} Aktionen ziehen Käufer von Premiumprodukten ab.
+  \item \textbf{Vertrauensverlust.} Wechselnde Preise wirken unseriös, besonders im B2B.
+\end{itemize}
+
+\quelle{vgl.\ Simon \& Fassnacht, 2015; Shapiro \& Varian, 1999}
+
+% --- 4. DIFFERENZIERUNG NACH PRODUKTROLLE --------------------------------
+\section{Differenzierung nach Produktrolle}
+
+Eine zentrale Senior-Erkenntnis: \emph{Nicht alle Produkte sollten gleich bepreist werden}. Eine reife Plattform-Verkaufsorganisation unterscheidet typischerweise vier Produktrollen mit jeweils eigener Preislogik.
+
+\subsection{Vier Produktrollen}
+
+\begin{enumerate}
+  \item \fachbegriff{Premium-/Markenprodukte.} Hohe Marge, strategische Bedeutung, Markenwirkung. \emph{Preislogik:} stabil halten, über Wert kommunizieren, keine pauschalen Rabatte. Bei Wettbewerbsdruck antwortet Content und Service -- nicht der Preis.
+  \item \fachbegriff{Standardprodukte mit Wettbewerbsdruck.} Hohe Vergleichbarkeit, hohe Preiselastizität. \emph{Preislogik:} gezielte zeitlich begrenzte Aktionen mit Mindestmarge; gegebenenfalls Wettbewerbsparität.
+  \item \fachbegriff{Ersatzteile / wiederkehrende Käufe.} Geringe Vergleichbarkeit (oft Kompatibilitäts-gebunden), hohe Wiederkaufrate. \emph{Preislogik:} stabile Preise; Differenzierung über Verfügbarkeit, schnelle Lieferung, Kompatibilitätsinformation.
+  \item \fachbegriff{Bundles.} Aus zwei oder mehr Komponenten kombiniert. \emph{Preislogik:} bewusster Bundle-Vorteil (z.\,B.\ 10--15\,\% gegenüber Einzelpreissumme); reduziert Vergleichbarkeit und erhöht Warenkorbwert.
+\end{enumerate}
+
+\subsection{Beispiel: differenzierte Preisstrategie}
+
+Für ``KitchenPro Direct'' (siehe Sektion 9) sieht eine differenzierte Strategie typischerweise so aus:
+
+\begin{itemize}
+  \item Premium-Küchenmaschinen \textrightarrow{} \emph{preisstabil}, mit Service-Bundles und Anwendungs-Content angereichert.
+  \item Standardzubehör \textrightarrow{} \emph{dynamisch} mit zeitlich begrenzten Aktionen, Mindestmarge geschützt.
+  \item Ersatzteile \textrightarrow{} \emph{stabil}, Differenzierung über Verfügbarkeit und schnelle Lieferung.
+  \item Bundles \textrightarrow{} \emph{aktiv ausgebaut}, um Vergleichbarkeit zu reduzieren.
+\end{itemize}
+
+\begin{merkbox}[Differenzierungs-Prinzip]
+Eine reife Preisstrategie behandelt verschiedene Produktrollen unterschiedlich. Wer alle Produkte gleich rabattiert, beschädigt Premium-Marke und Margen-Architektur gleichzeitig. Wer keine Produktrolle definiert, hat keine differenzierte Preisstrategie -- sondern einen Preisreflex.
+\end{merkbox}
+
+% --- 5. PREIS-GOVERNANCE ------------------------------------------------
+\section{Preis-Governance}
+
+Dynamische Preise ohne Governance führen zu Margenverlusten und Markenschäden. Daher: jedes dynamische Preissystem braucht klare Regeln, Grenzen und Entscheidungskompetenzen.
+
+\subsection{Sechs Governance-Bausteine}
+
+\begin{enumerate}
+  \item \fachbegriff{Mindestmarge.} Pro Produktgruppe ein Mindestwert (z.\,B.\ 25\,\%), unter den nicht gegangen wird -- auch nicht ``für nur eine Woche''.
+  \item \fachbegriff{Preiskorridor.} Maximaler Abstand zum Marktdurchschnitt nach oben und unten.
+  \item \fachbegriff{Aktionsbudget.} Wie viel Marge geben wir pro Quartal für Aktionen frei?
+  \item \fachbegriff{Entscheidungsrechte.} Wer darf welche Preisveränderung freigeben? Algorithmus, Pricing Manager, Geschäftsführung?
+  \item \fachbegriff{Eskalationsregeln.} Wann muss eine Preisentscheidung in die Geschäftsführung -- z.\,B.\ Dauerunterschreitung, Preiskampf, Markenrisiko?
+  \item \fachbegriff{Lernschleifen.} Quartalsweise Auswertung: Welche Aktion hat Marge gebracht, welche hat sie nur verschoben?
+\end{enumerate}
+
+\subsection{Wann manuelle Governance algorithmische Preise überschreibt}
+
+Algorithmen können viel -- aber sie sollten in bestimmten Situationen \emph{nicht} alleine entscheiden:
+
+\begin{itemize}
+  \item Beim Auftreten neuer Wettbewerber mit unklarer Strategie (Reaktion abwarten, Daten sammeln).
+  \item Bei Markenwirkungsrisiken (z.\,B.\ Premium-Produkt droht in Discount-Wahrnehmung zu rutschen).
+  \item Bei Vorzeichen eines Preiskriegs (Spirale erkennen und unterbrechen).
+  \item Bei extremer Nachfrageschwankung (Algorithmus überreagiert auf temporäre Effekte).
+\end{itemize}
+
+\subsection{Algorithmisches Pricing -- Chancen und Grenzen}
+
+Algorithmische Preissysteme können sekundenschnell reagieren -- z.\,B.\ auf Amazon-Marktplätzen mehrfach pro Stunde. Empirische Studien zeigen aber, dass diese Systeme \emph{Preiskriege} verstärken können, wenn nicht gegengesteuert wird. \quelle{Chen et al., 2016; Deshpandé \& Hwang, 2018}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{M-K-A-E-E-L} -- sechs Bausteine der Preis-Governance]
+Sechs Buchstaben, sechs Bausteine:\\[2pt]
+\textbf{M}indestmarge -- nicht verhandelbar.\\
+\textbf{K}orridor -- definierter Bereich.\\
+\textbf{A}ktionsbudget -- begrenzte ``Margenfreigabe''.\\
+\textbf{E}ntscheidungsrechte -- klar zugeordnet.\\
+\textbf{E}skalation -- wann geht es ins Management?\\
+\textbf{L}ernschleifen -- quartalsweise auswerten.\\[2pt]
+\emph{Wer auch nur einen der sechs nicht festlegt, hat keine Preisstrategie -- nur eine Preistabelle, die manchmal jemand ändert.}
+\end{eselsbox}
+
+% --- 6. PERFORMANCE-MONITORING -------------------------------------------
+\section{Performance-Monitoring}
+
+Eine integrierte Plattform-Verkaufsstrategie braucht Steuerung -- und Steuerung braucht KPIs, die nicht nur Aktivität, sondern Wirkung messen. \quelle{Kaplan \& Norton, 1996; Ellis \& Brown, 2017}
+
+\subsection{Operative vs.\ strategische KPIs}
+
+\begin{itemize}
+  \item \textbf{Operative KPIs.} Tagesgeschäft -- Klicks, Klickrate, Aufrufe, Sichtbarkeit-Rank, Lagerstand.
+  \item \textbf{Taktische KPIs.} Monat -- Conversion Rate, Warenkorbwert, Retourenquote, Bewertungsentwicklung, Aktionsrentabilität.
+  \item \textbf{Strategische KPIs.} Quartal / Jahr -- Deckungsbeitrag pro Produktgruppe, Marge pro Kanal, Wiederkaufrate, Plattformabhängigkeit.
+\end{itemize}
+
+\subsection{Kern-KPIs für Plattform-Performance}
+
+\begin{enumerate}
+  \item \fachbegriff{Umsatz pro Produktgruppe.}
+  \item \fachbegriff{Deckungsbeitrag pro Produktgruppe.}
+  \item \fachbegriff{Conversion Rate je Produktgruppe.}
+  \item \fachbegriff{Preisabstand zu Hauptwettbewerbern.}
+  \item \fachbegriff{Klickrate und Sichtbarkeit-Rank.}
+  \item \fachbegriff{Warenkorbwert.}
+  \item \fachbegriff{Wiederkaufrate.}
+  \item \fachbegriff{Retourenquote.}
+  \item \fachbegriff{Bewertungsentwicklung.}
+  \item \fachbegriff{Aktionsrentabilität} -- gemessen \emph{nach Marge}, nicht nur nach Umsatz.
+\end{enumerate}
+
+\subsection{Steuerungslogik: messen, bewerten, entscheiden, testen}
+
+Eine reife Performance-Steuerung folgt vier Schritten:
+
+\begin{enumerate}
+  \item \textbf{Messen.} KPIs in definiertem Rhythmus erfassen.
+  \item \textbf{Bewerten.} Abweichungen gegen Ziel oder Vorperiode prüfen -- mit Kontext.
+  \item \textbf{Entscheiden.} Bei kritischer Abweichung Aktion einleiten; bei stabilem Ergebnis: keine Aktion ist auch eine Entscheidung.
+  \item \textbf{Testen.} Hypothesen über Experimente prüfen (z.\,B.\ Preisexperimente bei zwei Standardprodukten über 4 Wochen).
+\end{enumerate}
+
+\subsection{Falle: Vanity-Metriken}
+
+\fachbegriff{Vanity-Metriken} sind Größen, die imposant aussehen, aber nichts steuern: Impressionen, Followerzahlen, ``Reichweite''. Senior-Level-Reports sollten sie weglassen oder nur als Nebenangabe behandeln -- die Steuerung erfolgt über Marge, Deckungsbeitrag und Wiederkaufrate.
+
+\begin{merkbox}[Monitoring-Faustregel]
+Wenn eine KPI im Managementreport keine Entscheidung auslöst, gehört sie nicht in den Report. Sinn von Monitoring ist nicht, Aktivität nachzuweisen -- sondern Entscheidungen zu ermöglichen.
+\end{merkbox}
+
+% --- 7. INTEGRATION: SEO x CONTENT x PREIS x BEWERTUNG -------------------
+\section{Integration: Plattform-Verkauf als ein System}
+
+Tag~7 hat Sichtbarkeit, Content, Retention und Bewertungen behandelt. Tag~8 ergänzt Markt und Preis. Erst zusammen entsteht eine integrierte Plattform-Verkaufsarchitektur. \quelle{Kotler et al., 2017; Homburg, 2020}
+
+\subsection{Sechs Hebel im Verbund}
+
+\begin{enumerate}
+  \item \textbf{SEO} -- Sichtbarkeit.
+  \item \textbf{Content} -- Conversion-Vorbereitung.
+  \item \textbf{Preis} -- Conversion-Hebel und Marketing-Signal zugleich.
+  \item \textbf{Bewertungen} -- Vertrauensbeschleuniger.
+  \item \textbf{Retention} -- Marge über Wiederkauf.
+  \item \textbf{Monitoring} -- Steuerungsgrundlage.
+\end{enumerate}
+
+\subsection{Wenn eine Stellschraube wackelt}
+
+Jede der sechs Stellschrauben kann eine andere kippen lassen:
+
+\begin{itemize}
+  \item Aggressive Preissenkung \textrightarrow{} mehr Klicks, aber falsche Kundenerwartung \textrightarrow{} schlechte Bewertungen \textrightarrow{} Ranking-Verlust.
+  \item Schlechter Content \textrightarrow{} niedrige Conversion \textrightarrow{} Algorithmus rankt herunter \textrightarrow{} Sichtbarkeit weg.
+  \item Schwacher Bewertungen-Prozess \textrightarrow{} Sterne sinken \textrightarrow{} Conversion sinkt \textrightarrow{} höherer CAC -- Marge weg.
+\end{itemize}
+
+\subsection{Was eine integrierte Architektur leistet}
+
+\begin{itemize}
+  \item Pro Produktgruppe definierte Preisrolle (siehe Sektion 4).
+  \item Pro Produktgruppe definierte Keyword- und Content-Standards (Tag 7).
+  \item Bewertungsmanagement, das in beide Richtungen wirkt: für Sichtbarkeit \emph{und} als Frühwarnsystem.
+  \item Retention-Mechanismus, der Bestandskunden hält und Marge stabilisiert.
+  \item Monitoring-Rhythmus, der Preis-, Conversion-, Bewertungs- und Margenentwicklung verbindet.
+\end{itemize}
+
+% --- 8. FALLSTUDIE-LEITFADEN ---------------------------------------------
+\section{Fallstudie-Leitfaden: KitchenPro Direct}
+
+In den Unterrichtseinheiten 4--5 bearbeiten Sie die Fallstudie ``KitchenPro Direct'' -- ein hochwertiger Anbieter für professionelle Gastronomie und ambitionierte Privatkunden, mit 6{,}5\,Mio.\,EUR Plattformumsatz, 29\,\% Marge, 4{,}6 Sternen und einer sinkenden Conversion Rate.
+
+\subsection{Analytischer Aufbau}
+
+\begin{enumerate}
+  \item \textbf{Markt- und Wettbewerbssituation.} Was steht im Markt -- wer rabattiert, wer nicht? Wo sind Sortimentslücken?
+  \item \textbf{Produktrollen bewerten.} Premium-Küchenmaschinen, Standardzubehör, Ersatzteile, Bundles -- mit welcher Preisrolle?
+  \item \textbf{Differenzierte Preisstrategie.} Pro Produktgruppe: stabil, dynamisch, gebündelt oder premium-positioniert?
+  \item \textbf{Performance-Monitoring.} KPIs pro Produktgruppe, mit klarer Schwelle für Eingriff.
+  \item \textbf{Budgetverteilung.} Wie verteilen sich 120.000\,EUR auf Monitoring, Content, Bundles, Tests und Reporting?
+  \item \textbf{Entscheidung unter Unsicherheit.} Welche kurzfristig attraktive Preisaktion wird trotz Wettbewerbsdruck \emph{nicht} gefahren?
+\end{enumerate}
+
+\subsection{Erwartete Empfehlungsrichtung}
+
+In einer typischen Musterlösung wird differenziert: Premium-Geräte preisstabil mit Service-Bundles und Content-Stärkung; Standardzubehör dynamisch mit Mindestmarge; Ersatzteile stabil mit Verfügbarkeits-Differenzierung; Bundles aktiv ausgebaut. Die Entscheidung unter Unsicherheit: ``Trotz sinkender Conversion verzichten wir auf pauschale Rabatte bei Premium-Küchenmaschinen, weil Marke und Marge strategische Vermögenswerte sind -- stattdessen testen wir Bundles und investieren in Content.''
+
+\begin{merkbox}[Argumentationsmuster für die Fallstudie]
+Eine gute Preisstrategie auf einer Plattform enthält:
+\begin{enumerate}
+  \item \textbf{Produktrollen.} Pro Gruppe definiert.
+  \item \textbf{Preislogik je Rolle.} Konsistent und begründet.
+  \item \textbf{Governance.} Mindestmarge, Korridor, Entscheidungsrechte.
+  \item \textbf{Monitoring.} KPIs mit Eingriffsschwelle.
+  \item \textbf{Verzichtsentscheidung.} Mindestens eine bewusste Senkung, die wir \emph{nicht} machen.
+\end{enumerate}
+\end{merkbox}
+
+% --- 9. MANAGEMENT-PERSPEKTIVE ------------------------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Auf Wissens- und Anwendungsebene sieht eine gute Preisstrategie wie eine sauber differenzierte Tabelle aus. Auf Managementebene geht es um Zielkonflikte, die nicht ``gelöst'', sondern \emph{entschieden} werden müssen. \quelle{vgl.\ Porter, 1996; Simon \& Fassnacht, 2015}
+
+\subsection{Fünf zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Umsatz vs.\ Marge.} Aggressive Preissenkung erhöht Umsatz, senkt Marge. Wann lohnt sich der Wechsel, wann nicht?
+  \item \textbf{Sichtbarkeit vs.\ Markenpositionierung.} Plattform-Algorithmen belohnen niedrige Preise und hohe Conversion -- aber wer Premium ist, kann hier nicht beliebig folgen.
+  \item \textbf{Kurzfristige Conversion vs.\ Preisanker.} Eine Aktion erhöht Conversion sofort -- aber sie verändert den Preisanker im Kundengedächtnis dauerhaft.
+  \item \textbf{Wettbewerberreaktion vs.\ eigene Strategie.} Reflexartiges Mitziehen mit Wettbewerbern führt in einen Preiskrieg. Nicht-Reagieren kann aber kurzfristig Marktanteil kosten.
+  \item \textbf{Algorithmus vs.\ Governance.} Algorithmen können schnell -- aber sollten in markenrelevanten Situationen nicht allein entscheiden.
+\end{enumerate}
+
+\subsection{Senior-Level-Test}
+
+Eine senior-level-fähige Preisstrategie lässt sich in einem Satz erklären, der eine Verzichtsentscheidung enthält. Beispiel: ``Wir halten Premium-Preise stabil und stärken Content und Bundles -- wir verzichten bewusst auf pauschale Rabatte trotz sinkender Conversion, weil eine pauschale Senkung Marke und Margenarchitektur dauerhaft beschädigen würde.''
+
+\subsection{Preisstrategie als Senior-Level-Verantwortung}
+
+Preisentscheidungen wirken wie operativ -- sie sind aber strategisch. Sie verändern Kundenerwartung, Marke, Marge und Wettbewerbsverhalten auf Jahre. Wer Preis an die Pricing-Abteilung allein delegiert, delegiert Markenführung und Margenarchitektur. Beides gehört auf die Senior-Ebene.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{U-S-K-W-A}]
+Fünf Zielkonflikte, die im dynamischen Pricing auf Senior-Level entschieden werden:\\[2pt]
+\textbf{U}msatz vs.\ Marge.\\
+\textbf{S}ichtbarkeit vs.\ Markenpositionierung.\\
+\textbf{K}urzfrist (Conversion) vs.\ Preisanker.\\
+\textbf{W}ettbewerberreaktion vs.\ eigene Strategie.\\
+\textbf{A}lgorithmus vs.\ Governance.\\[2pt]
+\emph{Fünf Konflikte, die kein Algorithmus allein verantworten sollte.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 8]
+Dynamische Preisstrategie ist kein automatisiertes Rabattsystem. Sie ist die Disziplin, Preise differenziert nach Produktrolle, Marktphase und Marge zu führen -- mit klarer Governance, sauberem Monitoring und bewussten Verzichtsentscheidungen. \emph{Wer Wettbewerberpreisen reflexartig folgt, verliert Marge, Marke und mittelfristig Position.}
+\end{merkbox}
+
+% --- 10. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Chen, L., Mislove, A., \& Wilson, C. (2016).] An empirical analysis of algorithmic pricing on Amazon Marketplace. In \emph{Proceedings of the 25th International Conference on World Wide Web} (S.\ 1339--1349). \href{https://doi.org/10.1145/2872427.2883089}{https://doi.org/10.1145/2872427.2883089}
+  \item[Deshpandé, R., \& Hwang, J. (2018).] Dynamic pricing in digital markets. \emph{MIT Sloan Management Review, 60}(1), 1--9.
+  \item[Ellis, S., \& Brown, M. (2017).] \emph{Hacking growth: How today's fastest-growing companies drive breakout success}. Crown Business.
+  \item[Kaplan, R.\,S., \& Norton, D.\,P. (1996).] \emph{The balanced scorecard: Translating strategy into action}. Harvard Business School Press.
+  \item[Nagle, T.\,T., \& Müller, G. (2016).] \emph{The strategy and tactics of pricing: A guide to growing more profitably} (6.\ Aufl.). Routledge.
+  \item[Porter, M.\,E. (1996).] What is strategy? \emph{Harvard Business Review, 74}(6), 61--78.
+  \item[Shapiro, C., \& Varian, H.\,R. (1999).] \emph{Information rules: A strategic guide to the network economy}. Harvard Business School Press.
+  \item[Simon, H., \& Fassnacht, M. (2015).] \emph{Preismanagement: Strategie -- Analyse -- Entscheidung -- Umsetzung} (4.\ Aufl.). Springer Gabler.
+\end{description}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Aktionsrentabilität] Bewertung einer Preisaktion nach Margenwirkung -- nicht nur nach Umsatzsteigerung.
+  \item[Algorithmisches Pricing] Software-gestützte Preissetzung, die auf Wettbewerb, Nachfrage und Lager reagiert; kann ohne Governance Preiskriege verstärken.
+  \item[Buy-Box] Bevorzugte Verkaufsbox auf einer Plattform; Sichtbarkeitsvorteil, beeinflusst durch Preis, Lieferfähigkeit, Verkäuferperformance.
+  \item[Bundle (Preisbundle)] Kombination aus Hauptprodukt, Zubehör und/oder Service zu einem Bündelpreis.
+  \item[Customer Acquisition Cost (CAC)] Gesamtkosten zur Gewinnung eines neuen Kunden.
+  \item[Deckungsbeitrag] Differenz aus Umsatz und variablen Kosten; zentrale Profitabilitätsgröße pro Produkt oder Gruppe.
+  \item[Differenzierte Preisstrategie] Unterschiedliche Preislogik je Produktrolle (Premium, Standard, Ersatz, Bundle).
+  \item[Dynamische Preisstrategie] Laufende oder häufige Anpassung von Preisen an Wettbewerb, Nachfrage, Marge, Lager und Plattform-KPIs.
+  \item[Eskalationsregel] Vorschrift, wann eine Preisentscheidung in die nächsthöhere Entscheidungsebene gehoben werden muss.
+  \item[Governance (Preis)] Regelwerk für Preisentscheidungen: Mindestmarge, Korridor, Entscheidungsrechte, Aktionsbudget, Eskalation.
+  \item[Kannibalisierung] Effekt, bei dem Aktionen auf einer Produktgruppe Käufer aus einer anderen Produktgruppe abziehen.
+  \item[Marktanalyse (Plattform)] Strukturierte, laufende Beobachtung von Wettbewerb, Preisbandbreiten, Sortiment, Nachfrage, Bewertung und Sichtbarkeit.
+  \item[Mindestmarge] Pro Produktgruppe definierter unterer Margenwert, der nicht unterschritten wird.
+  \item[Penetrationspreis] Bewusst unter dem Markt liegende Einführung, um schnell Anteile zu gewinnen.
+  \item[Performance-Monitoring] Strukturierte Erfassung und Auswertung relevanter KPIs zur Steuerung des Plattform-Verkaufs.
+  \item[Preisanker] Vom Kunden wahrgenommener Referenzpreis, der durch frühere Preise und Wettbewerb geprägt wird.
+  \item[Preisbandbreite] Korridor, in dem sich die Wettbewerberpreise innerhalb einer Produktkategorie bewegen.
+  \item[Preiselastizität] Veränderung der Nachfrage in Reaktion auf eine Preisänderung; je höher, desto preissensibler die Kunden.
+  \item[Preiskorridor] Definierter Spielraum, in dem dynamische Anpassungen erlaubt sind.
+  \item[Preiskrieg] Spirale gegenseitiger Preissenkungen, die alle Beteiligten Marge kostet.
+  \item[Premiumpreis] Preis bewusst über dem Marktdurchschnitt, gestützt durch Qualität, Service, Marke.
+  \item[Produktrolle] Strategische Funktion eines Produkts im Sortiment (Premium, Standard, Ersatz, Bundle); bestimmt die Preislogik.
+  \item[Vanity-Metrik] Kennzahl, die imposant wirkt, aber keine Steuerungsentscheidung auslöst (z.\,B.\ reine Impressionen).
+  \item[Wertorientierter Preis] Preisbildung aus dem konkret quantifizierbaren Kundennutzen (Einsparung, Umsatzwirkung).
+  \item[Wettbewerbsparität] Preis am Marktdurchschnitt orientiert; sicher, aber wenig differenzierend.
+  \item[Zielkonflikt (Preis)] Spannungsfeld zwischen Umsatz, Marge, Sichtbarkeit, Markenpositionierung und Wettbewerberreaktion -- nicht ``lösbar'', sondern bewusst entscheidbar.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 8 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

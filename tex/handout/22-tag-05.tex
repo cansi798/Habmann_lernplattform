@@ -1,0 +1,631 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 5 - Lehrskript
+% Digitale Vertriebsstrategie entwickeln - Kundenfokus, Kanaele & Omnichannel (Teil 1)
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 5}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Kundenzentrierter digitaler Vertrieb}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 3 \textperiodcentered{} TAG 5 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 3.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Digitale\\Vertriebsstrategie:\\Kundenfokus\\\& Kanäle\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom Produktdenken zum Kundenpfad --\\Customer Journey, Touchpoints und\\digitale Kanäle strategisch ableiten.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 5 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Modul 1 und Modul 2 haben Plattformmodelle und Skalierungslogik etabliert. Modul 3 wechselt die Perspektive: Heute beginnen wir bei den Kunden -- nicht bei den Tools. Eine digitale Vertriebsstrategie, die nicht aus Kundenbedürfnissen abgeleitet ist, scheitert spätestens an der ersten Roadmap. Die Lernziele sind in drei Stufen gegliedert.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundlagen digitaler Vertriebsstrategien verstehen.
+  \item Kundenzentrierten Vertriebsansatz einordnen.
+  \item Customer Journey, Touchpoints und digitale Kaufentscheidungen kennen.
+  \item Digitale Vertriebskanäle unterscheiden.
+  \item Bewertungskriterien für digitale Vertriebskanäle verstehen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Kundenbedürfnisse und Kaufverhalten analysieren.
+  \item Passende digitale Vertriebskanäle für konkrete Zielgruppen auswählen.
+  \item Kanaloptionen anhand von Reichweite, Kosten, Kontrolle, Datenzugang und Conversion-Potenzial bewerten.
+  \item Erste digitale Vertriebslogiken für konkrete Unternehmen entwickeln.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Digitale Vertriebskanalwahl als strategische Architekturentscheidung vorbereiten.
+  \item Zielkonflikte zwischen Kundennähe, Skalierbarkeit, Kosten, Datenhoheit und Markenführung bewerten.
+  \item Entscheidungen unter unvollständigen Informationen treffen.
+  \item Verantwortung für kundenzentrierte digitale Vertriebsarchitekturen übernehmen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Eine digitale Vertriebsstrategie beginnt nicht bei der Frage ``\emph{Welche Kanäle nutzen wir?}'', sondern bei: ``\emph{Wer kauft was, wann, wie und warum?}'' Erst aus dieser Antwort folgt eine begründete Kanalwahl. Wer in umgekehrter Reihenfolge plant, baut eine Toolsammlung -- keine Strategie.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Vom Produkt zum Kundenpfad}
+
+In vielen mittelständischen B2B-Organisationen hat sich der Vertrieb in den letzten 20 Jahren wenig verändert: Außendienst, Empfehlungen, gelegentliche Messen, Telefon. Die Kunden hingegen haben sich \emph{drastisch} verändert. Sie informieren sich vorab digital, vergleichen Anbieter über Suchmaschinen, lesen Bewertungen und treffen einen Großteil der Vorauswahl, bevor sie überhaupt mit dem Vertrieb sprechen. \quelle{vgl.\ Edelman \& Singer, 2015; Rogers, 2016}
+
+\subsection{Drei Verschiebungen, die jede Vertriebsstrategie betreffen}
+
+\begin{enumerate}
+  \item \fachbegriff{Verlagerung der Informationsphase.} Die ersten 40--70\,\% der Kaufentscheidung passieren digital -- ohne Anbieterkontakt. Wer in dieser Phase nicht sichtbar und überzeugend ist, fällt aus der Shortlist.
+  \item \fachbegriff{Konvergenz von B2B und B2C.} Geschäftskunden bringen B2C-Erwartungen mit: schnelle Suche, transparente Preise, sichtbare Bewertungen, einfache Self-Service-Funktionen. Wer im B2B noch ausschließlich klassisch verkauft, wirkt 2026 wie aus einer anderen Zeit.
+  \item \fachbegriff{Steuerung über Daten.} Erfolg im digitalen Vertrieb wird zunehmend datengetrieben -- über Klickraten, Conversion, Leadqualität, Customer Lifetime Value. Ohne Daten fliegt der Vertrieb blind.
+\end{enumerate}
+
+\subsection{Produktorientierter vs.\ kundenzentrierter Vertrieb}
+
+Der traditionelle Vertrieb arbeitet \fachbegriff{produktorientiert}: ``Wir haben dieses Produkt, suche jemanden, der es brauchen könnte.'' Der digitale Vertrieb funktioniert \fachbegriff{kundenzentriert}: ``Welche Personen oder Organisationen suchen aktiv nach einer Lösung -- und wie machen wir uns für sie sichtbar, verständlich und vertrauenswürdig?'' \quelle{Kotler et al., 2021; Homburg, 2020}
+
+Der Unterschied ist nicht nur sprachlich. Er verändert, womit die Vertriebsorganisation beginnt: nicht mit dem Produktkatalog, sondern mit der \emph{Customer Journey}.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{K-W-W-W-W} -- ``Kunde, Was, Wann, Wo, Warum''.]
+Die fünf Fragen am Anfang jeder digitalen Vertriebsstrategie:\\[2pt]
+\textbf{K}unde -- wer genau?\\
+\textbf{W}as -- welches Problem will er lösen?\\
+\textbf{W}ann -- in welcher Situation, mit welcher Dringlichkeit?\\
+\textbf{W}o -- wo informiert er sich, wo entscheidet er?\\
+\textbf{W}arum -- was sind seine eigentlichen Motive (Funktion, Risiko, Status, Geschwindigkeit)?\\[2pt]
+\emph{Wer ``K-W-W-W-W'' nicht beantworten kann, hat noch keine Vertriebsstrategie -- nur einen Kanalplan.}
+\end{eselsbox}
+
+% --- 2. KUNDENZENTRIERTER ANSATZ -----------------------------------------
+\section{Der kundenzentrierte Ansatz}
+
+Kundenzentrierung ist kein Marketing-Schlagwort, sondern ein Steuerungsprinzip. Sie bedeutet, dass jede Vertriebsentscheidung mit einer rekonstruierbaren Kundenperspektive begründet wird -- nicht mit ``das machen alle so'' oder ``das ist gerade trendy''.
+
+\subsection{Vier Bausteine kundenzentrierter Vertriebsstrategie}
+
+\begin{enumerate}
+  \item \textbf{Zielgruppen verstehen.} Wer kauft warum? Mit welchen Motiven, Auslösern, Entscheidungsmustern?
+  \item \textbf{Nutzenversprechen formulieren.} Welches konkrete Problem lösen wir besser als die Alternativen -- aus Sicht des Kunden?
+  \item \textbf{Customer Journey rekonstruieren.} Wie sieht die tatsächliche Reise vom ersten Bewusstsein bis zum Wiederkauf aus?
+  \item \textbf{Touchpoints und Kanäle ableiten.} An welchen Stellen erreichen wir den Kunden in einer für ihn relevanten Weise -- digital oder persönlich?
+\end{enumerate}
+
+\subsection{B2B vs.\ B2C -- es konvergiert, aber bleibt unterschiedlich}
+
+Auch wenn sich B2B- und B2C-Vertrieb annähern, gibt es robuste Unterschiede:
+
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+& \textbf{B2C} & \textbf{B2B} \\
+\midrule
+\textbf{Entscheider} & meist Einzelperson & Buying Center (mehrere Rollen) \\
+\textbf{Entscheidungsdauer} & Minuten bis Tage & Wochen bis Monate \\
+\textbf{Informationsbedarf} & Bewertungen, Preis, Versand & Referenzen, Wirtschaftlichkeit, Sicherheit, Compliance \\
+\textbf{Risikoaversion} & niedrig bis mittel & hoch (organisationales Risiko) \\
+\textbf{Wiederkauf} & oft impulsiv & strukturiert, vertraglich \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent Beide Welten teilen jedoch eine zentrale Erwartung: \emph{Einfachheit, Geschwindigkeit, Vertrauen, Relevanz}. Wer als B2B-Anbieter eine umständliche, langsame oder generische Erstinformation liefert, verliert -- selbst dann, wenn das Produkt überlegen ist. \quelle{Kotler et al., 2017; Rangaswamy et al., 2020}
+
+\subsection{Fünf Anforderungen, die digitale Kunden 2026 mitbringen}
+
+\begin{itemize}
+  \item \textbf{Vertrauen.} Über Referenzen, Bewertungen, Zertifikate, Transparenz von Preis und Lieferung.
+  \item \textbf{Einfachheit.} Selbsterklärende Strukturen, wenig Klicks bis zur relevanten Information.
+  \item \textbf{Relevanz.} Inhalte und Angebote, die zur Suche passen -- nicht generische Produktkataloge.
+  \item \textbf{Geschwindigkeit.} Schnelle Ladezeiten, schnelle Antworten, schnelle Lieferung.
+  \item \textbf{Personalisierung.} Angebote, die sich an der konkreten Situation der Person orientieren -- soweit datenschutzkonform machbar.
+\end{itemize}
+
+\begin{merkbox}[Kernsatz Kundenzentrierung]
+Der Kunde steht nicht im Mittelpunkt, weil wir nett sein wollen -- sondern weil seine Kaufentscheidung sich verlagert hat. Wer die Kaufentscheidung nicht abbildet, wird übergangen. Kundenzentrierung ist \emph{Wettbewerbsdisziplin}, nicht Service-Floskel.
+\end{merkbox}
+
+% --- 3. CUSTOMER JOURNEY ------------------------------------------------
+\section{Customer Journey \& Touchpoints}
+
+Die \fachbegriff{Customer Journey} ist die strukturierte Abfolge der Schritte, die ein Interessent vom ersten Bewusstsein bis zur Empfehlung durchläuft. Sie ist kein theoretisches Konstrukt, sondern ein Werkzeug, um Vertriebsmaßnahmen \emph{geordnet} zu denken. \quelle{Lemon \& Verhoef, 2016; Edelman \& Singer, 2015}
+
+\subsection{Sieben Phasen einer typischen Journey}
+
+\begin{enumerate}
+  \item \fachbegriff{Aufmerksamkeit (Awareness).} Der Kunde wird auf ein Problem oder einen Anbieter aufmerksam. Auslöser: Preisanstieg, gesetzliche Anforderung, Schmerzpunkt im Alltag.
+  \item \fachbegriff{Informationssuche.} Der Kunde recherchiert: Welche Lösungen gibt es überhaupt? Wer bietet sie an?
+  \item \fachbegriff{Vergleich.} Der Kunde vergleicht Optionen -- direkt (gleicher Lösungstyp) und indirekt (andere Lösungsansätze).
+  \item \fachbegriff{Kontaktaufnahme / Beratung.} Der Kunde nimmt Kontakt auf, fordert Demo, Angebot, Beratungstermin an.
+  \item \fachbegriff{Entscheidung.} Der Kunde entscheidet und kauft -- im B2B häufig mit interner Freigabe, Budgetprüfung, Vertragsverhandlung.
+  \item \fachbegriff{Nutzung.} Der Kunde nutzt das Produkt; je nach Bereich folgen Installation, Onboarding, Service.
+  \item \fachbegriff{Wiederkauf / Empfehlung.} Der Kunde bestellt nach, erweitert, empfiehlt oder kündigt.
+\end{enumerate}
+
+\subsection{Digitale Touchpoints entlang der Journey}
+
+Ein \fachbegriff{Touchpoint} ist jeder konkrete Berührungspunkt zwischen Kunde und Anbieter. Digitale Touchpoints sind in den letzten Jahren explodiert; eine sinnvolle Auswahl reicht aber meist aus:
+
+\begin{itemize}
+  \item Unternehmenswebsite (Homepage, Produkt-/Lösungsseiten, Referenzen, Fachartikel)
+  \item Suchmaschine (organische Suchergebnisse, Ads)
+  \item Social Media (LinkedIn, branchenspezifische Netzwerke)
+  \item E-Mail (Newsletter, Lead-Nurturing, Transaktionsmails)
+  \item Plattform-Listings (Marktplätze, Vergleichsportale)
+  \item Webshop / Konfigurator
+  \item Chat \& Messenger (Webchat, WhatsApp Business)
+  \item Webinare \& digitale Events
+  \item Kundenportal / Self-Service
+  \item CRM-getriebene Ansprache (gezielte Kampagnen auf Basis bisheriger Interaktion)
+\end{itemize}
+
+\subsection{Touchpoint = Conversion-Punkt?}
+
+Nicht jeder Touchpoint ist ein \fachbegriff{Conversion-Punkt}. Ein Conversion-Punkt ist ein Touchpoint, an dem der Kunde eine \emph{messbare} Handlung vollzieht: Klick, Formularabsendung, Demo-Buchung, Warenkorb-Abschluss, Vertragsanfrage. Eine gute Journey-Analyse identifiziert die Conversion-Punkte und stellt die Frage: \emph{Wo verlieren wir Kunden, und warum?}
+
+\begin{merkbox}[Journey-Checkliste]
+\begin{itemize}
+  \item Beginnt die Journey in einem Auslöser, den wir nachvollziehen können?
+  \item Sind die zentralen Touchpoints pro Phase identifiziert?
+  \item Sind die Conversion-Punkte (messbare Übergänge) markiert?
+  \item Wissen wir, wo der größte Verlust passiert -- und warum?
+  \item Können wir mindestens einen Touchpoint nennen, an dem eine kleine Verbesserung große Wirkung hätte?
+\end{itemize}
+\end{merkbox}
+
+% --- 4. ZIELGRUPPENANALYSE -----------------------------------------------
+\section{Zielgruppen- und Buying-Center-Analyse}
+
+Eine Customer Journey hängt von einer konkret beschriebenen Zielgruppe ab. ``Mittelständische Unternehmen'' ist keine Zielgruppe -- sondern eine Branche. Eine arbeitsfähige Zielgruppenbeschreibung beantwortet drei Fragen.
+
+\subsection{Drei Leitfragen}
+
+\begin{enumerate}
+  \item \textbf{Wer genau?} Demografie (B2C: Alter, Region, Einkommen) bzw.\ Firmografie (B2B: Branche, Größe, Rolle der Entscheider).
+  \item \textbf{In welcher Situation?} Welcher Auslöser bringt diese Person auf die Idee, nach einer Lösung zu suchen? (Sanierungsbedarf, gesetzliche Pflicht, Kostenanstieg, Wachstum.)
+  \item \textbf{Mit welchem Verhalten?} Wo informiert sie sich? Wem vertraut sie? Wie bezahlt sie? Wie kauft sie nach?
+\end{enumerate}
+
+\subsection{Buying Center im B2B}
+
+Im B2B-Vertrieb entscheidet selten eine einzelne Person. Das \fachbegriff{Buying Center} umfasst typischerweise mehrere Rollen:
+
+\begin{itemize}
+  \item \textbf{Initiator.} Erkennt das Problem, stößt die Suche an (z.\,B.\ Fachabteilung).
+  \item \textbf{Beeinflusser.} Liefert Fachwissen, bewertet Optionen (z.\,B.\ IT, Energieberater, Architekt).
+  \item \textbf{Entscheider.} Trifft die formale Auswahlentscheidung (z.\,B.\ Geschäftsführung).
+  \item \textbf{Käufer.} Wickelt die Beschaffung ab (z.\,B.\ Einkauf).
+  \item \textbf{Nutzer.} Setzt das Produkt im Alltag ein.
+  \item \textbf{Gatekeeper.} Kontrolliert den Zugang zu den anderen Rollen (z.\,B.\ Assistenz, Vorzimmer).
+\end{itemize}
+
+Jede dieser Rollen hat andere Informationsbedürfnisse. Eine kundenzentrierte digitale Vertriebsstrategie liefert pro Rolle zumindest einen passenden Content-Baustein. \quelle{Homburg, 2020}
+
+\subsection{Konvergenz zur ``Persona''}
+
+In der Praxis verdichten Vertriebs- und Marketingorganisationen Rollen zu \fachbegriff{Buyer Personas}: archetypische Beschreibungen der relevantesten Käufer\-rollen. Eine Persona enthält Name, Rolle, Ziele, Schmerzpunkte, übliche Informationsquellen, häufige Einwände, Erfolgsmaßstäbe. Ein Mittelständler braucht typischerweise 3--5 Personas -- nicht 25. \quelle{Kotler et al., 2017}
+
+% --- 5. DIGITALE VERTRIEBSKANAELE ----------------------------------------
+\section{Digitale Vertriebskanäle im Überblick}
+
+Sobald Zielgruppe und Journey verstanden sind, lassen sich die passenden Kanäle ableiten -- nicht umgekehrt. Die folgenden zehn Kanäle gehören 2026 zum Standardrepertoire mittelständischer B2B- und B2C-Vertriebsorganisationen.
+
+\subsection{Zehn relevante digitale Kanäle}
+
+\begin{enumerate}
+  \item \fachbegriff{Eigener Webshop.} Eigene Transaktionsfläche, volle Kontrolle, volle Datenhoheit. Aufbau und Sichtbarkeit sind teuer.
+  \item \fachbegriff{Unternehmenswebsite mit Leadgenerierung.} Keine Transaktion, aber strukturierte Leads über Beratungs- und Demo-Anfragen.
+  \item \fachbegriff{Suchmaschinenmarketing \& SEO.} Sichtbarkeit in der Phase ``Informationssuche'' -- bei aktiver Nachfrage hochwirksam.
+  \item \fachbegriff{Social Selling über LinkedIn.} Im B2B die wichtigste personenbasierte Reichweite; Aufbau dauert Monate bis Jahre.
+  \item \fachbegriff{E-Mail-Marketing \& Marketing Automation.} Lead-Nurturing, Newsletter, gezielte Kampagnen für Bestandskunden.
+  \item \fachbegriff{Digitale Plattformen / Marktplätze.} Schnelle Reichweite, aber begrenzte Datenhoheit (siehe Modul 1--2).
+  \item \fachbegriff{Vergleichsportale.} Effektiv in stark vergleichbaren Märkten -- riskant für Qualitätsanbieter.
+  \item \fachbegriff{Partner- und Affiliate-Kanäle.} Multiplikatoren (Architekten, Berater, Wiederverkäufer) liefern qualifizierte Leads.
+  \item \fachbegriff{Webinare und digitale Events.} Besonders stark bei erklärungsbedürftigen Produkten; Vertrauensaufbau und Leadqualifikation in einem.
+  \item \fachbegriff{Kundenportale / Self-Service-Kanäle.} Bestandskundenpflege, Nachbestellung, Service -- senkt Servicekosten und erhöht Bindung.
+\end{enumerate}
+
+\subsection{Kanal vs.\ Touchpoint}
+
+Häufige Verwechslung: nicht jeder Touchpoint ist ein eigener Kanal. Eine LinkedIn-Werbeanzeige ist ein Touchpoint im Kanal ``LinkedIn''. Ein Webinar ist ein Format innerhalb des Kanals ``digitale Events''. Saubere Trennung erleichtert spätere Bewertung und Roadmap-Planung.
+
+\begin{merkbox}[Faustregel Kanalauswahl]
+Wählen Sie nie einen Kanal, weil er ``modern'' wirkt. Wählen Sie ihn, weil er an einer konkreten Stelle der Customer Journey eine konkrete Aufgabe besser erledigt als andere Optionen. Wenn Sie diese Aufgabe nicht in einem Satz benennen können, fehlt die Strategie.
+\end{merkbox}
+
+% --- 6. BEWERTUNGSKRITERIEN ----------------------------------------------
+\section{Bewertungskriterien für Kanäle}
+
+Eine Kanalentscheidung sollte vergleichend und mit nachvollziehbaren Kriterien getroffen werden. Zehn Kriterien decken die typischen Trade-offs ab.
+
+\subsection{Zehn Kriterien -- und was sie messen}
+
+\begin{enumerate}
+  \item \fachbegriff{Zielgruppenpassung.} Sind unsere Wunschkunden auf dem Kanal überhaupt aktiv?
+  \item \fachbegriff{Reichweite.} Wie viele Personen können wir potenziell erreichen?
+  \item \fachbegriff{Kosten und Ressourcenbedarf.} Was kostet der Kanal pro Lead, pro Conversion, pro Kunde -- inklusive internem Aufwand?
+  \item \fachbegriff{Kontrollgrad.} Wie weit können wir Inhalt, Sortiment, Preis und Beratung selbst gestalten?
+  \item \fachbegriff{Datenzugang.} Welche Kundendaten sehen wir? Können wir sie in eigene Systeme übernehmen?
+  \item \fachbegriff{Conversion-Potenzial.} Wie hoch ist die typische Conversion vom Touchpoint zur messbaren Aktion?
+  \item \fachbegriff{Beratungsfähigkeit.} Können wir komplexe Inhalte vermitteln, Vertrauen aufbauen, individuell beraten?
+  \item \fachbegriff{Markenwirkung.} Stärkt oder verwässert der Kanal unsere Positionierung?
+  \item \fachbegriff{Skalierbarkeit.} Wie weit trägt der Kanal? Können wir ihn um Faktor 5--10 ausbauen?
+  \item \fachbegriff{Abhängigkeit von Drittplattformen.} Wie groß ist das Risiko, wenn die Plattform Regeln ändert?
+\end{enumerate}
+
+\subsection{Bewertungsmatrix als Werkzeug}
+
+Eine \fachbegriff{Bewertungsmatrix} kombiniert Kriterien (Spalten) mit Kanaloptionen (Zeilen) und vergibt Punkte auf einer Skala (1--5). Sinnvoll ist eine Gewichtung pro Kriterium (1--3). \quelle{methodisch vgl.\ Homburg, 2020; Osterwalder \& Pigneur, 2010}
+
+\begin{tabularx}{\linewidth}{@{}lXXXX@{}}
+\toprule
+\textbf{Kriterium (Gewicht)} & \textbf{Eigener Webshop} & \textbf{SEO-Website} & \textbf{LinkedIn Ads} & \textbf{Marktplatz} \\
+\midrule
+Zielgruppenpassung (3) & 4 & 5 & 4 & 3 \\
+Kosten (2)             & 3 & 3 & 3 & 4 \\
+Kontrollgrad (3)       & 5 & 5 & 3 & 1 \\
+Datenzugang (3)        & 5 & 5 & 3 & 1 \\
+Beratungsfähigkeit (2) & 3 & 4 & 4 & 1 \\
+Markenwirkung (2)      & 5 & 5 & 4 & 2 \\
+Skalierbarkeit (1)     & 4 & 4 & 4 & 5 \\
+\midrule
+\textbf{Gewichteter Schnitt} & \textbf{4{,}3} & \textbf{4{,}6} & \textbf{3{,}6} & \textbf{2{,}1} \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent\emph{Lesehinweis.} Die Werte oben sind illustrativ für einen hochwertigen, erklärungsbedürftigen B2B-Anbieter. Bei einem Standard-Konsumgüteranbieter würde insbesondere die Bewertung des Marktplatzes deutlich höher ausfallen.
+
+\subsection{Drei typische Fallen}
+
+\begin{itemize}
+  \item \textbf{Bewertung ohne Gewichtung.} Wenn Skalierbarkeit das gleiche Gewicht wie Datenzugang erhält, kommen Ergebnisse heraus, die kein Verantwortlicher will.
+  \item \textbf{Optionen ohne Funktion.} Kanäle werden verglichen, ohne dass die Aufgabe pro Kanal definiert ist -- LinkedIn-Ads und Webshop lösen unterschiedliche Aufgaben.
+  \item \textbf{Bauchgefühl statt Bewertung.} Die Matrix ist nicht das Ergebnis, sondern das Werkzeug, das Annahmen sichtbar macht.
+\end{itemize}
+
+% --- 7. KANALARCHITEKTUR -------------------------------------------------
+\section{Kanalarchitektur statt Kanalsammlung}
+
+Die zentrale Verschiebung von Tag~5 zu Tag~6 (Omnichannel) bahnt sich hier bereits an: Erfolgreiche digitale Vertriebsorganisationen bauen nicht eine \emph{Sammlung} von Kanälen, sondern eine \emph{Architektur}. \quelle{Verhoef et al., 2015; Rogers, 2016}
+
+\subsection{Was eine Architektur leistet}
+
+\begin{itemize}
+  \item Jeder Kanal hat eine definierte Aufgabe entlang der Journey (Awareness, Information, Vergleich, Conversion, Retention).
+  \item Kanäle verstärken sich -- ein Webinar-Teilnehmer landet als Lead im CRM, eine SEO-Seite leitet auf einen Konfigurator, ein LinkedIn-Kontakt erhält eine personalisierte E-Mail.
+  \item Datenflüsse sind klar: welche Information geht von wo nach wo.
+  \item Verantwortlichkeiten sind verteilt: pro Kanal ein Eigentümer, pro KPI ein Verantwortlicher.
+\end{itemize}
+
+\subsection{Die Frage ``welcher Kanal zuerst?''}
+
+Mittelständische Vertriebsorganisationen haben begrenzte Kapazitäten. Die Reihenfolge entscheidet. Drei Faustregeln:
+
+\begin{enumerate}
+  \item \textbf{Beginnen Sie bei dem Kanal, der die größte Conversion-Lücke schließt.} Wenn 80\,\% der Kunden online recherchieren, aber die Website eine ``digitale Broschüre'' ist, fängt es dort an.
+  \item \textbf{Verschwenden Sie kein Budget auf Reichweitenkanäle, solange die Conversion nicht funktioniert.} Mehr Klicks auf eine schlechte Seite kostet mehr Geld, ohne mehr Umsatz zu erzeugen.
+  \item \textbf{Bauen Sie Bestandskundenkanäle früher aus, als Ihr Marketing glaubt.} Wiederkauf ist günstiger als Neukundenakquise.
+\end{enumerate}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Z-K-D-M} -- vier Hebel jeder Kanalwahl]
+Vier Buchstaben, vier strategische Fragen vor jeder Kanalentscheidung:\\[2pt]
+\textbf{Z}ielgruppe -- ist sie hier wirklich?\\
+\textbf{K}osten -- wie teuer pro qualifiziertem Lead?\\
+\textbf{D}aten -- bekommen wir sie oder behält sie ein Dritter?\\
+\textbf{M}arke -- stärkt oder verwässert der Kanal unsere Positionierung?\\[2pt]
+\emph{Vier Buchstaben -- vier Antworten. Wenn drei davon nicht stimmen, ist es der falsche Kanal.}
+\end{eselsbox}
+
+% --- 8. FALLSTUDIE-LEITFADEN ---------------------------------------------
+\section{Fallstudie-Leitfaden: GreenTech Systems}
+
+In den Unterrichtseinheiten 4--5 arbeiten Sie an der Fallstudie ``GreenTech Systems'' -- einem mittelständischen Anbieter energieeffizienter Heizungs- und Gebäudetechnik. Die folgende Leitstruktur fasst zusammen, in welcher Logik die Aufgabe zu bearbeiten ist.
+
+\subsection{Analytischer Aufbau}
+
+\begin{enumerate}
+  \item \textbf{Zielgruppenanalyse.} Was sind die Informationsbedürfnisse von Immobilienverwaltern, Gewerbebetrieben, Architekten/Energieberatern und öffentlichen Auftraggebern?
+  \item \textbf{Customer Journey skizzieren.} Welche Phasen, welche Auslöser, welche Conversion-Punkte?
+  \item \textbf{Kanalbewertung.} Welche der zur Verfügung stehenden Kanäle (SEO-Website, Google Ads, LinkedIn-Kampagnen, Webinare, Partnerkanal, Konfigurator, allgemeine Portale) schneiden bei welchen Kriterien wie ab?
+  \item \textbf{Priorisierung für 12 Monate.} Maximal vier Kanäle -- mehr ist bei 180.000\,EUR Budget und einem 12-Personen-Vertriebsteam nicht ehrlich umsetzbar.
+  \item \textbf{Roadmap entwerfen.} Monate 1--3, 4--6, 7--9, 10--12 -- mit klaren Meilensteinen.
+  \item \textbf{Entscheidung unter Unsicherheit.} Welcher reichweitenstarke Kanal wird trotz Verlockung \emph{nicht} gewählt?
+\end{enumerate}
+
+\subsection{Erwartete Empfehlungsrichtung}
+
+In einer typischen Musterlösung wird der Schwerpunkt auf \emph{SEO-Website mit Fachinhalten}, \emph{Webinare}, \emph{LinkedIn} und \emph{Partnerkanal} (Energieberater/Architekten) gelegt. \emph{Bewusster Verzicht} auf allgemeine Gebäudetechnikportale (weil sie Preisvergleich fördern) und \emph{Verschiebung} des Angebotskonfigurators (weil Inhalte und Daten zuerst stehen müssen). Die Entscheidung unter Unsicherheit ist meist: ``Trotz langsamerer Leadgenerierung priorisieren wir SEO/Content, weil Vertrauen und Sichtbarkeit für erklärungsbedürftige Lösungen wichtiger sind als kurzfristige Klicks.''
+
+\begin{merkbox}[Argumentationsmuster für die Fallstudie]
+Eine gute Kanalentscheidung enthält drei Sätze:
+\begin{enumerate}
+  \item \textbf{Was wir machen.} Welche Kanäle, mit welcher Aufgabe in der Journey, mit welchem Budgetanteil?
+  \item \textbf{Worauf wir bewusst verzichten.} Mindestens ein reichweitenstarker Kanal, den wir aus Markenpositionierung oder Vertriebskapazität \emph{nicht} bedienen.
+  \item \textbf{Welche Annahme wir prüfen.} Welche KPI nach 8--12 Wochen würde uns signalisieren, dass die Strategie nicht trägt?
+\end{enumerate}
+\end{merkbox}
+
+% --- 9. MANAGEMENT-PERSPEKTIVE ------------------------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Auf Wissens- und Anwendungsebene wirkt eine gute Kanalstrategie wie eine sauber gefüllte Bewertungsmatrix. Auf Managementebene geht es um Zielkonflikte, die nicht ``richtig gelöst'' werden, sondern \emph{entschieden} werden müssen. \quelle{vgl.\ Rogers, 2016; Verhoef et al., 2015}
+
+\subsection{Fünf zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Kundennähe vs.\ Skalierbarkeit.} Persönliche Beratung schafft Vertrauen, lässt sich aber nicht beliebig skalieren. Digitale Self-Service-Kanäle skalieren, geben aber wenig Beratung.
+  \item \textbf{Reichweite vs.\ Leadqualität.} Mehr Anzeigen erzeugen mehr Klicks, aber häufig schlechtere Leads. Wer sein Vertriebsteam mit unqualifizierten Kontakten überlastet, verliert das Vertrieb dort, wo es zählt.
+  \item \textbf{Geschwindigkeit vs.\ Datenkontrolle.} Externe Plattformen liefern Reichweite sofort, behalten aber Daten. Eigene Infrastruktur liefert vollständige Daten, braucht aber Monate.
+  \item \textbf{Kosten vs.\ Markenpositionierung.} Vergleichsportale sind günstig, beschädigen aber bei Qualitätsanbietern die Positionierung.
+  \item \textbf{Aufbau vs.\ Ergebnis.} SEO und Content brauchen Monate, bis sie wirken. Performance-Kampagnen wirken sofort, aber teuer. Wer beide Welten ignoriert, hat keine Strategie -- nur eine Kampagne.
+\end{enumerate}
+
+\subsection{Senior-Level-Test}
+
+Eine senior-level-fähige Kanalentscheidung lässt sich in einem Satz erklären, der eine Verzichtsentscheidung enthält. Beispiel: ``Wir investieren in SEO, Webinare und Partnerkanal -- nicht in allgemeine Gebäudetechnikportale, weil sie unsere Qualitätspositionierung schwächen würden.'' Wer einen solchen Satz nicht formulieren kann, hat eine Wunschliste, keine Entscheidung.
+
+\subsection{Architekturentscheidung statt Marketingmaßnahme}
+
+Digitale Vertriebskanalwahl ist \emph{keine} Marketingentscheidung. Sie ist eine Architekturentscheidung: Sie verändert, wo Daten anfallen, welche Vertriebskapazität gebraucht wird, wie die Marke wahrgenommen wird, und welche Abhängigkeiten in den kommenden Jahren entstehen. Verantwortet wird sie auf der Ebene eines Chief Revenue Officers oder Vertriebsleiters, nicht in der Marketingabteilung.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{K-R-G-K-A} -- fünf Zielkonflikte digitaler Kanalwahl]
+Fünf Buchstaben, fünf Trade-offs:\\[2pt]
+\textbf{K}undennähe vs.\ Skalierbarkeit.\\
+\textbf{R}eichweite vs.\ Leadqualität.\\
+\textbf{G}eschwindigkeit vs.\ Datenkontrolle.\\
+\textbf{K}osten vs.\ Markenpositionierung.\\
+\textbf{A}ufbau vs.\ Ergebnis.\\[2pt]
+\emph{Wer als Senior auf einen dieser fünf Konflikte keine Antwort hat, hat keine Strategie.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 5]
+Die digitale Kanalwahl entscheidet nicht nur über Sichtbarkeit -- sie entscheidet über Datenzugang, Vertriebsausrichtung, Markenwirkung und über die Frage, welche Kundenbeziehung wir selbst kontrollieren. Diese Entscheidung gehört nicht in den Maßnahmenplan, sondern in die \textbf{Vertriebsarchitektur}. \emph{Wer wählt, entscheidet -- und wer entscheidet, verantwortet.}
+\end{merkbox}
+
+% --- 10. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Edelman, D.\,C., \& Singer, M. (2015).] Competing on customer journeys. \emph{Harvard Business Review, 93}(11), 88--100.
+  \item[Homburg, C. (2020).] \emph{Marketingmanagement: Strategie -- Instrumente -- Umsetzung -- Unternehmensführung} (7.\ Aufl.). Springer Gabler.
+  \item[Kotler, P., Kartajaya, H., \& Setiawan, I. (2017).] \emph{Marketing 4.0: Moving from traditional to digital}. Wiley.
+  \item[Kotler, P., Keller, K.\,L., Brady, M., Goodman, M., \& Hansen, T. (2021).] \emph{Marketing management} (4.\ Aufl.). Pearson.
+  \item[Lemon, K.\,N., \& Verhoef, P.\,C. (2016).] Understanding customer experience throughout the customer journey. \emph{Journal of Marketing, 80}(6), 69--96. \href{https://doi.org/10.1509/jm.15.0420}{https://doi.org/10.1509/jm.15.0420}
+  \item[Osterwalder, A., \& Pigneur, Y. (2010).] \emph{Business model generation: A handbook for visionaries, game changers, and challengers}. Wiley.
+  \item[Rangaswamy, A., Moch, N., Felten, C., van Bruggen, G.\,H., Wieringa, J.\,E., \& Wirtz, J. (2020).] The role of marketing in digital business platforms. \emph{Journal of Interactive Marketing, 51}(1), 72--90. \href{https://doi.org/10.1016/j.intmar.2020.04.006}{https://doi.org/10.1016/j.intmar.2020.04.006}
+  \item[Rogers, D.\,L. (2016).] \emph{The digital transformation playbook: Rethink your business for the digital age}. Columbia Business School Publishing.
+  \item[Verhoef, P.\,C., Kannan, P.\,K., \& Inman, J.\,J. (2015).] From multi-channel retailing to omni-channel retailing. \emph{Journal of Retailing, 91}(2), 174--181. \href{https://doi.org/10.1016/j.jretai.2015.02.005}{https://doi.org/10.1016/j.jretai.2015.02.005}
+\end{description}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Awareness] Phase, in der ein Kunde erstmals auf ein Problem oder einen Anbieter aufmerksam wird.
+  \item[Bewertungsmatrix] Werkzeug zur vergleichenden Bewertung von Kanaloptionen entlang gewichteter Kriterien.
+  \item[Buyer Persona] Archetypische Beschreibung einer Käuferrolle mit Zielen, Schmerzpunkten und typischen Informationsquellen.
+  \item[Buying Center] Gruppe von Personen, die im B2B gemeinsam eine Kaufentscheidung treffen -- Initiator, Beeinflusser, Entscheider, Käufer, Nutzer, Gatekeeper.
+  \item[Conversion-Punkt] Touchpoint, an dem der Kunde eine messbare Handlung vollzieht (Klick, Anfrage, Demo, Kauf).
+  \item[Customer Journey] Strukturierte Abfolge der Phasen, die ein Kunde vom ersten Bewusstsein bis zur Empfehlung durchläuft.
+  \item[Datenzugang] Maß, in dem ein Anbieter Kundendaten aus einem Kanal in eigene Systeme übernehmen kann.
+  \item[Digitaler Vertrieb] Vertriebsform, bei der Anbahnung, Information, Konfiguration oder Kaufabschluss über digitale Kanäle laufen.
+  \item[Kanal] Strukturierter Weg, über den Anbieter und Kunden interagieren -- Webshop, SEO, LinkedIn, Marktplatz, E-Mail u.\,a.
+  \item[Kanalarchitektur] Geordnetes System aus Kanälen mit definierten Aufgaben, Datenflüssen und Verantwortlichkeiten -- im Gegensatz zu einer ungeordneten Kanalsammlung.
+  \item[Kundenzentrierung] Steuerungsprinzip, das Vertriebsentscheidungen aus Kundenbedürfnissen und Kaufverhalten ableitet -- nicht aus dem Produktkatalog.
+  \item[Leadqualität] Maß, in dem ein erzeugter Lead tatsächlich Kaufabsicht, Budget und Entscheidungsbefugnis vereint.
+  \item[Marketing Automation] Software-Logik zur automatisierten Ansprache von Interessenten und Bestandskunden entlang definierter Trigger.
+  \item[Multichannel] Vertriebsansatz mit mehreren parallel betriebenen Kanälen, ohne enge Integration -- Vorstufe zu Omnichannel.
+  \item[Nutzenversprechen] Konkrete Aussage darüber, welches Problem das Angebot besser löst als die verfügbaren Alternativen.
+  \item[Persona] Siehe Buyer Persona.
+  \item[Personalisierung] Anpassung von Inhalten oder Angeboten an die konkrete Situation eines Nutzers -- datenschutzkonform gestaltet.
+  \item[Reichweite] Anzahl potenziell erreichbarer Personen über einen Kanal -- ohne Aussage über Qualität.
+  \item[SEO] Suchmaschinenoptimierung; Maßnahmen, um die organische Sichtbarkeit in Suchergebnissen zu erhöhen.
+  \item[Social Selling] Vertriebs- und Vertrauensaufbau über soziale Netzwerke, insbesondere LinkedIn im B2B-Kontext.
+  \item[Touchpoint] Konkreter Berührungspunkt zwischen Kunde und Anbieter entlang der Customer Journey.
+  \item[Zielgruppe] Konkret beschreibbare Gruppe von Personen oder Organisationen mit gemeinsamem Bedarf und Verhalten.
+  \item[Zielkonflikt (Kanalwahl)] Spannungsfeld zwischen Kundennähe, Reichweite, Datenkontrolle, Markenpositionierung und Geschwindigkeit -- nicht ``lösbar'', sondern bewusst entscheidbar.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 5 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

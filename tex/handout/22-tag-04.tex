@@ -1,0 +1,683 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 4 - Lehrskript
+% Plattform-Geschaeftsmodelle erfolgreich entwickeln & skalieren
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 4}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Plattform-Skalierung \& Governance}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 2 \textperiodcentered{} TAG 4 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 2.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Plattform-\\Geschäftsmodelle\\skalieren\\\& steuern\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Vom Launch zur tragfähigen Plattform --\\Skalierung, Monetarisierung und Governance\\als Wettbewerbsvorteil gestalten.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 4 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent An den ersten drei Tagen haben Sie Plattformmodelle eingeordnet, Strategien implementiert und KPI-Logiken aufgebaut. Heute geht es um die nächste Stufe: \emph{Wie wird aus einer wachsenden Plattform ein wirtschaftlich tragfähiges, skalierbares und steuerbares Geschäftsmodell?} Die Lernziele sind in drei Stufen gegliedert -- Wissen, Anwendung und Management.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Skalierung von Plattform-Geschäftsmodellen verstehen.
+  \item Monetarisierungsmodelle von Plattformen unterscheiden.
+  \item Plattform-Governance als Steuerungslogik begreifen.
+  \item Nachhaltige Wettbewerbsvorteile in Plattformökosystemen erkennen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Skalierungsoptionen für konkrete Plattformen bewerten.
+  \item Monetarisierungsmodelle anhand von Zielgruppen, Marktphase und Wertbeitrag auswählen.
+  \item Governance-Regeln für Plattformteilnehmer, Qualität, Daten und Konflikte entwickeln.
+  \item Wachstum, Profitabilität, Vertrauen und Kontrolle gegeneinander abwägen.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Skalierung als strategische Investitions- und Verantwortungsentscheidung treffen.
+  \item Monetarisierung nicht nur nach Umsatz, sondern nach langfristiger Plattformstabilität bewerten.
+  \item Governance als Wettbewerbsvorteil gestalten.
+  \item Entscheidungen unter Unsicherheit, Zielkonflikten, Budget- und Wachstumsdruck begründen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Tag~1--3 haben gezeigt, \emph{wie} man Plattformen entwickelt und steuert. Tag~4 beantwortet: \emph{Wie wird aus Wachstum eine tragfähige, profitable und verteidigungsfähige Plattform?} Wer Skalierung, Monetarisierung und Governance nicht zusammendenkt, baut keine Plattform -- sondern eine wachsende Baustelle.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Wachstum ist nicht Skalierung}
+
+In der öffentlichen Wahrnehmung gilt eine Plattform als ``erfolgreich'', wenn sie schnell wächst. Aus Managementsicht ist das eine gefährliche Verkürzung. Wachstum -- mehr Nutzer, mehr Anbieter, mehr Umsatz -- ist eine \emph{Größe}. Skalierung ist eine \emph{Fähigkeit}: die Fähigkeit, mit einem zusätzlichen Nutzer oder einer zusätzlichen Region nicht überproportional mehr Aufwand, Risiko oder Komplexität einzukaufen. \quelle{vgl.\ Parker et al., 2016, Kap.~7}
+
+\subsection{Drei Begriffe sauber trennen}
+
+\begin{itemize}
+  \item \fachbegriff{Wachstum.} Die Plattform wird größer -- mehr Nutzer, Anbieter, Transaktionen, Umsatz. Wachstum sagt noch nichts über Kosten, Marge oder Stabilität aus.
+  \item \fachbegriff{Skalierung.} Die Plattform wächst, ohne dass Stückkosten, Supportlast oder Qualitätsrisiken überproportional steigen. Skalierung ist \emph{ökonomisch sinnvolles} Wachstum.
+  \item \fachbegriff{Profitable Skalierung.} Die Plattform skaliert und erwirtschaftet dabei Deckungsbeiträge, die nicht nur die Mehrkosten, sondern auch den Aufbau eines verteidigungsfähigen Wettbewerbsvorteils finanzieren.
+\end{itemize}
+
+Wer eine Plattform-Initiative ausschließlich an Nutzerzahlen misst, übersieht regelmäßig den entscheidenden Übergang: den Punkt, an dem das nächste Wachstum mehr kostet als es bringt, weil Prozesse, Qualität, Vertrauen oder Datenzugang nicht mitgewachsen sind. \quelle{Cusumano et al., 2019, Kap.~6}
+
+\subsection{Warum Plattform-Wachstum besonders trügerisch ist}
+
+Plattformen wachsen \emph{nicht linear}. Indirekte Netzwerkeffekte bringen Phasen sehr starken Wachstums -- und genau in diesen Phasen scheitern viele Plattformen: weil Supportkosten, Qualitätsstreuung und negative Bewertungen mit der Reichweite \emph{schneller} steigen als der Umsatz. Die Folge ist eine charakteristische ``Wachstumsfalle'': Reichweite ja, aber Marge, Vertrauen und Steuerbarkeit gehen verloren.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{W-S-P} -- ``Wachstum, Skalierung, Profit''.]
+Drei Stufen, die nicht zu verwechseln sind:\\[2pt]
+\textbf{W}achstum -- es wird größer.\\
+\textbf{S}kalierung -- es wird tragfähig größer.\\
+\textbf{P}rofitable Skalierung -- es wird tragfähig größer \emph{und} verdient dabei.\\[2pt]
+\emph{Wer ``W'' mit ``P'' verwechselt, kommt in drei Jahren auf der falschen Plattform-Seite an.}
+\end{eselsbox}
+
+\subsection{Was dieser Tag konkret leistet}
+
+Wir gehen drei Stufen durch: Skalierungslogik (Sektionen 2--4), Monetarisierung (Sektion 5), Governance und Wettbewerbsvorteil (Sektionen 6--8). Die Fallstudie ``HealthCare Connect'' (Sektion 9) bringt alles in ein konkretes Szenario zusammen. Der Management-Teil (Sektion 10) macht klar, warum diese Themen \emph{Senior-Level-Verantwortung} sind und nicht in die Betriebsabteilung delegiert werden dürfen.
+
+% --- 2. SKALIERUNGSDIMENSIONEN -------------------------------------------
+\section{Skalierungsdimensionen}
+
+Plattformen können in unterschiedlichen Dimensionen skalieren. Eine erfahrene Plattform-Organisation entscheidet bewusst, welche Dimension sie als nächstes ausbaut -- und nicht alle gleichzeitig.
+
+\subsection{Sieben Skalierungsdimensionen}
+
+\begin{enumerate}
+  \item \fachbegriff{Nutzerwachstum.} Mehr Nachfrager auf der Plattform. Klassische Marketing- und Akquisitionslogik, aber nur wertvoll, wenn die Anbieterseite mitwachsen kann.
+  \item \fachbegriff{Anbieterwachstum.} Mehr Anbieter, breiteres Sortiment, mehr Spezialisierung. Treibt die Sichtbarkeit für Nachfrager -- erhöht aber Qualitätsstreuung.
+  \item \fachbegriff{Geografische Expansion.} Neue Städte, Regionen, Länder. Erfordert lokale Anpassungen: Sprache, Recht, Logistik, Zahlung.
+  \item \fachbegriff{Sortimentsausbau.} Neue Produktkategorien oder Dienstleistungen. Erweitert den Lebenszyklus eines Kunden -- braucht aber neue Anbieter und neues Vertrauen.
+  \item \fachbegriff{Partnernetzwerke.} Externe Multiplikatoren (Verbände, Großkunden, Distributoren) bringen Reichweite, ohne dass jeder einzelne Nutzer aktiv akquiriert werden muss.
+  \item \fachbegriff{Automatisierung.} Wiederkehrende Aufgaben -- Onboarding, Prüfung, Reporting, Konfliktlösung -- werden algorithmisch oder regelbasiert übernommen, sodass das Team nicht linear mit der Plattform wachsen muss.
+  \item \fachbegriff{Datenintegration.} Schnittstellen zu CRM, ERP, Buchhaltung, Logistik. Daten werden weniger doppelt erfasst, Entscheidungen werden schneller und belastbarer.
+\end{enumerate}
+
+\subsection{Die richtige Dimension zuerst}
+
+Eine zentrale Senior-Level-Frage lautet: \emph{Welche Dimension treibt heute den größten Engpass?} Wenn der Supportaufwand pro Anbieter steigt, hilft mehr Nutzerwachstum nichts -- es verschärft das Problem. Wenn die Vermittlungsquote unter 60\,\% liegt, hilft geografische Expansion nicht -- sie multipliziert ein ungelöstes Matching-Problem in fünf Regionen.
+
+\begin{merkbox}[Skalierungs-Prinzip]
+Skalieren Sie zuerst die Dimension, die heute den größten Engpass darstellt. Wer alle Dimensionen gleichzeitig ausbaut, baut keine Plattform aus, sondern verteilt seine Probleme auf mehr Fläche.
+\end{merkbox}
+
+\subsection{Voraussetzungen für Skalierung}
+
+Skalierung ist nicht nur eine Wachstumsentscheidung -- sie setzt voraus, dass das Fundament steht. Sechs Voraussetzungen sollten erfüllt sein, bevor expandiert wird: \quelle{vgl.\ Choudary, 2015; Tiwana, 2014}
+
+\begin{itemize}
+  \item \textbf{Stabile Prozesse.} Onboarding, Matching, Auszahlung, Reklamation funktionieren ohne ständige Sonderlösungen.
+  \item \textbf{Technische Leistungsfähigkeit.} Plattform und Schnittstellen halten auch bei dem zehnfachen Volumen, ohne dass jede Spitzenlast eine Krise wird.
+  \item \textbf{Klare Rollen.} Wer ist verantwortlich für Wachstum, wer für Qualität, wer für Daten, wer für Konfliktlösung? Ohne Rollen wird Skalierung zur Verteilkampf um Engpassressourcen.
+  \item \textbf{Datenqualität.} Stammdaten, Nutzungsdaten und Bewertungen sind sauber, vergleichbar und auswertbar.
+  \item \textbf{Vertrauen.} Beide Marktseiten erleben die Plattform als zuverlässig. Vertrauen ist Voraussetzung, nicht Folge der Skalierung.
+  \item \textbf{Wiederholbarer Kundennutzen.} Was in einer Region funktioniert, lässt sich in der nächsten Region mit überschaubarer Anpassung reproduzieren.
+\end{itemize}
+
+\subsection{Risiken zu schneller Skalierung}
+
+Wo das Fundament fehlt, erzeugt Skalierung typische Folgeschäden: \quelle{Cusumano et al., 2019, Kap.~6; vgl.\ Boudreau \& Hagiu, 2009}
+
+\begin{itemize}
+  \item \textbf{Qualitätsverlust.} Anbieter werden ohne ausreichende Prüfung onboardet, die Bewertungen rutschen.
+  \item \textbf{Überlastung des Supports.} Bearbeitungszeiten steigen, Beschwerden wandern in Bewertungen und Social Media.
+  \item \textbf{Sinkendes Vertrauen.} Wenn Kunden negative Erlebnisse häufiger erleben, verschiebt sich die Wahrnehmung -- und damit die Konversionsrate.
+  \item \textbf{Negative Netzwerkeffekte.} Mehr Anbieter \emph{minderer} Qualität schrecken Anbieter \emph{guter} Qualität ab und treiben sie ab.
+  \item \textbf{Steigende Stückkosten.} Manuelle Sonderlösungen verbrauchen Teamzeit, die nicht in Skalierungsinfrastruktur fließt.
+  \item \textbf{Kontrollverlust.} Die Plattform wird zu schnell zu groß, um noch zentral gesteuert werden zu können.
+\end{itemize}
+
+% --- 3. NETZWERKEFFEKTE ALS SKALIERUNGSMOTOR -----------------------------
+\section{Netzwerkeffekte als Skalierungsmotor}
+
+Skalierung auf Plattformen funktioniert anders als auf klassischen Pipelines, weil \fachbegriff{Netzwerkeffekte} das Wachstum nichtlinear machen. Mehr Nutzer auf einer Seite erhöhen den Wert für die andere Seite -- bis hin zum berühmten ``Winner-takes-most''-Effekt. \quelle{Van Alstyne et al., 2016; Eisenmann et al., 2006}
+
+\subsection{Positive vs.\ negative Netzwerkeffekte}
+
+Plattformen profitieren von positiven Netzwerkeffekten -- aber sie sind nicht immun gegen \emph{negative} Netzwerkeffekte. Wer den Unterschied nicht aktiv steuert, kippt in eine Abwärtsspirale, ohne sie zu bemerken.
+
+\begin{itemize}
+  \item \textbf{Positiver indirekter Netzwerkeffekt.} Mehr Anbieter \textrightarrow{} attraktiver für Nachfrager \textrightarrow{} mehr Nachfrager \textrightarrow{} attraktiver für Anbieter. Klassisches Schwungrad.
+  \item \textbf{Negativer Netzwerkeffekt.} Mehr Anbieter \emph{minderer} Qualität \textrightarrow{} schlechtere Bewertungen \textrightarrow{} sinkende Vertrauen \textrightarrow{} sinkende Nachfrage \textrightarrow{} qualitative Anbieter wandern ab \textrightarrow{} weiter sinkende Qualität.
+  \item \textbf{Cross-side Friction.} Wenn die eine Seite die andere ärgert (z.\,B.\ kostenpflichtige Anbieter ärgern sich über kostenlose Premium-Nachfrager), kann der Netzwerkeffekt sogar \emph{abstoßend} werden.
+\end{itemize}
+
+\subsection{Implikationen für Skalierungsentscheidungen}
+
+Aus Netzwerkeffekt-Logik folgt eine klare Senior-Level-Heuristik: \emph{Skalieren Sie nur die Seite, die heute knapp ist.} Wenn auf ``HealthCare Connect'' (siehe Sektion 9) Pflegekräfte überquellen, aber Einrichtungen knapp sind, bringt Anbieter-Akquise keinen Wert -- sie reduziert sogar die Vermittlungsquote pro Anbieter. \quelle{vgl.\ Eisenmann et al., 2006}
+
+\subsection{Subventionierung der ``Geld-Seite''}
+
+Plattformen subventionieren häufig eine Seite, um die andere zu gewinnen. Eine zentrale Designfrage ist: \emph{Wer zahlt?} Klassische Muster: Nachfrager nutzen kostenlos, Anbieter zahlen Provision; oder umgekehrt. Die Wahl ist nicht trivial -- sie definiert die Dynamik der Plattform auf Jahre. \quelle{Hagiu \& Wright, 2015; Eisenmann et al., 2006}
+
+\begin{merkbox}[Netzwerkeffekt-Diagnose]
+Drei Fragen, die jeder Plattform-Verantwortliche monatlich beantworten sollte:
+\begin{enumerate}
+  \item Wo wirken positive Netzwerkeffekte? Welcher Zuwachs der einen Seite treibt die andere?
+  \item Wo entstehen negative Netzwerkeffekte? Wo erhöht zusätzliches Wachstum Friktion, Beschwerden, Streuung?
+  \item Welche Seite ist heute knapp -- und welche skaliert von selbst weiter, ohne dass wir investieren müssen?
+\end{enumerate}
+\end{merkbox}
+
+% --- 4. SKALIERUNGSSTRATEGIEN --------------------------------------------
+\section{Skalierungsstrategien}
+
+Nicht jede Plattform sollte gleich skalieren. Es gibt vier wiederkehrende Skalierungsstrategien, jede mit eigenem Risikoprofil und passend zu unterschiedlichen Marktphasen. \quelle{Parker et al., 2016, Kap.~5--7}
+
+\subsection{Vier Strategien}
+
+\begin{enumerate}
+  \item \textbf{Schnelle, breite Expansion (``Blitz-Skalierung'').} Risiko hoch, Wachstumspotenzial hoch -- nur sinnvoll, wenn Netzwerkeffekte sehr stark, Wettbewerb dicht und Wechselkosten niedrig sind. Funktioniert in B2C-Marktplätzen mit hoher Frequenz, selten in regulierten B2B-Märkten.
+  \item \textbf{Schrittweise Expansion (``Region für Region'').} Eine neue Region wird vollständig konsolidiert, bevor die nächste angegangen wird. Schützt Qualität und Prozessstabilität. Langsamer, aber deutlich risikoärmer -- die Standardstrategie für vertrauenssensible Plattformen (Gesundheit, Pflege, B2B-Services).
+  \item \textbf{Vertikale Vertiefung statt Breite (``Premium first'').} Statt mehr Anbieter wird mehr Wert pro Anbieter geschaffen: Qualitätsstandards, Premium-Sichtbarkeit, geprüfte Dienstleister, Service-Bundles. Geeignet, wenn Differenzierung gegenüber Preisvergleichs-Marktplätzen das eigentliche Schutzschild ist.
+  \item \textbf{Partnernetzwerk-Strategie.} Skalierung über Verbände, Bildungsträger, Großkunden -- nicht über Einzelakquise. Besonders wirksam dort, wo Vertrauen institutionell vermittelt wird (Verbände, Kammern, B2B-Multiplikatoren).
+\end{enumerate}
+
+\subsection{Strategieauswahl als Architektur-Entscheidung}
+
+Welche Strategie passt, hängt von vier Faktoren ab:
+
+\begin{tabularx}{\linewidth}{@{}lXXXX@{}}
+\toprule
+\textbf{Faktor} & \textbf{Blitz-Skalierung} & \textbf{Schrittweise} & \textbf{Premium} & \textbf{Partnernetzwerk} \\
+\midrule
+Stärke Netzwerkeffekte & sehr hoch & hoch & mittel & hoch \\
+Vertrauensbedarf & gering & hoch & sehr hoch & hoch \\
+Regulatorische Komplexität & gering & hoch & mittel & mittel \\
+Wettbewerbsdruck & sehr hoch & mittel & gering & mittel \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\noindent\emph{Lesehinweis.} Die Tabelle ist ein Diagnose-Raster, keine universelle Empfehlung. Bei einer regulierten Gesundheits-Plattform mit hohem Vertrauensbedarf ist die Schrittweise- oder Partnernetzwerk-Strategie nahezu zwingend; bei einem B2C-Mobility-Marktplatz kann Blitz-Skalierung der einzige Weg sein, um Netzwerkeffekte vor dem Wettbewerb zu sichern.
+
+% --- 5. MONETARISIERUNG --------------------------------------------------
+\section{Monetarisierungsmodelle}
+
+Skalierung ohne Monetarisierung ist Subventionierung. Monetarisierung ohne saubere Skalierung ist Selbstsabotage. Beide Fragen gehören zusammen -- müssen aber in unterschiedlichen Plattformphasen unterschiedlich beantwortet werden. \quelle{Hagiu \& Wright, 2015; Gassmann et al., 2017}
+
+\subsection{Neun Monetarisierungsmodelle}
+
+\begin{enumerate}
+  \item \fachbegriff{Provision pro Transaktion.} Klassisches Marktplatz-Modell. Plattform verdient anteilig am Umsatz. Erfolgsabhängig, gut akzeptiert, aber sensibel auf Provisionserhöhungen.
+  \item \fachbegriff{Transaktionsgebühr (fix).} Fester Betrag pro Vorgang. Plant sich gut, schneidet aber bei kleinen Transaktionen schlecht.
+  \item \fachbegriff{Abonnement.} Anbieter (oder Nachfrager) zahlt fixe Monatsgebühr. Planbarer Umsatz für die Plattform; gute Eignung bei wiederkehrender Nutzung.
+  \item \fachbegriff{Freemium.} Grundnutzung gratis, Zusatzfunktionen kostenpflichtig. Senkt die Einstiegshürde, erfordert aber sehr klar abgegrenzten Premium-Wert.
+  \item \fachbegriff{Listing-Gebühr.} Einmalige oder periodische Gebühr für die Sichtbarkeit auf der Plattform. Reduziert Trittbrettfahrer, schreckt aber kleinere Anbieter ab.
+  \item \fachbegriff{Premium-Platzierung.} Anbieter bezahlen für bevorzugte Sichtbarkeit. Hohes Umsatzpotenzial, aber Risiko, dass Fairness und Bewertungssystem leiden.
+  \item \fachbegriff{Werbung.} Plattform monetarisiert Aufmerksamkeit Dritter. In B2C verbreitet, in B2B selten saubere Logik.
+  \item \fachbegriff{Datenservices.} Plattform bietet aggregierte Marktdaten gegen Bezahlung an. Mächtiges Modell -- aber regulatorisch und ethisch sensibel.
+  \item \fachbegriff{Servicepakete \& Partnergebühren.} Plattform bietet Mehrwertdienste (Garantie, Reaktionszeit, Schulung) zusätzlich zur Vermittlung. Stärkt Differenzierung gegenüber Preisvergleichern.
+\end{enumerate}
+
+\subsection{Monetarisierung passend zur Plattformphase}
+
+Ein zentrales Senior-Level-Prinzip: Monetarisierungs\emph{stärke} hängt von der Plattformphase ab. Zu früh ist ebenso gefährlich wie zu spät. \quelle{vgl.\ Cusumano et al., 2019}
+
+\begin{tabularx}{\linewidth}{@{}l X X@{}}
+\toprule
+\textbf{Phase} & \textbf{Logik} & \textbf{Typische Wahl} \\
+\midrule
+Aufbauphase & Vertrauen \& Reichweite aufbauen, beide Seiten gewinnen & gering monetarisieren, Subventionierung der knappen Seite \\
+Wachstumsphase & Modell etablieren, ohne Schwungrad zu bremsen & moderate Provision oder Abo, Freemium auf erweiterte Funktionen \\
+Reifephase & Profitabilität sichern, Lock-in vorsichtig nutzen & gestaffelte Modelle, Premium-Pakete, Datenservices \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Zielkonflikt: zu früh vs.\ zu spät}
+
+\begin{itemize}
+  \item \textbf{Zu frühe Monetarisierung} kann Wachstum bremsen, weil Anbieter oder Nachfrager abgeschreckt werden, bevor Netzwerkeffekte gegriffen haben.
+  \item \textbf{Zu späte Monetarisierung} gefährdet die wirtschaftliche Tragfähigkeit, vergrößert die Abhängigkeit von Investoren und erzwingt später abrupte Gebührensprünge.
+\end{itemize}
+
+\begin{merkbox}[Goldene Regel der Plattform-Monetarisierung]
+Monetarisierung folgt dem Wert. Bevor Sie Gebühren erheben, müssen beide Marktseiten erlebt haben, dass die Plattform einen reproduzierbaren Vorteil liefert -- spürbar genug, dass sie ihn nicht mehr verlieren wollen. \emph{Wer monetarisiert, bevor der Wert sitzt, riskiert beides: keinen Wert und keinen Umsatz.}
+\end{merkbox}
+
+\subsection{Welche Seite zahlt?}
+
+Eine eigene strategische Frage: \emph{Wer von beiden Seiten zahlt? Beide? Asymmetrisch?} Klassische Muster:
+
+\begin{itemize}
+  \item \textbf{Anbieter zahlen, Nachfrager kostenlos.} Klassisches Marktplatz-Modell (Amazon, Marktplätze). Reichweite und Nachfrage sind das knappe Gut, das Anbieter dafür einkaufen.
+  \item \textbf{Nachfrager zahlen, Anbieter kostenlos.} Seltener; sinnvoll, wenn Anbieter knapp sind (z.\,B.\ qualifizierte Spezialisten).
+  \item \textbf{Beide zahlen.} Differenzierte Modelle (z.\,B.\ Grundgebühr für Anbieter, Premium-Pakete für Nachfrager). Erhöht Umsatzbasis, kostet aber Akzeptanz.
+\end{itemize}
+
+\quelle{Eisenmann et al., 2006; Hagiu \& Wright, 2015}
+
+% --- 6. PLATTFORM-GOVERNANCE ---------------------------------------------
+\section{Plattform-Governance}
+
+Spätestens jetzt wird klar: eine Plattform ist nicht nur ein Produkt, sondern ein \fachbegriff{regulierter Marktraum}. Wer Plattformen baut, wird zum Regelgeber für viele Teilnehmer. \emph{Plattform-Governance} ist die Antwort auf diese Verantwortung. \quelle{Tiwana, 2014; Boudreau \& Hagiu, 2009}
+
+\subsection{Was Governance konkret regelt}
+
+\begin{itemize}
+  \item \fachbegriff{Zugang.} Wer darf auf die Plattform? Welche Voraussetzungen, welche Prüfungen?
+  \item \fachbegriff{Qualität.} Welche Mindeststandards gelten? Wie werden sie überprüft?
+  \item \fachbegriff{Sichtbarkeit.} Nach welchen Kriterien wird gerankt? Was kann ``erkauft'' werden, was nicht?
+  \item \fachbegriff{Daten.} Wem gehören Nutzungs-, Bewertungs- und Transaktionsdaten? Was ist exportierbar?
+  \item \fachbegriff{Verhalten.} Welche Regeln gelten zwischen Teilnehmern (Reaktionszeiten, Kommunikation, Fairness)?
+  \item \fachbegriff{Sanktionen.} Was passiert bei Verstößen -- Warnung, Sichtbarkeitsverlust, Ausschluss?
+  \item \fachbegriff{Konfliktlösung.} Wie werden Streitfälle (Reklamation, Bewertung, Vergütung) eskaliert und entschieden?
+\end{itemize}
+
+\subsection{Fünf Rollen des Plattformbetreibers}
+
+Plattformbetreiber sind nicht nur Produktanbieter -- sie übernehmen typischerweise fünf Rollen gleichzeitig: \quelle{vgl.\ Tiwana, 2014}
+
+\begin{enumerate}
+  \item \textbf{Marktgestalter} -- definiert, welche Produkte / Leistungen handelbar sind.
+  \item \textbf{Qualitätswächter} -- prüft, sanktioniert, kommuniziert Standards.
+  \item \textbf{Datenverantwortlicher} -- entscheidet über Datenzugang, Datenschutz, Nutzungsrechte.
+  \item \textbf{Regelsetzer} -- formuliert Teilnahmebedingungen, Algorithmen, Sichtbarkeitsregeln.
+  \item \textbf{Ökosystemmanager} -- steuert das Zusammenspiel mit Drittanbietern, Verbänden, Regulatoren.
+\end{enumerate}
+
+\subsection{Governance-Instrumente in der Praxis}
+
+\begin{itemize}
+  \item \textbf{Teilnahmebedingungen.} Klar, kurz, vergleichbar -- so verständlich, dass auch kleinere Anbieter sie ohne Anwalt unterzeichnen können.
+  \item \textbf{Qualitätsstandards.} Beobachtbar und messbar (Reaktionszeit, Bewertungsdurchschnitt, Reklamationsquote).
+  \item \textbf{Bewertungslogik.} Standardisiert, manipulationsresistent, nutzbar als Frühwarnsystem.
+  \item \textbf{Ranking-Regeln.} Transparente Mischung aus Relevanz, Qualität und ggf.\ bezahlter Sichtbarkeit -- bezahlte Sichtbarkeit nie als alleiniger Faktor.
+  \item \textbf{Servicelevel.} Reaktionszeiten, Bearbeitungszeiten, Verfügbarkeiten -- gemessen und sanktionierbar.
+  \item \textbf{Datenschutzregeln.} DSGVO-konform, transparent, mit klaren Exportrechten.
+  \item \textbf{Eskalationsprozesse.} Klar abgestuft (Warnung \textrightarrow{} Sichtbarkeitsverlust \textrightarrow{} Ausschluss), reproduzierbar dokumentiert.
+\end{itemize}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Z-Q-S-D-V-S-K} -- ``Zwerge Quetschen Sonntags Den Vornehmen Sieben Käse'']
+Die sieben Governance-Dimensionen einer Plattform:\\[2pt]
+\textbf{Z}ugang -- \textbf{Q}ualität -- \textbf{S}ichtbarkeit -- \textbf{D}aten -- \textbf{V}erhalten -- \textbf{S}anktionen -- \textbf{K}onflikt.\\[2pt]
+\emph{Eine Plattform, die nicht alle sieben Dimensionen aktiv reguliert, wird auf einer dieser sieben Achsen ausgebeutet.}
+\end{eselsbox}
+
+% --- 7. NACHHALTIGE WETTBEWERBSVORTEILE ----------------------------------
+\section{Nachhaltige Wettbewerbsvorteile}
+
+Plattformen, die größer werden, ziehen Wettbewerb an. Die Senior-Level-Frage lautet daher nicht nur ``wie wachsen wir?'', sondern: \emph{Welche Wettbewerbsvorteile bauen wir auf, die unsere Plattform in zwei oder drei Jahren noch verteidigungsfähig machen?} \quelle{Van Alstyne et al., 2016; Cusumano et al., 2019}
+
+\subsection{Acht nachhaltige Vorteile}
+
+\begin{enumerate}
+  \item \fachbegriff{Vertrauen.} Aufgebaut über Jahre, kaum kopierbar -- besonders wirksam in vertrauenssensiblen Märkten (Pflege, Gesundheit, B2B-Service).
+  \item \fachbegriff{Datenvorsprung.} Strukturierte Nutzungsdaten, die Wettbewerber so nicht haben. Treibt Empfehlungsqualität und Matching-Geschwindigkeit.
+  \item \fachbegriff{Starke Netzwerkeffekte.} Die ``Nummer 1'' einer Kategorie zieht weiter Nutzer an -- die Nummer 2 verliert sie typischerweise.
+  \item \fachbegriff{Hohe Wechselkosten.} Anbieter und Nachfrager hätten echten Aufwand, die Plattform zu verlassen (Reputation, Schnittstellen, gesammelte Bewertungen).
+  \item \fachbegriff{Ökosystembindung.} Drittanbieter haben in das System investiert (Apps, Schnittstellen, Schulungen).
+  \item \fachbegriff{Markenreputation.} Bekanntheit und Vertrauen, die Wettbewerber nur mit hohem Marketingbudget aufholen können.
+  \item \fachbegriff{Prozessintegration.} Plattform ist tief in die Workflows der Nutzer eingebunden (CRM, ERP, Abrechnung).
+  \item \fachbegriff{Exklusive Partnerzugänge.} Verträge mit Verbänden, Großkunden oder Regulierern, die Wettbewerbern nicht offenstehen.
+\end{enumerate}
+
+\subsection{Vorteile aktiv aufbauen statt hoffen}
+
+Ein nachhaltiger Wettbewerbsvorteil entsteht selten zufällig. Er entsteht, weil das Management eine bewusste Investition in einen oder mehrere dieser acht Hebel trifft -- typischerweise auf Kosten kurzfristigen Wachstums. Wer beispielsweise in Datenqualität, Qualitätsprüfung und Verbandskooperationen investiert, gibt damit auf, in der Tabelle der monatlich registrierten Nutzer ``oben zu stehen''. Aber er baut etwas auf, das in drei Jahren noch trägt.
+
+\begin{merkbox}[Verteidigungsfähigkeit als KPI]
+Eine reife Plattform misst nicht nur Wachstum, sondern \emph{Verteidigungsfähigkeit}. Sinnvolle Indikatoren: Wechselrate (Anbieter \& Nachfrager pro Quartal), Wiederkaufrate, Anteil exklusiver Partnerschaften, Datentiefe je aktivem Anbieter, Markenbekanntheit in der Zielgruppe. Wenn diese Werte nicht systematisch erfasst werden, fehlt der Plattform die zweite Steuerungsebene.
+\end{merkbox}
+
+% --- 8. ZUSAMMENSPIEL: SKALIERUNG x MONETARISIERUNG x GOVERNANCE ---------
+\section{Zusammenspiel: Skalierung, Monetarisierung, Governance}
+
+Die drei Themen dieses Tages sind nicht voneinander zu trennen. Eine saubere Skalierungsentscheidung ohne Monetarisierungsperspektive ist unverantwortlich, eine Monetarisierungsstrategie ohne Governance ist instabil, und eine Governance-Architektur ohne Skalierungspfad ist Bürokratie. Erst das Zusammenspiel ergibt eine tragfähige Plattform.
+
+\subsection{Drei typische Fehlmuster}
+
+\begin{enumerate}
+  \item \textbf{Wachstum ohne Governance.} Plattform expandiert schnell, Qualitätsstreuung steigt, negative Bewertungen häufen sich, Vertrauen sinkt -- und plötzlich kippt der Netzwerkeffekt. Typisch in der Spätphase überfinanzierter B2C-Marktplätze.
+  \item \textbf{Monetarisierung ohne Wert.} Plattform erhöht Provisionen, bevor beide Seiten den Mehrwert dauerhaft erlebt haben -- Anbieter wandern ab, Nachfrager bleiben aus.
+  \item \textbf{Governance ohne Skalierung.} Plattform baut elaborierte Regelwerke und Eskalationsprozesse, aber die Reichweite stagniert. Aus dem Marktraum wird ein zertifiziertes Nischenprodukt ohne Hebelwirkung.
+\end{enumerate}
+
+\subsection{Vier Synthesen}
+
+\begin{enumerate}
+  \item \textbf{Skalierung respektiert Governance.} Jede neue Region, jeder neue Anbietertyp wird gegen die Governance-Standards geprüft, nicht erst nach dem Onboarding.
+  \item \textbf{Monetarisierung folgt dem Netzwerkeffekt.} Gebühren steigen erst, wenn die Plattform den Wert reproduzierbar liefert -- nicht früher.
+  \item \textbf{Governance schützt die Marge.} Gute Regeln verhindern Trittbrettfahrer, Preisdumping und Reputationsverlust -- alles drei sind Margen-Killer.
+  \item \textbf{Wettbewerbsvorteile sind die Konsequenz, nicht der Startpunkt.} Wer Skalierung, Monetarisierung und Governance konsistent fährt, baut Wettbewerbsvorteile fast als Nebenprodukt auf.
+\end{enumerate}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{S-M-G} -- ``Skalierung, Monetarisierung, Governance''.]
+Drei Buchstaben, drei Hebel, ein Geschäftsmodell:\\[2pt]
+\textbf{S}kalierung -- wie wir wachsen.\\
+\textbf{M}onetarisierung -- wie wir verdienen.\\
+\textbf{G}overnance -- wie wir steuern.\\[2pt]
+\emph{Wer nur einen oder zwei der drei Hebel zieht, hat kein Plattform-Geschäftsmodell -- nur ein Wachstumsexperiment.}
+\end{eselsbox}
+
+% --- 9. FALLSTUDIE-LEITFADEN ---------------------------------------------
+\section{Fallstudie-Leitfaden: HealthCare Connect}
+
+In den Unterrichtseinheiten 4--5 arbeiten Sie an der Fallstudie ``HealthCare Connect'' -- einer Plattform, die Pflegeeinrichtungen und Pflegefachkräfte verbindet. Die folgende Leitstruktur fasst zusammen, in welcher Logik Sie die Fragen behandeln sollten. Die vollständige Aufgabenstellung mit Rahmenbedingungen finden Sie im Aufgabenheft (vgl.\ Modul 2, UE 4).
+
+\subsection{Analytischer Aufbau}
+
+\begin{enumerate}
+  \item \textbf{Skalierungsfähigkeit prüfen.} Welche Voraussetzungen sind erfüllt, welche nicht? Bewerten Sie die sechs Voraussetzungen aus Sektion 2.4 für die konkrete Ausgangslage.
+  \item \textbf{Engpass identifizieren.} Welche Seite ist heute knapp -- Pflegekräfte oder Einrichtungen? Welche Dimension treibt den größten Engpass (Sektion 2)?
+  \item \textbf{Skalierungsstrategie wählen.} Welche der vier Strategien (Sektion 4) passt zur Situation? Eine Strategie kombinieren ist erlaubt -- aber begründet.
+  \item \textbf{Monetarisierungsentscheidung.} Welches Modell oder welche Kombination passt zur Plattformphase und zum Wert auf beiden Seiten?
+  \item \textbf{Governance-Architektur.} Welche der sieben Governance-Dimensionen (Sektion 6) ist heute am dringendsten -- Zugang, Qualität, Sichtbarkeit?
+  \item \textbf{Budget aufteilen.} Wie verteilen Sie das Budget so, dass Skalierung, Monetarisierung und Governance kohärent finanziert werden?
+  \item \textbf{Entscheidung unter Unsicherheit.} Welche Annahme ist heute nicht belegbar -- und welche Konsequenz hätte es, wenn sie falsch wäre? Wie reduzieren Sie das Risiko?
+\end{enumerate}
+
+\subsection{Typische Diskussionspunkte}
+
+\begin{itemize}
+  \item Schnelle Expansion in fünf Regionen vs.\ qualitätsorientierte Skalierung in zwei Regionen: was wäre verantwortbar, was wäre nicht?
+  \item Premium-Sichtbarkeit für einzelne Anbieter -- sinnvoll oder vertrauenskritisch?
+  \item Welches Monetarisierungsmodell ist phasenadäquat -- und welches sollte trotz Umsatzpotenzial ausgeschlossen werden?
+\end{itemize}
+
+\subsection{Erwartete Empfehlungsrichtung (zur Selbstkalibrierung)}
+
+In der typischen Musterlösung wird eine Kombination aus \emph{schrittweiser Expansion} (zwei statt fünf Regionen) und \emph{Partnernetzwerk} (Pflegeverbände, Bildungsträger) gewählt. Monetarisierung: Provision pro erfolgreicher Vermittlung plus Servicepakete mit garantierter Reaktionszeit. Governance-Schwerpunkt: nur geprüfte Pflegefachkräfte, Reaktionszeiten beeinflussen Sichtbarkeit, transparente Eskalationsprozesse. \emph{Bewusste Entscheidung gegen} Premium-Platzierung, da sie Fairness und Vertrauen im Pflegeumfeld gefährden würde.
+
+\begin{merkbox}[Argumentationsmuster für die Fallstudie]
+Eine gute Empfehlung trennt drei Sätze klar:
+\begin{enumerate}
+  \item \textbf{Was wir tun.} Konkret, mit Zahlen, Phasen und Verantwortlichkeiten.
+  \item \textbf{Worauf wir bewusst verzichten.} Mindestens eine Wachstumsoption, die wir aus Qualitäts- oder Vertrauensgründen \emph{nicht} nehmen.
+  \item \textbf{Welche Annahme wir prüfen.} Mindestens eine Annahme mit klarem Test, einer KPI und einem Reagenz-Punkt, an dem wir die Entscheidung revidieren.
+\end{enumerate}
+\end{merkbox}
+
+% --- 10. MANAGEMENT-PERSPEKTIVE ------------------------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Auf Wissens- und Anwendungsebene sieht eine gute Skalierungsentscheidung wie eine sauber bewertete Tabelle aus. Auf Managementebene geht es um etwas anderes: um Zielkonflikte, die nicht aufgelöst, sondern \emph{entschieden} werden müssen. \quelle{vgl.\ Cusumano et al., 2019; Van Alstyne et al., 2016}
+
+\subsection{Vier zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Wachstum vs.\ Vertrauen.} Schnelle Skalierung erhöht Qualitätsstreuung. Wer in vertrauenssensiblen Märkten zu schnell wächst, beschädigt das eigentliche Asset.
+  \item \textbf{Reichweite vs.\ Profitabilität.} Höhere Reichweite kostet typischerweise Marge -- entweder über Subventionierung, Werbung oder Provisionsverzicht. Wann lohnt sich das, wann nicht?
+  \item \textbf{Umsatz vs.\ Ökosystemstabilität.} Höhere Provisionen oder Premium-Modelle steigern Umsatz, beschädigen aber Anbieterzufriedenheit. Es gibt einen Punkt, ab dem Anbieter abwandern -- und ihn zu finden ist eine Managementfrage, keine Excel-Frage.
+  \item \textbf{Kontrolle vs.\ Skalierungsgeschwindigkeit.} Mehr Governance senkt das Risiko, bremst aber Onboarding und Wachstum. Weniger Governance beschleunigt -- bis das Modell kippt.
+\end{enumerate}
+
+\subsection{Plattform-Architektur als Senior-Level-Verantwortung}
+
+Plattformskalierung ist \emph{keine} Marketingentscheidung und keine Vertriebsentscheidung. Es ist eine \fachbegriff{Architekturentscheidung}: Welche Wachstumsdimension öffnen wir, welche schließen wir bewusst? Welche Monetarisierungsentscheidung verändert das Verhalten der Plattformteilnehmer auf Jahre? Welche Governance-Regel schützt unser eigentliches Geschäftsmodell -- und welche schadet ihm? Diese Fragen liegen auf der Ebene eines Chief Platform Officers, Chief Revenue Officers oder Geschäftsführers.
+
+\subsection{Entscheidungslogik unter Unsicherheit}
+
+\begin{itemize}
+  \item \textbf{Verzicht bewusst formulieren.} Eine Senior-Entscheidung enthält immer \emph{eine} bewusste Verzichtsentscheidung -- nicht alle Wachstumsoptionen werden gezogen.
+  \item \textbf{Annahmen sichtbar machen.} Welche Annahme ist zentral, aber unsicher? Wie würden wir merken, dass sie nicht trägt?
+  \item \textbf{Robust statt optimal entscheiden.} Eine Entscheidung, die bei unerwarteter Marktentwicklung noch trägt, ist wertvoller als eine optimale Entscheidung, die nur bei optimistischen Annahmen funktioniert.
+  \item \textbf{Reagenz-Punkte definieren.} Wann revidieren wir? Welche KPI würde uns signalisieren, dass eine Annahme falsch ist?
+\end{itemize}
+
+\subsection{Senior-Level-Denken}
+
+Aus den Coaching-Themen (UE 4) und der Feedbackrunde (UE 7) ergibt sich ein einfacher Test: Eine senior-level-fähige Entscheidung lässt sich in einem Satz erklären, der die Verzichtsentscheidung enthält, die Annahme nennt und die Steuerungs-KPI benennt. Zum Beispiel: ``Wir expandieren in zwei statt fünf Regionen, weil die Qualitätsstreuung in fünf Regionen unser Plattform-Vertrauen gefährden würde -- wir prüfen monatlich die Vermittlungsquote als Frühwarnsignal.''
+
+\begin{eselsbox}[Eselsbrücke: \akzent{W-R-U-K}]
+Vier Zielkonflikte, die auf Senior-Level entschieden werden -- nicht delegiert:\\[2pt]
+\textbf{W}achstum vs.\ Vertrauen.\\
+\textbf{R}eichweite vs.\ Profitabilität.\\
+\textbf{U}msatz vs.\ Ökosystemstabilität.\\
+\textbf{K}ontrolle vs.\ Geschwindigkeit.\\[2pt]
+\emph{``W-R-U-K'' -- vier Buchstaben, die kein Senior-Manager an die Betriebsabteilung delegieren darf.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 4]
+Skalierung ist nicht Wachstum, Monetarisierung ist nicht Rabattlogik, und Governance ist kein Verwaltungsthema. Wer eine Plattform betreibt, betreibt einen \textbf{regulierten Marktraum} -- mit Wachstumshebeln, Erlöslogik und Spielregeln. Die Senior-Aufgabe besteht darin, alle drei konsistent zu führen, sodass aus Größe Tragfähigkeit wird, aus Umsatz Marge, und aus Reichweite Wettbewerbsvorteil. \emph{Wer eines der drei vernachlässigt, baut etwas, das groß wird -- aber nicht trägt.}
+\end{merkbox}
+
+% --- 11. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Boudreau, K.\,J., \& Hagiu, A. (2009).] Platform rules: Multi-sided platforms as regulators. In A.\ Gawer (Hrsg.), \emph{Platforms, markets and innovation} (S.\ 163--191). Edward Elgar.
+  \item[Choudary, S.\,P. (2015).] \emph{Platform scale: How an emerging business model helps startups build large empires with minimum investment}. Platform Thinking Labs.
+  \item[Cusumano, M.\,A., Gawer, A., \& Yoffie, D.\,B. (2019).] \emph{The business of platforms: Strategy in the age of digital competition, innovation, and power}. HarperBusiness.
+  \item[Eisenmann, T., Parker, G., \& Van Alstyne, M.\,W. (2006).] Strategies for two-sided markets. \emph{Harvard Business Review, 84}(10), 92--101.
+  \item[Gassmann, O., Frankenberger, K., \& Csik, M. (2017).] \emph{Geschäftsmodelle entwickeln: 55 innovative Konzepte mit dem St.\ Galler Business Model Navigator} (2.\ Aufl.). Hanser.
+  \item[Hagiu, A., \& Wright, J. (2015).] Multi-sided platforms. \emph{International Journal of Industrial Organization, 43}, 162--174. \href{https://doi.org/10.1016/j.ijindorg.2015.03.003}{https://doi.org/10.1016/j.ijindorg.2015.03.003}
+  \item[Parker, G.\,G., Van Alstyne, M.\,W., \& Choudary, S.\,P. (2016).] \emph{Platform revolution: How networked markets are transforming the economy -- and how to make them work for you}. W.\,W.\ Norton.
+  \item[Tiwana, A. (2014).] \emph{Platform ecosystems: Aligning architecture, governance, and strategy}. Morgan Kaufmann.
+  \item[Van Alstyne, M.\,W., Parker, G.\,G., \& Choudary, S.\,P. (2016).] Pipelines, platforms, and the new rules of strategy. \emph{Harvard Business Review, 94}(4), 54--62.
+\end{description}
+
+% --- 12. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Abonnement] Monetarisierungsmodell mit wiederkehrender, fixer Gebühr -- meist für Anbieter, seltener für Nachfrager.
+  \item[Architekturentscheidung] Plattformentscheidung, die jahrelang wirkt: Welche Kundenschnittstellen kontrollieren wir, welche Daten halten wir, nach welchen Regeln steuern wir das Ökosystem?
+  \item[Blitz-Skalierung] Schnelle, breite Expansion einer Plattform, oft begleitet von Subventionierung. Hohes Risiko, hoher Erfolgsdruck.
+  \item[Datenservices] Monetarisierung von aggregierten Plattformdaten -- regulatorisch und ethisch sensibel, aber hoher Margenhebel.
+  \item[Freemium] Modell mit kostenloser Grundnutzung und kostenpflichtigen Zusatzfunktionen. Senkt Einstiegshürde, fordert klare Abgrenzung von Premium-Wert.
+  \item[Governance] Regelwerk einer Plattform für Zugang, Qualität, Sichtbarkeit, Daten, Verhalten, Sanktionen und Konfliktlösung.
+  \item[Kritische Masse] Punkt, ab dem indirekte Netzwerkeffekte greifen und die Plattform sich selbst trägt.
+  \item[Listing-Gebühr] Einmalige oder periodische Gebühr für die Sichtbarkeit eines Anbieters / Produkts auf der Plattform.
+  \item[Monetarisierung] Logik, wie eine Plattform Erlöse erwirtschaftet: Provision, Abonnement, Listing, Premium, Werbung, Datenservices oder Servicepakete.
+  \item[Negativer Netzwerkeffekt] Spirale, in der zusätzliches Wachstum (z.\,B.\ mehr Anbieter minderer Qualität) den Wert der Plattform für beide Seiten reduziert.
+  \item[Netzwerkeffekt] Wertzuwachs einer Plattform durch zusätzliche Nutzer; positiv oder negativ, direkt oder indirekt.
+  \item[Plattformphase] Aufbau-, Wachstums- oder Reifephase einer Plattform; bestimmt, welche Monetarisierung und welche Skalierungsstrategie angemessen sind.
+  \item[Premium-Platzierung] Bezahlte Sichtbarkeit auf einer Plattform; erlöslich, aber vertrauenskritisch.
+  \item[Profitable Skalierung] Skalierung, die zusätzlich Deckungsbeitrag erzeugt und einen verteidigungsfähigen Vorteil aufbaut.
+  \item[Provision] Erfolgsabhängige Gebühr pro vermittelter Transaktion; klassisches Marktplatz-Modell.
+  \item[Sanktion] Reaktion einer Plattform auf einen Regelverstoß, abgestuft von Warnung über Sichtbarkeitsverlust bis zum Ausschluss.
+  \item[Servicepaket] Mehrwertdienst zusätzlich zur Vermittlung (Garantie, Reaktionszeit, Schulung); stärkt Differenzierung.
+  \item[Skalierung] Fähigkeit einer Plattform, mit zusätzlichen Nutzern oder Regionen nicht überproportional Aufwand, Risiko oder Komplexität einzukaufen.
+  \item[Subventionierung] Gezielte finanzielle oder funktionale Bevorteilung einer Marktseite, bis Netzwerkeffekte greifen.
+  \item[Verteidigungsfähigkeit] Eigenschaft einer Plattform, Wettbewerbsdruck dauerhaft standzuhalten -- über Vertrauen, Daten, Wechselkosten, Reputation und Partnerzugänge.
+  \item[Wachstum] Quantitative Größenveränderung (mehr Nutzer, mehr Umsatz). Sagt noch nichts über Tragfähigkeit aus.
+  \item[Wechselkosten] Aufwand, den ein Plattformteilnehmer hätte, um auf eine konkurrierende Plattform zu wechseln.
+  \item[Wettbewerbsvorteil (nachhaltig)] Vorteil, der über Jahre verteidigungsfähig bleibt: Vertrauen, Datenvorsprung, Netzwerkeffekte, Wechselkosten, Ökosystem, Marke, Prozessintegration, Partnerzugänge.
+  \item[Zielkonflikt] Spannungsfeld, das nicht ``gelöst'', sondern bewusst entschieden wird: Wachstum vs.\ Vertrauen, Reichweite vs.\ Profitabilität, Umsatz vs.\ Ökosystem, Kontrolle vs.\ Geschwindigkeit.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 4 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

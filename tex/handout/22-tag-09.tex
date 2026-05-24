@@ -1,0 +1,672 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 9 - Lehrskript
+% Performance-Marketing im Vertrieb - Anzeigen, Conversion & Landing Pages
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 9}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Performance-Marketing im Vertrieb}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 5 \textperiodcentered{} TAG 9 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 10.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Performance-\\Marketing\\im Vertrieb\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Anzeigen, Landing Pages \& Conversion --\\messbar planen, qualifiziert wachsen.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 9 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Performance-Marketing wird in vielen Organisationen als ``Werbung mit Tracking'' verstanden. Das verkürzt es. Performance-Marketing ist eine \emph{Vertriebsdisziplin}: datenbasiert, hypothesengetrieben, am Vertriebsergebnis ausgerichtet. Heute lernen Sie, wie Anzeigen, Landing Pages und Conversion-Optimierung als zusammenhängendes System zur Leadgenerierung beitragen -- und welche Entscheidungen auf Senior-Level fallen.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundlagen des Performance-Marketings im Vertrieb verstehen.
+  \item Unterschied zwischen Reichweite, Traffic, Leads, Conversion und Umsatz kennen.
+  \item Zielgruppen und Buyer Personas für Kampagnen strukturieren.
+  \item Grundlagen strategischer Anzeigenplanung verstehen.
+  \item Landing Pages als Conversion-Instrument einordnen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Kampagnenziele aus Vertriebszielen ableiten.
+  \item Zielgruppen und Botschaften für Anzeigen entwickeln.
+  \item Anzeigenkanäle nach Zielgruppenpassung, Kosten, Datenwirkung und Conversion-Potenzial bewerten.
+  \item Landing Pages hinsichtlich Nutzerführung, Vertrauen und Abschlussorientierung analysieren.
+  \item Conversion-Hürden erkennen und Optimierungsmaßnahmen ableiten.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Performance-Marketing als Investitions- und Steuerungsentscheidung bewerten.
+  \item Zielkonflikte zwischen Leadmenge, Leadqualität, Kosten, Geschwindigkeit und Vertriebsressourcen managen.
+  \item Entscheidungen unter Unsicherheit, Budgetdruck und Zeitdruck treffen.
+  \item Verantwortung für eine skalierbare Performance-Marketing-Architektur übernehmen.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Performance-Marketing endet nicht beim Klick. Es endet erst beim \emph{Vertriebsergebnis}: qualifizierter Lead, Demo, Angebot, Abschluss, Deckungsbeitrag. Wer nur bis ``Cost per Click'' misst, betreibt Werbung. Wer bis Deckungsbeitrag und CLV misst, betreibt Vertriebssteuerung.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Was Performance-Marketing wirklich ist}
+
+\emph{Performance-Marketing} ist eine datenbasierte, ergebnisorientierte Marketingdisziplin, in der jede Maßnahme messbar an einem konkreten Vertriebsziel ausgerichtet ist. Anzeigen, Landing Pages, Tracking, Conversion-Optimierung und Funnel-Analyse bilden ein zusammenhängendes System. \quelle{Chaffey \& Ellis-Chadwick, 2022; Ryan, 2020}
+
+\subsection{Drei Verschiebungen gegenüber klassischem Marketing}
+
+\begin{enumerate}
+  \item \fachbegriff{Vom Branding zum Vertriebsergebnis.} Klassisches Marketing baut Marke; Performance-Marketing erzeugt qualifizierte Nachfrage und nachweisbar Pipeline.
+  \item \fachbegriff{Vom Streuverlust zur Zielgruppensteuerung.} Anzeigen lassen sich auf Branche, Rolle, Größe, Verhalten zielgenau steuern -- besonders im B2B über LinkedIn.
+  \item \fachbegriff{Von Aktivität zu Hypothese.} Eine Kampagne ist eine Hypothese, die getestet wird. Was nicht funktioniert, wird gestoppt; was funktioniert, wird skaliert.
+\end{enumerate}
+
+\subsection{Die typische Performance-Falle}
+
+Die häufigste Falle: Performance-Marketing wird isoliert von Vertriebskapazität und Landing Page geplant. ``Wir schalten Anzeigen'' -- und die Leads landen in einem Vertriebsteam, das sie nicht bearbeiten kann, oder auf einer Landing Page, die nicht konvertiert. \quelle{Ellis \& Brown, 2017}
+
+\subsection{Was Tag~9 leistet}
+
+Wir bauen das System auf: Begriffsklärung (Sektion 2), Funnel-Logik (Sektion 3), Zielgruppen und Personas (Sektion 4), Anzeigenkanäle (Sektion 5), Botschaftenlogik (Sektion 6), Landing Pages (Sektion 7), Conversion-Optimierung (Sektion 8) und Fallstudie ``DataSecure Solutions'' (Sektion 9). Sektion 10 behandelt die Management-Perspektive.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{A-L-C-V} -- vier Phasen im Performance-Funnel]
+Vier Buchstaben, vier Phasen, ein Funnel:\\[2pt]
+\textbf{A}nzeige -- die Aufmerksamkeit ziehen.\\
+\textbf{L}anding Page -- den Klick zum Lead wandeln.\\
+\textbf{C}onversion / Leadqualifizierung -- Vertrieb übernimmt.\\
+\textbf{V}ertriebsergebnis -- Demo, Angebot, Abschluss.\\[2pt]
+\emph{Wenn eine der vier Stufen wackelt, verpufft das ganze Budget.}
+\end{eselsbox}
+
+% --- 2. BEGRIFFE -- REICHWEITE BIS UMSATZ --------------------------------
+\section{Vom Klick zum Umsatz}
+
+Eine zentrale Disziplin im Performance-Marketing ist saubere Begriffsabgrenzung. Wer die Größen nicht trennt, optimiert die falschen Schritte.
+
+\subsection{Sechs zentrale Größen}
+
+\begin{enumerate}
+  \item \fachbegriff{Impressionen.} Wie oft wurde unsere Anzeige angezeigt?
+  \item \fachbegriff{Klicks.} Wie viele Personen haben darauf reagiert? (Klickrate / CTR = Klicks / Impressionen.)
+  \item \fachbegriff{Traffic.} Wie viele Personen sind auf der Landing Page gelandet?
+  \item \fachbegriff{Leads.} Wie viele haben das Conversion-Ereignis ausgelöst (Formularabsendung, Demo-Anfrage, Download)?
+  \item \fachbegriff{Qualifizierte Leads.} Wie viele der Leads passen zur Zielgruppe und zeigen echte Kaufabsicht? (Marketing-Qualified / Sales-Qualified Leads.)
+  \item \fachbegriff{Umsatz / Deckungsbeitrag.} Wie viel Geschäft entsteht aus den qualifizierten Leads?
+\end{enumerate}
+
+\subsection{Zentrale KPIs entlang des Funnels}
+
+\begin{itemize}
+  \item \fachbegriff{Klickrate (CTR).} Klicks / Impressionen.
+  \item \fachbegriff{Kosten pro Klick (CPC).} Werbekosten / Klicks.
+  \item \fachbegriff{Conversion Rate.} Leads / Traffic (oder Lead / Klick).
+  \item \fachbegriff{Kosten pro Lead (CPL).} Werbekosten / Leads.
+  \item \fachbegriff{Kosten pro qualifiziertem Lead.} Werbekosten / qualifizierte Leads.
+  \item \fachbegriff{Customer Acquisition Cost (CAC).} Werbe- + Vertriebskosten / gewonnene Kunden.
+  \item \fachbegriff{Return on Ad Spend (ROAS).} Umsatz aus Werbung / Werbeausgaben.
+  \item \fachbegriff{Customer Lifetime Value (CLV).} Erwarteter Wert eines Kunden über die Beziehung.
+\end{itemize}
+
+\subsection{Welche Größe für welches Reporting?}
+
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+\textbf{Ebene} & \textbf{Wichtige KPIs} & \textbf{Entscheidungsfokus} \\
+\midrule
+Operativ (Kampagne) & CTR, CPC, Conversion Rate & Anzeigen, Landing Page optimieren \\
+Taktisch (Kanal) & CPL, qualifizierte Leads, Demo-Rate & Budget umverteilen, Kanal stoppen oder skalieren \\
+Strategisch (Vertrieb) & CAC, CLV, ROAS, Deckungsbeitrag & Investitions- und Kanal-Mix-Entscheidung \\
+\bottomrule
+\end{tabularx}
+
+\begin{merkbox}[Funnel-Faustregel]
+Optimieren Sie nie isoliert eine Funnel-Stufe. Eine erhöhte Klickrate ist wertlos, wenn die Conversion sinkt. Eine niedrige Conversion ist nicht zwingend Schuld der Landing Page -- sie kann an falsch ausgesteuerten Anzeigen liegen. Erst das gemeinsame Bild macht Sinn.
+\end{merkbox}
+
+% --- 3. FUNNEL-LOGIK -----------------------------------------------------
+\section{Funnel-Logik im Vertrieb}
+
+Ein \fachbegriff{Funnel} ist die strukturierte Abfolge der Schritte vom ersten Kontakt bis zum Abschluss. Im B2B-Performance-Marketing umfasst er typischerweise acht Stufen. \quelle{Chaffey \& Ellis-Chadwick, 2022; Ellis \& Brown, 2017}
+
+\subsection{Acht Stufen im B2B-Performance-Funnel}
+
+\begin{enumerate}
+  \item \textbf{Anzeige} -- Impressionen, Targeting, Botschaft.
+  \item \textbf{Klick} -- Person reagiert auf Anzeige.
+  \item \textbf{Landing Page} -- gezielte Seite, die das Anzeigeversprechen einlöst.
+  \item \textbf{Conversion} -- Formularabsendung, Download, Demo-Anfrage.
+  \item \textbf{Leadqualifizierung} -- Marketing prüft Score / Vertrieb prüft Eignung.
+  \item \textbf{Vertriebskontakt} -- Erstgespräch, Bedarfsanalyse.
+  \item \textbf{Angebot} -- konkretes Angebot, oft individuell.
+  \item \textbf{Abschluss} -- Vertrag, Kunde gewonnen.
+\end{enumerate}
+
+\subsection{Wo entstehen die größten Verluste?}
+
+Empirisch ist gut belegt, dass die größten Verluste meist an den \emph{Übergängen} entstehen: Klick \textrightarrow{} Conversion (schlechte Landing Page) und Lead \textrightarrow{} Vertriebskontakt (zu langsame Reaktion, kein Lead Scoring). Wer hier 20--30\,\% verbessert, vervielfacht effektiv das Marketingbudget. \quelle{Ash et al., 2012}
+
+\subsection{Funnel als gemeinsame Sicht}
+
+Ein zentrales Senior-Prinzip: Marketing, Vertrieb und Controlling sollten den \emph{gleichen Funnel} sehen. Wenn Marketing CTR und CPL berichtet, Vertrieb Abschlüsse und Pipeline -- und beide nicht miteinander reden -- bleibt jede Optimierung Stückwerk. Erst ein gemeinsames Reporting (mit Lead-, Demo-, Angebots-, Abschlussrate) erzeugt Steuerungsfähigkeit.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{A-K-L-C-Q-V-A-A}]
+Acht Stufen, die jede B2B-Performance-Kampagne durchläuft:\\[2pt]
+\textbf{A}nzeige -- \textbf{K}lick -- \textbf{L}anding Page -- \textbf{C}onversion -- \textbf{Q}ualifizierung -- \textbf{V}ertriebskontakt -- \textbf{A}ngebot -- \textbf{A}bschluss.\\[2pt]
+\emph{Wer als Marketing-Verantwortlicher nur bis ``Q'' denkt und der Vertrieb erst ab ``V'' anfängt, hat in der Mitte den Funnel auf zwei Hälften zerschnitten -- die Leads fallen heraus.}
+\end{eselsbox}
+
+% --- 4. ZIELGRUPPEN UND BUYER PERSONAS ---------------------------------
+\section{Zielgruppen und Buyer Personas für Kampagnen}
+
+Eine Performance-Kampagne ist nur so gut wie ihre Zielgruppensteuerung. Wer ``allen'' zeigen will, zahlt für irrelevante Klicks und verbrennt Vertriebskapazität. \quelle{Kotler et al., 2017; Homburg, 2020}
+
+\subsection{Sechs Dimensionen der Zielgruppenanalyse}
+
+\begin{enumerate}
+  \item \fachbegriff{Bedarf.} Welches konkrete Problem hat die Zielgruppe?
+  \item \fachbegriff{Rolle.} Welche Position im Unternehmen (IT-Leiter, Geschäftsführung, Datenschutzbeauftragter)?
+  \item \fachbegriff{Kaufmotiv.} Welche Motive treiben (Risikoreduktion, Compliance, Wirtschaftlichkeit, Geschwindigkeit)?
+  \item \fachbegriff{Informationsstand.} Ist die Person Anfänger im Thema oder erfahrener Entscheider?
+  \item \fachbegriff{Entscheidungsbefugnis.} Entscheidet sie alleine, mit anderen, gar nicht?
+  \item \fachbegriff{Schmerzpunkte.} Was nervt sie konkret im Alltag -- und welches Versprechen würde sie hören wollen?
+\end{enumerate}
+
+\subsection{Buying Center im Performance-Marketing}
+
+Im B2B entscheiden mehrere Rollen gemeinsam. Eine reife Kampagnenarchitektur adressiert mehrere Rollen -- mit unterschiedlichen Botschaften, aber konsistentem Versprechen.
+
+Für ein Cybersecurity-Angebot:
+
+\begin{itemize}
+  \item \textbf{IT-Leiter.} Fachliche Sicherheit, technische Passung, Integrationsfähigkeit.
+  \item \textbf{Geschäftsführer.} Risiko, Kosten, Haftung, Geschäftskontinuität.
+  \item \textbf{Datenschutzbeauftragter.} Nachweise, Prozesse, Auditfähigkeit.
+  \item \textbf{Compliance-Verantwortlicher.} Regulatorische Standards, Dokumentation.
+\end{itemize}
+
+\subsection{Buyer Personas konkret}
+
+Eine Buyer Persona verdichtet eine Zielgruppe in einen archetypischen ``Kunden im Kopf'':
+
+\begin{itemize}
+  \item Name, Rolle, Branche, Unternehmensgröße.
+  \item Ziele und Erfolgsmaßstäbe in der Rolle.
+  \item Typische Tagesabläufe und Belastungen.
+  \item Informationsquellen (Fachpresse, LinkedIn, Konferenzen).
+  \item Häufige Einwände gegen Angebote in unserer Kategorie.
+  \item Sprachlich passende Begriffe (technisch vs.\ management-orientiert).
+\end{itemize}
+
+Drei bis fünf Personas reichen meist -- mehr sind im Mittelstand selten ehrlich pflegbar.
+
+% --- 5. ANZEIGENKANAELE -------------------------------------------------
+\section{Anzeigenkanäle und ihre Logik}
+
+Sechs Anzeigenkanäle dominieren das B2B-Performance-Marketing 2026. Jeder hat eine eigene Logik, eigene Stärken und eigene Fallen.
+
+\subsection{Sechs Kanäle im Vergleich}
+
+\begin{enumerate}
+  \item \fachbegriff{Google Ads (Search).} Reagiert auf konkrete Suchanfragen -- ideal bei kaufnaher Intention. Hoher Wettbewerb auf typischen B2B-Begriffen, daher hoher CPC. Sehr gut für ``akute Nachfrage''.
+  \item \fachbegriff{LinkedIn Ads.} Targeting nach Branche, Größe, Rolle, Seniorität. Teurer CPC, aber häufig die höchste Leadqualität im B2B. Stark bei ``erklärungsbedürftig'' und ``Buying Center''.
+  \item \fachbegriff{Meta Ads (Facebook / Instagram).} B2C-stark, B2B-mäßig -- ausgenommen Produkte mit konsumnaher Anwendung (z.\,B.\ kleine Mittelständler, Selbstständige).
+  \item \fachbegriff{Plattformanzeigen.} Anzeigen auf Marktplätzen / Branchenportalen -- nah am Kaufkontext, oft niedrige Streuverluste.
+  \item \fachbegriff{Retargeting.} Anzeigen für Personen, die schon auf der Website waren. Hohe Conversion, niedrige Kosten -- aber begrenzte Zielgruppe. \quelle{Lambrecht \& Tucker, 2013}
+  \item \fachbegriff{Display-Kampagnen.} Breite Reichweite mit Banner-Anzeigen. Hoher Streuverlust; für B2B-Mittelstand selten effizient.
+\end{enumerate}
+
+\subsection{Kanalbewertung im B2B}
+
+\begin{tabularx}{\linewidth}{@{}lXXXX@{}}
+\toprule
+\textbf{Kanal} & \textbf{Zielgruppenpassung} & \textbf{Kosten} & \textbf{Leadqualität} & \textbf{Geschwindigkeit} \\
+\midrule
+Google Ads (Search) & hoch (bei aktiver Suche) & mittel--hoch & mittel--hoch & sehr schnell \\
+LinkedIn Ads & sehr hoch (Rollen-Targeting) & hoch & hoch & mittel \\
+Plattformanzeigen & hoch (im Branchenkontext) & mittel & hoch & schnell \\
+Retargeting & sehr hoch (Vorinteresse) & niedrig & hoch & sehr schnell \\
+Display & niedrig (Streuung) & niedrig pro Klick & niedrig & schnell \\
+Meta Ads & B2C-orientiert & niedrig--mittel & niedrig--mittel & schnell \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Wann ein Kanal \emph{nicht} sinnvoll ist}
+
+\begin{itemize}
+  \item Display-Kampagnen bei sicherheits-/komplexitätsbedürftigen B2B-Angeboten -- Reichweite ohne Vertriebskapazität gebunden zu sehen, ist teure Sichtbarkeit.
+  \item Meta Ads bei reinen B2B-Enterprise-Produkten.
+  \item LinkedIn Ads bei klassischen B2C-Konsumgütern (zu teuer für die Conversion-Ökonomie).
+\end{itemize}
+
+\begin{merkbox}[Kanal-Faustregel]
+Wählen Sie Anzeigenkanäle aus zwei Achsen: \emph{wo} ist die Zielgruppe -- und \emph{in welcher Phase} der Customer Journey ist sie dort? Google Ads = akute Suche. LinkedIn Ads = Buying Center erreichen. Retargeting = Vorinteresse vertiefen. Wer eine Phase ohne passendem Kanal bespielt, verbrennt Budget.
+\end{merkbox}
+
+% --- 6. BOTSCHAFTEN -----------------------------------------------------
+\section{Botschaften entwickeln: Problem, Nutzen, Beweis, CTA}
+
+Eine wirksame Anzeige beantwortet vier Fragen -- in der Reihenfolge, in der sie der Leser stellt: \quelle{Ryan, 2020}
+
+\subsection{Vier Bausteine einer Botschaft}
+
+\begin{enumerate}
+  \item \fachbegriff{Problem.} Erkenne ich mich in dieser Beschreibung wieder? (``Cyberrisiken im Mittelstand reduzieren'')
+  \item \fachbegriff{Nutzenversprechen.} Was bekomme ich, wenn ich klicke? (``Sicherheitscheck in 30~Minuten, ohne IT-Aufwand'')
+  \item \fachbegriff{Beweis.} Warum sollte ich es glauben? (``150+ Mittelständler haben unseren Sicherheitscheck genutzt'' oder Zertifikate)
+  \item \fachbegriff{Call-to-Action.} Was soll ich konkret tun? (``Sicherheitscheck anfragen'')
+\end{enumerate}
+
+\subsection{Botschaftendifferenzierung pro Rolle}
+
+Pro Buyer Persona eine eigene Botschaft -- aber konsistent in Markenversprechen und Look. Beispiel Cybersecurity:
+
+\begin{itemize}
+  \item \textbf{IT-Leiter:} ``Lückenlos Schutz integrieren -- ohne Bestandssysteme zu sprengen.''
+  \item \textbf{Geschäftsführer:} ``Cyberrisiken planbar reduzieren -- mit klarer Investitionsentscheidung.''
+  \item \textbf{Datenschutzbeauftragter:} ``Auditfähigkeit nachweisbar sichern -- alle Prozesse dokumentiert.''
+\end{itemize}
+
+\subsection{Botschaft \emph{passt zu} Landing Page}
+
+Eine zentrale Disziplin: die Anzeige muss zur Landing Page \emph{passen}. Wer mit ``Sicherheitscheck in 30 Minuten'' wirbt, und der Klick führt auf eine generische Homepage mit Firmengeschichte, verliert den Lead. Das passt-Prinzip ist kein Detail, sondern der wichtigste einzelne Conversion-Hebel.
+
+% --- 7. LANDING PAGES ---------------------------------------------------
+\section{Landing Pages: das Conversion-Instrument}
+
+Eine \fachbegriff{Landing Page} ist eine speziell für eine Kampagne gestaltete Seite -- nicht die Homepage. Sie hat eine Aufgabe: die Conversion zu erreichen. Empirisch ist sie der wichtigste Hebel zwischen Klick und Lead. \quelle{Ash et al., 2012; Ryan, 2020}
+
+\subsection{Acht Elemente einer wirksamen Landing Page}
+
+\begin{enumerate}
+  \item \fachbegriff{Klare Überschrift.} Mit Problembezug, in maximal 8--10 Wörtern. (``Cyberrisiken im Mittelstand erkennen und gezielt reduzieren.'')
+  \item \fachbegriff{Kurzes Nutzenversprechen.} 1--2 Sätze, was die Person konkret bekommt.
+  \item \fachbegriff{Zielgruppenspezifische Abschnitte.} Pro Rolle ein eigener Absatz oder Block.
+  \item \fachbegriff{Vertrauenselemente.} Referenzen, Kundenstimmen, Zertifizierungen, Sicherheitsnachweise.
+  \item \fachbegriff{Kurze Prozessdarstellung.} Wie läuft der nächste Schritt? (``1. Anfrage senden. 2.\ Kostenloser 30-Min-Check. 3.\ Empfehlungsbericht.'')
+  \item \fachbegriff{Call-to-Action.} Klarer, sichtbar, mehrfach platziert. Wortwahl konkret (``Sicherheitscheck anfragen'', nicht ``Absenden'').
+  \item \fachbegriff{Formular.} Mit wenigen Pflichtfeldern (3--5), optionale Felder erlaubt.
+  \item \fachbegriff{FAQ.} Antworten auf typische Einwände (Aufwand, Kosten, Datenschutz, Ablauf).
+\end{enumerate}
+
+\subsection{Conversion-Hürden -- die typischen Bremser}
+
+\begin{itemize}
+  \item \textbf{Unklare Botschaft.} Was bekomme ich hier, in einem Satz? Wenn der Leser es nach 5 Sekunden nicht weiß, springt er ab.
+  \item \textbf{Zu viele Informationen.} Wer alles erklärt, lenkt vom Conversion-Ziel ab.
+  \item \textbf{Fehlendes Vertrauen.} Keine Referenzen, keine Logos, keine Zertifikate -- besonders im B2B kritisch.
+  \item \textbf{Lange Formulare.} Jedes zusätzliche Pflichtfeld senkt die Conversion messbar.
+  \item \textbf{Widersprüche zwischen Anzeige und Page.} Anzeige verspricht X, Page redet von Y.
+  \item \textbf{Langsame Ladezeit.} Bereits ab 3--4 Sekunden Verzögerung steigt die Absprungrate signifikant.
+  \item \textbf{Fehlende Mobile-Tauglichkeit.} Im B2B oft unterschätzt -- ein Großteil der Klicks kommt mobil.
+  \item \textbf{Fehlende Relevanz zur Anzeige.} ``Bait \& Switch'' bestraft die Plattform mit höherem CPC.
+\end{itemize}
+
+\subsection{A/B-Tests und iterative Optimierung}
+
+Landing Pages werden nicht ``richtig'' gebaut -- sie werden \emph{verbessert}. Ein \fachbegriff{A/B-Test} testet zwei Varianten parallel (z.\,B.\ Überschrift A vs.\ Überschrift B) und entscheidet datenbasiert. Eine reife Performance-Organisation hat einen kontinuierlichen Test-Rhythmus (z.\,B.\ ein Test pro Landing Page pro 4 Wochen).
+
+\begin{merkbox}[Landing-Page-Kernsatz]
+Die Landing Page ist kein Nebenprodukt der Werbung. Sie ist der wichtigste einzelne Conversion-Hebel. Wer 50.000\,EUR in Anzeigen investiert und 500\,EUR in die Landing Page, hat die Verhältnisse falsch gesetzt.
+\end{merkbox}
+
+% --- 8. CONVERSION-OPTIMIERUNG ------------------------------------------
+\section{Conversion-Optimierung als laufende Disziplin}
+
+\fachbegriff{Conversion-Rate-Optimization (CRO)} ist die systematische Verbesserung der Conversion entlang des Funnels. Sie unterscheidet sich von ``Marketing'' insofern, dass sie hypothesen- und testgetrieben arbeitet. \quelle{Ash et al., 2012; Ellis \& Brown, 2017}
+
+\subsection{Vier Bausteine einer CRO-Praxis}
+
+\begin{enumerate}
+  \item \textbf{Hypothese.} ``Wenn wir das Formular von 12 auf 5 Felder kürzen, steigt die Conversion um mindestens 30\,\%.''
+  \item \textbf{Test.} Variante A (aktuell) vs.\ Variante B (Hypothese) parallel über ausreichend Volumen.
+  \item \textbf{Auswertung.} Statistische Signifikanz prüfen -- nicht nach 50 Klicks entscheiden.
+  \item \textbf{Roll-out oder Verwerfen.} Bei Gewinn übernehmen, bei Verlust verwerfen -- in jedem Fall das gelernte dokumentieren.
+\end{enumerate}
+
+\subsection{Was zuerst optimieren?}
+
+Eine pragmatische Reihenfolge:
+
+\begin{enumerate}
+  \item \textbf{Botschaftspassung.} Anzeige und Landing Page stimmig.
+  \item \textbf{Vertrauen.} Referenzen, Zertifikate, Kundenstimmen sichtbar.
+  \item \textbf{Formular.} Pflichtfelder reduzieren, Optionale erlauben.
+  \item \textbf{Call-to-Action.} Wortwahl, Platzierung, Wiederholung.
+  \item \textbf{Vertrauenshemmer abbauen.} FAQ zu Datenschutz, Kosten, Aufwand.
+  \item \textbf{Geschwindigkeit / Mobile.} Technische Hürden beseitigen.
+\end{enumerate}
+
+\subsection{Conversion vs.\ Leadqualität}
+
+Eine erhöhte Conversion-Rate ist nicht automatisch gut. Wer das Formular auf zwei Felder kürzt, bekommt mehr Leads -- aber möglicherweise weniger qualifizierte. Daher ist die Steuerungsgröße meistens nicht ``Conversion'', sondern ``Conversion zu qualifiziertem Lead''.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{H-T-A-R}]
+Vier Buchstaben, vier Schritte einer Conversion-Optimierung:\\[2pt]
+\textbf{H}ypothese -- begründete Vermutung.\\
+\textbf{T}est -- A/B im echten Traffic.\\
+\textbf{A}uswertung -- mit statistischer Signifikanz.\\
+\textbf{R}oll-out oder Verwerfen -- klare Entscheidung.\\[2pt]
+\emph{Wer ohne Hypothese testet, sammelt Daten -- nicht Erkenntnisse.}
+\end{eselsbox}
+
+% --- 9. FALLSTUDIE-LEITFADEN ---------------------------------------------
+\section{Fallstudie-Leitfaden: DataSecure Solutions}
+
+In den Unterrichtseinheiten 4--5 bearbeiten Sie die Fallstudie ``DataSecure Solutions'' -- ein mittelständischer Anbieter von Cybersecurity-Lösungen für Unternehmen mit 100--1.000 Mitarbeitenden, 16\,Mio.\,EUR Umsatz, 8 Vertriebs- und 2 Marketing-Mitarbeitenden.
+
+\subsection{Analytischer Aufbau}
+
+\begin{enumerate}
+  \item \textbf{Zielgruppenanalyse.} IT-Leiter, Geschäftsführer, Datenschutzbeauftragte, Compliance -- welche Informationsbedürfnisse?
+  \item \textbf{Kampagnenstrategie für 6 Monate.} Welche Kanäle, welche Reihenfolge, welche Ziele?
+  \item \textbf{Kanalpriorisierung.} Google, LinkedIn, Webinar, Retargeting, Display -- welche kombiniert man, welche nicht?
+  \item \textbf{Landing Page Struktur.} Acht Elemente konkret ausgestalten für ein Demo- oder Sicherheitscheck-Angebot.
+  \item \textbf{Conversion-Ziele und KPIs.} Entlang des Funnels.
+  \item \textbf{Budgetverteilung.} 150.000\,EUR aufteilen auf Kanäle, Landing Page, Content, Tests.
+  \item \textbf{Entscheidung unter Unsicherheit.} Warum bestimmte Kanäle (z.\,B.\ Display) \emph{nicht}?
+\end{enumerate}
+
+\subsection{Erwartete Empfehlungsrichtung}
+
+In einer typischen Musterlösung wird priorisiert: LinkedIn Ads (Buying Center), Webinare (Vertrauensaufbau, Fachvermittlung), Google Ads (akute Suchen), Retargeting (für Vor-Interessierte). \emph{Bewusster Verzicht} auf breite Display-Kampagnen, weil sie hohen Budgetverbrauch ohne qualifizierte Leadqualität bedeuten. Die Entscheidung unter Unsicherheit: ``Trotz höherer Reichweite verzichten wir auf breite Display-Kampagnen, weil das Vertriebsteam nur 20 neue Leads pro Woche verarbeiten kann -- die Kombination aus LinkedIn, Google Ads und Webinaren liefert höhere Leadqualität und passt zur Vertriebskapazität.''
+
+\begin{merkbox}[Argumentationsmuster für die Fallstudie]
+Eine gute Performance-Marketing-Architektur enthält:
+\begin{enumerate}
+  \item \textbf{Zielgruppen + Buying Center} -- pro Rolle eine Botschaft.
+  \item \textbf{Kanalpriorisierung mit Aufgabe pro Kanal} -- nicht alle Kanäle gleichzeitig.
+  \item \textbf{Landing Page Struktur} -- konkret, mit allen acht Elementen.
+  \item \textbf{KPI-Architektur entlang des Funnels} -- nicht nur CPC.
+  \item \textbf{Bewusster Verzicht auf einen reichweitenstarken Kanal} -- mit Begründung.
+  \item \textbf{Annahme + Frühindikator} -- welche Hypothese, welche KPI signalisiert Korrektur?
+\end{enumerate}
+\end{merkbox}
+
+% --- 10. MANAGEMENT-PERSPEKTIVE ------------------------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Auf Wissens- und Anwendungsebene sieht Performance-Marketing wie eine sauber strukturierte Kampagnenplanung aus. Auf Managementebene geht es um Zielkonflikte, die nicht ``gelöst'', sondern \emph{entschieden} werden müssen. \quelle{vgl.\ Homburg, 2020; Kaplan \& Norton, 1996}
+
+\subsection{Fünf zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Leadmenge vs.\ Leadqualität.} Mehr Anzeigen erzeugen mehr Leads -- aber häufig schlechtere. Wer den Vertrieb mit unqualifizierten Kontakten überflutet, verbrennt Kapazität.
+  \item \textbf{Kosten vs.\ Geschwindigkeit.} Performance-Kanäle wie LinkedIn sind teuer, aber liefern Buying-Center-Reichweite. SEO/Content ist günstig, aber langsam.
+  \item \textbf{Reichweite vs.\ Vertriebskapazität.} Mehr Reichweite ist erst dann sinnvoll, wenn der Vertrieb die Leads sinnvoll bearbeiten kann.
+  \item \textbf{Kurzfristige Klicks vs.\ Pipeline-Aufbau.} Kampagnen wirken kurzfristig; Content, Vertrauen und Wiederkauf wirken über Quartale.
+  \item \textbf{Automatisierung vs.\ Verantwortung.} Algorithmische Anzeigensteuerung ist effizient -- aber sie kann Targeting und Botschaft unsensibel führen, wenn keine Governance dahintersteht.
+\end{enumerate}
+
+\subsection{Performance-Marketing als Investitionsentscheidung}
+
+Performance-Marketing ist \emph{keine} Marketingmaßnahme im klassischen Sinn -- es ist eine Investitionsentscheidung über Ressourceneinsatz, Marktprioritäten und Vertriebskapazität. Sie wird auf Senior-Level entschieden, typischerweise durch Chief Revenue Officer oder Geschäftsführung gemeinsam mit Marketingleitung. Wer das Budget allein an die Marketingagentur delegiert, delegiert eine strategische Vertriebsentscheidung.
+
+\subsection{Senior-Level-Test}
+
+Eine senior-level-fähige Performance-Strategie lässt sich in einem Satz erklären, der eine bewusste Verzichtsentscheidung und einen Frühindikator enthält. Beispiel: ``Wir investieren 45\,k in LinkedIn Ads, 30\,k in Google Ads, 25\,k in Webinare und 20\,k in Landing Page \& Tracking -- wir verzichten bewusst auf breite Display-Kampagnen, weil die Vertriebskapazität bei 20 Leads pro Woche begrenzt ist. Wenn die Kosten pro qualifiziertem Lead nach 8 Wochen über 800\,EUR liegen, prüfen wir den Kanal-Mix neu.''
+
+\begin{eselsbox}[Eselsbrücke: \akzent{L-K-R-K-A}]
+Fünf Zielkonflikte, die im Performance-Marketing auf Senior-Level entschieden werden:\\[2pt]
+\textbf{L}eadmenge vs.\ Leadqualität.\\
+\textbf{K}osten vs.\ Geschwindigkeit.\\
+\textbf{R}eichweite vs.\ Vertriebskapazität.\\
+\textbf{K}urzfristige Klicks vs.\ Pipeline-Aufbau.\\
+\textbf{A}utomatisierung vs.\ Verantwortung.\\[2pt]
+\emph{Fünf Konflikte, die kein Marketingdienstleister allein verantworten sollte.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 9]
+Performance-Marketing endet nicht bei Klick-Kosten. Es endet beim Vertriebsergebnis. Die Kampagne ist nur dann erfolgreich, wenn Anzeige, Landing Page, Leadqualifizierung und Vertrieb sauber verbunden sind -- und wenn das Marketing nicht den Vertrieb überfordert, sondern ihn präzise füttert. \emph{Wer Performance-Marketing als Werbung versteht, kauft Klicks. Wer es als Vertriebssteuerung versteht, kauft Kunden.}
+\end{merkbox}
+
+% --- 11. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Ash, T., Ginty, M., \& Page, R. (2012).] \emph{Landing page optimization: The definitive guide to testing and tuning for conversions} (2.\ Aufl.). Sybex.
+  \item[Chaffey, D., \& Ellis-Chadwick, F. (2022).] \emph{Digital marketing: Strategy, implementation and practice} (8.\ Aufl.). Pearson.
+  \item[Ellis, S., \& Brown, M. (2017).] \emph{Hacking growth: How today's fastest-growing companies drive breakout success}. Crown Business.
+  \item[Homburg, C. (2020).] \emph{Marketingmanagement: Strategie -- Instrumente -- Umsetzung -- Unternehmensführung} (7.\ Aufl.). Springer Gabler.
+  \item[Kaplan, R.\,S., \& Norton, D.\,P. (1996).] \emph{The balanced scorecard: Translating strategy into action}. Harvard Business School Press.
+  \item[Kotler, P., Kartajaya, H., \& Setiawan, I. (2017).] \emph{Marketing 4.0: Moving from traditional to digital}. Wiley.
+  \item[Lambrecht, A., \& Tucker, C. (2013).] When does retargeting work? Information specificity in online advertising. \emph{Journal of Marketing Research, 50}(5), 561--576. \href{https://doi.org/10.1509/jmr.11.0503}{https://doi.org/10.1509/jmr.11.0503}
+  \item[Ryan, D. (2020).] \emph{Understanding digital marketing: A complete guide to engaging customers with digital marketing} (5.\ Aufl.). Kogan Page.
+\end{description}
+
+% --- 12. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[A/B-Test] Vergleich zweier Varianten (Anzeige, Landing Page, Element) im echten Traffic zur datenbasierten Entscheidung.
+  \item[Buyer Persona] Archetypische Beschreibung einer Käuferrolle mit Zielen, Schmerzpunkten und Informationsquellen.
+  \item[Buying Center] Mehrstufige B2B-Entscheidergruppe (z.\,B.\ IT-Leiter, Geschäftsführer, Compliance) -- jeder benötigt eine eigene Botschaft.
+  \item[Call-to-Action (CTA)] Handlungsaufforderung in Anzeige oder Landing Page (z.\,B.\ ``Sicherheitscheck anfragen'').
+  \item[Conversion] Messbares Ereignis, das ein Besucher auf der Landing Page auslöst -- Formularabsendung, Download, Demo-Anfrage.
+  \item[Conversion Rate] Anteil Besucher, die eine Conversion auslösen.
+  \item[Conversion-Hürde] Element, das die Conversion bremst (unklare Botschaft, langes Formular, fehlendes Vertrauen, langsame Ladezeit).
+  \item[Conversion-Rate-Optimization (CRO)] Hypothesen- und testgetriebene Verbesserung der Conversion entlang des Funnels.
+  \item[Cost per Click (CPC)] Werbekosten geteilt durch Klicks; KPI auf Anzeigenebene.
+  \item[Cost per Lead (CPL)] Werbekosten geteilt durch generierte Leads; KPI auf Kanalebene.
+  \item[Customer Acquisition Cost (CAC)] Gesamtkosten (Werbung + Vertrieb), die ein gewonnener Kunde verursacht.
+  \item[Customer Lifetime Value (CLV)] Erwarteter wirtschaftlicher Wert eines Kunden über die gesamte Beziehung.
+  \item[Display-Kampagne] Banner-Anzeigen mit breiter Reichweite -- hoher Streuverlust im B2B.
+  \item[Funnel] Geordnete Abfolge der Schritte von der Anzeige bis zum Abschluss; im B2B typischerweise acht Stufen.
+  \item[Google Ads] Suchanzeigen, die auf konkrete Suchanfragen ausgeliefert werden; stark bei kaufnaher Intention.
+  \item[Impressionen] Anzahl Anzeigen-Einblendungen, ohne Aussage über Wirkung.
+  \item[Klickrate (CTR)] Klicks geteilt durch Impressionen; Indikator für Anzeigenrelevanz.
+  \item[Landing Page] Speziell für eine Kampagne gestaltete Zielseite -- nicht die Homepage.
+  \item[Lead] Interessensbekundung, die in einen Vertriebsprozess überführt werden kann.
+  \item[Lead Scoring] Bewertung der Leadqualität anhand definierter Kriterien (Demografie, Verhalten, Bedarfssignale).
+  \item[LinkedIn Ads] Anzeigen mit Targeting nach Branche, Rolle, Seniorität; im B2B häufig die höchste Leadqualität.
+  \item[Nutzenversprechen] Konkrete Aussage, was der Klick / die Conversion dem Besucher bringt.
+  \item[Performance-Marketing] Datenbasierte, ergebnisorientierte Marketingdisziplin entlang eines messbaren Funnels.
+  \item[Qualifizierter Lead] Lead, der zur Zielgruppe passt und Kaufabsicht zeigt -- MQL/SQL.
+  \item[Retargeting] Anzeigen für Personen, die bereits auf der Website waren; hohe Conversion, niedrige Kosten.
+  \item[Return on Ad Spend (ROAS)] Umsatz aus Werbung geteilt durch Werbeausgaben.
+  \item[Suchintention] Absicht hinter einem Suchbegriff -- informieren, vergleichen, kaufen, wiederbestellen.
+  \item[Vanity-Metrik] Kennzahl ohne Steuerungswirkung (z.\,B.\ reine Impressionen, Followerzahlen).
+  \item[Zielkonflikt (Performance)] Spannungsfeld zwischen Leadmenge, Leadqualität, Kosten, Geschwindigkeit, Vertriebskapazität und Pipeline-Aufbau -- bewusst entscheidbar.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 9 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}

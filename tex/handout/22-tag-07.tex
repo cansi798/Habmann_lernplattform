@@ -1,0 +1,648 @@
+% !TEX program = xelatex
+% Lernplatt - by Can Siebert
+% Kurs 22 (Bo 143) - Tag 7 - Lehrskript
+% Plattform-Verkauf meistern - SEO, Retention & Bewertungsmanagement
+%
+% Self-contained xelatex source. Kein biblatex, keine externen Bilder.
+
+\documentclass[11pt,a4paper,oneside]{article}
+
+% --- Encoding & Sprache --------------------------------------------------
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% --- Geometrie -----------------------------------------------------------
+\usepackage[a4paper,top=2cm,bottom=2cm,outer=2.5cm,inner=2.5cm,bindingoffset=1.5cm]{geometry}
+
+% --- Fonts ---------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\IfFontExistsTF{Charter}{%
+  \setmainfont{Charter}[%
+    Numbers=OldStyle,%
+    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
+  ]%
+}{%
+  \IfFontExistsTF{Bitstream Charter}{%
+    \setmainfont{Bitstream Charter}%
+  }{%
+    \setmainfont{TeX Gyre Schola}%
+  }%
+}
+
+\IfFontExistsTF{Source Sans 3}{%
+  \setsansfont{Source Sans 3}%
+}{%
+  \IfFontExistsTF{Source Sans Pro}{%
+    \setsansfont{Source Sans Pro}%
+  }{%
+    \setsansfont{TeX Gyre Heros}%
+  }%
+}
+
+\newcommand{\caveatfontfallback}{\itshape}
+\IfFontExistsTF{Caveat}{%
+  \newfontfamily\caveatfont{Caveat}[Scale=1.15]%
+}{%
+  \newcommand\caveatfont{\caveatfontfallback}%
+}
+
+\setmonofont{Latin Modern Mono}
+
+% --- Mikro-Typografie ----------------------------------------------------
+\usepackage{microtype}
+\linespread{1.15}
+
+% --- Farben & Boxen ------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{lpInk}{RGB}{20,28,38}
+\definecolor{lpAccent}{RGB}{22,90,140}
+\definecolor{lpAccentLight}{RGB}{210,228,240}
+\definecolor{lpAmber}{RGB}{222,138,30}
+\definecolor{lpAmberLight}{RGB}{255,243,217}
+\definecolor{lpAmberBorder}{RGB}{196,118,18}
+\definecolor{lpGray}{RGB}{96,104,114}
+\definecolor{lpGrayLight}{RGB}{238,240,243}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{eselsbox}[1][Eselsbrücke]{%
+  enhanced, breakable,
+  colback=lpAmberLight,
+  colframe=lpAmberBorder,
+  boxrule=0.6pt,
+  arc=2pt,
+  borderline={0.4pt}{0pt}{lpAmberBorder, dashed},
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{lpAmberBorder},
+  coltitle=lpAmberBorder,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAmberLight, colframe=lpAmberBorder, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+\newtcolorbox{merkbox}[1][Merksatz]{%
+  enhanced, breakable,
+  colback=lpAccentLight,
+  colframe=lpAccent,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  fonttitle=\sffamily\bfseries\color{white},
+  coltitle=white,
+  title={#1},
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={size=small, colback=lpAccent, colframe=lpAccent, boxrule=0.4pt, arc=1pt},
+  top=14pt
+}
+
+% --- Listen --------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[itemize,1]{label={\textbullet},leftmargin=1.6em}
+\setlist[itemize,2]{label={\textendash},leftmargin=1.4em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=1.8em}
+
+% --- Tabellen ------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Kopf-/Fusszeilen ----------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} Kurs 22 \textperiodcentered{} Tag 7}
+\fancyhead[R]{\footnotesize\sffamily\color{lpGray}Plattform-SEO, Content \& Bewertungen}
+\fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\footnotesize\sffamily\color{lpGray}\thepage{} / \pageref{LastPage}}%
+}
+
+% --- Section-Styling -----------------------------------------------------
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{lpAccent}}
+  {\thesection.}{0.6em}{#1}
+  [{\vspace{2pt}\color{lpAccent}\titlerule[0.6pt]}]
+
+\titleformat{\subsection}[block]
+  {\sffamily\large\bfseries\color{lpInk}}
+  {\thesubsection}{0.6em}{#1}
+
+\titleformat{\subsubsection}[block]
+  {\sffamily\normalsize\bfseries\color{lpInk}}
+  {}{0pt}{#1}
+
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+% --- Hyperlinks ----------------------------------------------------------
+\usepackage[hidelinks,unicode]{hyperref}
+
+% --- TOC -----------------------------------------------------------------
+\renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
+
+% --- Helfer --------------------------------------------------------------
+\newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
+\newcommand{\fachbegriff}[1]{\textbf{#1}}
+\newcommand{\quelle}[1]{{\footnotesize\color{lpGray}(#1)}}
+
+% =========================================================================
+\begin{document}
+
+% --- COVER ---------------------------------------------------------------
+\begin{titlepage}
+  \pagestyle{empty}
+  \vspace*{1.5cm}
+  \noindent{\sffamily\footnotesize\color{lpGray}LERNPLATT \textperiodcentered{} BY CAN SIEBERT}\\[2pt]
+  \noindent{\color{lpAccent}\rule{\linewidth}{1.2pt}}\\[4pt]
+  \noindent{\sffamily\footnotesize\color{lpGray}MODUL 4 \textperiodcentered{} TAG 7 \textperiodcentered{} KURS 22 (Bo 143) \textperiodcentered{} 8.\,Juni 2026}
+
+  \vspace{3cm}
+  {\sffamily\fontsize{30}{34}\selectfont\bfseries\color{lpInk}Plattform-SEO,\\Content\\\& Bewertungen\par}
+
+  \vspace{0.7cm}
+  {\sffamily\large\color{lpGray}Sichtbarkeit, Vertrauen und Wiederkauf\\auf digitalen Plattformen steuern.\par}
+
+  \vspace{1.5cm}
+  {\caveatfont\LARGE\color{lpAmber}Lehrskript -- Tag 7 von 16}\par
+
+  \vfill
+
+  \noindent\begin{minipage}{0.55\linewidth}
+    {\sffamily\footnotesize\color{lpGray}Lernpfad:}\\
+    {\sffamily\small\color{lpInk}Wissen \textrightarrow{} Anwendung \textrightarrow{} Management}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Bearbeitungsdauer:}\\
+    {\sffamily\small\color{lpInk}1 Kurstag (8 Unterrichtseinheiten)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.4\linewidth}
+    \raggedleft
+    {\sffamily\footnotesize\color{lpGray}Dozent:}\\
+    {\sffamily\small\color{lpInk}Can Siebert}\\[10pt]
+    {\sffamily\footnotesize\color{lpGray}Format:}\\
+    {\sffamily\small\color{lpInk}Theorie \textperiodcentered{} Fallstudie \textperiodcentered{} Coaching}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  \noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}
+\end{titlepage}
+
+% --- LERNZIELE -----------------------------------------------------------
+\section*{Lernziele dieses Tages}
+\addcontentsline{toc}{section}{Lernziele dieses Tages}
+\thispagestyle{plain}
+
+\noindent Mit Tag~7 wechselt der Fokus auf den \emph{Plattform-Verkauf}. Wer auf einem Marktplatz oder einer großen Plattform verkauft, hat einen anderen Hebel als auf der eigenen Website: nicht persönliche Beratung, sondern Sichtbarkeit, Content, Bewertungen und Wiederkauf. Heute lernen Sie, diese Hebel strategisch zu nutzen -- und ihre Grenzen zu kennen.
+
+\subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
+\begin{itemize}
+  \item Grundlagen von Plattform-SEO verstehen.
+  \item Sichtbarkeitsfaktoren auf Plattformen kennen.
+  \item Keyword-Strategien und Content-Optimierung einordnen.
+  \item Bedeutung von Produktdaten, Titeln, Beschreibungen, Bildern und Bewertungen verstehen.
+  \item Grundlagen von Kundenretention und Bewertungsmanagement kennen.
+\end{itemize}
+
+\subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
+\begin{itemize}
+  \item Plattformangebote hinsichtlich Sichtbarkeit und Verkaufswirkung analysieren.
+  \item Keywords, Produkttitel und Beschreibungen zielgerichtet optimieren.
+  \item Maßnahmen zur Kundenbindung auf Plattformen entwickeln.
+  \item Bewertungsmanagement strukturiert anwenden.
+  \item Zielkonflikte zwischen Sichtbarkeit, Markenwirkung, Preispositionierung und Kundenerwartung bewerten.
+\end{itemize}
+
+\subsection*{L3 -- Management (Entscheidung und Verantwortung)}
+\begin{itemize}
+  \item Plattform-SEO und Bewertungsmanagement als strategische Steuerungsinstrumente bewerten.
+  \item Entscheidungen unter Unsicherheit, Wettbewerbsdruck und begrenztem Budget treffen.
+  \item Verantwortung für Sichtbarkeitsarchitektur, Reputation und Kundenbindung übernehmen.
+  \item Plattform-Verkauf nicht nur operativ, sondern als Teil der digitalen Vertriebsstrategie steuern.
+\end{itemize}
+
+\begin{merkbox}[Roter Faden]
+Sichtbarkeit ist auf Plattformen \emph{ein Produkt}: sie wird über Algorithmen, Bewertungen, Content-Qualität und bezahlte Platzierung verteilt. Wer das nicht versteht, optimiert isolierte Stellschrauben. Wer es versteht, baut eine \textbf{Plattform-Performance-Architektur} -- ein zusammenhängendes System aus Sichtbarkeit, Vertrauen, Conversion und Retention.
+\end{merkbox}
+
+\clearpage
+
+% --- 1. EINSTIEG ---------------------------------------------------------
+\section{Einstieg: Sichtbarkeit ist nicht Reichweite}
+
+Auf einer Plattform wie Amazon, Otto, eBay oder einem B2B-Marktplatz sind potenziell Millionen Kunden unterwegs. Reichweite \emph{könnte} riesig sein. Tatsächlich aber wird sie über den Algorithmus verteilt -- und der bevorzugt jene Anbieter, die bestimmte Signale liefern: relevante Keywords, vollständige Produktdaten, hohe Klickrate, hohe Conversion, gute Bewertungen, schnelle Lieferung. Wer diese Signale nicht aktiv steuert, bleibt unsichtbar -- selbst mit dem besten Produkt. \quelle{Enge et al., 2015; Fishkin, 2018}
+
+\subsection{Drei Wahrheiten über Plattform-Verkauf}
+
+\begin{enumerate}
+  \item \fachbegriff{Sichtbarkeit ist verteilt, nicht garantiert.} Das beste Produkt wird ohne saubere Plattform-SEO schlicht nicht gefunden.
+  \item \fachbegriff{Vertrauen ist quantifiziert.} Bewertungssterne, Anzahl Bewertungen, Verkäufer-Bewertung sind nicht Zierde -- sie sind Ranking- und Conversion-Faktoren.
+  \item \fachbegriff{Kunden vergleichen brutal.} Auf der Produktseite sehen sie nicht nur uns, sondern drei Wettbewerber. Wer die Conversion nicht aktiv gestaltet, verliert.
+\end{enumerate}
+
+\subsection{Was Tag~7 von Tag~5--6 unterscheidet}
+
+Tag 5 hat die kundenzentrierte Kanalwahl behandelt. Tag 6 hat die Omnichannel-Operationalisierung in die eigene Organisation gebracht. Tag 7 wechselt auf die \emph{Außenseite einer fremden Plattform}: Wir verkaufen \emph{innerhalb} eines Systems, dessen Regeln wir nicht setzen, dessen Algorithmus wir nicht kennen, dessen Daten wir nur teilweise sehen. Hier gelten andere Hebel als auf der eigenen Website.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{S-V-K} -- drei Hebel auf der Plattform]
+Drei Buchstaben, die jede Plattform-Performance erklären:\\[2pt]
+\textbf{S}ichtbarkeit -- werden wir gefunden?\\
+\textbf{V}ertrauen -- vertraut der Kunde uns genug zum Kauf?\\
+\textbf{K}auf \& Wiederkauf -- konvertieren wir, halten wir den Kunden?\\[2pt]
+\emph{``S-V-K'' -- drei Hebel, ein System.}
+\end{eselsbox}
+
+% --- 2. PLATTFORM-SEO ---------------------------------------------------
+\section{Plattform-SEO: was anders ist}
+
+Klassische Suchmaschinenoptimierung (SEO für Google) und Plattform-SEO (z.\,B.\ Amazon, Marktplätze) teilen viele Prinzipien -- aber nicht alle. Eine Verwechslung kostet Geld. \quelle{vgl.\ Enge et al., 2015}
+
+\subsection{Klassische SEO vs.\ Plattform-SEO}
+
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+& \textbf{Klassische SEO} & \textbf{Plattform-SEO} \\
+\midrule
+\textbf{Suchabsicht} & meist informativ & meist kaufnah \\
+\textbf{Ranking-Faktoren} & Inhalt, Backlinks, technische Qualität & Produkttitel, Verkaufszahlen, Bewertungen, Conversion \\
+\textbf{Content-Format} & Texte, Blog, Knowledge & Produkttitel, Produktdaten, Bilder, FAQs \\
+\textbf{Wirkungshorizont} & Wochen bis Monate & Tage bis Wochen \\
+\textbf{Margenwirkung} & indirekt (Leads) & direkt (Verkauf) \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Die typischen Sichtbarkeitsfaktoren auf Plattformen}
+
+\begin{itemize}
+  \item \textbf{Suchbegriff-Relevanz.} Wie genau passen Produkttitel und Beschreibung zum Suchbegriff?
+  \item \textbf{Produkttitel.} Klar, suchorientiert, mit Nutzenargument -- nicht nur Modellnummer.
+  \item \textbf{Produktbeschreibung.} Struktur, Vollständigkeit, Anwendungsfälle, FAQ.
+  \item \textbf{Kategorie.} Richtige Einordnung -- falsche Kategorie killt Sichtbarkeit.
+  \item \textbf{Bilder \& Medien.} Anzahl, Qualität, Anwendungssituationen, Videos.
+  \item \textbf{Lieferfähigkeit.} Verfügbarkeit, Lieferzeit, Versandkosten.
+  \item \textbf{Klickrate.} Wie oft wird unser Listing angeklickt, wenn es angezeigt wird?
+  \item \textbf{Conversion Rate.} Wie viele Klicks führen zum Kauf?
+  \item \textbf{Retourenquote.} Hohe Rückläufer verschlechtern Sichtbarkeit.
+  \item \textbf{Bewertungen.} Anzahl, Durchschnitt, Aktualität.
+  \item \textbf{Verkäuferperformance.} Reklamationsquote, Antwortzeiten, Konfliktlösung.
+\end{itemize}
+
+\subsection{Risiken reiner Sichtbarkeitsoptimierung}
+
+Wer nur auf Sichtbarkeit optimiert, ohne Conversion und Markenwirkung mitzudenken, kauft sich Probleme ein:
+
+\begin{itemize}
+  \item Falsche Kundenerwartungen \textrightarrow{} Rückläufer und schlechte Bewertungen.
+  \item Preisdruck \textrightarrow{} dauerhafte Margenerosion.
+  \item Margenverlust durch teure Werbeplätze, die nicht refinanziert werden.
+  \item Verwässerung der Markenpositionierung.
+\end{itemize}
+
+\begin{merkbox}[Sichtbarkeits-Faustregel]
+Sichtbarkeit ohne Conversion ist ein teures Hobby. Bevor Sie Budget in Reichweitenwerbung pumpen, prüfen Sie: ist die Produktseite überhaupt geeignet, einen Klick in einen Kauf zu wandeln? Wenn nicht, optimieren Sie die Conversion zuerst.
+\end{merkbox}
+
+% --- 3. KEYWORD-STRATEGIE -----------------------------------------------
+\section{Keyword-Strategie}
+
+Eine sinnvolle Plattform-SEO-Strategie beginnt bei den Suchbegriffen der Zielgruppe -- nicht bei den eigenen Produktbezeichnungen. ``TX 18V Set'' ist eine Modellnummer; \emph{niemand} sucht nach ihr ohne Vorkenntnisse. Kunden suchen nach Anwendungsproblemen und Nutzenversprechen.
+
+\subsection{Fünf Keyword-Arten}
+
+\begin{enumerate}
+  \item \fachbegriff{Hauptkeywords (Generika).} Kurz, hohes Volumen, hoher Wettbewerb -- z.\,B.\ ``Akkuschrauber''.
+  \item \fachbegriff{Nebenkeywords.} Etwas spezifischer, mittleres Volumen -- z.\,B.\ ``Akkuschrauber 18V''.
+  \item \fachbegriff{Long-Tail-Keywords.} Längere, präzisere Phrasen, niedrigeres Volumen, höhere Kaufabsicht -- z.\,B.\ ``Profi-Akkuschrauber 18V mit Ersatzakku für Handwerker''.
+  \item \fachbegriff{Problemorientierte Keywords.} Beschreiben die Anwendungssituation -- z.\,B.\ ``Akkuschrauber für Dauereinsatz Montage''.
+  \item \fachbegriff{Kaufnahe Keywords.} Mit Kauf-Signal -- z.\,B.\ ``Akkuschrauber kaufen Werkstatt''.
+\end{enumerate}
+
+\subsection{Suchintentionen verstehen}
+
+Jeder Suchbegriff trägt eine \fachbegriff{Suchintention}:
+
+\begin{itemize}
+  \item \textbf{Informieren} -- ``Was ist ein Akkuschrauber-Drehmoment?''
+  \item \textbf{Vergleichen} -- ``Akkuschrauber Test 2026''.
+  \item \textbf{Kaufen} -- ``Profi-Akkuschrauber 18V Set kaufen''.
+  \item \textbf{Wiederbestellen} -- ``Ersatzakku Modell TX 18V''.
+\end{itemize}
+
+Wer auf einer Plattform Reichweite \emph{ohne} Kaufabsicht einkauft, zahlt für Klicks ohne Umsatz. Auf einem Marktplatz gilt: priorisieren Sie kaufnahe Keywords mit guter Zielgruppenpassung -- nicht die mit dem höchsten Suchvolumen.
+
+\subsection{Keyword-Priorisierung -- nicht nur Suchvolumen}
+
+Eine Keyword-Auswahl wird auf vier Achsen bewertet:
+
+\begin{enumerate}
+  \item \textbf{Zielgruppenpassung.} Sucht meine Wunschzielgruppe so?
+  \item \textbf{Suchvolumen.} Wie groß ist die Nachfrage?
+  \item \textbf{Wettbewerb.} Wie schwer ist die Platzierung?
+  \item \textbf{Markenpassung.} Passt der Begriff zur Positionierung -- oder zieht er falsche Kunden?
+\end{enumerate}
+
+\subsection{Wann ``billig'' tabu ist}
+
+Ein klassisches Beispiel: das Keyword ``billiger Industriesauger'' hat hohes Volumen, aber niedrige Markenpassung für einen Qualitätsanbieter. Hier ist die Senior-Entscheidung: \emph{bewusst verzichten}, auch wenn Reichweite verlockend wäre. Wer auf ``billig'' optimiert, zieht ``billig''-erwartende Kunden an -- und produziert schlechte Bewertungen.
+
+\begin{eselsbox}[Eselsbrücke: \akzent{Z-S-W-M} -- vier Achsen jeder Keyword-Wahl]
+Vier Buchstaben, vier Achsen:\\[2pt]
+\textbf{Z}ielgruppenpassung -- sucht der richtige Mensch so?\\
+\textbf{S}uchvolumen -- ist die Nachfrage groß genug?\\
+\textbf{W}ettbewerb -- können wir hier ranken?\\
+\textbf{M}arkenpassung -- zieht das Keyword die richtigen Kunden an?\\[2pt]
+\emph{Wer nur ``S'' optimiert, kauft Klicks, keine Umsätze.}
+\end{eselsbox}
+
+% --- 4. PRODUKTTITEL & BESCHREIBUNG --------------------------------------
+\section{Produkttitel und Produktbeschreibung}
+
+Der \fachbegriff{Produkttitel} ist auf Plattformen die wichtigste einzelne Optimierungsstelle. Er entscheidet über Sichtbarkeit (Ranking), Klickrate (warum klickt der Kunde?) und Erwartung (was kauft er gleich?).
+
+\subsection{Aufbau eines verkaufsstarken Produkttitels}
+
+Ein wirksamer Produkttitel kombiniert:
+
+\begin{enumerate}
+  \item \textbf{Produkttyp + Hauptkeyword.} Was ist das eigentlich? (``Profi-Akkuschrauber 18V Set'')
+  \item \textbf{Differenzierungsmerkmal.} Wodurch unterscheidet sich das Produkt? (``mit 2 Akkus, Schnellladegerät, robustem Koffer'')
+  \item \textbf{Anwendungsbezug.} Für wen / wofür? (``für Handwerk \& Montage'')
+\end{enumerate}
+
+\subsubsection{Beispiel}
+
+Vorher: ``Akkuschrauber TX 18V Set''. Nachher: ``Profi-Akkuschrauber 18V Set für Handwerk \& Montage -- mit 2 Akkus, Schnellladegerät und robustem Transportkoffer''. Der zweite Titel rankt besser, wirkt vertrauenswürdiger und reduziert Rückläufer durch unklare Erwartungen.
+
+\subsection{Struktur einer Produktbeschreibung}
+
+\begin{enumerate}
+  \item \textbf{Nutzen-Einstieg.} Für welche Anwendung ist das Produkt geeignet? Welches Problem löst es?
+  \item \textbf{Wichtigste Vorteile.} 3--5 Punkte (Leistung, Akkulaufzeit, Robustheit, Ergonomie, Zubehör).
+  \item \textbf{Technische Daten.} Übersichtlich, vollständig, vergleichbar.
+  \item \textbf{Kompatibilität.} Welche Akkus, Bits, Zubehörteile passen? (Reduziert Rückläufer und Beschwerden enorm.)
+  \item \textbf{Anwendungsfälle.} Konkrete Einsatzszenarien (Montage, Innenausbau, Werkstatt, Serviceeinsatz).
+  \item \textbf{Lieferumfang.} Transparent aufgeführt.
+  \item \textbf{FAQ.} Häufige Fragen vor dem Kauf beantworten (Ersatzakku, Ladezeit, Garantie, Versand).
+\end{enumerate}
+
+\subsection{Bilder, Videos, Vergleichstabellen}
+
+\begin{itemize}
+  \item \textbf{Erstes Bild.} Klar, hoher Kontrast, Produkt im Vordergrund.
+  \item \textbf{Anwendungsbilder.} Produkt in realer Einsatzsituation -- erzeugt Identifikation.
+  \item \textbf{Vergleichstabellen.} Zeigen Unterschiede zu eigenen Produktvarianten (Basis vs.\ Premium).
+  \item \textbf{Kurzvideos.} Sehr wirksam, sofern Plattform sie zulässt.
+\end{itemize}
+
+\begin{merkbox}[Content-Faustregel]
+Die Produktseite ist die wichtigste Conversion-Fläche im Plattform-Verkauf. Sie ersetzt das Beratungsgespräch. Wenn sie weniger leistet als eine 5-Minuten-Beratung, lassen Sie potentielle Umsätze auf dem Tisch.
+\end{merkbox}
+
+% --- 5. KUNDENRETENTION AUF PLATTFORMEN ---------------------------------
+\section{Kundenretention auf Plattformen}
+
+Auf Plattformen ist Retention schwerer als auf der eigenen Website, weil die Plattform die Kundenbeziehung ``hält''. Trotzdem gibt es klare Hebel. \quelle{Reichheld, 2003; Lemon \& Verhoef, 2016; Ellis \& Brown, 2017}
+
+\subsection{Was Retention konkret bedeutet}
+
+\begin{itemize}
+  \item Der Kunde \textbf{wiederbestellt} bei uns -- statt beim Wettbewerber.
+  \item Der Kunde \textbf{erweitert} den Kauf um Zubehör, Bundles, Folgeprodukte.
+  \item Der Kunde \textbf{abonniert} regelmäßige Lieferungen oder Verträge.
+  \item Der Kunde \textbf{empfiehlt} weiter über Bewertungen oder Mund-zu-Mund.
+\end{itemize}
+
+\subsection{Vier Retention-Hebel im Plattform-Verkauf}
+
+\begin{enumerate}
+  \item \fachbegriff{Zubehör- und Ersatzteil-Strategie.} Hauptprodukt + Zubehör + Ersatz = wiederkehrender Bedarf. Wer Akkuschrauber verkauft, sollte Akkus, Bits und Ladegeräte sichtbar mitführen -- als Bundle oder als ``Häufig zusammen gekauft''.
+  \item \fachbegriff{Bundles.} Geräte- + Zubehör- + Service-Bundles reduzieren Vergleichbarkeit und erhöhen den Warenkorbwert.
+  \item \fachbegriff{Nachkaufimpulse.} Sofern die Plattform es zulässt: E-Mail-Strecken nach dem Kauf, Erinnerungen für Verbrauchsmaterial, Empfehlungen für Folgeprodukte.
+  \item \fachbegriff{Wiederkaufrate als KPI.} Wer Wiederkauf nicht misst, optimiert ihn nicht. Eine Wiederkaufrate von 25\,\% statt 15\,\% verändert das Geschäftsmodell signifikant.
+\end{enumerate}
+
+\subsection{Lieferung, Service, Kommunikation}
+
+Im Plattform-Verkauf entscheidet jenseits des Produkts die operative Qualität:
+
+\begin{itemize}
+  \item Lieferzeit eingehalten? Versandkosten transparent?
+  \item Anfragen schnell beantwortet?
+  \item Reklamationen schmerzfrei abgewickelt?
+\end{itemize}
+
+Diese drei Punkte sind keine ``Hygiene'' -- sie sind die Hälfte der Bewertungen, die ein Kunde am Ende abgibt.
+
+% --- 6. BEWERTUNGSMANAGEMENT ---------------------------------------------
+\section{Bewertungsmanagement}
+
+Bewertungen sind auf Plattformen \emph{Mehrfach-Asset}: Vertrauenssignal, Ranking-Faktor, Conversion-Treiber und Frühwarnsystem in einem. Wer Bewertungen passiv abwartet, verschenkt einen der wichtigsten Hebel. \quelle{Chevalier \& Mayzlin, 2006; Reichheld, 2003}
+
+\subsection{Warum Bewertungen wirken}
+
+\begin{enumerate}
+  \item \textbf{Vertrauen.} Andere Käufer wirken glaubwürdiger als der Anbieter selbst.
+  \item \textbf{Ranking.} Plattformalgorithmen bevorzugen besser bewertete Anbieter.
+  \item \textbf{Conversion.} Produkte mit > 4{,}5 Sternen werden deutlich häufiger gekauft als solche mit 3{,}8 Sternen -- bei sonst gleichem Angebot.
+  \item \textbf{Frühwarnung.} Wiederkehrende Kritik in Bewertungen zeigt operative oder qualitative Probleme an, oft schneller als interne Reports.
+\end{enumerate}
+
+\subsection{Vier Aufgaben des Bewertungsmanagements}
+
+\begin{enumerate}
+  \item \fachbegriff{Ermöglichen.} Zufriedene Kunden aktiv und regelkonform zur Bewertung anregen -- ohne Anreize, die die Plattform-Regeln verletzen.
+  \item \fachbegriff{Analysieren.} Bewertungen regelmäßig (mind.\ wöchentlich) auswerten und nach Themen clustern: Produkt, Lieferung, Service, Erwartung.
+  \item \fachbegriff{Beantworten.} Negative Bewertungen sachlich, lösungsorientiert und transparent beantworten -- innerhalb definierter Reaktionszeit.
+  \item \fachbegriff{Lernen.} Wiederkehrende Kritikpunkte an Produktmanagement, Logistik oder Content zurückspielen -- mit klarer Owner-Rolle.
+\end{enumerate}
+
+\subsection{Umgang mit negativen Bewertungen}
+
+\begin{itemize}
+  \item \textbf{Sachlich bleiben.} Persönlich werden lesen 100 künftige Kunden mit.
+  \item \textbf{Lösung anbieten.} Konkreter Vorschlag, kein leerer ``Wir nehmen Ihr Feedback ernst''.
+  \item \textbf{Transparenz.} Wenn ein Fehler unsererseits passiert ist, das ehrlich benennen.
+  \item \textbf{Kein Streit.} Auch bei ungerechten Bewertungen freundlich antworten; eine ruhige Antwort wirkt souveräner als ein Gegenargument.
+\end{itemize}
+
+\subsection{Manipulation: warum sie sich nicht lohnt}
+
+Gekaufte Bewertungen, fake Reviews oder das Drücken negativer Bewertungen funktionieren kurzfristig -- mittelfristig sanktionieren Plattformen rigoros (Sichtbarkeitsverlust, Account-Sperre). Außerdem verlieren Sie das Frühwarnsignal: wenn Sie nicht wissen, was wirklich schief läuft, können Sie es nicht beheben.
+
+\begin{merkbox}[Bewertungen als Frühwarnsystem]
+Bewertungen sind nicht nur ein \emph{Verkaufssignal}, sondern ein \emph{Prozesssignal}. Wenn drei Wochen lang Kritik an Lieferzeiten häuft, ist das ein Logistikproblem -- und kein Bewertungsproblem. Wer Bewertungen nicht als Frühwarnsystem nutzt, verliert ein zentrales Steuerungsinstrument.
+\end{merkbox}
+
+% --- 7. INTEGRIERTES SYSTEM ----------------------------------------------
+\section{SEO, Content, Retention, Bewertung -- ein System}
+
+Die vier Hebel dieses Tages -- SEO, Content, Retention, Bewertung -- sind keine voneinander getrennten Disziplinen. Sie verstärken sich gegenseitig:
+
+\subsection{Vier Verbindungen}
+
+\begin{enumerate}
+  \item \textbf{SEO bringt Klicks -- Content macht sie zum Kauf.} Ohne saubere Produktseiten verpufft jede Sichtbarkeit.
+  \item \textbf{Content erzeugt korrekte Erwartung -- Erwartung gibt gute Bewertungen.} Wer überverspricht, erntet schlechte Bewertungen.
+  \item \textbf{Bewertungen treiben Ranking -- Ranking treibt Sichtbarkeit.} Ein Kreislauf, der bei jeder Stelle gebrochen werden kann.
+  \item \textbf{Retention reduziert Akquisitionskosten -- niedrige CAC erlaubt höhere Marge.} Wer Bestandskunden hält, kann sich Wettbewerb auf neuen Suchen leisten.
+\end{enumerate}
+
+\subsection{Was eine Plattform-Performance-Architektur leistet}
+
+\begin{itemize}
+  \item Sie definiert pro Produktgruppe eine Keyword-Strategie (inkl.\ bewusst ausgeschlossener Keywords).
+  \item Sie spezifiziert Content-Standards für Titel, Beschreibung, Bilder, FAQ.
+  \item Sie hat einen Retention-Mechanismus für Zubehör, Bundles und Wiederkauf.
+  \item Sie betreibt ein aktives Bewertungsmanagement mit Reaktionsregeln und Lernschleifen.
+  \item Sie misst KPIs auf allen vier Achsen -- nicht nur Umsatz.
+\end{itemize}
+
+\quelle{vgl.\ Kotler et al., 2017; Homburg, 2020}
+
+\begin{eselsbox}[Eselsbrücke: \akzent{S-C-R-B} -- vier Hebel im System]
+Vier Buchstaben, vier Hebel:\\[2pt]
+\textbf{S}EO -- werden wir gefunden?\\
+\textbf{C}ontent -- macht die Produktseite den Klick zum Kauf?\\
+\textbf{R}etention -- kommt der Kunde wieder?\\
+\textbf{B}ewertungen -- vertrauen neue Kunden uns?\\[2pt]
+\emph{Wer einen der vier vernachlässigt, gewinnt nie das Ganze.}
+\end{eselsbox}
+
+% --- 8. FALLSTUDIE-LEITFADEN ---------------------------------------------
+\section{Fallstudie-Leitfaden: ToolMaster Pro}
+
+In den Unterrichtseinheiten 4--5 bearbeiten Sie die Fallstudie ``ToolMaster Pro'' -- ein mittelständischer Anbieter hochwertiger Elektrowerkzeuge mit 2{,}8\,Mio.\,EUR Plattformumsatz, 24\,\% Marge und einem Bewertungsdurchschnitt von 4{,}3 Sternen. Wettbewerber sind günstiger und sichtbarer.
+
+\subsection{Analytischer Aufbau}
+
+\begin{enumerate}
+  \item \textbf{Ursachen der schwachen Performance.} Wo liegt das Hauptproblem -- Content, Sichtbarkeit, Bewertungen, Retention?
+  \item \textbf{Keyword-Strategie.} Welche Hauptkeywords, Long-Tail-, Problem-Keywords? Welche bewusst nicht (``billig'')?
+  \item \textbf{Produkttitel und Beschreibung optimieren.} Beispiel-Optimierung an einer Produktseite.
+  \item \textbf{Content-Maßnahmen.} Bilder, Vergleichstabellen, FAQ, Anwendungsvideos.
+  \item \textbf{Retention.} Wie nutzen wir Zubehör- und Ersatzakku-Wiederkauf?
+  \item \textbf{Bewertungsmanagement.} Welche vier Aufgaben (Ermöglichen, Analysieren, Beantworten, Lernen)?
+  \item \textbf{Budgetverteilung.} Wie verteilen sich 90.000\,EUR auf 6 Monate?
+  \item \textbf{Entscheidung unter Unsicherheit.} Warum \emph{nicht} Preisaktionen?
+\end{enumerate}
+
+\subsection{Erwartete Empfehlungsrichtung}
+
+In einer typischen Musterlösung wird \emph{nicht} auf aggressive Preissenkungen gesetzt, sondern auf Content-Qualität, Keyword-Strategie und Bewertungsmanagement. Das Budget verteilt sich auf Keyword-/Content-Optimierung, neue Bilder/Videos, FAQ und Kompatibilitätsdaten, Bewertungsmanagement, Retention/Bundle-Maßnahmen und ein Testbudget. Die Entscheidung unter Unsicherheit: ``Trotz Wettbewerbsdruck verzichten wir auf pauschale Preisaktionen, weil sie die Qualitätspositionierung beschädigen und mittelfristig die Marge zerstören -- stattdessen testen wir Bundles und Content-Optimierung an ausgewählten Produktgruppen.''
+
+\begin{merkbox}[Argumentationsmuster für die Fallstudie]
+Eine gute Plattform-Performance-Strategie enthält:
+\begin{enumerate}
+  \item \textbf{Welche Keywords -- inklusive welche bewusst nicht.}
+  \item \textbf{Welche Content-Maßnahmen mit welchem Kundennutzen.}
+  \item \textbf{Welcher Retention-Mechanismus mit welcher KPI.}
+  \item \textbf{Welches Bewertungsmanagement mit welcher Reaktionsregel.}
+  \item \textbf{Welche Verzichtsentscheidung gegen kurzfristige Reichweite oder Preissenkung.}
+\end{enumerate}
+\end{merkbox}
+
+% --- 9. MANAGEMENT-PERSPEKTIVE ------------------------------------------
+\section{Management-Perspektive: Zielkonflikte}
+
+Auf Wissens- und Anwendungsebene sieht eine gute Plattform-Strategie wie eine sauber priorisierte Liste aus. Auf Managementebene geht es um Zielkonflikte, die nicht ``richtig gelöst'' werden, sondern \emph{entschieden} werden müssen. \quelle{vgl.\ Homburg, 2020; Kotler et al., 2017}
+
+\subsection{Fünf zentrale Zielkonflikte}
+
+\begin{enumerate}
+  \item \textbf{Reichweite vs.\ Markenwirkung.} Maximale Sichtbarkeit kann auf Kosten der Positionierung gehen -- besonders, wenn man Generika-Keywords gegen Discounter optimiert.
+  \item \textbf{Conversion vs.\ Marge.} Aggressive Preisaktionen erhöhen Conversion -- senken aber Marge und beschädigen Preisanker.
+  \item \textbf{Kurzfristiger Umsatz vs.\ langfristige Plattform-Performance.} Eine Werbekampagne bringt kurzfristig Klicks; eine saubere Content-Strategie wirkt erst nach Wochen, aber dauerhaft.
+  \item \textbf{Kundenerwartung vs.\ Markenversprechen.} Schnelle Lieferzeiten und 24h-Versprechen sind verlockend -- aber wer sie nicht hält, verliert in Bewertungen.
+  \item \textbf{Eigene Sichtbarkeit vs.\ Plattformabhängigkeit.} Wer ausschließlich auf einer Plattform wächst, ist 100\,\% abhängig. Diversifikation kostet -- aber sie reduziert das strategische Risiko.
+\end{enumerate}
+
+\subsection{Plattform-Performance ist Senior-Level-Thema}
+
+Plattform-Verkauf wirkt operativ -- Titel, Bilder, FAQ, Bewertungen. Diese Operativität täuscht darüber hinweg, dass die Entscheidungen \emph{Senior-Level-Charakter} haben: Welche Marke kommunizieren wir? Welche Kundenerwartung erzeugen wir? Welchen Preisanker setzen wir? Welche Plattform­abhängigkeit lassen wir entstehen? Wer diese Fragen an die Plattform-Operativ-Abteilung delegiert, delegiert die Markenführung -- und das kann Senior-Management nicht.
+
+\subsection{Senior-Level-Test}
+
+Eine senior-level-fähige Plattform-Strategie lässt sich in einem Satz erklären, der eine Verzichtsentscheidung enthält. Beispiel: ``Wir optimieren auf Qualitäts-Keywords und Bundles -- wir verzichten bewusst auf 'billig'-Keywords und pauschale Rabattaktionen, weil sie unsere Marke beschädigen und mittelfristig die Marge zerstören.''
+
+\begin{eselsbox}[Eselsbrücke: \akzent{R-C-K-E-A}]
+Fünf Zielkonflikte, die im Plattform-Verkauf auf Senior-Level entschieden werden:\\[2pt]
+\textbf{R}eichweite vs.\ Markenwirkung.\\
+\textbf{C}onversion vs.\ Marge.\\
+\textbf{K}urzfrist vs.\ Plattform-Performance.\\
+\textbf{E}rwartung vs.\ Markenversprechen.\\
+\textbf{A}bhängigkeit (Plattform) vs.\ Diversifikation.\\[2pt]
+\emph{Fünf Konflikte, die kein Plattform-Operativ-Team allein verantworten sollte.}
+\end{eselsbox}
+
+\begin{merkbox}[Schluss-Merksatz für Tag 7]
+Plattform-Verkauf wirkt operativ, ist aber eine \textbf{strategische Disziplin}. Sichtbarkeit, Content, Retention und Bewertungen sind kein Werbethema, sondern ein zusammenhängendes Steuerungssystem für Margen, Marke und Verteidigungsfähigkeit. \emph{Wer Plattform-Performance nicht als Architektur denkt, baut Klickkampagnen ohne Plan.}
+\end{merkbox}
+
+% --- 10. LITERATUR -------------------------------------------------------
+\clearpage
+\section{Literatur}
+
+Im Skript verwendete und für die Vertiefung empfohlene Quellen. Zitierstil: APA-7.
+
+\begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=4pt]
+  \item[Chevalier, J.\,A., \& Mayzlin, D. (2006).] The effect of word of mouth on sales: Online book reviews. \emph{Journal of Marketing Research, 43}(3), 345--354. \href{https://doi.org/10.1509/jmkr.43.3.345}{https://doi.org/10.1509/jmkr.43.3.345}
+  \item[Ellis, S., \& Brown, M. (2017).] \emph{Hacking growth: How today's fastest-growing companies drive breakout success}. Crown Business.
+  \item[Enge, E., Spencer, S., \& Stricchiola, J.\,C. (2015).] \emph{The art of SEO: Mastering search engine optimization} (3.\ Aufl.). O'Reilly.
+  \item[Fishkin, R. (2018).] \emph{Lost and founder: A painfully honest field guide to the startup world}. Portfolio.
+  \item[Homburg, C. (2020).] \emph{Marketingmanagement: Strategie -- Instrumente -- Umsetzung -- Unternehmensführung} (7.\ Aufl.). Springer Gabler.
+  \item[Kotler, P., Kartajaya, H., \& Setiawan, I. (2017).] \emph{Marketing 4.0: Moving from traditional to digital}. Wiley.
+  \item[Lemon, K.\,N., \& Verhoef, P.\,C. (2016).] Understanding customer experience throughout the customer journey. \emph{Journal of Marketing, 80}(6), 69--96. \href{https://doi.org/10.1509/jm.15.0420}{https://doi.org/10.1509/jm.15.0420}
+  \item[Reichheld, F.\,F. (2003).] The one number you need to grow. \emph{Harvard Business Review, 81}(12), 46--54.
+\end{description}
+
+% --- 11. GLOSSAR ---------------------------------------------------------
+\clearpage
+\section{Glossar}
+
+Die wichtigsten Begriffe des Tages -- kurz definiert, in alphabetischer Reihenfolge.
+
+\begin{description}[style=nextline,leftmargin=0pt,labelindent=0pt,itemsep=4pt]
+  \item[Bewertung] Quantitative oder qualitative Rückmeldung eines Kunden zu Produkt, Service, Lieferung; Vertrauenssignal und Ranking-Faktor.
+  \item[Bewertungsmanagement] Strukturierter Prozess aus Ermöglichen, Analysieren, Beantworten und Lernen aus Bewertungen.
+  \item[Bundle] Kombination aus Hauptprodukt, Zubehör und/oder Service zu einem Festpreis; reduziert Vergleichbarkeit, erhöht Warenkorbwert.
+  \item[Content-Optimierung] Verbesserung von Produkttitel, Beschreibung, Bildern, FAQ und Vergleichsinhalten zur Steigerung von Vertrauen und Conversion.
+  \item[Conversion Rate] Anteil Klicks auf eine Produktseite, die zum Kauf führen.
+  \item[Customer Acquisition Cost (CAC)] Gesamtkosten zur Gewinnung eines neuen Kunden.
+  \item[Frühwarnsystem (Bewertung)] Nutzung wiederkehrender Bewertungsmuster als Indikator für Prozess- oder Produktprobleme.
+  \item[Hauptkeyword] Generisches Suchwort mit hohem Volumen und hohem Wettbewerb.
+  \item[Kaufnahes Keyword] Suchbegriff mit erkennbarer Kaufabsicht.
+  \item[Keyword] Suchbegriff oder -phrase, mit der Kunden ein Bedürfnis ausdrücken.
+  \item[Keyword-Strategie] Geordnete Auswahl von Suchbegriffen pro Produktgruppe, einschließlich bewusst ausgeschlossener Begriffe.
+  \item[Klickrate (CTR)] Anteil Sichtungen, die zu einem Klick führen.
+  \item[Long-Tail-Keyword] Längere, präzisere Suchphrase mit niedrigerem Volumen, aber höherer Kaufabsicht.
+  \item[Markenpassung (Keyword)] Eigenschaft eines Keywords, die zur Positionierung des Anbieters passt -- oder eben nicht.
+  \item[Plattform-SEO] Suchmaschinenoptimierung innerhalb einer Plattform (z.\,B.\ Marktplatz), mit eigenen Ranking-Faktoren und Algorithmen.
+  \item[Problemorientiertes Keyword] Suchbegriff, der eine Anwendungssituation beschreibt -- z.\,B.\ ``Akkuschrauber für Dauereinsatz''.
+  \item[Produkttitel] Wichtigste einzelne Optimierungsstelle auf Plattformen; verbindet Produkttyp, Hauptkeyword, Differenzierung und Anwendungsbezug.
+  \item[Retention] Kundenbindung über Wiederkauf, Erweiterung, Abonnement, Empfehlung.
+  \item[Retourenquote] Anteil verkaufter Produkte, die zurückgeschickt werden; senkt Plattform-Sichtbarkeit.
+  \item[Sichtbarkeit] Wahrscheinlichkeit, dass ein Produkt in relevanten Suchen angezeigt wird; Ergebnis aus Algorithmus, Performance und Bewertungen.
+  \item[Suchintention] Absicht, die ein Nutzer mit seiner Suche verfolgt: informieren, vergleichen, kaufen, wiederbestellen.
+  \item[Verkäuferperformance] Bewertungsmaßstab der Plattform für Anbieter -- Reklamationsquote, Antwortzeiten, Konfliktlösung, Lieferqualität.
+  \item[Vergleichstabelle] Inhalt, der Unterschiede zwischen eigenen Produktvarianten transparent macht.
+  \item[Wiederkaufrate] Anteil Kunden, die innerhalb eines definierten Zeitraums erneut beim Anbieter kaufen.
+  \item[Zielkonflikt (Plattform-Verkauf)] Spannungsfeld zwischen Reichweite, Marge, Marke, Kundenerwartung und Plattform­abhängigkeit -- bewusst entscheidbar, nicht ``lösbar''.
+\end{description}
+
+\vspace{1cm}
+\noindent{\color{lpAccent}\rule{\linewidth}{0.6pt}}\\[4pt]
+{\footnotesize\sffamily\color{lpGray}Lernplatt \textperiodcentered{} by Can Siebert \textperiodcentered{} Kurs 22 (Bo 143) \textperiodcentered{} Tag 7 \textperiodcentered{} \textcopyright{} 2026}
+
+\end{document}
