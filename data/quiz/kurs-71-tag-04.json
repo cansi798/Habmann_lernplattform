@@ -1,0 +1,907 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 4,
+  "erstellt_am": "2026-05-24",
+  "fragen": [
+    {
+      "id": "q01",
+      "frage": "Was ist die Kernfunktion eines Prozess-Repositorys?",
+      "optionen": [
+        "Lokale Sicherung einzelner Visio-Dateien je Mitarbeiter",
+        "Single Source of Truth für Prozesse inklusive Struktur, Rollen, Versionen und Verantwortlichkeiten",
+        "Reiner E-Mail-Verteiler für Prozessdokumente",
+        "Werkzeug zur automatischen Ausführung von Workflows"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Prozess-Repository ist die Single Source of Truth für die Prozesslandschaft. Es bündelt Struktur, Rollen, Dokumente, Risiken, KPIs, Controls und Versionen. Lokale Ablagen oder reine Verteiler erfüllen weder die Governance- noch die Transparenz-Anforderung; ausführen lassen sich Prozesse erst in einer Engine.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Repository-Ansatz",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Repository & E2E"
+    },
+    {
+      "id": "q02",
+      "frage": "Wofür steht die Abkürzung ‚E2E‘ im Prozesskontext?",
+      "optionen": [
+        "Enterprise-to-Enterprise",
+        "End-to-End",
+        "Event-to-Engine",
+        "Execution-to-Evaluation"
+      ],
+      "korrekt": 1,
+      "erklaerung": "E2E steht für End-to-End und beschreibt die durchgängige Sicht vom auslösenden Bedarf bis zum nutzbaren Ergebnis. Sie verknüpft Value Chain, Prozesslandkarte, Prozess, Subprozess und Arbeitsanweisungen. Die anderen Begriffe sind in dieser Form nicht etabliert.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · E2E-Sicht",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Repository & E2E"
+    },
+    {
+      "id": "q03",
+      "frage": "Welche drei Ebenen werden als Startstruktur eines Prozess-Repositorys empfohlen?",
+      "optionen": [
+        "Strategie → Taktik → Operations",
+        "E2E-Prozess → Subprozess → Arbeits-/Nachweisdokument",
+        "Vision → Mission → Werte",
+        "Capability → Service → API"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Als Startgerüst genügen drei Ebenen: E2E-Prozess als Klammer, Subprozesse als ausführbare Bausteine und Arbeits-/Nachweisdokumente als operative Anleitungen. Die anderen Begriffsbündel beschreiben Strategie- oder Architekturmodelle, nicht die Repository-Tiefe.",
+      "quelle": "Tag 4 · UE 2 Arbeitsauftrag 1 · Repository-Ebenen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Repository & E2E"
+    },
+    {
+      "id": "q04",
+      "frage": "Welche Rolle ist typischerweise Teil der Modell-Governance?",
+      "optionen": [
+        "Influencer",
+        "Owner, Modeler, Reviewer",
+        "Pre-Sales, After-Sales, Trade-Sales",
+        "Tester, Designer, Architekt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Modell-Governance lebt von klaren Verantwortlichkeiten: Owner trägt fachliche Verantwortung, Modeler erstellt das Modell und Reviewer prüft. Diese Trias sichert Qualität und Aktualität. Die übrigen Rollenpaare gehören in andere Disziplinen.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Modell-Governance",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q05",
+      "frage": "Was ist mit ‚Single Source of Truth‘ gemeint?",
+      "optionen": [
+        "Nur eine Person darf Modelle ändern",
+        "Ein zentral verwalteter, autoritativer Datenbestand für Prozessinformationen",
+        "Alle Prozesse stehen ausschließlich auf Papier",
+        "Es gibt nur ein einziges Tool im Unternehmen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Single Source of Truth bezeichnet einen zentralen, autoritativen Datenbestand, auf den alle Beteiligten zugreifen. Damit werden widersprüchliche Versionen und Schattenkopien vermieden. Es geht nicht um eine Einzelperson, ein Medium oder eine Tool-Monokultur.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Repository-Ansatz",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Repository & E2E"
+    },
+    {
+      "id": "q06",
+      "frage": "Welche der folgenden Statusangaben gehört in einen typischen Freigabe-Lifecycle?",
+      "optionen": [
+        "Idea → Pilot → Sale",
+        "Draft → Review → Approved",
+        "Plan → Build → Demolish",
+        "Open → Closed → Reopen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein typischer Lifecycle führt Modelle von Draft über Review bis Approved (häufig ergänzt um Retired). Dieser Pfad sichert Qualitäts- und Audit-Anforderungen. Die anderen Ketten sind keine etablierten Freigabe-Lifecycles.",
+      "quelle": "Tag 4 · UE 2 Arbeitsauftrag 1 · Freigabeprozess",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Lifecycle & Freigabe"
+    },
+    {
+      "id": "q07",
+      "frage": "Was unterscheidet einen User Task von einem Service Task in der Execution-BPMN?",
+      "optionen": [
+        "User Task ist immer manuell, Service Task ist immer manuell",
+        "User Task wird von einem Menschen erledigt, Service Task automatisiert vom System",
+        "User Task ist ein Ereignis, Service Task ist ein Datenobjekt",
+        "Beide bezeichnen denselben Schritt mit anderem Symbol"
+      ],
+      "korrekt": 1,
+      "erklaerung": "In der Execution-BPMN repräsentiert ein User Task eine Tätigkeit, die ein Mensch über eine Aufgabenliste erledigt, während ein Service Task eine automatisierte Systemaktion (z. B. API-Call) ist. Beide unterscheiden sich klar in Symbol und Bedeutung.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Execution-BPMN",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Execution-BPMN"
+    },
+    {
+      "id": "q08",
+      "frage": "Welche Aussage zu Business-BPMN trifft zu?",
+      "optionen": [
+        "Sie ist auf maschinelle Ausführung optimiert",
+        "Sie ist verständlich und kommuniziert Verantwortung, darf aber grob bleiben",
+        "Sie ersetzt jede Execution-BPMN",
+        "Sie ist eine reine UML-Variante"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Business-BPMN dient der fachlichen Kommunikation und der Verantwortungsklärung; sie darf grob bleiben. Die Maschinen-Nähe erreicht erst die Execution-BPMN mit präzisen Tasks und Daten. Business- und Execution-Sicht ergänzen sich, ersetzen sich nicht.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Business-BPMN",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Execution-BPMN"
+    },
+    {
+      "id": "q09",
+      "frage": "Was bedeutet ‚Automations-Slice‘ im Sinne der Schulung?",
+      "optionen": [
+        "Eine grafische Tortendarstellung der Automatisierungsquote",
+        "Ein klar abgegrenzter Prozessabschnitt mit definiertem Start/Ende, Daten und Fehlerfällen, der realistisch automatisierbar ist",
+        "Ein vollständig automatisierter Gesamtprozess",
+        "Ein Tool zur Code-Generierung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Automations-Slice ist ein bewusst herausgeschnittener Teilprozess mit klaren Grenzen, klaren Daten und klaren Fehlerfällen. Er erlaubt MVP-Automatisierung, ohne den Gesamtprozess perfekt zu kennen. Es geht weder um Visualisierung noch um Vollautomatisierung.",
+      "quelle": "Tag 4 · UE 3 Arbeitsauftrag 2 · Automations-Slice",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Automation Slice & MVP"
+    },
+    {
+      "id": "q10",
+      "frage": "Welches Metadatenfeld ist für Repository-Modelle besonders sinnvoll?",
+      "optionen": [
+        "Lieblingsfarbe des Modellierers",
+        "Owner (verantwortliche Person/Rolle)",
+        "Anzahl Klicks im Modell",
+        "Browser-Version beim Speichern"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein verantwortlicher Owner ist zentrales Metadatum jedes Modells: ohne Owner verfällt das Modell schnell zur Datei ohne Steuerung. Die übrigen Felder haben für Governance, Audit und Aktualität keinen Nutzen.",
+      "quelle": "Tag 4 · UE 2 Arbeitsauftrag 1 · Metadaten",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Repository & E2E"
+    },
+    {
+      "id": "q11",
+      "frage": "Welche Aussage beschreibt ‚Varianten‘ im Repository korrekt?",
+      "optionen": [
+        "Sie entstehen ausschließlich durch Tippfehler im Modell",
+        "Sie repräsentieren legitime Unterschiede z. B. nach Land, Standort oder Produkt",
+        "Sie sind verbotene Sonderfälle, die immer eliminiert werden müssen",
+        "Sie sind Synonyme für ‚Versionen‘"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Varianten repräsentieren legitime Unterschiede, z. B. nach Land, Standort oder Produkt, und müssen explizit gesteuert werden. Sie sind nicht zwangsläufig zu eliminieren und nicht identisch mit Versionen (die zeitliche Stände bezeichnen).",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Varianten",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Varianten"
+    },
+    {
+      "id": "q12",
+      "frage": "Welche der genannten Ereignisarten gibt es in Execution-BPMN?",
+      "optionen": [
+        "Timer-, Message- und Error-Events",
+        "Birthday-, Holiday- und Vacation-Events",
+        "Click-, Hover- und Drag-Events",
+        "Plus-, Minus- und Mal-Events"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Execution-BPMN kennt unter anderem Timer-Events (Zeit), Message-Events (eingehende/ausgehende Nachrichten) und Error-Events (Fehlerbehandlung). Die übrigen Aufzählungen stammen aus UI-Events bzw. sind ohne Bedeutung in BPMN.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Execution-BPMN",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Execution-BPMN"
+    },
+    {
+      "id": "q13",
+      "frage": "Was bedeutet ‚Audit Trail‘ in einem Workflow?",
+      "optionen": [
+        "Eine Wanderroute für Auditoren",
+        "Eine lückenlose Aufzeichnung, wer wann was im Prozess gemacht hat",
+        "Ein Audit-Bericht ohne Anhang",
+        "Eine Liste offener Verbesserungspunkte"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Audit Trail ist die lückenlose Aufzeichnung von Schritten, Akteuren und Zeitpunkten innerhalb eines Workflows. Sie ist Pflichtbestandteil regulierter Prozesse. Die anderen Antworten beschreiben weder Funktion noch Inhalt.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Audit Trail",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Audit & Compliance"
+    },
+    {
+      "id": "q14",
+      "frage": "Wofür stehen Owner, Modeler und Reviewer in der Modell-Governance?",
+      "optionen": [
+        "Drei verschiedene Tools",
+        "Verantwortlicher, Ersteller und Prüfer eines Modells",
+        "Phasen eines Sprints",
+        "Lizenzstufen von Software"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Owner ist verantwortlich für das Modell, Modeler erstellt es und Reviewer prüft fachlich oder methodisch. Diese Rollentrennung verhindert ‚alles in einer Hand‘ und stärkt Qualität sowie Akzeptanz.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Modell-Governance",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q15",
+      "frage": "Welche Aussage zu Camunda als Execution-Plattform ist zutreffend?",
+      "optionen": [
+        "Camunda ist eine Notation wie BPMN",
+        "Camunda ist eine Workflow-/Process-Engine, die ausführbare BPMN-Modelle abarbeitet",
+        "Camunda ist eine Backup-Lösung",
+        "Camunda ist ein Storage-System"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Camunda ist eine Workflow-/Process-Engine, die ausführbare BPMN-Modelle (Execution-BPMN) zur Laufzeit abarbeitet, inklusive User Tasks, Service Tasks, Events und Audit Trail. Es ist kein Notationsstandard und auch kein Backup- oder Storage-Tool.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Execution-Plattform",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Execution-BPMN"
+    },
+    {
+      "id": "q16",
+      "frage": "Was ist ein zentraler Vorteil eines Repository-Ansatzes?",
+      "optionen": [
+        "Endgültige Abschaffung aller Prozesse",
+        "Transparenz und Wiederauffindbarkeit aktueller, freigegebener Prozessstände",
+        "Maximale Anzahl von Tool-Insellösungen",
+        "Verzicht auf Verantwortliche"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Repository schafft Transparenz und macht aktuelle, freigegebene Prozessstände schnell auffindbar. Damit reduziert es Suchaufwand, Doppelarbeit und Audit-Risiken. Die anderen Optionen widersprechen dem Zweck eines Repositorys.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Repository-Ansatz",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Repository & E2E"
+    },
+    {
+      "id": "q17",
+      "frage": "Was ist ein typisches Risiko, wenn ein Repository ohne Governance betrieben wird?",
+      "optionen": [
+        "Es entstehen automatisch korrekte Modelle",
+        "Es wird zur ungesteuerten Dokumentenablage statt Steuerungswerkzeug",
+        "Es senkt automatisch alle Audit-Kosten",
+        "Es macht jeden Prozess automatisch ausführbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ohne Governance (Owner, Review, Lifecycle) verkommt ein Repository schnell zur unstrukturierten Ablage und verliert seine Steuerungswirkung. Weder ‚Korrektheit‘ noch ‚Audit-Ersparnisse‘ noch ‚Ausführbarkeit‘ entstehen automatisch.",
+      "quelle": "Tag 4 · UE 4 Coaching · Governance",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q18",
+      "frage": "Welche der folgenden Anforderungen gehört typischerweise zu einer ‚Definition of Done‘ für ein Prozessmodell?",
+      "optionen": [
+        "Modell muss bunt sein",
+        "Modell hat Owner, Status, Version und ist freigegeben",
+        "Modell ist nirgends abgelegt",
+        "Modell ist nur dem Modellierer bekannt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Definition of Done für Modelle umfasst typischerweise Owner, Status, Version und Freigabe. Erst damit ist ein Modell ‚fertig‘ im Sinne von steuerungs- und auditfähig. Optische oder personalisierte Kriterien sind irrelevant.",
+      "quelle": "Tag 4 · UE 2 Arbeitsauftrag 1 · Definition of Done",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Repository & E2E"
+    },
+    {
+      "id": "q19",
+      "frage": "Welche Aussage zum Eskalationsmechanismus in Workflows ist korrekt?",
+      "optionen": [
+        "Eskalationen sind Fehler, die immer eliminiert werden müssen",
+        "Eskalationen sind geplante Mechanismen, die ausgelöst werden, wenn definierte Bedingungen (z. B. SLA-Überschreitung) eintreten",
+        "Eskalationen erfolgen ausschließlich per Brief",
+        "Eskalationen ersetzen Service Tasks"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eskalationen sind bewusst designte Mechanismen, die greifen, wenn Bedingungen wie SLA-Überschreitungen erfüllt sind. Sie sind Steuerungselemente, nicht Fehler. Kommunikationskanäle oder Task-Typen sind davon unabhängig.",
+      "quelle": "Tag 4 · UE 3 Arbeitsauftrag 2 · Eskalation",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Eskalation & SLA"
+    },
+    {
+      "id": "q20",
+      "frage": "Was beschreibt ‚MVP‘ im Kontext von Workflow-Automatisierung?",
+      "optionen": [
+        "Most Valuable Player",
+        "Minimum Viable Product – kleinste lauffähige Variante mit klarem Nutzen",
+        "Maximum Variant Process",
+        "Mid-Volume Pricing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "MVP steht für Minimum Viable Product: die kleinste lauffähige Variante, die echten Nutzen liefert und Lernen ermöglicht. Sie ist in unsicherem Umfeld Mittel der Wahl, um Komplexität zu begrenzen und Frühwarnsignale früh zu erhalten.",
+      "quelle": "Tag 4 · UE 4 Coaching · MVP",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Automation Slice & MVP"
+    },
+    {
+      "id": "q21",
+      "frage": "Sie planen eine Repository-Struktur und müssen entscheiden, ob länderspezifische Unterschiede als separate Modelle oder als Variantenattribute abgelegt werden. Welches Argument spricht typischerweise für Variantenattribute?",
+      "optionen": [
+        "Maximaler Pflegeaufwand wird gewünscht",
+        "Hohe Wiederverwendung gemeinsamer Schritte bei geringer Modellvielfalt",
+        "Variantenattribute machen Audit unmöglich",
+        "Es gibt überhaupt keine Gemeinsamkeiten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Variantenattribute lohnen sich, wenn ein gemeinsamer Kernprozess hohe Wiederverwendung erlaubt und sich nur wenige Aspekte unterscheiden – Pflegeaufwand sinkt, Vergleichbarkeit steigt. Separate Modelle sind sinnvoll, wenn Prozesse strukturell stark divergieren. Audit-Hindernis ist falsch.",
+      "quelle": "Tag 4 · UE 2 Arbeitsauftrag 1 · Varianten-Entscheidung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Varianten"
+    },
+    {
+      "id": "q22",
+      "frage": "Sie modellieren einen Rechnungsfreigabe-Workflow. Welche Reihenfolge ist sinnvoll, um den ersten Automations-Slice zu definieren?",
+      "optionen": [
+        "Tooling wählen → Modell freigeben → später Daten klären",
+        "Klare Start-/Endpunkte definieren → Datenminimum festlegen → Fehlerfälle abgrenzen → Ausnahmepolitik dokumentieren",
+        "Alle Sonderfälle zuerst automatisieren → MVP weglassen",
+        "Erst Eskalationen automatisieren → dann Start prüfen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein belastbarer Slice beginnt mit klaren Grenzen (Start/Ende), dann Datenminimum und Fehlerfällen; was nicht im ersten Release umgesetzt wird, wird über eine Ausnahmepolitik organisatorisch aufgefangen. Tool-First oder Sonderfall-First produzieren Risiko und Verzögerung.",
+      "quelle": "Tag 4 · UE 3 Arbeitsauftrag 2 · Slice-Definition",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Automation Slice & MVP"
+    },
+    {
+      "id": "q23",
+      "frage": "Welche Aussage zur Beziehung Business-BPMN ↔ Execution-BPMN beschreibt die Senior-Sicht am besten?",
+      "optionen": [
+        "Business-BPMN ist überflüssig, sobald eine Engine läuft",
+        "Business-BPMN steuert Verständnis und Verantwortung, Execution-BPMN steuert Durchlaufzeit, Qualität und Audit Trail – beide ergänzen sich",
+        "Execution-BPMN ist nur ein optisches Refresh der Business-Sicht",
+        "Beide Sichten widersprechen sich grundsätzlich"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Beide Sichten haben unterschiedliche Funktionen: Business-BPMN schafft Verständnis und Verantwortungsklarheit; Execution-BPMN steuert Laufzeit, Qualität und Audit Trail. Sie ergänzen sich, anstatt sich zu ersetzen oder zu widersprechen.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Kerndifferenz",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Execution-BPMN"
+    },
+    {
+      "id": "q24",
+      "frage": "Sie führen Modell-Governance ein. Welche Kombination aus zwei Regeln verhindert erfahrungsgemäß 80 % Chaos?",
+      "optionen": [
+        "Buntere Farben und mehr Pfeile",
+        "Klare Owner-Zuordnung und konsistente Versionierung/Freigabe",
+        "Mehr Tools und mehr Sichten",
+        "Längere Modellnamen und mehr Detailtiefe"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Owner-Zuordnung und konsequente Versionierung/Freigabe sind die wirksamsten Hebel: sie sichern Verantwortung und Aktualität. Visuelle oder Tool-bezogene Maßnahmen lösen Governance-Probleme nicht.",
+      "quelle": "Tag 4 · UE 4 Coaching · Governance Regeln",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q25",
+      "frage": "Ein Standort möchte eine Variante eines E2E-Prozesses ohne Abstimmung lokal pflegen. Welche Reaktion ist im Sinne der Repository-Governance angemessen?",
+      "optionen": [
+        "Lokale Pflege ohne jede Regel akzeptieren",
+        "Variante zulassen, aber innerhalb definierter Guardrails (Naming, Owner, Freigabe, Datenattribute) abbilden",
+        "Variante kategorisch verbieten, auch wenn fachlich begründet",
+        "Den Standort aus dem Repository ausschließen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Sinnvoll ist Variantenführung innerhalb verbindlicher Guardrails: Naming, Owner, Freigabe, Attribute. So bleibt Vergleichbarkeit erhalten, ohne lokale Realität zu ignorieren. Komplette Freigabe oder Verbot sind unrealistisch und gefährden Akzeptanz oder Compliance.",
+      "quelle": "Tag 4 · UE 4 Coaching · Varianten-Governance",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Varianten"
+    },
+    {
+      "id": "q26",
+      "frage": "Sie definieren ein Datenminimum für einen Rechnungsfreigabe-Workflow. Welche drei Felder sind typischerweise unverzichtbar?",
+      "optionen": [
+        "Schriftart, Schriftgröße, Farbe",
+        "Betrag, Kostenstelle, Freigeber",
+        "Lieblingslieferant, Lieblingsdatum, Kommentarlänge",
+        "Bildschirmgröße, Browser, Betriebssystem"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Für die Freigabeentscheidung sind Betrag (Schwellenwert-Logik), Kostenstelle (Buchung/Controlling) und Freigeber (Verantwortung) zentral. Visuelle oder technische Felder steuern weder Entscheidung noch Audit.",
+      "quelle": "Tag 4 · UE 3 Arbeitsauftrag 2 · Datenminimum",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Daten & Übergabe"
+    },
+    {
+      "id": "q27",
+      "frage": "Welche Eskalationsregel ist im Sinne eines steuerbaren Workflows am besten formuliert?",
+      "optionen": [
+        "Wenn etwas dauert, schnell handeln",
+        "Wenn Freigabe nicht innerhalb von 48 h erfolgt, Erinnerung an Freigeber; nach weiteren 24 h Eskalation an Vorgesetzten",
+        "Wer zuerst kommt, gewinnt",
+        "Eskalation nach Bauchgefühl der Buchhaltung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Steuerbar ist eine Eskalation nur mit messbarer Bedingung, definierter Adressat:in und klarer Folgehandlung – z. B. 48 h Erinnerung, 24 h später Eskalation an Vorgesetzte. Unscharfe Formulierungen verhindern Auditierbarkeit und Wirksamkeit.",
+      "quelle": "Tag 4 · UE 3 Arbeitsauftrag 2 · Eskalation",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Eskalation & SLA"
+    },
+    {
+      "id": "q28",
+      "frage": "Sie führen einen Freigabeprozess ‚Draft → Review → Approved‘ ein. Welche Rollenkombination ist sinnvoll?",
+      "optionen": [
+        "Modeler erstellt und genehmigt selbst",
+        "Modeler erstellt, Reviewer prüft, Owner gibt frei",
+        "Owner ist anonym, Reviewer ebenso",
+        "Approval durch zufällige Person"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine wirksame Rollenkombination trennt Erstellung (Modeler), Prüfung (Reviewer) und Freigabe (Owner). Damit greift das 4- bzw. 6-Augen-Prinzip. Eigen-Approvals oder anonyme Rollen widersprechen Audit-Anforderungen.",
+      "quelle": "Tag 4 · UE 2 Arbeitsauftrag 1 · Freigabeprozess",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Lifecycle & Freigabe"
+    },
+    {
+      "id": "q29",
+      "frage": "Welche Aussage zu Service Tasks ist korrekt?",
+      "optionen": [
+        "Service Tasks erfordern immer eine Bearbeitung durch Menschen",
+        "Service Tasks führen Systemaktionen aus, z. B. API-Aufrufe oder ERP-Buchungen",
+        "Service Tasks sind nur kosmetische Symbole ohne Funktion",
+        "Service Tasks sind dasselbe wie Events"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Service Tasks führen Systemaktionen aus, z. B. API-Aufrufe, Datenbankschreibvorgänge oder ERP-Buchungen. Menschliche Bearbeitung gehört in User Tasks. Events sind eigenständige Elemente, keine Service Tasks.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Execution-BPMN",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Execution-BPMN"
+    },
+    {
+      "id": "q30",
+      "frage": "Sie diskutieren mit der IT, ob ein Workflow im Sinne eines MVP startet. Welches Vorgehen passt zur Senior-Sicht ‚Entscheidungen unter Unsicherheit‘?",
+      "optionen": [
+        "Alle Ausnahmen perfekt automatisieren, bevor Release 1 startet",
+        "Klar definierten Slice produktiv setzen, eine Ausnahme bewusst organisatorisch abfangen, Frühwarnsignale messen",
+        "Niemals starten, bevor alle Daten vollständig sind",
+        "Ohne Frühwarnsignale loslegen und auf das Beste hoffen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Verhalten unter Unsicherheit heißt: Slice klar abgrenzen, bewusst eine Ausnahme organisatorisch behandeln und Frühwarnsignale (z. B. Eskalationsquote, Rework) messen. Perfektionismus oder Blindflug führen zu Stillstand bzw. Risiko.",
+      "quelle": "Tag 4 · UE 4 Coaching · Entscheidungen unter Unsicherheit",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Senior-Entscheidung"
+    },
+    {
+      "id": "q31",
+      "frage": "Welche KPI ist als Steuerungsgröße eines Workflows besonders aussagekräftig?",
+      "optionen": [
+        "Anzahl Bildschirmpixel pro Formular",
+        "Durchlaufzeit (Lead Time) der freigegebenen Fälle",
+        "Lieblingsfarbe der Sachbearbeiter",
+        "Anzahl Login-Versuche pro Stunde"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Lead Time misst, wie schnell ein Fall von Start bis Ende durch den Workflow läuft – sie ist eine kerntypische Steuerungs-KPI. Pixel-, Farb- oder Login-Metriken haben für Prozesssteuerung keinen direkten Aussagewert.",
+      "quelle": "Tag 4 · UE 5 Fallstudie · KPI-Set",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI & Frühwarnung"
+    },
+    {
+      "id": "q32",
+      "frage": "Ihre Pilotwahl ‚Order-to-Cash‘ wird vom Management hinterfragt. Welche Begründung ist senior-tauglich?",
+      "optionen": [
+        "Das Modell sieht im Tool schön aus",
+        "Hoher Wertschöpfungsbeitrag, klare Datenlage, eindeutige Owner und realistischer 8-Wochen-Slice mit Audit-Bezug",
+        "Andere Standorte haben Vorrang gefordert",
+        "Es ist der erste Prozess in der Liste"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Pilotwahl muss auf Wertbeitrag, Datenlage, Ownership und realistischer Umsetzbarkeit basieren – idealerweise mit erkennbarem Audit-/Compliance-Nutzen. Optische, opportunistische oder zufällige Auswahl trägt keine Senior-Argumentation.",
+      "quelle": "Tag 4 · UE 5 Fallstudie · Pilotwahl",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Pilotwahl & Roadmap"
+    },
+    {
+      "id": "q33",
+      "frage": "Welche Metadatenkombination ist für die Auditfähigkeit eines Modells besonders kritisch?",
+      "optionen": [
+        "Farbcode, Schriftart, Anzahl Symbole",
+        "Owner, Gültigkeit, Version/Status, Standort, Risikoklasse",
+        "Kategorien wie ‚schön‘ oder ‚unschön‘",
+        "Browserprofil und Bildschirmgröße"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Auditfähigkeit braucht Verantwortlichkeit (Owner), Aktualität (Gültigkeit, Version/Status) sowie Kontext (Standort, Risikoklasse). Visuelle oder technische Felder spielen für Nachvollziehbarkeit keine entscheidende Rolle.",
+      "quelle": "Tag 4 · UE 2 Arbeitsauftrag 1 · Metadaten",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Repository & E2E"
+    },
+    {
+      "id": "q34",
+      "frage": "Ein Workflow-Designer fragt, wann ein Subprozess als ‚Automationskandidat‘ klassifiziert werden sollte. Welche Kombination spricht dafür?",
+      "optionen": [
+        "Unklare Daten, viele Sonderfälle, hohe Beratungsdichte",
+        "Wiederholend, regelbasiert, stabile Datenquellen, klare Abgrenzung",
+        "Stark kreativ, individuell, häufige Politikwechsel",
+        "Selten ausgeführt, ohne SLA, ohne Owner"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Automationskandidaten sind wiederholend, regelbasiert, klar abgegrenzt und stützen sich auf stabile Datenquellen. Kreative, seltene oder politiklastige Vorgänge eignen sich schlechter und produzieren häufig Rework und Audit-Findings.",
+      "quelle": "Tag 4 · UE 5 Fallstudie · Automationskandidat",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Automation Slice & MVP"
+    },
+    {
+      "id": "q35",
+      "frage": "Welche KPI eignet sich besonders, um die Wirksamkeit eines Automations-Slices zu beobachten?",
+      "optionen": [
+        "Anzahl modellierter Pfeile",
+        "Eskalationsquote (Anteil eskalierter Fälle)",
+        "Größe der Modell-Datei",
+        "Schriftart der Aufgabenliste"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Eskalationsquote zeigt direkt, ob der automatisierte Slice stabil läuft oder ob systematisch ‚aufgefangen‘ werden muss. Datei-, Symbol- oder Schriftgrößen sagen nichts über Prozessqualität aus.",
+      "quelle": "Tag 4 · UE 7 Feedback · KPI-Auswahl",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI & Frühwarnung"
+    },
+    {
+      "id": "q36",
+      "frage": "Sie führen Lifecycle-Stati (Draft → Approved → Retired) ein. Welche Aussage ist korrekt?",
+      "optionen": [
+        "Retired-Modelle dürfen nie als Nachweis dienen",
+        "Retired-Modelle bleiben mit Versionsbezug auffindbar und dienen als historischer Nachweis",
+        "Retired-Modelle werden physisch gelöscht",
+        "Retired-Modelle sind dasselbe wie Draft-Modelle"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Retired-Modelle werden nicht physisch gelöscht, sondern bleiben mit Versionsbezug auffindbar – sie sind oft auditrelevant für vergangene Zeiträume. Drafts hingegen sind unfertig. Eine Gleichsetzung beider Stati wäre unzulässig.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Lifecycle",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Lifecycle & Freigabe"
+    },
+    {
+      "id": "q37",
+      "frage": "Welche Rollendefinition ist für ein Process Repository unverzichtbar?",
+      "optionen": [
+        "Architekt, Designer, Maler",
+        "Process Owner, Modeler, Reviewer, Approver",
+        "Vertrieb, Marketing, HR",
+        "Trainer, Coach, Mentor"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Process Owner, Modeler, Reviewer und Approver sichern Verantwortung, Erstellung, Qualität und Freigabe. Andere Rollensets adressieren andere Domänen und ersetzen die Repository-Governance nicht.",
+      "quelle": "Tag 4 · UE 4 Coaching · Rollen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q38",
+      "frage": "Ein Workflow soll Timer- und Error-Events nutzen. Was ist sinnvoll?",
+      "optionen": [
+        "Timer für Fehler, Error für Reminder",
+        "Timer-Events für zeitbasierte Aktionen (z. B. Reminder), Error-Events für Fehlerpfade und Recovery",
+        "Beide Events ohne Logik einbauen",
+        "Timer-Events ersetzen User Tasks"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Timer-Events triggern zeitbasiert (z. B. Reminder, Eskalation), Error-Events bilden Fehlerpfade und Recovery-Logik ab. Die Vertauschung führt zu nicht funktionsfähigen Workflows.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Events",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Execution-BPMN"
+    },
+    {
+      "id": "q39",
+      "frage": "Welche der folgenden Aussagen zur Kollaboration im Repository ist zutreffend?",
+      "optionen": [
+        "Kollaboration ersetzt Governance",
+        "Kollaboration funktioniert nur in Kombination mit Standards, Owner-Zuordnung und Freigaben",
+        "Kollaboration heißt: alle dürfen alles ändern",
+        "Kollaboration ist nicht messbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Kollaboration trägt Wirkung nur, wenn Standards, Owner-Zuordnung und Freigaben den Rahmen setzen. Andernfalls entstehen Inkonsistenzen und Audit-Risiken. Sie ersetzt Governance nicht, sondern nutzt sie.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Kollaboration",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q40",
+      "frage": "Welche Aussage zur Datenverantwortung in Workflow-Automatisierung ist korrekt?",
+      "optionen": [
+        "Daten sind herrenlos, das System klärt es",
+        "Pro Datenobjekt sollte ein eindeutiger Owner / System of Record benannt sein",
+        "Datenverantwortung ist nur ein Compliance-Thema und sonst irrelevant",
+        "Datenverantwortung wird automatisch durch das Repository erzeugt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Pro Datenobjekt braucht es einen Owner und ein System of Record, um Konsistenz, Qualität und Auditierbarkeit zu sichern. Ohne klare Verantwortung führt jeder Workflow zu Datenkonflikten.",
+      "quelle": "Tag 4 · UE 4 Coaching · Datenverantwortung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Daten & Übergabe"
+    },
+    {
+      "id": "q41",
+      "frage": "Bei MediSupply Services soll ein Pilot binnen 8 Wochen umgesetzt werden. Welche Vorgehensweise ist sinnvoll?",
+      "optionen": [
+        "Alle Prozesse parallel modellieren und in Produktion bringen",
+        "Einen E2E-Prozess als Pilot wählen, Repository minimal aufsetzen, Automationskandidaten identifizieren und Slice priorisieren",
+        "Nur Modellierung, keine Execution-Komponenten",
+        "Nur Execution, ohne Repository-Strukturierung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Sinnvoll ist eine fokussierte Pilotierung: ein E2E-Prozess wird ausgewählt, das Repository minimal sauber strukturiert, und ein Automations-Slice wird priorisiert. Pauschale Parallelisierung oder einseitige Lösungen scheitern an Ressourcen und Akzeptanz.",
+      "quelle": "Tag 4 · UE 5 Fallstudie · Vorgehen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Pilotwahl & Roadmap"
+    },
+    {
+      "id": "q42",
+      "frage": "Welche der folgenden Aussagen beschreibt einen sauberen Übergang Business → Execution?",
+      "optionen": [
+        "Übergabe per E-Mail-Anhang ohne Daten",
+        "Klar definierte Übergabe mit Datenmodell, Fehlerfällen, SLA-Vorgaben und expliziten Verantwortlichen",
+        "Übergabe nur mündlich",
+        "Übergabe wird automatisch durch das Modell ausgelöst"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine professionelle Übergabe enthält Datenmodell, Fehlerfälle, SLA-Vorgaben und Verantwortliche. So entsteht ein belastbarer ‚Vertrag‘ zwischen Business und Execution. Ad-hoc-Übergaben verursachen Folgeprobleme.",
+      "quelle": "Tag 4 · UE 4 Coaching · Übergabe",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Übergabe Business/Execution"
+    },
+    {
+      "id": "q43",
+      "frage": "Welcher Effekt ist ein zentrales Argument für ein Process Repository in regulierten Branchen?",
+      "optionen": [
+        "Höhere Verkaufszahlen am Point of Sale",
+        "Schnellere Auffindbarkeit aktueller, freigegebener Prozessstände im Audit",
+        "Bessere Internetgeschwindigkeit",
+        "Höhere Marketingbudgets"
+      ],
+      "korrekt": 1,
+      "erklaerung": "In regulierten Branchen ist die schnelle Auffindbarkeit der aktuellen, freigegebenen Prozessstände im Audit ein zentrales Argument. Die anderen Effekte sind entweder unbezogen oder nicht durch Repositorys verursacht.",
+      "quelle": "Tag 4 · UE 1 Wissensvermittlung · Audit",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Audit & Compliance"
+    },
+    {
+      "id": "q44",
+      "frage": "Welche Aussage zur Ausnahmepolitik in einem MVP-Workflow ist zutreffend?",
+      "optionen": [
+        "Ausnahmen müssen unbedingt mitautomatisiert werden",
+        "Ausnahmen werden bewusst organisatorisch (manuell) aufgefangen und dokumentiert, bis sich ein Muster zeigt",
+        "Ausnahmen werden ignoriert",
+        "Ausnahmen werden auf alle anderen Workflows übertragen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein MVP fängt Ausnahmen bewusst manuell ab und dokumentiert sie, um Muster sichtbar zu machen. Spätere Releases entscheiden über Automatisierung. Vollautomatisierung oder Ignorieren widerspricht Senior-Verantwortung.",
+      "quelle": "Tag 4 · UE 3 Arbeitsauftrag 2 · Ausnahmepolitik",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Automation Slice & MVP"
+    },
+    {
+      "id": "q45",
+      "frage": "Welche Kombination beschreibt die Rolle ‚Automation Owner‘ am besten?",
+      "optionen": [
+        "Verantwortet ausschließlich Lizenzkosten",
+        "Verantwortet Funktionsfähigkeit, Stabilität, Weiterentwicklung und Monitoring des automatisierten Workflows",
+        "Hat nur Modellierungsaufgaben",
+        "Hat nur Reporting-Aufgaben"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Automation Owner verantwortet Funktionsfähigkeit, Stabilität, Weiterentwicklung und Monitoring des automatisierten Workflows. Reine Modellier- oder Reporting-Aufgaben adressieren nur Teilaspekte, Lizenzkosten sind Nebensache.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · Rollenmodell",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q46",
+      "frage": "Sie entwickeln ein Operating Model, das E2E-Repository mit Workflow-Automatisierung verbindet. Welche Top-Entscheidung ist nach Senior-Sicht ‚nicht verhandelbar‘?",
+      "optionen": [
+        "Auswahl der Symbolfarben",
+        "Versionierung/Freigabe verbindlich, Owner pro Modell, Auditierbarkeit (Audit Trail in Repository und Execution)",
+        "Schriftgrößen-Konventionen",
+        "Lizenztyp des Modellierungstools"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Verbindliche Versionierung/Freigabe, klare Owner und durchgängige Auditierbarkeit sind die Trias, die ein steuerbares System trägt. Visuelle oder Lizenz-Entscheidungen sind nachgelagert und nicht systemkritisch.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · Nicht verhandelbar",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q47",
+      "frage": "Sie müssen entscheiden, ob Varianten als Attribute oder separate Modelle abgebildet werden. Welche Trade-off-Logik passt zur Senior-Argumentation?",
+      "optionen": [
+        "Immer separate Modelle, um maximale lokale Freiheit zu sichern",
+        "Attribute, solange Kernprozess stabil und Unterschiede gering sind; separate Modelle, wenn strukturelle Divergenz die Vergleichbarkeit zerstört",
+        "Immer Attribute, weil Modelle Aufwand erzeugen",
+        "Entscheidung ist beliebig, da Kosten und Nutzen gleich sind"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Logik wägt Pflegeaufwand gegen Klarheit ab: Attribute, solange Unterschiede gering sind und Vergleichbarkeit Vorrang hat; separate Modelle, wenn strukturelle Divergenz zu groß wird. Pauschale Antworten ignorieren den Trade-off.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · Variantenstrategie",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Varianten"
+    },
+    {
+      "id": "q48",
+      "frage": "Sie müssen Speed vs. Compliance abwägen. Welche Eskalationslogik im RACI hilft?",
+      "optionen": [
+        "Beide Themen werden zufällig priorisiert",
+        "Definierte Eskalationsstufen mit klaren Entscheidern (z. B. Process Owner, CCO/CPO), dokumentierter Risikoakzeptanz und Frühwarnsignalen",
+        "Eskalation grundsätzlich vermeiden",
+        "Compliance immer ignorieren, wenn Speed wichtig ist"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Praxis verlangt definierte Eskalationsstufen mit benannten Entscheidern, dokumentierter Risikoakzeptanz und Frühwarnsignalen. So bleibt der Zielkonflikt steuerbar, statt politisch oder zufällig entschieden zu werden.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · RACI Eskalation",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Audit & Compliance"
+    },
+    {
+      "id": "q49",
+      "frage": "Welche der folgenden Entscheidungen ist typischerweise ‚irreversibel/teuer‘ und muss daher explizit dokumentiert werden?",
+      "optionen": [
+        "Auswahl der Linienfarbe in Modellen",
+        "Wahl des Datenmodells / der ID-Strategie (z. B. Case-ID) für E2E-Prozesse",
+        "Erstellung eines Schulungsfoliensatzes",
+        "Festlegung der Schriftgröße in Reports"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenmodell und ID-Strategie wirken über alle Workflows, Reports und Audits hinweg und sind schwer reversibel. Solche Entscheidungen gehören explizit in die Entscheidungsarchitektur. Optische Festlegungen sind dagegen leicht zurücknehmbar.",
+      "quelle": "Tag 4 · UE 4 Coaching · Irreversible Entscheidungen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Entscheidung"
+    },
+    {
+      "id": "q50",
+      "frage": "Ein Senior Stakeholder fragt nach den Top-7 Entscheidungen, die ein Process-Repository-/Automation-Operating-Model unterstützen muss. Welche Auswahl passt?",
+      "optionen": [
+        "Tool-Hersteller, Logo, Modellfarben, Anzahl Buttons, Schriftart, Standort des Servers, Dateiformat",
+        "Priorisierung, Prozessstandard, Variantenpolitik, Freigaben, Automationskandidaten, KPI-Steuerung, Audit-Nachweise",
+        "Catering, Layout, Marketingplan, Eventreihe, Pressemitteilung, T-Shirts, Logo",
+        "Personalbudget, Boni, Urlaubsplan, Spesenrichtlinie, Dienstwagenpolicy, Pensionsmodell, Schichtplanung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Senior-Entscheidungsarchitektur deckt Priorisierung, Prozessstandard, Variantenpolitik, Freigaben, Automationskandidaten, KPI-Steuerung und Audit-Nachweise ab. Die anderen Listen adressieren Marketing, HR oder oberflächliche Tool-Themen.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · Top-7 Entscheidungen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Entscheidung"
+    },
+    {
+      "id": "q51",
+      "frage": "Welche Aussage zur ‚False Compliance‘ in Repository-Governance ist treffend?",
+      "optionen": [
+        "Sie tritt auf, wenn Dokumentation formal stimmt, aber die Realität abweicht und nicht zurückgespiegelt wird",
+        "Sie tritt auf, wenn keine Dokumentation existiert",
+        "Sie ist identisch mit echter Compliance",
+        "Sie ist nur ein theoretisches Konzept ohne Folgen"
+      ],
+      "korrekt": 0,
+      "erklaerung": "False Compliance bezeichnet die gefährliche Lücke zwischen formal stimmiger Dokumentation und tatsächlicher Prozessrealität. Sie ist gravierend, weil Audits formal bestanden werden, Probleme aber bestehen bleiben. Sie ist nicht identisch mit echter Compliance.",
+      "quelle": "Tag 4 · UE 7 Feedback · False Compliance",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q52",
+      "frage": "Welche Frühwarnsignale eignen sich, um die Wirksamkeit eines neuen Workflow-Operating-Models zu prüfen?",
+      "optionen": [
+        "Anzahl interner Memos",
+        "Eskalationsquote, Rework-Anteil, Audit-Findings, Lead-Time-Veränderung",
+        "Anzahl gedruckter Folien",
+        "Anzahl Mitarbeiterausflüge"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eskalationsquote, Rework, Audit-Findings und Lead-Time-Veränderung sind harte Frühwarnsignale, die Wirksamkeit messbar machen. Aktivitäten ohne Outcome-Bezug taugen nicht als Frühwarner.",
+      "quelle": "Tag 4 · UE 4 Coaching · Frühwarnsignale",
+      "schwierigkeit": "schwer",
+      "thema_tag": "KPI & Frühwarnung"
+    },
+    {
+      "id": "q53",
+      "frage": "Sie diskutieren, ob ein Workflow zentral oder dezentral verantwortet wird. Welche Senior-Antwort ist tragfähig?",
+      "optionen": [
+        "Beide gleichzeitig zentral und dezentral, ohne Abgrenzung",
+        "Zentral werden Standards/Guardrails (Naming, Freigabe, Audit, Datenmodell) entschieden; dezentral werden konkrete Implementierungen und lokale Varianten betrieben – innerhalb der Guardrails",
+        "Alles muss zentral entschieden werden, lokale Verantwortung entfällt",
+        "Alles muss dezentral entschieden werden, zentrale Standards entfallen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Praxis trennt klar: Standards/Guardrails zentral, Implementierungen/Varianten dezentral innerhalb der Guardrails. Extreme oder unscharfe Modelle führen zu Wildwuchs oder Bürokratie.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · Zentral/Dezentral",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Entscheidung"
+    },
+    {
+      "id": "q54",
+      "frage": "Welche Aussage zu ‚Lifecycle-Design‘ in einem Repository-Operating-Model ist senior-tauglich?",
+      "optionen": [
+        "Ein Lifecycle ist ein Reporting-Format",
+        "Ein Lifecycle definiert Stati (Draft→Approved→Retired), Change-Requests, Release-Kadenz und Qualitätsgates (Definition of Done)",
+        "Ein Lifecycle ist nur für IT-Teams relevant",
+        "Ein Lifecycle ist eine reine HR-Aufgabe"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Lifecycle-Design klärt Stati, Change-Requests, Release-Kadenz und Quality-Gates und macht Modelländerungen steuerbar. Es ist organisationsübergreifend und kein Reporting- oder HR-Thema.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · Lifecycle",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Lifecycle & Freigabe"
+    },
+    {
+      "id": "q55",
+      "frage": "Ihr Pilot soll 12 Wochen lang laufen. Welche Roadmap-Logik ist senior-tauglich?",
+      "optionen": [
+        "Big Bang am Ende der 12 Wochen",
+        "Wellen-Rollout: Pilot wählen, 1. Welle (Stabilisierung), 2. Welle (Skalierung) mit Enablement und messbaren Outcomes",
+        "Keine Roadmap – ‚wir improvisieren‘",
+        "Identischer Rollout für alle Standorte ohne Reifegradprüfung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wellen-Rollout (Pilot → Stabilisierung → Skalierung) mit Enablement und messbaren Outcomes ist tragfähig. Big-Bang-, Improvisations- oder uniforme Ansätze ignorieren Reifegrade und Risiken.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · Roadmap",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Pilotwahl & Roadmap"
+    },
+    {
+      "id": "q56",
+      "frage": "Welche Aussage zu ‚Governance ist Overhead‘ ist senior-reflektiert?",
+      "optionen": [
+        "Jede Governance ist Overhead und muss eliminiert werden",
+        "Governance ist Overhead, wenn sie keinen Outcome (Audit, Qualität, Risiko, Geschwindigkeit) erzeugt – die Frage ist nicht ‚ob‘, sondern ‚wo und wieviel‘",
+        "Governance ist immer alternativlos und ohne Diskussion zu maximieren",
+        "Governance ersetzt operative Verantwortung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Sicht: Governance ist nur dort sinnvoll, wo sie messbar Outcome erzeugt. Pauschale Maximierung erzeugt Bürokratie, pauschale Eliminierung produziert Risiko. Operative Verantwortung wird nicht ersetzt, sondern gerahmt.",
+      "quelle": "Tag 4 · UE 4 Coaching · Governance vs. Overhead",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q57",
+      "frage": "Welche Datenstrategie ist für eine Automation-Pipeline (MVP → Scale) senior-tauglich?",
+      "optionen": [
+        "Alle Daten sofort vollständig erfassen, bevor irgendetwas läuft",
+        "Datenminimum für MVP definieren, Datenqualität messen, Exception-Policy festlegen und in späteren Wellen erweitern",
+        "Keine Daten erfassen, Monitoring entfällt",
+        "Datenqualität ist nachrangig, solange ein Tool eingeführt ist"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Praxis startet mit einem Datenminimum, misst Datenqualität explizit, hält Exception-Policies vor und erweitert wellenweise. Maximalanforderungen oder Verzicht auf Datenqualität sind nicht tragfähig.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · Automation Pipeline",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Daten & Übergabe"
+    },
+    {
+      "id": "q58",
+      "frage": "Welche der folgenden Aussagen beschreibt einen ‚Steuerungs-Repository‘-Ansatz statt einer reinen Ablage am besten?",
+      "optionen": [
+        "Repository als Cloud-Festplatte ohne Workflow",
+        "Repository mit Owner, Lifecycle, Freigabe, Variantensteuerung, KPI-Verknüpfung und Audit-Schnittstelle",
+        "Repository ohne Rollen, dafür mit vielen Ordnern",
+        "Repository als reines Reporting-Cockpit"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Steuerungs-Repository bündelt Owner, Lifecycle, Freigabe, Variantensteuerung, KPI-Verknüpfung und Audit-Schnittstelle. Die anderen Optionen sind klassische Ablagen oder einseitig Reporting-fixiert.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · Steuerungs-Repository",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Repository & E2E"
+    },
+    {
+      "id": "q59",
+      "frage": "Welche Senior-Argumentation für ‚Execution ist ein Vertrag‘ trägt am besten?",
+      "optionen": [
+        "Execution ist eine technische Spielerei",
+        "Execution definiert Daten, Fehler, SLAs, Eskalationen und Verantwortung – damit ist klar geregelt, wer im Schadensfall haftet/handelt",
+        "Execution ist nur ein Reporting-Werkzeug",
+        "Execution ersetzt Business-Verantwortung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Execution funktioniert nur als Vertrag, der Daten, Fehler, SLAs, Eskalationen und Verantwortung regelt. Im Schadensfall ist klar, wer haftet und handelt. Sie ist weder Spielerei noch Reporting noch ein Ersatz für Business-Verantwortung.",
+      "quelle": "Tag 4 · UE 4 Coaching · Execution als Vertrag",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Entscheidung"
+    },
+    {
+      "id": "q60",
+      "frage": "Welche Senior-Empfehlung zum Verhältnis von Tool-Wahl und Operating Model ist tragfähig?",
+      "optionen": [
+        "Erst das schönste Tool wählen, dann Governance erfinden",
+        "Operating Model (Rollen, Lifecycle, Standards, KPIs) zuerst definieren; Tool dient als Träger – nicht als Treiber – der Steuerung",
+        "Tool und Operating Model sind dasselbe",
+        "Operating Model ist optional, Tool genügt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Operating Model (Rollen, Lifecycle, Standards, KPIs) ist Treiber, Tool ist Träger. Senior-Praxis vermeidet Tool-Fetisch und sichert, dass die Steuerungslogik unabhängig vom Werkzeug trägt.",
+      "quelle": "Tag 4 · UE 8 Transferprojekt · Tool vs. Operating Model",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Entscheidung"
+    }
+  ]
+}

@@ -1,0 +1,907 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 14,
+  "erstellt_am": "2026-05-24",
+  "fragen": [
+    {
+      "id": "q01",
+      "frage": "Wofür steht 'CO2e'?",
+      "optionen": [
+        "Eine zufällige Buchstabenkombination",
+        "CO2-Äquivalente, also die Umrechnung verschiedener Treibhausgase auf eine vergleichbare CO2-Wirkung",
+        "Eine Hardware-Marke",
+        "Eine ISO-Norm für IT"
+      ],
+      "korrekt": 1,
+      "erklaerung": "CO2e bezeichnet CO2-Äquivalente. Verschiedene Treibhausgase werden auf eine vergleichbare CO2-Wirkung umgerechnet, sodass eine einheitliche Bilanzierung möglich wird. Es ist die Standardgröße in Carbon Footprint Reports.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · Footprint",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Carbon Footprint"
+    },
+    {
+      "id": "q02",
+      "frage": "Was bedeutet 'Systemgrenze' bei einer Footprint-Messung?",
+      "optionen": [
+        "Eine reine Marketinggrenze",
+        "Die bewusste Definition, was in die Messung einbezogen wird und was nicht",
+        "Eine physische Mauer",
+        "Eine geheime IT-Komponente"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Systemgrenze definiert, welche Aktivitäten, Komponenten und Lieferkettenanteile in eine Messung einbezogen werden. Sie ist Voraussetzung für vergleichbare Reports und schützt vor Greenwashing über unklaren Scope.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · Messlogik",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Carbon Footprint"
+    },
+    {
+      "id": "q03",
+      "frage": "Welche Datenarten unterscheidet eine seriöse Footprint-Messung?",
+      "optionen": [
+        "Nur exakte Messwerte",
+        "Messwerte und Schätzungen, die transparent als solche gekennzeichnet sind",
+        "Nur Marketingdaten",
+        "Nur Hardware-Daten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine seriöse Messung unterscheidet Messwerte und Schätzungen und macht beide Arten transparent. Schätzungen sind legitim, müssen aber gekennzeichnet sein, damit Datenqualität bewertet und verbessert werden kann.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · Datenqualität",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q04",
+      "frage": "Was ist Sustainable Software Development (SSD)?",
+      "optionen": [
+        "Eine reine Marketingmethode",
+        "Softwareentwicklung mit gezielter Berücksichtigung von Effizienz, Ressourcenverbrauch und Lebenszyklus",
+        "Eine Programmiersprache",
+        "Eine Hardware-Norm"
+      ],
+      "korrekt": 1,
+      "erklaerung": "SSD bezeichnet Softwareentwicklung, in der Effizienz (Rechenzeit, Speicher, Datenvolumen) und Lebenszyklus aktiv mitgedacht werden. Sie ergänzt Funktionalität und Qualität um eine bewusste Nachhaltigkeitsperspektive.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · SSD",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Sustainable Software"
+    },
+    {
+      "id": "q05",
+      "frage": "Was beschreibt der Begriff 'Performance Budget' im SSD?",
+      "optionen": [
+        "Ein Marketingbudget",
+        "Eine Obergrenze für Performance-Kennzahlen wie Antwortzeit oder Ressourcennutzung",
+        "Ein Budget für Schulungen",
+        "Ein Synonym für Lizenzkosten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Performance Budget legt fest, welche Antwortzeiten, Speicher- oder Daten-Limits ein Service nicht überschreiten darf. Damit wird Effizienz wie Sicherheit ein Qualitätsmerkmal mit Gates und Reviews.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · SSD",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Sustainable Software"
+    },
+    {
+      "id": "q06",
+      "frage": "Was beschreibt ein 'Data Budget' im SSD?",
+      "optionen": [
+        "Ein freier Betrag im Finanzplan",
+        "Eine Obergrenze für übertragene oder gespeicherte Datenmengen, etwa pro Aufruf",
+        "Eine Marketingkennzahl",
+        "Eine Hardware-Eigenschaft"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Data Budget legt Obergrenzen für Datentransfer oder Storage fest, z. B. maximale Payload pro Aufruf. So werden ressourcenarme Defaults erzwungen, statt jede Anfrage maximal zu beladen.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · SSD",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Sustainable Software"
+    },
+    {
+      "id": "q07",
+      "frage": "Welche Aussage zu Caching aus Nachhaltigkeitssicht trifft zu?",
+      "optionen": [
+        "Caching ist irrelevant",
+        "Caching reduziert wiederholte Berechnungen und Datenbewegungen, spart Energie und beschleunigt Antworten",
+        "Caching erhöht den Verbrauch",
+        "Caching ist nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Caching speichert Ergebnisse oder Daten, die häufig gebraucht werden, lokal. So werden wiederholte Berechnungen und Datenbewegungen reduziert. Effekt: weniger Verbrauch und schnellere Antworten.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · SSD",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Sustainable Software"
+    },
+    {
+      "id": "q08",
+      "frage": "Was umfasst der Lifecycle elektronischer Geräte (E-Waste-Sicht)?",
+      "optionen": [
+        "Nur Beschaffung und Entsorgung",
+        "Beschaffung, Nutzung, Wartung/Reparatur, Wiederverwendung, Recycling und Entsorgung",
+        "Nur Nutzung",
+        "Nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der vollständige Lifecycle umfasst Beschaffung, Nutzung, Wartung/Reparatur, Wiederverwendung (Refurbish/Reuse) sowie Recycling und Entsorgung. Erst diese Sicht ermöglicht echte Steuerung.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · E-Waste",
+      "schwierigkeit": "leicht",
+      "thema_tag": "E-Waste Management"
+    },
+    {
+      "id": "q09",
+      "frage": "Welche Aussage zur Verlängerung der Gerätenutzungsdauer trifft zu?",
+      "optionen": [
+        "Sie ist nutzlos",
+        "Sie ist einer der wirksamsten Hebel im E-Waste-Management, kombiniert mit Reparaturfähigkeit und Refurbish",
+        "Sie ist nur Marketing",
+        "Sie ist gesetzlich verboten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine längere Nutzungsdauer reduziert Neuproduktion, Lieferketten-Emissionen und Müll. Sie wirkt am stärksten, wenn sie mit Reparaturfähigkeit, Refurbish-Programmen und Standardisierung kombiniert wird.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · E-Waste",
+      "schwierigkeit": "leicht",
+      "thema_tag": "E-Waste Management"
+    },
+    {
+      "id": "q10",
+      "frage": "Was bedeutet 'sichere Datenlöschung' bei Geräteausmusterung?",
+      "optionen": [
+        "Daten dürfen einfach gelöscht werden, ohne Nachweis",
+        "Daten werden so gelöscht, dass eine Wiederherstellung praktisch ausgeschlossen ist und der Vorgang dokumentiert wird",
+        "Sichere Datenlöschung ist optional",
+        "Sichere Datenlöschung ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Sichere Datenlöschung verhindert das Wiederherstellen sensibler Daten von ausgemusterten Geräten. Sie wird mit Nachweis und Verantwortlichkeit dokumentiert - typischerweise im Zusammenspiel von Asset Management und Security.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · E-Waste",
+      "schwierigkeit": "leicht",
+      "thema_tag": "E-Waste Management"
+    },
+    {
+      "id": "q11",
+      "frage": "Was umfasst eine Vendor Sustainability Scorecard?",
+      "optionen": [
+        "Nur den Preis",
+        "Umweltpolitik, CO2-Reporting, Energieeffizienz, Kreislaufwirtschaft, Subunternehmer, Nachweise/Zertifikate",
+        "Nur die Marketingaussagen des Anbieters",
+        "Nur die Liefermenge"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine seriöse Vendor Sustainability Scorecard erfasst Umweltpolitik, CO2-Reporting, Energieeffizienz, Kreislaufwirtschaft, Subunternehmertransparenz und Nachweise/Zertifikate. So lassen sich Anbieter strukturiert vergleichen.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · Vendor Assessment",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q12",
+      "frage": "Wofür steht ISO 14001?",
+      "optionen": [
+        "Eine Hardware-Norm",
+        "Ein Standard für Umweltmanagementsysteme mit PDCA-Logik",
+        "Eine Marketingmethode",
+        "Eine reine IT-Norm"
+      ],
+      "korrekt": 1,
+      "erklaerung": "ISO 14001 ist der Standard für Umweltmanagementsysteme. Er folgt einer PDCA-Logik (Plan-Do-Check-Act) und verlangt klare Aspekte, Ziele, Programme, Messung und Verbesserung.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · ISO 14001",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ISO 14001 Logik"
+    },
+    {
+      "id": "q13",
+      "frage": "Was sind 'Environmental Aspects' im ISO-14001-Sinne?",
+      "optionen": [
+        "Reine Sichtweisen ohne Wirkung",
+        "Tätigkeiten oder Elemente, die einen Umweltbezug haben und gesteuert werden müssen",
+        "Marketingbegriffe",
+        "Nur Hardware-Themen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Environmental Aspects sind Tätigkeiten oder Elemente mit Umweltbezug, etwa Energieverbrauch im Betrieb, Hardware-Lifecycle, Datenvolumen, Lieferkette oder Entsorgung. Sie sind Ansatzpunkte für Ziele und Maßnahmen.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Aspects",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ISO 14001 Logik"
+    },
+    {
+      "id": "q14",
+      "frage": "Welche Aussage zum Verhältnis von Green IT und Lifecycle trifft zu?",
+      "optionen": [
+        "Green IT ist eine einmalige Kampagne",
+        "Green IT wird wirksam, wenn sie im gesamten Service-Lifecycle verankert ist",
+        "Green IT existiert nur außerhalb der IT",
+        "Green IT ist nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Green IT verliert ihre Wirkung als Einzelkampagne. Sie muss in Service-Design, Transition, Operation und Improvement verankert werden, damit Beschaffung, Betrieb und Stilllegung wirklich nachhaltige Wirkung entfalten.",
+      "quelle": "Tag 14 · UE 4 Coaching · Lifecycle",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Green IT Managementsystem"
+    },
+    {
+      "id": "q15",
+      "frage": "Welche Aussage zu Anti-Greenwashing trifft zu?",
+      "optionen": [
+        "Greenwashing ist harmlos",
+        "Anti-Greenwashing braucht klare Systemgrenzen, Datenqualität, Annahmen und Verbesserungspläne",
+        "Anti-Greenwashing ist Marketing",
+        "Anti-Greenwashing ist nutzlos"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Anti-Greenwashing baut auf klaren Systemgrenzen, transparenten Datenqualitätsangaben, dokumentierten Annahmen und konkreten Verbesserungsplänen auf. Ohne diese Disziplin bleiben Reports angreifbar und audit-kritisch.",
+      "quelle": "Tag 14 · UE 4 Coaching · Anti-Greenwashing",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Anti-Greenwashing"
+    },
+    {
+      "id": "q16",
+      "frage": "Welche Aussage zu 'Reparieren statt ersetzen' trifft zu?",
+      "optionen": [
+        "Reparieren ist sinnlos",
+        "Reparaturfähigkeit ist ein Hebel, um Lebenszeit zu verlängern und Müll zu vermeiden",
+        "Reparieren ist nur Marketing",
+        "Reparieren ist verboten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Reparaturen verlängern die Nutzungsdauer und vermeiden vorzeitige Beschaffung und Entsorgung. Reparaturfähigkeit ist deshalb ein zentrales Kriterium bei Vendor- und Lifecycle-Entscheidungen.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · E-Waste",
+      "schwierigkeit": "leicht",
+      "thema_tag": "E-Waste Management"
+    },
+    {
+      "id": "q17",
+      "frage": "Welche Aussage zu Rücknahmeprogrammen bei Hardware-Vendoren trifft zu?",
+      "optionen": [
+        "Sie sind unwichtig",
+        "Sie sind ein Indikator für Kreislaufwirtschaft und Vendor-Reife",
+        "Sie sind nur Marketing",
+        "Sie sind verboten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Rücknahmeprogramme zeigen, ob ein Anbieter eine Kreislaufwirtschaft ernst meint. Sie sind ein wichtiges Kriterium in einer Vendor Sustainability Scorecard und beeinflussen die langfristige Wirkung der Beschaffung.",
+      "quelle": "Tag 14 · UE 3 Arbeitsauftrag 2 · Vendor",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q18",
+      "frage": "Was sind typische Kennzahlen pro Service im Mess-Standard?",
+      "optionen": [
+        "Nur die Anzahl Mitarbeitender",
+        "z. B. kWh/Compute-Hours, Storage-GB, Requests/Tag, Antwortzeit, Off-Hours Shutdown Quote",
+        "Nur Marketingdaten",
+        "Nur HR-Daten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Pro Service werden sinnvolle technische und nachhaltige Kennzahlen geführt: Energie pro Compute-Hour, Storage, Requests, Antwortzeit, Off-Hours-Shutdown-Quote. Sie machen Wirkung steuerbar und vergleichbar.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Messstandard",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Carbon Footprint"
+    },
+    {
+      "id": "q19",
+      "frage": "Welche Rolle hat das Asset Register im E-Waste-Prozess?",
+      "optionen": [
+        "Keine",
+        "Es ist die Datenbasis für Lifecycle, Datenlöschung, Wiederverwendung und Nachweisarchiv",
+        "Es ist nur Marketing",
+        "Es ist nur intern relevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein gepflegtes Asset Register ist die Grundlage für jede E-Waste-Steuerung: nur was im Register steht, kann verfolgt, sauber gelöscht, wiederverwendet, recycelt und im Nachweisarchiv dokumentiert werden.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · E-Waste",
+      "schwierigkeit": "leicht",
+      "thema_tag": "E-Waste Management"
+    },
+    {
+      "id": "q20",
+      "frage": "Welche Aussage zu 'gemessen vs. geschätzt' im Reporting trifft zu?",
+      "optionen": [
+        "Schätzungen sind verboten",
+        "Schätzungen sind erlaubt, müssen aber gekennzeichnet, methodisch begründet und mit Verbesserungsplan versehen sein",
+        "Schätzungen sind ohne Bedeutung",
+        "Schätzungen ersetzen Messwerte ohne Hinweis"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Schätzungen sind in der Praxis unverzichtbar, müssen aber transparent ausgewiesen und methodisch begründet werden. Ein Verbesserungsplan zeigt, wie zukünftig auf gemessene Werte umgestellt wird.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · Datenqualität",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q21",
+      "frage": "Welche Aussage zum Begriff 'Procurement als Teil des Umweltmanagements' trifft zu?",
+      "optionen": [
+        "Procurement ist nur Einkauf",
+        "Procurement-Entscheidungen prägen die Lieferkette und müssen Umwelt-Kriterien strukturiert mitberücksichtigen",
+        "Procurement ist nur Marketing",
+        "Procurement ist irrelevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Beschaffungsentscheidungen prägen Lieferkette, Hardware-Lebensdauer und Rücknahmemöglichkeiten. Procurement ist deshalb integraler Teil des Umweltmanagements und nicht reine Preisoptimierung.",
+      "quelle": "Tag 14 · UE 4 Coaching · Procurement",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q22",
+      "frage": "Welche Aussage zur Wirkung von Performance Budgets für kritische Services trifft zu?",
+      "optionen": [
+        "Sie sind reine Theorie",
+        "Sie zwingen, Effizienz früh ins Design und in Release Gates einzubauen",
+        "Sie sind nur Marketing",
+        "Sie verlangsamen ohne Nutzen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Performance Budgets zwingen Entwicklungsteams, Effizienz bereits im Design zu berücksichtigen. Reviews und Gates prüfen, ob Budgets eingehalten werden. So entstehen ressourcenarme Defaults statt nachträgliche Optimierung.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Guardrails",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Sustainable Software"
+    },
+    {
+      "id": "q23",
+      "frage": "Welche Aussage zur Vendor Scorecard für 1.200 Laptop-Beschaffung trifft zu?",
+      "optionen": [
+        "Der günstigste Vendor ist immer die beste Wahl",
+        "Eine strukturierte Scorecard wägt Preis, Reparaturfähigkeit, Rücknahme, Subunternehmertransparenz und Energieeffizienz gegeneinander ab",
+        "Eine Scorecard ist überflüssig",
+        "Eine Scorecard ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine strukturierte Scorecard verhindert reine Preisentscheidungen. Sie verbindet Preis mit Reparaturfähigkeit, Rücknahmeprogrammen, Subunternehmertransparenz und Energieeffizienz und schafft so eine begründete Auswahl.",
+      "quelle": "Tag 14 · UE 3 Arbeitsauftrag 2 · Vendor Scorecard",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q24",
+      "frage": "Welche Aussage zur Aussage 'Messbarkeit vor Moral' trifft zu?",
+      "optionen": [
+        "Moral ist wichtiger als Messbarkeit",
+        "Ohne belastbare Messung wird die Diskussion politisch und Wirkung bleibt aus",
+        "Messbarkeit ist nur Marketing",
+        "Messbarkeit ist verboten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ohne belastbare Messung werden Nachhaltigkeitsdiskussionen schnell ideologisch oder politisch. 'Messbarkeit vor Moral' bedeutet: erst die Faktenbasis schaffen, dann Entscheidungen begründen.",
+      "quelle": "Tag 14 · UE 4 Coaching · Messbarkeit",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q25",
+      "frage": "Welche Aussage zu 'Efficiency als Qualitätsmerkmal' trifft zu?",
+      "optionen": [
+        "Effizienz ist optional",
+        "Effizienz wird ein Qualitätsmerkmal mit Budgets, Reviews und Gates - vergleichbar mit Security",
+        "Effizienz ist nur Marketing",
+        "Effizienz ist nicht messbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Effizienz wird im SSD-Ansatz wie Security behandelt: mit klaren Budgets (Performance/Data), Reviews und Gates. Sie wird nicht 'nachträglich' optimiert, sondern ist Teil des Qualitätsversprechens.",
+      "quelle": "Tag 14 · UE 4 Coaching · SSD",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Sustainable Software"
+    },
+    {
+      "id": "q26",
+      "frage": "Welche Aussage zu Vertragsklauseln im Vendor-Management trifft zu?",
+      "optionen": [
+        "Klauseln sind irrelevant",
+        "Klauseln wie jährliches Reporting, Rücknahme, Subunternehmertransparenz und Auditrecht verankern Nachhaltigkeit rechtlich",
+        "Klauseln sind nur Marketing",
+        "Klauseln behindern Innovation"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Klauseln wie jährliches Reporting, Rücknahmepflichten, Transparenz der Subunternehmer und ein Auditrecht (zumindest als Prinzip) machen Nachhaltigkeit zur vertraglichen Realität, nicht zur Imageaussage.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Vertragsklauseln",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q27",
+      "frage": "Welche Aussage zum Verhältnis von Performance und CO2 trifft zu?",
+      "optionen": [
+        "Performance und CO2 sind unabhängig",
+        "Effizientere Software hat oft niedrigeren Ressourcenverbrauch und damit niedrigere CO2-Bilanz",
+        "CO2 ist nicht messbar",
+        "Performance ist nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Effizientere Software benötigt weniger Rechenzeit, Speicher und Datenbewegung. Das senkt typischerweise Verbrauch und CO2-Bilanz. Performance-Optimierung und Sustainable IT stützen sich gegenseitig.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · SSD",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Sustainable Software"
+    },
+    {
+      "id": "q28",
+      "frage": "Welche Aussage zu 'kritisch vs. normal' bei SSD-Guardrails trifft zu?",
+      "optionen": [
+        "Alle Services bekommen gleiche Guardrails",
+        "Kritische Services erhalten strengere Performance-/Data-Budgets, andere Services lockerere - bei klar definiertem Ausnahmeprozess",
+        "Guardrails sind Marketing",
+        "Guardrails sind nicht steuerbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Sinnvoll ist eine Klassendifferenzierung: kritische Services mit strengeren Budgets, weniger kritische lockerer. Ein definierter Ausnahmeprozess verhindert, dass Guardrails leise umgangen werden.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Klassen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Sustainable Software"
+    },
+    {
+      "id": "q29",
+      "frage": "Welche Aussage zu 'Right to Audit' bei Vendoren trifft zu?",
+      "optionen": [
+        "Es ist nicht relevant",
+        "Es ist ein wichtiges Prinzip, um Nachhaltigkeitsangaben überprüfen zu können",
+        "Es ist nur Marketing",
+        "Es ersetzt jede Zertifizierung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Auditrecht erlaubt, Nachhaltigkeitsangaben eines Vendors zu überprüfen oder durch Dritte überprüfen zu lassen. Ohne dieses Prinzip bleibt Compliance theoretisch und Reports anfechtbar.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Auditrecht",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q30",
+      "frage": "Welche Aussage zu 'Datenlücken bei Cloud-Verbrauch' trifft zu?",
+      "optionen": [
+        "Datenlücken sind unwichtig",
+        "Datenlücken werden mit Schätzungen geschlossen, transparent gekennzeichnet und mit Plan zur Messung adressiert",
+        "Datenlücken sind nicht steuerbar",
+        "Datenlücken sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenlücken im Cloud-Verbrauch sind typisch. Sie werden mit nachvollziehbaren Schätzungen geschlossen, transparent gekennzeichnet und mit einem konkreten Plan zur Verbesserung der Messung verbunden.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Datenlücken",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q31",
+      "frage": "Welche Aussage zur Reihenfolge 'Aspekte → Ziele → Programme → Messung → Korrektur → Verbesserung' trifft zu?",
+      "optionen": [
+        "Sie ist eine Marketingformel",
+        "Sie folgt der PDCA-Logik (ISO 14001) und macht Green IT als Managementsystem strukturierbar",
+        "Sie ist nicht relevant",
+        "Sie ist nur ein Marketingbegriff"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Diese Reihenfolge entspricht der PDCA-Logik (Plan-Do-Check-Act) der ISO 14001. Sie strukturiert Green IT als Managementsystem mit klaren Stufen statt isolierter Einzelaktionen.",
+      "quelle": "Tag 14 · UE 4 Coaching · ISO 14001",
+      "schwierigkeit": "mittel",
+      "thema_tag": "ISO 14001 Logik"
+    },
+    {
+      "id": "q32",
+      "frage": "Welche Aussage zur Frage 'wo ist der größte Hebel?' trifft zu?",
+      "optionen": [
+        "Der Hebel ist immer Hardware",
+        "Der Hebel hängt vom Profil ab: Software, Betrieb, Hardware, Vendor oder Prozessdisziplin können je nach Organisation dominieren",
+        "Der Hebel ist nur Marketing",
+        "Es gibt keinen Hebel"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der größte Hebel ist organisationsspezifisch: bei einem Hardware-intensiven Setup eher Geräte und Vendor, bei Cloud-lastigen Setups eher Software-Effizienz und Workload-Management. Die Antwort braucht reale Daten.",
+      "quelle": "Tag 14 · UE 7 Feedback · Hebel",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Green IT Managementsystem"
+    },
+    {
+      "id": "q33",
+      "frage": "Welche Aussage zu Quick Wins in einer 4-Wochen-Roadmap trifft zu?",
+      "optionen": [
+        "Quick Wins sind unmöglich",
+        "Messplan MVP, Non-Prod Off-Hours und Standardisierung E-Waste sind typische Quick Wins mit hohem Hebel",
+        "Quick Wins sind nur Marketing",
+        "Quick Wins benötigen Jahre"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Innerhalb von 4 Wochen sind ein MVP-Messplan, Non-Prod Off-Hours-Politik und Standardisierung im E-Waste-Prozess realistische Quick Wins. Sie liefern Wirkung und Lerneffekte für die spätere Skalierung.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Quick Wins",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Green IT Managementsystem"
+    },
+    {
+      "id": "q34",
+      "frage": "Welche Aussage zu 'Vendor mit intransparenter Subunternehmerkette' trifft zu?",
+      "optionen": [
+        "Sie ist unbedenklich",
+        "Sie ist ein Risiko, weil Nachhaltigkeitsaussagen nicht überprüfbar sind und Verstöße schwer aufzudecken sind",
+        "Sie ist Marketing",
+        "Sie ist gesetzlich vorgeschrieben"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine intransparente Subunternehmerkette macht Nachhaltigkeits- und Compliance-Aussagen schwer überprüfbar. Verstöße bleiben verdeckt. Solche Vendoren brauchen entweder zusätzliche Klauseln oder kommen nicht in die engere Auswahl.",
+      "quelle": "Tag 14 · UE 3 Arbeitsauftrag 2 · Vendor",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q35",
+      "frage": "Welche Aussage zur Aufbewahrung von E-Waste-Nachweisen trifft zu?",
+      "optionen": [
+        "Nachweise sind überflüssig",
+        "Nachweise (Datenlöschung, Rücknahme, Recycling) müssen für definierte Zeiträume archiviert und auditierbar verfügbar sein",
+        "Nachweise sind Marketing",
+        "Nachweise müssen verheimlicht werden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Nachweise über sichere Datenlöschung, Rücknahme und Recycling werden für definierte Zeiträume archiviert und müssen für Audits zugänglich sein. Ohne dokumentierte Nachweise bleibt der Prozess angreifbar.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · E-Waste",
+      "schwierigkeit": "mittel",
+      "thema_tag": "E-Waste Management"
+    },
+    {
+      "id": "q36",
+      "frage": "Welche Aussage zur Frage 'Vendor mit CO2-Reporting und Rücknahmeprogramm trotz höherem Preis' trifft zu?",
+      "optionen": [
+        "Er wird sofort abgelehnt",
+        "Er kann bei begründeter Mehrkosten-Akzeptanz bevorzugt werden, wenn Risiko, Audit und Lifecycle gewichtet werden",
+        "Vendor-Entscheidungen sind ohne Begründung",
+        "Vendor-Entscheidungen sind reine Marketingaktionen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Höhere Preise können gerechtfertigt sein, wenn der Vendor weniger Risiken (Audit, Compliance, Reputation), bessere Lifecycle-Wirkung und transparente Daten liefert. Wichtig ist eine begründete Trade-off-Entscheidung.",
+      "quelle": "Tag 14 · UE 3 Arbeitsauftrag 2 · Trade-off",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q37",
+      "frage": "Welche Aussage zur Reihenfolge im SSD-Release-Prozess trifft zu?",
+      "optionen": [
+        "SSD-Prüfung erfolgt nach Auslieferung",
+        "Verpflichtendes Profiling vor Release ist sinnvoll für kritische Services",
+        "SSD wird nur zufällig geprüft",
+        "SSD-Prüfung ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Für kritische Services kann ein Profiling vor Release verbindlich sein: Antwortzeiten, Datenvolumen, Ressourcenverbrauch. Das verhindert, dass Effizienzprobleme erst im Produktivbetrieb entdeckt werden.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · SSD Gates",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Sustainable Software"
+    },
+    {
+      "id": "q38",
+      "frage": "Welche Aussage zur Frage 'Ausnahmeprozess für SSD-Guardrails' trifft zu?",
+      "optionen": [
+        "Ausnahmen werden stillschweigend zugelassen",
+        "Ausnahmen werden begründet, befristet, vom Service Owner verantwortet und in Reviews behandelt",
+        "Ausnahmen sind Marketing",
+        "Ausnahmen sind nie erlaubt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ausnahmen sind erlaubt, müssen aber begründet, befristet, vom Owner verantwortet und in Reviews behandelt werden. So bleibt das Standardregime glaubwürdig.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Ausnahmen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Sustainable Software"
+    },
+    {
+      "id": "q39",
+      "frage": "Welche Aussage zur Aussage 'Procurement und Service Owner gemeinsam' trifft zu?",
+      "optionen": [
+        "Procurement entscheidet alleine",
+        "Procurement und Service Owner verantworten gemeinsam Kriterien und Auswahl, weil beides langfristige Wirkung hat",
+        "Procurement ist nur Marketing",
+        "Service Owner ist nicht relevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Beschaffungs- und Service-Verantwortung sind eng verknüpft. Service Owner kennen Anforderungen und Lifecycle, Procurement bringt Vertrags- und Lieferketten-Sicht. Gemeinsam entstehen begründete Vendor-Entscheidungen.",
+      "quelle": "Tag 14 · UE 4 Coaching · Verantwortung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q40",
+      "frage": "Welche Aussage zur Aussage 'Green-IT als auditfähiges Programm' trifft zu?",
+      "optionen": [
+        "Auditfähigkeit ist optional",
+        "Auditfähigkeit entsteht durch klare Rollen, Standards, Messstandards, Nachweisartefakte und Reviewzyklen",
+        "Auditfähigkeit ist Marketing",
+        "Auditfähigkeit ist verboten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein auditfähiges Green-IT-Programm erfordert klare Rollen, Standards, Messverfahren, Nachweisartefakte und Reviewzyklen. Erst diese Disziplin macht Ergebnisse belastbar und gegenüber Auditoren verteidigbar.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Audit",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Green IT Managementsystem"
+    },
+    {
+      "id": "q41",
+      "frage": "Welche Aussage zur Frage 'Welche Maßnahmen sofort, welche später?' trifft zu?",
+      "optionen": [
+        "Alle Maßnahmen gleichzeitig",
+        "Quick Wins mit hohem Hebel/niedrigem Risiko starten sofort, größere Maßnahmen mit Abhängigkeiten werden begründet verschoben",
+        "Reihenfolge ist egal",
+        "Reihenfolge ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Priorisierung in 4-Wochen Quick Wins und spätere größere Maßnahmen schafft frühe Wirkung, ohne sich an Abhängigkeiten zu verheben. Die Trennung wird offen und begründet kommuniziert.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Quick Wins",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Green IT Managementsystem"
+    },
+    {
+      "id": "q42",
+      "frage": "Welche Aussage zur Frage 'Trade-off Performance vs. Cost vs. CO2' trifft zu?",
+      "optionen": [
+        "Es gibt keinen Trade-off",
+        "Trade-offs werden sichtbar gemacht und mit klaren KPI-Kopplungen geführt, damit nicht eine Dimension auf Kosten anderer 'gewinnt'",
+        "Trade-off ist nur Marketing",
+        "Trade-off ist verboten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Performance, Cost und CO2 stehen häufig in Spannung. Senior-Steuerung macht Trade-offs sichtbar und verknüpft KPIs so, dass eine Dimension nicht heimlich zulasten anderer optimiert wird.",
+      "quelle": "Tag 14 · UE 7 Feedback · Trade-off",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Anti-Greenwashing"
+    },
+    {
+      "id": "q43",
+      "frage": "Welche Aussage zur Rolle 'Procurement' trifft zu?",
+      "optionen": [
+        "Procurement ist nicht beteiligt",
+        "Procurement übersetzt Nachhaltigkeitsziele in Verträge, Klauseln und Vendor-Auswahl",
+        "Procurement ist nur Marketing",
+        "Procurement ist gleichbedeutend mit Finance"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Procurement ist der Hebel, mit dem Nachhaltigkeitsziele in Verträge übersetzt werden: Klauseln zu Reporting, Rücknahme, Subunternehmertransparenz und Auditrecht. Ohne Procurement bleibt Sustainability eine Absichtserklärung.",
+      "quelle": "Tag 14 · UE 8 Transferprojekt · Rollen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q44",
+      "frage": "Welche Aussage zu 'Off-Hours Shutdown Quote' als Kennzahl trifft zu?",
+      "optionen": [
+        "Sie ist ohne Wert",
+        "Sie misst, welcher Anteil der Non-Prod-Umgebungen außerhalb der Nutzungszeiten tatsächlich abgeschaltet ist",
+        "Sie ist Marketing",
+        "Sie ersetzt Energiemessungen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Off-Hours Shutdown Quote zeigt, wie konsequent Non-Prod-Umgebungen außerhalb der Nutzungszeiten heruntergefahren werden. Sie ist ein guter Indikator für Disziplin und ein wirksamer Sustainable-IT-Hebel.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · KPIs",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Carbon Footprint"
+    },
+    {
+      "id": "q45",
+      "frage": "Welche Aussage zur Frage 'Rückgabe und Recycling als Vendor-Pflicht' trifft zu?",
+      "optionen": [
+        "Sie sind unwichtig",
+        "Sie werden im Vertrag vorgesehen und über Nachweise (Mengen, Zertifikate) gesteuert",
+        "Sie sind Marketing",
+        "Sie ersetzen interne Prozesse vollständig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Rückgabe und Recycling können vertraglich verankert und über Nachweise (Mengen, Zertifikate) gemessen werden. Sie ersetzen nicht die interne Lifecycle-Steuerung, sondern ergänzen sie wirksam.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Vendor",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q46",
+      "frage": "Welche Aussage zur Senior-Frage 'welche Metriken trotz Datenlücken veröffentlicht werden' trifft zu?",
+      "optionen": [
+        "Es werden nur perfekte Werte veröffentlicht",
+        "Auch unsichere Werte können veröffentlicht werden, wenn Schätzlogik, Datenqualitätslabel und Verbesserungsplan transparent sind",
+        "Veröffentlichung ist Marketing",
+        "Datenlücken sind kein Senior-Thema"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Verantwortung kann transparent unsichere Werte veröffentlichen, wenn Schätzlogik, Datenqualitätslabel und Verbesserungsplan offenliegen. So wird Lernen statt Greenwashing.",
+      "quelle": "Tag 14 · UE 8 Transferprojekt · Senior",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Anti-Greenwashing"
+    },
+    {
+      "id": "q47",
+      "frage": "Welche Aussage zur Senior-Frage 'Vendor trotz Mehrkosten bevorzugen' trifft zu?",
+      "optionen": [
+        "Mehrkosten sind tabu",
+        "Mehrkosten können bevorzugt werden, wenn der Business Case Risiko, CO2 und Compliance ausgewogen begründet",
+        "Mehrkosten sind nur Marketing",
+        "Mehrkosten dürfen nicht entschieden werden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Entscheidungen wägen Risiko, CO2-Wirkung und Compliance gegen Mehrkosten ab. Ein dokumentierter Business Case macht die Bevorzugung eines teureren, aber nachhaltigeren Vendors verteidigbar.",
+      "quelle": "Tag 14 · UE 8 Transferprojekt · Vendor-Entscheidung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Verantwortung"
+    },
+    {
+      "id": "q48",
+      "frage": "Welche Aussage zu Anti-Greenwashing-Mechanismen in KPIs trifft zu?",
+      "optionen": [
+        "Es sind keine Mechanismen nötig",
+        "KPIs werden so gekoppelt, dass Berichtbarkeit von Datenqualität und Kontrollergebnissen abhängt (z. B. nur veröffentlicht bei Datenqualitätslabel ≥B)",
+        "Mechanismen sind Marketing",
+        "Mechanismen sind verboten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wirksame Anti-Greenwashing-Mechanismen koppeln Berichtbarkeit an Datenqualität: KPIs werden nur veröffentlicht, wenn Label ≥B vorliegt oder Kontrollen bestanden sind. So bleibt Transparenz mit Substanz verbunden.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Anti-Gaming",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Anti-Greenwashing"
+    },
+    {
+      "id": "q49",
+      "frage": "Welche Aussage zu 'Reportingpflichten und Senior-Verantwortung' trifft zu?",
+      "optionen": [
+        "Reportingpflichten sind nur ein IT-Thema",
+        "Sie sind Senior-Verantwortung, weil Risk Appetite, Systemgrenzen und Transparenzregeln nicht delegierbar sind",
+        "Reportingpflichten sind nur Marketing",
+        "Reportingpflichten sind irrelevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Reportingpflichten betreffen Risk Appetite, Systemgrenzen und Transparenzregeln. Diese Entscheidungen sind Senior-Verantwortung und können nicht in den operativen Maschinenraum delegiert werden.",
+      "quelle": "Tag 14 · UE 8 Transferprojekt · Senior",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Verantwortung"
+    },
+    {
+      "id": "q50",
+      "frage": "Welche Aussage zur 'Exit-Strategie' bei Vendoren trifft zu?",
+      "optionen": [
+        "Eine Exit-Strategie ist nicht nötig",
+        "Eine Exit-Strategie regelt Übergaben, Datenrückgabe und Vermeidung von Lock-in - inklusive Nachhaltigkeitsaspekten",
+        "Exit ist Marketing",
+        "Exit ist verboten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Exit-Strategie sichert, dass Übergaben, Datenrückgabe und Hardware-Rücknahme geregelt sind und kein Lock-in entsteht. Auch Nachhaltigkeitsaspekte (Rücknahme, Recycling) gehören in den Exit.",
+      "quelle": "Tag 14 · UE 8 Transferprojekt · Exit",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q51",
+      "frage": "Welche Aussage zur Frage 'wie verhindert man Overhead bei Green-IT-Standards?' trifft zu?",
+      "optionen": [
+        "Mehr Vorschriften lösen das Problem",
+        "Wenige, verbindliche Regeln mit klarer Wirkung schlagen umfangreiche Regelwerke ohne Steuerungswirkung",
+        "Overhead ist gewollt",
+        "Standards sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wenige, klar wirksame Regeln schlagen umfangreiche Regelwerke. Senior-Steuerung sorgt dafür, dass Standards Wirkung entfalten, statt zu lähmen, und dass Ausnahmen geordnet behandelt werden.",
+      "quelle": "Tag 14 · UE 7 Feedback · Overhead",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Green IT Managementsystem"
+    },
+    {
+      "id": "q52",
+      "frage": "Welche Aussage zur Aussage 'klare Systemgrenzen sind nicht delegierbar' trifft zu?",
+      "optionen": [
+        "Systemgrenzen sind unwichtig",
+        "Sie sind Senior-Entscheidungen, weil sie über Vergleichbarkeit, Auditfähigkeit und Glaubwürdigkeit bestimmen",
+        "Sie sind nur Marketing",
+        "Sie werden zufällig festgelegt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Systemgrenzen entscheiden, welche Aktivitäten in Reports einfließen. Sie bestimmen Vergleichbarkeit, Auditfähigkeit und Glaubwürdigkeit - und sind deshalb Senior-Verantwortung.",
+      "quelle": "Tag 14 · UE 4 Coaching · Systemgrenzen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Verantwortung"
+    },
+    {
+      "id": "q53",
+      "frage": "Welche Aussage zur Frage 'Lieferkette und Vendor-Risiken' im Senior-Sinne trifft zu?",
+      "optionen": [
+        "Lieferkette ist irrelevant",
+        "Lieferkette ist Teil des Senior-Risikos, weil Verstöße bei Subunternehmern die eigene Reputation und Compliance treffen",
+        "Lieferkette ist nur Marketing",
+        "Lieferkette ist nicht steuerbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Verstöße in der Lieferkette schlagen direkt auf die eigene Organisation zurück. Senior-Verantwortung steuert deshalb über Klauseln, Auditrechte und Transparenzpflichten in die Tiefe der Lieferkette.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · Vendor",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q54",
+      "frage": "Welche Aussage zur Aussage 'Green IT ist kein Marketing, sondern Managementsystem' trifft zu?",
+      "optionen": [
+        "Green IT ist Marketing",
+        "Green IT wird wirksam, wenn sie messbar, auditfähig und im Lifecycle verankert ist - mit klaren Rollen und KPIs",
+        "Green IT ist eine reine Kampagne",
+        "Green IT spielt keine Rolle"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wirksame Green IT braucht ein Managementsystem: messbar, auditfähig, im Lifecycle verankert, mit klaren Rollen und KPIs. Marketingaussagen ohne diese Substanz sind angreifbar und schaffen kein Vertrauen.",
+      "quelle": "Tag 14 · UE 8 Transferprojekt · Senior-Ziel",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Green IT Managementsystem"
+    },
+    {
+      "id": "q55",
+      "frage": "Welche Aussage zur Aussage 'Vendor-Claims widersprüchlich' trifft im Senior-Sinne zu?",
+      "optionen": [
+        "Sie sind harmlos",
+        "Widersprüchliche Vendor-Claims müssen über Auditrechte, Nachweise und Subunternehmertransparenz geprüft werden",
+        "Sie sind Marketing",
+        "Sie sind nicht prüfbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Widersprüchliche Vendor-Claims sind ein Risiko. Senior-Verantwortung setzt auf Auditrechte, Nachweise und Subunternehmertransparenz, um Aussagen prüfbar und vergleichbar zu machen.",
+      "quelle": "Tag 14 · UE 5 Fallstudie · Vendor",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Vendor Sustainability"
+    },
+    {
+      "id": "q56",
+      "frage": "Welche Aussage zu 'Investitionsprioritäten' im Green-IT-Operating-Model trifft zu?",
+      "optionen": [
+        "Sie spielen keine Rolle",
+        "Sie verbinden Wirkungspotenzial, Risiko und Umsetzungsaufwand und werden auditfähig dokumentiert",
+        "Sie sind nur Marketing",
+        "Sie sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Investitionsprioritäten verbinden Wirkung, Risiko und Umsetzungsaufwand. Auditfähige Dokumentation der Entscheidungen verhindert spätere Streitfälle und macht die Steuerung glaubwürdig.",
+      "quelle": "Tag 14 · UE 8 Transferprojekt · Investitionsprioritäten",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Verantwortung"
+    },
+    {
+      "id": "q57",
+      "frage": "Welche Aussage zur Frage 'Reviewzyklen für Green IT' trifft zu?",
+      "optionen": [
+        "Reviews sind unnötig",
+        "Reviews prüfen Wirkung, Datenqualität, Vendor-Performance und steuern Verbesserungen",
+        "Reviews sind Marketing",
+        "Reviews ersetzen den Betrieb"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Reviewzyklen prüfen regelmäßig die Wirkung, die Datenqualität und die Vendor-Performance. Aus ihnen entstehen Anpassungen, neue Maßnahmen und Verbesserungspläne. Ohne Reviews stagniert das Programm.",
+      "quelle": "Tag 14 · UE 8 Transferprojekt · Reviews",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Green IT Managementsystem"
+    },
+    {
+      "id": "q58",
+      "frage": "Welche Aussage zur Aussage 'Datenqualitätslabel A/B/C' trifft zu?",
+      "optionen": [
+        "Labels sind ohne Wirkung",
+        "Labels machen den Reifegrad der Daten transparent und steuern, welche Aussagen veröffentlicht werden dürfen",
+        "Labels sind Marketing",
+        "Labels sind irrelevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenqualitätslabel A/B/C zeigen den Reifegrad: A gemessen und geprüft, B teilweise gemessen, C überwiegend geschätzt. Sie steuern, welche KPIs publiziert werden dürfen und welche zunächst nur intern.",
+      "quelle": "Tag 14 · UE 4 Coaching · Labels",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q59",
+      "frage": "Welche Aussage zur Aussage 'integriert in Service-Lifecycle' trifft zu?",
+      "optionen": [
+        "Green IT existiert getrennt vom Lifecycle",
+        "Green IT ist erst wirksam, wenn ihre Standards in Design, Transition, Operation und Improvement eines Services verbindlich sind",
+        "Lifecycle ist Marketing",
+        "Integration ist optional"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Standards werden im gesamten Service-Lifecycle verbindlich: im Design (z. B. Effizienz-Defaults), in der Transition (Beschaffung), im Betrieb (KPIs) und im Improvement (Reviews). Erst so entsteht nachhaltige Wirkung.",
+      "quelle": "Tag 14 · UE 1 Wissensvermittlung · Lifecycle",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Green IT Managementsystem"
+    },
+    {
+      "id": "q60",
+      "frage": "Welche Aussage zum Senior-Ziel 'Green IT als verantwortete Entscheidungsarchitektur' trifft zu?",
+      "optionen": [
+        "Es ist eine Kampagne",
+        "Es ist ein dauerhaft gesteuertes System aus Standards, KPIs, Vendor-Steuerung und Reviewzyklen mit klarer Senior-Verantwortung",
+        "Es ist nur Marketing",
+        "Es ist eine Hardware-Frage"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Senior-Ziel verschiebt Green IT von Einzelkampagnen zu einer dauerhaft gesteuerten Entscheidungsarchitektur: Standards, KPIs, Vendor-Steuerung, Reviewzyklen, Verantwortung. Wirkung statt Inszenierung.",
+      "quelle": "Tag 14 · UE 8 Transferprojekt · Senior-Ziel",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Verantwortung"
+    }
+  ]
+}

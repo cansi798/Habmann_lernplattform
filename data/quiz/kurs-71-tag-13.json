@@ -1,0 +1,907 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 13,
+  "erstellt_am": "2026-05-24",
+  "fragen": [
+    {
+      "id": "q01",
+      "frage": "Was umfasst ein Service-Portfolio nach ITIL-4-Logik?",
+      "optionen": [
+        "Nur die aktuell live betriebenen Services",
+        "Pipeline, Live und Retired Services inklusive Eigentümer, Kosten, Risiko und Nutzen",
+        "Nur die geplanten Services",
+        "Nur die Hardware-Liste"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein vollständiges Service-Portfolio umfasst alle Services im Lebenszyklus: geplante (Pipeline), live betriebene und stillgelegte (Retired) Services. Eigentümer, Kosten, Risiken und Nutzen werden bewusst geführt - inklusive Nachhaltigkeitswirkung.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Service-Portfolio",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Service-Portfolio"
+    },
+    {
+      "id": "q02",
+      "frage": "Welche Aussage zum Wert eines IT-Services trifft zu?",
+      "optionen": [
+        "Wert ist ausschließlich monetär",
+        "Wert umfasst Kundennutzen, Regulatorik, Resilienz und Nachhaltigkeit",
+        "Wert wird nur durch Marketing definiert",
+        "Wert spielt für IT-Services keine Rolle"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wert wird breit gedacht: Kundennutzen, regulatorische Relevanz, Resilienz und Nachhaltigkeitswirkung. Eine rein monetäre Sicht greift zu kurz, weil sie Risiken, Pflichten und langfristige Effekte ausblendet.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Wertverständnis",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Service-Portfolio"
+    },
+    {
+      "id": "q03",
+      "frage": "Was bedeutet Rightsizing im IT-Betrieb?",
+      "optionen": [
+        "Ressourcen werden so groß wie möglich gewählt",
+        "Ressourcen werden an den tatsächlichen Bedarf angepasst, im Rahmen der SLOs",
+        "Ressourcen werden willkürlich verteilt",
+        "Ressourcen werden vollständig abgeschaltet"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Rightsizing passt Ressourcen wie CPU, RAM oder VMs an den realen Bedarf an. Ziel ist, Overprovisioning zu vermeiden, ohne die vereinbarten SLOs zu gefährden. Vorausgesetzt wird belastbares Monitoring.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Rightsizing",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Capacity und Rightsizing"
+    },
+    {
+      "id": "q04",
+      "frage": "Was beschreibt der Begriff Kapazität im IT-Service-Management?",
+      "optionen": [
+        "Nur den Festplattenplatz",
+        "Die Fähigkeit, Last und SLOs zu erfüllen, über Compute, Storage, Netzwerk und Skills",
+        "Nur die Bandbreite",
+        "Nur die Anzahl Mitarbeitender"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Kapazität bezeichnet die Fähigkeit, Last zu bewältigen und SLOs zu erfüllen. Sie umfasst Compute, Storage, Netzwerk und auch die Skills/Verfügbarkeit von Menschen. Eine reine Hardware-Sicht greift zu kurz.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Capacity",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Capacity und Rightsizing"
+    },
+    {
+      "id": "q05",
+      "frage": "Was ist ein Hebel für energieeffiziente Rechenzentren?",
+      "optionen": [
+        "Maximale Überdimensionierung",
+        "Konsolidierung, Virtualisierung/Container, Abschalten Idle, optimierte Kühlung",
+        "Verzicht auf jegliches Monitoring",
+        "Reine Marketingaussagen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Typische Hebel sind Konsolidierung von Systemen, Virtualisierung und Container, Abschalten von Idle-Workloads und optimierte Kühlung. Hardware-Effizienzklassen und Workload-Shift ergänzen das Bild.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Energieeffizienz",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Energieeffizienz"
+    },
+    {
+      "id": "q06",
+      "frage": "Was beschreibt ISO 20000?",
+      "optionen": [
+        "Eine Norm für Möbeldesign",
+        "Eine Norm rund um IT-Service-Management mit definierten Anforderungen",
+        "Eine Programmiersprache",
+        "Eine Software-Lizenz"
+      ],
+      "korrekt": 1,
+      "erklaerung": "ISO 20000 ist eine Norm für IT-Service-Management, die Anforderungen an Prozesse, Rollen, Messung und Verbesserung definiert. Im Kurs wird sie als praktische Nachweislogik genutzt, nicht als Selbstzweck.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · ISO 20000",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ISO 20000 Nachweislogik"
+    },
+    {
+      "id": "q07",
+      "frage": "Was zeichnet einen SLO aus?",
+      "optionen": [
+        "Eine unverbindliche Hoffnung",
+        "Ein messbares Zielniveau, z. B. Verfügbarkeit oder Antwortzeit",
+        "Eine reine Marketingfloskel",
+        "Ein internes Akronym ohne Wirkung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein SLO (Service Level Objective) ist ein messbares Zielniveau, etwa Verfügbarkeit pro Monat oder maximale Antwortzeit. SLOs machen Betriebsversprechen verbindlich und sind Grundlage für Capacity-Entscheidungen.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · SLO",
+      "schwierigkeit": "leicht",
+      "thema_tag": "SLO und Monitoring"
+    },
+    {
+      "id": "q08",
+      "frage": "Welcher Hebel betrifft besonders Non-Prod-Umgebungen?",
+      "optionen": [
+        "Permanent maximal skalieren",
+        "Off-Hours Shutdown, Standard-Images und konsequente Wiederverwendung",
+        "Anschalten aller Backups",
+        "Verzicht auf Tests"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Non-Prod-Umgebungen sind ein typischer Sparhebel: Off-Hours-Shutdown, einheitliche Standard-Images und konsequente Wiederverwendung reduzieren Verbrauch und Komplexität, ohne fachliche Wirkung zu mindern.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Maßnahmen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Capacity und Rightsizing"
+    },
+    {
+      "id": "q09",
+      "frage": "Was sind 'Zombie-Services'?",
+      "optionen": [
+        "Services aus alten Filmen",
+        "Services, die noch laufen, aber keinen klaren Nutzen oder Owner mehr haben",
+        "Services mit besonders hohem Wert",
+        "Services im Pilotbetrieb"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Zombie-Services laufen weiter, obwohl ihr Nutzen oder ihre Verantwortlichkeit unklar ist. Sie verbrauchen Ressourcen, ohne Wert zu liefern, und sind klassische Kandidaten für ein Portfolio-Review und Stilllegung.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Konsolidierung",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Service-Portfolio"
+    },
+    {
+      "id": "q10",
+      "frage": "Was ist ein Capacity Review Board?",
+      "optionen": [
+        "Eine Werbeagentur",
+        "Ein regelmäßiges Gremium, das Kapazitätsentscheidungen abstimmt und dokumentiert",
+        "Eine reine Audit-Funktion",
+        "Eine Marketinginstanz"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Capacity Review Board trifft in einem festen Takt Entscheidungen über Skalierung, Reduktion und Stilllegung. Es dokumentiert Entscheidungen auditfähig und sorgt dafür, dass Kapazität nicht reaktiv, sondern gesteuert verantwortet wird.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Governance",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Portfolio Governance"
+    },
+    {
+      "id": "q11",
+      "frage": "Was beschreibt 'Low Regret Moves'?",
+      "optionen": [
+        "Maßnahmen mit hohem Risiko und unklarer Wirkung",
+        "Maßnahmen, die fast immer sinnvoll sind, etwa Idle abschalten und klare SLOs",
+        "Maßnahmen, die nur Marketing sind",
+        "Maßnahmen, die nur intern wirken"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Low Regret Moves sind Maßnahmen, die unter fast jedem Szenario sinnvoll sind: Idle abschalten, klare SLOs, Standard-Runbooks. Sie liefern Wirkung mit minimalem Risiko und sind ideale Quick Wins.",
+      "quelle": "Tag 13 · UE 4 Coaching · Low Regret",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Energieeffizienz"
+    },
+    {
+      "id": "q12",
+      "frage": "Welche Rolle spielt der Service Owner?",
+      "optionen": [
+        "Reine Marketingrolle",
+        "Verantwortet einen Service ende-zu-ende inkl. Kosten, SLO und Nachhaltigkeit",
+        "Hat keinen Einfluss auf den Service",
+        "Ist nur in Tests relevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Service Owner verantwortet einen Service End-to-End: Wirkung, Kosten, SLOs und seine Nachhaltigkeitswirkung. Ohne klar besetzte Service Owner verlieren Entscheidungen über Invest oder Retire ihre Zuordnung.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Rollen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Portfolio Governance"
+    },
+    {
+      "id": "q13",
+      "frage": "Welche Aussage zur Auditfähigkeit von Portfolio-Entscheidungen trifft zu?",
+      "optionen": [
+        "Auditfähigkeit ist optional",
+        "Entscheidungen brauchen Kriterien, Datenbasis, Owner, Beschluss und Reviewzyklus, damit sie nachvollziehbar bleiben",
+        "Auditfähigkeit ist nur Marketing",
+        "Auditfähigkeit hindert Entscheidungen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine auditfähige Portfolio-Entscheidung dokumentiert Kriterien, Datenbasis, Owner, Beschluss und Reviewdatum. So bleibt sie nachvollziehbar und kann später überprüft, korrigiert oder verteidigt werden.",
+      "quelle": "Tag 13 · UE 4 Coaching · Audit",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Portfolio Governance"
+    },
+    {
+      "id": "q14",
+      "frage": "Welche Aussage zu 'Sicherheit durch Messung' im Rightsizing trifft zu?",
+      "optionen": [
+        "Reduzierung erfolgt ohne Messdaten",
+        "Erst Monitoring + SLOs + Guardrails ermöglichen verantwortliche Ressourcenreduktion",
+        "Messung ist nur Marketing",
+        "Messung verhindert jede Reduktion"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ohne Monitoring, SLOs und Guardrails ist Rightsizing Glücksspiel. Erst belastbare Messung erlaubt es, Reserven gezielt abzubauen und im Notfall mit Stop-/Rollback-Regeln zu reagieren.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Rightsizing",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Capacity und Rightsizing"
+    },
+    {
+      "id": "q15",
+      "frage": "Was ist ein typisches Beispiel für ein Guardrail beim Rightsizing?",
+      "optionen": [
+        "Verzicht auf Monitoring",
+        "Rollback, wenn CPU über 85 Prozent über mehrere Minuten steigt",
+        "Sofortige Hardware-Erneuerung ohne Anlass",
+        "Beliebige Reduktion ohne Schwellen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Guardrail definiert klare Schwellen, ab denen rückwärts gesteuert wird: etwa CPU-Auslastung über 85 Prozent über mehrere Minuten, hohe Fehlerquote oder langsamere Antwortzeiten. Sie schützen vor unbemerkten Engpässen.",
+      "quelle": "Tag 13 · UE 3 Arbeitsauftrag 2 · Guardrails",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Capacity und Rightsizing"
+    },
+    {
+      "id": "q16",
+      "frage": "Welche Aussage zum Begriff 'Workload Shift' trifft zu?",
+      "optionen": [
+        "Workloads bleiben immer zur gleichen Zeit",
+        "Workloads werden in günstigere Zeitfenster verschoben, etwa für Batches oder Reports",
+        "Workloads werden niemals beeinflusst",
+        "Workloads sind reine Marketingbegriffe"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Workload Shift bezeichnet das Verschieben von Aufgaben in günstigere Zeitfenster (z. B. nachts, lastarme Zeiten) oder Regionen. So lassen sich Verbrauch, Kosten und SLO-Belastung besser balancieren.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Energieeffizienz",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Energieeffizienz"
+    },
+    {
+      "id": "q17",
+      "frage": "Was ist ein typischer Eintrag in einem Service-Portfolio-Canvas?",
+      "optionen": [
+        "Wetterdaten",
+        "Service, Owner, Kritikalität, SLO, Kosten-/Energie-Treiber, Risiko, Nachhaltigkeitshebel",
+        "Aktienkurs",
+        "Persönliche Daten der Mitarbeitenden"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Service-Portfolio-Canvas listet pro Service: Owner, Kritikalität, SLO, zentrale Kosten- und Energie-Treiber, Risiken und mögliche Nachhaltigkeitshebel. So entsteht eine vergleichbare Steuerungssicht.",
+      "quelle": "Tag 13 · UE 2 Arbeitsauftrag 1 · Canvas",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Service-Portfolio"
+    },
+    {
+      "id": "q18",
+      "frage": "Welche Aussage zur Kommunikation 'Abschaltungen' im Fachbereich trifft zu?",
+      "optionen": [
+        "Abschaltungen werden verschwiegen",
+        "Abschaltungen brauchen Transparenz, Begründung, Notfall-On-Mechanismen und klare Owner",
+        "Abschaltungen passieren spontan",
+        "Abschaltungen sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Abschaltungen, etwa von Non-Prod über Nacht, brauchen klare Kommunikation, dokumentierte Begründung und Notfall-Mechanismen (z. B. 'Notfall-On in unter 30 Minuten'). So bleibt Vertrauen erhalten.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Abschaltpolitik",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Capacity und Rightsizing"
+    },
+    {
+      "id": "q19",
+      "frage": "Was ist ein typischer Energie-/Kosten-Treiber bei IT-Services?",
+      "optionen": [
+        "Hardware-Klasse, Auslastung, Overprovisioning und Datenvolumen",
+        "Nur die Farbe des Logos",
+        "Nur das Wetter am Standort",
+        "Nur die Anzahl der Slides"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Energie- und Kostenfresser sind typischerweise ineffiziente Hardware-Klassen, niedrige Auslastung trotz hoher Reservierung, Overprovisioning und große Datenvolumen. Sie müssen pro Service erkannt und adressiert werden.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Treiber",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Energieeffizienz"
+    },
+    {
+      "id": "q20",
+      "frage": "Was bedeutet 'Standardisierung' bei Services im Portfolio?",
+      "optionen": [
+        "Jeder Service nutzt eigene, individuelle Plattformen",
+        "Services nutzen vergleichbare Standardplattformen, was Betrieb und Optimierung erleichtert",
+        "Standardisierung verhindert Innovation",
+        "Standardisierung ist nur ein Marketingbegriff"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Standardisierung bedeutet, Services auf vergleichbare Plattformen, Tools und Mechanismen zu bündeln. So lassen sich Skalierung, Monitoring und Optimierung effizienter steuern, ohne fachliche Vielfalt zu opfern.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Portfolio",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Service-Portfolio"
+    },
+    {
+      "id": "q21",
+      "frage": "Welche Aussage zum Verhältnis von Verfügbarkeit, Kosten und Nachhaltigkeit trifft zu?",
+      "optionen": [
+        "Die drei Größen sind unabhängig",
+        "Sie stehen häufig in Zielkonflikt und müssen mit einer Trade-off-Logik bewusst gesteuert werden",
+        "Sie sind identisch",
+        "Sie sind nur Marketingbegriffe"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Verfügbarkeit, Kosten und Nachhaltigkeit konkurrieren oft miteinander: höhere Reserven kosten mehr und verbrauchen mehr Energie. Senior-Steuerung macht diese Trade-offs sichtbar und entscheidet bewusst.",
+      "quelle": "Tag 13 · UE 4 Coaching · Trade-off",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Trade-off Logik"
+    },
+    {
+      "id": "q22",
+      "frage": "Welche Aussage zu einem Portfolio-Scoring (1–5) trifft zu?",
+      "optionen": [
+        "Scoring ist Bürokratie ohne Wirkung",
+        "Scoring nach Wert, Risiko, Kosten, Nachhaltigkeit und Veränderungsaufwand macht Vergleichbarkeit möglich",
+        "Scoring ist nur in HR sinnvoll",
+        "Scoring ist nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein einheitliches Scoring über mehrere Kriterien (Wert, Risiko, Kosten, Nachhaltigkeit, Aufwand) macht Services vergleichbar. Damit lassen sich Invest- und Retire-Entscheidungen begründbar und konsistent treffen.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Scoring",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Portfolio Governance"
+    },
+    {
+      "id": "q23",
+      "frage": "Welche Aussage zu 'SLO-Reserven' trifft zu?",
+      "optionen": [
+        "Reserven sind beliebig groß zu wählen",
+        "Reserven werden bewusst dimensioniert, basierend auf Peak-Last, Toleranz für SLO-Bruch und Frühwarnsignalen",
+        "Reserven sind irrelevant",
+        "Reserven sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "SLO-Reserven sollen Lastspitzen abfedern, aber nicht unnötig Energie und Kosten verbrennen. Sinnvoll dimensioniert sind sie an Peak-Last, Toleranz für Verletzungen und Frühwarnsignale gekoppelt.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Reserven",
+      "schwierigkeit": "mittel",
+      "thema_tag": "SLO und Monitoring"
+    },
+    {
+      "id": "q24",
+      "frage": "Welche Aussage zu Demand Forecasting im Kapazitätsmanagement trifft zu?",
+      "optionen": [
+        "Demand Forecasting ist überflüssig",
+        "Auch einfache Forecasts (Trends, Peak-Profile) verbessern Entscheidungen deutlich gegenüber rein reaktivem Verhalten",
+        "Demand Forecasting funktioniert nur mit perfekten Daten",
+        "Demand Forecasting ist nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Schon einfache Bedarfsprognosen (Trends, Saisonalität, Peak-Profile) verbessern Capacity-Entscheidungen deutlich. Ohne Forecast bleibt die Steuerung reaktiv und überprovisioniert tendenziell.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Forecasting",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Capacity und Rightsizing"
+    },
+    {
+      "id": "q25",
+      "frage": "Welche Aussage zu Greenwashing-KPIs trifft zu?",
+      "optionen": [
+        "Greenwashing-KPIs sind harmlos",
+        "Sie zeigen scheinbare Verbesserungen, ohne echte Wirkung; sie unterminieren Vertrauen und Audits",
+        "Greenwashing ist erwünscht",
+        "Greenwashing ist nur ein Marketingbegriff ohne Folgen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Greenwashing-KPIs liefern bunte Berichte, ohne realen Effekt. Sie sind ein Reputations- und Auditrisiko. Sinnvoll sind klare Systemgrenzen, transparente Datenqualität und gekoppelte KPIs gegen Gaming.",
+      "quelle": "Tag 13 · UE 4 Coaching · Greenwashing",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Anti-Greenwashing"
+    },
+    {
+      "id": "q26",
+      "frage": "Welche Aussage zu Reviewzyklen im Portfolio trifft zu?",
+      "optionen": [
+        "Reviews finden zufällig statt",
+        "Reviews folgen einem festen Takt (z. B. zwei-wöchentlich/quartalsweise) mit Owner und auditfähigem Protokoll",
+        "Reviews sind nur Marketing",
+        "Reviews ersetzen den Betrieb"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Portfolio-Reviews folgen einem festen Takt mit klaren Verantwortlichen und einem dokumentierten Protokoll. So bleibt das Portfolio steuerbar und Entscheidungen werden nachvollziehbar verantwortet.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Review-Board",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Portfolio Governance"
+    },
+    {
+      "id": "q27",
+      "frage": "Welche Aussage zur Frage 'Welche zwei Maßnahmen sofort, welche verschieben?' trifft zu?",
+      "optionen": [
+        "Alles wird gleichzeitig gestartet",
+        "Quick Wins mit klarem Hebel und geringem Risiko starten sofort, größere oder abhängige Maßnahmen werden bewusst verschoben",
+        "Maßnahmen werden nie verschoben",
+        "Die Reihenfolge ist egal"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wer sofort startet, wählt Quick Wins mit klarem Hebel und geringem Risiko, etwa Non-Prod Shutdown oder einen Rightsizing-Piloten. Größere oder abhängige Maßnahmen werden bewusst geplant und nicht ad hoc angegangen.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Quick Wins",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Energieeffizienz"
+    },
+    {
+      "id": "q28",
+      "frage": "Welche Aussage zu 'KPIs an Wert koppeln' trifft zu?",
+      "optionen": [
+        "KPIs sind ohne Bedeutung",
+        "Kostenreduktion zählt nur dann, wenn SLO gehalten wird; Anti-Gaming-Kopplung schützt vor Scheinerfolg",
+        "KPIs sind unkoppelbar",
+        "KPIs sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-KPI-Design koppelt: Eine Kostenreduktion zählt nur, wenn der SLO gehalten wird, sonst spart man auf Kosten der Verfügbarkeit. Diese Kopplung verhindert kurzfristige Optimierung mit langfristigem Schaden.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Anti-Gaming",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Trade-off Logik"
+    },
+    {
+      "id": "q29",
+      "frage": "Welche Aussage zur Rolle 'Portfolio Manager' trifft zu?",
+      "optionen": [
+        "Sie ist eine Marketingrolle",
+        "Sie verantwortet die Portfolio-Sicht: Invest/Halten/Optimieren/Retire über alle Services",
+        "Sie ist mit dem Service Owner identisch",
+        "Sie ist im Portfolio nicht vorgesehen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Portfolio Manager hält die Gesamtsicht: Welche Services werden ausgebaut, gehalten, optimiert oder stillgelegt. Er entscheidet nicht über einzelne Tickets, sondern über Bewegungen im Portfolio.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Rollen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Portfolio Governance"
+    },
+    {
+      "id": "q30",
+      "frage": "Welche Aussage zur Frage 'Sustainable IT' trifft zu?",
+      "optionen": [
+        "Sustainable IT ist ein Nebenprojekt",
+        "Sustainable IT ist ein Steuerungssystem, das Portfolio, Capacity, Kosten und Energie integriert",
+        "Sustainable IT ist nur Marketing",
+        "Sustainable IT spielt für IT keine Rolle"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Sustainable IT wird wirksam, wenn sie als Steuerungssystem verstanden wird: Portfolio, Capacity, Kosten und Energie werden gemeinsam gesteuert. Sie ist kein einmaliges Projekt, sondern ein dauerhafter Modus der Steuerung.",
+      "quelle": "Tag 13 · UE 4 Coaching · Sustainable IT",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Sustainable IT"
+    },
+    {
+      "id": "q31",
+      "frage": "Welche Aussage zur Frage 'SLO-Bruch früh erkennen' trifft zu?",
+      "optionen": [
+        "SLO-Brüche erkennt man erst nach Wochen",
+        "Frühindikatoren wie Latenz, Fehlerquote oder Queue-Tiefen warnen vor drohenden Brüchen",
+        "Brüche sind nicht messbar",
+        "Brüche sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Gute Observability liefert Frühwarnsignale wie steigende Latenz, Fehlerquote oder Queue-Tiefen. Sie zeigen drohende SLO-Verletzungen, bevor diese im Reporting landen, und ermöglichen rechtzeitiges Gegensteuern.",
+      "quelle": "Tag 13 · UE 7 Feedback · Management-Fragen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "SLO und Monitoring"
+    },
+    {
+      "id": "q32",
+      "frage": "Welche Aussage zu 'Standard-Runbooks' trifft zu?",
+      "optionen": [
+        "Runbooks sind Bürokratie",
+        "Runbooks sind dokumentierte Standardabläufe, die im Incident-Fall schnelles, konsistentes Handeln ermöglichen",
+        "Runbooks ersetzen jede Schulung",
+        "Runbooks sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Standard-Runbooks beschreiben, wie typische Vorfälle abgearbeitet werden: Schritte, Verantwortliche, Eskalation. Sie ermöglichen schnelles, gleichwertiges Handeln und sind Teil seriösen IT-Service-Betriebs.",
+      "quelle": "Tag 13 · UE 4 Coaching · Low Regret",
+      "schwierigkeit": "mittel",
+      "thema_tag": "ISO 20000 Nachweislogik"
+    },
+    {
+      "id": "q33",
+      "frage": "Welche Aussage zu 'kritisch vs. weniger kritisch' im Portfolio trifft zu?",
+      "optionen": [
+        "Alle Services sind gleich kritisch",
+        "Services werden nach Kritikalitätsklassen bewertet, die SLOs, Reserven und Reviewzyklen differenzieren",
+        "Kritikalität ist nur Marketing",
+        "Kritikalität ist nicht steuerbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine differenzierte Kritikalitätsbewertung erlaubt, SLOs, Reserven und Reviewzyklen passend zu wählen. So werden Ressourcen risikobasiert verteilt und nicht jedes System gleich aufwendig behandelt.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Kritikalität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Service-Portfolio"
+    },
+    {
+      "id": "q34",
+      "frage": "Welche Aussage zur Aussage 'erst Messbarkeit, dann Reduktion' trifft zu?",
+      "optionen": [
+        "Reduktion erfolgt ohne Messbasis",
+        "Erst wenn Monitoring und SLOs etabliert sind, ist Ressourcenreduktion verantwortbar",
+        "Messbarkeit verhindert Reduktion",
+        "Messbarkeit ist nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Erst belastbare Messbarkeit (Monitoring, SLOs, Lastprofil) erlaubt es, Ressourcen verantwortlich zu reduzieren. Wer ohne diese Basis kürzt, riskiert SLO-Brüche und Vertrauensverluste.",
+      "quelle": "Tag 13 · UE 4 Coaching · Reihenfolge",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Capacity und Rightsizing"
+    },
+    {
+      "id": "q35",
+      "frage": "Welche Aussage zu 'Pilot → Rollout' beim Rightsizing trifft zu?",
+      "optionen": [
+        "Alle Services werden gleichzeitig umgestellt",
+        "Ein zweistufiger Ansatz aus Pilot und anschließendem Rollout begrenzt Risiko und schafft Lerneffekte",
+        "Pilot ist Bürokratie",
+        "Pilot ist nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Pilot für ausgewählte Services begrenzt Risiko und liefert Erkenntnisse für den späteren Rollout. So lassen sich Annahmen über Last, Peak und Akzeptanz prüfen, bevor breit verändert wird.",
+      "quelle": "Tag 13 · UE 3 Arbeitsauftrag 2 · Pilot",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Capacity und Rightsizing"
+    },
+    {
+      "id": "q36",
+      "frage": "Welche Aussage zur Rolle von FinOps/Controlling im Portfolio trifft zu?",
+      "optionen": [
+        "FinOps spielt keine Rolle",
+        "FinOps/Controlling liefert Kostenklarheit pro Service und steuert mit, ob Reduktionen oder Investitionen sinnvoll sind",
+        "FinOps ersetzt den Service Owner",
+        "FinOps ist nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "FinOps/Controlling sorgt für Kostentransparenz pro Service und liefert die Basis für Invest- und Retire-Entscheidungen. Service Owner werden so gestärkt, nicht ersetzt: sie verantworten weiterhin den Service.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Rollen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Portfolio Governance"
+    },
+    {
+      "id": "q37",
+      "frage": "Welche Aussage zum Thema 'Speed vs. Kosten' im Capacity-Kontext trifft zu?",
+      "optionen": [
+        "Es gibt keinen Zielkonflikt",
+        "Hohe Geschwindigkeit (z. B. aggressive Skalierung) kostet meist mehr und braucht klare Begründung",
+        "Geschwindigkeit ist gratis",
+        "Geschwindigkeit ist nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Hohe Skalierungsgeschwindigkeit kostet typischerweise mehr Ressourcen und Energie. Sie sollte nur dort gewählt werden, wo der Nutzen klar überwiegt, etwa für kritische Kundenprozesse oder zeitkritische Peaks.",
+      "quelle": "Tag 13 · UE 4 Coaching · Trade-off",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Trade-off Logik"
+    },
+    {
+      "id": "q38",
+      "frage": "Welche Aussage zu 'Schatten-Umgehungen' trifft zu?",
+      "optionen": [
+        "Schatten-Umgehungen sind harmlos",
+        "Wenn Teams Standards umgehen, etwa Non-Prod nicht abschalten, entstehen versteckte Risiken und unbemerkte Verbräuche",
+        "Schatten-Umgehungen sind nur Marketing",
+        "Schatten-Umgehungen sind erwünscht"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Schatten-Umgehungen, etwa nicht abgeschaltete Non-Prod-Umgebungen oder nicht erfasste Workloads, untergraben Wirkung und Auditfähigkeit. Sie müssen aktiv adressiert werden, statt zugelassen zu werden.",
+      "quelle": "Tag 13 · UE 7 Feedback · Frühwarnsignale",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Anti-Greenwashing"
+    },
+    {
+      "id": "q39",
+      "frage": "Welche Aussage zur Frage 'Alarmmüdigkeit' trifft zu?",
+      "optionen": [
+        "Mehr Alarme sind immer besser",
+        "Zu viele unspezifische Alarme erzeugen Müdigkeit; sinnvoll sind wenige, aussagekräftige Alarme mit klaren Eskalationen",
+        "Alarme sind ohne Wirkung",
+        "Alarme sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wenn Alarme zu häufig oder zu unspezifisch sind, übersehen Teams wichtige Signale. Wenige, aussagekräftige Alarme mit klaren Eskalationspfaden sind nachhaltig wirksamer als ein lautes Dauerrauschen.",
+      "quelle": "Tag 13 · UE 7 Feedback · Frühwarnsignale",
+      "schwierigkeit": "mittel",
+      "thema_tag": "SLO und Monitoring"
+    },
+    {
+      "id": "q40",
+      "frage": "Welche Aussage zur Rolle der Reviews bei Stilllegung von Services trifft zu?",
+      "optionen": [
+        "Stilllegung ist nicht Teil des Reviews",
+        "Stilllegung (Retire) ist eine reguläre Entscheidung in Portfolio-Reviews und braucht Plan, Owner und Kommunikationspfad",
+        "Stilllegungen sind verboten",
+        "Stilllegungen sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Stilllegung gehört aktiv ins Portfolio-Review. Sie braucht einen Plan (Migration, Daten, Verträge), einen Owner und klare Kommunikation. Wer Stilllegung scheut, behält Zombie-Services und ungenutzte Ressourcen.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Retire",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Service-Portfolio"
+    },
+    {
+      "id": "q41",
+      "frage": "Welche Aussage zur Differenzierung der Maßnahmen nach Kritikalitätsklasse trifft zu?",
+      "optionen": [
+        "Alle Services brauchen die gleichen Maßnahmen",
+        "Kritische Services brauchen mehr Reserven, höhere SLOs und engere Monitoring-Standards als unkritische",
+        "Kritikalität ist irrelevant",
+        "Kritikalität ist nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Kritikalitätsklassen differenzieren Reserven, SLO-Niveaus und Monitoring-Tiefe. So werden knappe Ressourcen risikobasiert verteilt: kritische Services höher geschützt, unkritische schlanker betrieben.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Standard-SLOs",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Service-Portfolio"
+    },
+    {
+      "id": "q42",
+      "frage": "Welche Aussage zum Verhältnis von Cloud-Workloads und Sustainable IT trifft zu?",
+      "optionen": [
+        "Cloud-Workloads sind automatisch nachhaltig",
+        "Cloud-Workloads sind nicht per se nachhaltig; nachhaltige Wirkung entsteht durch Architektur, Rightsizing und Workload-Management",
+        "Cloud-Workloads sind irrelevant",
+        "Cloud-Workloads sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Cloud allein ist kein Garant für Nachhaltigkeit. Wirkung entsteht durch effiziente Architektur, konsequentes Rightsizing, Workload-Management und transparente Messung, sonst wachsen Verbrauch und Kosten unbemerkt.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Energieeffizienz",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Sustainable IT"
+    },
+    {
+      "id": "q43",
+      "frage": "Welche Aussage zu 'Wahl der KPIs (mind. 1 SLO, 1 Kosten, 1 Nachhaltigkeit)' trifft zu?",
+      "optionen": [
+        "Es reicht ein einzelner Kosten-KPI",
+        "Ein ausgewogenes KPI-Set verbindet SLO, Kosten und Nachhaltigkeit und macht Trade-offs sichtbar",
+        "Nur Nachhaltigkeit zählt",
+        "KPIs sind ohne Bedeutung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein wirksames KPI-Set kombiniert mindestens SLO, Kosten und Nachhaltigkeit. Ein einzelner KPI wäre leicht zu gamen. Erst durch die Kombination werden Trade-offs erkennbar und Verantwortung zuordenbar.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · KPIs",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Trade-off Logik"
+    },
+    {
+      "id": "q44",
+      "frage": "Welche Aussage zur Frage 'Welche Maßnahme später, weil abhängig?' trifft zu?",
+      "optionen": [
+        "Abhängige Maßnahmen werden ignoriert",
+        "Sie werden zurückgestellt, bis Voraussetzungen (z. B. Architekturwechsel, vollständige Daten) erfüllt sind",
+        "Abhängigkeiten sind nicht relevant",
+        "Abhängigkeiten sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Maßnahmen mit Abhängigkeiten - etwa Architekturwechsel oder Vollständigkeit von Daten - werden bewusst verschoben. Andernfalls drohen halbgare Umsetzungen mit hohem Aufwand und geringer Wirkung.",
+      "quelle": "Tag 13 · UE 5 Fallstudie · Quick Wins",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Energieeffizienz"
+    },
+    {
+      "id": "q45",
+      "frage": "Welche Aussage zur Rolle 'Sustainable-IT Lead' trifft zu?",
+      "optionen": [
+        "Sie ist eine reine Werbefunktion",
+        "Sie verantwortet das Steuerungssystem Sustainable IT inkl. Standards, KPIs und Reviewzyklen",
+        "Sie ist gleichbedeutend mit dem Marketingleiter",
+        "Sie existiert nicht"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Sustainable-IT Lead verantwortet das übergreifende Steuerungssystem: Standards, KPIs, Reviewzyklen, Verankerung im Service-Portfolio. Er bündelt fachliche, betriebliche und nachhaltige Sicht.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Rollen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Sustainable IT"
+    },
+    {
+      "id": "q46",
+      "frage": "Welche Aussage zur Frage 'Welche SLO-Reserven sind genug?' im Senior-Sinne trifft zu?",
+      "optionen": [
+        "Reserven werden willkürlich gewählt",
+        "Reserven werden bewusst entschieden mit Begründung, Frühwarnsignal und Eskalationspfad, auch wenn Peak unsicher ist",
+        "Reserven sind nicht Teil der Senior-Entscheidung",
+        "Reserven sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Auch unter Peak-Unsicherheit lassen sich Reserven verantwortbar wählen, wenn Begründung, Frühwarnsignal und Eskalationspfad klar sind. So werden Entscheidungen nicht beliebig, sondern handhabbar.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Unsicherheit",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Entscheidung"
+    },
+    {
+      "id": "q47",
+      "frage": "Welche Aussage zur Frage 'Konsequent retiren trotz Widerstand' trifft im Senior-Sinne zu?",
+      "optionen": [
+        "Stilllegungen werden vermieden, sobald Widerstand kommt",
+        "Stilllegungen sind oft Senior-Entscheidungen mit klarem Stakeholder-Plan, Trade-off-Logik und Kommunikationsstrategie",
+        "Stilllegungen sind nicht Teil der Senior-Verantwortung",
+        "Stilllegungen sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Stilllegungen rufen häufig Widerstand hervor. Senior-Verantwortung trägt diese Entscheidungen mit Stakeholder-Plan, Trade-off-Logik (Wert/Risiko/Nachhaltigkeit) und transparenter Kommunikation, statt sie liegenzulassen.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Retire",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Entscheidung"
+    },
+    {
+      "id": "q48",
+      "frage": "Welche Aussage zur Kombination 'Tooling-Reife unterschiedlich + Zeitdruck' im Senior-Sinne trifft zu?",
+      "optionen": [
+        "Tooling-Reife ist egal",
+        "Bei unterschiedlicher Reife wird priorisiert: zuerst Standards in Bereichen mit größtem Hebel, parallel Capacity-Maßnahmen mit vorhandenen Daten",
+        "Bei Zeitdruck wird Governance abgeschaltet",
+        "Bei Zeitdruck zählen nur Marketingaktionen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Steuerung priorisiert: zuerst Standards in Bereichen mit größtem Hebel, parallel Capacity-Maßnahmen, wo Daten bereits ausreichen. Zeitdruck rechtfertigt keine Aufgabe von Governance, sondern bewusste Schwerpunkte.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Roadmap",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Entscheidung"
+    },
+    {
+      "id": "q49",
+      "frage": "Welche Aussage zu 'Welche Portfolio-Kriterien sind nicht verhandelbar?' im Senior-Sinne trifft zu?",
+      "optionen": [
+        "Es gibt keine festen Kriterien",
+        "Kritikalität, regulatorische Pflicht und definierte Sicherheits-Baselines sind typischerweise nicht verhandelbar",
+        "Alle Kriterien sind beliebig anpassbar",
+        "Kriterien sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Bestimmte Kriterien stehen außerhalb der Diskussion: Kritikalität für Geschäftsfortführung, regulatorische Pflichten, Sicherheits-Baselines. Verhandelbar sind dagegen Reserven, Releasezyklen, Optimierungspfade.",
+      "quelle": "Tag 13 · UE 7 Feedback · Management-Fragen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Portfolio Governance"
+    },
+    {
+      "id": "q50",
+      "frage": "Welche Aussage zur Rolle der Entscheidungsarchitektur im Senior-Sinne trifft zu?",
+      "optionen": [
+        "Entscheidungsarchitektur ist nicht steuerbar",
+        "Sie definiert die wenigen wichtigen Senior-Entscheidungen (SLO-Klassen, Rightsizing-Policy, Retire-Regeln, Ausnahmen, Reviewzyklen)",
+        "Sie ist gleichbedeutend mit Marketing",
+        "Sie ersetzt die Linienorganisation"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Entscheidungsarchitektur bündelt die wenigen wirklich wichtigen Senior-Entscheidungen: SLO-Klassen, Rightsizing-Policy, Retire-Regeln, Ausnahmeprozesse und Reviewzyklen. So bleibt Steuerung handhabbar und nachvollziehbar.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Architektur",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Entscheidung"
+    },
+    {
+      "id": "q51",
+      "frage": "Welche Aussage zur Frage 'Anti-Gaming bei Kostenreduktion' im Senior-Sinne trifft zu?",
+      "optionen": [
+        "Anti-Gaming ist überflüssig",
+        "Kostenreduktion zählt nur, wenn SLO gehalten wird, sonst entsteht kurzfristig 'Erfolg' mit langfristigem Schaden",
+        "Anti-Gaming ist Marketing",
+        "Anti-Gaming ist nicht Teil der KPI-Steuerung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-KPI-Design erzwingt Kopplung: Kostenreduktion zählt nur dann, wenn SLOs gehalten werden. Sonst entstehen scheinbare Erfolge, die in steigenden Incidents und Vertrauensverlust enden.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · KPI-Steuerung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Trade-off Logik"
+    },
+    {
+      "id": "q52",
+      "frage": "Welche Aussage zu 'Ausnahmeprozesse' im Service-Portfolio trifft zu?",
+      "optionen": [
+        "Ausnahmen werden stillschweigend zugelassen",
+        "Ausnahmen werden dokumentiert, befristet, vom Owner verantwortet und in den Reviewzyklus aufgenommen",
+        "Ausnahmen sind irrelevant",
+        "Ausnahmen sind nur Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ausnahmen vom Standard werden bewusst dokumentiert, mit Befristung, Owner und Reviewdatum geführt. So bleibt der Standard glaubwürdig und Ausnahmen werden nicht zur stillen Regel.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Ausnahmen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Portfolio Governance"
+    },
+    {
+      "id": "q53",
+      "frage": "Welche Aussage zur Frage 'auditfähige Portfolio-Steuerung' im Senior-Sinne trifft zu?",
+      "optionen": [
+        "Auditfähigkeit entsteht nur vor Audits",
+        "Auditfähigkeit entsteht durch laufende Disziplin: Kriterien, Datenbasis, Owner, Beschluss und Reviewzyklus konsequent geführt",
+        "Auditfähigkeit ist Marketing",
+        "Auditfähigkeit ist optional"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Auditfähige Portfolio-Steuerung entsteht im Alltag: jede Entscheidung erhält Kriterien, Datenbasis, Owner, Beschluss, Reviewdatum. So wird das Portfolio steuerbar und gleichzeitig prüfbar.",
+      "quelle": "Tag 13 · UE 4 Coaching · Audit",
+      "schwierigkeit": "schwer",
+      "thema_tag": "ISO 20000 Nachweislogik"
+    },
+    {
+      "id": "q54",
+      "frage": "Welche Aussage zur Verbindung von Capacity Governance und Risk Management trifft zu?",
+      "optionen": [
+        "Beides ist getrennt",
+        "Capacity-Entscheidungen sind zugleich Risiko-Entscheidungen: zu wenig Kapazität gefährdet SLOs, zu viel verbraucht Energie und Budget",
+        "Beides ist nur Marketing",
+        "Beides ist irrelevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Capacity-Entscheidungen sind immer auch Risiko-Entscheidungen: zu wenig Kapazität gefährdet SLOs und Vertrauen, zu viel verbraucht Budget und Energie. Senior-Steuerung führt beides gemeinsam.",
+      "quelle": "Tag 13 · UE 4 Coaching · Risk",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Trade-off Logik"
+    },
+    {
+      "id": "q55",
+      "frage": "Welche Aussage zur Roadmap 'Quick Wins → Skalierung → Sustain' trifft zu?",
+      "optionen": [
+        "Roadmaps sind unnötig",
+        "Eine schrittweise Roadmap liefert frühe Wirkung, baut Reife auf und führt in einen dauerhaft gelebten Steuerungsmodus",
+        "Roadmaps sind nur Marketing",
+        "Roadmaps sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Roadmap aus Quick Wins, Skalierung und Sustain liefert frühe Wirkung, baut Reife systematisch auf und mündet in einen dauerhaft gelebten Steuerungsmodus. Sie ist Teil der Senior-Verantwortung.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Roadmap",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Sustainable IT"
+    },
+    {
+      "id": "q56",
+      "frage": "Welche Aussage zur Frage 'wer trägt Risiko bei SLO-Bruch' im Senior-Sinne trifft zu?",
+      "optionen": [
+        "Niemand",
+        "Risiken sind klaren Rollen zugeordnet (Service Owner, Portfolio Owner, ggf. CIO) und Eskalationen sind dokumentiert",
+        "Risiken trägt nur das Marketing",
+        "Risiken sind nicht relevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "SLO-Risiken sind klaren Rollen zugeordnet: Service Owner verantwortet primär, Portfolio Owner und CIO werden bei Schwellenüberschreitung einbezogen. Eskalationspfade sind dokumentiert.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Governance",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Entscheidung"
+    },
+    {
+      "id": "q57",
+      "frage": "Welche Aussage zur Frage 'wie verhindert man Greenwashing-KPIs?' im Senior-Sinne trifft zu?",
+      "optionen": [
+        "Mehr Folien helfen",
+        "Klare Systemgrenzen, transparente Datenqualität, gekoppelte KPIs und unabhängige Reviews verhindern Scheinerfolge",
+        "Greenwashing wird hingenommen",
+        "Greenwashing ist nur ein Modewort"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Schutz vor Greenwashing entsteht durch klare Systemgrenzen, transparente Datenqualität (z. B. gemessen vs. geschätzt), gekoppelte KPIs und unabhängige Reviews. So bleiben Berichte glaubwürdig und auditfähig.",
+      "quelle": "Tag 13 · UE 4 Coaching · Greenwashing",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Anti-Greenwashing"
+    },
+    {
+      "id": "q58",
+      "frage": "Welche Aussage zu 'Standortwahl und Strommix' aus Sustainable-IT-Sicht trifft zu?",
+      "optionen": [
+        "Standort und Strommix sind irrelevant",
+        "Sie sind als Konzept Teil der Steuerung, weil sie langfristig auf Kosten, Emissionen und Resilienz wirken",
+        "Sie sind nur Marketing",
+        "Sie betreffen ausschließlich Wohngebäude"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Standort und Strommix sind langfristige Hebel: sie beeinflussen Energieverbrauch, Emissionen und Resilienz. Sie werden als Konzept in der Senior-Steuerung berücksichtigt, auch wenn sie nicht kurzfristig veränderbar sind.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Energieeffizienz",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Energieeffizienz"
+    },
+    {
+      "id": "q59",
+      "frage": "Welche Aussage zur 'Prozessdisziplin im Change-/Release-Prozess' trifft zu?",
+      "optionen": [
+        "Prozessdisziplin spielt für Nachhaltigkeit keine Rolle",
+        "Disziplinierte Change-/Release-Prozesse vermeiden überflüssige Workloads, Fehler und Energieverschwendung",
+        "Prozessdisziplin ist nur Marketing",
+        "Prozessdisziplin ist nicht messbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Diszipliniertes Change- und Release-Management spart Energie und Risiken: weniger Hotfixes, weniger Rückbauten, weniger ungewollte Workloads. Es ist somit ein indirekter, aber wirksamer Hebel für Sustainable IT.",
+      "quelle": "Tag 13 · UE 1 Wissensvermittlung · Hebel",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Sustainable IT"
+    },
+    {
+      "id": "q60",
+      "frage": "Welche Aussage zum Senior-Ziel 'verantwortete Service- und Entscheidungsarchitektur' trifft zu?",
+      "optionen": [
+        "Es geht um reine Ressourcenverwaltung",
+        "Es geht darum, Service-Portfolio, Capacity, Kosten und Nachhaltigkeit gemeinsam steuerbar und verantwortbar zu führen",
+        "Es geht nur um Marketing",
+        "Es geht nur um Hardware"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Senior-Shift verschiebt den Fokus von 'Ressourcen verwalten' hin zu einer steuerbaren, verantworteten Architektur aus Service-Portfolio, Capacity, Kosten und Nachhaltigkeit. So entsteht Wirkung mit Nachweis.",
+      "quelle": "Tag 13 · UE 8 Transferprojekt · Senior-Ziel",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior Entscheidung"
+    }
+  ]
+}

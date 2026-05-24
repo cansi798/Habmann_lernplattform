@@ -1,0 +1,907 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 8,
+  "erstellt_am": "2026-05-24",
+  "fragen": [
+    {
+      "id": "q01",
+      "frage": "Was bedeutet ‚Process Enhancement‘ in Process Mining?",
+      "optionen": [
+        "Reine Ästhetik im Diagramm",
+        "Anreicherung des Prozessmodells mit Zeiten, Ressourcen, Kosten und Varianten",
+        "Schließen aller Prozesse",
+        "Umbenennen aller Aktivitäten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Enhancement bezeichnet die Anreicherung des Prozessmodells mit Zeiten, Ressourcen, Kosten und Varianten. So entsteht aus dem ‚Bild‘ ein steuerbares Modell – nicht nur eine Ästhetik- oder Umbenennungs-Übung.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · Enhancement",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Enhancement"
+    },
+    {
+      "id": "q02",
+      "frage": "Welche ML-Methode wird typischerweise für ‚Wird Fall eskalieren? (ja/nein)‘ eingesetzt?",
+      "optionen": [
+        "Klassifikation",
+        "Regression",
+        "Clustering",
+        "Anomalieerkennung"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Eine Ja/Nein-Vorhersage wie ‚Wird Fall eskalieren?‘ ist eine Klassifikationsaufgabe. Regression sagt Werte voraus, Clustering bildet Gruppen, Anomalieerkennung markiert Ausreißer.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · ML-Typen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q03",
+      "frage": "Welche ML-Methode passt für ‚Restlaufzeit eines Falls prognostizieren‘?",
+      "optionen": [
+        "Klassifikation",
+        "Regression",
+        "Clustering",
+        "Anomalieerkennung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine kontinuierliche Wertvorhersage wie Restlaufzeit ist eine Regressionsaufgabe. Klassifikation, Clustering und Anomalieerkennung adressieren andere Aufgabentypen.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · ML-Typen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q04",
+      "frage": "Was ist das Ziel von ‚Predictive Process Analytics‘?",
+      "optionen": [
+        "Rückblickendes Reporting",
+        "Frühwarnsystem mit Vorhersagen (z. B. SLA-Verletzung, Rework-Risiko)",
+        "Rein dekorative Dashboards",
+        "Ersatz aller manuellen Tätigkeiten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Predictive Process Analytics zielt auf ein Frühwarnsystem mit Vorhersagen wie SLA-Verletzung, Rework- oder Abbruchwahrscheinlichkeit – nicht nur auf Rückblick oder Ästhetik.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · Predictive Analytics",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q05",
+      "frage": "Wofür steht ‚ETL‘ in der Datenintegration?",
+      "optionen": [
+        "Edit, Transmit, Log",
+        "Extract, Transform, Load",
+        "Encrypt, Tokenize, Lock",
+        "Email, Tag, List"
+      ],
+      "korrekt": 1,
+      "erklaerung": "ETL steht für Extract, Transform, Load – das klassische Daten-Pipeline-Muster, das Quelldaten extrahiert, transformiert und in ein Zielsystem (z. B. DWH) lädt.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · ETL",
+      "schwierigkeit": "leicht",
+      "thema_tag": "DWH & ETL"
+    },
+    {
+      "id": "q06",
+      "frage": "Wofür steht ‚DWH‘?",
+      "optionen": [
+        "Data Workflow Handler",
+        "Data Warehouse",
+        "Daily Work Habit",
+        "Dynamic Web Host"
+      ],
+      "korrekt": 1,
+      "erklaerung": "DWH steht für Data Warehouse – ein zentralisiertes, integriertes Datenlager für analytische Zwecke. Die anderen Begriffe sind nicht etabliert.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · DWH",
+      "schwierigkeit": "leicht",
+      "thema_tag": "DWH & ETL"
+    },
+    {
+      "id": "q07",
+      "frage": "Was ist ein ‚Event‘ im Sinne des Tages?",
+      "optionen": [
+        "Eine Tagung",
+        "Ein Tripel aus Case ID, Aktivität und Timestamp",
+        "Ein UI-Animationsschritt",
+        "Ein Werbeplakat"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Im Daten-/Mining-Kontext besteht ein Event aus Case ID, Aktivität und Timestamp. Es bildet die Basis für Discovery, Conformance und ML.",
+      "quelle": "Tag 8 · UE 3 Arbeitsauftrag 2 · Event",
+      "schwierigkeit": "leicht",
+      "thema_tag": "DWH & ETL"
+    },
+    {
+      "id": "q08",
+      "frage": "Welche Aussage zu ‚Anomalieerkennung‘ ist korrekt?",
+      "optionen": [
+        "Sie erkennt typische Standardfälle",
+        "Sie identifiziert ungewöhnliche Pfade, Fehler oder Manipulationen",
+        "Sie ersetzt jede Regel",
+        "Sie ist ein UI-Element"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Anomalieerkennung identifiziert ungewöhnliche Pfade, Fehler oder Manipulationen. Sie ergänzt Klassifikation und Regression, ersetzt aber keine Regelwerke.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · Anomalieerkennung",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q09",
+      "frage": "Welche Aussage zu ‚Baseline-Heuristik vor ML‘ ist treffend?",
+      "optionen": [
+        "Baseline-Heuristiken sind sinnlos",
+        "Einfache Regeln liefern oft 60–80 % Nutzen, sind erklärbar und auditierbar – ideal als Start",
+        "Baseline-Heuristiken sind UI-Themen",
+        "Baseline-Heuristiken ersetzen ML nie"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Baseline-Heuristiken (z. B. ‚Ticket Age > 70 % SLA‘) liefern oft 60–80 % Nutzen, sind erklärbar und auditierbar. Sie sind sinnvoller Startpunkt vor ML.",
+      "quelle": "Tag 8 · UE 4 Coaching · Baseline",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q10",
+      "frage": "Was bedeutet ‚Konzeptdrift‘ in ML?",
+      "optionen": [
+        "Veränderung der Datenverteilung oder des Zusammenhangs über die Zeit",
+        "Eine UI-Animation",
+        "Ein Drucksymbol",
+        "Eine Marketingkampagne"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Konzeptdrift bezeichnet die Veränderung der Datenverteilung oder des Zusammenhangs zwischen Eingangs- und Zielvariablen über die Zeit. Modelle müssen darauf überwacht werden.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · Konzeptdrift",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q11",
+      "frage": "Welche Aussage zu ‚Erklärbarkeit‘ in ML ist senior-relevant?",
+      "optionen": [
+        "Erklärbarkeit ist nebensächlich",
+        "Erklärbarkeit ist Voraussetzung für Akzeptanz, Audit und Verantwortung – insbesondere bei automatisierten Entscheidungen",
+        "Erklärbarkeit ist UI-Theme",
+        "Erklärbarkeit ist Marketingbegriff"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Erklärbarkeit ist Voraussetzung für Akzeptanz, Audit und Verantwortung – besonders bei automatisierten Entscheidungen. Sie ist kein UI-Thema und kein Marketing.",
+      "quelle": "Tag 8 · UE 4 Coaching · Erklärbarkeit",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q12",
+      "frage": "Welche typische ETL-Herausforderung adressiert ‚Aktivitätsmapping‘?",
+      "optionen": [
+        "Vereinheitlichung unterschiedlicher Bezeichnungen für dieselbe Aktivität aus verschiedenen Quellsystemen",
+        "Reines UI-Layout",
+        "Marketing-Klassifikation",
+        "Druckersteuerung"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Aktivitätsmapping vereinheitlicht unterschiedliche Bezeichnungen für dieselbe Aktivität aus verschiedenen Quellsystemen. Es ist Kernarbeit in ETL und Voraussetzung für Mining/ML.",
+      "quelle": "Tag 8 · UE 3 Arbeitsauftrag 2 · Aktivitätsmapping",
+      "schwierigkeit": "leicht",
+      "thema_tag": "DWH & ETL"
+    },
+    {
+      "id": "q13",
+      "frage": "Welche Aussage zum ‚Datenmodell Faktentabelle Events + Dimensionen‘ ist sinnvoll?",
+      "optionen": [
+        "Es ist eine reine UI-Frage",
+        "Faktentabelle Events trägt Messgrößen pro Ereignis, Dimensionen liefern Kontext (Aktivität, Zeit, Kunde, Produkt, Standort)",
+        "Faktentabelle und Dimensionen sind identisch",
+        "Es gibt nur eine Tabelle"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Faktentabelle Events trägt Messgrößen pro Ereignis (z. B. Dauer, Kosten), Dimensionen liefern Kontext (Aktivität, Zeit, Kunde, Produkt, Standort). Das ist ein etabliertes BI-Datenmodell.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · Datenmodell",
+      "schwierigkeit": "leicht",
+      "thema_tag": "DWH & ETL"
+    },
+    {
+      "id": "q14",
+      "frage": "Was beschreibt ein gutes BI-Dashboard?",
+      "optionen": [
+        "Möglichst viele Kacheln ohne Logik",
+        "Wenige Executive KPIs + Drilldown + Alarme/Handlungen + Trend/Schwellen + Segmentierung",
+        "Nur Texte ohne Visualisierung",
+        "Reine Bildersammlung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Gute Dashboards zeigen wenige Executive KPIs mit Drilldown, Alarmen/Handlungen, Trends/Schwellen und Segmentierung. Maximalismus oder reine Text-/Bilder-Sammlungen liefern keine Steuerung.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · BI-Dashboard",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BI-Dashboards"
+    },
+    {
+      "id": "q15",
+      "frage": "Welche Aussage zu ‚Real-time Monitoring‘ ist treffend?",
+      "optionen": [
+        "Es liefert ausschließlich Rückblick-Daten",
+        "Es liefert Eventströme und KPIs in Near-Real-Time mit Alerts und Playbooks",
+        "Es ersetzt alle KPIs",
+        "Es ist ein UI-Theme"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Real-time Monitoring stellt Eventströme und KPIs in Near-Real-Time bereit – mit Alerts und Playbooks. Es ist mehr als Reporting und kein UI-Theme.",
+      "quelle": "Tag 8 · UE 1 Wissensvermittlung · Real-time",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Real-time Monitoring"
+    },
+    {
+      "id": "q16",
+      "frage": "Welche Aussage zu ‚Fairness/Bias in ML‘ ist relevant?",
+      "optionen": [
+        "Fairness/Bias sind irrelevant",
+        "Fairness/Bias müssen geprüft werden, wenn Modellentscheidungen sensible Gruppen betreffen oder regulierte Bereiche tangieren",
+        "Fairness/Bias sind UI-Themen",
+        "Fairness/Bias sind Marketingbegriffe"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Fairness und Bias müssen geprüft werden, wenn Modellentscheidungen sensible Gruppen betreffen oder regulierte Bereiche tangieren. Sie sind keine UI- oder Marketing-Themen.",
+      "quelle": "Tag 8 · UE 4 Coaching · Fairness/Bias",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q17",
+      "frage": "Welche Aussage zur ‚Alarmmüdigkeit‘ ist senior-relevant?",
+      "optionen": [
+        "Alarmmüdigkeit ist nicht existent",
+        "Alarmmüdigkeit entsteht durch zu viele/irrelevante Alerts und kann durch Schwellen, Eskalationslogik und Feedbackschleifen reduziert werden",
+        "Alarmmüdigkeit ist UI-Theme",
+        "Alarmmüdigkeit ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Alarmmüdigkeit entsteht durch zu viele/irrelevante Alerts. Sie wird durch Schwellen, Eskalationslogik und Feedbackschleifen reduziert. Sie ist real, kein UI- oder Marketing-Begriff.",
+      "quelle": "Tag 8 · UE 4 Coaching · Alarmmüdigkeit",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Real-time Monitoring"
+    },
+    {
+      "id": "q18",
+      "frage": "Welche Aussage zu ‚Drift-Monitoring von Modellen‘ ist senior-relevant?",
+      "optionen": [
+        "Drift-Monitoring ist überflüssig",
+        "Drift-Monitoring beobachtet, ob Datenverteilung und Modellperformance über die Zeit stabil bleiben",
+        "Drift-Monitoring ist UI-Theme",
+        "Drift-Monitoring ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Drift-Monitoring beobachtet, ob Datenverteilung und Modellperformance über die Zeit stabil bleiben. Ohne Drift-Monitoring altern Modelle unbemerkt und verlieren Qualität.",
+      "quelle": "Tag 8 · UE 4 Coaching · Drift",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q19",
+      "frage": "Welche Aussage zu ‚False Positive vs. False Negative‘ ist korrekt?",
+      "optionen": [
+        "False Positive sagt korrekt, False Negative auch",
+        "False Positive: Alarm, obwohl Ereignis nicht eintritt; False Negative: Ereignis tritt ein, ohne Alarm",
+        "False Positive und False Negative sind UI-Themen",
+        "False Positive und False Negative sind Marketingbegriffe"
+      ],
+      "korrekt": 1,
+      "erklaerung": "False Positive ist ein falscher Alarm (Ereignis tritt nicht ein), False Negative ein verpasstes Ereignis (kein Alarm). Beide Kostenseiten müssen abgewogen werden.",
+      "quelle": "Tag 8 · UE 7 Feedback · FP/FN",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q20",
+      "frage": "Welche Aussage zu ‚Predictive Use Case Canvas‘ ist treffend?",
+      "optionen": [
+        "Ein Canvas erfasst nur Zielentscheidung",
+        "Ein Canvas erfasst Zielentscheidung, Prognose, Handlung, Datenminimum, Risiko/Compliance, Erfolgskriterium",
+        "Ein Canvas ist UI-Theme",
+        "Ein Canvas ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein sinnvolles Predictive-Canvas erfasst Zielentscheidung, Prognose, Handlung, Datenminimum, Risiko/Compliance und Erfolgskriterium. Reduktion auf einen Aspekt produziert blinde Flecken.",
+      "quelle": "Tag 8 · UE 2 Arbeitsauftrag 1 · Canvas",
+      "schwierigkeit": "leicht",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q21",
+      "frage": "Sie definieren einen Predictive Use Case ‚SLA-Risiko früh erkennen‘. Welches Datenminimum ist sinnvoll?",
+      "optionen": [
+        "Lieblingsfarbe, Lieblingsfont, Lieblingsservice",
+        "Priorität, Alter des Tickets, Anzahl Reassignments, Kategorie, Warteschlangenlänge",
+        "Anzahl Logos im Header",
+        "Anzahl Drucker pro Etage"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenminimum für SLA-Risiko: Priorität, Alter, Anzahl Reassignments, Kategorie, Warteschlangenlänge. Diese Felder bilden plausible Treiber. Lieblingsdaten oder Logos haben keinen Aussagewert.",
+      "quelle": "Tag 8 · UE 2 Arbeitsauftrag 1 · Datenminimum",
+      "schwierigkeit": "mittel",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q22",
+      "frage": "Welche Aussage zu ‚Predictive ohne Handlungsplan‘ ist senior-tauglich?",
+      "optionen": [
+        "Predictive funktioniert auch ohne Handlungsplan",
+        "Predictive ist wertlos ohne Alert → Owner → Playbook (was tun, wenn Risiko hoch?)",
+        "Predictive ist nur Reporting",
+        "Predictive ist UI-Theme"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Predictive ist wertlos ohne Alert → Owner → Playbook. Erst die definierte Reaktionskette macht Vorhersagen wirksam. Reporting- oder UI-Reduktion sind unzureichend.",
+      "quelle": "Tag 8 · UE 4 Coaching · Handlungsplan",
+      "schwierigkeit": "mittel",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q23",
+      "frage": "Welche Aussage zu ‚Anti-Gaming KPI-Kopplung‘ ist senior-tauglich?",
+      "optionen": [
+        "KPIs werden einzeln betrachtet",
+        "Speed-KPIs werden mit Quality-/Risiko-KPIs gekoppelt (z. B. Lead Time + Rework-Quote), um Anreizverzerrung zu vermeiden",
+        "KPIs sind UI-Theme",
+        "KPIs sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Anti-Gaming-Kopplungen verbinden Speed-KPIs mit Quality-/Risiko-KPIs (z. B. Lead Time + Rework-Quote). Einzelbetrachtung erzeugt Anreizverzerrung und Fehlsteuerung.",
+      "quelle": "Tag 8 · UE 3 Arbeitsauftrag 2 · Anti-Gaming",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI & BI-Governance"
+    },
+    {
+      "id": "q24",
+      "frage": "Welche Aussage zur ‚6-Stufen-ETL-Pipeline‘ ist sinnvoll?",
+      "optionen": [
+        "Quelle → Staging → Mapping → Join → Quality Checks → DWH",
+        "Verkauf → Marketing → Druck → Versand → Liefer → Lagerung",
+        "UI → CSS → JS → DOM → Server → Cloud",
+        "Mahnung → Stornierung → Inkasso → Klage → Insolvenz → Liquidation"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Eine typische ETL-Pipeline: Quelle → Staging → Mapping → Join → Quality Checks → DWH. Die anderen Sequenzen adressieren andere Domänen.",
+      "quelle": "Tag 8 · UE 3 Arbeitsauftrag 2 · ETL-Pipeline",
+      "schwierigkeit": "mittel",
+      "thema_tag": "DWH & ETL"
+    },
+    {
+      "id": "q25",
+      "frage": "Welche 5 Datenqualitätschecks sind in der ETL-Pipeline besonders relevant?",
+      "optionen": [
+        "Fehlende Case ID, Zeitstempel rückwärts, unbekannte Aktivität, doppelte Events, fehlerhafte Datentypen",
+        "Lieblingsfarbe, Lieblingsfont, Lieblingstag, Lieblingsmonat, Lieblingsjahr",
+        "UI-Header, UI-Footer, UI-Menü, UI-Logo, UI-Icon",
+        "Werbung A, Werbung B, Werbung C, Werbung D, Werbung E"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Sinnvolle Checks: fehlende Case ID, Zeitstempel rückwärts, unbekannte Aktivität, doppelte Events, fehlerhafte Datentypen. Die anderen Aufzählungen sind keine Datenqualitätschecks.",
+      "quelle": "Tag 8 · UE 3 Arbeitsauftrag 2 · Datenqualitätschecks",
+      "schwierigkeit": "mittel",
+      "thema_tag": "DWH & ETL"
+    },
+    {
+      "id": "q26",
+      "frage": "Welche Aussage zur ‚Anti-Gaming-Auswahl einer KPI‘ ist senior-tauglich?",
+      "optionen": [
+        "Jede KPI ist gleich gut",
+        "Eine KPI, die isoliert maximale Geschwindigkeit belohnt (z. B. ‚Tickets pro Stunde‘), kann Qualität verdrängen – sie bedarf Gegenmetrik oder Verzicht",
+        "KPIs sind UI-Theme",
+        "KPIs sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine KPI, die isoliert maximale Geschwindigkeit belohnt, kann Qualität verdrängen. Senior-Praxis ergänzt eine Gegenmetrik oder verzichtet auf die isolierte KPI.",
+      "quelle": "Tag 8 · UE 3 Arbeitsauftrag 2 · Anti-Gaming",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI & BI-Governance"
+    },
+    {
+      "id": "q27",
+      "frage": "Welche Aussage zur ‚Dashboard-Kachel ‚Alert‘‘ ist sinnvoll?",
+      "optionen": [
+        "Alerts sind nur Optik",
+        "Alerts zeigen Top-Risiko-Cases, Owner, Status der Maßnahmen – mit Drilldown",
+        "Alerts sind UI-Theme ohne Logik",
+        "Alerts sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Alert-Kachel zeigt Top-Risiko-Cases, Owner und Status der Maßnahmen mit Drilldown. So entsteht Handlungsorientierung – nicht reine Optik oder beliebige Anzeige.",
+      "quelle": "Tag 8 · UE 3 Arbeitsauftrag 2 · Alert-Kachel",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BI-Dashboards"
+    },
+    {
+      "id": "q28",
+      "frage": "Welche Aussage zur ‚Minimum Viable Data Product‘-Logik ist senior-tauglich?",
+      "optionen": [
+        "Datenprodukte werden in voller Tiefe gebaut, bevor Nutzen entsteht",
+        "Ein MVDP startet mit klarem Nutzen, einer Datenquelle, wenigen KPIs, klarer Owner-Verantwortung und Drift-Monitoring",
+        "Datenprodukte sind UI-Theme",
+        "Datenprodukte sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Minimum Viable Data Product startet mit klarem Nutzen, einer Datenquelle, wenigen KPIs, klarer Owner-Verantwortung und Drift-Monitoring. Vollausbau ohne Lernzyklus erzeugt Risiko.",
+      "quelle": "Tag 8 · UE 4 Coaching · MVDP",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Data Product"
+    },
+    {
+      "id": "q29",
+      "frage": "Welche Aussage zu ‚Alert-Playbook‘ ist sinnvoll?",
+      "optionen": [
+        "Playbook ist UI-Layout",
+        "Ein Playbook definiert Owner, Handlungsschritte, Eskalation, Dokumentation, Post-Review",
+        "Playbook ist Marketing",
+        "Playbook ist beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Alert-Playbook definiert Owner, Handlungsschritte, Eskalation, Dokumentation und Post-Review. Es macht Alerts wirksam und auditierbar.",
+      "quelle": "Tag 8 · UE 5 Fallstudie · Playbook",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Real-time Monitoring"
+    },
+    {
+      "id": "q30",
+      "frage": "Welche Aussage zur ‚Label-Definition mit fehlenden Labels‘ ist senior-tauglich?",
+      "optionen": [
+        "Fehlende Labels sind irrelevant",
+        "Bei fehlenden Labels werden Baselines (z. B. Ticket-Age > 70 % SLA) als Proxy genutzt, um Training/Start zu ermöglichen",
+        "Fehlende Labels sind UI-Theme",
+        "Fehlende Labels sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Bei fehlenden Labels werden Baseline-Regeln als Proxy genutzt (z. B. ‚Ticket Age > 70 % SLA‘). Sie ermöglichen Training/Start und werden später verbessert.",
+      "quelle": "Tag 8 · UE 5 Fallstudie · Label",
+      "schwierigkeit": "mittel",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q31",
+      "frage": "Welche Aussage zur ‚Feature-Auswahl für SLA-Vorhersage‘ ist senior-tauglich?",
+      "optionen": [
+        "Priority und Customer-Tier sind keine Features",
+        "Priority, Ticket Age, Queue, Reassignments, Service, Category, Open Incidents per Service, Time since last update, Shift, Customer Tier sind plausible Features",
+        "Features sind beliebig",
+        "Features sind UI-Theme"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Plausible Features für SLA-Vorhersage: Priority, Ticket Age, Queue, Reassignments, Service, Category, Open Incidents per Service, Time since last update, Shift, Customer Tier. Beliebigkeit oder Reduktion tragen nicht.",
+      "quelle": "Tag 8 · UE 5 Fallstudie · Features",
+      "schwierigkeit": "mittel",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q32",
+      "frage": "Welche Aussage zur ‚MVP-Entscheidung im Predictive Use Case‘ ist senior-tauglich?",
+      "optionen": [
+        "Alle Datenquellen sofort einbinden",
+        "Start ohne Monitoring-Join (nur Ticketing) + 6 Features; kompensieren durch manuelle ‚Service Impact‘-Kennzeichnung im Ticket",
+        "Start ohne Daten",
+        "Start ohne Owner"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein realistischer MVP startet z. B. ohne Monitoring-Join (nur Ticketing) + 6 Features; eine manuelle ‚Service Impact‘-Kennzeichnung kompensiert temporär. Alles-sofort-Strategien scheitern an Ressourcen.",
+      "quelle": "Tag 8 · UE 5 Fallstudie · MVP",
+      "schwierigkeit": "mittel",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q33",
+      "frage": "Welche Aussage zur ‚Risk Heatmap im Dashboard‘ ist senior-tauglich?",
+      "optionen": [
+        "Heatmap ist UI-Spielerei",
+        "Eine Heatmap (Service × Queue) zeigt schnell, wo SLA-Risiken konzentriert sind und wo Maßnahmen wirken müssen",
+        "Heatmap ist Marketing",
+        "Heatmap ist beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine SLA-Risk Heatmap (Service × Queue) zeigt schnell, wo Risiken konzentriert sind und wo Maßnahmen wirken müssen. Sie ist Steuerungsinstrument, nicht reine Optik.",
+      "quelle": "Tag 8 · UE 5 Fallstudie · Heatmap",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BI-Dashboards"
+    },
+    {
+      "id": "q34",
+      "frage": "Welche Aussage zur ‚Accountability Datenqualität und Modell-Governance‘ ist senior-tauglich?",
+      "optionen": [
+        "Niemand ist verantwortlich",
+        "Datenqualität verantwortet ein Data Owner; Modell-Governance verantwortet ein Modell-/Product Owner; beide arbeiten zusammen",
+        "Verantwortlichkeit ist UI-Theme",
+        "Verantwortlichkeit ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenqualität verantwortet ein Data Owner, Modell-Governance ein Modell-/Product Owner. Beide arbeiten zusammen. Ohne klare Accountability fehlen Wirkung und Eskalation.",
+      "quelle": "Tag 8 · UE 7 Feedback · Accountability",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q35",
+      "frage": "Welche Aussage zu ‚Analytics als Produkt‘ ist senior-tauglich?",
+      "optionen": [
+        "Analytics ist einmalige Aktion",
+        "Analytics hat Product Owner, Release-Zyklen, Monitoring der Modelle und Auditfähigkeit",
+        "Analytics ist UI-Theme",
+        "Analytics ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Analytics wird als Produkt geführt: Product Owner, Release-Zyklen, Monitoring der Modelle, Auditfähigkeit. Einmalige Aktion oder Reduktion auf UI/Marketing tragen nicht.",
+      "quelle": "Tag 8 · UE 7 Feedback · Analytics als Produkt",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Data Product"
+    },
+    {
+      "id": "q36",
+      "frage": "Welche Aussage zu ‚Human-in-the-loop in Predictive Workflows‘ ist senior-tauglich?",
+      "optionen": [
+        "Vollautomatisierung in allen Fällen",
+        "Bei kritischen oder regulierten Entscheidungen sichert Human-in-the-loop Akzeptanz, Verantwortung und Korrekturmöglichkeit",
+        "Human-in-the-loop ist UI-Theme",
+        "Human-in-the-loop ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Bei kritischen oder regulierten Entscheidungen sichert Human-in-the-loop Akzeptanz, Verantwortung und Korrekturmöglichkeit. Vollautomatisierung ist nicht in jedem Fall sinnvoll.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Human-in-the-loop",
+      "schwierigkeit": "mittel",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q37",
+      "frage": "Welche Aussage zur ‚Wirkungsmessung von Predictive Use Cases‘ ist senior-tauglich?",
+      "optionen": [
+        "Wirkung wird nicht gemessen",
+        "Wirkung wird mit Vorher/Nachher (z. B. SLA-Breach-Rate, MTTR), Owner-Bewertung und Frühwarnsignalen erfasst",
+        "Wirkung ist UI-Theme",
+        "Wirkung ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wirkungsmessung kombiniert Vorher/Nachher-KPIs (z. B. SLA-Breach-Rate, MTTR), Owner-Bewertung und Frühwarnsignale. Ohne Messung kein Wirkungsnachweis.",
+      "quelle": "Tag 8 · UE 7 Feedback · Wirkungsmessung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI & BI-Governance"
+    },
+    {
+      "id": "q38",
+      "frage": "Welche Aussage zur ‚Service Impact-Kennzeichnung im Ticket‘ ist sinnvoll?",
+      "optionen": [
+        "Sie ist ein Druckersymbol",
+        "Sie ist eine pragmatische manuelle Ergänzung zur Datenqualität, bis Monitoring-Daten verfügbar sind",
+        "Sie ist UI-Theme",
+        "Sie ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Service-Impact-Kennzeichnungen im Ticket sind pragmatische manuelle Ergänzungen zur Datenqualität, bis Monitoring-Daten verfügbar sind. Sie sind operative Senior-Praxis – nicht UI/Marketing.",
+      "quelle": "Tag 8 · UE 5 Fallstudie · Kennzeichnung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Data Product"
+    },
+    {
+      "id": "q39",
+      "frage": "Welche Aussage zur ‚Bias-Kontrolle in Trainingsdaten‘ ist senior-tauglich?",
+      "optionen": [
+        "Trainingsdaten sind immer fair",
+        "Trainingsdaten können Bias enthalten (z. B. Untervertretung von Gruppen); Bias-Kontrolle erfolgt durch Datenaudits, Sampling-Strategie und Erklärbarkeit",
+        "Bias ist UI-Theme",
+        "Bias ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Trainingsdaten enthalten oft Bias (z. B. Untervertretung). Senior-Praxis nutzt Datenaudits, Sampling-Strategie und Erklärbarkeit, um Bias zu kontrollieren. UI-/Marketing-Reduktion ist unzulässig.",
+      "quelle": "Tag 8 · UE 4 Coaching · Bias",
+      "schwierigkeit": "mittel",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q40",
+      "frage": "Welche Aussage zur ‚Anti-Gaming-Auswahl in Executive KPIs‘ ist senior-tauglich?",
+      "optionen": [
+        "Executive KPIs werden ohne Anti-Gaming definiert",
+        "Executive KPIs werden mit Gegenmetriken (Quality, Risk) und Guardrails (Schwellen, Reviews) versehen",
+        "Executive KPIs sind UI-Theme",
+        "Executive KPIs sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Executive-KPIs werden mit Gegenmetriken (Quality, Risk) und Guardrails (Schwellen, Reviews) versehen. Sie sind weder beliebig noch UI-Theme.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Executive KPIs",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI & BI-Governance"
+    },
+    {
+      "id": "q41",
+      "frage": "Welche der folgenden Aussagen zur ‚Anti-Gaming-Kopplung Speed/Quality‘ ist sinnvoll?",
+      "optionen": [
+        "Speed ohne Quality genügt",
+        "Lead Time wird mit First-Pass-Yield oder Rework-Quote gekoppelt, um Anreize auszubalancieren",
+        "Speed ist UI-Theme",
+        "Speed ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Sicht koppelt Lead Time mit First-Pass-Yield oder Rework-Quote. So entsteht Balance statt einseitiger Anreize.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Speed/Quality",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI & BI-Governance"
+    },
+    {
+      "id": "q42",
+      "frage": "Welche Aussage zur ‚Audit-Trail im Predictive Workflow‘ ist senior-tauglich?",
+      "optionen": [
+        "Audit-Trail entfällt bei ML",
+        "Audit-Trail erfasst Predictions, Schwellen, Handlungen und Owner – damit nachvollziehbar bleibt, wer wann auf welcher Basis entschieden hat",
+        "Audit-Trail ist UI-Theme",
+        "Audit-Trail ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Audit-Trails in Predictive-Workflows erfassen Predictions, Schwellen, Handlungen und Owner. So bleibt nachvollziehbar, wer wann auf welcher Basis entschieden hat.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Audit-Trail Predictive",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Audit & Compliance"
+    },
+    {
+      "id": "q43",
+      "frage": "Welche Aussage zur ‚Datenethik im Process Mining‘ ist senior-tauglich?",
+      "optionen": [
+        "Datenethik ist beliebig",
+        "Datenethik adressiert Zugriff, Anonymisierung, Zweckbindung, Audit – sie ist Voraussetzung für Akzeptanz und regulatorische Konformität",
+        "Datenethik ist UI-Theme",
+        "Datenethik ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenethik adressiert Zugriff, Anonymisierung, Zweckbindung und Audit – sie ist Voraussetzung für Akzeptanz und Compliance. Beliebigkeit oder UI-Reduktion tragen nicht.",
+      "quelle": "Tag 8 · UE 4 Coaching · Datenethik",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Audit & Compliance"
+    },
+    {
+      "id": "q44",
+      "frage": "Welche Aussage zur ‚Use Case Priorisierung Value/Risk/Effort‘ ist senior-tauglich?",
+      "optionen": [
+        "Priorisierung erfolgt zufällig",
+        "Use Cases werden nach Value (Wert), Risk (Risiko), Effort (Aufwand) priorisiert; Baseline-Heuristiken werden zuerst geprüft",
+        "Priorisierung ist UI-Theme",
+        "Priorisierung ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Use-Case-Priorisierung berücksichtigt Value, Risk und Effort. Vor ML werden Baseline-Heuristiken geprüft. Zufalls- oder UI-/Marketing-Reduktion tragen nicht.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Use Case Priorisierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q45",
+      "frage": "Welche Aussage zur ‚Alerting Governance‘ ist senior-tauglich?",
+      "optionen": [
+        "Alerts brauchen keine Governance",
+        "Alerting Governance definiert Schwellen, Eskalation, Owner, Playbooks und Feedbackschleifen – minimiert Alarmmüdigkeit",
+        "Alerts sind UI-Theme",
+        "Alerts sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Alerting Governance definiert Schwellen, Eskalation, Owner, Playbooks und Feedbackschleifen – sie minimiert Alarmmüdigkeit und sichert Wirkung. UI-/Marketing-Reduktion ist unzulässig.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Alerting Governance",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Real-time Monitoring"
+    },
+    {
+      "id": "q46",
+      "frage": "Sie verantworten als Chief Data Officer eine Process-Intelligence-Plattform. Welche Entscheidungsarchitektur ist senior-tauglich?",
+      "optionen": [
+        "Top-10 Entscheidungen werden nicht priorisiert",
+        "Top-10 Entscheidungen (Priorisierung, SLA-Steuerung, Kapazitäten, Risiko, Automatisierung, Investitionen, …) mit Verantwortlichen, Messgrößen und Triggern definiert",
+        "Architektur ist UI-Theme",
+        "Architektur ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Entscheidungsarchitektur definiert Top-10 Entscheidungen mit Verantwortlichen, Messgrößen und Triggern (Priorisierung, SLA-Steuerung, Kapazitäten, Risiko, Automatisierung, Investitionen). UI-/Marketing-Logik trägt nicht.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Entscheidungsarchitektur",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q47",
+      "frage": "Welche Aussage zum ‚Data Product Design‘ ist senior-tauglich?",
+      "optionen": [
+        "Data Products brauchen keine Standards",
+        "Data Products definieren Event-Log-Standard, Case-ID-Strategie, Datenmodell (Events + Dimensions), Data Quality SLAs, Ownership (Data Owners)",
+        "Data Products sind UI-Theme",
+        "Data Products sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Data-Products definieren Event-Log-Standard, Case-ID-Strategie, Datenmodell, Data-Quality-SLAs und Ownership. Verzicht auf Standards oder Reduktion auf UI/Marketing tragen nicht.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Data Product Design",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Data Product"
+    },
+    {
+      "id": "q48",
+      "frage": "Welche Aussage zu ‚Analytics-Portfolio (Value/Risk/Effort)‘ ist senior-tauglich?",
+      "optionen": [
+        "Portfolio wird nach Bauchgefühl entschieden",
+        "Portfolio priorisiert Use Cases nach Value/Risk/Effort, Baseline-Regeln vor ML, mit Erklärbarkeit und Monitoring/Drift-Plan",
+        "Portfolio ist UI-Theme",
+        "Portfolio ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Portfolio nutzt Value/Risk/Effort, Baselines vor ML, Erklärbarkeit und Monitoring/Drift-Plan. Bauchgefühl- oder UI-/Marketing-Logik führen zu Risiko und Fehlinvestitionen.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Analytics-Portfolio",
+      "schwierigkeit": "schwer",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q49",
+      "frage": "Welche Aussage zur ‚Real-time Operating Model-Logik‘ ist senior-tauglich?",
+      "optionen": [
+        "Real-time braucht kein Operating Model",
+        "Real-time Operating Model definiert Alerting Governance, Playbooks, Eskalationslogik, Audit Trail, Human-in-the-loop-Regeln",
+        "Real-time ist UI-Theme",
+        "Real-time ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Real-time Operating Model bündelt Alerting Governance, Playbooks, Eskalationslogik, Audit Trail und Human-in-the-loop-Regeln. UI-/Marketing-Logik oder Verzicht sind unzureichend.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Real-time Operating Model",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Real-time Monitoring"
+    },
+    {
+      "id": "q50",
+      "frage": "Welche Aussage zur ‚KPI-Governance‘ ist senior-tauglich?",
+      "optionen": [
+        "KPIs werden beliebig definiert",
+        "KPI-Governance definiert KPI-Definitionen, Anti-Gaming-Kopplungen, Review-Zyklen, Training/Enablement",
+        "KPIs sind UI-Theme",
+        "KPIs sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-KPI-Governance umfasst Definitionen, Anti-Gaming-Kopplungen, Review-Zyklen sowie Training/Enablement. Beliebigkeit oder Reduktion sind unzulässig.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · KPI-Governance",
+      "schwierigkeit": "schwer",
+      "thema_tag": "KPI & BI-Governance"
+    },
+    {
+      "id": "q51",
+      "frage": "Welche der folgenden Aussagen zur ‚Roadmap MVP→Scale→Sustain‘ ist senior-tauglich?",
+      "optionen": [
+        "Roadmaps sind unnötig",
+        "MVP (8 Wochen), Scale (12 Wochen), Sustain (laufend) mit messbaren Outcomes und Stop/Continue-Triggern",
+        "Roadmap ist UI-Theme",
+        "Roadmap ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Roadmaps strukturieren MVP, Scale und Sustain mit messbaren Outcomes und Stop/Continue-Triggern. Verzicht oder Reduktion auf UI/Marketing tragen nicht.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Roadmap",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Operating Model"
+    },
+    {
+      "id": "q52",
+      "frage": "Welche Aussage zu ‚Datenschutz/Compliance in Process Intelligence‘ ist senior-tauglich?",
+      "optionen": [
+        "Datenschutz wird nachträglich addiert",
+        "Datenschutz ist ‚by design‘ integriert: Zweckbindung, Anonymisierung, Zugriffsregeln, Audit-Schnittstellen – kontinuierlich, nicht punktuell",
+        "Datenschutz ist UI-Theme",
+        "Datenschutz ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenschutz ist ‚by design‘ integriert: Zweckbindung, Anonymisierung, Zugriffsregeln, Audit-Schnittstellen – kontinuierlich, nicht nachträglich. UI-/Marketing-Reduktion ist unzulässig.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Datenschutz",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Audit & Compliance"
+    },
+    {
+      "id": "q53",
+      "frage": "Welche der folgenden Aussagen zur ‚Misstrauen-Strategie (Überwachungs-Sorge)‘ ist senior-tauglich?",
+      "optionen": [
+        "Misstrauen ist irrelevant",
+        "Misstrauen wird durch Transparenz (Zweck, Daten, Zugriff, Owner), Mitbestimmung und Schutz vor Personenbezug adressiert",
+        "Misstrauen ist UI-Theme",
+        "Misstrauen ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Misstrauen wird durch Transparenz (Zweck, Daten, Zugriff, Owner), Mitbestimmung und Schutz vor Personenbezug adressiert. Ignorieren oder UI-/Marketing-Reduktion tragen nicht.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Misstrauen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q54",
+      "frage": "Welche Aussage zur ‚Welche 3 Use Cases zuerst trotz Datenlücken‘ ist senior-tauglich?",
+      "optionen": [
+        "Beliebige Use Cases wählen",
+        "Use Cases mit hohem Value/Risk-Hebel, akzeptablem Effort, plausibler Baseline und definierten Frühwarnsignalen – verworfene Alternativen dokumentieren",
+        "Use Cases ohne Datenlage starten",
+        "Use Cases sind UI-Theme"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Auswahl unter Datenlücken folgt Value/Risk-Hebel, Effort, Baseline und Frühwarnsignalen, mit Dokumentation verworfener Alternativen. Beliebigkeit, Datenfreiheit oder UI-Reduktion tragen nicht.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Use Case Auswahl",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q55",
+      "frage": "Welche Aussage zu ‚Fehlanreize durch Executive Alerts‘ ist senior-tauglich?",
+      "optionen": [
+        "Executive Alerts erzeugen keine Fehlanreize",
+        "Executive Alerts können Fehlanreize erzeugen (z. B. ‚alles wird gemeldet, nichts wird gelöst‘); Guardrails: Aggregation, Verantwortlichkeit, Wirkungsmessung",
+        "Executive Alerts sind UI-Theme",
+        "Executive Alerts sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Executive Alerts können Fehlanreize erzeugen, wenn nicht gegengesteuert wird. Guardrails: Aggregation, Verantwortlichkeit, Wirkungsmessung. UI-/Marketing-Reduktion ist unzureichend.",
+      "quelle": "Tag 8 · UE 7 Feedback · Executive Alerts",
+      "schwierigkeit": "schwer",
+      "thema_tag": "KPI & BI-Governance"
+    },
+    {
+      "id": "q56",
+      "frage": "Welche Aussage zur ‚Modell-Lifecycle und Audit‘ ist senior-tauglich?",
+      "optionen": [
+        "Modelle werden ohne Lifecycle betrieben",
+        "Modelle haben Lifecycle (Train, Validate, Deploy, Monitor, Retire) inkl. Audit-Trail, Versionierung und Owner-Verantwortung",
+        "Modelle sind UI-Theme",
+        "Modelle sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Modelle haben Lifecycle (Train, Validate, Deploy, Monitor, Retire) inkl. Audit-Trail, Versionierung und Owner-Verantwortung. Lifecycle-Freiheit oder Reduktion sind unzulässig.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Modell-Lifecycle",
+      "schwierigkeit": "schwer",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q57",
+      "frage": "Welche Aussage zur ‚False Positive vs. False Negative Risikobewertung‘ ist senior-tauglich?",
+      "optionen": [
+        "Beide Fehlerarten sind gleich",
+        "Senior-Entscheidung gewichtet False Positive vs. False Negative entlang Schaden (Kunde, Kosten, Compliance) – Schwellenwerte werden begründet",
+        "Beide sind UI-Theme",
+        "Beide sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Entscheidung gewichtet False Positive vs. False Negative entlang Schaden (Kunde, Kosten, Compliance). Schwellen werden begründet. Pauschalantworten tragen nicht.",
+      "quelle": "Tag 8 · UE 7 Feedback · FP/FN Bewertung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "ML & Predictive"
+    },
+    {
+      "id": "q58",
+      "frage": "Welche Aussage zur ‚BI-Governance vs. Schatten-BI‘ ist senior-tauglich?",
+      "optionen": [
+        "Schatten-BI ist unkritisch",
+        "Schatten-BI (uneinheitliche Excels, lokale Berichte) erzeugt Inkonsistenz; BI-Governance bietet Standards, Datenquellen, Definitionen, Audit-Schnittstellen",
+        "Schatten-BI ist UI-Theme",
+        "Schatten-BI ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Schatten-BI erzeugt Inkonsistenz und Risiko. BI-Governance bietet Standards, Datenquellen, Definitionen und Audit-Schnittstellen. UI-/Marketing-Reduktion ist unzulässig.",
+      "quelle": "Tag 8 · UE 4 Coaching · Schatten-BI",
+      "schwierigkeit": "schwer",
+      "thema_tag": "KPI & BI-Governance"
+    },
+    {
+      "id": "q59",
+      "frage": "Welche Aussage zur ‚Steuerungs- und Entscheidungsarchitektur‘ ist senior-tauglich?",
+      "optionen": [
+        "Dashboards sind Selbstzweck",
+        "Senior-Verantwortung bedeutet: von ‚Dashboards bauen‘ zu ‚Steuerungs- und Entscheidungsarchitektur verantworten‘ (Owner, Outcomes, Risiken, Frühwarnung)",
+        "Dashboards sind Marketing",
+        "Dashboards sind UI-Theme"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Verantwortung verschiebt den Fokus von ‚Dashboards bauen‘ zur Steuerungs- und Entscheidungsarchitektur (Owner, Outcomes, Risiken, Frühwarnung). UI-/Marketing-Reduktion ist unzulässig.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Steuerungsarchitektur",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q60",
+      "frage": "Welche Aussage zur ‚Outcome-orientierten Roadmap‘ ist senior-tauglich?",
+      "optionen": [
+        "Roadmap orientiert sich an Output (Lieferungen)",
+        "Roadmap orientiert sich an Outcomes (Wirkungen) – z. B. SLA-Breach-Reduktion, MTTR-Verkürzung, Audit-Findings",
+        "Roadmap ist UI-Theme",
+        "Roadmap ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Roadmaps orientieren sich an Outcomes (Wirkungen), z. B. SLA-Breach-Reduktion, MTTR-Verkürzung, Audit-Findings. Reine Output-Orientierung oder UI/Marketing-Reduktion tragen nicht.",
+      "quelle": "Tag 8 · UE 8 Transferprojekt · Outcome-Roadmap",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    }
+  ]
+}

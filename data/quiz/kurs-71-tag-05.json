@@ -1,0 +1,907 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 5,
+  "erstellt_am": "2026-05-24",
+  "fragen": [
+    {
+      "id": "q01",
+      "frage": "Welcher Hauptzweck steht hinter dem Einsatz von Tools wie Visio oder Lucidchart in der unternehmensweiten Modellierung?",
+      "optionen": [
+        "Reine ästhetische Verbesserung von Folien",
+        "Kollaborative Erstellung, Standardisierung und Versionierung von Prozessmodellen",
+        "Ersetzen jeglicher Prozessmodellierung durch Slides",
+        "Reine Speicherung von Rechnungen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Visio und Lucidchart unterstützen kollaborative Modellierung, Standardisierung über Templates und Versionierung. Sie sind Werkzeuge für unternehmensweite Vergleichbarkeit, nicht reine Designer-Tools oder Folien-Ersatz.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · Kollaboration & Standards",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Tools & Kollaboration"
+    },
+    {
+      "id": "q02",
+      "frage": "Wofür steht die Abkürzung ‚EA‘ in der Modellierungslandschaft?",
+      "optionen": [
+        "Excel Automation",
+        "Enterprise Architecture",
+        "External Audit",
+        "Event Analytics"
+      ],
+      "korrekt": 1,
+      "erklaerung": "EA steht für Enterprise Architecture und beschreibt einen Architekturrahmen, der Capabilities, Prozesse, Applikationen, Daten und Technologie zusammen denkt. Die anderen Begriffe haben keine etablierte Bedeutung als ‚EA‘.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · EA-Grundlagen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Enterprise Architecture"
+    },
+    {
+      "id": "q03",
+      "frage": "Wofür steht ‚MDA‘ im Kontext modellgetriebener Entwicklung?",
+      "optionen": [
+        "Multiple Database Access",
+        "Model-Driven Architecture",
+        "Management Decision Architecture",
+        "Modular Domain Application"
+      ],
+      "korrekt": 1,
+      "erklaerung": "MDA steht für Model-Driven Architecture (OMG). Sie definiert die Übersetzungsebenen CIM, PIM und PSM, um Business-, Logik- und Plattformsicht zu trennen. Die übrigen Begriffe sind keine etablierten MDA-Definitionen.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · MDA-Grundlagen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "MDA"
+    },
+    {
+      "id": "q04",
+      "frage": "Welches dieser Modelle bildet die Business-Sicht in MDA ab?",
+      "optionen": [
+        "PSM (Platform Specific Model)",
+        "CIM (Computation Independent Model)",
+        "PIM (Platform Independent Model)",
+        "TIM (Technical Independent Model)"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das CIM (Computation Independent Model) bildet die Business-Sicht mit Zielen, Prozessen und Begriffen ab. PIM und PSM beschreiben technisch logisch bzw. plattformspezifisch. TIM ist kein offizielles MDA-Element.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · MDA-Ebenen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "MDA"
+    },
+    {
+      "id": "q05",
+      "frage": "Was ist eine ‚Capability‘ im EA-Sinn?",
+      "optionen": [
+        "Ein konkretes IT-System",
+        "Eine Fähigkeit eines Unternehmens, etwas Bestimmtes zu leisten (z. B. ‚Kunde identifizieren‘)",
+        "Ein Diagramm in BPMN",
+        "Ein Lieferantenrating"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Capability beschreibt eine Fähigkeit (was kann das Unternehmen?). Sie ist abstrahiert von Systemen und Prozessen und zentral für strategische Priorisierung. Systeme oder Diagramme adressieren andere Sichten.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · Capability-Begriff",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Capability Map"
+    },
+    {
+      "id": "q06",
+      "frage": "Welche zwei Modellebenen der MDA beschreiben Logik bzw. Plattformbezug?",
+      "optionen": [
+        "CIM und KPI",
+        "PIM und PSM",
+        "BPM und SOA",
+        "UML und EPC"
+      ],
+      "korrekt": 1,
+      "erklaerung": "PIM (Platform Independent Model) bildet logische System-/Servicesicht ab, PSM (Platform Specific Model) konkretisiert die plattformspezifische Umsetzung. CIM steht für die Business-Sicht.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · MDA-Ebenen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "MDA"
+    },
+    {
+      "id": "q07",
+      "frage": "Welche Aussage zu Naming-Konventionen ist zutreffend?",
+      "optionen": [
+        "Naming ist nur für IT relevant",
+        "Verb + Objekt (z. B. ‚Rechnung prüfen‘) ist eine etablierte Konvention für Aktivitäten",
+        "Naming sollte zufällig sein, um Kreativität zu fördern",
+        "Naming ist überflüssig, da Symbole sprechen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Verb + Objekt ist eine bewährte Naming-Konvention für Aktivitäten in Prozessmodellen. Sie macht Modelle vergleichbar und auditierbar. Beliebigkeit oder Verzicht auf Naming widerspricht jeder Standardisierungslogik.",
+      "quelle": "Tag 5 · UE 2 Arbeitsauftrag 1 · Naming-Konventionen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q08",
+      "frage": "Was bezeichnet eine ‚Capability Map‘?",
+      "optionen": [
+        "Eine Landkarte der Office-Standorte",
+        "Eine strukturierte Übersicht der Fähigkeiten eines Unternehmens",
+        "Eine Liste aller Lieferanten",
+        "Eine Lizenzübersicht der Tools"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Capability Map gibt eine strukturierte Übersicht der Fähigkeiten eines Unternehmens. Sie dient als Priorisierungs- und Standardisierungsinstrument auf strategischer Ebene. Die anderen Optionen sind keine Capability-Sichten.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · Capability Map",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Capability Map"
+    },
+    {
+      "id": "q09",
+      "frage": "Welches Element gehört in eine ‚Modelling Charter‘?",
+      "optionen": [
+        "Geheimrezepte für Catering",
+        "Nicht verhandelbare Standards, Freiheitsgrade und Freigabe-/Änderungsprozess",
+        "Reine Marketing-Slogans",
+        "Eine Tabelle der Aktienkurse"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Modelling Charter formuliert nicht verhandelbare Standards, definiert Freiheitsgrade und beschreibt den Freigabe-/Änderungsprozess inkl. Rollen. Die anderen Inhalte gehören nicht in eine Modellierungs-Charta.",
+      "quelle": "Tag 5 · UE 2 Arbeitsauftrag 1 · Modelling Charter",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q10",
+      "frage": "Welche der folgenden Sichten gehört typischerweise zur Enterprise Architecture?",
+      "optionen": [
+        "Catering-Sicht",
+        "Applikationslandschaft",
+        "Sitzplanverwaltung",
+        "Werbekampagnen-Kalender"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Applikationslandschaft gehört zu den Standard-Sichten einer Enterprise Architecture, neben Capability Map, Prozesslandkarte, Datenobjekten und Schnittstellen. Die übrigen Beispiele sind keine EA-Sichten.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · EA-Sichten",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Enterprise Architecture"
+    },
+    {
+      "id": "q11",
+      "frage": "Welche Aussage zur Versionierung in Visio/Lucidchart ist korrekt?",
+      "optionen": [
+        "Versionierung ist Selbstzweck",
+        "Versionierung hält Modellstände nachvollziehbar und ermöglicht Audit-/Rollback-Fähigkeit",
+        "Versionierung verursacht nur Aufwand und ist überflüssig",
+        "Versionierung erfolgt automatisch durch die Cloud, manuelle Pflege ist nicht nötig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Versionierung sichert Nachvollziehbarkeit, Audit-Fähigkeit und Rollback. Auch in Cloud-Tools braucht es bewusste Versionsstrategien (z. B. Major/Minor, Status-Tags). Selbstzweck oder Überflüssigkeit ist nicht zutreffend.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · Versionierung",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q12",
+      "frage": "Welches Element gehört nicht zwingend in den Mindestumfang von Modell-Metadaten?",
+      "optionen": [
+        "Owner",
+        "Status/Version",
+        "Letzte Änderung",
+        "Anzahl Bildschirmpixel"
+      ],
+      "korrekt": 3,
+      "erklaerung": "Mindest-Metadaten enthalten Owner, Status/Version und letzte Änderung. Pixel sind irrelevant für Steuerung und Audit. Diese Trennung ist Teil einer wirksamen Modelling Charter.",
+      "quelle": "Tag 5 · UE 2 Arbeitsauftrag 1 · Mindestmetadaten",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q13",
+      "frage": "Welche Rolle ist typischerweise Teil einer ‚Modeling Governance‘ in Visio/Lucidchart?",
+      "optionen": [
+        "Modeler, Reviewer, Owner",
+        "Reise-Manager, Spesen-Manager, IT-Helpdesk",
+        "Vertrieb Außendienst, Innendienst, Logistik",
+        "Designer, Texter, Druckerei"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Modeling Governance basiert auf Modeler (erstellt), Reviewer (prüft) und Owner (verantwortet/freigibt). Die anderen Rollensets gehören in andere Funktionsbereiche.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · Modeling Governance",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q14",
+      "frage": "Welche Aussage zur ‚Definition of Done‘ für Prozessmodelle stimmt?",
+      "optionen": [
+        "Sie ist überflüssig, da Modelle nie ‚fertig‘ sind",
+        "Sie definiert Mindestkriterien, ab denen ein Modell als freigabefähig gilt",
+        "Sie betrifft nur Tester",
+        "Sie ist ausschließlich ein Excel-Feld"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Definition of Done für Modelle legt fest, ab welchem Reifegrad ein Modell freigabefähig ist (z. B. Owner, Naming, Reviews bestanden). Sie ist nicht überflüssig und nicht auf Test/Excel beschränkt.",
+      "quelle": "Tag 5 · UE 2 Arbeitsauftrag 1 · Definition of Done",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q15",
+      "frage": "Was beschreibt das Prinzip ‚Single Source of Truth‘ in einem EA-Repository?",
+      "optionen": [
+        "Eine einzige Person darf das Repository pflegen",
+        "Ein zentraler, autoritativer Bestand an Modellen, Daten und Verknüpfungen für die ganze Organisation",
+        "Ein Backup auf einem USB-Stick",
+        "Eine reine E-Mail-Sammlung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Single Source of Truth heißt zentral autoritativer Bestand für Modelle, Daten und Verknüpfungen. So vermeidet die Organisation widersprüchliche Ablagen und Schattenkopien. Personen-, USB- oder E-Mail-Lösungen sind keine SSOT.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · SSOT",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Tools & Kollaboration"
+    },
+    {
+      "id": "q16",
+      "frage": "Welche Aussage zur Bedeutung von Datenobjekten in der EA ist korrekt?",
+      "optionen": [
+        "Datenobjekte sind unwichtige Randnotizen",
+        "Datenobjekte (z. B. Kunde, Vertrag) sind Informationskerne, die Capabilities und Prozesse verbinden",
+        "Datenobjekte ersetzen Capabilities",
+        "Datenobjekte existieren nur in BPMN"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenobjekte sind Informationskerne (z. B. Kunde, Vertrag), die Capabilities, Prozesse und Applikationen verbinden. Sie sind nicht ersetzbar durch Capabilities und nicht auf BPMN beschränkt.",
+      "quelle": "Tag 5 · UE 3 Arbeitsauftrag 2 · Datenobjekte",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Datenobjekte"
+    },
+    {
+      "id": "q17",
+      "frage": "Welche Aussage zur Prozesslandkarte ist korrekt?",
+      "optionen": [
+        "Sie ist eine Detailmodellierung jedes Schritts",
+        "Sie ist eine Übersicht der wichtigsten Prozesse (Kern-, Management-, Unterstützungsprozesse)",
+        "Sie ersetzt jede Capability Map",
+        "Sie ist nur für IT-Strategie relevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Prozesslandkarte bündelt die wichtigsten Prozesse (Kern-, Management-, Unterstützungsprozesse) auf Übersichtsebene. Sie ergänzt die Capability Map und ist organisationsweit relevant, nicht nur für IT.",
+      "quelle": "Tag 5 · UE 3 Arbeitsauftrag 2 · Prozesslandkarte",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Prozesslandkarte"
+    },
+    {
+      "id": "q18",
+      "frage": "Welche der folgenden Aussagen zur Verbindung Business ↔ IT ist sinnvoll?",
+      "optionen": [
+        "Business und IT entscheiden unabhängig voneinander, das Ergebnis ergibt sich",
+        "EA und MDA stellen explizite Verbindungen zwischen Business-Zielen und IT-Umsetzung sicher",
+        "EA ist ein reines IT-Thema ohne Business-Bezug",
+        "MDA ist nur ein Toolkonzept"
+      ],
+      "korrekt": 1,
+      "erklaerung": "EA und MDA verbinden Business-Ziele (Capabilities, Prozesse) mit IT-Umsetzung (Applikationen, Daten, Plattform). Ohne diese Brücken laufen Programme aneinander vorbei. EA ist nicht IT-only und MDA ist mehr als ein Tool.",
+      "quelle": "Tag 5 · UE 4 Coaching · Business-IT-Brücke",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Enterprise Architecture"
+    },
+    {
+      "id": "q19",
+      "frage": "Welche Aussage zur Modell-Hierarchie ist sinnvoll?",
+      "optionen": [
+        "Alle Modelle befinden sich auf gleicher Detailtiefe",
+        "Modell-Hierarchien strukturieren Übersicht (z. B. Landkarte) und Detail (z. B. Subprozess) konsistent",
+        "Hierarchien sind in der Modellierung verboten",
+        "Hierarchien gelten nur für IT-Architektur"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Modell-Hierarchien gliedern Sichten von Übersicht bis Detail konsistent und ermöglichen Drill-down. Sie sind nicht verboten und nicht IT-only, sondern Basistechnik der EA und der Prozessmodellierung.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · Hierarchien",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q20",
+      "frage": "Was bedeutet ‚Audit Trail‘ im Modellierungskontext?",
+      "optionen": [
+        "Eine Wanderroute für Auditoren",
+        "Eine nachvollziehbare Spur, wer wann was am Modell verändert hat",
+        "Eine Liste interner Witze",
+        "Ein Verkaufstrichter"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Audit Trail bezeichnet die nachvollziehbare Aufzeichnung von Änderungen (wer, wann, was). Sie ist Pflichtbestandteil regulierter Organisationen. Die anderen Optionen sind nicht zutreffend.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · Audit Trail",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q21",
+      "frage": "Sie sollen fünf nicht verhandelbare Modellierungsstandards definieren. Welche Auswahl ist sinnvoll?",
+      "optionen": [
+        "Lieblingsfarbe, Lieblingsfont, Lieblingssymbol, Lieblingsgröße, Lieblingstool",
+        "Naming-Konvention, sichtbare Rollen, klare Start-/Endpunkte, Status/Version, Owner",
+        "Beliebige Symbole, keine Owner, keine Versionen, keine Reviews, keine Rollen",
+        "Anzahl Pfeile, Anzahl Symbole, Schriftgröße, Schriftart, Hintergrundbild"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wirksame Standards regeln Naming, sichtbare Rollen, Start/Ende, Status/Version und Owner. Sie erzeugen Vergleichbarkeit und Auditierbarkeit. Visuelle Beliebigkeit oder fehlende Verantwortlichkeiten unterminieren Governance.",
+      "quelle": "Tag 5 · UE 2 Arbeitsauftrag 1 · Standards",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q22",
+      "frage": "Welche drei Freiheitsgrade sind innerhalb einer Modelling Charter sinnvoll?",
+      "optionen": [
+        "Owner, Version, Freigabe",
+        "Detailtiefe, Notation in Übersichten, lokale Varianten als Attribute",
+        "Naming, Rollen, Start/Ende",
+        "Tool-Wahl, Tool-Lizenz, Tool-Hersteller"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Sinnvolle Freiheitsgrade lassen Detailtiefe, Notation in Übersichten und lokale Varianten als Attribute offen – die Kern-Governance (Owner, Version, Naming) bleibt verbindlich. Das ist die typische ‚Wahlfreiheit in Grenzen‘.",
+      "quelle": "Tag 5 · UE 2 Arbeitsauftrag 1 · Freiheitsgrade",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q23",
+      "frage": "Sie priorisieren in einer Capability Map. Welche Capability ist typischerweise hochpriorisiert?",
+      "optionen": [
+        "Eine Capability ohne Bezug zu Strategie oder Compliance",
+        "Eine Capability mit hohem Hebel auf Durchlaufzeit oder Compliance (z. B. ‚Identitätsprüfung‘ im Onboarding)",
+        "Eine Capability, die niemand benötigt",
+        "Eine Capability, die in keinem Prozess vorkommt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Capabilities mit hohem Hebel auf strategische Outcomes (Durchlaufzeit, Compliance, Risiko) werden priorisiert. Beispiel: ‚Identitätsprüfung‘ im Digital Onboarding. Capabilities ohne Bezug oder ohne Prozesseinsatz sind kein Priorisierungs-Kandidat.",
+      "quelle": "Tag 5 · UE 3 Arbeitsauftrag 2 · Priorisierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Capability Map"
+    },
+    {
+      "id": "q24",
+      "frage": "Beim Übergang CIM → PIM sollten Sie sich auf welche Inhalte konzentrieren?",
+      "optionen": [
+        "Logos und Farbprofile",
+        "Logische Services, Datenflüsse, Fehlerfälle, ohne sich auf eine spezifische Plattform festzulegen",
+        "Konkrete Cloud-Region und Lizenz",
+        "Reines Compliance-Reporting"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der PIM-Layer beschreibt logische Services, Datenflüsse und Fehlerfälle plattform-unabhängig. Konkrete Plattform-Entscheidungen gehören erst in den PSM. Visuelles oder reines Reporting passt nicht in diese MDA-Ebene.",
+      "quelle": "Tag 5 · UE 5 Fallstudie · CIM→PIM",
+      "schwierigkeit": "mittel",
+      "thema_tag": "MDA"
+    },
+    {
+      "id": "q25",
+      "frage": "Welche KPI passt besonders gut, um die Wirkung einer EA-Priorisierung zu beobachten?",
+      "optionen": [
+        "Anzahl modellierter Symbole",
+        "Lead Time eines priorisierten E2E-Prozesses (z. B. Onboarding)",
+        "Schriftartwechsel pro Sprint",
+        "Anzahl Mitarbeiter im Lift"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine wirkungsorientierte KPI ist die Lead Time des priorisierten E2E-Prozesses, weil sie direkten Outcome-Bezug hat. Symbol- oder Schriftartmetriken sind keine sinnvollen EA-Steuerungs-KPIs.",
+      "quelle": "Tag 5 · UE 5 Fallstudie · KPI",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI-Steuerung"
+    },
+    {
+      "id": "q26",
+      "frage": "Welche der folgenden Aussagen zu ‚Standortautonomie‘ ist senior-tauglich?",
+      "optionen": [
+        "Standorte dürfen ohne jede Regel handeln",
+        "Standortautonomie wird durch Guardrails (Naming, Owner, Freigabe, Variantenattribute) gerahmt – nicht durch Wildwuchs",
+        "Standortautonomie ist generell verboten",
+        "Standortautonomie betrifft nur IT"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Praxis nutzt Guardrails, um Standortautonomie zu rahmen, ohne lokale Realität zu zerstören. Wildwuchs zerstört Vergleichbarkeit, Verbote zerstören Akzeptanz. IT-Begrenzung wäre unzulässig.",
+      "quelle": "Tag 5 · UE 4 Coaching · Standortautonomie",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q27",
+      "frage": "Welche Empfehlung gilt für die ‚Modelling Charter‘ in einer Organisation mit unterschiedlicher Toolreife?",
+      "optionen": [
+        "Sofortige strenge Standardisierung über alle Bereiche, ohne Übergang",
+        "Wenige nicht verhandelbare Standards, gezielte Freiheitsgrade, schrittweise Einführung mit Coaching",
+        "Verzicht auf Charter, da heterogene Tools dies verhindern",
+        "Charter ausschließlich in einem Tool umsetzen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Bei heterogener Toolreife arbeitet die Senior-Praxis mit wenigen unverrückbaren Standards, gezielten Freiheitsgraden und schrittweiser Einführung inkl. Coaching. Extreme Strenge oder Verzicht erzeugen Widerstand bzw. Stillstand.",
+      "quelle": "Tag 5 · UE 4 Coaching · Charter Einführung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q28",
+      "frage": "Welche der folgenden Aussagen zur EA-Praxis ist treffend?",
+      "optionen": [
+        "EA ist Selbstzweck und liefert keinen Geschäftsnutzen",
+        "EA reduziert Komplexität, ermöglicht Priorisierung und unterstützt Risiko-/Compliance-Steuerung",
+        "EA ist nur für Software-Entwickler relevant",
+        "EA ersetzt jede operative Verantwortung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "EA reduziert Komplexität, ermöglicht Priorisierung und unterstützt Risiko-/Compliance-Steuerung. Sie ist Querschnittsdisziplin, nicht IT-only, und nicht Selbstzweck. Operative Verantwortung wird gerahmt, nicht ersetzt.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · EA-Nutzen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Enterprise Architecture"
+    },
+    {
+      "id": "q29",
+      "frage": "Welche Aussage zur MDA-Verantwortungsgrenze ist korrekt?",
+      "optionen": [
+        "CIM ist eine reine IT-Sicht",
+        "CIM definiert Business-Entscheidung; PIM/PSM betreffen Implementierungsdetails – die Trennung schützt Business-Verantwortlichkeit",
+        "PIM ersetzt CIM komplett",
+        "PSM betrifft nur Tester"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die MDA-Trennung definiert Verantwortungen: CIM = Business-Entscheidung, PIM/PSM = Umsetzung. Diese Klarheit verhindert, dass Technik Business-Themen verschiebt. CIM ist keine IT-Sicht, PIM ersetzt CIM nicht, PSM ist nicht nur ‚Testung‘.",
+      "quelle": "Tag 5 · UE 4 Coaching · Verantwortungsgrenze",
+      "schwierigkeit": "mittel",
+      "thema_tag": "MDA"
+    },
+    {
+      "id": "q30",
+      "frage": "Welche Aussage zu Tool-Lockin in der Modellierung trifft zu?",
+      "optionen": [
+        "Tool-Lockin ist immer vorteilhaft",
+        "Tool-Lockin entsteht, wenn Modelle, Templates und Standards untrennbar an ein Werkzeug gebunden werden – Risiko: Wechselkosten, Abhängigkeiten",
+        "Tool-Lockin ist nur ein Marketing-Begriff",
+        "Tool-Lockin ist gleichbedeutend mit Open Standards"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Tool-Lockin entsteht, wenn Modelle und Standards untrennbar an ein Werkzeug gebunden sind. Es erhöht Wechselkosten und Abhängigkeiten. Es ist weder pauschal vorteilhaft noch dasselbe wie Open Standards.",
+      "quelle": "Tag 5 · UE 4 Coaching · Tool-Lockin",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Tools & Kollaboration"
+    },
+    {
+      "id": "q31",
+      "frage": "Sie wählen für ‚Digital Customer Onboarding‘ Top-3-Capabilities mit höchstem Hebel. Welche Auswahl ist plausibel?",
+      "optionen": [
+        "Kantinenmenü, Empfang, Sitzplan",
+        "Identität prüfen, Vertrag prüfen, Zugang/Account provisionieren",
+        "Logo-Design, Werbeplakat, Pressemitteilung",
+        "Drucker warten, Festplatte tauschen, Kabel verlegen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Identitätsprüfung, Vertragsprüfung und Zugangs-Provisionierung haben hohen Hebel auf Durchlaufzeit und Compliance im Onboarding. Die anderen Auflistungen adressieren keine Onboarding-Capabilities.",
+      "quelle": "Tag 5 · UE 3 Arbeitsauftrag 2 · Capability-Auswahl",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Capability Map"
+    },
+    {
+      "id": "q32",
+      "frage": "Welche zwei Datenobjekte sind im Digital Customer Onboarding typischerweise zentral?",
+      "optionen": [
+        "Kunde und Vertrag",
+        "Schriftart und Farbe",
+        "Mitarbeiterausweis und Kantinenkarte",
+        "Druckerpatrone und Aktenordner"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Kunde und Vertrag sind zentrale Datenobjekte im Onboarding. Sie tragen Identität, Berechtigung und Vertragsbasis. Die anderen Beispiele haben keinen Kerncharakter für Onboarding-Datenmodelle.",
+      "quelle": "Tag 5 · UE 3 Arbeitsauftrag 2 · Datenobjekte",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Datenobjekte"
+    },
+    {
+      "id": "q33",
+      "frage": "Welche Aussage zur Wirkung von Modell-Standardisierung ist treffend?",
+      "optionen": [
+        "Standards verschlechtern Audit-Fähigkeit",
+        "Standards erhöhen Vergleichbarkeit, Auditierbarkeit und Wiederverwendbarkeit",
+        "Standards verhindern jede Kollaboration",
+        "Standards eliminieren Variantenrealität"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Standards erhöhen Vergleichbarkeit, Auditierbarkeit und Wiederverwendbarkeit. Sie sind kein Gegensatz zu Kollaboration oder Varianten – sie rahmen sie. Audit-Verschlechterung ist unzutreffend.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · Standardisierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellierungsstandards"
+    },
+    {
+      "id": "q34",
+      "frage": "Welche Aussage zu ‚EA als Priorisierungsmaschine‘ ist senior-tauglich?",
+      "optionen": [
+        "EA priorisiert per Zufallsgenerator",
+        "EA verschiebt Diskussionen von Einzelprozess zu Wertbeitrag (Capability-Hebel, Risiko, Compliance)",
+        "EA priorisiert nach dem Lautstärkenprinzip",
+        "EA priorisiert ausschließlich nach Lizenzkosten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "EA verlagert Diskussionen vom Einzelprozess auf Wertbeitrag, Risiko und Compliance via Capabilities. So entstehen tragfähige Priorisierungen. Lautstärke- oder Lizenz-Logiken sind keine EA-Prinzipien.",
+      "quelle": "Tag 5 · UE 4 Coaching · EA Priorisierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Enterprise Architecture"
+    },
+    {
+      "id": "q35",
+      "frage": "Welche der folgenden Aussagen über die Definition eines KPI-Sets in der EA-Fallstudie passt?",
+      "optionen": [
+        "KPI-Sets bestehen ausschließlich aus Outcome-KPIs ohne Risiko-Sicht",
+        "Sinnvolles KPI-Set kombiniert Outcome/Speed-KPIs (z. B. Lead Time) mit Risk/Compliance-KPIs (z. B. Compliance-Findings)",
+        "KPI-Sets sollten so groß wie möglich sein",
+        "KPI-Sets sind frei wählbar ohne Owner"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wirksame KPI-Sets kombinieren Outcome/Speed mit Risk/Compliance, jeweils mit klaren Owner. Maximale Anzahl oder Verzicht auf Ownership widerspricht Steuerungslogik.",
+      "quelle": "Tag 5 · UE 5 Fallstudie · KPI-Set",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI-Steuerung"
+    },
+    {
+      "id": "q36",
+      "frage": "Welche Aussage zur Modell-Wartung beschreibt eine Senior-Sicht?",
+      "optionen": [
+        "Wartung ist optional und überflüssig",
+        "Wartung ist Pflicht und wird durch Review-Zyklen, Change-Requests und Retired-Status gesichert",
+        "Wartung ist eine reine Marketing-Aufgabe",
+        "Wartung wird ausschließlich durch IT-Tickets gesteuert"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Modell-Wartung gehört zur Modeling Governance und wird über Review-Zyklen, Change-Requests und Lifecycle-Stati gesichert. Sie ist weder optional noch reine Marketing- oder IT-Ticket-Tätigkeit.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · Wartung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q37",
+      "frage": "Welche Aussage zur ‚Capability vs. Prozess‘ Abgrenzung ist korrekt?",
+      "optionen": [
+        "Capability beschreibt ‚wie‘ (Schrittfolge), Prozess beschreibt ‚was‘ (Fähigkeit)",
+        "Capability beschreibt ‚was‘ (Fähigkeit), Prozess beschreibt ‚wie‘ (Schrittfolge)",
+        "Capability und Prozess sind dasselbe",
+        "Capability ist ein Datenobjekt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Capability beschreibt die Fähigkeit (‚was‘ kann eine Organisation), Prozess beschreibt den Ablauf (‚wie‘ wird sie erbracht). Die Begriffe sind komplementär, nicht synonym; eine Capability ist auch kein Datenobjekt.",
+      "quelle": "Tag 5 · UE 3 Arbeitsauftrag 2 · Capability vs. Prozess",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Capability Map"
+    },
+    {
+      "id": "q38",
+      "frage": "Welche Aussage zur ‚Roll-out-Welle‘ einer Modelling Charter ist sinnvoll?",
+      "optionen": [
+        "Sofortiger globaler Big Bang",
+        "Pilotbereich mit Coaching → Wellenrollout in weitere Bereiche → kontinuierliche Verbesserung",
+        "Verzicht auf Rollout, da Charter Selbstläufer",
+        "Rollout nur durch externes Consulting"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Wirksame Roll-outs nutzen Pilot, Wellen und kontinuierliche Verbesserung mit Coaching. Big Bang erzeugt Risiko, ‚Selbstläufer‘ ist ein Mythos und reine Consulting-Verantwortung blockiert Eigenverantwortung.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · Roll-out",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Roll-out & Enablement"
+    },
+    {
+      "id": "q39",
+      "frage": "Welche der folgenden Risiken kann durch inkonsistente Modelle entstehen?",
+      "optionen": [
+        "Maximaler Audit-Erfolg",
+        "Audit-Findings, Fehlinvestitionen, IT-Business-Konflikte",
+        "Geringerer Aufwand für Compliance",
+        "Höhere Kundenzufriedenheit als Automatismus"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Inkonsistente Modelle erzeugen Audit-Findings, Fehlinvestitionen und Konflikte zwischen IT und Business. Sie reduzieren weder Compliance-Aufwand noch erhöhen sie automatisch Kundenzufriedenheit.",
+      "quelle": "Tag 5 · UE 4 Coaching · Risiken",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q40",
+      "frage": "Welche Antwort beschreibt einen sinnvollen Umgang mit Datenverantwortung in EA?",
+      "optionen": [
+        "Daten sind herrenlos",
+        "Pro zentralem Datenobjekt wird ein Data Owner benannt, der Qualitäts- und Definitions-Verantwortung trägt",
+        "Daten werden ausschließlich von externen Auditoren verwaltet",
+        "Daten werden ohne Definition geführt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Praxis benennt pro zentralem Datenobjekt einen Data Owner mit Qualitäts- und Definitionsverantwortung. Herrenlose oder rein extern verwaltete Daten produzieren Audit-Findings und IT-Business-Konflikte.",
+      "quelle": "Tag 5 · UE 4 Coaching · Data Ownership",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Datenobjekte"
+    },
+    {
+      "id": "q41",
+      "frage": "In der Fallstudie ‚RetailGroup Europe‘ sollen Sie zwei Capabilities priorisieren. Welche Argumentation ist tragfähig?",
+      "optionen": [
+        "Wir nehmen die ersten zwei, die uns einfallen",
+        "Hebel auf Durchlaufzeit/Compliance + Engpassanalyse + Verbindung zu strategischen Zielen",
+        "Wir wählen die Capabilities mit den kürzesten Namen",
+        "Wir nehmen die teuersten Capabilities"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Tragfähige Priorisierung verknüpft Capability-Hebel mit Engpassanalyse und strategischen Zielen. Zufalls- oder Kosten-Heuristiken liefern keine belastbaren Entscheidungen.",
+      "quelle": "Tag 5 · UE 5 Fallstudie · Priorisierungslogik",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Capability Map"
+    },
+    {
+      "id": "q42",
+      "frage": "Welche Aussage zu KPI-Gaming ist senior-relevant?",
+      "optionen": [
+        "Gaming ist immer ausgeschlossen, wenn KPIs benannt sind",
+        "Gaming entsteht, wenn KPIs ohne Gegenmetriken oder Outcome-Bindung Anreize verzerren – Anti-Gaming-Kopplungen sind nötig",
+        "Gaming betrifft nur Spielebranche",
+        "Gaming hat keinen Einfluss auf Steuerung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Gaming entsteht, wenn KPIs Anreize verzerren und keine Anti-Gaming-Kopplungen vorhanden sind. Senior-Praxis koppelt z. B. Speed-KPIs an Quality-/Risk-KPIs. Branchenfremd ist die Gefahr nicht.",
+      "quelle": "Tag 5 · UE 7 Feedback · Gaming",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI-Steuerung"
+    },
+    {
+      "id": "q43",
+      "frage": "Welche Aussage zur Rolle eines ‚Chief Enterprise Architect‘ ist senior-tauglich?",
+      "optionen": [
+        "Verantwortet ausschließlich Tool-Lizenzen",
+        "Verantwortet Architekturrahmen, Standards, Governance, Investitionsentscheidungen über Capabilities/Daten/Applikationen",
+        "Hat nur eine Reporting-Rolle ohne Entscheidungsbefugnis",
+        "Hat keine Verbindung zu Business-Strategie"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Chief Enterprise Architect verantwortet den Architekturrahmen, Standards, Governance und Investitionsentscheidungen über Capabilities, Daten und Applikationen. Lizenz- oder reine Reporting-Beschränkung ist unzulässig.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · CEA-Rolle",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q44",
+      "frage": "Welche Aussage zur ‚MDA Guardrail‘ ist sinnvoll?",
+      "optionen": [
+        "MDA Guardrails fixieren ausschließlich Symbole",
+        "MDA Guardrails regeln, was zwingend ins CIM gehört (Definitionen, Ziele, Scope) und wann PSM zulässig ist (Review-Gates)",
+        "MDA Guardrails sind eine reine UI-Frage",
+        "MDA Guardrails ersetzen jede Modellierung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "MDA Guardrails sind Inhaltsregeln: CIM-Pflichtinhalte, PIM-Übergang, PSM-Zulässigkeit – häufig mit Review-Gates. Symbolik oder UI-Themen sind nicht der Kern.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · MDA Guardrails",
+      "schwierigkeit": "mittel",
+      "thema_tag": "MDA"
+    },
+    {
+      "id": "q45",
+      "frage": "Welche der folgenden Aussagen ist eine sinnvolle Frühwarnung in der Modeling-Charter-Einführung?",
+      "optionen": [
+        "Anzahl Folien im Foliensatz",
+        "Anteil Modelle ohne Owner, Anteil Modelle ohne Freigabe, Anteil veralteter Modelle",
+        "Anzahl Workshops im Jahr",
+        "Anzahl der E-Mails an die Charter-Adresse"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Frühwarnsignale sind Owner-Lücken, fehlende Freigaben und veraltete Modelle. Sie zeigen direkt, dass die Charter operativ noch nicht greift. Folien- oder E-Mail-Zahlen sind keine Outcome-Indikatoren.",
+      "quelle": "Tag 5 · UE 7 Feedback · Frühwarnung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI-Steuerung"
+    },
+    {
+      "id": "q46",
+      "frage": "Sie stehen vor der Wahl ‚Standardtool unternehmensweit‘ vs. ‚föderierte Tool-Landschaft‘. Welche Senior-Argumentation trägt?",
+      "optionen": [
+        "Standardtool ist immer billiger",
+        "Standardtool reduziert Komplexität, riskiert Lockin und Akzeptanzprobleme; föderiert schützt Autonomie, erfordert klare Standards und Mapping – Entscheidung explizit dokumentieren",
+        "Föderiert ist immer besser",
+        "Entscheidung ist beliebig, da beide gleich sind"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Argumentation wägt Standardtool (weniger Komplexität, mehr Lockin) gegen föderiert (mehr Autonomie, mehr Mapping-Aufwand) ab und dokumentiert die Entscheidung mit Frühwarnsignalen. Pauschalantworten sind unzureichend.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · Tool-Strategie",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Tools & Kollaboration"
+    },
+    {
+      "id": "q47",
+      "frage": "Welche Senior-Aussage zur ‚Governance-Strenge‘ ist tragfähig?",
+      "optionen": [
+        "Maximale Strenge erzeugt maximale Akzeptanz",
+        "Minimal-strenge Governance startet niedrig, wird datenbasiert nachgeschärft (Trigger: Audit-Findings, Inkonsistenz-Quote)",
+        "Strenge ist immer falsch",
+        "Strenge ist beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Praxis startet minimal-streng und schärft datenbasiert nach, wenn definierte Trigger (Audit-Findings, Inkonsistenzen) reißen. Maximalstrenge erzeugt Widerstand, ‚immer falsch‘ ist unsinnig.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · Governance-Strenge",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q48",
+      "frage": "Welche der folgenden Aussagen zu ‚Operating Model für Enterprise Modelling‘ trifft zu?",
+      "optionen": [
+        "Es genügt ein Tool ohne Rollen",
+        "Es kombiniert Charter, Rollen (Owner/Modeler/Reviewer/Approver), Lifecycle, KPI-Set für Modellqualität und Akzeptanzstrategie",
+        "Es ist ausschließlich eine IT-Aufgabe",
+        "Es ist beliebig austauschbar mit einem Wiki"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Operating Model bündelt Charter, Rollen, Lifecycle, Modellqualitäts-KPIs und Akzeptanzstrategie. Tool-only, IT-only oder Wiki-Logik genügen nicht.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · Operating Model",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q49",
+      "frage": "Welche Senior-Argumentation zur Modellqualität trifft zu?",
+      "optionen": [
+        "Modellqualität ist ein subjektives Bauchgefühl",
+        "Modellqualität wird über Definition of Done, Review-Quote, Nutzung im Audit, Anzahl Findings messbar",
+        "Modellqualität betrifft nur Optik",
+        "Modellqualität ist nicht steuerbar"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Modellqualität wird durch DoD, Review-Quote, Audit-Nutzung und Findings messbar. Subjektive Bauchgefühle, Optik oder Nicht-Steuerbarkeit sind nicht senior-tauglich.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · Modellqualität",
+      "schwierigkeit": "schwer",
+      "thema_tag": "KPI-Steuerung"
+    },
+    {
+      "id": "q50",
+      "frage": "Welche Aussage zur Top-8-Entscheidungsarchitektur eines Modelling/EA Operating Models ist passend?",
+      "optionen": [
+        "Logo, Schriftart, Foliendesign, Druckmaschine, Tinten, Notizbücher, Postit-Farbe, Kantinenmenü",
+        "Priorisierung, Standardisierung, Investitionen, Risiken, Schnittstellen, Variantenstrategie, KPI-Set, Audit-Nachweise",
+        "Reisekosten, Spesen, Boni, Urlaub, Lohnabrechnung, Pensionsmodell, Dienstwagen, Schichtplan",
+        "Empfang, Sitzplan, Catering, Werbeplakat, Pressemitteilung, Kantine, Drucker, Lift"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Senior-Entscheidungsarchitektur deckt Priorisierung, Standardisierung, Investitionen, Risiken, Schnittstellen, Variantenstrategie, KPI-Set und Audit-Nachweise ab. Andere Listen adressieren operative Nebenthemen.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · Top-8-Entscheidungen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q51",
+      "frage": "Welche der folgenden Aussagen reflektiert ‚CIM enthält Definitionen, Ziele, Scope‘ am stärksten?",
+      "optionen": [
+        "CIM ist nur ein Diagramm",
+        "Wenn CIM unklar ist, baut Technik am Business vorbei – CIM trägt Definitionen, Ziele und Scope als verbindliches Business-Fundament",
+        "CIM ersetzt Tests",
+        "CIM ist ein Reporting-Format"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein unklares CIM erzeugt Technik-Lösungen am Business vorbei. Senior-Praxis nutzt CIM als verbindliches Fundament mit Definitionen, Zielen und Scope. Diagramm-, Test- oder Reporting-Reduktion ist falsch.",
+      "quelle": "Tag 5 · UE 4 Coaching · CIM",
+      "schwierigkeit": "schwer",
+      "thema_tag": "MDA"
+    },
+    {
+      "id": "q52",
+      "frage": "Welche der folgenden Strategien adressiert ‚Akzeptanzproblem bei strengeren Standards‘ am besten?",
+      "optionen": [
+        "Standards komplett aufgeben",
+        "Frühe Pilotbereiche mit Nutzennachweis, Coaching, Champion-Modell und transparente Wirkungsmessung",
+        "Standards anonym einführen",
+        "Standards nur per Mail kommunizieren"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Akzeptanz steigt mit frühen Piloten, sichtbarem Nutzen, Coaching, Champion-Modell und transparenter Wirkungsmessung. Anonyme, mail-basierte oder Verzichts-Strategien sind ungeeignet.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · Akzeptanz",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Roll-out & Enablement"
+    },
+    {
+      "id": "q53",
+      "frage": "Welche der folgenden Aussagen zur Wechselwirkung Capability ↔ Applikation ist senior-relevant?",
+      "optionen": [
+        "Capability und Applikation sind unverbunden",
+        "Capabilities werden durch Applikationen gestützt; die Applikationslandschaft sollte priorisierte Capabilities optimal unterstützen, sonst sind Investitionen falsch geleitet",
+        "Capability ist Synonym für Applikation",
+        "Applikationen sind im EA-Sinn irrelevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Capabilities werden durch Applikationen unterstützt; Investitionen müssen priorisierten Capabilities folgen, sonst entstehen Fehlinvestitionen. Synonym-Setzung oder Irrelevanz-These sind unzulässig.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · Capability/Applikation",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Enterprise Architecture"
+    },
+    {
+      "id": "q54",
+      "frage": "Welche Aussage zur ‚Governance als Produkt‘ ist sinnvoll?",
+      "optionen": [
+        "Governance ist eine einmalige Aktion",
+        "Governance hat Product Owner, Releases, Review-Mechanik und wird laufend weiterentwickelt",
+        "Governance ist eine Hardware",
+        "Governance wird ausschließlich extern eingekauft"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Praxis behandelt Governance als Produkt mit Product Owner, Releases und Review-Mechanik. Sie wird laufend weiterentwickelt, statt einmalig eingeführt oder fremd-vergeben.",
+      "quelle": "Tag 5 · UE 7 Feedback · Governance als Produkt",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q55",
+      "frage": "Welche der folgenden Senior-Aussagen zu ‚Reifegrad der Organisation‘ trifft zu?",
+      "optionen": [
+        "Reifegrad ist irrelevant",
+        "Reifegrad bestimmt Tempo, Strenge und Reichweite der Modellierungs-/EA-Einführung – höhere Reife erlaubt strengere Standards",
+        "Reifegrad ist nur ein HR-Begriff",
+        "Reifegrad wird automatisch durch Tools erzeugt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Sicht: Reifegrad bestimmt Tempo, Strenge und Reichweite der Einführung. Höhere Reife trägt strengere Standards, niedrige Reife verlangt Coaching und Schrittfolge.",
+      "quelle": "Tag 5 · UE 4 Coaching · Reifegrad",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Roll-out & Enablement"
+    },
+    {
+      "id": "q56",
+      "frage": "Welche Aussage zur Wechselwirkung EA ↔ Investmentlogik ist tragfähig?",
+      "optionen": [
+        "Investitionen erfolgen unabhängig von EA",
+        "EA macht Investitionen erklärbar (Capability-Hebel, Risiko, Datenfundament) und verhindert ‚wir kaufen, weil es schön klingt‘",
+        "EA blockiert alle Investitionen",
+        "EA ist Reporting-Beiwerk"
+      ],
+      "korrekt": 1,
+      "erklaerung": "EA erklärt Investitionen über Capability-Hebel, Risiko und Datenfundament – sie ist Begründungsbasis, nicht Blockade oder Beiwerk. So entstehen tragfähige Investmententscheidungen.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · Investmentlogik",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Enterprise Architecture"
+    },
+    {
+      "id": "q57",
+      "frage": "Welche der folgenden Aussagen zu ‚MVA – Minimum Viable Architecture‘ ist passend?",
+      "optionen": [
+        "MVA ist die maximale Architektur, die nie funktioniert",
+        "MVA ist eine minimale, aber tragfähige Architektur, die mit wenigen klaren Sichten startet und entwicklungsfähig bleibt",
+        "MVA ist eine reine Visualisierungstechnik",
+        "MVA ersetzt jeden Standard"
+      ],
+      "korrekt": 1,
+      "erklaerung": "MVA ist eine bewusst minimale, aber tragfähige Architektur, die wachsen kann. Sie startet mit wenigen klaren Sichten (Capability, Prozess, Applikation, Daten) und wird datenbasiert erweitert.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · MVA",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Enterprise Architecture"
+    },
+    {
+      "id": "q58",
+      "frage": "Welche der folgenden Aussagen zur ‚Toolwahl unter Unsicherheit‘ ist senior-tauglich?",
+      "optionen": [
+        "Tool wird allein durch IT entschieden",
+        "Tool-Entscheidung wird durch Use Cases, Reifegrad, Lockin-Risiko, Integrationsfähigkeit und Skalierungsbedarf strukturiert; Entscheidung mit Frühwarnsignalen",
+        "Tool-Entscheidung erfolgt nach Markenname",
+        "Tool-Entscheidung ist irrelevant"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Toolwahl folgt Use Cases, Reifegrad, Lockin-Risiko, Integrationsfähigkeit und Skalierungsbedarf, mit definierten Frühwarnsignalen. Reine IT-, Marken- oder Beliebigkeits-Logik genügt nicht.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · Toolwahl",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Tools & Kollaboration"
+    },
+    {
+      "id": "q59",
+      "frage": "Welche der folgenden Aussagen zur Wechselwirkung ‚EA ↔ MDA‘ trifft zu?",
+      "optionen": [
+        "EA und MDA sind redundant",
+        "EA liefert die strategische Sichtarchitektur (was, wie, womit); MDA liefert die Übersetzungslogik in IT-Umsetzung (CIM→PIM→PSM)",
+        "MDA ersetzt EA komplett",
+        "EA ersetzt MDA komplett"
+      ],
+      "korrekt": 1,
+      "erklaerung": "EA und MDA ergänzen sich: EA strukturiert die strategische Sicht (Capability, Prozess, Applikation, Daten, Technologie), MDA übersetzt in die IT-Umsetzung (CIM→PIM→PSM). Sie ersetzen sich nicht.",
+      "quelle": "Tag 5 · UE 1 Wissensvermittlung · EA vs. MDA",
+      "schwierigkeit": "schwer",
+      "thema_tag": "MDA"
+    },
+    {
+      "id": "q60",
+      "frage": "Welche Senior-Empfehlung beschreibt ‚Verantwortung für Systemdesign statt für einzelne Diagramme‘ am besten?",
+      "optionen": [
+        "Jeder verantwortet nur die eigene Datei",
+        "Senior-Verantwortung umfasst Standards, Lifecycle, EA-/MDA-Brücke, KPIs, Akzeptanzstrategie – das Systemdesign trägt die Steuerung, nicht das Diagramm",
+        "Verantwortung wird ausschließlich an IT delegiert",
+        "Verantwortung gibt es im EA-Kontext nicht"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Verantwortung verschiebt den Fokus vom einzelnen Diagramm zum Systemdesign: Standards, Lifecycle, EA-/MDA-Brücke, KPIs und Akzeptanzstrategie tragen die Steuerung. Datei-, IT-only- oder Verantwortungsfrei-Logik trägt nicht.",
+      "quelle": "Tag 5 · UE 8 Transferprojekt · Senior-Verantwortung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    }
+  ]
+}

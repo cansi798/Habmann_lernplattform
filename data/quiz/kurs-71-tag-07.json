@@ -1,0 +1,907 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": 7,
+  "erstellt_am": "2026-05-24",
+  "fragen": [
+    {
+      "id": "q01",
+      "frage": "Welche drei Mindestfelder muss ein Event Log für Process Mining enthalten?",
+      "optionen": [
+        "Case ID, Aktivität, Timestamp",
+        "Mitarbeitername, Kantine, Lieblingsfarbe",
+        "Logo, Slogan, Werbebudget",
+        "Drucker, Patrone, Toner"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Ein Event Log braucht mindestens Case ID, Aktivität und Timestamp. Optional kommen Ressource, Kanal, Kosten oder Standort hinzu. Die anderen Aufzählungen sind nicht log-relevant.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · Event Log Mindestfelder",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Event Log"
+    },
+    {
+      "id": "q02",
+      "frage": "Was ist das Ziel von Process Discovery?",
+      "optionen": [
+        "Eine Marketingbotschaft erstellen",
+        "Aus vielen Fällen einen Ist-Prozess inklusive Varianten ableiten",
+        "Mitarbeiter überwachen",
+        "Eine Werbekampagne planen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Process Discovery leitet aus vielen Fällen einen Ist-Prozess und Varianten ab (typischer Pfad, seltene Pfade, Schleifen). Es geht nicht um Marketing, Überwachung oder Kampagnenplanung.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · Discovery",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q03",
+      "frage": "Was bedeutet ‚Conformance Checking‘?",
+      "optionen": [
+        "Abgleich von Ist-Prozessdaten mit dem normativen Soll-Modell",
+        "Konvertierung von PDFs in Word",
+        "Optimierung von Bildschirmschonern",
+        "Kommunikationsplan mit Konformitätsbescheinigung"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Conformance Checking gleicht das Ist (Logs) mit dem Soll (normatives Modell, z. B. BPMN/Policy) ab. Es identifiziert Abweichungen wie fehlende Schritte, falsche Reihenfolge oder Rework.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · Conformance",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q04",
+      "frage": "Was bezeichnet der ‚Happy Path‘ in Process Mining?",
+      "optionen": [
+        "Eine zufällige Variante",
+        "Den typischsten/vorgesehenen Ablauf eines Prozesses",
+        "Den schnellsten Pfad ohne Compliance",
+        "Den Pfad, den niemand nutzt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Happy Path ist der typischste, vorgesehene Ablauf eines Prozesses ohne Sonderfälle. Er dient als Referenz, gegen die Abweichungen sichtbar werden.",
+      "quelle": "Tag 7 · UE 2 Arbeitsauftrag 1 · Happy Path",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q05",
+      "frage": "Was ist eine ‚Variante‘ im Mining-Kontext?",
+      "optionen": [
+        "Ein Schreibfehler",
+        "Ein abweichender Ausführungspfad, z. B. mit Rückfrage- oder Storno-Schritten",
+        "Eine Werbekampagne",
+        "Ein UI-Element"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Variante ist ein abweichender Ausführungspfad gegenüber dem Happy Path – z. B. mit Rückfrage, Storno oder Schleifen. Sie kann legitim, problematisch oder Datenfehler-bedingt sein.",
+      "quelle": "Tag 7 · UE 2 Arbeitsauftrag 1 · Variante",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q06",
+      "frage": "Welche Aussage zur ‚Case ID‘ ist korrekt?",
+      "optionen": [
+        "Sie identifiziert einen Vorgang über alle Schritte eindeutig",
+        "Sie wird zufällig je Schritt erzeugt",
+        "Sie ist ein Synonym für Zeitstempel",
+        "Sie ist optional und ohne Funktion"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Die Case ID identifiziert einen Vorgang über alle Schritte hinweg eindeutig. Sie ist Grundlage für Variantenerkennung, Conformance und Audit Trail.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · Case ID",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Event Log"
+    },
+    {
+      "id": "q07",
+      "frage": "Welche Aussage zu ‚Soll-Modell‘ ist korrekt?",
+      "optionen": [
+        "Ein Soll-Modell entsteht spontan",
+        "Ein Soll-Modell ist die normative Erwartung (Policy, SOP, BPMN)",
+        "Ein Soll-Modell ist ein UI-Mockup",
+        "Ein Soll-Modell ist ein Reportingformat"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Soll-Modell ist die normative Erwartung (Policy, SOP, BPMN) für einen Prozess. Es bildet die Referenz für Conformance Checks.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · Soll-Modell",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q08",
+      "frage": "Welche Aussage zu Abweichungstypen ist korrekt?",
+      "optionen": [
+        "Abweichungen sind immer Fehler",
+        "Abweichungen können fehlende Schritte, zusätzliche Schritte, falsche Reihenfolge oder zu viele Schleifen sein",
+        "Abweichungen sind UI-Themen",
+        "Abweichungen werden nie dokumentiert"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Typische Abweichungstypen sind fehlende Schritte, zusätzliche Schritte, falsche Reihenfolge, zu viele Schleifen/Rework und SLA-Verletzungen. Sie sind nicht zwangsläufig Fehler.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · Abweichungstypen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q09",
+      "frage": "Welche der folgenden Stolpersteine sind typisch in Event Logs?",
+      "optionen": [
+        "Fehlende/unscharfe Activities, doppelte Events, falsche Case IDs, Zeitstempel-Probleme",
+        "Zu schöne Logs, zu klare IDs",
+        "Zu wenig Mitarbeiter im Empfang",
+        "Zu kalter Kaffee in der Kantine"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Klassische Stolpersteine sind fehlende/unscharfe Activities, doppelte Events, falsche Case IDs und Zeitstempel-Probleme. Sie müssen vor Discovery/Conformance bereinigt werden.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · Stolpersteine",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Event Log"
+    },
+    {
+      "id": "q10",
+      "frage": "Welche Aussage zu ‚Abweichung ist Signal‘ ist senior-relevant?",
+      "optionen": [
+        "Jede Abweichung ist automatisch ein Verstoß",
+        "Abweichungen können Innovation, Notfall oder Workaround anzeigen – sie sind Signale, die interpretiert werden müssen",
+        "Abweichungen sind nicht erkennbar",
+        "Abweichungen sind UI-Themen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Sicht: Abweichungen sind Signale (Innovation, Notfall, Workaround) und müssen interpretiert werden – nicht pauschal als Verstoß gewertet werden. Sie sind erkennbar und kein UI-Theme.",
+      "quelle": "Tag 7 · UE 4 Coaching · Abweichung als Signal",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q11",
+      "frage": "Was zeigt eine ‚Schleife‘ im Discovery?",
+      "optionen": [
+        "Ein Schreibfehler",
+        "Eine wiederholte Aktivität in der Ausführung, z. B. doppelte Versand-Schritte",
+        "Ein Werbeevent",
+        "Eine reine UI-Animation"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Schleife zeigt wiederholte Aktivitäten in der Ausführung (z. B. doppelte Versände). Sie kann legitim (z. B. Korrekturen) oder problematisch (Rework) sein.",
+      "quelle": "Tag 7 · UE 2 Arbeitsauftrag 1 · Schleifen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q12",
+      "frage": "Welche Aussage zur ‚SLA-Verletzung als Conformance-Abweichung‘ ist korrekt?",
+      "optionen": [
+        "SLA-Verletzungen sind keine Abweichungen",
+        "SLA-Verletzungen sind eine Form von Abweichung, da das Soll-Modell zeitliche Erwartungen enthält",
+        "SLA-Verletzungen sind UI-Themen",
+        "SLA-Verletzungen werden nie erkannt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "SLA-Verletzungen sind Abweichungen, da das Soll-Modell zeitliche Erwartungen enthält. Sie sind aussagekräftige Conformance-Signale und kein UI-Theme.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · SLA-Abweichungen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q13",
+      "frage": "Was sind typische Klassifikationen für Abweichungen?",
+      "optionen": [
+        "Compliance-Risiko, Qualitäts-/Kostenrisiko, Legitime Variante, Datenproblem",
+        "Schön, hässlich, mittel, neutral",
+        "Frühling, Sommer, Herbst, Winter",
+        "Rot, gelb, grün, blau"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Typische Klassifikationen sind Compliance-Risiko, Qualitäts-/Kostenrisiko, Legitime Variante und Datenproblem. Sie helfen bei Priorisierung und Maßnahmenwahl.",
+      "quelle": "Tag 7 · UE 3 Arbeitsauftrag 2 · Klassifikation",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q14",
+      "frage": "Was bedeutet ‚Guardrail‘ in der Abweichungsbehandlung?",
+      "optionen": [
+        "Ein UI-Element",
+        "Eine bewusste Bedingung/Schwelle, unter der eine Variante zulässig bleibt",
+        "Ein Marketing-Slogan",
+        "Eine Sicherheitsleitplanke im Straßenverkehr"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Guardrail ist eine bewusste Bedingung/Schwelle, unter der eine Variante zulässig bleibt (z. B. Betrag, Häufigkeit, Eskalation). Sie macht ‚zugelassene Abweichung‘ steuerbar.",
+      "quelle": "Tag 7 · UE 3 Arbeitsauftrag 2 · Guardrail",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Guardrails"
+    },
+    {
+      "id": "q15",
+      "frage": "Welche Aussage zur ‚Hypothesennatur von Discovery‘ ist korrekt?",
+      "optionen": [
+        "Discovery liefert die absolute Wahrheit",
+        "Discovery liefert Hypothesen, die mit der Fachseite validiert werden müssen",
+        "Discovery ist beliebig",
+        "Discovery ist ein UI-Theme"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Discovery erzeugt Hypothesen aus Daten. Sie müssen mit der Fachseite validiert werden, da Daten Verzerrungen oder Lücken aufweisen können. Sie ist weder absolute Wahrheit noch beliebig.",
+      "quelle": "Tag 7 · UE 4 Coaching · Hypothesen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q16",
+      "frage": "Welche Aussage zur ‚Datenqualität in Logs‘ ist korrekt?",
+      "optionen": [
+        "Datenqualität ist nebensächlich",
+        "Datenqualität (Vollständigkeit, Konsistenz, Aktualität) bestimmt die Aussagekraft von Discovery und Conformance",
+        "Datenqualität ist eine reine UI-Frage",
+        "Datenqualität ist ein Marketing-Slogan"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenqualität (Vollständigkeit, Konsistenz, Aktualität) bestimmt die Aussagekraft von Discovery und Conformance. Sie ist Kernvoraussetzung, nicht UI- oder Marketing-Begriff.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · Datenqualität",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q17",
+      "frage": "Was bedeutet ‚Process Owner‘ in der Conformance-Governance?",
+      "optionen": [
+        "Eine Person, die Modelle malt",
+        "Die Person/Rolle, die fachlich für den Prozess verantwortlich ist (inklusive Conformance-Steuerung)",
+        "Ein Datenbank-Admin",
+        "Ein Marketing-Verantwortlicher"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Process Owner ist fachlich für den Prozess verantwortlich – inklusive Conformance-Steuerung, Maßnahmenwahl und Reporting. Er ist weder reiner Modeler noch DB-Admin oder Marketing.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlich · Process Owner",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q18",
+      "frage": "Was beschreibt ‚Maverick Buying‘?",
+      "optionen": [
+        "Ein Einkauf außerhalb des regulären Prozesses und ohne reguläre Freigabe",
+        "Ein UI-Mode",
+        "Ein neues Modegeschäft",
+        "Ein Werbemodell"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Maverick Buying ist ein Einkauf außerhalb des regulären Prozesses und ohne reguläre Freigabe. Er ist Compliance- und Kostenrisiko zugleich.",
+      "quelle": "Tag 7 · UE 5 Fallstudie · Maverick Buying",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q19",
+      "frage": "Welche Aussage zur ‚Datenverantwortung im Mining‘ ist korrekt?",
+      "optionen": [
+        "Datenverantwortung ist optional",
+        "Pro Datenobjekt sollte ein klarer Data Owner benannt sein, der Qualitäts- und Definitionsverantwortung trägt",
+        "Datenverantwortung ist eine UI-Frage",
+        "Datenverantwortung ist ein Marketingbegriff"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenverantwortung erfordert Data Owner pro Datenobjekt. Sie tragen Qualitäts- und Definitionsverantwortung. UI-/Marketing-Reduktion oder Optionalität sind unzulässig.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Data Owner",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q20",
+      "frage": "Welche Aussage zu ‚Conformance als Steuerungsinstrument‘ ist treffend?",
+      "optionen": [
+        "Conformance ist reine Reporting-Aufgabe",
+        "Conformance wird wirksam, wenn Datenverantwortung, Regeln, Eskalationen und Maßnahmen klar sind",
+        "Conformance ist ein UI-Element",
+        "Conformance ersetzt jede Modellierung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Conformance wirkt nur, wenn Datenverantwortung, Regeln, Eskalationen und Maßnahmen klar sind. Reines Reporting, UI-Reduktion oder Modellierungs-Ersatz sind unzureichend.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · Steuerung",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q21",
+      "frage": "Sie analysieren ein Mini-Eventlog mit 4 Cases. Welche Vorgehensweise ist sinnvoll, um den Happy Path zu identifizieren?",
+      "optionen": [
+        "Erstes Case nehmen, fertig",
+        "Häufigste Sequenz von Aktivitäten als Happy Path bestimmen, seltene Abweichungen als Varianten markieren",
+        "Zufälliges Case nehmen",
+        "Letztes Case nehmen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Der Happy Path ergibt sich aus der häufigsten Sequenz. Seltene Abweichungen werden als Varianten gekennzeichnet. Zufalls-, Erstes- oder Letztes-Case-Heuristiken sind nicht datenbasiert.",
+      "quelle": "Tag 7 · UE 2 Arbeitsauftrag 1 · Happy Path Ableitung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q22",
+      "frage": "Sie sehen in Case 102 die Sequenz ‚Anfrage prüfen → Rückfrage → Anfrage prüfen‘. Welche Interpretation ist plausibel?",
+      "optionen": [
+        "Ein Datenfehler",
+        "Eine legitime Rückfrage-Schleife, die fachlich begründet sein kann (z. B. fehlende Angaben)",
+        "Ein UI-Bug",
+        "Ein Druckfehler"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine ‚Anfrage prüfen → Rückfrage → Anfrage prüfen‘-Schleife ist häufig legitim (z. B. fehlende Angaben). Sie sollte trotzdem in Häufigkeit und Wirkung beobachtet werden.",
+      "quelle": "Tag 7 · UE 2 Arbeitsauftrag 1 · Variante 102",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q23",
+      "frage": "Im Soll heißt es: ‚Rechnung darf erst nach Versand erstellt werden‘. Im Ist kommt Rechnung vor Versand. Welche Klassifikation ist plausibel?",
+      "optionen": [
+        "Legitime Variante ohne Risiko",
+        "Compliance-/Qualitätsrisiko (z. B. 3-Way-Match bricht, falsche Reihenfolge in Buchung)",
+        "UI-Fehler",
+        "Druckfehler in der Buchhaltung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Rechnung vor Versand verletzt die Soll-Regel und kann den 3-Way-Match brechen sowie Buchungs-Risiken erzeugen. Sie ist als Compliance-/Qualitätsrisiko zu klassifizieren.",
+      "quelle": "Tag 7 · UE 3 Arbeitsauftrag 2 · Rechnung vor Versand",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q24",
+      "frage": "Welche Maßnahme ist bei häufig fehlender Kostenstelle in Bestellungen sinnvoll?",
+      "optionen": [
+        "Anforderungen ohne Kostenstelle akzeptieren",
+        "Pflichtfeld + Validierung + Rückgabe im Workflow, ggf. Verantwortliche schulen",
+        "Manuelles Nacharbeiten ohne System",
+        "Kostenstellen abschaffen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Sinnvoll ist die Kombination aus Pflichtfeld, Validierung und Rückgabe im Workflow, plus Schulung. Akzeptanz ohne Eingrenzung oder Abschaffung sind unzulässig.",
+      "quelle": "Tag 7 · UE 5 Fallstudie · Maßnahme Kostenstelle",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q25",
+      "frage": "Welche Aussage zu ‚Sonderfreigaben‘ als Conformance-Thema ist senior-relevant?",
+      "optionen": [
+        "Sonderfreigaben sind grundsätzlich verboten",
+        "Sonderfreigaben sind oft notwendig; Steuerung erfolgt via Schwellenwert + Eskalationsboard + Monitoring",
+        "Sonderfreigaben sind irrelevant",
+        "Sonderfreigaben sind ein UI-Theme"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Sonderfreigaben sind in der Praxis oft notwendig, brauchen aber Steuerung: Schwellenwert, Eskalationsboard und Monitoring. Verbot oder Irrelevanz scheitern an Realität.",
+      "quelle": "Tag 7 · UE 5 Fallstudie · Sonderfreigaben",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q26",
+      "frage": "Sie wählen aus, welche Abweichung Sie ‚bewusst zulassen‘. Welche Vorgehensweise trägt?",
+      "optionen": [
+        "Bauchgefühl entscheiden",
+        "Abweichung definieren, Guardrail (Bedingung/Schwelle) festlegen, Monitoring + Frühwarnung definieren, Owner benennen",
+        "Abweichung pauschal zulassen",
+        "Abweichung verbieten ohne Begründung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Praxis definiert die Abweichung, fixiert Guardrails (Bedingung/Schwelle), etabliert Monitoring + Frühwarnung und benennt Owner. Pauschal-Antworten oder Bauchgefühl tragen nicht.",
+      "quelle": "Tag 7 · UE 3 Arbeitsauftrag 2 · Zugelassene Variante",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Guardrails"
+    },
+    {
+      "id": "q27",
+      "frage": "Welche Aussage zur Trennung ‚Datenqualität vs. Prozessrealität‘ ist senior-tauglich?",
+      "optionen": [
+        "Beides ist identisch",
+        "Erst Datenqualität klären, dann Prozessrealität interpretieren – sonst werden Datenprobleme als Prozessfehler missdeutet",
+        "Datenqualität ist beliebig",
+        "Datenqualität ist eine reine UI-Frage"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Erst Datenqualität klären, dann Prozessrealität interpretieren. Sonst werden Datenprobleme (fehlende Events, doppelte IDs) als Prozessfehler missdeutet.",
+      "quelle": "Tag 7 · UE 4 Coaching · Trennung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q28",
+      "frage": "Welche der folgenden Aussagen zu ‚Innovationspotenzial in Abweichungen‘ ist tragfähig?",
+      "optionen": [
+        "Abweichungen tragen kein Lernpotenzial",
+        "Manche Abweichungen zeigen bessere Wege, die in das Soll-Modell aufgenommen werden sollten",
+        "Abweichungen sind UI-Themen",
+        "Abweichungen sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Sicht: Manche Abweichungen zeigen bessere Wege und sollten ins Soll-Modell aufgenommen werden. Sie sind kein UI-Theme und nicht beliebig.",
+      "quelle": "Tag 7 · UE 4 Coaching · Innovationspotenzial",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q29",
+      "frage": "Welche Aussage zu ‚Conformance braucht Regeln Muss/Kann/Ausnahme‘ ist senior-tauglich?",
+      "optionen": [
+        "Regeln sind beliebig",
+        "Klare Trennung Muss/Kann/Ausnahmeprozess macht Conformance steuerbar und vermeidet Streit über ‚richtig vs. falsch‘",
+        "Regeln sind UI-Themen",
+        "Regeln sind ein Marketingbegriff"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Praxis trennt Muss/Kann/Ausnahmeprozess. Damit wird Conformance steuerbar und Diskussionen über ‚richtig vs. falsch‘ entstehen seltener.",
+      "quelle": "Tag 7 · UE 4 Coaching · Regelarchitektur",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q30",
+      "frage": "Welche Aussage zur Fallstudie ‚Procure-to-Pay Conformance‘ ist tragfähig?",
+      "optionen": [
+        "30 % Rechnungen vor Wareneingang ist akzeptabel ohne Maßnahmen",
+        "30 % Rechnungen vor Wareneingang erfordert Ausnahmeprozess + Pflichtkennzeichen + Nachbuchungs-SLA + Owner Finance Ops",
+        "30 % Rechnungen vor Wareneingang ist ein UI-Theme",
+        "30 % Rechnungen vor Wareneingang ist beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Bei 30 % Rechnungen vor Wareneingang ist ein Ausnahmeprozess mit Pflichtkennzeichen, Nachbuchungs-SLA und Owner Finance Ops sinnvoll. Akzeptanz ohne Maßnahmen oder UI-Reduktion sind unzulässig.",
+      "quelle": "Tag 7 · UE 5 Fallstudie · Maßnahme P2P",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q31",
+      "frage": "Welche Aussage zur ‚Klärfrage-Praxis‘ in Discovery ist senior-relevant?",
+      "optionen": [
+        "Klärfragen sind überflüssig",
+        "Klärfragen sichern Daten-/Prozessverständnis und verhindern Fehlinterpretation",
+        "Klärfragen sind ein UI-Theme",
+        "Klärfragen sind Marketingmittel"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Klärfragen sichern Daten- und Prozessverständnis und verhindern Fehlinterpretation. Sie sind unverzichtbarer Teil seriöser Mining-Praxis – nicht UI- oder Marketing.",
+      "quelle": "Tag 7 · UE 2 Arbeitsauftrag 1 · Klärfragen",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q32",
+      "frage": "Welche Maßnahmen-Priorisierungs-Logik ist sinnvoll?",
+      "optionen": [
+        "Schaden × Häufigkeit ignorieren",
+        "Schaden × Häufigkeit schätzen + Aufwand der Maßnahme bewerten → priorisierte Liste mit Owner",
+        "Beliebige Maßnahmen wählen",
+        "Maßnahmen nach Lautstärke priorisieren"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Sinnvolle Priorisierung kombiniert Schaden × Häufigkeit mit Aufwand und benennt Owner. Bauchgefühl, Beliebigkeit oder Lautstärke führen zu Fehlpriorisierung.",
+      "quelle": "Tag 7 · UE 3 Arbeitsauftrag 2 · Priorisierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Maßnahmen & Priorisierung"
+    },
+    {
+      "id": "q33",
+      "frage": "Welche Aussage zu ‚6 Wochen vs. 3 Monate‘ Maßnahmenplan im Audit-Fall ist tragfähig?",
+      "optionen": [
+        "6 Wochen ohne Maßnahmen, 3 Monate ohne Maßnahmen",
+        "6 Wochen: Quick Wins (Pflichtfelder, Ausnahmeprozess, Monitoring); 3 Monate: Automatisierter 3-Way-Match, Stammdatenbereinigung, Training",
+        "Beide Zeiträume gleich behandeln",
+        "Pläne sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Pläne trennen Quick Wins (6 Wochen) von nachhaltigen Maßnahmen (3 Monate). Pauschale Behandlung oder Beliebigkeit tragen nicht.",
+      "quelle": "Tag 7 · UE 5 Fallstudie · Maßnahmenpläne",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Maßnahmen & Priorisierung"
+    },
+    {
+      "id": "q34",
+      "frage": "Welche Aussage zu ‚Conformance Operating Model‘ ist tragfähig?",
+      "optionen": [
+        "Operating Model ist ein Reporting",
+        "Operating Model definiert Rollen (Process Owner, Data Steward, Compliance Reviewer), Eskalation und Kommunikationsplan",
+        "Operating Model ist ein UI-Theme",
+        "Operating Model ist beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein Conformance Operating Model definiert Rollen (Process Owner, Data Steward, Compliance Reviewer), Eskalation und Kommunikationsplan. UI-/Reporting-Reduktion ist unzulässig.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Operating Model",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q35",
+      "frage": "Welche Aussage zur ‚Eskalationsquote als Steuerungs-KPI‘ ist senior-relevant?",
+      "optionen": [
+        "Eskalationsquote ist beliebig",
+        "Eskalationsquote misst, wie häufig Standardregeln versagen – sie ist ein Frühwarnsignal für Prozess- oder Designprobleme",
+        "Eskalationsquote ist ein UI-Theme",
+        "Eskalationsquote ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Eskalationsquote ist ein Frühwarnsignal für Prozess- oder Designprobleme, weil sie misst, wie häufig Standardregeln versagen. Sie ist keine UI- oder Marketing-Größe.",
+      "quelle": "Tag 7 · UE 7 Feedback · Eskalationsquote",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI-Steuerung"
+    },
+    {
+      "id": "q36",
+      "frage": "Welche Aussage zur ‚False Compliance‘ ist senior-relevant?",
+      "optionen": [
+        "False Compliance heißt formal ok, real abweichend",
+        "False Compliance ist ein UI-Theme",
+        "False Compliance heißt Compliance ohne Audit",
+        "False Compliance ist beliebig"
+      ],
+      "korrekt": 0,
+      "erklaerung": "False Compliance bezeichnet die Diskrepanz, dass die Dokumentation formal ok ist, aber die Realität abweicht. Sie ist ein kritisches Risiko, das Senior-Verantwortung adressieren muss.",
+      "quelle": "Tag 7 · UE 7 Feedback · False Compliance",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Conformance"
+    },
+    {
+      "id": "q37",
+      "frage": "Welche Aussage zur Frage ‚Welche Abweichung toleriert ihr und warum ist das verantwortbar?‘ ist senior-relevant?",
+      "optionen": [
+        "Toleranz wird ohne Begründung gewährt",
+        "Toleranz wird mit Begründung (Risiko/Hebel) + Guardrail + Frühwarnsignal + Owner gewährt",
+        "Toleranz ist beliebig",
+        "Toleranz ist UI-Theme"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Toleranz braucht Begründung (Risiko/Hebel), Guardrail, Frühwarnsignal und Owner. Beliebige Toleranz produziert Audit-Findings und politische Risiken.",
+      "quelle": "Tag 7 · UE 7 Feedback · Toleranz",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Guardrails"
+    },
+    {
+      "id": "q38",
+      "frage": "Welche Aussage zur ‚Conformance-Maßnahme Pflichtfeld + Validierung‘ ist senior-tauglich?",
+      "optionen": [
+        "Pflichtfelder erzeugen Bürokratie ohne Nutzen",
+        "Pflichtfeld + Validierung verhindern Datenlücken am Entstehungsort – sie sind effektive Conformance-Stellschrauben",
+        "Pflichtfelder sind UI-Themen ohne Compliance-Effekt",
+        "Pflichtfelder sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Pflichtfeld + Validierung verhindern Datenlücken am Entstehungsort und sind effektive Conformance-Stellschrauben. Sie sind weder reine UI-Frage noch beliebig.",
+      "quelle": "Tag 7 · UE 5 Fallstudie · Pflichtfeld",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Maßnahmen & Priorisierung"
+    },
+    {
+      "id": "q39",
+      "frage": "Welche Aussage zum ‚Monitoring-Dashboard für Abweichungen‘ ist senior-tauglich?",
+      "optionen": [
+        "Ein Dashboard reicht ohne Owner",
+        "Ein Dashboard zeigt Top-Abweichungen, Trends, Owner und Maßnahmen – mit wöchentlichem Review",
+        "Ein Dashboard ist UI-Spielerei",
+        "Ein Dashboard ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Ein wirksames Dashboard zeigt Top-Abweichungen, Trends, Owner und Maßnahmen – mit wöchentlichem Review. Ohne Owner und Maßnahmen ist es Reporting ohne Folgen.",
+      "quelle": "Tag 7 · UE 5 Fallstudie · Dashboard",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI-Steuerung"
+    },
+    {
+      "id": "q40",
+      "frage": "Welche Aussage zur ‚Audit-Vorbereitung in 6 Wochen‘ ist tragfähig?",
+      "optionen": [
+        "Audit-Vorbereitung ist ein UI-Thema",
+        "Audit-Vorbereitung priorisiert Quick Wins (Pflichtfelder, Ausnahmeprozess dokumentiert, Monitoring); Owner + Reviews machen Wirkung sichtbar",
+        "Audit-Vorbereitung ist überflüssig",
+        "Audit-Vorbereitung ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Audit-Vorbereitung priorisiert wirksame Quick Wins (Pflichtfelder, dokumentierter Ausnahmeprozess, Monitoring) mit Owner und Reviews. Sie ist keine UI- oder Marketing-Aufgabe und nicht überflüssig.",
+      "quelle": "Tag 7 · UE 5 Fallstudie · Audit-Vorbereitung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Audit & Compliance"
+    },
+    {
+      "id": "q41",
+      "frage": "Welche Aussage zur ‚Abweichung ‚Sonderfreigabe‘ in Procure-to-Pay‘ ist senior-tauglich?",
+      "optionen": [
+        "Sonderfreigaben sind grundsätzlich okay",
+        "Sonderfreigaben werden nach Schwellenwert + Eskalation + Monitoring gesteuert; ohne Steuerung entsteht ‚Umgehung‘ als Risiko",
+        "Sonderfreigaben sind ein UI-Theme",
+        "Sonderfreigaben sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Sonderfreigaben brauchen Schwellenwert, Eskalation und Monitoring. Ohne diese Steuerung entsteht systematische Umgehung als Compliance-Risiko.",
+      "quelle": "Tag 7 · UE 5 Fallstudie · Sonderfreigabe",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Guardrails"
+    },
+    {
+      "id": "q42",
+      "frage": "Welche Aussage zur ‚Variante als legitimer Pfad‘ ist senior-tauglich?",
+      "optionen": [
+        "Jede Variante ist legitim",
+        "Eine Variante ist legitim, wenn sie fachlich begründet, mit Guardrail versehen und im Soll-Modell sichtbar gemacht wird",
+        "Varianten sind ein UI-Theme",
+        "Varianten sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Eine Variante ist legitim, wenn sie fachlich begründet, mit Guardrail versehen und im Soll-Modell sichtbar gemacht wird. Pauschale Legitimität oder Beliebigkeit tragen nicht.",
+      "quelle": "Tag 7 · UE 4 Coaching · Legitime Varianten",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Guardrails"
+    },
+    {
+      "id": "q43",
+      "frage": "Welche der folgenden ‚Reflexionsfragen‘ ist eine senior-taugliche Frage?",
+      "optionen": [
+        "Wie heißt das Tool?",
+        "Welche Abweichung ist reputations-/compliancekritisch (nicht verhandelbar)?",
+        "Welche Farbe hat das Dashboard?",
+        "Wer war am längsten im Meeting?"
+      ],
+      "korrekt": 1,
+      "erklaerung": "‚Welche Abweichung ist reputations-/compliancekritisch (nicht verhandelbar)?‘ ist eine senior-relevante Reflexionsfrage. Tool-, Farb- oder Meeting-Fragen führen nicht zu Steuerung.",
+      "quelle": "Tag 7 · UE 4 Coaching · Reflexion",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q44",
+      "frage": "Welche Aussage zu ‚Leading Indicator‘ in Conformance ist senior-tauglich?",
+      "optionen": [
+        "Leading Indicator ist ein Lagging-Begriff",
+        "Leading Indicator signalisiert Risiko vorher (z. B. wachsender Anteil Sonderfreigaben) und ermöglicht Eingreifen",
+        "Leading Indicator ist UI-Theme",
+        "Leading Indicator ist beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Leading Indicator signalisiert Risiko vorher (z. B. wachsender Anteil Sonderfreigaben). Er ermöglicht frühes Eingreifen und ist nicht UI- oder Marketing.",
+      "quelle": "Tag 7 · UE 4 Coaching · Leading Indicator",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI-Steuerung"
+    },
+    {
+      "id": "q45",
+      "frage": "Welche Aussage zur ‚Validierung mit Fachseite‘ in Discovery ist senior-tauglich?",
+      "optionen": [
+        "Validierung ist optional",
+        "Validierung mit Fachseite ist Pflicht: Discovery-Hypothesen werden im Fachgespräch bestätigt, ergänzt oder verworfen",
+        "Validierung ist UI-Frage",
+        "Validierung ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Validierung mit Fachseite ist Pflicht – Discovery-Hypothesen müssen bestätigt, ergänzt oder verworfen werden. Sie ist keine UI- oder Marketing-Frage.",
+      "quelle": "Tag 7 · UE 4 Coaching · Validierung",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Discovery"
+    },
+    {
+      "id": "q46",
+      "frage": "Sie verantworten ein unternehmensweites Conformance-Programm. Welche Senior-Argumentation ist tragfähig?",
+      "optionen": [
+        "Maximalstrenge + keine Ausnahmen",
+        "Regelwerk-Architektur (Muss/Kann/Ausnahme), Daten- und Log-Standard, Operating Model (Rollen/Eskalation), Portfolio der Abweichungen, Messkonzept, Roadmap",
+        "Programm ist Reporting",
+        "Programm ist beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Programme bauen Regelwerk-Architektur, Daten-/Log-Standard, Operating Model, Abweichungs-Portfolio, Messkonzept und Roadmap. Maximalstrenge oder Reporting-Reduktion tragen nicht.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Programmstruktur",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Operating Model"
+    },
+    {
+      "id": "q47",
+      "frage": "Welche der folgenden Aussagen zu ‚Datenlücken temporär akzeptieren‘ ist senior-tauglich?",
+      "optionen": [
+        "Datenlücken werden ignoriert",
+        "Datenlücken werden bewusst temporär akzeptiert + Guardrails + Frühwarnsignale + Owner – bis Datenquelle stabilisiert ist",
+        "Datenlücken sind UI-Theme",
+        "Datenlücken sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Praxis akzeptiert Datenlücken bewusst temporär, kompensiert mit Guardrails, Frühwarnsignalen und Owner, bis die Datenquelle stabilisiert ist. Ignorieren oder UI-Reduktion tragen nicht.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Datenlücken",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q48",
+      "frage": "Welche Aussage zur ‚Zero Tolerance‘-Entscheidung ist senior-tauglich?",
+      "optionen": [
+        "Zero Tolerance ist beliebig",
+        "Zero Tolerance gilt für reputations-/compliancekritische Abweichungen; Begründung + Risiko + Akzeptanzstrategie sind dokumentiert",
+        "Zero Tolerance ist UI-Theme",
+        "Zero Tolerance ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Zero-Tolerance-Entscheidungen gelten für reputations-/compliancekritische Abweichungen und sind mit Begründung, Risiko und Akzeptanzstrategie dokumentiert. Beliebigkeit oder Reduktion sind unzulässig.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Zero Tolerance",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q49",
+      "frage": "Welche der folgenden Aussagen zur ‚Schwellenwert-Logik in Guardrails‘ ist senior-tauglich?",
+      "optionen": [
+        "Schwellen sind beliebig",
+        "Schwellenwerte basieren auf Daten (Häufigkeit, Schaden), werden mit Owner abgestimmt und in Monitoring verankert",
+        "Schwellen sind UI-Theme",
+        "Schwellen sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Schwellenwerte werden datenbasiert (Häufigkeit, Schaden) gewählt, mit Owner abgestimmt und in Monitoring verankert. Beliebigkeit oder UI-/Marketing-Logik tragen nicht.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Schwellenwerte",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Guardrails"
+    },
+    {
+      "id": "q50",
+      "frage": "Welche der folgenden Aussagen zur ‚Fitness-Quote‘ als Conformance-KPI ist tragfähig?",
+      "optionen": [
+        "Fitness-Quote ist beliebig",
+        "Fitness-Quote misst, wie hoch der Anteil regelkonformer Cases ist – sie ist nützlich, kann aber Anreizverzerrungen (Gaming) erzeugen",
+        "Fitness-Quote ist UI-Theme",
+        "Fitness-Quote ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Fitness-Quote misst regelkonforme Cases. Sie ist nützlich, kann aber Gaming erzeugen, wenn sie ohne Quality-/Risiko-KPIs eingesetzt wird. Daher Anti-Gaming-Kopplung wichtig.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Fitness-Quote",
+      "schwierigkeit": "schwer",
+      "thema_tag": "KPI-Steuerung"
+    },
+    {
+      "id": "q51",
+      "frage": "Welche Aussage zu ‚Compliance vs. Speed‘ im Conformance-Programm ist senior-tauglich?",
+      "optionen": [
+        "Compliance schlägt Speed immer",
+        "Compliance und Speed sind als Zielkonflikt sichtbar zu machen – Senior-Verantwortung priorisiert Audit-/Reputations-Risiken, sichert Speed durch effiziente Ausnahmeprozesse",
+        "Speed schlägt Compliance immer",
+        "Beides ist beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Sicht: Zielkonflikt sichtbar machen, Audit-/Reputations-Risiken priorisieren, Speed via effiziente Ausnahmeprozesse sichern. Pauschal-Antworten tragen nicht.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Compliance vs. Speed",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q52",
+      "frage": "Welche der folgenden Aussagen zur ‚Maßnahmen-Wirkungsmessung‘ ist tragfähig?",
+      "optionen": [
+        "Maßnahmen werden nicht gemessen",
+        "Maßnahmen werden mit Vorher/Nachher-Vergleich, Owner und Frühwarnsignal gemessen – ohne Messung kein Wirkungsnachweis",
+        "Maßnahmen sind UI-Theme",
+        "Maßnahmen sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Maßnahmen werden mit Vorher/Nachher-Vergleich, Owner und Frühwarnsignal gemessen. Ohne Messung gibt es keinen Wirkungsnachweis. UI-/Beliebigkeits-Reduktion ist unzulässig.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Wirkungsmessung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Maßnahmen & Priorisierung"
+    },
+    {
+      "id": "q53",
+      "frage": "Welche Aussage zur ‚Standortautonomie und Conformance‘ ist senior-tauglich?",
+      "optionen": [
+        "Standorte handeln frei",
+        "Standortautonomie wird durch Guardrails (Muss-Regeln, Naming, Owner) gerahmt; Varianten als Attribute, Risiken explizit gesteuert",
+        "Standortautonomie ist UI-Theme",
+        "Standortautonomie ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Standortautonomie wird durch Guardrails gerahmt: Muss-Regeln, Naming, Owner; Varianten als Attribute, Risiken explizit gesteuert. Freie Autonomie oder Reduktion sind unzulässig.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Standortautonomie",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance & Rollen"
+    },
+    {
+      "id": "q54",
+      "frage": "Welche Aussage zur ‚Daten-/Log-Standardisierung‘ ist senior-tauglich?",
+      "optionen": [
+        "Standardisierung ist überflüssig",
+        "Standardisierung definiert Mindestfelder, Case-ID-Strategie, Aktivitätsmapping und Zeitstempel-Konventionen – Voraussetzung für E2E-Mining",
+        "Standardisierung ist UI-Frage",
+        "Standardisierung ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Daten-/Log-Standardisierung ist Voraussetzung für E2E-Mining. Sie umfasst Mindestfelder, Case-ID-Strategie, Aktivitätsmapping und Zeitstempel-Konventionen.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Log-Standardisierung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Event Log"
+    },
+    {
+      "id": "q55",
+      "frage": "Welche der folgenden Aussagen zur ‚Datenqualitätsprüfung in Logs‘ ist senior-tauglich?",
+      "optionen": [
+        "Datenqualität wird nicht geprüft",
+        "Datenqualität wird systematisch geprüft (Vollständigkeit, Konsistenz, Aktualität, Eindeutigkeit der IDs) – mit Owner und Schwellenwerten",
+        "Datenqualität ist UI-Theme",
+        "Datenqualität ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Datenqualität wird systematisch geprüft (Vollständigkeit, Konsistenz, Aktualität, ID-Eindeutigkeit) mit Owner und Schwellen. Verzicht oder Reduktion auf UI-/Marketing-Logik tragen nicht.",
+      "quelle": "Tag 7 · UE 1 Wissensvermittlung · Datenqualitätsprüfung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Datenqualität"
+    },
+    {
+      "id": "q56",
+      "frage": "Welche Aussage zu ‚Maßnahmenkatalog (Prozess, Training, Systemkontrolle)‘ ist senior-tauglich?",
+      "optionen": [
+        "Ein einziges Mittel reicht für alle Abweichungen",
+        "Maßnahmen werden je Abweichung passgenau aus Prozess (Regel/Workflow), Training (Wissen), Systemkontrolle (Pflichtfeld/Logik) kombiniert",
+        "Maßnahmen sind UI-Theme",
+        "Maßnahmen sind beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Maßnahmen kombinieren passgenau Prozess, Training und Systemkontrolle. Ein einziges Mittel oder beliebige Auswahl produziert Wirkungslücken.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Maßnahmenkatalog",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Maßnahmen & Priorisierung"
+    },
+    {
+      "id": "q57",
+      "frage": "Welche Aussage zur ‚Messkonzept Anti-Gaming-Kopplung‘ ist senior-tauglich?",
+      "optionen": [
+        "Kopplungen verhindern keine Verzerrung",
+        "Kopplungen verbinden Fitness-Quote mit Quality-/Risiko-KPIs, um Gaming zu verhindern und ausgewogene Steuerung zu sichern",
+        "Kopplungen sind UI-Theme",
+        "Kopplungen sind Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Anti-Gaming-Kopplungen verbinden Fitness-Quote mit Quality-/Risiko-KPIs und verhindern einseitige Anreize. Sie sichern ausgewogene Steuerung.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Anti-Gaming",
+      "schwierigkeit": "schwer",
+      "thema_tag": "KPI-Steuerung"
+    },
+    {
+      "id": "q58",
+      "frage": "Welche der folgenden Aussagen zur ‚Roadmap-Logik (12 Wochen)‘ ist senior-tauglich?",
+      "optionen": [
+        "Big Bang am Ende",
+        "Pilotprozess wählen, Quick Wins früh realisieren, Skalierungsstrategie definieren, Enablement Level 1–3, messbare Outcomes",
+        "Roadmap ist beliebig",
+        "Roadmap ist UI-Theme"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Roadmap wählt Pilot, realisiert Quick Wins früh, definiert Skalierungsstrategie, Enablement Level 1–3 und macht Outcomes messbar. Big Bang oder Beliebigkeit tragen nicht.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Roadmap",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Operating Model"
+    },
+    {
+      "id": "q59",
+      "frage": "Welche Aussage zur ‚Conformance als verantwortete Steuerung‘ ist senior-tauglich?",
+      "optionen": [
+        "Conformance ist Reporting",
+        "Conformance ist verantwortete Steuerung: Regeln, Owner, Maßnahmen, Wirkungsmessung und Frühwarnung als zusammenhängendes System",
+        "Conformance ist UI-Theme",
+        "Conformance ist beliebig"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Conformance ist ein zusammenhängendes Steuerungssystem: Regeln, Owner, Maßnahmen, Wirkungsmessung, Frühwarnung. Reporting- oder UI-Reduktion sind unzureichend.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Verantwortete Steuerung",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    },
+    {
+      "id": "q60",
+      "frage": "Welche Aussage zum ‚Senior-Shift‘ in Process Mining ist tragfähig?",
+      "optionen": [
+        "Mining ist nur ein Tool",
+        "Senior-Shift bedeutet: von Reporting-Konsum zur verantworteten Steuerungs- und Entscheidungsarchitektur – Mining als Mittel, nicht Selbstzweck",
+        "Mining ist UI-Theme",
+        "Mining ist Marketing"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Senior-Shift heißt: Mining nicht als Reporting-Konsum, sondern als verantwortete Steuerungs- und Entscheidungsarchitektur. Mining ist Mittel, nicht Selbstzweck.",
+      "quelle": "Tag 7 · UE 8 Transferprojekt · Senior-Shift",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Senior-Verantwortung"
+    }
+  ]
+}
