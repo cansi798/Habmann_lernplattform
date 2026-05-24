@@ -44,7 +44,6 @@ jobs:
 
       - name: Build all PDFs
         id: build_pdfs
-        continue-on-error: true
         run: |
           mkdir -p docs/pdf
           FAILED=()
@@ -102,9 +101,11 @@ jobs:
             echo "::warning::${#FAILED[@]} file(s) failed to build (commit-step will still push the successful PDFs):"
             printf '  - %s\n' "${FAILED[@]}"
           fi
+          # Explicitly succeed — commit step pushes whatever PDFs we got.
+          # Per-file failures are surfaced as ::warning:: above.
+          exit 0
 
       - name: Commit + push PDFs
-        if: always()
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
