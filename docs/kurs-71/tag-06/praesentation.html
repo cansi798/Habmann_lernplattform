@@ -51,7 +51,7 @@
     <section class="slide">
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 2 · Tag 6 von 16 · Kurs 71 (Dig 42) · 5. Juni 2026</div>
-      <h2 class="handwritten" style="font-size:46px;line-height:1.05;color:var(--kurs-71);margin:0">BPMS · APIs · Cloud-native</h2>
+      <h2 class="handwritten" style="font-size:46px;line-height:1.05;color:var(--kurs-71);margin:0"><abbr title="Business Process Management System – Softwareplattform zur Modellierung, Ausführung und Überwachung von Geschäftsprozessen">BPMS</abbr> · APIs · Cloud-native</h2>
       <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Von der Prozesslandkarte zur integrierten Ausführung – Model → Run → Improve.</p>
       <div style="margin-top:48px" class="accent-box">
         <span class="handwritten" style="color:#5a3a08;font-size:26px">Plattform ist Steuerungssystem, nicht Tool-Stack.</span>
@@ -64,8 +64,8 @@
         <div class="merk-box">
           <h3>L1 · Wissen</h3>
           <ul>
-            <li>BPMS Closed Loop: Modell · Ausführen · Messen · Verbessern</li>
-            <li>API-Vertrag: Endpoint, I/O, Fehler, Auth, Versionierung</li>
+            <li><abbr title="Business Process Management System">BPMS</abbr> Closed Loop: Modell · Ausführen · Messen · Verbessern</li>
+            <li><abbr title="Application Programming Interface – Standardisierte Schnittstelle zur Kommunikation zwischen Softwaresystemen">API</abbr>-Vertrag: Endpoint, I/O, Fehler, Auth, Versionierung</li>
             <li>Sync vs. Async (Event/Message)</li>
             <li>Cloud-native: stateless, Observability, Resilienz</li>
           </ul>
@@ -73,10 +73,10 @@
         <div class="merk-box">
           <h3>L2 · Anwendung</h3>
           <ul>
-            <li>BPMS-Blueprint zeichnen (Tasks/SLA/Eskalation)</li>
-            <li>API-Verträge ausfüllen (5+ Felder)</li>
+            <li><abbr title="Business Process Management System">BPMS</abbr>-Blueprint zeichnen (Tasks/SLA/Eskalation)</li>
+            <li><abbr title="Application Programming Interface">API</abbr>-Verträge ausfüllen (5+ Felder)</li>
             <li>Sync/Async-Entscheidung begründen</li>
-            <li>MVP-Scope definieren</li>
+            <li><abbr title="Minimum Viable Product – Erste marktreife Produktversion mit minimalem Funktionsumfang">MVP</abbr>-Scope definieren</li>
           </ul>
         </div>
         <div class="merk-box">
@@ -85,7 +85,7 @@
             <li>System of Record je Datenobjekt</li>
             <li>Architekturpfad event vs. sync</li>
             <li>Operating Model: zentral vs. dezentral</li>
-            <li>SLO &amp; Cost Awareness (FinOps light)</li>
+            <li><abbr title="Service Level Objective – Konkrete, messbare Zielgröße innerhalb eines SLA">SLO</abbr> &amp; Cost Awareness (FinOps light)</li>
           </ul>
         </div>
       </div>
@@ -95,7 +95,7 @@
     </section>
 
     <section class="slide" style="display:none">
-      <h2>BPMS · Closed Loop</h2>
+      <h2><abbr title="Business Process Management System">BPMS</abbr> · Closed Loop</h2>
       <div class="diagram-box" style="margin-top:14px">
         <svg width="100%" viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -105,7 +105,7 @@
           </defs>
           <rect x="40" y="40" width="200" height="80" rx="8" fill="#fff3d9" stroke="#c47612" stroke-width="2"/>
           <text x="140" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">1 · Modell</text>
-          <text x="140" y="88" text-anchor="middle" font-size="12" fill="#5a3a08">BPMN / VSM</text>
+          <text x="140" y="88" text-anchor="middle" font-size="12" fill="#5a3a08"><abbr title="Business Process Model and Notation – Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)">BPMN</abbr> / VSM</text>
           <text x="140" y="106" text-anchor="middle" font-size="12" fill="#5a3a08">Soll-Prozess</text>
           <rect x="480" y="40" width="200" height="80" rx="8" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
           <text x="580" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#9d4a1a">2 · Ausführen</text>
@@ -113,7 +113,7 @@
           <text x="580" y="106" text-anchor="middle" font-size="12" fill="#222">Worklist · Rules</text>
           <rect x="480" y="160" width="200" height="80" rx="8" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
           <text x="580" y="188" text-anchor="middle" font-size="14" font-weight="700" fill="#1b4d1b">3 · Messen</text>
-          <text x="580" y="208" text-anchor="middle" font-size="12" fill="#222">KPIs · Mining</text>
+          <text x="580" y="208" text-anchor="middle" font-size="12" fill="#222"><abbr title="Key Performance Indicators – Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele">KPIs</abbr> · Mining</text>
           <text x="580" y="226" text-anchor="middle" font-size="12" fill="#222">Audit Trail</text>
           <rect x="40" y="160" width="200" height="80" rx="8" fill="#fde2dc" stroke="#b04030" stroke-width="2"/>
           <text x="140" y="188" text-anchor="middle" font-size="14" font-weight="700" fill="#b04030">4 · Verbessern</text>
@@ -126,17 +126,17 @@
         </svg>
       </div>
       <div class="accent-box" style="margin-top:10px;font-size:18px">
-        Ohne Closed Loop bleibt jede BPMS-Investition Theorie – Messung &amp; Verbesserung sind keine Optionen.
+        Ohne Closed Loop bleibt jede <abbr title="Business Process Management System">BPMS</abbr>-Investition Theorie – Messung &amp; Verbesserung sind keine Optionen.
       </div>
     </section>
 
     <section class="slide" style="display:none">
-      <h2>BPMS-Bausteine</h2>
+      <h2><abbr title="Business Process Management System">BPMS</abbr>-Bausteine</h2>
       <div class="grid-4" style="margin-top:16px">
         <div class="merk-box"><h3>Engine</h3><p style="font-size:13px">Steuert Tokens, States, Variablen, Persistenz.</p></div>
         <div class="merk-box"><h3>Worklist</h3><p style="font-size:13px">User Tasks, Queues, Assignment, Claim.</p></div>
         <div class="merk-box"><h3>Rules</h3><p style="font-size:13px">DMN-Tabellen, Routing, Gateways.</p></div>
-        <div class="merk-box"><h3>Forms</h3><p style="font-size:13px">UI-Bausteine, Validierung, Datenbindung.</p></div>
+        <div class="merk-box"><h3>Forms</h3><p style="font-size:13px"><abbr title="User Interface – Benutzeroberfläche; alle Elemente, über die Menschen mit einem System interagieren">UI</abbr>-Bausteine, Validierung, Datenbindung.</p></div>
         <div class="merk-box"><h3>Monitoring</h3><p style="font-size:13px">Cockpit, Alerts, Heatmaps, Dashboards.</p></div>
         <div class="merk-box"><h3>Audit Trail</h3><p style="font-size:13px">Wer hat wann was getan – revisionssicher.</p></div>
         <div class="merk-box"><h3>Versionierung</h3><p style="font-size:13px">Migration laufender Instanzen, Rollback.</p></div>
@@ -145,7 +145,7 @@
     </section>
 
     <section class="slide" style="display:none">
-      <h2>API-Vertrag · Pflichtfelder</h2>
+      <h2><abbr title="Application Programming Interface">API</abbr>-Vertrag · Pflichtfelder</h2>
       <table class="vs-table" style="margin-top:10px">
         <tbody>
           <tr><th style="width:24%">Name &amp; Zweck</th><td>z. B. <em>GetShipmentStatus</em> – aktuellen Status einer Sendung lesen</td></tr>
@@ -154,19 +154,19 @@
           <tr><th>Output</th><td>status, eta, last_event_timestamp, source_system</td></tr>
           <tr><th>Fehlercodes</th><td>404 NotFound · 408 Timeout · 401 Unauthorized · 429 RateLimit</td></tr>
           <tr><th>Auth</th><td>OAuth2 Client Credentials · Scope „shipment.read“</td></tr>
-          <tr><th>SLA / Limits</th><td>p95 &lt; 300 ms · 100 RPS · Idempotenz via correlation_id</td></tr>
+          <tr><th><abbr title="Service Level Agreement – Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen">SLA</abbr> / Limits</th><td>p95 &lt; 300 ms · 100 RPS · Idempotenz via correlation_id</td></tr>
           <tr><th>Versionierung</th><td>URI-Versioning v1, v2 parallel · Deprecation 6 Monate</td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
-        Eine API ist ein <strong>Vertrag</strong>. Wer ihn bricht, hat einen Vorfall, kein „Update“.
+        Eine <abbr title="Application Programming Interface">API</abbr> ist ein <strong>Vertrag</strong>. Wer ihn bricht, hat einen Vorfall, kein „Update“.
       </div>
     </section>
 
     <section class="slide" style="display:none">
       <h2>Sync vs. Async · Entscheidungs-Heuristik</h2>
       <table class="vs-table" style="margin-top:10px">
-        <thead><tr><th>Aspekt</th><th>Sync API Call</th><th>Async Event / Message</th></tr></thead>
+        <thead><tr><th>Aspekt</th><th>Sync <abbr title="Application Programming Interface">API</abbr> Call</th><th>Async Event / Message</th></tr></thead>
         <tbody>
           <tr><th>Latenz</th><td>antwortet sofort</td><td>kann Sekunden bis Minuten brauchen</td></tr>
           <tr><th>Kopplung</th><td>eng – Aufrufer wartet</td><td>lose – Sender feuert &amp; vergisst</td></tr>
@@ -188,7 +188,7 @@
         <div class="merk-box"><h3>Observability</h3><p>Logs · Metrics · Traces – die drei Säulen jeder Diagnose.</p></div>
         <div class="merk-box"><h3>Resilienz</h3><p>Retry · Circuit Breaker · Timeout · Bulkhead – Ausfälle eingrenzen.</p></div>
         <div class="merk-box"><h3>Security by default</h3><p>Zero Trust · Secrets-Manager · IAM · Audit – kein Plain-Text-Passwort.</p></div>
-        <div class="merk-box"><h3>SLO / FinOps</h3><p>Service Level Objectives + Kostenbewusstsein – Performance hat einen Preis.</p></div>
+        <div class="merk-box"><h3><abbr title="Service Level Objective">SLO</abbr> / FinOps</h3><p>Service Level Objectives + Kostenbewusstsein – Performance hat einen Preis.</p></div>
       </div>
       <div class="accent-box" style="margin-top:14px">
         Cloud-native ohne Observability ist Blindflug. Skalierung ohne Resilienz ist <em>schneller</em> Ausfall.
@@ -206,13 +206,13 @@
             </marker>
           </defs>
           <rect x="20" y="60" width="140" height="60" rx="6" fill="#fff3d9" stroke="#c47612" stroke-width="2"/>
-          <text x="90" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08">BPMN/VSM</text>
+          <text x="90" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#5a3a08"><abbr title="Business Process Model and Notation">BPMN</abbr>/VSM</text>
           <text x="90" y="103" text-anchor="middle" font-size="11" fill="#5a3a08">Soll-Modell</text>
           <rect x="200" y="60" width="140" height="60" rx="6" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
-          <text x="270" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#9d4a1a">BPMS / API</text>
+          <text x="270" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#9d4a1a"><abbr title="Business Process Management System">BPMS</abbr> / API</text>
           <text x="270" y="103" text-anchor="middle" font-size="11" fill="#222">Ausführung</text>
           <rect x="380" y="60" width="140" height="60" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
-          <text x="450" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#1b4d1b">KPIs / Mining</text>
+          <text x="450" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#1b4d1b"><abbr title="Key Performance Indicators">KPIs</abbr> / Mining</text>
           <text x="450" y="103" text-anchor="middle" font-size="11" fill="#222">Messung</text>
           <rect x="560" y="60" width="180" height="60" rx="6" fill="#fde2dc" stroke="#b04030" stroke-width="2"/>
           <text x="650" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#b04030">Governance / Board</text>
@@ -234,11 +234,11 @@
       <p style="color:var(--color-muted)">Logistik, schwankende Peak-Lasten. 9 Wochen, 150k Budget. Legacy + Security.</p>
       <div class="grid-2" style="margin-top:14px">
         <div class="merk-box">
-          <h3>BPMS-Kern (Soll)</h3>
+          <h3><abbr title="Business Process Management System">BPMS</abbr>-Kern (Soll)</h3>
           <ul>
             <li>Start: ExceptionRaised Event aus TMS</li>
-            <li>Klassifizieren → XOR kritisch?</li>
-            <li>SLA Erstreaktion 2 h · Lösung 24 h</li>
+            <li>Klassifizieren → <abbr title="Exclusive Or (Exklusives Oder) – Logischer Operator: genau eine von mehreren Bedingungen trifft zu (BPMN-Gateway)">XOR</abbr> kritisch?</li>
+            <li><abbr title="Service Level Agreement">SLA</abbr> Erstreaktion 2 h · Lösung 24 h</li>
             <li>Eskalation nach 4 h an Duty Manager</li>
           </ul>
         </div>
@@ -246,21 +246,21 @@
           <h3>3 Integrationen</h3>
           <ul>
             <li>Event ExceptionRaised (async) – CaseID, Severity</li>
-            <li>API GetShipmentStatus (sync) – Fallback: Cache</li>
-            <li>API NotifyCustomer (sync) + Event CustomerNotified</li>
+            <li><abbr title="Application Programming Interface">API</abbr> GetShipmentStatus (sync) – Fallback: Cache</li>
+            <li><abbr title="Application Programming Interface">API</abbr> NotifyCustomer (sync) + Event CustomerNotified</li>
           </ul>
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
-        MVP: BPMS-Case Handling + 1 Event + 1 Status-API + SLA/Eskalation + Dashboard. Kein DWH-Rebuild.
+        <abbr title="Minimum Viable Product">MVP</abbr>: <abbr title="Business Process Management System">BPMS</abbr>-Case Handling + 1 Event + 1 Status-<abbr title="Application Programming Interface">API</abbr> + <abbr title="Service Level Agreement">SLA</abbr>/Eskalation + Dashboard. Kein <abbr title="Data Warehouse – Zentrales Datenlager, das Daten aus verschiedenen Quellen für Analysen konsolidiert">DWH</abbr>-Rebuild.
       </div>
     </section>
 
     <section class="slide" style="display:none">
       <h2>Coaching · Integrationsverantwortung</h2>
       <div class="grid-2x2" style="margin-top:18px">
-        <div class="merk-box"><h3>Prozessgrenzen = Machtgrenzen</h3><p>Was gehört in BPMS, was in Fachsysteme? Wer entscheidet?</p></div>
-        <div class="merk-box"><h3>API = Vertrag</h3><p>Wer verantwortet Stabilität, Versionierung, SLAs – und was kostet ein Bruch?</p></div>
+        <div class="merk-box"><h3>Prozessgrenzen = Machtgrenzen</h3><p>Was gehört in <abbr title="Business Process Management System">BPMS</abbr>, was in Fachsysteme? Wer entscheidet?</p></div>
+        <div class="merk-box"><h3><abbr title="Application Programming Interface">API</abbr> = Vertrag</h3><p>Wer verantwortet Stabilität, Versionierung, SLAs – und was kostet ein Bruch?</p></div>
         <div class="merk-box"><h3>Cloud-native = Betriebsfähigkeit</h3><p>Skalierung ohne Observability ist Blindflug. Kosten haben einen Owner.</p></div>
         <div class="merk-box"><h3>Minimum Viable Integration</h3><p>2 kritische Integrationen stabil &gt; 10 halbgare.</p></div>
       </div>
@@ -275,7 +275,7 @@
           <p style="font-size:13px;color:var(--color-muted);margin-top:6px">Frühwarnsignal: Dead-Letter-Queue &gt; 50/Tag → Designreview.</p>
         </div>
         <div class="merk-box">
-          <h3>MVP-Scope · welche 2 Integrationen zuerst</h3>
+          <h3><abbr title="Minimum Viable Product">MVP</abbr>-Scope · welche 2 Integrationen zuerst</h3>
           <p style="font-size:14px">Bewusst „Stop Doing“-Liste – nicht alles in Release 1.</p>
           <p style="font-size:13px;color:var(--color-muted);margin-top:6px">Frühwarnsignal: Eskalationsquote steigt → Scope-Review.</p>
         </div>
@@ -288,25 +288,99 @@
     <section class="slide" style="display:none">
       <h2>Take-aways · fünf Merksätze</h2>
       <div style="margin-top:18px">
-        <div class="takeaway-row"><span class="check">✓</span><span class="text">BPMS ohne Closed Loop ist Theater.</span></div>
-        <div class="takeaway-row"><span class="check">✓</span><span class="text">API = Vertrag. Versionierung &amp; Idempotenz sind Pflicht.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text"><abbr title="Business Process Management System">BPMS</abbr> ohne Closed Loop ist Theater.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text"><abbr title="Application Programming Interface">API</abbr> = Vertrag. Versionierung &amp; Idempotenz sind Pflicht.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text">Lesen sync, Schreiben async – mit Correlation-ID.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text">Cloud-native ohne Observability ist Blindflug.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text">2 stabile Integrationen schlagen 10 halbgare.</span></div>
       </div>
     </section>
 
+        <!-- Fachbegriffe & Definitionen (auto-generated) -->
     <section class="slide" style="display:none">
+      <h2>Fachbegriffe &amp; Definitionen</h2>
+      <p style="font-size:13px;color:var(--color-muted);margin:0 0 10px">Alle Abkürzungen und Fachbegriffe dieser Präsentation auf einen Blick.</p>
+      <div style="overflow-x:auto">
+      <table class="vs-table" style="font-size:13px;width:100%">
+        <thead>
+          <tr>
+            <th style="width:60px;background:var(--kurs-71-bg);color:var(--kurs-71)">Kürzel</th>
+            <th style="width:30%;background:var(--kurs-71-bg);color:var(--kurs-71)">Ausgeschrieben</th>
+            <th style="background:var(--kurs-71-bg);color:var(--kurs-71)">Definition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">API</strong></td>
+            <td style="font-style:italic">Application Programming Interface</td>
+            <td style="font-size:13px">Standardisierte Schnittstelle zur Kommunikation zwischen Softwaresystemen</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">BPMN</strong></td>
+            <td style="font-style:italic">Business Process Model and Notation</td>
+            <td style="font-size:13px">Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">BPMS</strong></td>
+            <td style="font-style:italic">Business Process Management System</td>
+            <td style="font-size:13px">Softwareplattform zur Modellierung, Ausführung und Überwachung von Geschäftsprozessen</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">DWH</strong></td>
+            <td style="font-style:italic">Data Warehouse</td>
+            <td style="font-size:13px">Zentrales Datenlager, das Daten aus verschiedenen Quellen für Analysen konsolidiert</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">KPIs</strong></td>
+            <td style="font-style:italic">Key Performance Indicators</td>
+            <td style="font-size:13px">Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">MVP</strong></td>
+            <td style="font-style:italic">Minimum Viable Product</td>
+            <td style="font-size:13px">Erste marktreife Produktversion mit minimalem Funktionsumfang</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">SLA</strong></td>
+            <td style="font-style:italic">Service Level Agreement</td>
+            <td style="font-size:13px">Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">SLO</strong></td>
+            <td style="font-style:italic">Service Level Objective</td>
+            <td style="font-size:13px">Konkrete, messbare Zielgröße innerhalb eines SLA</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">UI</strong></td>
+            <td style="font-style:italic">User Interface</td>
+            <td style="font-size:13px">Benutzeroberfläche; alle Elemente, über die Menschen mit einem System interagieren</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">VSM</strong></td>
+            <td style="font-style:italic">Value Stream Mapping</td>
+            <td style="font-size:13px">Lean-Methode zur Visualisierung und Optimierung des gesamten Wertschöpfungsstroms</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">XOR</strong></td>
+            <td style="font-style:italic">Exclusive Or (Exklusives Oder)</td>
+            <td style="font-size:13px">Logischer Operator: genau eine von mehreren Bedingungen trifft zu (BPMN-Gateway)</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+<section class="slide" style="display:none">
       <h2>Weiterarbeiten · Tag 6</h2>
       <div class="grid-2" style="margin-top:18px">
         <div class="merk-box">
           <h3>Handout</h3>
-          <p style="font-size:14px">12 Sektionen mit BPMS-Blueprint, API-Vertragsvorlage und Cloud-native Checkliste.</p>
+          <p style="font-size:14px">12 Sektionen mit <abbr title="Business Process Management System">BPMS</abbr>-Blueprint, <abbr title="Application Programming Interface">API</abbr>-Vertragsvorlage und Cloud-native Checkliste.</p>
           <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-06.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
         </div>
         <div class="merk-box">
           <h3>Lernpfad</h3>
-          <p style="font-size:14px">Videos zu BPMS-Architektur, REST/Events und Cloud-native Observability.</p>
+          <p style="font-size:14px">Videos zu <abbr title="Business Process Management System">BPMS</abbr>-Architektur, REST/Events und Cloud-native Observability.</p>
           <p style="margin-top:10px"><a href="lernpfad.html" style="color:var(--kurs-71);font-weight:600">→ Lernpfad öffnen</a></p>
         </div>
       </div>

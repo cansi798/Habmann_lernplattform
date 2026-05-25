@@ -65,7 +65,7 @@
           <ul>
             <li>Repository als Single Source of Truth</li>
             <li>3 Ebenen: E2E → Subprozess → Artefakt</li>
-            <li>Business-BPMN vs. Execution-BPMN</li>
+            <li>Business-<abbr title="Business Process Model and Notation – Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)">BPMN</abbr> vs. Execution-<abbr title="Business Process Model and Notation">BPMN</abbr></li>
             <li>User Task / Service Task / Events / Variablen</li>
           </ul>
         </div>
@@ -83,13 +83,13 @@
           <ul>
             <li>Variantenstrategie: Attribute vs. eigene Modelle</li>
             <li>Governance vs. Overhead</li>
-            <li>Exception-Policy: MVP statt Perfektion</li>
+            <li>Exception-Policy: <abbr title="Minimum Viable Product – Erste marktreife Produktversion mit minimalem Funktionsumfang">MVP</abbr> statt Perfektion</li>
             <li>Irreversible Entscheidungen markieren</li>
           </ul>
         </div>
       </div>
       <div class="accent-box" style="margin-top:20px">
-        „Repository ohne Owner/Review = Ablage. Execution ohne SLA/Eskalation = Hoffnung.“
+        „Repository ohne Owner/Review = Ablage. Execution ohne <abbr title="Service Level Agreement – Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen">SLA</abbr>/Eskalation = Hoffnung.“
       </div>
     </section>
 
@@ -103,7 +103,7 @@
           <line x1="140" y1="90" x2="140" y2="120" stroke="#9d4a1a" stroke-width="2"/>
           <rect x="40" y="120" width="200" height="60" rx="6" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
           <text x="140" y="145" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">Ebene 2 · Prozess / Subprozess</text>
-          <text x="140" y="164" text-anchor="middle" font-size="11" fill="#5a3a08">BPMN-Modell mit Lanes, KPIs, Risiken</text>
+          <text x="140" y="164" text-anchor="middle" font-size="11" fill="#5a3a08"><abbr title="Business Process Model and Notation">BPMN</abbr>-Modell mit Lanes, <abbr title="Key Performance Indicators – Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele">KPIs</abbr>, Risiken</text>
           <line x1="140" y1="180" x2="140" y2="210" stroke="#9d4a1a" stroke-width="2"/>
           <rect x="40" y="210" width="200" height="50" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
           <text x="140" y="232" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">Ebene 3 · Artefakte</text>
@@ -115,7 +115,7 @@
           <text x="340" y="130" font-size="13" fill="#222">• Version + letzte Änderung</text>
           <text x="340" y="155" font-size="13" fill="#222">• Gültigkeit (Standort, Produkt, Land)</text>
           <text x="340" y="180" font-size="13" fill="#222">• Risikoklasse / Compliance-Bezug</text>
-          <text x="340" y="205" font-size="13" fill="#222">• Verlinkte KPIs &amp; Controls</text>
+          <text x="340" y="205" font-size="13" fill="#222">• Verlinkte <abbr title="Key Performance Indicators">KPIs</abbr> &amp; Controls</text>
           <text x="340" y="240" font-size="13" font-weight="700" fill="#b04030">Ohne Owner und Status: keine Steuerung möglich.</text>
         </svg>
       </div>
@@ -161,10 +161,10 @@
     </section>
 
     <section class="slide" style="display:none">
-      <h2>Business-BPMN vs. Execution-BPMN</h2>
+      <h2>Business-<abbr title="Business Process Model and Notation">BPMN</abbr> vs. Execution-<abbr title="Business Process Model and Notation">BPMN</abbr></h2>
       <p style="color:var(--color-muted)">Gleiches Werkzeug, zwei Detailgrade – zwei Verantwortungsbereiche.</p>
       <table class="vs-table" style="margin-top:10px">
-        <thead><tr><th style="width:22%">Aspekt</th><th>Business-BPMN</th><th>Execution-BPMN (Camunda)</th></tr></thead>
+        <thead><tr><th style="width:22%">Aspekt</th><th>Business-<abbr title="Business Process Model and Notation">BPMN</abbr></th><th>Execution-<abbr title="Business Process Model and Notation">BPMN</abbr> (Camunda)</th></tr></thead>
         <tbody>
           <tr><th>Zielgruppe</th><td>Fachbereich, Management</td><td>Entwicklung, Workflow-Engine</td></tr>
           <tr><th>Detailtiefe</th><td>grob, Lanes &amp; Tasks reichen</td><td>präzise, jede Variable definiert</td></tr>
@@ -181,8 +181,8 @@
     </section>
 
     <section class="slide" style="display:none">
-      <h2>Execution-BPMN · Rechnungsfreigabe</h2>
-      <p style="color:var(--color-muted)">Mini-Camunda-Logik: User Task · Service Task · Timer · XOR.</p>
+      <h2>Execution-<abbr title="Business Process Model and Notation">BPMN</abbr> · Rechnungsfreigabe</h2>
+      <p style="color:var(--color-muted)">Mini-Camunda-Logik: User Task · Service Task · Timer · <abbr title="Exclusive Or (Exklusives Oder) – Logischer Operator: genau eine von mehreren Bedingungen trifft zu (BPMN-Gateway)">XOR</abbr>.</p>
       <div class="diagram-box" style="margin-top:14px">
         <svg width="100%" viewBox="0 0 920 260" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -219,8 +219,8 @@
           <polyline points="600,80 620,130" fill="none" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
           <polyline points="600,180 620,130" fill="none" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
           <rect x="710" y="110" width="130" height="40" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
-          <text x="775" y="128" text-anchor="middle" font-size="11" fill="#222">ERP buchen</text>
-          <text x="775" y="143" text-anchor="middle" font-size="10" fill="#3a7a2a">Service Task → ERP-API</text>
+          <text x="775" y="128" text-anchor="middle" font-size="11" fill="#222"><abbr title="Enterprise Resource Planning – Integriertes Softwaresystem zur unternehmensweiten Ressourcenplanung">ERP</abbr> buchen</text>
+          <text x="775" y="143" text-anchor="middle" font-size="10" fill="#3a7a2a">Service Task → <abbr title="Enterprise Resource Planning">ERP</abbr>-<abbr title="Application Programming Interface – Standardisierte Schnittstelle zur Kommunikation zwischen Softwaresystemen">API</abbr></text>
           <line x1="680" y1="130" x2="710" y2="130" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
           <circle cx="870" cy="130" r="18" fill="#fff" stroke="#9d4a1a" stroke-width="4"/>
           <line x1="840" y1="130" x2="852" y2="130" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-ex)"/>
@@ -238,22 +238,22 @@
       <div class="grid-3" style="margin-top:16px">
         <div class="merk-box"><h3>1 · Klarer Start &amp; Ende</h3><p>Was triggert den Slice? Wann ist er fertig? Beides ohne „kommt drauf an“.</p></div>
         <div class="merk-box"><h3>2 · Klare Daten</h3><p>Welche Felder muss der Workflow zwingend kennen? (z. B. Betrag, KSt, Freigeber).</p></div>
-        <div class="merk-box"><h3>3 · Klare Fehlerfälle</h3><p>Was tun, wenn Daten fehlen, API hängt, Timeout passiert?</p></div>
+        <div class="merk-box"><h3>3 · Klare Fehlerfälle</h3><p>Was tun, wenn Daten fehlen, <abbr title="Application Programming Interface">API</abbr> hängt, Timeout passiert?</p></div>
       </div>
       <div class="accent-box" style="margin-top:14px">
-        Ausnahme-Politik MVP: 1–2 Sonderfälle <strong>bewusst draußen lassen</strong> – organisatorisch auffangen, später integrieren.
+        Ausnahme-Politik <abbr title="Minimum Viable Product">MVP</abbr>: 1–2 Sonderfälle <strong>bewusst draußen lassen</strong> – organisatorisch auffangen, später integrieren.
       </div>
     </section>
 
     <section class="slide" style="display:none">
       <h2>Repository vs. Execution · Steuerungs-Unterschied</h2>
       <table class="vs-table" style="margin-top:10px">
-        <thead><tr><th>Dimension</th><th>Repository</th><th>Execution (BPMS)</th></tr></thead>
+        <thead><tr><th>Dimension</th><th>Repository</th><th>Execution (<abbr title="Business Process Management System – Softwareplattform zur Modellierung, Ausführung und Überwachung von Geschäftsprozessen">BPMS</abbr>)</th></tr></thead>
         <tbody>
           <tr><th>Hebel</th><td>Transparenz, Konsistenz, Audit</td><td>Durchlaufzeit, Qualität, Audit Trail</td></tr>
           <tr><th>Wirkung</th><td>langsam, organisationsweit</td><td>schnell, prozessspezifisch</td></tr>
           <tr><th>Risiko</th><td>tote Ablage ohne Owner</td><td>Engine ohne Modell = teurer Schrott</td></tr>
-          <tr><th>Owner</th><td>Process Owner</td><td>Automation Owner + IT</td></tr>
+          <tr><th>Owner</th><td>Process Owner</td><td>Automation Owner + <abbr title="Informationstechnologie – Gesamtheit der Technologien zur Erfassung, Speicherung und Übertragung von Daten">IT</abbr></td></tr>
           <tr><th>Investitionsschutz</th><td>Standards, Naming, Lifecycle</td><td>Versionierung, Migration, Rollback</td></tr>
         </tbody>
       </table>
@@ -264,14 +264,14 @@
 
     <section class="slide" style="display:none">
       <h2>Fallstudie · MediSupply Services</h2>
-      <p style="color:var(--color-muted)">8 Wochen, 90k Budget, mehrere Standorte mit Variantenwunsch, unklare ERP-Schnittstelle.</p>
+      <p style="color:var(--color-muted)">8 Wochen, 90k Budget, mehrere Standorte mit Variantenwunsch, unklare <abbr title="Enterprise Resource Planning">ERP</abbr>-Schnittstelle.</p>
       <div class="grid-2" style="margin-top:14px">
         <div class="merk-box">
           <h3>Pilot-Auswahl Begründung</h3>
           <ul>
             <li>Hoher Standardisierungs-Hebel</li>
             <li>Audit-Relevanz nachweisbar</li>
-            <li>Eine ERP-Schnittstelle reicht für MVP</li>
+            <li>Eine <abbr title="Enterprise Resource Planning">ERP</abbr>-Schnittstelle reicht für <abbr title="Minimum Viable Product">MVP</abbr></li>
             <li>Subprozess automatisierbar in 8 Wochen</li>
           </ul>
         </div>
@@ -286,7 +286,7 @@
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
-        KPIs für Steuerung: Durchlaufzeit · Eskalationsquote · Rework. Je KPI ein Owner mit Eskalationspfad.
+        <abbr title="Key Performance Indicators">KPIs</abbr> für Steuerung: Durchlaufzeit · Eskalationsquote · Rework. Je <abbr title="Key Performance Indicator – Messgröße zur Überwachung und Steuerung unternehmerischer Ziele">KPI</abbr> ein Owner mit Eskalationspfad.
       </div>
     </section>
 
@@ -296,7 +296,7 @@
         <div class="merk-box"><h3>Repository ist Betriebssystem</h3><p>Ohne Owner/Review/Lifecycle wird es zur Ablage – nicht zur Steuerung.</p></div>
         <div class="merk-box"><h3>Execution ist Vertrag</h3><p>Daten, Fehler, SLAs, Eskalation – wer trägt das Risiko falscher Automatisierung?</p></div>
         <div class="merk-box"><h3>Saubere Übergabe</h3><p>Business-Sicht (verständlich) ↔ Execution-Sicht (präzise). Zwei Modelle, ein Auftrag.</p></div>
-        <div class="merk-box"><h3>MVP statt Perfektion</h3><p>Aber mit Frühwarnsignalen: Eskalationsquote, Rework, Audit-Findings.</p></div>
+        <div class="merk-box"><h3><abbr title="Minimum Viable Product">MVP</abbr> statt Perfektion</h3><p>Aber mit Frühwarnsignalen: Eskalationsquote, Rework, Audit-Findings.</p></div>
       </div>
     </section>
 
@@ -316,15 +316,89 @@
     <section class="slide" style="display:none">
       <h2>Take-aways · fünf Merksätze</h2>
       <div style="margin-top:18px">
-        <div class="takeaway-row"><span class="check">✓</span><span class="text">Repository ohne Owner = Ablage. Execution ohne SLA = Hoffnung.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Repository ohne Owner = Ablage. Execution ohne <abbr title="Service Level Agreement">SLA</abbr> = Hoffnung.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text">Drei Ebenen reichen für den Start: Value Chain → Prozess → Artefakt.</span></div>
-        <div class="takeaway-row"><span class="check">✓</span><span class="text">Business-BPMN ist Sprache. Execution-BPMN ist Vertrag.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Business-<abbr title="Business Process Model and Notation">BPMN</abbr> ist Sprache. Execution-<abbr title="Business Process Model and Notation">BPMN</abbr> ist Vertrag.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text">Schnitt vor Implementierung: Start, Daten, Fehler klären.</span></div>
-        <div class="takeaway-row"><span class="check">✓</span><span class="text">MVP statt Perfektion – mit Frühwarnsignal &amp; Rückbau-Plan.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text"><abbr title="Minimum Viable Product">MVP</abbr> statt Perfektion – mit Frühwarnsignal &amp; Rückbau-Plan.</span></div>
       </div>
     </section>
 
+        <!-- Fachbegriffe & Definitionen (auto-generated) -->
     <section class="slide" style="display:none">
+      <h2>Fachbegriffe &amp; Definitionen</h2>
+      <p style="font-size:13px;color:var(--color-muted);margin:0 0 10px">Alle Abkürzungen und Fachbegriffe dieser Präsentation auf einen Blick.</p>
+      <div style="overflow-x:auto">
+      <table class="vs-table" style="font-size:13px;width:100%">
+        <thead>
+          <tr>
+            <th style="width:60px;background:var(--kurs-71-bg);color:var(--kurs-71)">Kürzel</th>
+            <th style="width:30%;background:var(--kurs-71-bg);color:var(--kurs-71)">Ausgeschrieben</th>
+            <th style="background:var(--kurs-71-bg);color:var(--kurs-71)">Definition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">API</strong></td>
+            <td style="font-style:italic">Application Programming Interface</td>
+            <td style="font-size:13px">Standardisierte Schnittstelle zur Kommunikation zwischen Softwaresystemen</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">BPMN</strong></td>
+            <td style="font-style:italic">Business Process Model and Notation</td>
+            <td style="font-size:13px">Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">BPMS</strong></td>
+            <td style="font-style:italic">Business Process Management System</td>
+            <td style="font-size:13px">Softwareplattform zur Modellierung, Ausführung und Überwachung von Geschäftsprozessen</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">EA</strong></td>
+            <td style="font-style:italic">Enterprise Architecture</td>
+            <td style="font-size:13px">Gesamtarchitektur eines Unternehmens aus IT- und Geschäftsprozesssicht</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">ERP</strong></td>
+            <td style="font-style:italic">Enterprise Resource Planning</td>
+            <td style="font-size:13px">Integriertes Softwaresystem zur unternehmensweiten Ressourcenplanung</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">IT</strong></td>
+            <td style="font-style:italic">Informationstechnologie</td>
+            <td style="font-size:13px">Gesamtheit der Technologien zur Erfassung, Speicherung und Übertragung von Daten</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">KPI</strong></td>
+            <td style="font-style:italic">Key Performance Indicator</td>
+            <td style="font-size:13px">Messgröße zur Überwachung und Steuerung unternehmerischer Ziele</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">MDA</strong></td>
+            <td style="font-style:italic">Model-Driven Architecture</td>
+            <td style="font-size:13px">OMG-Standard: Softwareentwicklung auf Basis plattformunabhängiger Modelle</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">MVP</strong></td>
+            <td style="font-style:italic">Minimum Viable Product</td>
+            <td style="font-size:13px">Erste marktreife Produktversion mit minimalem Funktionsumfang</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">SLA</strong></td>
+            <td style="font-style:italic">Service Level Agreement</td>
+            <td style="font-size:13px">Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">XOR</strong></td>
+            <td style="font-style:italic">Exclusive Or (Exklusives Oder)</td>
+            <td style="font-size:13px">Logischer Operator: genau eine von mehreren Bedingungen trifft zu (BPMN-Gateway)</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+<section class="slide" style="display:none">
       <h2>Weiterarbeiten · Tag 4</h2>
       <div class="grid-2" style="margin-top:18px">
         <div class="merk-box">
@@ -339,7 +413,7 @@
         </div>
       </div>
       <div style="margin-top:36px;text-align:center">
-        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 5 (EA &amp; MDA).</p>
+        <p class="handwritten" style="font-size:30px;color:var(--kurs-71);margin:12px 0 0">Bis morgen – Tag 5 (<abbr title="Enterprise Architecture – Gesamtarchitektur eines Unternehmens aus IT- und Geschäftsprozesssicht">EA</abbr> &amp; <abbr title="Model-Driven Architecture – OMG-Standard: Softwareentwicklung auf Basis plattformunabhängiger Modelle">MDA</abbr>).</p>
         <p style="font-size:13px;color:var(--color-muted);margin-top:8px">Lernplatt · by Can Siebert · Kurs 71 (Dig 42) · © 2026</p>
       </div>
     </section>

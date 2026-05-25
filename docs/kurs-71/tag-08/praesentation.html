@@ -51,8 +51,8 @@
     <section class="slide">
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 3 · Tag 8 von 16 · Kurs 71 (Dig 42) · 9. Juni 2026</div>
-      <h2 class="handwritten" style="font-size:44px;line-height:1.05;color:var(--kurs-71);margin:0">Enhancement · Predictive · BI</h2>
-      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Vom „Ist verstehen“ zum „Zukunft steuern“ – DWH/ETL und Dashboards als Frühwarnsystem.</p>
+      <h2 class="handwritten" style="font-size:44px;line-height:1.05;color:var(--kurs-71);margin:0">Enhancement · Predictive · <abbr title="Business Intelligence – Technologien und Methoden zur Analyse und Aufbereitung von Unternehmensdaten">BI</abbr></h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Vom „Ist verstehen“ zum „Zukunft steuern“ – <abbr title="Data Warehouse – Zentrales Datenlager, das Daten aus verschiedenen Quellen für Analysen konsolidiert">DWH</abbr>/<abbr title="Extract, Transform, Load – Prozess zur Datenintegration: Extraktion, Umwandlung und Laden in ein Zielsystem">ETL</abbr> und Dashboards als Frühwarnsystem.</p>
       <div style="margin-top:48px" class="accent-box">
         <span class="handwritten" style="color:#5a3a08;font-size:26px">Predictive ohne Playbook ist wertlos. Alert → Owner → Handlung.</span>
       </div>
@@ -65,8 +65,8 @@
           <h3>L1 · Wissen</h3>
           <ul>
             <li>Enhancement: Modell mit Zeiten/Kosten anreichern</li>
-            <li>ML-Typen im Prozess: Klassif. · Regression · Cluster · Anomalie</li>
-            <li>DWH/ETL für Prozessdaten</li>
+            <li><abbr title="Machine Learning – Teilgebiet der KI: Systeme erkennen Muster in Daten und lernen daraus">ML</abbr>-Typen im Prozess: Klassif. · Regression · Cluster · Anomalie</li>
+            <li><abbr title="Data Warehouse">DWH</abbr>/ETL für Prozessdaten</li>
             <li>Real-time Monitoring &amp; Drift</li>
           </ul>
         </div>
@@ -75,8 +75,8 @@
           <ul>
             <li>Predictive Use Case Canvas füllen</li>
             <li>Baseline-Heuristik formulieren</li>
-            <li>ETL-Pipeline in 6 Schritten</li>
-            <li>BI-Dashboard mit 6 Kacheln</li>
+            <li><abbr title="Extract, Transform, Load">ETL</abbr>-Pipeline in 6 Schritten</li>
+            <li><abbr title="Business Intelligence">BI</abbr>-Dashboard mit 6 Kacheln</li>
           </ul>
         </div>
         <div class="merk-box">
@@ -90,17 +90,17 @@
         </div>
       </div>
       <div class="accent-box" style="margin-top:20px">
-        Baseline vor ML – einfache Regeln liefern oft 60–80 % Nutzen und sind auditierbar.
+        Baseline vor <abbr title="Machine Learning">ML</abbr> – einfache Regeln liefern oft 60–80 % Nutzen und sind auditierbar.
       </div>
     </section>
 
     <section class="slide" style="display:none">
-      <h2>ML-Typen im Prozesskontext</h2>
+      <h2><abbr title="Machine Learning">ML</abbr>-Typen im Prozesskontext</h2>
       <div class="grid-2x2" style="margin-top:18px">
         <div class="merk-box">
           <h3>Klassifikation</h3>
           <p><strong>Frage:</strong> Wird der Fall eskalieren (ja/nein)?</p>
-          <p style="font-size:13px;color:var(--color-muted)">SLA-Breach-Vorhersage, Rework-Risiko</p>
+          <p style="font-size:13px;color:var(--color-muted)"><abbr title="Service Level Agreement – Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen">SLA</abbr>-Breach-Vorhersage, Rework-Risiko</p>
         </div>
         <div class="merk-box">
           <h3>Regression</h3>
@@ -126,23 +126,23 @@
     <section class="slide" style="display:none">
       <h2>Predictive Use Case Canvas</h2>
       <table class="vs-table" style="margin-top:10px">
-        <thead><tr><th style="width:30%">Feld</th><th>Beispiel „SLA-Risiko früh erkennen“</th></tr></thead>
+        <thead><tr><th style="width:30%">Feld</th><th>Beispiel „<abbr title="Service Level Agreement">SLA</abbr>-Risiko früh erkennen“</th></tr></thead>
         <tbody>
           <tr><th>1 · Zielentscheidung</th><td>Welches Ticket eskalieren wir, wer übernimmt?</td></tr>
-          <tr><th>2 · Prognose</th><td>Wahrscheinlichkeit SLA-Breach in den nächsten 4 h</td></tr>
+          <tr><th>2 · Prognose</th><td>Wahrscheinlichkeit <abbr title="Service Level Agreement">SLA</abbr>-Breach in den nächsten 4 h</td></tr>
           <tr><th>3 · Handlung</th><td>Risk &gt; 0,8 → Duty Manager + Fast Triage 15 min</td></tr>
           <tr><th>4 · Datenminimum</th><td>Priorität · Alter · Service · Reassignments · Queue</td></tr>
           <tr><th>5 · Risiko / Compliance</th><td>Kein automatisches Schließen · Audit Log Pflicht</td></tr>
-          <tr><th>6 · Erfolgskriterium</th><td>–25 % SLA-Verletzungen · gleichbleibende NPS</td></tr>
+          <tr><th>6 · Erfolgskriterium</th><td>–25 % <abbr title="Service Level Agreement">SLA</abbr>-Verletzungen · gleichbleibende <abbr title="Net Promoter Score – Kennzahl für Kundenloyalität: Weiterempfehlungsbereitschaft auf einer Skala 0–10">NPS</abbr></td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
-        Baseline-Heuristik: „Ticket Age &gt; 70 % SLA &amp; Reassignments &gt; 2 → markieren“. Funktioniert ohne ML.
+        Baseline-Heuristik: „Ticket Age &gt; 70 % <abbr title="Service Level Agreement">SLA</abbr> &amp; Reassignments &gt; 2 → markieren“. Funktioniert ohne <abbr title="Machine Learning">ML</abbr>.
       </div>
     </section>
 
     <section class="slide" style="display:none">
-      <h2>ETL-Pipeline · 6 Schritte</h2>
+      <h2><abbr title="Extract, Transform, Load">ETL</abbr>-Pipeline · 6 Schritte</h2>
       <div class="diagram-box" style="margin-top:14px">
         <svg width="100%" viewBox="0 0 880 180" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -152,7 +152,7 @@
           </defs>
           <rect x="20" y="60" width="120" height="60" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
           <text x="80" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">1 · Quelle</text>
-          <text x="80" y="102" text-anchor="middle" font-size="11" fill="#555">CRM · Tickets · ERP</text>
+          <text x="80" y="102" text-anchor="middle" font-size="11" fill="#555"><abbr title="Customer Relationship Management – Systematische Gestaltung aller Kundenbeziehungen im Unternehmen">CRM</abbr> · Tickets · ERP</text>
           <rect x="160" y="60" width="120" height="60" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
           <text x="220" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#9d4a1a">2 · Staging</text>
           <text x="220" y="102" text-anchor="middle" font-size="11" fill="#555">Rohdaten ablegen</text>
@@ -166,7 +166,7 @@
           <text x="640" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#b04030">5 · Quality</text>
           <text x="640" y="102" text-anchor="middle" font-size="11" fill="#b04030">Checks &amp; Reject</text>
           <rect x="720" y="60" width="140" height="60" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
-          <text x="790" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#1b4d1b">6 · DWH</text>
+          <text x="790" y="84" text-anchor="middle" font-size="12" font-weight="700" fill="#1b4d1b">6 · <abbr title="Data Warehouse">DWH</abbr></text>
           <text x="790" y="102" text-anchor="middle" font-size="11" fill="#1b4d1b">Facts + Dimensions</text>
           <line x1="140" y1="90" x2="160" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-etl)"/>
           <line x1="280" y1="90" x2="300" y2="90" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-etl)"/>
@@ -183,12 +183,12 @@
     </section>
 
     <section class="slide" style="display:none">
-      <h2>BI-Dashboard · sechs Kacheln</h2>
+      <h2><abbr title="Business Intelligence">BI</abbr>-Dashboard · sechs Kacheln</h2>
       <div class="grid-3" style="margin-top:16px">
-        <div class="merk-box"><h3>Exec KPI 1</h3><p style="font-size:13px">Lead Time vs. Ziel · Trend 8 Wochen</p></div>
-        <div class="merk-box"><h3>Exec KPI 2</h3><p style="font-size:13px">SLA-Einhaltung gesamt · Heatmap</p></div>
-        <div class="merk-box"><h3>Prozess-KPI A</h3><p style="font-size:13px">Top-10 Risikotickets jetzt</p></div>
-        <div class="merk-box"><h3>Prozess-KPI B</h3><p style="font-size:13px">Reassignments pro Service</p></div>
+        <div class="merk-box"><h3>Exec <abbr title="Key Performance Indicator – Messgröße zur Überwachung und Steuerung unternehmerischer Ziele">KPI</abbr> 1</h3><p style="font-size:13px">Lead Time vs. Ziel · Trend 8 Wochen</p></div>
+        <div class="merk-box"><h3>Exec <abbr title="Key Performance Indicator">KPI</abbr> 2</h3><p style="font-size:13px"><abbr title="Service Level Agreement">SLA</abbr>-Einhaltung gesamt · Heatmap</p></div>
+        <div class="merk-box"><h3>Prozess-<abbr title="Key Performance Indicator">KPI</abbr> A</h3><p style="font-size:13px">Top-10 Risikotickets jetzt</p></div>
+        <div class="merk-box"><h3>Prozess-<abbr title="Key Performance Indicator">KPI</abbr> B</h3><p style="font-size:13px">Reassignments pro Service</p></div>
         <div class="merk-box"><h3>Risiko / Compliance</h3><p style="font-size:13px">Anomalien · Audit-Findings · Sonderfreigaben</p></div>
         <div class="merk-box" style="background:#fde2dc;border-color:#b04030"><h3 style="color:#b04030">Alert / Aktion</h3><p style="font-size:13px;color:#b04030">Offene Alerts · Owner · Playbook-Link</p></div>
       </div>
@@ -200,21 +200,21 @@
     <section class="slide" style="display:none">
       <h2>Anti-Gaming · Kopplung verhindert Fehlanreize</h2>
       <table class="vs-table" style="margin-top:10px">
-        <thead><tr><th>KPI</th><th>Mögliches Gaming</th><th>Anti-Gaming-Kopplung</th></tr></thead>
+        <thead><tr><th><abbr title="Key Performance Indicator">KPI</abbr></th><th>Mögliches Gaming</th><th>Anti-Gaming-Kopplung</th></tr></thead>
         <tbody>
-          <tr><td>SLA-Einhaltungsquote</td><td>schnell auf „erledigt“ setzen ohne Lösung</td><td>+ Re-Open-Rate &amp; Kundenzufriedenheit</td></tr>
+          <tr><td><abbr title="Service Level Agreement">SLA</abbr>-Einhaltungsquote</td><td>schnell auf „erledigt“ setzen ohne Lösung</td><td>+ Re-Open-Rate &amp; Kundenzufriedenheit</td></tr>
           <tr><td>Tickets / FTE / Tag</td><td>Tickets künstlich splitten</td><td>+ Bearbeitungszeit-Verteilung &amp; Rework-Rate</td></tr>
           <tr><td>First-Pass-Yield</td><td>Komplexe Fälle vermeiden</td><td>+ Mix-Index (Komplexitäts-Anteil)</td></tr>
           <tr><td>Lead Time</td><td>Tickets vor Eingangsbuchung „warm halten“</td><td>+ Eingangs-vs-Erstkontakt-Zeit</td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
-        Jede Executive-KPI braucht eine <strong>Gegen-KPI</strong>. Sonst optimiert die Organisation die falsche Richtung.
+        Jede Executive-<abbr title="Key Performance Indicator">KPI</abbr> braucht eine <strong>Gegen-<abbr title="Key Performance Indicator">KPI</abbr></strong>. Sonst optimiert die Organisation die falsche Richtung.
       </div>
     </section>
 
     <section class="slide" style="display:none">
-      <h2>Fallstudie · FinServe SLA-Frühwarnsystem</h2>
+      <h2>Fallstudie · FinServe <abbr title="Service Level Agreement">SLA</abbr>-Frühwarnsystem</h2>
       <p style="color:var(--color-muted)">8 Wochen, 120k Budget. Labels (Breach) unvollständig. Misstrauen wegen „Überwachung“.</p>
       <div class="grid-2" style="margin-top:14px">
         <div class="merk-box">
@@ -236,7 +236,7 @@
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
-        MVP: Start ohne Monitoring-Join (nur Ticketing) · 6 Features · manuelle Service-Impact-Kennzeichnung.
+        <abbr title="Minimum Viable Product – Erste marktreife Produktversion mit minimalem Funktionsumfang">MVP</abbr>: Start ohne Monitoring-Join (nur Ticketing) · 6 Features · manuelle Service-Impact-Kennzeichnung.
       </div>
     </section>
 
@@ -244,7 +244,7 @@
       <h2>Coaching · Predictive als Verantwortung</h2>
       <div class="grid-2x2" style="margin-top:18px">
         <div class="merk-box"><h3>Alert → Owner → Playbook</h3><p>Predictive ohne Handlungsplan ist wertlos. Jeder Alert braucht eine Adresse.</p></div>
-        <div class="merk-box"><h3>Baseline vor ML</h3><p>Einfache Regeln liefern 60–80 % Nutzen und sind auditierbar – das ist viel.</p></div>
+        <div class="merk-box"><h3>Baseline vor <abbr title="Machine Learning">ML</abbr></h3><p>Einfache Regeln liefern 60–80 % Nutzen und sind auditierbar – das ist viel.</p></div>
         <div class="merk-box"><h3>Datenethik &amp; Bias</h3><p>Erklärbarkeit, Zugriffe, Audit Trail – Modell ist Produkt mit Verantwortung.</p></div>
         <div class="merk-box"><h3>Drift managen</h3><p>Modelle altern – Monitoring für Modell-Performance &amp; Datenverschiebung.</p></div>
       </div>
@@ -296,25 +296,94 @@
     <section class="slide" style="display:none">
       <h2>Take-aways · fünf Merksätze</h2>
       <div style="margin-top:18px">
-        <div class="takeaway-row"><span class="check">✓</span><span class="text">Baseline vor ML – einfache Regeln auditierbar &amp; oft wirksam.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Baseline vor <abbr title="Machine Learning">ML</abbr> – einfache Regeln auditierbar &amp; oft wirksam.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text">Predictive braucht Alert → Owner → Playbook.</span></div>
-        <div class="takeaway-row"><span class="check">✓</span><span class="text">Jede KPI braucht eine Gegen-KPI gegen Gaming.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Jede <abbr title="Key Performance Indicator">KPI</abbr> braucht eine Gegen-<abbr title="Key Performance Indicator">KPI</abbr> gegen Gaming.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text">Drift &amp; Datenqualität sind Pflicht-Monitoring.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text">Analytics ist Produkt – Product Owner, Release-Zyklus, Audit.</span></div>
       </div>
     </section>
 
+        <!-- Fachbegriffe & Definitionen (auto-generated) -->
     <section class="slide" style="display:none">
+      <h2>Fachbegriffe &amp; Definitionen</h2>
+      <p style="font-size:13px;color:var(--color-muted);margin:0 0 10px">Alle Abkürzungen und Fachbegriffe dieser Präsentation auf einen Blick.</p>
+      <div style="overflow-x:auto">
+      <table class="vs-table" style="font-size:13px;width:100%">
+        <thead>
+          <tr>
+            <th style="width:60px;background:var(--kurs-71-bg);color:var(--kurs-71)">Kürzel</th>
+            <th style="width:30%;background:var(--kurs-71-bg);color:var(--kurs-71)">Ausgeschrieben</th>
+            <th style="background:var(--kurs-71-bg);color:var(--kurs-71)">Definition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">BI</strong></td>
+            <td style="font-style:italic">Business Intelligence</td>
+            <td style="font-size:13px">Technologien und Methoden zur Analyse und Aufbereitung von Unternehmensdaten</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">CRM</strong></td>
+            <td style="font-style:italic">Customer Relationship Management</td>
+            <td style="font-size:13px">Systematische Gestaltung aller Kundenbeziehungen im Unternehmen</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">DWH</strong></td>
+            <td style="font-style:italic">Data Warehouse</td>
+            <td style="font-size:13px">Zentrales Datenlager, das Daten aus verschiedenen Quellen für Analysen konsolidiert</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">ERP</strong></td>
+            <td style="font-style:italic">Enterprise Resource Planning</td>
+            <td style="font-size:13px">Integriertes Softwaresystem zur unternehmensweiten Ressourcenplanung</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">ETL</strong></td>
+            <td style="font-style:italic">Extract, Transform, Load</td>
+            <td style="font-size:13px">Prozess zur Datenintegration: Extraktion, Umwandlung und Laden in ein Zielsystem</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">KPI</strong></td>
+            <td style="font-style:italic">Key Performance Indicator</td>
+            <td style="font-size:13px">Messgröße zur Überwachung und Steuerung unternehmerischer Ziele</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">ML</strong></td>
+            <td style="font-style:italic">Machine Learning</td>
+            <td style="font-size:13px">Teilgebiet der KI: Systeme erkennen Muster in Daten und lernen daraus</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">MVP</strong></td>
+            <td style="font-style:italic">Minimum Viable Product</td>
+            <td style="font-size:13px">Erste marktreife Produktversion mit minimalem Funktionsumfang</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">NPS</strong></td>
+            <td style="font-style:italic">Net Promoter Score</td>
+            <td style="font-size:13px">Kennzahl für Kundenloyalität: Weiterempfehlungsbereitschaft auf einer Skala 0–10</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">SLA</strong></td>
+            <td style="font-style:italic">Service Level Agreement</td>
+            <td style="font-size:13px">Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+<section class="slide" style="display:none">
       <h2>Weiterarbeiten · Tag 8</h2>
       <div class="grid-2" style="margin-top:18px">
         <div class="merk-box">
           <h3>Handout</h3>
-          <p style="font-size:14px">12 Sektionen mit Predictive Canvas, ETL-Pattern und Dashboard-Best-Practices.</p>
+          <p style="font-size:14px">12 Sektionen mit Predictive Canvas, <abbr title="Extract, Transform, Load">ETL</abbr>-Pattern und Dashboard-Best-Practices.</p>
           <p style="margin-top:10px"><a href="../../pdf/71-handout-tag-08.pdf" style="color:var(--kurs-71);font-weight:600">→ Handout PDF öffnen</a></p>
         </div>
         <div class="merk-box">
           <h3>Lernpfad</h3>
-          <p style="font-size:14px">Videos zu ETL-Tools (dbt, Airflow), BI-Dashboards (Tableau, Power BI) und Drift Monitoring.</p>
+          <p style="font-size:14px">Videos zu <abbr title="Extract, Transform, Load">ETL</abbr>-Tools (dbt, Airflow), <abbr title="Business Intelligence">BI</abbr>-Dashboards (Tableau, Power <abbr title="Business Intelligence">BI</abbr>) und Drift Monitoring.</p>
           <p style="margin-top:10px"><a href="lernpfad.html" style="color:var(--kurs-71);font-weight:600">→ Lernpfad öffnen</a></p>
         </div>
       </div>

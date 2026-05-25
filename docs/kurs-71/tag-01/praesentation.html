@@ -106,7 +106,7 @@
     <section class="slide">
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 1 · Tag 1 von 3 · Kurs 71 (Dig 42) · 28. Mai 2026</div>
-      <h2 class="handwritten" style="font-size:54px;line-height:1.05;color:var(--kurs-71);margin:0">BPMN 2.0 &amp; EPC</h2>
+      <h2 class="handwritten" style="font-size:54px;line-height:1.05;color:var(--kurs-71);margin:0"><abbr title="Business Process Model and Notation – Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)">BPMN</abbr> 2.0 &amp; EPC</h2>
       <canvas data-rough="underline" data-color="#9d4a1a" width="420" height="22" style="margin-top:8px"></canvas>
       <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:680px">Einordnung · Basiselemente · Modell-Qualität · Zweckorientierung – vom ersten Symbol zur Entscheidungsarchitektur.</p>
       <div style="margin-top:48px" class="accent-box">
@@ -123,8 +123,8 @@
           <h3>L1 · Wissen</h3>
           <ul>
             <li>Prozessbegriff: Input – Transformation – Output</li>
-            <li>BPMN-Basiselemente sicher lesen</li>
-            <li>EPC-Basiselemente einordnen</li>
+            <li><abbr title="Business Process Model and Notation">BPMN</abbr>-Basiselemente sicher lesen</li>
+            <li><abbr title="Ereignisgesteuerte Prozesskette – Methode zur grafischen Darstellung und Dokumentation von Geschäftsprozessen">EPC</abbr>-Basiselemente einordnen</li>
             <li>Modellzwecke unterscheiden</li>
           </ul>
         </div>
@@ -132,7 +132,7 @@
           <h3>L2 · Anwendung</h3>
           <ul>
             <li>Text in Modell überführen</li>
-            <li>Notation begründet wählen (BPMN vs. EPC)</li>
+            <li>Notation begründet wählen (<abbr title="Business Process Model and Notation">BPMN</abbr> vs. <abbr title="Ereignisgesteuerte Prozesskette">EPC</abbr>)</li>
             <li>Qualität an klaren Kriterien prüfen</li>
             <li>Annahmen sichtbar dokumentieren</li>
           </ul>
@@ -174,7 +174,7 @@
         </div>
         <div class="merk-box">
           <h3>4 · Automatisieren</h3>
-          <p>Executable BPMN, Workflow-Engines, RPA-Anbindung.</p>
+          <p>Executable <abbr title="Business Process Model and Notation">BPMN</abbr>, Workflow-Engines, <abbr title="Robotic Process Automation – Softwarebasierte Automatisierung repetitiver, regelbasierter Aufgaben">RPA</abbr>-Anbindung.</p>
           <p style="font-size:13px;color:var(--color-muted)">Camunda · Activiti · Power Automate</p>
         </div>
       </div>
@@ -186,7 +186,7 @@
 
     <!-- Slide 4: BPMN 2.0 Basiselemente (SVG-Symboltafel) -->
     <section class="slide" style="display:none">
-      <h2>BPMN 2.0 · fünf Basiselemente</h2>
+      <h2><abbr title="Business Process Model and Notation">BPMN</abbr> 2.0 · fünf Basiselemente</h2>
       <p style="color:var(--color-muted)">Mehr braucht es für 80 % aller Prozessmodelle nicht.</p>
       <div class="diagram-box" style="margin-top:14px;text-align:left">
         <svg width="100%" viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg">
@@ -215,7 +215,7 @@
           <!-- 4 Gateway -->
           <polygon points="580,60 610,30 640,60 610,90" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
           <text x="610" y="65" text-anchor="middle" font-size="18" fill="#9d4a1a">×</text>
-          <text x="610" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#9d4a1a">XOR-Gateway</text>
+          <text x="610" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#9d4a1a"><abbr title="Exclusive Or (Exklusives Oder) – Logischer Operator: genau eine von mehreren Bedingungen trifft zu (BPMN-Gateway)">XOR</abbr>-Gateway</text>
           <text x="610" y="135" text-anchor="middle" font-size="11" fill="#666">Entscheidung</text>
 
           <!-- 5 Sequence flow & message flow -->
@@ -243,7 +243,7 @@
 
     <!-- Slide 5: Mini-BPMN-Beispiel (SVG) -->
     <section class="slide" style="display:none">
-      <h2>Mini-BPMN · Bestellprozess „NovaParts“</h2>
+      <h2>Mini-<abbr title="Business Process Model and Notation">BPMN</abbr> · Bestellprozess „NovaParts“</h2>
       <p style="color:var(--color-muted)">Vom Eingang bis zum Versand – in sieben Symbolen lesbar.</p>
       <div class="diagram-box" style="margin-top:14px">
         <svg width="100%" viewBox="0 0 880 260" xmlns="http://www.w3.org/2000/svg">
@@ -333,21 +333,21 @@
 
     <!-- Slide 6: EPC im Vergleich -->
     <section class="slide" style="display:none">
-      <h2>EPC im Vergleich · gleiche Welt, andere Brille</h2>
+      <h2><abbr title="Ereignisgesteuerte Prozesskette">EPC</abbr> im Vergleich · gleiche Welt, andere Brille</h2>
       <p style="color:var(--color-muted)">Ereignisgesteuerte Prozesskette – Wurzeln in den 1990ern, IDS Scheer / ARIS.</p>
       <table class="vs-table" style="margin-top:10px">
         <thead>
-          <tr><th style="width:24%">Aspekt</th><th>BPMN 2.0</th><th>EPC</th></tr>
+          <tr><th style="width:24%">Aspekt</th><th><abbr title="Business Process Model and Notation">BPMN</abbr> 2.0</th><th><abbr title="Ereignisgesteuerte Prozesskette">EPC</abbr></th></tr>
         </thead>
         <tbody>
           <tr><th>Knotentypen</th><td>Activity · Event · Gateway · Pool/Lane</td><td>Funktion · Ereignis · Konnektor · Org-Einheit/Information</td></tr>
           <tr><th>Symbol-Mapping</th><td>Aktivität (Rechteck)</td><td>Funktion (abgerundetes Rechteck, grün)</td></tr>
           <tr><th></th><td>Event (Kreis)</td><td>Ereignis (Sechseck, rot)</td></tr>
-          <tr><th></th><td>Gateway (Diamant)</td><td>Konnektor AND / OR / XOR (Kreis ∧ ∨ × )</td></tr>
+          <tr><th></th><td>Gateway (Diamant)</td><td>Konnektor AND / OR / <abbr title="Exclusive Or (Exklusives Oder)">XOR</abbr> (Kreis ∧ ∨ × )</td></tr>
           <tr><th>Reihenfolge</th><td>Sequenzfluss frei</td><td>strikt <em>Ereignis – Funktion – Ereignis</em></td></tr>
-          <tr><th>Ausführbarkeit</th><td>Executable BPMN möglich</td><td>primär konzeptionell</td></tr>
-          <tr><th>Zielgruppe</th><td>Business + IT, automatisierungsnah</td><td>Business, Management-Übersicht</td></tr>
-          <tr><th>Standardisierung</th><td>OMG-Standard (BPMN 2.0)</td><td>De-facto-Standard (ARIS-Methode)</td></tr>
+          <tr><th>Ausführbarkeit</th><td>Executable <abbr title="Business Process Model and Notation">BPMN</abbr> möglich</td><td>primär konzeptionell</td></tr>
+          <tr><th>Zielgruppe</th><td>Business + <abbr title="Informationstechnologie – Gesamtheit der Technologien zur Erfassung, Speicherung und Übertragung von Daten">IT</abbr>, automatisierungsnah</td><td>Business, Management-Übersicht</td></tr>
+          <tr><th>Standardisierung</th><td>OMG-Standard (<abbr title="Business Process Model and Notation">BPMN</abbr> 2.0)</td><td>De-facto-Standard (ARIS-Methode)</td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
@@ -357,7 +357,7 @@
 
     <!-- Slide 7: EPC Mini-Beispiel (SVG) -->
     <section class="slide" style="display:none">
-      <h2>EPC Mini-Beispiel · derselbe Schritt, andere Notation</h2>
+      <h2><abbr title="Ereignisgesteuerte Prozesskette">EPC</abbr> Mini-Beispiel · derselbe Schritt, andere Notation</h2>
       <p style="color:var(--color-muted)">Strikt im Wechsel: Ereignis (rot) → Funktion (grün) → Ereignis.</p>
       <div class="diagram-box" style="margin-top:14px">
         <svg width="100%" viewBox="0 0 820 300" xmlns="http://www.w3.org/2000/svg">
@@ -385,7 +385,7 @@
           <!-- XOR-Konnektor -->
           <circle cx="110" cy="240" r="22" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
           <text x="110" y="246" text-anchor="middle" font-size="18" fill="#9d4a1a">×</text>
-          <text x="160" y="246" font-size="11" fill="#666">XOR</text>
+          <text x="160" y="246" font-size="11" fill="#666"><abbr title="Exclusive Or (Exklusives Oder)">XOR</abbr></text>
 
           <!-- Pfeile vom XOR zu zwei Ereignissen -->
           <line x1="92" y1="252" x2="40" y2="285" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar7)"/>
@@ -403,7 +403,7 @@
 
           <!-- Vergleichs-Achse rechts: BPMN-Spiegel -->
           <line x1="340" y1="20" x2="340" y2="290" stroke="#ccc" stroke-width="1" stroke-dasharray="3 3"/>
-          <text x="360" y="35" font-size="13" font-weight="600" fill="#9d4a1a">BPMN-Spiegel</text>
+          <text x="360" y="35" font-size="13" font-weight="600" fill="#9d4a1a"><abbr title="Business Process Model and Notation">BPMN</abbr>-Spiegel</text>
 
           <!-- Start Event -->
           <circle cx="400" cy="70" r="20" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
@@ -425,11 +425,11 @@
           <line x1="685" y1="95" x2="685" y2="160" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar7)"/>
           <line x1="710" y1="70" x2="780" y2="70" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar7)"/>
 
-          <text x="540" y="170" font-size="11" fill="#666">EPC: 3 Knotentypen pro Schritt — BPMN: 1 Gateway, kompakter.</text>
+          <text x="540" y="170" font-size="11" fill="#666"><abbr title="Ereignisgesteuerte Prozesskette">EPC</abbr>: 3 Knotentypen pro Schritt — <abbr title="Business Process Model and Notation">BPMN</abbr>: 1 Gateway, kompakter.</text>
         </svg>
       </div>
       <div class="accent-box" style="margin-top:12px;font-size:18px">
-        EPC zwingt zum Denken in Zustandswechseln – BPMN denkt in Aktivitätsketten. Beide schärfen das Denken.
+        <abbr title="Ereignisgesteuerte Prozesskette">EPC</abbr> zwingt zum Denken in Zustandswechseln – <abbr title="Business Process Model and Notation">BPMN</abbr> denkt in Aktivitätsketten. Beide schärfen das Denken.
       </div>
     </section>
 
@@ -483,7 +483,7 @@
           <canvas data-rough="arrow" data-color="#9d4a1a" width="120" height="28"></canvas>
           <div class="merk-box" style="flex:1">
             <h3>1 · Stakeholder · wer liest mit?</h3>
-            <p>Vorstand, Fachbereich, IT, Auditor? Jede Zielgruppe braucht eine andere Tiefe und Notation.</p>
+            <p>Vorstand, Fachbereich, <abbr title="Informationstechnologie">IT</abbr>, Auditor? Jede Zielgruppe braucht eine andere Tiefe und Notation.</p>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:18px;margin-bottom:18px">
@@ -508,7 +508,7 @@
 
     <!-- Slide 10: Pools, Lanes, RACI (SVG-Schwimmbahn) -->
     <section class="slide" style="display:none">
-      <h2>Pools, Lanes &amp; RACI · Verantwortung sichtbar machen</h2>
+      <h2>Pools, Lanes &amp; <abbr title="Responsible, Accountable, Consulted, Informed – Verantwortungsmatrix zur Klärung von Rollen und Zuständigkeiten in Projekten">RACI</abbr> · Verantwortung sichtbar machen</h2>
       <p style="color:var(--color-muted)">Lanes zeigen <em>wer macht was</em> – nicht <em>wann</em>. Reihenfolge bleibt der Sequenzfluss.</p>
       <div class="diagram-box" style="margin-top:14px">
         <svg width="100%" viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg">
@@ -580,7 +580,7 @@
         </svg>
       </div>
       <div class="accent-box" style="margin-top:10px;font-size:18px">
-        RACI über Lanes: <strong>R</strong>esponsible = wer modelliert da, <strong>A</strong>ccountable = Pool-Eigentümer.
+        <abbr title="Responsible, Accountable, Consulted, Informed">RACI</abbr> über Lanes: <strong>R</strong>esponsible = wer modelliert da, <strong>A</strong>ccountable = Pool-Eigentümer.
       </div>
     </section>
 
@@ -610,7 +610,7 @@
           <p style="font-size:13px;margin:0">Jeder Mausklick als eigener Task. Granularität verfehlt den Zweck.</p>
         </div>
         <div class="anti-card"><span class="don">Don't</span>
-          <h3>OR statt XOR</h3>
+          <h3>OR statt <abbr title="Exclusive Or (Exklusives Oder)">XOR</abbr></h3>
           <p style="font-size:13px;margin:0">Falsche Entscheidungslogik. Engine läuft sich tot oder doppelt.</p>
         </div>
       </div>
@@ -638,18 +638,18 @@
 
           <rect x="220" y="150" width="180" height="110" fill="#ffd9b0" stroke="#9d4a1a" stroke-width="2"/>
           <text x="310" y="175" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">2 · Logisches Modell</text>
-          <text x="310" y="195" text-anchor="middle" font-size="11" fill="#5a3a08">BPMN-Lesart, Lanes</text>
+          <text x="310" y="195" text-anchor="middle" font-size="11" fill="#5a3a08"><abbr title="Business Process Model and Notation">BPMN</abbr>-Lesart, Lanes</text>
           <text x="310" y="210" text-anchor="middle" font-size="11" fill="#5a3a08">Reviews, Versionen</text>
 
           <rect x="400" y="100" width="180" height="160" fill="#f5b878" stroke="#9d4a1a" stroke-width="2"/>
-          <text x="490" y="125" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">3 · Executable BPMN</text>
+          <text x="490" y="125" text-anchor="middle" font-size="14" font-weight="700" fill="#5a3a08">3 · Executable <abbr title="Business Process Model and Notation">BPMN</abbr></text>
           <text x="490" y="145" text-anchor="middle" font-size="11" fill="#5a3a08">Service-Tasks · DMN</text>
           <text x="490" y="160" text-anchor="middle" font-size="11" fill="#5a3a08">Variablen · APIs</text>
 
           <rect x="580" y="40" width="180" height="220" fill="#d18a40" stroke="#9d4a1a" stroke-width="2"/>
           <text x="670" y="65" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">4 · Engine</text>
           <text x="670" y="85" text-anchor="middle" font-size="11" fill="#fff">Camunda · Activiti</text>
-          <text x="670" y="100" text-anchor="middle" font-size="11" fill="#fff">Monitoring · KPIs</text>
+          <text x="670" y="100" text-anchor="middle" font-size="11" fill="#fff">Monitoring · <abbr title="Key Performance Indicators – Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele">KPIs</abbr></text>
 
           <!-- Pfeile zwischen Stufen -->
           <line x1="220" y1="230" x2="230" y2="220" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar12)"/>
@@ -712,8 +712,8 @@
           <p style="font-size:14px">Tote Modelle sind teurer als keine. Wer hält welches Modell <em>wie oft</em> aktuell?</p>
         </div>
         <div class="merk-box">
-          <h3>IT-Sicht ↔ Fach-Sicht</h3>
-          <p style="font-size:14px">Executable BPMN für die Engine vs. EPC-Übersicht fürs Management – ein Modell für beide ist Fiktion.</p>
+          <h3><abbr title="Informationstechnologie">IT</abbr>-Sicht ↔ Fach-Sicht</h3>
+          <p style="font-size:14px">Executable <abbr title="Business Process Model and Notation">BPMN</abbr> für die Engine vs. <abbr title="Ereignisgesteuerte Prozesskette">EPC</abbr>-Übersicht fürs Management – ein Modell für beide ist Fiktion.</p>
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
@@ -727,7 +727,7 @@
       <div style="margin-top:18px">
         <div class="takeaway-row">
           <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
-          <span class="text">Zweck zuerst, Notation zweitens. BPMN ≠ EPC – beide haben Berechtigung.</span>
+          <span class="text">Zweck zuerst, Notation zweitens. <abbr title="Business Process Model and Notation">BPMN</abbr> ≠ <abbr title="Ereignisgesteuerte Prozesskette">EPC</abbr> – beide haben Berechtigung.</span>
         </div>
         <div class="takeaway-row">
           <canvas data-rough="check" data-color="#2a8a2a" width="36" height="36"></canvas>
@@ -753,13 +753,13 @@
       <h2>Literaturverzeichnis</h2>
       <p style="color:var(--color-muted);font-size:14px">Quellen nach APA 7 – vertiefende Lehrbücher und Standards.</p>
       <ol class="lit-list">
-        <li>Allweyer, T. (2020). <em>BPMN 2.0: Business Process Model and Notation</em> (5. Aufl.). Books on Demand.</li>
+        <li>Allweyer, T. (2020). <em><abbr title="Business Process Model and Notation">BPMN</abbr> 2.0: Business Process Model and Notation</em> (5. Aufl.). Books on Demand.</li>
         <li>Becker, J., Kugeler, M., &amp; Rosemann, M. (Hrsg.). (2012). <em>Prozessmanagement: Ein Leitfaden zur prozessorientierten Organisationsgestaltung</em> (7. Aufl.). Springer Gabler.</li>
         <li>Davenport, T. H. (1993). <em>Process Innovation: Reengineering Work Through Information Technology</em>. Harvard Business School Press.</li>
         <li>Dumas, M., La Rosa, M., Mendling, J., &amp; Reijers, H. A. (2018). <em>Fundamentals of Business Process Management</em> (2nd ed.). Springer.</li>
-        <li>Freund, J., &amp; Rücker, B. (2019). <em>Praxishandbuch BPMN: Mit Einführung in CMMN und DMN</em> (6. Aufl.). Hanser.</li>
+        <li>Freund, J., &amp; Rücker, B. (2019). <em>Praxishandbuch <abbr title="Business Process Model and Notation">BPMN</abbr>: Mit Einführung in CMMN und DMN</em> (6. Aufl.). Hanser.</li>
         <li>Hammer, M., &amp; Champy, J. (1993). <em>Reengineering the Corporation: A Manifesto for Business Revolution</em>. HarperBusiness.</li>
-        <li>Object Management Group. (2014). <em>Business Process Model and Notation (BPMN), Version 2.0.2</em> (OMG Document formal/2013-12-09). <a href="https://www.omg.org/spec/BPMN/2.0.2/" style="color:var(--kurs-71)">https://www.omg.org/spec/BPMN/2.0.2/</a></li>
+        <li>Object Management Group. (2014). <em>Business Process Model and Notation (<abbr title="Business Process Model and Notation">BPMN</abbr>), Version 2.0.2</em> (OMG Document formal/2013-12-09). <a href="https://www.omg.org/spec/BPMN/2.0.2/" style="color:var(--kurs-71)">https://www.omg.org/spec/<abbr title="Business Process Model and Notation">BPMN</abbr>/2.0.2/</a></li>
         <li>Scheer, A.-W. (1992). <em>Architecture of Integrated Information Systems: Foundations of Enterprise Modelling</em>. Springer.</li>
         <li>Schmelzer, H. J., &amp; Sesselmann, W. (2020). <em>Geschäftsprozessmanagement in der Praxis</em> (9. Aufl.). Hanser.</li>
         <li>Weske, M. (2019). <em>Business Process Management: Concepts, Languages, Architectures</em> (3rd ed.). Springer.</li>
@@ -770,7 +770,61 @@
     </section>
 
     <!-- Slide 17: Ende / Zurück -->
+        <!-- Fachbegriffe & Definitionen (auto-generated) -->
     <section class="slide" style="display:none">
+      <h2>Fachbegriffe &amp; Definitionen</h2>
+      <p style="font-size:13px;color:var(--color-muted);margin:0 0 10px">Alle Abkürzungen und Fachbegriffe dieser Präsentation auf einen Blick.</p>
+      <div style="overflow-x:auto">
+      <table class="vs-table" style="font-size:13px;width:100%">
+        <thead>
+          <tr>
+            <th style="width:60px;background:var(--kurs-71-bg);color:var(--kurs-71)">Kürzel</th>
+            <th style="width:30%;background:var(--kurs-71-bg);color:var(--kurs-71)">Ausgeschrieben</th>
+            <th style="background:var(--kurs-71-bg);color:var(--kurs-71)">Definition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">BPMN</strong></td>
+            <td style="font-style:italic">Business Process Model and Notation</td>
+            <td style="font-size:13px">Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">EPC</strong></td>
+            <td style="font-style:italic">Ereignisgesteuerte Prozesskette</td>
+            <td style="font-size:13px">Methode zur grafischen Darstellung und Dokumentation von Geschäftsprozessen</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">IT</strong></td>
+            <td style="font-style:italic">Informationstechnologie</td>
+            <td style="font-size:13px">Gesamtheit der Technologien zur Erfassung, Speicherung und Übertragung von Daten</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">KPIs</strong></td>
+            <td style="font-style:italic">Key Performance Indicators</td>
+            <td style="font-size:13px">Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">RACI</strong></td>
+            <td style="font-style:italic">Responsible, Accountable, Consulted, Informed</td>
+            <td style="font-size:13px">Verantwortungsmatrix zur Klärung von Rollen und Zuständigkeiten in Projekten</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">RPA</strong></td>
+            <td style="font-style:italic">Robotic Process Automation</td>
+            <td style="font-size:13px">Softwarebasierte Automatisierung repetitiver, regelbasierter Aufgaben</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--kurs-71)">XOR</strong></td>
+            <td style="font-style:italic">Exclusive Or (Exklusives Oder)</td>
+            <td style="font-size:13px">Logischer Operator: genau eine von mehreren Bedingungen trifft zu (BPMN-Gateway)</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+<section class="slide" style="display:none">
       <h2>Quellen · Weiterarbeiten</h2>
       <p style="color:var(--color-muted)">Diese Präsentation ist die Tagesübersicht. Die Tiefe findet sich im Handout.</p>
       <div class="grid-2" style="margin-top:18px">
