@@ -18,10 +18,10 @@
 \IfFontExistsTF{Charter}{%
   \setmainfont{Charter}%
 }{%
-  \IfFontExistsTF{Bitstream Charter}{%
-    \setmainfont{Bitstream Charter}%
+  \IfFontExistsTF{Noto Serif}{%
+    \setmainfont{Noto Serif}%
   }{%
-    \setmainfont{TeX Gyre Schola}%
+    \setmainfont{Liberation Serif}%
   }%
 }
 
@@ -31,7 +31,7 @@
   \IfFontExistsTF{Source Sans Pro}{%
     \setsansfont{Source Sans Pro}%
   }{%
-    \setsansfont{TeX Gyre Heros}%
+    \setsansfont{Liberation Sans}%
   }%
 }
 
@@ -42,7 +42,7 @@
   \newcommand\caveatfont{\caveatfontfallback}%
 }
 
-\setmonofont{Latin Modern Mono}
+\setmonofont{Liberation Mono}
 
 \usepackage{microtype}
 \linespread{1.15}
@@ -246,7 +246,7 @@ Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihr
 \noindent Die folgenden YouTube-Erkl\"arvideos vermitteln die Inhalte, die Sie zur Bearbeitung der Aufgaben ben\"otigen. Klicken Sie auf den Titel, um das Video direkt zu \"offnen; die vollst\"andige URL steht in Klammern.
 
 \begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=8pt]
-  \item[1.~Kotter — Das 8-Stufen-Modell der Veränderung] \href{https://youtu.be/7yiI_n79Aj8}{\textcolor{lpAccent}{https://youtu.be/7yiI_n79Aj8}}\\[2pt]
+  \item[1.~Kotter — Das 8-Stufen-Modell der Veränderung] \href{https://youtu.be/7yiI_n79Aj8}{\textcolor{lpAccent}{\nolinkurl{https://youtu.be/7yiI_n79Aj8}}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/7yiI_n79Aj8})}
   \item[2.~Lewin — Unfreeze, Change, Refreeze] \href{https://youtu.be/zz7xzY8c6Vo}{\textcolor{lpAccent}{https://youtu.be/zz7xzY8c6Vo}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/zz7xzY8c6Vo})}

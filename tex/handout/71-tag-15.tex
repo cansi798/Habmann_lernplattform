@@ -19,15 +19,12 @@
 \defaultfontfeatures{Ligatures=TeX}
 
 \IfFontExistsTF{Charter}{%
-  \setmainfont{Charter}[%
-    Numbers=OldStyle,%
-    UprightFeatures   = {SmallCapsFeatures={Letters=SmallCaps}}%
-  ]%
+  \setmainfont{Charter}[Numbers=OldStyle]%
 }{%
-  \IfFontExistsTF{Bitstream Charter}{%
-    \setmainfont{Bitstream Charter}%
+  \IfFontExistsTF{Noto Serif}{%
+    \setmainfont{Noto Serif}%
   }{%
-    \setmainfont{TeX Gyre Schola}%
+    \setmainfont{Liberation Serif}%
   }%
 }
 
@@ -37,7 +34,7 @@
   \IfFontExistsTF{Source Sans Pro}{%
     \setsansfont{Source Sans Pro}%
   }{%
-    \setsansfont{TeX Gyre Heros}%
+    \setsansfont{Liberation Sans}%
   }%
 }
 
@@ -48,7 +45,7 @@
   \newcommand\caveatfont{\caveatfontfallback}%
 }
 
-\setmonofont{Latin Modern Mono}
+\setmonofont{Liberation Mono}
 
 % --- Mikro-Typografie ----------------------------------------------------
 \usepackage{microtype}

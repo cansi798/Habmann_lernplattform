@@ -21,10 +21,10 @@
 \IfFontExistsTF{Charter}{%
   \setmainfont{Charter}%
 }{%
-  \IfFontExistsTF{Bitstream Charter}{%
-    \setmainfont{Bitstream Charter}%
+  \IfFontExistsTF{Noto Serif}{%
+    \setmainfont{Noto Serif}%
   }{%
-    \setmainfont{TeX Gyre Schola}%
+    \setmainfont{Liberation Serif}%
   }%
 }
 
@@ -34,7 +34,7 @@
   \IfFontExistsTF{Source Sans Pro}{%
     \setsansfont{Source Sans Pro}%
   }{%
-    \setsansfont{TeX Gyre Heros}%
+    \setsansfont{Liberation Sans}%
   }%
 }
 
@@ -45,10 +45,11 @@
   \newcommand\caveatfont{\caveatfontfallback}%
 }
 
-\setmonofont{Latin Modern Mono}
+\setmonofont{Liberation Mono}
 
 % --- Mikro-Typografie ----------------------------------------------------
 \usepackage{microtype}
+\usepackage{eurosym}
 \linespread{1.15}
 
 % --- Farben & Boxen ------------------------------------------------------
@@ -264,7 +265,7 @@ Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterlösung. Wo weicht Ihre
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/miDfOoa39OU})}
   \item[2.~Netzwerkeffekte: direkt versus indirekt] \href{https://youtu.be/UriJSUecDxM}{\textcolor{lpAccent}{https://youtu.be/UriJSUecDxM}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/UriJSUecDxM})}
-  \item[3.~Eigener Kanal versus Plattform — strategische Trade-offs] \href{https://youtu.be/fq8Q_hpA9UU}{\textcolor{lpAccent}{https://youtu.be/fq8Q_hpA9UU}}\\[2pt]
+  \item[3.~Eigener Kanal versus Plattform — strategische Trade-offs] \href{https://youtu.be/fq8Q_hpA9UU}{\textcolor{lpAccent}{\nolinkurl{https://youtu.be/fq8Q_hpA9UU}}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/fq8Q_hpA9UU})}
   \item[4.~Management: Wann wird die Plattform zur Falle?] \href{https://youtu.be/fMdtp0RqBOw}{\textcolor{lpAccent}{https://youtu.be/fMdtp0RqBOw}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/fMdtp0RqBOw})}

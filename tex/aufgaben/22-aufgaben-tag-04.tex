@@ -14,18 +14,18 @@
 \defaultfontfeatures{Ligatures=TeX}
 
 \IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
-  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{%
-    \setmainfont{TeX Gyre Schola}}}
+  \setmainfont{Noto Serif}}
 \IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
   \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{%
-    \setsansfont{TeX Gyre Heros}}}
+    \setsansfont{Liberation Sans}}}
 
 \newcommand{\caveatfontfallback}{\itshape}
 \IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
 
-\setmonofont{Latin Modern Mono}
+\setmonofont{Liberation Mono}
 
 \usepackage{microtype}
+\usepackage{eurosym}
 \linespread{1.15}
 
 \usepackage{xcolor}
@@ -171,7 +171,7 @@ Schnelles Wachstum ist im Plattformkontext nicht automatisch Erfolg. Plattformen
 \noindent Die folgenden YouTube-Erkl\"arvideos vermitteln die Inhalte, die Sie zur Bearbeitung der Aufgaben ben\"otigen. Klicken Sie auf den Titel, um das Video direkt zu \"offnen; die vollst\"andige URL steht in Klammern.
 
 \begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=8pt]
-  \item[1.~Plattformökonomie und Skalierungslogik] \href{https://youtu.be/3B5Rn_lrGpQ}{\textcolor{lpAccent}{https://youtu.be/3B5Rn_lrGpQ}}\\[2pt]
+  \item[1.~Plattformökonomie und Skalierungslogik] \href{https://youtu.be/3B5Rn_lrGpQ}{\textcolor{lpAccent}{\nolinkurl{https://youtu.be/3B5Rn_lrGpQ}}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/3B5Rn_lrGpQ})}
   \item[2.~Monetarisierungsmodelle und die Wahl der Erlöslogik] \href{https://youtu.be/2x5Vj2Twq6c}{\textcolor{lpAccent}{https://youtu.be/2x5Vj2Twq6c}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/2x5Vj2Twq6c})}

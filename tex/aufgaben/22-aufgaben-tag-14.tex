@@ -16,10 +16,10 @@
 \IfFontExistsTF{Charter}{%
   \setmainfont{Charter}%
 }{%
-  \IfFontExistsTF{Bitstream Charter}{%
-    \setmainfont{Bitstream Charter}%
+  \IfFontExistsTF{Noto Serif}{%
+    \setmainfont{Noto Serif}%
   }{%
-    \setmainfont{TeX Gyre Schola}%
+    \setmainfont{Liberation Serif}%
   }%
 }
 
@@ -29,7 +29,7 @@
   \IfFontExistsTF{Source Sans Pro}{%
     \setsansfont{Source Sans Pro}%
   }{%
-    \setsansfont{TeX Gyre Heros}%
+    \setsansfont{Liberation Sans}%
   }%
 }
 
@@ -40,9 +40,10 @@
   \newcommand\caveatfont{\caveatfontfallback}%
 }
 
-\setmonofont{Latin Modern Mono}
+\setmonofont{Liberation Mono}
 
 \usepackage{microtype}
+\usepackage{eurosym}
 \linespread{1.15}
 
 \usepackage{xcolor}
@@ -250,7 +251,7 @@ Die Musterlösungen finden Sie im separaten \emph{Lösungsheft Tag 14}. Beim Les
 \begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=8pt]
   \item[1.~Chatbots einfach erklärt — Grundlagen automatisierter Kundeninteraktion] \href{https://youtu.be/3ya1k29C3bA}{\textcolor{lpAccent}{https://youtu.be/3ya1k29C3bA}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/3ya1k29C3bA})}
-  \item[2.~Live-Chat und KI-Widget für Kundenservice und Lead-Gewinnung] \href{https://youtu.be/_mCADLc16yg}{\textcolor{lpAccent}{https://youtu.be/_mCADLc16yg}}\\[2pt]
+  \item[2.~Live-Chat und KI-Widget für Kundenservice und Lead-Gewinnung] \href{https://youtu.be/_mCADLc16yg}{\textcolor{lpAccent}{\nolinkurl{https://youtu.be/_mCADLc16yg}}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/_mCADLc16yg})}
   \item[3.~Wann lohnt sich ein Chatbot für kleine Unternehmen?] \href{https://youtu.be/4ks3RY6lSRQ}{\textcolor{lpAccent}{https://youtu.be/4ks3RY6lSRQ}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/4ks3RY6lSRQ})}

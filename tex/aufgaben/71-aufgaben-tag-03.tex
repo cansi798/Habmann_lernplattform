@@ -14,16 +14,17 @@
 \defaultfontfeatures{Ligatures=TeX}
 
 \IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
-  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+  \setmainfont{Noto Serif}%
 }
 \IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
-  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{Liberation Sans}}%
 }
 \newcommand{\caveatfontfallback}{\itshape}
 \IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
-\setmonofont{Latin Modern Mono}
+\setmonofont{Liberation Mono}
 
 \usepackage{microtype}
+\usepackage{eurosym}
 \linespread{1.15}
 
 \usepackage{xcolor}

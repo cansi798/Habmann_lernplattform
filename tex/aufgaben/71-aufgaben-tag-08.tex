@@ -12,16 +12,17 @@
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
 \IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
-  \IfFontExistsTF{Bitstream Charter}{\setmainfont{Bitstream Charter}}{\setmainfont{TeX Gyre Schola}}%
+  \setmainfont{Noto Serif}%
 }
 \IfFontExistsTF{Source Sans 3}{\setsansfont{Source Sans 3}}{%
-  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{TeX Gyre Heros}}%
+  \IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{\setsansfont{Liberation Sans}}%
 }
 \newcommand{\caveatfontfallback}{\itshape}
 \IfFontExistsTF{Caveat}{\newfontfamily\caveatfont{Caveat}[Scale=1.15]}{\newcommand\caveatfont{\caveatfontfallback}}
-\setmonofont{Latin Modern Mono}
+\setmonofont{Liberation Mono}
 
 \usepackage{microtype}
+\usepackage{eurosym}
 \linespread{1.15}
 
 \usepackage{xcolor}
@@ -223,7 +224,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 8}. Heute besonders w
 \begin{description}[style=nextline,leftmargin=18pt,labelindent=0pt,itemsep=8pt]
   \item[1.~ETL (Extract Transform Load) für Data Warehousing einfach erklärt] \href{https://youtu.be/VVJRBhUkX5o}{\textcolor{lpAccent}{https://youtu.be/VVJRBhUkX5o}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/VVJRBhUkX5o})}
-  \item[2.~Datenbank vs. Data Lake vs. Data Warehouse — die Unterschiede] \href{https://youtu.be/BQuyIwi_RCQ}{\textcolor{lpAccent}{https://youtu.be/BQuyIwi_RCQ}}\\[2pt]
+  \item[2.~Datenbank vs. Data Lake vs. Data Warehouse — die Unterschiede] \href{https://youtu.be/BQuyIwi_RCQ}{\textcolor{lpAccent}{\nolinkurl{https://youtu.be/BQuyIwi_RCQ}}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/BQuyIwi_RCQ})}
   \item[3.~Data Warehouse einfach erklärt — Grundlagen] \href{https://youtu.be/EHmeK1nMBvA}{\textcolor{lpAccent}{https://youtu.be/EHmeK1nMBvA}}\\[2pt]
   {\footnotesize\color{lpGray}(URL: \nolinkurl{https://youtu.be/EHmeK1nMBvA})}
