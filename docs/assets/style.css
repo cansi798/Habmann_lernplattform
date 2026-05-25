@@ -23,6 +23,12 @@
 
 * { box-sizing: border-box; }
 
+abbr {
+  text-decoration: underline dotted var(--color-muted);
+  cursor: help;
+  text-underline-offset: 2px;
+}
+
 body {
   margin: 0;
   font-family: 'Source Sans 3', system-ui, sans-serif;
@@ -252,7 +258,95 @@ h3 { font-size: 18px; margin: 16px 0 8px; }
 }
 
 @media (max-width: 720px) {
-  .day-row { grid-template-columns: 1fr; gap: 4px; }
-  .day-row .pips { margin-top: 8px; }
-  main { padding: 16px; }
+  /* Grundlayout */
+  main { padding: 12px; }
+  h1 { font-size: 22px; }
+  h2 { font-size: 18px; }
+
+  /* Brand-Bar */
+  .brand-bar { padding: 10px 14px; font-size: 17px; }
+  .brand-bar .logout { font-size: 14px; }
+
+  /* Breadcrumbs */
+  .crumbs { padding: 6px 14px; font-size: 12px; white-space: nowrap; overflow-x: auto; }
+
+  /* Kursübersicht */
+  .course-grid { grid-template-columns: 1fr; gap: 16px; }
+  .course-card { padding: 20px; }
+
+  /* Tagesliste */
+  .day-row { grid-template-columns: 1fr; gap: 4px; padding: 10px 12px; }
+  .day-row .pips { margin-top: 6px; }
+  .day-row .day-date { font-size: 14px; }
+  .day-row .day-title { font-size: 14px; }
+
+  /* Materialien */
+  .material-row { flex-direction: column; }
+  .material-card { flex: none; width: 100%; }
+
+  /* Quiz */
+  .quiz-card { padding: 16px; margin: 12px auto; }
+  .quiz-question { font-size: 17px; }
+  .quiz-option { padding: 10px 12px; font-size: 15px; }
+  .quiz-button { width: 100%; }
+
+  /* Lernpfad Fortschritt */
+  .pfad-progress-bar { gap: 4px; }
+  .pfad-progress-step { width: 22px; height: 22px; font-size: 11px; }
+
+  /* Zuordnung */
+  .zuordnung-grid { grid-template-columns: 1fr !important; }
+
+  /* Präsentation: Navigation + Scaling */
+  .slide-nav {
+    display: flex !important;
+  }
+  #slides {
+    padding: 16px !important;
+    min-height: unset !important;
+    touch-action: pan-y;
+  }
+  #slides .slide h2 { font-size: 18px !important; }
+  #slides .slide h3 { font-size: 15px !important; }
+  #slides .slide li,
+  #slides .slide p  { font-size: 14px !important; }
+  #slides .slide .grid-2,
+  #slides .slide .grid-3,
+  #slides .slide .grid-2x2,
+  #slides .slide .grid-2x3 { grid-template-columns: 1fr !important; }
+  #slides .slide .vs-table { font-size: 12px; }
+  #slides .slide .vs-table th,
+  #slides .slide .vs-table td { padding: 5px 6px; }
+}
+
+/* Slide-Navigation: auf Desktop unsichtbar (Tastatur), auf Mobile sichtbar */
+.slide-nav {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 12px;
+}
+.slide-nav button {
+  flex: 1;
+  padding: 14px;
+  background: var(--kurs-22);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 22px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+}
+.slide-nav button:disabled { background: var(--color-line); color: var(--color-muted); }
+.slide-nav .slide-counter {
+  font-size: 14px;
+  color: var(--color-muted);
+  text-align: center;
+  min-width: 60px;
+}
+@media (max-width: 900px) {
+  .slide-nav { display: flex; }
+  .brand-bar { font-size: 18px; }
 }
