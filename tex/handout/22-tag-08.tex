@@ -150,6 +150,10 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -247,6 +251,22 @@ In vielen Organisationen wird ``dynamische Preisgestaltung'' synonym mit ``Rabat
   \item \fachbegriff{Aktionsbasierte Preisgestaltung.} Preise werden in zeitlich begrenzten Aktionen verändert (Weihnachten, Black Friday, Sortimentswechsel). Planbar, geübt -- aber wenig flexibel auf laufende Marktveränderungen.
   \item \fachbegriff{Dynamische Preisstrategie.} Preise reagieren laufend (oder zumindest häufig) auf eine Mischung aus Wettbewerb, Nachfrage, Lager, Marge und Plattform-KPIs. Anspruchsvoll -- erfordert Governance, Daten und klare Grenzen.
 \end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  stufe/.style={rectangle, rounded corners=2pt, draw=lpAccent, text=lpInk,
+                minimum width=28mm, minimum height=10mm, align=center, line width=0.5pt},
+  axis/.style={-{Latex[length=2mm]}, draw=lpGray, line width=0.5pt}]
+  \node[stufe, fill=lpGrayLight]   (s1) at (0,0)   {\textbf{Statisch}\\fest, planbar};
+  \node[stufe, fill=lpAccentLight] (s2) at (3.6,0.9) {\textbf{Aktionsbasiert}\\zeitlich begrenzt};
+  \node[stufe, fill=lpAmberLight, draw=lpAmber] (s3) at (7.2,1.8) {\textbf{Dynamisch}\\laufend, regelbasiert};
+  \draw[axis] (-1.2,-0.8) -- (8.5,-0.8) node[below, midway, text=lpGray] {Flexibilität / Steuerungsaufwand};
+  \draw[axis] (-1.2,-0.8) -- (-1.2,2.4) node[above, midway, sloped, text=lpGray] {Komplexität \& Governance};
+\end{tikzpicture}
+\caption{\sffamily Drei Stufen der Preissteuerung -- mit zunehmender Flexibilität steigt der Governance-Bedarf.}
+\label{fig:preisstufen-22t08}
+\end{figure}
 
 \subsection{Warum Plattformen dynamische Preise erzwingen}
 

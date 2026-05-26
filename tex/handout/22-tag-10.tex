@@ -156,6 +156,10 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ---------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -358,6 +362,35 @@ Vier Personalisierungs-Dimensionen, die im B2B den Unterschied machen:\\[2pt]
 \section{Trigger-basierte Kommunikation}
 
 Wirkungsvolles E-Mail-Marketing ist heute selten \emph{kalenderbasiert} (``jeden ersten Donnerstag im Monat''), sondern \emph{verhaltensbasiert}: eine Aktion des Empfängers löst eine Nachricht aus.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  trig/.style={circle, draw=lpAmberBorder, fill=lpAmberLight, minimum size=14mm, inner sep=1pt, align=center, line width=0.4pt},
+  cond/.style={diamond, draw=lpAccent, fill=lpAccentLight, aspect=2, inner sep=2pt, align=center, line width=0.4pt},
+  act/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight, minimum height=8mm, minimum width=24mm, inner sep=3pt, align=center, line width=0.4pt},
+  end/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccent, text=white, minimum height=8mm, inner sep=3pt, align=center},
+  arr/.style={->, >=Stealth, draw=lpGray, line width=0.4pt}]
+  \node[trig] (t) {Trigger:\\Download};
+  \node[act, right=8mm of t] (m1) {Mail 1:\\Vertiefung};
+  \node[cond, right=8mm of m1] (c1) {geöffnet?};
+  \node[act, above right=2mm and 8mm of c1] (m2a) {Mail 2:\\Use-Case};
+  \node[act, below right=2mm and 8mm of c1] (m2b) {Mail 2:\\Re-Engage};
+  \node[cond, right=10mm of m2a] (c2) {geklickt?};
+  \node[end, right=8mm of c2] (sql) {MQL $\to$ Vertrieb};
+  \node[act, below=6mm of c2] (drop) {Lead-Scoring\\$+$ Pause};
+  \draw[arr] (t) -- (m1);
+  \draw[arr] (m1) -- (c1);
+  \draw[arr] (c1.north) |- node[pos=0.75, above, font=\sffamily\scriptsize]{ja} (m2a.west);
+  \draw[arr] (c1.south) |- node[pos=0.75, below, font=\sffamily\scriptsize]{nein} (m2b.west);
+  \draw[arr] (m2a) -- (c2);
+  \draw[arr] (c2) -- node[above, font=\sffamily\scriptsize]{ja} (sql);
+  \draw[arr] (c2.south) -- node[right, font=\sffamily\scriptsize]{nein} (drop.north);
+  \draw[arr] (m2b.east) -| (drop.south);
+\end{tikzpicture}
+\caption{\sffamily Trigger-basierter E-Mail-Workflow mit Verzweigung über Engagement-Bedingungen; relevante Reaktionen führen in die MQL-Übergabe.}
+\label{fig:emailflow-22t10}
+\end{figure}
 
 \subsection{Typische Trigger}
 

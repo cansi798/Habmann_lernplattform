@@ -151,6 +151,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{222,239,224}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -372,6 +377,28 @@ In der Praxis ist die richtige Antwort selten ``alles attended'' oder ``alles un
 \begin{merkbox}[Stufenentscheidung -- die wichtigste Frage]
 \emph{``Wie können wir attended starten, dass uns der spätere Wechsel zu unattended nicht noch einmal alles neu kostet?''} Diese Frage am Anfang spart Monate Re-Engineering. Standards für Logging, Konfiguration und Exception Handling müssen attended schon so sein, wie sie unattended sein werden.
 \end{merkbox}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  step/.style={rectangle, rounded corners=2pt, draw=lpAccent, thick, align=center,
+               minimum width=3.6cm, minimum height=1.1cm},
+  arrow/.style={-{Stealth[length=3mm]}, lpAccent, very thick}]
+  \node[step, fill=lpAccentLight] (s1) at (0,0) {\textbf{Stufe 1 -- Attended-Pilot}\\\scriptsize Lernkurve, Akzeptanz, Stabilität};
+  \node[step, fill=lpAmberLight, right=0.6cm of s1, yshift=0.9cm] (s2)
+    {\textbf{Stufe 2 -- Hybrid}\\\scriptsize unattended skaliert, attended assistiert};
+  \node[step, fill=lpGreenLight, right=0.6cm of s2, yshift=0.9cm] (s3)
+    {\textbf{Stufe 3 -- Portfolio + CoE}\\\scriptsize Self-Service, Governance, Self-Service};
+  \draw[arrow] (s1.north east) -- (s2.south west);
+  \draw[arrow] (s2.north east) -- (s3.south west);
+  % vertical axis hint
+  \draw[-{Stealth[length=2mm]}, lpGray, thick] (-1.0,-0.4) -- (-1.0,2.4)
+    node[midway, sloped, above, font=\sffamily\scriptsize\itshape] {Skalierung\,/\,Governance-Reife};
+  \draw[-{Stealth[length=2mm]}, lpGray, thick] (-1.0,-0.4) -- (8.4,-0.4)
+    node[midway, below, font=\sffamily\scriptsize\itshape] {Zeit\,/\,Plattformreife};
+\end{tikzpicture}
+\caption{\sffamily RPA-Stufenmodell -- Attended-Pilot \textrightarrow\ Hybrid \textrightarrow\ skaliertes Portfolio.}
+\end{figure}
 
 \subsection{Entscheidungsfaktoren}
 

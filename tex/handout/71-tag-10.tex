@@ -151,6 +151,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{222,239,224}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -287,6 +292,36 @@ Die zentrale Frage bei Microservices ist nicht ``wie klein'' -- sondern ``wie ge
 Eine \fachbegriff{Geschäftsfähigkeit} (Business Capability) ist eine eigenständige Leistung, die das Unternehmen erbringt -- etwa ``Bestellung annehmen'', ``Bonität prüfen'', ``Versand auslösen''. Sie ist sprachlich klar abgrenzbar, hat einen typischen Input und Output, und sie hat einen verantwortlichen Owner. \quelle{Newman, 2021, Kap.~3}
 
 Ein \fachbegriff{Bounded Context} im Sinne von Eric Evans ist die sprachlich abgegrenzte Zone, in der ein bestimmtes Modell konsistent gilt. ``Kunde'' bedeutet im Vertrieb etwas anderes als im Mahnwesen -- und das ist kein Problem, sondern eine notwendige Klärung. Die Servicegrenze verläuft an der Grenze des Bounded Context, nicht innerhalb. \quelle{Evans, 2003, Kap.~14}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  mono/.style={rectangle, rounded corners=2pt, draw=lpGray, fill=lpGrayLight,
+               minimum width=3.2cm, minimum height=2.6cm, align=center, thick},
+  svc/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+              minimum width=1.5cm, minimum height=0.8cm, align=center, thick},
+  bus/.style={rectangle, draw=lpAccent, fill=lpGreenLight,
+              minimum width=4.6cm, minimum height=0.4cm, align=center, thick},
+  arrow/.style={-{Stealth[length=2.2mm]}, lpGray, thick, dashed}]
+  % Monolith
+  \node[mono] (mono) {\textbf{Monolith}\\[2pt]
+    {\footnotesize UI\,/\,Logik\,/\,DB}\\
+    {\footnotesize ein Deploy\\ein Team}};
+  \node[below=0.05cm of mono, font=\sffamily\scriptsize\itshape, lpGray] {ein Stück, eine Grenze};
+  % Right side: microservices with bus
+  \node[svc, right=2.2cm of mono.north east, anchor=north west] (s1) {Bestellung};
+  \node[svc, right=0.25cm of s1] (s2) {Bonität};
+  \node[svc, right=0.25cm of s2] (s3) {Versand};
+  \node[bus, below=0.5cm of s2] (bus) {\textsf{\scriptsize Event Bus / API Gateway}};
+  \draw[arrow] (s1.south) -- (s1.south |- bus.north);
+  \draw[arrow] (s2.south) -- (s2.south |- bus.north);
+  \draw[arrow] (s3.south) -- (s3.south |- bus.north);
+  \node[below=0.05cm of bus, font=\sffamily\scriptsize\itshape, lpGray] {viele Services, klare Grenzen};
+  \draw[-{Stealth[length=2.5mm]}, lpAccent, very thick] (mono.east) -- ($(mono.east)+(1.4,0)$) node[midway, above, font=\sffamily\scriptsize] {Schnitt entlang};
+  \node[font=\sffamily\scriptsize, lpAccent] at ($(mono.east)+(1.4,-0.32)$) {Bounded Context};
+\end{tikzpicture}
+\caption{\sffamily Vom Monolithen zu Microservices -- Schnitt entlang fachlicher Bounded Contexts.}
+\end{figure}
 
 \subsection{Die Servicekarte: ein Steckbrief je Service}
 

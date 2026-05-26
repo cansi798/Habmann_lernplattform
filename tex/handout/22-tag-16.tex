@@ -140,6 +140,9 @@
 
 \usepackage[hidelinks,unicode]{hyperref}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
@@ -379,6 +382,27 @@ Fünf Elemente einer Krisenarchitektur:\\[2pt]
 \section{Der Krisenprozess: 72 Stunden bis Nachbereitung}
 
 Eine wirksame Krisenreaktion läuft in drei Phasen ab, die zeitlich klar getrennt sind und unterschiedliche Anforderungen haben.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  ph/.style={rectangle, rounded corners=3pt, line width=0.4pt, minimum height=22mm, minimum width=38mm, align=center, inner sep=3pt},
+  arr/.style={->, >=Stealth, draw=lpGray, line width=0.5pt},
+  axis/.style={->, >=Stealth, draw=lpGray, line width=0.4pt},
+  lab/.style={font=\sffamily\scriptsize, text=lpGray}]
+  \node[ph, draw=lpAmberBorder, fill=lpAmberLight] (p1) {\textbf{Phase 1}\\\scriptsize 0--72\,h\\[1pt]\scriptsize Lagebild + Sofort-\\Kommunikation\\\scriptsize \emph{schneller als perfekt}};
+  \node[ph, draw=lpAccent, fill=lpAccentLight, right=8mm of p1] (p2) {\textbf{Phase 2}\\\scriptsize Tag 3--14\\[1pt]\scriptsize Vertiefung +\\Stakeholder-Dialog\\\scriptsize Massnahmenpaket};
+  \node[ph, draw=lpAccent, fill=lpAccent, text=white, right=8mm of p2] (p3) {\textbf{Phase 3}\\\scriptsize Wochen--Monate\\[1pt]\scriptsize Strukturelle\\Verbesserung\\\scriptsize Lessons Learned};
+  \draw[arr] (p1) -- (p2);
+  \draw[arr] (p2) -- (p3);
+  \draw[axis] ($(p1.south west)+(-4mm,-3mm)$) -- ($(p3.south east)+(4mm,-3mm)$) node[right, lab] {Zeit};
+  \node[lab, below=4mm of p1] {Reaktion};
+  \node[lab, below=4mm of p2] {Vertrauensaufbau};
+  \node[lab, below=4mm of p3] {Resilienz-Aufbau};
+\end{tikzpicture}
+\caption{\sffamily Krisenprozess in drei Phasen -- vom Sofort-Lagebild (orange, Akutphase) über Stakeholder-Dialog bis zur strukturellen Verbesserung.}
+\label{fig:krise-22t16}
+\end{figure}
 
 \subsection{Phase 1: 0--72 Stunden}
 

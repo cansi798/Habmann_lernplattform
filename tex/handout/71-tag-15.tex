@@ -151,6 +151,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{222,239,224}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -337,6 +342,21 @@ Eine pragmatische Stakeholder-Klassifikation:
 \end{tabularx}
 
 \medskip
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  cell/.style={rectangle, draw=lpAccent, thick, minimum width=3.2cm, minimum height=1.8cm, align=center},
+  ax/.style={-{Stealth[length=2mm]}, lpGray, thick}]
+  \node[cell, fill=lpGrayLight]   (q1) at (0,0)   {\textbf{Informieren}\\\scriptsize Einfluss \textendash\ , Betroff.\ \textendash};
+  \node[cell, fill=lpAccentLight] (q2) at (3.3,0) {\textbf{Verantworten}\\\scriptsize Einfluss \textendash\ , Betroff.\ +};
+  \node[cell, fill=lpAmberLight]  (q3) at (0,2)   {\textbf{Konsultieren}\\\scriptsize Einfluss +, Betroff.\ \textendash};
+  \node[cell, fill=lpGreenLight]  (q4) at (3.3,2) {\textbf{Mitentscheiden}\\\scriptsize Einfluss +, Betroff.\ +};
+  \draw[ax] (-1.9,-1.1) -- (-1.9,3.1) node[midway, sloped, above, font=\sffamily\scriptsize] {Einfluss};
+  \draw[ax] (-1.9,-1.1) -- (5.2,-1.1) node[midway, below, font=\sffamily\scriptsize] {Betroffenheit};
+\end{tikzpicture}
+\caption{\sffamily Stakeholder-Matrix -- Einbindungsstufe je nach Einfluss und Betroffenheit.}
+\end{figure}
 
 Die vier Einbindungsstufen:
 

@@ -151,6 +151,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{222,239,224}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -289,6 +294,30 @@ Drei Quellklassen:
   \item \fachbegriff{Endgeräte.} Laptops, Mobilgeräte, Bildschirme; teils gemessen, teils über Durchschnittswerte.
   \item \fachbegriff{Lieferkette / Vendor.} Hardware-Herstellung, Software-Lizenzen mit eigenem Footprint.
 \end{itemize}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  src/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+              minimum width=2.4cm, minimum height=0.9cm, align=center, thick},
+  op/.style={rectangle, rounded corners=2pt, draw=lpAmberBorder, fill=lpAmberLight,
+             minimum width=2.0cm, minimum height=0.7cm, align=center, thick},
+  out/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpGreenLight,
+              minimum width=2.4cm, minimum height=0.9cm, align=center, thick},
+  arrow/.style={-{Stealth[length=2mm]}, lpGray, thick}]
+  \node[src] (s1) at (0,1.5) {RZ\,/\,Cloud};
+  \node[src] (s2) at (0,0)   {Endgeräte};
+  \node[src] (s3) at (0,-1.5){Lieferkette};
+  \node[op]  (e)  at (3.4,0) {kWh\\\scriptsize $\times$ EF};
+  \node[out] (co) at (6.6,0) {CO\textsubscript{2}e};
+  \draw[arrow] (s1.east) -- (e.west);
+  \draw[arrow] (s2.east) -- (e.west);
+  \draw[arrow] (s3.east) -- (e.west);
+  \draw[arrow] (e.east)  -- (co.west);
+  \node[font=\sffamily\scriptsize\itshape, lpGray] at (3.4,-1.2) {Aktivität \textrightarrow\ Energie \textrightarrow\ Emission};
+\end{tikzpicture}
+\caption{\sffamily Carbon-Footprint-Logik -- drei Quellklassen, ein Emissionsfaktor, eine Kennzahl.}
+\end{figure}
 
 \subsection{Systemgrenzen festlegen}
 

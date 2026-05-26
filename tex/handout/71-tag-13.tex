@@ -151,6 +151,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{222,239,224}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -286,6 +291,21 @@ Vier Wert-Dimensionen eines IT-Services:\\[2pt]
 \textbf{N}achhaltigkeit -- wie ist die Effizienz?\\[2pt]
 \emph{Wer nur monetär steuert, verliert die anderen drei aus dem Blick.}
 \end{eselsbox}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  quad/.style={rectangle, draw=lpAccent, thick, minimum width=3.0cm, minimum height=2.0cm, align=center},
+  ax/.style={-{Stealth[length=2mm]}, lpGray, thick}]
+  \node[quad, fill=lpGreenLight] (q1) at (0,2)   {\textbf{Invest}\\\scriptsize hoher Wert\\\scriptsize niedrige Kosten};
+  \node[quad, fill=lpAccentLight] (q2) at (3.1,2) {\textbf{Optimieren}\\\scriptsize hoher Wert\\\scriptsize hohe Kosten};
+  \node[quad, fill=lpGrayLight]  (q3) at (0,0)   {\textbf{Halten}\\\scriptsize niedriger Wert\\\scriptsize niedrige Kosten};
+  \node[quad, fill=lpAmberLight] (q4) at (3.1,0) {\textbf{Retire}\\\scriptsize niedriger Wert\\\scriptsize hohe Kosten};
+  \draw[ax] (-1.7,-1.1) -- (-1.7,3.1) node[midway, sloped, above, font=\sffamily\scriptsize] {Wert (K-R-R-N)};
+  \draw[ax] (-1.7,-1.1) -- (4.8,-1.1) node[midway, below, font=\sffamily\scriptsize] {Kosten / Energieaufwand};
+\end{tikzpicture}
+\caption{\sffamily Service-Portfolio-Matrix -- Steuerung nach Wert vs.\ Kosten.}
+\end{figure}
 
 % --- 2. CAPACITY ---------------------------------------------------------
 \section{Capacity Planning: Sicherheit durch Messung}

@@ -152,6 +152,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{225,238,225}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -459,6 +464,35 @@ Fünf Pflichtfelder jedes Alert-Playbooks:\\[2pt]
 \section{DWH und ETL als Daten-Fundament}
 
 Predictive Analytics, Conformance und Dashboards stehen alle auf demselben Fundament: einem \fachbegriff{Data Warehouse (DWH)}, in dem Prozessdaten aus verschiedenen Quellsystemen konsolidiert, gemappt und qualitätsgesichert werden. Der Prozess der Befüllung heißt \fachbegriff{ETL} (Extract -- Transform -- Load) oder in moderner Variante \fachbegriff{ELT} (Extract -- Load -- Transform), bei der die Transformation im DWH selbst geschieht. \quelle{Kimball \& Ross, 2013; Inmon, 2005; Russom, 2011}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  src/.style={rectangle, rounded corners=2pt, draw=lpGray, fill=lpGrayLight,
+    line width=0.5pt, minimum width=14mm, minimum height=6mm, align=center, inner sep=1pt},
+  stage/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+    line width=0.6pt, minimum width=16mm, minimum height=9mm, align=center, inner sep=2pt},
+  dwh/.style={cylinder, shape border rotate=90, aspect=0.25, draw=lpAccent,
+    fill=lpGreenLight, line width=0.6pt, minimum width=18mm, minimum height=14mm,
+    align=center, inner sep=1pt},
+  bi/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+    line width=0.6pt, minimum width=16mm, minimum height=9mm, align=center, inner sep=2pt},
+  arr/.style={-{Latex[length=1.8mm]}, draw=lpAccent, line width=0.5pt}]
+  \node[src] (s1) at (0,1.0)  {ERP};
+  \node[src] (s2) at (0,0.0)  {CRM};
+  \node[src] (s3) at (0,-1.0) {BPMS/Logs};
+  \node[stage] (e) at (2.6,0) {ETL\\\scriptsize Extract\\Transform};
+  \node[dwh]  (d) at (5.4,0) {DWH\\\scriptsize Fakten\\\& Dim.};
+  \node[bi]   (b) at (8.2,0) {BI\\\scriptsize Dashboards};
+  \draw[arr] (s1.east) -- (e.west);
+  \draw[arr] (s2.east) -- (e.west);
+  \draw[arr] (s3.east) -- (e.west);
+  \draw[arr] (e) -- (d);
+  \draw[arr] (d) -- (b);
+\end{tikzpicture}
+\caption{\sffamily Datenpfad von Quellsystemen über ETL und DWH zum BI-Dashboard.}
+\label{fig:konzept-71t08}
+\end{figure}
 
 \subsection{Typische Quellsysteme}
 

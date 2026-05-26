@@ -159,6 +159,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{225,238,225}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -407,6 +412,42 @@ Alles weitere ist Komfort und kann später ergänzt werden, wenn die Organisatio
 \section{Business-BPMN vs.\ Execution-BPMN}
 
 Eine der häufigsten Quellen für Frust in Modellierungs-Projekten ist die unsichtbare Annahme, dass \emph{ein} Modell gleichzeitig dem Vorstand etwas erklären und der Workflow-Engine etwas vorgeben kann. In der Praxis sind das zwei verschiedene Modelle, die denselben Prozess beschreiben -- mit unterschiedlicher Tiefe und Strenge. \quelle{Freund \& Rücker, 2019; OMG, 2014}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  ev/.style={circle, draw=lpGray, line width=0.6pt, minimum size=4mm, inner sep=0pt},
+  evEnd/.style={circle, draw=lpGray, line width=1.2pt, minimum size=4mm, inner sep=0pt},
+  task/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+    line width=0.5pt, minimum width=14mm, minimum height=7mm, align=center, inner sep=1pt},
+  gw/.style={diamond, draw=lpAccent, fill=white, line width=0.5pt,
+    minimum size=5mm, inner sep=0pt},
+  arr/.style={-{Latex[length=1.8mm]}, draw=lpGray, line width=0.5pt},
+  lbl/.style={font=\sffamily\scriptsize\bfseries, color=lpAccent, align=center},
+  hint/.style={font=\sffamily\scriptsize\itshape, color=lpGray, align=center}]
+  % Business
+  \node[lbl] at (3.7,1.5) {Business-BPMN\\\scriptsize\mdseries\upshape Verständigung};
+  \node[ev] (b0) at (0,0) {};
+  \node[task] (b1) at (1.4,0) {Anfrage\\prüfen};
+  \node[gw] (b2) at (3.5,0) {};
+  \node[task] (b3) at (5.5,0) {bearbeiten};
+  \node[evEnd] (b4) at (7.3,0) {};
+  \draw[arr] (b0) -- (b1); \draw[arr] (b1) -- (b2); \draw[arr] (b2) -- (b3); \draw[arr] (b3) -- (b4);
+  % Execution (Slice)
+  \node[lbl] at (3.7,-1.6) {Execution-BPMN (Slice)\\\scriptsize\mdseries\upshape Ausführung};
+  \node[ev] (e0) at (1.4,-2.7) {};
+  \node[task, fill=lpGreenLight, draw=lpGray] (e1) at (3.0,-2.7) {Service\\Task (API)};
+  \node[task, fill=lpGreenLight, draw=lpGray] (e2) at (5.0,-2.7) {User\\Task};
+  \node[evEnd] (e3) at (6.6,-2.7) {};
+  \draw[arr] (e0) -- (e1); \draw[arr] (e1) -- (e2); \draw[arr] (e2) -- (e3);
+  % Slice bracket
+  \draw[lpAccent, dashed, line width=0.5pt] (3.0,-0.5) -- (3.0,-2.2);
+  \draw[lpAccent, dashed, line width=0.5pt] (5.0,-0.5) -- (5.0,-2.2);
+  \node[hint] at (4.0,-1.0) {Automations-Slice};
+\end{tikzpicture}
+\caption{\sffamily Vom Business-BPMN zum ausführbaren Slice.}
+\label{fig:konzept-71t04}
+\end{figure}
 
 \subsection{Business-BPMN: verständlich, kommuniziert Verantwortung}
 

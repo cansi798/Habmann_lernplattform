@@ -150,6 +150,10 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -282,6 +286,24 @@ Plattformen können in unterschiedlichen Dimensionen skalieren. Eine erfahrene P
   \item \fachbegriff{Automatisierung.} Wiederkehrende Aufgaben -- Onboarding, Prüfung, Reporting, Konfliktlösung -- werden algorithmisch oder regelbasiert übernommen, sodass das Team nicht linear mit der Plattform wachsen muss.
   \item \fachbegriff{Datenintegration.} Schnittstellen zu CRM, ERP, Buchhaltung, Logistik. Daten werden weniger doppelt erfasst, Entscheidungen werden schneller und belastbarer.
 \end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  dim/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+              text=lpInk, minimum width=24mm, minimum height=6mm, align=center, line width=0.5pt},
+  hub/.style={circle, draw=lpAmber, fill=lpAmberLight, text=lpInk, minimum size=14mm,
+              align=center, line width=0.6pt, inner sep=1pt},
+  link/.style={-, draw=lpGray, line width=0.4pt}]
+  \node[hub] (c) at (0,0) {\textbf{Skalierung}};
+  \foreach \i/\label in {0/Nutzer, 1/Anbieter, 2/Geografie, 3/Sortiment, 4/Partner, 5/Automatisierung, 6/Daten} {
+    \node[dim] (d\i) at ({90 - \i*360/7}:3) {\label};
+    \draw[link] (c) -- (d\i);
+  }
+\end{tikzpicture}
+\caption{\sffamily Sieben Skalierungsdimensionen einer Plattform -- nicht alle gleichzeitig, sondern entlang des aktuellen Engpasses.}
+\label{fig:skalierungsdimensionen-22t04}
+\end{figure}
 
 \subsection{Die richtige Dimension zuerst}
 

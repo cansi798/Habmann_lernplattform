@@ -151,6 +151,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{222,239,224}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -287,6 +292,27 @@ Jeder Bot durchläuft idealerweise einen klar definierten Lifecycle. Wer den Lif
   \item \fachbegriff{Improve.} Verbesserungen aufgrund von Incidents, Exceptions, neuer Anforderungen.
   \item \fachbegriff{Retire.} Geplante Abschaltung mit Daten-Archivierung, Übergangs-Plan, Dokumentation.
 \end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  phase/.style={circle, draw=lpAccent, fill=lpAccentLight, thick,
+                inner sep=1pt, minimum size=1.05cm, align=center},
+  arr/.style={-{Stealth[length=2mm]}, lpAccent, thick}]
+  \def\R{2.6}
+  \foreach \i/\name in {1/Idea, 2/Assess, 3/Design, 4/Build, 5/Test,
+                        6/Deploy, 7/Run, 8/Improve, 9/Retire} {
+    \pgfmathsetmacro\ang{90 - (\i - 1) * 40}
+    \node[phase] (p\i) at (\ang:\R) {\scriptsize\name};
+  }
+  \foreach \i/\j in {1/2,2/3,3/4,4/5,5/6,6/7,7/8,8/9} {
+    \draw[arr] (p\i) to[bend right=10] (p\j);
+  }
+  \draw[arr, dashed, lpGray] (p8) to[bend right=12] (p4);
+  \node[font=\sffamily\scriptsize\itshape, lpGray] at (0,0) {Bot-\\Lifecycle};
+\end{tikzpicture}
+\caption{\sffamily Neun-Phasen-Lifecycle eines Bots -- Improve speist zurück in Build/Test.}
+\end{figure}
 
 \subsection{Lebenszyklus-Disziplin in der Praxis}
 

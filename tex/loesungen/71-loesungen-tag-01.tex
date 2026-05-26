@@ -153,6 +153,8 @@
 
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.misc,arrows.meta,positioning,calc,fit,backgrounds}
 
 % --- Helfer --------------------------------------------------------------
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
@@ -185,7 +187,10 @@
 
 \newcommand{\ytquery}[1]{%
   \par\vspace{4pt}
-  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo zum Thema:}\ %
+    \href{https://studyflix.de/search?query=#1}{\textcolor{lpAccent}{Studyflix-Treffer}}\ ·\ %
+    \href{https://www.youtube.com/results?search\_query=#1}{\textcolor{lpAccent}{YouTube-Treffer}}\\%
+    \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
 % =========================================================================
@@ -374,7 +379,82 @@ Typischer Anwendungs\-fokus & Ablauflogik, Verantwortlichkeiten (Pools/Lanes), N
 \ytquery{BPMN Bestellprozess modellieren Beispiel Webshop B2C Lane Gateway}
 
 \begin{loesungbox}
-\textbf{BPMN-Modell (Soll-Logik, textuelle Beschreibung):}
+\textbf{BPMN-Modell (Soll-Logik):}
+
+\smallskip
+\textbf{Grafische Darstellung (vereinfachter Happy Path mit den beiden zentralen Gateways):}
+
+\begin{center}
+\begin{tikzpicture}[
+  font=\sffamily\footnotesize,
+  startevent/.style={circle, draw=lpAccent, thick, minimum size=8mm, inner sep=0pt},
+  endevent/.style={circle, draw=lpAccent, ultra thick, minimum size=8mm, inner sep=0pt},
+  task/.style={rectangle, rounded corners=2pt, draw=lpAccent, thick, fill=lpGreenLight, minimum width=22mm, minimum height=8mm, text width=22mm, align=center, inner sep=2pt},
+  gw/.style={diamond, draw=lpAccent, thick, fill=yellow!20, minimum size=8mm, inner sep=0pt, aspect=1.5},
+  flow/.style={-{Latex[length=2mm]}, thick, draw=lpAccent},
+  lane/.style={font=\sffamily\scriptsize\itshape, color=lpGray, anchor=west},
+  node distance=4mm and 5mm
+]
+% Lane labels (links)
+\node[lane] (lWeb)  at (-1.0,  0.0) {Webshop};
+\node[lane] (lZah)  at (-1.0, -1.4) {Zahlung};
+\node[lane] (lKS1)  at (-1.0, -2.8) {Kundenservice};
+\node[lane] (lLag)  at (-1.0, -4.2) {Lager};
+\node[lane] (lVer)  at (-1.0, -5.6) {Versand};
+\node[lane] (lKS2)  at (-1.0, -7.0) {Kundenservice};
+
+% Webshop lane
+\node[startevent] (start) at (1.5, 0)  {};
+\node[font=\scriptsize, below=0pt of start] {Bestell. eingeg.};
+\node[task, right=of start] (val) {Bestellung validieren};
+
+% Zahlung lane
+\node[task, below=of val] (pay) {Zahlung verarbeiten};
+\node[gw, right=of pay] (gwPay) {};
+\node[font=\scriptsize, above=0pt of gwPay] {Zahlung OK?};
+
+% Kundenservice (Abbruchpfad)
+\node[task, below=of pay] (notify) {Kunden über Zahlungsfehler};
+\node[endevent, right=of notify, fill=red!10] (endFail) {};
+\node[font=\scriptsize, below=0pt of endFail] {abgebrochen};
+
+% Lager lane
+\node[task, below=of notify] (stockcheck) {Lagerbestand prüfen};
+\node[gw, right=of stockcheck] (gwStock) {};
+\node[font=\scriptsize, above=0pt of gwStock] {Ware da?};
+\node[task, right=of gwStock] (komm) {Ware kommissionieren};
+
+% Versand lane
+\node[task, below=of komm] (verpack) {Ware verpacken \& versenden};
+
+% Kundenservice (Bestätigung)
+\node[task, below=of verpack] (confirm) {Versandbestätigung};
+\node[endevent, right=of confirm, fill=green!10] (endOk) {};
+\node[font=\scriptsize, below=0pt of endOk] {abgeschlossen};
+
+% Flow arrows: happy path
+\draw[flow] (start) -- (val);
+\draw[flow] (val.south) |- (pay.west);
+\draw[flow] (pay) -- (gwPay);
+\draw[flow] (gwPay.south) -- ++(0,-0.4) -| node[font=\scriptsize, near start, above] {nein} (notify.north);
+\draw[flow] (notify) -- (endFail);
+\draw[flow] (gwPay.east) -- ++(0.5,0) node[font=\scriptsize, midway, above] {ja} |- (stockcheck.east);
+\draw[flow] (stockcheck) -- (gwStock);
+\draw[flow] (gwStock) -- node[font=\scriptsize, above] {ja} (komm);
+\draw[flow] (gwStock.south) -- ++(0,-0.4) node[font=\scriptsize, right, near start] {nein: nachbestellen};
+\draw[flow] (komm) -- (verpack);
+\draw[flow] (verpack) -- (confirm);
+\draw[flow] (confirm) -- (endOk);
+
+% Pool border
+\begin{scope}[on background layer]
+  \node[draw=lpGray, dashed, fit=(lWeb)(komm)(endOk)(endFail), inner sep=4mm, label={[font=\sffamily\scriptsize\itshape, color=lpGray]above:Pool: Bücherklick GmbH}] {};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\smallskip
+\textbf{Textuelle Beschreibung (für die Beurteilung):}
 
 \smallskip
 \textbf{Pool:} B\"ucherklick GmbH \textendash{} \textbf{Lanes:} Webshop-System \textperiodcentered{} Zahlung \textperiodcentered{} Lager \textperiodcentered{} Versand \textperiodcentered{} Kundenservice.

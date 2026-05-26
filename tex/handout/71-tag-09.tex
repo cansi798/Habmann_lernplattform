@@ -152,6 +152,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{222,239,224}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -458,6 +463,34 @@ In der Praxis nutzen viele Teams Mischformen:
   \item \fachbegriff{Security / Quality Checks.} Statische Analyse, Vulnerability-Scan, Coverage-Check.
   \item \fachbegriff{Deploy.} Staging, dann Production -- mit Smoke Tests dazwischen.
 \end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  stage/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+                minimum width=1.7cm, minimum height=0.9cm, align=center, thick},
+  gate/.style={diamond, draw=lpAmberBorder, fill=lpAmberLight, aspect=1.6,
+               inner sep=1pt, align=center, thick},
+  flow/.style={-{Stealth[length=2.2mm]}, lpGray, thick},
+  node distance=0.55cm]
+  \node[stage] (commit) {Commit};
+  \node[stage, right=of commit] (build) {Build};
+  \node[stage, right=of build] (unit) {Unit\\Tests};
+  \node[stage, right=of unit] (integ) {Integration\\Tests};
+  \node[stage, right=of integ] (sec) {Security\\\&\,Quality};
+  \node[stage, right=of sec, fill=lpGreenLight, draw=lpAccent] (deploy) {Deploy};
+  \draw[flow] (commit) -- (build);
+  \draw[flow] (build) -- (unit);
+  \draw[flow] (unit) -- (integ);
+  \draw[flow] (integ) -- (sec);
+  \draw[flow] (sec) -- (deploy);
+  \node[gate, below=0.35cm of unit] (g1) {Tests\\grün?};
+  \node[gate, below=0.35cm of sec] (g2) {Scan\\ok?};
+  \draw[flow, dashed] (unit.south) -- (g1.north);
+  \draw[flow, dashed] (sec.south) -- (g2.north);
+\end{tikzpicture}
+\caption{\sffamily CI/CD-Pipeline -- sechs Stufen mit zwei Pflicht-Quality-Gates.}
+\end{figure}
 
 \subsection{Quality Gates}
 

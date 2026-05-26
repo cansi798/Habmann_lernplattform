@@ -154,6 +154,10 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -375,6 +379,27 @@ Content-Plattform      & Produktion und Verteilung von Inhalten           & YouT
 \medskip
 
 \noindent Diese Typen lassen sich nicht trennscharf abgrenzen -- viele Plattformen kombinieren mehrere. ``MachineHub'' aus unserer Fallstudie wäre eine Kombination aus Marktplatz (Ersatzteile) und Service-Plattform (Wartungsservices).
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  typ/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+              text=lpInk, minimum width=22mm, minimum height=7mm, align=center, line width=0.5pt},
+  axis/.style={-{Latex[length=2mm]}, draw=lpGray, line width=0.6pt}]
+  \draw[axis] (-4,0) -- (4,0) node[right, text=lpGray] {Transaktion};
+  \draw[axis] (0,-3) -- (0,3) node[above, text=lpGray] {Produkt};
+  \node[text=lpGray, anchor=east] at (-4,0) {Vermittlung};
+  \node[text=lpGray, anchor=south] at (0,-3) {Service / Daten};
+  \node[typ] at (2.2, 1.6) {Marktplatz};
+  \node[typ] at (-2.4, 1.4) {Content};
+  \node[typ] at (-2.4,-1.6) {Vermittlung};
+  \node[typ] at (2.2,-1.6) {Service};
+  \node[typ, fill=lpAmberLight, draw=lpAmber] at (0,2.4) {Daten};
+  \node[typ, fill=lpAmberLight, draw=lpAmber] at (0,-2.6) {Ökosystem};
+\end{tikzpicture}
+\caption{\sffamily Sechs Plattformtypen entlang der Achsen Vermittlung--Transaktion und Service--Produkt.}
+\label{fig:plattformtypen-22t03}
+\end{figure}
 
 \subsection{Sieben typische Erlöslogiken}
 

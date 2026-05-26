@@ -150,6 +150,10 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ---------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -293,6 +297,32 @@ Wer ``Plattform-Monetarisierung'' sagt, meint nicht ein einzelnes Modell, sonder
   \item \fachbegriff{Partnergebühren.} Gebühren von Partner-Plattformen, Integrationen, Affiliate-Anbindung.
   \item \fachbegriff{Erfolgsbeteiligungen.} Anteil am erzeugten Geschäftsergebnis (selten, aber bei Vermittlungsplattformen relevant).
 \end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  hub/.style={circle, draw=lpAccent, fill=lpAccent, text=white, minimum size=18mm, inner sep=1pt, align=center, line width=0.4pt},
+  dir/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight, minimum height=6mm, minimum width=24mm, inner sep=2pt, align=center, line width=0.4pt},
+  ind/.style={rectangle, rounded corners=2pt, draw=lpAmberBorder, fill=lpAmberLight, minimum height=6mm, minimum width=24mm, inner sep=2pt, align=center, line width=0.4pt},
+  arr/.style={-, draw=lpGray, line width=0.3pt}]
+  \node[hub] (p) {Plattform};
+  \node[dir, above left=10mm and 8mm of p] (n1) {Provision};
+  \node[dir, left=14mm of p] (n2) {Subscription};
+  \node[dir, below left=10mm and 8mm of p] (n3) {Listing-Gebühr};
+  \node[dir, below=14mm of p] (n4) {Freemium / Premium};
+  \node[dir, above=14mm of p] (n5) {Servicepakete};
+  \node[ind, above right=10mm and 8mm of p] (n6) {Werbung};
+  \node[ind, right=14mm of p] (n7) {Datenservices};
+  \node[ind, below right=10mm and 8mm of p] (n8) {Partner / Affiliate};
+  \node[ind, below=4mm of n4] (n9) {Erfolgsbeteiligung};
+  \node[dir, above=4mm of n5] (n10) {Premium-Placement};
+  \foreach \x in {n1,n2,n3,n4,n5,n6,n7,n8,n9,n10} { \draw[arr] (p) -- (\x); }
+  \node[font=\sffamily\scriptsize\itshape, text=lpAccent, below left=2mm and 6mm of n3] {direkt};
+  \node[font=\sffamily\scriptsize\itshape, text=lpAmberBorder, below right=2mm and 6mm of n8] {indirekt};
+\end{tikzpicture}
+\caption{\sffamily Zehn Erlös-Hebel einer Plattform; blau die direkten (Gebühr von Marktteilnehmern), orange die indirekten (Erlös über Dritte).}
+\label{fig:revenue-22t11}
+\end{figure}
 
 \subsection{Direkt vs.\ indirekt}
 

@@ -139,6 +139,9 @@
 
 \usepackage[hidelinks,unicode]{hyperref}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
 \newcommand{\fachbegriff}[1]{\textbf{#1}}
 \newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
@@ -543,6 +546,55 @@ Queue / Warteschlange & Anzahl wartender Vorg\"ange vor einem Schritt. & NVA-Ind
   \item Welche \emph{Pflichtfelder} sind im Briefing tats\"achlich nicht verhandelbar?
   \item Welcher Compliance-Check ist \emph{vorab} parallelisierbar (vor Provisioning), welcher zwingend sequentiell?
 \end{enumerate}
+
+\smallskip
+\textbf{Activity-Skizze (Swimlanes):}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  lane/.style={rectangle, draw=lpGray, thick, minimum width=3.0cm, minimum height=7.7cm},
+  act/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+              minimum width=2.4cm, minimum height=0.7cm, align=center, thick},
+  dec/.style={diamond, draw=lpAmberBorder, fill=lpAmberLight, aspect=1.4,
+              inner sep=0.5pt, align=center, thick},
+  startend/.style={circle, draw=lpAccent, fill=lpAccent, minimum size=0.32cm, inner sep=0},
+  endev/.style={circle, draw=lpAccent, thick, fill=white, minimum size=0.42cm, inner sep=0,
+                path picture={\fill[lpAccent] (path picture bounding box.center) circle (0.13cm);}},
+  flow/.style={-{Stealth[length=2mm]}, lpGray, thick}]
+  % lanes
+  \node[lane, label=above:{\sffamily\bfseries\scriptsize Sales}]      (L1) at (0,0)    {};
+  \node[lane, label=above:{\sffamily\bfseries\scriptsize Onboarding}] (L2) at (3.2,0)  {};
+  \node[lane, label=above:{\sffamily\bfseries\scriptsize IT}]         (L3) at (6.4,0)  {};
+  \node[lane, label=above:{\sffamily\bfseries\scriptsize Compliance}] (L4) at (9.6,0)  {};
+  % activities
+  \node[startend] (s) at (0,3.4) {};
+  \node[act] (a1) at (0,2.6) {Briefing\\\"ubergeben};
+  \node[act] (a2) at (3.2,1.9) {Daten\\konsolidieren};
+  \node[dec] (d1) at (3.2,0.8) {\scriptsize voll-\\st.?};
+  \node[act] (a3) at (6.4,-0.3) {Account\\provision.};
+  \node[dec] (d2) at (6.4,-1.4) {\scriptsize ok?};
+  \node[act] (a4) at (9.6,-2.5) {Security\\Check};
+  \node[dec] (d3) at (9.6,-3.6) {\scriptsize ok?};
+  \node[act] (a5) at (3.2,-4.4) {Go-Live};
+  \node[endev] (e) at (3.2,-5.4) {};
+  % flows
+  \draw[flow] (s) -- (a1);
+  \draw[flow] (a1.east) -| (a2.north);
+  \draw[flow] (a2) -- (d1);
+  \draw[flow] (d1.east) -- ++(0.6,0) |- (a3.west) node[pos=0.25, above, font=\sffamily\scriptsize] {ja};
+  \draw[flow, dashed] (d1.west) -- ++(-0.6,0) |- (a2.west)
+    node[pos=0.25, above, font=\sffamily\scriptsize] {nein};
+  \draw[flow] (a3) -- (d2);
+  \draw[flow] (d2.east) -- ++(0.6,0) |- (a4.west) node[pos=0.25, above, font=\sffamily\scriptsize] {ja};
+  \draw[flow] (a4) -- (d3);
+  \draw[flow] (d3.west) -- ++(-3.4,0) |- (a5.east) node[pos=0.25, above, font=\sffamily\scriptsize] {ja};
+  \draw[flow, dashed] (d3.south) -- ++(0,-0.5) -| (a3.south)
+    node[pos=0.7, right, font=\sffamily\scriptsize] {nein};
+  \draw[flow] (a5) -- (e);
+\end{tikzpicture}
+\caption{\sffamily UML-Activity-Skizze mit Swimlanes -- vier Lanes, drei XOR-Gates, ein Eskalations-Rückpfad.}
+\end{figure}
 \end{loesungbox}
 
 \clearpage

@@ -152,6 +152,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{225,238,225}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -625,6 +630,31 @@ In der Praxis kommt ein einziger Event Log selten aus einer einzigen Quelle. Typ
 \section{Der Methodendreiklang}
 
 Bis hier haben wir die drei Methoden einzeln betrachtet. Die Stärke entsteht aber erst durch \emph{die Kombination}.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  node distance=6mm,
+  meth/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+    line width=0.6pt, minimum width=30mm, minimum height=11mm, align=center, inner sep=2pt},
+  proc/.style={circle, draw=lpGray, fill=lpGrayLight, line width=0.6pt,
+    minimum size=22mm, align=center, inner sep=1pt},
+  qa/.style={font=\sffamily\scriptsize\itshape, color=lpGray, align=center},
+  arr/.style={-{Latex[length=2mm]}, draw=lpAccent, line width=0.5pt}]
+  \node[proc] (p) {Prozess\\(Realität)};
+  \node[meth, above=10mm of p] (uml) {UML\\\scriptsize Struktur \& Rollen};
+  \node[meth, below left=8mm and 4mm of p] (vsm) {VSM\\\scriptsize Wertfluss \& Zeit};
+  \node[meth, below right=8mm and 4mm of p] (pm) {Process Mining\\\scriptsize Datenrealität};
+  \draw[arr] (uml) -- (p);
+  \draw[arr] (vsm) -- (p);
+  \draw[arr] (pm) -- (p);
+  \node[qa, right=1mm of uml] {Wer? Was?};
+  \node[qa, left=1mm of vsm] {Wo Zeit\\verloren?};
+  \node[qa, right=1mm of pm] {Was passiert\\wirklich?};
+\end{tikzpicture}
+\caption{\sffamily Der Methodendreiklang: drei Perspektiven, ein Prozess.}
+\label{fig:konzept-71t02}
+\end{figure}
 
 \subsection{Was jede Methode beiträgt -- und was sie auslässt}
 

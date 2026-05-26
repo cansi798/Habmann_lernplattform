@@ -155,6 +155,8 @@
 
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
 
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
@@ -506,6 +508,59 @@ Plattformen werden mit jedem zusätzlichen Nutzer wertvoller -- in unterschiedli
   \item \fachbegriff{Direkter Netzwerkeffekt} -- mehr Nutzer derselben Gruppe machen die Plattform für jeden Einzelnen wertvoller (Telefon-Netz, Messenger). Im Vertrieb seltener.
   \item \fachbegriff{Indirekter Netzwerkeffekt} -- mehr Anbieter machen die Plattform für Nachfrager attraktiver, und umgekehrt. Das ist die typische \emph{Marktplatz-Dynamik}. Sie erklärt, warum die Nummer-2-Plattform in einer Kategorie oft viel weniger wert ist als die Nummer~1. \quelle{Rochet \& Tirole, 2003; Evans \& Schmalensee, 2016}
 \end{itemize}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+  font=\sffamily\footnotesize,
+  user/.style={circle, draw=lpAccent, thick, fill=lpAccent!10, minimum size=6mm, inner sep=0pt},
+  newuser/.style={circle, draw=orange!80!black, ultra thick, fill=yellow!30, minimum size=7mm, inner sep=0pt},
+  provider/.style={circle, draw=lpAccent, thick, fill=lpAccent!10, minimum size=6mm, inner sep=0pt},
+  customer/.style={circle, draw=orange!80!black, thick, fill=orange!15, minimum size=6mm, inner sep=0pt},
+  edge/.style={draw=lpGray!60, thin},
+  bidir/.style={Latex-Latex, very thick, draw=green!60!black}
+]
+% LINKS: Direkter Effekt (eine Gruppe)
+\begin{scope}[xshift=0cm]
+  \node[font=\sffamily\bfseries, color=lpAccent] at (1.5, 2.4) {Direkter Netzwerkeffekt};
+  \node[font=\sffamily\itshape\scriptsize, color=lpGray, align=center] at (1.5, 1.9) {eine Nutzergruppe};
+  \node[user] (a1) at (0.3, 1.0) {};
+  \node[user] (a2) at (1.5, 1.4) {};
+  \node[user] (a3) at (2.7, 1.0) {};
+  \node[user] (a4) at (0.7, 0.0) {};
+  \node[user] (a5) at (2.3, 0.0) {};
+  \foreach \i/\j in {a1/a2, a1/a3, a1/a4, a1/a5, a2/a3, a2/a4, a2/a5, a3/a4, a3/a5, a4/a5}
+    \draw[edge] (\i) -- (\j);
+  \node[newuser] (anew) at (4.0, 0.5) {\textbf{+1}};
+  \node[font=\sffamily\scriptsize, color=orange!80!black] at (4.0, 1.1) {neuer Nutzer};
+  \foreach \i in {a1,a2,a3,a4,a5} \draw[-Latex, thick, draw=orange!80!black] (anew) -- (\i);
+  \node[font=\sffamily\scriptsize, align=center, color=lpAccent] at (1.5, -0.8) {macht Plattform für ALLE\\ in derselben Gruppe wertvoller};
+\end{scope}
+
+% RECHTS: Indirekter Effekt (zwei Gruppen)
+\begin{scope}[xshift=8.5cm]
+  \node[font=\sffamily\bfseries, color=lpAccent] at (1.5, 2.4) {Indirekter Netzwerkeffekt};
+  \node[font=\sffamily\itshape\scriptsize, color=lpGray, align=center] at (1.5, 1.9) {zwei Marktseiten};
+  \node[font=\sffamily\scriptsize\bfseries, color=lpAccent] at (-0.5, 1.4) {Anbieter};
+  \node[provider] (p1) at (0.5, 1.4) {};
+  \node[provider] (p2) at (1.5, 1.4) {};
+  \node[provider] (p3) at (2.5, 1.4) {};
+  \node[provider] (p4) at (3.5, 1.4) {};
+  \node[font=\sffamily\scriptsize\bfseries, color=orange!80!black] at (-0.5, 0.0) {Nachfrager};
+  \node[customer] (c1) at (0.5, 0.0) {};
+  \node[customer] (c2) at (1.5, 0.0) {};
+  \node[customer] (c3) at (2.5, 0.0) {};
+  \node[customer] (c4) at (3.5, 0.0) {};
+  \foreach \i in {p1,p2,p3,p4} \foreach \j in {c1,c2,c3,c4} \draw[edge] (\i) -- (\j);
+  \draw[bidir] (-1.2, 1.4) -- (-1.2, 0.0);
+  \node[font=\sffamily\scriptsize, color=green!50!black, align=center, rotate=90] at (-1.6, 0.7) {ziehen sich};
+  \node[font=\sffamily\scriptsize, color=green!50!black, align=center, rotate=90] at (-1.9, 0.7) {gegenseitig an};
+  \node[font=\sffamily\scriptsize, align=center, color=lpAccent] at (1.5, -0.8) {Marktplatz-Dynamik\\ (Uber, Amazon, Airbnb)};
+\end{scope}
+\end{tikzpicture}
+\caption{\sffamily Direkter (links) vs. indirekter (rechts) Netzwerkeffekt. Beim direkten Effekt erhöht jeder neue Nutzer den Wert für alle Bestehenden derselben Gruppe; beim indirekten Effekt zieht eine größere Marktseite die jeweils andere an (Henne-Ei-Dynamik).}
+\label{fig:netzwerkeffekte-22t01}
+\end{figure}
 
 \subsection{Transaktionsabwicklung}
 

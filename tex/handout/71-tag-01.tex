@@ -157,6 +157,8 @@
 
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
 
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
@@ -375,6 +377,41 @@ EPC ist im Kern denkbar einfach. Drei Symbole tragen die Notation:
 \end{itemize}
 
 Die zentrale Spielregel der EPC: \emph{Ereignis und Funktion wechseln sich strikt ab.} Auf ein Ereignis folgt eine Funktion, auf eine Funktion ein Ereignis. Diese Disziplin macht EPC besonders gut lesbar -- und besonders streng.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+  font=\sffamily\footnotesize,
+  ereignis/.style={signal, signal to=east and west, draw=red!50!black, thick, fill=red!10, minimum width=22mm, minimum height=8mm, text width=22mm, align=center, inner sep=2pt},
+  funktion/.style={rectangle, rounded corners=4pt, draw=green!50!black, thick, fill=green!12, minimum width=22mm, minimum height=8mm, text width=22mm, align=center, inner sep=2pt},
+  flow/.style={-{Latex[length=2mm]}, thick, draw=orange!70!black},
+  node distance=4mm
+]
+\node[ereignis] (e1) {Bestellung\\eingegangen};
+\node[funktion, below=of e1] (f1) {Bestellung prüfen};
+\node[ereignis, below=of f1] (e2) {Bestellung\\geprüft};
+\node[funktion, below=of e2] (f2) {Ware\\kommissionieren};
+\node[ereignis, below=of f2] (e3) {Ware\\kommissioniert};
+\node[funktion, below=of e3] (f3) {Ware versenden};
+\node[ereignis, below=of f3, fill=red!18, line width=1.2pt] (e4) {\bfseries Ware versendet};
+\draw[flow] (e1) -- (f1);
+\draw[flow] (f1) -- (e2);
+\draw[flow] (e2) -- (f2);
+\draw[flow] (f2) -- (e3);
+\draw[flow] (e3) -- (f3);
+\draw[flow] (f3) -- (e4);
+
+% Legende rechts
+\node[font=\sffamily\bfseries\small, anchor=west] at (3.5, 0) {Legende};
+\node[ereignis, anchor=west, minimum width=18mm] (lE) at (3.5, -0.9) {Ereignis};
+\node[font=\sffamily\scriptsize, anchor=west, text width=4cm] at (6.0, -0.9) {Zustand, was \emph{ist} (Subjekt + Partizip)};
+\node[funktion, anchor=west, minimum width=18mm] (lF) at (3.5, -2.0) {Funktion};
+\node[font=\sffamily\scriptsize, anchor=west, text width=4cm] at (6.0, -2.0) {Tätigkeit, was \emph{getan wird} (Verb + Objekt)};
+\node[font=\sffamily\itshape\scriptsize, color=lpGray, anchor=west, text width=6.5cm] at (3.5, -3.4) {Strikt im Wechsel: nie zwei Ereignisse oder Funktionen direkt hintereinander. Das erzwingt sauberes Denken in Zustandsänderungen.};
+\end{tikzpicture}
+\caption{\sffamily Vollständige EPC-Kette ``Eingang bis Versand'' (vereinfacht, ohne Konnektoren). Die strikte Alternation \emph{Ereignis} (rot, Sechseck) $\rightarrow$ \emph{Funktion} (grün, abgerundet) $\rightarrow$ \emph{Ereignis} bildet das Rückgrat jeder EPC.}
+\label{fig:epc-kette-71t01}
+\end{figure}
 
 \subsection{Ergänzende Elemente}
 

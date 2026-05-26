@@ -101,6 +101,8 @@
 \titlespacing*{\subsection}{0pt}{10pt}{4pt}
 
 \usepackage[hidelinks,unicode]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
 
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
 \newcommand{\fachbegriff}[1]{\textbf{#1}}
@@ -133,7 +135,10 @@
 
 \newcommand{\ytquery}[1]{%
   \par\vspace{4pt}
-  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo zum Thema:}\ %
+    \href{https://studyflix.de/search?query=#1}{\textcolor{lpAccent}{Studyflix-Treffer}}\ ·\ %
+    \href{https://www.youtube.com/results?search\_query=#1}{\textcolor{lpAccent}{YouTube-Treffer}}\\%
+    \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
 \begin{document}
@@ -375,7 +380,54 @@ Wir behandeln \emph{Sammelrechnungen mit mehreren Kostenstellen} \emph{nicht} im
 \ytquery{Camunda BPMN Execution Service Task Timer Error Boundary Event Beispiel}
 
 \begin{loesungbox}
-\textbf{Execution-BPMN (textuelle Soll-Logik):}
+\textbf{Execution-BPMN (Soll-Logik):}
+
+\smallskip
+\textbf{Grafische Darstellung} (Happy Path + zwei XOR-Gateways + Timer-/Error-Boundary):
+
+\begin{center}
+\begin{tikzpicture}[
+  font=\sffamily\footnotesize,
+  startevt/.style={circle, draw=lpAccent, thick, minimum size=7mm, inner sep=0pt, label={[font=\scriptsize, color=lpGray]below:Message}},
+  endevt/.style={circle, draw=lpAccent, ultra thick, minimum size=7mm, inner sep=0pt},
+  utask/.style={rectangle, rounded corners=2pt, draw=lpAccent, thick, fill=blue!8, minimum width=20mm, minimum height=8mm, text width=20mm, align=center, inner sep=2pt},
+  stask/.style={rectangle, rounded corners=2pt, draw=lpAccent, thick, fill=orange!12, minimum width=20mm, minimum height=8mm, text width=20mm, align=center, inner sep=2pt},
+  gw/.style={diamond, draw=lpAccent, thick, fill=yellow!18, minimum size=7mm, inner sep=0pt, aspect=1.4},
+  flow/.style={-{Latex[length=2mm]}, thick, draw=lpAccent},
+  boundary/.style={circle, draw=red!60!black, very thick, dashed, fill=white, minimum size=4mm, inner sep=0pt, font=\tiny}
+]
+\node[startevt] (s) at (0,0) {};
+\node[utask, right=3mm of s] (erfass) {Rechnung erfassen};
+\node[gw, right=3mm of erfass] (g1) {};
+\node[font=\scriptsize, above=0pt of g1] {KSt?};
+\node[utask, right=3mm of g1] (g1n) {Kostenstelle ergänzen};
+\node[gw, below=4mm of g1] (g2) {};
+\node[font=\scriptsize, left=0pt of g2] {$>$5k\,\euro?};
+\node[utask, below=4mm of g2] (frei) {Freigabe Teamleitung};
+\node[boundary, fill=yellow!40] at (frei.south west) {T};
+\node[font=\tiny, left=0pt of frei.south west, anchor=east] {3\,d Timer $\rightarrow$ Eskal.};
+\node[stask, below=8mm of frei] (erp) {Im ERP buchen};
+\node[boundary, fill=red!20] at (erp.north east) {E};
+\node[font=\tiny, right=0pt of erp.north east] {ERPUnavailable $\rightarrow$ Retry 3$\times$};
+\node[stask, below=4mm of erp] (zahl) {Zahlung anstoßen};
+\node[endevt, fill=green!12, below=3mm of zahl] (e) {};
+\node[font=\scriptsize, below=0pt of e] {Rechnung bezahlt};
+
+\draw[flow] (s) -- (erfass);
+\draw[flow] (erfass) -- (g1);
+\draw[flow] (g1) -- node[font=\scriptsize, above]{nein} (g1n);
+\draw[flow] (g1n.south) |- ($(g1)+(0,-0.8)$) -- (g2);
+\draw[flow] (g1) -- node[font=\scriptsize, right]{ja} (g2);
+\draw[flow] (g2) -- node[font=\scriptsize, right]{ja} (frei);
+\draw[flow] (g2.east) -- ++(0.5,0) node[font=\scriptsize, above]{nein} |- (erp.east);
+\draw[flow] (frei) -- (erp);
+\draw[flow] (erp) -- (zahl);
+\draw[flow] (zahl) -- (e);
+\end{tikzpicture}
+\end{center}
+
+\smallskip
+\textbf{Textuelle Beschreibung} (für die detaillierte Bewertung):
 
 \smallskip
 \textbf{Start-Event} (Message): \emph{Rechnung E-Mail eingegangen}.

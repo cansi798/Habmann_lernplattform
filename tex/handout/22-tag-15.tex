@@ -140,6 +140,9 @@
 
 \usepackage[hidelinks,unicode]{hyperref}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
@@ -327,6 +330,22 @@ Eine wirksame Compliance-Architektur besteht nicht aus einem Ordner Dokumente. S
   \item \fachbegriff{Dokumentation.} Was wird festgehalten? Wer hat wann was entschieden, was vereinbart, was kontrolliert?
   \item \fachbegriff{Eskalation.} Was passiert, wenn ein Verstoß auftritt? Wer wird informiert? Wer entscheidet?
 \end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  layer/.style={rectangle, rounded corners=2pt, minimum height=11mm, inner sep=4pt, align=center, line width=0.4pt}]
+  \node[layer, draw=lpAccent, fill=lpAccent, text=white, minimum width=40mm] (L1) {\textbf{1. Regeln}\\\scriptsize DSA / DMA / P2B / DSGVO};
+  \node[layer, draw=lpAccent, fill=lpAccentLight, minimum width=58mm, below=2mm of L1] (L2) {\textbf{2. Verantwortlichkeiten}\\\scriptsize pro Risikofeld klare Rolle};
+  \node[layer, draw=lpAccent, fill=lpAccentLight, minimum width=76mm, below=2mm of L2] (L3) {\textbf{3. Kontrollen}\\\scriptsize laufende Prüfung, Audit-Logik};
+  \node[layer, draw=lpAccent, fill=lpAccentLight, minimum width=94mm, below=2mm of L3] (L4) {\textbf{4. Dokumentation}\\\scriptsize Beschluss-, Entscheidungs-, Vorgangsprotokoll};
+  \node[layer, draw=lpAmberBorder, fill=lpAmberLight, minimum width=112mm, below=2mm of L4] (L5) {\textbf{5. Eskalation}\\\scriptsize Verstoß $\to$ Information $\to$ Entscheidung $\to$ Korrektur};
+  \node[font=\sffamily\scriptsize\itshape, text=lpGray, right=3mm of L1] {abstrakt};
+  \node[font=\sffamily\scriptsize\itshape, text=lpGray, right=3mm of L5] {operativ};
+\end{tikzpicture}
+\caption{\sffamily Compliance-Architektur als Schichtenmodell -- von abstrakten Regeln (oben) bis zur operativen Eskalation (unten); jede Schicht stützt die nächste.}
+\label{fig:compliance-22t15}
+\end{figure}
 
 \subsection{Typische Bausteine}
 
