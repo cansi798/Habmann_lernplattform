@@ -360,8 +360,13 @@ class PfadSession {
 
   evaluateZuordnung(task) {
     let correctCount = 0;
+    const paare = this.zuordnungPairs;
     this.zuordnungMatches.forEach((rightIdx, leftIdx) => {
-      const ok = rightIdx === leftIdx;
+      // m:n support — Zuordnung gilt als richtig, wenn der rechte Text mit dem
+      // erwarteten rechten Text der linken Seite übereinstimmt (auch wenn mehrere
+      // links denselben rechts-Wert teilen, z.B. Kategorisierung).
+      const ok = paare[leftIdx] && paare[rightIdx] &&
+                 paare[leftIdx].rechts === paare[rightIdx].rechts;
       if (ok) correctCount++;
       const leftNode = this.container.querySelector(`.zuordnung-left .zuordnung-item[data-idx="${leftIdx}"]`);
       const rightNode = this.container.querySelector(`.zuordnung-right .zuordnung-item[data-idx="${rightIdx}"]`);

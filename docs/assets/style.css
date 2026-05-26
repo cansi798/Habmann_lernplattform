@@ -349,4 +349,30 @@ h3 { font-size: 18px; margin: 16px 0 8px; }
 @media (max-width: 900px) {
   .slide-nav { display: flex; }
   .brand-bar { font-size: 18px; }
+
+  /* Mobile-Layout-Fixes (Audit 2026-05-26) */
+
+  /* Canvas/SVG/img: niemals breiter als Container */
+  canvas, svg, img { max-width: 100%; height: auto; }
+
+  /* 2-Spalten-Grids stacken auf Mobile/Tablet */
+  .grid-2, .grid-2x2, .grid-3, .grid-2x3, .grid-2x4 { grid-template-columns: 1fr !important; }
+
+  /* Vergleichs- und VS-Tabellen scrollbar machen */
+  .vs-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  .vs-table th, .vs-table td { white-space: normal; word-break: break-word; }
+
+  /* Diagram-Box / Merk-Box / accent-box: niemals breiter */
+  .diagram-box, .merk-box, .accent-box { max-width: 100%; box-sizing: border-box; }
+
+  /* Slides-Container: kein horizontaler Scroll der Seite */
+  #slides { overflow-x: hidden; }
 }
+
+/* Globale Sicherung gegen horizontalen Scroll */
+html, body { max-width: 100%; overflow-x: hidden; }

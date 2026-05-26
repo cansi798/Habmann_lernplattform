@@ -84,6 +84,8 @@
 \titlespacing*{\subsection}{0pt}{10pt}{4pt}
 
 \usepackage[hidelinks,unicode]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
 
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
 \newcommand{\fachbegriff}[1]{\textbf{#1}}
@@ -284,6 +286,47 @@ Im Mittelstand dominiert noch \emph{statische} Preisgestaltung (Preisliste, jäh
 \ytvideo{Premiumstrategie im B2B — Wertargumentation statt Rabatte}{https://youtu.be/DpgQaQaX4OI}
 
 \begin{loesungbox}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\footnotesize]
+  % Preisachse 80..180 EUR
+  \def\xmin{0}\def\xmax{12}
+  % Achse
+  \draw[->, line width=0.8pt, color=lpInk] (\xmin,0) -- (\xmax+0.5,0) node[right, font=\sffamily\footnotesize] {Preis};
+  % Skala
+  \foreach \p/\x in {89/1.08, 119/4.68, 149/8.28, 169/10.68, 180/12.0} {
+    \draw[color=lpGray] (\x,-0.08) -- (\x,0.08);
+    \node[below, font=\sffamily\scriptsize, color=lpGray] at (\x,-0.1) {\p\,\euro};
+  }
+  % Segment-Banden
+  \fill[lpGreenLight, opacity=0.6] (\xmin,0.4) rectangle (3.6,1.0);
+  \fill[lpAccentLight, opacity=0.7] (3.6,0.4) rectangle (8.7,1.0);
+  \fill[lpAmberLight, opacity=0.7] (8.7,0.4) rectangle (\xmax,1.0);
+  \node[font=\sffamily\bfseries\scriptsize, color=lpGreen] at (1.8,0.7) {Budget};
+  \node[font=\sffamily\bfseries\scriptsize, color=lpAccent] at (6.15,0.7) {Mid-Tier};
+  \node[font=\sffamily\bfseries\scriptsize, color=lpAmberBorder] at (10.35,0.7) {Premium};
+  % Wettbewerber-Marker
+  \node[circle, draw=lpGreen, fill=lpGreen!30, minimum size=0.55cm,
+        font=\sffamily\bfseries\scriptsize] (B) at (1.08,2.0) {B};
+  \node[circle, draw=lpAccent, fill=lpAccent!30, minimum size=0.55cm,
+        font=\sffamily\bfseries\scriptsize] (A) at (4.68,2.0) {A};
+  \node[circle, draw=lpAmberBorder, fill=lpAmberBorder, text=white, minimum size=0.65cm,
+        line width=1pt, font=\sffamily\bfseries\scriptsize] (H) at (8.28,2.6) {HT};
+  \node[circle, draw=lpAmberBorder, fill=lpAmberLight, minimum size=0.55cm,
+        font=\sffamily\bfseries\scriptsize] (C) at (10.68,2.0) {C};
+  % Labels
+  \node[above, font=\sffamily\scriptsize, color=lpGray] at (B.north) {Wettb.\,B};
+  \node[above, font=\sffamily\scriptsize, color=lpGray] at (A.north) {Wettb.\,A};
+  \node[above, font=\sffamily\scriptsize\bfseries, color=lpAmberBorder] at (H.north) {HomeTech Pro};
+  \node[above, font=\sffamily\scriptsize, color=lpGray] at (C.north) {Wettb.\,C};
+  % "Zwischen den Stühlen" Indikator
+  \draw[densely dashed, color=lpAmberBorder, line width=0.8pt]
+    (H.south) -- (8.28,0.4);
+  \node[font=\sffamily\scriptsize\itshape, color=lpAmberBorder, align=center, text width=4.5cm]
+    at (8.28,4.0) {\bfseries Strategisch schwierige\\Mid-/Premium-Grenze};
+\end{tikzpicture}
+\end{center}
+
+\smallskip
 \textbf{1. Marktposition:}
 HomeTech Pro liegt im \emph{oberen Mid-Tier} bzw.\ \emph{unteren Premium}-Bereich \textendash{} 149\,\euro{} zwischen Wettbewerber A (119, Mid-Tier) und Wettbewerber C (169, Premium). Wettbewerber B (89) ist Budget. HomeTech ist nicht klar Premium positioniert (zu wenig Bewertungen, weniger Sichtbarkeit als A) und nicht Budget. Damit liegt es in der \emph{strategisch schwierigsten} Position: ``zu teuer für Preis-Suchende, zu unsichtbar für Qualitäts-Suchende''.
 

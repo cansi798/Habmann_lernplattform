@@ -115,4 +115,21 @@ jobs:
             exit 0
           fi
           git commit -m "ci: rebuild PDFs [skip ci]"
-          git push
+          # Retry-Loop für race-conditions bei parallelen Pushes
+          BRANCH="${GITHUB_REF_NAME}"
+          for i in 1 2 3 4 5; do
+            if git push origin "HEAD:${BRANCH}" 2>&1; then
+              echo "::notice::push succeeded on attempt $i"
+              exit 0
+            fi
+            echo "::warning::push attempt $i failed, fetching + rebasing"
+            git fetch origin "${BRANCH}"
+            if ! git rebase "origin/${BRANCH}"; then
+              echo "::error::rebase conflict, aborting"
+              git rebase --abort 2>/dev/null || true
+              exit 1
+            fi
+            sleep $((i * 3))
+          done
+          echo "::error::push failed after 5 attempts"
+          exit 1

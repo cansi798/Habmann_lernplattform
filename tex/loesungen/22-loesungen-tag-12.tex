@@ -136,6 +136,8 @@
 \titlespacing*{\subsection}{0pt}{10pt}{4pt}
 
 \usepackage[hidelinks,unicode]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
 
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
 \newcommand{\fachbegriff}[1]{\textbf{#1}}
@@ -406,6 +408,55 @@ Bei einer Conversion Rate von 1{,}4\,\% bedeutet eine Verbesserung auf 1{,}7\,\%
 \ytvideo{Skalierung von Wachstumsunternehmen — strategische Hebel}{https://youtu.be/eXjpapyKxYA}
 
 \begin{loesungbox}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\footnotesize]
+  % Funnel mit Werten + Verlust-Annotation rechts
+  % Stage: name, count, conv_to_next (Abs.)
+  \def\h{0.78}
+  \def\ystart{4.5}
+  % i, top, bot, name, count, loss, lossPct, highlight
+  \foreach \i/\wtop/\wbot/\name/\count/\loss/\lpct/\hl in {%
+    0/7.5/5.4/{Besucher}/{240.000}/{144.000}/{60\,\%}/0,
+    1/5.4/2.7/{Kursdetail}/{96.000}/{81.600}/{85\,\%}/1,
+    2/2.7/1.5/{Registriert}/{14.400}/{9.600}/{67\,\%}/0,
+    3/1.5/1.05/{Anfrage}/{4.800}/{1.440}/{30\,\%}/0,
+    4/1.05/0.6/{Buchung}/{3.360}/{2.755}/{82\,\%}/0,
+    5/0.6/0.3/{Wiederkauf}/{605}/{}/{}/0} {
+    \pgfmathsetmacro{\y}{\ystart - \i*\h}
+    \pgfmathsetmacro{\yb}{\y - \h + 0.05}
+    \pgfmathsetmacro{\wtl}{-\wtop/2}
+    \pgfmathsetmacro{\wtr}{ \wtop/2}
+    \pgfmathsetmacro{\wbl}{-\wbot/2}
+    \pgfmathsetmacro{\wbr}{ \wbot/2}
+    \pgfmathsetmacro{\fillmix}{30 + \i*12}
+    \ifnum\hl=1
+      \fill[lpAmber!60!lpAmberLight, draw=lpAmberBorder, line width=1pt]
+        (\wtl,\y) -- (\wtr,\y) -- (\wbr,\yb) -- (\wbl,\yb) -- cycle;
+    \else
+      \fill[lpAccent!\fillmix!lpAccentLight, draw=lpAccent, line width=0.5pt]
+        (\wtl,\y) -- (\wtr,\y) -- (\wbr,\yb) -- (\wbl,\yb) -- cycle;
+    \fi
+    % Label links
+    \node[anchor=east, font=\sffamily\bfseries\scriptsize, color=lpInk]
+      at (\wtl-0.15, \y-\h/2+0.05) {\name};
+    % Count zentriert
+    \pgfmathparse{\fillmix > 55 || \hl==1 ? "white" : "lpInk"}
+    \node[font=\sffamily\bfseries\scriptsize, color=\pgfmathresult]
+      at (0, \y-\h/2+0.05) {\count};
+    % Verlust rechts
+    \ifx\loss\empty\else
+      \node[anchor=west, font=\sffamily\scriptsize, color=lpAmberBorder]
+        at (\wtr+0.15, \y-\h+0.05) {$-$\loss{} (\lpct)};
+    \fi
+  }
+  % Engpass-Highlight Annotation
+  \node[anchor=west, font=\sffamily\bfseries\scriptsize, color=lpAmberBorder,
+        align=left, text width=4cm]
+    at (4.5, 3.7) {\textleftarrow{} Gr{\"o}{\ss}ter\\Engpass\\(85\,\% Verlust)};
+\end{tikzpicture}
+\end{center}
+
+\smallskip
 \textbf{1. Größter Conversion-Engpass \textendash{} quantitative Analyse:}
 
 \smallskip

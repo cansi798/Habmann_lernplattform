@@ -84,6 +84,8 @@
 \titlespacing*{\subsection}{0pt}{10pt}{4pt}
 
 \usepackage[hidelinks,unicode]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
 
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
 \newcommand{\fachbegriff}[1]{\textbf{#1}}
@@ -426,6 +428,36 @@ G: Gemeinsame KPIs       & 5 & 1 & 1 & 5 & 5 \\
 \ytvideo{Lead Scoring — vom CRM-Eintrag zum priorisierten Lead}{https://youtu.be/tpVQBQWuLt8}
 
 \begin{loesungbox}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  hub/.style={circle, draw=lpAccent, fill=lpAccent, text=white,
+    font=\sffamily\bfseries\small, minimum size=1.8cm, align=center},
+  ch/.style={rectangle, rounded corners=3pt, draw=lpGray!70, fill=lpGrayLight,
+    text=lpInk, minimum width=1.9cm, minimum height=0.8cm, align=center,
+    font=\sffamily\footnotesize},
+  prio/.style={ch, draw=lpAmberBorder, fill=lpAmberLight, line width=0.8pt},
+  flow/.style={-{Stealth[length=4pt]}, line width=0.7pt, color=lpAccent!70}]
+  % CRM-Hub im Zentrum
+  \node[hub] (crm) at (0,0) {CRM\\(Hub)};
+  % Kanäle ringsum
+  \node[prio]  (web)  at ( 3.3, 1.6) {Website};
+  \node[prio]  (lead) at ( 3.3,-1.6) {Lead\\Scoring};
+  \node[ch]    (mail) at ( 0.0, 2.5) {E-Mail};
+  \node[ch]    (port) at ( 0.0,-2.5) {Kunden-\\portal};
+  \node[ch]    (ad)   at (-3.3, 1.6) {Außen-\\dienst};
+  \node[prio]  (dash) at (-3.3,-1.6) {Dashboard};
+  % Verbindungen (bidirektional)
+  \foreach \n in {web,lead,mail,port,ad,dash} {
+    \draw[flow] (crm) -- (\n);
+    \draw[flow] (\n) -- (crm);
+  }
+  % Legende
+  \node[font=\sffamily\scriptsize\itshape, color=lpAmberBorder] at (0,-3.4)
+    {Orange = Priorit{\"a}t 1--4 (CRM, Lead-Scoring, Website, Dashboard) \textbullet{} Grau = sp{\"a}ter / Pilot};
+\end{tikzpicture}
+\end{center}
+
+\smallskip
 \textbf{1. Omnichannel-Schwächen:}
 \begin{itemize}
   \item Bestehende Kanäle isoliert \textendash{} keine integrierte Strategie.
