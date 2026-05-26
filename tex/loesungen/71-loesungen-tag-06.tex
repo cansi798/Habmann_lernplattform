@@ -138,6 +138,12 @@
   \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
+
 \begin{document}
 
 \begin{titlepage}
@@ -214,7 +220,7 @@ Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Welche Entscheidung ist in 6\,
 
 \aufgabenkopf{1}{BPMS-Bausteine}{\nivLi}{8\,min}
 
-\ytquery{BPMS Bausteine Prozessengine Workflow Engine Closed Loop Camunda}
+\ytvideo{Was ist BPM? — Business Process Management in 2 Minuten}{https://youtu.be/9NXq0a-X7cI}
 
 \begin{loesungbox}
 \textbf{Sieben Kernbausteine:}
@@ -236,7 +242,7 @@ Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Welche Entscheidung ist in 6\,
 
 \aufgabenkopf{2}{API als Vertrag}{\nivLi}{10\,min}
 
-\ytquery{API Contract REST Endpoint Versioning Auth Rate Limiting Best Practice}
+\ytvideo{Was ist BPM? — Business Process Management in 2 Minuten}{https://youtu.be/9NXq0a-X7cI}
 
 \begin{loesungbox}
 \textbf{Acht Pflichtbestandteile:}
@@ -259,7 +265,7 @@ Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Welche Entscheidung ist in 6\,
 
 \aufgabenkopf{3}{Sync vs.\ Async, Idempotenz, Retry}{\nivLi}{8\,min}
 
-\ytquery{Sync vs Async API Event Driven Architecture Idempotency Retry Exponential}
+\ytvideo{Was ist BPM? — Business Process Management in 2 Minuten}{https://youtu.be/9NXq0a-X7cI}
 
 \begin{loesungbox}
 \textbf{1. Sync vs.\ Async:}
@@ -298,7 +304,7 @@ Komplexit\"at   & gering & h\"oher (Correlation) \\
 
 \aufgabenkopf{4}{BPMS-Blueprint \emph{Customer Complaint Handling}}{\nivLii}{25\,min}
 
-\ytquery{BPMS Blueprint Customer Complaint Workflow SLA Eskalation Camunda}
+\ytvideo{Was ist eine REST-API? — Einführung in REST APIs}{https://youtu.be/ZuINS_-n-AM}
 
 \begin{loesungbox}
 \textbf{BPMS-Blueprint:}
@@ -337,7 +343,7 @@ Komplexit\"at   & gering & h\"oher (Correlation) \\
 
 \aufgabenkopf{5}{API-Vertr\"age}{\nivLii}{22\,min}
 
-\ytquery{REST API Contract Order Status Return GetOrderStatus CreateReturn Error}
+\ytvideo{Was ist eine REST-API? — Einführung in REST APIs}{https://youtu.be/ZuINS_-n-AM}
 
 \begin{loesungbox}
 \textbf{API 1: \texttt{GetOrderStatus} (sync)}
@@ -383,7 +389,7 @@ Komplexit\"at   & gering & h\"oher (Correlation) \\
 
 \aufgabenkopf{6}{Cloud-native Betriebsanforderungen}{\nivLii}{20\,min}
 
-\ytquery{Cloud Native Twelve Factor Auto Scaling Observability Circuit Breaker SLO}
+\ytvideo{Was ist eine REST-API? — Einführung in REST APIs}{https://youtu.be/ZuINS_-n-AM}
 
 \begin{loesungbox}
 \textbf{F\"unf Anforderungen:}
@@ -404,7 +410,7 @@ Wenn Container im Peak auf 20 hochskaliert, aber niemand Latenz, Error-Rate und 
 
 \aufgabenkopf{7}{System-of-Record-Entscheidung}{\nivLii}{18\,min}
 
-\ytquery{System of Record Data Ownership Master Data Management CRM ERP Conflict}
+\ytvideo{Monolithen vs. Microservices — wann ist welche Architektur sinnvoll?}{https://youtu.be/N0k3VKL4Als}
 
 \begin{loesungbox}
 \textbf{1. System of Record pro Datenobjekt:}
@@ -434,7 +440,7 @@ Wenn CRM eine neue Lieferadresse f\"uhrt, das ERP eine ``alte'' Adresse aus eine
 
 \aufgabenkopf{8}{E2E-Methodenintegration: Model \textrightarrow{} Run \textrightarrow{} Improve}{\nivLii}{18\,min}
 
-\ytquery{Process Model Run Improve Closed Loop BPMS Mining KPI Continuous Improvement}
+\ytvideo{Monolithen vs. Microservices — wann ist welche Architektur sinnvoll?}{https://youtu.be/N0k3VKL4Als}
 
 \begin{loesungbox}
 \textbf{Model:} \emph{BPMN} als Soll (ausf\"uhrbar im BPMS) + \emph{VSM} als End-to-End-\"Ubersicht f\"ur Engp\"asse. BPMN steuert Ausf\"uhrung, VSM steuert Optimierung.
@@ -485,7 +491,7 @@ Wenn CRM eine neue Lieferadresse f\"uhrt, das ERP eine ``alte'' Adresse aus eine
 
 \aufgabenkopf{9}{Fallstudie \emph{EuroLogix}}{\nivLiii}{45\,min}
 
-\ytquery{Logistics Exception Handling BPMS Cloud Native API Integration Roadmap}
+\ytvideo{Monolithen vs. Microservices — wann ist welche Architektur sinnvoll?}{https://youtu.be/N0k3VKL4Als}
 
 \begin{loesungbox}
 \textbf{1. BPMS-Prozess:}\\
@@ -515,7 +521,7 @@ Start ``Exception erkannt'' (Event aus TMS) \textrightarrow{} Task \emph{Klassif
 
 \aufgabenkopf{10}{Architekturpfad: event-driven vs.\ sync}{\nivLiii}{25\,min}
 
-\ytquery{Event Driven Architecture vs Synchronous Trade Off Resilience Audit}
+\ytvideo{Business Process Management — Closed-Loop einfach erklärt}{https://youtu.be/IBenKthHmUU}
 
 \begin{loesungbox}
 \textbf{Trade-off-Matrix:}
@@ -556,7 +562,7 @@ Wenn nach 3\,Monaten die durchschnittliche Event-Latenz \"uber 2\,Sekunden steig
 
 \aufgabenkopf{11}{Transferprojekt \textendash{} E2E Integration \& BPMS Platform Strategy}{\nivLiii}{45\,min}
 
-\ytquery{Platform Strategy BPMS Integration Cloud Native API Governance CDO}
+\ytvideo{Business Process Management — Closed-Loop einfach erklärt}{https://youtu.be/IBenKthHmUU}
 
 \begin{loesungbox}
 \textbf{1. Plattform-Entscheidungsarchitektur:}

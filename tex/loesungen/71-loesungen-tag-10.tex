@@ -189,6 +189,11 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
 % =========================================================================
 \begin{document}
 
@@ -279,7 +284,7 @@ Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihr
 
 \aufgabenkopf{1}{Microservices \textendash{} Eignung, Risiken und Servicegrenze}{\nivLi}{8\,min}
 
-\ytquery{Microservices Vorteile Risiken Servicegrenze Business Capability erklaert}
+\ytvideo{Microservices — warum, wann und mit welchen Grenzen}{https://youtu.be/ZXfLy229GLs}
 
 \begin{loesungbox}
 \textbf{1. Drei Nutzenversprechen:}
@@ -306,7 +311,7 @@ Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihr
 % --- AUFGABE 2 -----------------------------------------------------------
 \aufgabenkopf{2}{Container \& Kubernetes \textendash{} Kernbegriffe}{\nivLi}{8\,min}
 
-\ytquery{Kubernetes Grundlagen Container Orchestrierung Blue Green Canary einfach erklaert}
+\ytvideo{Kubernetes — Container-Orchestrierung in der Praxis}{https://youtu.be/SFVg7fDdvLE}
 
 \begin{loesungbox}
 \begin{tabularx}{\linewidth}{@{}p{3.6cm}X@{}}
@@ -333,7 +338,7 @@ Ressourcen\-limits & Pro Container vereinbarte Mindest- (Requests) und H\"ochstw
 % --- AUFGABE 3 -----------------------------------------------------------
 \aufgabenkopf{3}{Testpyramide \& Quality Gates}{\nivLi}{10\,min}
 
-\ytquery{Testpyramide TDD Red Green Refactor Quality Gates erklaert}
+\ytvideo{Microservices — warum, wann und mit welchen Grenzen}{https://youtu.be/ZXfLy229GLs}
 
 \begin{loesungbox}
 \begin{tabularx}{\linewidth}{@{}p{3.4cm}|X|X|X@{}}
@@ -373,7 +378,7 @@ Typischer Fehlerfund & Logikfehler in einer Methode. & Schnittstelle / Datenform
 % --- AUFGABE 4 -----------------------------------------------------------
 \aufgabenkopf{4}{Service-Schnitt aus Prozessbeschreibung \textendash{} Order-to-Cash}{\nivLii}{25\,min}
 
-\ytquery{Microservices Service Schnitt Order to Cash Domain Driven Design Capability}
+\ytvideo{Microservices — warum, wann und mit welchen Grenzen}{https://youtu.be/ZXfLy229GLs}
 
 \begin{loesungbox}
 \textbf{1. Sechs Service-Kandidaten:}
@@ -411,7 +416,7 @@ Typischer Fehlerfund & Logikfehler in einer Methode. & Schnittstelle / Datenform
 % --- AUFGABE 5 -----------------------------------------------------------
 \aufgabenkopf{5}{Release-Flow \& Testpyramide als Sicherheitsnetz}{\nivLii}{25\,min}
 
-\ytquery{Release Flow Quality Gates Canary Feature Toggle SLO Beispiel}
+\ytvideo{Kubernetes — Container-Orchestrierung in der Praxis}{https://youtu.be/SFVg7fDdvLE}
 
 \begin{loesungbox}
 \textbf{1. Minimaler Release-Flow (7 Schritte):}
@@ -461,7 +466,7 @@ Payments & $\sim$\,140 (PSP-Adapter, Storno-Logik)    & $\sim$\,30 (Zahlungsprov
 % --- AUFGABE 6 -----------------------------------------------------------
 \aufgabenkopf{6}{Fallstudie ``InsureFast'' \textendash{} Servicegrenzen \& Betriebskonzept}{\nivLii}{30\,min}
 
-\ytquery{Microservices Versicherung Schadenmeldung Kubernetes Skalierung Beispiel}
+\ytvideo{Microservices — warum, wann und mit welchen Grenzen}{https://youtu.be/ZXfLy229GLs}
 
 \begin{loesungbox}
 \textbf{1. Servicegrenzen (sieben Services):}
@@ -496,7 +501,7 @@ Payments & $\sim$\,140 (PSP-Adapter, Storno-Logik)    & $\sim$\,30 (Zahlungsprov
 % --- AUFGABE 7 -----------------------------------------------------------
 \aufgabenkopf{7}{Fallstudie ``InsureFast'' \textendash{} Teststrategie \& Operating Model}{\nivLii}{30\,min}
 
-\ytquery{Microservices Operating Model RACI Plattform Team Incident Management}
+\ytvideo{Microservices — warum, wann und mit welchen Grenzen}{https://youtu.be/ZXfLy229GLs}
 
 \begin{loesungbox}
 \textbf{1. Teststrategie (TDD):}
@@ -548,7 +553,7 @@ Rollback-Plan            & R     & R & A & I \\
 % --- AUFGABE 8 -----------------------------------------------------------
 \aufgabenkopf{8}{Anti-Muster ``Microservices-Spaghetti'' erkennen und korrigieren}{\nivLii}{25\,min}
 
-\ytquery{Microservices Antipattern verteilter Monolith Observability erklaert}
+\ytvideo{Microservices — warum, wann und mit welchen Grenzen}{https://youtu.be/ZXfLy229GLs}
 
 \begin{loesungbox}
 \textbf{A \textendash{} Service-Wildwuchs.}
@@ -590,7 +595,7 @@ Rollback-Plan            & R     & R & A & I \\
 % --- AUFGABE 9 -----------------------------------------------------------
 \aufgabenkopf{9}{Reliability- \& Risk-Framework f\"ur eine wachsende Plattform}{\nivLiii}{35\,min}
 
-\ytquery{SLO Error Budget Change Failure Rate MTTR SRE Framework Senior}
+\ytvideo{Test-Driven Development — Qualität als Entscheidungsinstrument}{https://youtu.be/71nLhdZuMk0}
 
 \begin{loesungbox}
 \textbf{1. SLO-Set (drei SLOs f\"ur kritische Services):}
@@ -644,7 +649,7 @@ Tooling-Lock-in & 3 & 3 & Offene Standards (OpenAPI, BPMN-XML, Helm), Export-Anf
 % --- AUFGABE 10 ----------------------------------------------------------
 \aufgabenkopf{10}{Governance leicht, aber wirksam}{\nivLiii}{30\,min}
 
-\ytquery{Architecture Governance Principles Senior Lightweight Service Standard}
+\ytvideo{DevOps-Operating-Model — „you build it, you run it” und Plattform-Teams}{https://youtu.be/ak3oE0I6cXU}
 
 \begin{loesungbox}
 \textbf{1. Acht Architekturprinzipien:}
@@ -689,7 +694,7 @@ Tooling-Lock-in & 3 & 3 & Offene Standards (OpenAPI, BPMN-XML, Helm), Export-Anf
 % --- AUFGABE 11 ----------------------------------------------------------
 \aufgabenkopf{11}{Transferprojekt \textendash{} Digitale Prozessarchitektur als Betriebs- und Entscheidungsarchitektur}{\nivLiii}{45\,min}
 
-\ytquery{Microservices Operating Model Decision Architecture Senior Platform CIO}
+\ytvideo{Microservices — warum, wann und mit welchen Grenzen}{https://youtu.be/ZXfLy229GLs}
 
 \begin{loesungbox}
 \emph{Musterl\"osung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind m\"oglich, solange sie als Architektur (nicht als Liste) gedacht sind.}

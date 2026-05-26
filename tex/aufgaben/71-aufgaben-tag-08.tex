@@ -140,6 +140,12 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
+
 \newcommand{\antwortlinien}[1]{%
   \par\vspace{6pt}
   \foreach \x in {1,...,#1}{%
@@ -253,7 +259,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 8}. Heute besonders w
 \medskip
 \noindent Erg\"anzen Sie f\"ur jeden Typ: \emph{Welches Datenminimum} brauchen Sie? \emph{Welche Grenzen} (Datenqualit\"at, Konzeptdrift, Erkl\"arbarkeit, Fehlanreize)?
 
-\ytquery{Machine Learning Process Mining Classification Regression Clustering Anomaly}
+\ytvideo{ETL (Extract Transform Load) für Data Warehousing einfach erklärt}{https://youtu.be/VVJRBhUkX5o}
 
 \antwortlinien{14}
 
@@ -275,7 +281,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 8}. Heute besonders w
 \medskip
 \noindent Geben Sie pro Schritt einen \emph{typischen Stolperstein} an. Schlie{\ss}en Sie mit einem Satz: Wo entsteht die meiste Arbeit \textendash{} und wo der gr\"o{\ss}te Wert?
 
-\ytquery{ETL Pipeline Process Data Staging Mapping Join Data Quality DWH}
+\ytvideo{ETL (Extract Transform Load) für Data Warehousing einfach erklärt}{https://youtu.be/VVJRBhUkX5o}
 
 \antwortlinien{14}
 
@@ -297,7 +303,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 8}. Heute besonders w
 \medskip
 \noindent Entwerfen Sie ein \emph{Mini-Layout} f\"ur ein Dashboard ``Incident Operations'' mit \emph{sechs Kacheln}: 2 Executive-KPIs, 2 Prozess-KPIs, 1 Risiko/Compliance-KPI, 1 Alert-Kachel.
 
-\ytquery{BI Dashboard Best Practice Executive KPI Drilldown Alert Tableau Power BI}
+\ytvideo{ETL (Extract Transform Load) für Data Warehousing einfach erklärt}{https://youtu.be/VVJRBhUkX5o}
 
 \antwortlinien{14}
 
@@ -332,7 +338,7 @@ Ein Prozess (z.\,B.\ Reklamationsbearbeitung) schwankt stark in Durchlaufzeit; M
   \item \textbf{Entscheidung unter Unsicherheit:} Welche Daten fehlen vermutlich \textendash{} und wie erfassen Sie sie pragmatisch (ohne Tool-Projekt)?
 \end{enumerate}
 
-\ytquery{Predictive Process Analytics Use Case Canvas SLA Risk Rework Baseline}
+\ytvideo{Datenbank vs. Data Lake vs. Data Warehouse — die Unterschiede}{https://youtu.be/BQuyIwi_RCQ}
 
 \antwortlinien{18}
 
@@ -353,7 +359,7 @@ Prozessdaten liegen in drei Quellen: \emph{CRM} (Kunde), \emph{Ticketing} (Bearb
   \item \textbf{Anti-Gaming-Entscheidung:} Welche \emph{eine KPI} f\"uhren Sie \emph{nicht} sofort ein, um Fehlanreize zu vermeiden \textendash{} und warum?
 \end{enumerate}
 
-\ytquery{ETL Pipeline 6 Steps Data Quality Checks BI Dashboard Anti Gaming}
+\ytvideo{Datenbank vs. Data Lake vs. Data Warehouse — die Unterschiede}{https://youtu.be/BQuyIwi_RCQ}
 
 \antwortlinien{18}
 
@@ -374,7 +380,7 @@ Vor jeder ML-L\"osung lohnt sich eine \fachbegriff{Baseline-Heuristik}: einfache
   \item \textbf{Anti-Muster}: Wann ist die Baseline \emph{besser} als ein ML-Modell (Erkl\"arbarkeit, Auditierbarkeit, Stabilit\"at)?
 \end{enumerate}
 
-\ytquery{Baseline Heuristic vs Machine Learning When Simpler is Better Process}
+\ytvideo{Datenbank vs. Data Lake vs. Data Warehouse — die Unterschiede}{https://youtu.be/BQuyIwi_RCQ}
 
 \antwortlinien{14}
 
@@ -395,7 +401,7 @@ Das Predictive-Modell wirft pro Tag 30 Alerts. Niemand reagiert. Nach 6 Wochen w
   \item \textbf{Faustregel} (1 Satz): Ab wann ist ein Predictive-System ``produktiv'' \textendash{} im Gegensatz zu ``demoreif''?
 \end{enumerate}
 
-\ytquery{Alert Playbook Process Mining MLOps Drift Detection Alarm Fatigue}
+\ytvideo{Data Warehouse einfach erklärt — Grundlagen}{https://youtu.be/EHmeK1nMBvA}
 
 \antwortlinien{16}
 
@@ -420,7 +426,7 @@ Bei Predictive sind \emph{beide} Fehler m\"oglich: ein \emph{False Positive} (Al
 
 \noindent Sagen Sie pro Use Case: (a) Was ist False Positive konkret? (b) Was ist False Negative konkret? (c) Welcher ist teurer und warum? (d) Welche Konsequenz hat das f\"ur den \emph{Schwellenwert} (sensitiv vs.\ konservativ)?
 
-\ytquery{False Positive vs False Negative Cost Sensitive ML Process Mining Threshold}
+\ytvideo{Data Warehouse einfach erklärt — Grundlagen}{https://youtu.be/EHmeK1nMBvA}
 
 \antwortlinien{16}
 
@@ -450,7 +456,7 @@ Bei Predictive sind \emph{beide} Fehler m\"oglich: ein \emph{False Positive} (Al
   \item \textbf{MVP-Entscheidung:} Welche \emph{2 Features} und welche \emph{1 Datenquelle} lassen Sie zuerst weg \textendash{} und wie kompensieren Sie?
 \end{enumerate}
 
-\ytquery{SLA Predictive Incident Management Features ETL Dashboard Real Time}
+\ytvideo{Data Warehouse einfach erklärt — Grundlagen}{https://youtu.be/EHmeK1nMBvA}
 
 \antwortlinien{34}
 
@@ -472,7 +478,7 @@ Bei Predictive sind \emph{beide} Fehler m\"oglich: ein \emph{False Positive} (Al
   \item \textbf{Fairness:} Welcher \emph{Bias} k\"onnte das Modell entwickeln (z.\,B.\ benachteiligt Service A gegen\"uber Service B)? Welche Gegenma{\ss}nahme?
 \end{enumerate}
 
-\ytquery{MLOps Model Governance Drift Detection Explainability XAI Fairness Bias}
+\ytvideo{Business Intelligence KPI Dashboard in Power BI}{https://youtu.be/0BwQvLGUbZg}
 
 \antwortlinien{20}
 
@@ -510,7 +516,7 @@ Bei Predictive sind \emph{beide} Fehler m\"oglich: ein \emph{False Positive} (Al
 
 \noindent\textbf{Format-Hinweis:} Pr\"asentieren Sie das Ergebnis als \emph{Executive Briefing} \textendash{} 2 Seiten max. Seite 1: Entscheidungsarchitektur + Roadmap-Skizze. Seite 2: KPI-Set + Risiken + Fr\"uhwarnsignale. Senior-Reflex: ein CDO liest in 90\,Sekunden, was er entscheiden muss \textendash{} nicht 30\,Seiten Konzept.
 
-\ytquery{Process Intelligence Platform Decision Architecture CDO Real Time Predictive}
+\ytvideo{Business Intelligence KPI Dashboard in Power BI}{https://youtu.be/0BwQvLGUbZg}
 
 \antwortlinien{40}
 

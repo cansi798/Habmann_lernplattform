@@ -140,6 +140,12 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
+
 \newcommand{\antwortlinien}[1]{%
   \par\vspace{6pt}
   \foreach \x in {1,...,#1}{%
@@ -252,7 +258,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 4}. Versuchen Sie jed
 
 \noindent Schlie{\ss}en Sie mit einem Satz: Welcher Baustein wird am h\"aufigsten ``vergessen'' \textendash{} und warum?
 
-\ytquery{Process Repository Single Source of Truth Aufbau Komponenten BPM}
+\ytvideo{Was ist BPM-Software? — Repository und Engine in der Übersicht}{https://youtu.be/vL6VOjsCJSo}
 
 \antwortlinien{14}
 
@@ -284,7 +290,7 @@ Fehlerbehandlung & & \\[16pt]
 \smallskip
 \noindent Erkl\"aren Sie zus\"atzlich das \emph{\"Ubergabeprinzip}: Wie schneidet man eine ``automatisierbare Teilstrecke'' (Start / Ende / Daten / Fehler) aus einem Business-BPMN heraus?
 
-\ytquery{BPMN Business vs Execution Camunda User Task Service Task Variable}
+\ytvideo{Was ist BPM-Software? — Repository und Engine in der Übersicht}{https://youtu.be/vL6VOjsCJSo}
 
 \antwortlinien{8}
 
@@ -307,7 +313,7 @@ Fehlerbehandlung & & \\[16pt]
 
 \noindent Skizze als Pfeildiagramm: \emph{Draft} \textrightarrow{} \emph{Review} \textrightarrow{} \emph{Approved} \textrightarrow{} \emph{Retired}, mit R\"ucksprung-Pfeil aus \emph{Review} zur\"uck zu \emph{Draft}.
 
-\ytquery{Process Model Lifecycle Draft Approved Retired Workflow Governance}
+\ytvideo{Was ist BPM-Software? — Repository und Engine in der Übersicht}{https://youtu.be/vL6VOjsCJSo}
 
 \antwortlinien{12}
 
@@ -333,7 +339,7 @@ Fehlerbehandlung & & \\[16pt]
 
 \noindent Abgabe: 1-Seiten-Blueprint + Freigabefluss + Variantenentscheidung.
 
-\ytquery{Process Repository Blueprint Metadaten Order to Cash Freigabe Varianten}
+\ytvideo{Camunda 8 — vom Modell zum laufenden Workflow}{https://youtu.be/rC_TdTOfdkE}
 
 \antwortlinien{20}
 
@@ -361,7 +367,7 @@ Fehlerbehandlung & & \\[16pt]
   \item \textbf{Entscheidung unter Unsicherheit:} Welche \emph{eine Ausnahme} behandeln Sie im ersten Release \emph{nicht} im Workflow \textendash{} und wie fangen Sie sie \emph{organisatorisch} ab?
 \end{enumerate}
 
-\ytquery{Camunda Execution BPMN Rechnungsfreigabe User Task Service Task Slice}
+\ytvideo{Camunda 8 — vom Modell zum laufenden Workflow}{https://youtu.be/rC_TdTOfdkE}
 
 \antwortlinien{18}
 
@@ -390,7 +396,7 @@ Nehmen Sie den \emph{Automations-Slice} aus Aufgabe 5 und modellieren Sie ihn al
   \item \textbf{Fehlerbehandlung:} Wie verh\"alt sich der Prozess, wenn die Service Task ``ERP buchen'' technisch scheitert (Retry, Eskalation, manuell)?
 \end{enumerate}
 
-\ytquery{Camunda BPMN Execution Service Task Timer Error Boundary Event Beispiel}
+\ytvideo{Camunda 8 — vom Modell zum laufenden Workflow}{https://youtu.be/rC_TdTOfdkE}
 
 \antwortlinien{18}
 
@@ -416,7 +422,7 @@ Nehmen Sie den \emph{Automations-Slice} aus Aufgabe 5 und modellieren Sie ihn al
   \item \textbf{Eskalation:} Wann m\"ussen Sie auf eine andere Option wechseln (Trigger benennen)?
 \end{enumerate}
 
-\ytquery{BPM Variant Management Process Variants Country Multi Site Governance}
+\ytvideo{Camunda DACH — Wie funktioniert Workflow Automation?}{https://youtu.be/M4UU2BXVc1g}
 
 \antwortlinien{16}
 
@@ -446,7 +452,7 @@ Nehmen Sie den \emph{Automations-Slice} aus Aufgabe 5 und modellieren Sie ihn al
   \item Schlagen Sie eine konkrete \emph{Sofortma{\ss}nahme} (24\,h) und eine \emph{strukturelle Ma{\ss}nahme} (30\,Tage) vor.
 \end{enumerate}
 
-\ytquery{Process Repository Governance Audit Findings Owner Version Approval}
+\ytvideo{Camunda DACH — Wie funktioniert Workflow Automation?}{https://youtu.be/M4UU2BXVc1g}
 
 \antwortlinien{16}
 
@@ -481,7 +487,7 @@ Nehmen Sie den \emph{Automations-Slice} aus Aufgabe 5 und modellieren Sie ihn al
   \item \textbf{Entscheidung unter Unsicherheit:} Welche \emph{Ausnahme} bleibt im ersten Release au{\ss}en vor \textendash{} und wie wird sie organisatorisch abgefedert?
 \end{enumerate}
 
-\ytquery{Process Repository Automation Camunda Pilot KPI Roadmap Mittelstand}
+\ytvideo{Camunda DACH — Wie funktioniert Workflow Automation?}{https://youtu.be/M4UU2BXVc1g}
 
 \antwortlinien{34}
 
@@ -503,7 +509,7 @@ Nehmen Sie den \emph{Automations-Slice} aus Aufgabe 5 und modellieren Sie ihn al
   \item \textbf{Faustregel} (1 Satz): Wann ist Governance \emph{zwingend}, wann ist sie \emph{Overhead}?
 \end{enumerate}
 
-\ytquery{Process Repository Governance RACI Owner Approver Decision Architecture}
+\ytvideo{Low-Code mit Camunda 8 — Prozessautomatisierung ohne Programmierung?}{https://youtu.be/33oG8WtRmdk}
 
 \antwortlinien{20}
 
@@ -539,7 +545,7 @@ Nehmen Sie den \emph{Automations-Slice} aus Aufgabe 5 und modellieren Sie ihn al
 
 \noindent\textbf{Bewertungskriterien:} Strategie-Anschluss \textperiodcentered{} Klarheit der Verantwortung \textperiodcentered{} Pragmatismus unter Budget/Reorg-Risiko \textperiodcentered{} Entscheidungslogik.
 
-\ytquery{Process Operating Model Repository Automation Camunda Governance Roadmap CPO}
+\ytvideo{Low-Code mit Camunda 8 — Prozessautomatisierung ohne Programmierung?}{https://youtu.be/33oG8WtRmdk}
 
 \antwortlinien{36}
 

@@ -138,6 +138,11 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
 \begin{document}
 
 \begin{titlepage}
@@ -214,7 +219,7 @@ Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Habe ich Scrum/Kanban-Wahl mit
 
 \aufgabenkopf{1}{Scrum-Framework}{\nivLi}{8\,min}
 
-\ytquery{Scrum Framework Roles Events Artifacts Cargo Cult Scrum}
+\ytvideo{Scrum-Framework — Rollen, Events, Artefakte}{https://youtu.be/Ibz9STVjtzI}
 
 \begin{loesungbox}
 \textbf{Drei Rollen:}
@@ -247,7 +252,7 @@ Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Habe ich Scrum/Kanban-Wahl mit
 
 \aufgabenkopf{2}{Kanban-Prinzipien}{\nivLi}{8\,min}
 
-\ytquery{Kanban Principles Visualize WIP Limit Pull Flow Lead Time Cycle Time}
+\ytvideo{DORA-Kennzahlen — Lead Time, Deployment Frequency, MTTR, Change Failure Rate}{https://youtu.be/lqsENcje41w}
 
 \begin{loesungbox}
 \begin{tabularx}{\linewidth}{@{}p{3.0cm}|X|X@{}}
@@ -270,7 +275,7 @@ Ein WIP-Limit zwingt das Team, \emph{Ende} (Done) wichtiger zu nehmen als \emph{
 
 \aufgabenkopf{3}{CI-Pipeline \& IaC}{\nivLi}{10\,min}
 
-\ytquery{CI Pipeline Build Test Deploy Quality Gate IaC Infrastructure as Code}
+\ytvideo{Infrastructure as Code — Reproduzierbarkeit und Auditierbarkeit}{https://youtu.be/3gZ_-k9t-KQ}
 
 \begin{loesungbox}
 \textbf{CI-Pipeline Stufen + Quality Gates:}
@@ -300,7 +305,7 @@ Deploy Prod & Auf Production. & Smoke Tests + Health-Check OK; Rollback-Plan dok
 
 \aufgabenkopf{4}{Scrum oder Kanban?}{\nivLii}{25\,min}
 
-\ytquery{Scrum vs Kanban Hybrid Decision Process Improvement Operating Model}
+\ytvideo{CI/CD-Pipelines — sichere und schnelle Änderungen}{https://youtu.be/xzV0KiprcZc}
 
 \begin{loesungbox}
 \textbf{1. Entscheidung: Hybrid.} 6 Stichpunkte:
@@ -333,7 +338,7 @@ Deploy Prod & Auf Production. & Smoke Tests + Health-Check OK; Rollback-Plan dok
 
 \aufgabenkopf{5}{CI-Pipeline \& Quality Gates}{\nivLii}{22\,min}
 
-\ytquery{CI CD Pipeline Quality Gates IaC Policy Rollback Canary Feature Toggle}
+\ytvideo{CI/CD-Pipelines — sichere und schnelle Änderungen}{https://youtu.be/xzV0KiprcZc}
 
 \begin{loesungbox}
 \textbf{1. Minimal-Pipeline (6 Stufen):}\\
@@ -367,7 +372,7 @@ Build \textrightarrow{} Unit Tests \textrightarrow{} Integration Tests \textrigh
 
 \aufgabenkopf{6}{DORA-Kennzahlen}{\nivLii}{20\,min}
 
-\ytquery{DORA Metrics Lead Time Deployment Frequency MTTR Change Failure Rate}
+\ytvideo{DORA-Kennzahlen — Lead Time, Deployment Frequency, MTTR, Change Failure Rate}{https://youtu.be/lqsENcje41w}
 
 \begin{loesungbox}
 \textbf{DORA-Kennzahlen:}
@@ -397,7 +402,7 @@ Change Failure Rate & \% Deployments mit Incidents. F\"ordert Qualit\"at. & Klei
 
 \aufgabenkopf{7}{IaC-Workflow}{\nivLii}{20\,min}
 
-\ytquery{Infrastructure as Code GitOps Pull Request Review Secrets Management Audit}
+\ytvideo{Infrastructure as Code — Reproduzierbarkeit und Auditierbarkeit}{https://youtu.be/3gZ_-k9t-KQ}
 
 \begin{loesungbox}
 \textbf{1. IaC-Workflow:}\\
@@ -429,7 +434,7 @@ Auditor sieht: (a) Git-Historie (wer hat commitet), (b) Pull-Request-Review (wer
 
 \aufgabenkopf{8}{Anti-Muster im Agile Delivery}{\nivLii}{18\,min}
 
-\ytquery{Scrum Kanban Anti Patterns Cargo Cult Friday Release Sprint Goal}
+\ytvideo{Infrastructure as Code — Reproduzierbarkeit und Auditierbarkeit}{https://youtu.be/3gZ_-k9t-KQ}
 
 \begin{loesungbox}
 \textbf{A \textendash{} ``Backlog-Abarbeitungs-Sprint'':} \emph{Anti-Muster:} kein Sprint Goal, kein Outcome. \emph{Schaden:} Team verliert Fokus, Stakeholder bekommen Aufz\"ahlung statt Wert. \emph{Sofort:} Sprint Goal als Outcome formulieren (``Bef\"ahige X''); \emph{Strukturell:} Planning auf max.\ 2\,h fokussieren, Backlog vorher refinen.
@@ -451,7 +456,7 @@ Auditor sieht: (a) Git-Historie (wer hat commitet), (b) Pull-Request-Review (wer
 
 \aufgabenkopf{9}{Fallstudie \emph{CityServices}}{\nivLiii}{45\,min}
 
-\ytquery{Public Sector Digital Approval Workflow Agile Scrum Kanban CI Release}
+\ytvideo{Infrastructure as Code — Reproduzierbarkeit und Auditierbarkeit}{https://youtu.be/3gZ_-k9t-KQ}
 
 \begin{loesungbox}
 \textbf{1. Hybrid-Ansatz:} Scrum f\"ur Features (2-Wochen-Sprints) + Kanban-Lane f\"ur Incidents/Requests (WIP 2). Rollen: PO (Fachbereich), SM, Dev-Team, Plattform-Lead. Policies (siehe Aufgabe 4).
@@ -485,7 +490,7 @@ Auditor sieht: (a) Git-Historie (wer hat commitet), (b) Pull-Request-Review (wer
 
 \aufgabenkopf{10}{Stop-the-Line}{\nivLiii}{25\,min}
 
-\ytquery{Stop The Line Andon Continuous Delivery Emergency Change Management}
+\ytvideo{DORA-Kennzahlen — Lead Time, Deployment Frequency, MTTR, Change Failure Rate}{https://youtu.be/lqsENcje41w}
 
 \begin{loesungbox}
 \textbf{1. Drei Stop-the-Line-Regeln:}
@@ -517,7 +522,7 @@ Wenn das Management eine Stop-Regel \emph{politisch} \"uberstimmt (``muss heute 
 
 \aufgabenkopf{11}{Transferprojekt \textendash{} Agile + DevOps Operating Model}{\nivLiii}{45\,min}
 
-\ytquery{Agile DevOps Operating Model DORA Team Topologies Quality Gates Roadmap}
+\ytvideo{DORA-Kennzahlen — Lead Time, Deployment Frequency, MTTR, Change Failure Rate}{https://youtu.be/lqsENcje41w}
 
 \begin{loesungbox}
 \textbf{1. Entscheidungs\-architektur:}

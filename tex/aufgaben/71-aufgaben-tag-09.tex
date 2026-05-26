@@ -140,6 +140,11 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
 \newcommand{\antwortlinien}[1]{%
   \par\vspace{6pt}
   \foreach \x in {1,...,#1}{%
@@ -255,7 +260,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 9}. Heute besonders w
 \medskip
 \noindent Erkl\"aren Sie zus\"atzlich den \emph{Anti-Muster-Begriff} ``Cargo Cult Scrum'' in 2\,--\,3 S\"atzen: Welche Symptome treten auf? Welcher Wert ist verloren gegangen?
 
-\ytquery{Scrum Framework Roles Events Artifacts Cargo Cult Scrum}
+\ytvideo{Scrum-Framework — Rollen, Events, Artefakte}{https://youtu.be/Ibz9STVjtzI}
 
 \antwortlinien{14}
 
@@ -281,7 +286,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 9}. Heute besonders w
 
 \noindent Diskutieren Sie: Warum ist ein \emph{WIP-Limit} ein Schutzmechanismus, kein Aufwand-Hindernis?
 
-\ytquery{Kanban Principles Visualize WIP Limit Pull Flow Lead Time Cycle Time}
+\ytvideo{DORA-Kennzahlen — Lead Time, Deployment Frequency, MTTR, Change Failure Rate}{https://youtu.be/lqsENcje41w}
 
 \antwortlinien{12}
 
@@ -303,7 +308,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 9}. Heute besonders w
 \medskip
 \noindent Erkl\"aren Sie au{\ss}erdem \fachbegriff{Infrastructure as Code}: Was ist es? Welche \emph{drei Vorteile} (Reproduzierbarkeit, Reviewbarkeit, Auditability)? Welche \emph{zwei Risiken} (falsche Rechte, unkontrollierte \"Anderungen ohne Review)?
 
-\ytquery{CI Pipeline Build Test Deploy Quality Gate IaC Infrastructure as Code}
+\ytvideo{Infrastructure as Code — Reproduzierbarkeit und Auditierbarkeit}{https://youtu.be/3gZ_-k9t-KQ}
 
 \antwortlinien{12}
 
@@ -330,7 +335,7 @@ Ein Unternehmen will in 12 Wochen einen digitalen Prozess (z.\,B.\ \emph{Rechnun
   \item \textbf{Drei Policies}, die ``Verantwortungs\-f\"ahigkeit'' f\"ordern: klare Abnahme, Eskalation, Transparenz.
 \end{enumerate}
 
-\ytquery{Scrum vs Kanban Hybrid Decision Process Improvement Operating Model}
+\ytvideo{CI/CD-Pipelines — sichere und schnelle Änderungen}{https://youtu.be/xzV0KiprcZc}
 
 \antwortlinien{18}
 
@@ -351,7 +356,7 @@ Sie liefern jede Woche Prozess-/IT-\"Anderungen aus. Bisher entstehen Fehler nac
   \item \textbf{Entscheidung unter Unsicherheit:} Wo akzeptieren Sie bewusst \emph{Risiko} im MVP (z.\,B.\ weniger Tests) \textendash{} und wie begrenzen Sie den Schaden (Rollback, Canary, Feature Toggle)?
 \end{enumerate}
 
-\ytquery{CI CD Pipeline Quality Gates IaC Policy Rollback Canary Feature Toggle}
+\ytvideo{CI/CD-Pipelines — sichere und schnelle Änderungen}{https://youtu.be/xzV0KiprcZc}
 
 \antwortlinien{18}
 
@@ -378,7 +383,7 @@ DORA-Kennzahlen sind das ``Quartett'' der Delivery-Performance:
   \item \textbf{Faustregel:} Ab welchem Niveau gilt eine Organisation als ``High Performer'' (DORA-Benchmark)?
 \end{enumerate}
 
-\ytquery{DORA Metrics Lead Time Deployment Frequency MTTR Change Failure Rate}
+\ytvideo{DORA-Kennzahlen — Lead Time, Deployment Frequency, MTTR, Change Failure Rate}{https://youtu.be/lqsENcje41w}
 
 \antwortlinien{16}
 
@@ -399,7 +404,7 @@ Infrastructure as Code ist ein Vertrag: Umgebungen werden per Code beschrieben, 
   \item \textbf{Audit Trail:} Wie weist man dem Auditor in 6 Monaten nach, \emph{wer} \emph{wann} \emph{was} ge\"andert hat?
 \end{enumerate}
 
-\ytquery{Infrastructure as Code GitOps Pull Request Review Secrets Management Audit}
+\ytvideo{Infrastructure as Code — Reproduzierbarkeit und Auditierbarkeit}{https://youtu.be/3gZ_-k9t-KQ}
 
 \antwortlinien{16}
 
@@ -430,7 +435,7 @@ Infrastructure as Code ist ein Vertrag: Umgebungen werden per Code beschrieben, 
   \item Schlagen Sie eine \emph{Sofortma{\ss}nahme} (24\,h) und eine \emph{strukturelle Ma{\ss}nahme} (30\,T) vor.
 \end{enumerate}
 
-\ytquery{Scrum Kanban Anti Patterns Cargo Cult Friday Release Sprint Goal}
+\ytvideo{Infrastructure as Code — Reproduzierbarkeit und Auditierbarkeit}{https://youtu.be/3gZ_-k9t-KQ}
 
 \antwortlinien{16}
 
@@ -464,7 +469,7 @@ Infrastructure as Code ist ein Vertrag: Umgebungen werden per Code beschrieben, 
   \item \textbf{2 Fr\"uhwarnsignale:} z.\,B.\ ``Fehlerrate nach Release steigt'' oder ``Lead Time steigt''.
 \end{enumerate}
 
-\ytquery{Public Sector Digital Approval Workflow Agile Scrum Kanban CI Release}
+\ytvideo{Infrastructure as Code — Reproduzierbarkeit und Auditierbarkeit}{https://youtu.be/3gZ_-k9t-KQ}
 
 \antwortlinien{34}
 
@@ -486,7 +491,7 @@ Infrastructure as Code ist ein Vertrag: Umgebungen werden per Code beschrieben, 
   \item \textbf{Eskalation:} Wann \"uberstimmt das Management die Stop-the-Line-Regel? Welche Folgen hat das f\"ur die Glaubw\"urdigkeit?
 \end{enumerate}
 
-\ytquery{Stop The Line Andon Continuous Delivery Emergency Change Management}
+\ytvideo{DORA-Kennzahlen — Lead Time, Deployment Frequency, MTTR, Change Failure Rate}{https://youtu.be/lqsENcje41w}
 
 \antwortlinien{18}
 
@@ -521,7 +526,7 @@ Infrastructure as Code ist ein Vertrag: Umgebungen werden per Code beschrieben, 
 
 \noindent\textbf{Bewertungskriterien:} Senior-Level-Denken: Ver\"anderung als gesteuertes System (Outcomes, Risiken, Ownership) \textendash{} nicht als Taskliste.
 
-\ytquery{Agile DevOps Operating Model DORA Team Topologies Quality Gates Roadmap}
+\ytvideo{DORA-Kennzahlen — Lead Time, Deployment Frequency, MTTR, Change Failure Rate}{https://youtu.be/lqsENcje41w}
 
 \antwortlinien{38}
 

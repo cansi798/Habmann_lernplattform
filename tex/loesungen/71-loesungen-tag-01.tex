@@ -193,6 +193,12 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
+
 % =========================================================================
 \begin{document}
 
@@ -285,7 +291,7 @@ Vergleichen Sie Ihre eigene Antwort \emph{vor} der Musterl\"osung. Wo weicht Ihr
 
 \noindent Ordnen Sie die acht BPMN-Notationselemente unten jeweils ihrer korrekten Bedeutung zu.
 
-\ytquery{BPMN 2.0 Notation Symbole Erklaerung Start Event Task Gateway Pool Lane}
+\ytvideo{Was ist ein Geschäftsprozess — und warum überhaupt modellieren?}{https://youtu.be/E5ZgMT7ty6E}
 
 \begin{loesungbox}
 \begin{tabularx}{\linewidth}{@{}p{3.6cm}p{3.4cm}X@{}}
@@ -312,7 +318,7 @@ Lane              & Streifen \emph{im} Pool   & Rolle / Abteilung innerhalb eine
 % --- AUFGABE 2 -----------------------------------------------------------
 \aufgabenkopf{2}{Grunds\"atze ordnungsm\"a{\ss}iger Modellierung (GoM)}{\nivLi}{8\,min}
 
-\ytquery{Grundsaetze ordnungsmaessiger Modellierung GoM Becker Rosemann}
+\ytvideo{Was ist ein Geschäftsprozess — und warum überhaupt modellieren?}{https://youtu.be/E5ZgMT7ty6E}
 
 \begin{loesungbox}
 \textbf{Die sieben Grunds\"atze (nach Becker / Rosemann / Sch\"utte):}
@@ -342,7 +348,7 @@ Lane              & Streifen \emph{im} Pool   & Rolle / Abteilung innerhalb eine
 % --- AUFGABE 3 -----------------------------------------------------------
 \aufgabenkopf{3}{BPMN vs.\ EPC \textendash{} Vergleichstabelle}{\nivLi}{10\,min}
 
-\ytquery{BPMN EPC Vergleich Notation Unterschied Funktion Ereignis Konnektor}
+\ytvideo{Was ist ein Geschäftsprozess — und warum überhaupt modellieren?}{https://youtu.be/E5ZgMT7ty6E}
 
 \begin{loesungbox}
 \begin{tabularx}{\linewidth}{@{}p{4.0cm}|X|X@{}}
@@ -376,7 +382,7 @@ Typischer Anwendungs\-fokus & Ablauflogik, Verantwortlichkeiten (Pools/Lanes), N
 % --- AUFGABE 4 -----------------------------------------------------------
 \aufgabenkopf{4}{Bestellprozess ``B\"ucherklick GmbH'' modellieren}{\nivLii}{25\,min}
 
-\ytquery{BPMN Bestellprozess modellieren Beispiel Webshop B2C Lane Gateway}
+\ytvideo{Wofür modellieren wir? Die vier Zwecke und ihre Folgen}{https://youtu.be/xmls25KO7V8}
 
 \begin{loesungbox}
 \textbf{BPMN-Modell (Soll-Logik):}
@@ -508,7 +514,7 @@ Typischer Anwendungs\-fokus & Ablauflogik, Verantwortlichkeiten (Pools/Lanes), N
 % --- AUFGABE 5 -----------------------------------------------------------
 \aufgabenkopf{5}{Modell-Qualit\"at bewerten}{\nivLii}{20\,min}
 
-\ytquery{Modellqualitaet bewerten BPMN GoM Klarheit Richtigkeit Pruefkriterien}
+\ytvideo{Wofür modellieren wir? Die vier Zwecke und ihre Folgen}{https://youtu.be/xmls25KO7V8}
 
 \begin{loesungbox}
 \textbf{Bewertung anhand vier GoM-Kriterien:}
@@ -544,7 +550,7 @@ F\"ur \emph{Schulung von Service-MA ohne BPMN-Kenntnis} ist das Modell ungeeigne
 % --- AUFGABE 6 -----------------------------------------------------------
 \aufgabenkopf{6}{Rechnungspr\"ufung in EPC umsetzen}{\nivLii}{20\,min}
 
-\ytquery{EPC ereignisgesteuerte Prozesskette Beispiel Rechnungspruefung XOR}
+\ytvideo{Wofür modellieren wir? Die vier Zwecke und ihre Folgen}{https://youtu.be/xmls25KO7V8}
 
 \begin{loesungbox}
 \textbf{EPC-Darstellung (Soll-Logik, textuell mit Pfeilen):}
@@ -574,7 +580,7 @@ F\"ur \emph{Schulung von Service-MA ohne BPMN-Kenntnis} ist das Modell ungeeigne
 % --- AUFGABE 7 -----------------------------------------------------------
 \aufgabenkopf{7}{Pool-Lane-Aufteilung}{\nivLii}{20\,min}
 
-\ytquery{BPMN Pool Lane Unterschied Beispiel Kunde Lieferant Message Flow}
+\ytvideo{Pools und Lanes — wer macht was, und warum das strategisch wichtig ist}{https://youtu.be/AmEX0CxmzAs}
 
 \begin{loesungbox}
 \textbf{1. Struktur:} \emph{Zwei Pools, drei Lanes.}
@@ -622,7 +628,7 @@ Zahlungseingang verbuchen  & Pool 2 / Lane Buchhaltung & End-State f\"ur Anbiete
 % --- AUFGABE 8 -----------------------------------------------------------
 \aufgabenkopf{8}{Anti-Muster identifizieren und korrigieren}{\nivLii}{25\,min}
 
-\ytquery{BPMN Antipatterns Modellierungsfehler Spaghetti Gateway fehlend Join}
+\ytvideo{Pools und Lanes — wer macht was, und warum das strategisch wichtig ist}{https://youtu.be/AmEX0CxmzAs}
 
 \begin{loesungbox}
 \textbf{A \textendash{} Spaghetti-Layout.}
@@ -664,7 +670,7 @@ Zahlungseingang verbuchen  & Pool 2 / Lane Buchhaltung & End-State f\"ur Anbiete
 % --- AUFGABE 9 -----------------------------------------------------------
 \aufgabenkopf{9}{Fallstudie ``InnoHome Devices'' \textendash{} Innovation-to-Launch}{\nivLiii}{45\,min}
 
-\ytquery{Innovation Launch Prozess BPMN Lanes Stage Gate Modellierung}
+\ytvideo{Pools und Lanes — wer macht was, und warum das strategisch wichtig ist}{https://youtu.be/AmEX0CxmzAs}
 
 \begin{loesungbox}
 \textbf{1. BPMN-Modell mit Lanes (Soll-Logik):}
@@ -732,7 +738,7 @@ Pilotfreigabe & Reduziert Serienrisiko, kl\"art Accountability (``wer tr\"agt di
 % --- AUFGABE 10 ----------------------------------------------------------
 \aufgabenkopf{10}{Modellierungs-Governance \textendash{} wann aktualisieren, wer verantwortet?}{\nivLiii}{30\,min}
 
-\ytquery{Process Modeling Governance RACI Process Owner Aktualisierung Audit}
+\ytvideo{Vom Modellieren zur Governance — Senior-Verantwortung}{https://youtu.be/aQAT-0-Wljo}
 
 \begin{loesungbox}
 \textbf{1. Aktualisierungslogik:}
@@ -771,7 +777,7 @@ Kommunikation \& Schulung       & A     & I & C & I \\
 % --- AUFGABE 11 ----------------------------------------------------------
 \aufgabenkopf{11}{Transferprojekt \textendash{} Process Modeling Governance \& Decision Architecture}{\nivLiii}{45\,min}
 
-\ytquery{Process Modeling Governance Decision Architecture BPMN Enterprise Architect}
+\ytvideo{Vom Modellieren zur Governance — Senior-Verantwortung}{https://youtu.be/aQAT-0-Wljo}
 
 \begin{loesungbox}
 \emph{Musterl\"osung als Entscheidungsarchitektur \textendash{} andere Konfigurationen sind m\"oglich, solange sie als Architektur (nicht als Liste) gedacht sind.}

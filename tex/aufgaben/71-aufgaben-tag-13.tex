@@ -178,6 +178,11 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
 \newcommand{\antwortlinien}[1]{%
   \par\vspace{6pt}
   \foreach \x in {1,...,#1}{%
@@ -284,7 +289,7 @@ Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 13}. \emph{
   \item Begr\"unden Sie in einem Satz, warum die Nachhaltigkeitswirkung ein \emph{eigenes Attribut} sein muss \textendash{} statt sie in ``Kosten'' zu verstecken.
 \end{enumerate}
 
-\ytquery{ITIL 4 service portfolio management pipeline live retired catalog}
+\ytvideo{ITIL 4 Service Portfolio Management — Pipeline, Live, Retired}{https://youtu.be/778SxGGGbrI}
 
 \antwortlinien{14}
 
@@ -304,7 +309,7 @@ Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 13}. \emph{
   \item Nennen Sie \textbf{drei Anzeichen}, dass ein Service \emph{overprovisioniert} ist (z.\,B.\ CPU $<$\,20\,\% im Durchschnitt, RAM $<$\,40\,\%, kein einziger Spitzen-Alarm in 90 Tagen).
 \end{enumerate}
 
-\ytquery{IT capacity planning rightsizing SLO SLI SLA overprovisioning guardrail}
+\ytvideo{ITIL Capacity Management — Praxis und Kennzahlen}{https://youtu.be/nP4Dk68pulM}
 
 \antwortlinien{14}
 
@@ -324,7 +329,7 @@ Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 13}. \emph{
   \item Nennen Sie \textbf{zwei Hebel}, die in der Praxis oft als ``schnell umsetzbar'' verkauft werden, aber teure Folgen haben (z.\,B.\ ``alles in die Cloud schieben'' ohne Workload-Profil; ``K\"uhlung herunterfahren'' ohne Temperaturmonitoring).
 \end{enumerate}
 
-\ytquery{energy efficient data center virtualization rightsizing workload shift cooling}
+\ytvideo{ITIL 4 Service Portfolio Management — Pipeline, Live, Retired}{https://youtu.be/778SxGGGbrI}
 
 \antwortlinien{12}
 
@@ -358,7 +363,7 @@ Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 13}. \emph{
   \item Nennen Sie \textbf{zwei Zielkonflikte}, die der Canvas sichtbar macht (z.\,B.\ \emph{Kritikalit\"at vs.\ Kosten}, \emph{Verf\"ugbarkeit vs.\ Energie}).
 \end{enumerate}
 
-\ytquery{IT service portfolio canvas critical SLO sustainability scoring}
+\ytvideo{ITIL 4 Service Portfolio Management — Pipeline, Live, Retired}{https://youtu.be/778SxGGGbrI}
 
 \antwortlinien{22}
 
@@ -392,7 +397,7 @@ Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 13}. \emph{
   \item \textbf{Entscheidung unter Unsicherheit:} Welches ist das gr\"o{\ss}te Risiko (z.\,B.\ Peak wurde untersch\"atzt, Monitoringdaten sind l\"uckenhaft, Service hat unsichtbare Abh\"angigkeiten)? Wie kompensieren Sie \emph{minimalinvasiv} (z.\,B.\ Peak-Profil 1 Monat zus\"atzlich messen, Notfall-Kapazit\"at on demand sichern)?
 \end{enumerate}
 
-\ytquery{rightsizing pilot rollout guardrails VM cpu memory peak SLO}
+\ytvideo{Nachhaltige Rechenzentren — Best Practices für mehr Energieeffizienz}{https://youtu.be/mW8RS3gND7o}
 
 \antwortlinien{22}
 
@@ -431,7 +436,7 @@ Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 13}. \emph{
 
 \noindent Erg\"anzen Sie unter dem Ma{\ss}nahmenpaket eine \emph{Priorisierungs-Tabelle} (Hebel vs.\ Aufwand): welche zwei Ma{\ss}nahmen starten in den ersten 4 Wochen, welche zwei in den Wochen 5\,--\,12, welche zwei sp\"ater?
 
-\ytquery{ITIL capacity management sustainable IT rightsizing measures non-prod shutdown}
+\ytvideo{ITIL Capacity Management — Praxis und Kennzahlen}{https://youtu.be/nP4Dk68pulM}
 
 \antwortlinien{24}
 
@@ -453,7 +458,7 @@ Sie m\"ussen Ihrem Steuerkreis ein KPI-Set f\"ur ``Sustainable IT'' vorlegen. Es
   \item Erg\"anzen Sie \textbf{eine vierte, optionale KPI} (z.\,B.\ \emph{Auditf\"ahigkeit der Entscheidungen} \textendash{} \% der Capacity-Entscheidungen mit dokumentiertem Protokoll), die das System \emph{vor sich selbst} sch\"utzt.
 \end{enumerate}
 
-\ytquery{sustainable IT KPI green IT anti gaming coupling SLO cost energy}
+\ytvideo{Nachhaltige Rechenzentren — Best Practices für mehr Energieeffizienz}{https://youtu.be/mW8RS3gND7o}
 
 \antwortlinien{18}
 
@@ -491,7 +496,7 @@ Sie m\"ussen Ihrem Steuerkreis ein KPI-Set f\"ur ``Sustainable IT'' vorlegen. Es
   \item \textbf{Entscheidung unter Unsicherheit:} Welche \emph{2 Ma{\ss}nahmen} starten Sie sofort (4 Wochen), welche \emph{2} verschieben Sie bewusst (Risiko / Abh\"angigkeit) \textendash{} mit Begr\"undung.
 \end{enumerate}
 
-\ytquery{sustainable IT service portfolio capacity governance healthcare SLO energy}
+\ytvideo{ITIL 4 Service Portfolio Management — Pipeline, Live, Retired}{https://youtu.be/778SxGGGbrI}
 
 \antwortlinien{32}
 
@@ -526,7 +531,7 @@ Sie m\"ussen Ihrem Steuerkreis ein KPI-Set f\"ur ``Sustainable IT'' vorlegen. Es
   \item \textbf{Zwei Entscheidungen unter Unsicherheit:} (a) Welche \emph{SLO-Reserven} sind ``genug'', obwohl der Peak unsicher ist? Begr\"undung + Fr\"uhwarnsignal + Eskalationspfad. (b) Welche Services werden \emph{konsequent} optimiert / retired, obwohl Widerstand erwartet wird? Trade-off-Logik + Stakeholder-Plan.
 \end{enumerate}
 
-\ytquery{ITSM portfolio board capacity governance RACI decision protocol audit}
+\ytvideo{ITIL 4 Service Portfolio Management — Pipeline, Live, Retired}{https://youtu.be/778SxGGGbrI}
 
 \antwortlinien{28}
 
@@ -549,7 +554,7 @@ Sie m\"ussen Ihrem Steuerkreis ein KPI-Set f\"ur ``Sustainable IT'' vorlegen. Es
   \item \textbf{Faustregel} (1 Satz): Wann ist ein Nachweis \emph{Compliance} \textendash{} und wann \emph{B\"urokratie}?
 \end{enumerate}
 
-\ytquery{ISO 20000 ITSM audit evidence service management documentation compliance}
+\ytvideo{ITIL 4 Service Portfolio Management — Pipeline, Live, Retired}{https://youtu.be/778SxGGGbrI}
 
 \antwortlinien{20}
 
@@ -594,7 +599,7 @@ Sie m\"ussen Ihrem Steuerkreis ein KPI-Set f\"ur ``Sustainable IT'' vorlegen. Es
 
 \noindent\textbf{Bewertungskriterien (Senior-Level):} Pragmatismus unter Restriktionen \textperiodcentered{} Auditf\"ahigkeit \textperiodcentered{} Anti-Gaming-Reife \textperiodcentered{} Stakeholder-Bewusstsein \textperiodcentered{} Wirkung von ``Ressourcen verwalten'' zu ``verantwortete Service- und Entscheidungsarchitektur''.
 
-\ytquery{sustainable IT decision architecture CIO portfolio capacity governance roadmap}
+\ytvideo{ITIL 4 Service Portfolio Management — Pipeline, Live, Retired}{https://youtu.be/778SxGGGbrI}
 
 \antwortlinien{38}
 

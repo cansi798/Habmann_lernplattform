@@ -138,6 +138,12 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
+
 \begin{document}
 
 \begin{titlepage}
@@ -214,7 +220,7 @@ Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Habe ich die Baseline-Regel er
 
 \aufgabenkopf{1}{ML-Typen im Prozesskontext}{\nivLi}{8\,min}
 
-\ytquery{Machine Learning Process Mining Classification Regression Clustering Anomaly}
+\ytvideo{ETL (Extract Transform Load) für Data Warehousing einfach erklärt}{https://youtu.be/VVJRBhUkX5o}
 
 \begin{loesungbox}
 \begin{tabularx}{\linewidth}{@{}p{3.0cm}|X|X|X@{}}
@@ -239,7 +245,7 @@ Anomalie       & ungew\"ohnliche Pfade           & ausreichend ``normale'' Cases
 
 \aufgabenkopf{2}{ETL-Pipeline}{\nivLi}{8\,min}
 
-\ytquery{ETL Pipeline Process Data Staging Mapping Join Data Quality DWH}
+\ytvideo{ETL (Extract Transform Load) für Data Warehousing einfach erklärt}{https://youtu.be/VVJRBhUkX5o}
 
 \begin{loesungbox}
 \begin{tabularx}{\linewidth}{@{}p{2.4cm}XX@{}}
@@ -263,7 +269,7 @@ DWH            & Faktentabelle Events + Dimensionen. & Modell zu eng (sp\"atere 
 
 \aufgabenkopf{3}{BI-Dashboard}{\nivLi}{10\,min}
 
-\ytquery{BI Dashboard Best Practice Executive KPI Drilldown Alert Tableau Power BI}
+\ytvideo{ETL (Extract Transform Load) für Data Warehousing einfach erklärt}{https://youtu.be/VVJRBhUkX5o}
 
 \begin{loesungbox}
 \textbf{Drei Prinzipien:}
@@ -292,7 +298,7 @@ DWH            & Faktentabelle Events + Dimensionen. & Modell zu eng (sp\"atere 
 
 \aufgabenkopf{4}{Predictive Use Case Canvas (zwei Use Cases)}{\nivLii}{25\,min}
 
-\ytquery{Predictive Process Analytics Use Case Canvas SLA Risk Rework Baseline}
+\ytvideo{Datenbank vs. Data Lake vs. Data Warehouse — die Unterschiede}{https://youtu.be/BQuyIwi_RCQ}
 
 \begin{loesungbox}
 \textbf{Use Case A \textendash{} SLA-Risiko fr\"uh erkennen:}
@@ -332,7 +338,7 @@ DWH            & Faktentabelle Events + Dimensionen. & Modell zu eng (sp\"atere 
 
 \aufgabenkopf{5}{ETL \& Dashboard in 30 Minuten}{\nivLii}{25\,min}
 
-\ytquery{ETL Pipeline 6 Steps Data Quality Checks BI Dashboard Anti Gaming}
+\ytvideo{Datenbank vs. Data Lake vs. Data Warehouse — die Unterschiede}{https://youtu.be/BQuyIwi_RCQ}
 
 \begin{loesungbox}
 \textbf{ETL-Pipeline (6 Schritte):}\\
@@ -368,7 +374,7 @@ DWH            & Faktentabelle Events + Dimensionen. & Modell zu eng (sp\"atere 
 
 \aufgabenkopf{6}{Baseline-Regel vor ML}{\nivLii}{18\,min}
 
-\ytquery{Baseline Heuristic vs Machine Learning When Simpler is Better Process}
+\ytvideo{Datenbank vs. Data Lake vs. Data Warehouse — die Unterschiede}{https://youtu.be/BQuyIwi_RCQ}
 
 \begin{loesungbox}
 \textbf{1. Baseline-Regel ``SLA-Breach in 4\,h'':}\\
@@ -399,7 +405,7 @@ Bei \emph{regulierten Prozessen} (Pharma, Finance) ist eine Regel auditierbar un
 
 \aufgabenkopf{7}{Alert-Playbook}{\nivLii}{20\,min}
 
-\ytquery{Alert Playbook Process Mining MLOps Drift Detection Alarm Fatigue}
+\ytvideo{Data Warehouse einfach erklärt — Grundlagen}{https://youtu.be/EHmeK1nMBvA}
 
 \begin{loesungbox}
 \textbf{1. Alert-Playbook ``SLA-Risiko'':}
@@ -437,7 +443,7 @@ Risk $>$\,0,85 & Service Delivery Manager & Sofortma{\ss}nahme + Kundeninfo & Po
 
 \aufgabenkopf{8}{False Positive vs.\ False Negative}{\nivLii}{18\,min}
 
-\ytquery{False Positive vs False Negative Cost Sensitive ML Process Mining Threshold}
+\ytvideo{Data Warehouse einfach erklärt — Grundlagen}{https://youtu.be/EHmeK1nMBvA}
 
 \begin{loesungbox}
 \begin{tabularx}{\linewidth}{@{}p{2.4cm}XXl@{}}
@@ -468,7 +474,7 @@ Wenn \emph{False Negative} teurer ist, w\"ahlt man \emph{niedrige Schwelle} (sen
 
 \aufgabenkopf{9}{Fallstudie \emph{FinServe IT Operations}}{\nivLiii}{45\,min}
 
-\ytquery{SLA Predictive Incident Management Features ETL Dashboard Real Time}
+\ytvideo{Data Warehouse einfach erklärt — Grundlagen}{https://youtu.be/EHmeK1nMBvA}
 
 \begin{loesungbox}
 \textbf{1. Predictive Use Case:} ``Wahrscheinlichkeit SLA-Breach in n\"achsten 4\,h''.
@@ -504,7 +510,7 @@ Wenn \emph{False Negative} teurer ist, w\"ahlt man \emph{niedrige Schwelle} (sen
 
 \aufgabenkopf{10}{Modell-Governance}{\nivLiii}{25\,min}
 
-\ytquery{MLOps Model Governance Drift Detection Explainability XAI Fairness Bias}
+\ytvideo{Business Intelligence KPI Dashboard in Power BI}{https://youtu.be/0BwQvLGUbZg}
 
 \begin{loesungbox}
 \textbf{1. ML Product Owner (SLA-Modell):}
@@ -538,7 +544,7 @@ Modell k\"onnte Service-A systematisch hochstufen, weil dort historisch viele Br
 
 \aufgabenkopf{11}{Transferprojekt \textendash{} Process Intelligence Platform}{\nivLiii}{45\,min}
 
-\ytquery{Process Intelligence Platform Decision Architecture CDO Real Time Predictive}
+\ytvideo{Business Intelligence KPI Dashboard in Power BI}{https://youtu.be/0BwQvLGUbZg}
 
 \begin{loesungbox}
 \textbf{1. Top-10 Entscheidungen:}\\

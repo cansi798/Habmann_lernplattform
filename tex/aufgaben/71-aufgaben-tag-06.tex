@@ -140,6 +140,12 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
+
 \newcommand{\antwortlinien}[1]{%
   \par\vspace{6pt}
   \foreach \x in {1,...,#1}{%
@@ -248,7 +254,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 6}. Heute steht die F
 \medskip
 \noindent Erg\"anzen Sie: Was bedeutet ``Closed Loop'' im BPMS-Kontext? Beschreiben Sie die vier Phasen \emph{Modellieren \textrightarrow{} Ausf\"uhren \textrightarrow{} \"Uberwachen \textrightarrow{} Optimieren}.
 
-\ytquery{BPMS Bausteine Prozessengine Workflow Engine Closed Loop Camunda}
+\ytvideo{Was ist BPM? — Business Process Management in 2 Minuten}{https://youtu.be/9NXq0a-X7cI}
 
 \antwortlinien{14}
 
@@ -270,7 +276,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 6}. Heute steht die F
 
 \noindent Schlie{\ss}en Sie mit einem Satz: Wer ist Eigent\"umer des API-Vertrags \textendash{} \emph{Anbieter} oder \emph{Konsument}?
 
-\ytquery{API Contract REST Endpoint Versioning Auth Rate Limiting Best Practice}
+\ytvideo{Was ist BPM? — Business Process Management in 2 Minuten}{https://youtu.be/9NXq0a-X7cI}
 
 \antwortlinien{14}
 
@@ -305,7 +311,7 @@ Komplexit\"at    & & \\[14pt]
 \bottomrule
 \end{tabularx}
 
-\ytquery{Sync vs Async API Event Driven Architecture Idempotency Retry Exponential}
+\ytvideo{Was ist BPM? — Business Process Management in 2 Minuten}{https://youtu.be/9NXq0a-X7cI}
 
 \antwortlinien{6}
 
@@ -334,7 +340,7 @@ Komplexit\"at    & & \\[14pt]
   \item \textbf{Entscheidung unter Unsicherheit:} Welche \emph{eine Funktion} \emph{muss} im BPMS sein, welche darf zun\"achst au{\ss}erhalb bleiben (und warum)?
 \end{enumerate}
 
-\ytquery{BPMS Blueprint Customer Complaint Workflow SLA Eskalation Camunda}
+\ytvideo{Was ist eine REST-API? — Einführung in REST APIs}{https://youtu.be/ZuINS_-n-AM}
 
 \antwortlinien{20}
 
@@ -355,7 +361,7 @@ Der Complaint-Prozess braucht Integrationen zu \emph{CRM} (Kunde), \emph{ERP} (A
   \item \textbf{Sync- oder Async-Entscheidung} pro API: mit Begr\"undung (Speed vs.\ Robustheit).
 \end{enumerate}
 
-\ytquery{REST API Contract Order Status Return GetOrderStatus CreateReturn Error}
+\ytvideo{Was ist eine REST-API? — Einführung in REST APIs}{https://youtu.be/ZuINS_-n-AM}
 
 \antwortlinien{18}
 
@@ -381,7 +387,7 @@ Das Volumen schwankt stark (Peak-Saisons), das System ist auditiert, Kunden erwa
 
 \noindent \emph{Anti-Muster}: Skalierung ohne Observability ist \emph{Blindflug}. Begr\"unden Sie in 3 S\"atzen.
 
-\ytquery{Cloud Native Twelve Factor Auto Scaling Observability Circuit Breaker SLO}
+\ytvideo{Was ist eine REST-API? — Einführung in REST APIs}{https://youtu.be/ZuINS_-n-AM}
 
 \antwortlinien{18}
 
@@ -407,7 +413,7 @@ F\"ur den Complaint-Prozess gibt es f\"ur das Datenobjekt \emph{Kunde} potenziel
   \item Entscheidung unter Unsicherheit: Welche \emph{eine Inkonsistenz} akzeptieren Sie bewusst tempor\"ar (mit Guardrail) \textendash{} und welche nie?
 \end{enumerate}
 
-\ytquery{System of Record Data Ownership Master Data Management CRM ERP Conflict}
+\ytvideo{Monolithen vs. Microservices — wann ist welche Architektur sinnvoll?}{https://youtu.be/N0k3VKL4Als}
 
 \antwortlinien{14}
 
@@ -430,7 +436,7 @@ E2E hei{\ss}t: Prozess + Daten + Systeme + Rollen + KPIs + Controls werden zusam
 
 \noindent Faustregel (1 Satz): Woran erkennen Sie, dass der Loop ``geschlossen'' ist \textendash{} im Gegensatz zu drei isolierten Aktivit\"aten?
 
-\ytquery{Process Model Run Improve Closed Loop BPMS Mining KPI Continuous Improvement}
+\ytvideo{Monolithen vs. Microservices — wann ist welche Architektur sinnvoll?}{https://youtu.be/N0k3VKL4Als}
 
 \antwortlinien{14}
 
@@ -461,7 +467,7 @@ E2E hei{\ss}t: Prozess + Daten + Systeme + Rollen + KPIs + Controls werden zusam
 
 \noindent\textbf{Format-Hinweis:} eine A4-Seite Senior-Pitch. In 90\,Sekunden lesbar.
 
-\ytquery{Logistics Exception Handling BPMS Cloud Native API Integration Roadmap}
+\ytvideo{Monolithen vs. Microservices — wann ist welche Architektur sinnvoll?}{https://youtu.be/N0k3VKL4Als}
 
 \antwortlinien{36}
 
@@ -483,7 +489,7 @@ E2E hei{\ss}t: Prozess + Daten + Systeme + Rollen + KPIs + Controls werden zusam
   \item \textbf{Fr\"uhwarnsignal:} Was zwingt Sie in 6 Monaten zur Umkehr?
 \end{enumerate}
 
-\ytquery{Event Driven Architecture vs Synchronous Trade Off Resilience Audit}
+\ytvideo{Business Process Management — Closed-Loop einfach erklärt}{https://youtu.be/IBenKthHmUU}
 
 \antwortlinien{18}
 
@@ -518,7 +524,7 @@ E2E hei{\ss}t: Prozess + Daten + Systeme + Rollen + KPIs + Controls werden zusam
 
 \noindent\textbf{Bewertungskriterien:} Strategie-Anschluss \textperiodcentered{} Klarheit der Verantwortung \textperiodcentered{} Pragmatismus unter Restriktionen \textperiodcentered{} Entscheidungslogik.
 
-\ytquery{Platform Strategy BPMS Integration Cloud Native API Governance CDO}
+\ytvideo{Business Process Management — Closed-Loop einfach erklärt}{https://youtu.be/IBenKthHmUU}
 
 \antwortlinien{38}
 

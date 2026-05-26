@@ -183,6 +183,11 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
 \newcommand{\antwortlinien}[1]{%
   \par\vspace{6pt}
   \foreach \x in {1,...,#1}{%
@@ -296,7 +301,7 @@ Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 11}. RPA is
   \item Schreiben Sie in einem Satz, warum die Aussage ``RPA spart immer Geld'' irref\"uhrend ist.
 \end{enumerate}
 
-\ytquery{RPA Eignung Use Case Auswahl regelbasiert UI stabil Beispiel}
+\ytvideo{RPA im Unternehmen — Nutzen und Risiken in 138 Sekunden}{https://youtu.be/Z0mzGnzC1n8}
 
 \antwortlinien{12}
 
@@ -329,7 +334,7 @@ Logs / Monitoring        & \\[14pt]
 \smallskip
 \noindent Erg\"anzen Sie unter der Tabelle in einem Satz: Warum reicht das \emph{Studio} allein nicht aus, sobald mehr als drei Bots in Produktion laufen?
 
-\ytquery{RPA Plattform Studio Orchestrator Queue Logs erklaert tool neutral}
+\ytvideo{RPA im Unternehmen — Nutzen und Risiken in 138 Sekunden}{https://youtu.be/Z0mzGnzC1n8}
 
 \antwortlinien{6}
 
@@ -362,7 +367,7 @@ Risiko bei UI-\"Anderungen  & & \\[16pt]
 \smallskip
 \noindent Schreiben Sie unter die Tabelle einen Schlusssatz: Wann ist ein \emph{Stufenmodell} (erst attended, dann unattended) die richtige Antwort \textendash{} und wann ist es eine Ausrede, um Verantwortung aufzuschieben?
 
-\ytquery{Attended Unattended RPA Unterschied Beispiel Stufenmodell}
+\ytvideo{Attended vs. Unattended — Wann läuft der Bot wo?}{https://youtu.be/TeRPLv1nK5U}
 
 \antwortlinien{4}
 
@@ -396,7 +401,7 @@ Risiko bei UI-\"Anderungen  & & \\[16pt]
   \item Erg\"anzen Sie einen Schlusssatz: An welchem Punkt h\"ort RPA als Werkzeug auf und wir w\"urden den Prozess besser \emph{neu modellieren} (BPM) oder \emph{neu codieren} (Workflow-Engine)?
 \end{enumerate}
 
-\ytquery{RPA Use Case Eignung bewerten Scorecard regelbasiert Volumen}
+\ytvideo{RPA im Unternehmen — Nutzen und Risiken in 138 Sekunden}{https://youtu.be/Z0mzGnzC1n8}
 
 \antwortlinien{18}
 
@@ -425,7 +430,7 @@ Der Fachbereich fordert ``sofort Vollautomatisierung''. Die IT warnt vor Zugriff
   \item \textbf{Readiness-KPIs:} Definieren Sie zwei Kennzahlen, die zeigen, dass der Prozess ``unattended-ready'' wird (z.\,B.\ Ausnahmequote, UI-\"Anderungsrate, Fehlerquote). Mit Schwelle.
 \end{enumerate}
 
-\ytquery{RPA Attended Unattended Stufenmodell Entscheidung Zielkonflikt}
+\ytvideo{Attended vs. Unattended — Wann läuft der Bot wo?}{https://youtu.be/TeRPLv1nK5U}
 
 \antwortlinien{20}
 
@@ -452,7 +457,7 @@ Der Fachbereich fordert ``sofort Vollautomatisierung''. Die IT warnt vor Zugriff
   \item \textbf{Exception-Kategorien:} Definieren Sie mindestens \emph{f\"unf} Kategorien (z.\,B.\ \emph{fehlende Kostenstelle}, \emph{Lieferant unbekannt}, \emph{Dublette}, \emph{Portal nicht erreichbar}, \emph{Validierung fail}). F\"ur jede Kategorie: Behandlung (manuell / Retry / Eskalation) und Owner.
 \end{enumerate}
 
-\ytquery{RPA Rechnungseingang Bot Flow Exception Queue ERP Audit}
+\ytvideo{Attended vs. Unattended — Wann läuft der Bot wo?}{https://youtu.be/TeRPLv1nK5U}
 
 \antwortlinien{22}
 
@@ -474,7 +479,7 @@ Diese Aufgabe baut auf Aufgabe 6 auf. Sie schlie{\ss}en die Fallstudie ab.
   \item \textbf{Zwei Fr\"uhwarnsignale}, ab denen Sie reagieren w\"urden (z.\,B.\ Exception-Rate $>$\,18\,\%, UI-Change-Quote $>$\,2$\times$/Monat).
 \end{enumerate}
 
-\ytquery{RPA Audit Trail Logging KPI Produktivitaet Qualitaet Risiko}
+\ytvideo{RPA im Unternehmen — Nutzen und Risiken in 138 Sekunden}{https://youtu.be/Z0mzGnzC1n8}
 
 \antwortlinien{20}
 
@@ -501,7 +506,7 @@ Diese Aufgabe baut auf Aufgabe 6 auf. Sie schlie{\ss}en die Fallstudie ab.
   \item Definieren Sie eine konkrete \textbf{Guardrail}, die in das Bot-Design eingebaut wird (z.\,B.\ Bot-spezifischer Funktionsaccount im Vault; Retry mit Backoff und Eskalation nach 30 Minuten; Plausibilit\"atsgrenzen $\pm$\,20\,\% gegen Vortag).
 \end{enumerate}
 
-\ytquery{RPA Risiko Credential Vault Plausibilitaet Guardrail Beispiel}
+\ytvideo{RPA im Unternehmen — Nutzen und Risiken in 138 Sekunden}{https://youtu.be/Z0mzGnzC1n8}
 
 \antwortlinien{16}
 
@@ -529,7 +534,7 @@ Diese Aufgabe baut auf Aufgabe 6 auf. Sie schlie{\ss}en die Fallstudie ab.
   \item \textbf{Kill Criteria:} Wann verlassen Bots oder Ideen den Funnel? Definieren Sie drei Kriterien (z.\,B.\ Exception-Rate $>$\,25\,\% nach Stabilisierung, UI-Change $>$\,3$\times$/Monat, Use-Case nicht mehr fachlich relevant).
 \end{enumerate}
 
-\ytquery{RPA Automation Funnel Portfolio Value Risk Effort Kill Criteria}
+\ytvideo{Was ist Robotic Process Automation — Einsatzgebiete und Grenzen}{https://youtu.be/YoGjxvTn1ms}
 
 \antwortlinien{24}
 
@@ -552,7 +557,7 @@ Diese Aufgabe baut auf Aufgabe 6 auf. Sie schlie{\ss}en die Fallstudie ab.
   \item \textbf{Faustregel} (1\,--\,2 S\"atze): Wann ist ein KPI \emph{gef\"ahrlicher} als kein KPI?
 \end{enumerate}
 
-\ytquery{KPI Gaming Goodharts Law Anti Gaming RPA Steuerung}
+\ytvideo{RPA im Unternehmen — Nutzen und Risiken in 138 Sekunden}{https://youtu.be/Z0mzGnzC1n8}
 
 \antwortlinien{20}
 
@@ -595,7 +600,7 @@ Diese Aufgabe baut auf Aufgabe 6 auf. Sie schlie{\ss}en die Fallstudie ab.
 
 \noindent\textbf{Bewertungskriterien (Senior-Level):} Entscheidungslogik \textperiodcentered{} Risikoreife \textperiodcentered{} Pragmatismus unter Restriktionen \textperiodcentered{} Anschlussf\"ahigkeit an Strategie.
 
-\ytquery{RPA Operating Model Decision Architecture Senior Audit Compliance}
+\ytvideo{RPA im Unternehmen — Nutzen und Risiken in 138 Sekunden}{https://youtu.be/Z0mzGnzC1n8}
 
 \antwortlinien{36}
 

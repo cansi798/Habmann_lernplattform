@@ -139,6 +139,12 @@
     \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
 }
 
+\newcommand{\ytvideo}[2]{%
+  \par\vspace{4pt}
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo:}\ \href{#2}{\textcolor{lpAccent}{#1}}}\par
+}
+
+
 \begin{document}
 
 \begin{titlepage}
@@ -215,7 +221,7 @@ Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Habe ich Abweichungen \emph{kl
 
 \aufgabenkopf{1}{Event Log: Pflicht, Optional, Stolpersteine}{\nivLi}{8\,min}
 
-\ytquery{Process Mining Event Log Required Fields Case ID Activity Timestamp Quality}
+\ytvideo{Introduction to Process Mining — 360°-Überblick (Wil van der Aalst)}{https://youtu.be/aHbHQ6caJoU}
 
 \begin{loesungbox}
 \textbf{Pflichtfelder (3):} Case ID, Aktivit\"at, Timestamp.
@@ -237,7 +243,7 @@ Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Habe ich Abweichungen \emph{kl
 
 \aufgabenkopf{2}{Discovery: Happy Path, Variante, Schleife}{\nivLi}{8\,min}
 
-\ytquery{Process Discovery Happy Path Variants Loops Bottleneck Beispiel}
+\ytvideo{Introduction to Process Mining — 360°-Überblick (Wil van der Aalst)}{https://youtu.be/aHbHQ6caJoU}
 
 \begin{loesungbox}
 \textbf{Definitionen:}
@@ -261,7 +267,7 @@ Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Habe ich Abweichungen \emph{kl
 
 \aufgabenkopf{3}{Conformance: vier Abweichungstypen}{\nivLi}{10\,min}
 
-\ytquery{Conformance Checking Process Mining Deviation Types Compliance Variant}
+\ytvideo{Introduction to Process Mining — 360°-Überblick (Wil van der Aalst)}{https://youtu.be/aHbHQ6caJoU}
 
 \begin{loesungbox}
 \textbf{Vier Abweichungstypen:}
@@ -283,7 +289,7 @@ Pr\"ufen Sie Ihre L\"osung gegen drei Fragen: (1) Habe ich Abweichungen \emph{kl
 
 \aufgabenkopf{4}{Discovery ohne Tool}{\nivLii}{22\,min}
 
-\ytquery{Process Mining Discovery Cases Happy Path Variants ohne Tool Beispiel}
+\ytvideo{Celonis Conformance Checker — Tutorial}{https://youtu.be/QBvjRcqsySw}
 
 \begin{loesungbox}
 \textbf{1. Happy Path:}\\
@@ -317,7 +323,7 @@ Start \textrightarrow{} Anfrage\_pr\"ufen \textrightarrow{} Angebot\_erstellen \
 
 \aufgabenkopf{5}{Conformance ohne Tool}{\nivLii}{22\,min}
 
-\ytquery{Conformance Checking Deviation Classification Priorization Guardrail Mining}
+\ytvideo{Celonis Conformance Checker — Tutorial}{https://youtu.be/QBvjRcqsySw}
 
 \begin{loesungbox}
 \textbf{1. Klassifikation:}
@@ -353,7 +359,7 @@ Start \textrightarrow{} Anfrage\_pr\"ufen \textrightarrow{} Angebot\_erstellen \
 
 \aufgabenkopf{6}{Hypothesen vs.\ Wahrheit}{\nivLii}{18\,min}
 
-\ytquery{Process Mining Validation Stakeholder Discovery Workshop Hypothesis}
+\ytvideo{Celonis Conformance Checker — Tutorial}{https://youtu.be/QBvjRcqsySw}
 
 \begin{loesungbox}
 \textbf{1. F\"unf Validierungsfragen:}
@@ -379,7 +385,7 @@ Start \textrightarrow{} Anfrage\_pr\"ufen \textrightarrow{} Angebot\_erstellen \
 
 \aufgabenkopf{7}{Bewusst zugelassene Variante \textendash{} Guardrails}{\nivLii}{20\,min}
 
-\ytquery{Process Compliance Tolerated Exception Guardrail Audit Trail Procurement}
+\ytvideo{Process Discovery — RWTH Lecture (van der Aalst)}{https://youtu.be/jPERVdZYgA8}
 
 \begin{loesungbox}
 \textbf{1. Ausnahmeprozess f\"ur ``Rechnung vor Wareneingang'':}\\
@@ -405,7 +411,7 @@ Auditor sieht \emph{drei Artefakte}: (a) dokumentierten Ausnahmeprozess mit Schw
 
 \aufgabenkopf{8}{Goodhart vs.\ Echte Steuerung}{\nivLii}{18\,min}
 
-\ytquery{Process Mining KPI Fitness Score Conformance Anti Gaming Manipulation}
+\ytvideo{Process Discovery — RWTH Lecture (van der Aalst)}{https://youtu.be/jPERVdZYgA8}
 
 \begin{loesungbox}
 \textbf{KPI-Manipulationsmuster + Gegenkennzahl:}
@@ -438,7 +444,7 @@ Trend (sinkende Abweichung) & ``Definition-Anpassung'' senkt scheinbar. & Vergle
 
 \aufgabenkopf{9}{Fallstudie \emph{MedTech Supplies}}{\nivLiii}{45\,min}
 
-\ytquery{Procure to Pay Conformance Audit Maverick Buying 3 Way Match Mining}
+\ytvideo{Process Discovery — RWTH Lecture (van der Aalst)}{https://youtu.be/jPERVdZYgA8}
 
 \begin{loesungbox}
 \textbf{1. Soll-Modell P2P (10 Schritte):}\\
@@ -482,7 +488,7 @@ Sonderfreigaben (12\,\%) & Umgehung des regul\"aren Wegs; Zeitdruck; Schwellenwe
 
 \aufgabenkopf{10}{Datenverantwortung \textendash{} Logqualit\"at sichern}{\nivLiii}{25\,min}
 
-\ytquery{Data Steward Process Mining Event Log Quality Compliance Governance Pharma}
+\ytvideo{Celonis in der Produktion — Process Mining im Einsatz}{https://youtu.be/RERGYW5o5xY}
 
 \begin{loesungbox}
 \textbf{1. Rolle \emph{Data Steward} f\"ur P2P-Logs:}
@@ -518,7 +524,7 @@ Faustregel: \emph{80/20-Daten} reichen f\"ur Quick Insights und erste Steuerung.
 
 \aufgabenkopf{11}{Transferprojekt \textendash{} Conformance Governance \& Decision Architecture}{\nivLiii}{45\,min}
 
-\ytquery{Conformance Governance Decision Architecture Process Mining CCO Audit Readiness}
+\ytvideo{Celonis in der Produktion — Process Mining im Einsatz}{https://youtu.be/RERGYW5o5xY}
 
 \begin{loesungbox}
 \textbf{1. Regelwerk-Architektur:}

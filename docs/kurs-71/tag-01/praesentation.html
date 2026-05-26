@@ -439,6 +439,48 @@
       </div>
     </section>
 
+    <!-- Slide 7b: BPMN-Spiegel zum EPK-Vollworkflow -->
+    <section class="slide" style="display:none">
+      <h2><abbr title="Business Process Model and Notation">BPMN</abbr>-Spiegel · derselbe Prozess, andere Brille</h2>
+      <p style="color:var(--color-muted)">Eingang bis Versand in <abbr title="Business Process Model and Notation">BPMN</abbr> 2.0 — kompakter, kein Wechselzwang zwischen Zustand und Aktivität.</p>
+      <div class="diagram-box" style="margin-top:10px">
+        <svg width="100%" viewBox="0 0 820 240" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif">
+          <defs>
+            <marker id="ar8" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+          <circle cx="40" cy="80" r="22" fill="#fff" stroke="#9d4a1a" stroke-width="2.5"/>
+          <text x="40" y="120" text-anchor="middle" font-size="11" fill="#444">Bestellung</text>
+          <text x="40" y="134" text-anchor="middle" font-size="11" fill="#444">eingegangen</text>
+          <line x1="62" y1="80" x2="92" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar8)"/>
+          <rect x="95" y="58" width="120" height="44" rx="8" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="155" y="85" text-anchor="middle" font-size="12" fill="#222">Bestellung prüfen</text>
+          <line x1="215" y1="80" x2="245" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar8)"/>
+          <rect x="248" y="58" width="135" height="44" rx="8" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="315" y="78" text-anchor="middle" font-size="12" fill="#222">Ware</text>
+          <text x="315" y="94" text-anchor="middle" font-size="12" fill="#222">kommissionieren</text>
+          <line x1="383" y1="80" x2="413" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar8)"/>
+          <rect x="416" y="58" width="120" height="44" rx="8" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="476" y="85" text-anchor="middle" font-size="12" fill="#222">Ware verpacken</text>
+          <line x1="536" y1="80" x2="566" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar8)"/>
+          <rect x="569" y="58" width="120" height="44" rx="8" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="629" y="85" text-anchor="middle" font-size="12" fill="#222">Ware versenden</text>
+          <line x1="689" y1="80" x2="719" y2="80" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar8)"/>
+          <circle cx="745" cy="80" r="22" fill="#fff" stroke="#9d4a1a" stroke-width="4"/>
+          <text x="745" y="120" text-anchor="middle" font-size="11" font-weight="600" fill="#444">Ware</text>
+          <text x="745" y="134" text-anchor="middle" font-size="11" font-weight="600" fill="#444">versendet</text>
+          <text x="20" y="180" font-size="12" font-weight="600" fill="#9d4a1a">Vergleich:</text>
+          <text x="20" y="200" font-size="11" fill="#444"><tspan font-weight="600">EPK</tspan> (Slide 7): 5 Ereignisse + 4 Funktionen = 9 Knoten · strict alternation</text>
+          <text x="20" y="216" font-size="11" fill="#444"><tspan font-weight="600">BPMN</tspan> (oben): 1 Start + 4 Activities + 1 End = 6 Knoten · linear, kompakt</text>
+          <text x="20" y="232" font-size="11" font-style="italic" fill="#666">→ BPMN spart die expliziten Zwischenzustände, ist näher an Ausführung. EPK ist näher an Fachsprache.</text>
+        </svg>
+      </div>
+      <div class="accent-box" style="margin-top:10px;font-size:16px">
+        <strong>Wann was?</strong> <abbr title="Business Process Model and Notation">BPMN</abbr> wenn Pools/Lanes &amp; Automatisierung wichtig sind. <abbr title="Ereignisgesteuerte Prozesskette">EPC</abbr> wenn Fachbereiche modellieren oder ARIS/SAP-Umfeld.
+      </div>
+    </section>
+
     <!-- Slide 8: GoM Sieben Grundsätze -->
     <section class="slide" style="display:none">
       <h2>GoM · Grundsätze ordnungsmäßiger Modellierung</h2>
