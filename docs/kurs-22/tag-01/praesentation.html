@@ -346,15 +346,15 @@
       <div class="grid-2" style="margin-top:16px">
         <div class="diagram-box">
           <h3>Direkter Netzwerkeffekt</h3>
-          <p style="font-size:14px;color:var(--color-muted);margin:0 0 8px">Mehr Nutzer <em>derselben</em> Gruppe → wertvoller für jeden.</p>
-          <canvas data-rough="network-direct" data-color="#1a4d8f" width="320" height="180"></canvas>
-          <p style="font-size:13px;color:var(--color-muted);margin:8px 0 0">Telefon, Messenger. Im Vertrieb seltener.</p>
+          <p style="font-size:14px;color:var(--color-muted);margin:0 0 8px">Innerhalb <em>derselben</em> Nutzergruppe: jeder neue Nutzer macht die Plattform für alle anderen wertvoller.</p>
+          <canvas data-rough="network-direct" data-color="#1a4d8f" width="360" height="220"></canvas>
+          <p style="font-size:13px;color:var(--color-muted);margin:8px 0 0"><strong>Beispiel:</strong> WhatsApp · Telefon · LinkedIn (Profil-Sichtbarkeit). Im B2B-Vertrieb seltener Hauptmechanismus.</p>
         </div>
         <div class="diagram-box">
           <h3>Indirekter Netzwerkeffekt</h3>
-          <p style="font-size:14px;color:var(--color-muted);margin:0 0 8px">Mehr Anbieter ↔ mehr Nachfrager. Beide Seiten ziehen sich an.</p>
-          <canvas data-rough="network-indirect" data-color="#1a4d8f" width="320" height="180"></canvas>
-          <p style="font-size:13px;color:var(--color-muted);margin:8px 0 0">Typische Marktplatz-Dynamik. <strong>Nr. 1 weit wertvoller als Nr. 2.</strong></p>
+          <p style="font-size:14px;color:var(--color-muted);margin:0 0 8px">Zwischen <em>zwei</em> Marktseiten: mehr Anbieter ziehen Nachfrager an, mehr Nachfrager ziehen Anbieter an.</p>
+          <canvas data-rough="network-indirect" data-color="#1a4d8f" width="360" height="220"></canvas>
+          <p style="font-size:13px;color:var(--color-muted);margin:8px 0 0"><strong>Marktplatz-Dynamik</strong> (Uber, Airbnb, Amazon). Nr. 1 ist weit wertvoller als Nr. 2 — Winner-takes-most.</p>
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
@@ -629,27 +629,73 @@
         rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
         rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
       } else if (type === 'network-direct') {
-        // 5 Knoten, alle untereinander verbunden (direkter Effekt)
-        const nodes = [
-          {x: 60, y: 40}, {x: 260, y: 40},
-          {x: 30, y: 130}, {x: 160, y: 160}, {x: 290, y: 130}
-        ];
-        // Linien zwischen allen Knoten
-        for (let i = 0; i < nodes.length; i++) {
-          for (let j = i+1; j < nodes.length; j++) {
-            rc.line(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y, { stroke: color, strokeWidth: 1.2, roughness: 1.8 });
+        // DIREKTER Netzwerkeffekt: EINE Gruppe ("Nutzer"), neuer Nutzer rechts → erhöht Wert für alle bestehenden.
+        // Title-Label
+        const ctx = canvas.getContext('2d');
+        ctx.font = '13px system-ui, sans-serif';
+        ctx.fillStyle = '#1a4d8f';
+        ctx.textAlign = 'center';
+        ctx.fillText('Eine Nutzergruppe', w/2, 16);
+        // Gruppen-Umriss (Lasso/Wolke um bestehende 4 Nutzer)
+        rc.ellipse(110, 110, 180, 140, { stroke: color, strokeWidth: 1, roughness: 2.2, fill: 'rgba(26,77,143,0.05)', fillStyle: 'solid' });
+        // 4 bestehende Nutzer
+        const users = [{x: 70, y: 75}, {x: 155, y: 70}, {x: 65, y: 145}, {x: 150, y: 155}];
+        // Alle untereinander verbunden (Werte tauschen)
+        for (let i = 0; i < users.length; i++) {
+          for (let j = i+1; j < users.length; j++) {
+            rc.line(users[i].x, users[i].y, users[j].x, users[j].y, { stroke: color, strokeWidth: 1.0, roughness: 1.6 });
           }
         }
-        nodes.forEach(n => rc.circle(n.x, n.y, 18, { stroke: color, strokeWidth: 2, fill: '#dceaff', fillStyle: 'solid', roughness: 1.5 }));
+        users.forEach(u => rc.circle(u.x, u.y, 22, { stroke: color, strokeWidth: 2, fill: '#dceaff', fillStyle: 'solid', roughness: 1.4 }));
+        // Neuer Nutzer rechts (gelb hervorgehoben)
+        const neu = {x: 290, y: 110};
+        rc.circle(neu.x, neu.y, 24, { stroke: '#c47612', strokeWidth: 2.5, fill: '#ffe8a8', fillStyle: 'solid', roughness: 1.4 });
+        // Pfeil von Neuem hinein zu jedem bestehenden
+        users.forEach(u => {
+          rc.line(neu.x - 12, neu.y, u.x + 18, u.y, { stroke: '#c47612', strokeWidth: 1.4, roughness: 1.8 });
+        });
+        // Labels
+        ctx.fillStyle = '#c47612';
+        ctx.font = 'italic 12px system-ui';
+        ctx.fillText('+1 neuer', neu.x, neu.y - 30);
+        ctx.fillText('Nutzer', neu.x, neu.y + 38);
+        ctx.fillStyle = '#1a4d8f';
+        ctx.font = '11px system-ui';
+        ctx.fillText('macht Plattform wertvoller für ALLE', w/2, h - 8);
       } else if (type === 'network-indirect') {
-        // Zwei Seiten: Anbieter oben (3), Nachfrager unten (3), nur quer verbunden
-        const anbieter = [{x: 50, y: 35}, {x: 160, y: 35}, {x: 270, y: 35}];
-        const nachfrager = [{x: 50, y: 145}, {x: 160, y: 145}, {x: 270, y: 145}];
+        // INDIREKTER Effekt: zwei Marktseiten "Anbieter" / "Nachfrager", Cross-Effekte mit Pfeilen beide Richtungen.
+        const ctx = canvas.getContext('2d');
+        ctx.font = '13px system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        // Side-Labels
+        ctx.fillStyle = '#1a4d8f';
+        ctx.fillText('Anbieter-Seite', w/2, 16);
+        ctx.fillStyle = '#9d4a1a';
+        ctx.fillText('Nachfrager-Seite', w/2, h - 6);
+        // Anbieter (3 Knoten oben, blau)
+        const anbieter = [{x: 90, y: 50}, {x: 180, y: 50}, {x: 270, y: 50}];
+        anbieter.forEach(a => rc.circle(a.x, a.y, 22, { stroke: color, strokeWidth: 2, fill: '#dceaff', fillStyle: 'solid', roughness: 1.4 }));
+        // Nachfrager (3 Knoten unten, orange)
+        const nachfrager = [{x: 90, y: 160}, {x: 180, y: 160}, {x: 270, y: 160}];
+        nachfrager.forEach(n => rc.circle(n.x, n.y, 22, { stroke: '#c47612', strokeWidth: 2, fill: '#fff3d9', fillStyle: 'solid', roughness: 1.4 }));
+        // Cross-Linien (alle Anbieter zu allen Nachfragern)
         anbieter.forEach(a => nachfrager.forEach(n => {
-          rc.line(a.x, a.y, n.x, n.y, { stroke: color, strokeWidth: 1, roughness: 1.6 });
+          rc.line(a.x, a.y + 22, n.x, n.y - 22, { stroke: '#888', strokeWidth: 0.8, roughness: 1.4 });
         }));
-        anbieter.forEach(a => rc.circle(a.x, a.y, 18, { stroke: color, strokeWidth: 2, fill: '#dceaff', fillStyle: 'solid', roughness: 1.4 }));
-        nachfrager.forEach(n => rc.circle(n.x, n.y, 18, { stroke: '#c47612', strokeWidth: 2, fill: '#fff3d9', fillStyle: 'solid', roughness: 1.4 }));
+        // Zentraler doppelseitiger Pfeil zur Verdeutlichung der Wechselwirkung
+        rc.line(40, 75, 40, 135, { stroke: '#2a8a2a', strokeWidth: 2.5, roughness: 1.2 });
+        // Pfeilspitze nach unten
+        rc.line(35, 130, 40, 138, { stroke: '#2a8a2a', strokeWidth: 2, roughness: 1 });
+        rc.line(45, 130, 40, 138, { stroke: '#2a8a2a', strokeWidth: 2, roughness: 1 });
+        // Pfeilspitze nach oben
+        rc.line(35, 82, 40, 74, { stroke: '#2a8a2a', strokeWidth: 2, roughness: 1 });
+        rc.line(45, 82, 40, 74, { stroke: '#2a8a2a', strokeWidth: 2, roughness: 1 });
+        ctx.fillStyle = '#2a8a2a';
+        ctx.font = 'italic 11px system-ui';
+        ctx.textAlign = 'left';
+        ctx.fillText('mehr →', 50, 100);
+        ctx.fillText('wertvoller', 50, 115);
+        ctx.fillText('für andere Seite', 50, 130);
       }
     });
   });
