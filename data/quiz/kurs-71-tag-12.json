@@ -22,12 +22,12 @@
       "id": "q02",
       "frage": "Welche Rollen gehören zum Minimum einer RPA-Governance?",
       "optionen": [
+        "Ist ein rein technischer Aspekt ohne fachliche Steuerung",
         "Nur Developer",
-        "Process Owner, Bot Owner, Developer, Reviewer/QA, Security Owner, Operations",
-        "Nur Marketing",
-        "Nur Auditoren"
+        "Nur Auditoren",
+        "Process Owner, Bot Owner, Developer, Reviewer/QA, Security Owner, Operations"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Das beschriebene Minimum umfasst Process Owner, Bot Owner, Developer, Reviewer/QA, Security Owner und Operations. Ohne diese Rollen entstehen Lücken in Verantwortung, Qualität, Sicherheit oder Betrieb.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Rollen",
       "schwierigkeit": "leicht",
@@ -37,12 +37,12 @@
       "id": "q03",
       "frage": "Was ist ein nicht verhandelbarer Standard im RPA-Sinne?",
       "optionen": [
-        "Eine optionale Best Practice",
-        "Eine verbindliche Regel, deren Einhaltung Voraussetzung für die Produktion ist",
+        "Ist nur in stark regulierten Branchen relevant",
         "Ein nur intern bekannter Tipp",
-        "Eine reine Marketingaussage"
+        "Eine verbindliche Regel, deren Einhaltung Voraussetzung für die Produktion ist",
+        "Eine optionale Best Practice"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Nicht verhandelbare Standards sind verbindliche Regeln, ohne deren Erfüllung kein Bot in Produktion gehen darf. Beispiele sind Versionierung, Logging-Minimum, Exception Codes und Freigabe vor Prod.",
       "quelle": "Tag 12 · UE 2 Arbeitsauftrag 1 · Standards",
       "schwierigkeit": "leicht",
@@ -53,11 +53,11 @@
       "frage": "Was beantwortet ein Audit Trail auf einen Blick?",
       "optionen": [
         "Den Wetterbericht",
-        "Wer/Was/Wann/Womit/Ergebnis/Begründung",
+        "Den nächsten Urlaubstermin",
         "Den Aktienkurs",
-        "Den nächsten Urlaubstermin"
+        "Wer/Was/Wann/Womit/Ergebnis/Begründung"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Ein guter Audit Trail beantwortet 'Wer hat was wann womit getan, mit welchem Ergebnis und welcher Begründung'. Erst diese Vollständigkeit macht ihn für Audit, Debugging und Risikomanagement wirklich nützlich.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Audit Trail",
       "schwierigkeit": "leicht",
@@ -67,12 +67,12 @@
       "id": "q05",
       "frage": "Welche drei Kategorien von Exceptions wurden im Material unterschieden?",
       "optionen": [
-        "Nur fachliche Exceptions",
         "Business, System und Data Exceptions",
-        "Nur technische Exceptions",
-        "Marketing-, Vertriebs- und HR-Exceptions"
+        "Nur fachliche Exceptions",
+        "Marketing-, Vertriebs- und HR-Exceptions",
+        "Nur technische Exceptions"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Im RPA-Kontext werden Business Exceptions (fachlich), System Exceptions (technisch) und Data Exceptions (Datenqualität) unterschieden. Diese Trennung hilft, Ursachen klar zu adressieren und passende Playbooks zu definieren.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Exception Handling",
       "schwierigkeit": "leicht",
@@ -82,12 +82,12 @@
       "id": "q06",
       "frage": "Was bedeutet 'Least Privilege' bei RPA?",
       "optionen": [
-        "Bots erhalten alle Rechte aller Mitarbeitenden",
-        "Bots erhalten nur die Rechte, die sie tatsächlich für ihre Aufgabe benötigen",
         "Bots brauchen keinerlei Berechtigungen",
-        "Bots werden ohne Konto betrieben"
+        "Bots erhalten alle Rechte aller Mitarbeitenden",
+        "Bots werden ohne Konto betrieben",
+        "Bots erhalten nur die Rechte, die sie tatsächlich für ihre Aufgabe benötigen"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Das Prinzip Least Privilege beschränkt die Rechte eines Bots auf das fachlich notwendige Minimum. Damit reduziert sich der Schaden bei Kompromittierung oder Fehlverhalten erheblich, ohne den eigentlichen Nutzen einzuschränken.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Security",
       "schwierigkeit": "leicht",
@@ -97,12 +97,12 @@
       "id": "q07",
       "frage": "Wofür steht 'SoD' im RPA-Kontext?",
       "optionen": [
-        "Software Operations Department",
         "Segregation of Duties (Aufgabentrennung)",
+        "Standard of Documentation",
         "Service Outage Detection",
-        "Standard of Documentation"
+        "Software Operations Department"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "SoD steht für Segregation of Duties, also die Trennung von Aufgaben, um Interessenkonflikte und Missbrauch zu vermeiden. Ein Bot darf zum Beispiel nicht gleichzeitig anlegen und freigeben, wenn die Regel das verbietet.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · SoD",
       "schwierigkeit": "leicht",
@@ -112,10 +112,10 @@
       "id": "q08",
       "frage": "Wo gehören Anmeldedaten (Secrets) hin?",
       "optionen": [
-        "In den Bot-Code",
+        "Auf Post-its am Bildschirm",
         "In einen geschützten Vault, der zur Laufzeit angesprochen wird",
         "In ein offenes Excel-Sheet",
-        "Auf Post-its am Bildschirm"
+        "In den Bot-Code"
       ],
       "korrekt": 1,
       "erklaerung": "Secrets gehören in einen geschützten Vault. Der Bot ruft sie zur Laufzeit kontrolliert ab. Klartext-Secrets im Code, in offenen Sheets oder Notizen sind ein massives Sicherheits- und Compliance-Risiko.",
@@ -127,12 +127,12 @@
       "id": "q09",
       "frage": "Welche Phase eines Bot-Lifecycles bedeutet die kontrollierte Außerbetriebnahme?",
       "optionen": [
-        "Build",
-        "Retire",
+        "Idea",
         "Test",
-        "Idea"
+        "Build",
+        "Retire"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Retire bezeichnet die kontrollierte Stilllegung eines Bots, etwa wenn ein Prozess obsolet ist oder durch eine andere Lösung ersetzt wird. Ohne 'Retire' wachsen tote Bots im Portfolio mit unklarer Verantwortung.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Lifecycle",
       "schwierigkeit": "leicht",
@@ -142,12 +142,12 @@
       "id": "q10",
       "frage": "Was bedeutet 'Risk-based Releases' für RPA?",
       "optionen": [
-        "Alle Bots durchlaufen dieselbe Freigabestrecke",
         "Kleine, risikoarme Bots werden schneller freigegeben, kritische Bots durchlaufen mehr Gates",
         "Alle Bots werden ohne Freigabe ausgerollt",
-        "Releases werden vom Marketing entschieden"
+        "Alle Bots durchlaufen dieselbe Freigabestrecke",
+        "Wird einmalig festgelegt und nicht mehr überprüft"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Risk-based Releases differenzieren nach Risiko: harmlose Bots dürfen leichter und schneller in Produktion, kritische Bots durchlaufen mehr Prüfungen (QA, Security, Process Owner). So bleibt Tempo erhalten, ohne Kontrolle zu verlieren.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Freigaben",
       "schwierigkeit": "leicht",
@@ -157,12 +157,12 @@
       "id": "q11",
       "frage": "Was beschreibt der Begriff 'Append-only Logging'?",
       "optionen": [
-        "Logs dürfen jederzeit überschrieben werden",
         "Logs werden nur angefügt und nicht verändert, damit Manipulation erkennbar wird",
+        "Logs dürfen jederzeit überschrieben werden",
         "Logs werden täglich gelöscht",
-        "Logs sind nur sichtbar für Marketing"
+        "Logs ist nur in stark regulierten Branchen relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Append-only bedeutet, dass Log-Einträge nur ergänzt, aber nicht geändert oder gelöscht werden dürfen. So bleibt die Beweiskraft erhalten und Manipulation wird erkennbar - eine Grundvoraussetzung für auditfähige RPA.",
       "quelle": "Tag 12 · UE 5 Fallstudie · Security",
       "schwierigkeit": "leicht",
@@ -172,12 +172,12 @@
       "id": "q12",
       "frage": "Welche Aussage zur Aufbewahrung von Logs trifft typischerweise zu?",
       "optionen": [
-        "Logs werden nach einer Stunde gelöscht",
         "Logs werden gemäß regulatorischer Vorgaben oft mehrere Jahre aufbewahrt",
         "Logs dürfen niemals gespeichert werden",
-        "Logs werden nur im Marketing aufbewahrt"
+        "Logs wird ausschließlich durch externe Auditoren festgelegt",
+        "Logs werden nach einer Stunde gelöscht"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Die konkrete Aufbewahrungsdauer hängt von der jeweiligen Regulatorik und Branche ab. Häufig sind zwei bis fünf Jahre üblich. Wichtig sind dokumentierte Regeln, exportfähige Formate und zugriffsgeschützte Speicherung.",
       "quelle": "Tag 12 · UE 5 Fallstudie · Audit Trail",
       "schwierigkeit": "leicht",
@@ -189,8 +189,8 @@
       "optionen": [
         "Die mit Abstand umfassendste, möglichst dichte Regelwelt",
         "Ein bewusst schlankes, aber verbindliches Set aus Rollen, Standards, Gates und Monitoring",
-        "Keine Governance",
-        "Eine nur dokumentierte, aber nicht durchgesetzte Sammlung von Wünschen"
+        "Eine nur dokumentierte, aber nicht durchgesetzte Sammlung von Wünschen",
+        "Keine Governance"
       ],
       "korrekt": 1,
       "erklaerung": "Minimum Viable Governance ist bewusst schlank: wenige, aber durchgesetzte Regeln. Sie reichen aus, damit Skalierung sicher gelingt, ohne Tempo zu ersticken. Sie kann später erweitert werden, wenn Erfahrung wächst.",
@@ -202,12 +202,12 @@
       "id": "q14",
       "frage": "Welche Rolle ist im RPA-Operating-Model speziell für die Sicherheit zuständig?",
       "optionen": [
-        "Process Owner",
         "Security Owner",
+        "HR Business Partner",
         "Marketing Lead",
-        "HR Business Partner"
+        "Process Owner"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Der Security Owner verantwortet sicherheitsrelevante Standards und Reviews für Bots: Identity, Vault, Zugriffe, Logging-Integrität. Process Owner verantworten die Fachlichkeit, Marketing und HR sind andere Funktionen.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Rollen",
       "schwierigkeit": "leicht",
@@ -217,12 +217,12 @@
       "id": "q15",
       "frage": "Welche Aussage zur Wirkung von Bots auf Mitarbeitende trifft zu?",
       "optionen": [
-        "Bots verdrängen jede menschliche Tätigkeit ohne Folgen",
-        "Bots verschieben Aufgaben hin zu Überwachen, Entscheiden und Bearbeiten von Ausnahmen",
+        "Bots werden ausschließlich vom HR-Bereich verwaltet",
         "Bots haben keinen Einfluss auf Rollen",
-        "Bots werden ausschließlich vom HR-Bereich verwaltet"
+        "Bots verdrängen jede menschliche Tätigkeit ohne Folgen",
+        "Bots verschieben Aufgaben hin zu Überwachen, Entscheiden und Bearbeiten von Ausnahmen"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Bots übernehmen Routinen, Menschen wandern in Rollen mit Überwachung, Entscheidungen und Ausnahmebearbeitung. Wer diesen Rollenwandel nicht aktiv begleitet, riskiert Akzeptanzprobleme und kulturellen Widerstand.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Change",
       "schwierigkeit": "leicht",
@@ -232,12 +232,12 @@
       "id": "q16",
       "frage": "Welche Aussage zur Kommunikation rund um RPA-Governance trifft zu?",
       "optionen": [
-        "Regeln werden nur als Verbote kommuniziert",
-        "Governance wird als Enablement vermittelt: Regeln existieren wegen Audit, Risiko und Stabilität, nicht als Selbstzweck",
         "Governance wird geheim gehalten",
-        "Governance ist nur ein Marketinginstrument"
+        "Regeln werden nur als Verbote kommuniziert",
+        "Governance ist nur ein Marketinginstrument",
+        "Governance wird als Enablement vermittelt: Regeln existieren wegen Audit, Risiko und Stabilität, nicht als Selbstzweck"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Wer Governance allein als Bürokratie kommuniziert, erzeugt Widerstand. Effektiv wird sie, wenn klar wird: Regeln schützen Audit, Risiko und Betrieb und ermöglichen damit Skalierung. Sie sind Enablement, nicht Selbstzweck.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Change",
       "schwierigkeit": "leicht",
@@ -247,12 +247,12 @@
       "id": "q17",
       "frage": "Was sind typische Exception-Codes im Finanzbereich?",
       "optionen": [
-        "MissingCostCenter, UnknownVendor, DuplicateInvoice, ERPDown, AuthFail",
-        "Nur 'Errors'",
         "Nur 'OK'",
-        "Marketing-Codes wie CTR oder CPM"
+        "Nur 'Errors'",
+        "Marketing-Codes wie CTR oder CPM",
+        "MissingCostCenter, UnknownVendor, DuplicateInvoice, ERPDown, AuthFail"
       ],
-      "korrekt": 0,
+      "korrekt": 3,
       "erklaerung": "Typische Codes umfassen Datenfehler (MissingCostCenter), fachliche Fälle (UnknownVendor, DuplicateInvoice), Systemausfälle (ERPDown) und Sicherheitsfälle (AuthFail). Klare Codes ermöglichen KPIs und Playbooks.",
       "quelle": "Tag 12 · UE 5 Fallstudie · Exception Codes",
       "schwierigkeit": "leicht",
@@ -262,12 +262,12 @@
       "id": "q18",
       "frage": "Welche Aussage zu Trainingspfaden im RPA-Change trifft zu?",
       "optionen": [
-        "Training ist nicht erforderlich",
-        "Operatoren, Bot Owner und Reviewer brauchen jeweils zugeschnittene Trainings",
         "Training erfolgt erst nach Auditfeststellung",
-        "Training ist nur Marketing"
+        "Wird einmalig festgelegt und nicht mehr überprüft",
+        "Training ist nicht erforderlich",
+        "Operatoren, Bot Owner und Reviewer brauchen jeweils zugeschnittene Trainings"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Rollen rund um Bots brauchen spezifische Schulung: Operator (Tagesbetrieb, Ausnahmen), Bot Owner (Steuerung, Lebenszyklus), Reviewer (Qualität, Sicherheit). Generisches Allgemeintraining bleibt wirkungsschwach.",
       "quelle": "Tag 12 · UE 5 Fallstudie · Change",
       "schwierigkeit": "leicht",
@@ -277,10 +277,10 @@
       "id": "q19",
       "frage": "Was zeichnet eine 'risikobasierte Freigabe' aus?",
       "optionen": [
-        "Sie ist immer gleich aufwendig",
+        "Sie ersetzt Tests vollständig",
         "Sie verlangt umso mehr Prüfungen, je höher das Risiko des Bots ist",
         "Sie verlangt keine Prüfungen",
-        "Sie ersetzt Tests vollständig"
+        "Sie ist immer gleich aufwendig"
       ],
       "korrekt": 1,
       "erklaerung": "Eine risikobasierte Freigabe skaliert ihre Tiefe mit dem Risiko: Low-risk Bots passieren ein Gate (QA), High-risk Bots durchlaufen mehrere Gates (QA, Security, Process Owner). So bleibt Aufwand verhältnismäßig.",
@@ -292,10 +292,10 @@
       "id": "q20",
       "frage": "Welche Aussage zum Begriff 'Bot Owner' trifft zu?",
       "optionen": [
-        "Es ist eine reine Marketingfunktion",
-        "Der Bot Owner ist accountable für Run, Monitoring und Wirkung des Bots",
         "Bot Owner kommen nur in Tests vor",
-        "Bot Owner sind in einer ordentlichen Governance überflüssig"
+        "Der Bot Owner ist accountable für Run, Monitoring und Wirkung des Bots",
+        "Bot Owner sind in einer ordentlichen Governance überflüssig",
+        "Wird ausschließlich durch externe Audits festgelegt"
       ],
       "korrekt": 1,
       "erklaerung": "Der Bot Owner ist die zentrale Verantwortung für den laufenden Bot: Betrieb, Monitoring, Wirkung, Verbesserungen. Ohne diese Rolle bleibt im Schadensfall unklar, wer entscheidet und handelt.",
@@ -307,9 +307,9 @@
       "id": "q21",
       "frage": "Welche Aussage zu einem 'Fast Track' bei kleinen Bots trifft zu?",
       "optionen": [
-        "Fast Track entfernt jede Form von Governance",
-        "Fast Track ist eine bewusste, verkürzte Freigabestrecke für klar definierte risikoarme Fälle mit erhaltenen Mindest-Guardrails",
         "Fast Track gilt nur für High-risk Bots",
+        "Fast Track ist eine bewusste, verkürzte Freigabestrecke für klar definierte risikoarme Fälle mit erhaltenen Mindest-Guardrails",
+        "Fast Track entfernt jede Form von Governance",
         "Fast Track ist gleichbedeutend mit Schatten-IT"
       ],
       "korrekt": 1,
@@ -322,12 +322,12 @@
       "id": "q22",
       "frage": "Welche Aussage zur Steuerung von Exception Rate trifft zu?",
       "optionen": [
-        "Hohe Exception Rate ist immer egal",
-        "Eine steigende Exception Rate ist ein Frühwarnsignal für Prozessinstabilität oder UI-Änderungen und braucht Reaktion",
-        "Exception Rate wird vom Marketing entschieden",
-        "Exception Rate ist nur für Reviews relevant"
+        "Exception Rate ist nur für Reviews relevant",
+        "Ist eine optionale Empfehlung ohne verbindliche Wirkung",
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
+        "Eine steigende Exception Rate ist ein Frühwarnsignal für Prozessinstabilität oder UI-Änderungen und braucht Reaktion"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Eine steigende Exception Rate signalisiert oft Probleme: Portal-Änderungen, schlechtere Datenqualität oder neue Sonderfälle. Sie muss als Frühwarnsignal in die Steuerung aufgenommen und mit klaren Eskalationen verbunden sein.",
       "quelle": "Tag 12 · UE 5 Fallstudie · KPIs",
       "schwierigkeit": "mittel",
@@ -337,12 +337,12 @@
       "id": "q23",
       "frage": "Welche Aussage zu Compliance by Design trifft zu?",
       "optionen": [
-        "Compliance ist nachträglich aufgesetzt",
-        "Compliance-Anforderungen werden früh ins Bot-Design eingebaut: Logging, Freigabe, SoD, Aufbewahrung",
+        "Compliance wird einmalig im Projekt festgelegt und danach nicht mehr überprüft",
         "Compliance ist nur ein Audit-Thema",
-        "Compliance ist nur Marketing"
+        "Compliance ist nachträglich aufgesetzt",
+        "Compliance-Anforderungen werden früh ins Bot-Design eingebaut: Logging, Freigabe, SoD, Aufbewahrung"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Compliance by Design heißt: Anforderungen wie Logging, Freigaben, Aufgabentrennung und Aufbewahrung sind Teil des Bot-Designs, nicht später aufgesetzte Pflicht. So entstehen Bots, die fast 'von Natur aus' auditfähig sind.",
       "quelle": "Tag 12 · UE 4 Coaching · Compliance",
       "schwierigkeit": "mittel",
@@ -353,11 +353,11 @@
       "frage": "Welche Aussage zu Quality Gates in der RPA-Governance trifft zu?",
       "optionen": [
         "Quality Gates sind eine reine Empfehlung",
-        "Quality Gates definieren Prüfpunkte (z. B. Tests, Security, Owner-Freigabe), die zum Produktionsstart bestanden sein müssen",
         "Quality Gates sind nur in Tests sichtbar",
-        "Quality Gates können beliebig umgangen werden"
+        "Quality Gates wird ausschließlich durch externe Auditoren festgelegt",
+        "Quality Gates definieren Prüfpunkte (z. B. Tests, Security, Owner-Freigabe), die zum Produktionsstart bestanden sein müssen"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Quality Gates sind verbindliche Prüfpunkte vor Produktionsstart, etwa Tests grün, Security Review ok, Process Owner Freigabe. Wer Gates umgeht, untergräbt das ganze System der risikobasierten Steuerung.",
       "quelle": "Tag 12 · UE 5 Fallstudie · Gates",
       "schwierigkeit": "mittel",
@@ -367,10 +367,10 @@
       "id": "q25",
       "frage": "Welche Aussage zum Zugriff auf Audit-Logs trifft zu?",
       "optionen": [
-        "Alle Mitarbeitenden dürfen Logs frei einsehen",
+        "Logs wird einmalig festgelegt und nicht mehr überprüft",
         "Zugriff erfolgt rollenbasiert, geschützt und mit definierten Berechtigungen",
         "Logs werden öffentlich auf der Webseite veröffentlicht",
-        "Logs sind nur für Marketing einsehbar"
+        "Alle Mitarbeitenden dürfen Logs frei einsehen"
       ],
       "korrekt": 1,
       "erklaerung": "Audit-Logs enthalten oft sensible Daten. Zugriff erfolgt rollenbasiert: Operations, Bot Owner, Security, Audit. Ein offener Zugriff verletzt typischerweise Datenschutz, Geheimhaltungs- und Compliance-Anforderungen.",
@@ -383,11 +383,11 @@
       "frage": "Welche Aussage zu Eskalationslogik bei Exceptions trifft zu?",
       "optionen": [
         "Eskalation passiert spontan und unsortiert",
-        "Eskalation folgt definierten Stufen (z. B. Retry, Ticket an IT, Eskalation an Bot Owner nach SLA)",
-        "Eskalation existiert nicht im RPA",
-        "Eskalation ersetzt die Buchhaltung"
+        "Wird einmalig festgelegt und nicht mehr überprüft",
+        "Eskalation ersetzt die Buchhaltung",
+        "Eskalation folgt definierten Stufen (z. B. Retry, Ticket an IT, Eskalation an Bot Owner nach SLA)"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Ein gutes Playbook definiert Eskalationsstufen mit SLAs: zunächst Retry, dann Ticket an Betrieb, danach Eskalation an Bot Owner und ggf. Process Owner. Klare Schritte verhindern, dass Ausnahmen liegen bleiben.",
       "quelle": "Tag 12 · UE 5 Fallstudie · Playbooks",
       "schwierigkeit": "mittel",
@@ -397,12 +397,12 @@
       "id": "q27",
       "frage": "Welche Aussage zur Wirkung guter Governance auf ROI trifft zu?",
       "optionen": [
-        "Governance senkt grundsätzlich den ROI",
         "Schlechte Governance kann ROI durch Fehler, Nacharbeit, Audit-Findings und Vertrauensverlust dramatisch senken",
+        "Governance ist nur Marketingthema",
         "Governance ist neutral zum ROI",
-        "Governance ist nur Marketingthema"
+        "Governance senkt grundsätzlich den ROI"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Wer Governance unterschätzt, zahlt im Nachhinein hohe Kosten durch Fehler, Nacharbeit, Audit-Findings oder Reputationsschäden. Gute Governance ist ROI-Schutz, kein Bremsfaktor.",
       "quelle": "Tag 12 · UE 4 Coaching · ROI",
       "schwierigkeit": "mittel",
@@ -412,12 +412,12 @@
       "id": "q28",
       "frage": "Welche Aussage zu SoD bei kritischen Bots trifft zu?",
       "optionen": [
-        "Ein Bot darf gleichzeitig anlegen, prüfen und freigeben",
-        "Ein Bot darf nicht gleichzeitig anlegen und freigeben, wenn die Regel SoD verlangt",
+        "SoD wird ausschließlich durch externe Auditoren festgelegt",
         "SoD ist nur in Tests sinnvoll",
-        "SoD wird im Marketing entschieden"
+        "Ein Bot darf gleichzeitig anlegen, prüfen und freigeben",
+        "Ein Bot darf nicht gleichzeitig anlegen und freigeben, wenn die Regel SoD verlangt"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Wo SoD vorgeschrieben ist, darf ein Bot nicht beide Rollen einnehmen. Er kann anlegen, eine andere Instanz (Mensch oder anderer Bot mit eigenem Konto) prüft und gibt frei. So bleibt die Trennung erhalten.",
       "quelle": "Tag 12 · UE 5 Fallstudie · SoD",
       "schwierigkeit": "mittel",
@@ -428,11 +428,11 @@
       "frage": "Welche Aussage zur Aufgabe eines QA-/Reviewer-Rolle trifft zu?",
       "optionen": [
         "QA prüft nur die Optik",
+        "QA wird ausschließlich durch externe Auditoren festgelegt",
         "QA prüft Bot-Design, Tests, Logging, Sicherheit und Einhaltung der Standards",
-        "QA ist nur in Großprojekten relevant",
-        "QA ist gleichbedeutend mit Marketing"
+        "QA ist nur in Großprojekten relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "QA/Reviewer prüfen, dass Bot-Design, Tests, Logging und Sicherheits-Baselines die festgelegten Standards erfüllen. Sie sind unabhängig vom Bauteam und sorgen für gleichbleibende Qualität über das Portfolio.",
       "quelle": "Tag 12 · UE 5 Fallstudie · Rollen",
       "schwierigkeit": "mittel",
@@ -442,12 +442,12 @@
       "id": "q30",
       "frage": "Welche Aussage zu MTTR im RPA-Betrieb trifft zu?",
       "optionen": [
-        "MTTR misst die Marketingeffektivität",
         "MTTR misst die mittlere Zeit, um nach einem Bot-Incident wieder den Sollbetrieb herzustellen",
+        "MTTR ist nur in Hardware-Themen relevant",
         "MTTR ist ohne Bedeutung",
-        "MTTR ist nur in Hardware-Themen relevant"
+        "MTTR misst die Marketingeffektivität"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "MTTR misst die durchschnittliche Zeit bis zur Wiederherstellung des Sollbetriebs nach einem Incident. Sie ist eine Schlüsselkennzahl für die Reife des Bot-Betriebs und Indikator für die Wirksamkeit der Playbooks.",
       "quelle": "Tag 12 · UE 5 Fallstudie · KPIs",
       "schwierigkeit": "mittel",
@@ -457,10 +457,10 @@
       "id": "q31",
       "frage": "Welche Aussage zur Rolle von Champions im Rollout trifft zu?",
       "optionen": [
-        "Champions sind reine Werbefiguren",
+        "Wird einmalig festgelegt und nicht mehr überprüft",
         "Champions sind nahe an der Praxis, geben Feedback und tragen Veränderung in Teams",
-        "Champions ersetzen die Geschäftsleitung",
-        "Champions existieren nur im Marketing"
+        "Champions sind reine Werbefiguren",
+        "Champions ersetzen die Geschäftsleitung"
       ],
       "korrekt": 1,
       "erklaerung": "Champions sind erfahrene Mitarbeitende mit guter Praxisbindung. Sie tragen Veränderung in Teams, liefern Feedback an das Programm und stützen so Akzeptanz und Adoption. Sie sind keine Werbefiguren, sondern Mitgestalter.",
@@ -472,12 +472,12 @@
       "id": "q32",
       "frage": "Welche Aussage zur Audit-Readiness im Alltag trifft zu?",
       "optionen": [
-        "Audit-Readiness entsteht nur kurz vor dem Audit",
-        "Audit-Readiness wird Tag für Tag durch Versionierung, Freigaben, Logs und Change-Belege aufgebaut",
         "Audit-Readiness ist nicht messbar",
-        "Audit-Readiness ist optional"
+        "Audit-Readiness entsteht nur kurz vor dem Audit",
+        "Audit-Readiness ist optional",
+        "Audit-Readiness wird Tag für Tag durch Versionierung, Freigaben, Logs und Change-Belege aufgebaut"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Audit-Readiness lässt sich nicht 'schnell vor dem Audit' erzeugen. Sie entsteht durch durchgehende Disziplin im Alltag: saubere Versionierung, Freigaben, Logs und Change-Belege. Nur so bleiben Nachweise konsistent.",
       "quelle": "Tag 12 · UE 4 Coaching · Audit",
       "schwierigkeit": "mittel",
@@ -487,12 +487,12 @@
       "id": "q33",
       "frage": "Welche Aussage zur Vendor-/Subunternehmer-Transparenz bei RPA trifft zu?",
       "optionen": [
-        "Vendor-Transparenz ist irrelevant",
-        "Wenn externe Anbieter oder Plattformen Bots hosten oder betreiben, müssen ihre Kontrollen, Logs und Zertifikate Teil der eigenen Governance sein",
+        "Vendor-Transparenz wird einmalig im Projekt festgelegt und danach nicht mehr überprüft",
+        "Vendor-Transparenz spielt nur bei Hardware eine Rolle",
         "Vendor-Transparenz ist nur ein Marketingthema",
-        "Vendor-Transparenz spielt nur bei Hardware eine Rolle"
+        "Wenn externe Anbieter oder Plattformen Bots hosten oder betreiben, müssen ihre Kontrollen, Logs und Zertifikate Teil der eigenen Governance sein"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Externe Anbieter sind Teil der eigenen Risikolage. Ihre Kontrollen, Logs und Zertifikate müssen die eigene Governance ergänzen. Sonst entstehen Lücken zwischen interner Compliance und der tatsächlichen Lieferkette.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Vendor",
       "schwierigkeit": "mittel",
@@ -503,11 +503,11 @@
       "frage": "Welche Aussage zu PII (Personal Identifiable Information) und Bots trifft zu?",
       "optionen": [
         "Bots dürfen PII frei verwenden",
-        "Bots, die mit personenbezogenen Daten arbeiten, brauchen klare Datenschutzregeln, Zugriffslogik und Logging",
         "PII existiert in RPA nicht",
-        "PII ist ein Synonym für Marketing"
+        "Bots, die mit personenbezogenen Daten arbeiten, brauchen klare Datenschutzregeln, Zugriffslogik und Logging",
+        "PII ist ein Synonym für anonymisierte Daten"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Personenbezogene Daten unterliegen Datenschutzregeln. Bots, die sie verarbeiten, brauchen klare Zugriffsregeln, Zweckbindung, sichere Speicherung und nachvollziehbares Logging. Ein verantwortliches Datenschutzkonzept ist Pflicht.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Security",
       "schwierigkeit": "mittel",
@@ -517,12 +517,12 @@
       "id": "q35",
       "frage": "Welche Aussage zu Continuous Improvement der Bots trifft zu?",
       "optionen": [
+        "Wird einmalig festgelegt und nicht mehr überprüft",
+        "Verbesserungen wird einmalig im Projekt festgelegt und danach nicht mehr überprüft",
         "Bots sind nach Go-Live 'fertig'",
-        "Bots werden anhand von Logs und KPIs regelmäßig verbessert, Ausnahmen analysiert und ggf. neu geschnitten",
-        "Verbesserungen finden nur im Marketing statt",
-        "Verbesserungen sind verboten"
+        "Bots werden anhand von Logs und KPIs regelmäßig verbessert, Ausnahmen analysiert und ggf. neu geschnitten"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Verbesserung ist Teil des Lifecycles: Logs und KPIs zeigen, wo Probleme entstehen, welche Ausnahmen sich häufen und welche Designänderungen lohnen. Bots ohne Verbesserung degenerieren über Zeit.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Lifecycle",
       "schwierigkeit": "mittel",
@@ -532,12 +532,12 @@
       "id": "q36",
       "frage": "Welche Aussage zum Begriff 'Risk Appetite' im RPA-Programm trifft zu?",
       "optionen": [
-        "Risk Appetite ist ein zufälliger Bauchwert",
         "Risk Appetite ist die bewusste Festlegung, welche Risiken in welchem Umfang akzeptiert werden, gekoppelt an Gates und Reviews",
-        "Risk Appetite ist nur ein Marketingbegriff",
+        "Wird zentral vom CIO ohne Fachbereich entschieden",
+        "Risk Appetite ist ein zufälliger Bauchwert",
         "Risk Appetite ist in RPA nicht relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Risk Appetite legt fest, welche Risiken in welchem Umfang akzeptiert werden, etwa bei Fast-Track Bots oder geringer Datenqualität. Er steuert Freigabestrecken und Reviewzyklen und macht Risiken im Programm bewusst handhabbar.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Risk Appetite",
       "schwierigkeit": "mittel",
@@ -547,12 +547,12 @@
       "id": "q37",
       "frage": "Welche Aussage zum Verhältnis von Plattformteam und Bot-Teams trifft zu?",
       "optionen": [
-        "Plattformteam und Bot-Teams sind identisch",
         "Das Plattformteam liefert Standards, Tooling, Templates; Bot-Teams nutzen sie und behalten Verantwortung für ihre Bots",
-        "Plattformteam ersetzt jede Bot-Verantwortung",
-        "Bot-Teams sind ohne Plattform überflüssig"
+        "Plattformteam und Bot-Teams sind identisch",
+        "Bot-Teams sind ohne Plattform überflüssig",
+        "Plattformteam ersetzt jede Bot-Verantwortung"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Plattformteams liefern Standards, Templates und Tooling (CI/CD, Logging, Vault, Monitoring). Bot-Teams nutzen diese und behalten Produktverantwortung für ihre Bots. So entstehen Skalierung und gemeinsame Qualität.",
       "quelle": "Tag 12 · UE 5 Fallstudie · Operating Model",
       "schwierigkeit": "mittel",
@@ -562,12 +562,12 @@
       "id": "q38",
       "frage": "Welche Aussage zu 'Mensch im Loop' für kritische Bots trifft zu?",
       "optionen": [
-        "Mensch im Loop ist Bürokratie",
         "Bei kritischen Entscheidungen bleibt ein Mensch in der Verantwortung, der Bot bereitet vor und dokumentiert",
+        "Mensch im Loop ist Bürokratie",
         "Mensch im Loop ist nur in Tests sinnvoll",
-        "Mensch im Loop wird vom Marketing entschieden"
+        "Ist nur in stark regulierten Branchen relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Bei kritischen oder regulierten Entscheidungen bleibt ein Mensch in der Verantwortung. Der Bot liefert Daten, prüft Pflichtfelder, dokumentiert und gibt die Entscheidung an die qualifizierte Person.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Human-in-the-loop",
       "schwierigkeit": "mittel",
@@ -578,11 +578,11 @@
       "frage": "Welche Aussage zu 'leichter, aber verbindlicher Governance' trifft zu?",
       "optionen": [
         "Sie ist ein Widerspruch in sich",
-        "Sie kombiniert wenige, aber durchgesetzte Regeln mit klaren Verantwortlichkeiten und transparenten Ausnahmen",
         "Sie bedeutet, dass Regeln optional sind",
+        "Sie kombiniert wenige, aber durchgesetzte Regeln mit klaren Verantwortlichkeiten und transparenten Ausnahmen",
         "Sie ist gleichbedeutend mit fehlender Governance"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Leichte Governance bedeutet nicht 'unverbindlich', sondern 'reduziert auf das Wesentliche, aber konsequent durchgesetzt'. Wenige klare Regeln, klare Verantwortlichkeiten und nachvollziehbare Ausnahmen sind oft wirksamer als dicke Regelwerke.",
       "quelle": "Tag 12 · UE 4 Coaching · Enablement",
       "schwierigkeit": "mittel",
@@ -594,8 +594,8 @@
       "optionen": [
         "Ausnahmen sind reine Ärgernisse",
         "Ausnahmen zeigen Schwächen im Prozess, im Bot oder in der Datenqualität und werden systematisch ausgewertet",
-        "Ausnahmen sind nur Statistik",
-        "Ausnahmen sind nicht analysierbar"
+        "Ausnahmen sind nicht analysierbar",
+        "Ausnahmen sind nur Statistik"
       ],
       "korrekt": 1,
       "erklaerung": "Ausnahmen sind ein Datenschatz: sie zeigen Schwächen in Prozess, Bot oder Daten. Eine systematische Auswertung verbessert Design, Daten und Playbooks und senkt die Ausnahmequote dauerhaft.",
@@ -607,12 +607,12 @@
       "id": "q41",
       "frage": "Welche Aussage zur Rolle 'Change Owner' im RPA-Kontext trifft zu?",
       "optionen": [
+        "Change Owner sind in der Governance überflüssig",
         "Der Change Owner schreibt den Bot-Code",
         "Der Change Owner verantwortet, dass Veränderungen im Fachbereich kommuniziert, trainiert und akzeptiert werden",
-        "Change Owner ist eine technische Rolle für Backups",
-        "Change Owner sind in der Governance überflüssig"
+        "Change Owner ist eine technische Rolle für Backups"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Der Change Owner trägt Verantwortung dafür, dass Bots im Fachbereich angekommen sind: Botschaft, Schulung, Feedbackmechanismen, Adoption. Ohne diese Rolle bleibt der Roll-out technisch erfolgreich, aber kulturell wirkungslos.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Rollen",
       "schwierigkeit": "mittel",
@@ -622,10 +622,10 @@
       "id": "q42",
       "frage": "Welche Aussage zur Frage 'Welche Guardrails sind nicht verhandelbar?' trifft zu?",
       "optionen": [
-        "Es gibt keine nicht verhandelbaren Guardrails",
+        "Ist eine optionale Empfehlung ohne verbindliche Wirkung",
         "Logging-Mindeststandard, Vault-Pflicht und Freigabe vor Prod sind typische Beispiele für Pflicht-Guardrails",
-        "Guardrails dürfen jederzeit individuell ignoriert werden",
-        "Guardrails sind nur Marketing"
+        "Es gibt keine nicht verhandelbaren Guardrails",
+        "Guardrails dürfen jederzeit individuell ignoriert werden"
       ],
       "korrekt": 1,
       "erklaerung": "Typische Pflicht-Guardrails sind ein definierter Logging-Mindeststandard, Vault-Pflicht für Secrets und Freigabe vor Prod. Sie sichern Audit, Sicherheit und Risiko und gelten unabhängig von Termindruck.",
@@ -637,12 +637,12 @@
       "id": "q43",
       "frage": "Welche Aussage zu 'Bot Owner accountable' trifft zu?",
       "optionen": [
-        "Accountability lässt sich beliebig wegdelegieren",
+        "Accountability gibt es im RACI nicht",
+        "Accountability liegt allein bei externen Beratern",
         "Der Bot Owner trägt die Ergebnisverantwortung für seinen Bot, auch wenn andere im RACI mitwirken",
-        "Accountability ist nur Marketing",
-        "Accountability gibt es im RACI nicht"
+        "Wird einmalig festgelegt und nicht mehr überprüft"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Im RACI ist Accountable die ergebnisverantwortliche Rolle. Beim Bot ist dies der Bot Owner: andere Rollen wirken mit (Responsible, Consulted, Informed), aber die finale Verantwortung bleibt beim Owner.",
       "quelle": "Tag 12 · UE 5 Fallstudie · Rollen",
       "schwierigkeit": "mittel",
@@ -652,12 +652,12 @@
       "id": "q44",
       "frage": "Welche Aussage zu Reviews in der RPA-Governance trifft zu?",
       "optionen": [
-        "Reviews sind nur Audits",
         "Reviews prüfen regelmäßig Bots, KPIs, Vorfälle und Ausnahmen und steuern Verbesserungen und Stilllegungen",
-        "Reviews sind nur einmalig erforderlich",
-        "Reviews sind ein Marketinginstrument"
+        "Reviews sind nur Audits",
+        "Reviews sind ein Marketinginstrument",
+        "Reviews sind nur einmalig erforderlich"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Reviews sind kein Audit, sondern Steuerungsinstrument im Alltag. Sie betrachten Bot-KPIs, Incidents und Ausnahmen, leiten Verbesserungen ab oder entscheiden über Stilllegung. So entsteht ein lernendes Portfolio.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Reviews",
       "schwierigkeit": "mittel",
@@ -667,12 +667,12 @@
       "id": "q45",
       "frage": "Welche Aussage zur Kommunikation der Botschaft 'Bot nimmt Aufgaben, nicht Würde' trifft zu?",
       "optionen": [
-        "Die Botschaft ist überflüssig",
         "Sie adressiert Angst, würdigt Beschäftigte und unterstützt den Rollenwandel",
-        "Sie ist nur PR",
-        "Sie ist nicht Teil von Change Management"
+        "Sie ist nicht Teil von Change Management",
+        "Die Botschaft ist überflüssig",
+        "Sie ist nur PR"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Eine respektvolle, klare Botschaft adressiert Angst, würdigt die Leistung der Beschäftigten und unterstützt den Rollenwandel. Sie ist kein Werbespruch, sondern Teil einer ernstgemeinten Change-Strategie.",
       "quelle": "Tag 12 · UE 1 Wissensvermittlung · Change",
       "schwierigkeit": "mittel",
@@ -682,12 +682,12 @@
       "id": "q46",
       "frage": "Welche Aussage zur Senior-Frage 'CoE vs. Föderation' trifft zu?",
       "optionen": [
-        "Es gibt nur ein richtiges Modell für alle Unternehmen",
-        "Es ist eine bewusste Entscheidung mit Risiken: CoE kann zum Engpass werden, Föderation zur Schatten-IT; hybride Modelle sind oft sinnvoll",
         "Beide Modelle sind identisch",
-        "Föderation kommt ohne Standards aus"
+        "Es gibt nur ein richtiges Modell für alle Unternehmen",
+        "Föderation kommt ohne Standards aus",
+        "Es ist eine bewusste Entscheidung mit Risiken: CoE kann zum Engpass werden, Föderation zur Schatten-IT; hybride Modelle sind oft sinnvoll"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "CoE-Modelle bündeln Reife und Standards, riskieren aber Engpass. Föderation gibt Tempo, riskiert aber Schatten-IT. Häufig sind Hybridmodelle tragfähig: zentrale Plattform und Risk Frame, federierte Build- und Betriebsteams.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Operating Model",
       "schwierigkeit": "schwer",
@@ -697,12 +697,12 @@
       "id": "q47",
       "frage": "Welche Aussage zur Bedeutung von 'irreversiblen Entscheidungen' im RPA-Operating-Model trifft zu?",
       "optionen": [
-        "Alle Entscheidungen sind leicht zu ändern",
-        "Zugriffskonzepte, Vault-Architektur und Orchestrierung sind schwer rückwärts zu drehen und gehören explizit auf die Senior-Agenda",
+        "Irreversible Entscheidungen werden allein vom CIO ohne Fachbereich getroffen",
         "Irreversible Entscheidungen sind nur in HR relevant",
-        "Irreversible Entscheidungen werden vom Marketing getroffen"
+        "Alle Entscheidungen sind leicht zu ändern",
+        "Zugriffskonzepte, Vault-Architektur und Orchestrierung sind schwer rückwärts zu drehen und gehören explizit auf die Senior-Agenda"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Manche Entscheidungen prägen das Operating Model dauerhaft: das Zugriffskonzept, die Vault-Architektur, die Orchestrierungsplattform. Diese gehören auf die Senior-Agenda mit besonderer Vorbereitung und Reviewzyklus.",
       "quelle": "Tag 12 · UE 4 Coaching · Senior",
       "schwierigkeit": "schwer",
@@ -712,12 +712,12 @@
       "id": "q48",
       "frage": "Welche Aussage zu 'Wer trägt Risiko?' im RPA-Programm trifft im Senior-Sinne zu?",
       "optionen": [
-        "Risiko trägt niemand",
         "Risiken sind klaren Rollen zugeordnet (z. B. Bot Owner, Process Owner, Security Owner) und werden dokumentiert",
-        "Risiko trägt nur das Marketing",
-        "Risiko ist nicht steuerbar"
+        "Risiko ist nicht steuerbar",
+        "Risiko trägt allein die externe Beratung",
+        "Risiko trägt niemand"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Senior-Verantwortung sorgt dafür, dass jedes Risiko einem klaren Owner zugeordnet ist - Bot Owner, Process Owner, Security Owner. Ohne klare Zuordnung wird im Incident-Fall diskutiert statt entschieden.",
       "quelle": "Tag 12 · UE 7 Feedback · Verantwortung",
       "schwierigkeit": "schwer",
@@ -727,10 +727,10 @@
       "id": "q49",
       "frage": "Welche Aussage zu Fast-Track-Grenzen trifft im Senior-Sinne zu?",
       "optionen": [
-        "Fast Track kennt keine Grenzen",
+        "Fast Track gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
         "Fast Track gilt nur für klar abgrenzbare, risikoarme Klassen mit definierten KPI-Stopp-Schwellen",
         "Fast Track ist gleichbedeutend mit fehlender Governance",
-        "Fast Track ist Marketing"
+        "Fast Track kennt keine Grenzen"
       ],
       "korrekt": 1,
       "erklaerung": "Fast Track ist nur für klar definierte Klassen risikoarmer Bots gerechtfertigt, mit transparenten Stoppkriterien: Exception Rate, Fehlerquote, UI-Volatilität. So bleibt das Tempo verantwortbar.",
@@ -742,12 +742,12 @@
       "id": "q50",
       "frage": "Welche Aussage zur 'Logging Integrity' im Senior-Sinne trifft zu?",
       "optionen": [
+        "Wird zentral vom CIO ohne Fachbereich entschieden",
         "Logs dürfen jederzeit überschrieben werden",
         "Integrität der Logs (Append-only, Zugriffsregeln, Aufbewahrung) ist eine Senior-Pflicht, sonst sind alle weiteren Kontrollen wertlos",
-        "Logging Integrity gibt es nicht",
-        "Logging Integrity ist Marketing"
+        "Ist eine optionale Empfehlung ohne verbindliche Wirkung"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Ohne integere Logs wird jede weitere Kontrolle wertlos: Audits können sich nicht auf manipulierbare Daten stützen, Risikoanalysen werden unzuverlässig. Append-only, Zugriffsregeln und definierte Aufbewahrung sind Senior-Pflichten.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Logging",
       "schwierigkeit": "schwer",
@@ -757,12 +757,12 @@
       "id": "q51",
       "frage": "Welche Aussage zu KPI-Kopplung gegen Gaming trifft im Senior-Sinne zu?",
       "optionen": [
-        "KPIs werden möglichst entkoppelt",
-        "Produktivitäts-KPIs werden mit Qualitäts- und Risiko-KPIs gekoppelt, damit eine Verbesserung nur dann zählt, wenn andere Größen im Korridor bleiben",
         "KPIs sind nicht koppelbar",
-        "KPIs sind nur Marketing"
+        "KPIs ist erst in agilen Pilotprojekten relevant",
+        "KPIs werden möglichst entkoppelt",
+        "Produktivitäts-KPIs werden mit Qualitäts- und Risiko-KPIs gekoppelt, damit eine Verbesserung nur dann zählt, wenn andere Größen im Korridor bleiben"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-KPI-Design verbindet Produktivität, Qualität und Risiko, damit eine Erhöhung der Durchsatzzahl nicht durch heimliche Verschlechterung von Qualität oder Risiko 'erkauft' wird. Diese Kopplung schützt vor Scheinverbesserungen.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Anti-Gaming",
       "schwierigkeit": "schwer",
@@ -772,12 +772,12 @@
       "id": "q52",
       "frage": "Welche Aussage zur Exit-/Retire-Strategie für Bots trifft zu?",
       "optionen": [
-        "Bots werden nie stillgelegt",
         "Eine klare Retire-Strategie definiert, wann Bots stillgelegt werden, wie Daten und Logs übergeben und Prozesse rückübertragen werden",
-        "Exit ist nur Marketing",
+        "Exit wird zentral vom CIO ohne Fachbereich entschieden",
+        "Bots werden nie stillgelegt",
         "Exit gibt es im Lifecycle nicht"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Auch das Stilllegen gehört zum Lifecycle: wann wird ein Bot abgeschaltet, wie werden Daten und Logs archiviert, wie wandert die Aufgabe zurück oder in eine bessere Lösung. Ohne Retire-Strategie verstopfen Portfolios.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Retire",
       "schwierigkeit": "schwer",
@@ -787,12 +787,12 @@
       "id": "q53",
       "frage": "Welche Aussage zur Wirkung eines schlecht gemanagten Vendor-/Drittparteienzugangs trifft zu?",
       "optionen": [
-        "Es entstehen keine Risiken",
-        "Es entstehen typischerweise Sicherheits-, Compliance- und Reputationsrisiken, die das ganze RPA-Programm gefährden können",
+        "Risiken sind nur ein Marketingthema",
         "Risiken sind nur theoretisch",
-        "Risiken sind nur ein Marketingthema"
+        "Es entstehen keine Risiken",
+        "Es entstehen typischerweise Sicherheits-, Compliance- und Reputationsrisiken, die das ganze RPA-Programm gefährden können"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Drittparteienzugriffe sind besonders sensibel: ohne klare Verträge, Audit-Rechte und Kontrollen entstehen Sicherheits-, Compliance- und Reputationsrisiken. Sie können ein ganzes RPA-Programm in Frage stellen.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Vendor",
       "schwierigkeit": "schwer",
@@ -802,10 +802,10 @@
       "id": "q54",
       "frage": "Welche Aussage zu 'Governance darf nicht zum Bottleneck werden' trifft zu?",
       "optionen": [
-        "Governance soll immer das Tempo bestimmen",
+        "Wird einmalig festgelegt und nicht mehr überprüft",
         "Senior-Verantwortung sorgt für klare Service-Levels, Selbstbedienungs-Templates und Risk-based Releases, damit Governance handhabbar bleibt",
         "Governance ist nie ein Engpass",
-        "Governance ist nur Marketing"
+        "Governance soll immer das Tempo bestimmen"
       ],
       "korrekt": 1,
       "erklaerung": "Governance muss steuern, aber nicht alles aufhalten. Service-Levels für Reviews, Self-Service-Templates und Risk-based Releases sorgen dafür, dass sie wirksam, aber nicht zum strukturellen Engpass wird.",
@@ -817,12 +817,12 @@
       "id": "q55",
       "frage": "Welche Aussage zur 'Verantwortung ohne Angstkultur' trifft zu?",
       "optionen": [
+        "Verantwortung ist nicht steuerbar",
         "Verantwortung erfordert Angst",
         "Verantwortung gelingt, wenn Fehler analysiert statt bestraft werden und Strukturen Wirksamkeit, nicht Schuld in den Mittelpunkt stellen",
-        "Verantwortung ist nicht steuerbar",
-        "Verantwortung ist nur Marketing"
+        "Ist nur in stark regulierten Branchen relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Senior-Führung etabliert Verantwortung ohne Angstkultur: Fehler werden analysiert und genutzt, Strukturen stellen Wirksamkeit in den Mittelpunkt. Angstgetriebene Kultur erzeugt Vermeidungsverhalten und versteckte Risiken.",
       "quelle": "Tag 12 · UE 4 Coaching · Senior-Shift",
       "schwierigkeit": "schwer",
@@ -832,10 +832,10 @@
       "id": "q56",
       "frage": "Welche Aussage zur Frage 'wann nicht skalieren' im Senior-Sinne trifft zu?",
       "optionen": [
-        "Skalieren ist immer richtig",
+        "Liegt allein in der Verantwortung der IT-Abteilung",
         "Wenn Exception Rate, Audit-Findings oder Incident Rate definierte Schwellen überschreiten, wird stabilisiert statt skaliert",
-        "Skalieren wird vom Marketing entschieden",
-        "Skalieren ist nie eine Senior-Frage"
+        "Skalieren ist nie eine Senior-Frage",
+        "Skalieren ist immer richtig"
       ],
       "korrekt": 1,
       "erklaerung": "Senior-Steuerung verzichtet bewusst auf Skalierung, wenn definierte Schwellen (Exception Rate, Audit-Findings, Incident Rate) überschritten sind. Stabilisierung geht dann vor, sonst skaliert man die Risiken statt der Wirkung.",
@@ -847,12 +847,12 @@
       "id": "q57",
       "frage": "Welche Aussage zu 'Risikoakzeptanzmodell' im RPA-Programm trifft zu?",
       "optionen": [
-        "Es gibt es nicht",
         "Ein Risikoakzeptanzmodell beschreibt, wer welche Risiken in welchem Umfang akzeptieren darf, mit klaren Reviewzyklen",
+        "Risiken wird zentral vom CIO ohne Fachbereich entschieden",
         "Risiken werden nur stillschweigend zugelassen",
-        "Risiken sind nur Marketing"
+        "Wird einmalig festgelegt und nicht mehr überprüft"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Ein Risikoakzeptanzmodell legt fest, wer welche Risiken in welchem Umfang akzeptieren darf - z. B. Bot Owner für niedrige Klassen, CRO/COO für höhere. Reviewzyklen sorgen dafür, dass akzeptierte Risiken überprüft bleiben.",
       "quelle": "Tag 12 · UE 7 Feedback · Risikomodell",
       "schwierigkeit": "schwer",
@@ -862,12 +862,12 @@
       "id": "q58",
       "frage": "Welche Aussage zu Audit-Sampling als Steuerungsinstrument trifft zu?",
       "optionen": [
+        "Liegt allein in der Verantwortung der IT-Abteilung",
         "Audit-Sampling ist eine Last",
-        "Audit-Sampling testet stichprobenartig Vorgänge gegen die definierten Kontrollen und ist Frühindikator für Compliance-Lücken",
-        "Audit-Sampling ist Marketing",
-        "Audit-Sampling existiert nur extern"
+        "Audit-Sampling existiert nur extern",
+        "Audit-Sampling testet stichprobenartig Vorgänge gegen die definierten Kontrollen und ist Frühindikator für Compliance-Lücken"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Audit-Sampling prüft Stichproben gegen die definierten Kontrollen und liefert frühe Hinweise auf Lücken im Bot-Design, in Daten oder Verfahren. Es ist ein effektives Steuerungsinstrument, nicht nur eine externe Pflicht.",
       "quelle": "Tag 12 · UE 5 Fallstudie · Audit",
       "schwierigkeit": "schwer",
@@ -878,11 +878,11 @@
       "frage": "Welche Aussage zur Rolle des Architekturboards für RPA trifft zu?",
       "optionen": [
         "Es entscheidet jeden Pull Request",
-        "Es entscheidet die wenigen teuren und schwer rückwärts zu drehenden Themen: Plattform, Zugriffskonzept, SoD-Regeln",
         "Es ersetzt jede Verantwortung der Owner",
-        "Es ist nur Marketing"
+        "Wird ausschließlich durch externe Audits festgelegt",
+        "Es entscheidet die wenigen teuren und schwer rückwärts zu drehenden Themen: Plattform, Zugriffskonzept, SoD-Regeln"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Ein RPA-Architekturboard entscheidet nicht jeden Detailfall, sondern setzt Leitplanken für die wenigen teuren Themen: Plattformwahl, Zugriffskonzept, SoD-Regeln, Sicherheits-Baseline. Alles andere bleibt in den Owner-Rollen.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Governance",
       "schwierigkeit": "schwer",
@@ -892,12 +892,12 @@
       "id": "q60",
       "frage": "Welche Aussage zum Senior-Ziel 'ein verantwortbares Automationssystem führen' trifft zu?",
       "optionen": [
-        "Es geht nur um die Anzahl gebauter Bots",
         "Es geht darum, Portfolio, Risiko, Sicherheit, Compliance und Change gemeinsam so zu steuern, dass Skalierung verantwortbar bleibt",
-        "Es geht nur um Marketing",
-        "Es geht nur um Lizenzkosten"
+        "Es geht nur um Lizenzkosten",
+        "Es geht nur um die Anzahl gebauter Bots",
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Der Senior-Shift verschiebt den Fokus von der reinen Bot-Produktion hin zur Führung eines Systems aus Portfolio, Risiko, Sicherheit, Compliance und Change. Erst dadurch wird RPA-Skalierung nachhaltig verantwortbar.",
       "quelle": "Tag 12 · UE 8 Transferprojekt · Senior-Ziel",
       "schwierigkeit": "schwer",

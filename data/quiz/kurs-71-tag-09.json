@@ -7,12 +7,12 @@
       "id": "q01",
       "frage": "Welche drei Rollen sind im Scrum-Framework offiziell vorgesehen?",
       "optionen": [
-        "Product Owner, Scrum Master, Developers",
         "Designer, Tester, Sales",
+        "Product Owner, Scrum Master, Developers",
         "CEO, CFO, COO",
         "Architekt, Manager, Sekretär"
       ],
-      "korrekt": 0,
+      "korrekt": 1,
       "erklaerung": "Scrum kennt drei Rollen: Product Owner (Wertorientierung), Scrum Master (Prozess-Coach) und Developers (Lieferung). Die anderen Aufzählungen entsprechen keiner Scrum-Rollendefinition.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · Scrum-Rollen",
       "schwierigkeit": "leicht",
@@ -22,12 +22,12 @@
       "id": "q02",
       "frage": "Welches Event gehört zum Scrum-Rahmen?",
       "optionen": [
-        "Sprint Planning",
         "Lieferanten-Audit",
+        "Sprint Planning",
         "Hauptversammlung",
         "Jahresinventur"
       ],
-      "korrekt": 0,
+      "korrekt": 1,
       "erklaerung": "Sprint Planning, Daily, Review und Retro sind Scrum-Events. Audit, Hauptversammlung und Inventur sind keine Scrum-Events.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · Scrum-Events",
       "schwierigkeit": "leicht",
@@ -37,12 +37,12 @@
       "id": "q03",
       "frage": "Was ist die ‚Definition of Done‘?",
       "optionen": [
-        "Ein UI-Element",
         "Eine vereinbarte Liste von Kriterien, die ein Increment erfüllen muss, um als ‚fertig‘ zu gelten",
-        "Ein Marketingbegriff",
-        "Eine externe Auditregel"
+        "Eine externe Auditregel",
+        "Wird vollständig durch die BPM-Suite automatisiert",
+        "Ein UI-Element"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Die Definition of Done ist eine vereinbarte Liste von Kriterien, die ein Increment erfüllen muss, um als ‚fertig‘ zu gelten. Sie sichert Qualität und Vergleichbarkeit der Ergebnisse.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · DoD",
       "schwierigkeit": "leicht",
@@ -52,12 +52,12 @@
       "id": "q04",
       "frage": "Welche zwei zentralen Kanban-Prinzipien werden genannt?",
       "optionen": [
-        "Visualisieren und WIP limitieren",
+        "Lieblingsfarbe und Lieblingsschriftart",
         "Marketing und Vertrieb",
-        "Kantine und Empfang",
-        "Lieblingsfarbe und Lieblingsschriftart"
+        "Visualisieren und WIP limitieren",
+        "Kantine und Empfang"
       ],
-      "korrekt": 0,
+      "korrekt": 2,
       "erklaerung": "Kanban setzt auf Visualisieren, WIP-Limits, Pull-System und Flow-Messung (Lead Time/Cycle Time). Die anderen Begriffe sind keine Kanban-Prinzipien.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · Kanban-Prinzipien",
       "schwierigkeit": "leicht",
@@ -68,11 +68,11 @@
       "frage": "Was bedeutet ‚WIP-Limit‘?",
       "optionen": [
         "Eine UI-Animation",
-        "Ein maximales Limit für gleichzeitig laufende Arbeitspakete (Work in Progress) je Spalte",
-        "Eine Marketingkennzahl",
-        "Eine Steuererklärung"
+        "Ist nur in der Pilotphase relevant",
+        "Eine Steuererklärung",
+        "Ein maximales Limit für gleichzeitig laufende Arbeitspakete (Work in Progress) je Spalte"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "WIP-Limit begrenzt die Anzahl gleichzeitig in Bearbeitung befindlicher Aufgaben (Work in Progress) je Spalte/Schritt. Es reduziert Multitasking und verkürzt Lead Time.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · WIP-Limit",
       "schwierigkeit": "leicht",
@@ -82,12 +82,12 @@
       "id": "q06",
       "frage": "Wofür steht ‚CI‘ in der Pipeline?",
       "optionen": [
-        "Continuous Integration",
-        "Continuous Information",
         "Conformance Index",
+        "Continuous Information",
+        "Continuous Integration",
         "Customer Identity"
       ],
-      "korrekt": 0,
+      "korrekt": 2,
       "erklaerung": "CI steht für Continuous Integration – die häufige, automatisierte Integration und Prüfung von Code-Änderungen. Die anderen Begriffe sind in dieser Form nicht etabliert.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · CI",
       "schwierigkeit": "leicht",
@@ -97,12 +97,12 @@
       "id": "q07",
       "frage": "Wofür steht ‚IaC‘?",
       "optionen": [
-        "Internal Audit Control",
         "Infrastructure as Code",
+        "Internal Audit Control",
         "Integration and Coordination",
         "Information as Communication"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "IaC steht für Infrastructure as Code – Infrastruktur wird als versionierter Code definiert, gereviewt und reproduzierbar bereitgestellt.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · IaC",
       "schwierigkeit": "leicht",
@@ -114,8 +114,8 @@
       "optionen": [
         "Gates sind Stop-Regeln, die immer erfüllt sein müssen, bevor ein Schritt freigegeben wird",
         "Gates sind UI-Themen",
-        "Gates sind Marketingbegriffe",
-        "Gates sind beliebig"
+        "Gates liegt allein in der Verantwortung der IT-Abteilung",
+        "Gates sind Marketingbegriffe"
       ],
       "korrekt": 0,
       "erklaerung": "Quality Gates sind Stop-Regeln, die immer erfüllt sein müssen (z. B. Tests grün, Security-Scan ok). Sie verhindern, dass Defekte in Produktion gelangen.",
@@ -127,10 +127,10 @@
       "id": "q09",
       "frage": "Welche Aussage zu ‚Pull-System‘ in Kanban ist korrekt?",
       "optionen": [
-        "Arbeit wird in das System gedrückt, sobald sie auftaucht",
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
         "Arbeit wird gezogen, wenn Kapazität frei wird – das schützt Qualität und Lead Time",
-        "Pull-System ist UI-Theme",
-        "Pull-System ist Marketing"
+        "Arbeit wird in das System gedrückt, sobald sie auftaucht",
+        "Pull-System wird ausschließlich durch externe Auditoren festgelegt"
       ],
       "korrekt": 1,
       "erklaerung": "In einem Pull-System wird Arbeit erst gezogen, wenn Kapazität frei wird. Das verhindert Überlast und verkürzt Lead Time – im Gegensatz zu Push-Systemen.",
@@ -142,12 +142,12 @@
       "id": "q10",
       "frage": "Welche Aussage zu ‚Sprint Backlog‘ ist korrekt?",
       "optionen": [
+        "Eine Marketingliste",
         "Eine UI-Animation",
         "Eine Liste von Items, die das Team in einem Sprint umsetzen will – verbunden mit dem Sprint Goal",
-        "Eine Marketingliste",
         "Eine HR-Liste"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Das Sprint Backlog enthält die Items, die das Team in einem Sprint umsetzen will, verbunden mit dem Sprint Goal. Es entsteht aus dem Product Backlog.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · Sprint Backlog",
       "schwierigkeit": "leicht",
@@ -158,11 +158,11 @@
       "frage": "Welche Aussage zu ‚Cargo Cult Scrum‘ ist treffend?",
       "optionen": [
         "Cargo Cult Scrum ist effektives Scrum",
+        "Ist nur in der Pilotphase relevant",
         "Cargo Cult Scrum bezeichnet das mechanische Abarbeiten von Ritualen ohne Outcome – ein häufiges Anti-Pattern",
-        "Cargo Cult Scrum ist UI-Theme",
-        "Cargo Cult Scrum ist Marketing"
+        "Cargo Cult Scrum wird zentral vom CIO ohne Fachbereich entschieden"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Cargo Cult Scrum bezeichnet das mechanische Abarbeiten von Ritualen ohne Outcome. Es ist ein verbreitetes Anti-Pattern, das Scrum entwertet.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · Cargo Cult",
       "schwierigkeit": "leicht",
@@ -172,12 +172,12 @@
       "id": "q12",
       "frage": "Welche der folgenden Aussagen zur ‚Pipeline-Stufung Build → Test → Deploy‘ ist korrekt?",
       "optionen": [
-        "Reihenfolge ist beliebig",
-        "Sinnvolle Stufung: Commit → Build → Tests → Security/Quality Checks → Deploy (Staging/Prod)",
+        "Reihenfolge ist nur für interne Reports an den Vorstand vorgesehen",
         "Reihenfolge ist UI-Frage",
-        "Reihenfolge ist Marketing"
+        "Reihenfolge ist nur in der Pilotphase relevant und entfällt im Regelbetrieb",
+        "Sinnvolle Stufung: Commit → Build → Tests → Security/Quality Checks → Deploy (Staging/Prod)"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Eine sinnvolle CI-Pipeline durchläuft Commit → Build → Tests → Security/Quality Checks → Deploy. Beliebige Reihenfolgen erhöhen Defektquoten und Risiken.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · Pipeline-Stufung",
       "schwierigkeit": "leicht",
@@ -187,12 +187,12 @@
       "id": "q13",
       "frage": "Welche Aussage zur ‚IaC-Reproduzierbarkeit‘ ist korrekt?",
       "optionen": [
-        "IaC ist nicht reproduzierbar",
         "IaC erlaubt reproduzierbare Umgebungen, weil Infrastruktur als versionierter Code definiert ist",
-        "IaC ist UI-Theme",
-        "IaC ist Marketing"
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
+        "Ist ein rein technischer Aspekt ohne fachliche Steuerung",
+        "IaC ist nicht reproduzierbar"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "IaC erlaubt reproduzierbare Umgebungen, weil Infrastruktur als versionierter Code definiert ist. So entstehen reviewbare, auditierbare Änderungen.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · IaC Reproduzierbarkeit",
       "schwierigkeit": "leicht",
@@ -203,11 +203,11 @@
       "frage": "Welches der folgenden Flow-Metriken-Begriffe ist korrekt?",
       "optionen": [
         "Lead Time = Bestellungen pro Monat",
-        "Lead Time = Dauer von Eintritt eines Items in das System bis zu seinem Abschluss",
         "Lead Time = Anzahl Sprints pro Quartal",
-        "Lead Time ist eine Marketingkennzahl"
+        "Lead Time = Dauer von Eintritt eines Items in das System bis zu seinem Abschluss",
+        "Ist nur in der Pilotphase relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Lead Time misst die Dauer von Eintritt eines Items in das System bis zu seinem Abschluss. Sie ist eine zentrale Flow-Metrik in Kanban.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · Lead Time",
       "schwierigkeit": "leicht",
@@ -217,12 +217,12 @@
       "id": "q15",
       "frage": "Welche Aussage zur ‚Sprint Retrospektive‘ ist korrekt?",
       "optionen": [
-        "Sie ist ein Marketingtermin",
         "Sie reflektiert Arbeitsweise und definiert Verbesserungen für den nächsten Sprint",
-        "Sie ist UI-Theme",
-        "Sie ist beliebig"
+        "Sie ist ein Marketingtermin",
+        "Wird einmalig festgelegt und nicht mehr überprüft",
+        "Wird ausschließlich durch externe Audits festgelegt"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Die Sprint Retrospektive reflektiert die Arbeitsweise und definiert konkrete Verbesserungen für den nächsten Sprint. Sie ist Lernschleife – kein Marketingtermin.",
       "quelle": "Tag 9 · UE 1 Wissensvermittlung · Retrospektive",
       "schwierigkeit": "leicht",
@@ -233,11 +233,11 @@
       "frage": "Welche Aussage zu ‚Smoke Tests‘ ist korrekt?",
       "optionen": [
         "Smoke Tests prüfen Logos",
-        "Smoke Tests prüfen, ob ein deploytes System grundlegend funktioniert",
-        "Smoke Tests sind UI-Theme",
-        "Smoke Tests sind Marketing"
+        "Smoke Tests ist ein optionaler Best-Effort-Schritt ohne verbindliche Wirkung",
+        "Smoke Tests wird automatisch durch die BPM-Suite generiert",
+        "Smoke Tests prüfen, ob ein deploytes System grundlegend funktioniert"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Smoke Tests prüfen, ob ein deploytes System grundlegend funktioniert (z. B. Login, Hauptseite). Sie sind in CI-Pipelines verbreitet und schützen vor groben Defekten.",
       "quelle": "Tag 9 · UE 3 Arbeitsauftrag 2 · Smoke Tests",
       "schwierigkeit": "leicht",
@@ -247,12 +247,12 @@
       "id": "q17",
       "frage": "Welche Aussage zu ‚Feature Toggle/Canary/Rollback‘ ist korrekt?",
       "optionen": [
-        "Feature Toggle, Canary und Rollback sind Risiko-Minderungsmuster für Releases",
         "Feature Toggle ist eine UI-Animation",
         "Canary ist ein Lieferantenrating",
-        "Rollback ist ein Marketingbegriff"
+        "Rollback ist nur in der Pilotphase relevant und entfällt im Regelbetrieb",
+        "Feature Toggle, Canary und Rollback sind Risiko-Minderungsmuster für Releases"
       ],
-      "korrekt": 0,
+      "korrekt": 3,
       "erklaerung": "Feature Toggle, Canary und Rollback sind Risiko-Minderungsmuster für Releases. Sie erlauben gezielte Aktivierung, schrittweise Auslieferung und Rücknahme – wichtige Bausteine moderner Auslieferung.",
       "quelle": "Tag 9 · UE 3 Arbeitsauftrag 2 · Risiko-Muster",
       "schwierigkeit": "leicht",
@@ -262,12 +262,12 @@
       "id": "q18",
       "frage": "Welche Aussage zur ‚2-Augen-Freigabe in IaC-PRs‘ ist korrekt?",
       "optionen": [
-        "Sie ist unnötig",
+        "Liegt allein in der Verantwortung der IT-Abteilung",
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
         "Sie verlangt Review durch eine zweite Person vor Merge, um Risiko und Fehler zu reduzieren",
-        "Sie ist UI-Theme",
-        "Sie ist Marketing"
+        "Sie ist unnötig"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Eine 2-Augen-Freigabe verlangt Review durch eine zweite Person vor Merge – sie reduziert Risiko und Fehler bei Infrastrukturänderungen.",
       "quelle": "Tag 9 · UE 3 Arbeitsauftrag 2 · 2-Augen-Prinzip",
       "schwierigkeit": "leicht",
@@ -279,8 +279,8 @@
       "optionen": [
         "Secrets gehören ins Repo",
         "Secrets gehören nicht ins Repo; sie werden in Secret-Stores verwaltet und sicher injiziert",
-        "Secrets sind UI-Theme",
-        "Secrets sind Marketing"
+        "Ist ein rein technischer Aspekt ohne fachliche Steuerung",
+        "Secrets ist nur für interne Reports an den Vorstand vorgesehen"
       ],
       "korrekt": 1,
       "erklaerung": "Secrets gehören nicht ins Repo; sie werden in Secret-Stores verwaltet und sicher injiziert. Andernfalls drohen Leaks und Compliance-Findings.",
@@ -292,10 +292,10 @@
       "id": "q20",
       "frage": "Welche Aussage zu ‚Shift Left‘ ist korrekt?",
       "optionen": [
-        "Shift Left bedeutet, Probleme erst spät zu fixen",
+        "Shift Left ist nur in der Pilotphase relevant und entfällt im Regelbetrieb",
         "Shift Left bedeutet, Tests und Qualitätschecks frühzeitig in den Lebenszyklus zu verlagern",
-        "Shift Left ist UI-Theme",
-        "Shift Left ist Marketing"
+        "Shift Left bedeutet, Probleme erst spät zu fixen",
+        "Shift Left ist nur in stark regulierten Branchen relevant"
       ],
       "korrekt": 1,
       "erklaerung": "Shift Left bedeutet, Tests und Qualitätschecks frühzeitig in den Lebenszyklus zu verlagern. Es senkt Kosten und reduziert Defekte am Ende der Pipeline.",
@@ -307,12 +307,12 @@
       "id": "q21",
       "frage": "Sie entscheiden zwischen Scrum, Kanban oder Hybrid für ein Programm mit häufigen Anforderungsänderungen und Stakeholder-Vielfalt. Welche Senior-Argumentation trägt?",
       "optionen": [
+        "Liegt allein in der Verantwortung der IT-Abteilung",
         "Scrum immer, weil bekannter",
-        "Hybrid (Scrum für Sprint-Reviews mit Stakeholdern + Kanban für laufende Requests/Incidents) – Entscheidung mit Begründung in 6 Stichpunkten (Risiko, Planbarkeit, Stakeholder, Teamreife, Workload, Abhängigkeiten)",
         "Kanban immer, weil flexibler",
-        "Beliebig, da gleich"
+        "Hybrid (Scrum für Sprint-Reviews mit Stakeholdern + Kanban für laufende Requests/Incidents) – Entscheidung mit Begründung in 6 Stichpunkten (Risiko, Planbarkeit, Stakeholder, Teamreife, Workload, Abhängigkeiten)"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Hybrid kombiniert Scrum-Reviews für Stakeholder mit Kanban-Lane für laufende Requests/Incidents. Senior-Entscheidung erfolgt entlang Risiko, Planbarkeit, Stakeholder, Teamreife, Workload und Abhängigkeiten.",
       "quelle": "Tag 9 · UE 2 Arbeitsauftrag 1 · Methodenwahl",
       "schwierigkeit": "mittel",
@@ -322,12 +322,12 @@
       "id": "q22",
       "frage": "Welche Aussage zu ‚Replenishment-Meeting in Kanban‘ ist sinnvoll?",
       "optionen": [
-        "Es füllt nur den Kaffeevorrat",
         "Es priorisiert die Auswahl neuer Items für das Board – mit klaren Pull-Regeln",
-        "Es ist UI-Theme",
-        "Es ist Marketing"
+        "Ist ein rein technischer Aspekt ohne fachliche Steuerung",
+        "Wird vollständig durch die BPM-Suite automatisiert",
+        "Es füllt nur den Kaffeevorrat"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Ein Replenishment-Meeting priorisiert neue Items für das Board und nutzt klare Pull-Regeln. Es ist Steuerungselement im Kanban-Flow.",
       "quelle": "Tag 9 · UE 2 Arbeitsauftrag 1 · Replenishment",
       "schwierigkeit": "mittel",
@@ -338,11 +338,11 @@
       "frage": "Welche Aussage zu ‚Policies‘, die Verantwortungsfähigkeit fördern, ist senior-relevant?",
       "optionen": [
         "Keine Policies sind nötig",
-        "Policies adressieren z. B. klare Abnahme, Eskalation, Transparenz, ‚Pull statt Push‘, WIP-Limits und Definition of Done",
-        "Policies sind UI-Theme",
-        "Policies sind Marketing"
+        "Wird zentral vom CIO ohne Fachbereich entschieden",
+        "Ist nur in der Pilotphase relevant",
+        "Policies adressieren z. B. klare Abnahme, Eskalation, Transparenz, ‚Pull statt Push‘, WIP-Limits und Definition of Done"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Policies adressieren klare Abnahme, Eskalation, Transparenz, ‚Pull statt Push‘, WIP-Limits und Definition of Done. Sie sichern Verantwortungsfähigkeit – nicht UI/Marketing oder Verzicht.",
       "quelle": "Tag 9 · UE 2 Arbeitsauftrag 1 · Policies",
       "schwierigkeit": "mittel",
@@ -352,10 +352,10 @@
       "id": "q24",
       "frage": "Welche Aussage zu ‚Mindest-Pipeline für sichere schnelle Änderungen‘ ist senior-tauglich?",
       "optionen": [
-        "Eine Pipeline ohne Tests genügt",
+        "Wird zentral vom CIO ohne Fachbereich entschieden",
         "Build → Unit Tests → Integration Tests → Security Scan → Deploy Staging → Smoke Tests (oder analoge Mindeststruktur)",
-        "Pipeline ist UI-Theme",
-        "Pipeline ist Marketing"
+        "Eine Pipeline ohne Tests genügt",
+        "Wird ausschließlich durch externe Audits festgelegt"
       ],
       "korrekt": 1,
       "erklaerung": "Eine sinnvolle Minimal-Pipeline umfasst Build, Unit Tests, Integration Tests, Security Scan, Deploy Staging und Smoke Tests. Verzicht auf Tests oder UI-/Marketing-Reduktion sind unzulässig.",
@@ -367,12 +367,12 @@
       "id": "q25",
       "frage": "Welche Aussage zu ‚2 Quality Gates‘ ist senior-tauglich?",
       "optionen": [
-        "Quality Gates sind beliebig",
         "Sinnvolle Gates: ‚Tests grün‘ und ‚Security Scan ok‘ – sonst kein Release",
-        "Gates sind UI-Theme",
-        "Gates sind Marketing"
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
+        "Wird zentral vom CIO ohne Fachbereich entschieden",
+        "Gates ist erst in agilen Pilotprojekten relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Sinnvolle Quality Gates: ‚Tests grün‘ und ‚Security Scan ok‘ – sonst kein Release. Beliebigkeit oder UI-/Marketing-Reduktion sind unzulässig.",
       "quelle": "Tag 9 · UE 3 Arbeitsauftrag 2 · Quality Gates",
       "schwierigkeit": "mittel",
@@ -382,10 +382,10 @@
       "id": "q26",
       "frage": "Welche Aussage zur ‚IaC-Policy mit Audit Trail‘ ist senior-tauglich?",
       "optionen": [
-        "IaC-Policy entfällt",
+        "Liegt allein in der Verantwortung der IT-Abteilung",
         "IaC-Policy: Änderungen via Pull Request, 2-Augen-Freigabe, Umgebungen reproduzierbar, Secrets nicht im Repo, Audit Log via Merge-Historie",
-        "IaC-Policy ist UI-Theme",
-        "IaC-Policy ist Marketing"
+        "IaC-Policy entfällt",
+        "IaC-Policy ist ein optionaler Best-Effort-Schritt ohne verbindliche Wirkung"
       ],
       "korrekt": 1,
       "erklaerung": "Eine wirksame IaC-Policy verlangt PR, 2-Augen-Freigabe, reproduzierbare Umgebungen, Secrets außerhalb des Repos und Audit Log via Merge-Historie. Verzicht oder Reduktion auf UI/Marketing tragen nicht.",
@@ -397,12 +397,12 @@
       "id": "q27",
       "frage": "Welche Aussage zur ‚MVP-Risikoplanung‘ ist senior-tauglich?",
       "optionen": [
-        "MVP nimmt jedes Risiko in Kauf, ohne Begrenzung",
+        "MVP ist nur in der Pilotphase relevant und entfällt im Regelbetrieb",
+        "MVP ist nur in stark regulierten Branchen relevant",
         "MVP akzeptiert bewusste Risiken (z. B. weniger Tests) und begrenzt Schaden via Rollback, Canary, Feature Toggle",
-        "MVP ist UI-Theme",
-        "MVP ist Marketing"
+        "MVP nimmt jedes Risiko in Kauf, ohne Begrenzung"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Senior-MVP akzeptiert bewusste Risiken (z. B. weniger Tests) und begrenzt Schaden via Rollback, Canary, Feature Toggle. Unbegrenzte Risikobereitschaft trägt nicht.",
       "quelle": "Tag 9 · UE 3 Arbeitsauftrag 2 · MVP-Risikoplan",
       "schwierigkeit": "mittel",
@@ -412,10 +412,10 @@
       "id": "q28",
       "frage": "Welche Aussage zur ‚Engpass-Analyse‘ ist senior-relevant?",
       "optionen": [
-        "Engpässe sind irrelevant",
+        "Engpässe ist nur in stark regulierten Branchen relevant",
         "Engpässe (Anforderungen, Entwicklung, Tests, Deploy, Abnahmen) müssen identifiziert und gezielt entlastet werden",
-        "Engpässe sind UI-Theme",
-        "Engpässe sind Marketing"
+        "Engpässe ist nur für interne Reports an den Vorstand vorgesehen",
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden"
       ],
       "korrekt": 1,
       "erklaerung": "Senior-Praxis identifiziert Engpässe (Anforderungen, Entwicklung, Tests, Deploy, Abnahmen) und entlastet sie gezielt. Ohne diese Analyse bleibt Verbesserung Zufall.",
@@ -427,12 +427,12 @@
       "id": "q29",
       "frage": "Welche Aussage zur ‚Stop-the-line-Regel‘ ist senior-tauglich?",
       "optionen": [
-        "Stop-the-line gibt es nicht",
+        "Stop-the-line wird einmalig im Projekt festgelegt und danach nicht mehr überprüft",
+        "Wird vollständig durch die BPM-Suite automatisiert",
         "Stop-the-line definiert klare Situationen (z. B. Tests rot, Security-Findings) ab denen nicht released wird",
-        "Stop-the-line ist UI-Theme",
-        "Stop-the-line ist Marketing"
+        "Stop-the-line ist nur für Großkonzerne mit eigenem Process Office sinnvoll"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Eine Stop-the-line-Regel definiert klare Situationen, ab denen nicht released wird (z. B. rote Tests, Security-Findings). Sie ist Senior-Verantwortung – nicht UI/Marketing.",
       "quelle": "Tag 9 · UE 7 Feedback · Stop-the-line",
       "schwierigkeit": "mittel",
@@ -442,12 +442,12 @@
       "id": "q30",
       "frage": "Welche Aussage zur ‚Release-Frequenz vs. Risiko‘ ist senior-tauglich?",
       "optionen": [
+        "Wird zentral vom CIO ohne Fachbereich entschieden",
         "Release täglich ohne Schutz",
         "Release-Frequenz wird mit Qualitätsgates, Tests, Rollback-Optionen und Owner gekoppelt – Frühwarnsignal bei steigender Change Failure Rate",
-        "Release ist UI-Theme",
-        "Release ist Marketing"
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Senior-Release-Frequenz koppelt sich an Quality Gates, Tests, Rollback-Optionen und Owner; bei steigender Change Failure Rate ist nachzusteuern.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Release-Frequenz",
       "schwierigkeit": "mittel",
@@ -458,11 +458,11 @@
       "frage": "Welche Aussage zur ‚Sprint Goal-Definition‘ ist senior-tauglich?",
       "optionen": [
         "Sprint Goal ist optional",
+        "Wird vollständig durch die BPM-Suite automatisiert",
         "Sprint Goal bündelt den Outcome-Beitrag des Sprints – darauf richten sich Backlog-Auswahl und Daily aus",
-        "Sprint Goal ist UI-Theme",
-        "Sprint Goal ist Marketing"
+        "Ist nur in stark regulierten Branchen relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Sprint Goal bündelt den Outcome-Beitrag des Sprints. Backlog-Auswahl und Daily richten sich daran aus. Verzicht oder Reduktion tragen nicht.",
       "quelle": "Tag 9 · UE 2 Arbeitsauftrag 1 · Sprint Goal",
       "schwierigkeit": "mittel",
@@ -472,12 +472,12 @@
       "id": "q32",
       "frage": "Welche Aussage zu ‚3-Release-Planung (MVP, Beta, Stabilisierung)‘ ist senior-tauglich?",
       "optionen": [
-        "Eine Big-Bang-Release am Ende",
         "MVP, Beta, Stabilisierung mit je messbaren Outcomes – statt reiner Task-Liste",
-        "Releases sind UI-Theme",
-        "Releases sind Marketing"
+        "Eine Big-Bang-Release am Ende",
+        "Wird vollständig durch die BPM-Suite automatisiert",
+        "Releases ersetzt vollständig die fachliche Modellierung"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Senior-Planung verteilt Outcomes auf MVP, Beta, Stabilisierung – mit messbaren Wirkungen statt reiner Task-Liste. Big-Bang erzeugt Risiko.",
       "quelle": "Tag 9 · UE 5 Fallstudie · Release-Planung",
       "schwierigkeit": "mittel",
@@ -487,12 +487,12 @@
       "id": "q33",
       "frage": "Welche Aussage zur ‚DoD inklusive Security‘ ist senior-tauglich?",
       "optionen": [
-        "Security gehört nicht in DoD",
         "Security-Checks (z. B. Scan ohne Findings) gehören in die Definition of Done – sonst entstehen Risiken in Produktion",
-        "Security ist UI-Theme",
-        "Security ist Marketing"
+        "Security gehört nicht in DoD",
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
+        "Security wird zentral vom CIO ohne Fachbereich entschieden"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Security-Checks gehören in die Definition of Done. Ohne diese Verankerung entstehen Produktions- und Compliance-Risiken. UI-/Marketing-Reduktion ist unzureichend.",
       "quelle": "Tag 9 · UE 4 Coaching · DoD Security",
       "schwierigkeit": "mittel",
@@ -502,12 +502,12 @@
       "id": "q34",
       "frage": "Welche Aussage zur ‚Fast vs. Safe‘ Entscheidung ist senior-tauglich?",
       "optionen": [
-        "Speed schlägt Safety immer",
         "Fast vs. Safe wird bewusst entschieden: einige Bereiche zugunsten Speed (z. B. MVP-Scope), andere zugunsten Safety (z. B. unverhandelbare Gates, Rollback-Plan)",
         "Safety schlägt Speed immer",
-        "Beides ist beliebig"
+        "Ist nur in stark regulierten Branchen relevant",
+        "Speed schlägt Safety immer"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Senior-Entscheidung trennt bewusst: Speed im Scope, Safety in Gates und Rollback. Pauschalantworten oder Beliebigkeit produzieren Risiko bzw. Stillstand.",
       "quelle": "Tag 9 · UE 5 Fallstudie · Fast vs. Safe",
       "schwierigkeit": "mittel",
@@ -518,11 +518,11 @@
       "frage": "Welche Aussage zur ‚Hybrid-Methodenwahl‘ in einer öffentlichen Verwaltung mit hohem Compliance-Anspruch ist senior-tauglich?",
       "optionen": [
         "Reines Scrum mit allen Sonderfällen",
-        "Hybrid (Scrum für neue Features + Kanban-Lane für Incidents/Requests mit WIP 2) – beachtet Compliance-Releasezyklen",
+        "Wird zentral vom CIO ohne Fachbereich entschieden",
         "Kein Methodenrahmen",
-        "Beliebig"
+        "Hybrid (Scrum für neue Features + Kanban-Lane für Incidents/Requests mit WIP 2) – beachtet Compliance-Releasezyklen"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "In öffentlicher Verwaltung mit hohem Compliance-Anspruch trägt ein Hybrid (Scrum + Kanban-Lane für Incidents/Requests) und beachtet Compliance-Releasezyklen. Pauschalantworten oder Verzicht sind unzulässig.",
       "quelle": "Tag 9 · UE 5 Fallstudie · Hybrid",
       "schwierigkeit": "mittel",
@@ -533,11 +533,11 @@
       "frage": "Welche Aussage zu ‚DORA-Metriken Lead Time/Deployment Frequency/Change Failure Rate/MTTR‘ ist senior-tauglich?",
       "optionen": [
         "DORA-Metriken sind UI-Themen",
-        "Lead Time, Deployment Frequency, Change Failure Rate, MTTR sind die vier zentralen DORA-Metriken – sie messen Delivery-Performance ganzheitlich",
-        "DORA-Metriken sind Marketing",
-        "DORA-Metriken sind beliebig"
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
+        "Ist eine optionale Empfehlung ohne verbindliche Wirkung",
+        "Lead Time, Deployment Frequency, Change Failure Rate, MTTR sind die vier zentralen DORA-Metriken – sie messen Delivery-Performance ganzheitlich"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Die vier DORA-Metriken (Lead Time, Deployment Frequency, Change Failure Rate, MTTR) messen Delivery-Performance ganzheitlich. Sie sind etabliert und nicht UI/Marketing oder beliebig.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · DORA",
       "schwierigkeit": "mittel",
@@ -547,12 +547,12 @@
       "id": "q37",
       "frage": "Welche Aussage zur ‚Anti-Gaming-Mechanik bei DORA‘ ist senior-tauglich?",
       "optionen": [
+        "Liegt allein in der Verantwortung der IT-Abteilung",
         "DORA-Metriken sind nicht gameable",
-        "Speed-Metriken (Lead Time, Frequency) werden mit Qualitäts-Metriken (Change Failure Rate, MTTR) gekoppelt, um Anreizverzerrung zu vermeiden",
-        "DORA ist UI-Theme",
-        "DORA ist Marketing"
+        "Wird zentral vom CIO ohne Fachbereich entschieden",
+        "Speed-Metriken (Lead Time, Frequency) werden mit Qualitäts-Metriken (Change Failure Rate, MTTR) gekoppelt, um Anreizverzerrung zu vermeiden"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Speed-Metriken werden mit Qualitäts-Metriken (Change Failure Rate, MTTR) gekoppelt, um Gaming zu vermeiden. Sie sind nicht ‚unverletzlich‘ und müssen aktiv geschützt werden.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Anti-Gaming DORA",
       "schwierigkeit": "mittel",
@@ -562,12 +562,12 @@
       "id": "q38",
       "frage": "Welche Aussage zur ‚Team-Topologie und Plattform-Team‘ ist senior-tauglich?",
       "optionen": [
+        "Plattform-Teams gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
         "Plattform-Teams sind UI-Themen",
         "Stream-aligned Teams liefern Fachwert; Plattform-Teams stellen wiederverwendbare Bausteine (Pipelines, IaC-Module, Observability) bereit",
-        "Plattform-Teams sind Marketing",
-        "Plattform-Teams sind beliebig"
+        "Plattform-Teams wird zentral vom CIO ohne Fachbereich entschieden"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Stream-aligned Teams liefern Fachwert, Plattform-Teams stellen Pipelines, IaC-Module und Observability bereit. Diese Topologie beschleunigt Delivery und reduziert Kopplung.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Team-Topologie",
       "schwierigkeit": "mittel",
@@ -577,12 +577,12 @@
       "id": "q39",
       "frage": "Welche Aussage zur ‚Emergency Change-Regelung‘ ist senior-tauglich?",
       "optionen": [
-        "Emergency Changes sind beliebig",
+        "Emergency Changes liegt allein in der Verantwortung der IT-Abteilung",
+        "Emergency Changes ist nur für Großkonzerne mit eigenem Process Office sinnvoll",
         "Emergency Changes folgen einer geregelten Ausnahme: minimal nötiges Risiko, klare Owner, Post-Review, Dokumentation in Audit Trail",
-        "Emergency Changes sind UI-Theme",
-        "Emergency Changes sind Marketing"
+        "Emergency Changes wird automatisch durch die BPM-Suite generiert"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Emergency Changes folgen einer geregelten Ausnahme: minimal nötiges Risiko, klare Owner, Post-Review, Dokumentation im Audit Trail. Beliebigkeit oder UI-/Marketing-Reduktion sind unzulässig.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Emergency Change",
       "schwierigkeit": "mittel",
@@ -593,11 +593,11 @@
       "frage": "Welche Aussage zur ‚Backlog-Pflege als Senior-Verantwortung‘ ist tragfähig?",
       "optionen": [
         "Backlog-Pflege ist Tasklisten-Buchhaltung",
+        "Wird vollständig durch die BPM-Suite automatisiert",
         "Backlog-Pflege priorisiert nach Outcome, Risiko, Nutzen und Abhängigkeiten – mit klaren DoR/DoD",
-        "Backlog-Pflege ist UI-Theme",
-        "Backlog-Pflege ist Marketing"
+        "Ist nur in der Pilotphase relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Senior-Backlog-Pflege priorisiert nach Outcome, Risiko, Nutzen und Abhängigkeiten – mit Definition of Ready/Done. Sie ist mehr als Tasklisten-Buchhaltung.",
       "quelle": "Tag 9 · UE 4 Coaching · Backlog",
       "schwierigkeit": "mittel",
@@ -607,12 +607,12 @@
       "id": "q41",
       "frage": "Welche Aussage zur ‚Auditierbarkeit von CI/IaC-Änderungen‘ ist senior-tauglich?",
       "optionen": [
-        "Audit erfolgt nachgelagert auf Papier",
         "Audit-Trail wird durch Pull Requests, Reviews, Pipelines, Test-/Scan-Ergebnisse und Deploy-Logs automatisch erzeugt – revisionssicher",
-        "Audit ist UI-Theme",
-        "Audit ist Marketing"
+        "Audit erfolgt nachgelagert auf Papier",
+        "Audit ist ein rein technischer Aspekt ohne fachliche Steuerung",
+        "Audit gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Audit-Trail entsteht automatisch durch PRs, Reviews, Pipelines, Test-/Scan-Ergebnisse und Deploy-Logs – revisionssicher. Papier- oder Marketing-Reduktion sind unzulässig.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Audit-Trail",
       "schwierigkeit": "mittel",
@@ -622,12 +622,12 @@
       "id": "q42",
       "frage": "Welche der folgenden Aussagen zur ‚DevOps-Reife‘ ist senior-tauglich?",
       "optionen": [
-        "Reife ist überall identisch",
         "DevOps-Reife variiert zwischen Teams; Senior-Praxis nutzt Reifegradmodelle, Pilotteams und differenzierte Skalierung",
-        "Reife ist UI-Theme",
-        "Reife ist Marketing"
+        "Reife ist nur für Großkonzerne mit eigenem Process Office sinnvoll",
+        "Ist eine optionale Empfehlung ohne verbindliche Wirkung",
+        "Reife ist überall identisch"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "DevOps-Reife variiert zwischen Teams. Senior-Praxis nutzt Reifegradmodelle, Pilotteams und differenzierte Skalierung. Pauschal-Reife trägt nicht.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · DevOps-Reife",
       "schwierigkeit": "mittel",
@@ -637,12 +637,12 @@
       "id": "q43",
       "frage": "Welche Aussage zur ‚Outcome statt Output‘ in Releases ist senior-tauglich?",
       "optionen": [
-        "Output zählt mehr als Outcome",
+        "Wird zentral vom CIO ohne Fachbereich entschieden",
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
         "Releases werden in Outcomes (Wirkungen für Nutzer, Risiko, Geschäft) gedacht – nicht nur in gelieferten Tickets",
-        "Outcome ist UI-Theme",
-        "Outcome ist Marketing"
+        "Output zählt mehr als Outcome"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Senior-Releases werden in Outcomes (Wirkungen für Nutzer, Risiko, Geschäft) gedacht – nicht nur in gelieferten Tickets. UI-/Marketing-Reduktion ist unzulässig.",
       "quelle": "Tag 9 · UE 5 Fallstudie · Outcome",
       "schwierigkeit": "mittel",
@@ -652,10 +652,10 @@
       "id": "q44",
       "frage": "Welche der folgenden Aussagen zur ‚Bot/Automation in Reviews‘ ist senior-tauglich?",
       "optionen": [
-        "Automatisierung ersetzt jede Review",
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
         "Automatisierte Checks (Linter, Tests, Security Scans) unterstützen Reviews, ersetzen aber nicht das fachliche/architekturelle Auge",
-        "Automation ist UI-Theme",
-        "Automation ist Marketing"
+        "Automatisierung ersetzt jede Review",
+        "Wird ausschließlich durch externe Audits festgelegt"
       ],
       "korrekt": 1,
       "erklaerung": "Automatisierte Checks unterstützen Reviews (Linter, Tests, Security Scans), ersetzen aber fachliche/architekturelle Sicht nicht. Vollständiger Ersatz ist unzulässig.",
@@ -667,12 +667,12 @@
       "id": "q45",
       "frage": "Welche Aussage zur ‚Risikoakzeptanz im RACI‘ ist senior-tauglich?",
       "optionen": [
-        "Risiko-Akzeptanz ist beliebig",
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
+        "Risiko ist nur für interne Reports an den Vorstand vorgesehen",
         "Risiko-Akzeptanz wird explizit: Accountable (z. B. PO, Security, Plattform) wird benannt, Begründung und Kompensationen dokumentiert",
-        "Risiko ist UI-Theme",
-        "Risiko ist Marketing"
+        "Risiko wird automatisch durch die BPM-Suite generiert"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Senior-Risiko-Akzeptanz benennt Accountable, dokumentiert Begründung und Kompensationen. Beliebigkeit oder UI-/Marketing-Reduktion sind unzulässig.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · RACI Risiko",
       "schwierigkeit": "mittel",
@@ -682,12 +682,12 @@
       "id": "q46",
       "frage": "Sie verantworten als CDO ein Agile + DevOps Operating Model. Welche Senior-Entscheidungsarchitektur ist tragfähig?",
       "optionen": [
-        "Alle Entscheidungen zentral",
-        "Zentrale Entscheidungen (Gates, Security, IaC-Standards) + dezentrale Entscheidungen (Backlog, Implementierung) mit klarem RACI",
         "Alle Entscheidungen dezentral",
-        "Beliebig"
+        "Alle Entscheidungen zentral",
+        "Liegt allein in der Verantwortung der IT-Abteilung",
+        "Zentrale Entscheidungen (Gates, Security, IaC-Standards) + dezentrale Entscheidungen (Backlog, Implementierung) mit klarem RACI"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-Architektur: Gates, Security, IaC-Standards zentral; Backlog und Implementierung dezentral – mit klarem RACI. Pauschalantworten produzieren Bürokratie oder Wildwuchs.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Entscheidungsarchitektur",
       "schwierigkeit": "schwer",
@@ -697,12 +697,12 @@
       "id": "q47",
       "frage": "Welche Aussage zu ‚Standardisierung vs. Teamautonomie‘ ist senior-tauglich?",
       "optionen": [
-        "Maximalstandard erzeugt maximale Akzeptanz",
         "Senior-Sicht: Wenige verbindliche Standards (Gates, Security, Observability) + bewusste Autonomie (Tooling, Implementierung), Trigger zum Nachsteuern bei steigender Change Failure Rate",
         "Maximale Autonomie ist immer überlegen",
-        "Beides ist beliebig"
+        "Beides gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
+        "Maximalstandard erzeugt maximale Akzeptanz"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Senior-Sicht: Wenige verbindliche Standards + bewusste Autonomie, mit Triggern zum Nachsteuern bei steigender Change Failure Rate. Extremlösungen tragen nicht.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Standard vs. Autonomie",
       "schwierigkeit": "schwer",
@@ -712,10 +712,10 @@
       "id": "q48",
       "frage": "Welche Aussage zur ‚Pilotteams-Strategie‘ ist senior-tauglich?",
       "optionen": [
-        "Roll-out direkt alle Teams gleichzeitig",
+        "Pilots wird ausschließlich vom externen Berater verantwortet",
         "Pilotteams adressieren Reifegrad-Heterogenität, ermöglichen Lerneffekte und ‚Champion‘-Mechanik vor Skalierung",
-        "Pilots sind UI-Theme",
-        "Pilots sind Marketing"
+        "Pilots wird einmalig im Projekt festgelegt und danach nicht mehr überprüft",
+        "Roll-out direkt alle Teams gleichzeitig"
       ],
       "korrekt": 1,
       "erklaerung": "Pilotteams adressieren Heterogenität, sichern Lerneffekte und Champion-Mechanik. Big-Bang-Roll-out scheitert an Reifeunterschieden.",
@@ -727,12 +727,12 @@
       "id": "q49",
       "frage": "Welche der folgenden Aussagen zu ‚DORA als Anti-Gaming-Verbund‘ ist senior-tauglich?",
       "optionen": [
+        "DORA ersetzt vollständig die fachliche Modellierung",
+        "Wird zentral vom CIO ohne Fachbereich entschieden",
         "Eine einzelne DORA-Metrik reicht",
-        "Die vier DORA-Metriken bilden gemeinsam ein Anti-Gaming-Verbund: Speed (Lead Time, Frequency) wird mit Qualität (Change Failure Rate, MTTR) ausbalanciert",
-        "DORA ist UI-Theme",
-        "DORA ist Marketing"
+        "Die vier DORA-Metriken bilden gemeinsam ein Anti-Gaming-Verbund: Speed (Lead Time, Frequency) wird mit Qualität (Change Failure Rate, MTTR) ausbalanciert"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Die vier DORA-Metriken bilden gemeinsam ein Anti-Gaming-Verbund: Speed wird mit Qualität ausbalanciert. Einzelmetriken reichen nicht aus.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · DORA Anti-Gaming",
       "schwierigkeit": "schwer",
@@ -742,12 +742,12 @@
       "id": "q50",
       "frage": "Welche Aussage zur ‚Quality Gate Strategy mit Emergency-Regelung‘ ist senior-tauglich?",
       "optionen": [
+        "Gates ist ein rein technischer Aspekt ohne fachliche Steuerung",
         "Gates entfallen im Notfall",
         "Gates bleiben Standard; Emergency-Changes sind explizit geregelte Ausnahmen mit Approval-Pfad, Post-Review und Audit-Trail",
-        "Gates sind UI-Theme",
-        "Gates sind Marketing"
+        "Gates wird ausschließlich durch externe Auditoren festgelegt"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Gates bleiben Standard; Emergency Changes sind explizit geregelte Ausnahmen mit Approval-Pfad, Post-Review und Audit-Trail. Verzicht auf Gates oder Reduktion tragen nicht.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Quality Gate Strategy",
       "schwierigkeit": "schwer",
@@ -758,11 +758,11 @@
       "frage": "Welche der folgenden Aussagen zur ‚Roadmap 16 Wochen‘ ist senior-tauglich?",
       "optionen": [
         "Roadmap ohne Pilot",
-        "Roadmap mit Pilotteams (Reifegrade), Enablement (Coaching), Plattform-Bausteinen (IaC, Pipelines, Observability) und Skalierung in Wellen",
-        "Roadmap ist UI-Theme",
-        "Roadmap ist Marketing"
+        "Roadmap ersetzt vollständig die fachliche Modellierung",
+        "Roadmap wird ausschließlich durch externe Auditoren festgelegt",
+        "Roadmap mit Pilotteams (Reifegrade), Enablement (Coaching), Plattform-Bausteinen (IaC, Pipelines, Observability) und Skalierung in Wellen"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-Roadmap nutzt Pilotteams, Enablement, Plattform-Bausteine und Wellen-Skalierung. Verzicht auf Pilot oder Reduktion auf UI/Marketing tragen nicht.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Roadmap",
       "schwierigkeit": "schwer",
@@ -772,12 +772,12 @@
       "id": "q52",
       "frage": "Welche Aussage zur ‚Security-by-Design‘-Logik ist senior-tauglich?",
       "optionen": [
-        "Security wird nach Release addiert",
         "Security ist im Design verankert: Pipelines mit Security-Scans, IaC mit Secret-Stores, Audit Trail, regelmäßige Threat-Modelle",
-        "Security ist UI-Theme",
-        "Security ist Marketing"
+        "Security wird einmalig im Projekt festgelegt und danach nicht mehr überprüft",
+        "Security wird nach Release addiert",
+        "Security ist nur in der Pilotphase relevant und entfällt im Regelbetrieb"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Security-by-Design verankert Security im Design: Pipelines mit Scans, IaC mit Secret-Stores, Audit Trail, regelmäßige Threat-Modelle. UI-/Marketing-Reduktion oder ‚nachträglich‘ tragen nicht.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Security-by-Design",
       "schwierigkeit": "schwer",
@@ -787,12 +787,12 @@
       "id": "q53",
       "frage": "Welche der folgenden Aussagen zu ‚Outcome-Roadmap mit messbaren Outcomes‘ ist senior-tauglich?",
       "optionen": [
-        "Outcome-Roadmaps sind UI-Theme",
+        "Outcome-Roadmaps ist nur in stark regulierten Branchen relevant",
+        "Outcome-Roadmaps ist nur für interne Reports an den Vorstand vorgesehen",
         "Outcome-Roadmaps verbinden Lieferungen mit messbaren Wirkungen (z. B. Lead-Time-Reduktion, Change Failure Rate, MTTR-Verkürzung)",
-        "Outcome-Roadmaps sind Marketing",
-        "Outcome-Roadmaps sind beliebig"
+        "Outcome-Roadmaps gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Outcome-Roadmaps verbinden Lieferungen mit messbaren Wirkungen. So entstehen Steuerung statt reiner Lieferplanung. UI-/Marketing-/Beliebigkeits-Reduktion sind unzureichend.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Outcome-Roadmap",
       "schwierigkeit": "schwer",
@@ -802,12 +802,12 @@
       "id": "q54",
       "frage": "Welche Aussage zur ‚Senior-Verantwortung für Veränderung als gesteuertes System‘ ist tragfähig?",
       "optionen": [
+        "Ist nur in stark regulierten Branchen relevant",
         "Veränderung ist Task-Liste",
         "Veränderung ist gesteuertes System: Outcomes, Risiken, Ownership, Frühwarnung, Stop/Continue-Trigger",
-        "Veränderung ist UI-Theme",
-        "Veränderung ist Marketing"
+        "Veränderung ist nur in stark regulierten Branchen relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Senior-Verantwortung betrachtet Veränderung als gesteuertes System: Outcomes, Risiken, Ownership, Frühwarnung, Stop/Continue-Trigger. Task-Listen- oder UI-Reduktion tragen nicht.",
       "quelle": "Tag 9 · UE 8 Transferprojekt · Veränderung als System",
       "schwierigkeit": "schwer",
@@ -817,12 +817,12 @@
       "id": "q55",
       "frage": "Welche Aussage zur ‚Anti-Pattern-Erkennung im agilen Operating Model‘ ist senior-tauglich?",
       "optionen": [
-        "Anti-Patterns kommen nicht vor",
         "Typische Anti-Patterns: Cargo Cult Scrum, ‚Agile als Beschleuniger ohne Qualität‘, ‚Output statt Outcome‘ – Senior-Praxis erkennt und adressiert sie früh",
-        "Anti-Patterns sind UI-Theme",
-        "Anti-Patterns sind Marketing"
+        "Ist nur in der Pilotphase relevant",
+        "Liegt allein in der Verantwortung der IT-Abteilung",
+        "Anti-Patterns kommen nicht vor"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Typische Anti-Patterns sind Cargo Cult Scrum, Speed ohne Qualität, Output statt Outcome. Senior-Praxis erkennt und adressiert sie früh – nicht UI/Marketing oder Ignorieren.",
       "quelle": "Tag 9 · UE 7 Feedback · Anti-Patterns",
       "schwierigkeit": "schwer",
@@ -832,10 +832,10 @@
       "id": "q56",
       "frage": "Welche Aussage zur ‚Plattform-Governance‘ ist senior-tauglich?",
       "optionen": [
-        "Plattform-Governance ist beliebig",
+        "Ist nur in stark regulierten Branchen relevant",
         "Plattform-Governance definiert Standards für Pipelines, IaC, Observability, Security und stellt wiederverwendbare Bausteine bereit",
-        "Plattform-Governance ist UI-Theme",
-        "Plattform-Governance ist Marketing"
+        "Liegt allein in der Verantwortung der IT-Abteilung",
+        "Ist eine optionale Empfehlung ohne verbindliche Wirkung"
       ],
       "korrekt": 1,
       "erklaerung": "Plattform-Governance definiert Standards für Pipelines, IaC, Observability und Security; sie stellt wiederverwendbare Bausteine bereit. Beliebigkeit oder UI-/Marketing-Reduktion tragen nicht.",
@@ -847,10 +847,10 @@
       "id": "q57",
       "frage": "Welche Aussage zur ‚Akzeptanzstrategie bei Standardisierung‘ ist senior-tauglich?",
       "optionen": [
-        "Akzeptanz erzwingen",
+        "Akzeptanz ist nur in stark regulierten Branchen relevant",
         "Akzeptanz entsteht durch Nutzennachweis, Coaching, Champion-Modell, Mitbestimmung – nicht durch reine Anordnung",
-        "Akzeptanz ist UI-Theme",
-        "Akzeptanz ist Marketing"
+        "Akzeptanz erzwingen",
+        "Akzeptanz wird ausschließlich vom externen Berater verantwortet"
       ],
       "korrekt": 1,
       "erklaerung": "Akzeptanz entsteht durch Nutzennachweis, Coaching, Champion-Modell und Mitbestimmung. Reine Anordnung oder Marketing-Logik erzeugen Widerstand.",
@@ -862,10 +862,10 @@
       "id": "q58",
       "frage": "Welche Aussage zur ‚MTTR-Reduktion als Outcome‘ ist senior-tauglich?",
       "optionen": [
-        "MTTR ist beliebig",
+        "MTTR ersetzt vollständig die fachliche Modellierung",
         "MTTR-Reduktion (z. B. durch Observability, Playbooks, On-Call) ist ein messbarer Outcome für Delivery- und Betriebsqualität",
-        "MTTR ist UI-Theme",
-        "MTTR ist Marketing"
+        "Wird ausschließlich durch externe Audits festgelegt",
+        "MTTR ist nur in stark regulierten Branchen relevant"
       ],
       "korrekt": 1,
       "erklaerung": "MTTR-Reduktion (Observability, Playbooks, On-Call) ist ein messbarer Outcome für Delivery- und Betriebsqualität. Sie ist mehr als UI-/Marketing-Begriff und nicht beliebig.",
@@ -877,12 +877,12 @@
       "id": "q59",
       "frage": "Welche Aussage zur ‚Senior-Verantwortung gegen ‚mehr Arbeit statt mehr Outcome‘‘ ist tragfähig?",
       "optionen": [
+        "Outcome liegt allein in der Verantwortung der IT-Abteilung",
+        "Outcome gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
         "Mehr Arbeit ist Selbstzweck",
-        "Senior-Verantwortung verhindert ‚mehr Arbeit statt mehr Outcome‘ durch klare Outcome-Definition, WIP-Limits, Priorisierung und ‚Stop Doing‘-Liste",
-        "Outcome ist UI-Theme",
-        "Outcome ist Marketing"
+        "Senior-Verantwortung verhindert ‚mehr Arbeit statt mehr Outcome‘ durch klare Outcome-Definition, WIP-Limits, Priorisierung und ‚Stop Doing‘-Liste"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-Verantwortung verhindert ‚mehr Arbeit statt mehr Outcome‘ durch klare Outcome-Definition, WIP-Limits, Priorisierung und ‚Stop Doing‘-Liste. UI-/Marketing-Reduktion ist unzureichend.",
       "quelle": "Tag 9 · UE 7 Feedback · Mehr Outcome",
       "schwierigkeit": "schwer",
@@ -894,8 +894,8 @@
       "optionen": [
         "Agile Delivery ist nur Methodik",
         "Agile Delivery + CI/IaC bilden ein Steuerungssystem: Prioritäten, Outcomes, Risiken, Qualität, Geschwindigkeit und Akzeptanz werden integriert verantwortet",
-        "Agile Delivery ist UI-Theme",
-        "Agile Delivery ist Marketing"
+        "Liegt allein in der Verantwortung der IT-Abteilung",
+        "Agile Delivery wird ausschließlich vom externen Berater verantwortet"
       ],
       "korrekt": 1,
       "erklaerung": "Senior-Sicht: Agile Delivery + CI/IaC bilden ein Steuerungssystem, das Prioritäten, Outcomes, Risiken, Qualität, Geschwindigkeit und Akzeptanz integriert verantwortet. Methodik-, UI- oder Marketing-Reduktion tragen nicht.",

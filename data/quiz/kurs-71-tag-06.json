@@ -7,12 +7,12 @@
       "id": "q01",
       "frage": "Wofür steht die Abkürzung ‚BPMS‘?",
       "optionen": [
-        "Business Project Management Suite",
-        "Business Process Management System",
         "Best Practice Modelling Standard",
-        "Big Picture Measurement System"
+        "Big Picture Measurement System",
+        "Business Process Management System",
+        "Business Project Management Suite"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "BPMS steht für Business Process Management System – eine Plattform, die Modellieren, Ausführen, Überwachen und Optimieren von Prozessen unterstützt (Closed Loop). Die anderen Optionen sind keine etablierten Begriffe.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · BPMS-Grundlagen",
       "schwierigkeit": "leicht",
@@ -22,12 +22,12 @@
       "id": "q02",
       "frage": "Wofür steht die Abkürzung ‚API‘ im Integrationskontext?",
       "optionen": [
-        "Application Process Interface",
-        "Application Programming Interface",
         "Audit Process Integration",
-        "Authentication Protocol Index"
+        "Authentication Protocol Index",
+        "Application Programming Interface",
+        "Application Process Interface"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "API steht für Application Programming Interface – die definierte Schnittstelle zwischen Anwendungen mit Endpoint, Input/Output, Fehlercodes und Auth. Die anderen Begriffe sind keine etablierten Bedeutungen.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · API-Grundlagen",
       "schwierigkeit": "leicht",
@@ -37,12 +37,12 @@
       "id": "q03",
       "frage": "Welcher Closed-Loop-Zyklus beschreibt ein BPMS am treffendsten?",
       "optionen": [
-        "Plan → Print → Pause → Pay",
         "Modellieren → Ausführen → Überwachen → Optimieren",
         "Buy → Build → Burn → Bury",
-        "Click → Crash → Cancel → Close"
+        "Click → Crash → Cancel → Close",
+        "Plan → Print → Pause → Pay"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Ein BPMS realisiert den Closed-Loop ‚Modellieren → Ausführen → Überwachen → Optimieren‘. Dieser Kreislauf macht Prozesse messbar und kontinuierlich verbesserbar. Die anderen Sequenzen sind keine BPMS-Logik.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · BPMS Closed Loop",
       "schwierigkeit": "leicht",
@@ -52,12 +52,12 @@
       "id": "q04",
       "frage": "Welches Element ist typischer Bestandteil einer BPMS-Engine?",
       "optionen": [
+        "Werbenetzwerk-Tool",
         "Aufgabenliste / Worklist",
         "Reise-Buchungsportal",
-        "Lohnabrechnungssoftware",
-        "Werbenetzwerk-Tool"
+        "Lohnabrechnungssoftware"
       ],
-      "korrekt": 0,
+      "korrekt": 1,
       "erklaerung": "Eine Aufgabenliste (Worklist) ist typischer Bestandteil eines BPMS und steuert User Tasks für Mitarbeitende. Die anderen Optionen sind keine BPMS-Bausteine.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · BPMS Bausteine",
       "schwierigkeit": "leicht",
@@ -67,12 +67,12 @@
       "id": "q05",
       "frage": "Welche Aussage zu APIs als Verträgen ist korrekt?",
       "optionen": [
+        "Eine API ersetzt jeden Geschäftsprozess",
         "Eine API hat keine Spezifikation",
         "Eine API definiert Endpoint, Input/Output, Fehlercodes, Auth, Rate Limits und Versionierung",
-        "Eine API ist ein reines UI",
-        "Eine API ersetzt jeden Geschäftsprozess"
+        "Eine API ist ein reines UI"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "APIs sind Verträge mit Endpoint, Input/Output, Fehlercodes, Auth, Rate Limits und Versionierung. Sie sind weder UI noch Geschäftsprozess-Ersatz und nicht spezifikationsfrei.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · API als Vertrag",
       "schwierigkeit": "leicht",
@@ -83,11 +83,11 @@
       "frage": "Welches der folgenden Konzepte ist ein cloud-natives Prinzip?",
       "optionen": [
         "Manuelle Server-Pflege",
-        "Stateless Services und horizontale Skalierung",
         "Single Point of Failure als Standard",
+        "Stateless Services und horizontale Skalierung",
         "Ungeprüfte Deployments per E-Mail"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Cloud-native Architekturen setzen auf stateless Services, horizontale Skalierung, Container und Observability. Die anderen Optionen widersprechen modernen Betriebsanforderungen.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · Cloud-native",
       "schwierigkeit": "leicht",
@@ -97,12 +97,12 @@
       "id": "q07",
       "frage": "Was bedeutet ‚SLA‘?",
       "optionen": [
-        "Service Level Agreement",
         "System Latency Analyzer",
-        "Software Lifecycle Audit",
-        "Standard Logging Annotation"
+        "Standard Logging Annotation",
+        "Service Level Agreement",
+        "Software Lifecycle Audit"
       ],
-      "korrekt": 0,
+      "korrekt": 2,
       "erklaerung": "SLA steht für Service Level Agreement – eine verbindliche Zusage zu Service-Qualitäten (z. B. Reaktionszeit). Die anderen Begriffe sind nicht etabliert.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · SLA",
       "schwierigkeit": "leicht",
@@ -112,12 +112,12 @@
       "id": "q08",
       "frage": "Was beschreibt ‚Idempotenz‘ in API-Aufrufen?",
       "optionen": [
-        "Mehrfache Ausführung führt zu mehrfachen Nebeneffekten",
         "Mehrfache Ausführung desselben Calls hat denselben Effekt wie eine einzelne Ausführung",
+        "Mehrfache Ausführung führt zu mehrfachen Nebeneffekten",
         "Idempotenz ist ein Datenformat",
-        "Idempotenz ist ein Marketingbegriff"
+        "Idempotenz wird automatisch durch die BPM-Suite generiert"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Idempotenz heißt: mehrfache Ausführung desselben Calls hat denselben Effekt wie eine einzelne Ausführung. Sie ist zentral für Retries und Robustheit – kein Datenformat und kein Marketingbegriff.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · Idempotenz",
       "schwierigkeit": "leicht",
@@ -127,12 +127,12 @@
       "id": "q09",
       "frage": "Welche Beobachtungsdaten gehören typischerweise zur ‚Observability‘?",
       "optionen": [
-        "Logs, Metrics, Traces",
-        "Speisepläne, Sitzpläne, Werbepläne",
         "Lieder, Bilder, Filme",
+        "Speisepläne, Sitzpläne, Werbepläne",
+        "Logs, Metrics, Traces",
         "Boni, Spesen, Urlaubsanträge"
       ],
-      "korrekt": 0,
+      "korrekt": 2,
       "erklaerung": "Observability stützt sich auf Logs, Metrics und Traces. Diese drei Säulen erlauben Fehlersuche, Performance- und Skalierungsanalysen. Die anderen Beispiele haben keinen technischen Bezug.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · Observability",
       "schwierigkeit": "leicht",
@@ -142,12 +142,12 @@
       "id": "q10",
       "frage": "Welche Aussage zu Sync vs. Async Integration ist zutreffend?",
       "optionen": [
-        "Sync und Async sind synonym",
         "Sync ruft direkt auf und wartet, Async sendet Nachricht/Event und entkoppelt zeitlich",
         "Sync bedeutet ausschließlich UI, Async ausschließlich Backend",
+        "Sync und Async sind synonym",
         "Async wird durch Brief versendet"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Sync ruft direkt auf und wartet, Async entkoppelt zeitlich via Nachricht oder Event. Beide haben unterschiedliche Robustheits- und Latenzeigenschaften – sie sind nicht synonym oder UI/Backend-beschränkt.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · Sync vs. Async",
       "schwierigkeit": "leicht",
@@ -157,12 +157,12 @@
       "id": "q11",
       "frage": "Was bezeichnet ein ‚Audit Trail‘ im BPMS?",
       "optionen": [
-        "Eine externe Auditfirma",
         "Eine systemseitige, lückenlose Nachvollziehbarkeit ausgeführter Schritte",
         "Eine Wanderroute für Inspektoren",
+        "Eine externe Auditfirma",
         "Eine Kategorie von Servern"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Ein Audit Trail ist die systemseitige, lückenlose Nachvollziehbarkeit der ausgeführten Schritte – wer, wann, was. Sie ist Kernbestandteil regulierter Workflows.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · Audit Trail",
       "schwierigkeit": "leicht",
@@ -172,12 +172,12 @@
       "id": "q12",
       "frage": "Welches Element fehlt typischerweise nicht in einer ETL-Pipeline?",
       "optionen": [
-        "Extract, Transform, Load",
-        "Print, Pause, Pay",
         "Read, Recycle, Repeat",
-        "Click, Crash, Close"
+        "Click, Crash, Close",
+        "Print, Pause, Pay",
+        "Extract, Transform, Load"
       ],
-      "korrekt": 0,
+      "korrekt": 3,
       "erklaerung": "ETL steht für Extract, Transform, Load – die klassische Datenpipeline. Die anderen Sequenzen sind nicht zutreffend.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · ETL",
       "schwierigkeit": "leicht",
@@ -187,12 +187,12 @@
       "id": "q13",
       "frage": "Welche Aussage zur ‚Correlation/Case ID‘ in Workflow-Integrationen trifft zu?",
       "optionen": [
-        "Sie ist optional und ohne Funktion",
         "Sie verknüpft alle Events, Calls und Schritte eines Vorgangs eindeutig miteinander",
-        "Sie ist nur in UI relevant",
-        "Sie ist eine Marketing-Kennzahl"
+        "Sie ist optional und ohne Funktion",
+        "Ist nur in der Pilotphase relevant",
+        "Sie ist nur in UI relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Eine Correlation/Case ID verknüpft alle Events, Calls und Schritte eines Vorgangs eindeutig. Sie ist zentral für Audit Trail, Monitoring und Idempotenz – weder UI-spezifisch noch Marketing.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · Case ID",
       "schwierigkeit": "leicht",
@@ -202,12 +202,12 @@
       "id": "q14",
       "frage": "Welche Aussage zu ‚E2E-Methodenintegration‘ trifft zu?",
       "optionen": [
-        "Sie verbindet Prozess, Daten, Systeme, Rollen, KPIs und Controls",
         "Sie ist eine reine UI-Frage",
-        "Sie betrifft nur Marketing",
+        "Sie verbindet Prozess, Daten, Systeme, Rollen, KPIs und Controls",
+        "Liegt allein in der Verantwortung der IT-Abteilung",
         "Sie ersetzt jede Modellierung"
       ],
-      "korrekt": 0,
+      "korrekt": 1,
       "erklaerung": "E2E-Methodenintegration verbindet Prozess, Daten, Systeme, Rollen, KPIs und Controls. Sie ist Grundlage für ‚Model → Run → Improve‘ und betrifft die gesamte Organisation.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · E2E-Methodenintegration",
       "schwierigkeit": "leicht",
@@ -218,11 +218,11 @@
       "frage": "Welche Aussage zu Retries in API-Aufrufen ist korrekt?",
       "optionen": [
         "Retries lösen jedes Problem automatisch",
+        "Retries ersetzt vollständig die fachliche Modellierung",
         "Retries müssen idempotent sein und brauchen klare Limits/Backoff-Strategien",
-        "Retries sind verboten",
         "Retries betreffen nur Frontend"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Retries setzen Idempotenz voraus und brauchen klare Limits sowie Backoff-Strategien, sonst entstehen Sturm- und Duplikat-Effekte. Sie sind weder Allheilmittel noch verboten noch frontend-spezifisch.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · Retries",
       "schwierigkeit": "leicht",
@@ -232,12 +232,12 @@
       "id": "q16",
       "frage": "Welche Aussage zu ‚SLO‘ trifft zu?",
       "optionen": [
-        "SLO ist ein vager Wunsch",
         "Service Level Objective – messbares Ziel innerhalb des SLA",
-        "SLO ist ein Datenformat",
-        "SLO ist ein Brand"
+        "SLO ist ein vager Wunsch",
+        "SLO ist ein Brand",
+        "SLO ist ein Datenformat"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "SLO (Service Level Objective) ist ein messbares Ziel, das ein SLA-Versprechen operativ macht (z. B. 99,9 % Verfügbarkeit). Es ist kein Datenformat oder Marketingbegriff.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · SLO",
       "schwierigkeit": "leicht",
@@ -247,10 +247,10 @@
       "id": "q17",
       "frage": "Was bedeutet ‚Circuit Breaker‘ im cloud-nativen Kontext?",
       "optionen": [
-        "Eine physische Sicherung im Rechenzentrum",
-        "Ein Schutzmuster, das Calls bei dauerhaftem Fehlerverhalten temporär unterbricht, um Kaskaden zu verhindern",
         "Ein UI-Komponentenname",
-        "Ein Branding-Tool"
+        "Ein Schutzmuster, das Calls bei dauerhaftem Fehlerverhalten temporär unterbricht, um Kaskaden zu verhindern",
+        "Ein Branding-Tool",
+        "Eine physische Sicherung im Rechenzentrum"
       ],
       "korrekt": 1,
       "erklaerung": "Ein Circuit Breaker schützt vor Kaskadenausfällen, indem er fehlerhafte Calls temporär unterbricht. Es handelt sich um ein Resilienz-Muster, nicht um Hardware oder UI.",
@@ -262,12 +262,12 @@
       "id": "q18",
       "frage": "Welche Aussage zur ‚System of Record‘-Definition ist korrekt?",
       "optionen": [
-        "System of Record bedeutet, dass jedes System Hauptquelle für alles ist",
-        "System of Record ist die autoritative Quelle für ein konkretes Datenobjekt (z. B. Kunde im CRM)",
         "System of Record ist ein Buchhaltungsbegriff aus dem 19. Jahrhundert",
-        "System of Record ist ein Audio-Tool"
+        "System of Record ist ein Audio-Tool",
+        "System of Record bedeutet, dass jedes System Hauptquelle für alles ist",
+        "System of Record ist die autoritative Quelle für ein konkretes Datenobjekt (z. B. Kunde im CRM)"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Das System of Record ist die autoritative Quelle für ein konkretes Datenobjekt. Es definiert, wem im Konfliktfall die Wahrheit gehört. Andere Optionen sind nicht zutreffend.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · System of Record",
       "schwierigkeit": "leicht",
@@ -277,12 +277,12 @@
       "id": "q19",
       "frage": "Was beschreibt ‚Rate Limit‘ in APIs?",
       "optionen": [
-        "Eine Tariferhöhung",
-        "Eine maximale Anzahl Calls pro Zeitintervall, um Systeme zu schützen",
         "Eine UI-Animationsgeschwindigkeit",
-        "Eine Logarithmusfunktion"
+        "Eine Logarithmusfunktion",
+        "Eine maximale Anzahl Calls pro Zeitintervall, um Systeme zu schützen",
+        "Eine Tariferhöhung"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Rate Limits begrenzen Calls pro Zeitintervall, um Systeme zu schützen und Fairness zu sichern. Sie sind weder Tarif noch UI- oder Mathebegriff.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · Rate Limit",
       "schwierigkeit": "leicht",
@@ -293,11 +293,11 @@
       "frage": "Welche Aussage zur ‚Eskalation‘ in einem BPMS ist korrekt?",
       "optionen": [
         "Eskalation entsteht nur durch Druckfehler",
-        "Eskalation ist ein definierter Steuerungsmechanismus bei SLA- oder Regelverletzung, z. B. Weiterleitung an Duty Manager",
-        "Eskalation ist ein UI-Theme",
-        "Eskalation ersetzt KPIs"
+        "Eskalation ist nur für Großkonzerne mit eigenem Process Office sinnvoll",
+        "Eskalation ersetzt KPIs",
+        "Eskalation ist ein definierter Steuerungsmechanismus bei SLA- oder Regelverletzung, z. B. Weiterleitung an Duty Manager"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Eskalation ist ein definierter Steuerungsmechanismus, der bei SLA-/Regelverletzung greift (z. B. Weiterleitung an Duty Manager). Sie ist weder UI-Thema noch KPI-Ersatz.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · Eskalation",
       "schwierigkeit": "leicht",
@@ -307,12 +307,12 @@
       "id": "q21",
       "frage": "Sie entwerfen ein BPMS-Blueprint für ‚Customer Complaint Handling‘. Welche Bausteine gehören zwingend dazu?",
       "optionen": [
-        "Reines UI ohne Daten oder Rollen",
         "Start/Ende, Rollen, Aufgaben, Regeln, SLA/Eskalation, Systeme, Audit Trail, KPIs",
+        "Nur ein E-Mail-Postfach",
         "Nur ein Excel-Sheet",
-        "Nur ein E-Mail-Postfach"
+        "Reines UI ohne Daten oder Rollen"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Ein BPMS-Blueprint braucht Start/Ende, Rollen, Aufgaben, Regeln, SLA/Eskalation, Systeme, Audit Trail und KPIs. Die anderen Optionen lassen entweder Steuerung oder Compliance unbeantwortet.",
       "quelle": "Tag 6 · UE 2 Arbeitsauftrag 1 · BPMS-Blueprint",
       "schwierigkeit": "mittel",
@@ -322,12 +322,12 @@
       "id": "q22",
       "frage": "Sie definieren KPIs für ein BPMS. Welche Auswahl ist sinnvoll?",
       "optionen": [
+        "Anzahl Kaffeepausen",
         "Anzahl Pfeile in der Modellierung",
-        "SLA-Einhaltung, Rework-Quote, Kundenzufriedenheit",
         "Anzahl Bildschirmpixel",
-        "Anzahl Kaffeepausen"
+        "SLA-Einhaltung, Rework-Quote, Kundenzufriedenheit"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "SLA-Einhaltung, Rework-Quote und Kundenzufriedenheit sind etablierte Steuerungs-KPIs für ein BPMS. Sie kombinieren Speed-, Quality- und Outcome-Sichten – im Gegensatz zu Pixel-, Pfeil- oder Pausen-Metriken.",
       "quelle": "Tag 6 · UE 2 Arbeitsauftrag 1 · KPI-Set",
       "schwierigkeit": "mittel",
@@ -337,12 +337,12 @@
       "id": "q23",
       "frage": "Sie wählen Sync vs. Async für eine Integration. Welche Senior-Logik trägt?",
       "optionen": [
-        "Sync immer, weil schneller wirkt",
         "Sync bei direkten Antwortbedürfnissen mit niedriger Latenz; Async bei Entkopplung, Robustheit und Lastspitzen – Entscheidung explizit begründen",
+        "Liegt allein in der Verantwortung der IT-Abteilung",
         "Async immer, weil moderner klingt",
-        "Beliebig, weil beides identisch ist"
+        "Sync immer, weil schneller wirkt"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Senior-Logik wägt Antwortbedürfnis und Latenz (Sync) gegen Robustheit, Entkopplung und Lastspitzen (Async) ab und dokumentiert die Entscheidung. Pauschalantworten ignorieren den Trade-off.",
       "quelle": "Tag 6 · UE 3 Arbeitsauftrag 2 · Sync vs. Async",
       "schwierigkeit": "mittel",
@@ -352,9 +352,9 @@
       "id": "q24",
       "frage": "Welche Aussage zu ‚Minimum Viable Integration‘ ist senior-relevant?",
       "optionen": [
-        "Alle Integrationen müssen sofort und vollständig vorhanden sein",
-        "Wenige kritische Integrationen sauber, statt vieler halbgarer Integrationen – mit messbaren Frühwarnsignalen",
         "Keine Integrationen nötig, BPMS macht alles allein",
+        "Wenige kritische Integrationen sauber, statt vieler halbgarer Integrationen – mit messbaren Frühwarnsignalen",
+        "Alle Integrationen müssen sofort und vollständig vorhanden sein",
         "Integrationen sind ein UI-Thema"
       ],
       "korrekt": 1,
@@ -367,12 +367,12 @@
       "id": "q25",
       "frage": "Welche der folgenden Fehlerstrategien ist sinnvoll, wenn eine API zur Statusabfrage einen Timeout liefert?",
       "optionen": [
-        "Sofort den Prozess abbrechen ohne Eintrag",
         "Retry mit Backoff, Fallback auf Cache/Manuell, dokumentierter Eintrag im Audit Trail, Eskalation bei wiederholtem Fehler",
         "Endloser Retry ohne Limit",
-        "Fehler ignorieren"
+        "Fehler ignorieren",
+        "Sofort den Prozess abbrechen ohne Eintrag"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Sinnvoll sind begrenzte Retries mit Backoff, ein Fallback (Cache/Manuell), eine dokumentierte Spur im Audit Trail und Eskalation bei wiederholtem Fehler. Sofort-Abbruch, Endlos-Retry oder Ignorieren erzeugen Risiken.",
       "quelle": "Tag 6 · UE 3 Arbeitsauftrag 2 · Fehlerstrategie",
       "schwierigkeit": "mittel",
@@ -384,8 +384,8 @@
       "optionen": [
         "Skalierung ohne Observability ist akzeptabel",
         "Skalierung erfordert Observability (Logs/Metrics/Traces), sonst entstehen blinde Flecken und Risiko",
-        "Cloud-native bedeutet ‚keine Betriebsverantwortung‘",
-        "Cloud-native ist nur ein Marketingname"
+        "Cloud-native ist nur ein Marketingname",
+        "Cloud-native bedeutet ‚keine Betriebsverantwortung‘"
       ],
       "korrekt": 1,
       "erklaerung": "Skalierung erfordert Observability, sonst entstehen blinde Flecken bei Fehler-, Performance- und Compliance-Themen. Cloud-native ist ein konkretes Betriebsmodell, kein Verzicht auf Verantwortung.",
@@ -397,12 +397,12 @@
       "id": "q27",
       "frage": "Welche Aussage zu ‚System of Record‘ und Datenverantwortung passt zur Senior-Sicht?",
       "optionen": [
+        "Datenverantwortung wird automatisch durch APIs erzeugt",
+        "Datenverantwortung ist nur in stark regulierten Branchen relevant",
         "Datenverantwortung ist eine IT-Frage",
-        "Pro Datenobjekt sollte ein klares System of Record + Data Owner definiert sein, um Konflikte und Audit-Findings zu vermeiden",
-        "Datenverantwortung ist beliebig",
-        "Datenverantwortung wird automatisch durch APIs erzeugt"
+        "Pro Datenobjekt sollte ein klares System of Record + Data Owner definiert sein, um Konflikte und Audit-Findings zu vermeiden"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-Praxis benennt pro Datenobjekt ein System of Record + Data Owner. So werden Konflikte und Audit-Findings vermieden. IT-Reduktion, Beliebigkeit oder Automatismus durch APIs sind nicht ausreichend.",
       "quelle": "Tag 6 · UE 4 Coaching · Datenverantwortung",
       "schwierigkeit": "mittel",
@@ -412,12 +412,12 @@
       "id": "q28",
       "frage": "Welche der folgenden ist eine sinnvolle ‚Stop-the-line‘-Regel für ein BPMS-Release?",
       "optionen": [
-        "Es gibt keine Stop-Regeln",
         "Tests grün und Security-Check ok – sonst kein Release",
+        "Stop-Regel ist nur eine Empfehlung",
         "Release immer, egal was passiert",
-        "Stop-Regel ist nur eine Empfehlung"
+        "Es gibt keine Stop-Regeln"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Eine sinnvolle Stop-Regel verlangt grüne Tests und Security-Check als verbindliche Gates. ‚Keine Regel‘, ‚immer release‘ oder ‚nur Empfehlung‘ untergraben Stabilität und Compliance.",
       "quelle": "Tag 6 · UE 5 Fallstudie · Release Policy",
       "schwierigkeit": "mittel",
@@ -428,11 +428,11 @@
       "frage": "Welche Aussage zur ‚MVP-Entscheidung‘ in einem BPMS-Programm ist sinnvoll?",
       "optionen": [
         "Alles muss im Release 1 enthalten sein",
-        "MVP setzt klaren Scope (z. B. Case Handling + 1 Event + 1 Status-API + SLA + Dashboard) und benennt explizit, was nicht enthalten ist",
         "MVP-Verzicht ist sinnvoll, weil Kunden Vollständigkeit erwarten",
+        "MVP setzt klaren Scope (z. B. Case Handling + 1 Event + 1 Status-API + SLA + Dashboard) und benennt explizit, was nicht enthalten ist",
         "MVP ist ausschließlich ein Reporting-Begriff"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Ein sinnvoller MVP setzt klaren Scope (z. B. Case Handling + 1 Event + 1 Status-API + SLA + Dashboard) und benennt explizit, was nicht enthalten ist. Vollständigkeitserwartung oder reine Reporting-Reduktion sind unzureichend.",
       "quelle": "Tag 6 · UE 5 Fallstudie · MVP-Entscheidung",
       "schwierigkeit": "mittel",
@@ -443,11 +443,11 @@
       "frage": "Sie haben für ein Logistikunternehmen ‚Shipment Exception Handling‘ zu modellieren. Welche Eskalationsregel passt?",
       "optionen": [
         "Eskalation passiert nach Bauchgefühl",
+        "Eskalation wird per Brief versendet",
         "Erstreaktion 2 h, Lösung 24 h, Eskalation nach 4 h an Duty Manager (oder analoge messbare Schwellen)",
-        "Eskalation gibt es nicht",
-        "Eskalation wird per Brief versendet"
+        "Ist ein rein technischer Aspekt ohne fachliche Steuerung"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Eine wirksame Eskalation ist messbar: Erstreaktion 2 h, Lösung 24 h, Eskalation nach 4 h an Duty Manager. Bauchgefühl- oder Brief-Lösungen sind weder auditierbar noch reaktionsschnell.",
       "quelle": "Tag 6 · UE 5 Fallstudie · Eskalationsregel",
       "schwierigkeit": "mittel",
@@ -457,12 +457,12 @@
       "id": "q31",
       "frage": "Welche Aussage zur Resilienz-Muster-Kombination ist sinnvoll?",
       "optionen": [
-        "Retries reichen für alle Fälle",
-        "Kombination aus Retries, Backoff, Circuit Breaker, Idempotenz und Monitoring schützt vor Kaskaden und Datenkorruption",
+        "Resilienz ist nur in stark regulierten Branchen relevant",
         "Resilienz ist ein UI-Thema",
-        "Resilienz ist nur in Marketing relevant"
+        "Retries reichen für alle Fälle",
+        "Kombination aus Retries, Backoff, Circuit Breaker, Idempotenz und Monitoring schützt vor Kaskaden und Datenkorruption"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Sinnvolle Resilienz kombiniert Retries, Backoff, Circuit Breaker, Idempotenz und Monitoring. Einzelmuster oder UI-/Marketing-Reduktion genügen nicht.",
       "quelle": "Tag 6 · UE 5 Fallstudie · Resilienz",
       "schwierigkeit": "mittel",
@@ -473,11 +473,11 @@
       "frage": "Welche Aussage zur ‚Methodenintegration BPMN/VSM + KPIs + Mining‘ ist treffend?",
       "optionen": [
         "Sie ist redundant",
-        "BPMN als Soll, VSM für Engpässe, KPIs als Steuerung, Mining für Varianten – verbunden im monatlichen Process Review Board",
         "Mining ersetzt BPMN",
-        "VSM ist überflüssig"
+        "VSM ist überflüssig",
+        "BPMN als Soll, VSM für Engpässe, KPIs als Steuerung, Mining für Varianten – verbunden im monatlichen Process Review Board"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-Praxis verbindet BPMN als Soll, VSM für Engpassanalyse, KPIs als Steuerung und Mining für Variantenerkenntnis – häufig im Process Review Board. Sie ersetzen sich nicht.",
       "quelle": "Tag 6 · UE 5 Fallstudie · Methodenintegration",
       "schwierigkeit": "mittel",
@@ -487,12 +487,12 @@
       "id": "q33",
       "frage": "Welche Aussage zu ‚Audit Logging Pflicht für Kundenkommunikation‘ ist sinnvoll?",
       "optionen": [
-        "Es genügt eine mündliche Notiz",
         "Audit Logging ist Pflicht: Zeitpunkt, Inhalt, Kanal, Empfänger – revisionssicher",
-        "Audit Logging ist Marketingaufgabe",
-        "Audit Logging ist beliebig"
+        "Es genügt eine mündliche Notiz",
+        "Wird einmalig festgelegt und nicht mehr überprüft",
+        "Audit Logging ist ein rein technischer Aspekt ohne fachliche Steuerung"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Audit Logging muss revisionssicher Zeitpunkt, Inhalt, Kanal und Empfänger erfassen. Mündliche, Marketing- oder beliebige Logging-Strategien tragen weder rechtlich noch operativ.",
       "quelle": "Tag 6 · UE 5 Fallstudie · Audit Logging",
       "schwierigkeit": "mittel",
@@ -502,12 +502,12 @@
       "id": "q34",
       "frage": "Welche Aussage zur ‚Operating-Model-Verantwortung‘ in BPMS/API/Cloud ist treffend?",
       "optionen": [
-        "Verantwortung wird einer Person für alles übertragen",
-        "Klare Accountabilities: End-to-End-Owner, API-Owner, SLO-Owner – inkl. Eskalation und Audit-Schnittstelle",
         "Verantwortung ist ein UI-Element",
-        "Verantwortung ist optional"
+        "Verantwortung ist optional",
+        "Klare Accountabilities: End-to-End-Owner, API-Owner, SLO-Owner – inkl. Eskalation und Audit-Schnittstelle",
+        "Verantwortung wird einer Person für alles übertragen"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Senior-Operating-Modelle definieren klare Accountabilities: End-to-End-Owner, API-Owner, SLO-Owner – mit Eskalation und Audit-Schnittstelle. Sammel- oder UI-Verantwortung trägt nicht.",
       "quelle": "Tag 6 · UE 7 Feedback · Accountabilities",
       "schwierigkeit": "mittel",
@@ -517,12 +517,12 @@
       "id": "q35",
       "frage": "Welche der folgenden Aussagen zur ‚KPI-Auswahl im BPMS-Kontext‘ ist senior-tauglich?",
       "optionen": [
-        "Maximale Anzahl KPIs ist sinnvoll",
+        "KPIs wird ausschließlich vom externen Berater verantwortet",
+        "KPIs sind ohne Owner sinnvoll",
         "Wenige Outcome-/Risiko-KPIs (z. B. SLA-Einhaltung, Reaktionszeit, Eskalationsquote) statt Reporting-Flut",
-        "KPIs sind beliebig austauschbar",
-        "KPIs sind ohne Owner sinnvoll"
+        "Maximale Anzahl KPIs ist sinnvoll"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Senior-Praxis arbeitet mit wenigen wirkungsorientierten KPIs (SLA-Einhaltung, Reaktionszeit, Eskalationsquote) mit klarem Owner. Reporting-Flut, Beliebigkeit oder Owner-Verzicht zerstören Steuerungswirkung.",
       "quelle": "Tag 6 · UE 7 Feedback · KPI-Auswahl",
       "schwierigkeit": "mittel",
@@ -532,10 +532,10 @@
       "id": "q36",
       "frage": "Welche Aussage zu ‚Architekturpfad event-driven vs. überwiegend sync‘ ist senior-tauglich?",
       "optionen": [
-        "Event-driven ist immer überlegen",
+        "Beide Architekturen sind identisch",
         "Event-driven schützt vor enger Kopplung und Lastspitzen, erfordert aber Idempotenz, Monitoring und klare Datenverträge; sync ist einfacher, koppelt aber stärker",
-        "Sync ist immer überlegen",
-        "Beide Architekturen sind identisch"
+        "Event-driven ist immer überlegen",
+        "Sync ist immer überlegen"
       ],
       "korrekt": 1,
       "erklaerung": "Senior-Sicht: Event-driven schützt vor enger Kopplung und Lastspitzen, erfordert aber Idempotenz, Monitoring und Datenverträge. Sync ist einfacher, koppelt aber stärker. Pauschalantworten greifen zu kurz.",
@@ -547,12 +547,12 @@
       "id": "q37",
       "frage": "Welche Aussage zur ‚API-Versionierung‘ ist treffend?",
       "optionen": [
-        "Versionierung ist überflüssig",
         "API-Versionierung schützt Konsumenten vor Breaking Changes; semantische Versionen + Deprecation-Plan sind etabliert",
-        "Versionierung ist ein UI-Theme",
-        "Versionierung verhindert Audits"
+        "Versionierung verhindert Audits",
+        "Versionierung ist überflüssig",
+        "Versionierung wird automatisch durch die BPM-Suite generiert"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "API-Versionierung schützt Konsumenten vor Breaking Changes. Semantische Versionen und Deprecation-Pläne sind etablierte Praktiken. UI-/Audit-Reduktionen sind unzulässig.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · API-Versionierung",
       "schwierigkeit": "mittel",
@@ -562,12 +562,12 @@
       "id": "q38",
       "frage": "Welche Aussage zu ‚Kosten- und FinOps-Aspekten‘ in cloud-nativen Workflows ist sinnvoll?",
       "optionen": [
-        "Kosten sind irrelevant in der Cloud",
-        "Skalierung erzeugt variable Kosten, die FinOps light (Monitoring, Budgets, Alerts) und Kostenoptimierung erfordert",
         "FinOps ist ein UI-Konzept",
-        "FinOps ersetzt Compliance"
+        "FinOps ersetzt Compliance",
+        "Kosten ist nur für interne Reports an den Vorstand vorgesehen",
+        "Skalierung erzeugt variable Kosten, die FinOps light (Monitoring, Budgets, Alerts) und Kostenoptimierung erfordert"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Cloud-Skalierung erzeugt variable Kosten, die durch FinOps-Praktiken (Monitoring, Budgets, Alerts) gesteuert werden. UI-Reduktion oder Compliance-Ersatz sind unzulässig.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · FinOps",
       "schwierigkeit": "mittel",
@@ -577,12 +577,12 @@
       "id": "q39",
       "frage": "Welche Aussage zum ‚Audit Trail im BPMS + API + Cloud-Setup‘ ist senior-tauglich?",
       "optionen": [
+        "Audit Trail wird automatisch durch die BPM-Suite generiert",
         "Audit Trail ist ein UI-Modul",
-        "Audit Trail muss durchgängig (BPMS + API + Cloud) konsistente Case IDs und Zeitstempel erfassen, um End-to-End-Nachvollziehbarkeit zu sichern",
-        "Audit Trail ist ein Marketingbegriff",
-        "Audit Trail erfasst nur Erfolge"
+        "Audit Trail erfasst nur Erfolge",
+        "Audit Trail muss durchgängig (BPMS + API + Cloud) konsistente Case IDs und Zeitstempel erfassen, um End-to-End-Nachvollziehbarkeit zu sichern"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "End-to-End-Audit-Trail erfordert konsistente Case IDs und Zeitstempel über BPMS, API und Cloud hinweg. Erfolg-/Fehlerfälle gehören gleichermaßen erfasst – UI-/Marketing-Reduktion ist unzulässig.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · Audit Trail",
       "schwierigkeit": "mittel",
@@ -592,10 +592,10 @@
       "id": "q40",
       "frage": "Welche Aussage zu ‚SLO-Ableitung aus SLA‘ ist treffend?",
       "optionen": [
-        "SLO ist beliebig und unabhängig von SLA",
+        "SLO ist ein Synonym für KPI",
         "SLOs werden aus SLAs hergeleitet, sind messbare Operativziele und werden in Monitoring/Alerts verankert",
-        "SLO ist ein UI-Begriff",
-        "SLO ist ein Synonym für KPI"
+        "SLO wird automatisch durch die BPM-Suite generiert",
+        "SLO ist ein UI-Begriff"
       ],
       "korrekt": 1,
       "erklaerung": "SLOs werden aus SLAs abgeleitet, sind messbare Operativziele und werden in Monitoring/Alerts verankert. Sie sind weder beliebig noch UI-Theme noch KPI-Synonym.",
@@ -607,12 +607,12 @@
       "id": "q41",
       "frage": "Welche Aussage zu ‚Contract Testing‘ ist sinnvoll?",
       "optionen": [
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
         "Contract Testing ist ein UI-Test",
         "Contract Testing prüft konzeptionell, dass API-Konsumenten und -Provider gemeinsame Verträge einhalten – verhindert Breaking-Change-Risiken",
-        "Contract Testing ersetzt SLAs",
-        "Contract Testing ist eine Marketing-Methode"
+        "Contract Testing ersetzt SLAs"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Contract Testing sichert, dass API-Konsumenten und -Provider sich an einen gemeinsamen Vertrag halten. Es verhindert Breaking-Change-Risiken und ergänzt SLAs, ersetzt sie aber nicht.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · Contract Testing",
       "schwierigkeit": "mittel",
@@ -623,11 +623,11 @@
       "frage": "Welche Aussage zu ‚zentralen vs. dezentralen Entscheidungen‘ in einer Plattformstrategie ist tragfähig?",
       "optionen": [
         "Alles zentral, sonst entsteht Chaos",
-        "Standards (Observability, Security, API-Naming) zentral, Implementierungen dezentral innerhalb der Standards",
         "Alles dezentral, sonst entsteht Bürokratie",
-        "Beliebig"
+        "Wird einmalig festgelegt und nicht mehr überprüft",
+        "Standards (Observability, Security, API-Naming) zentral, Implementierungen dezentral innerhalb der Standards"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-Plattformstrategie definiert Standards (Observability, Security, API-Naming) zentral und lässt Implementierungen dezentral innerhalb der Standards. Maximale Zentralisierung erzeugt Bürokratie, maximale Dezentralisierung Chaos.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · Zentral/Dezentral",
       "schwierigkeit": "mittel",
@@ -637,12 +637,12 @@
       "id": "q43",
       "frage": "Welche Aussage zu ‚Peak-Saison und Skalierung‘ ist senior-tauglich?",
       "optionen": [
-        "Peak-Lasten sind irrelevant",
-        "Peak-Saisonen erfordern Auto-Scaling, Lasttests, Resilienz-Muster und Kostenkontrolle (FinOps light)",
         "Peak-Lasten lösen sich automatisch",
-        "Peak-Lasten betreffen nur Marketing"
+        "Wird ausschließlich durch externe Audits festgelegt",
+        "Ist eine optionale Empfehlung ohne verbindliche Wirkung",
+        "Peak-Saisonen erfordern Auto-Scaling, Lasttests, Resilienz-Muster und Kostenkontrolle (FinOps light)"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Peak-Saisonen erfordern Auto-Scaling, Lasttests, Resilienz-Muster und Kostenkontrolle. Sie lösen sich nicht automatisch, betreffen nicht nur Marketing und dürfen nicht ignoriert werden.",
       "quelle": "Tag 6 · UE 5 Fallstudie · Peak-Skalierung",
       "schwierigkeit": "mittel",
@@ -652,12 +652,12 @@
       "id": "q44",
       "frage": "Welche Aussage zum ‚MVP-Scope für 2 Integrationen zuerst‘ ist tragfähig?",
       "optionen": [
-        "Welche zwei Integrationen ist egal",
-        "Entscheidungskriterien: Wertbeitrag, Risiko, Datenverfügbarkeit, Stabilität der Gegenstelle – Entscheidung mit ‚Stop Doing‘-Liste dokumentieren",
+        "MVP-Scope ist nur eine Reporting-Frage",
         "Es genügt eine Integration für 10 Jahre",
-        "MVP-Scope ist nur eine Reporting-Frage"
+        "Welche zwei Integrationen wird einmalig im Projekt festgelegt und danach nicht mehr überprüft",
+        "Entscheidungskriterien: Wertbeitrag, Risiko, Datenverfügbarkeit, Stabilität der Gegenstelle – Entscheidung mit ‚Stop Doing‘-Liste dokumentieren"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-MVP-Scope wird nach Wertbeitrag, Risiko, Datenverfügbarkeit und Stabilität der Gegenstelle entschieden und durch eine ‚Stop Doing‘-Liste flankiert. Reine Reporting- oder Beliebigkeits-Logik trägt nicht.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · MVP-Scope",
       "schwierigkeit": "mittel",
@@ -667,10 +667,10 @@
       "id": "q45",
       "frage": "Welche der folgenden Aussagen zu ‚nice-to-have vs. must-have Integration‘ trifft zu?",
       "optionen": [
-        "Alle Integrationen sind gleich wichtig",
+        "Must-have und nice-to-have wird automatisch durch die BPM-Suite generiert",
         "Must-have-Integrationen sind direkt prozesskritisch oder Compliance-relevant; nice-to-have-Integrationen verbessern Effizienz, sind aber priorisierbar",
         "Nice-to-have-Integrationen sollten zuerst gebaut werden",
-        "Must-have und nice-to-have sind beliebig"
+        "Alle Integrationen sind gleich wichtig"
       ],
       "korrekt": 1,
       "erklaerung": "Must-have ist prozesskritisch oder Compliance-relevant, nice-to-have steigert Effizienz und ist priorisierbar. Diese Differenzierung schützt MVP-Scope und Ressourcen.",
@@ -682,12 +682,12 @@
       "id": "q46",
       "frage": "Sie verantworten als Chief Digital Officer eine E2E-Integrationsstrategie. Welche Senior-Argumentation ist tragfähig?",
       "optionen": [
-        "Tool-First-Strategie wählen",
         "Operating Model (Owner, Standards, SLOs, Audit Trail, Architekturpfad) zuerst definieren, Plattform dient als Träger – plus Roadmap mit messbaren Outcomes",
-        "Strategie wird durch das günstigste Tool definiert",
-        "Strategie ist beliebig"
+        "Tool-First-Strategie wählen",
+        "Strategie ist nur für Großkonzerne mit eigenem Process Office sinnvoll",
+        "Strategie wird durch das günstigste Tool definiert"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Senior-Sicht: Operating Model (Owner, Standards, SLOs, Audit Trail, Architekturpfad) trägt die Strategie; Plattform ist Träger. Tool-First oder Kosten-First-Strategien versagen in komplexen Umgebungen.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · CDO-Strategie",
       "schwierigkeit": "schwer",
@@ -698,11 +698,11 @@
       "frage": "Welche Aussage zur ‚Plattform-Entscheidungsarchitektur‘ ist tragfähig?",
       "optionen": [
         "Sie ist eine reine Tool-Liste",
+        "Sie ersetzt operative Verantwortung",
         "Sie definiert, welche Entscheidungen zentral (Standards) und welche dezentral (Teams) getroffen werden, inklusive Audit-/Risikoabsicherung",
-        "Sie ist ein Layout-Konzept für Folien",
-        "Sie ersetzt operative Verantwortung"
+        "Sie ist ein Layout-Konzept für Folien"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Eine Plattform-Entscheidungsarchitektur trennt zentral (Standards) von dezentral (Teams) und sichert Audit-/Risikoabsicherung. Sie ist weder Tool-Liste noch Layout, noch ein Ersatz für operative Verantwortung.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · Entscheidungsarchitektur",
       "schwierigkeit": "schwer",
@@ -712,10 +712,10 @@
       "id": "q48",
       "frage": "Welche Senior-Argumentation zu ‚Legacy-Integration‘ ist tragfähig?",
       "optionen": [
-        "Legacy sofort abschalten",
-        "Legacy bleibt teilweise unverzichtbar; Kapselung via APIs/Adapter, Datenzugriff klar geregelt, schrittweise Modernisierung – Risiken kontrolliert",
         "Legacy ignorieren",
-        "Legacy ist ein UI-Thema"
+        "Legacy bleibt teilweise unverzichtbar; Kapselung via APIs/Adapter, Datenzugriff klar geregelt, schrittweise Modernisierung – Risiken kontrolliert",
+        "Legacy ist ein UI-Thema",
+        "Legacy sofort abschalten"
       ],
       "korrekt": 1,
       "erklaerung": "Senior-Praxis kapselt Legacy via APIs/Adapter, regelt Datenzugriff klar und treibt schrittweise Modernisierung. Abschaltungs- oder Ignorier-Strategien sind unrealistisch und riskant.",
@@ -728,11 +728,11 @@
       "frage": "Welche Aussage zu ‚Incident Management in cloud-nativen Workflows‘ ist senior-tauglich?",
       "optionen": [
         "Incident Management ist ein UI-Thema",
-        "Incident Management braucht klare Severities, Playbooks, On-Call-Modelle, MTTR-Steuerung und Post-Mortem-Praxis",
         "Incident Management ist optional",
-        "Incident Management wird durch Marketing erledigt"
+        "Wird einmalig festgelegt und nicht mehr überprüft",
+        "Incident Management braucht klare Severities, Playbooks, On-Call-Modelle, MTTR-Steuerung und Post-Mortem-Praxis"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Cloud-natives Incident Management benötigt Severities, Playbooks, On-Call-Modelle, MTTR-Steuerung und Post-Mortem-Praxis. UI-/Marketing-Reduktion oder Optionalitäts-These sind unzulässig.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · Incident Management",
       "schwierigkeit": "schwer",
@@ -742,12 +742,12 @@
       "id": "q50",
       "frage": "Welche der folgenden Aussagen zu ‚Messkonzept Leading/Lagging‘ ist tragfähig?",
       "optionen": [
-        "Nur Lagging-Indikatoren sind sinnvoll",
-        "Leading-Indikatoren (z. B. Queue-Länge, Reassignments) signalisieren Risiko früh; Lagging-Indikatoren (z. B. SLA-Breach) bestätigen Ergebnisse – beide gemeinsam steuern",
         "Nur Leading-Indikatoren sind sinnvoll",
-        "Beide Indikatoren sind beliebig"
+        "Ist nur in der Pilotphase relevant",
+        "Nur Lagging-Indikatoren sind sinnvoll",
+        "Leading-Indikatoren (z. B. Queue-Länge, Reassignments) signalisieren Risiko früh; Lagging-Indikatoren (z. B. SLA-Breach) bestätigen Ergebnisse – beide gemeinsam steuern"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-Messkonzepte kombinieren Leading- und Lagging-Indikatoren: Leading warnt früh, Lagging bestätigt Ergebnisse. Einseitige oder beliebige Auswahl unterminiert Steuerung.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · Leading/Lagging",
       "schwierigkeit": "schwer",
@@ -758,11 +758,11 @@
       "frage": "Welche Aussage zur ‚E2E-Methodenintegration als Steuerungsarchitektur‘ trifft zu?",
       "optionen": [
         "Methodenintegration ist nur ein Diagramm",
-        "Sie verbindet Modellierung, Ausführung, Messung und Governance in einem geschlossenen Steuerungssystem – ‚Model → Run → Improve‘",
         "Methodenintegration ist nur ein Reporting",
-        "Methodenintegration ist beliebig"
+        "Ist nur in stark regulierten Branchen relevant",
+        "Sie verbindet Modellierung, Ausführung, Messung und Governance in einem geschlossenen Steuerungssystem – ‚Model → Run → Improve‘"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "E2E-Methodenintegration ist ein geschlossenes Steuerungssystem (Model → Run → Improve), das Modellierung, Ausführung, Messung und Governance verbindet. Sie ist mehr als ein Diagramm oder Reporting.",
       "quelle": "Tag 6 · UE 1 Wissensvermittlung · E2E-Steuerung",
       "schwierigkeit": "schwer",
@@ -772,10 +772,10 @@
       "id": "q52",
       "frage": "Welche der folgenden Aussagen zur ‚API-Governance‘ ist senior-tauglich?",
       "optionen": [
-        "API-Governance ist optional",
-        "API-Governance definiert Versionierung, SLA/SLO, Ownership, Contract Testing und Change-Prozess – sie sichert Stabilität und Auditfähigkeit",
         "API-Governance ist ein reiner UI-Standard",
-        "API-Governance ist Marketingbegriff"
+        "API-Governance definiert Versionierung, SLA/SLO, Ownership, Contract Testing und Change-Prozess – sie sichert Stabilität und Auditfähigkeit",
+        "API-Governance ist nur in stark regulierten Branchen relevant",
+        "API-Governance ist optional"
       ],
       "korrekt": 1,
       "erklaerung": "API-Governance regelt Versionierung, SLA/SLO, Ownership, Contract Testing und Change-Prozess. Sie ist Kernbestandteil tragfähiger Plattformen – nicht optional, kein UI-Standard, kein Marketing.",
@@ -788,11 +788,11 @@
       "frage": "Welche Aussage zu ‚Audit-Driven Design‘ in BPMS-Plattformen ist senior-relevant?",
       "optionen": [
         "Audit ist ein Reporting nach Release",
-        "Auditanforderungen werden vorab im Design verankert (z. B. Case IDs, Logging, Reviews) statt nachträglich aufgesetzt",
-        "Audit ist ein UI-Theme",
-        "Audit ist beliebig"
+        "Audit wird automatisch durch die BPM-Suite generiert",
+        "Audit ist nur in stark regulierten Branchen relevant",
+        "Auditanforderungen werden vorab im Design verankert (z. B. Case IDs, Logging, Reviews) statt nachträglich aufgesetzt"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Audit-Driven Design verankert Auditanforderungen vorab im Design (Case IDs, Logging, Reviews) und reduziert spätere Findings. Nachträgliche oder UI-/beliebige Audit-Reduktionen tragen nicht.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · Audit-Driven",
       "schwierigkeit": "schwer",
@@ -802,12 +802,12 @@
       "id": "q54",
       "frage": "Welche der folgenden Aussagen zu ‚Security in cloud-nativen Workflows‘ ist senior-tauglich?",
       "optionen": [
+        "Security wird einmalig im Projekt festgelegt und danach nicht mehr überprüft",
         "Security ist eine separate Aufgabe nach Release",
         "Security wird ‚by design‘ integriert: Auth, Secrets, Zero-Trust-Konzepte, Audit Trail – Compliance ist kontinuierlich, nicht punktuell",
-        "Security ist nur in Frontends relevant",
-        "Security ist ein Marketing-Slogan"
+        "Security ist nur in Frontends relevant"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Security ist ‚by design‘ integriert (Auth, Secrets, Zero Trust, Audit Trail) und kontinuierlich, nicht punktuell. Frontend- oder Marketing-Reduktion sind unzulässig.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · Security",
       "schwierigkeit": "schwer",
@@ -817,10 +817,10 @@
       "id": "q55",
       "frage": "Welche Aussage zur ‚MTTR-Steuerung‘ ist tragfähig?",
       "optionen": [
-        "MTTR ist beliebig",
+        "MTTR ist ein UI-Begriff",
         "Mean Time To Recover misst, wie schnell Systeme nach Vorfällen wieder funktionieren – sie wird durch Playbooks, Observability und On-Call-Reife getrieben",
-        "MTTR ist eine Marketingkennzahl",
-        "MTTR ist ein UI-Begriff"
+        "MTTR wird zentral vom CIO ohne Fachbereich entschieden",
+        "MTTR wird ausschließlich durch externe Auditoren festgelegt"
       ],
       "korrekt": 1,
       "erklaerung": "MTTR (Mean Time To Recover) misst Recovery-Geschwindigkeit nach Vorfällen. Sie wird durch Playbooks, Observability und On-Call-Reife getrieben – sie ist eine operative Steuerungsgröße.",
@@ -832,12 +832,12 @@
       "id": "q56",
       "frage": "Welche Aussage zur ‚Skalierungsstrategie unter Unsicherheit‘ ist senior-tauglich?",
       "optionen": [
+        "Liegt allein in der Verantwortung der IT-Abteilung",
+        "Wird ausschließlich durch externe Audits festgelegt",
         "Voll vorbauen, koste es was es wolle",
-        "Auto-Scaling-Strategie mit Mindest-/Maximal-Grenzen, Lasttests und Kostengrenzen; Skalierungs-Frühwarnungen definieren",
-        "Skalierung ist beliebig",
-        "Skalierung ist nur Marketing"
+        "Auto-Scaling-Strategie mit Mindest-/Maximal-Grenzen, Lasttests und Kostengrenzen; Skalierungs-Frühwarnungen definieren"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-Skalierung kombiniert Auto-Scaling mit Mindest-/Maximal-Grenzen, Lasttests, Kostenkontrollen und Skalierungs-Frühwarnungen. Vollbau ohne Grenzen ist teuer und riskant.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · Skalierungsstrategie",
       "schwierigkeit": "schwer",
@@ -847,12 +847,12 @@
       "id": "q57",
       "frage": "Welche Aussage zur ‚Investmentlogik für BPMS/API/Cloud-Programme‘ ist tragfähig?",
       "optionen": [
+        "Wird vollständig durch die BPM-Suite automatisiert",
         "Investmentlogik ist überflüssig",
         "Investmentlogik benennt Nutzen, Risiko, Messung (Leading/Lagging), Stop/Continue-Trigger und Verantwortliche",
-        "Investmentlogik ist eine reine Excel-Tabelle ohne Folgen",
-        "Investmentlogik ist eine Marketingaufgabe"
+        "Investmentlogik ist eine reine Excel-Tabelle ohne Folgen"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Senior-Investmentlogik definiert Nutzen, Risiko, Messung (Leading/Lagging), Stop/Continue-Trigger und Verantwortliche. Excel-Reduktion oder Marketing-Logik tragen nicht.",
       "quelle": "Tag 6 · UE 8 Transferprojekt · Investmentlogik",
       "schwierigkeit": "schwer",
@@ -863,11 +863,11 @@
       "frage": "Welche der folgenden Aussagen zur ‚Anti-Gaming-Kopplung von KPIs‘ ist tragfähig?",
       "optionen": [
         "KPIs immer einzeln betrachten",
-        "Speed-KPIs werden mit Quality-/Risiko-KPIs gekoppelt, um Anreizverzerrung zu vermeiden – z. B. SLA-Einhaltung neben Rework-Quote",
-        "KPIs sind beliebig",
-        "KPIs sind ohne Anti-Gaming-Mechanik sinnvoll"
+        "KPIs ist erst in agilen Pilotprojekten relevant",
+        "KPIs sind ohne Anti-Gaming-Mechanik sinnvoll",
+        "Speed-KPIs werden mit Quality-/Risiko-KPIs gekoppelt, um Anreizverzerrung zu vermeiden – z. B. SLA-Einhaltung neben Rework-Quote"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Senior-KPI-Praxis koppelt Speed-KPIs mit Quality-/Risiko-KPIs, um Anreizverzerrungen zu vermeiden. Einzelbetrachtung oder Verzicht auf Anti-Gaming-Mechanik führt zu Fehlsteuerung.",
       "quelle": "Tag 6 · UE 7 Feedback · Anti-Gaming",
       "schwierigkeit": "schwer",
@@ -877,10 +877,10 @@
       "id": "q59",
       "frage": "Welche der folgenden Aussagen zu ‚Plattform als Steuerungssystem‘ ist senior-tauglich?",
       "optionen": [
-        "Plattform ist nur ein Hosting",
-        "Plattform ist Steuerungssystem: Modellierung, Ausführung, Messung, Governance, Risiko-/Audit-Sicht – nicht nur Prozessautomatisierung",
         "Plattform ist eine UI-Frage",
-        "Plattform ist nur Marketing"
+        "Plattform ist Steuerungssystem: Modellierung, Ausführung, Messung, Governance, Risiko-/Audit-Sicht – nicht nur Prozessautomatisierung",
+        "Ist nur in der Pilotphase relevant",
+        "Plattform ist nur ein Hosting"
       ],
       "korrekt": 1,
       "erklaerung": "Senior-Sicht: Eine Plattform ist Steuerungssystem für Modellierung, Ausführung, Messung, Governance und Risiko-/Audit-Sicht. Sie ist mehr als Hosting, UI oder Marketing.",
@@ -892,10 +892,10 @@
       "id": "q60",
       "frage": "Welche Aussage zur ‚Entscheidungsfähigkeit unter Unsicherheit‘ in BPMS/API/Cloud-Programmen ist tragfähig?",
       "optionen": [
-        "Entscheidungen vermeiden, bis alle Daten vorliegen",
-        "Entscheidungen mit Begründung, Frühwarnsignalen und Stop/Continue-Triggern treffen – Senior-Praxis statt Perfektionismus",
         "Entscheidungen sind Bauchgefühl",
-        "Entscheidungen sind beliebig"
+        "Entscheidungen mit Begründung, Frühwarnsignalen und Stop/Continue-Triggern treffen – Senior-Praxis statt Perfektionismus",
+        "Entscheidungen gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
+        "Entscheidungen vermeiden, bis alle Daten vorliegen"
       ],
       "korrekt": 1,
       "erklaerung": "Senior-Entscheidungen unter Unsicherheit sind begründet, mit Frühwarnsignalen und Stop/Continue-Triggern versehen. Perfektionismus, Bauchgefühl oder Beliebigkeit untergraben Steuerungswirkung.",

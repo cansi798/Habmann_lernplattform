@@ -7,10 +7,10 @@
       "id": "q01",
       "frage": "Was ist ein zentrales Merkmal einer Microservices-Architektur?",
       "optionen": [
-        "Alle Services teilen sich eine zentrale Datenbank",
+        "Services dürfen keine eigene Datenhaltung haben",
         "Services können unabhängig voneinander deployt werden",
         "Es gibt einen einzigen großen Release-Zyklus für alle Komponenten",
-        "Services dürfen keine eigene Datenhaltung haben"
+        "Alle Services teilen sich eine zentrale Datenbank"
       ],
       "korrekt": 1,
       "erklaerung": "Unabhängige Deploybarkeit ist eines der Kernversprechen von Microservices. Jeder Service hat eigene Verantwortungsgrenzen, kann eigenständig skaliert und ausgeliefert werden. Eine geteilte zentrale Datenbank widerspricht diesem Prinzip und erzeugt enge Kopplung.",
@@ -22,12 +22,12 @@
       "id": "q02",
       "frage": "Entlang welcher Linien sollten Servicegrenzen sinnvoll geschnitten werden?",
       "optionen": [
+        "Entlang der Hierarchie im Unternehmen",
         "Entlang einzelner Datenbanktabellen",
-        "Entlang von Geschäftsfähigkeiten (Business Capabilities)",
         "Entlang von Programmiersprachen",
-        "Entlang der Hierarchie im Unternehmen"
+        "Entlang von Geschäftsfähigkeiten (Business Capabilities)"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Servicegrenzen werden entlang fachlicher Geschäftsfähigkeiten gezogen, etwa Order, Inventory, Shipping. Schnittlinien entlang technischer Strukturen wie Datenbanktabellen führen zu unzusammenhängenden Bündeln. Geschäftsfähigkeiten machen Verantwortung und Wertschöpfung sichtbar.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Servicegrenzen",
       "schwierigkeit": "leicht",
@@ -37,10 +37,10 @@
       "id": "q03",
       "frage": "Was bedeutet Idempotenz im Kontext von Service-Integration?",
       "optionen": [
-        "Ein Aufruf darf nur ein einziges Mal erlaubt sein",
+        "Ein Aufruf darf keine Antwort liefern",
         "Ein wiederholter Aufruf mit gleichen Eingaben erzeugt keinen zusätzlichen Schaden",
         "Ein Aufruf muss immer asynchron erfolgen",
-        "Ein Aufruf darf keine Antwort liefern"
+        "Ein Aufruf darf nur ein einziges Mal erlaubt sein"
       ],
       "korrekt": 1,
       "erklaerung": "Idempotenz bedeutet: Wird derselbe Aufruf mehrfach ausgeführt, ist das Endergebnis identisch zum einmaligen Aufruf. Das ist wichtig bei verteilten Systemen, in denen Netzwerkausfälle und Retries vorkommen. Ohne Idempotenz drohen Doppelbuchungen oder Inkonsistenzen.",
@@ -52,10 +52,10 @@
       "id": "q04",
       "frage": "Was ist ein Container im technischen Sinne?",
       "optionen": [
-        "Eine physische Server-Hardware",
+        "Ein reines Backup-Format",
         "Eine verpackte Anwendung inklusive ihrer Abhängigkeiten",
-        "Ein Netzwerkkabel",
-        "Ein reines Backup-Format"
+        "Eine physische Server-Hardware",
+        "Ein Netzwerkkabel"
       ],
       "korrekt": 1,
       "erklaerung": "Ein Container ist eine schlanke, isolierte Laufzeitumgebung, in der eine Anwendung samt ihrer Abhängigkeiten verpackt ist. So läuft sie auf jedem System gleich. Container sind keine VMs und auch keine reinen Backups.",
@@ -67,12 +67,12 @@
       "id": "q05",
       "frage": "Welche Aufgabe übernimmt Kubernetes?",
       "optionen": [
+        "Buchhaltung und Rechnungsstellung",
         "Programmiersprachen-Übersetzung",
         "Orchestrierung von Containern (Deploy, Skalierung, Self-Healing)",
-        "Buchhaltung und Rechnungsstellung",
         "Visuelle Prozessmodellierung"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Kubernetes orchestriert Container: es deployt sie, skaliert sie nach Bedarf, startet sie nach Ausfall automatisch neu (Self-Healing) und übernimmt Service Discovery. Buchhaltung oder Modellierung sind nicht Aufgabe einer Orchestrierungsplattform.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Kubernetes",
       "schwierigkeit": "leicht",
@@ -84,8 +84,8 @@
       "optionen": [
         "Total Deployment Design",
         "Test-Driven Development",
-        "Technical Debt Doctrine",
-        "Time-Driven Delivery"
+        "Time-Driven Delivery",
+        "Technical Debt Doctrine"
       ],
       "korrekt": 1,
       "erklaerung": "TDD steht für Test-Driven Development und beschreibt einen Entwicklungsstil, bei dem Tests vor der eigentlichen Implementierung geschrieben werden. Der typische Zyklus ist Red-Green-Refactor: erst Test, dann minimaler Code, dann saubere Umgestaltung.",
@@ -97,9 +97,9 @@
       "id": "q07",
       "frage": "Welche Schritte beschreibt der TDD-Zyklus?",
       "optionen": [
-        "Plan-Do-Check-Act",
-        "Red-Green-Refactor",
         "Build-Run-Stop",
+        "Red-Green-Refactor",
+        "Plan-Do-Check-Act",
         "Design-Develop-Deploy"
       ],
       "korrekt": 1,
@@ -112,12 +112,12 @@
       "id": "q08",
       "frage": "Welche Aussage zur Testpyramide trifft zu?",
       "optionen": [
-        "Sie empfiehlt überwiegend End-to-End-Tests, wenige Unit-Tests",
         "Sie empfiehlt viele Unit-Tests, weniger Integrationstests und nur wenige End-to-End-Tests",
-        "Sie verbietet Integrationstests",
-        "Sie ist nur bei Monolithen anwendbar"
+        "Sie empfiehlt überwiegend End-to-End-Tests, wenige Unit-Tests",
+        "Sie ist nur bei Monolithen anwendbar",
+        "Sie verbietet Integrationstests"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Die Testpyramide priorisiert viele schnelle, günstige Unit-Tests an der Basis, weniger Integrationstests in der Mitte und wenige End-to-End-Tests an der Spitze, weil diese teuer und fragil sind. Eine umgekehrte Pyramide führt zu instabilen Pipelines.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Testpyramide",
       "schwierigkeit": "leicht",
@@ -127,12 +127,12 @@
       "id": "q09",
       "frage": "Was ist ein Quality Gate?",
       "optionen": [
+        "Ein Lizenzdokument",
         "Eine Tür im Rechenzentrum",
         "Ein definierter Prüfpunkt, der vor einem Release passiert werden muss",
-        "Ein Pflichtfeld in einem Formular",
-        "Ein Lizenzdokument"
+        "Ein Pflichtfeld in einem Formular"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Quality Gates sind definierte Prüfpunkte im Release-Prozess, an denen Tests, statische Analysen oder Security-Checks bestanden werden müssen. Nur wer das Gate passiert, geht in Produktion. Sie verhindern, dass schlechte Qualität unkontrolliert ausgeliefert wird.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Quality Gates",
       "schwierigkeit": "leicht",
@@ -142,12 +142,12 @@
       "id": "q10",
       "frage": "Was ist das Hauptziel von DevOps?",
       "optionen": [
-        "Trennung von Entwicklung und Betrieb verstärken",
-        "Kurze Feedbackschleifen und stabile Releases ermöglichen",
         "Manuelles Deployment fördern",
-        "Nur einmal pro Jahr releasen"
+        "Nur einmal pro Jahr releasen",
+        "Trennung von Entwicklung und Betrieb verstärken",
+        "Kurze Feedbackschleifen und stabile Releases ermöglichen"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "DevOps zielt darauf, Entwicklungs- und Betriebsteams enger zu verzahnen, um Feedbackschleifen zu verkürzen und gleichzeitig stabile Releases zu liefern. Das Motto 'you build it, you run it' verteilt Verantwortung. Trennungen verlängern Zyklen statt sie zu verkürzen.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · DevOps",
       "schwierigkeit": "leicht",
@@ -157,12 +157,12 @@
       "id": "q11",
       "frage": "Was bedeutet das DevOps-Prinzip 'you build it, you run it'?",
       "optionen": [
+        "Es darf nur eine Person pro System geben",
         "Wer baut, übergibt sofort an einen Betreiber",
         "Das Team, das ein System entwickelt, trägt auch Betriebsverantwortung",
-        "Nur das Betriebsteam darf Software bauen",
-        "Es darf nur eine Person pro System geben"
+        "Nur das Betriebsteam darf Software bauen"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Das Prinzip 'you build it, you run it' verbindet Entwicklung und Betrieb in einem Team. So entsteht ein direkter Anreiz, robuste und betreibbare Software zu liefern. In der Praxis abgestuft umgesetzt, etwa mit einem Plattformteam im Rücken.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Operating Model",
       "schwierigkeit": "leicht",
@@ -172,12 +172,12 @@
       "id": "q12",
       "frage": "Welche Rolle hat ein Plattformteam in einem typischen DevOps-Operating-Model?",
       "optionen": [
-        "Es ersetzt alle Produktteams",
         "Es liefert wiederverwendbare Standards wie CI/CD-Templates und Observability",
-        "Es entscheidet alle fachlichen Anforderungen",
-        "Es übernimmt nur Hardwarebeschaffung"
+        "Es ersetzt alle Produktteams",
+        "Es übernimmt nur Hardwarebeschaffung",
+        "Es entscheidet alle fachlichen Anforderungen"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Plattformteams stellen Standards, Templates und Werkzeuge bereit, etwa für CI/CD, Logging oder Kubernetes-Basis. Produktteams nutzen diese Plattform, behalten aber Produktverantwortung. Plattformteams ersetzen keine Produktteams.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Operating Model",
       "schwierigkeit": "leicht",
@@ -187,12 +187,12 @@
       "id": "q13",
       "frage": "Was ist ein typisches Merkmal eines Monolithen?",
       "optionen": [
-        "Viele unabhängige Deployments pro Tag",
-        "Eine eng gekoppelte Codebasis, die als Ganzes deployt wird",
+        "Automatisches horizontales Skalieren einzelner Module",
         "Strikt getrennte Datenhaltungen pro Komponente",
-        "Automatisches horizontales Skalieren einzelner Module"
+        "Eine eng gekoppelte Codebasis, die als Ganzes deployt wird",
+        "Viele unabhängige Deployments pro Tag"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Ein Monolith ist eine eng gekoppelte Anwendung, die als Ganzes gebaut, getestet und deployt wird. Vorteil: einfacher Start. Nachteil: lange Release-Zyklen, hohe Änderungskosten, schwer skalierbar entlang einzelner Funktionen.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Monolith vs Microservices",
       "schwierigkeit": "leicht",
@@ -202,12 +202,12 @@
       "id": "q14",
       "frage": "Welche Aufgabe hat Service Discovery in einer Microservices-Umgebung?",
       "optionen": [
-        "Sie ist ein Tool für Marketingzwecke",
-        "Sie ermöglicht es Services, einander zur Laufzeit zu finden",
         "Sie ersetzt die Authentifizierung",
-        "Sie ist ein klassisches BI-Reporting-Tool"
+        "Sie ist ein klassisches BI-Reporting-Tool",
+        "Sie ist ein Tool für Marketingzwecke",
+        "Sie ermöglicht es Services, einander zur Laufzeit zu finden"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Service Discovery sorgt dafür, dass Services sich zur Laufzeit gegenseitig finden, ohne dass Adressen hart kodiert sind. Plattformen wie Kubernetes bieten das eingebaut über Service-Objekte. Authentifizierung und Reporting sind eigenständige Themen.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Kubernetes",
       "schwierigkeit": "leicht",
@@ -217,12 +217,12 @@
       "id": "q15",
       "frage": "Was beschreibt ein Rollback im Deployment-Kontext?",
       "optionen": [
-        "Den Wechsel zu einer komplett neuen Architektur",
-        "Die Rückkehr zu einer vorherigen, stabilen Version nach Problemen",
+        "Den Neuaufbau einer Datenbank",
         "Den Abbruch der Buchhaltung",
-        "Den Neuaufbau einer Datenbank"
+        "Den Wechsel zu einer komplett neuen Architektur",
+        "Die Rückkehr zu einer vorherigen, stabilen Version nach Problemen"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Ein Rollback ist die kontrollierte Rückkehr zu einer früheren, stabil laufenden Version, wenn ein neues Release Probleme verursacht. Er ist Teil jedes seriösen Release-Plans und reduziert Risiko bei häufigen Deployments deutlich.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Deployment",
       "schwierigkeit": "leicht",
@@ -232,12 +232,12 @@
       "id": "q16",
       "frage": "Was sind 'Secrets' in einer Container-/Kubernetes-Umgebung?",
       "optionen": [
-        "Geheime Mitarbeitende",
         "Vertrauliche Konfigurationswerte wie Passwörter oder API-Schlüssel",
+        "Eine Backup-Methode",
         "Verbotene Funktionen im Code",
-        "Eine Backup-Methode"
+        "Geheime Mitarbeitende"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Secrets sind vertrauliche Konfigurationswerte wie Passwörter, Tokens oder API-Schlüssel. Sie werden separat von gewöhnlicher Konfiguration verwaltet und sollen nicht im Code stehen. Plattformen bieten dafür spezielle Mechanismen.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Kubernetes-Betrieb",
       "schwierigkeit": "leicht",
@@ -247,12 +247,12 @@
       "id": "q17",
       "frage": "Was beschreibt der Begriff Observability?",
       "optionen": [
-        "Die Fähigkeit, ein System anhand seiner Outputs (Logs, Metriken, Traces) zu verstehen",
         "Eine Methode für manuelles Testen",
-        "Den Verzicht auf Monitoring",
-        "Eine reine UI-Designkategorie"
+        "Eine reine UI-Designkategorie",
+        "Die Fähigkeit, ein System anhand seiner Outputs (Logs, Metriken, Traces) zu verstehen",
+        "Den Verzicht auf Monitoring"
       ],
-      "korrekt": 0,
+      "korrekt": 2,
       "erklaerung": "Observability beschreibt, wie gut der Zustand eines Systems aus seinen sichtbaren Signalen (Logs, Metriken, Traces) abgelesen werden kann. Sie ist Voraussetzung für stabiles Betreiben verteilter Systeme. Ohne Observability bleibt der Betrieb blind.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Observability",
       "schwierigkeit": "leicht",
@@ -262,12 +262,12 @@
       "id": "q18",
       "frage": "Was ist ein SLO (Service Level Objective)?",
       "optionen": [
-        "Ein zufälliges Tagesziel",
         "Ein messbares Zielniveau für Eigenschaften wie Verfügbarkeit oder Latenz",
-        "Eine reine Marketingaussage",
-        "Ein technisches Akronym ohne Bedeutung"
+        "Ein technisches Akronym ohne Bedeutung",
+        "Ein zufälliges Tagesziel",
+        "Wird einmalig festgelegt und nicht mehr überprüft"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Ein SLO ist ein messbares Zielniveau für definierte Service-Eigenschaften, etwa 99,9% Verfügbarkeit im Monat oder eine maximale Antwortzeit. SLOs machen Betriebsversprechen prüfbar und sind die Grundlage für Error Budgets.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · SLO",
       "schwierigkeit": "leicht",
@@ -277,12 +277,12 @@
       "id": "q19",
       "frage": "Was ist ein Canary Release?",
       "optionen": [
-        "Ein vollständiger Rollout auf alle Nutzer gleichzeitig",
         "Ein schrittweiser Rollout, bei dem zunächst nur ein kleiner Anteil der Nutzer die neue Version erhält",
-        "Ein Release, das nur in Testumgebungen ausgespielt wird",
-        "Ein abgebrochenes Release"
+        "Ein vollständiger Rollout auf alle Nutzer gleichzeitig",
+        "Ein abgebrochenes Release",
+        "Ein Release, das nur in Testumgebungen ausgespielt wird"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Bei einem Canary Release wird die neue Version zunächst nur einem kleinen Prozentsatz der Nutzer ausgespielt. Verhält sie sich gut, wird der Anteil schrittweise erhöht. So lässt sich Risiko früh erkennen, ohne alle Nutzer zu betreffen.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Deployment-Strategien",
       "schwierigkeit": "leicht",
@@ -292,10 +292,10 @@
       "id": "q20",
       "frage": "Wofür steht der Begriff RACI in einem Operating Model?",
       "optionen": [
-        "Eine Programmiersprache",
+        "Rollback And Continuous Integration",
         "Responsible, Accountable, Consulted, Informed",
-        "Real-time Application Cluster Index",
-        "Rollback And Continuous Integration"
+        "Eine Programmiersprache",
+        "Real-time Application Cluster Index"
       ],
       "korrekt": 1,
       "erklaerung": "RACI steht für Responsible (führt aus), Accountable (verantwortet das Ergebnis), Consulted (wird konsultiert) und Informed (wird informiert). Es ist eine einfache Matrix, um Verantwortung in Prozessen oder Vorhaben sichtbar zu machen.",
@@ -308,9 +308,9 @@
       "frage": "Welcher Effekt entsteht typischerweise, wenn Microservices entlang von Datenbanktabellen statt entlang von Geschäftsfähigkeiten geschnitten werden?",
       "optionen": [
         "Hohe Kopplung und viele Cross-Service-Abhängigkeiten",
-        "Bessere fachliche Ausrichtung",
+        "Höhere Geschwindigkeit pro Service",
         "Niedrigere Komplexität im Betrieb",
-        "Höhere Geschwindigkeit pro Service"
+        "Bessere fachliche Ausrichtung"
       ],
       "korrekt": 0,
       "erklaerung": "Ein Schnitt entlang von Tabellen erzeugt viele kleine technische Services, die für jede fachliche Operation miteinander reden müssen. Es entsteht hohe Kopplung, langsame Änderungen und unklare Ownership. Geschäftsfähigkeiten als Schnittlinie reduzieren diese Probleme.",
@@ -323,11 +323,11 @@
       "frage": "Welche Aussage zu Blue/Green Deployment trifft zu?",
       "optionen": [
         "Es gibt nur eine Umgebung, die direkt überschrieben wird",
-        "Zwei parallele Umgebungen ermöglichen Umschalten und Rollback ohne Ausfall",
         "Blau und Grün sind nur Farben ohne technische Bedeutung",
-        "Es funktioniert nur in Monolithen"
+        "Es funktioniert nur in Monolithen",
+        "Zwei parallele Umgebungen ermöglichen Umschalten und Rollback ohne Ausfall"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Bei Blue/Green Deployment wird die neue Version in einer zweiten, parallelen Umgebung bereitgestellt. Erst nach erfolgreichem Test wird der Verkehr umgeschaltet. Im Problemfall lässt sich sehr schnell auf die alte Umgebung zurückschalten.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Deployment-Strategien",
       "schwierigkeit": "mittel",
@@ -337,12 +337,12 @@
       "id": "q23",
       "frage": "Welche Rolle spielt ein Anti-Corruption-Layer bei der Modernisierung eines Monolithen?",
       "optionen": [
-        "Er verschleiert Sicherheitslücken",
-        "Er kapselt Altsysteme so, dass neue Services nicht von alten Datenmodellen verseucht werden",
         "Er ist ein reines Reporting-Tool",
-        "Er ersetzt den Monolithen vollständig in einem Schritt"
+        "Er ersetzt den Monolithen vollständig in einem Schritt",
+        "Er verschleiert Sicherheitslücken",
+        "Er kapselt Altsysteme so, dass neue Services nicht von alten Datenmodellen verseucht werden"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Ein Anti-Corruption-Layer übersetzt zwischen einem Altsystem und neuen Services. Er verhindert, dass alte Datenmodelle und Begriffe in die neue Welt einsickern. So entsteht ein schrittweiser, risikoarmer Modernisierungspfad statt eines Big-Bang.",
       "quelle": "Tag 10 · UE 5 Fallstudie · Migration",
       "schwierigkeit": "mittel",
@@ -352,10 +352,10 @@
       "id": "q24",
       "frage": "Was ist ein typischer Vorteil einer feingranularen Autoskalierung über Kubernetes?",
       "optionen": [
-        "Die Anwendung wird automatisch günstiger, ohne Beobachtung",
+        "Sie macht Tests überflüssig",
         "Ressourcen können bei Lastspitzen erhöht und in ruhigen Phasen reduziert werden",
         "Sie ersetzt jede Art von Monitoring",
-        "Sie macht Tests überflüssig"
+        "Die Anwendung wird automatisch günstiger, ohne Beobachtung"
       ],
       "korrekt": 1,
       "erklaerung": "Autoskalierung passt die Anzahl von Pods oder Knoten dynamisch an die Last an. So werden Lastspitzen abgefangen und in ruhigen Phasen Ressourcen gespart. Beobachtung und Tests bleiben weiterhin notwendig.",
@@ -367,10 +367,10 @@
       "id": "q25",
       "frage": "Welche Aufgabe haben Ressourcenlimits in Kubernetes?",
       "optionen": [
-        "Sie sind reine Dokumentation ohne Wirkung",
+        "Sie ersetzen das Monitoring",
         "Sie verhindern, dass ein Service zu viel CPU oder Speicher zulasten anderer verbraucht",
         "Sie sind nur in der Entwicklungsumgebung erlaubt",
-        "Sie ersetzen das Monitoring"
+        "Sie sind reine Dokumentation ohne Wirkung"
       ],
       "korrekt": 1,
       "erklaerung": "Ressourcenlimits begrenzen, wie viel CPU oder Speicher ein Pod konsumieren darf. So wird verhindert, dass ein außer Kontrolle geratener Service den ganzen Cluster destabilisiert. Sie sind ein wichtiger Stabilitätshebel im Betrieb.",
@@ -382,12 +382,12 @@
       "id": "q26",
       "frage": "Welche Aussage zu Change Failure Rate (CFR) als DevOps-Kennzahl trifft zu?",
       "optionen": [
-        "Sie misst, wie viele Mitarbeitende das Team verlassen",
-        "Sie misst den Anteil von Releases, die im Betrieb zu Problemen führen",
         "Sie ist ohne SLOs nicht definierbar",
-        "Sie ist nur für Marketing relevant"
+        "Gilt erst ab einer Org-Größe von mehr als 1000 Mitarbeitenden",
+        "Sie misst den Anteil von Releases, die im Betrieb zu Problemen führen",
+        "Sie misst, wie viele Mitarbeitende das Team verlassen"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Die Change Failure Rate misst, welcher Anteil ausgelieferter Änderungen zu Incidents, Rollbacks oder Hotfixes führt. Sie ist eine der vier zentralen DORA-Metriken und Frühindikator für Qualitätsprobleme im Release-Prozess.",
       "quelle": "Tag 10 · UE 5 Fallstudie · DORA Metriken",
       "schwierigkeit": "mittel",
@@ -397,12 +397,12 @@
       "id": "q27",
       "frage": "Welcher Test wird in einer Microservices-Welt typischerweise als am teuersten und fragilsten angesehen?",
       "optionen": [
-        "Unit-Test",
-        "Integrationstest",
+        "Statische Code-Analyse",
         "End-to-End-Test über mehrere Services",
-        "Statische Code-Analyse"
+        "Integrationstest",
+        "Unit-Test"
       ],
-      "korrekt": 2,
+      "korrekt": 1,
       "erklaerung": "End-to-End-Tests, die mehrere Services und Systeme einbeziehen, sind aufwändig zu pflegen, langsam und neigen zu falschen Negativen, wenn beteiligte Komponenten flackern. Die Testpyramide empfiehlt deshalb gezielt wenige, aber sorgfältig gewählte E2E-Tests.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · Testpyramide",
       "schwierigkeit": "mittel",
@@ -413,11 +413,11 @@
       "frage": "Was ist eine Lead Time im DevOps-Sinne?",
       "optionen": [
         "Die Zeit, die ein Mitarbeiter im Urlaub ist",
-        "Die Zeit von einer Code-Änderung bis zur Produktion",
         "Die Lebensdauer einer Festplatte",
-        "Die Reaktionszeit eines Telefongesprächs"
+        "Die Reaktionszeit eines Telefongesprächs",
+        "Die Zeit von einer Code-Änderung bis zur Produktion"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Lead Time for Changes ist eine der DORA-Metriken und misst, wie lange es dauert, bis eine eingecheckte Änderung produktiv ist. Kurze Lead Times zeigen kurze Feedbackschleifen und sind ein Indikator für hohe Lieferfähigkeit.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · DevOps Metriken",
       "schwierigkeit": "mittel",
@@ -427,12 +427,12 @@
       "id": "q29",
       "frage": "Welche Aussage zu Feature Toggles trifft zu?",
       "optionen": [
-        "Sie sind nur Marketinginstrumente",
         "Sie erlauben es, Funktionen im laufenden Betrieb ein- oder auszuschalten",
+        "Sie sind in Microservices verboten",
         "Sie ersetzen Tests vollständig",
-        "Sie sind in Microservices verboten"
+        "Sie sind nur Marketinginstrumente"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Feature Toggles ermöglichen, neue Funktionen mit ausgeliefertem Code zunächst deaktiviert zu lassen und gezielt freizuschalten. So lassen sich Deployments und Releases entkoppeln. Tests werden dadurch nicht ersetzt, sondern ergänzen die Toggles.",
       "quelle": "Tag 10 · UE 3 Arbeitsauftrag 2 · Release-Mechanik",
       "schwierigkeit": "mittel",
@@ -457,12 +457,12 @@
       "id": "q31",
       "frage": "Welche Aussage zur Architektur-Governance trifft im Sinne des Tages zu?",
       "optionen": [
-        "Sie sollte alle technischen Detailentscheidungen zentral treffen",
-        "Sie sollte leicht, aber verbindlich Prinzipien und Standards definieren",
+        "Sie ist nur in Großkonzernen sinnvoll",
         "Sie sollte nur für interne Audits existieren",
-        "Sie ist nur in Großkonzernen sinnvoll"
+        "Sie sollte leicht, aber verbindlich Prinzipien und Standards definieren",
+        "Sie sollte alle technischen Detailentscheidungen zentral treffen"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Architektur-Governance soll leichtgewichtig, aber verbindlich sein: wenige Prinzipien, klare Standards für Schnittstellen, SLOs und Security-Baselines. Eine zentrale Detailentscheiderin wäre langsam und würde Teamautonomie ersticken.",
       "quelle": "Tag 10 · UE 4 Coaching · Governance",
       "schwierigkeit": "mittel",
@@ -473,11 +473,11 @@
       "frage": "Wofür sind Smoke Tests nach einem Deployment besonders nützlich?",
       "optionen": [
         "Für eine vollständige Last-Simulation",
+        "Nur in lokalen Entwicklungsumgebungen",
         "Für eine schnelle Grundprüfung, ob die wichtigsten Funktionen laufen",
-        "Als Ersatz für Unit-Tests",
-        "Nur in lokalen Entwicklungsumgebungen"
+        "Als Ersatz für Unit-Tests"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Smoke Tests prüfen schnell, ob die wichtigsten Funktionen nach einem Deployment grundsätzlich funktionieren, etwa Start, zentrale API-Aufrufe und Logging. Sie ersetzen keine Unit- oder Integrationstests, sind aber ein wichtiges Sicherheitsnetz.",
       "quelle": "Tag 10 · UE 5 Fallstudie · Quality Gates",
       "schwierigkeit": "mittel",
@@ -487,12 +487,12 @@
       "id": "q33",
       "frage": "Welche Aussage zur Datenhoheit in einer Microservices-Welt trifft zu?",
       "optionen": [
-        "Alle Services nutzen dieselbe zentrale Datenbank",
         "Jeder Service besitzt seine eigenen Daten und stellt sie über klar definierte Schnittstellen bereit",
+        "Datenhoheit ist nur in Monolithen relevant",
         "Daten werden zwischen Services frei verschoben, ohne Schnittstellen",
-        "Datenhoheit ist nur in Monolithen relevant"
+        "Alle Services nutzen dieselbe zentrale Datenbank"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Jeder Microservice ist für seine eigenen Daten verantwortlich und stellt sie nur über definierte Schnittstellen bereit. Eine zentrale Datenbank für alle würde Kopplung und Konflikte erzeugen. Datenhoheit ist Teil der Servicegrenze.",
       "quelle": "Tag 10 · UE 5 Fallstudie · Datenstrategie",
       "schwierigkeit": "mittel",
@@ -502,12 +502,12 @@
       "id": "q34",
       "frage": "Welcher Begriff bezeichnet die durchschnittliche Zeit, um nach einem Incident wieder den Sollbetrieb herzustellen?",
       "optionen": [
-        "MTBF",
-        "MTTR (Mean Time To Restore/Repair)",
         "SLA",
-        "RTO"
+        "RTO",
+        "MTBF",
+        "MTTR (Mean Time To Restore/Repair)"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "MTTR steht für Mean Time To Restore (oder Repair) und misst, wie schnell nach einem Incident der Normalbetrieb wiederhergestellt wird. Sie ist eine zentrale DevOps-Kennzahl für Betriebsdisziplin. MTBF dagegen misst die Zeit zwischen Ausfällen.",
       "quelle": "Tag 10 · UE 3 Arbeitsauftrag 2 · Betriebskennzahlen",
       "schwierigkeit": "mittel",
@@ -518,11 +518,11 @@
       "frage": "Welche Aussage zu Microservices-Spaghetti trifft zu?",
       "optionen": [
         "Es ist ein erstrebenswertes Architekturmuster",
-        "Es entsteht, wenn Services unkoordiniert immer mehr Abhängigkeiten zueinander aufbauen",
         "Es ist gleichbedeutend mit einem Monolithen",
-        "Es ist ein Synonym für Kubernetes"
+        "Es ist ein Synonym für Kubernetes",
+        "Es entsteht, wenn Services unkoordiniert immer mehr Abhängigkeiten zueinander aufbauen"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Microservices-Spaghetti beschreibt das Antimuster, in dem zu viele Services zu viele synchrone Abhängigkeiten zueinander aufbauen. Statt Entkopplung entsteht ein verteilter Monolith, der schwerer zu warten ist als der ursprüngliche.",
       "quelle": "Tag 10 · UE 7 Feedback · Management-Fragen",
       "schwierigkeit": "mittel",
@@ -532,12 +532,12 @@
       "id": "q36",
       "frage": "Welche Aussage zu Tests in der TDD-Praxis trifft zu?",
       "optionen": [
-        "Tests werden nach der Implementierung als letzte Stufe geschrieben",
         "Tests werden in kleinen Schritten vor der Implementierung geschrieben",
-        "Tests sind im DevOps-Kontext optional",
-        "Tests dürfen niemals fehlschlagen"
+        "Tests dürfen niemals fehlschlagen",
+        "Tests werden nach der Implementierung als letzte Stufe geschrieben",
+        "Tests sind im DevOps-Kontext optional"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "In TDD werden Tests in kleinen Schritten vor dem produktiven Code geschrieben (Red), dann minimal implementiert (Green) und anschließend refactored. Dass Tests zunächst fehlschlagen, ist Teil des Prozesses und keine Schwäche.",
       "quelle": "Tag 10 · UE 1 Wissensvermittlung · TDD",
       "schwierigkeit": "mittel",
@@ -548,11 +548,11 @@
       "frage": "Wofür dient ein Architekturboard im beschriebenen Operating Model?",
       "optionen": [
         "Es entscheidet jeden Pull Request",
+        "Es führt nur Audits durch",
         "Es entscheidet nur über teure und irreversible Architekturthemen",
-        "Es ersetzt die Produktverantwortung",
-        "Es führt nur Audits durch"
+        "Es ersetzt die Produktverantwortung"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Ein leichtgewichtiges Architekturboard kümmert sich nur um die wenigen teuren und schwer umkehrbaren Entscheidungen wie Servicegrenzen, Datenhoheit oder Toolchain-Standards. Alles andere bleibt in den Teams, um Geschwindigkeit zu erhalten.",
       "quelle": "Tag 10 · UE 5 Fallstudie · Operating Model",
       "schwierigkeit": "mittel",
@@ -562,9 +562,9 @@
       "id": "q38",
       "frage": "Welche Aussage zu Schnittstellenstandards in der Architektur-Governance trifft zu?",
       "optionen": [
-        "Sie sollten in jedem Team komplett individuell sein",
-        "Sie sollten zentral als verbindliche Standards definiert werden, damit Services interoperabel bleiben",
         "Sie sind ausschließlich Sache der Plattformteams",
+        "Sie sollten zentral als verbindliche Standards definiert werden, damit Services interoperabel bleiben",
+        "Sie sollten in jedem Team komplett individuell sein",
         "Sie machen Microservices unnötig"
       ],
       "korrekt": 1,
@@ -578,11 +578,11 @@
       "frage": "Welche Aussage zu einem Error Budget trifft zu?",
       "optionen": [
         "Es ist ein Budget für Marketingfehler",
-        "Es ist die akzeptierte Differenz zwischen 100% Verfügbarkeit und dem SLO und steuert die Release-Geschwindigkeit",
         "Es ist nur in monolithischen Anwendungen sinnvoll",
-        "Es ist die Anzahl der erlaubten Hotfixes pro Jahr"
+        "Es ist die Anzahl der erlaubten Hotfixes pro Jahr",
+        "Es ist die akzeptierte Differenz zwischen 100% Verfügbarkeit und dem SLO und steuert die Release-Geschwindigkeit"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Ein Error Budget beschreibt, wie viel Unverfügbarkeit der SLO erlaubt. Solange das Budget eingehalten ist, kann ein Team mutig releasen; bei Erschöpfung müssen Stabilisierungsmaßnahmen Vorrang haben. So wird die Spannung Speed vs. Stabilität messbar.",
       "quelle": "Tag 10 · UE 8 Transferprojekt · Reliability Framework",
       "schwierigkeit": "mittel",
@@ -592,12 +592,12 @@
       "id": "q40",
       "frage": "Welche Aussage zu einer guten Servicegrenze trifft zu?",
       "optionen": [
-        "Sie maximiert die Anzahl an Cross-Service-Calls",
-        "Sie minimiert das 'Hin und Her' zwischen Services und macht Ownership klar",
         "Sie ignoriert Datenhoheit",
-        "Sie ist nach Tool-Wahl ausgerichtet"
+        "Sie maximiert die Anzahl an Cross-Service-Calls",
+        "Sie ist nach Tool-Wahl ausgerichtet",
+        "Sie minimiert das 'Hin und Her' zwischen Services und macht Ownership klar"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Eine gute Servicegrenze bündelt fachlich zusammengehörige Funktionen mit klarer Ownership und minimaler Interaktion mit anderen Services. Viel Cross-Service-Verkehr deutet auf einen falschen Schnitt hin. Tools sollten der Architektur folgen, nicht umgekehrt.",
       "quelle": "Tag 10 · UE 2 Arbeitsauftrag 1 · Service-Schnitt",
       "schwierigkeit": "mittel",
@@ -608,11 +608,11 @@
       "frage": "Was ist der Hauptgrund, einen Release-Flow mit ausdrücklichen Gates zu definieren?",
       "optionen": [
         "Um Releases möglichst selten zu machen",
-        "Um klare Prüfpunkte für Qualität, Sicherheit und Verantwortung im Lieferprozess zu verankern",
         "Um Tests komplett zu vermeiden",
+        "Um klare Prüfpunkte für Qualität, Sicherheit und Verantwortung im Lieferprozess zu verankern",
         "Um Auditoren auszuschließen"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Klar definierte Gates legen fest, welche Prüfungen vor einem Release stehen müssen, etwa Tests, Security-Checks oder fachliche Freigaben. So wird Qualität reproduzierbar und Verantwortung sichtbar, statt im Einzelfall ausgehandelt zu werden.",
       "quelle": "Tag 10 · UE 3 Arbeitsauftrag 2 · Release-Flow",
       "schwierigkeit": "mittel",
@@ -622,10 +622,10 @@
       "id": "q42",
       "frage": "Welche Wirkung hat eine konsequente Idempotenz von Event-Verarbeitung in einem Microservice-System?",
       "optionen": [
-        "Sie ersetzt Authentifizierung",
-        "Sie macht das System robust gegen Doppelverarbeitung durch Retries oder Duplikate",
         "Sie macht Tests überflüssig",
-        "Sie verhindert jede Form von Skalierung"
+        "Sie macht das System robust gegen Doppelverarbeitung durch Retries oder Duplikate",
+        "Sie verhindert jede Form von Skalierung",
+        "Sie ersetzt Authentifizierung"
       ],
       "korrekt": 1,
       "erklaerung": "Idempotente Verarbeitung sorgt dafür, dass ein zweimal eintreffendes Event keinen zusätzlichen fachlichen Effekt hat. Bei verteilten Systemen mit Retries und Wiederholungen ist das essenziell, um Doppelbuchungen oder inkonsistente Zustände zu vermeiden.",
@@ -637,12 +637,12 @@
       "id": "q43",
       "frage": "Welche Aussage zur Verantwortlichkeit (Ownership) im DevOps-Operating-Model trifft zu?",
       "optionen": [
+        "Ownership wird zentral durch das Audit vergeben",
         "Niemand ist explizit verantwortlich, weil alle Teams alles machen",
-        "Jeder Service hat einen klaren Eigentümer (Owner), der für Build und Run verantwortet",
         "Ownership ist nur in regulierten Branchen relevant",
-        "Ownership wird zentral durch das Audit vergeben"
+        "Jeder Service hat einen klaren Eigentümer (Owner), der für Build und Run verantwortet"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Ohne klare Ownership pro Service entsteht im Incident-Fall Diskussion statt Handlung. Ein definierter Owner trägt Verantwortung für Roadmap, Stabilität und Betrieb seines Services. Das ist Kern des 'you build it, you run it'-Prinzips.",
       "quelle": "Tag 10 · UE 4 Coaching · Ownership",
       "schwierigkeit": "mittel",
@@ -654,8 +654,8 @@
       "optionen": [
         "Mehr Gates machen Releases immer automatisch besser",
         "Gates sollten risiko-basiert gewählt sein: nicht verhandelbar bei Kritischem, leichter bei Geringfügigem",
-        "Gates sind nur Theorie",
-        "Gates sind nur für Marketing relevant"
+        "Gates wird ausschließlich durch externe Auditoren festgelegt",
+        "Gates sind nur Theorie"
       ],
       "korrekt": 1,
       "erklaerung": "Zu viele Gates verlangsamen und werden umgangen. Sinnvoll sind risiko-basierte Gates: für kritische Pfade nicht verhandelbar und gut automatisiert, für weniger riskante Komponenten bewusst leichter, ohne die Mindestqualität zu untergraben.",
@@ -667,12 +667,12 @@
       "id": "q45",
       "frage": "Welche Aussage zu Observability als Senior-Verantwortung trifft zu?",
       "optionen": [
-        "Observability ist eine reine Entwickleraufgabe",
         "Observability muss als zentraler Standard definiert werden, weil sie über Steuerbarkeit verteilter Systeme entscheidet",
+        "Observability darf nie automatisiert werden",
         "Observability ist nur in Cloud-Umgebungen relevant",
-        "Observability darf nie automatisiert werden"
+        "Observability ist eine reine Entwickleraufgabe"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Observability ist eine Architekturentscheidung mit Senior-Tragweite: ohne einheitlichen Log-/Metrik-/Trace-Standard wird ein Microservice-System unbeherrschbar. Sie betrifft Entwicklung, Plattform und Betrieb gleichermaßen.",
       "quelle": "Tag 10 · UE 4 Coaching · Observability",
       "schwierigkeit": "mittel",
@@ -682,10 +682,10 @@
       "id": "q46",
       "frage": "Welche Entscheidung gilt im Sinne der Senior-Architektur als besonders 'teuer zu ändern'?",
       "optionen": [
-        "Die Wahl einer Logging-Bibliothek pro Team",
+        "Die Farbgebung der UI",
         "Die grundlegende Definition von Servicegrenzen und Datenhoheit",
         "Die Reihenfolge zweier Felder in einem internen Formular",
-        "Die Farbgebung der UI"
+        "Die Wahl einer Logging-Bibliothek pro Team"
       ],
       "korrekt": 1,
       "erklaerung": "Servicegrenzen und Datenhoheit prägen die gesamte spätere Architektur. Falsche Grenzen verursachen jahrelange Migrationen und Spannungen zwischen Teams. Logging-Bibliotheken oder UI-Details sind dagegen mit deutlich geringerem Aufwand korrigierbar.",
@@ -712,12 +712,12 @@
       "id": "q48",
       "frage": "Welche Aussage zu Anti-Gaming-Mechanismen bei Reliability-KPIs trifft im Senior-Sinne zu?",
       "optionen": [
+        "Anti-Gaming ist Aufgabe des Marketings",
         "KPIs dürfen niemals gekoppelt werden",
         "KPIs sollten so gekoppelt sein, dass kurzfristige Optimierung an einer Stelle Risiko an anderer Stelle sichtbar macht",
-        "Anti-Gaming ist Aufgabe des Marketings",
         "Anti-Gaming bedeutet, KPIs nicht zu veröffentlichen"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Einzelne KPIs lassen sich leicht 'gamen', etwa wenn Deployment Frequency hoch wirkt, aber Change Failure Rate steigt. Senior-Steuerung koppelt KPIs so, dass eine Verbesserung nur dann zählt, wenn Stabilität, Sicherheit und Outcome ebenfalls gehalten werden.",
       "quelle": "Tag 10 · UE 8 Transferprojekt · Risk Framework",
       "schwierigkeit": "schwer",
@@ -727,12 +727,12 @@
       "id": "q49",
       "frage": "Welche Aussage zur Frage 'CoE vs. föderiertes Modell' trifft im Operating Model zu?",
       "optionen": [
-        "Beide Modelle sind identisch",
-        "CoE bietet zentrale Standards und Tempo bei Reife-Aufbau, Föderation maximiert Teamautonomie, hybride Mischformen sind oft sinnvoll",
+        "CoE liegt allein in der Verantwortung der IT-Abteilung",
         "Föderation verhindert jegliche Standards",
-        "CoE ist nur für Marketing geeignet"
+        "CoE bietet zentrale Standards und Tempo bei Reife-Aufbau, Föderation maximiert Teamautonomie, hybride Mischformen sind oft sinnvoll",
+        "Beide Modelle sind identisch"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Ein Center of Excellence (CoE) bündelt Reife, Standards und Enablement. Eine reine Föderation gibt Teams maximale Autonomie. In der Praxis bewähren sich Hybridmodelle: CoE setzt Leitplanken und Tooling, Teams entscheiden im Rahmen eigenständig.",
       "quelle": "Tag 10 · UE 8 Transferprojekt · Operating Model",
       "schwierigkeit": "schwer",
@@ -742,12 +742,12 @@
       "id": "q50",
       "frage": "Welche Aussage zur Risikoabsicherung bei wöchentlichen Releases von Kernprozessen trifft zu?",
       "optionen": [
-        "Kernprozesse sollten dieselbe Release-Frequenz wie unkritische Services haben",
         "Für Kernprozesse helfen Canary, Feature Toggles, schnelle Rollbacks und stärkere Gates, um Risiko und Geschwindigkeit zu balancieren",
-        "Kernprozesse dürfen nur einmal pro Jahr verändert werden",
-        "Kernprozesse benötigen keine Observability"
+        "Kernprozesse benötigen keine Observability",
+        "Kernprozesse sollten dieselbe Release-Frequenz wie unkritische Services haben",
+        "Kernprozesse dürfen nur einmal pro Jahr verändert werden"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Bei kritischen Kernprozessen wird Geschwindigkeit nicht durch Stillstand abgesichert, sondern durch Mechanismen wie Canary, Feature Toggles, schnelle Rollbacks, stärkere Gates und engere Observability. So bleibt die Plattform veränderungsfähig, ohne unverantwortbares Risiko.",
       "quelle": "Tag 10 · UE 5 Fallstudie · Release-Policy",
       "schwierigkeit": "schwer",
@@ -757,9 +757,9 @@
       "id": "q51",
       "frage": "Welche Aussage zur Bedeutung von Architekturprinzipien (max. ca. 8) trifft im Senior-Sinne zu?",
       "optionen": [
-        "Sie sind Bürokratie ohne Wirkung",
-        "Sie machen wiederkehrende Entscheidungen schneller, weil Leitplanken vorab definiert sind",
         "Sie sind nur für kleine Teams sinnvoll",
+        "Sie machen wiederkehrende Entscheidungen schneller, weil Leitplanken vorab definiert sind",
+        "Sie sind Bürokratie ohne Wirkung",
         "Sie ersetzen jede Detailprüfung"
       ],
       "korrekt": 1,
@@ -772,12 +772,12 @@
       "id": "q52",
       "frage": "Welche Aussage zu 'Daten bleiben zunächst im Monolith' im Zuge einer schrittweisen Service-Extraktion trifft zu?",
       "optionen": [
-        "Sie ist immer falsch und sollte vermieden werden",
         "Sie kann eine bewusste Senior-Entscheidung sein, ergänzt durch Anti-Corruption-Layer und definierte Frühwarnsignale",
         "Sie macht Microservices unmöglich",
-        "Sie ist gleichbedeutend mit Verzicht auf Governance"
+        "Sie ist gleichbedeutend mit Verzicht auf Governance",
+        "Sie ist immer falsch und sollte vermieden werden"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Die bewusste Entscheidung, eine bestehende Datenbank vorerst zu behalten und über einen Anti-Corruption-Layer abzukoppeln, ist häufig der pragmatischere und sicherere Pfad als ein Big-Bang. Wichtig sind Frühwarnsignale wie steigende Integrationsfehler oder Lead Time.",
       "quelle": "Tag 10 · UE 5 Fallstudie · Datenstrategie",
       "schwierigkeit": "schwer",
@@ -788,11 +788,11 @@
       "frage": "Welche Aussage zum Verhältnis von Microservices und Organisationsstruktur (Conway's Law) trifft zu?",
       "optionen": [
         "Beides ist unabhängig voneinander",
-        "Die Architektur spiegelt typischerweise die Kommunikationsstruktur der Organisation wider",
+        "Microservices erzwingen eine reine Hierarchie",
         "Conway's Law gilt nur in der Verwaltung",
-        "Microservices erzwingen eine reine Hierarchie"
+        "Die Architektur spiegelt typischerweise die Kommunikationsstruktur der Organisation wider"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Conway's Law besagt, dass Systeme die Kommunikationsstrukturen ihrer Organisationen abbilden. Wer Microservices ohne entsprechende Teamzuschnitte einführt, baut häufig nur einen verteilten Monolithen. Senior-Architektur ist deshalb auch Organisationsdesign.",
       "quelle": "Tag 10 · UE 4 Coaching · Organisationsdesign",
       "schwierigkeit": "schwer",
@@ -804,8 +804,8 @@
       "optionen": [
         "Sie ist Bürokratie ohne Nutzen",
         "Sie ist eine sinnvolle Betriebsregel, weil sie Reaktionsfähigkeit erzwingt und Mut zu kleinen Releases stützt",
-        "Sie macht Tests überflüssig",
-        "Sie verlangt vollständige Vermeidung von Releases"
+        "Sie verlangt vollständige Vermeidung von Releases",
+        "Sie macht Tests überflüssig"
       ],
       "korrekt": 1,
       "erklaerung": "Eine harte Rollback-Zeit zwingt Teams, ihre Deployment- und Beobachtungsmechanismen so zu bauen, dass schnelle Korrekturen möglich sind. Das senkt Risiko, ohne Geschwindigkeit zu opfern, und gibt Teams gleichzeitig Sicherheit beim Experimentieren.",
@@ -818,11 +818,11 @@
       "frage": "Welche Aussage zu 'Microservices sind Organisationsdesign' trifft im Senior-Sinne zu?",
       "optionen": [
         "Architektur ist von Organisation entkoppelt",
-        "Ohne klare Ownership, RACI und Teamzuschnitt entstehen trotz Microservices Chaos und Risiken",
         "Architektur ist nur ein Anhang der HR-Strategie",
-        "Microservices ersetzen jede Form von Führung"
+        "Microservices ersetzen jede Form von Führung",
+        "Ohne klare Ownership, RACI und Teamzuschnitt entstehen trotz Microservices Chaos und Risiken"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Microservices skalieren nur, wenn Verantwortung und Schnittstellen organisatorisch sauber liegen. Ohne klare Ownership entstehen Grauzonen, in denen niemand für Stabilität oder Weiterentwicklung verantwortet. Senior-Verantwortung gestaltet beides gemeinsam.",
       "quelle": "Tag 10 · UE 4 Coaching · Senior-Shift",
       "schwierigkeit": "schwer",
@@ -832,12 +832,12 @@
       "id": "q56",
       "frage": "Welche Aussage zu einem 'Portfolio bewusst eingegangener Risiken' trifft zu?",
       "optionen": [
-        "Risiken werden ignoriert und nicht dokumentiert",
         "Risiken werden bewusst gewählt, mit Begründung, Eigner, Frühwarnsignal und Review-Zyklus geführt",
+        "Risiken werden ignoriert und nicht dokumentiert",
         "Risiken dürfen nur extern gemanagt werden",
         "Risiken sollten allein durch Tests gelöst werden"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Senior-Architektur akzeptiert, dass nicht jedes Risiko sofort beseitigt werden kann. Wichtig ist, Risiken bewusst zu wählen, sie mit Eigner, Frühwarnsignal und Reviewdatum zu führen und so handhabbar zu machen, statt sie zu verdrängen.",
       "quelle": "Tag 10 · UE 7 Feedback · Senior-Verantwortung",
       "schwierigkeit": "schwer",
@@ -848,11 +848,11 @@
       "frage": "Welche Aussage zu 'Speed vs. Audit' bei wöchentlichen Releases regulierter Prozesse trifft zu?",
       "optionen": [
         "Audit und schnelle Releases sind grundsätzlich unvereinbar",
+        "Es darf kein Logging vorhanden sein",
         "Mit definierten Gates, Audit Trails, Versionierung und Rollback-Pflichten lassen sich Speed und Auditierbarkeit kombinieren",
-        "Audits werden überflüssig",
-        "Es darf kein Logging vorhanden sein"
+        "Audits werden überflüssig"
       ],
-      "korrekt": 1,
+      "korrekt": 2,
       "erklaerung": "Hohe Release-Frequenz und Auditfähigkeit schließen sich nicht aus, sondern erfordern saubere Mechanik: dokumentierte Gates, lückenlose Audit Trails, klare Versionierung und definierte Rollbacks. Auditierbar ist nicht 'langsam', sondern 'nachvollziehbar'.",
       "quelle": "Tag 10 · UE 5 Fallstudie · Audit",
       "schwierigkeit": "schwer",
@@ -862,12 +862,12 @@
       "id": "q58",
       "frage": "Welche Aussage zum Verhältnis von 'Standardisierung der Toolchain' und 'Teamautonomie' trifft im Senior-Sinne zu?",
       "optionen": [
-        "Standardisierung muss alles vorschreiben",
-        "Standardisierung definiert wenige verbindliche Bausteine und Rahmen, lässt aber Teamautonomie innerhalb",
         "Teamautonomie bedeutet keine Standards",
-        "Standardisierung ist nur in monolithischen Systemen sinnvoll"
+        "Standardisierung ist nur in monolithischen Systemen sinnvoll",
+        "Standardisierung muss alles vorschreiben",
+        "Standardisierung definiert wenige verbindliche Bausteine und Rahmen, lässt aber Teamautonomie innerhalb"
       ],
-      "korrekt": 1,
+      "korrekt": 3,
       "erklaerung": "Zu wenig Standardisierung erzeugt Inseln und Reibung im Betrieb; zu viel erstickt Geschwindigkeit. Senior-Architektur definiert wenige, klare gemeinsame Bausteine (CI/CD, Logging, Security-Baselines) und lässt Teams darin autonom entscheiden.",
       "quelle": "Tag 10 · UE 8 Transferprojekt · Governance",
       "schwierigkeit": "schwer",
@@ -877,12 +877,12 @@
       "id": "q59",
       "frage": "Welche Aussage zur Reife einer Plattform ('Sind wir unattended-bereit für Kernservices?') trifft zu?",
       "optionen": [
-        "Reife ist nicht messbar",
         "Reife zeigt sich in stabilen SLOs, niedriger Change Failure Rate, kurzer MTTR und gelebter Observability",
-        "Reife ist nur eine Frage des Bauchgefühls",
-        "Reife bedeutet, dass alle Tests automatisch entfallen"
+        "Reife bedeutet, dass alle Tests automatisch entfallen",
+        "Reife ist nicht messbar",
+        "Reife ist nur eine Frage des Bauchgefühls"
       ],
-      "korrekt": 1,
+      "korrekt": 0,
       "erklaerung": "Reife einer Plattform für höhere Automatisierung und höhere Release-Frequenz zeigt sich in konkreten Signalen: SLOs werden zuverlässig gehalten, Change Failure Rate ist niedrig, MTTR kurz und Observability ist im Betrieb gelebt, nicht nur dokumentiert.",
       "quelle": "Tag 10 · UE 8 Transferprojekt · Roadmap",
       "schwierigkeit": "schwer",
@@ -892,10 +892,10 @@
       "id": "q60",
       "frage": "Welche Aussage zum Senior-Ziel 'ein steuerbares System bauen, das Entscheidungen, Risiko und Verantwortung sichtbar macht' trifft zu?",
       "optionen": [
-        "Es geht primär um Tool-Auswahl",
+        "Liegt allein in der Verantwortung der IT-Abteilung",
         "Es geht darum, dass Architektur, Operating Model und Governance gemeinsam Transparenz über Entscheidungen, Risiken und Verantwortung schaffen",
-        "Es geht ausschließlich um Kostenreduktion",
-        "Es geht um eine reine Marketing-Erzählung"
+        "Es geht primär um Tool-Auswahl",
+        "Es geht ausschließlich um Kostenreduktion"
       ],
       "korrekt": 1,
       "erklaerung": "Das Senior-Ziel ist nicht, eine bestimmte Technologie einzuführen, sondern ein System, in dem Entscheidungen begründet, Risiken bewusst gewählt und Verantwortung klar zugeordnet sind. Tools sind Mittel zum Zweck, nicht das Ziel.",
