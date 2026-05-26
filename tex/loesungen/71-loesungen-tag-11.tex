@@ -142,6 +142,9 @@
 
 \usepackage[hidelinks,unicode]{hyperref}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
 \newcommand{\fachbegriff}[1]{\textbf{#1}}
 
@@ -172,10 +175,7 @@
 
 \newcommand{\ytquery}[1]{%
   \par\vspace{4pt}
-  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo zum Thema:}\ %
-    \href{https://studyflix.de/search?query=#1}{\textcolor{lpAccent}{Studyflix-Treffer}}\ ·\ %
-    \href{https://www.youtube.com/results?search\_query=#1}{\textcolor{lpAccent}{YouTube-Treffer}}\\%
-    \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
 }
 
 % =========================================================================
@@ -425,6 +425,34 @@ C (HR-Onboarding 3 Systeme)   & 3 & 3 & 4 & 4 & 4 & 18 \\
   \item \emph{UI-\"Anderungsrate} der Zielsysteme: $\leq$\,1\,Change/Monat \"uber drei Monate.
 \end{itemize}
 Erst wenn beide KPIs erreicht sind, wechseln wir auf unattended. Andernfalls: weitere zwei Wochen attended.
+
+\smallskip
+\textbf{5. Stufenmodell-Skizze:}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  step/.style={rectangle, rounded corners=2pt, draw=lpAccent, thick, align=center,
+               minimum width=3.7cm, minimum height=1.15cm},
+  gate/.style={diamond, draw=lpAmberBorder, fill=lpAmberLight, aspect=1.6,
+               inner sep=1pt, align=center, thick},
+  arrow/.style={-{Stealth[length=2.5mm]}, lpAccent, very thick}]
+  \node[step, fill=lpAccentLight] (r1) at (0,0)
+    {\textbf{Release 1 -- Attended}\\\scriptsize 6 Wochen, 60\,\% Prozess\\\scriptsize Vault-Logging};
+  \node[gate] (g) at (5.0,1.2)
+    {\scriptsize Excp.\,$\leq$\,12\,\%\\\scriptsize UI\,$\leq$\,1\,/\,M};
+  \node[step, fill=lpGreenLight] (r2) at (9.5,2.4)
+    {\textbf{Release 2 -- Unattended}\\\scriptsize Wo 7--12, 60\,\% Prozess\\\scriptsize SoD, Exception Queue};
+  \node[step, fill=lpGrayLight, draw=lpGray] (loop) at (4.6,-1.8)
+    {\scriptsize attended +2 Wochen\\\scriptsize (KPIs nachschärfen)};
+  \draw[arrow] (r1.north east) to[bend left=10] (g.west);
+  \draw[arrow] (g.east) to[bend left=10] node[above, font=\sffamily\scriptsize, lpAccent] {ja} (r2.west);
+  \draw[arrow, dashed, lpGray] (g.south) -- ++(0,-0.5) -| (loop.north)
+    node[midway, above, font=\sffamily\scriptsize, lpGray] {nein};
+  \draw[arrow, dashed, lpGray] (loop.east) -- ++(1.0,0) |- (g.south west);
+\end{tikzpicture}
+\caption{\sffamily Stufenmodell Attended\,\textrightarrow\,Unattended -- Übergang nur über das Readiness-Gate.}
+\end{figure}
 \end{loesungbox}
 
 \clearpage

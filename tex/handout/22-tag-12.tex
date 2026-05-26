@@ -143,6 +143,9 @@
 
 \usepackage[hidelinks,unicode]{hyperref}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
@@ -435,6 +438,28 @@ Eine Conversion-Rate-Verbesserung von 1{,}5\,\% auf 2\,\% ist ökonomisch oft me
 \section{Skalierungsstrategien}
 
 Skalierung ist die nächste Stufe nach Wachstum: planbare, wiederholbare Vervielfachung -- nicht ``mehr Aufwand für mehr Ergebnis'', sondern \emph{disproportionaler} Ergebniszuwachs.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  axis/.style={->, >=Stealth, draw=lpGray, line width=0.5pt},
+  curveW/.style={draw=lpAccent, line width=1pt},
+  curveS/.style={draw=lpAmberBorder, line width=1pt},
+  lab/.style={font=\sffamily\scriptsize, text=lpInk}]
+  \draw[axis] (0,0) -- (7.4,0) node[right, lab] {Aufwand};
+  \draw[axis] (0,0) -- (0,4) node[above, lab] {Ergebnis};
+  \draw[curveW] (0,0) -- (7,3.2);
+  \node[text=lpAccent, font=\sffamily\small\bfseries] at (6.0,2.3) {Wachstum};
+  \node[text=lpAccent, font=\sffamily\scriptsize, align=center] at (6.0,1.7) {linear:\\Aufwand $\to$ Ergebnis};
+  \draw[curveS] plot[domain=0:7, samples=40, smooth] (\x, {0.18*\x*\x});
+  \node[text=lpAmberBorder, font=\sffamily\small\bfseries] at (5.0,3.6) {Skalierung};
+  \node[text=lpAmberBorder, font=\sffamily\scriptsize, align=center] at (5.0,3.05) {disproportional:\\Hebel statt Aufwand};
+  \draw[draw=lpGray, dashed, line width=0.3pt] (3,0) -- (3,3.2);
+  \node[lab, below, text=lpGray] at (3,0) {Stabilisierungs-Schwelle};
+\end{tikzpicture}
+\caption{\sffamily Wachstum ist linear -- mehr Aufwand bringt mehr Ergebnis. Skalierung erzeugt einen disproportionalen Effekt; voraussetzungsreich, aber stark hebelnd.}
+\label{fig:scale-22t12}
+\end{figure}
 
 \subsection{Sechs Skalierungsachsen}
 

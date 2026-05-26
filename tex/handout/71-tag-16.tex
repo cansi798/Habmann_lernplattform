@@ -151,6 +151,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{222,239,224}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -321,6 +326,28 @@ Ein belastbarer ESG-Reportingprozess hat sieben Schritte. Jeder Schritt hat eine
   \item \fachbegriff{Report.} Veröffentlichung im Lagebericht / Sustainability Statement / Dashboards.
   \item \fachbegriff{Assure.} Interne und externe Assurance (Limited / Reasonable). Sampling, Walkthroughs, Findings.
 \end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  step/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+               minimum width=1.55cm, minimum height=0.85cm, align=center, thick},
+  last/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpGreenLight,
+               minimum width=1.55cm, minimum height=0.85cm, align=center, thick},
+  arr/.style={-{Stealth[length=2mm]}, lpGray, thick}]
+  \node[step]                 (p1)               {Plan};
+  \node[step, right=0.18cm of p1] (p2) {Collect};
+  \node[step, right=0.18cm of p2] (p3) {Validate};
+  \node[step, right=0.18cm of p3] (p4) {Consoli-\\date};
+  \node[step, right=0.18cm of p4] (p5) {Approve};
+  \node[step, right=0.18cm of p5] (p6) {Report};
+  \node[last, right=0.18cm of p6] (p7) {Assure};
+  \foreach \a/\b in {p1/p2,p2/p3,p3/p4,p4/p5,p5/p6,p6/p7} \draw[arr] (\a) -- (\b);
+  \node[font=\sffamily\scriptsize\itshape, lpGray, below=0.15cm of p4]
+    {jede Stufe: Rolle + Kontrolle};
+\end{tikzpicture}
+\caption{\sffamily ESG-Reporting-Pipeline -- sieben Schritte vom Plan bis zur externen Assurance.}
+\end{figure}
 
 \subsection{KPI-Dictionary als Fundament}
 

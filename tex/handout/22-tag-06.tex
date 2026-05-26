@@ -150,6 +150,10 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -276,6 +280,22 @@ Die Begriffe werden oft unscharf verwendet. Eine saubere Abgrenzung ist Vorausse
   \item \fachbegriff{Cross-Channel.} Kanäle sind teilweise verbunden -- Kunden können Kanäle wechseln, sehen aber noch Brüche. Z.\,B.\ Online-Kauf, aber Reklamation nur in der Filiale.
   \item \fachbegriff{Omnichannel.} Kanäle sind \emph{integriert}, der Kunde erlebt ein einheitliches Unternehmen. Konsistente Informationen, Preise, Bestände, Daten, Ansprechpartner -- unabhängig vom Kanal.
 \end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  step/.style={rectangle, rounded corners=2pt, draw=lpAccent, text=lpInk,
+               minimum width=30mm, minimum height=8mm, align=center, line width=0.5pt},
+  axis/.style={-{Latex[length=2mm]}, draw=lpGray, line width=0.5pt}]
+  \node[step, fill=lpGrayLight]    (s1) at (0,0)    {\textbf{Single}\\1 Kanal};
+  \node[step, fill=lpAccentLight!50] (s2) at (0,1.0)  {\textbf{Multi}\\Kanäle nebeneinander};
+  \node[step, fill=lpAccentLight]  (s3) at (0,2.0)  {\textbf{Cross}\\teilweise verbunden};
+  \node[step, fill=lpAmberLight, draw=lpAmber] (s4) at (0,3.0)  {\textbf{Omni}\\voll integriert};
+  \draw[axis] (3.2,-0.3) -- (3.2,3.4) node[right, midway, text=lpGray, align=left] {Integrationsgrad\\Kundennutzen};
+\end{tikzpicture}
+\caption{\sffamily Vier Stufen der Kanalintegration: vom Single Channel zum integrierten Omnichannel.}
+\label{fig:kanalstufen-22t06}
+\end{figure}
 
 \subsection{Was ``integriert'' konkret bedeutet}
 

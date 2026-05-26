@@ -152,6 +152,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{225,238,225}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -257,6 +262,26 @@ End-to-End-Integration ist nicht ``alle Systeme miteinander verbinden''. Es ist 
 \subsection{Der ``Model-Run-Improve''-Zyklus}
 
 Eine pragmatische Sicht auf den BPM-Lebenszyklus: \quelle{Dumas et al., 2018; Reinkemeyer, 2020}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  step/.style={rectangle, rounded corners=3pt, draw=lpAccent, fill=lpAccentLight,
+    line width=0.6pt, minimum width=20mm, minimum height=11mm, align=center, inner sep=2pt},
+  arr/.style={-{Latex[length=2mm]}, draw=lpAccent, line width=0.6pt}]
+  \def\R{2.0cm}
+  \node[step] (m) at (90:\R)  {Model\\\scriptsize BPMN/VSM};
+  \node[step] (r) at (0:\R)   {Run\\\scriptsize Engine};
+  \node[step] (me) at (270:\R){Measure\\\scriptsize KPI/Mining};
+  \node[step] (i) at (180:\R) {Improve\\\scriptsize Change};
+  \draw[arr] (m)  to[bend left=20] (r);
+  \draw[arr] (r)  to[bend left=20] (me);
+  \draw[arr] (me) to[bend left=20] (i);
+  \draw[arr] (i)  to[bend left=20] (m);
+\end{tikzpicture}
+\caption{\sffamily Closed Loop der Prozesssteuerung: Model -- Run -- Measure -- Improve.}
+\label{fig:konzept-71t06}
+\end{figure}
 
 \begin{enumerate}
   \item \fachbegriff{Model.} Soll-Prozess als BPMN oder VSM dokumentieren.

@@ -101,6 +101,9 @@
 
 \usepackage[hidelinks,unicode]{hyperref}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
 \newcommand{\fachbegriff}[1]{\textbf{#1}}
 \newcommand{\quelle}[1]{{\footnotesize\sffamily\color{lpGray}(#1)}}
@@ -132,10 +135,7 @@
 
 \newcommand{\ytquery}[1]{%
   \par\vspace{4pt}
-  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{Lernvideo zum Thema:}\ %
-    \href{https://studyflix.de/search?query=#1}{\textcolor{lpAccent}{Studyflix-Treffer}}\ ·\ %
-    \href{https://www.youtube.com/results?search\_query=#1}{\textcolor{lpAccent}{YouTube-Treffer}}\\%
-    \textit{\textcolor{lpGray}{Stichworte: #1}}}\par
+  \noindent{\footnotesize\sffamily\color{lpGray}\textbf{YouTube-Suchquery:} \texttt{#1}}\par
 }
 
 \begin{document}
@@ -455,6 +455,27 @@ Wenn CRM eine neue Lieferadresse f\"uhrt, das ERP eine ``alte'' Adresse aus eine
 
 \smallskip
 \textbf{Faustregel:} Der Loop ist \emph{geschlossen}, sobald eine im Mining entdeckte Abweichung in einem dokumentierten Change Request endet \textendash{} und dieser zu einer neuen BPMN-Version f\"uhrt, die wieder gemessen wird. Wenn drei Reviews kein Change Request produzieren, ist es \emph{kein} Loop, sondern Reporting.
+
+\smallskip
+\textbf{Zyklus-Skizze:}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  phase/.style={rectangle, rounded corners=4pt, draw=lpAccent, thick,
+                minimum width=3.0cm, minimum height=1.2cm, align=center},
+  arr/.style={-{Stealth[length=3mm]}, lpAccent, very thick}]
+  \node[phase, fill=lpAccentLight] (m) at (90:2.8)  {\textbf{Model}\\\scriptsize BPMN-Soll + VSM};
+  \node[phase, fill=lpAmberLight]  (r) at (-30:2.8) {\textbf{Run}\\\scriptsize BPMS-Engine + APIs};
+  \node[phase, fill=lpGreenLight]  (i) at (210:2.8) {\textbf{Improve}\\\scriptsize Mining + KPI-Review};
+  \draw[arr] (m) to[bend left=22] (r);
+  \draw[arr] (r) to[bend left=22] (i);
+  \draw[arr] (i) to[bend left=22] (m);
+  \node[font=\sffamily\scriptsize\itshape, lpGray, align=center] at (0,0)
+    {Closed Loop:\\Change Request\\schließt den Kreis};
+\end{tikzpicture}
+\caption{\sffamily Model -- Run -- Improve als geschlossener Zyklus; ohne Change Request bleibt es Reporting.}
+\end{figure}
 \end{loesungbox}
 
 \clearpage

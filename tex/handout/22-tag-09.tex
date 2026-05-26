@@ -150,6 +150,10 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ---------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -329,6 +333,30 @@ Ein \fachbegriff{Funnel} ist die strukturierte Abfolge der Schritte vom ersten K
   \item \textbf{Angebot} -- konkretes Angebot, oft individuell.
   \item \textbf{Abschluss} -- Vertrag, Kunde gewonnen.
 \end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  stage/.style={trapezium, trapezium left angle=70, trapezium right angle=70,
+                draw=lpAccent, fill=lpAccentLight, line width=0.4pt,
+                minimum height=8mm, inner sep=2pt, text=lpInk},
+  drop/.style={->, >=Stealth, draw=lpGray, line width=0.4pt}]
+  \node[stage, minimum width=64mm] (a1) {Anzeige (Impressionen, Targeting)};
+  \node[stage, minimum width=58mm, below=1.5mm of a1] (a2) {Klick (CTR)};
+  \node[stage, minimum width=52mm, below=1.5mm of a2] (a3) {Landing Page};
+  \node[stage, minimum width=46mm, below=1.5mm of a3, fill=lpAmberLight, draw=lpAmberBorder] (a4) {Conversion};
+  \node[stage, minimum width=40mm, below=1.5mm of a4] (a5) {Qualifizierung (MQL/SQL)};
+  \node[stage, minimum width=34mm, below=1.5mm of a5, fill=lpAmberLight, draw=lpAmberBorder] (a6) {Vertriebskontakt};
+  \node[stage, minimum width=28mm, below=1.5mm of a6] (a7) {Angebot};
+  \node[stage, minimum width=22mm, below=1.5mm of a7, fill=lpAccent, text=white] (a8) {Abschluss};
+  \node[right=4mm of a4, text=lpAmberBorder, font=\sffamily\scriptsize\itshape, align=left] (l1) {grösster\\Verlust 1};
+  \node[right=4mm of a6, text=lpAmberBorder, font=\sffamily\scriptsize\itshape, align=left] (l2) {grösster\\Verlust 2};
+  \draw[drop] (a4.east) ++(2mm,0) -- (l1.west);
+  \draw[drop] (a6.east) ++(2mm,0) -- (l2.west);
+\end{tikzpicture}
+\caption{\sffamily Acht Stufen des B2B-Performance-Funnels; an den orange markierten Übergängen entstehen typischerweise die größten Lead-Verluste.}
+\label{fig:funnel-22t09}
+\end{figure}
 
 \subsection{Wo entstehen die größten Verluste?}
 

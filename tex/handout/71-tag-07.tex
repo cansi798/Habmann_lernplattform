@@ -152,6 +152,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{225,238,225}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -386,6 +391,40 @@ Diese Filter machen den Graphen lesbar -- aber sie verbergen Information, die sp
 \section{Conformance Checking -- Soll vs.\ Ist}
 
 \fachbegriff{Conformance Checking} vergleicht den Ist-Prozess (aus Discovery) mit einem Soll-Modell (BPMN, EPC, Policy). Das Ergebnis sind \emph{Abweichungen} -- die zu klassifizieren und zu priorisieren sind. \quelle{Rozinat \& van der Aalst, 2008; van der Aalst, 2016}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  t/.style={rectangle, rounded corners=2pt, draw=lpGray, line width=0.5pt,
+    minimum width=12mm, minimum height=7mm, align=center, inner sep=1pt},
+  tSoll/.style={t, fill=lpAccentLight, draw=lpAccent},
+  tIst/.style={t, fill=lpGreenLight, draw=lpGray},
+  tDev/.style={t, fill=lpAmberLight, draw=lpAmberBorder},
+  arr/.style={-{Latex[length=1.8mm]}, draw=lpGray, line width=0.5pt},
+  lbl/.style={font=\sffamily\scriptsize\bfseries, color=lpAccent},
+  dev/.style={font=\sffamily\scriptsize\itshape, color=lpAmberBorder, align=center}]
+  % Soll
+  \node[lbl] at (-0.5,1.5) {Soll-Modell};
+  \node[tSoll] (s1) at (0.6,0.8) {A};
+  \node[tSoll] (s2) at (2.2,0.8) {B};
+  \node[tSoll] (s3) at (3.8,0.8) {C};
+  \node[tSoll] (s4) at (5.4,0.8) {D};
+  \draw[arr] (s1) -- (s2); \draw[arr] (s2) -- (s3); \draw[arr] (s3) -- (s4);
+  % Ist
+  \node[lbl] at (-0.5,-1.0) {Ist (aus Log)};
+  \node[tIst] (i1) at (0.6,-1.7) {A};
+  \node[tDev] (i2) at (2.2,-1.7) {C};
+  \node[tDev] (i3) at (3.8,-1.7) {X};
+  \node[tIst] (i4) at (5.4,-1.7) {D};
+  \draw[arr] (i1) -- (i2); \draw[arr] (i2) -- (i3); \draw[arr] (i3) -- (i4);
+  % Annotation
+  \node[dev] at (2.2,-2.5) {falsche\\Reihenfolge};
+  \node[dev] at (3.8,-2.5) {zus.\ Schritt};
+  \node[dev] at (2.9,0.0) {B fehlt};
+\end{tikzpicture}
+\caption{\sffamily Conformance Checking: Soll-Pfad gegen Ist-Pfad, Abweichungen markiert.}
+\label{fig:konzept-71t07}
+\end{figure}
 
 \subsection{Vier typische Abweichungs-Arten}
 

@@ -140,6 +140,9 @@
 
 \usepackage[hidelinks,unicode]{hyperref}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
 \newcommand{\akzent}[1]{{\caveatfont\color{lpAmber}#1}}
@@ -279,6 +282,35 @@ Nicht jeder ``Chatbot'' ist dasselbe Tier. Drei Grundtypen unterscheiden sich in
   \item \textbf{Nachteile.} Risiko von Halluzinationen (erfundene Antworten), schwerer testbar, Datenschutz-Komplexität, höhere Kosten, schwerer kontrollierbar.
   \item \textbf{Einsatz.} Produktberatung, Suche, Empfehlungen, generative Erklärungen.
 \end{itemize}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  user/.style={rectangle, rounded corners=2pt, draw=lpGray, fill=lpGrayLight, line width=0.3pt, minimum height=8mm, minimum width=22mm, align=center},
+  comp/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight, line width=0.4pt, minimum height=10mm, minimum width=24mm, align=center, inner sep=3pt},
+  store/.style={cylinder, shape border rotate=90, aspect=0.25, draw=lpAccent, fill=lpAccentLight, line width=0.4pt, minimum height=12mm, minimum width=20mm, align=center, font=\sffamily\scriptsize},
+  act/.style={rectangle, rounded corners=2pt, draw=lpAmberBorder, fill=lpAmberLight, line width=0.4pt, minimum height=8mm, minimum width=22mm, align=center, font=\sffamily\scriptsize},
+  human/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccent, text=white, minimum height=8mm, minimum width=22mm, align=center, font=\sffamily\scriptsize\bfseries},
+  arr/.style={->, >=Stealth, draw=lpGray, line width=0.4pt}]
+  \node[user] (u) {Nutzer-\\Eingabe};
+  \node[comp, right=6mm of u] (nlu) {NLU\\(Intent + Slots)};
+  \node[comp, right=6mm of nlu] (dlg) {Dialog-\\Manager};
+  \node[store, above=6mm of dlg] (kb) {Wissens-\\basis};
+  \node[act, right=6mm of dlg, yshift=8mm] (a1) {Aktion: FAQ};
+  \node[act, right=6mm of dlg] (a2) {Aktion: CRM-\\Termin / Lead};
+  \node[act, right=6mm of dlg, yshift=-8mm] (a3) {Aktion: Empfehlung};
+  \node[human, below=6mm of dlg] (esc) {Eskalation: Mensch};
+  \draw[arr] (u) -- (nlu);
+  \draw[arr] (nlu) -- (dlg);
+  \draw[arr] (kb) -- (dlg);
+  \draw[arr] (dlg.east) -- (a1.west);
+  \draw[arr] (dlg.east) -- (a2.west);
+  \draw[arr] (dlg.east) -- (a3.west);
+  \draw[arr] (dlg) -- node[right, font=\sffamily\scriptsize, text=lpAccent]{Confidence niedrig} (esc);
+\end{tikzpicture}
+\caption{\sffamily Architektur eines hybriden Chatbots: Eingabe $\to$ NLU (Intent-Erkennung) $\to$ Dialog-Manager $\to$ Aktion oder Eskalation an einen Menschen.}
+\label{fig:bot-22t14}
+\end{figure}
 
 \subsection{Hybride Bot-Mensch-Prozesse}
 

@@ -150,6 +150,10 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -296,6 +300,24 @@ Klassische Suchmaschinenoptimierung (SEO für Google) und Plattform-SEO (z.\,B.\
   \item \textbf{Bewertungen.} Anzahl, Durchschnitt, Aktualität.
   \item \textbf{Verkäuferperformance.} Reklamationsquote, Antwortzeiten, Konfliktlösung.
 \end{itemize}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  funnel/.style={trapezium, trapezium angle=72, draw=lpAccent, fill=lpAccentLight,
+                 text=lpInk, minimum height=7mm, align=center, line width=0.5pt},
+  flow/.style={-{Latex[length=2mm]}, draw=lpAccent, line width=0.6pt},
+  loop/.style={-{Latex[length=2mm]}, draw=lpAmber, line width=0.6pt, dashed}]
+  \node[funnel, minimum width=58mm] (i) at (0,0)    {Impressionen};
+  \node[funnel, minimum width=46mm] (k) at (0,-0.95) {Klicks (CTR)};
+  \node[funnel, minimum width=34mm] (c) at (0,-1.9)  {Conversion};
+  \node[funnel, minimum width=22mm, fill=lpAmberLight, draw=lpAmber] (b) at (0,-2.85) {Bewertung};
+  \draw[flow] (i) -- (k); \draw[flow] (k) -- (c); \draw[flow] (c) -- (b);
+  \draw[loop] (b.east) to[bend right=60] node[right, font=\sffamily\scriptsize, text=lpAmber, align=left] {Ranking-\\Boost} (i.east);
+\end{tikzpicture}
+\caption{\sffamily Plattform-Sichtbarkeitsfunnel: Bewertungen wirken über das Ranking auf die Impressionen zurück.}
+\label{fig:seo-funnel-22t07}
+\end{figure}
 
 \subsection{Risiken reiner Sichtbarkeitsoptimierung}
 

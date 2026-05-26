@@ -155,6 +155,11 @@
 % --- Hyperlinks ----------------------------------------------------------
 \usepackage[hidelinks,unicode]{hyperref}
 
+% --- TikZ ----------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds}
+\definecolor{lpGreenLight}{RGB}{225,238,225}
+
 % --- TOC -----------------------------------------------------------------
 \renewcommand{\contentsname}{\sffamily\Large\bfseries\color{lpAccent}Inhalt}
 
@@ -473,6 +478,41 @@ Wenn keine dieser drei Bedingungen zutrifft, ist ein eigener Service Over-Engine
 \section{Orchestrierung vs.\ Choreographie}
 
 Zwei Muster regeln, wie Services zusammenarbeiten:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[font=\sffamily\footnotesize,
+  svc/.style={rectangle, rounded corners=2pt, draw=lpGray, fill=lpGrayLight,
+    line width=0.5pt, minimum width=11mm, minimum height=7mm, inner sep=2pt},
+  dir/.style={rectangle, rounded corners=2pt, draw=lpAccent, fill=lpAccentLight,
+    line width=0.6pt, minimum width=18mm, minimum height=8mm, align=center, inner sep=2pt},
+  arr/.style={-{Latex[length=1.8mm]}, draw=lpAccent, line width=0.5pt},
+  ev/.style={-{Latex[length=1.8mm]}, draw=lpGray, line width=0.5pt, dashed},
+  lbl/.style={font=\sffamily\scriptsize\bfseries, color=lpAccent}]
+  % Orchestrierung
+  \node[lbl] at (0,1.9) {Orchestrierung};
+  \node[dir] (d) at (0,0.8) {Dirigent\\\scriptsize (Engine)};
+  \node[svc] (a) at (-1.7,-0.6) {A};
+  \node[svc] (b) at (0,-0.6) {B};
+  \node[svc] (c) at (1.7,-0.6) {C};
+  \draw[arr] (d) -- (a);
+  \draw[arr] (d) -- (b);
+  \draw[arr] (d) -- (c);
+  % Choreographie
+  \node[lbl] at (6,1.9) {Choreographie};
+  \node[svc] (e) at (4.6,0.8) {A};
+  \node[svc] (f) at (7.4,0.8) {B};
+  \node[svc] (g) at (4.6,-0.8) {C};
+  \node[svc] (h) at (7.4,-0.8) {D};
+  \draw[ev] (e) -- (f);
+  \draw[ev] (f) -- (h);
+  \draw[ev] (h) -- (g);
+  \draw[ev] (g) -- (e);
+  \draw[ev] (e) -- (h);
+\end{tikzpicture}
+\caption{\sffamily Zentrale Steuerung (links) vs.\ ereignisbasierte Kopplung (rechts).}
+\label{fig:konzept-71t03}
+\end{figure}
 
 \subsection{Orchestrierung}
 
