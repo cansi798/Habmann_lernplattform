@@ -56,24 +56,32 @@ jobs:
             local base
             base=$(basename "$tex_path" .tex)
             echo "::group::Build $tex_path -> docs/pdf/$out_name.pdf"
+            # Subshell-Exit-Code propagieren: ohne `|| return 1` würde der
+            # äußere `cp` auch nach Build-Fehler laufen und gute PDFs durch
+            # halbfertige aus dem abgebrochenen xelatex-Lauf überschreiben.
             (
               cd "$dir"
               xelatex -interaction=nonstopmode -halt-on-error "$base.tex" > /tmp/xelatex.log 2>&1 || {
                 echo "::error file=$tex_path::xelatex pass 1 failed"
                 tail -50 /tmp/xelatex.log
-                return 1
+                exit 1
               }
               xelatex -interaction=nonstopmode -halt-on-error "$base.tex" > /tmp/xelatex.log 2>&1 || {
                 echo "::error file=$tex_path::xelatex pass 2 failed"
                 tail -50 /tmp/xelatex.log
-                return 1
+                exit 1
               }
-            )
+            ) || {
+              echo "::warning file=$tex_path::Build fehlgeschlagen, bestehende docs/pdf/$out_name.pdf bleibt unverändert."
+              echo "::endgroup::"
+              return 1
+            }
             if [ -f "$dir/$base.pdf" ]; then
               cp "$dir/$base.pdf" "docs/pdf/$out_name.pdf"
               echo "  -> docs/pdf/$out_name.pdf"
             else
               echo "::error file=$tex_path::no pdf produced"
+              echo "::endgroup::"
               return 1
             fi
             echo "::endgroup::"
