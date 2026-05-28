@@ -237,18 +237,45 @@ def _media_crumbs(kurs: dict, tag: dict, label: str):
     ]
 
 
+VIDEO_EXTS = (".mp4", ".webm", ".mov")
+PODCAST_EXTS = (".m4a", ".mp3", ".ogg", ".wav")
+
+
+def _find_media_file(kurs_short: str, tag_nn: str, kind: str, exts: tuple) -> Path | None:
+    """Suche Mediendatei unter docs/media/kurs-{short}/tag-{NN}-{kind}.{ext}."""
+    media_dir = DOCS / "media" / f"kurs-{kurs_short}"
+    for ext in exts:
+        candidate = media_dir / f"tag-{tag_nn}-{kind}{ext}"
+        if candidate.exists():
+            return candidate
+    return None
+
+
 def build_video_page_html(kurs: dict, tag: dict) -> str:
+    kurs_short = kurs["id"].split("_")[0]
+    tag_nn = f"{tag['nr']:02d}"
+    media_file = _find_media_file(kurs_short, tag_nn, "video", VIDEO_EXTS)
+    if media_file is not None:
+        src = f"../../media/kurs-{kurs_short}/{media_file.name}"
+        mime = {"mp4": "video/mp4", "webm": "video/webm", "mov": "video/quicktime"}[media_file.suffix[1:]]
+        player = f"""
+  <video controls preload="metadata" playsinline style="width:100%;max-width:960px;border-radius:8px;background:#000">
+    <source src="{src}" type="{mime}">
+    Dein Browser unterstützt kein HTML5-Video. <a href="{src}">Video herunterladen</a>.
+  </video>
+  <p style="margin-top:12px;color:var(--color-muted)">
+    <a href="{src}" download>⬇ Download (MP4)</a>
+  </p>"""
+    else:
+        player = """
+  <div class="pfad-video-placeholder">📺 Video-Platzhalter<br>
+    <small>Datei nach <code>docs/media/kurs-XX/tag-NN-video.mp4</code> legen</small>
+  </div>"""
     body = f"""
 {brand_bar(asset_prefix="../../")}
 {crumbs(_media_crumbs(kurs, tag, "Video"))}
 <main>
-  <h1>Tagesvideo · Tag {tag['nr']}</h1>
-  <div class="pfad-video-placeholder">📺 Video-Platzhalter<br>
-    <small>YouTube-Embed hier einfügen</small>
-  </div>
-  <p style="margin-top:24px;color:var(--color-muted)">
-    Hinweis: Sobald produziert, durch <code>iframe src="https://www.youtube.com/embed/VIDEO_ID"</code> ersetzen.
-  </p>
+  <h1>Tagesvideo · Tag {tag['nr']}</h1>{player}
 </main>
 <script src="../../assets/progress.js"></script>
 <script>markViewed("{kurs['id']}", {tag['nr']}, "video");</script>
@@ -257,14 +284,30 @@ def build_video_page_html(kurs: dict, tag: dict) -> str:
 
 
 def build_podcast_page_html(kurs: dict, tag: dict) -> str:
+    kurs_short = kurs["id"].split("_")[0]
+    tag_nn = f"{tag['nr']:02d}"
+    media_file = _find_media_file(kurs_short, tag_nn, "podcast", PODCAST_EXTS)
+    if media_file is not None:
+        src = f"../../media/kurs-{kurs_short}/{media_file.name}"
+        mime = {"m4a": "audio/mp4", "mp3": "audio/mpeg", "ogg": "audio/ogg", "wav": "audio/wav"}[media_file.suffix[1:]]
+        player = f"""
+  <audio controls preload="metadata" style="width:100%;max-width:720px">
+    <source src="{src}" type="{mime}">
+    Dein Browser unterstützt kein HTML5-Audio. <a href="{src}">Podcast herunterladen</a>.
+  </audio>
+  <p style="margin-top:12px;color:var(--color-muted)">
+    <a href="{src}" download>⬇ Download</a>
+  </p>"""
+    else:
+        player = """
+  <div class="pfad-video-placeholder">🎧 Podcast-Platzhalter<br>
+    <small>Datei nach <code>docs/media/kurs-XX/tag-NN-podcast.m4a</code> legen</small>
+  </div>"""
     body = f"""
 {brand_bar(asset_prefix="../../")}
 {crumbs(_media_crumbs(kurs, tag, "Podcast"))}
 <main>
-  <h1>Tagespodcast · Tag {tag['nr']}</h1>
-  <div class="pfad-video-placeholder">🎧 Podcast-Platzhalter<br>
-    <small>Audio-URL hier eintragen</small>
-  </div>
+  <h1>Tagespodcast · Tag {tag['nr']}</h1>{player}
 </main>
 <script src="../../assets/progress.js"></script>
 <script>markViewed("{kurs['id']}", {tag['nr']}, "podcast");</script>
