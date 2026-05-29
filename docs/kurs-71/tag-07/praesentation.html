@@ -50,8 +50,8 @@
     <section class="slide">
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 3 · Tag 7 von 16 · Kurs 71 (Dig 42) · 8. Juni 2026</div>
-      <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0">Discovery &amp; Conformance</h2>
-      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Daten werden zu Realität – Event Logs zum Ist-Prozess, Soll/Ist-Abgleich als Steuerungsinstrument.</p>
+      <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0">Discovery (Prozess-Aufdeckung) &amp; Conformance (Soll-Ist-Vergleich)</h2>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Daten werden zu Realität – Event Logs (Protokoll-Datensätze) zum Ist-Prozess, Soll/Ist-Abgleich als Steuerungsinstrument.</p>
       <div style="margin-top:48px" class="accent-box">
         <span class="handwritten" style="color:#5a3a08;font-size:26px">Abweichung ist Signal. Nicht immer Fehler. Manchmal Innovation. Oft Datenproblem.</span>
       </div>
@@ -64,7 +64,7 @@
           <h3>L1 · Wissen</h3>
           <ul>
             <li>Event Log Pflicht- &amp; Kürfelder</li>
-            <li>Discovery: Happy Path, Varianten, Schleifen</li>
+            <li>Discovery: Happy Path (idealer Standardablauf), Varianten, Schleifen</li>
             <li>Conformance-Abweichungstypen</li>
             <li>Compliance vs. operative Flexibilität</li>
           </ul>
@@ -82,8 +82,8 @@
           <h3>L3 · Management</h3>
           <ul>
             <li>Zero-Tolerance-Liste definieren</li>
-            <li>„False Compliance“ vermeiden</li>
-            <li>Data Owner &amp; Process Owner klären</li>
+            <li>„False Compliance“ (Schein-Regeltreue) vermeiden</li>
+            <li>Data Owner (Datenverantwortlicher) &amp; Process Owner (Prozessverantwortlicher) klären</li>
             <li>Steuerungs- statt Reporting-Sicht</li>
           </ul>
         </div>
@@ -101,7 +101,7 @@
           <tr><td>Case ID</td><td>Pflicht</td><td>Was gehört zu welchem Vorgang?</td></tr>
           <tr><td>Aktivität</td><td>Pflicht</td><td>Welcher Schritt wurde ausgeführt?</td></tr>
           <tr><td>Timestamp</td><td>Pflicht</td><td>Wann passierte er (<abbr title="International Organization for Standardization – Internationale Organisation, die globale Normen und Standards entwickelt">ISO</abbr> 8601, mit Zeitzone)?</td></tr>
-          <tr><td>Ressource</td><td>Kür</td><td>Wer/welches System – nötig für Bottleneck-Analyse pro Person/Team</td></tr>
+          <tr><td>Ressource</td><td>Kür</td><td>Wer/welches System – nötig für Bottleneck-Analyse (Engpass-Untersuchung) pro Person/Team</td></tr>
           <tr><td>Kosten</td><td>Kür</td><td>Aktivitätsbasierte Kostenanalyse</td></tr>
           <tr><td>Kanal / Standort</td><td>Kür</td><td>Segmentierung für Varianten</td></tr>
         </tbody>
@@ -145,7 +145,7 @@
         </div>
         <div class="merk-box">
           <h3>4 · Schleifen &amp; <abbr title="Service Level Agreement – Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen">SLA</abbr>-Verletzungen</h3>
-          <p>Rework-Schleifen, Eskalationen, Zeitüberschreitungen sichtbar im Log.</p>
+          <p>Rework-Schleifen (Nacharbeit), Eskalationen, Zeitüberschreitungen sichtbar im Log.</p>
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
@@ -218,14 +218,14 @@
     </section>
 
     <section class="slide" style="display:none">
-      <h2>Fallstudie · MedTech Procure-to-Pay</h2>
+      <h2>Fallstudie · MedTech Procure-to-Pay (Einkauf-bis-Zahlung-Prozess)</h2>
       <p style="color:var(--color-muted)">6 Wochen bis Audit, 70k Budget. Unvollständige Logs (<abbr title="Enterprise Resource Planning – Integriertes Softwaresystem zur unternehmensweiten Ressourcenplanung">ERP</abbr> + Mail).</p>
       <div class="grid-2" style="margin-top:14px">
         <div class="merk-box">
           <h3>Soll-Modell P2P (grob)</h3>
           <ul>
             <li>Bedarf → Genehmigung → Bestellung → Lieferung</li>
-            <li>Wareneingang → Rechnung → 3-Way-Match</li>
+            <li>Wareneingang → Rechnung → 3-Way-Match (Abgleich Bestellung/Lieferschein/Rechnung)</li>
             <li>Freigabe → Zahlung → Archiv</li>
           </ul>
         </div>
@@ -251,7 +251,7 @@
         <tbody>
           <tr><td>Rechnung vor Wareneingang</td><td>3-Way-Match bricht</td><td>Dropship · Services · fehlende Buchung</td><td>Ausnahmeprozess + Pflichtkennzeichen + Nachbuchungs-<abbr title="Service Level Agreement">SLA</abbr></td><td>Finance Ops</td></tr>
           <tr><td>Fehlende Kostenstelle</td><td>Controlling · Compliance</td><td>Anforderungsformular schlecht</td><td>Pflichtfeld + Validierung + Rückgabe im Workflow</td><td>Einkauf</td></tr>
-          <tr><td>Sonderfreigaben</td><td>Umgehung Standard</td><td>Zeitdruck · keine klaren Schwellen</td><td>Schwellenwert + Eskalationsboard + Monitoring</td><td>Procurement Lead</td></tr>
+          <tr><td>Sonderfreigaben</td><td>Umgehung Standard</td><td>Zeitdruck · keine klaren Schwellen</td><td>Schwellenwert + Eskalationsboard + Monitoring (laufende Überwachung)</td><td>Procurement Lead (Einkaufsleitung)</td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
@@ -273,12 +273,12 @@
       <h2>Management · drei Pflicht-Entscheidungen</h2>
       <div class="grid-3" style="margin-top:16px">
         <div class="merk-box">
-          <h3>Zero Tolerance</h3>
+          <h3>Zero Tolerance (Null-Toleranz)</h3>
           <p style="font-size:14px">Welche Abweichungen werden ab sofort nicht toleriert (Compliance, Sicherheit)?</p>
         </div>
         <div class="merk-box">
           <h3>Akzeptierte Varianten</h3>
-          <p style="font-size:14px">Welche Varianten lassen wir bewusst zu – mit welcher Guardrail (Schwelle, Eskalation)?</p>
+          <p style="font-size:14px">Welche Varianten lassen wir bewusst zu – mit welcher Guardrail (Leitplanke: Schwelle, Eskalation)?</p>
         </div>
         <div class="merk-box">
           <h3>Daten-Lücken</h3>

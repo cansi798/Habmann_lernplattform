@@ -51,7 +51,7 @@
     <section class="slide">
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 4 · Tag 9 von 16 · Kurs 71 (Dig 42) · 10. Juni 2026</div>
-      <h2 class="handwritten" style="font-size:44px;line-height:1.05;color:var(--kurs-71);margin:0">Scrum · Kanban · <abbr title="Continuous Integration – Entwicklungspraxis: Codeänderungen werden regelmäßig automatisch getestet und integriert">CI</abbr>/<abbr title="Continuous Deployment – Automatisierte Auslieferung validierter Software-Änderungen direkt in die Produktion">CD</abbr> · IaC</h2>
+      <h2 class="handwritten" style="font-size:44px;line-height:1.05;color:var(--kurs-71);margin:0">Scrum (agile Sprint-Methode) · Kanban (Pull-Tafel) · <abbr title="Continuous Integration – Entwicklungspraxis: Codeänderungen werden regelmäßig automatisch getestet und integriert">CI</abbr>/<abbr title="Continuous Deployment – Automatisierte Auslieferung validierter Software-Änderungen direkt in die Produktion">CD</abbr> · IaC (Infrastructure as Code)</h2>
       <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Agile Delivery als Steuerungssystem – schnell &amp; sicher ändern, mit <abbr title="Digital Operational Resilience Act – EU-Verordnung zur Sicherstellung der digitalen Betriebsstabilität im Finanzsektor">DORA</abbr>-Kennzahlen statt Aktivismus.</p>
       <div style="margin-top:48px" class="accent-box">
         <span class="handwritten" style="color:#5a3a08;font-size:26px">Agile ≠ schneller Chaos. Verantwortung durch Flow &amp; Gates.</span>
@@ -65,7 +65,7 @@
           <h3>L1 · Wissen</h3>
           <ul>
             <li>Scrum: Rollen, Events, Artefakte</li>
-            <li>Kanban: <abbr title="Work in Progress – Menge der gleichzeitig in Bearbeitung befindlichen Arbeitspakete oder Aufgaben">WIP</abbr>-Limits, Flow, Pull</li>
+            <li>Kanban: <abbr title="Work in Progress – Menge der gleichzeitig in Bearbeitung befindlichen Arbeitspakete oder Aufgaben">WIP</abbr>-Limits, Flow, Pull (d.h. Team zieht neue Aufgaben erst, wenn Kapazität frei)</li>
             <li><abbr title="Continuous Integration">CI</abbr>/CD Pipeline-Stufen &amp; Gates</li>
             <li>IaC: versionierte Infrastruktur</li>
           </ul>
@@ -74,7 +74,7 @@
           <h3>L2 · Anwendung</h3>
           <ul>
             <li>Scrum vs. Kanban begründet wählen</li>
-            <li>Sprint Goal &amp; DoD definieren</li>
+            <li>Sprint Goal (Sprint-Ziel) &amp; DoD (Definition of Done – Fertigstellungs-Kriterien) definieren</li>
             <li>Pipeline mit 2 Gates entwerfen</li>
             <li>IaC-Policy mit Review &amp; Audit</li>
           </ul>
@@ -83,7 +83,7 @@
           <h3>L3 · Management</h3>
           <ul>
             <li><abbr title="Digital Operational Resilience Act">DORA</abbr>-Kennzahlen verstehen &amp; entscheiden</li>
-            <li>Stop-the-line-Regeln</li>
+            <li>Stop-the-line-Regeln (d.h. Pipeline anhalten, bis Fehler behoben)</li>
             <li>Standardisierung vs. Teamautonomie</li>
             <li>Risiko bewusst zulassen (Canary, Toggle)</li>
           </ul>
@@ -100,11 +100,11 @@
         <thead><tr><th>Aspekt</th><th>Scrum</th><th>Kanban</th></tr></thead>
         <tbody>
           <tr><th>Taktung</th><td>fixe Sprints (1–4 Wochen)</td><td>kontinuierlich, Pull-getrieben</td></tr>
-          <tr><th>Rollen</th><td>PO · SM · Developers</td><td>frei – aber Service-Klassen sinnvoll</td></tr>
-          <tr><th>Planung</th><td>Sprint Planning, Sprint Goal</td><td>Replenishment-Meeting</td></tr>
+          <tr><th>Rollen</th><td>PO (Product Owner) · SM (Scrum Master) · Developers</td><td>frei – aber Service-Klassen sinnvoll</td></tr>
+          <tr><th>Planung</th><td>Sprint Planning, Sprint Goal</td><td>Replenishment-Meeting (Nachschub-Termin)</td></tr>
           <tr><th><abbr title="Work in Progress">WIP</abbr>-Steuerung</th><td>indirekt (Sprint Backlog)</td><td>explizite <abbr title="Work in Progress">WIP</abbr>-Limits</td></tr>
           <tr><th>Geeignet für</th><td>Produktentwicklung, klare Reviews</td><td>Support, Incidents, wechselnde Prio</td></tr>
-          <tr><th>Risiko</th><td>Cargo Cult Scrum (Rituale ohne Outcome)</td><td>kein Backlog/Policies → Beliebigkeit</td></tr>
+          <tr><th>Risiko</th><td>Cargo Cult Scrum (d.h. Rituale ohne Outcome – nur die Form, nicht die Wirkung)</td><td>kein Backlog (Aufgabenliste)/Policies → Beliebigkeit</td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
@@ -139,7 +139,7 @@
         </svg>
       </div>
       <div class="accent-box" style="margin-top:10px;font-size:18px">
-        <abbr title="Work in Progress">WIP</abbr>-Limit = Schutz für Qualität. Weniger Multitasking, kürzere Lead Times, ehrliche Engpässe.
+        <abbr title="Work in Progress">WIP</abbr>-Limit = Schutz für Qualität. Weniger Multitasking, kürzere Lead Times (d.h. Durchlaufzeit von Start bis Fertig), ehrliche Engpässe.
       </div>
     </section>
 
@@ -179,7 +179,7 @@
         </svg>
       </div>
       <div class="accent-box" style="margin-top:10px;font-size:18px">
-        Quality Gates sind nicht verhandelbar. Wer „durchwinkt“, übernimmt die Verantwortung – schriftlich.
+        Quality Gates (Qualitäts-Prüfpunkte, die jede Änderung passieren muss) sind nicht verhandelbar. Wer „durchwinkt“, übernimmt die Verantwortung – schriftlich.
       </div>
     </section>
 
@@ -200,7 +200,7 @@
           <ul>
             <li>2-Augen-Prinzip auf jeden Apply</li>
             <li>Audit Trail = Merge-Historie</li>
-            <li>Drift-Detection: was läuft &lt;-&gt; was sagt der Code?</li>
+            <li>Drift-Detection (d.h. Abweichung erkennen): was läuft &lt;-&gt; was sagt der Code?</li>
             <li>Emergency-Change geregelt (Post-Hoc-Review)</li>
           </ul>
         </div>
@@ -231,12 +231,12 @@
       <h2>Risiko bewusst zulassen · Canary, Toggle, Rollback</h2>
       <div class="grid-3" style="margin-top:16px">
         <div class="merk-box">
-          <h3>Canary Release</h3>
+          <h3>Canary Release (Test-Ballon)</h3>
           <p>Neue Version an 5–10 % der Nutzer · Metriken vergleichen · automatischer Stop bei Anomalie.</p>
         </div>
         <div class="merk-box">
-          <h3>Feature Toggle</h3>
-          <p>Code im Prod, Feature deaktiviert. Aktivieren ohne Deploy. Kill-Switch in Sekunden.</p>
+          <h3>Feature Toggle (Funktions-Schalter)</h3>
+          <p>Code im Prod (Produktiv-Umgebung), Feature deaktiviert. Aktivieren ohne Deploy (Auslieferung). Kill-Switch (Not-Aus) in Sekunden.</p>
         </div>
         <div class="merk-box">
           <h3>Rollback-Plan</h3>
@@ -280,7 +280,7 @@
       <div class="grid-2x2" style="margin-top:18px">
         <div class="merk-box"><h3>Steuerungssysteme</h3><p>Scrum/Kanban sind Priorisierung, Transparenz, Abnahme – nicht Meeting-Kalender.</p></div>
         <div class="merk-box"><h3><abbr title="Work in Progress">WIP</abbr>-Limits</h3><p>Schutz für Qualität: weniger Multitasking, kürzere Lead Times.</p></div>
-        <div class="merk-box"><h3>Shift-left</h3><p>Tests &amp; Checks früh – kleine Releases, schnelle Rücknahme.</p></div>
+        <div class="merk-box"><h3>Shift-left (Qualität früh)</h3><p>Tests &amp; Checks früh – kleine Releases, schnelle Rücknahme.</p></div>
         <div class="merk-box"><h3>Ownership</h3><p>You build it, you run it. Wer deployt, trägt nachts den Pager.</p></div>
       </div>
     </section>

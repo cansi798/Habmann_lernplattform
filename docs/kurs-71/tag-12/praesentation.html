@@ -58,7 +58,7 @@
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 5 · Tag 12 von 16 · Kurs 71 (Dig 42) · 15. Juni 2026</div>
       <h2 class="handwritten" style="font-size:46px;line-height:1.05;color:var(--kurs-71);margin:0"><abbr title="Robotic Process Automation – Softwarebasierte Automatisierung repetitiver, regelbasierter Aufgaben">RPA</abbr> skalieren ohne Kontrollverlust</h2>
-      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Governance · Audit Trail · Exceptions · Security by Design · Change Management als Verantwortungsarchitektur.</p>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Governance (Regelwerk &amp; Steuerung) · Audit Trail (lückenlose Nachweisspur) · Exceptions (Sonderfälle, die der Bot nicht regelt) · Security by Design (Sicherheit von Anfang an mitgedacht) · Change Management (Veränderungs-Begleitung der Mitarbeitenden) als Verantwortungsarchitektur.</p>
       <div style="margin-top:48px" class="accent-box">
         <span class="handwritten" style="color:#5a3a08;font-size:26px">Tag 12 von 16 · Wachstum mit Disziplin</span>
       </div>
@@ -72,8 +72,8 @@
         <div class="merk-box">
           <h3>L1 · Wissen</h3>
           <ul>
-            <li>Bot Governance Lifecycle</li>
-            <li>Audit Trail &amp; Traceability</li>
+            <li>Bot Governance Lifecycle (Steuerungs-Lebenszyklus eines Bots von Idee bis Stilllegung)</li>
+            <li>Audit Trail &amp; Traceability (Rückverfolgbarkeit aller Schritte)</li>
             <li>Exception-Typen (Business/System/Data)</li>
             <li>Security by Design für Bots</li>
           </ul>
@@ -81,18 +81,18 @@
         <div class="merk-box">
           <h3>L2 · Anwendung</h3>
           <ul>
-            <li>Minimum Viable Governance entwerfen</li>
-            <li>Audit-Log-Schema definieren</li>
-            <li>Exception Codes + Playbooks</li>
+            <li>Minimum Viable Governance (minimal funktionsfähiges Regelwerk) entwerfen</li>
+            <li>Audit-Log-Schema (Protokoll-Aufbau für Prüfungen) definieren</li>
+            <li>Exception Codes + Playbooks (vordefinierte Handlungsleitfäden für Sonderfälle)</li>
             <li>Change-Paket: Kommunikation, Training</li>
           </ul>
         </div>
         <div class="merk-box">
           <h3>L3 · Management</h3>
           <ul>
-            <li>Risk Appetite &amp; Bot-Klassen</li>
-            <li>CoE vs. föderiert entscheiden</li>
-            <li>Anti-Gaming <abbr title="Key Performance Indicator – Messgröße zur Überwachung und Steuerung unternehmerischer Ziele">KPI</abbr>-Design</li>
+            <li>Risk Appetite (festgelegte Risikobereitschaft) &amp; Bot-Klassen</li>
+            <li>CoE (Center of Excellence, zentrales Kompetenzzentrum) vs. föderiert entscheiden</li>
+            <li>Anti-Gaming (gegen das Austricksen von Kennzahlen) <abbr title="Key Performance Indicator – Messgröße zur Überwachung und Steuerung unternehmerischer Ziele">KPI</abbr>-Design</li>
             <li>Audit-Readiness als System</li>
           </ul>
         </div>
@@ -171,14 +171,14 @@
       <h2>Minimum Viable Governance · sechs Rollen, vier Standards</h2>
       <table class="vs-table" style="margin-top:10px">
         <thead>
-          <tr><th>Rolle</th><th>Verantwortung</th><th>Accountability</th></tr>
+          <tr><th>Rolle</th><th>Verantwortung</th><th>Accountability (Rechenschaftspflicht)</th></tr>
         </thead>
         <tbody>
           <tr><th>Process Owner</th><td>fachliche Prozessregeln, Ausnahmen, <abbr title="Key Performance Indicators – Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele">KPIs</abbr></td><td>A · für Prozessergebnis</td></tr>
           <tr><th>Bot Owner</th><td>Bot läuft, <abbr title="Key Performance Indicators">KPIs</abbr>, Wartung, Incident</td><td>A · für Botbetrieb</td></tr>
           <tr><th>Developer</th><td>Build, Versionierung, Dokumentation</td><td>R · für Bot-Code</td></tr>
-          <tr><th>Reviewer / <abbr title="Quality Assurance">QA</abbr></th><td>Code-/Test-Review, Freigabe vor UAT</td><td>R · Qualität</td></tr>
-          <tr><th>Security Owner</th><td>Credentials, SoD, Logging, Baseline</td><td>A · Security/Audit</td></tr>
+          <tr><th>Reviewer / <abbr title="Quality Assurance">QA</abbr></th><td>Code-/Test-Review, Freigabe vor UAT (User Acceptance Test, Abnahmetest durch Anwender)</td><td>R · Qualität</td></tr>
+          <tr><th>Security Owner</th><td>Credentials (Zugangsdaten), SoD (Segregation of Duties, Funktionstrennung), Logging, Baseline (Sicherheits-Grundkonfiguration)</td><td>A · Security/Audit</td></tr>
           <tr><th>Operations / Run</th><td>Deploy, Monitoring, Incident-Response</td><td>R · Betrieb</td></tr>
         </tbody>
       </table>
@@ -207,7 +207,7 @@
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
-        Logs zentral · Zugriff role-based · Aufbewahrung 2–5 Jahre · append-only (unveränderbar).
+        Logs zentral · Zugriff role-based (rollenbasiert, nach Aufgabe) · Aufbewahrung 2–5 Jahre · append-only (nur Hinzufügen erlaubt, kein Löschen/Ändern).
       </div>
     </section>
 
@@ -262,31 +262,31 @@
       <h2>Security by Design · der Bot als privilegierter Mitarbeiter</h2>
       <div class="grid-2x2" style="margin-top:14px">
         <div class="merk-box">
-          <h3>Least Privilege</h3>
+          <h3>Least Privilege (Minimalrechte-Prinzip)</h3>
           <p>Bot-Accounts getrennt von Personenaccounts · nur Rechte, die er braucht · zeitlich begrenzt wo möglich.</p>
         </div>
         <div class="merk-box">
-          <h3>Credential Vault</h3>
-          <p>Secrets niemals im Code · zentraler Vault · Rotation automatisch · Audit-Trail für Secret-Zugriffe.</p>
+          <h3>Credential Vault (Tresor für Zugangsdaten)</h3>
+          <p>Secrets (Passwörter, Schlüssel) niemals im Code · zentraler Vault · Rotation (regelmäßiges Wechseln) automatisch · Audit-Trail für Secret-Zugriffe.</p>
         </div>
         <div class="merk-box">
-          <h3>Segregation of Duties</h3>
+          <h3>Segregation of Duties (Funktionstrennung)</h3>
           <p>Bot darf nicht „anlegen und freigeben“. Vier-Augen bleibt vier Augen – ein Bot ist nicht zwei Personen.</p>
         </div>
         <div class="merk-box">
-          <h3>Log-Integrität</h3>
-          <p>Append-only · Hash-Chain für kritische Logs · separater Zugriff für Sicherheitsteam &amp; Auditor.</p>
+          <h3>Log-Integrität (Unverfälschtheit der Protokolle)</h3>
+          <p>Append-only · Hash-Chain (kryptographisch verkettete Prüfsummen-Folge) für kritische Logs · separater Zugriff für Sicherheitsteam &amp; Auditor.</p>
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
-        PII-Awareness: Wer sieht im Log welche Daten? Pseudonymisieren wo möglich – DSGVO ist nicht optional.
+        PII-Awareness (Bewusstsein für personenbezogene Daten, Personally Identifiable Information): Wer sieht im Log welche Daten? Pseudonymisieren wo möglich – DSGVO (Datenschutz-Grundverordnung) ist nicht optional.
       </div>
     </section>
 
     <!-- Slide 8: Fallstudie PharmaDistrib -->
     <section class="slide" style="display:none">
       <h2>Fallstudie · PharmaDistrib (reguliert)</h2>
-      <p style="color:var(--color-muted)">10 Bots in 3 Monaten · Auditor fordert Traceability · Mitarbeitende verunsichert.</p>
+      <p style="color:var(--color-muted)">10 Bots in 3 Monaten · Auditor (Prüfer) fordert Traceability (Rückverfolgbarkeit jeder Bot-Aktion) · Mitarbeitende verunsichert.</p>
       <div class="grid-2" style="margin-top:14px">
         <div class="merk-box">
           <h3>Governance-Minimum</h3>
@@ -308,7 +308,7 @@
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px;font-size:18px">
-        <abbr title="Key Performance Indicator">KPI</abbr>: Exception Rate ≤ 12 % · MTTR &lt; 4h · Audit-Sample-Pass-Rate ≥ 95 %.
+        <abbr title="Key Performance Indicator">KPI</abbr>: Exception Rate ≤ 12 % · MTTR (Mean Time To Repair, durchschnittliche Reparaturdauer) &lt; 4h · Audit-Sample-Pass-Rate (Bestehensquote bei Stichproben-Audits) ≥ 95 %.
       </div>
     </section>
 
@@ -341,7 +341,7 @@
       <div class="grid-3" style="margin-top:14px">
         <div class="merk-box">
           <h3>Security Engpass</h3>
-          <p>Wenn jede Vault-Anbindung 4 Wochen dauert, sterben Bots im Backlog. Standard-Templates lösen es.</p>
+          <p>Wenn jede Vault-Anbindung 4 Wochen dauert, sterben Bots im Backlog (Stapel offener Arbeitspakete). Standard-Templates (Vorlagen) lösen es.</p>
         </div>
         <div class="merk-box">
           <h3><abbr title="Quality Assurance">QA</abbr> Engpass</h3>
@@ -368,7 +368,7 @@
           <tr><th>Durchsatz</th><td>schnell falsch buchen wird belohnt</td><td>Durchsatz <em>nur</em> gültig bei Fehlerquote &lt; 2 %</td></tr>
           <tr><th>Exception Rate</th><td>Exceptions werden „weggetrickst“</td><td>Stichprobe-Audit + Root-Cause-Pflicht</td></tr>
           <tr><th>MTTR</th><td>schnelle Symptom-Fixes statt Lösung</td><td>Recurring-Incident-Quote als Gegen-<abbr title="Key Performance Indicator">KPI</abbr></td></tr>
-          <tr><th>Cost Saving</th><td>Bot-Friedhof bleibt unsichtbar</td><td>nur Bots mit aktivem Lauf zählen · Retire-Quote</td></tr>
+          <tr><th>Cost Saving (Kosteneinsparung)</th><td>Bot-Friedhof bleibt unsichtbar</td><td>nur Bots mit aktivem Lauf zählen · Retire-Quote (Stilllegungs-Anteil)</td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
@@ -415,7 +415,7 @@
           <p>Bot stoppt bei Exception-Rate &gt; 25 % oder 3 Critical-Incidents/Monat. Schriftlich, mit Owner.</p>
         </div>
         <div class="merk-box">
-          <h3>Human-in-the-Loop</h3>
+          <h3>Human-in-the-Loop (Mensch im Prozess als Freigeber)</h3>
           <p>Pflicht für Beträge über Schwelle, für PII-sensible Aktionen, für irreversible Buchungen.</p>
         </div>
       </div>

@@ -67,7 +67,7 @@
           <ul>
             <li>Stakeholder-Matrix (Einfluss × Interesse)</li>
             <li><abbr title="Key Performance Indicator – Messgröße zur Überwachung und Steuerung unternehmerischer Ziele">KPI</abbr>-Ebenen Outcome/Output/Prozess/Risiko</li>
-            <li>SOA-Grenzen: Kohäsion, Kopplung, Vertrag</li>
+            <li>SOA (Service-Oriented Architecture, dienstorientierte Architektur)-Grenzen: Kohäsion, Kopplung, Vertrag</li>
             <li>Workflow-Bausteine: <abbr title="Service Level Agreement – Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen">SLA</abbr>, Eskalation, Audit</li>
           </ul>
         </div>
@@ -147,9 +147,9 @@
           <tr><th>Ebene</th><th>Frage</th><th>Beispiel</th><th>Typ</th></tr>
         </thead>
         <tbody>
-          <tr><th>Outcome</th><td>Welcher Kundennutzen?</td><td><abbr title="Net Promoter Score – Kennzahl für Kundenloyalität: Weiterempfehlungsbereitschaft auf einer Skala 0–10">NPS</abbr>, Wiederkaufrate</td><td>Lagging</td></tr>
+          <tr><th>Outcome</th><td>Welcher Kundennutzen?</td><td><abbr title="Net Promoter Score – Kennzahl für Kundenloyalität: Weiterempfehlungsbereitschaft auf einer Skala 0–10">NPS</abbr>, Wiederkaufrate</td><td>Lagging (nachlaufend)</td></tr>
           <tr><th>Output</th><td>Wie viel produzieren wir?</td><td>Anzahl freigegebener Konzepte</td><td>Lagging</td></tr>
-          <tr><th>Prozess</th><td>Wie schnell, sauber, wirtschaftlich?</td><td>Lead Time, Rework, Cost-per-Case</td><td>Leading + Lagging</td></tr>
+          <tr><th>Prozess</th><td>Wie schnell, sauber, wirtschaftlich?</td><td>Lead Time (Durchlaufzeit), Rework (Nacharbeit), Cost-per-Case (Kosten pro Vorgang)</td><td>Leading (vorlaufend) + Lagging</td></tr>
           <tr><th>Risiko / Compliance</th><td>Welche Fehler / Audit-Findings?</td><td>Sonderfreigaben, Findings, Fehlerquote</td><td>Leading</td></tr>
         </tbody>
       </table>
@@ -167,7 +167,7 @@
           <tr><th>Definition</th><td>Median(Timestamp Gate-Freigabe – Timestamp Idee-Eingang)</td></tr>
           <tr><th>Datenquelle</th><td>Ticketing-System (Pflichtfelder), wöchentliche Aktualisierung</td></tr>
           <tr><th>Frequenz</th><td>wöchentlich · Trend auf Quartalsebene</td></tr>
-          <tr><th>Owner</th><td>PMO · Eskalation an CDO</td></tr>
+          <tr><th>Owner</th><td>PMO (Project Management Office) · Eskalation an CDO (Chief Digital Officer)</td></tr>
           <tr><th>Ziel / Schwelle</th><td>–20 % in 10 Wochen · Schwelle 14 Tage Median</td></tr>
           <tr><th>Manipulationsrisiko</th><td>„Schnell schließen ohne Qualität“ – Kopplung mit Gate-Pass-Rate &amp; Rework-Rate als Gegenmaßnahme</td></tr>
         </tbody>
@@ -194,9 +194,9 @@
           <h3>Beispiele AeroTech</h3>
           <ul>
             <li>Service „Idee erfassen“ → Idea-ID, Owner PM</li>
-            <li>Service „Business Case bewerten“ → Score, Finance</li>
-            <li>Service „Prototyp planen“ → Plan/<abbr title="Service Level Agreement">SLA</abbr>, F&amp;E</li>
-            <li>Service „Qualitätsnachweis erzeugen“ → Evidence, QM</li>
+            <li>Service „Business Case (Wirtschaftlichkeitsanalyse) bewerten“ → Score, Finance</li>
+            <li>Service „Prototyp planen“ → Plan/<abbr title="Service Level Agreement">SLA</abbr>, F&amp;E (Forschung &amp; Entwicklung)</li>
+            <li>Service „Qualitätsnachweis erzeugen“ → Evidence, QM (Qualitätsmanagement)</li>
             <li>Service „Freigabe orchestrieren“ → Freigabe, Board</li>
           </ul>
         </div>
@@ -208,7 +208,7 @@
 
     <section class="slide" style="display:none">
       <h2>Workflow · Soll-Logik AeroTech</h2>
-      <p style="color:var(--color-muted)">Ein Workflow ist ein Vertrag: Aufgaben, Rollen, Regeln, Eskalation, Audit Trail.</p>
+      <p style="color:var(--color-muted)">Ein Workflow ist ein Vertrag: Aufgaben, Rollen, Regeln, Eskalation, Audit Trail (lückenloser Nachweispfad).</p>
       <div class="diagram-box" style="margin-top:14px">
         <svg width="100%" viewBox="0 0 920 230" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -271,7 +271,7 @@
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
-        Falle: „Microservices = Choreographie“. Nein. Microservices können auch orchestriert werden.
+        Falle: „Microservices (kleine, unabhängige Dienste) = Choreographie“. Nein. Microservices können auch orchestriert werden.
       </div>
     </section>
 

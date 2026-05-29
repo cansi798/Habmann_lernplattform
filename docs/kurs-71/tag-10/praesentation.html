@@ -77,7 +77,7 @@
     <section class="slide">
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 4 · Tag 10 von 16 · Kurs 71 (Dig 42) · 11. Juni 2026</div>
-      <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0">Microservices, K8s, <abbr title="Test-Driven Development – Entwicklungsmethode: Tests werden vor dem eigentlichen Programmcode geschrieben">TDD</abbr> &amp; DevOps</h2>
+      <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0">Microservices (kleine eigenständige Dienste), K8s (Kubernetes), <abbr title="Test-Driven Development – Entwicklungsmethode: Tests werden vor dem eigentlichen Programmcode geschrieben">TDD</abbr> &amp; DevOps (Development + Operations)</h2>
       <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Skalierbare digitale Prozessarchitektur bauen und verantworten – Servicegrenzen, Orchestrierung, Quality Gates und Operating Model.</p>
       <div style="margin-top:48px" class="accent-box">
         <span class="handwritten" style="color:#5a3a08;font-size:26px">Tag 10 von 16 · Wissen → Anwendung → Management</span>
@@ -93,7 +93,7 @@
           <h3>L1 · Wissen</h3>
           <ul>
             <li>Microservices: Nutzen, Risiken, Servicegrenzen</li>
-            <li>Container &amp; Kubernetes konzeptionell</li>
+            <li>Container (Verpackungs-Format für Anwendungen) &amp; Kubernetes (Orchestrierungs-Plattform) konzeptionell</li>
             <li><abbr title="Test-Driven Development">TDD</abbr> &amp; Testpyramide</li>
             <li>DevOps-Prinzipien &amp; Operating Model</li>
           </ul>
@@ -103,7 +103,7 @@
           <ul>
             <li>Prozess in Services schneiden</li>
             <li>Release-Flow + Quality Gates entwerfen</li>
-            <li>SLOs &amp; <abbr title="Minimum Viable Product – Erste marktreife Produktversion mit minimalem Funktionsumfang">MVP</abbr>-Risikoplan formulieren</li>
+            <li>SLOs (Service Level Objectives – messbare Service-Ziele) &amp; <abbr title="Minimum Viable Product – Erste marktreife Produktversion mit minimalem Funktionsumfang">MVP</abbr>-Risikoplan formulieren</li>
             <li>Exception/Rollback-Logik definieren</li>
           </ul>
         </div>
@@ -130,18 +130,18 @@
         <div class="merk-box">
           <h3>Versprechen</h3>
           <ul>
-            <li>Unabhängige Deployments &amp; Releases</li>
+            <li>Unabhängige Deployments (Auslieferungen) &amp; Releases (Versions-Freigaben)</li>
             <li>Skalierung nach Bedarf (vertikal/horizontal)</li>
             <li>Klare Verantwortungsgrenzen je Team</li>
-            <li>Polyglott: passendes Tool je Service</li>
+            <li>Polyglott (mehrsprachig, d.h. unterschiedliche Programmiersprachen erlaubt): passendes Tool je Service</li>
           </ul>
         </div>
         <div class="merk-box">
           <h3>Schulden</h3>
           <ul>
             <li>Verteilte Fehler &amp; Latenzen</li>
-            <li>Observability wird Pflicht (Logs, Traces, Metrics)</li>
-            <li>Versionierung &amp; Idempotenz nötig</li>
+            <li>Observability (Beobachtbarkeit des Systems) wird Pflicht (Logs, Traces, Metrics)</li>
+            <li>Versionierung &amp; Idempotenz (d.h. mehrfacher Aufruf hat gleichen Effekt wie einer) nötig</li>
             <li>Komplexität in Betrieb, <abbr title="Continuous Integration – Entwicklungspraxis: Codeänderungen werden regelmäßig automatisch getestet und integriert">CI</abbr>/<abbr title="Continuous Deployment – Automatisierte Auslieferung validierter Software-Änderungen direkt in die Produktion">CD</abbr>, Security</li>
           </ul>
         </div>
@@ -153,7 +153,7 @@
 
     <!-- Slide 4: Service-Schnitt-Architektur (SVG) -->
     <section class="slide" style="display:none">
-      <h2>Service-Schnitt · Order-to-Cash als Beispiel</h2>
+      <h2>Service-Schnitt · Order-to-Cash (Bestellung-bis-Zahlungseingang) als Beispiel</h2>
       <p style="color:var(--color-muted)">Ein Monolith → 6 Services entlang der Geschäftsfähigkeiten.</p>
       <div class="diagram-box" style="margin-top:14px">
         <svg width="100%" viewBox="0 0 860 240" xmlns="http://www.w3.org/2000/svg">
@@ -212,15 +212,15 @@
       <div class="grid-3" style="margin-top:14px">
         <div class="merk-box">
           <h3>1 · Idempotenz</h3>
-          <p>Anfragen können doppelt eintreffen. Operations brauchen Idempotency-Key, Service merkt verarbeitete Keys.</p>
+          <p>Anfragen können doppelt eintreffen. Operations brauchen Idempotency-Key (eindeutiger Anfrage-Schlüssel), Service merkt verarbeitete Keys.</p>
         </div>
         <div class="merk-box">
           <h3>2 · Versionierung</h3>
-          <p>APIs ändern sich, Konsumenten dürfen nicht brechen. v1/v2 mit Migrationsfrist, klare Deprecation-Policy.</p>
+          <p>APIs (Programmier-Schnittstellen) ändern sich, Konsumenten dürfen nicht brechen. v1/v2 mit Migrationsfrist, klare Deprecation-Policy (Abkündigungs-Regel).</p>
         </div>
         <div class="merk-box">
           <h3>3 · Verteilte Fehler</h3>
-          <p>„Habe gespeichert“ kann Lüge sein. Circuit Breaker, Timeouts, Retries mit Backoff, Dead-Letter-Queues.</p>
+          <p>„Habe gespeichert“ kann Lüge sein. Circuit Breaker (Sicherung gegen kaputte Dienste), Timeouts (Zeit-Limits), Retries (Wiederholungen) mit Backoff (zunehmender Wartezeit), Dead-Letter-Queues (Auffang-Warteschlange für unzustellbare Nachrichten).</p>
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
@@ -235,7 +235,7 @@
       <div class="grid-2x2" style="margin-top:14px">
         <div class="merk-box">
           <h3>Deploy</h3>
-          <p>Rollouts, Rollbacks, Blue/Green, Canary – Versionswechsel ohne Downtime.</p>
+          <p>Rollouts (gestaffelte Auslieferung), Rollbacks (Rücknahmen), Blue/Green (zwei parallele Umgebungen), Canary (Test an Teilnutzerschaft) – Versionswechsel ohne Downtime (Ausfallzeit).</p>
         </div>
         <div class="merk-box">
           <h3>Scale</h3>
@@ -243,7 +243,7 @@
         </div>
         <div class="merk-box">
           <h3>Heal</h3>
-          <p>Self-Healing: ausgefallene Pods werden neu gestartet, Health-Checks definieren „gesund“.</p>
+          <p>Self-Healing (Selbst-Heilung): ausgefallene Pods (kleinste Lauf-Einheiten in Kubernetes) werden neu gestartet, Health-Checks (Gesundheits-Prüfungen) definieren „gesund“.</p>
         </div>
         <div class="merk-box">
           <h3>Discover</h3>
@@ -280,7 +280,7 @@
         </svg>
       </div>
       <div class="accent-box" style="margin-top:10px;font-size:18px">
-        Anti-Pattern: umgekehrte Pyramide (viele E2E, wenige Units) – teuer, fragil, lange Pipelines.
+        Anti-Pattern: umgekehrte Pyramide (viele E2E (End-to-End-Tests, also volle Durchläufe), wenige Units) – teuer, fragil, lange Pipelines.
       </div>
     </section>
 
@@ -315,7 +315,7 @@
         </div>
         <div class="merk-box">
           <h3>Plattformteam</h3>
-          <p>Liefert Standards: <abbr title="Continuous Integration">CI</abbr>/<abbr title="Continuous Deployment">CD</abbr>-Templates, Observability-Baseline, Kubernetes-Basis, GitOps.</p>
+          <p>Liefert Standards: <abbr title="Continuous Integration">CI</abbr>/<abbr title="Continuous Deployment">CD</abbr>-Templates, Observability-Baseline, Kubernetes-Basis, GitOps (d.h. Git-Repository ist die einzige Quelle der Wahrheit für Infrastruktur).</p>
         </div>
         <div class="merk-box">
           <h3>Security / Compliance</h3>
@@ -428,7 +428,7 @@
             <li>5–7 Services entlang Schadenkette</li>
             <li>Canary + Auto-Scaling auf Queue-Tiefe</li>
             <li><abbr title="Test-Driven Development">TDD</abbr> für Kernlogik, E2E nur Happy + Fraud</li>
-            <li>Anti-Corruption-Layer vor Legacy-DB</li>
+            <li>Anti-Corruption-Layer (Schutzschicht, die fremde Daten-Modelle übersetzt) vor Legacy-DB (Alt-Datenbank)</li>
           </ul>
         </div>
       </div>

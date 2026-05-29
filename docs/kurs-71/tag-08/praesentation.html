@@ -51,10 +51,10 @@
     <section class="slide">
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 3 · Tag 8 von 16 · Kurs 71 (Dig 42) · 9. Juni 2026</div>
-      <h2 class="handwritten" style="font-size:44px;line-height:1.05;color:var(--kurs-71);margin:0">Enhancement · Predictive · <abbr title="Business Intelligence – Technologien und Methoden zur Analyse und Aufbereitung von Unternehmensdaten">BI</abbr></h2>
+      <h2 class="handwritten" style="font-size:44px;line-height:1.05;color:var(--kurs-71);margin:0">Enhancement (Modell-Anreicherung) · Predictive (Vorhersage) · <abbr title="Business Intelligence – Technologien und Methoden zur Analyse und Aufbereitung von Unternehmensdaten">BI</abbr></h2>
       <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Vom „Ist verstehen“ zum „Zukunft steuern“ – <abbr title="Data Warehouse – Zentrales Datenlager, das Daten aus verschiedenen Quellen für Analysen konsolidiert">DWH</abbr>/<abbr title="Extract, Transform, Load – Prozess zur Datenintegration: Extraktion, Umwandlung und Laden in ein Zielsystem">ETL</abbr> und Dashboards als Frühwarnsystem.</p>
       <div style="margin-top:48px" class="accent-box">
-        <span class="handwritten" style="color:#5a3a08;font-size:26px">Predictive ohne Playbook ist wertlos. Alert → Owner → Handlung.</span>
+        <span class="handwritten" style="color:#5a3a08;font-size:26px">Predictive ohne Playbook (Handlungsdrehbuch) ist wertlos. Alert (Warnsignal) → Owner (Verantwortlicher) → Handlung.</span>
       </div>
     </section>
 
@@ -67,14 +67,14 @@
             <li>Enhancement: Modell mit Zeiten/Kosten anreichern</li>
             <li><abbr title="Machine Learning – Teilgebiet der KI: Systeme erkennen Muster in Daten und lernen daraus">ML</abbr>-Typen im Prozess: Klassif. · Regression · Cluster · Anomalie</li>
             <li><abbr title="Data Warehouse">DWH</abbr>/ETL für Prozessdaten</li>
-            <li>Real-time Monitoring &amp; Drift</li>
+            <li>Real-time Monitoring (Echtzeit-Überwachung) &amp; Drift (Modell-Veralterung)</li>
           </ul>
         </div>
         <div class="merk-box">
           <h3>L2 · Anwendung</h3>
           <ul>
-            <li>Predictive Use Case Canvas füllen</li>
-            <li>Baseline-Heuristik formulieren</li>
+            <li>Predictive Use Case Canvas (Vorhersage-Anwendungsfall-Vorlage) füllen</li>
+            <li>Baseline-Heuristik (einfache Grundregel) formulieren</li>
             <li><abbr title="Extract, Transform, Load">ETL</abbr>-Pipeline in 6 Schritten</li>
             <li><abbr title="Business Intelligence">BI</abbr>-Dashboard mit 6 Kacheln</li>
           </ul>
@@ -82,7 +82,7 @@
         <div class="merk-box">
           <h3>L3 · Management</h3>
           <ul>
-            <li>False Positive vs. False Negative bewerten</li>
+            <li>False Positive (Fehlalarm) vs. False Negative (übersehener Fall) bewerten</li>
             <li>Anti-Gaming-Kopplungen</li>
             <li>Alarmmüdigkeit verhindern</li>
             <li>Modell-Governance &amp; Drift-Plan</li>
@@ -115,11 +115,11 @@
         <div class="merk-box">
           <h3>Anomalieerkennung</h3>
           <p><strong>Frage:</strong> Was ist ungewöhnlich?</p>
-          <p style="font-size:13px;color:var(--color-muted)">Manipulation, seltene Pfade, Fehler</p>
+          <p style="font-size:13px;color:var(--color-muted)">Manipulation (absichtliche Datenfälschung), seltene Pfade, Fehler</p>
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
-        Grenzen: Datenqualität · Konzeptdrift · Erklärbarkeit · Fehlanreize (Gaming). Alle vier <strong>messen</strong>.
+        Grenzen: Datenqualität · Konzeptdrift · Erklärbarkeit · Fehlanreize (Gaming, d.h. Tricksen am Kennzahlsystem). Alle vier <strong>messen</strong>.
       </div>
     </section>
 
@@ -130,14 +130,14 @@
         <tbody>
           <tr><th>1 · Zielentscheidung</th><td>Welches Ticket eskalieren wir, wer übernimmt?</td></tr>
           <tr><th>2 · Prognose</th><td>Wahrscheinlichkeit <abbr title="Service Level Agreement">SLA</abbr>-Breach in den nächsten 4 h</td></tr>
-          <tr><th>3 · Handlung</th><td>Risk &gt; 0,8 → Duty Manager + Fast Triage 15 min</td></tr>
-          <tr><th>4 · Datenminimum</th><td>Priorität · Alter · Service · Reassignments · Queue</td></tr>
-          <tr><th>5 · Risiko / Compliance</th><td>Kein automatisches Schließen · Audit Log Pflicht</td></tr>
+          <tr><th>3 · Handlung</th><td>Risk &gt; 0,8 → Duty Manager (Bereitschafts-Manager) + Fast Triage (Schnell-Priorisierung) 15 min</td></tr>
+          <tr><th>4 · Datenminimum</th><td>Priorität · Alter · Service · Reassignments (Weiterleitungen) · Queue (Warteschlange)</td></tr>
+          <tr><th>5 · Risiko / Compliance</th><td>Kein automatisches Schließen · Audit Log (revisionssicheres Protokoll) Pflicht</td></tr>
           <tr><th>6 · Erfolgskriterium</th><td>–25 % <abbr title="Service Level Agreement">SLA</abbr>-Verletzungen · gleichbleibende <abbr title="Net Promoter Score – Kennzahl für Kundenloyalität: Weiterempfehlungsbereitschaft auf einer Skala 0–10">NPS</abbr></td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
-        Baseline-Heuristik: „Ticket Age &gt; 70 % <abbr title="Service Level Agreement">SLA</abbr> &amp; Reassignments &gt; 2 → markieren“. Funktioniert ohne <abbr title="Machine Learning">ML</abbr>.
+        Baseline-Heuristik: „Ticket Age (Ticket-Alter) &gt; 70 % <abbr title="Service Level Agreement">SLA</abbr> &amp; Reassignments &gt; 2 → markieren“. Funktioniert ohne <abbr title="Machine Learning">ML</abbr>.
       </div>
     </section>
 
@@ -185,7 +185,7 @@
     <section class="slide" style="display:none">
       <h2><abbr title="Business Intelligence">BI</abbr>-Dashboard · sechs Kacheln</h2>
       <div class="grid-3" style="margin-top:16px">
-        <div class="merk-box"><h3>Exec <abbr title="Key Performance Indicator – Messgröße zur Überwachung und Steuerung unternehmerischer Ziele">KPI</abbr> 1</h3><p style="font-size:13px">Lead Time vs. Ziel · Trend 8 Wochen</p></div>
+        <div class="merk-box"><h3>Exec <abbr title="Key Performance Indicator – Messgröße zur Überwachung und Steuerung unternehmerischer Ziele">KPI</abbr> 1</h3><p style="font-size:13px">Lead Time (Durchlaufzeit) vs. Ziel · Trend 8 Wochen</p></div>
         <div class="merk-box"><h3>Exec <abbr title="Key Performance Indicator">KPI</abbr> 2</h3><p style="font-size:13px"><abbr title="Service Level Agreement">SLA</abbr>-Einhaltung gesamt · Heatmap</p></div>
         <div class="merk-box"><h3>Prozess-<abbr title="Key Performance Indicator">KPI</abbr> A</h3><p style="font-size:13px">Top-10 Risikotickets jetzt</p></div>
         <div class="merk-box"><h3>Prozess-<abbr title="Key Performance Indicator">KPI</abbr> B</h3><p style="font-size:13px">Reassignments pro Service</p></div>
@@ -193,7 +193,7 @@
         <div class="merk-box" style="background:#fde2dc;border-color:#b04030"><h3 style="color:#b04030">Alert / Aktion</h3><p style="font-size:13px;color:#b04030">Offene Alerts · Owner · Playbook-Link</p></div>
       </div>
       <div class="accent-box" style="margin-top:14px">
-        Gutes Dashboard: Trend · Ziel · Drilldown · <strong>Next best action</strong> – nicht nur „pretty pictures“.
+        Gutes Dashboard: Trend · Ziel · Drilldown (Detailansicht) · <strong>Next best action (nächste sinnvolle Maßnahme)</strong> – nicht nur „pretty pictures“.
       </div>
     </section>
 
@@ -203,8 +203,8 @@
         <thead><tr><th><abbr title="Key Performance Indicator">KPI</abbr></th><th>Mögliches Gaming</th><th>Anti-Gaming-Kopplung</th></tr></thead>
         <tbody>
           <tr><td><abbr title="Service Level Agreement">SLA</abbr>-Einhaltungsquote</td><td>schnell auf „erledigt“ setzen ohne Lösung</td><td>+ Re-Open-Rate &amp; Kundenzufriedenheit</td></tr>
-          <tr><td>Tickets / FTE / Tag</td><td>Tickets künstlich splitten</td><td>+ Bearbeitungszeit-Verteilung &amp; Rework-Rate</td></tr>
-          <tr><td>First-Pass-Yield</td><td>Komplexe Fälle vermeiden</td><td>+ Mix-Index (Komplexitäts-Anteil)</td></tr>
+          <tr><td>Tickets / FTE (Vollzeitäquivalent) / Tag</td><td>Tickets künstlich splitten</td><td>+ Bearbeitungszeit-Verteilung &amp; Rework-Rate</td></tr>
+          <tr><td>First-Pass-Yield (Erstdurchlauf-Erfolgsquote)</td><td>Komplexe Fälle vermeiden</td><td>+ Mix-Index (Komplexitäts-Anteil)</td></tr>
           <tr><td>Lead Time</td><td>Tickets vor Eingangsbuchung „warm halten“</td><td>+ Eingangs-vs-Erstkontakt-Zeit</td></tr>
         </tbody>
       </table>
@@ -215,10 +215,10 @@
 
     <section class="slide" style="display:none">
       <h2>Fallstudie · FinServe <abbr title="Service Level Agreement">SLA</abbr>-Frühwarnsystem</h2>
-      <p style="color:var(--color-muted)">8 Wochen, 120k Budget. Labels (Breach) unvollständig. Misstrauen wegen „Überwachung“.</p>
+      <p style="color:var(--color-muted)">8 Wochen, 120k Budget. Labels (Zielwerte/Klassifizierungen) für Breach (Verletzung) unvollständig. Misstrauen wegen „Überwachung“.</p>
       <div class="grid-2" style="margin-top:14px">
         <div class="merk-box">
-          <h3>Features (Auswahl)</h3>
+          <h3>Features (Eingangsmerkmale) (Auswahl)</h3>
           <ul>
             <li>Priority · Ticket Age · Queue · Reassignments</li>
             <li>Service · Category · Open Incidents per Service</li>
@@ -255,16 +255,16 @@
       <p style="color:var(--color-muted)">Modelle altern – das ist kein Versagen, das ist Realität. Pflichtprogramm fürs Operating Model.</p>
       <div class="grid-3" style="margin-top:16px">
         <div class="merk-box">
-          <h3>Data Drift</h3>
+          <h3>Data Drift (Datenverschiebung)</h3>
           <p style="font-size:13px">Verteilung der Eingangsfeatures verschiebt sich – neue Kundengruppe, neuer Kanal.</p>
         </div>
         <div class="merk-box">
-          <h3>Concept Drift</h3>
+          <h3>Concept Drift (Konzept-Verschiebung)</h3>
           <p style="font-size:13px">Zusammenhang Feature → Label ändert sich – z. B. neuer Geschäftsprozess, neue Regulierung.</p>
         </div>
         <div class="merk-box">
           <h3>Performance Drift</h3>
-          <p style="font-size:13px">Accuracy / Recall sinkt – Modell trifft schlechtere Vorhersagen ohne offensichtlichen Grund.</p>
+          <p style="font-size:13px">Accuracy (Trefferquote) / Recall (Trefferabdeckung) sinkt – Modell trifft schlechtere Vorhersagen ohne offensichtlichen Grund.</p>
         </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
@@ -276,7 +276,7 @@
       <h2>Management · drei Pflicht-Entscheidungen</h2>
       <div class="grid-3" style="margin-top:16px">
         <div class="merk-box">
-          <h3>FP vs. FN</h3>
+          <h3>FP (False Positive) vs. FN (False Negative)</h3>
           <p style="font-size:14px">Welche falsche Entscheidung kostet mehr (Eskalation ohne Grund vs. übersehener Breach)?</p>
         </div>
         <div class="merk-box">

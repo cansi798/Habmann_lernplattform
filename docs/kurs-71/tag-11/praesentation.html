@@ -58,7 +58,7 @@
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 5 · Tag 11 von 16 · Kurs 71 (Dig 42) · 12. Juni 2026</div>
       <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0"><abbr title="Robotic Process Automation – Softwarebasierte Automatisierung repetitiver, regelbasierter Aufgaben">RPA</abbr> als Steuerungs- und Risikohebel</h2>
-      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Plattformüberblick · Attended vs. Unattended · Use-Case-Eignung · Entscheidung unter Unsicherheit.</p>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Plattformüberblick · Attended (Bot mit Mensch am Arbeitsplatz) vs. Unattended (Bot auf Server, autonom) · Use-Case-Eignung (Einsatzfall-Tauglichkeit) · Entscheidung unter Unsicherheit.</p>
       <div style="margin-top:48px" class="accent-box">
         <span class="handwritten" style="color:#5a3a08;font-size:26px">Tag 11 von 16 · Produktivität ohne Klick-Magie</span>
       </div>
@@ -81,18 +81,18 @@
         <div class="merk-box">
           <h3>L2 · Anwendung</h3>
           <ul>
-            <li>Eignungs-Scoring für Use Cases</li>
+            <li>Eignungs-Scoring (Punktebewertung) für Use Cases (Anwendungsfälle)</li>
             <li>Stufenplan Attended → Unattended</li>
-            <li>Bot-Flow mit Exception Queue entwerfen</li>
+            <li>Bot-Flow mit Exception Queue (Ausnahme-Warteschlange für Sonderfälle) entwerfen</li>
             <li>3 <abbr title="Key Performance Indicators – Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele">KPIs</abbr> definieren (Produktivität/Qualität/Risiko)</li>
           </ul>
         </div>
         <div class="merk-box">
           <h3>L3 · Management</h3>
           <ul>
-            <li>Automation Funnel &amp; Portfolio</li>
-            <li>Risk Appetite + Guardrails</li>
-            <li>Operating Model + <abbr title="Responsible, Accountable, Consulted, Informed – Verantwortungsmatrix zur Klärung von Rollen und Zuständigkeiten in Projekten">RACI</abbr></li>
+            <li>Automation Funnel (Trichter-Auswahlprozess für Automatisierungs-Ideen) &amp; Portfolio</li>
+            <li>Risk Appetite (Risikobereitschaft des Unternehmens) + Guardrails (verbindliche Leitplanken)</li>
+            <li>Operating Model (Betriebsmodell, d.h. Wer-macht-was-Architektur) + <abbr title="Responsible, Accountable, Consulted, Informed – Verantwortungsmatrix zur Klärung von Rollen und Zuständigkeiten in Projekten">RACI</abbr></li>
             <li>Skalierungs-Stop-Kriterien</li>
           </ul>
         </div>
@@ -175,7 +175,7 @@
         </svg>
       </div>
       <div class="accent-box" style="margin-top:10px;font-size:18px">
-        Low-Code lockt schnell – aber ohne Standards wird daraus Schatten-<abbr title="Informationstechnologie – Gesamtheit der Technologien zur Erfassung, Speicherung und Übertragung von Daten">IT</abbr>.
+        Low-Code (Entwicklung mit wenig Programmierung, meist per Klick-Baukasten) lockt schnell – aber ohne Standards wird daraus Schatten-<abbr title="Informationstechnologie – Gesamtheit der Technologien zur Erfassung, Speicherung und Übertragung von Daten">IT</abbr> (heimlich gebaute, unkontrollierte IT-Systeme).
       </div>
     </section>
 
@@ -191,8 +191,8 @@
           <tr><th>Skalierung</th><td>begrenzt (1 Bot pro Mensch)</td><td>hoch · 24/7-Betrieb möglich</td></tr>
           <tr><th>Anwendung</th><td>Assistenz, Teilschritte, Co-Pilot</td><td>vollautomatische Massenverarbeitung</td></tr>
           <tr><th>Betriebsrisiko</th><td>gering · Mensch sieht zu</td><td>höher · Bot kann skaliert falschbuchen</td></tr>
-          <tr><th>Governance-Bedarf</th><td>moderat</td><td>hoch · SoD, Audit, Logging, Eskalation</td></tr>
-          <tr><th>Einstieg</th><td>für PoC und unsichere Prozesse ideal</td><td>für stabile Prozesse mit hohem Volumen</td></tr>
+          <tr><th>Governance-Bedarf (Steuerung &amp; Kontrolle)</th><td>moderat</td><td>hoch · SoD (Segregation of Duties, Funktionstrennung), Audit, Logging, Eskalation</td></tr>
+          <tr><th>Einstieg</th><td>für PoC (Proof of Concept, Machbarkeitsnachweis) und unsichere Prozesse ideal</td><td>für stabile Prozesse mit hohem Volumen</td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
@@ -301,7 +301,7 @@
         </svg>
       </div>
       <div class="accent-box" style="margin-top:10px;font-size:18px">
-        Fail safe: Bot bricht kontrolliert ab, erzeugt Arbeitspaket – nicht Chaos.
+        Fail safe (sicheres Scheitern, d.h. bei Fehler kontrolliert stoppen): Bot bricht kontrolliert ab, erzeugt Arbeitspaket – nicht Chaos.
       </div>
     </section>
 
@@ -336,7 +336,7 @@
             <li>Zeitgewinn 30–70 % bei stabilen Prozessen</li>
             <li>Fehlerreduktion durch deterministische Logik</li>
             <li><abbr title="Service Level Agreement – Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen">SLA</abbr>-Stabilität, 24/7-Fähigkeit (unattended)</li>
-            <li>Audit Trail – wenn richtig gebaut</li>
+            <li>Audit Trail (lückenlose Nachweisspur aller Bot-Aktionen) – wenn richtig gebaut</li>
           </ul>
         </div>
         <div class="merk-box">
@@ -425,7 +425,7 @@
         </div>
         <div class="merk-box">
           <h3>Pflicht-Guardrails</h3>
-          <p>Vault statt Klartext-Credentials · Least Privilege · SoD-Regeln · Audit-Log unveränderbar · Stop-Schwelle.</p>
+          <p>Vault (verschlüsselter Passwort-Tresor) statt Klartext-Credentials (sichtbare Zugangsdaten) · Least Privilege (Minimalrechte-Prinzip) · SoD-Regeln · Audit-Log unveränderbar · Stop-Schwelle.</p>
         </div>
         <div class="merk-box">
           <h3><abbr title="Key Performance Indicator">KPI</abbr> gegen Gaming</h3>
@@ -447,10 +447,10 @@
         </div>
         <div class="merk-box">
           <h3>Risk Appetite</h3>
-          <p>Welche Bot-Klasse darf Fast Track? Ab welcher Exception-Rate wird gestoppt? Schriftlich.</p>
+          <p>Welche Bot-Klasse darf Fast Track (beschleunigtes Freigabe-Verfahren)? Ab welcher Exception-Rate wird gestoppt? Schriftlich.</p>
         </div>
         <div class="merk-box">
-          <h3>CoE vs. föderiert</h3>
+          <h3>CoE (Center of Excellence, zentrales Kompetenzzentrum) vs. föderiert</h3>
           <p>Center of Excellence sichert Standards · Fachbereiche besitzen Bots. Hybrid funktioniert am besten.</p>
         </div>
         <div class="merk-box">

@@ -64,10 +64,10 @@
         <div class="merk-box">
           <h3>L1 · Wissen</h3>
           <ul>
-            <li><abbr title="Business Process Management System">BPMS</abbr> Closed Loop: Modell · Ausführen · Messen · Verbessern</li>
+            <li><abbr title="Business Process Management System">BPMS</abbr> Closed Loop (geschlossener Regelkreis, in dem Messergebnisse zurück in die Verbesserung fließen): Modell · Ausführen · Messen · Verbessern</li>
             <li><abbr title="Application Programming Interface – Standardisierte Schnittstelle zur Kommunikation zwischen Softwaresystemen">API</abbr>-Vertrag: Endpoint, I/O, Fehler, Auth, Versionierung</li>
             <li>Sync vs. Async (Event/Message)</li>
-            <li>Cloud-native: stateless, Observability, Resilienz</li>
+            <li>Cloud-native (von Anfang an für die Cloud entworfen): stateless (zustandslos, d.h. ohne gespeicherten Sitzungszustand), Observability (Beobachtbarkeit über Logs/Metriken/Traces), Resilienz</li>
           </ul>
         </div>
         <div class="merk-box">
@@ -85,7 +85,7 @@
             <li>System of Record je Datenobjekt</li>
             <li>Architekturpfad event vs. sync</li>
             <li>Operating Model: zentral vs. dezentral</li>
-            <li><abbr title="Service Level Objective – Konkrete, messbare Zielgröße innerhalb eines SLA">SLO</abbr> &amp; Cost Awareness (FinOps light)</li>
+            <li><abbr title="Service Level Objective – Konkrete, messbare Zielgröße innerhalb eines SLA">SLO</abbr> &amp; Cost Awareness (FinOps light, d.h. finanzielle Steuerung von Cloud-Kosten in einfacher Form)</li>
           </ul>
         </div>
       </div>
@@ -134,13 +134,13 @@
       <h2><abbr title="Business Process Management System">BPMS</abbr>-Bausteine</h2>
       <div class="grid-4" style="margin-top:16px">
         <div class="merk-box"><h3>Engine</h3><p style="font-size:13px">Steuert Tokens, States, Variablen, Persistenz.</p></div>
-        <div class="merk-box"><h3>Worklist</h3><p style="font-size:13px">User Tasks, Queues, Assignment, Claim.</p></div>
-        <div class="merk-box"><h3>Rules</h3><p style="font-size:13px">DMN-Tabellen, Routing, Gateways.</p></div>
+        <div class="merk-box"><h3>Worklist (Aufgabenliste der zugewiesenen Tasks)</h3><p style="font-size:13px">User Tasks, Queues, Assignment, Claim.</p></div>
+        <div class="merk-box"><h3>Rules</h3><p style="font-size:13px">DMN (Decision Model and Notation, Standard für Entscheidungstabellen)-Tabellen, Routing, Gateways.</p></div>
         <div class="merk-box"><h3>Forms</h3><p style="font-size:13px"><abbr title="User Interface – Benutzeroberfläche; alle Elemente, über die Menschen mit einem System interagieren">UI</abbr>-Bausteine, Validierung, Datenbindung.</p></div>
         <div class="merk-box"><h3>Monitoring</h3><p style="font-size:13px">Cockpit, Alerts, Heatmaps, Dashboards.</p></div>
         <div class="merk-box"><h3>Audit Trail</h3><p style="font-size:13px">Wer hat wann was getan – revisionssicher.</p></div>
         <div class="merk-box"><h3>Versionierung</h3><p style="font-size:13px">Migration laufender Instanzen, Rollback.</p></div>
-        <div class="merk-box"><h3>Integration</h3><p style="font-size:13px">REST/Events, Connectoren, Adapter.</p></div>
+        <div class="merk-box"><h3>Integration</h3><p style="font-size:13px">REST (Representational State Transfer, Architekturstil für Web-APIs)/Events, Connectoren, Adapter.</p></div>
       </div>
     </section>
 
@@ -153,7 +153,7 @@
           <tr><th>Input</th><td>shipment_id (string · required), correlation_id (string)</td></tr>
           <tr><th>Output</th><td>status, eta, last_event_timestamp, source_system</td></tr>
           <tr><th>Fehlercodes</th><td>404 NotFound · 408 Timeout · 401 Unauthorized · 429 RateLimit</td></tr>
-          <tr><th>Auth</th><td>OAuth2 Client Credentials · Scope „shipment.read“</td></tr>
+          <tr><th>Auth</th><td>OAuth2 (offener Standard zur Autorisierung von API-Zugriffen) Client Credentials · Scope „shipment.read“</td></tr>
           <tr><th><abbr title="Service Level Agreement – Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen">SLA</abbr> / Limits</th><td>p95 &lt; 300 ms · 100 RPS · Idempotenz via correlation_id</td></tr>
           <tr><th>Versionierung</th><td>URI-Versioning v1, v2 parallel · Deprecation 6 Monate</td></tr>
         </tbody>
@@ -170,24 +170,24 @@
         <tbody>
           <tr><th>Latenz</th><td>antwortet sofort</td><td>kann Sekunden bis Minuten brauchen</td></tr>
           <tr><th>Kopplung</th><td>eng – Aufrufer wartet</td><td>lose – Sender feuert &amp; vergisst</td></tr>
-          <tr><th>Fehler</th><td>direkt sichtbar</td><td>Dead-Letter-Queue, Retry-Policy</td></tr>
+          <tr><th>Fehler</th><td>direkt sichtbar</td><td>Dead-Letter-Queue (Warteschlange für nicht zustellbare Nachrichten), Retry-Policy (Regelwerk für automatische Wiederholungsversuche)</td></tr>
           <tr><th>Skalierung</th><td>Aufrufer ist Engpass</td><td>Producer entkoppelt vom Consumer</td></tr>
           <tr><th>Typischer Use Case</th><td>„Status lesen“, „Bonität prüfen“</td><td>„Bestellung angelegt“, „Schaden gemeldet“</td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
-        Faustregel: Lesen sync, Schreiben/Domain-Events async. Aber: Idempotenz &amp; Correlation-IDs immer.
+        Faustregel: Lesen sync, Schreiben/Domain-Events async. Aber: Idempotenz (mehrfache Aufrufe führen zum gleichen Ergebnis) &amp; Correlation-IDs (Kennungen zur Verknüpfung zusammengehöriger Aufrufe) immer.
       </div>
     </section>
 
     <section class="slide" style="display:none">
       <h2>Cloud-native · sechs Prinzipien</h2>
       <div class="grid-3" style="margin-top:18px">
-        <div class="merk-box"><h3>Stateless</h3><p>Zustand in Datenbank/Stream, nicht im Prozess. Skaliert horizontal.</p></div>
-        <div class="merk-box"><h3>Containerisiert</h3><p>Immutable Images, reproduzierbare Deployments, Blue/Green oder Canary.</p></div>
+        <div class="merk-box"><h3>Stateless</h3><p>Zustand in Datenbank/Stream, nicht im Prozess. Skaliert horizontal (d.h. durch Hinzufügen weiterer Instanzen).</p></div>
+        <div class="merk-box"><h3>Containerisiert</h3><p>Immutable Images (unveränderliche Software-Pakete), reproduzierbare Deployments, Blue/Green (Parallelbetrieb alt/neu) oder Canary (stufenweiser Rollout an Teilnutzer).</p></div>
         <div class="merk-box"><h3>Observability</h3><p>Logs · Metrics · Traces – die drei Säulen jeder Diagnose.</p></div>
-        <div class="merk-box"><h3>Resilienz</h3><p>Retry · Circuit Breaker · Timeout · Bulkhead – Ausfälle eingrenzen.</p></div>
-        <div class="merk-box"><h3>Security by default</h3><p>Zero Trust · Secrets-Manager · IAM · Audit – kein Plain-Text-Passwort.</p></div>
+        <div class="merk-box"><h3>Resilienz</h3><p>Retry · Circuit Breaker (unterbricht Aufrufe bei wiederholtem Fehler) · Timeout · Bulkhead (Schottwand-Prinzip zur Fehlerisolation) – Ausfälle eingrenzen.</p></div>
+        <div class="merk-box"><h3>Security by default</h3><p>Zero Trust (niemandem im Netzwerk wird automatisch vertraut) · Secrets-Manager · IAM (Identity &amp; Access Management) · Audit – kein Plain-Text-Passwort.</p></div>
         <div class="merk-box"><h3><abbr title="Service Level Objective">SLO</abbr> / FinOps</h3><p>Service Level Objectives + Kostenbewusstsein – Performance hat einen Preis.</p></div>
       </div>
       <div class="accent-box" style="margin-top:14px">
@@ -236,7 +236,7 @@
         <div class="merk-box">
           <h3><abbr title="Business Process Management System">BPMS</abbr>-Kern (Soll)</h3>
           <ul>
-            <li>Start: ExceptionRaised Event aus TMS</li>
+            <li>Start: ExceptionRaised Event aus TMS (Transport Management System, Software zur Steuerung von Transporten)</li>
             <li>Klassifizieren → <abbr title="Exclusive Or (Exklusives Oder) – Logischer Operator: genau eine von mehreren Bedingungen trifft zu (BPMN-Gateway)">XOR</abbr> kritisch?</li>
             <li><abbr title="Service Level Agreement">SLA</abbr> Erstreaktion 2 h · Lösung 24 h</li>
             <li>Eskalation nach 4 h an Duty Manager</li>

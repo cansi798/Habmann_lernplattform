@@ -51,7 +51,7 @@
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Lernplatt · by Can Siebert</div>
       <div style="font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:24px">Modul 2 · Tag 4 von 16 · Kurs 71 (Dig 42) · 2. Juni 2026</div>
       <h2 class="handwritten" style="font-size:48px;line-height:1.05;color:var(--kurs-71);margin:0">Repository &amp; Execution</h2>
-      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Vom Prozessbild zum steuerbaren System – Single Source of Truth + Workflow-Engine (Camunda-Style).</p>
+      <p style="font-size:20px;color:var(--color-muted);margin-top:24px;max-width:720px">Vom Prozessbild zum steuerbaren System – Single Source of Truth (eine verbindliche Wahrheits-Quelle) + Workflow-Engine (Camunda-Style).</p>
       <div style="margin-top:48px" class="accent-box">
         <span class="handwritten" style="color:#5a3a08;font-size:26px">Repository steuert Transparenz. Execution steuert Durchlaufzeit. Beides braucht Owner.</span>
       </div>
@@ -64,7 +64,7 @@
           <h3>L1 · Wissen</h3>
           <ul>
             <li>Repository als Single Source of Truth</li>
-            <li>3 Ebenen: E2E → Subprozess → Artefakt</li>
+            <li>3 Ebenen: E2E (End-to-End, durchgängig) → Subprozess → Artefakt</li>
             <li>Business-<abbr title="Business Process Model and Notation – Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)">BPMN</abbr> vs. Execution-<abbr title="Business Process Model and Notation">BPMN</abbr></li>
             <li>User Task / Service Task / Events / Variablen</li>
           </ul>
@@ -171,7 +171,7 @@
           <tr><th>Tasks</th><td>„Rechnung prüfen“</td><td>User Task vs. Service Task</td></tr>
           <tr><th>Events</th><td>„Erinnerung“</td><td>Timer / Message / Error / Escalation</td></tr>
           <tr><th>Daten</th><td>im Kopf</td><td>Variablen, Schemas, APIs</td></tr>
-          <tr><th>Fehler</th><td>„Sonderfall“</td><td>Boundary Events, Compensation</td></tr>
+          <tr><th>Fehler</th><td>„Sonderfall“</td><td>Boundary Events (Begrenzungs-Ereignisse), Compensation (Rücknahme)</td></tr>
           <tr><th>Verbindlichkeit</th><td>Kommunikationsmodell</td><td>ausführbarer Vertrag</td></tr>
         </tbody>
       </table>
@@ -237,7 +237,7 @@
       <p style="color:var(--color-muted)">Drei Fragen, bevor man automatisiert.</p>
       <div class="grid-3" style="margin-top:16px">
         <div class="merk-box"><h3>1 · Klarer Start &amp; Ende</h3><p>Was triggert den Slice? Wann ist er fertig? Beides ohne „kommt drauf an“.</p></div>
-        <div class="merk-box"><h3>2 · Klare Daten</h3><p>Welche Felder muss der Workflow zwingend kennen? (z. B. Betrag, KSt, Freigeber).</p></div>
+        <div class="merk-box"><h3>2 · Klare Daten</h3><p>Welche Felder muss der Workflow zwingend kennen? (z. B. Betrag, KSt (Kostenstelle), Freigeber).</p></div>
         <div class="merk-box"><h3>3 · Klare Fehlerfälle</h3><p>Was tun, wenn Daten fehlen, <abbr title="Application Programming Interface">API</abbr> hängt, Timeout passiert?</p></div>
       </div>
       <div class="accent-box" style="margin-top:14px">
@@ -250,11 +250,11 @@
       <table class="vs-table" style="margin-top:10px">
         <thead><tr><th>Dimension</th><th>Repository</th><th>Execution (<abbr title="Business Process Management System – Softwareplattform zur Modellierung, Ausführung und Überwachung von Geschäftsprozessen">BPMS</abbr>)</th></tr></thead>
         <tbody>
-          <tr><th>Hebel</th><td>Transparenz, Konsistenz, Audit</td><td>Durchlaufzeit, Qualität, Audit Trail</td></tr>
+          <tr><th>Hebel</th><td>Transparenz, Konsistenz, Audit</td><td>Durchlaufzeit, Qualität, Audit Trail (lückenloser Nachweispfad)</td></tr>
           <tr><th>Wirkung</th><td>langsam, organisationsweit</td><td>schnell, prozessspezifisch</td></tr>
           <tr><th>Risiko</th><td>tote Ablage ohne Owner</td><td>Engine ohne Modell = teurer Schrott</td></tr>
           <tr><th>Owner</th><td>Process Owner</td><td>Automation Owner + <abbr title="Informationstechnologie – Gesamtheit der Technologien zur Erfassung, Speicherung und Übertragung von Daten">IT</abbr></td></tr>
-          <tr><th>Investitionsschutz</th><td>Standards, Naming, Lifecycle</td><td>Versionierung, Migration, Rollback</td></tr>
+          <tr><th>Investitionsschutz</th><td>Standards, Naming (Benennungs-Konvention), Lifecycle (Lebenszyklus)</td><td>Versionierung, Migration, Rollback (Zurücksetzen auf vorherigen Stand)</td></tr>
         </tbody>
       </table>
       <div class="accent-box" style="margin-top:14px">
@@ -303,7 +303,7 @@
     <section class="slide" style="display:none">
       <h2>Management · vier Zielkonflikte</h2>
       <div class="grid-2x2" style="margin-top:16px">
-        <div class="merk-box"><h3>Standard ↔ Standortautonomie</h3><p style="font-size:14px">Guardrails statt Wildwuchs – aber wo darf lokal entschieden werden?</p></div>
+        <div class="merk-box"><h3>Standard ↔ Standortautonomie</h3><p style="font-size:14px">Guardrails (Leitplanken) statt Wildwuchs – aber wo darf lokal entschieden werden?</p></div>
         <div class="merk-box"><h3>Repository-Tiefe ↔ Pflegeaufwand</h3><p style="font-size:14px">Vollständig ist nicht hilfreich – hilfreich ist nicht vollständig.</p></div>
         <div class="merk-box"><h3>Automation ↔ Audit-Sicherheit</h3><p style="font-size:14px">Schnelle Automation kann Compliance untergraben – Boundary Events sind nicht optional.</p></div>
         <div class="merk-box"><h3>Speed ↔ Reversibilität</h3><p style="font-size:14px">Welche Architektur-Entscheidung kostet uns in 6 Monaten am meisten beim Rollback?</p></div>
@@ -317,7 +317,7 @@
       <h2>Take-aways · fünf Merksätze</h2>
       <div style="margin-top:18px">
         <div class="takeaway-row"><span class="check">✓</span><span class="text">Repository ohne Owner = Ablage. Execution ohne <abbr title="Service Level Agreement">SLA</abbr> = Hoffnung.</span></div>
-        <div class="takeaway-row"><span class="check">✓</span><span class="text">Drei Ebenen reichen für den Start: Value Chain → Prozess → Artefakt.</span></div>
+        <div class="takeaway-row"><span class="check">✓</span><span class="text">Drei Ebenen reichen für den Start: Value Chain (Wertschöpfungskette) → Prozess → Artefakt.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text">Business-<abbr title="Business Process Model and Notation">BPMN</abbr> ist Sprache. Execution-<abbr title="Business Process Model and Notation">BPMN</abbr> ist Vertrag.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text">Schnitt vor Implementierung: Start, Daten, Fehler klären.</span></div>
         <div class="takeaway-row"><span class="check">✓</span><span class="text"><abbr title="Minimum Viable Product">MVP</abbr> statt Perfektion – mit Frühwarnsignal &amp; Rückbau-Plan.</span></div>
