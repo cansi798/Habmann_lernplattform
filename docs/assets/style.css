@@ -376,3 +376,24 @@ h3 { font-size: 18px; margin: 16px 0 8px; }
 
 /* Globale Sicherung gegen horizontalen Scroll */
 html, body { max-width: 100%; overflow-x: hidden; }
+
+/* Foliennummer (Audit 2026-05-29) ---------------------------------------- */
+/* Opt-in per Default; opt-out via class="no-slide-num" auf #slides. */
+#slides:not(.no-slide-num) { counter-reset: slide-num; }
+#slides:not(.no-slide-num) .slide { counter-increment: slide-num; position: relative; }
+#slides:not(.no-slide-num) .slide::after {
+  content: counter(slide-num);
+  position: absolute;
+  bottom: 8px;
+  right: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  background: rgba(255,255,255,0.85);
+  padding: 2px 8px;
+  border-radius: 10px;
+  pointer-events: none;
+}
+@media (max-width: 900px) {
+  #slides:not(.no-slide-num) .slide::after { font-size: 11px; padding: 1px 6px; bottom: 6px; right: 10px; }
+}
