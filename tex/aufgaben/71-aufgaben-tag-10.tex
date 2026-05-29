@@ -251,11 +251,11 @@
 \section*{So arbeiten Sie mit diesem Heft}
 \thispagestyle{plain}
 
-\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 10 \textendash{} \emph{Skalierbare digitale Prozessarchitektur}: Microservices, Container/Kubernetes, TDD und Teststrategien sowie DevOps-Strategien inklusive Operating Model. Die Aufgaben sind in drei Niveaus gegliedert:
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 10 \textendash{} \emph{Skalierbare digitale Prozessarchitektur}: Microservices (kleine eigenst\"andige Dienste), Container/Kubernetes (Verpackungs- und Orchestrierungs-Plattform), TDD (Test-Driven Development -- Tests vor Code) und Teststrategien sowie DevOps-Strategien (Development + Operations als ein System) inklusive Operating Model. Die Aufgaben sind in drei Niveaus gegliedert:
 
 \begin{itemize}
   \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Begriffe, Servicegrenzen, Pipeline-Logik, Testpyramide. 5\,--\,10 Minuten pro Aufgabe.
-  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Servicegrenzen ziehen, Betriebskonzept entwerfen, SLOs definieren, RACI bauen. 15\,--\,30 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Servicegrenzen ziehen, Betriebskonzept entwerfen, SLOs (Service Level Objectives -- messbare Service-Ziele) definieren, RACI (Responsible, Accountable, Consulted, Informed -- Verantwortungs-Matrix) bauen. 15\,--\,30 Minuten.
   \item \nivLiii{} \textendash{} \fachbegriff{Management.} Operating Model, Entscheidungsarchitektur, Reliability-Framework. 30\,--\,45 Minuten.
 \end{itemize}
 
@@ -431,8 +431,8 @@ Typischer Fehlerfund & & & \\[16pt]
 \begin{enumerate}
   \item Entwerfen Sie einen \textbf{minimalen Release-Flow} in maximal \emph{sieben Schritten} von ``\"Anderung'' bis ``Prod'' inklusive zweier \textbf{Quality Gates}.
   \item Skizzieren Sie eine \textbf{Testpyramide f\"ur drei Services} (z.\,B.\ Order, Billing, Payments). Geben Sie f\"ur jeden Service grob an, wie viele Tests welcher Art Sie ansetzen.
-  \item Definieren Sie \textbf{zwei Betriebskennzahlen} (SLO-orientiert), z.\,B.\ \emph{Verf\"ugbarkeit}, \emph{Fehlerquote}, \emph{Latenz}, \emph{MTTR} \textendash{} jeweils mit \emph{Owner} und \emph{Zielwert}.
-  \item Entscheidung unter Unsicherheit: Wo akzeptieren Sie im \textbf{MVP} bewusst Rest-Risiko (z.\,B.\ weniger E2E-Tests)? Wie kompensieren Sie es (Canary, Feature Toggle, manuelle Kontrolle)? Dokumentieren Sie das in einem kurzen \emph{Risikoplan}.
+  \item Definieren Sie \textbf{zwei Betriebskennzahlen} (SLO-orientiert), z.\,B.\ \emph{Verf\"ugbarkeit}, \emph{Fehlerquote}, \emph{Latenz}, \emph{MTTR} (Mean Time to Recover -- mittlere Wieder\-herstellungs-Zeit) \textendash{} jeweils mit \emph{Owner} und \emph{Zielwert}.
+  \item Entscheidung unter Unsicherheit: Wo akzeptieren Sie im \textbf{MVP} (Minimum Viable Product -- erste marktreife Version) bewusst Rest-Risiko (z.\,B.\ weniger E2E-Tests = End-to-End-Tests, also volle Durchl\"aufe)? Wie kompensieren Sie es (Canary, Feature Toggle, manuelle Kontrolle)? Dokumentieren Sie das in einem kurzen \emph{Risikoplan}.
 \end{enumerate}
 
 \ytvideo{Kubernetes — Container-Orchestrierung in der Praxis}{https://youtu.be/SFVg7fDdvLE}

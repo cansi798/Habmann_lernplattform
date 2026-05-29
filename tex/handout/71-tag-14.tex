@@ -364,8 +364,8 @@ Software-Effizienz ist lange ein Nischenthema gewesen. Mit wachsender Cloud-Last
 Ein \fachbegriff{Performance Budget} ist eine vorab definierte Obergrenze für eine Performance-Metrik. Beispiele:
 
 \begin{itemize}
-  \item Antwortzeit $\leq$ 300\,ms (P99).
-  \item Payload $\leq$ 200\,KB pro Response.
+  \item Antwortzeit $\leq$ 300\,ms (P99, d.\,h.\ 99.\ Perzentil-Latenz).
+  \item Payload (Nutzdatenmenge) $\leq$ 200\,KB pro Response.
   \item CPU-Verbrauch $\leq$ X CPU-Sekunden pro 1.000 Requests.
 \end{itemize}
 
@@ -439,7 +439,7 @@ Für jede ausgemusterte Hardware:
 \begin{itemize}
   \item \fachbegriff{IT Asset Manager.} Führt das Asset-Register, ordnet die Weiterverwendung.
   \item \fachbegriff{Security} (für Löschprotokolle).
-  \item \fachbegriff{Procurement} (für Rücknahme-Verträge).
+  \item \fachbegriff{Procurement} (Beschaffung) (für Rücknahme-Verträge).
   \item \fachbegriff{Sustainability} (für Reporting / Quotenmessung).
 \end{itemize}
 
@@ -457,7 +457,7 @@ Eine pragmatische Vendor-Scorecard mit 1--5-Bewertungen:
 Kriterium & Frage \\
 \midrule
 Umweltpolitik & Existiert eine dokumentierte Umweltpolitik mit Zielen? \\
-CO\textsubscript{2}-Reporting & Veröffentlicht der Vendor Scope-1/2/3-Emissionen? \\
+CO\textsubscript{2}-Reporting & Veröffentlicht der Vendor Scope-1/2/3-Emissionen (Bilanzgrenze nach GHG: 1 direkt, 2 Energie, 3 Lieferkette)? \\
 Energieeffizienz & Welche Effizienzklassen / Zertifikate weist Hardware aus? \\
 Kreislaufwirtschaft & Rücknahmeprogramm? Refurbish? Recycling-Quote? \\
 Subunternehmer & Welche Subunternehmer; wie wird deren Footprint mitgeführt? \\
@@ -527,7 +527,7 @@ Restriktionen: Budget 180\,k EUR, Datenlücken (Cloud-Verbrauch), Widerstand (``
 Für \textbf{kritische Services}:
 
 \begin{itemize}
-  \item Performance Budget Antwortzeit (P99 $\leq$ 500\,ms).
+  \item Performance Budget Antwortzeit (P99, d.\,h.\ 99.\ Perzentil $\leq$ 500\,ms).
   \item Data Budget (max.\ Payload pro Response).
   \item Profiling vor Release verpflichtend.
   \item Ausnahmeprozess mit Begründung und Verbesserungsplan.

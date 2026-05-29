@@ -220,7 +220,7 @@
   \item Eine \fachbegriff{Modelling Charter} mit fünf nicht verhandelbaren Standards und drei Freiheitsgraden formulieren.
   \item Eine Capability Map mit 8 bis 12 Capabilities für ein konkretes Geschäftsfeld erstellen und priorisieren.
   \item Den MDA-Pfad für eine priorisierte Capability skizzieren: CIM (Business-Ziel + Scope), PIM (Service-/Datenlogik), PSM (Umsetzungsidee).
-  \item Vier KPIs (zwei Outcome/Speed, zwei Risk/Compliance) mit Ownern festlegen.
+  \item Vier KPIs (\emph{Key Performance Indicators} -- Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele; zwei Outcome/Speed, zwei Risk/Compliance) mit Ownern festlegen.
 \end{itemize}
 
 \subsection*{L3 -- Management (Entscheidung und Verantwortung)}
@@ -469,7 +469,7 @@ Ein CIM, das mehr als eine Überschrift ist, enthält:
   \item \textbf{Datenobjekt ``Kunde'':} Pflichtfelder Name, Adresse, Identifikationsnachweis, Vertragsreferenz.
   \item \textbf{Kernprozesse:} KYC, Bonität, Vertragsabschluss, Provisioning, Training.
   \item \textbf{Nicht verhandelbar:} KYC vor jedem Provisioning; Audit-Logging Pflicht; Datenlöschung gemäß DSGVO.
-  \item \textbf{Erfolgskriterien:} DLZ-Median $<24\,\text{h}$; Compliance-Findings = 0; Kunden-NPS $>+30$.
+  \item \textbf{Erfolgskriterien:} DLZ-Median $<24\,\text{h}$; Compliance-Findings = 0; Kunden-NPS (\emph{Net Promoter Score} -- Kennzahl für Kundenloyalität: Weiterempfehlungsbereitschaft auf einer Skala 0--10) $>+30$.
 \end{itemize}
 
 \subsection{Was im PIM stehen muss}
@@ -485,7 +485,7 @@ Ein CIM, das mehr als eine Überschrift ist, enthält:
 
 \begin{itemize}
   \item Die konkrete \emph{Plattformwahl} (Cloud-Provider, Region, Tenant).
-  \item Die konkreten \emph{Schnittstellen} (REST/gRPC/AsyncAPI, Auth-Verfahren, Endpoints).
+  \item Die konkreten \emph{Schnittstellen} (REST/gRPC/AsyncAPI -- \emph{API} = \emph{Application Programming Interface}, standardisierte Schnittstelle zur Kommunikation zwischen Softwaresystemen; Auth-Verfahren, Endpoints).
   \item Die \emph{Deployment-Strategie} (Container, IaC, CI/CD).
   \item \emph{Audit-Logging} mit konkretem Logging-Stack.
   \item Die \emph{Sicherheits-Konfiguration} (Secrets, Netzwerk-Policies).
@@ -597,7 +597,7 @@ Draft \textrightarrow{} Review (Modeler + Reviewer, vier Augen) \textrightarrow{
 \subsubsection{PSM}
 
 \begin{itemize}
-  \item Konkrete Plattform: bestehendes IAM-System plus Verifikations-Service eines Anbieters.
+  \item Konkrete Plattform: bestehendes IAM (\emph{Identity \& Access Management} -- System zur Verwaltung von Identitäten und Zugriffsrechten)-System plus Verifikations-Service eines Anbieters.
   \item REST-API mit OAuth-2.0, Versionierung in URL.
   \item Audit-Logging zentral, mit unveränderlichem Speicher.
   \item Deployment in Container, IaC für Test-/Produktivumgebung.

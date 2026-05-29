@@ -216,13 +216,13 @@
   \item RPA-Eignungskriterien benennen: regelbasiert, stabiler Prozess, klarer Input/Output, hohes Volumen, geringe Ausnahmen.
   \item Plattformüberblick einordnen: Studio/Designer, Orchestrierung, Queues, Credentials, Monitoring -- toolneutral.
   \item Unterschied attended vs.\ unattended verstehen: Betriebsmodell, Skalierungs- und Governance-Konsequenzen.
-  \item Nutzen und Risiken von RPA aus Senior-Brille einordnen: Schatten-IT, Credential-Risiko, fragile UI-Automation, Audit Trail.
+  \item Nutzen und Risiken von RPA aus Senior-Brille einordnen: Schatten-IT (heimlich gebaute, unkontrollierte IT-Systeme), Credential-Risiko, fragile UI-Automation (UI = User Interface, Benutzeroberfl\"ache), Audit Trail.
 \end{itemize}
 
 \subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
 \begin{itemize}
   \item Aus einer Use-Case-Liste die Eignung mit Scoring 1--5 bewerten und priorisieren.
-  \item Eine Stufenstrategie attended $\to$ unattended entwerfen, inkl.\ Readiness-KPIs.
+  \item Eine Stufenstrategie attended (Bot mit Mensch am Arbeitsplatz) $\to$ unattended (Bot auf Server, autonom) entwerfen, inkl.\ Readiness-KPIs (Key Performance Indicators -- Mess-Kennzahlen).
   \item Einen Bot-Flow mit Validierung, Verarbeitung, Logging und Exception Queue konzipieren.
   \item Audit-Trail-Minimum und KPI-Set (Produktivität, Qualität, Risiko) auf einen Fall anwenden.
 \end{itemize}
@@ -231,7 +231,7 @@
 \begin{itemize}
   \item Ein RPA-Portfolio mit Kriterien Value/Risk/Effort und Kill Criteria steuern.
   \item Governance leicht, aber verbindlich verankern (Bot Owner, Process Owner, Security, Operations).
-  \item Security- und Compliance-Guardrails (Least Privilege, SoD, Vault) als Pflichtprogramm setzen.
+  \item Security- und Compliance-Guardrails (Least Privilege = Minimalrechte-Prinzip, SoD = Segregation of Duties, also Funktionstrennung; Vault = zentraler verschl\"usselter Passwort-Tresor) als Pflichtprogramm setzen.
   \item Entscheidungen unter Unsicherheit (welche Use Cases zuerst, Unattended-Grenze) mit Frühwarnsignalen verankern.
 \end{itemize}
 
@@ -244,7 +244,7 @@ RPA ist kein Klick-Roboter, sondern ein \emph{privilegierter Mitarbeiter}, der i
 % --- 1. EINSTIEG ---------------------------------------------------------
 \section{Einstieg: Warum RPA mehr ist als Klick-Magie}
 
-In vielen Organisationen begann RPA als Selbsthilfe-Werkzeug einzelner Fachbereiche: ``Wir haben hier dreihundert Rechnungen pro Tag und drei Mitarbeitende, die nichts anderes tun als Kopieren aus E-Mail in ERP. Können wir das automatisieren?'' Die Antwort eines RPA-Tools lautet typischerweise: ``Ja, in zwei Wochen.'' Was als pragmatische Antwort beginnt, kann zu einer schwer beherrschbaren Plattform mit hunderten Bots, instabilen Portalen und unklaren Verantwortlichkeiten heranwachsen. \quelle{Willcocks et al., 2017}
+In vielen Organisationen begann RPA als Selbsthilfe-Werkzeug einzelner Fachbereiche: ``Wir haben hier dreihundert Rechnungen pro Tag und drei Mitarbeitende, die nichts anderes tun als Kopieren aus E-Mail in ERP (Enterprise Resource Planning -- integriertes Software-System zur unternehmensweiten Ressourcenplanung). Können wir das automatisieren?'' Die Antwort eines RPA-Tools lautet typischerweise: ``Ja, in zwei Wochen.'' Was als pragmatische Antwort beginnt, kann zu einer schwer beherrschbaren Plattform mit hunderten Bots, instabilen Portalen und unklaren Verantwortlichkeiten heranwachsen. \quelle{Willcocks et al., 2017}
 
 Die Frage ist daher nicht: \emph{Können wir RPA?} Sondern: \emph{Können wir RPA verantworten?}
 
@@ -274,7 +274,7 @@ RPA steht nicht neben BPM, sondern \emph{in} ihm. Im klassischen Lifecycle (Disc
 
 \subsection{Die Versuchung des schnellen Erfolgs}
 
-RPA hat eine besondere Versuchung: \emph{schnelle Erfolge}. Ein Pilot ist in zwei bis vier Wochen lauffähig, der ROI scheint klar, das Management ist beeindruckt. Das ist der Punkt, an dem Disziplin am wichtigsten ist -- denn der zweite, dritte und zehnte Bot bringt die Skalierungsprobleme: \quelle{Smeets et al., 2019}
+RPA hat eine besondere Versuchung: \emph{schnelle Erfolge}. Ein Pilot ist in zwei bis vier Wochen lauffähig, der ROI (Return on Investment -- Rentabilit\"ats-Kennzahl: Gewinn geteilt durch Kosten) scheint klar, das Management ist beeindruckt. Das ist der Punkt, an dem Disziplin am wichtigsten ist -- denn der zweite, dritte und zehnte Bot bringt die Skalierungsprobleme: \quelle{Smeets et al., 2019}
 
 \begin{itemize}
   \item \textbf{Schatten-IT.} Fachbereiche bauen ohne IT-Beteiligung. Niemand kennt den Bestand, niemand wartet, niemand hat Backups.
@@ -430,7 +430,7 @@ RPA-Initiativen scheitern selten an der Technik. Sie scheitern an unterschätzte
 \begin{itemize}
   \item \textbf{Zeitgewinn.} Sachbearbeitende verlagern Zeit von repetitiver Erfassung zu Bearbeitungs- und Entscheidungsaufgaben. Achtung: Zeit \emph{verlagert} sich, sie wird nicht von selbst frei -- ohne Rollen-Anpassung wird sie ``versickert''.
   \item \textbf{Fehlerreduktion.} Bots tippen nicht falsch, sie vergessen kein Pflichtfeld. Vorausgesetzt, sie wurden korrekt gebaut.
-  \item \textbf{SLA-Stabilität.} Durchsatz wird vorhersagbar, Spitzen werden ausgeglichen.
+  \item \textbf{SLA-Stabilität.} (SLA = Service Level Agreement, vereinbarte Qualit\"ats- und Leistungsstandards.) Durchsatz wird vorhersagbar, Spitzen werden ausgeglichen.
   \item \textbf{Audit Trail.} Wenn richtig gebaut, dokumentiert der Bot lückenlos, was er getan hat -- besser als jeder manuelle Vorgang.
 \end{itemize}
 

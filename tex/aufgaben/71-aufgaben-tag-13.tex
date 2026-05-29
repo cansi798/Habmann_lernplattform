@@ -233,7 +233,7 @@
 \section*{So arbeiten Sie mit diesem Heft}
 \thispagestyle{plain}
 
-\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 13 \textendash{} \emph{Nachhaltige IT-Services steuerbar machen}: ITIL-4-orientiertes Service Portfolio Management, Kapazit\"atsplanung, Rightsizing, Energy-Efficient Data Centers und ISO-20000-nahe Nachweislogik. Die Aufgaben sind in drei Niveaus gegliedert:
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 13 \textendash{} \emph{Nachhaltige IT-Services steuerbar machen}: ITIL-4-orientiertes (\emph{IT Infrastructure Library}) Service Portfolio Management, Kapazit\"atsplanung, Rightsizing, Energy-Efficient Data Centers und ISO-20000-nahe Nachweislogik. Die Aufgaben sind in drei Niveaus gegliedert:
 
 \begin{itemize}
   \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Portfolio-Logik, Kapazit\"ats-Begriffe, Energiehebel. 5\,--\,10 Minuten.
@@ -428,7 +428,7 @@ Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 13}. \emph{
 
 \noindent Beispielsweise:
 \begin{itemize}
-  \item Abschalt-Policy f\"ur Non-Prod (Owner: Plattformbetrieb; Guardrail: Notfall-On in $<$\,30 Min; Monitoring: Off-Hours-Quote; Rollback: Wiederanlauf-Skript).
+  \item Abschalt-Policy f\"ur Non-Prod (Nicht-Produktivsysteme) (Owner: Plattformbetrieb; Guardrail: Notfall-On in $<$\,30 Min; Monitoring: Off-Hours-Quote; Rollback: Wiederanlauf-Skript).
   \item Rightsizing-Pilot 2 Services (Owner: Service Owner; Guardrail: CPU $>$\,85\,\% / Fehlerquote $>$\,0,5\,\%; Monitoring: Synthetic Tests; Rollback: 1-Klick-Restore).
   \item Capacity-Review-Board 2-w\"ochentlich (Owner: ITSM Lead; auditf\"ahiges Entscheidungsprotokoll).
   \item \ldots
@@ -512,7 +512,7 @@ Sie m\"ussen Ihrem Steuerkreis ein KPI-Set f\"ur ``Sustainable IT'' vorlegen. Es
 \aufgabenkopf{9}{Portfolio Board \& Capacity Governance Design}{\nivLiii}{35\,min}
 
 \begin{infobox}[Rolle: Head of IT Service Management]
-\textbf{Ihre Rolle:} \emph{Head of ITSM} eines Konzerns mit ca.\ 80 Services, mehrere Bereiche, eigene FinOps-Funktion im Aufbau.
+\textbf{Ihre Rolle:} \emph{Head of ITSM} eines Konzerns mit ca.\ 80 Services, mehrere Bereiche, eigene FinOps-Funktion (\emph{Financial Operations} -- wirtschaftliche Steuerung von Cloud-Kosten) im Aufbau.
 
 \smallskip
 \textbf{Auftrag:} Etablieren Sie ein \emph{Portfolio Board} + eine \emph{Capacity Governance}, die in 90 Tagen wirksam sein muss \textendash{} \emph{auditf\"ahig} und \emph{anschlussf\"ahig} an die Konzernstrategie.
@@ -524,7 +524,7 @@ Sie m\"ussen Ihrem Steuerkreis ein KPI-Set f\"ur ``Sustainable IT'' vorlegen. Es
 \noindent\textbf{Arbeitsauftrag:}
 
 \begin{enumerate}
-  \item \textbf{Portfolio Board Setup:} Wer sitzt drin (Portfolio Owner, Service Owner, FinOps / Controlling, Operations / SRE)? Taktung (z.\,B.\ monatlich, 90 Min)? Entscheidungsschwellen (welche Entscheidungen werden \emph{im Board} getroffen, welche \emph{eskaliert} an den Vorstand)?
+  \item \textbf{Portfolio Board Setup:} Wer sitzt drin (Portfolio Owner, Service Owner, FinOps / Controlling, Operations / SRE \emph{(Site Reliability Engineering)})? Taktung (z.\,B.\ monatlich, 90 Min)? Entscheidungsschwellen (welche Entscheidungen werden \emph{im Board} getroffen, welche \emph{eskaliert} an den Vorstand)?
   \item \textbf{RACI \"uber f\"unf typische Entscheidungstypen}: \emph{Service einf\"uhren}, \emph{Service \"andern}, \emph{Service stilllegen}, \emph{SLO-Klasse \"andern}, \emph{Rightsizing-Ausnahme genehmigen}.
   \item \textbf{Entscheidungsprotokoll (auditf\"ahig):} Welche f\"unf Pflichtfelder muss jedes Protokoll enthalten? (Datum, Teilnehmer, Entscheidung, Begr\"undung, Datenquelle, Reviewdatum, Verantwortlicher.)
   \item \textbf{Capacity Governance \textendash{} drei Bausteine:} \emph{Demand Forecasting Minimal} (z.\,B.\ 12-Monats-Trend + Quartals-Adjust), \emph{Guardrail-Set} (Stopp-/Rollback-Regeln), \emph{Ausnahmeprozess} (wer darf Ausnahmen genehmigen, in welchem Rahmen).

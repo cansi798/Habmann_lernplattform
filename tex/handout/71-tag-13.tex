@@ -209,7 +209,7 @@
 \addcontentsline{toc}{section}{Lernziele dieses Tages}
 \thispagestyle{plain}
 
-\noindent Nachhaltigkeit in der IT ist kein ``Nebenprojekt'' für Marketing-Folien, sondern ein \emph{Steuerungssystem}: Welche Services laufen wie, welche Kapazität verbrauchen sie, welche Wirkung erzielen sie, und wo lohnt sich Optimierung? Heute lernen Sie, ein Service-Portfolio nach ITIL-4-Logik aufzubauen, Kapazität und Rightsizing als Managemententscheidung zu führen und Nachhaltigkeit als integralen Teil der IT-Service-Governance zu verankern.
+\noindent Nachhaltigkeit in der IT ist kein ``Nebenprojekt'' für Marketing-Folien, sondern ein \emph{Steuerungssystem}: Welche Services laufen wie, welche Kapazität verbrauchen sie, welche Wirkung erzielen sie, und wo lohnt sich Optimierung? Heute lernen Sie, ein Service-Portfolio nach ITIL-4-Logik (ITIL = \emph{IT Infrastructure Library}) aufzubauen, Kapazität und Rightsizing als Managemententscheidung zu führen und Nachhaltigkeit als integralen Teil der IT-Service-Governance zu verankern.
 
 \subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
 \begin{itemize}
@@ -335,7 +335,7 @@ Drei Prinzipien für gute Kapazitätssteuerung: \quelle{Murugesan, 2008}
 
 \fachbegriff{Rightsizing} ist die bewusste Anpassung der Ressourcen an den tatsächlichen Bedarf. Das ist mehr als ``runterskalieren'' -- es ist eine Entscheidung mit Guardrails.
 
-Typisches Beispiel: Ein Service läuft auf 10 VMs mit CPU-Last 15--20\,\% Durchschnitt und RAM 35--40\,\%. Peak: CPU 60\,\% für 6 Stunden monatlich. SLO: Antwortzeit, keine Ausfälle. Ziel: 20\,\% Energiekosten senken, ohne SLO zu brechen.
+Typisches Beispiel: Ein Service läuft auf 10 VMs (\emph{Virtual Machines}, virtuelle Rechner) mit CPU-Last 15--20\,\% Durchschnitt und RAM 35--40\,\%. Peak: CPU 60\,\% für 6 Stunden monatlich. SLO: Antwortzeit, keine Ausfälle. Ziel: 20\,\% Energiekosten senken, ohne SLO zu brechen.
 
 Optionen:
 
@@ -446,10 +446,10 @@ Jeder Service wird auf einer 1--5-Skala bewertet in: \emph{Wert} (Kunde / Regula
 \subsection{Maßnahmenpaket}
 
 \begin{enumerate}
-  \item \textbf{Abschaltpolitik für Non-Prod.} Owner: Plattformbetrieb. Guardrail: Notfall-On in $<$30\,min möglich. Geschätzte Wirkung: 15--20\,\% Energie auf Non-Prod-Workloads.
+  \item \textbf{Abschaltpolitik für Non-Prod} (Nicht-Produktivsysteme)\textbf{.} Owner: Plattformbetrieb. Guardrail: Notfall-On in $<$30\,min möglich. Geschätzte Wirkung: 15--20\,\% Energie auf Non-Prod-Workloads.
   \item \textbf{Rightsizing Pilot für 2 Services} (Reporting + Mail). Owner: Service Owner. Guardrail: CPU $>$ 85\,\% oder Fehlerquote $\to$ Rollback.
   \item \textbf{Capacity Review Board} zweiwöchentlich. Owner: ITSM Lead. Protokoll auditfähig.
-  \item \textbf{Standard-SLOs je Kritikalitätsklasse.} Owner: SRE / Operations. Einführung über 8 Wochen.
+  \item \textbf{Standard-SLOs je Kritikalitätsklasse.} Owner: SRE (\emph{Site Reliability Engineering} -- Disziplin für Betriebsstabilität) / Operations. Einführung über 8 Wochen.
   \item \textbf{Konsolidierung Zombie-Services.} Retire-Kandidaten identifizieren und in 12 Wochen abschalten.
   \item \textbf{Energieeffizienz-Runbook.} Betriebsmaßnahmen (Kühlung, Hardware-Refresh als Konzept) + KPI-Tracking.
 \end{enumerate}
@@ -539,7 +539,7 @@ Eine pragmatische Rollenverteilung:
 \begin{itemize}
   \item \fachbegriff{Portfolio Owner.} Verantwortet das Portfolio als Ganzes, führt das Portfolio Board.
   \item \fachbegriff{Service Owner.} Verantwortet einen Service in Wert, Risiko, Kosten, Nachhaltigkeit.
-  \item \fachbegriff{FinOps / Controlling.} Sorgt für Kostentransparenz und Anti-Gaming-Mechaniken.
+  \item \fachbegriff{FinOps} (\emph{Financial Operations} -- wirtschaftliche Steuerung von Cloud-Kosten) \fachbegriff{/ Controlling.} Sorgt für Kostentransparenz und Anti-Gaming-Mechaniken.
   \item \fachbegriff{Operations.} Verantwortet Betriebsdaten, Auslastungsmetriken, Incident-Pflege.
 \end{itemize}
 

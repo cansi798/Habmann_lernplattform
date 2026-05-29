@@ -199,7 +199,7 @@
 
 \begin{itemize}
   \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Event-Log-Aufbau, Discovery-Grundlagen, Conformance-Logik. 5\,--\,10 Minuten.
-  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Happy Path ableiten, Abweichungen klassifizieren, Guardrails. 15\,--\,30 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Happy Path (idealer Standardablauf) ableiten, Abweichungen klassifizieren, Guardrails. 15\,--\,30 Minuten.
   \item \nivLiii{} \textendash{} \fachbegriff{Management.} Fallstudie \emph{MedTech Supplies}, Conformance Governance. 30\,--\,45 Minuten.
 \end{itemize}
 
@@ -412,7 +412,7 @@ Im \emph{MedTech Supplies}-P2P-Prozess kommen 30\,\% Rechnungen \emph{vor} Waren
 
 \begin{enumerate}
   \item Formulieren Sie einen \emph{Ausnahmeprozess}: \emph{Welche Bedingung} (Schwellenwert, Lieferanten\-typ, Vertrag) macht ``Rechnung vor Wareneingang'' tempor\"ar zul\"assig?
-  \item Definieren Sie \emph{drei Guardrails}: (a) Sichtbarkeit (Pflichtkennzeichen ``EXCEPTION''), (b) SLA f\"ur Nachbuchung, (c) Monitoring + Owner.
+  \item Definieren Sie \emph{drei Guardrails}: (a) Sichtbarkeit (Pflichtkennzeichen ``EXCEPTION''), (b) SLA (\emph{Service Level Agreement}, vertraglich vereinbarte Qualit\"ats- und Leistungsstandards f\"ur Dienstleistungen) f\"ur Nachbuchung, (c) Monitoring + Owner.
   \item \textbf{Audit-Strategie:} Wie wei{\ss} ein Auditor in 6 Monaten, dass die Ausnahme \emph{bewusst} und \emph{kontrolliert} ist \textendash{} nicht ``\"ubersehen''?
   \item Definieren Sie das \emph{Eskalations-Trigger}: ab welcher Quote eskaliert die Ausnahme zum Prozess-\"Anderungs-Antrag?
 \end{enumerate}
@@ -454,7 +454,7 @@ F\"ur Conformance gibt es typische KPIs: \emph{Fitness-Score}, \emph{Abweichungs
 \textbf{Problem:} Auditoren bem\"angeln unklare Nachweise; Einkauf klagt \"uber Bürokratie. Hinweise auf \emph{Maverick Buying} (Eink\"aufe au{\ss}erhalb des Prozesses).
 
 \smallskip
-\textbf{Restriktionen:} \textbf{6 Wochen} bis Audit; Budget \textbf{70\,k\,\euro}; Logs unvollst\"andig (nur ERP + E-Mail-Tickets); Zielkonflikt Speed vs.\ Compliance.
+\textbf{Restriktionen:} \textbf{6 Wochen} bis Audit; Budget \textbf{70\,k\,\euro}; Logs unvollst\"andig (nur ERP -- \emph{Enterprise Resource Planning}, integriertes Softwaresystem zur unternehmensweiten Ressourcenplanung; + E-Mail-Tickets); Zielkonflikt Speed vs.\ Compliance.
 
 \smallskip
 \textbf{Ist-Hinweise (qualitativ):}

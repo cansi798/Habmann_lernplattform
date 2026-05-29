@@ -239,11 +239,11 @@
 \section*{So arbeiten Sie mit diesem Heft}
 \thispagestyle{plain}
 
-\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 11 \textendash{} \emph{RPA als Steuerungs- und Risikohebel}: Plattform\"uberblick (Studio/Orchestrator), Eignung von Use Cases, Attended vs.\ Unattended, Nutzen-/Risikoabw\"agung und das richtige Stufenmodell. Die Aufgaben sind in drei Niveaus gegliedert:
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 11 \textendash{} \emph{RPA (Robotic Process Automation -- Software-basierte Automatisierung repetitiver, regel\-basierter Aufgaben) als Steuerungs- und Risikohebel}: Plattform\"uberblick (Studio/Orchestrator), Eignung von Use Cases (Anwendungsf\"alle), Attended (Bot mit Mensch am Arbeitsplatz) vs.\ Unattended (Bot auf Server, autonom), Nutzen-/Risikoabw\"agung und das richtige Stufenmodell. Die Aufgaben sind in drei Niveaus gegliedert:
 
 \begin{itemize}
   \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Eignungs-Kriterien, Plattform-Begriffe, Nutzen-/Risiko-Landkarte. 5\,--\,10 Minuten.
-  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Use-Case-Scoping, Stufenmodell, Bot-Flow, KPIs. 15\,--\,30 Minuten.
+  \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Use-Case-Scoping, Stufenmodell, Bot-Flow, KPIs (Key Performance Indicators -- Mess-Kennzahlen). 15\,--\,30 Minuten.
   \item \nivLiii{} \textendash{} \fachbegriff{Management.} Operating Model, Entscheidungsarchitektur, Anti-Gaming-KPIs. 30\,--\,45 Minuten.
 \end{itemize}
 
@@ -296,7 +296,7 @@ Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 11}. RPA is
 \noindent Beantworten Sie kompakt:
 
 \begin{enumerate}
-  \item Nennen Sie \textbf{f\"unf Eignungskriterien} f\"ur einen typischen RPA-Use-Case (z.\,B.\ regelbasiert, stabile UI, klarer Input/Output, hohes Volumen, geringe Ausnahmenrate).
+  \item Nennen Sie \textbf{f\"unf Eignungskriterien} f\"ur einen typischen RPA-Use-Case (z.\,B.\ regelbasiert, stabile UI = User Interface, also Benutzeroberfl\"ache; klarer Input/Output, hohes Volumen, geringe Ausnahmenrate).
   \item Nennen Sie \textbf{drei typische Anti-Kandidaten}, bei denen RPA \emph{nicht} (oder nur in Kombination mit BPM/KI) die richtige Wahl ist.
   \item Schreiben Sie in einem Satz, warum die Aussage ``RPA spart immer Geld'' irref\"uhrend ist.
 \end{enumerate}
@@ -383,7 +383,7 @@ Risiko bei UI-\"Anderungen  & & \\[16pt]
 \aufgabenkopf{4}{Use-Case-Eignung bewerten \textendash{} drei Kandidaten}{\nivLii}{20\,min}
 
 \begin{infobox}[Drei Kandidaten]
-\textbf{A.} Rechnungsdaten aus E-Mail lesen \textrightarrow{} ERP erfassen \textrightarrow{} Status per Mail zur\"uckmelden.
+\textbf{A.} Rechnungsdaten aus E-Mail lesen \textrightarrow{} ERP (Enterprise Resource Planning -- integriertes Unternehmens-System) erfassen \textrightarrow{} Status per Mail zur\"uckmelden.
 
 \smallskip
 \textbf{B.} Kundenreklamation pr\"ufen \textrightarrow{} Kulanz entscheiden \textrightarrow{} ggf.\ Gutschrift ausl\"osen (viele Sonderf\"alle).
@@ -491,7 +491,7 @@ Diese Aufgabe baut auf Aufgabe 6 auf. Sie schlie{\ss}en die Fallstudie ab.
 \begin{infobox}[Drei typische Schwachstellen]
 \textbf{A \textendash{} Credentials:} Der Bot loggt sich mit dem pers\"onlichen Account einer Sachbearbeiterin ein, weil ``das geht halt schneller''.\\[2pt]
 
-\textbf{B \textendash{} Portal-Abh\"angigkeit:} Der Bot ruft ein Lieferanten-Portal ohne SLA an. Das Portal ist 1\,--\,2$\times$ pro Woche f\"ur 20 Minuten weg.\\[2pt]
+\textbf{B \textendash{} Portal-Abh\"angigkeit:} Der Bot ruft ein Lieferanten-Portal ohne SLA (Service Level Agreement -- vereinbarte Qualit\"ats- und Leistungsstandards) an. Das Portal ist 1\,--\,2$\times$ pro Woche f\"ur 20 Minuten weg.\\[2pt]
 
 \textbf{C \textendash{} Datenqualit\"at:} Der Bot \"ubernimmt eingehende Daten ohne Plausibilit\"atspr\"ufung; ein Komma-Fehler bedeutet einen Faktor 100.
 \end{infobox}
@@ -528,7 +528,7 @@ Diese Aufgabe baut auf Aufgabe 6 auf. Sie schlie{\ss}en die Fallstudie ab.
 \noindent\textbf{Arbeitsauftrag:}
 
 \begin{enumerate}
-  \item \textbf{Automation Funnel:} Definieren Sie f\"unf Stufen (Idea \textrightarrow{} Eignung \textrightarrow{} PoC \textrightarrow{} Pilot \textrightarrow{} Betrieb). Pro Stufe: \emph{Zugangskriterium} und \emph{Owner}.
+  \item \textbf{Automation Funnel} (Trichter zur Auswahl von Automatisierungs-Ideen): Definieren Sie f\"unf Stufen (Idea \textrightarrow{} Eignung \textrightarrow{} PoC = Proof of Concept (Machbarkeits-Nachweis) \textrightarrow{} Pilot \textrightarrow{} Betrieb). Pro Stufe: \emph{Zugangskriterium} und \emph{Owner}.
   \item \textbf{Bewertungskriterien:} Definieren Sie drei Achsen \textendash{} \emph{Value}, \emph{Risk}, \emph{Effort} \textendash{} jeweils mit 3\,--\,5 Indikatoren (z.\,B.\ \emph{Value:} Volumen, Zeitersparnis, Fehlerkostenreduktion; \emph{Risk:} Audit, Datenqualit\"at, UI-Stabilit\"at; \emph{Effort:} Komplexit\"at, Schnittstellen, Test-Aufwand).
   \item \textbf{Release-Klassen:} Definieren Sie zwei bis drei Klassen (z.\,B.\ \emph{Fast Track}, \emph{Standard}, \emph{High-Risk}) mit jeweils unterschiedlicher Anzahl an Quality Gates und Freigaben.
   \item \textbf{Kill Criteria:} Wann verlassen Bots oder Ideen den Funnel? Definieren Sie drei Kriterien (z.\,B.\ Exception-Rate $>$\,25\,\% nach Stabilisierung, UI-Change $>$\,3$\times$/Monat, Use-Case nicht mehr fachlich relevant).

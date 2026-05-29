@@ -194,7 +194,7 @@
 \section*{So arbeiten Sie mit diesem Heft}
 \thispagestyle{plain}
 
-\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 9 \textendash{} \emph{Agile Delivery als Steuerungssystem}: Scrum, Kanban, CI-Pipelines und Infrastructure as Code. Die Aufgaben gliedern sich in drei Niveaus:
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 9 \textendash{} \emph{Agile Delivery als Steuerungssystem}: Scrum, Kanban, CI-Pipelines (Continuous Integration -- automatisierte Build-/Test-Ketten) und Infrastructure as Code. Die Aufgaben gliedern sich in drei Niveaus:
 
 \begin{itemize}
   \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Scrum-Rollen + Events, Kanban-Prinzipien, CI-Pipeline-Bausteine, IaC. 5\,--\,10 Minuten.
@@ -353,7 +353,7 @@ Sie liefern jede Woche Prozess-/IT-\"Anderungen aus. Bisher entstehen Fehler nac
   \item \textbf{Minimal-Pipeline} (max.\ 6 Stufen) f\"ur ``sichere schnelle \"Anderungen''.
   \item \textbf{Zwei Quality Gates} (Stop-Regeln), die \emph{immer} erf\"ullt sein m\"ussen (z.\,B.\ Tests gr\"un, Security-Scan ok).
   \item \textbf{IaC-Policy}: Wer darf Infrastruktur\-\"anderungen freigeben? Wie wird dokumentiert (Audit Trail)?
-  \item \textbf{Entscheidung unter Unsicherheit:} Wo akzeptieren Sie bewusst \emph{Risiko} im MVP (z.\,B.\ weniger Tests) \textendash{} und wie begrenzen Sie den Schaden (Rollback, Canary, Feature Toggle)?
+  \item \textbf{Entscheidung unter Unsicherheit:} Wo akzeptieren Sie bewusst \emph{Risiko} im MVP (Minimum Viable Product -- erste marktreife Version mit minimalem Funktionsumfang; z.\,B.\ weniger Tests) \textendash{} und wie begrenzen Sie den Schaden (Rollback, Canary, Feature Toggle)?
 \end{enumerate}
 
 \ytvideo{CI/CD-Pipelines — sichere und schnelle Änderungen}{https://youtu.be/xzV0KiprcZc}
@@ -379,7 +379,7 @@ DORA-Kennzahlen sind das ``Quartett'' der Delivery-Performance:
 \begin{enumerate}
   \item F\"ur jede DORA-Kennzahl: \emph{Was misst sie? Welche Verhaltens\-wirkung erzeugt sie?}
   \item \textbf{Anti-Gaming:} Wie k\"onnte jede gespielt werden? Welche Gegenkopplung sch\"utzt?
-  \item \textbf{Senior-KPI-Set:} Welche \emph{zwei} der vier f\"uhren Sie als Executive-KPIs \textendash{} und warum lassen Sie die anderen zwei intern?
+  \item \textbf{Senior-KPI-Set:} Welche \emph{zwei} der vier f\"uhren Sie als Executive-KPIs (Key Performance Indicators -- Mess\-gr\"o{\ss}en f\"ur Steuerung) \textendash{} und warum lassen Sie die anderen zwei intern?
   \item \textbf{Faustregel:} Ab welchem Niveau gilt eine Organisation als ``High Performer'' (DORA-Benchmark)?
 \end{enumerate}
 

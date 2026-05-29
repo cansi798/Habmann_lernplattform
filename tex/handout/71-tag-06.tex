@@ -214,15 +214,15 @@
 
 \subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
 \begin{itemize}
-  \item BPMS-Kernbausteine kennen: Prozessengine, Aufgaben-/Worklist, Forms, Regelwerk, Monitoring, Audit Trail, Versionierung.
-  \item API-Verträge benennen: Endpoint, Input/Output, Fehlercodes, Auth, Rate Limits, Versionierung, Idempotenz.
+  \item BPMS-Kernbausteine (\emph{BPMS} = \emph{Business Process Management System}, Softwareplattform zur Modellierung, Ausführung und Überwachung von Geschäftsprozessen) kennen: Prozessengine, Aufgaben-/Worklist, Forms, Regelwerk, Monitoring, Audit Trail, Versionierung.
+  \item API-Verträge (\emph{API} = \emph{Application Programming Interface}, standardisierte Schnittstelle zur Kommunikation zwischen Softwaresystemen) benennen: Endpoint, Input/Output, Fehlercodes, Auth, Rate Limits, Versionierung, Idempotenz (mehrfache Aufrufe führen zum gleichen Ergebnis).
   \item Integrationsmuster unterscheiden: synchroner API-Call vs.\ asynchrones Event/Message.
   \item Cloud-native Prinzipien einordnen: stateless Services, horizontale Skalierung, Observability (Logs, Metrics, Traces), Resilienz-Patterns.
 \end{itemize}
 
 \subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
 \begin{itemize}
-  \item Einen BPMS-Blueprint für einen E2E-Prozess (Rollen, Tasks, SLAs, Eskalation, Audit Trail) entwerfen.
+  \item Einen BPMS-Blueprint für einen E2E-Prozess (Rollen, Tasks, SLAs -- \emph{Service Level Agreement}, vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen; Eskalation, Audit Trail) entwerfen.
   \item Einen API-Vertrag mit Input/Output, Fehlerfällen und Versionierung formulieren.
   \item Sync- vs.\ Async-Entscheidung mit Speed/Robustheit-Trade-off begründen.
   \item Cloud-native Betriebsanforderungen ableiten (Skalierung, Observability, Resilienz, Security).
@@ -342,7 +342,7 @@ Wir nehmen einen realistischen Mini-Prozess: \emph{Customer Complaint Handling.}
 \begin{itemize}
   \item \textbf{Trigger:} Message Event ``Complaint empfangen'' (E-Mail-Eingang, Webformular, oder API).
   \item \textbf{User Task ``Klassifizieren''} (Lane Customer Service) -- 30\,min SLA. Daten: Typ, Schweregrad, Produktbezug.
-  \item \textbf{XOR Gateway ``Klärung nötig?''} \\
+  \item \textbf{XOR Gateway (\emph{Exclusive Or} -- exklusives Oder; genau eine von mehreren Bedingungen trifft zu) ``Klärung nötig?''} \\
     Ja $\rightarrow$ User Task ``Rückfrage stellen'' + Receive Task ``Antwort erhalten'' (Timer 5\,Tage). \\
     Nein $\rightarrow$ direkt zu Entscheidung.
   \item \textbf{Business Rule Task ``Kulanz vs.\ Retoure''} (DMN-Tabelle) -- Schwellwert, Kundenwert, Produkthistorie.
@@ -367,7 +367,7 @@ Wir nehmen einen realistischen Mini-Prozess: \emph{Customer Complaint Handling.}
   \item \fachbegriff{Kundenzufriedenheit} -- NPS oder CSAT pro abgeschlossenem Case. Owner: VP Customer Experience.
 \end{itemize}
 
-\subsubsection{MVP-Entscheidung}
+\subsubsection{MVP-Entscheidung (\emph{Minimum Viable Product} -- erste marktreife Produktversion mit minimalem Funktionsumfang)}
 
 Eine \fachbegriff{Funktion gehört rein:} der Audit Trail. Ohne Audit Trail kein BPMS-Wert. \\
 Eine \fachbegriff{Funktion bleibt vorerst draußen:} die automatische Kategorisierung per ML. Sie ist verlockend, aber sie erfordert Trainingsdaten, die zum Start nicht in der nötigen Qualität existieren. Stattdessen: regelbasierte Vorklassifikation in der DMN-Tabelle. Trigger für die Erweiterung: $>$3000 Cases im Trainingskorpus mit Label.

@@ -233,7 +233,7 @@
 \section*{So arbeiten Sie mit diesem Heft}
 \thispagestyle{plain}
 
-\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 14 \textendash{} \emph{Green IT als Managementsystem}: Carbon Footprint Measurement (GHG-Protocol-Logik), Sustainable Software Development, E-Waste Management, Vendor Sustainability Assessment und ISO-14001-orientierte PDCA-Verankerung im Service-Lifecycle.
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 14 \textendash{} \emph{Green IT als Managementsystem}: Carbon Footprint Measurement (CO\textsubscript{2}-Fußabdruck-Messung; GHG-Protocol = \emph{Greenhouse Gas Protocol}, internationaler Standard zur Treibhausgas-Bilanzierung), Sustainable Software Development (ressourcen- und energieeffiziente Software-Entwicklung), E-Waste Management (Elektroschrott-Management), Vendor Sustainability Assessment und ISO-14001-orientierte PDCA-Verankerung im Service-Lifecycle.
 
 \begin{itemize}
   \item \nivLi{} \textendash{} \fachbegriff{Wissen.} Messlogik, Hebel, Lifecycle, Scorecard-Begriffe. 5\,--\,10 Minuten.
@@ -298,14 +298,14 @@ Die Musterl\"osungen finden Sie im separaten \emph{L\"osungsheft Tag 14}. \emph{
 % --- AUFGABE 2 -----------------------------------------------------------
 \aufgabenkopf{2}{Sustainable Software Development \textendash{} Hebel}{\nivLi}{8\,min}
 
-\noindent \emph{Sustainable Software Development (SSD)} setzt drei Hebelklassen ein: \emph{Effizienz} (weniger Rechenzeit, weniger Speicher, weniger Datenbewegung), \emph{Architektur} (Caching, asynchrone Verarbeitung, Batch vs.\ Real-Time, ressourcenbewusste Defaults) und \emph{Betrieb} (Skalierung nach Bedarf, Off-Hours, Monitoring, \emph{Performance Budgets}). Das Hauptrisiko: ``Green by guesswork'' \textendash{} Aussagen ohne Metriken und Guardrails.
+\noindent \emph{Sustainable Software Development (SSD)} setzt drei Hebelklassen ein: \emph{Effizienz} (weniger Rechenzeit, weniger Speicher, weniger Datenbewegung), \emph{Architektur} (Caching (Zwischenspeichern), asynchrone Verarbeitung, Batch (Sammelverarbeitung) vs.\ Real-Time, ressourcenbewusste Defaults) und \emph{Betrieb} (Skalierung nach Bedarf, Off-Hours, Monitoring, \emph{Performance Budgets}). Das Hauptrisiko: ``Green by guesswork'' \textendash{} Aussagen ohne Metriken und Guardrails.
 
 \medskip
 \noindent\textbf{Arbeitsauftrag:}
 
 \begin{enumerate}
   \item Erstellen Sie eine \textbf{Tabelle} mit den drei Hebelklassen und je drei konkreten Beispielen (z.\,B.\ Effizienz: SQL-Index statt Full-Scan; Architektur: HTTP-Caching; Betrieb: Off-Hours-Shutdown Non-Prod).
-  \item Definieren Sie \emph{Performance Budget} und \emph{Data Budget} jeweils in einem Satz \textendash{} und nennen Sie einen konkreten Wert f\"ur einen kritischen API-Endpunkt (z.\,B.\ \emph{p95 $<$\,300\,ms}; \emph{Payload $<$\,50\,kB}).
+  \item Definieren Sie \emph{Performance Budget} und \emph{Data Budget} jeweils in einem Satz \textendash{} und nennen Sie einen konkreten Wert f\"ur einen kritischen API-Endpunkt (z.\,B.\ \emph{p95 $<$\,300\,ms}; \emph{Payload (Nutzdatenmenge) $<$\,50\,kB}).
   \item Nennen Sie \textbf{zwei typische ``Green by guesswork''-Anti-Muster}, die Sie aus Projekten kennen (z.\,B.\ ``Wir haben ein Caching gebaut'' ohne Cache-Hit-Rate zu messen).
 \end{enumerate}
 
@@ -575,7 +575,7 @@ F\"ur zwei Serviceklassen \textendash{} \emph{kritisch} (Patientenportal, Bankin
 \aufgabenkopf{11}{Transferprojekt \textendash{} Green-IT Operating Model \& Decision Architecture}{\nivLiii}{50\,min}
 
 \begin{infobox}[Rolle und Ausgangslage]
-\textbf{Ihre Rolle:} \emph{CIO/CTO} + \emph{Sustainability Lead} + \emph{Head of Procurement} (Senior-Rollenmix; gemeinsame Steuerung).
+\textbf{Ihre Rolle:} \emph{CIO/CTO} + \emph{Sustainability Lead} + \emph{Head of Procurement} (Beschaffung) (Senior-Rollenmix; gemeinsame Steuerung).
 
 \smallskip
 \textbf{Auftrag:} Ein \emph{Green-IT-Operating-Model} etablieren, das CO\textsubscript{2}-Messung, SSD-Standards, E-Waste und Vendor Sustainability in den IT-Service-Lifecycle integriert \textendash{} auditf\"ahig und wirkungsorientiert.

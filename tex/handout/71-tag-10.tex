@@ -215,7 +215,7 @@
 \begin{itemize}
   \item Microservices-Grundlogik kennen: unabhängige Deployments, Servicegrenzen entlang Capabilities, API/Event-Integration, Idempotenz.
   \item Container und Kubernetes konzeptionell einordnen: Deploy, Skalierung, Self-Healing, Rollback, Service-Discovery, Konfiguration/Secrets.
-  \item TDD-Zyklus (Red-Green-Refactor) und Testpyramide (Unit, Integration, End-to-End) als Qualitätsarchitektur verstehen.
+  \item TDD-Zyklus (Test-Driven Development -- Red-Green-Refactor: erst Test, dann Code) und Testpyramide (Unit, Integration, End-to-End) als Qualitätsarchitektur verstehen.
   \item DevOps-Praktiken und Operating-Model-Bausteine (Produktteams, Plattformteam, Security, Architektur-Governance) einordnen.
 \end{itemize}
 
@@ -224,14 +224,14 @@
   \item Einen Monolithen entlang Capabilities in fünf bis acht Service-Kandidaten zerlegen und Steckbriefe formulieren.
   \item Einen Release-Flow mit zwei Quality Gates definieren und eine Testpyramide pro Service dimensionieren.
   \item Ein Kubernetes-Betriebskonzept (Rollout/Rollback, Autoscaling, Monitoring/Alerting) auf einen Fallprozess anwenden.
-  \item Ein Operating Model entwerfen, das Produktteams, Plattformteam und Security in einer RACI darstellt.
+  \item Ein Operating Model entwerfen, das Produktteams, Plattformteam und Security in einer RACI (Responsible, Accountable, Consulted, Informed -- Verantwortungs-Matrix) darstellt.
 \end{itemize}
 
 \subsection*{L3 -- Management (Entscheidung und Verantwortung)}
 \begin{itemize}
-  \item Top-10-Entscheidungen für eine skalierbare Plattform priorisieren (Servicegrenzen, Datenhoheit, SLOs, Standards).
+  \item Top-10-Entscheidungen für eine skalierbare Plattform priorisieren (Servicegrenzen, Datenhoheit, SLOs = Service Level Objectives, messbare Ziel-Niveaus; Standards).
   \item Zielkonflikte Speed vs.\ Safety, Autonomie vs.\ Standardisierung, Innovation vs.\ Audit transparent entscheiden.
-  \item Reliability- und Risiko-Architektur (SLOs, Error Budgets, Change Failure Rate, MTTR) als Steuerungsinstrument nutzen.
+  \item Reliability- und Risiko-Architektur (SLOs, Error Budgets, Change Failure Rate, MTTR = Mean Time to Recover, mittlere Wieder\-herstellungs-Zeit) als Steuerungsinstrument nutzen.
   \item Entscheidungen unter Unsicherheit mit Frühwarnsignalen absichern statt sie zu vermeiden.
 \end{itemize}
 

@@ -210,14 +210,14 @@
 \addcontentsline{toc}{section}{Lernziele dieses Tages}
 \thispagestyle{plain}
 
-\noindent Gestern haben wir mit Discovery und Conformance den Ist-Prozess gegen das Soll-Modell gespiegelt. Heute machen wir den nächsten Schritt: vom \emph{Verstehen} zum \emph{Vorhersagen} und \emph{Steuern in Echtzeit}. Drei Bausteine machen das möglich -- Process Enhancement (Modelle mit Daten anreichern), Predictive Process Analytics (Risiken vor Eintritt erkennen) und ein solides Daten-Fundament aus DWH, ETL und BI-Dashboards.
+\noindent Gestern haben wir mit Discovery und Conformance den Ist-Prozess gegen das Soll-Modell gespiegelt. Heute machen wir den nächsten Schritt: vom \emph{Verstehen} zum \emph{Vorhersagen} und \emph{Steuern in Echtzeit}. Drei Bausteine machen das möglich -- Process Enhancement (Modelle mit Daten anreichern), Predictive Process Analytics (Risiken vor Eintritt erkennen) und ein solides Daten-Fundament aus DWH (\emph{Data Warehouse} -- zentrales Datenlager, das Daten aus verschiedenen Quellen für Analysen konsolidiert), ETL (\emph{Extract, Transform, Load} -- Prozess zur Datenintegration: Extraktion, Umwandlung und Laden in ein Zielsystem) und BI-Dashboards (\emph{Business Intelligence} -- Technologien und Methoden zur Analyse und Aufbereitung von Unternehmensdaten).
 
 \subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
 \begin{itemize}
   \item Process Enhancement als Anreicherungs-Disziplin einordnen (Zeiten, Ressourcen, Kosten, Varianten).
-  \item ML-Typen im Prozesskontext unterscheiden: Klassifikation, Regression, Clustering, Anomalieerkennung.
+  \item ML-Typen (\emph{Machine Learning} -- Teilgebiet der KI: Systeme erkennen Muster in Daten und lernen daraus) im Prozesskontext unterscheiden: Klassifikation, Regression, Clustering, Anomalieerkennung.
   \item DWH/ETL-Grundlagen kennen: Fakten und Dimensionen, Staging, Mapping, Quality Checks.
-  \item Dashboard-Prinzipien benennen: Executive-KPIs, Drilldown, Alerts, ``next best action''.
+  \item Dashboard-Prinzipien benennen: Executive-KPIs (\emph{Key Performance Indicator} -- Messgröße zur Überwachung und Steuerung unternehmerischer Ziele), Drilldown, Alerts, ``next best action''.
 \end{itemize}
 
 \subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
@@ -252,7 +252,7 @@ Die meisten BPM-Programme haben in den letzten zehn Jahren gelernt, Vergangenhei
 \begin{enumerate}
   \item \fachbegriff{Reporting-Reifegrad.} Vergangenheit beschreiben (Monatsbericht, Quartals-KPI). Hilft bei Diagnose, nicht bei Steuerung.
   \item \fachbegriff{Real-time-Reifegrad.} Gegenwart beobachten (Live-Dashboard, KPI in Near-Real-Time). Schnellere Diagnose, aber noch reaktiv.
-  \item \fachbegriff{Predictive-Reifegrad.} Zukunft vorhersagen (Welche Cases werden in den nächsten 4\,h SLA reißen?). Erlaubt \emph{präventives} Eingreifen.
+  \item \fachbegriff{Predictive-Reifegrad.} Zukunft vorhersagen (Welche Cases werden in den nächsten 4\,h SLA -- \emph{Service Level Agreement}, vertraglich vereinbarte Qualitäts- und Leistungsstandards -- reißen?). Erlaubt \emph{präventives} Eingreifen.
 \end{enumerate}
 
 \subsection{Die drei Bausteine des heutigen Tages}
@@ -497,8 +497,8 @@ Predictive Analytics, Conformance und Dashboards stehen alle auf demselben Funda
 \subsection{Typische Quellsysteme}
 
 \begin{itemize}
-  \item \fachbegriff{ERP} (Aufträge, Rechnungen, Stammdaten).
-  \item \fachbegriff{CRM} (Kunden, Kommunikation, Interaktionen).
+  \item \fachbegriff{ERP} (\emph{Enterprise Resource Planning} -- integriertes Softwaresystem zur unternehmensweiten Ressourcenplanung; Aufträge, Rechnungen, Stammdaten).
+  \item \fachbegriff{CRM} (\emph{Customer Relationship Management} -- systematische Gestaltung aller Kundenbeziehungen im Unternehmen; Kunden, Kommunikation, Interaktionen).
   \item \fachbegriff{Ticket-/Workflow-Systeme} (Cases, Bearbeitungsschritte, Zuweisungen).
   \item \fachbegriff{Logs aus Workflow-Engines} (BPMS-Audit-Trail).
   \item \fachbegriff{Externe Daten} (Marktdaten, Wetter, Lieferanten-Updates).
@@ -582,7 +582,7 @@ Eine bewusste Entscheidung in jedem Dashboard-Design ist die \emph{Auslassung}. 
 \begin{itemize}
   \item \fachbegriff{Cases pro Mitarbeitenden pro Stunde.} Risiko: ``Schnell-und-Schlampig'' wird belohnt. Gegenmaßnahme: Kopplung an Rework-Rate, oder gar nicht einführen.
   \item \fachbegriff{Erstanruf-Lösungsquote.} Risiko: Tickets werden vorzeitig geschlossen. Gegenmaßnahme: Kopplung an Reopen-Rate.
-  \item \fachbegriff{Bearbeitungs\-zeit-Reduktion.} Risiko: ``Quick-Close'' ohne Lösung. Gegenmaßnahme: Kombination mit Kunden-NPS.
+  \item \fachbegriff{Bearbeitungs\-zeit-Reduktion.} Risiko: ``Quick-Close'' ohne Lösung. Gegenmaßnahme: Kombination mit Kunden-NPS (\emph{Net Promoter Score} -- Kennzahl für Kundenloyalität: Weiterempfehlungsbereitschaft auf einer Skala 0--10).
 \end{itemize}
 
 % --- 7. FALLSTUDIE -------------------------------------------------------
@@ -662,7 +662,7 @@ Eine bewusste Entscheidung in jedem Dashboard-Design ist die \emph{Auslassung}. 
   \item Post-Review: monatlicher Service-Excellence-Termin.
 \end{itemize}
 
-\subsection{Schritt 6 -- MVP-Entscheidung}
+\subsection{Schritt 6 -- MVP-Entscheidung (\emph{Minimum Viable Product} -- erste marktreife Produktversion mit minimalem Funktionsumfang)}
 
 \textbf{Im MVP:}
 \begin{itemize}

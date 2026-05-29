@@ -195,10 +195,10 @@
 \section*{So arbeiten Sie mit diesem Heft}
 \thispagestyle{plain}
 
-\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 8 \textendash{} \emph{Vom Ist verstehen zum Zukunft steuern}: Process Enhancement, Predictive Analytics, Real-time Monitoring, DWH/ETL und BI-Dashboards. Heute schlie{\ss}en sich die Themen von Tag 7 (Discovery + Conformance) um die Predictive-Schicht: \emph{wir bewegen uns vom ``Was war?'' zum ``Was kommt?''}. Die Aufgaben gliedern sich in drei Niveaus:
+\noindent Dieses Aufgabenheft enth\"alt elf Aufgaben zu Tag 8 \textendash{} \emph{Vom Ist verstehen zum Zukunft steuern}: Process Enhancement, Predictive Analytics, Real-time Monitoring, DWH (\emph{Data Warehouse} -- zentrales Datenlager, das Daten aus verschiedenen Quellen f\"ur Analysen konsolidiert)/ETL (\emph{Extract, Transform, Load} -- Prozess zur Datenintegration: Extraktion, Umwandlung und Laden in ein Zielsystem) und BI-Dashboards (\emph{Business Intelligence} -- Technologien und Methoden zur Analyse und Aufbereitung von Unternehmensdaten). Heute schlie{\ss}en sich die Themen von Tag 7 (Discovery + Conformance) um die Predictive-Schicht: \emph{wir bewegen uns vom ``Was war?'' zum ``Was kommt?''}. Die Aufgaben gliedern sich in drei Niveaus:
 
 \begin{itemize}
-  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} ML-Typen, ETL-Schritte, Dashboard-Prinzipien. 5\,--\,10 Minuten.
+  \item \nivLi{} \textendash{} \fachbegriff{Wissen.} ML-Typen (\emph{Machine Learning} -- Teilgebiet der KI: Systeme erkennen Muster in Daten und lernen daraus), ETL-Schritte, Dashboard-Prinzipien. 5\,--\,10 Minuten.
   \item \nivLii{} \textendash{} \fachbegriff{Anwendung.} Predictive Canvas, ETL-Pipeline, BI-Dashboard. 15\,--\,30 Minuten.
   \item \nivLiii{} \textendash{} \fachbegriff{Management.} Fallstudie \emph{FinServe IT Operations}, Process Intelligence Plattform. 30\,--\,45 Minuten.
 \end{itemize}
@@ -270,7 +270,7 @@ Die Musterl\"osungen finden Sie im \emph{L\"osungsheft Tag 8}. Heute besonders w
 \noindent Erkl\"aren Sie die sechs Schritte einer typischen \fachbegriff{ETL}-Pipeline f\"ur Prozessdaten:
 
 \begin{enumerate}
-  \item \emph{Quelle} (CRM, ERP, Tickets, Logs).
+  \item \emph{Quelle} (CRM = \emph{Customer Relationship Management}, systematische Gestaltung aller Kundenbeziehungen; ERP = \emph{Enterprise Resource Planning}, integriertes Softwaresystem zur unternehmensweiten Ressourcenplanung; Tickets, Logs).
   \item \emph{Staging} (Rohdaten unver\"andert ablegen).
   \item \emph{Mapping} (Aktivit\"atsnamen, Status normalisieren).
   \item \emph{Join} (\"uber Case-IDs oder Korrelationsschl\"ussel).
@@ -332,7 +332,7 @@ Ein Prozess (z.\,B.\ Reklamationsbearbeitung) schwankt stark in Durchlaufzeit; M
 \noindent\textbf{Arbeitsauftrag:}
 
 \begin{enumerate}
-  \item F\"ullen Sie den Canvas f\"ur \emph{Use Case A: ``SLA-Risiko fr\"uh erkennen''}.
+  \item F\"ullen Sie den Canvas f\"ur \emph{Use Case A: ``SLA-Risiko fr\"uh erkennen''} (\emph{SLA} = \emph{Service Level Agreement}, vertraglich vereinbarte Qualit\"ats- und Leistungsstandards f\"ur Dienstleistungen).
   \item F\"ullen Sie den Canvas f\"ur \emph{Use Case B: ``Rework / Fehler fr\"uh erkennen''}.
   \item Definieren Sie je Use Case eine \fachbegriff{Baseline-Heuristik}, die auch \emph{ohne ML} sofort wirkt.
   \item \textbf{Entscheidung unter Unsicherheit:} Welche Daten fehlen vermutlich \textendash{} und wie erfassen Sie sie pragmatisch (ohne Tool-Projekt)?
@@ -453,7 +453,7 @@ Bei Predictive sind \emph{beide} Fehler m\"oglich: ein \emph{False Positive} (Al
   \item \textbf{Label-Definition:} Was ist ``Breach''? Umgang mit fehlenden Labels (Proxy).
   \item \textbf{ETL-Pipeline} + \textbf{Datenqualit\"ats-Checks} + Case-ID-Strategie.
   \item \textbf{Real-time Dashboard} + \textbf{Alert Playbook} (Owner, Handlung, Eskalation, Dokumentation).
-  \item \textbf{MVP-Entscheidung:} Welche \emph{2 Features} und welche \emph{1 Datenquelle} lassen Sie zuerst weg \textendash{} und wie kompensieren Sie?
+  \item \textbf{MVP-Entscheidung} (\emph{Minimum Viable Product} -- erste marktreife Produktversion mit minimalem Funktionsumfang)\textbf{:} Welche \emph{2 Features} und welche \emph{1 Datenquelle} lassen Sie zuerst weg \textendash{} und wie kompensieren Sie?
 \end{enumerate}
 
 \ytvideo{Data Warehouse einfach erklärt — Grundlagen}{https://youtu.be/EHmeK1nMBvA}

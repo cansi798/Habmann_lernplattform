@@ -238,8 +238,8 @@
 \subsection*{L3 -- Management (Entscheidung und Verantwortung)}
 \begin{itemize}
   \item Repository als \emph{Betriebssystem} für Prozesssteuerung verstehen -- nicht als Ablage.
-  \item Execution als \emph{Vertrag} zwischen Fach, IT und Compliance behandeln: Daten, Fehler, SLAs, Eskalation.
-  \item Entscheidungen unter Unsicherheit treffen: MVP statt Perfektion, mit Frühwarnsignalen abgesichert.
+  \item Execution als \emph{Vertrag} zwischen Fach, IT und Compliance behandeln: Daten, Fehler, SLAs (Service Level Agreements), Eskalation.
+  \item Entscheidungen unter Unsicherheit treffen: MVP (\emph{Minimum Viable Product}, erste marktreife Mindestversion) statt Perfektion, mit Frühwarnsignalen abgesichert.
   \item Governance-Regeln auf das Minimum reduzieren, das 80\,\% des Chaos verhindert -- und alles weitere bewusst delegieren.
 \end{itemize}
 
@@ -291,7 +291,7 @@ Ein Repository steht auf vier Beinen, das fünfte ist der Owner:\\[2pt]
 
 Wenn das Repository der ``Bibliothekar'' ist, ist die Execution-Schicht die ``Maschine''. Sie nimmt ausgewählte Modelle und führt sie aus -- als Workflows mit User Tasks, Service Tasks, Timern, Eskalationen und Audit Trail. \quelle{Freund \& Rücker, 2019; OMG, 2014}
 
-Nicht jedes Modell muss ausführbar sein. Im Gegenteil: Die wertvollsten Modelle sind oft die \emph{Übersichtsmodelle}, die Verantwortung sichtbar machen und Kommunikation strukturieren. Aber bestimmte Teilstrecken -- typischerweise solche mit klarer Start-Ende-Definition, eindeutigen Daten und nachvollziehbaren Fehlerfällen -- profitieren massiv davon, in einer \fachbegriff{Workflow-Engine} (Camunda, Flowable, jBPM, oder vergleichbare BPMS-Produkte) zu laufen.
+Nicht jedes Modell muss ausführbar sein. Im Gegenteil: Die wertvollsten Modelle sind oft die \emph{Übersichtsmodelle}, die Verantwortung sichtbar machen und Kommunikation strukturieren. Aber bestimmte Teilstrecken -- typischerweise solche mit klarer Start-Ende-Definition, eindeutigen Daten und nachvollziehbaren Fehlerfällen -- profitieren massiv davon, in einer \fachbegriff{Workflow-Engine} (Camunda, Flowable, jBPM, oder vergleichbare BPMS-Produkte; BPMS = \emph{Business Process Management System}) zu laufen.
 
 % --- 2. REPOSITORY-DESIGN ------------------------------------------------
 \section{Repository-Design: Single Source of Truth in drei Ebenen}
@@ -301,7 +301,7 @@ Ein praxistaugliches Repository kommt mit einer überraschend einfachen Struktur
 \subsection{Die drei kanonischen Ebenen}
 
 \begin{enumerate}
-  \item \fachbegriff{Ebene 1 -- E2E-Prozess.} Die Sicht auf einen vollständigen Wertschöpfungsstrang: ``Order-to-Cash'', ``Incident-to-Resolution'', ``Lead-to-Order'', ``Hire-to-Retire''. Auf dieser Ebene wird \emph{nicht} im Detail modelliert, sondern Scope, Owner, KPI und übergeordneter Verlauf geklärt.
+  \item \fachbegriff{Ebene 1 -- E2E-Prozess.} Die Sicht auf einen vollständigen Wertschöpfungsstrang: ``Order-to-Cash'', ``Incident-to-Resolution'', ``Lead-to-Order'', ``Hire-to-Retire''. Auf dieser Ebene wird \emph{nicht} im Detail modelliert, sondern Scope, Owner, KPI (\emph{Key Performance Indicator}) und übergeordneter Verlauf geklärt.
   \item \fachbegriff{Ebene 2 -- Subprozess.} Die Detail-Modelle, die zeigen, wie ein Teil des E2E-Prozesses tatsächlich abläuft. Hier wohnt das eigentliche BPMN/EPC-Diagramm mit Lanes, Gateways und Tasks. Pro E2E-Prozess typischerweise 3 bis 8 Subprozesse.
   \item \fachbegriff{Ebene 3 -- Arbeits- und Nachweisdokument.} Die operativen Artefakte: SOP (Standard Operating Procedure), Checklisten, Formulare, Anweisungen, Schulungsunterlagen, Auditnachweise. Sie hängen an einzelnen Subprozessen oder Tasks.
 \end{enumerate}
@@ -469,7 +469,7 @@ Ein \fachbegriff{Execution-BPMN}-Modell muss in eine Workflow-Engine laden und d
 
 \begin{itemize}
   \item \fachbegriff{User Task} -- ein menschlicher Schritt mit Form, Zuweisungsregel und SLA.
-  \item \fachbegriff{Service Task} -- ein Systemschritt, typischerweise ein API-Aufruf oder eine Datenbankoperation.
+  \item \fachbegriff{Service Task} -- ein Systemschritt, typischerweise ein API-Aufruf (API = \emph{Application Programming Interface}, Schnittstelle zwischen Softwaresystemen) oder eine Datenbankoperation.
   \item \fachbegriff{Send/Receive Task} -- expliziter Nachrichtenaustausch über System- oder Pool-Grenzen.
   \item \fachbegriff{Business Rule Task} -- delegiert Entscheidung an eine Decision Engine (DMN).
   \item \fachbegriff{Timer Event} -- Reminder, Eskalation, Deadlines (``nach 3 Tagen erinnern, nach 5 Tagen eskalieren'').
@@ -527,7 +527,7 @@ Nehmen wir den klassischen Mini-Prozess ``Rechnungsfreigabe'':
   \item Buchhaltung erfasst Grunddaten.
   \item Wenn Betrag $> 5.000\,\text{\euro}$, muss Teamleitung freigeben.
   \item Wenn Kostenstelle fehlt, geht es zurück an die Anforderungsstelle.
-  \item Nach Freigabe wird im ERP gebucht und Zahlung angestoßen.
+  \item Nach Freigabe wird im ERP (\emph{Enterprise Resource Planning}, unternehmensweites Ressourcenplanungssystem) gebucht und Zahlung angestoßen.
   \item Bei Fristüberschreitung wird erinnert und nach 3 Tagen eskaliert.
 \end{enumerate}
 

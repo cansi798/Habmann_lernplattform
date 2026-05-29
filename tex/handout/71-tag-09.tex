@@ -215,8 +215,8 @@
 \subsection*{L1 -- Wissen (Reproduktion und Einordnung)}
 \begin{itemize}
   \item Scrum-Bausteine kennen: Rollen (Product Owner, Scrum Master, Developers), Events, Artefakte, Definition of Done.
-  \item Kanban-Prinzipien einordnen: Visualisieren, WIP-Limits, Pull-System, Flow-Metriken.
-  \item CI-Pipeline und ihre typischen Stufen kennen: Build, Tests, Security/Quality Checks, Deploy.
+  \item Kanban-Prinzipien einordnen: Visualisieren, WIP-Limits (Work in Progress -- Menge der gleichzeitig in Bearbeitung befindlichen Arbeitspakete), Pull-System, Flow-Metriken.
+  \item CI-Pipeline (Continuous Integration -- Codeänderungen werden regelmäßig automatisch getestet und integriert) und ihre typischen Stufen kennen: Build, Tests, Security/Quality Checks, Deploy.
   \item Infrastructure-as-Code-Grundlagen benennen: Code statt Click, Versionierung, Reviews, Audit-Trail.
 \end{itemize}
 
@@ -230,7 +230,7 @@
 
 \subsection*{L3 -- Management (Entscheidung und Verantwortung)}
 \begin{itemize}
-  \item DORA-Metriken (Lead Time, Deployment Frequency, Change Failure Rate, MTTR) als Steuerungssprache nutzen.
+  \item DORA-Metriken (DevOps Research and Assessment -- vier Liefer-Kennzahlen; Lead Time, Deployment Frequency, Change Failure Rate, MTTR = Mean Time to Restore) als Steuerungssprache nutzen.
   \item Zentrale (Gates, Security, IaC-Standards) vs.\ dezentrale Entscheidungen (Team Backlog) bewusst trennen.
   \item ``Fast vs.\ Safe''-Entscheidungen unter Zielkonflikt schriftlich begründen.
   \item Anti-Gaming-Mechanismen für Flow-Kennzahlen einbauen.
@@ -252,7 +252,7 @@ Jedes BPM-, Digital- oder Transformations-Programm hat eine Lieferschicht. Hier 
 \begin{itemize}
   \item \fachbegriff{``Release Friday Fear''.} Niemand traut sich, am Freitag noch zu deployen -- aus Angst, das Wochenende durchzukämpfen.
   \item \fachbegriff{Sprint Theater.} Scrum-Events laufen, aber jede Iteration liefert das Gleiche: Tickets schieben, keine Outcomes.
-  \item \fachbegriff{Kanban-Wildwuchs.} Boards mit 30 Tickets in ``In Progress''; WIP-Limits nicht durchgesetzt; Pull-System nur auf dem Papier.
+  \item \fachbegriff{Kanban-Wildwuchs.} Boards mit 30 Tickets in ``In Progress''; WIP-Limits nicht durchgesetzt; Pull-System (d.h. Team zieht Aufgaben erst bei freier Kapazität) nur auf dem Papier.
   \item \fachbegriff{Deploys per Klick.} Niemand weiß, was im letzten Release wirklich geändert wurde; Rollback ist Glücksspiel.
 \end{itemize}
 
@@ -642,7 +642,7 @@ Vier IaC-Eigenschaften, die zusammen tragen:\\[2pt]
 
 \subsection{Schritt 2 -- 12-Wochen-Plan in drei Releases}
 
-\subsubsection{MVP (Woche 1--4)}
+\subsubsection{MVP -- Minimum Viable Product (Woche 1--4)}
 
 \begin{itemize}
   \item Digitaler Antrag online (Pflichtfelder, Vorab-Validierung).
@@ -661,7 +661,7 @@ Vier IaC-Eigenschaften, die zusammen tragen:\\[2pt]
 
 \begin{itemize}
   \item Rollenmodell (Antragsteller, Bearbeitende, Genehmigende, Audit).
-  \item SLA-Reminder und Eskalation bei Fristüberschreitung.
+  \item SLA-Reminder (Service Level Agreement -- vereinbarte Qualitätsstandards) und Eskalation bei Fristüberschreitung.
   \item Audit Trail.
   \item Zweiter Genehmigungsweg.
 \end{itemize}
@@ -679,7 +679,7 @@ Vier IaC-Eigenschaften, die zusammen tragen:\\[2pt]
   \item Performance-Optimierung.
   \item Monitoring + Alerts.
   \item Fehlerfall-Behandlung.
-  \item Prozess-KPIs für Steuerung.
+  \item Prozess-KPIs (Key Performance Indicators -- Messgrößen für Ziel-Steuerung) für Steuerung.
 \end{itemize}
 
 \textbf{Outcomes:}

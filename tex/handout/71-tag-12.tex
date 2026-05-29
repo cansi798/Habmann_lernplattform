@@ -216,7 +216,7 @@
   \item Bot-Lifecycle und Governance-Bausteine kennen: Idea $\to$ Assessment $\to$ Design $\to$ Build $\to$ Test $\to$ Deploy $\to$ Run $\to$ Improve $\to$ Retire.
   \item Rollen und Rollenträger im RPA-Operating-Modell unterscheiden (Process Owner, Bot Owner, Developer, Reviewer, Security, Operations, Change).
   \item Audit-Trail-Anforderungen verstehen: Traceability, Aufbewahrung, Access-Kontrolle, Beweisführung.
-  \item Exception-Klassen (Business, System, Data, Security) und Security-by-Design-Prinzipien (Least Privilege, SoD, Vault) einordnen.
+  \item Exception-Klassen (Business, System, Data, Security) und Security-by-Design-Prinzipien (Least Privilege = Minimalrechte; SoD = Segregation of Duties, Funktionstrennung; Vault = zentraler verschl\"usselter Passwort-Tresor) einordnen.
 \end{itemize}
 
 \subsection*{L2 -- Anwendung (Transfer auf konkrete Situationen)}
@@ -230,7 +230,7 @@
 \subsection*{L3 -- Management (Entscheidung und Verantwortung)}
 \begin{itemize}
   \item Risk Appetite definieren und Bots in Low/Medium/High Risk klassifizieren.
-  \item CoE vs.\ Föderation als bewusste Entscheidung treffen, mit Frühwarnsignalen.
+  \item CoE (Center of Excellence -- zentrales Kompetenzzentrum) vs.\ Föderation als bewusste Entscheidung treffen, mit Frühwarnsignalen.
   \item Fast-Track-Grenzen und Stop-Conditions verankern.
   \item Change Management von Beginn an im Operating Model verankern (Akzeptanz, Rollenwandel, Kommunikation).
 \end{itemize}
@@ -337,9 +337,9 @@ Ein wachsendes Programm braucht klare Rollen. Sechs Kernrollen reichen für die 
   \item \fachbegriff{Process Owner.} Fachlicher Eigentümer des Prozesses, in dem der Bot arbeitet. Definiert Anforderungen, akzeptiert Outputs, verantwortet fachliche Korrektheit.
   \item \fachbegriff{Bot Owner.} Verantwortet einen konkreten Bot in Build und Run. Eine Person, nicht ein Verteiler.
   \item \fachbegriff{Developer.} Baut den Bot im Studio, gegen Standards.
-  \item \fachbegriff{Reviewer / QA.} Prüft Bot gegen Naming, Tests, Logging, Security-Baselines vor Deployment.
+  \item \fachbegriff{Reviewer / QA.} (Quality Assurance -- Qualit\"atssicherung.) Prüft Bot gegen Naming, Tests, Logging, Security-Baselines vor Deployment.
   \item \fachbegriff{Security Owner.} Definiert Baselines (Credentials, Vault, Logging, SoD) und prüft Ausnahmen.
-  \item \fachbegriff{Operations / Run.} Betreibt die Plattform (Orchestrator, Server, Updates), reagiert auf Incidents, verantwortet MTTR.
+  \item \fachbegriff{Operations / Run.} Betreibt die Plattform (Orchestrator, Server, Updates), reagiert auf Incidents, verantwortet MTTR (Mean Time To Repair -- durchschnittliche Reparatur-Dauer).
 \end{itemize}
 
 \subsection{RACI für eine Bot-Änderung}
