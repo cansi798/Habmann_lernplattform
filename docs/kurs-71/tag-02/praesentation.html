@@ -455,78 +455,79 @@
     <section class="slide" style="display:none">
       <h2>Fachbegriffe &amp; Definitionen</h2>
       <p style="font-size:13px;color:var(--color-muted);margin:0 0 10px">Alle Abkürzungen und Fachbegriffe dieser Präsentation auf einen Blick.</p>
-      <div style="overflow-x:auto">
-      <table class="vs-table" style="font-size:13px;width:100%">
-        <thead>
-          <tr>
-            <th style="width:60px;background:var(--kurs-71-bg);color:var(--kurs-71)">Kürzel</th>
-            <th style="width:30%;background:var(--kurs-71-bg);color:var(--kurs-71)">Ausgeschrieben</th>
-            <th style="background:var(--kurs-71-bg);color:var(--kurs-71)">Definition</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">B2B</strong></td>
-            <td style="font-style:italic">Business-to-Business</td>
-            <td style="font-size:13px">Geschäftsbeziehungen zwischen Unternehmen (im Gegensatz zu Endkunden)</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">BPMN</strong></td>
-            <td style="font-style:italic">Business Process Model and Notation</td>
-            <td style="font-size:13px">Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">BT</strong></td>
-            <td style="font-style:italic">Bearbeitungszeit</td>
-            <td style="font-size:13px">Zeit, die aktiv für die Bearbeitung eines Vorgangs aufgewendet wird</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">CRM</strong></td>
-            <td style="font-style:italic">Customer Relationship Management</td>
-            <td style="font-size:13px">Systematische Gestaltung aller Kundenbeziehungen im Unternehmen</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">DLZ</strong></td>
-            <td style="font-style:italic">Durchlaufzeit</td>
-            <td style="font-size:13px">Gesamtzeit vom Auftragseingang bis zur vollständigen Fertigstellung eines Vorgangs</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">IT</strong></td>
-            <td style="font-style:italic">Informationstechnologie</td>
-            <td style="font-size:13px">Gesamtheit der Technologien zur Erfassung, Speicherung und Übertragung von Daten</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">KPIs</strong></td>
-            <td style="font-style:italic">Key Performance Indicators</td>
-            <td style="font-size:13px">Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">SLA</strong></td>
-            <td style="font-style:italic">Service Level Agreement</td>
-            <td style="font-size:13px">Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">UML</strong></td>
-            <td style="font-style:italic">Unified Modeling Language</td>
-            <td style="font-size:13px">Standardisierte grafische Modellierungssprache für Softwarearchitekturen</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">VSM</strong></td>
-            <td style="font-style:italic">Value Stream Mapping</td>
-            <td style="font-size:13px">Lean-Methode zur Visualisierung und Optimierung des gesamten Wertschöpfungsstroms</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">WIP</strong></td>
-            <td style="font-style:italic">Work in Progress</td>
-            <td style="font-size:13px">Menge der gleichzeitig in Bearbeitung befindlichen Arbeitspakete oder Aufgaben</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">WT</strong></td>
-            <td style="font-style:italic">Wartezeit</td>
-            <td style="font-size:13px">Zeitspanne, in der ein Vorgang auf Ressourcen oder Entscheidungen wartet</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px">
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">UML</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Unified Modeling Language</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Standardisierte grafische Modellierungssprache zur Beschreibung von Softwarearchitektur und -verhalten (OMG-Standard).</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die Bildsprache der Software-Architekten — Klassendiagramme, Use Cases, Sequenzen.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">VSM</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Value Stream Mapping</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Lean-Methode zur Visualisierung des gesamten Wertschöpfungsstroms (Bearbeitungszeit, Wartezeit, Durchlaufzeit) zur Engpassidentifikation.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Eine Skizze des kompletten Wegs vom Auftrag zur Auslieferung — sichtbar, wo Wartezeit Wert auffrisst.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">BT</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Bearbeitungszeit</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Zeit, in der ein Vorgang aktiv bearbeitet wird (ohne Wartezeiten).</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Reine Arbeitszeit am Vorgang — nicht das Liegen im Posteingang.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">DLZ</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Durchlaufzeit</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Gesamtzeit vom Auftragseingang bis zur vollständigen Fertigstellung, inkl. Bearbeitungs- und Wartezeiten.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Wie lange dauert es von „Bestellung rein" bis „Sache erledigt" — egal was dazwischen passiert.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">IT</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Informationstechnologie</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Gesamtheit von Hardware, Software, Netzwerken und Diensten zur Verarbeitung und Übertragung von Information.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Alles, was an Rechnern, Servern, Software und Netzen zum Job dazugehört.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">BPMN</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Business Process Model and Notation</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Internationaler Standard (ISO 19510) für die grafische Darstellung von Geschäftsprozessen.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die genormte Bildsprache für Prozessdiagramme — damit alle dasselbe Bild lesen.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">WT</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Wartezeit</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Zeit, in der ein Vorgang im Prozess liegt, ohne aktiv bearbeitet zu werden.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die Zeit, in der nix passiert — Liegen im Posteingang, in Schlangen, in Genehmigungen.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">WIP</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Work in Progress</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Menge aktuell parallel in Arbeit befindlicher Vorgänge; in Kanban explizit begrenzt (WIP-Limits) zur Flusssicherung.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Wie viele Vorgänge gleichzeitig in der Mache sind — zu viele = nichts wird fertig.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">B2B</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Business-to-Business</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Geschäftsbeziehungen zwischen Unternehmen (im Gegensatz zum Endkundengeschäft B2C).</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Firma kauft bei Firma — nicht der Privatkunde im Laden.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">CRM</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Customer Relationship Management</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Systeme und Strategien zur Pflege und Auswertung von Kundenbeziehungen.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die zentrale Akte zu jedem Kunden — was er kaufte, fragte, beschwerte.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">SLA</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Service Level Agreement</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Vertraglich vereinbarte Dienstleistungsqualität zwischen Anbieter und Kunde (Verfügbarkeit, Reaktionszeit, Lösungszeit).</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Schwarz auf weiß: Was muss der Dienst leisten, wann wird es kritisch, wer haftet?</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">KPI</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Key Performance Indicator (Plural: KPIs)</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Quantitativ messbare Kennzahl zur Bewertung des Zielerreichungsgrads einer Aktivität, eines Prozesses oder einer Organisation.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die wenigen Zahlen, an denen man WIRKLICH ablesen kann, ob ein Ziel erreicht ist.</p>
+        </div>
       </div>
     </section>
 

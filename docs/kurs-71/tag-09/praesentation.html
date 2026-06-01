@@ -343,53 +343,49 @@
     <section class="slide" style="display:none">
       <h2>Fachbegriffe &amp; Definitionen</h2>
       <p style="font-size:13px;color:var(--color-muted);margin:0 0 10px">Alle Abkürzungen und Fachbegriffe dieser Präsentation auf einen Blick.</p>
-      <div style="overflow-x:auto">
-      <table class="vs-table" style="font-size:13px;width:100%">
-        <thead>
-          <tr>
-            <th style="width:60px;background:var(--kurs-71-bg);color:var(--kurs-71)">Kürzel</th>
-            <th style="width:30%;background:var(--kurs-71-bg);color:var(--kurs-71)">Ausgeschrieben</th>
-            <th style="background:var(--kurs-71-bg);color:var(--kurs-71)">Definition</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">CD</strong></td>
-            <td style="font-style:italic">Continuous Deployment</td>
-            <td style="font-size:13px">Automatisierte Auslieferung validierter Software-Änderungen direkt in die Produktion</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">CI</strong></td>
-            <td style="font-style:italic">Continuous Integration</td>
-            <td style="font-size:13px">Entwicklungspraxis: Codeänderungen werden regelmäßig automatisch getestet und integriert</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">DORA</strong></td>
-            <td style="font-style:italic">DevOps Research and Assessment</td>
-            <td style="font-size:13px">Forschungsgruppe (Forsgren, Humble, Kim, "Accelerate"); vier Flow-Kennzahlen als Industriestandard</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">KPIs</strong></td>
-            <td style="font-style:italic">Key Performance Indicators</td>
-            <td style="font-size:13px">Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">MVP</strong></td>
-            <td style="font-style:italic">Minimum Viable Product</td>
-            <td style="font-size:13px">Erste marktreife Produktversion mit minimalem Funktionsumfang</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">SLA</strong></td>
-            <td style="font-style:italic">Service Level Agreement</td>
-            <td style="font-size:13px">Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">WIP</strong></td>
-            <td style="font-style:italic">Work in Progress</td>
-            <td style="font-size:13px">Menge der gleichzeitig in Bearbeitung befindlichen Arbeitspakete oder Aufgaben</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px">
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">CI</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Continuous Integration</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Regelmäßiges, automatisiertes Zusammenführen von Code-Änderungen in einen gemeinsamen Hauptzweig mit automatischer Prüfung.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Jeder Entwickler liefert mehrmals täglich, ein Roboter prüft sofort, ob noch alles zusammenpasst.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">CD</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Continuous Deployment</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Automatisierte Auslieferung jeder freigegebenen Codeänderung in die Produktivumgebung ohne manuelles Release.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Jede getestete Codezeile geht ohne Pause live — keine Release-Termine mehr.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">DORA</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">DevOps Research and Assessment</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Forschungsprogramm mit vier Schlüssel-Metriken zur Bewertung der Liefer-Performance: Lead Time, Deployment Frequency, MTTR, Change Failure Rate.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Vier Zahlen, an denen man erkennt, ob ein IT-Team schnell und stabil liefert.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">WIP</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Work in Progress</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Menge aktuell parallel in Arbeit befindlicher Vorgänge; in Kanban explizit begrenzt (WIP-Limits) zur Flusssicherung.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Wie viele Vorgänge gleichzeitig in der Mache sind — zu viele = nichts wird fertig.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">MVP</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Minimum Viable Product</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Erste lauffähige Produktversion mit gerade so vielen Funktionen, dass echtes Nutzer-Feedback möglich wird.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die kleinste Version, die echtes Feedback liefert — kein Schaufenster-Prototyp.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">SLA</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Service Level Agreement</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Vertraglich vereinbarte Dienstleistungsqualität zwischen Anbieter und Kunde (Verfügbarkeit, Reaktionszeit, Lösungszeit).</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Schwarz auf weiß: Was muss der Dienst leisten, wann wird es kritisch, wer haftet?</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">KPI</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Key Performance Indicator (Plural: KPIs)</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Quantitativ messbare Kennzahl zur Bewertung des Zielerreichungsgrads einer Aktivität, eines Prozesses oder einer Organisation.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die wenigen Zahlen, an denen man WIRKLICH ablesen kann, ob ein Ziel erreicht ist.</p>
+        </div>
       </div>
     </section>
 

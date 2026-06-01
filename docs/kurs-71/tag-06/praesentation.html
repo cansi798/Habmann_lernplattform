@@ -319,73 +319,67 @@
     <section class="slide" style="display:none">
       <h2>Fachbegriffe &amp; Definitionen</h2>
       <p style="font-size:13px;color:var(--color-muted);margin:0 0 10px">Alle Abkürzungen und Fachbegriffe dieser Präsentation auf einen Blick.</p>
-      <div style="overflow-x:auto">
-      <table class="vs-table" style="font-size:13px;width:100%">
-        <thead>
-          <tr>
-            <th style="width:60px;background:var(--kurs-71-bg);color:var(--kurs-71)">Kürzel</th>
-            <th style="width:30%;background:var(--kurs-71-bg);color:var(--kurs-71)">Ausgeschrieben</th>
-            <th style="background:var(--kurs-71-bg);color:var(--kurs-71)">Definition</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">API</strong></td>
-            <td style="font-style:italic">Application Programming Interface</td>
-            <td style="font-size:13px">Standardisierte Schnittstelle zur Kommunikation zwischen Softwaresystemen</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">BPMN</strong></td>
-            <td style="font-style:italic">Business Process Model and Notation</td>
-            <td style="font-size:13px">Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">BPMS</strong></td>
-            <td style="font-style:italic">Business Process Management System</td>
-            <td style="font-size:13px">Softwareplattform zur Modellierung, Ausführung und Überwachung von Geschäftsprozessen</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">DWH</strong></td>
-            <td style="font-style:italic">Data Warehouse</td>
-            <td style="font-size:13px">Zentrales Datenlager, das Daten aus verschiedenen Quellen für Analysen konsolidiert</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">KPIs</strong></td>
-            <td style="font-style:italic">Key Performance Indicators</td>
-            <td style="font-size:13px">Messgrößen zur Überwachung und Steuerung unternehmerischer Ziele</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">MVP</strong></td>
-            <td style="font-style:italic">Minimum Viable Product</td>
-            <td style="font-size:13px">Erste marktreife Produktversion mit minimalem Funktionsumfang</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">SLA</strong></td>
-            <td style="font-style:italic">Service Level Agreement</td>
-            <td style="font-size:13px">Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">SLO</strong></td>
-            <td style="font-style:italic">Service Level Objective</td>
-            <td style="font-size:13px">Konkrete, messbare Zielgröße innerhalb eines SLA</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">UI</strong></td>
-            <td style="font-style:italic">User Interface</td>
-            <td style="font-size:13px">Benutzeroberfläche; alle Elemente, über die Menschen mit einem System interagieren</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">VSM</strong></td>
-            <td style="font-style:italic">Value Stream Mapping</td>
-            <td style="font-size:13px">Lean-Methode zur Visualisierung und Optimierung des gesamten Wertschöpfungsstroms</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">XOR</strong></td>
-            <td style="font-style:italic">Exclusive Or (Exklusives Oder)</td>
-            <td style="font-size:13px">Logischer Operator: genau eine von mehreren Bedingungen trifft zu (BPMN-Gateway)</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px">
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">BPMS</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Business Process Management System</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Softwareplattform zur Modellierung, Ausführung, Überwachung und Optimierung von Geschäftsprozessen.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die Werkzeugkiste, die ein BPMN-Diagramm zu einem laufenden Prozess macht.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">API</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Application Programming Interface</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Standardisierte Programmierschnittstelle, über die Softwaresysteme strukturiert Daten austauschen.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die „Steckdose", an die andere Programme andocken, um etwas anzufragen oder zu liefern.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">MVP</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Minimum Viable Product</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Erste lauffähige Produktversion mit gerade so vielen Funktionen, dass echtes Nutzer-Feedback möglich wird.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die kleinste Version, die echtes Feedback liefert — kein Schaufenster-Prototyp.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">SLO</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Service Level Objective</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Internes messbares Qualitätsziel pro Service-Dimension (z.B. Verfügbarkeit &gt; 99,9 %), feiner und teamintern als das SLA.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die konkrete Zielzahl, an der das eigene Team merkt, ob ein Service gut genug läuft.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">BPMN</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Business Process Model and Notation</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Internationaler Standard (ISO 19510) für die grafische Darstellung von Geschäftsprozessen.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die genormte Bildsprache für Prozessdiagramme — damit alle dasselbe Bild lesen.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">KPI</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Key Performance Indicator (Plural: KPIs)</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Quantitativ messbare Kennzahl zur Bewertung des Zielerreichungsgrads einer Aktivität, eines Prozesses oder einer Organisation.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die wenigen Zahlen, an denen man WIRKLICH ablesen kann, ob ein Ziel erreicht ist.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">UI</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">User Interface</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Mensch-Maschine-Schnittstelle für die Interaktion mit einem Softwaresystem (Bedienoberfläche).</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Alles, was der Nutzer anfasst, anschaut und anklickt.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">SLA</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Service Level Agreement</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Vertraglich vereinbarte Dienstleistungsqualität zwischen Anbieter und Kunde (Verfügbarkeit, Reaktionszeit, Lösungszeit).</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Schwarz auf weiß: Was muss der Dienst leisten, wann wird es kritisch, wer haftet?</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">XOR</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Exclusive Or (Exklusives Oder)</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Logischer Operator: wahr, wenn genau eine von mehreren Bedingungen wahr ist.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Entweder A oder B — aber nicht beide gleichzeitig. Im BPMN: die Entscheidungs-Raute.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">DWH</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Data Warehouse</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Zentrale, integrierte Datenbank für unternehmensweite Auswertungen, die operative Quellsysteme zusammenführt.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die große Sammeltonne, in der alle Daten der Firma fürs Reporting landen.</p>
+        </div>
       </div>
     </section>
 

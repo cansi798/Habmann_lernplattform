@@ -489,73 +489,67 @@
     <section class="slide" style="display:none">
       <h2>Fachbegriffe &amp; Definitionen</h2>
       <p style="font-size:13px;color:var(--color-muted);margin:0 0 10px">Alle Abkürzungen und Fachbegriffe dieser Präsentation auf einen Blick.</p>
-      <div style="overflow-x:auto">
-      <table class="vs-table" style="font-size:13px;width:100%">
-        <thead>
-          <tr>
-            <th style="width:60px;background:var(--kurs-71-bg);color:var(--kurs-71)">Kürzel</th>
-            <th style="width:30%;background:var(--kurs-71-bg);color:var(--kurs-71)">Ausgeschrieben</th>
-            <th style="background:var(--kurs-71-bg);color:var(--kurs-71)">Definition</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">BI</strong></td>
-            <td style="font-style:italic">Business Intelligence</td>
-            <td style="font-size:13px">Technologien und Methoden zur Analyse und Aufbereitung von Unternehmensdaten</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">BPMN</strong></td>
-            <td style="font-style:italic">Business Process Model and Notation</td>
-            <td style="font-size:13px">Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">CSRD</strong></td>
-            <td style="font-style:italic">Corporate Sustainability Reporting Directive</td>
-            <td style="font-size:13px">EU-Richtlinie zur verpflichtenden Nachhaltigkeitsberichterstattung für Unternehmen</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">DWH</strong></td>
-            <td style="font-style:italic">Data Warehouse</td>
-            <td style="font-size:13px">Zentrales Datenlager, das Daten aus verschiedenen Quellen für Analysen konsolidiert</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">EPC</strong></td>
-            <td style="font-style:italic">Ereignisgesteuerte Prozesskette</td>
-            <td style="font-size:13px">Methode zur grafischen Darstellung und Dokumentation von Geschäftsprozessen</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">ERP</strong></td>
-            <td style="font-style:italic">Enterprise Resource Planning</td>
-            <td style="font-size:13px">Integriertes Softwaresystem zur unternehmensweiten Ressourcenplanung</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">ESG</strong></td>
-            <td style="font-style:italic">Environmental, Social, Governance</td>
-            <td style="font-size:13px">Nachhaltigkeitskriterien für ökologisch, sozial und ethisch verantwortliches Handeln</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">ETL</strong></td>
-            <td style="font-style:italic">Extract, Transform, Load</td>
-            <td style="font-size:13px">Prozess zur Datenintegration: Extraktion, Umwandlung und Laden in ein Zielsystem</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">IT</strong></td>
-            <td style="font-style:italic">Informationstechnologie</td>
-            <td style="font-size:13px">Gesamtheit der Technologien zur Erfassung, Speicherung und Übertragung von Daten</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">KPI</strong></td>
-            <td style="font-style:italic">Key Performance Indicator</td>
-            <td style="font-size:13px">Messgröße zur Überwachung und Steuerung unternehmerischer Ziele</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">RPA</strong></td>
-            <td style="font-style:italic">Robotic Process Automation</td>
-            <td style="font-size:13px">Softwarebasierte Automatisierung repetitiver, regelbasierter Aufgaben</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px">
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">CSRD</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Corporate Sustainability Reporting Directive</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> EU-Richtlinie (2022/2464), die Unternehmen zu standardisierter Nachhaltigkeitsberichterstattung verpflichtet.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Großen Firmen wird vorgeschrieben, was und wie sie zu Umwelt/Soziales/Governance berichten müssen.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">KPI</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Key Performance Indicator (Plural: KPIs)</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Quantitativ messbare Kennzahl zur Bewertung des Zielerreichungsgrads einer Aktivität, eines Prozesses oder einer Organisation.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die wenigen Zahlen, an denen man WIRKLICH ablesen kann, ob ein Ziel erreicht ist.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">ESG</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Environmental, Social, Governance</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Drei Dimensionen zur Bewertung der Nachhaltigkeit von Unternehmen: Umwelt, Soziales, Unternehmensführung.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Drei Brillen, durch die Firmen heute zusätzlich bewertet werden — neben dem Geld.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">ETL</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Extract, Transform, Load</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Verfahren zur Datenintegration: Daten werden extrahiert, transformiert und in ein Zielsystem geladen.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Daten aus mehreren Quellen abholen, anpassen, in eine Sammeltonne kippen — täglich oder live.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">DWH</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Data Warehouse</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Zentrale, integrierte Datenbank für unternehmensweite Auswertungen, die operative Quellsysteme zusammenführt.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die große Sammeltonne, in der alle Daten der Firma fürs Reporting landen.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">BI</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Business Intelligence</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Systeme und Verfahren zur Sammlung, Aufbereitung und Auswertung von Unternehmensdaten zur Entscheidungsunterstützung.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Werkzeuge, die aus Daten Reports und Dashboards machen, damit Entscheider sehen, wo es klemmt.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">RPA</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Robotic Process Automation</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Softwarebasierte Automatisierung regelbasierter, repetitiver Aufgaben durch Bots, die menschliche Bildschirmaktionen nachahmen.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Bots, die wie Menschen Mausklicks machen — für stupide Wiederhol-Arbeiten.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">ERP</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Enterprise Resource Planning</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Integriertes Softwaresystem zur Planung und Steuerung unternehmensweiter Ressourcen (z.B. SAP, Oracle, Dynamics).</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Das Rückgrat-IT-System, in dem Buchhaltung, Einkauf, Lager und HR im selben Datenbestand laufen.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">IT</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Informationstechnologie</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Gesamtheit von Hardware, Software, Netzwerken und Diensten zur Verarbeitung und Übertragung von Information.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Alles, was an Rechnern, Servern, Software und Netzen zum Job dazugehört.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">BPMN</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Business Process Model and Notation</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Internationaler Standard (ISO 19510) für die grafische Darstellung von Geschäftsprozessen.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die genormte Bildsprache für Prozessdiagramme — damit alle dasselbe Bild lesen.</p>
+        </div>
       </div>
     </section>
 

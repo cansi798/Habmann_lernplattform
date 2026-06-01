@@ -534,53 +534,49 @@
     <section class="slide" style="display:none">
       <h2>Fachbegriffe &amp; Definitionen</h2>
       <p style="font-size:13px;color:var(--color-muted);margin:0 0 10px">Alle Abkürzungen und Fachbegriffe dieser Präsentation auf einen Blick.</p>
-      <div style="overflow-x:auto">
-      <table class="vs-table" style="font-size:13px;width:100%">
-        <thead>
-          <tr>
-            <th style="width:60px;background:var(--kurs-71-bg);color:var(--kurs-71)">Kürzel</th>
-            <th style="width:30%;background:var(--kurs-71-bg);color:var(--kurs-71)">Ausgeschrieben</th>
-            <th style="background:var(--kurs-71-bg);color:var(--kurs-71)">Definition</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">CD</strong></td>
-            <td style="font-style:italic">Continuous Deployment</td>
-            <td style="font-size:13px">Automatisierte Auslieferung validierter Software-Änderungen direkt in die Produktion</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">CI</strong></td>
-            <td style="font-style:italic">Continuous Integration</td>
-            <td style="font-size:13px">Entwicklungspraxis: Codeänderungen werden regelmäßig automatisch getestet und integriert</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">DORA</strong></td>
-            <td style="font-style:italic">DevOps Research and Assessment</td>
-            <td style="font-size:13px">Forschungsgruppe (Forsgren, Humble, Kim, "Accelerate"); vier Flow-Kennzahlen als Industriestandard</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">MVP</strong></td>
-            <td style="font-style:italic">Minimum Viable Product</td>
-            <td style="font-size:13px">Erste marktreife Produktversion mit minimalem Funktionsumfang</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">RACI</strong></td>
-            <td style="font-style:italic">Responsible, Accountable, Consulted, Informed</td>
-            <td style="font-size:13px">Verantwortungsmatrix zur Klärung von Rollen und Zuständigkeiten in Projekten</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">SLO</strong></td>
-            <td style="font-style:italic">Service Level Objective</td>
-            <td style="font-size:13px">Konkrete, messbare Zielgröße innerhalb eines SLA</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--kurs-71)">TDD</strong></td>
-            <td style="font-style:italic">Test-Driven Development</td>
-            <td style="font-size:13px">Entwicklungsmethode: Tests werden vor dem eigentlichen Programmcode geschrieben</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px">
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">TDD</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Test-Driven Development</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Entwicklungsmethode: Erst den Test schreiben (der zunächst fehlschlägt), dann den Code bauen, bis der Test grün wird.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Erst beweisen, dass etwas „fehlt", dann bauen — der Test definiert die Anforderung.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">MVP</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Minimum Viable Product</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Erste lauffähige Produktversion mit gerade so vielen Funktionen, dass echtes Nutzer-Feedback möglich wird.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die kleinste Version, die echtes Feedback liefert — kein Schaufenster-Prototyp.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">CI</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Continuous Integration</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Regelmäßiges, automatisiertes Zusammenführen von Code-Änderungen in einen gemeinsamen Hauptzweig mit automatischer Prüfung.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Jeder Entwickler liefert mehrmals täglich, ein Roboter prüft sofort, ob noch alles zusammenpasst.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">CD</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Continuous Deployment</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Automatisierte Auslieferung jeder freigegebenen Codeänderung in die Produktivumgebung ohne manuelles Release.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Jede getestete Codezeile geht ohne Pause live — keine Release-Termine mehr.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">RACI</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Responsible, Accountable, Consulted, Informed</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Matrixmethode zur eindeutigen Klärung von Rollen: ausführend (R), verantwortlich (A), beratend (C), informiert (I).</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Wer macht es, wer trägt die Verantwortung, wer wird gefragt, wer wird nur informiert?</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">SLO</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">Service Level Objective</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Internes messbares Qualitätsziel pro Service-Dimension (z.B. Verfügbarkeit &gt; 99,9 %), feiner und teamintern als das SLA.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Die konkrete Zielzahl, an der das eigene Team merkt, ob ein Service gut genug läuft.</p>
+        </div>
+        <div class="merk-box" style="padding:10px 12px">
+          <h3 style="font-size:15px;margin:0 0 4px;color:var(--kurs-71)">DORA</h3>
+          <p style="font-size:12px;font-style:italic;color:var(--color-muted);margin:0 0 6px;line-height:1.3">DevOps Research and Assessment</p>
+          <p style="font-size:12px;margin:0 0 4px;line-height:1.4"><strong>Def.:</strong> Forschungsprogramm mit vier Schlüssel-Metriken zur Bewertung der Liefer-Performance: Lead Time, Deployment Frequency, MTTR, Change Failure Rate.</p>
+          <p style="font-size:12px;margin:0;line-height:1.4;color:#3a3a3a"><strong>Einfach:</strong> Vier Zahlen, an denen man erkennt, ob ein IT-Team schnell und stabil liefert.</p>
+        </div>
       </div>
     </section>
 
