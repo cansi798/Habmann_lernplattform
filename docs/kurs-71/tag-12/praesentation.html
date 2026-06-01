@@ -69,6 +69,35 @@
     </section>
 
     <!-- Slide 2: Lernziele -->
+        <section class="slide" style="display:none">
+      <h2>Das große Bild · worum geht es heute?</h2>
+      <p style="color:var(--color-muted)">In einem Satz: 30 Bots im Betrieb sind nicht 30× ein Pilot — sie brauchen Lifecycle, Audit Trail und klare Verantwortung.</p>
+
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Stell dir vor</h3>
+        <p>Stell dir vor: Du hast in einem Jahr 30 Bots ausgerollt. Ein Bot beginnt plötzlich Lieferanten in der falschen Währung zu buchen. Ein anderer wird langsam, weil sich eine Webseite geändert hat. Wer findet das? Wer entscheidet, was zu tun ist? Heute lernst du, wie ein Bot-Lifecycle aussieht, welche Audit-Pflichten existieren, wie Exceptions sauber gemanagt werden — und ob ein zentrales Center of Excellence oder ein föderiertes Modell besser passt.</p>
+      </div>
+
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>1 · Lifecycle · neun Phasen</h3>
+          <p>Von Idee bis Retire: jede Phase hat einen Owner und klare Übergaben. Sonst „lebt" ein Bot, ohne dass jemand ihn verantwortet.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Audit Trail</h3>
+          <p>Jede Aktion des Bots wird protokolliert: wann, was, welche Datenfelder. Pflicht für Compliance und Fehlersuche.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · CoE vs. föderiert</h3>
+          <p>Center of Excellence = zentrale Steuerung. Föderiert = Teams entscheiden selbst. Beides funktioniert — Entscheidung muss bewusst sein.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Am Ende des Tages weißt du: Was Minimum Viable Governance ist, wie ein Audit Trail aussieht — und wie du Risk Appetite schriftlich festhältst.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Lernziele dieses Tages</h2>
       <p style="color:var(--color-muted)">Drei Stufen – von Lifecycle zur Risikoarchitektur.</p>
@@ -107,6 +136,34 @@
     </section>
 
     <!-- Slide 3: Bot Lifecycle (SVG) -->
+        <section class="slide" style="display:none">
+      <h2>Bausteine · die Vokabeln, die heute reichen</h2>
+      <p style="color:var(--color-muted)">Vier Begriffe für jede Bot-Governance-Diskussion.</p>
+
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Bot-Owner</h3>
+          <p>Eine Person, die Verantwortung für den Bot trägt: Fachlich richtig? Compliance-konform? Bei Stillstand erreichbar? Pflicht pro Bot, nicht optional.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Audit Trail</h3>
+          <p>Lückenloses Protokoll: jede Aktion mit Zeitstempel, Datenfeld, Ergebnis. Ermöglicht externe Prüfung und Fehlersuche.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Business Exception</h3>
+          <p>Fachlicher Sonderfall, den der Bot nicht entscheiden darf (z.B. unbekannter Lieferant). Geht in die Exception Queue, Mensch entscheidet.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Center of Excellence</h3>
+          <p>Zentrales Team mit Standards, Templates, Mentoring. Verantwortet Plattform und Best Practices — nicht jeden einzelnen Bot.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Merkregel: <strong>Owner</strong> = Person · <strong>Audit Trail</strong> = Spur · <strong>Business Exception</strong> = fachlich, kein Bug · <strong>CoE</strong> = Standard-Schmiede.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Bot Lifecycle · neun Phasen mit Owner</h2>
       <div class="diagram-box" style="margin-top:14px">
@@ -444,6 +501,34 @@
     </section>
 
     <!-- Slide 14: Take-aways -->
+        <section class="slide" style="display:none">
+      <h2>Der rote Faden · vom Bot zum sauber gemanagten Portfolio</h2>
+      <p style="color:var(--color-muted)">Sechs Stufen, die jeden Bot durch seinen gesamten Lebenszyklus tragen.</p>
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "1 · Build"}, {"label": "2 · Test"}, {"label": "3 · Deploy"}, {"label": "4 · Run"}, {"label": "5 · Monitor"}, {"label": "6 · Retire"}]'></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;font-size:14px">
+        <div class="merk-box">
+          <h3>Build → Deploy</h3>
+          <p>In jeder Phase: Owner-Pflicht, Audit-Pflicht, Dokumentation. Pro Phase ein definierter Übergang („Gate") mit Checks.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Run → Monitor</h3>
+          <p>Bot läuft mit aktivem Monitoring: KPIs für Erfolg, Exception-Rate, Latenz. Auffälligkeiten lösen Alerts aus.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Monitor → Retire</h3>
+          <p>Wenn der Bot nicht mehr rentabel ist oder durch eine andere Lösung ersetzt wird: sauberer Retire mit Daten-Archivierung.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Skip-Risiken: <strong>Kein Owner</strong> = niemand verantwortet · <strong>Kein Audit Trail</strong> = Compliance-Verstoß · <strong>Kein Retire</strong> = Zombie-Bots im Betrieb.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Take-aways · fünf Merksätze</h2>
       <div style="margin-top:18px">

@@ -62,6 +62,35 @@
       </div>
     </section>
 
+        <section class="slide" style="display:none">
+      <h2>Das große Bild · worum geht es heute?</h2>
+      <p style="color:var(--color-muted)">In einem Satz: Statt nur zu sehen, was passiert ist, vorhersagen, was passieren wird — und wo Risiken stecken.</p>
+
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Stell dir vor</h3>
+        <p>Stell dir vor: Du weißt aus Tag 7, welche Bestellungen heute durchs Haus laufen. Aber kannst du sagen, welche Bestellung in 4 Tagen verspätet sein wird? Welche Reklamation eskaliert? Welcher Kreditantrag wahrscheinlich ausfällt? Predictive Process Mining bringt KI-Modelle in den Prozess — sie lernen aus tausenden früheren Fällen und sagen für jeden neuen Fall eine Wahrscheinlichkeit voraus. Heute lernst du, wie man so einen Use Case sauber aufsetzt, wie man Drift erkennt und warum Anti-Gaming-Pflicht ist.</p>
+      </div>
+
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>1 · Predictive Use Case</h3>
+          <p>Eine konkrete Vorhersage-Aufgabe: was wird vorhergesagt (Eskalation? Ausfall? Dauer?), wer nutzt es, was wird daraus für eine Entscheidung?</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Drift</h3>
+          <p>Die Welt ändert sich, das Modell wird mit der Zeit ungenauer. Drift-Monitoring erkennt es früh.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Anti-Gaming</h3>
+          <p>Wenn eine Kennzahl gesteuert wird, manipulieren Menschen sie. Anti-Gaming entkoppelt KPI-Definition und Anreize.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Am Ende des Tages weißt du: Wann Predictive Sinn ergibt, was eine saubere Übergabe an die Engine braucht und wie du das Modell langfristig sauber hältst.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Lernziele · Tag 8</h2>
       <div class="grid-3" style="margin-top:18px">
@@ -124,6 +153,34 @@
       </div>
       <div class="accent-box" style="margin-top:14px">
         Grenzen: Datenqualität · Konzeptdrift · Erklärbarkeit · Fehlanreize (Gaming, d.h. Tricksen am Kennzahlsystem). Alle vier <strong>messen</strong>.
+      </div>
+    </section>
+
+        <section class="slide" style="display:none">
+      <h2>Bausteine · die Vokabeln, die heute reichen</h2>
+      <p style="color:var(--color-muted)">Vier Begriffe, die Predictive Mining greifbar machen.</p>
+
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Feature</h3>
+          <p>Eine messbare Eigenschaft eines Falls, die ins Modell einfließt. <em>Beispiel: „Anzahl Vorvorgänge gleicher Art".</em></p>
+        </div>
+        <div class="merk-box">
+          <h3>Label</h3>
+          <p>Was vorhergesagt wird. <em>Beispiel: „eskaliert" / „eskaliert nicht".</em> Pflicht: historische Beispiele mit echten Labels.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Drift</h3>
+          <p>Wenn sich die Realität verschiebt (neuer Konkurrent, neue Regulierung), passt das Modell nicht mehr. Wird durch Performance-Monitoring entdeckt.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Anti-Gaming</h3>
+          <p>Maßnahmen, damit ein KPI nicht direkt steuerbar wird. <em>Beispiel: KPI „Eskalationen" nicht direkt an Bonus koppeln — sonst wird sie versteckt.</em></p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Merkregel: <strong>Feature + Label</strong> = Trainingsfutter · <strong>Drift</strong> = Modell-Verfall · <strong>Anti-Gaming</strong> = Anreize entkoppeln.
       </div>
     </section>
 
@@ -309,6 +366,34 @@
       </div>
       <div class="accent-box" style="margin-top:14px">
         Senior-Brille: Analytics ist Produkt – mit Product Owner, Release-Zyklus, Monitoring, Auditfähigkeit.
+      </div>
+    </section>
+
+        <section class="slide" style="display:none">
+      <h2>Der rote Faden · vom Use Case zum verantwortungsvollen Predictive-Modell</h2>
+      <p style="color:var(--color-muted)">Fünf Stufen — Predictive ist mehr als ein ML-Algorithmus, es ist ein verantwortungsvoller Lebenszyklus.</p>
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "1 · Use Case"}, {"label": "2 · Daten & Features"}, {"label": "3 · Modell"}, {"label": "4 · Decision & Action"}, {"label": "5 · Monitor & Retrain"}]'></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;font-size:14px">
+        <div class="merk-box">
+          <h3>Use Case → Daten</h3>
+          <p>Pro Use Case wird geklärt: was kann ein Mensch danach <em>tun</em>? Ohne Action-Pfad keine Vorhersage.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Modell → Decision</h3>
+          <p>Schwellen werden bewusst gesetzt: ab welcher Wahrscheinlichkeit wird gehandelt? Wer entscheidet final — Mensch oder Maschine?</p>
+        </div>
+        <div class="merk-box">
+          <h3>Monitor → Retrain</h3>
+          <p>Drift-Indikatoren und Feedback-Schleifen laufen permanent. Bei Drift wird neu trainiert — nicht alle paar Jahre.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Skip-Risiken: <strong>Use Case ohne Action</strong> = nettes Dashboard · <strong>Modell ohne Schwellen</strong> = Blackbox · <strong>kein Monitoring</strong> = stiller Verfall.
       </div>
     </section>
 

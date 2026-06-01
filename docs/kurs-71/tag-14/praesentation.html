@@ -69,6 +69,35 @@
     </section>
 
     <!-- Slide 2: Lernziele -->
+        <section class="slide" style="display:none">
+      <h2>Das große Bild · worum geht es heute?</h2>
+      <p style="color:var(--color-muted)">In einem Satz: IT verursacht ~4 % der globalen CO₂-Emissionen — und ab 2024 muss berichtet werden, wie viel davon dein Betrieb beiträgt.</p>
+
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Stell dir vor</h3>
+        <p>Stell dir vor: Die EU-Regulierung (CSRD) verlangt ab 2024 von großen Unternehmen ein vollständiges Nachhaltigkeitsreporting. Wie viel Strom verbraucht dein IT-Betrieb? Wie viel CO₂ steckt schon in der Hardware? Wie nachhaltig sind deine Lieferanten? Heute lernst du, wie man den Carbon Footprint sauber misst, welche vier Hebel Software-Entwicklung beeinflussen können und welche Procurement-Gates beim Einkauf greifen.</p>
+      </div>
+
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>1 · Carbon Footprint</h3>
+          <p>Die Messkette: Datenquellen → Aktivitäten → Emissionsfaktoren → Bilanz. Scope 1/2/3 unterscheiden, sonst kommen Äpfel und Birnen zusammen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Sustainable Software</h3>
+          <p>Vier Hebel: Code-Effizienz, Daten-Reduktion, sparsame Workloads, intelligente Caches. Großer Hebel bei kleinem Aufwand möglich.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Vendor Sustainability</h3>
+          <p>Lieferanten werden auf Nachhaltigkeit gescort. Procurement-Gates verhindern Einkauf bei kritisch bewerteten Vendoren.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Am Ende des Tages weißt du: Wie eine Carbon-Bilanz aufgebaut wird, welche Greenwashing-Fallen es gibt und wo drei harte Trade-offs lauern.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Lernziele dieses Tages</h2>
       <div class="grid-3" style="margin-top:18px">
@@ -106,6 +135,34 @@
     </section>
 
     <!-- Slide 3: Carbon Footprint Logik (SVG) -->
+        <section class="slide" style="display:none">
+      <h2>Bausteine · die Vokabeln, die heute reichen</h2>
+      <p style="color:var(--color-muted)">Vier Begriffe für Green-IT-Diskussionen.</p>
+
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Scope 1 / 2 / 3</h3>
+          <p><strong>Scope 1</strong> = direkte Emissionen (eigene Heizung). <strong>Scope 2</strong> = Strom-Einkauf. <strong>Scope 3</strong> = vorgelagerte Lieferkette (Hardware-Herstellung).</p>
+        </div>
+        <div class="merk-box">
+          <h3>Embodied Carbon</h3>
+          <p>CO₂, das bereits bei der Herstellung eines Geräts entstanden ist. Bei Laptops oft &gt; 70 % der gesamten Lebensdauer-Emissionen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Green Software</h3>
+          <p>Code, der ressourcen-sparsam läuft: weniger CPU, weniger Speicher, weniger Daten-Transfer. <em>Beispiel: Image-Optimierung statt 4K-Standards.</em></p>
+        </div>
+        <div class="merk-box">
+          <h3>Procurement-Gate</h3>
+          <p>Im Einkaufs-Prozess: Vendor wird auf Nachhaltigkeit gescort. Unter Schwelle = kein Vertragsabschluss.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Merkregel: <strong>Scope</strong> = Zuständigkeit · <strong>Embodied</strong> = drin · <strong>Green Software</strong> = sparsamer Code · <strong>Gate</strong> = Stopper.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Carbon Footprint · die Messkette</h2>
       <div class="diagram-box" style="margin-top:14px">
@@ -412,6 +469,34 @@
     </section>
 
     <!-- Slide 13: Take-aways -->
+        <section class="slide" style="display:none">
+      <h2>Der rote Faden · vom Datensatz zum berichtsfähigen Footprint</h2>
+      <p style="color:var(--color-muted)">Sechs Stufen — Green IT ist eine Messkette, kein Marketingbegriff.</p>
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "1 · Datenquellen"}, {"label": "2 · Aktivitäten"}, {"label": "3 · Emissionsfaktoren"}, {"label": "4 · Bilanz"}, {"label": "5 · Bericht"}, {"label": "6 · Maßnahmen"}]'></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;font-size:14px">
+        <div class="merk-box">
+          <h3>Datenquellen → Aktivitäten</h3>
+          <p>Strom-Verbräuche, Cloud-Rechnungen, Server-Anzahl, Reise-Daten. Jede Quelle wird auf eine Aktivitäts-Einheit normalisiert.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Emissionsfaktoren → Bilanz</h3>
+          <p>Pro Aktivität ein offizieller Faktor (z.B. „kWh Deutschland-Strom-Mix"). Bilanz wird in CO₂-Äquivalenten ausgedrückt.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Bericht → Maßnahmen</h3>
+          <p>Reporting nach CSRD-Standard, mit externer Prüfung. Daraus folgen Maßnahmen — sonst Greenwashing.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Skip-Risiken: <strong>Daten lückenhaft</strong> = Bericht angreifbar · <strong>Falscher Emissionsfaktor</strong> = Verfälschung · <strong>Keine Maßnahmen</strong> = Reporting ohne Wirkung.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Take-aways · fünf Merksätze</h2>
       <div style="margin-top:18px">

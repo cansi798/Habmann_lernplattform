@@ -62,6 +62,35 @@
       </div>
     </section>
 
+        <section class="slide" style="display:none">
+      <h2>Das große Bild · worum geht es heute?</h2>
+      <p style="color:var(--color-muted)">In einem Satz: Wie reden Systeme miteinander — wartet jemand auf jemanden, oder läuft alles parallel?</p>
+
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Stell dir vor</h3>
+        <p>Stell dir vor: Eine Bestellung kommt ins Webshop-System. Daraus muss eine Buchung im ERP entstehen, ein Lieferschein im Logistik-System und eine Mail an den Kunden. Macht das System alles <em>nacheinander</em> (wartet) oder <em>parallel</em> (sendet, läuft weiter)? Diese Entscheidung bestimmt, ob deine Plattform unter Last bricht oder skaliert. Heute lernst du die Heuristik dafür und die sechs Prinzipien, mit denen Cloud-native Anwendungen heute gebaut werden.</p>
+      </div>
+
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>1 · Sync vs. Async</h3>
+          <p>Synchron = A ruft B und wartet auf Antwort. Asynchron = A schickt Nachricht und läuft weiter. Beide haben Berechtigung — die Entscheidung ist die Heuristik.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Cloud-native</h3>
+          <p>Sechs Bauprinzipien (Container, Microservices, DevOps, CI/CD, Observability, Resilience) — gemeinsam machen sie eine moderne Plattform.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · E2E-Methodenintegration</h3>
+          <p>Wie hängen Modellierung, Repository, Engine, Monitoring zusammen? Ohne Integration ist jeder Schritt eine Insel.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Am Ende des Tages weißt du: Wann Sync/Async — und wie eine cloud-native Plattform die Methoden des Kurses (Modell, Repository, Engine) wirklich verbindet.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Lernziele · Tag 6</h2>
       <div class="grid-3" style="margin-top:18px">
@@ -164,6 +193,34 @@
       </table>
       <div class="accent-box" style="margin-top:14px">
         Eine <abbr title="Application Programming Interface">API</abbr> ist ein <strong>Vertrag</strong>. Wer ihn bricht, hat einen Vorfall, kein „Update“.
+      </div>
+    </section>
+
+        <section class="slide" style="display:none">
+      <h2>Bausteine · die Vokabeln, die heute reichen</h2>
+      <p style="color:var(--color-muted)">Vier Begriffe, die heute immer wieder auftauchen.</p>
+
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Synchron (Sync)</h3>
+          <p>A ruft B per <abbr title="Application Programming Interface">API</abbr>, wartet auf Antwort, läuft erst dann weiter. <em>Beispiel: Webshop fragt Zahlungsdienst „darf ich buchen?".</em></p>
+        </div>
+        <div class="merk-box">
+          <h3>Asynchron (Async)</h3>
+          <p>A wirft Nachricht in einen Event-Bus, läuft sofort weiter. B holt sich die Nachricht später ab. <em>Beispiel: Bestell-Bestätigungs-Mail.</em></p>
+        </div>
+        <div class="merk-box">
+          <h3>Container</h3>
+          <p>Standardisierte Verpackung für Software (Docker). Läuft auf Laptop, Cloud, Server — überall identisch.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Microservice</h3>
+          <p>Kleiner, eigenständiger Dienst mit klarer Aufgabe. Kommuniziert nur über APIs/Events mit anderen Diensten.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Merkregel: <strong>Sync</strong> = „bitte sofort antworten", <strong>Async</strong> = „melde dich, wenn du fertig bist". <strong>Container</strong> = Verpackung, <strong>Microservice</strong> = Inhalt.
       </div>
     </section>
 
@@ -301,6 +358,34 @@
       </div>
       <div class="accent-box" style="margin-top:14px">
         Senior-Brille: Plattform ist Steuerungssystem für Entscheidungen – nicht nur Prozessautomatisierung.
+      </div>
+    </section>
+
+        <section class="slide" style="display:none">
+      <h2>Der rote Faden · vom Bedarf zur cloud-nativen Plattform</h2>
+      <p style="color:var(--color-muted)">Fünf Stufen, die zeigen, wie Tag-6-Methoden mit dem Bisherigen verbunden sind.</p>
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "1 · Bedarf"}, {"label": "2 · Sync/Async-Wahl"}, {"label": "3 · Cloud-native Build"}, {"label": "4 · Integration"}, {"label": "5 · Betrieb"}]'></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;font-size:14px">
+        <div class="merk-box">
+          <h3>Bedarf → Sync/Async</h3>
+          <p>Aus den Anforderungen ergibt sich, ob Latenz oder Entkopplung wichtiger ist. Falsche Wahl = Performance- oder Verfügbarkeitsproblem später.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Cloud-native → Build</h3>
+          <p>Containerisierte Microservices in CI/CD-Pipeline. Resilience-Pattern (Retry, Circuit Breaker) sind nicht optional.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Integration → Betrieb</h3>
+          <p>Modell, Repository und Engine müssen über Standards verbunden sein. Monitoring und Observability sind Voraussetzung, nicht Add-on.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Skip-Risiken: <strong>Sync ohne Not</strong> = Plattform skaliert nicht · <strong>Async ohne Idempotenz</strong> = doppelte Bestellungen · <strong>Cloud-native ohne Observability</strong> = Blindflug.
       </div>
     </section>
 

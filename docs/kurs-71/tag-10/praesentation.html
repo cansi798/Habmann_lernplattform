@@ -89,6 +89,35 @@
     </section>
 
     <!-- Slide 2: Lernziele -->
+        <section class="slide" style="display:none">
+      <h2>Das große Bild · worum geht es heute?</h2>
+      <p style="color:var(--color-muted)">In einem Satz: Eine große Anwendung in viele kleine, eigenständige Stücke zerlegen — Versprechen und Risiken liegen dicht beieinander.</p>
+
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Stell dir vor</h3>
+        <p>Stell dir vor: Eure Anwendung ist über 10 Jahre gewachsen. Jede Änderung kostet 3 Wochen, jede Bereitstellung ein Wochenende. Microservices versprechen Erlösung: kleinere Teile, schnellere Lieferung, mehr Selbstständigkeit der Teams. Aber: jedes Versprechen bringt eine neue Schuld mit (verteilte Systeme sind komplexer). Heute lernst du den realistischen Blick darauf — wie schneidet man Services, was muss man bezahlen, und wie hält die Plattform das?</p>
+      </div>
+
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>1 · Vom Monolith zum Microservice</h3>
+          <p>Schnitt nach fachlichen Capabilities (Tag 5!) — nicht nach Technologie. Jeder Service trägt eine fachliche Verantwortung.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Container & K8s</h3>
+          <p>Container verpacken jeden Service identisch. Kubernetes orchestriert hunderte gleichzeitig — Standard-Pattern für die Plattform.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Verteilte Disziplin</h3>
+          <p>Drei Pflicht-Themen: Observability (sehen was läuft), Verteilte Transaktionen (Konsistenz), Service-Verträge (API-Stabilität).</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Am Ende des Tages weißt du: Wann Microservices sich lohnen, welche vier Entscheidungen teuer werden — und welche fünf Take-aways du im Hinterkopf brauchst.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Lernziele dieses Tages</h2>
       <p style="color:var(--color-muted)">Drei Stufen – von Symbol zu Entscheidungsarchitektur.</p>
@@ -127,6 +156,34 @@
     </section>
 
     <!-- Slide 3: Microservices · Warum, wann, mit welchen Grenzen -->
+        <section class="slide" style="display:none">
+      <h2>Bausteine · die Vokabeln, die heute reichen</h2>
+      <p style="color:var(--color-muted)">Vier Begriffe, die für Microservice-Architekturen unverzichtbar sind.</p>
+
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Monolith</h3>
+          <p>Alles in einer großen Codebase, gemeinsam deployed. <em>Vorteil:</em> einfache Konsistenz. <em>Nachteil:</em> jede Änderung betrifft alle.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Microservice</h3>
+          <p>Kleiner, eigenständiger Dienst mit klarer fachlicher Aufgabe, kommuniziert nur per API/Event. Wird unabhängig deployed.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Container</h3>
+          <p>Standardisierte Verpackung für Software (Docker). Identisches Verhalten auf Laptop, Test-Umgebung, Cloud.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Kubernetes (K8s)</h3>
+          <p>Orchestriert Container: startet, skaliert, ersetzt sie automatisch. <em>Wie ein Schiff-Container-Hafen — mit Robotern statt Kränen.</em></p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Merkregel: <strong>Monolith</strong> = ein Block · <strong>Microservice</strong> = eine Aufgabe · <strong>Container</strong> = Verpackung · <strong>Kubernetes</strong> = Orchester.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Microservices · vier Versprechen, drei Schulden</h2>
       <p style="color:var(--color-muted)">Unabhängige Deployments kosten Disziplin – sonst entsteht verteilter Schaden.</p>
@@ -518,6 +575,34 @@
     </section>
 
     <!-- Slide 15: Take-aways -->
+        <section class="slide" style="display:none">
+      <h2>Der rote Faden · vom Service-Schnitt zur Produktion</h2>
+      <p style="color:var(--color-muted)">Sieben Stufen — Microservices sind kein Projekt-Endzustand, sondern ein laufender Betrieb.</p>
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "1 · Schnitt"}, {"label": "2 · Build"}, {"label": "3 · Container"}, {"label": "4 · K8s"}, {"label": "5 · Tests"}, {"label": "6 · Release"}, {"label": "7 · Observe"}]'></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;font-size:14px">
+        <div class="merk-box">
+          <h3>Schnitt → Build</h3>
+          <p>Schnitt nach fachlichen Capabilities (Tag 5). Pro Service ein Team mit „You build it, you run it"-Verantwortung.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Container → K8s</h3>
+          <p>Container-Image wird in Registry gelegt. K8s deployt es, sorgt für Skalierung, Selbstheilung, Updates.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Release → Observe</h3>
+          <p>Release läuft mit Canary, Toggle und automatischem Rollback. Monitoring + Distributed Tracing zeigt, was läuft.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Skip-Risiken: <strong>Schnitt nach Technik</strong> = verteilter Monolith · <strong>Kein Observability</strong> = Blindflug · <strong>Kein Vertrag</strong> = Service-Schnittstellen brechen ständig.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Take-aways · fünf Merksätze</h2>
       <div style="margin-top:18px">

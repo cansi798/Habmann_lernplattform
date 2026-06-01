@@ -61,6 +61,35 @@
       </div>
     </section>
 
+        <section class="slide" style="display:none">
+      <h2>Das große Bild · worum geht es heute?</h2>
+      <p style="color:var(--color-muted)">In einem Satz: Eine Gesamtsicht aufs Unternehmen — Strategie, Prozesse, IT, Infrastruktur — als eine zusammenhängende Landkarte.</p>
+
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Stell dir vor</h3>
+        <p>Stell dir vor: Der Vorstand fragt dich „Was machen wir eigentlich alles? Wo doppeln wir? Was hängt an was?". Du kannst nicht 20 verschiedene Dokumente vorlegen — du brauchst <strong>eine integrierte Karte</strong>, in der man von Geschäftsstrategie bis Server alles findet. Heute lernst du, wie diese Karte aussieht, mit welchen Notationen sie gebaut wird und wo Capability-Maps dabei helfen, die Hebel-Themen zu priorisieren.</p>
+      </div>
+
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>1 · Enterprise Architecture</h3>
+          <p>Die Gesamtsicht: Geschäft + Anwendungen + Technologie als <em>eine</em> zusammenhängende Sicht. Steuert, statt nur zu dokumentieren.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · ArchiMate-Notation</h3>
+          <p>Die standardisierte Bildsprache für EA — drei Schichten (Business, Application, Technology), klare Beziehungstypen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Capability Map</h3>
+          <p>Die Sicht „Was kann der Laden eigentlich?" (statt „Welche Prozesse?"). Hilft, in 5-15 Capabilities zu priorisieren — wo investieren?</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Am Ende des Tages weißt du: Wie eine integrierte Architektur-Sicht aussieht — und welche zwei Pflicht-Entscheidungen das Management dabei trifft.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Lernziele · Tag 5</h2>
       <div class="grid-3" style="margin-top:18px">
@@ -120,6 +149,34 @@
       </div>
       <div class="accent-box" style="margin-top:14px">
         Capabilities sind stabil. Prozesse ändern sich. Applikationen ersetzt man. Daten überleben alles.
+      </div>
+    </section>
+
+        <section class="slide" style="display:none">
+      <h2>Bausteine · die Vokabeln, die heute reichen</h2>
+      <p style="color:var(--color-muted)">Vorlauf für die nächsten Folien — wenn du diese vier Begriffe kennst, kannst du jedes ArchiMate-Diagramm lesen.</p>
+
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Business Layer</h3>
+          <p>Akteure, Rollen, Geschäftsprozesse, Services — das, was Fachbereich und Management benennen. <em>Beispiel: „Bestellung annehmen".</em></p>
+        </div>
+        <div class="merk-box">
+          <h3>Application Layer</h3>
+          <p>Software-Komponenten, Anwendungen, Services, Schnittstellen — die IT-Sicht. <em>Beispiel: SAP, Salesforce, ein Microservice.</em></p>
+        </div>
+        <div class="merk-box">
+          <h3>Technology Layer</h3>
+          <p>Server, Netze, Geräte, Betriebssysteme — die Infrastruktur darunter. <em>Beispiel: AWS-VM, Datenbank-Cluster.</em></p>
+        </div>
+        <div class="merk-box">
+          <h3>Capability</h3>
+          <p>Die Fähigkeit eines Unternehmens, etwas zu tun — <em>unabhängig</em> davon, mit welchem Prozess oder welcher Software. <em>Beispiel: „Kundenorientierte Auftragsabwicklung".</em></p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Merkregel: <strong>Capability</strong> = WAS kann der Laden · <strong>Business Process</strong> = WIE macht er das · <strong>Application</strong> = WOMIT ist es gebaut · <strong>Technology</strong> = WORAUF läuft es.
       </div>
     </section>
 
@@ -338,6 +395,34 @@
         <div data-rough-diagram="matrix2x2" data-aspect="1.5" data-spec='{"x": {"label": "Standard-Bindung", "lo": "lose", "hi": "streng"}, "y": {"label": "Werkzeug", "lo": "frei", "hi": "zentral"}, "q": ["Konzern-Modus", "Innovations-Insel", "Wildwuchs", "Pflicht-Tool-ohne-Standards"]}'></div>
       </div>
       <!-- rough-diagram:matrix2x2:zwei Pflicht-Entscheidungen -->
+    </section>
+
+        <section class="slide" style="display:none">
+      <h2>Der rote Faden · von Strategie zur konkreten IT-Entscheidung</h2>
+      <p style="color:var(--color-muted)">Vier Stufen — jede einzelne hast du heute gesehen. Ohne diesen Bogen werden Architektur-Diagramme zum Selbstzweck.</p>
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "1 · Strategie"}, {"label": "2 · Capability Map"}, {"label": "3 · ArchiMate-Modell"}, {"label": "4 · Modelling Charter"}, {"label": "5 · Entscheidung"}]'></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;font-size:14px">
+        <div class="merk-box">
+          <h3>Strategie → Capabilities</h3>
+          <p>Strategische Ziele werden auf 10-15 Capabilities heruntergebrochen. Jede bekommt einen Hebel-Score (klein/mittel/groß).</p>
+        </div>
+        <div class="merk-box">
+          <h3>Capabilities → ArchiMate</h3>
+          <p>Hebel-Capabilities werden in ArchiMate sichtbar: welche Anwendungen tragen, welche IT-Komponenten hängen daran?</p>
+        </div>
+        <div class="merk-box">
+          <h3>Charter → Konsistenz</h3>
+          <p>Die Modelling Charter setzt Regeln (Notation, Naming, Detailtiefe), damit verschiedene Teams konsistente Modelle bauen.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Skip-Risiken: <strong>Capability fehlt</strong> = Investitionsentscheidungen werden taktisch · <strong>Charter fehlt</strong> = Modelle aus zwei Teams reden aneinander vorbei.
+      </div>
     </section>
 
     <section class="slide" style="display:none">

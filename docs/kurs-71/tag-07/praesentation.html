@@ -61,6 +61,35 @@
       </div>
     </section>
 
+        <section class="slide" style="display:none">
+      <h2>Das große Bild · worum geht es heute?</h2>
+      <p style="color:var(--color-muted)">In einem Satz: Tut der Prozess wirklich das, was im Modell steht? Process Mining zeigt es schwarz auf weiß.</p>
+
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Stell dir vor</h3>
+        <p>Stell dir vor: Du hast ein schönes Prozess-Modell. Es ist freigegeben, gedruckt, im Repository. Aber lebt der Prozess wirklich so im Alltag? Oder gibt es 15 Varianten, von denen du nichts weißt? Process Mining zieht Spuren aus den IT-Systemen (jeder Klick hinterlässt einen Log-Eintrag) und rekonstruiert daraus die <em>echte</em> Prozess-Realität. Heute lernst du, wie man aus Logs ein Discovery-Modell baut, wie man Modell mit Realität abgleicht (Conformance) und wie man Abweichungen bewertet.</p>
+      </div>
+
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>1 · Event Log</h3>
+          <p>Die Datenbasis: jede Zeile = ein Ereignis im Prozess. Drei Pflichtfelder reichen: Case-ID, Activity, Timestamp.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Discovery</h3>
+          <p>Aus dem Event Log wird ein <em>tatsächliches</em> Prozessmodell rekonstruiert — inklusive aller Varianten und Schleifen.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Conformance</h3>
+          <p>Soll-Modell und Ist-Modell werden gegenübergestellt. Wo läuft die Realität anders als geplant?</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Am Ende des Tages weißt du: Welche Mindestdaten du brauchst, wie eine Abweichungslandkarte gebaut wird und welche drei Management-Entscheidungen daran hängen.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Lernziele · Tag 7</h2>
       <div class="grid-3" style="margin-top:18px">
@@ -94,6 +123,34 @@
       </div>
       <div class="accent-box" style="margin-top:20px">
         Discovery liefert Hypothesen, keine Wahrheit. Validierung mit Fachseite ist Pflicht.
+      </div>
+    </section>
+
+        <section class="slide" style="display:none">
+      <h2>Bausteine · die Vokabeln, die heute reichen</h2>
+      <p style="color:var(--color-muted)">Vier Begriffe für jedes Process-Mining-Gespräch.</p>
+
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Event Log</h3>
+          <p>Tabelle aus IT-Systemen. Pro Zeile: <em>Case-ID</em> (welcher Vorgang), <em>Activity</em> (was passiert), <em>Timestamp</em> (wann). Optional: Resource (wer), Cost.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Discovery</h3>
+          <p>Algorithmus baut aus dem Log ein Prozess-Modell. Zeigt alle <em>tatsächlichen</em> Pfade und ihre Häufigkeiten.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Conformance</h3>
+          <p>Vergleich: Wie gut passt das Soll-Modell auf das Ist-Log? Wo gibt es Abweichungen?</p>
+        </div>
+        <div class="merk-box">
+          <h3>Fitness</h3>
+          <p>Maß von 0 bis 1: 1 = Modell passt perfekt zur Realität, 0 = Modell und Realität haben nichts gemeinsam.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Merkregel: <strong>Event Log</strong> ist die Pflicht-Basis · <strong>Discovery</strong> erzeugt Modelle · <strong>Conformance</strong> vergleicht · <strong>Fitness</strong> misst die Passung.
       </div>
     </section>
 
@@ -311,6 +368,34 @@
       </div>
       <div class="accent-box" style="margin-top:14px">
         Senior-Brille: Conformance als verantwortete Steuerung – nicht als Reporting.
+      </div>
+    </section>
+
+        <section class="slide" style="display:none">
+      <h2>Der rote Faden · vom IT-Log zur Management-Entscheidung</h2>
+      <p style="color:var(--color-muted)">Sechs Stufen — Process Mining ist ein Prozess, nicht ein Werkzeug-Klick.</p>
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "1 · Event Log"}, {"label": "2 · Discovery"}, {"label": "3 · Soll/Ist-Vergleich"}, {"label": "4 · Abweichungen"}, {"label": "5 · Maßnahmen"}, {"label": "6 · Enhancement"}]'></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;font-size:14px">
+        <div class="merk-box">
+          <h3>Log → Discovery</h3>
+          <p>Daten-Qualität ist entscheidend: Fehlende Timestamps, falsche Case-IDs sind das #1 Problem.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Conformance → Abweichungen</h3>
+          <p>Jede Abweichung wird klassifiziert: Reihenfolgefehler, Fehlende Schritte, Zusätzliche Schritte. Häufigkeit × Risiko = Priorität.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Maßnahmen → Enhancement</h3>
+          <p>Nach den Maßnahmen wird das Modell um neue Erkenntnisse angereichert (Enhancement) — und der Kreislauf beginnt von vorn.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Skip-Risiken: <strong>Datenqualität ignoriert</strong> = falsche Discovery · <strong>Conformance ohne Priorisierung</strong> = Listen, an denen niemand arbeitet · <strong>kein Enhancement</strong> = Erkenntnis verpufft.
       </div>
     </section>
 

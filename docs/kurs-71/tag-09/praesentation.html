@@ -67,6 +67,35 @@
       <!-- rough-diagram:layer:IaC -->
     </section>
 
+        <section class="slide" style="display:none">
+      <h2>Das große Bild · worum geht es heute?</h2>
+      <p style="color:var(--color-muted)">In einem Satz: Wie schaffen Teams es, IT-Lieferungen schneller und gleichzeitig stabiler zu machen?</p>
+
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Stell dir vor</h3>
+        <p>Stell dir vor: Dein Team soll alle 2 Wochen Software liefern. Aber jedes Mal ist das Release ein Drama: irgendwas geht kaputt, irgendwer wartet auf irgendwen, Rollbacks dauern Stunden. Heute lernst du die zwei zentralen Arbeits-Methoden (Scrum getaktet, Kanban kontinuierlich) und die Infrastruktur-Pattern (Infrastructure as Code, Canary, Feature-Toggle), mit denen moderne Teams diese Risiken systematisch entschärfen.</p>
+      </div>
+
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>1 · Scrum vs. Kanban</h3>
+          <p>Zwei Arbeits-Methoden mit gleichem Ziel (Fluss), unterschiedlichem Mechanismus (Takt vs. Pull). Welche zu welchem Team passt — heute geklärt.</p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · IaC · Infrastructure as Code</h3>
+          <p>Statt Server händisch einzurichten, wird Infrastruktur als Code (Terraform, Bicep) beschrieben. Reproduzierbar, versioniert, prüfbar.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Sicheres Ausrollen</h3>
+          <p>Canary Release, Feature Toggle, Rollback — drei Pattern, die ein Risiko bewusst klein halten und Rückbau ermöglichen.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Am Ende des Tages weißt du: Wann Scrum, wann Kanban — und welche zwei Pflicht-Entscheidungen das Management bei DevOps trifft.
+      </div>
+    </section>
+
     <section class="slide" style="display:none">
       <h2>Lernziele · Tag 9</h2>
       <div class="grid-3" style="margin-top:18px">
@@ -100,6 +129,34 @@
       </div>
       <div class="accent-box" style="margin-top:20px">
         Scrum/Kanban sind Steuerungssysteme – keine Meeting-Kalender.
+      </div>
+    </section>
+
+        <section class="slide" style="display:none">
+      <h2>Bausteine · die Vokabeln, die heute reichen</h2>
+      <p style="color:var(--color-muted)">Vier Konzepte, die in jeder DevOps-Diskussion auftauchen.</p>
+
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Sprint</h3>
+          <p>Fester Zeitabschnitt (meist 2 Wochen) in Scrum. Am Anfang ist das Ziel klar, am Ende wird geliefert. Scope ist <em>fest</em>, Zeit ist <em>fest</em>.</p>
+        </div>
+        <div class="merk-box">
+          <h3>WIP-Limit</h3>
+          <p>In Kanban: Wie viele Vorgänge dürfen gleichzeitig „in Arbeit" sein? Zu viel = nichts wird fertig. Das Limit zwingt zum Abschluss.</p>
+        </div>
+        <div class="merk-box">
+          <h3>IaC</h3>
+          <p>Infrastructure as Code: die Umgebung wird als Code definiert (statt Klicks im Cloud-Portal). <em>Beispiel: „3 Server, jeweils 8 GB RAM" als Terraform-Datei.</em></p>
+        </div>
+        <div class="merk-box">
+          <h3>Canary Release</h3>
+          <p>Neue Version geht zuerst nur an 5 % der Nutzer. Wenn keine Fehler, dann 25 %, dann 100 %. Sicherheitsnetz: schneller Rollback möglich.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Merkregel: <strong>Scrum</strong> = getaktet · <strong>Kanban</strong> = Pull · <strong>IaC</strong> = reproduzierbar · <strong>Canary</strong> = stufenweise sicher.
       </div>
     </section>
 
@@ -325,6 +382,34 @@
       </div>
       <div class="accent-box" style="margin-top:14px">
         Senior-Brille: Veränderung als gesteuertes System (Outcomes, Risiken, Ownership) – nicht als Taskliste.
+      </div>
+    </section>
+
+        <section class="slide" style="display:none">
+      <h2>Der rote Faden · vom Auftrag zur sicheren Produktion</h2>
+      <p style="color:var(--color-muted)">Sechs Stufen — von der Anforderung bis zum sauberen Betrieb.</p>
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "1 · Anforderung"}, {"label": "2 · Scrum/Kanban"}, {"label": "3 · IaC"}, {"label": "4 · CI/CD"}, {"label": "5 · Canary"}, {"label": "6 · Monitoring"}]'></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;font-size:14px">
+        <div class="merk-box">
+          <h3>Anforderung → Methodenwahl</h3>
+          <p>Stabile, planbare Lieferungen → Scrum. Wechselnder Bedarf, mehrere Quellen → Kanban. Mischformen (Scrumban) sind oft realistisch.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Build → CI/CD</h3>
+          <p>Jeder Commit löst automatische Tests aus. Eine grüne Pipeline ist die Voraussetzung für ein Deployment — nicht ein zusätzlicher Schritt.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Canary → Monitoring</h3>
+          <p>Rollouts werden gemessen: Fehlerquote, Latenz, Conversion. Schwellenwerte sind vor dem Rollout definiert — automatischer Rollback bei Verletzung.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Skip-Risiken: <strong>Scrum ohne Reviews</strong> = Show-Sprints · <strong>IaC ohne Versionierung</strong> = Drift-Chaos · <strong>Canary ohne Schwellen</strong> = blinder Rollout.
       </div>
     </section>
 
