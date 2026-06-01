@@ -62,6 +62,41 @@
     </section>
 
     <section class="slide" style="display:none">
+      <h2>Das große Bild · worum geht es heute?</h2>
+      <p style="color:var(--color-muted)">In einem Satz: Wir machen aus einem Prozess-<em>Bild</em> ein laufendes <em>System</em>.</p>
+
+      <div class="merk-box" style="margin-top:14px">
+        <h3>Stell dir vor</h3>
+        <p>Bei deinem Arbeitgeber kommt jeden Tag eine Bestellung herein. Ein Mensch prüft sie,
+        ein anderer gibt sie frei, eine Software bucht sie. Heute lernst du, wie diese Schritte nicht im Kopf
+        einzelner Mitarbeitenden hängen, sondern als <strong>verbindliches Modell</strong> existieren —
+        und wie dieses Modell eine Software direkt steuern kann.</p>
+      </div>
+
+      <div class="grid-3" style="margin-top:16px">
+        <div class="merk-box">
+          <h3>1 · Repository</h3>
+          <p>Eine zentrale Sammlung aller Prozesse als saubere Modelle — mit Owner (wer ist verantwortlich?),
+          Status (Entwurf oder freigegeben?) und Version. <em>Die Wahrheits-Quelle.</em></p>
+        </div>
+        <div class="merk-box">
+          <h3>2 · Business-Modell</h3>
+          <p>Dasselbe Prozessbild, aber so dargestellt, dass <strong>Fachbereich und Management</strong>
+          es verstehen: grobe Boxen, Lanes für Rollen, keine technischen Details.</p>
+        </div>
+        <div class="merk-box">
+          <h3>3 · Execution-Modell</h3>
+          <p>Dasselbe Prozessbild, aber technisch präzise: Welche Daten? Welche Fehlerfälle? Welche
+          System-Schnittstelle? <strong>Eine Workflow-Engine kann es direkt ausführen.</strong></p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Am Ende des Tages weißt du: Welche Prozesse eignen sich für ein „laufendes" Modell — und welche besser auf Papier bleiben?
+      </div>
+    </section>
+
+    <section class="slide" style="display:none">
       <h2>Lernziele · Tag 4</h2>
       <div class="grid-3" style="margin-top:18px">
         <div class="merk-box">
@@ -128,7 +163,7 @@
       </div>
     
       <div class="diagram-box" style="margin-top:16px;text-align:left">
-        <div data-rough-diagram="layer" data-aspect="3.2" data-spec='[{"label": "Strategisch", "sub": "Capabilities · Wertströme · Roadmap"}, {"label": "Taktisch", "sub": "Prozessmodelle · Schnittstellen · Rollen"}, {"label": "Operativ", "sub": "Executable BPMN · Service Tasks · Variablen"}]'></div>
+        <div data-rough-diagram="layer" data-aspect="3.2" data-spec='[{"label": "Ebene 1 · Value Chain", "sub": "Prozesslandkarte (z.B. Order-to-Cash: Auftrag bis Geldeingang)"}, {"label": "Ebene 2 · Prozess / Subprozess", "sub": "BPMN-Modell mit Lanes, KPIs, Risiken"}, {"label": "Ebene 3 · Artefakte", "sub": "SOPs, Forms, Templates, Trainings — das tägliche Werkzeug"}]'></div>
       </div>
       <!-- rough-diagram:layer:Repository · drei Ebenen -->
     </section>
@@ -169,9 +204,65 @@
       </div>
     
       <div class="diagram-box" style="margin-top:16px;text-align:left">
-        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "Draft"}, {"label": "Review"}, {"label": "Approved"}, {"label": "Productive"}, {"label": "Retired"}]'></div>
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "Draft (in Arbeit)"}, {"label": "Review (4-Augen)"}, {"label": "Approved (freigegeben)"}, {"label": "Retired (archiviert)"}]'></div>
       </div>
       <!-- rough-diagram:flow:Freigabe-Workflow -->
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>BPMN-Bausteine · die vier Symbole, die heute reichen</h2>
+      <p style="color:var(--color-muted)">Wenn du diese vier kennst, kannst du jedes Workflow-Diagramm lesen — auch die auf den nächsten Folien.</p>
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <svg width="100%" viewBox="0 0 820 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="36" width="160" height="52" rx="6" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="100" y="58" text-anchor="middle" font-size="13" font-weight="700" fill="#222">Rechnung prüfen</text>
+          <text x="100" y="76" text-anchor="middle" font-size="11" fill="#9d4a1a">User Task</text>
+          <text x="100" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#444">Mensch macht es</text>
+          <text x="100" y="138" text-anchor="middle" font-size="11" fill="#666">(orange · Sachbearbeiter,</text>
+          <text x="100" y="152" text-anchor="middle" font-size="11" fill="#666">Freigeber)</text>
+
+          <rect x="220" y="36" width="160" height="52" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="300" y="58" text-anchor="middle" font-size="13" font-weight="700" fill="#222">ERP buchen</text>
+          <text x="300" y="76" text-anchor="middle" font-size="11" fill="#3a7a2a">Service Task</text>
+          <text x="300" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#444">Software macht es</text>
+          <text x="300" y="138" text-anchor="middle" font-size="11" fill="#666">(grün · API-Aufruf,</text>
+          <text x="300" y="152" text-anchor="middle" font-size="11" fill="#666">DB-Update)</text>
+
+          <polygon points="460,62 490,32 520,62 490,92" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="490" y="68" text-anchor="middle" font-size="18" fill="#9d4a1a">×</text>
+          <text x="490" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#444">Entscheidung</text>
+          <text x="490" y="138" text-anchor="middle" font-size="11" fill="#666">(XOR-Gateway ·</text>
+          <text x="490" y="152" text-anchor="middle" font-size="11" fill="#666">„entweder/oder")</text>
+
+          <circle cx="640" cy="62" r="22" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <circle cx="640" cy="62" r="16" fill="none" stroke="#9d4a1a" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="640" y="68" text-anchor="middle" font-size="14" fill="#9d4a1a">⏱</text>
+          <text x="640" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#444">Zeit-Trigger</text>
+          <text x="640" y="138" text-anchor="middle" font-size="11" fill="#666">(Timer · „nach 3 Tagen</text>
+          <text x="640" y="152" text-anchor="middle" font-size="11" fill="#666">erinnern")</text>
+        </svg>
+      </div>
+
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Merkregel · die vier Symbole in Worten</h3>
+          <p style="margin:4px 0"><strong style="color:#9d4a1a">Orange Box</strong> = ein Mensch arbeitet (User Task)</p>
+          <p style="margin:4px 0"><strong style="color:#3a7a2a">Grüne Box</strong> = Software arbeitet (Service Task)</p>
+          <p style="margin:4px 0"><strong>Raute mit ×</strong> = hier wird entschieden, welcher Weg</p>
+          <p style="margin:4px 0"><strong>Kreis mit Uhr</strong> = eine Frist läuft (Timer-Event)</p>
+        </div>
+        <div class="merk-box">
+          <h3>Warum diese vier reichen</h3>
+          <p>80 % aller realen Prozesse lassen sich mit genau diesen vier Bausteinen beschreiben.
+          Das fünfte Symbol, das du oft siehst — ein Kreis ohne Inhalt — ist einfach
+          <em>Start</em> bzw. <em>Ende</em> des Prozesses (dünner Rand = Start, dicker Rand = Ende).</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:12px;font-size:18px">
+        Lies das Diagramm auf der nächsten Folie mit dieser Brille: <strong>orange = Mensch, grün = Software, Raute = Entscheidung, Uhr = Frist.</strong>
+      </div>
     </section>
 
     <section class="slide" style="display:none">
@@ -340,6 +431,37 @@
         <div data-rough-diagram="matrix2x2" data-aspect="1.5" data-spec='{"x": {"label": "Geschwindigkeit", "lo": "langsam", "hi": "schnell"}, "y": {"label": "Stabilität", "lo": "volatil", "hi": "stabil"}, "q": ["Hochleistung (schnell + stabil)", "Solide (langsam + stabil)", "Risiko-Modus (langsam + volatil)", "Bleeding Edge (schnell + volatil)"]}'></div>
       </div>
       <!-- rough-diagram:matrix2x2:vier Zielkonflikte -->
+    </section>
+
+    <section class="slide" style="display:none">
+      <h2>Der rote Faden · vom Bild zum laufenden System</h2>
+      <p style="color:var(--color-muted)">Fünf Stufen — jede einzelne hast du heute kennengelernt. Hier nochmal in der richtigen Reihenfolge.</p>
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label":"1 · Repository"},{"label":"2 · Business-BPMN"},{"label":"3 · Execution-BPMN"},{"label":"4 · Engine"},{"label":"5 · Monitoring"}]'></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;font-size:14px">
+        <div class="merk-box">
+          <h3>Repository → Business-Modell</h3>
+          <p>Im Repository liegt eine Prozesslandkarte mit Owner und Freigabe-Status. Aus einer Box dieser Landkarte
+          wird ein <em>Business-BPMN</em>: Fachbereich liest, Management entscheidet.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Business → Execution-Modell</h3>
+          <p>Aus dem Business-Modell wird ein <em>Execution-BPMN</em>: Welcher Schritt ist Mensch (User Task),
+          welcher Software (Service Task)? Welche Daten fließen? Welche Fehlerfälle gibt es?</p>
+        </div>
+        <div class="merk-box">
+          <h3>Execution → Engine → Steuerung</h3>
+          <p>Eine Workflow-Engine (z.B. Camunda) führt das Execution-Modell direkt aus. <abbr title="Key Performance Indicator">KPIs</abbr>
+          wie Durchlaufzeit und Eskalationsquote zeigen, ob es funktioniert — Erkenntnisse fließen zurück ins Modell.</p>
+        </div>
+      </div>
+
+      <div class="accent-box" style="margin-top:14px;font-size:18px">
+        Kein Schritt ist optional. Skip-Risiken: <strong>Repository fehlt</strong> = Wissen geht verloren · <strong>Business-BPMN fehlt</strong> = Fachbereich versteht Execution nicht · <strong>Execution-BPMN fehlt</strong> = Engine läuft ins Leere.
+      </div>
     </section>
 
     <section class="slide" style="display:none">
