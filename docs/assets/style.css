@@ -397,3 +397,69 @@ html, body { max-width: 100%; overflow-x: hidden; }
 @media (max-width: 900px) {
   #slides:not(.no-slide-num) .slide::after { font-size: 11px; padding: 1px 6px; bottom: 6px; right: 10px; }
 }
+
+/* Druck/PDF-Export für K71-Präsentationen (2026-06-01) ------------------- */
+/* Aktivierung über body[data-kurs="71"]; "Als PDF speichern"-Button löst   */
+/* window.print() aus. Browser-Dialog → "Als PDF speichern".                */
+@media print {
+  @page { size: A4 landscape; margin: 10mm; }
+
+  body[data-kurs="71"] {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  body[data-kurs="71"] .brand-bar,
+  body[data-kurs="71"] .crumbs,
+  body[data-kurs="71"] .slide-nav,
+  body[data-kurs="71"] main > h1,
+  body[data-kurs="71"] main > div:first-of-type,
+  body[data-kurs="71"] main > p:first-of-type,
+  body[data-kurs="71"] .quiz-button,
+  body[data-kurs="71"] .pdf-print-btn,
+  body[data-kurs="71"] .logout { display: none !important; }
+
+  body[data-kurs="71"] main { padding: 0 !important; max-width: none !important; margin: 0 !important; }
+
+  body[data-kurs="71"] #slides {
+    border: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    background: #fff !important;
+    overflow: visible !important;
+  }
+  body[data-kurs="71"] #slides .slide {
+    display: block !important;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    min-height: 175mm;
+    padding: 6mm 8mm;
+    box-sizing: border-box;
+  }
+  body[data-kurs="71"] #slides .slide:last-child { page-break-after: auto; }
+
+  /* Grids im Druck nicht zu Single-Column kollabieren lassen */
+  body[data-kurs="71"] #slides .grid-2,
+  body[data-kurs="71"] #slides .grid-2x2 { grid-template-columns: 1fr 1fr !important; }
+  body[data-kurs="71"] #slides .grid-3,
+  body[data-kurs="71"] #slides .grid-2x3 { grid-template-columns: 1fr 1fr 1fr !important; }
+  body[data-kurs="71"] #slides .grid-2x4 { grid-template-columns: repeat(4, 1fr) !important; }
+
+  /* Mobile-Overrides zurücksetzen, falls Drucker schmale Pixelbreite meldet */
+  body[data-kurs="71"] #slides canvas,
+  body[data-kurs="71"] #slides svg,
+  body[data-kurs="71"] #slides img { max-width: 100% !important; height: auto !important; }
+
+  /* SVG/Box-Farben erhalten (BPMN-Diagramme!) */
+  body[data-kurs="71"] * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Foliennummer-Badge bleibt sichtbar im Druck */
+  body[data-kurs="71"] #slides:not(.no-slide-num) .slide::after {
+    background: transparent !important;
+    color: #555 !important;
+  }
+}

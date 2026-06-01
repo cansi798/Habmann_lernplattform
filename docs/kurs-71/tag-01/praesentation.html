@@ -85,7 +85,7 @@
     .lit-list li { text-indent: -2em; padding-left: 2em; margin-bottom: 8px; }
   </style>
 </head>
-<body>
+<body data-kurs="71">
 <script src="../../assets/auth.js"></script>
 <script>requireAuth();</script>
 
@@ -98,9 +98,13 @@
        class="quiz-button" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">
       ⬇ HTML-Download
     </a>
+    <button type="button" onclick="window.print()" aria-label="Als PDF speichern"
+       class="quiz-button pdf-print-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:inherit;font-weight:700">
+      ⬇ Als PDF speichern
+    </button>
   </div>
   <p style="color:var(--color-muted);margin-top:0">Pfeil-Tasten ← → · F = Vollbild · O = Übersicht</p>
-  <div id="slides" class="no-slide-num" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
+  <div id="slides" style="border:1.5px solid var(--color-line-dark);padding:40px;min-height:480px;background:#fff;border-radius:8px;position:relative">
 
     <!-- Slide 1: Cover -->
     <section class="slide">
