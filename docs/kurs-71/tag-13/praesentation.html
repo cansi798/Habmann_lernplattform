@@ -126,6 +126,11 @@
       <div class="accent-box" style="margin-top:14px;font-size:18px">
         Portfolio-Eintrag = Service + Owner + Kosten + Risiko + Nutzen + Nachhaltigkeitswirkung.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="funnel" data-aspect="2.0" data-spec='[{"label": "Invest (Aufbau)"}, {"label": "Run (Optimierung)"}, {"label": "Retire (Abbau)"}]'></div>
+      </div>
+      <!-- rough-diagram:funnel:Service Portfolio · drei Leben -->
     </section>
 
     <!-- Slide 4: Rightsizing-Logik (SVG) -->
@@ -188,6 +193,11 @@
       <div class="accent-box" style="margin-top:14px">
         Prozessdisziplin (Change · Release) ist der unsichtbare 7. Hebel – ohne sie verpufft alles andere.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="cycle" data-aspect="1.8" data-spec='[{"label": "Right-sizing"}, {"label": "PUE-Tuning"}, {"label": "Workload-Verlagerung"}, {"label": "Hardware-Refresh"}, {"label": "Software-Effizienz"}, {"label": "Abwärme-Nutzung"}]'></div>
+      </div>
+      <!-- rough-diagram:cycle:Energieeffizienz · sechs Hebel -->
     </section>
 
     <!-- Slide 6: Capacity Planning -->
@@ -214,6 +224,11 @@
       <div class="accent-box" style="margin-top:14px;font-size:18px">
         Kapazität ist die Fähigkeit, Last und SLOs zu erfüllen – nicht ein VM (Virtual Machine – virtueller Rechner)-Inventar.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="matrix2x2" data-aspect="1.5" data-spec='{"x": {"label": "Vorhersagbarkeit", "lo": "unklar", "hi": "klar"}, "y": {"label": "Elastizität", "lo": "starr", "hi": "elastisch"}, "q": ["Cloud-fit (klar + elastisch)", "Forecast-getrieben (klar + starr)", "Klassisches RZ (unklar + starr)", "Burst-Capacity (unklar + elastisch)"]}'></div>
+      </div>
+      <!-- rough-diagram:matrix2x2:Capacity Planning · vier Dimen -->
     </section>
 
     <!-- Slide 7: Fallstudie EuroHealth -->
@@ -262,6 +277,11 @@
       <div class="accent-box" style="margin-top:14px">
         Priorität = hoher Hebel × vertretbares Risiko × machbarer Aufwand. „Low regret moves“ zuerst.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="scorecard" data-aspect="2.4" data-spec='[{"label": "Strategischer Wert", "value": 5}, {"label": "Nutzungsgrad", "value": 3}, {"label": "Kosten/Service", "value": 2}, {"label": "Risiko", "value": 4}, {"label": "CO₂-Footprint", "value": 2}]'></div>
+      </div>
+      <!-- rough-diagram:scorecard:Portfolio-Scoring · fünf Krite -->
     </section>
 
     <!-- Slide 9: KPI-Set mit Anti-Gaming -->
@@ -441,6 +461,8 @@
 
   </div>
 </main>
+<script src="../../assets/rough.min.js"></script>
+<script src="../../assets/rough-init.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>

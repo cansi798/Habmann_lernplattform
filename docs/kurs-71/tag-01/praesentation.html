@@ -902,31 +902,10 @@
 </main>
 
 <script src="../../assets/rough.min.js"></script>
+<script src="../../assets/rough-init.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
-  // Rough.js Akzente (Kurs 71 = orange)
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('canvas[data-rough]').forEach(canvas => {
-      const rc = rough.canvas(canvas);
-      const w = canvas.width, h = canvas.height;
-      const color = canvas.dataset.color || '#9d4a1a';
-      const type = canvas.dataset.rough;
-      if (type === 'underline') {
-        rc.line(0, h/2, w, h/2, { stroke: color, strokeWidth: 3, roughness: 1.8 });
-      } else if (type === 'box') {
-        rc.rectangle(2, 2, w-4, h-4, { stroke: color, strokeWidth: 1.5, roughness: 2.0, fill: 'rgba(157,74,26,0.05)', fillStyle: 'solid' });
-      } else if (type === 'arrow') {
-        rc.line(0, h/2, w-10, h/2, { stroke: color, strokeWidth: 2, roughness: 1.4 });
-        rc.line(w-15, h/2-7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
-        rc.line(w-15, h/2+7, w-3, h/2, { stroke: color, strokeWidth: 2, roughness: 1.2 });
-      } else if (type === 'check') {
-        rc.line(4, h/2, w/2.4, h-6, { stroke: color, strokeWidth: 3, roughness: 1.4 });
-        rc.line(w/2.4, h-6, w-4, 4, { stroke: color, strokeWidth: 3, roughness: 1.4 });
-      }
-    });
-  });
-
   new SlideShow(document.getElementById("slides"));
   markViewed("71_Dig_42", 1, "praesentation");
 </script>

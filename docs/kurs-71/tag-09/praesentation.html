@@ -60,6 +60,11 @@
       <div style="margin-top:48px" class="accent-box">
         <span class="handwritten" style="color:#5a3a08;font-size:26px">Agile ≠ schneller Chaos. Verantwortung durch Flow &amp; Gates.</span>
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="layer" data-aspect="3.2" data-spec='[{"label": "Code (deklarativ)", "sub": "Terraform · Bicep · CloudFormation"}, {"label": "CI/CD", "sub": "Plan · Apply · Drift-Check"}, {"label": "Cloud-Ressourcen", "sub": "Netze · Compute · Storage · Identity"}]'></div>
+      </div>
+      <!-- rough-diagram:layer:IaC -->
     </section>
 
     <section class="slide" style="display:none">
@@ -114,6 +119,11 @@
       <div class="accent-box" style="margin-top:14px">
         Hybrid funktioniert: Scrum für Features (2-Wochen-Sprints) + Kanban-Lane für Incidents (<abbr title="Work in Progress">WIP</abbr> 2).
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="matrix2x2" data-aspect="1.5" data-spec='{"x": {"label": "Planungsrhythmus", "lo": "kontinuierlich", "hi": "getaktet"}, "y": {"label": "Flussfokus", "lo": "Batch", "hi": "Pull"}, "q": ["Scrum (getaktet · Batch-Iteration)", "Hybrid Scrumban", "Wasserfall-Rest", "Kanban (kontinuierlich · Pull)"]}'></div>
+      </div>
+      <!-- rough-diagram:matrix2x2:Scrum vs. Kanban -->
     </section>
 
     <section class="slide" style="display:none">
@@ -145,6 +155,11 @@
       <div class="accent-box" style="margin-top:10px;font-size:18px">
         <abbr title="Work in Progress">WIP</abbr>-Limit = Schutz für Qualität. Weniger Multitasking, kürzere Lead Times (d.h. Durchlaufzeit von Start bis Fertig), ehrliche Engpässe.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "Backlog"}, {"label": "In Arbeit"}, {"label": "Review"}, {"label": "Test"}, {"label": "Done"}]'></div>
+      </div>
+      <!-- rough-diagram:flow:Kanban-Board -->
     </section>
 
     <section class="slide" style="display:none">
@@ -250,6 +265,11 @@
       <div class="accent-box" style="margin-top:14px">
         <abbr title="Minimum Viable Product – Erste marktreife Produktversion mit minimalem Funktionsumfang">MVP</abbr> darf „dünn“ sein – wenn Schaden begrenzt &amp; Rückbau in &lt; 15 Min möglich ist.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "Build"}, {"label": "Test"}, {"label": "Canary 5%"}, {"label": "Toggle ON"}, {"label": "Rollout 100%"}, {"label": "Rollback?"}]'></div>
+      </div>
+      <!-- rough-diagram:flow:Canary, Toggle -->
     </section>
 
     <section class="slide" style="display:none">
@@ -395,6 +415,8 @@
 
   </div>
 </main>
+<script src="../../assets/rough.min.js"></script>
+<script src="../../assets/rough-init.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>

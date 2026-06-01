@@ -113,6 +113,11 @@
       <div class="accent-box" style="margin-top:14px">
         Stolpersteine: doppelte Events · Zeitzonen-Mix · falsche Case-ID-Strategie · unscharfe Aktivitätsbezeichnung.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="layer" data-aspect="3.2" data-spec='[{"label": "Pflichtfelder", "sub": "Case-ID · Activity · Timestamp"}, {"label": "Empfohlen", "sub": "Resource · Lifecycle (start/complete) · Cost"}, {"label": "Optional", "sub": "Custom Attributes · Datenausprägungen · System-Metadaten"}]'></div>
+      </div>
+      <!-- rough-diagram:layer:Event Log · Pflicht -->
     </section>
 
     <section class="slide" style="display:none">
@@ -197,6 +202,11 @@
       <div class="accent-box" style="margin-top:10px;font-size:18px">
         Pfeile in Rot = Abweichungen. Dicke der Linie = Häufigkeit (in echten Tools sichtbar).
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "Bestellung an"}, {"label": "Prüfen"}, {"label": "Freigeben"}, {"label": "Liefern"}, {"label": "Fakturieren"}, {"label": "Zahlung"}]'></div>
+      </div>
+      <!-- rough-diagram:flow:Discovery-Skizze -->
     </section>
 
     <section class="slide" style="display:none">
@@ -219,6 +229,11 @@
       <div class="accent-box" style="margin-top:14px">
         Falle: niedrige Fitness als Datenfehler abtun. Oft ist sie Realitäts-Signal, das gehört werden will.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="scorecard" data-aspect="2.4" data-spec='[{"label": "Token-Replay-Fitness", "value": 4}, {"label": "Precision", "value": 3}, {"label": "Generalization", "value": 3}, {"label": "Simplicity", "value": 4}]'></div>
+      </div>
+      <!-- rough-diagram:scorecard:Fitness · Maß -->
     </section>
 
     <section class="slide" style="display:none">
@@ -261,6 +276,11 @@
       <div class="accent-box" style="margin-top:14px">
         6-Wochen-Plan: Pflichtfelder + Rückgabe · Ausnahmeprozess dokumentieren · Monitoring-Dashboard + wöchentliches Review.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="matrix2x2" data-aspect="1.5" data-spec='{"x": {"label": "Häufigkeit", "lo": "selten", "hi": "häufig"}, "y": {"label": "Risiko", "lo": "gering", "hi": "hoch"}, "q": ["Top-Priorität (häufig & risikoreich)", "Audit-Fall (selten & risikoreich)", "Rauschen ignorieren", "Effizienzhebel (häufig & risikoarm)"]}'></div>
+      </div>
+      <!-- rough-diagram:matrix2x2:Abweichungslandkarte -->
     </section>
 
     <section class="slide" style="display:none">
@@ -366,6 +386,8 @@
 
   </div>
 </main>
+<script src="../../assets/rough.min.js"></script>
+<script src="../../assets/rough-init.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>

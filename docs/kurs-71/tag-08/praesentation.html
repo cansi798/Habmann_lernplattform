@@ -143,6 +143,11 @@
       <div class="accent-box" style="margin-top:14px">
         Baseline-Heuristik: „Ticket Age (Ticket-Alter) &gt; 70 % <abbr title="Service Level Agreement">SLA</abbr> &amp; Reassignments &gt; 2 → markieren“. Funktioniert ohne <abbr title="Machine Learning">ML</abbr>.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="layer" data-aspect="3.2" data-spec='[{"label": "Daten", "sub": "Quellen · Qualität · Frequenz"}, {"label": "Features", "sub": "Engineering · Labels · Drift-Indikatoren"}, {"label": "Modell", "sub": "Algorithmus · Training · Validierung"}, {"label": "Decision", "sub": "Schwellen · Threshold · Confidence"}, {"label": "Action", "sub": "Trigger · Mensch-im-Loop · Audit"}]'></div>
+      </div>
+      <!-- rough-diagram:layer:Predictive Use Case Canvas -->
     </section>
 
     <section class="slide" style="display:none">
@@ -215,6 +220,11 @@
       <div class="accent-box" style="margin-top:14px">
         Jede Executive-<abbr title="Key Performance Indicator">KPI</abbr> braucht eine <strong>Gegen-<abbr title="Key Performance Indicator">KPI</abbr></strong>. Sonst optimiert die Organisation die falsche Richtung.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="cycle" data-aspect="1.8" data-spec='[{"label": "KPI setzen"}, {"label": "Mensch optimiert"}, {"label": "Gaming entsteht"}, {"label": "Gegenmaß. koppeln"}, {"label": "KPI härten"}]'></div>
+      </div>
+      <!-- rough-diagram:cycle:Anti-Gaming -->
     </section>
 
     <section class="slide" style="display:none">
@@ -274,6 +284,11 @@
       <div class="accent-box" style="margin-top:14px">
         Pflicht: Schwellen + Alarm + Retraining-Trigger. Modelle haben ein Verfallsdatum – plant es ein.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "Train"}, {"label": "Deploy"}, {"label": "Monitor"}, {"label": "Detect Drift"}, {"label": "Retrain"}]'></div>
+      </div>
+      <!-- rough-diagram:flow:Drift -->
     </section>
 
     <section class="slide" style="display:none">
@@ -399,6 +414,8 @@
 
   </div>
 </main>
+<script src="../../assets/rough.min.js"></script>
+<script src="../../assets/rough-init.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>

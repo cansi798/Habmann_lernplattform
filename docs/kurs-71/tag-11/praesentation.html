@@ -202,6 +202,11 @@
       <div class="accent-box" style="margin-top:14px">
         Stufenstrategie: Attended starten → <abbr title="Key Performance Indicators">KPIs</abbr> stabil → schrittweise Unattended-Migration.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="matrix2x2" data-aspect="1.5" data-spec='{"x": {"label": "Aufsicht", "lo": "autonom", "hi": "menschlich"}, "y": {"label": "Volumen", "lo": "gering", "hi": "hoch"}, "q": ["Attended-Highend (menschl. + hoch)", "Attended-Helper (menschl. + gering)", "Pilot/Experiment (autonom + gering)", "Unattended-Production (autonom + hoch)"]}'></div>
+      </div>
+      <!-- rough-diagram:matrix2x2:Attended vs. Unattended -->
     </section>
 
     <!-- Slide 6: Automation Candidate Funnel (SVG) -->
@@ -248,6 +253,11 @@
       <div class="accent-box" style="margin-top:10px;font-size:18px">
         Nicht „kann automatisiert werden“, sondern „lohnt sich und ist verantwortbar“.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="funnel" data-aspect="2.0" data-spec='[{"label": "Alle Prozesse"}, {"label": "Repetitiv & regelbasiert"}, {"label": "Stabile Eingangsdaten"}, {"label": "Hohes Volumen"}, {"label": "ROI > Threshold"}, {"label": "Bot-Kandidat"}]'></div>
+      </div>
+      <!-- rough-diagram:funnel:Automation Candidate Funnel -->
     </section>
 
     <!-- Slide 7: Bot-Flow mit Exceptions (SVG) -->
@@ -328,6 +338,11 @@
       <div class="accent-box" style="margin-top:14px">
         B braucht erst Regelklarheit + AI-Ergänzung. <abbr title="Robotic Process Automation">RPA</abbr> allein scheitert an „viele Sonderfälle“.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="scorecard" data-aspect="2.4" data-spec='[{"label": "Volumen", "value": 4}, {"label": "Stabilität", "value": 3}, {"label": "Datenqualität", "value": 2}, {"label": "Regelklarheit", "value": 4}, {"label": "ROI", "value": 3}]'></div>
+      </div>
+      <!-- rough-diagram:scorecard:Use-Case-Eignung -->
     </section>
 
     <!-- Slide 9: Nutzen vs. Risiken -->
@@ -385,6 +400,11 @@
       <div class="accent-box" style="margin-top:14px">
         Readiness-<abbr title="Key Performance Indicators">KPIs</abbr>: <strong>Exception-Rate &lt; 10 %</strong> · <abbr title="User Interface">UI</abbr>-Änderungen &lt; 1 / Monat · Rollback-Pfad getestet.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "Discovery (W1-2)"}, {"label": "Pilot (W3-6)"}, {"label": "Härten (W7-9)"}, {"label": "Skalieren (W10-12)"}]'></div>
+      </div>
+      <!-- rough-diagram:flow:Stufenplan · in 12 Wochen -->
     </section>
 
     <!-- Slide 11: Fallstudie NordTrade -->
@@ -566,6 +586,8 @@
 
   </div>
 </main>
+<script src="../../assets/rough.min.js"></script>
+<script src="../../assets/rough-init.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>

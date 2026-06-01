@@ -153,6 +153,11 @@
       <div class="accent-box" style="margin-top:14px;font-size:18px">
         Servicegrenze entlang <strong>Geschäftsfähigkeit (Capability)</strong> – nicht entlang Datenbanktabellen.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="matrix2x2" data-aspect="1.5" data-spec='{"x": {"label": "Lieferzeit", "lo": "kurz", "hi": "lang"}, "y": {"label": "Kopplung", "lo": "lose", "hi": "eng"}, "q": ["Monolith (lang + eng)", "Verteilter Monolith (lang + lose)", "Microservices (kurz + lose)", "Modulith (kurz + eng)"]}'></div>
+      </div>
+      <!-- rough-diagram:matrix2x2:vier Versprechen, drei Schulde -->
     </section>
 
     <!-- Slide 4: Service-Schnitt-Architektur (SVG) -->
@@ -286,6 +291,11 @@
       <div class="accent-box" style="margin-top:10px;font-size:18px">
         Anti-Pattern: umgekehrte Pyramide (viele E2E (End-to-End-Tests, also volle Durchläufe), wenige Units) – teuer, fragil, lange Pipelines.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="funnel" data-aspect="2.0" data-spec='[{"label": "E2E (wenige, teuer)"}, {"label": "Integration"}, {"label": "Unit (viele, billig)"}]'></div>
+      </div>
+      <!-- rough-diagram:funnel:Testpyramide -->
     </section>
 
     <!-- Slide 8: Deployment-Strategien -->
@@ -329,6 +339,11 @@
       <div class="accent-box" style="margin-top:14px;font-size:18px">
         Ohne <abbr title="Responsible, Accountable, Consulted, Informed – Verantwortungsmatrix zur Klärung von Rollen und Zuständigkeiten in Projekten">RACI</abbr> &amp; Eskalationspfade ist „You build it, you run it“ Wandtattoo, keine Operation.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="layer" data-aspect="3.2" data-spec='[{"label": "You build it", "sub": "Code · Tests · Doku"}, {"label": "You run it", "sub": "Deploy · Observability · Oncall"}, {"label": "You own it", "sub": "Roadmap · KPIs · Lifecycle"}]'></div>
+      </div>
+      <!-- rough-diagram:layer:abgestufte Ownership -->
     </section>
 
     <!-- Slide 10: Release-Flow (SVG) -->
@@ -383,6 +398,11 @@
       <div class="accent-box" style="margin-top:10px;font-size:18px">
         Smoke-Test nach Deploy + automatisierter Rollback-Pfad = harte Pflicht für Kernservices.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "Commit"}, {"label": "Build"}, {"label": "Test"}, {"label": "Stage"}, {"label": "Canary"}, {"label": "Prod"}, {"label": "Observe"}]'></div>
+      </div>
+      <!-- rough-diagram:flow:Release-Flow · von Commit bis  -->
     </section>
 
     <!-- Slide 11: SLOs & Error Budget -->
@@ -587,6 +607,8 @@
 
   </div>
 </main>
+<script src="../../assets/rough.min.js"></script>
+<script src="../../assets/rough-init.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>

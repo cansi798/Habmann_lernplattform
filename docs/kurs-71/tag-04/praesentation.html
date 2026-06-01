@@ -126,6 +126,11 @@
       <div class="accent-box" style="margin-top:12px">
         Variantenfrage: <strong>als Attribute</strong> (kleine Unterschiede) oder <strong>als separate Modelle</strong> (echte E2E-Abweichungen)?
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="layer" data-aspect="3.2" data-spec='[{"label": "Strategisch", "sub": "Capabilities · Wertströme · Roadmap"}, {"label": "Taktisch", "sub": "Prozessmodelle · Schnittstellen · Rollen"}, {"label": "Operativ", "sub": "Executable BPMN · Service Tasks · Variablen"}]'></div>
+      </div>
+      <!-- rough-diagram:layer:Repository · drei Ebenen -->
     </section>
 
     <section class="slide" style="display:none">
@@ -162,6 +167,11 @@
         <div class="merk-box"><h3>Reviewer</h3><p>Prüft Qualität &amp; Konsistenz. 4-Augen-Prinzip.</p></div>
         <div class="merk-box"><h3>Owner</h3><p>Trägt Inhalt &amp; Wirkung. Genehmigt Approved.</p></div>
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="flow" data-aspect="3.6" data-spec='[{"label": "Draft"}, {"label": "Review"}, {"label": "Approved"}, {"label": "Productive"}, {"label": "Retired"}]'></div>
+      </div>
+      <!-- rough-diagram:flow:Freigabe-Workflow -->
     </section>
 
     <section class="slide" style="display:none">
@@ -247,6 +257,11 @@
       <div class="accent-box" style="margin-top:14px">
         Ausnahme-Politik <abbr title="Minimum Viable Product">MVP</abbr>: 1–2 Sonderfälle <strong>bewusst draußen lassen</strong> – organisatorisch auffangen, später integrieren.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="funnel" data-aspect="2.0" data-spec='[{"label": "Alle Prozesse"}, {"label": "Stabil & wiederholbar"}, {"label": "Hohes Volumen"}, {"label": "Klare Entscheidungsregeln"}, {"label": "Automatisierbar"}]'></div>
+      </div>
+      <!-- rough-diagram:funnel:Automations-Slice -->
     </section>
 
     <section class="slide" style="display:none">
@@ -264,6 +279,11 @@
       <div class="accent-box" style="margin-top:14px">
         Senior-Brille: Beide Säulen <strong>parallel</strong> aufbauen – Repository ohne Execution = Papier, Execution ohne Repository = Insel.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="matrix2x2" data-aspect="1.5" data-spec='{"x": {"label": "Detailgrad", "lo": "grob", "hi": "fein"}, "y": {"label": "Verbindlichkeit", "lo": "orientierend", "hi": "bindend"}, "q": ["Executable BPMN (fein + bindend)", "Business BPMN (grob + bindend)", "Skizze (grob + lose)", "Detailmodell ohne Freigabe (fein + lose)"]}'></div>
+      </div>
+      <!-- rough-diagram:matrix2x2:Repository vs. Execution -->
     </section>
 
     <section class="slide" style="display:none">
@@ -315,6 +335,11 @@
       <div class="accent-box" style="margin-top:14px">
         Irreversible Entscheidungen brauchen schriftliche Begründung + Frühwarnsignal.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="matrix2x2" data-aspect="1.5" data-spec='{"x": {"label": "Geschwindigkeit", "lo": "langsam", "hi": "schnell"}, "y": {"label": "Stabilität", "lo": "volatil", "hi": "stabil"}, "q": ["Hochleistung (schnell + stabil)", "Solide (langsam + stabil)", "Risiko-Modus (langsam + volatil)", "Bleeding Edge (schnell + volatil)"]}'></div>
+      </div>
+      <!-- rough-diagram:matrix2x2:vier Zielkonflikte -->
     </section>
 
     <section class="slide" style="display:none">
@@ -424,6 +449,8 @@
 
   </div>
 </main>
+<script src="../../assets/rough.min.js"></script>
+<script src="../../assets/rough-init.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>

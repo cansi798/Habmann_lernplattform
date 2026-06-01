@@ -168,6 +168,11 @@
       <div class="accent-box" style="margin-top:10px;font-size:18px">
         Lifecycle ohne Owner = Chaos mit Versionsnummer. Jede Phase: <em>wer</em>, <em>was</em>, <em>wann</em>, <em>woraufhin</em>.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="cycle" data-aspect="1.8" data-spec='[{"label": "Idee"}, {"label": "Design"}, {"label": "Build"}, {"label": "Test"}, {"label": "Deploy"}, {"label": "Run"}, {"label": "Monitor"}, {"label": "Optimize"}, {"label": "Retire"}]'></div>
+      </div>
+      <!-- rough-diagram:cycle:Bot Lifecycle · neun Phasen -->
     </section>
 
     <!-- Slide 4: Governance-Minimum (RACI) -->
@@ -259,6 +264,11 @@
       <div class="accent-box" style="margin-top:10px;font-size:18px">
         10 % Ausnahmen können 80 % Aufwand erzeugen, wenn schlecht gestaltet. Playbooks &amp; SLAs entscheiden <abbr title="Return on Investment – Kennzahl für die Rentabilität einer Investition; Gewinn geteilt durch Kosten">ROI</abbr>.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="layer" data-aspect="3.2" data-spec='[{"label": "Business Exception", "sub": "Fachlich, gehört in Playbook"}, {"label": "Application Exception", "sub": "Tech-Fehler im Bot-Code"}, {"label": "System Exception", "sub": "Umgebung: Netz · Login · OS"}]'></div>
+      </div>
+      <!-- rough-diagram:layer:Exception Handling · drei Type -->
     </section>
 
     <!-- Slide 7: Security by Design -->
@@ -400,6 +410,11 @@
       <div class="accent-box" style="margin-top:14px;font-size:18px">
         Frühwarnsignal Föderation: Shadow-Bot-Quote, Incident-Rate, Audit-Findings.
       </div>
+    
+      <div class="diagram-box" style="margin-top:16px;text-align:left">
+        <div data-rough-diagram="matrix2x2" data-aspect="1.5" data-spec='{"x": {"label": "Steuerung", "lo": "verteilt", "hi": "zentral"}, "y": {"label": "Skalierungstempo", "lo": "langsam", "hi": "schnell"}, "q": ["CoE-Hochgeschwindigkeit", "Föderiert + Sog", "CoE-Trägheit", "Wildwuchs"]}'></div>
+      </div>
+      <!-- rough-diagram:matrix2x2:CoE vs. föderiert -->
     </section>
 
     <!-- Slide 13: Management · Risk Appetite -->
@@ -512,6 +527,8 @@
 
   </div>
 </main>
+<script src="../../assets/rough.min.js"></script>
+<script src="../../assets/rough-init.js"></script>
 <script src="../../assets/progress.js"></script>
 <script src="../../assets/slides.js"></script>
 <script>
