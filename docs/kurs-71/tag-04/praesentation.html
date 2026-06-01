@@ -98,37 +98,41 @@
 
     <section class="slide" style="display:none">
       <h2>Lernziele · Tag 4</h2>
-      <div class="grid-3" style="margin-top:18px">
+      <p style="color:var(--color-muted)">Was du am Ende des Tages konkret kannst — drei Stufen, die aufeinander aufbauen.</p>
+      <div class="grid-3" style="margin-top:14px">
         <div class="merk-box">
-          <h3>L1 · Wissen</h3>
+          <h3>L1 · Wissen <span style="font-weight:normal;font-size:13px;color:var(--color-muted)">(„Ich kenne…")</span></h3>
           <ul>
-            <li>Repository als Single Source of Truth</li>
-            <li>3 Ebenen: E2E (End-to-End, durchgängig) → Subprozess → Artefakt</li>
-            <li>Business-<abbr title="Business Process Model and Notation – Standardisierte grafische Notation zur Modellierung von Geschäftsprozessen (ISO 19510)">BPMN</abbr> vs. Execution-<abbr title="Business Process Model and Notation">BPMN</abbr></li>
-            <li>User Task / Service Task / Events / Variablen</li>
+            <li>Repository als <em>Single Source of Truth</em> — die eine verbindliche Sammlung aller Prozessmodelle</li>
+            <li>3 Repository-Ebenen: Value Chain → Subprozess → Artefakt</li>
+            <li>Den Unterschied zwischen Business-<abbr title="Business Process Model and Notation">BPMN</abbr> (Sprache fürs Verstehen) und Execution-<abbr title="Business Process Model and Notation">BPMN</abbr> (Vertrag fürs Ausführen)</li>
+            <li>Vier BPMN-Bausteine: User Task, Service Task, XOR-Gateway, Timer</li>
           </ul>
+          <p style="font-size:12px;color:var(--color-muted);margin:8px 0 0;font-style:italic">Selbsttest: „Erklär einer fremden Person in einer Minute, was ein Process-Repository ist."</p>
         </div>
         <div class="merk-box">
-          <h3>L2 · Anwendung</h3>
+          <h3>L2 · Anwendung <span style="font-weight:normal;font-size:13px;color:var(--color-muted)">(„Ich kann tun…")</span></h3>
           <ul>
-            <li>Repository-Struktur + Metadaten entwerfen</li>
-            <li>Freigabe-Workflow (Draft → Approved)</li>
-            <li>Automations-Slice schneiden</li>
-            <li>Minimum-Daten für Workflow definieren</li>
+            <li>Repository-Struktur mit Pflicht-Metadaten (Owner, Status, Version) entwerfen</li>
+            <li>Freigabe-Workflow (Draft → Review → Approved → Retired) skizzieren</li>
+            <li>Einen automatisierbaren Slice schneiden — mit klarem Start, Daten und Fehlerfällen</li>
+            <li>Minimum-Daten für einen Workflow definieren (Was muss die Engine wissen?)</li>
           </ul>
+          <p style="font-size:12px;color:var(--color-muted);margin:8px 0 0;font-style:italic">Selbsttest: „Schneide für einen realen Prozess deiner Firma einen 4-Wochen-Pilot-Slice."</p>
         </div>
         <div class="merk-box">
-          <h3>L3 · Management</h3>
+          <h3>L3 · Management <span style="font-weight:normal;font-size:13px;color:var(--color-muted)">(„Ich entscheide…")</span></h3>
           <ul>
-            <li>Variantenstrategie: Attribute vs. eigene Modelle</li>
-            <li>Governance vs. Overhead</li>
-            <li>Exception-Policy: <abbr title="Minimum Viable Product – Erste marktreife Produktversion mit minimalem Funktionsumfang">MVP</abbr> statt Perfektion</li>
-            <li>Irreversible Entscheidungen markieren</li>
+            <li>Variantenstrategie: Attribut-Varianten oder eigene Modelle?</li>
+            <li>Wie viel Governance ist nötig, ab wann wird sie Overhead?</li>
+            <li>Exception-Policy: bewusst <abbr title="Minimum Viable Product">MVP</abbr> statt Perfektion</li>
+            <li>Irreversible Entscheidungen erkennen + schriftlich begründen</li>
           </ul>
+          <p style="font-size:12px;color:var(--color-muted);margin:8px 0 0;font-style:italic">Selbsttest: „Entscheide einen Zielkonflikt heute — und sag warum."</p>
         </div>
       </div>
-      <div class="accent-box" style="margin-top:20px">
-        „Repository ohne Owner/Review = Ablage. Execution ohne <abbr title="Service Level Agreement – Vertraglich vereinbarte Qualitäts- und Leistungsstandards für Dienstleistungen">SLA</abbr>/Eskalation = Hoffnung.“
+      <div class="accent-box" style="margin-top:14px">
+        Kernsatz heute: <strong>„Repository ohne Owner = Ablage. Execution ohne <abbr title="Service Level Agreement">SLA</abbr> = Hoffnung."</strong>
       </div>
     </section>
 
@@ -280,8 +284,61 @@
           <tr><th>Verbindlichkeit</th><td>Kommunikationsmodell</td><td>ausführbarer Vertrag</td></tr>
         </tbody>
       </table>
-      <div class="accent-box" style="margin-top:14px">
-        Übergabeprinzip: erst <strong>automatisierbaren Slice isolieren</strong> – klarer Start/Ende, klare Daten, klare Fehlerfälle.
+
+      <div class="diagram-box" style="margin-top:14px;text-align:left">
+        <h3 style="margin:0 0 8px;font-size:14px;color:var(--kurs-71)">Derselbe Prozess „Rechnung freigeben" — in beiden Detailgraden</h3>
+        <svg width="100%" viewBox="0 0 920 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ar-cmp" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9d4a1a"/>
+            </marker>
+          </defs>
+
+          <text x="20" y="22" font-size="13" font-weight="700" fill="#9d4a1a">Business-BPMN (für Fachbereich + Management)</text>
+          <circle cx="50" cy="60" r="14" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <line x1="64" y1="60" x2="86" y2="60" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cmp)"/>
+          <rect x="90" y="44" width="160" height="32" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="170" y="64" text-anchor="middle" font-size="12" fill="#222">Rechnung prüfen</text>
+          <line x1="250" y1="60" x2="272" y2="60" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cmp)"/>
+          <rect x="276" y="44" width="160" height="32" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="356" y="64" text-anchor="middle" font-size="12" fill="#222">Freigabe einholen</text>
+          <line x1="436" y1="60" x2="458" y2="60" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cmp)"/>
+          <rect x="462" y="44" width="160" height="32" rx="6" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="542" y="64" text-anchor="middle" font-size="12" fill="#222">Im ERP buchen</text>
+          <line x1="622" y1="60" x2="644" y2="60" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cmp)"/>
+          <circle cx="660" cy="60" r="14" fill="#fff" stroke="#9d4a1a" stroke-width="4"/>
+          <text x="700" y="64" font-size="11" font-style="italic" fill="#666">→ 4 Boxen reichen.</text>
+
+          <text x="20" y="120" font-size="13" font-weight="700" fill="#9d4a1a">Execution-BPMN (für die Workflow-Engine)</text>
+          <circle cx="50" cy="170" r="14" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <line x1="64" y1="170" x2="80" y2="170" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cmp)"/>
+          <rect x="84" y="154" width="110" height="32" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="139" y="171" text-anchor="middle" font-size="11" fill="#222">Daten extrahieren</text>
+          <text x="139" y="181" text-anchor="middle" font-size="9" fill="#3a7a2a">Service Task</text>
+          <line x1="194" y1="170" x2="208" y2="170" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cmp)"/>
+          <rect x="212" y="154" width="110" height="32" rx="6" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="267" y="171" text-anchor="middle" font-size="11" fill="#222">Prüfen</text>
+          <text x="267" y="181" text-anchor="middle" font-size="9" fill="#9d4a1a">User Task · Buchhaltung</text>
+          <line x1="322" y1="170" x2="336" y2="170" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cmp)"/>
+          <polygon points="340,170 360,150 380,170 360,190" fill="#fff" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="360" y="174" text-anchor="middle" font-size="13" fill="#9d4a1a">×</text>
+          <text x="360" y="142" text-anchor="middle" font-size="9" fill="#444">Betrag &gt; 5.000?</text>
+          <line x1="380" y1="170" x2="394" y2="170" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cmp)"/>
+          <rect x="398" y="154" width="120" height="32" rx="6" fill="#ffe9d6" stroke="#9d4a1a" stroke-width="2"/>
+          <text x="458" y="171" text-anchor="middle" font-size="11" fill="#222">Freigabe Teamlead</text>
+          <text x="458" y="181" text-anchor="middle" font-size="9" fill="#9d4a1a">User Task · Timer 3d</text>
+          <line x1="518" y1="170" x2="532" y2="170" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cmp)"/>
+          <rect x="536" y="154" width="110" height="32" rx="6" fill="#dff0d4" stroke="#3a7a2a" stroke-width="2"/>
+          <text x="591" y="171" text-anchor="middle" font-size="11" fill="#222">ERP buchen</text>
+          <text x="591" y="181" text-anchor="middle" font-size="9" fill="#3a7a2a">Service Task · API</text>
+          <line x1="646" y1="170" x2="660" y2="170" stroke="#9d4a1a" stroke-width="2" marker-end="url(#ar-cmp)"/>
+          <circle cx="676" cy="170" r="14" fill="#fff" stroke="#9d4a1a" stroke-width="4"/>
+          <text x="700" y="174" font-size="11" font-style="italic" fill="#666">→ Engine kann es ausführen.</text>
+        </svg>
+      </div>
+
+      <div class="accent-box" style="margin-top:12px">
+        Übergabeprinzip: Erst <strong>automatisierbaren Slice isolieren</strong> — klarer Start/Ende, klare Daten, klare Fehlerfälle. Dann erst aus Business-BPMN das Execution-BPMN ableiten.
       </div>
     </section>
 
@@ -332,8 +389,33 @@
           <text x="535" y="115" text-anchor="middle" font-size="10" fill="#b04030">⏱ Timer-Boundary: Erinnerung +3d / Eskalation</text>
         </svg>
       </div>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Lies das Diagramm so · Schritt für Schritt</h3>
+          <ol style="margin:6px 0 0;padding-left:20px;font-size:14px;line-height:1.55">
+            <li><strong>Rechnung kommt rein</strong> (Start-Kreis links): per Mail-Postfach oder Upload-Portal.</li>
+            <li><strong>Daten extrahieren</strong> (grün/Service Task): Software liest Lieferant, Betrag, Posten.</li>
+            <li><strong>Erfassen prüfen</strong> (orange/User Task): Buchhaltung schaut drauf, korrigiert ggf.</li>
+            <li><strong>Betrag &gt; 5.000?</strong> (Raute/XOR): ja → Teamlead-Freigabe nötig · nein → direkt weiter.</li>
+            <li><strong>Freigabe Teamlead</strong> (orange/User Task mit Timer): Timer wartet max. 3 Tage, danach Eskalation.</li>
+            <li><strong>Pfade führen wieder zusammen</strong> (Raute mit +).</li>
+            <li><strong>ERP buchen</strong> (grün/Service Task): API-Aufruf zum SAP-System.</li>
+            <li><strong>Fertig</strong> (End-Kreis rechts mit dickem Rand).</li>
+          </ol>
+        </div>
+        <div class="merk-box">
+          <h3>Was du in diesem Diagramm sehen kannst</h3>
+          <ul style="margin:6px 0 0;padding-left:20px;font-size:14px;line-height:1.55">
+            <li><strong>Mensch vs. Software</strong>: 2 orange Schritte = Mensch, 2 grüne Schritte = Software.</li>
+            <li><strong>Sicherheitsnetz</strong>: Der Timer auf der Teamlead-Freigabe verhindert, dass Vorgänge ewig liegen bleiben.</li>
+            <li><strong>Zwei Wege</strong>: Kleine Beträge (&lt; 5.000) gehen ohne Extra-Freigabe durch — Effizienz für 80 % der Fälle.</li>
+            <li><strong>Daten fließen mit</strong>: Lieferant, Betrag, Kostenstelle reisen als Variablen durch die Engine — keine händische Übergabe.</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="accent-box" style="margin-top:10px;font-size:18px">
-        Service Tasks (grün) = automatisiert. User Tasks (orange) = Menschen. Timer/Boundary = Sicherheitsnetz.
+        Merksatz: <strong>Service Tasks (grün) = automatisiert. User Tasks (orange) = Menschen. Timer/Boundary = Sicherheitsnetz.</strong>
       </div>
     </section>
 
@@ -406,25 +488,59 @@
     </section>
 
     <section class="slide" style="display:none">
-      <h2>Coaching · Verantwortungsfähigkeit</h2>
-      <div class="grid-2x2" style="margin-top:18px">
-        <div class="merk-box"><h3>Repository ist Betriebssystem</h3><p>Ohne Owner/Review/Lifecycle wird es zur Ablage – nicht zur Steuerung.</p></div>
-        <div class="merk-box"><h3>Execution ist Vertrag</h3><p>Daten, Fehler, SLAs, Eskalation – wer trägt das Risiko falscher Automatisierung?</p></div>
-        <div class="merk-box"><h3>Saubere Übergabe</h3><p>Business-Sicht (verständlich) ↔ Execution-Sicht (präzise). Zwei Modelle, ein Auftrag.</p></div>
-        <div class="merk-box"><h3><abbr title="Minimum Viable Product">MVP</abbr> statt Perfektion</h3><p>Aber mit Frühwarnsignalen: Eskalationsquote, Rework, Audit-Findings.</p></div>
+      <h2>Coaching · vier konkrete Situationen</h2>
+      <p style="color:var(--color-muted)">Stell dir vor — was tust du in diesem Moment? Vier Mini-Szenarien, vier Antworten.</p>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Szenario: Repository wird zur Ablage</h3>
+          <p style="font-size:14px"><em>Beobachtung:</em> Im Repository liegen 200 BPMN-Diagramme. Aber niemand pflegt sie. Letzte Änderung: vor 2 Jahren.</p>
+          <p style="font-size:14px;margin-top:6px"><strong>Antwort:</strong> Owner pro Modell festlegen. Quartalsweise Review-Routine. Modelle ohne Owner nach 6 Monaten in „Retired" verschieben.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Szenario: Engine ohne Vertrag</h3>
+          <p style="font-size:14px"><em>Beobachtung:</em> Workflow läuft seit 3 Monaten. Mitarbeitende klagen über Hänger. Keiner weiß, wer für Fehler zuständig ist.</p>
+          <p style="font-size:14px;margin-top:6px"><strong>Antwort:</strong> <abbr title="Service Level Agreement">SLA</abbr> definieren (Reaktionszeit, Lösungszeit). Eskalationspfad: 1st-Level → 2nd-Level → Process Owner.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Szenario: Übergabe zerschellt</h3>
+          <p style="font-size:14px"><em>Beobachtung:</em> Fachbereich übergibt Modell an IT. IT sagt: „So können wir das nicht ausführen." Fachbereich: „Aber genau das wollen wir!"</p>
+          <p style="font-size:14px;margin-top:6px"><strong>Antwort:</strong> Übergabe-Termin <em>vor</em> dem Modellieren. Business-BPMN gemeinsam reviewen. Erst dann Execution-BPMN ableiten.</p>
+        </div>
+        <div class="merk-box">
+          <h3>Szenario: MVP läuft zu kurz</h3>
+          <p style="font-size:14px"><em>Beobachtung:</em> 2 Sonderfälle wurden bewusst ausgespart. Nach 4 Wochen Pilot: niemand bemerkt sie — alle drücken auf Skalierung.</p>
+          <p style="font-size:14px;margin-top:6px"><strong>Antwort:</strong> Frühwarnsignale ansehen (Eskalationsquote, Rework, Audit-Findings). Erst skalieren, wenn alle drei Signale grün sind.</p>
+        </div>
       </div>
     </section>
 
     <section class="slide" style="display:none">
       <h2>Management · vier Zielkonflikte</h2>
-      <div class="grid-2x2" style="margin-top:16px">
-        <div class="merk-box"><h3>Standard ↔ Standortautonomie</h3><p style="font-size:14px">Guardrails (Leitplanken) statt Wildwuchs – aber wo darf lokal entschieden werden?</p></div>
-        <div class="merk-box"><h3>Repository-Tiefe ↔ Pflegeaufwand</h3><p style="font-size:14px">Vollständig ist nicht hilfreich – hilfreich ist nicht vollständig.</p></div>
-        <div class="merk-box"><h3>Automation ↔ Audit-Sicherheit</h3><p style="font-size:14px">Schnelle Automation kann Compliance untergraben – Boundary Events sind nicht optional.</p></div>
-        <div class="merk-box"><h3>Speed ↔ Reversibilität</h3><p style="font-size:14px">Welche Architektur-Entscheidung kostet uns in 6 Monaten am meisten beim Rollback?</p></div>
+      <p style="color:var(--color-muted)">Pro Konflikt: die Spannung — und eine konkrete Leitfrage, die hilft zu entscheiden.</p>
+      <div class="grid-2x2" style="margin-top:14px">
+        <div class="merk-box">
+          <h3>Standard ↔ Standortautonomie</h3>
+          <p style="font-size:14px;margin:0">Guardrails statt Wildwuchs — aber wo darf lokal entschieden werden?</p>
+          <p style="font-size:13px;margin:6px 0 0;color:#3a3a3a"><strong>Leitfrage:</strong> „Standort München will eine eigene Sonderfreigabe einbauen. Lassen wir das zu — oder zwingen wir den Standardprozess durch?"</p>
+        </div>
+        <div class="merk-box">
+          <h3>Repository-Tiefe ↔ Pflegeaufwand</h3>
+          <p style="font-size:14px;margin:0">Vollständig ist nicht hilfreich — hilfreich ist nicht vollständig.</p>
+          <p style="font-size:13px;margin:6px 0 0;color:#3a3a3a"><strong>Leitfrage:</strong> „Modellieren wir nur den Happy Path oder alle 12 Ausnahmen? Wer pflegt die Ausnahmen in 2 Jahren noch?"</p>
+        </div>
+        <div class="merk-box">
+          <h3>Automation ↔ Audit-Sicherheit</h3>
+          <p style="font-size:14px;margin:0">Schnelle Automation kann Compliance untergraben — Boundary Events sind nicht optional.</p>
+          <p style="font-size:13px;margin:6px 0 0;color:#3a3a3a"><strong>Leitfrage:</strong> „Wenn der Bot eine falsche Buchung macht — wie viele Klicks weit ist der Audit Trail davon entfernt?"</p>
+        </div>
+        <div class="merk-box">
+          <h3>Speed ↔ Reversibilität</h3>
+          <p style="font-size:14px;margin:0">Welche Architektur-Entscheidung kostet in 6 Monaten am meisten beim Rollback?</p>
+          <p style="font-size:13px;margin:6px 0 0;color:#3a3a3a"><strong>Leitfrage:</strong> „Wenn wir nach 6 Monaten zurück müssen — gibt es einen Plan B, oder müssen wir alles neu bauen?"</p>
+        </div>
       </div>
       <div class="accent-box" style="margin-top:14px">
-        Irreversible Entscheidungen brauchen schriftliche Begründung + Frühwarnsignal.
+        Faustregel: <strong>Irreversible Entscheidungen brauchen schriftliche Begründung + Frühwarnsignal</strong> — sonst wird sie still und teuer.
       </div>
     
       <div class="diagram-box" style="margin-top:16px;text-align:left">
