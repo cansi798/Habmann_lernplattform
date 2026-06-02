@@ -1,0 +1,1089 @@
+{
+  "kurs_id": "71_Dig_42",
+  "tag_nr": "m1",
+  "titel": "Zwischenstand Modul 1 · 70 Fragen aus Tag 1–3",
+  "erstellt_am": "2026-06-02",
+  "fragen": [
+    {
+      "id": "t1q01",
+      "frage": "(1 Antwort richtig) Welche drei Bestandteile gehören laut Skript zu jedem Prozess (I-T-O)?",
+      "optionen": [
+        "Initiative, Tätigkeit, Optimierung",
+        "Input, Transformation, Output",
+        "Idee, Tooling, Organisation",
+        "Instanz, Trigger, Operation"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Skript definiert Prozess als Abfolge mit Input (Trigger/Ausgangszustand), Transformation (Tätigkeiten) und Output (Ergebniszustand). Die anderen Akronyme klingen plausibel, sind aber im Skript nicht verankert.",
+      "quelle": "Tag 1 · Abschnitt 1.1 / Eselsbrücke I-T-O",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Prozess-Grundbegriffe"
+    },
+    {
+      "id": "t1q02",
+      "frage": "(1 Antwort richtig) Welches BPMN-Element wird als abgerundetes Rechteck dargestellt und enthält eine atomare Tätigkeit?",
+      "optionen": [
+        "Gateway",
+        "Pool",
+        "Task",
+        "Ereignis"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Ein Task ist die einfachste, nicht weiter zerlegte Aktivität und wird als abgerundetes Rechteck gezeichnet. Gateway ist eine Raute, Pool ein Container, Ereignis ein Kreis.",
+      "quelle": "Tag 1 · Abschnitt 2.1 Aktivitäten",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Basiselemente"
+    },
+    {
+      "id": "t1q03",
+      "frage": "(1 Antwort richtig) Welche Benennungsregel gilt im Skript für BPMN-Tasks und EPC-Funktionen?",
+      "optionen": [
+        "Substantiv plus Adjektiv",
+        "Subjekt plus Prädikat",
+        "Verb plus Objekt",
+        "Status plus Rolle"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Tasks und Funktionen folgen der Regel Verb plus Objekt (z. B. ‹Lagerbestand prüfen›). EPC-Ereignisse folgen einem Zustand (Subjekt plus Partizip), das ist hier aber nicht gefragt.",
+      "quelle": "Tag 1 · Abschnitt 2.1 und 3.1",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Benennungsregeln"
+    },
+    {
+      "id": "t1q04",
+      "frage": "(1 Antwort richtig) Welche Aussage zum XOR-Gateway in BPMN ist korrekt?",
+      "optionen": [
+        "Genau ein Pfad wird exklusiv gewählt",
+        "Alle Pfade laufen gleichzeitig parallel",
+        "Beliebig viele Pfade dürfen aktiv sein",
+        "Der Pfad wird zufällig ausgewürfelt"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Das XOR-Gateway markiert eine exklusive Entscheidung mit genau einem aktiven Pfad. AND lässt alle Pfade parallel laufen, OR mehrere gleichzeitig. Zufall ist kein Modellierungs-Konstrukt.",
+      "quelle": "Tag 1 · Abschnitt 2.3 Gateways",
+      "schwierigkeit": "leicht",
+      "thema_tag": "BPMN Gateways"
+    },
+    {
+      "id": "t1q05",
+      "frage": "(1 Antwort richtig) Welches Symbol verwendet die EPC für ein Ereignis?",
+      "optionen": [
+        "Abgerundetes Rechteck",
+        "Kreis mit Symbol darin",
+        "Sechseck",
+        "Raute mit X"
+      ],
+      "korrekt": 2,
+      "erklaerung": "In der EPC wird ein Ereignis als Sechseck dargestellt, eine Funktion als abgerundetes Rechteck und ein Konnektor als Kreis mit Symbol. Die Raute ist BPMN-Notation.",
+      "quelle": "Tag 1 · Abschnitt 3.1 EPC-Pflichtelemente",
+      "schwierigkeit": "leicht",
+      "thema_tag": "EPC Basiselemente"
+    },
+    {
+      "id": "t1q06",
+      "frage": "(1 Antwort richtig) Was besagt die zentrale Spielregel der EPC zur Reihenfolge von Elementen?",
+      "optionen": [
+        "Funktionen werden immer parallel ausgeführt",
+        "Ereignis und Funktion wechseln sich strikt ab",
+        "Konnektoren stehen nur am Anfang einer Kette",
+        "Ereignisse dürfen ohne Funktion verbunden sein"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die EPC-Spielregel verlangt strikte Alternation: Auf ein Ereignis folgt eine Funktion und umgekehrt. Das erzwingt sauberes Denken in Zustandsänderungen und ist Prüfkriterium für EPC-Modelle.",
+      "quelle": "Tag 1 · Abschnitt 3.1 EPC",
+      "schwierigkeit": "leicht",
+      "thema_tag": "EPC Notationsregeln"
+    },
+    {
+      "id": "t1q07",
+      "frage": "(1 Antwort richtig) Welcher Grundsatz wird im Skript als der wichtigste der sieben GoM bezeichnet?",
+      "optionen": [
+        "Grundsatz der Klarheit",
+        "Grundsatz der Zweckorientierung",
+        "Grundsatz der Wirtschaftlichkeit",
+        "Grundsatz der Richtigkeit"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Zweckorientierung ist laut Skript der wichtigste Grundsatz, dem alle anderen untergeordnet sind. Wer den Zweck verfehlt, hat egal wie schön gezeichnet kein brauchbares Modell.",
+      "quelle": "Tag 1 · Abschnitt 4 GoM und Abschnitt 5",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Modellqualität GoM"
+    },
+    {
+      "id": "t1q08",
+      "frage": "(1 Antwort richtig) Wofür steht die Abkürzung RACI im Skript?",
+      "optionen": [
+        "Responsible, Accountable, Consulted, Informed",
+        "Review, Audit, Compliance, Implementation",
+        "Rollen, Aufgaben, Charta, Indikatoren",
+        "Resource, Activity, Control, Issue"
+      ],
+      "korrekt": 0,
+      "erklaerung": "RACI bedeutet Responsible (führt aus), Accountable (verantwortet), Consulted (wird gefragt), Informed (wird informiert). Die Matrix ergänzt Lanes um Detail-Verantwortung.",
+      "quelle": "Tag 1 · Abschnitt 6.3 RACI",
+      "schwierigkeit": "leicht",
+      "thema_tag": "RACI Verantwortung"
+    },
+    {
+      "id": "t1q09",
+      "frage": "(1 Antwort richtig) Sie sind PMO-Lead und der Auftraggeber sagt: das Modell soll später durch eine Workflow-Engine automatisiert werden. Welche Konsequenz folgt zwingend daraus?",
+      "optionen": [
+        "Eine EPC reicht, weil sie ohnehin nahe an IT liegt",
+        "BPMN wählen, Tasks typisieren und Gateway-Bedingungen formal beschreiben",
+        "Auf Pools verzichten, weil diese die Engine blockieren würden",
+        "Granularität bewusst grob halten, die Engine ergänzt die Logik"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Executable BPMN verlangt Vollständigkeit, eindeutige Gateway-Bedingungen (z. B. FEEL) und Task-Typisierung (User, Service, Send). EPC ist Beschreibungsmodell, nicht ausführbar. Pools werden gerade dort gebraucht, und grobe Granularität ist für Engines untauglich.",
+      "quelle": "Tag 1 · Abschnitt 8 executable BPMN",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Executable BPMN"
+    },
+    {
+      "id": "t1q10",
+      "frage": "(1 Antwort richtig) Ein Fachbereich übergibt Ihnen ein BPMN-Modell mit 47 Tasks auf einer Seite, ohne Lanes, ohne Hierarchie. Welche Diagnose passt am besten?",
+      "optionen": [
+        "Modell ohne Annahmen-Hinweis — Annotationen ergänzen",
+        "Falsche Gateway-Logik — XOR-Bedingungen prüfen",
+        "Spaghetti-Modell — Sub-Prozesse und Layering bilden",
+        "Inkonsistente Benennung — ein Glossar einführen"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Klassisches Spaghetti-Anti-Muster: kein Layering, alles auf einer Seite. Heilmittel laut Skript sind Sub-Prozesse, Schichten und weniger Detail. Die anderen Anti-Muster betreffen andere Symptome.",
+      "quelle": "Tag 1 · Abschnitt 7.1 Anti-Muster",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Anti-Muster"
+    },
+    {
+      "id": "t1q11",
+      "frage": "(1 Antwort richtig) Welche Aussage zur Faustregel BPMN vs. EPC trifft das Skript am genauesten?",
+      "optionen": [
+        "EPC ist OMG-Standard, BPMN ist nur im DACH-Raum verbreitet",
+        "Beide Notationen bilden denselben Prozess mit unterschiedlichen Schwerpunkten ab",
+        "BPMN ersetzt EPC vollständig in modernen Unternehmen heute",
+        "EPC erlaubt executable Workflows über Camunda-Engines direkt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Skript betont, dass beide Notationen denselben Prozess abbilden können, mit unterschiedlichem Schwerpunkt (BPMN nahe IT, EPC nahe Business). BPMN ist OMG-Standard (nicht EPC), und EPC ist Beschreibungs-, nicht Ausführungsmodell.",
+      "quelle": "Tag 1 · Abschnitt 3.3 BPMN vs. EPC",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN vs EPC"
+    },
+    {
+      "id": "t1q12",
+      "frage": "(1 Antwort richtig) Welche Heuristik nennt das Skript für die kleinste sinnvolle Aktivität im Modell?",
+      "optionen": [
+        "Eine Aktivität, die immer unter zwei Minuten dauert",
+        "Eine Aktivität pro Sprint im Team-Backlog vergeben",
+        "Eine Aktivität immer gleiche Rolle, gleiches System, ohne Unterbrechung",
+        "Eine Aktivität, die im KPI-Reporting separat auftaucht"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Die Skript-Heuristik definiert die kleinste sinnvolle Einheit über Konstanz von Rolle, System und Zeitpunkt. Wechselt einer dieser Faktoren, wird daraus eine neue Aktivität.",
+      "quelle": "Tag 1 · Abschnitt 5.2 Granularität",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Granularität"
+    },
+    {
+      "id": "t1q13",
+      "frage": "(1 Antwort richtig) Im Review eines Innovations-Prozesses entdecken Sie eine Schleife: Nacharbeiten → erneut prüfen → Nacharbeiten. Welcher Skript-Hinweis hilft hier?",
+      "optionen": [
+        "Endlosschleife ohne klares Abbruchkriterium oder Eskalationspfad",
+        "Lanes verschmelzen, um die Verantwortung zu reduzieren",
+        "Den Sequenzfluss zwischen Pools auf Nachrichtenfluss ändern",
+        "Den OR-Konnektor durch eine AND-Synchronisation ersetzen"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Endlosschleifen ohne Abbruchkriterium sind ein dokumentiertes Anti-Muster. Heilmittel ist ein klares Abbruchkriterium oder ein Eskalationspfad. Die anderen Optionen behandeln andere Konstrukte und passen hier nicht.",
+      "quelle": "Tag 1 · Abschnitt 7.1 Anti-Muster",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Anti-Muster"
+    },
+    {
+      "id": "t1q14",
+      "frage": "(2 Antworten richtig) Welche zwei Flusstypen unterscheidet die BPMN-Notation für Verbindungen zwischen Elementen?",
+      "optionen": [
+        "Sequenzfluss — durchgezogener Pfeil innerhalb eines Pools",
+        "Nachrichtenfluss — gestrichelter Pfeil zwischen Pools",
+        "Versionspfeil — gepunkteter Pfeil für Modellstände",
+        "Steuerfluss — doppelter Pfeil für Compliance-Bezug",
+        "Datenkanal — farbiger Pfeil zwischen Lanes für ETL"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Sequenzfluss (durchgezogen) verbindet Elemente innerhalb eines Pools, Nachrichtenfluss (gestrichelt) verbindet über Pool-Grenzen hinweg. Versionspfeil, Steuerfluss und Datenkanal sind erfundene Distraktoren.",
+      "quelle": "Tag 1 · Abschnitt 2.4 Flüsse",
+      "schwierigkeit": "mittel",
+      "thema_tag": "BPMN Flüsse"
+    },
+    {
+      "id": "t1q15",
+      "frage": "(2 Antworten richtig) Sie reviewen eine BPMN-Skizze: ein Kunde steht als Lane im eigenen Pool, eine Aktivität ist zwei Lanes zugeordnet. Welche Fehler diagnostiziert das Skript hier?",
+      "optionen": [
+        "Externe Beteiligte gehören in einen eigenen Pool, nicht in eine Lane",
+        "Eine Aktivität gehört zu genau einer Rolle, nicht zu zwei Lanes",
+        "Pools brauchen immer drei oder mehr Lanes, sonst sind sie ungültig",
+        "Kunden dürfen in BPMN gar nicht modelliert werden, nur erwähnt",
+        "Lanes müssen Personen statt Rollen sein, um prüfbar zu bleiben"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Das Skript nennt beide Pools-und-Lanes-Fehler explizit: externe Beteiligte als Lane verschleiern die organisatorische Grenze, und eine Aktivität in zwei Lanes ist entweder eine Übergabe oder eine ungenaue Beschreibung. Die anderen Aussagen sind frei erfunden bzw. widersprechen dem Skript.",
+      "quelle": "Tag 1 · Abschnitt 6.4 Pools/Lanes-Fehler",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Pools und Lanes"
+    },
+    {
+      "id": "t1q16",
+      "frage": "(2 Antworten richtig) Welche zwei Modellzwecke nennt das Skript explizit als Hauptzwecke für Prozessmodellierung?",
+      "optionen": [
+        "Dokumentation des Ist-Zustands für neue Mitarbeitende",
+        "Marketing-Visualisierung für Kunden-Präsentationen",
+        "Automatisierung als Vorlage für eine Workflow-Engine",
+        "Mitarbeiter-Bewertung im jährlichen Performance-Cycle",
+        "Lieferantenauswahl im Beschaffungs-Tender als Vergabe-Kriterium"
+      ],
+      "korrekt": [0, 2],
+      "erklaerung": "Skript-Hauptzwecke sind Dokumentation, Analyse, Automatisierung und Compliance. Marketing, Mitarbeiter-Bewertung und Lieferantenauswahl sind keine im Skript genannten Modellierungszwecke.",
+      "quelle": "Tag 1 · Abschnitt 1.3 Vier Modellierungszwecke",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Modellzweck"
+    },
+    {
+      "id": "t1q17",
+      "frage": "(2 Antworten richtig) Welche Aussagen zur EPC sind laut Skript korrekt?",
+      "optionen": [
+        "EPC wurde Anfang der 1990er in Saarbrücken (Scheer) entwickelt",
+        "EPC ist ein OMG-Standard und international weit verbreitet",
+        "Ereignisse benennen einen Zustand, Funktionen eine Tätigkeit",
+        "EPC ersetzt RACI-Matrizen in deutschen Behörden vollständig",
+        "Konnektoren sind Sechsecke mit AND-, OR- oder XOR-Logik"
+      ],
+      "korrekt": [0, 2],
+      "erklaerung": "EPC entstand in den 1990ern bei Scheer in Saarbrücken; Ereignisse sind Zustände, Funktionen sind Verb+Objekt-Tätigkeiten. EPC ist kein OMG-Standard (das ist BPMN), ersetzt keine RACI, und Konnektoren sind Kreise (Sechsecke wären Ereignisse).",
+      "quelle": "Tag 1 · Abschnitt 3.1 EPC",
+      "schwierigkeit": "mittel",
+      "thema_tag": "EPC Notation"
+    },
+    {
+      "id": "t1q18",
+      "frage": "(2 Antworten richtig) Ein Auditor verlangt Compliance-Nachweise. Welche zwei Aspekte sind laut Skript für den Modellzweck Compliance entscheidend?",
+      "optionen": [
+        "Nachvollziehbarkeit der Pfade und Entscheidungen",
+        "Versionierung des Modells über die Zeit hinweg",
+        "Reine A4-Übersicht für die Management-Ebene erstellen",
+        "Minimale Granularität halten, um Pflegeaufwand zu sparen",
+        "Pool-loses Modell wählen, um Reibungen zu vermeiden"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Das Skript nennt für Compliance explizit Nachvollziehbarkeit und Versionierung als entscheidend. A4-Übersicht passt zum Management-Zweck, minimale Granularität und Pool-Verzicht sind keine Compliance-Kriterien.",
+      "quelle": "Tag 1 · Abschnitt 1.3 Modellzwecke",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Compliance"
+    },
+    {
+      "id": "t1q19",
+      "frage": "(2 Antworten richtig) Welche Senior-Hebel nennt die Eselsbrücke Z-G-A-V als vorab zu klärende Fragen?",
+      "optionen": [
+        "Zweck — wofür modellieren wir den Prozess?",
+        "Granularität — wie tief gehen wir ins Detail?",
+        "Zertifizierung — welche ISO-Norm wenden wir an?",
+        "Animation — wie machen wir das Diagramm bunt?",
+        "Geschwindigkeit — wie schnell rendert das Tool?"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Z-G-A-V steht für Zweck, Granularität, Annahmen und Verantwortung. Zertifizierung, Animation und Tool-Geschwindigkeit sind keine Bestandteile der Eselsbrücke.",
+      "quelle": "Tag 1 · Abschnitt 9 Eselsbrücke Z-G-A-V",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Senior-Modellierung"
+    },
+    {
+      "id": "t1q20",
+      "frage": "(2 Antworten richtig) Sie diskutieren mit der IT, ob ein Ja-Nein-Detail als Gateway modelliert werden soll. Welche Kriterien sprechen dafür, ein echtes Gateway zu setzen?",
+      "optionen": [
+        "Eine Person oder Regel entscheidet mit nachvollziehbaren Kriterien",
+        "Die Wahl hat erkennbare Konsequenzen für den weiteren Pfad",
+        "Die IT möchte einen zusätzlichen Klick für die Logging-Quote",
+        "Es wirkt visuell symmetrischer mit drei statt mit zwei Pfaden",
+        "Im Tool ist ohnehin Platz für ein weiteres Element vorhanden"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Echte Gateways verlangen eine nachvollziehbare Entscheidung und Konsequenzen für den Pfad. Logging-Quoten, visuelle Symmetrie oder freier Platz sind keine Modellierungs-Gründe, sondern verschleiern Improvisation als Kontrolle.",
+      "quelle": "Tag 1 · Abschnitt 9.4 Gateway-Disziplin",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Gateway-Disziplin"
+    },
+    {
+      "id": "t1q21",
+      "frage": "(3 Antworten richtig) Sie sind PMO-Lead und entdecken im Workshop ein Modell ohne Lanes, ohne End-Ereignis und mit drei sich überlappenden XOR-Pfaden. Welche drei Anti-Muster liegen vor?",
+      "optionen": [
+        "Fehlende End-Ereignisse — jeder Pfad muss enden",
+        "Falsche Gateway-Logik — Bedingungen müssen disjunkt sein",
+        "Lanes fehlen — ohne sie kein Verantwortungsmodell",
+        "Modellzweck-Statement ist zu lang — kürzen erforderlich",
+        "Workflow-Engine fehlt — sofort Camunda installieren"
+      ],
+      "korrekt": [0, 1, 2],
+      "erklaerung": "Drei dokumentierte Probleme: fehlende End-Ereignisse, falsche Gateway-Logik mit überlappenden Bedingungen, fehlende Lanes als Verantwortungs-Werkzeug. Zweck-Statement und Engine-Installation gehören in andere Phasen.",
+      "quelle": "Tag 1 · Abschnitt 6.2, 7.1 Anti-Muster",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Modell-Review"
+    },
+    {
+      "id": "t1q22",
+      "frage": "(3 Antworten richtig) Welche drei Risiken bei Modellierungs-Initiativen nennt das Skript in der Management-Perspektive?",
+      "optionen": [
+        "Übermodellierung — Detail verschlingt den Nutzen am Ende",
+        "Schattenprozesse — Modell und Wirklichkeit driften auseinander",
+        "Akzeptanzproblem — operative Teams sehen keinen Nutzen",
+        "Patentstreit — die Notation ist urheberrechtlich geschützt",
+        "Hardwarekosten — Modellierung braucht teure Server-Cluster"
+      ],
+      "korrekt": [0, 1, 2],
+      "erklaerung": "Das Skript nennt explizit Übermodellierung, Schattenprozesse, Akzeptanzproblem, Tool-Falle und Audit-Fokus als Risiken. Patentstreit und Hardwarekosten sind nicht Teil dieser Liste.",
+      "quelle": "Tag 1 · Abschnitt 10.4 Risiken",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Governance Risiken"
+    },
+    {
+      "id": "t1q23",
+      "frage": "(3 Antworten richtig) Welche drei der sieben GoM-Grundsätze enthält die Eselsbrücke R-R-W-K-V-S-Z?",
+      "optionen": [
+        "Richtigkeit — keine Widersprüche, die Logik trägt",
+        "Klarheit — lesbar für die jeweilige Zielgruppe",
+        "Zweckorientierung — klar benannter Zweck vor Detail",
+        "Skalierbarkeit — Cloud-Tauglichkeit des Modells",
+        "Transparenz — öffentliche Zugänglichkeit für alle"
+      ],
+      "korrekt": [0, 1, 2],
+      "erklaerung": "Die sieben GoM-Grundsätze sind Richtigkeit, Relevanz, Wirtschaftlichkeit, Klarheit, Vergleichbarkeit, systematischer Aufbau und Zweckorientierung. Skalierbarkeit und Transparenz sind in dieser Form nicht Teil der GoM.",
+      "quelle": "Tag 1 · Abschnitt 4.1 GoM",
+      "schwierigkeit": "mittel",
+      "thema_tag": "GoM Grundsätze"
+    },
+    {
+      "id": "t1q24",
+      "frage": "(3 Antworten richtig) Welche drei Indikatoren mahnen laut Skript zur Zurückhaltung bei der Automatisierung eines Prozesses?",
+      "optionen": [
+        "Hohe Varianz pro Fall — kaum zwei Vorgänge gleich",
+        "Kurze Lebensdauer — Prozess wird in 12 Monaten neu erfunden",
+        "Niedrige Frequenz — der Prozess läuft nur dreimal im Jahr",
+        "Hohe Compliance-Last — automatisieren, um Audits zu bestehen",
+        "Knappe IT-Budgets — automatisieren, um Personalkosten zu sparen"
+      ],
+      "korrekt": [0, 1, 2],
+      "erklaerung": "Das Skript nennt drei Indikatoren gegen Automatisierung: hohe Varianz, kurze Lebensdauer, niedrige Frequenz. Compliance-Last oder knappe Budgets sind keine Automatisierungs-Indikatoren und sprechen im Skript eher für Checklisten oder manuelle Lösungen.",
+      "quelle": "Tag 1 · Abschnitt 8.4 Wann nicht automatisieren",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Automatisierungs-Entscheidung"
+    },
+    {
+      "id": "t2q01",
+      "frage": "(1 Antwort richtig) Welche zwei UML-Diagrammtypen reichen laut Skript für rund 80 Prozent der Geschäftsprozess-Fragen aus?",
+      "optionen": [
+        "Klassendiagramm und Sequenzdiagramm für die Software-Sicht",
+        "Anwendungsfalldiagramm (Use Case) und Aktivitätsdiagramm (Activity)",
+        "Zustandsdiagramm und Komponentendiagramm für Logik-Module",
+        "Kommunikationsdiagramm und Verteilungsdiagramm der Systeme"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Abschnitt 2 betont: Aus den 14 UML-Diagrammtypen genügen in der Praxis Use Case Diagram (Scope/Akteure) und Activity Diagram (Ablauf). Klassen-, Sequenz-, Zustands- oder Komponentendiagramme gehören typischerweise in das Software-Design, nicht in die Geschäftsprozess-Modellierung.",
+      "quelle": "Tag 2 · Abschnitt 2",
+      "schwierigkeit": "leicht",
+      "thema_tag": "UML Grundlagen"
+    },
+    {
+      "id": "t2q02",
+      "frage": "(1 Antwort richtig) Welche drei Felder muss ein Event Log laut Skript mindestens pro Eintrag enthalten?",
+      "optionen": [
+        "Case ID, Aktivität und Zeitstempel jedes Schritts",
+        "Vorgangsnummer, Kostenstelle und Bearbeiterrolle",
+        "Rolle, Aktivitätsname und Priorität pro Schritt",
+        "Zeitstempel, Ressource und Verantwortlicher",
+        "Datum, System und Aktivität als Pflichtangaben"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Abschnitt 4 nennt als Pflichtfelder Case ID, Aktivität und Zeitstempel. Ressource und Datenfelder wie Kostenstelle oder Priorität sind optional. Ohne Case ID lassen sich die Events nicht zu Vorgängen zusammenfassen — sie ist die zentrale Klammer.",
+      "quelle": "Tag 2 · Abschnitt 4",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Process Mining Grundlagen"
+    },
+    {
+      "id": "t2q03",
+      "frage": "(1 Antwort richtig) Sie messen mit VSM 6 h Bearbeitungszeit gegen 6 Wochen Durchlaufzeit. Welche Schlussfolgerung ist methodisch am tragfähigsten?",
+      "optionen": [
+        "Bearbeitungszeit ist überhöht und wird durch Schulungen reduziert",
+        "Differenz besteht überwiegend aus Wartezeit — dort liegt der Hebel",
+        "Schätzung ist falsch, BT und DLZ sollten ähnlich groß ausfallen",
+        "Die VSM ist zu grob, weil keine Engpass-Hypothese sichtbar wird"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Skript zeigt: In Wissensprozessen ist DLZ meist ein Vielfaches der BT, der Rest ist Wartezeit. Genau dieses Muster zeigt auch die CloudWorks-Fallstudie. Optimierung lohnt sich daher fast immer mehr bei der WT als bei der BT.",
+      "quelle": "Tag 2 · Abschnitt 3",
+      "schwierigkeit": "leicht",
+      "thema_tag": "VSM Zeiten"
+    },
+    {
+      "id": "t2q04",
+      "frage": "(2 Antworten richtig) Welche Aussagen zu den sieben Verschwendungsarten (Muda) treffen zu?",
+      "optionen": [
+        "Wartezeit zählt zu den sieben klassischen Verschwendungsarten",
+        "Überproduktion im Büro: Reports erstellen, die niemand mehr liest",
+        "Bewegung meint nur körperliches Laufen, nie digitale Wechsel",
+        "Fehler ist keine Verschwendung, sondern ein normales Qualitätsmaß",
+        "Verschwendung tritt nur in Produktionsprozessen wirklich auf"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Wartezeit und Überproduktion sind klassische Verschwendungsarten (Abschnitt 3, Tabelle). Bewegung umfasst laut Skript ausdrücklich auch System-Wechsel (CRM → Ticket → ERP). Fehler/Nacharbeit ist sehr wohl eine Verschwendungsart, und Muda kommt explizit auch in Wissensprozessen vor.",
+      "quelle": "Tag 2 · Abschnitt 3",
+      "schwierigkeit": "mittel",
+      "thema_tag": "VSM Verschwendung"
+    },
+    {
+      "id": "t2q05",
+      "frage": "(1 Antwort richtig) Welche Disziplin des Process Mining rekonstruiert einen Ist-Prozess direkt aus dem Event Log ohne vorhandenes Soll-Modell?",
+      "optionen": [
+        "Conformance Checking durch direkten Modellvergleich",
+        "Enhancement durch Anreicherung um Zeit und Frequenz",
+        "Discovery durch algorithmische Pfad-Rekonstruktion",
+        "Compliance Audit mit regelbasierter Prüfung"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Discovery rekonstruiert das Ist-Modell aus dem Log (Abschnitt 4). Conformance prüft ein vorhandenes Soll gegen das Ist, Enhancement reichert ein Modell um Zeit/Frequenz an. ‹Compliance Audit› ist keine der drei Process-Mining-Disziplinen im Skript.",
+      "quelle": "Tag 2 · Abschnitt 4",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Process Mining Disziplinen"
+    },
+    {
+      "id": "t2q06",
+      "frage": "(2 Antworten richtig) Welche Eigenschaften beschreibt der Inductive Miner im Vergleich zum Alpha-Algorithmus laut Skript?",
+      "optionen": [
+        "Garantiert wohlgeformte Modelle ohne Deadlocks",
+        "Ist die heute meistgenutzte Familie in kommerziellen Tools",
+        "Reagiert besonders empfindlich auf Rauschen im Log",
+        "Erkennt ausschließlich Sequenzen ohne Verzweigungen",
+        "Ist akademisch, aber praxisfern für Produktivumgebungen"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Das Skript beschreibt Inductive Miner als Garant für wohlgeformte Modelle (keine Deadlocks) und als meistgenutzte Familie in kommerziellen Tools. Rauschanfällig und ‹akademischer Klassiker› ist gerade der Alpha-Algorithmus, nicht der Inductive Miner.",
+      "quelle": "Tag 2 · Abschnitt 4 (Discovery-Algorithmen)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Process Mining Algorithmen"
+    },
+    {
+      "id": "t2q07",
+      "frage": "(1 Antwort richtig) Sie prüfen einen Schritt mit der Wertschöpfungs-Klassifikation: ‹Rechnung gesetzlich archivieren›. Wie ist dieser Schritt korrekt einzustufen?",
+      "optionen": [
+        "Wertschöpfend (VA), weil Kunde davon profitiert",
+        "Notwendig, aber nicht wertschöpfend (NNVA)",
+        "Verschwendung (Muda), weil keine Wirkung am Kunden",
+        "Wertschöpfend, sofern Compliance ein USP des Hauses"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Abschnitt 3 nennt Rechnungsarchivierung explizit als NNVA-Beispiel: notwendig aus regulatorischen Gründen, aber kein Wertbeitrag, für den der Kunde zahlen würde. VA wäre ein Schritt, für den der Kunde bewusst zahlen würde; Muda meint nicht-notwendige Verschwendung.",
+      "quelle": "Tag 2 · Abschnitt 3 (Wertschöpfung)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "VSM Wertschöpfung"
+    },
+    {
+      "id": "t2q08",
+      "frage": "(1 Antwort richtig) Im Event Log Ihres Bestellprozesses fehlen bei der Aktivität ‹Zahlung_prüfen› die Zeitstempel. Welche Konsequenz hat das für Process Mining?",
+      "optionen": [
+        "Discovery liefert die Aktivität noch sauber im Pfad",
+        "Conformance verbessert sich, weil weniger Varianz besteht",
+        "Reihenfolge und Engpass bei diesem Schritt sind nicht ableitbar",
+        "Der Inductive Miner ergänzt fehlende Zeiten automatisch"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Ohne Zeitstempel lässt sich die zeitliche Reihenfolge des Events nicht rekonstruieren — und damit auch keine Engpass-Diagnose oder Pfad-Position. Das Skript betont: Process Mining ist nur so gut wie die Datenqualität; fehlende Felder führen zu blinden Flecken in Discovery und Conformance.",
+      "quelle": "Tag 2 · Abschnitt 4 (Voraussetzungen)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Process Mining Datenqualität"
+    },
+    {
+      "id": "t2q09",
+      "frage": "(3 Antworten richtig) Welche typischen Fehler in UML-Diagrammen nennt das Skript explizit?",
+      "optionen": [
+        "Akteure als konkrete Personen (‹Frau Meier›) benennen",
+        "Schleifen ohne klare Obergrenze definieren",
+        "Systemgrenze fehlt oder bleibt unscharf gezeichnet",
+        "Verwendung von Swimlanes pro Verantwortungsbereich",
+        "Use Cases mit dem Schema Verb plus Objekt benennen"
+      ],
+      "korrekt": [0, 1, 2],
+      "erklaerung": "Abschnitt 2 (Häufige Fehler) listet: Akteure als Personen, Use Cases als UI-Klicks, fehlende Systemgrenze, Schleifen ohne Obergrenze, mehrere Verantwortliche in einer Lane. Swimlanes pro Verantwortungsbereich und Verb-plus-Objekt-Benennung sind dagegen korrekte Praxis, keine Fehler.",
+      "quelle": "Tag 2 · Abschnitt 2 (Häufige Fehler)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "UML Qualität"
+    },
+    {
+      "id": "t2q10",
+      "frage": "(1 Antwort richtig) Was bedeutet ‹Fitness› als Conformance-Metrik laut Skript?",
+      "optionen": [
+        "Wie kompakt das Modell die Realität abbildet",
+        "Wie viele tatsächliche Cases das Soll-Modell vollständig abdeckt",
+        "Wie eng das Modell nur beobachtetes Verhalten beschreibt",
+        "Wie gut das Modell zukünftiges Verhalten generalisiert"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Fitness misst laut Abschnitt 4, wie viele der real beobachteten Cases sich mit dem Soll-Modell vollständig nachvollziehen lassen — hohe Fitness heißt: das Soll deckt das Ist gut ab. Kompaktheit ist Simplicity, Eng-Beschreibung ist Precision, Zukunftsverhalten ist Generalization.",
+      "quelle": "Tag 2 · Abschnitt 4 (Conformance-Metriken)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Process Mining Metriken"
+    },
+    {
+      "id": "t2q11",
+      "frage": "(2 Antworten richtig) Welche Aussagen zum Trade-off zwischen Fitness und Precision treffen zu?",
+      "optionen": [
+        "Ein Modell, das jeden Ausreißer abdeckt, hat oft hohe Fitness",
+        "Ein sehr restriktives Modell hat oft niedrigere Fitness",
+        "Fitness und Precision sind voneinander unabhängig",
+        "Hohe Precision heißt: das Modell deckt jede mögliche Variante ab",
+        "Simplicity ersetzt in der Praxis Fitness und Precision"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Skript: Modelle, die alle Ausreißer abdecken, haben hohe Fitness aber niedrige Precision; restriktive Modelle umgekehrt. Die Metriken stehen also in Spannung, sind nicht unabhängig. Hohe Precision heißt: kaum unbeobachtete Pfade — nicht ‹alles abdecken›. Simplicity ergänzt, ersetzt aber nichts.",
+      "quelle": "Tag 2 · Abschnitt 4 (Conformance-Metriken)",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Process Mining Metriken"
+    },
+    {
+      "id": "t2q12",
+      "frage": "(1 Antwort richtig) Welche Rolle spielen Schleifen-Obergrenzen in einem Activity Diagram?",
+      "optionen": [
+        "Sie sind dekorativ, in der Praxis bedeutungslos",
+        "Sie verhindern theoretisch unendliche Iterationen, etwa max. 2",
+        "Sie erhöhen den Pflegeaufwand ohne fachlichen Nutzen",
+        "Sie ersetzen Entscheidungspunkte mit Raute-Symbolen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Abschnitt 2 betont: Schleifen wie ‹erneut prüfen → korrigieren› können sonst theoretisch unendlich laufen. Praxis: max. zwei Iterationen, dann Eskalation. Das ist nicht Dekoration, sondern Disziplin. Entscheidungsrauten bleiben separat erhalten — Obergrenzen ergänzen sie nur.",
+      "quelle": "Tag 2 · Abschnitt 2 (Activity Diagram)",
+      "schwierigkeit": "leicht",
+      "thema_tag": "UML Activity"
+    },
+    {
+      "id": "t2q13",
+      "frage": "(1 Antwort richtig) Sie sollen einen brandneuen, noch nie gelebten Workflow für Vertragsfreigaben konzipieren (Greenfield). Welche Methodenkombination ist laut Skript primär sinnvoll?",
+      "optionen": [
+        "Vor allem Process Mining mit umfangreichen Log-Analysen",
+        "UML Use Case und Activity, weil noch keine Ist-Daten existieren",
+        "VSM Current State und Future State der Bestandsprozesse",
+        "Methodendreiklang aus UML, VSM und Process Mining"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Szenario B im Skript: Im Greenfield reicht UML aus, VSM und Mining wären verfrüht (keine verlässlichen Ist-Daten, keine Logs). Das Skript betont: Mehr Methoden hieße hier mehr Aufwand ohne Mehrwert — Disziplin statt Vollständigkeits-Anspruch.",
+      "quelle": "Tag 2 · Abschnitt 5 (Szenario B)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Methodenauswahl"
+    },
+    {
+      "id": "t2q14",
+      "frage": "(1 Antwort richtig) Was beschreibt das Skript als die ‹goldene Klammer› des Methodendreiklangs?",
+      "optionen": [
+        "Drei spezialisierte Berater pro Methode getrennt arbeiten lassen",
+        "Dieselbe Person oder dasselbe Team führt die drei Sichten zusammen",
+        "Drei parallel laufende Berichte für drei Stakeholder erstellen",
+        "Ein zentrales Tool, das UML, VSM und Mining automatisch verbindet"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die ‹goldene Klammer› entsteht laut Skript, wenn dieselbe Person oder dasselbe Team die drei Sichten integriert. Trennt man Modellierer, Lean-Berater und Data Analyst auf, ergeben sich drei parallele Berichte ohne integrierte Diagnose — genau der Silo-Fehler.",
+      "quelle": "Tag 2 · Abschnitt 5",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Methodendreiklang"
+    },
+    {
+      "id": "t2q15",
+      "frage": "(2 Antworten richtig) Welche Voraussetzungen nennt das Skript für ein gutes Process-Mining-Projekt?",
+      "optionen": [
+        "Digitale Spuren in den genutzten IT-Systemen",
+        "Eine eindeutige Case ID über alle Quellsysteme hinweg",
+        "Mindestens 1 Million Cases im untersuchten Log",
+        "Eine bereits abgeschlossene BPMN-Modellierung",
+        "Garantierte Datenqualität ohne jegliche Lücken"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Abschnitt 4 nennt drei Voraussetzungen: digitale Spuren, eindeutige Case ID, genug Cases (typisch hunderte bis tausende — nicht zwingend Millionen). Eine vorab fertige BPMN-Modellierung ist keine Voraussetzung (Discovery rekonstruiert ja gerade ohne Modell), und perfekte Datenqualität ist nie real.",
+      "quelle": "Tag 2 · Abschnitt 4 (Voraussetzungen)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Process Mining Voraussetzungen"
+    },
+    {
+      "id": "t2q16",
+      "frage": "(1 Antwort richtig) In der CloudWorks-Fallstudie ist Schritt 3 ‹Daten nachfordern› klassifiziert als …",
+      "optionen": [
+        "Wertschöpfend (VA), weil Kundendaten zentral sind",
+        "Verschwendung (Waste), da Folge unvollständiger Übergaben",
+        "Notwendig nicht-wertschöpfend (NNVA), weil regulatorisch",
+        "Engpass-Schritt mit höchster Bearbeitungszeit"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Fallstudien-Tabelle (Abschnitt 8) klassifiziert Schritt 3 explizit als Waste — er entsteht nur, weil die initiale Übergabe unvollständig war (40 Prozent der Cases). Der größere Engpass ist Schritt 6 (Zugänge vergeben) mit 5–8 Tagen Wartezeit, nicht Schritt 3.",
+      "quelle": "Tag 2 · Abschnitt 8 (VSM-Tabelle)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Fallstudie CloudWorks"
+    },
+    {
+      "id": "t2q17",
+      "frage": "(3 Antworten richtig) Was zeigt Process Mining laut Skript ausdrücklich NICHT?",
+      "optionen": [
+        "Den intendierten Soll-Prozess hinter Abweichungen",
+        "Die Absicht hinter einer beobachteten Prozess-Variante",
+        "Die formalen Verantwortlichkeiten und Entscheidungsrechte",
+        "Die häufigsten Pfade und Varianten im Ist-Verhalten",
+        "Frequenzen einzelner Aktivitäten im Event Log"
+      ],
+      "korrekt": [0, 1, 2],
+      "erklaerung": "Abschnitt 4 (‹Was Process Mining nicht ersetzt›): Soll-Prozess, Absicht und Verantwortlichkeiten stehen nicht im Log und sind nicht ableitbar. Häufigste Pfade/Varianten und Aktivitäts-Frequenzen liefert Process Mining dagegen sehr wohl — das ist gerade seine Stärke.",
+      "quelle": "Tag 2 · Abschnitt 4",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Process Mining Grenzen"
+    },
+    {
+      "id": "t2q18",
+      "frage": "(1 Antwort richtig) Welches Kombinationsmuster nennt das Skript für klassische Conformance-Projekte?",
+      "optionen": [
+        "Modell plus Daten: UML/BPMN gegen Event Log halten",
+        "Wertstrom plus Daten: VSM-Hypothesen mit Mining belegen",
+        "Modell plus Wertstrom: UML und VSM ohne Daten kombinieren",
+        "Alle drei Methoden parallel als vollständiger Dreiklang"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Abschnitt 6 nennt drei Kombinationsmuster. Modell + Daten (UML/BPMN + Process Mining) ist explizit die klassische Konfiguration für Conformance: Soll modelliert, Ist aus Logs, Differenz gemessen. VSM + Mining ist für Optimierung, UML + VSM für datenarme Lagen.",
+      "quelle": "Tag 2 · Abschnitt 6",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Methodenkombination"
+    },
+    {
+      "id": "t2q19",
+      "frage": "(2 Antworten richtig) Welche Besonderheiten kennzeichnen VSM in Wissensprozessen laut Skript?",
+      "optionen": [
+        "Der Wertstrom ist visuell unsichtbar im Posteingang",
+        "Zeiten je Vorgang weisen hohe individuelle Varianz auf",
+        "Bearbeitungszeiten sind exakt wie bei Produktionsmaschinen",
+        "Wertschöpfungs-Klassifikation ist universal und kulturfrei",
+        "Schätzungen sind unzulässig und stets durch Messung zu ersetzen"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Abschnitt 3 nennt drei Besonderheiten: unsichtbarer Wertstrom (Posteingang/Ticket), hohe individuelle Varianz, kulturell geprägte Wertschöpfungs-Klassifikation. Exakte Maschinen-Zeiten und universal-kulturfreie VA-Klassen treffen nicht zu; Schätzungen sind explizit erlaubt, wenn ehrlich markiert.",
+      "quelle": "Tag 2 · Abschnitt 3",
+      "schwierigkeit": "mittel",
+      "thema_tag": "VSM Wissensprozess"
+    },
+    {
+      "id": "t2q20",
+      "frage": "(1 Antwort richtig) Sie entdecken: 40 % der Onboarding-Cases haben Rücksprünge wegen fehlender Kundendaten, 25 % warten zu lange auf IT-Provisioning, 15 % eskalieren. Was lehrt der Dreiklang über solche Befunde?",
+      "optionen": [
+        "Drei eigenständige Probleme verlangen drei separate Initiativen",
+        "Sie bilden meist eine Kausalkette mit einer gemeinsamen Ursache",
+        "Sie zeigen, dass IT der primäre Engpass ohne weitere Gründe ist",
+        "Sie sind statistische Ausreißer und ohne strukturelle Bedeutung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die Fallstudie zeigt: Die drei vermeintlich getrennten Befunde entpuppen sich als Kausalkette — Datenprobleme verzögern Provisioning, was wiederum Eskalationen erzeugt. Genau diese Kausalkette ist der Wert des Dreiklangs (Abschnitt 8, Process-Mining-Brille).",
+      "quelle": "Tag 2 · Abschnitt 8",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Fallstudie Kausalkette"
+    },
+    {
+      "id": "t2q21",
+      "frage": "(1 Antwort richtig) Was kennzeichnet eine ‹risiko-relevante Annahme› laut Coaching-Abschnitt?",
+      "optionen": [
+        "Sie verändert das Ergebnis nicht, wenn sie sich als falsch erweist",
+        "Bei Irrtum dreht sich die Schlussfolgerung um, daher Frühwarnsignal",
+        "Sie betrifft ausschließlich Datenqualität in Event Logs",
+        "Sie wird gleichwertig wie akzeptable Annahmen behandelt"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Abschnitt 9 unterscheidet akzeptable von risiko-relevanten Annahmen. Risiko-relevant: Irrtum dreht die Empfehlung um (Beispiel: IT-Provisioning vs. Compliance als wahrer Engpass). Sie brauchen explizit Frühwarnsignale, akzeptable Annahmen nicht.",
+      "quelle": "Tag 2 · Abschnitt 9 (Coaching)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Coaching Annahmen"
+    },
+    {
+      "id": "t2q22",
+      "frage": "(3 Antworten richtig) Welche Anti-Patterns auf Management-Ebene nennt das Skript explizit?",
+      "optionen": [
+        "‹Process Mining für alle Prozesse› als Ankündigung",
+        "Methodenlandkarte als 30-seitiges Bürokratiedokument",
+        "Trennung Modellierung, VSM und Mining auf Silo-Abteilungen",
+        "Pilotprozess mit klarer Wirkungs-Hypothese und Owner",
+        "Wirkungs-Kennzahlen wöchentlich an Steuerungsrunde berichten"
+      ],
+      "korrekt": [0, 1, 2],
+      "erklaerung": "Abschnitt 10 listet vier Anti-Patterns, darunter ‹Mining für alle›, bürokratische Methodenlandkarte, Silo-Trennung und Warten auf perfekte Datenqualität. Pilot mit Owner und wöchentliches Wirkungs-Reporting sind dagegen explizit empfohlene Praktiken, keine Anti-Patterns.",
+      "quelle": "Tag 2 · Abschnitt 10",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Management Anti-Patterns"
+    },
+    {
+      "id": "t2q23",
+      "frage": "(1 Antwort richtig) Sie wählen einen Pilotprozess für die Dreiklang-Einführung. Welches Kriterium nennt das Skript explizit?",
+      "optionen": [
+        "Möglichst groß: der gesamte E2E-Konzernprozess",
+        "Realistischer Umfang: rund 10 bis 20 Hauptaktivitäten",
+        "Möglichst unsichtbar, um Politik zu vermeiden",
+        "Pflichtzuweisung durch Vorstand sichert Motivation"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Abschnitt 10 nennt vier Kriterien: Sichtbarkeit, Datenlage, motivierte Beteiligte, realistischer Umfang (10–20 Hauptaktivitäten, 3–5 Akteure). Riesige Konzernprozesse, unsichtbare Rand-Prozesse oder vorstandsverordnete Pilotwahl sind explizit als ungeeignet markiert.",
+      "quelle": "Tag 2 · Abschnitt 10 (Pilotwahl)",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Management Pilotwahl"
+    },
+    {
+      "id": "t2q24",
+      "frage": "(2 Antworten richtig) Welche Aussagen zur Methodenqualität bei VSM treffen laut Skript zu?",
+      "optionen": [
+        "Jeder Schritt ist als VA, NNVA oder Waste klassifiziert",
+        "Mindestens eine Engpass-Hypothese mit Begründung gehört dazu",
+        "‹Nichts auffällig› ist die ideale Aussage einer reifen VSM",
+        "Geschätzte Zeiten sind grundsätzlich unzulässig in einer VSM",
+        "Eine VSM braucht zwingend Messungen jeder Sekunde Wartezeit"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Abschnitt 7 nennt für VSM-Qualität: realistische Zeiten (Schätzungen explizit erlaubt, wenn markiert), Klassifikation jedes Schritts, Engpass-Hypothese mit Begründung. Eine ‹nichts auffällig›-VSM ist gerade Warnsignal für zu grobe Aufnahme; exakte Messungen jeder Sekunde sind weder gefordert noch realistisch.",
+      "quelle": "Tag 2 · Abschnitt 7 (Qualität bei VSM)",
+      "schwierigkeit": "schwer",
+      "thema_tag": "VSM Qualität"
+    },
+    {
+      "id": "t3q01",
+      "frage": "(1 Antwort richtig) Welche vier Hebel bilden laut Tag 3 das Grundgerüst der Prozess-Steuerung (Eselsbrücke S-K-S-W)?",
+      "optionen": [
+        "Strategie, Kommunikation, Standards, Wissen",
+        "Stakeholder, KPIs, SOA-Services, Workflow-Orchestrierung",
+        "Skripte, Kontrollen, Sicherheit, Werkzeuge",
+        "Steuerteam, Kennzahlen, Software, Weiterbildung"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Lehrskript benennt explizit Stakeholder, KPIs, SOA-Servicegrenzen und Workflow-Orchestrierung als die vier Hebel (S-K-S-W). Die anderen Aufzählungen sind erfunden und tauchen so im Text nicht auf.",
+      "quelle": "Tag 3 · Einstieg / Eselsbrücke S-K-S-W",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Steuerungs-Hebel"
+    },
+    {
+      "id": "t3q02",
+      "frage": "(1 Antwort richtig) Welche Pathologie beschreibt das Skript mit dem Begriff ‹Spaghetti-Integration›?",
+      "optionen": [
+        "Jede Abteilung führt eigene Kennzahlen ein, die niemand mehr konsolidiert",
+        "Eskalationen erfolgen je nach Lautstärke statt nach klar definierten Regeln",
+        "Jedes IT-System spricht direkt mit jedem anderen, ohne saubere Abstraktion",
+        "Stakeholder entscheiden ad hoc, ohne dokumentierte Mandate und Owner"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Spaghetti-Integration meint genau die ungekapselten Punkt-zu-Punkt-Verbindungen zwischen IT-Systemen, die Änderungen teuer machen. Die anderen Optionen beschreiben KPI-Aktivismus, Eskalation per Zufall und Schatten-Entscheidungen.",
+      "quelle": "Tag 3 · Vier typische Pathologien",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Steuerungs-Pathologien"
+    },
+    {
+      "id": "t3q03",
+      "frage": "(1 Antwort richtig) In welchem Quadranten der Mendelow-Matrix wird die Strategie ‹Eng managen› empfohlen?",
+      "optionen": [
+        "Niedriger Einfluss und niedriges Interesse des Stakeholders",
+        "Niedriger Einfluss und hohes Interesse des Stakeholders",
+        "Hoher Einfluss und niedriges Interesse des Stakeholders",
+        "Hoher Einfluss und hohes Interesse des Stakeholders"
+      ],
+      "korrekt": 3,
+      "erklaerung": "Mendelow ordnet ‹Eng managen› dem Quadranten mit hohem Einfluss UND hohem Interesse zu. Die anderen Quadranten führen zu ‹Minimal beachten›, ‹Informiert halten› bzw. ‹Zufrieden halten›.",
+      "quelle": "Tag 3 · Mendelow-Matrix",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Stakeholder-Analyse"
+    },
+    {
+      "id": "t3q04",
+      "frage": "(1 Antwort richtig) Welche vier Einbindungsstufen unterscheidet das Skript für Stakeholder?",
+      "optionen": [
+        "Informieren, Konsultieren, Mitentscheiden, Verantworten",
+        "Beobachten, Beraten, Abstimmen, Entscheiden",
+        "Briefen, Reviewen, Freigeben, Eskalieren",
+        "Anhören, Mitdenken, Mitwirken, Mitfinanzieren"
+      ],
+      "korrekt": 0,
+      "erklaerung": "Die vier Stufen sind explizit Informieren, Konsultieren, Mitentscheiden und Verantworten. Sie werden vor dem Vorhaben festgelegt, nicht im Konflikt. Die anderen Aufzählungen verwischen die klare Eskalations-Hierarchie.",
+      "quelle": "Tag 3 · Vier Einbindungsstufen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "Stakeholder-Analyse"
+    },
+    {
+      "id": "t3q05",
+      "frage": "(1 Antwort richtig) Welche vier KPI-Ebenen bilden laut Skript eine ausgewogene KPI-Architektur?",
+      "optionen": [
+        "Strategie, Taktik, Operation, Risiko",
+        "Outcome, Output, Prozess, Compliance/Risiko",
+        "Kunde, Finanzen, Mitarbeiter, Lernen",
+        "Effizienz, Effektivität, Qualität, Kosten"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Tag 3 nennt explizit Outcome, Output, Prozess und Compliance/Risiko als die vier Ebenen. Option C beschreibt grob die Balanced Scorecard (Kaplan/Norton), wird aber nicht als die vier Ebenen verwendet.",
+      "quelle": "Tag 3 · Vier KPI-Ebenen",
+      "schwierigkeit": "leicht",
+      "thema_tag": "KPI-Frameworks"
+    },
+    {
+      "id": "t3q06",
+      "frage": "(1 Antwort richtig) Welche Kennzeichnung trifft auf einen Leading Indicator zu?",
+      "optionen": [
+        "Misst präzise Vergangenheits-Ergebnisse, jedoch ohne Steuerungsmöglichkeit",
+        "Misst Vorboten künftiger Wirkung, ungenauer aber rechtzeitig steuerbar",
+        "Misst Compliance-Auflagen lückenlos und rückwirkend prüfbar dokumentiert",
+        "Misst Kosten je Vorgang als endgültiges Ergebnis am Periodenende"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Leading Indicators messen Vorboten und ermöglichen rechtzeitiges Nachsteuern, sind dafür aber ungenauer. Die anderen Optionen beschreiben Lagging-Charakter (Vergangenheit, präzise, aber spät).",
+      "quelle": "Tag 3 · Leading vs. Lagging",
+      "schwierigkeit": "leicht",
+      "thema_tag": "KPI-Frameworks"
+    },
+    {
+      "id": "t3q07",
+      "frage": "(1 Antwort richtig) Wie lautet die im Skript zitierte Kurzformel des Goodhart-Effekts?",
+      "optionen": [
+        "Wer misst, gewinnt — und wer mehr misst, gewinnt mehr.",
+        "Eine Kennzahl, die zum Ziel wird, hört auf eine gute Kennzahl zu sein.",
+        "Was nicht gemessen werden kann, kann auch nicht gesteuert werden.",
+        "Kennzahlen ohne Owner verlieren binnen Quartalen ihre Aussagekraft."
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Skript zitiert die Paraphrase ‹When a measure becomes a target, it ceases to be a good measure›. Option C ist die bekannte Drucker-Formel, Option A erfunden, Option D adressiert Owner-Disziplin nicht den Goodhart-Effekt.",
+      "quelle": "Tag 3 · Goodhart-Effekt",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI-Frameworks"
+    },
+    {
+      "id": "t3q08",
+      "frage": "(1 Antwort richtig) Welche zwei Architektur-Qualitätskriterien für SOA-Services nennt das Skript (David Parnas, 1972)?",
+      "optionen": [
+        "Hohe Verfügbarkeit und niedrige Latenz der Service-Aufrufe",
+        "Hohe Kohäsion und geringe Kopplung zwischen Services",
+        "Hohe Wiederverwendung und niedrige Implementierungs-Kosten",
+        "Hohe Sicherheit und geringe Komplexität der Schnittstellen"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Die seit 50 Jahren gültigen Kriterien sind hohe Kohäsion (Service tut eine Sache) und geringe Kopplung (Unabhängigkeit). Die anderen Aspekte sind zwar wünschenswert, aber nicht die genannten Grundprinzipien.",
+      "quelle": "Tag 3 · Kohäsion und Kopplung",
+      "schwierigkeit": "leicht",
+      "thema_tag": "SOA"
+    },
+    {
+      "id": "t3q09",
+      "frage": "(1 Antwort richtig) Welche sechs Bausteine machen laut Skript einen Workflow steuerbar?",
+      "optionen": [
+        "Ziele, Mittel, Rollen, Reports, Reviews, Belohnungen im operativen Betrieb",
+        "Prozesse, Daten, Systeme, Schnittstellen, Sicherheit, Wartung der Plattform",
+        "Aufgaben, Regeln, Rollen, Eskalationen, SLAs, Audit Trail/Monitoring",
+        "Modelle, Notationen, Tools, Standards, Schulungen, Governance-Strukturen"
+      ],
+      "korrekt": 2,
+      "erklaerung": "Die sechs Workflow-Bausteine sind explizit: Aufgaben, Regeln, Rollen, Eskalationen, SLAs und Audit Trail. Fehlt einer, hat der Workflow Lücken (z. B. ohne SLAs keine Erwartungs-Klarheit).",
+      "quelle": "Tag 3 · Sechs Workflow-Bausteine",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Workflow-Management"
+    },
+    {
+      "id": "t3q10",
+      "frage": "(1 Antwort richtig) Welche Aussage zur Wahl zwischen Orchestrierung und Choreographie folgt aus dem Skript?",
+      "optionen": [
+        "Choreographie ist immer überlegen, weil sie keinen Single Point of Failure besitzt",
+        "Im B2B-Umfeld ist Orchestrierung meist der pragmatischste Einstieg",
+        "Orchestrierung ist nur sinnvoll bei mehr als 100 Services und vielen Events",
+        "Beide Muster sind funktional identisch und nur eine Namensfrage"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Skript empfiehlt Orchestrierung als pragmatischen Einstieg im B2B; Choreographie wird sinnvoll, wenn Skalierung/Entkopplung zum Problem werden. Aussagen A und C verallgemeinern unzulässig, D ignoriert die strukturellen Unterschiede.",
+      "quelle": "Tag 3 · Wann was?",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Orchestrierung vs. Choreographie"
+    },
+    {
+      "id": "t3q11",
+      "frage": "(1 Antwort richtig) Situation: Der CFO will ‹Lead Time› allein als zentrale KPI für den Idee-zu-Freigabe-Prozess. Welcher Goodhart-Schutz wird vom Skript empfohlen?",
+      "optionen": [
+        "Lead Time mit längeren Reviewzyklen versehen, etwa halbjährlich statt wöchentlich",
+        "Lead Time mit Gegen-KPIs wie Rework-Rate und Gate-Pass-Rate koppeln",
+        "Lead Time gar nicht messen, weil Zeit-Kennzahlen grundsätzlich manipulierbar sind",
+        "Lead Time nur dem Controlling melden, nicht den operativen Teams"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Skript fordert ausdrücklich Kopplungen: Lead Time wird mit Rework-Rate und Gate-Pass-Rate verknüpft, damit Beschleunigung nur als Erfolg zählt, wenn Qualität hält. Die anderen Optionen lösen das Manipulationsproblem nicht.",
+      "quelle": "Tag 3 · Goodhart-Effekt / KPI-Steckbrief",
+      "schwierigkeit": "mittel",
+      "thema_tag": "KPI-Frameworks"
+    },
+    {
+      "id": "t3q12",
+      "frage": "(1 Antwort richtig) Welches Anti-Pattern auf Management-Ebene benennt das Skript ausdrücklich?",
+      "optionen": [
+        "‹KPIs sind Sache der Prozess-Owner› — falsch, Controlling muss sie tragen",
+        "‹Wir messen alles — mehr Daten, bessere Entscheidungen› — erzeugt mehr Aufwand",
+        "‹Erst die Logik (BPMN), dann das Tool› — falsch, weil zu modell-lastig",
+        "‹Naming von Microservices ist entscheidend› — richtig, sichert Kohäsion ab"
+      ],
+      "korrekt": 1,
+      "erklaerung": "Das Skript stellt ‹Wir messen alles› als Anti-Pattern dar: mehr Kennzahlen = mehr Aufwand, nicht mehr Erkenntnis. Die anderen Aussagen drehen die korrekten Aussagen des Skripts ins Gegenteil.",
+      "quelle": "Tag 3 · Anti-Patterns Management",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Management-Perspektive"
+    },
+    {
+      "id": "t3q13",
+      "frage": "(2 Antworten richtig) Welche Aussagen über die Mendelow-Matrix und Einbindungsstrategien sind korrekt?",
+      "optionen": [
+        "Stakeholder mit hohem Einfluss und niedrigem Interesse werden ‹zufrieden gehalten›",
+        "Stakeholder mit niedrigem Einfluss und hohem Interesse werden ‹eng gemanagt›",
+        "Alle Stakeholder gleich zu behandeln ist die häufigste Falle der Praxis",
+        "‹Stopper-Stakeholder› dürfen erst nach Projektstart einbezogen werden",
+        "Niedrige Einfluss-/Interesse-Stakeholder werden ignoriert ohne Information"
+      ],
+      "korrekt": [0, 2],
+      "erklaerung": "A entspricht der Matrix (‹Zufrieden halten›); C ist die explizit benannte häufigste Falle. B verwechselt Quadranten (richtig wäre ‹informiert halten›), D widerspricht der Stopper-Logik (früh einbinden), E ignoriert die Minimal-Information.",
+      "quelle": "Tag 3 · Mendelow-Matrix / Stopper",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Stakeholder-Analyse"
+    },
+    {
+      "id": "t3q14",
+      "frage": "(2 Antworten richtig) Situation: Sie sehen drei Services mit identischem Datenmodell, die sich gegenseitig direkt aufrufen. Welche SOA-Fehler liegen erkennbar vor?",
+      "optionen": [
+        "Hohe Kopplung zwischen den Services, weil direkte Aufrufe dominieren",
+        "Niedrige Kohäsion, da fachliche Trennung beim gleichen Datenmodell fehlt",
+        "Choreographie wurde fälschlich anstelle einer Orchestrierung gewählt",
+        "Das Mikro-Mikro-Service-Problem entsteht zwingend durch Direktaufrufe",
+        "Es liegt kein SOA-Problem vor, solange jeder Service einen Owner hat"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Direkte gegenseitige Aufrufe erhöhen die Kopplung; gleiches Datenmodell deutet auf fehlende fachliche Abgrenzung und damit niedrige Kohäsion hin. Choreographie/Mikro-Mikro ist nicht zwingend ableitbar; Owner-Existenz heilt Kohäsions-/Kopplungsprobleme nicht.",
+      "quelle": "Tag 3 · Häufige SOA-Fehler",
+      "schwierigkeit": "schwer",
+      "thema_tag": "SOA"
+    },
+    {
+      "id": "t3q15",
+      "frage": "(2 Antworten richtig) Welche Kriterien sprechen laut Faustregel des Skripts dafür, eine Funktion als eigenständigen Service zu kapseln?",
+      "optionen": [
+        "Die Funktion wird von mehreren Prozessen wiederverwendet",
+        "Die Funktion ist trivial und einmal pro Quartal nötig",
+        "Compliance- oder Standardisierungs-Vorgaben verlangen zentrale Umsetzung",
+        "Die Funktion ist Bestandteil eines einzelnen Sonderkundenprozesses",
+        "Die Funktion wurde schon einmal von einer externen Firma implementiert"
+      ],
+      "korrekt": [0, 2],
+      "erklaerung": "Die Faustregel nennt Wiederverwendung, hinreichende Komplexität und Compliance/Standardisierung. Trivialfunktionen oder Einzelfall-Logik sind Over-Engineering; externe Vorgeschichte ist kein Kriterium.",
+      "quelle": "Tag 3 · Wann lohnt sich ein Service?",
+      "schwierigkeit": "mittel",
+      "thema_tag": "SOA"
+    },
+    {
+      "id": "t3q16",
+      "frage": "(2 Antworten richtig) Welche Vor- und Nachteile beschreibt das Skript für die Choreographie korrekt?",
+      "optionen": [
+        "Vorteil: skaliert sehr gut und besitzt keine zentrale Engpass-Komponente",
+        "Vorteil: liefert dem Fachbereich ein zentrales, leicht lesbares Big-Picture",
+        "Nachteil: Debugging und Audit werden komplexer als bei Orchestrierung",
+        "Nachteil: führt zwangsläufig zu einem Single Point of Failure im Bus",
+        "Vorteil: erzwingt strikte BPMN-Modellierung beim zentralen Dirigenten"
+      ],
+      "korrekt": [0, 2],
+      "erklaerung": "Choreographie skaliert sehr gut und hat keine zentrale Engpass-Komponente; Debugging/Audit sind aber komplexer (kein zentrales Big Picture). B beschreibt eher die Orchestrierung; D widerspricht der Dezentralität; E ist falsch zugeordnet.",
+      "quelle": "Tag 3 · Orchestrierung vs. Choreographie",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Orchestrierung vs. Choreographie"
+    },
+    {
+      "id": "t3q17",
+      "frage": "(2 Antworten richtig) Situation: Ein Prozess läuft nur dreimal pro Jahr, hat jedes Mal eigene Sonderfälle und enthält viel kreative Konzeptarbeit. Welche Aussagen sind korrekt?",
+      "optionen": [
+        "Ein WMS ist hier sinnvoll, weil jeder Prozess in ein Tool gehört",
+        "Hohe Varianz spricht gegen ein klassisches WMS dieses Prozesses",
+        "Niedrige Frequenz macht eine Checkliste oft sinnvoller als einen Workflow",
+        "Kreative Konzeptarbeit lässt sich problemlos in feste Tasks zerlegen",
+        "Ein WMS sichert hier durch Eskalationen die Kreativ-Phase quantitativ ab"
+      ],
+      "korrekt": [1, 2],
+      "erklaerung": "Das Skript nennt hohe Varianz, niedrige Frequenz und hohe kreative Komponente als Anti-Indikatoren für ein WMS — hier reicht eine Checkliste. A widerspricht der Faustregel; D und E verkennen die kreative Natur.",
+      "quelle": "Tag 3 · Wann ein WMS nicht hilft",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Workflow-Management"
+    },
+    {
+      "id": "t3q18",
+      "frage": "(2 Antworten richtig) Welche Aussagen zum KPI-Steckbrief sind laut Skript korrekt?",
+      "optionen": [
+        "Ein KPI-Steckbrief umfasst rund zehn definierte Felder",
+        "Der Steckbrief darf erst nach erster Messung nachgereicht werden",
+        "Manipulationsrisiko und Gegenmaßnahme sind explizite Pflichtfelder",
+        "Owner und Messfrequenz sind optional, sofern eine Formel existiert",
+        "Den Steckbrief auszufüllen ist ein nice-to-have, kein Pflichtbestandteil"
+      ],
+      "korrekt": [0, 2],
+      "erklaerung": "Der Steckbrief umfasst rund zehn Felder inkl. Manipulationsrisiko und Gegenmaßnahme. Die anderen Aussagen widersprechen der KPI-Hygiene: ein Steckbrief gehört vor die Messung, Owner und Frequenz sind Pflicht, und Steckbrief-Disziplin trennt Kennzahl von beliebiger Zahl.",
+      "quelle": "Tag 3 · KPI-Steckbrief",
+      "schwierigkeit": "schwer",
+      "thema_tag": "KPI-Frameworks"
+    },
+    {
+      "id": "t3q19",
+      "frage": "(2 Antworten richtig) Welche Anti-Patterns nennt das Skript explizit für Workflow- und Service-Disziplin?",
+      "optionen": [
+        "Workflow ohne SLAs — Aufgaben dauern ‹so lange wie es eben dauert›",
+        "Servicegrenzen entlang IT-Systeme statt entlang fachlicher Fähigkeiten",
+        "Workflow mit SLAs, aber ohne Tagesreports an die Geschäftsleitung",
+        "Servicegrenzen entlang Owner-Rollen statt entlang externer APIs",
+        "Audit Trail vom ersten Tag an — gilt als Übersteuerung in der Pilotphase"
+      ],
+      "korrekt": [0, 1],
+      "erklaerung": "Beide sind explizit als Anti-Muster benannt: Workflow ohne SLAs und technisch (statt fachlich) gezogene Servicegrenzen. C und D sind nicht im Skript; E kehrt die Empfehlung ‹Audit Trail von Tag 1› fälschlich um.",
+      "quelle": "Tag 3 · Häufige Fehler",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Anti-Patterns"
+    },
+    {
+      "id": "t3q20",
+      "frage": "(3 Antworten richtig) Welche Kriterien gelten laut Skript für die Auswahl von Executive-KPIs auf Vorstandsebene?",
+      "optionen": [
+        "Die KPI macht einen echten Trade-off sichtbar (z. B. Speed vs. Qualität)",
+        "Die KPI ist strategisch relevant für die wichtigsten Geschäftsziele",
+        "Die KPI besitzt eine Gegen-KPI und ist damit manipulationssicher",
+        "Die KPI wechselt quartalsweise das Ziel, um agil zu bleiben",
+        "Die KPI wird nur vom Controlling gepflegt, nicht vom Prozess-Owner"
+      ],
+      "korrekt": [0, 1, 2],
+      "erklaerung": "Trade-off-Sichtbarkeit, strategische Relevanz und Manipulationssicherheit (plus Stabilität) sind die Auswahl-Kriterien. D widerspricht dem Stabilitäts-Kriterium; E widerspricht dem Prinzip ‹KPIs sind Sache der Prozess-Owner›.",
+      "quelle": "Tag 3 · Drei Executive-KPIs",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Management-Perspektive"
+    },
+    {
+      "id": "t3q21",
+      "frage": "(3 Antworten richtig) Situation: Sie führen in einem 10-Wochen-Projekt einen Idee-zu-Freigabe-Workflow ein. Welche Elemente sind laut Review-Checkliste vor dem Go-live verpflichtend?",
+      "optionen": [
+        "Top-5 Stakeholder benannt und mit klarer Einbindungsstufe versehen",
+        "Jede zentrale KPI hat einen vollständigen Steckbrief mit Gegen-KPI",
+        "Workflow hat SLAs, Eskalationen und Audit Trail von Tag 1 an",
+        "Mindestens ein neues Workflow-Tool muss vor Start eingekauft werden",
+        "Alle Stakeholder müssen formell auf der Stufe ‹Mitentscheiden› stehen"
+      ],
+      "korrekt": [0, 1, 2],
+      "erklaerung": "Die Review-Checkliste fordert benannte Stakeholder mit Stufen, KPI-Steckbriefe mit Gegen-KPI sowie SLAs/Eskalationen/Audit Trail von Tag 1. Tool-Pflicht (D) und Einheits-Stufe (E) widersprechen Fallstudie und Einbindungs-Logik.",
+      "quelle": "Tag 3 · Review-Checkliste",
+      "schwierigkeit": "mittel",
+      "thema_tag": "Workflow-Management"
+    },
+    {
+      "id": "t3q22",
+      "frage": "(3 Antworten richtig) Situation: Eine neue Cycle-Time-KPI soll im Vertrieb eingeführt werden. Welche Reflexionsfragen verlangt das KPI-Hygiene-Coaching ausdrücklich vor der Einführung?",
+      "optionen": [
+        "Welche konkrete Entscheidung soll diese KPI tatsächlich stützen?",
+        "Welches Verhalten — gewünscht oder unerwünscht — wird die KPI auslösen?",
+        "Welche Manipulationsmöglichkeit besteht und welche Gegen-KPI schützt?",
+        "Wie viele zusätzliche Reports muss das Controlling deshalb erstellen?",
+        "Wie hoch fällt der Bonus aus, wenn die KPI das Ziel überschreitet?"
+      ],
+      "korrekt": [0, 1, 2],
+      "erklaerung": "Das Coaching nennt sechs Reflexionsfragen; A, B und C entsprechen dreien davon (Entscheidung, Verhalten, Manipulation/Gegen-KPI). Report-Volumen und Bonushöhe sind keine Hygiene-Fragen, sondern verstärken sogar das Goodhart-Risiko.",
+      "quelle": "Tag 3 · Sechs Reflexionsfragen",
+      "schwierigkeit": "schwer",
+      "thema_tag": "Coaching / KPI-Hygiene"
+    }
+  ]
+}

@@ -1,6 +1,9 @@
 // Lernplatt — quiz.js
 // Quiz engine with 2 modes: 'single' (eine Frage pro Bildschirm) und 'all' (alle Fragen scrollend).
 // Uses el()/clear() from dom.js — no string-based HTML injection.
+//
+// `korrekt` darf Integer (Single-Correct) ODER sortiertes Integer-Array (Multi-Correct) sein.
+// Multi-Correct schaltet Checkbox-UI + Set-Vergleich frei; alles andere bleibt gleich.
 
 function shuffleArray(arr) {
   const a = [...arr];
@@ -11,14 +14,41 @@ function shuffleArray(arr) {
   return a;
 }
 
+function isMulti(q) {
+  return Array.isArray(q.korrekt);
+}
+
 function shuffleQuestion(q) {
   const withIdx = q.optionen.map((opt, i) => ({ opt, originalIdx: i }));
   const shuffled = shuffleArray(withIdx);
+  let newKorrekt;
+  if (isMulti(q)) {
+    const originalSet = new Set(q.korrekt);
+    newKorrekt = shuffled
+      .map((x, i) => (originalSet.has(x.originalIdx) ? i : -1))
+      .filter(i => i !== -1)
+      .sort((a, b) => a - b);
+  } else {
+    newKorrekt = shuffled.findIndex(x => x.originalIdx === q.korrekt);
+  }
   return {
     ...q,
     optionen: shuffled.map(x => x.opt),
-    korrekt: shuffled.findIndex(x => x.originalIdx === q.korrekt),
+    korrekt: newKorrekt,
   };
+}
+
+function setEquals(a, b) {
+  if (a.size !== b.size) return false;
+  for (const v of a) if (!b.has(v)) return false;
+  return true;
+}
+
+function isCorrect(q, selection) {
+  if (isMulti(q)) {
+    return setEquals(selection, new Set(q.korrekt));
+  }
+  return selection === q.korrekt;
 }
 
 async function loadQuiz(jsonPath) {
@@ -28,16 +58,31 @@ async function loadQuiz(jsonPath) {
 }
 
 class QuizSession {
-  constructor(data, container) {
+  constructor(data, container, opts = {}) {
     this.kursId = data.kurs_id;
     this.tagNr = data.tag_nr;
+    this.title = data.titel || opts.title || null;
     this.questions = shuffleArray(data.fragen).map(shuffleQuestion);
     this.container = container;
     this.mode = null;
     this.current = 0;
-    this.selected = null;
+    this.selectedSingle = null; // index OR null (Single-Correct)
+    this.selectedMulti = new Set(); // (Multi-Correct)
     this.evaluated = false;
     this.correctCount = 0;
+  }
+
+  resetSelection() {
+    this.selectedSingle = null;
+    this.selectedMulti = new Set();
+  }
+
+  currentSelection(q) {
+    return isMulti(q) ? this.selectedMulti : this.selectedSingle;
+  }
+
+  hasSelection(q) {
+    return isMulti(q) ? this.selectedMulti.size > 0 : this.selectedSingle !== null;
   }
 
   render() {
@@ -51,7 +96,7 @@ class QuizSession {
     clear(this.container);
     this.container.append(
       el('div', { class: 'quiz-card' },
-        el('h2', {}, 'Quiz · 60 Fragen'),
+        el('h2', {}, this.title || `Quiz · ${this.questions.length} Fragen`),
         el('p', {}, 'Wie möchtest du das Quiz bearbeiten?'),
         el('div', { style: 'display:flex;gap:12px;flex-wrap:wrap;margin-top:16px' },
           el('button', {
@@ -66,6 +111,8 @@ class QuizSession {
         ),
         el('p', { style: 'margin-top:16px;color:var(--color-muted);font-size:14px' },
           'Einzelmodus: geführt, ideal für unterwegs. Alle-untereinander: gut zum Überfliegen oder gezielten Nachschlagen.'),
+        el('p', { style: 'margin-top:8px;color:var(--color-muted);font-size:13px' },
+          'Hinweis: bei Multi-Choice-Fragen steht in der Frage, wie viele Antworten richtig sind.'),
       ),
     );
   }
@@ -73,18 +120,26 @@ class QuizSession {
   renderSingle() {
     clear(this.container);
     const q = this.questions[this.current];
+    this.resetSelection();
 
     this.evalBtn = el('button', { class: 'quiz-button', id: 'quiz-eval', disabled: true,
       on: { click: () => this.evaluateSingle() } }, 'Auswerten');
     this.feedback = el('div', { class: 'quiz-feedback', style: 'display:none' });
 
+    const multi = isMulti(q);
     const card = el('div', { class: 'quiz-card' },
       el('div', { class: 'quiz-progress' }, `Frage ${this.current + 1} von ${this.questions.length}`),
       el('div', { class: 'quiz-question' }, q.frage),
       el('div', { class: 'quiz-options' },
         ...q.optionen.map((opt, i) =>
-          el('div', { class: 'quiz-option', 'data-idx': i,
-            on: { click: () => this.selectSingle(i) } }, opt))
+          el('div', {
+            class: 'quiz-option' + (multi ? ' quiz-option-multi' : ''),
+            'data-idx': i,
+            on: { click: () => multi ? this.toggleMultiSingle(i) : this.selectSingle(i) },
+          },
+            multi ? el('span', { class: 'quiz-checkbox' }, '') : null,
+            el('span', { class: 'quiz-option-text' }, opt),
+          ))
       ),
       this.evalBtn,
       this.feedback,
@@ -94,21 +149,34 @@ class QuizSession {
 
   selectSingle(idx) {
     if (this.evaluated) return;
-    this.selected = idx;
+    this.selectedSingle = idx;
     this.container.querySelectorAll('.quiz-option').forEach((node, i) =>
       node.classList.toggle('selected', i === idx));
     this.evalBtn.disabled = false;
   }
 
+  toggleMultiSingle(idx) {
+    if (this.evaluated) return;
+    if (this.selectedMulti.has(idx)) this.selectedMulti.delete(idx);
+    else this.selectedMulti.add(idx);
+    this.container.querySelectorAll('.quiz-option').forEach((node, i) =>
+      node.classList.toggle('selected', this.selectedMulti.has(i)));
+    this.evalBtn.disabled = this.selectedMulti.size === 0;
+  }
+
   evaluateSingle() {
-    if (this.selected === null || this.evaluated) return;
-    this.evaluated = true;
+    if (this.evaluated) return;
     const q = this.questions[this.current];
-    const correct = this.selected === q.korrekt;
+    if (!this.hasSelection(q)) return;
+    this.evaluated = true;
+    const sel = this.currentSelection(q);
+    const correct = isCorrect(q, sel);
     if (correct) this.correctCount++;
+    const correctSet = new Set(isMulti(q) ? q.korrekt : [q.korrekt]);
+    const selSet = isMulti(q) ? sel : new Set([sel]);
     this.container.querySelectorAll('.quiz-option').forEach((node, i) => {
-      if (i === q.korrekt) node.classList.add('correct');
-      else if (i === this.selected) node.classList.add('wrong');
+      if (correctSet.has(i)) node.classList.add('correct');
+      else if (selSet.has(i)) node.classList.add('wrong');
     });
     clear(this.feedback);
     this.feedback.append(
@@ -125,20 +193,20 @@ class QuizSession {
 
   nextSingle() {
     this.current++;
-    this.selected = null;
+    this.resetSelection();
     this.evaluated = false;
     this.render();
   }
 
   renderAll() {
     clear(this.container);
-    // State pro Frage: { selected: null|idx, evaluated: false }
-    this.allState = this.questions.map(() => ({ selected: null, evaluated: false }));
-    const allCorrectCount = () => this.allState.filter((s, i) => s.evaluated && s.selected === this.questions[i].korrekt).length;
-    const allEvaluatedCount = () => this.allState.filter(s => s.evaluated).length;
+    // State pro Frage: { selectedSingle: null|idx, selectedMulti: Set, evaluated: false }
+    this.allState = this.questions.map(() => ({
+      selectedSingle: null, selectedMulti: new Set(), evaluated: false,
+    }));
 
     const header = el('div', { class: 'quiz-card', style: 'margin-bottom:16px' },
-      el('h2', { style: 'margin:0 0 8px' }, 'Quiz · alle Fragen'),
+      el('h2', { style: 'margin:0 0 8px' }, this.title || 'Quiz · alle Fragen'),
       el('p', { style: 'margin:0;color:var(--color-muted)' },
         `${this.questions.length} Fragen. Jede Frage hat ihren eigenen Auswerten-Button.`),
       el('div', { id: 'quiz-summary-line', style: 'margin-top:8px;font-weight:600' },
@@ -152,6 +220,7 @@ class QuizSession {
 
     this.questions.forEach((q, qi) => {
       const cardId = `qcard-${qi}`;
+      const multi = isMulti(q);
       const evalBtn = el('button', {
         class: 'quiz-button', disabled: true,
         on: { click: () => this.evaluateAt(qi, card, evalBtn, feedback) }
@@ -163,9 +232,13 @@ class QuizSession {
         el('div', { class: 'quiz-options' },
           ...q.optionen.map((opt, oi) =>
             el('div', {
-              class: 'quiz-option', 'data-idx': oi,
-              on: { click: () => this.selectAt(qi, oi, card, evalBtn) }
-            }, opt))
+              class: 'quiz-option' + (multi ? ' quiz-option-multi' : ''),
+              'data-idx': oi,
+              on: { click: () => multi ? this.toggleMultiAt(qi, oi, card, evalBtn) : this.selectAt(qi, oi, card, evalBtn) }
+            },
+              multi ? el('span', { class: 'quiz-checkbox' }, '') : null,
+              el('span', { class: 'quiz-option-text' }, opt),
+            ))
         ),
         evalBtn,
         feedback,
@@ -178,21 +251,35 @@ class QuizSession {
 
   selectAt(qi, oi, card, evalBtn) {
     if (this.allState[qi].evaluated) return;
-    this.allState[qi].selected = oi;
+    this.allState[qi].selectedSingle = oi;
     card.querySelectorAll('.quiz-option').forEach((node, i) =>
       node.classList.toggle('selected', i === oi));
     evalBtn.disabled = false;
   }
 
+  toggleMultiAt(qi, oi, card, evalBtn) {
+    if (this.allState[qi].evaluated) return;
+    const set = this.allState[qi].selectedMulti;
+    if (set.has(oi)) set.delete(oi); else set.add(oi);
+    card.querySelectorAll('.quiz-option').forEach((node, i) =>
+      node.classList.toggle('selected', set.has(i)));
+    evalBtn.disabled = set.size === 0;
+  }
+
   evaluateAt(qi, card, evalBtn, feedback) {
     const st = this.allState[qi];
-    if (st.selected === null || st.evaluated) return;
-    st.evaluated = true;
+    if (st.evaluated) return;
     const q = this.questions[qi];
-    const correct = st.selected === q.korrekt;
+    const sel = isMulti(q) ? st.selectedMulti : st.selectedSingle;
+    const hasSel = isMulti(q) ? st.selectedMulti.size > 0 : st.selectedSingle !== null;
+    if (!hasSel) return;
+    st.evaluated = true;
+    const correct = isCorrect(q, sel);
+    const correctSet = new Set(isMulti(q) ? q.korrekt : [q.korrekt]);
+    const selSet = isMulti(q) ? sel : new Set([sel]);
     card.querySelectorAll('.quiz-option').forEach((node, i) => {
-      if (i === q.korrekt) node.classList.add('correct');
-      else if (i === st.selected) node.classList.add('wrong');
+      if (correctSet.has(i)) node.classList.add('correct');
+      else if (selSet.has(i)) node.classList.add('wrong');
     });
     clear(feedback);
     feedback.append(
@@ -209,7 +296,10 @@ class QuizSession {
 
   evaluateAllRemaining() {
     this.allState.forEach((st, qi) => {
-      if (st.evaluated || st.selected === null) return;
+      if (st.evaluated) return;
+      const q = this.questions[qi];
+      const hasSel = isMulti(q) ? st.selectedMulti.size > 0 : st.selectedSingle !== null;
+      if (!hasSel) return;
       const card = document.getElementById(`qcard-${qi}`);
       if (!card) return;
       const evalBtn = card.querySelector('.quiz-button');
@@ -222,7 +312,12 @@ class QuizSession {
     const line = document.getElementById('quiz-summary-line');
     if (!line) return;
     const evaluated = this.allState.filter(s => s.evaluated).length;
-    const correct = this.allState.filter((s, i) => s.evaluated && s.selected === this.questions[i].korrekt).length;
+    const correct = this.allState.filter((s, i) => {
+      if (!s.evaluated) return false;
+      const q = this.questions[i];
+      const sel = isMulti(q) ? s.selectedMulti : s.selectedSingle;
+      return isCorrect(q, sel);
+    }).length;
     line.textContent = `Beantwortet: ${evaluated} / ${this.questions.length} · richtig: ${correct}`;
     if (evaluated === this.questions.length && typeof recordQuizResult === 'function') {
       recordQuizResult(this.kursId, this.tagNr, correct);
