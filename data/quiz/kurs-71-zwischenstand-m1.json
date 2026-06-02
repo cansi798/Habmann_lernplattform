@@ -31,7 +31,8 @@
             "label": "Output"
           }
         ],
-        "aspect": 4.5
+        "aspect": 4.5,
+        "position": "erklaerung"
       }
     },
     {
@@ -188,7 +189,8 @@
             "label": "Informed"
           }
         ],
-        "aspect": 4.5
+        "aspect": 4.5,
+        "position": "erklaerung"
       }
     },
     {
@@ -434,7 +436,8 @@
             "sub": "Logik nicht disjunkt"
           }
         ],
-        "aspect": 3.0
+        "aspect": 3.0,
+        "position": "erklaerung"
       }
     },
     {
@@ -475,7 +478,35 @@
       "erklaerung": "Die sieben GoM-Grundsätze sind Richtigkeit, Relevanz, Wirtschaftlichkeit, Klarheit, Vergleichbarkeit, systematischer Aufbau und Zweckorientierung. Skalierbarkeit und Transparenz sind in dieser Form nicht Teil der GoM.",
       "quelle": "Tag 1 · Abschnitt 4.1 GoM",
       "schwierigkeit": "mittel",
-      "thema_tag": "GoM Grundsätze"
+      "thema_tag": "GoM Grundsätze",
+      "diagramm": {
+        "typ": "layer",
+        "spec": [
+          {
+            "label": "Richtigkeit"
+          },
+          {
+            "label": "Relevanz"
+          },
+          {
+            "label": "Wirtschaftlichkeit"
+          },
+          {
+            "label": "Klarheit"
+          },
+          {
+            "label": "Vergleichbarkeit"
+          },
+          {
+            "label": "Systematischer Aufbau"
+          },
+          {
+            "label": "Zweckorientierung"
+          }
+        ],
+        "aspect": 1.8,
+        "position": "erklaerung"
+      }
     },
     {
       "id": "t1q24",
@@ -495,7 +526,34 @@
       "erklaerung": "Das Skript nennt drei Indikatoren gegen Automatisierung: hohe Varianz, kurze Lebensdauer, niedrige Frequenz. Compliance-Last oder knappe Budgets sind keine Automatisierungs-Indikatoren und sprechen im Skript eher für Checklisten oder manuelle Lösungen.",
       "quelle": "Tag 1 · Abschnitt 8.4 Wann nicht automatisieren",
       "schwierigkeit": "schwer",
-      "thema_tag": "Automatisierungs-Entscheidung"
+      "thema_tag": "Automatisierungs-Entscheidung",
+      "diagramm": {
+        "typ": "layer",
+        "spec": [
+          {
+            "label": "Hohe Varianz",
+            "sub": "kaum zwei Fälle gleich"
+          },
+          {
+            "label": "Kurze Lebensdauer",
+            "sub": "Prozess bald erneuert"
+          },
+          {
+            "label": "Niedrige Frequenz",
+            "sub": "läuft selten"
+          },
+          {
+            "label": "Tiefes Erfahrungswissen",
+            "sub": "nicht regelbasiert"
+          },
+          {
+            "label": "Häufige Ad-hoc-Entscheidung",
+            "sub": "Kontext-spezifisch"
+          }
+        ],
+        "aspect": 2.4,
+        "position": "erklaerung"
+      }
     },
     {
       "id": "t2q01",
@@ -540,7 +598,8 @@
             "label": "Zeitstempel"
           }
         ],
-        "aspect": 4.5
+        "aspect": 4.5,
+        "position": "erklaerung"
       }
     },
     {
@@ -753,7 +812,38 @@
       "erklaerung": "Skript: Modelle, die alle Ausreißer abdecken, haben hohe Fitness aber niedrige Precision; restriktive Modelle umgekehrt. Die Metriken stehen also in Spannung, sind nicht unabhängig. Hohe Precision heißt: kaum unbeobachtete Pfade — nicht ‹alles abdecken›. Simplicity ergänzt, ersetzt aber nichts.",
       "quelle": "Tag 2 · Abschnitt 4 (Conformance-Metriken)",
       "schwierigkeit": "schwer",
-      "thema_tag": "Process Mining Metriken"
+      "thema_tag": "Process Mining Metriken",
+      "diagramm": {
+        "typ": "scorecard",
+        "spec": [
+          {
+            "label": "Modell deckt alles ab",
+            "value": 5
+          },
+          {
+            "label": "→ Fitness",
+            "value": 5
+          },
+          {
+            "label": "→ Precision",
+            "value": 1
+          },
+          {
+            "label": "Modell sehr restriktiv",
+            "value": 1
+          },
+          {
+            "label": "→ Fitness",
+            "value": 1
+          },
+          {
+            "label": "→ Precision",
+            "value": 5
+          }
+        ],
+        "aspect": 2.0,
+        "position": "erklaerung"
+      }
     },
     {
       "id": "t2q12",
@@ -915,7 +1005,8 @@
             "label": "Eskalationen"
           }
         ],
-        "aspect": 4.0
+        "aspect": 4.0,
+        "position": "erklaerung"
       }
     },
     {
@@ -1017,7 +1108,8 @@
             "label": "Workflow-Orchestrierung"
           }
         ],
-        "aspect": 4.0
+        "aspect": 4.0,
+        "position": "erklaerung"
       }
     },
     {
@@ -1121,7 +1213,8 @@
             "sub": "Absicherung"
           }
         ],
-        "aspect": 2.0
+        "aspect": 2.0,
+        "position": "erklaerung"
       }
     },
     {
@@ -1205,7 +1298,8 @@
             "label": "Audit Trail"
           }
         ],
-        "aspect": 1.6
+        "aspect": 1.6,
+        "position": "erklaerung"
       }
     },
     {
@@ -1368,7 +1462,26 @@
       "erklaerung": "Das Skript nennt hohe Varianz, niedrige Frequenz und hohe kreative Komponente als Anti-Indikatoren für ein WMS — hier reicht eine Checkliste. A widerspricht der Faustregel; D und E verkennen die kreative Natur.",
       "quelle": "Tag 3 · Wann ein WMS nicht hilft",
       "schwierigkeit": "mittel",
-      "thema_tag": "Workflow-Management"
+      "thema_tag": "Workflow-Management",
+      "diagramm": {
+        "typ": "layer",
+        "spec": [
+          {
+            "label": "Hohe Varianz pro Fall",
+            "sub": "Standard-Workflow zu starr"
+          },
+          {
+            "label": "Niedrige Frequenz",
+            "sub": "Checkliste reicht"
+          },
+          {
+            "label": "Kreative Konzeptarbeit",
+            "sub": "nicht in feste Tasks zerlegbar"
+          }
+        ],
+        "aspect": 3.0,
+        "position": "erklaerung"
+      }
     },
     {
       "id": "t3q18",

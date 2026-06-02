@@ -36,15 +36,29 @@ function buildQuestionEl(q) {
   );
 }
 
-// Build optional rough.js diagram host between question and options.
+// Build optional rough.js diagram host. The diagram renders in the question
+// area by default; set q.diagramm.position = 'erklaerung' to defer rendering
+// until after evaluation (host then sits inside the feedback box and is
+// returned by buildDiagramElForFeedback).
 function buildDiagramEl(q) {
   if (!q.diagramm || !q.diagramm.typ || !q.diagramm.spec) return null;
+  if (q.diagramm.position === 'erklaerung') return null;
+  return makeDiagramHost(q.diagramm);
+}
+
+function buildDiagramElForFeedback(q) {
+  if (!q.diagramm || !q.diagramm.typ || !q.diagramm.spec) return null;
+  if (q.diagramm.position !== 'erklaerung') return null;
+  return makeDiagramHost(q.diagramm, 'quiz-diagram quiz-diagram-feedback');
+}
+
+function makeDiagramHost(d, cls) {
   return el('div', {
-    class: 'quiz-diagram',
-    'data-rough-diagram': q.diagramm.typ,
-    'data-spec': JSON.stringify(q.diagramm.spec),
-    'data-color': q.diagramm.color || '#9d4a1a',
-    'data-aspect': String(q.diagramm.aspect || 2.4),
+    class: cls || 'quiz-diagram',
+    'data-rough-diagram': d.typ,
+    'data-spec': JSON.stringify(d.spec),
+    'data-color': d.color || '#9d4a1a',
+    'data-aspect': String(d.aspect || 2.4),
   });
 }
 
@@ -221,12 +235,14 @@ class QuizSession {
       el('strong', {}, correct ? '✓ Richtig!' : '✗ Falsch.'),
       el('br'),
       document.createTextNode(q.erklaerung),
+      buildDiagramElForFeedback(q),
       q.quelle ? el('div', { class: 'source' }, `Quelle: ${q.quelle}`) : null,
     );
     this.feedback.style.display = 'block';
     this.evalBtn.textContent = 'Weiter →';
     this.evalBtn.disabled = false;
     this.evalBtn.onclick = () => this.nextSingle();
+    triggerRoughRefresh();
   }
 
   nextSingle() {
@@ -326,12 +342,14 @@ class QuizSession {
       el('strong', {}, correct ? '✓ Richtig!' : '✗ Falsch.'),
       el('br'),
       document.createTextNode(q.erklaerung),
+      buildDiagramElForFeedback(q),
       q.quelle ? el('div', { class: 'source' }, `Quelle: ${q.quelle}`) : null,
     );
     feedback.style.display = 'block';
     evalBtn.disabled = true;
     evalBtn.textContent = correct ? '✓ Ausgewertet' : '✗ Ausgewertet';
     this.updateAllSummary();
+    triggerRoughRefresh();
   }
 
   evaluateAllRemaining() {
