@@ -324,6 +324,10 @@
     initSvgDiagrams();
   }
 
+  // Public API for dynamically-mounted content (e.g. quiz engine renders cards
+  // after DOMContentLoaded; it calls refresh() to render any new diagrams).
+  window.LernplattRough = { refresh: init };
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

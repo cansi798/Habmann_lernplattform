@@ -18,6 +18,42 @@ function isMulti(q) {
   return Array.isArray(q.korrekt);
 }
 
+function correctCount(q) {
+  return isMulti(q) ? q.korrekt.length : 1;
+}
+
+function answerHint(q) {
+  const n = correctCount(q);
+  return n === 1 ? '(1 Antwort richtig)' : `(${n} Antworten richtig)`;
+}
+
+// Build a <div class="quiz-question"> containing main text + small hint at end.
+function buildQuestionEl(q) {
+  return el('div', { class: 'quiz-question' },
+    el('span', { class: 'quiz-question-text' }, q.frage),
+    ' ',
+    el('small', { class: 'quiz-answer-hint' }, answerHint(q)),
+  );
+}
+
+// Build optional rough.js diagram host between question and options.
+function buildDiagramEl(q) {
+  if (!q.diagramm || !q.diagramm.typ || !q.diagramm.spec) return null;
+  return el('div', {
+    class: 'quiz-diagram',
+    'data-rough-diagram': q.diagramm.typ,
+    'data-spec': JSON.stringify(q.diagramm.spec),
+    'data-color': q.diagramm.color || '#9d4a1a',
+    'data-aspect': String(q.diagramm.aspect || 2.4),
+  });
+}
+
+function triggerRoughRefresh() {
+  if (typeof window !== 'undefined' && window.LernplattRough && typeof window.LernplattRough.refresh === 'function') {
+    window.LernplattRough.refresh();
+  }
+}
+
 function shuffleQuestion(q) {
   const withIdx = q.optionen.map((opt, i) => ({ opt, originalIdx: i }));
   const shuffled = shuffleArray(withIdx);
@@ -129,7 +165,8 @@ class QuizSession {
     const multi = isMulti(q);
     const card = el('div', { class: 'quiz-card' },
       el('div', { class: 'quiz-progress' }, `Frage ${this.current + 1} von ${this.questions.length}`),
-      el('div', { class: 'quiz-question' }, q.frage),
+      buildQuestionEl(q),
+      buildDiagramEl(q),
       el('div', { class: 'quiz-options' },
         ...q.optionen.map((opt, i) =>
           el('div', {
@@ -145,6 +182,7 @@ class QuizSession {
       this.feedback,
     );
     this.container.append(card);
+    triggerRoughRefresh();
   }
 
   selectSingle(idx) {
@@ -228,7 +266,8 @@ class QuizSession {
       const feedback = el('div', { class: 'quiz-feedback', style: 'display:none' });
       const card = el('div', { class: 'quiz-card', id: cardId, style: 'margin-bottom:16px' },
         el('div', { class: 'quiz-progress' }, `Frage ${qi + 1} von ${this.questions.length} · ${q.schwierigkeit || ''}`),
-        el('div', { class: 'quiz-question' }, q.frage),
+        buildQuestionEl(q),
+        buildDiagramEl(q),
         el('div', { class: 'quiz-options' },
           ...q.optionen.map((opt, oi) =>
             el('div', {
@@ -247,6 +286,7 @@ class QuizSession {
     });
 
     this.updateAllSummary();
+    triggerRoughRefresh();
   }
 
   selectAt(qi, oi, card, evalBtn) {
