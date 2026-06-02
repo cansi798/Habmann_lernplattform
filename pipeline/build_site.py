@@ -43,9 +43,32 @@ def render_day_row(tag: dict, kurs_id: str, today: str) -> str:
 </a>"""
 
 
+def render_zwischenstand_row(zs: dict, kurs_id: str) -> str:
+    href = f"zwischenstand-{zs['slug']}.html"
+    pips = f'<div class="pips"><span class="pip" data-key="zwischenstand"></span></div>'
+    title = f"★ {zs['titel']} · {zs['untertitel']}" if zs.get('untertitel') else f"★ {zs['titel']}"
+    return f"""<a class="day-row zwischenstand-row" href="{href}">
+  <div>
+    <div class="day-date">Modul {zs['modul_nr']}</div>
+    <div class="day-meta">Zwischenstand</div>
+  </div>
+  <div class="day-title">{title}</div>
+  {pips}
+  <span></span>
+</a>"""
+
+
 def build_day_list_html(kurs: dict, today: str | None = None) -> str:
     today = today or today_iso()
-    rows = "\n".join(render_day_row(t, kurs["id"], today) for t in kurs["tage"])
+    # Mix day-rows with optional zwischenstand-rows inserted after their nach_tag.
+    zs_by_after = {zs["nach_tag"]: zs for zs in kurs.get("zwischenstaende", [])}
+    parts: list[str] = []
+    for t in kurs["tage"]:
+        parts.append(render_day_row(t, kurs["id"], today))
+        zs = zs_by_after.get(t["nr"])
+        if zs:
+            parts.append(render_zwischenstand_row(zs, kurs["id"]))
+    rows = "\n".join(parts)
     crumb_items = [
         {"label": "Kurse", "href": "../dashboard.html"},
         {"label": f"Kurs {kurs['id']}", "href": None},
